@@ -218,6 +218,14 @@
       });
     }
 
+    const goCommunity = getEl("goCommunity");
+    if (goCommunity) {
+      goCommunity.addEventListener("click", () => {
+        packSelection();
+        location.href = "pages/community.html";
+      });
+    }
+
     const goAdmin = getEl("goAdmin");
     if (goAdmin) {
       goAdmin.addEventListener("click", () => {

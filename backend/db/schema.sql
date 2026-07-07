@@ -81,6 +81,72 @@ create table if not exists wrong_notebook_entries (
 create index if not exists idx_wrong_notebook_user_last_wrong
 on wrong_notebook_entries(user_id, last_wrong_at desc);
 
+-- Flarum-inspired learning discussions linked to questions and topics.
+create table if not exists discussion_threads (
+  id uuid primary key default gen_random_uuid(),
+  question_key text,
+  title text not null,
+  board text,
+  subject text,
+  paper text,
+  topic text,
+  tags text[] not null default '{}',
+  status text not null default 'open' check (status in ('open', 'solved', 'locked', 'hidden')),
+  sticky boolean not null default false,
+  approved boolean not null default true,
+  author_id uuid references users(id) on delete set null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  last_post_at timestamptz not null default now()
+);
+
+create index if not exists idx_discussion_threads_question
+on discussion_threads(question_key, last_post_at desc);
+
+create index if not exists idx_discussion_threads_filters
+on discussion_threads(subject, paper, topic, status, last_post_at desc);
+
+create index if not exists idx_discussion_threads_tags
+on discussion_threads using gin(tags);
+
+create table if not exists discussion_posts (
+  id uuid primary key default gen_random_uuid(),
+  thread_id uuid not null references discussion_threads(id) on delete cascade,
+  author_id uuid references users(id) on delete set null,
+  body text not null,
+  approved boolean not null default true,
+  hidden boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists idx_discussion_posts_thread_created
+on discussion_posts(thread_id, created_at asc);
+
+create table if not exists discussion_post_likes (
+  post_id uuid not null references discussion_posts(id) on delete cascade,
+  user_id uuid not null references users(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (post_id, user_id)
+);
+
+create table if not exists discussion_thread_follows (
+  thread_id uuid not null references discussion_threads(id) on delete cascade,
+  user_id uuid not null references users(id) on delete cascade,
+  last_read_at timestamptz,
+  created_at timestamptz not null default now(),
+  primary key (thread_id, user_id)
+);
+
+create table if not exists discussion_flags (
+  id uuid primary key default gen_random_uuid(),
+  post_id uuid not null references discussion_posts(id) on delete cascade,
+  user_id uuid not null references users(id) on delete cascade,
+  reason text,
+  created_at timestamptz not null default now(),
+  unique (post_id, user_id)
+);
+
 -- Convenience analytics view for per-user practice summary.
 create or replace view user_practice_summary as
 select

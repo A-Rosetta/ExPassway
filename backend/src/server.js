@@ -24,6 +24,7 @@ app.get("/", (_req, res) => {
       stats: "/api/meta/stats",
       storage: "/api/meta/storage",
       adminRecords: "/api/admin/records",
+      discussions: "/api/discussions",
     },
   });
 });

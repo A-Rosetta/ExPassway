@@ -165,5 +165,68 @@
         body: JSON.stringify(input || {}),
       });
     },
+    async getDiscussions(token, input = {}) {
+      const params = new URLSearchParams();
+      Object.entries(input || {}).forEach(([key, value]) => {
+        if (value != null && value !== "") params.set(key, value);
+      });
+      const query = params.toString();
+      return request(`/api/discussions${query ? `?${query}` : ""}`, { token });
+    },
+    async createDiscussion(token, input) {
+      return request("/api/discussions", {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async getDiscussion(token, threadId) {
+      return request(`/api/discussions/${encodeURIComponent(threadId)}`, { token });
+    },
+    async replyDiscussion(token, threadId, input) {
+      return request(`/api/discussions/${encodeURIComponent(threadId)}/posts`, {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async likeDiscussionPost(token, postId) {
+      return request(`/api/discussions/posts/${encodeURIComponent(postId)}/like`, {
+        method: "POST",
+        token,
+      });
+    },
+    async unlikeDiscussionPost(token, postId) {
+      return request(`/api/discussions/posts/${encodeURIComponent(postId)}/like`, {
+        method: "DELETE",
+        token,
+      });
+    },
+    async flagDiscussionPost(token, postId, input) {
+      return request(`/api/discussions/posts/${encodeURIComponent(postId)}/flag`, {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async followDiscussion(token, threadId) {
+      return request(`/api/discussions/${encodeURIComponent(threadId)}/follow`, {
+        method: "POST",
+        token,
+      });
+    },
+    async unfollowDiscussion(token, threadId) {
+      return request(`/api/discussions/${encodeURIComponent(threadId)}/follow`, {
+        method: "DELETE",
+        token,
+      });
+    },
+    async moderateDiscussion(token, threadId, input) {
+      return request(`/api/discussions/${encodeURIComponent(threadId)}/moderation`, {
+        method: "PATCH",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
   };
 })();

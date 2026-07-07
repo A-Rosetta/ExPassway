@@ -194,6 +194,20 @@
     return t("reviewAnalysisGeneric");
   }
 
+  function buildCommunityUrl(question, detail, idx) {
+    const params = new URLSearchParams();
+    const questionKey = question?.id || detail?.id || "";
+    if (questionKey) params.set("questionKey", questionKey);
+    if (question?.board) params.set("board", question.board);
+    if (question?.subject) params.set("subject", question.subject);
+    if (question?.paper) params.set("paper", question.paper);
+    if (question?.topic) params.set("topic", question.topic);
+    const stem = question?.stem ? String(question.stem).slice(0, 220) : "";
+    if (stem) params.set("stem", stem);
+    if (!questionKey) params.set("topic", question?.topic || detail?.topic || `Q${idx + 1}`);
+    return `./community.html?${params.toString()}`;
+  }
+
   function buildImproveText(question, detail) {
     const skills = Array.isArray(question?.skills) ? question.skills.filter(Boolean) : [];
     const hintTotal = Number(detail?.hintTotal || 0);
@@ -341,6 +355,9 @@
             <div class="text-view-box">
               <p><strong>${t("analysisLabel")}</strong> ${analysisText}</p>
               <p><strong>${t("improvementLabel")}</strong> ${improveText}</p>
+            </div>
+            <div class="actions compact-actions">
+              <a class="btn-link" href="${buildCommunityUrl(q, d, idx)}">${t("discussQuestion")}</a>
             </div>
           </article>
         `;

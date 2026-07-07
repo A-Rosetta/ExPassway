@@ -120,6 +120,18 @@
     return groups;
   }
 
+  function buildCommunityUrl(row) {
+    const params = new URLSearchParams();
+    const questionKey = row.questionKey || row.id || "";
+    if (questionKey) params.set("questionKey", questionKey);
+    if (row.board) params.set("board", row.board);
+    if (row.subject) params.set("subject", row.subject);
+    if (row.paper) params.set("paper", row.paper);
+    if (row.topic) params.set("topic", row.topic);
+    if (row.stem) params.set("stem", String(row.stem).slice(0, 220));
+    return `./community.html?${params.toString()}`;
+  }
+
   function renderList(rows, state) {
     const wrap = byId("notebookList");
     let filtered = state.subject ? rows.filter((r) => r.subject === state.subject) : rows;
@@ -158,6 +170,7 @@
                   <p class="good">${t("correctAnswer", { answer: r.answerText || "-" })}</p>
                   <div class="actions">
                     <button class="btn-secondary" data-mastered-id="${r.id}">${r.mastered ? t("unmarkMastered") : t("markMastered")}</button>
+                    <a class="btn-link" href="${buildCommunityUrl(r)}">${t("discussQuestion")}</a>
                   </div>
                 </article>
               `)

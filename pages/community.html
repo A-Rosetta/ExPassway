@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="communityPageTitle">学习讨论</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <main class="container community-shell">
+    <section class="card hero">
+      <h1 data-i18n="communityHeroTitle">学习讨论</h1>
+      <p class="tip" data-i18n="communityHeroSubtitle">围绕真题、错题和知识点提问，沉淀可复用的解题讨论。</p>
+    </section>
+
+    <section class="card panel community-layout">
+      <div class="community-sidebar">
+        <h2 data-i18n="communityFiltersTitle">筛选</h2>
+        <label><span data-i18n="subjectFilterLabel">科目筛选</span>
+          <select id="communitySubjectFilter"></select>
+        </label>
+        <label><span data-i18n="paperLabel">模块/卷别</span>
+          <select id="communityPaperFilter"></select>
+        </label>
+        <label><span data-i18n="communityTopicLabel">知识点</span>
+          <input id="communityTopicFilter" type="text" data-i18n-placeholder="communityTopicPlaceholder" placeholder="例如 Atomic structure" />
+        </label>
+        <label><span data-i18n="communityStatusLabel">状态</span>
+          <select id="communityStatusFilter">
+            <option value="" data-i18n="communityAllStatuses">全部状态</option>
+            <option value="open" data-i18n="communityStatusOpen">开放</option>
+            <option value="solved" data-i18n="communityStatusSolved">已解决</option>
+            <option value="locked" data-i18n="communityStatusLocked">已锁定</option>
+          </select>
+        </label>
+        <label class="inline-check">
+          <input id="communityFollowedOnly" type="checkbox" />
+          <span data-i18n="communityFollowedOnly">只看已关注</span>
+        </label>
+        <div class="actions compact-actions">
+          <button id="communityApplyFilters" class="btn-primary" data-i18n="communityApplyFilters">应用筛选</button>
+          <button id="communityBackHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
+        </div>
+      </div>
+
+      <div class="community-main">
+        <div class="community-toolbar">
+          <div>
+            <h2 data-i18n="communityThreadsTitle">讨论列表</h2>
+            <p id="communityStatus" class="tip"></p>
+          </div>
+          <button id="communityNewThread" class="btn-primary" data-i18n="communityNewThread">发起讨论</button>
+        </div>
+        <div id="communityQuestionContext" class="question-context"></div>
+        <div id="communityThreadList" class="discussion-list"></div>
+      </div>
+    </section>
+
+    <section id="communityComposerPanel" class="card panel" hidden>
+      <h2 id="communityComposerTitle" data-i18n="communityComposerTitle">发起讨论</h2>
+      <div class="grid-2">
+        <label><span data-i18n="communityTitleLabel">标题</span>
+          <input id="communityTitle" type="text" maxlength="140" data-i18n-placeholder="communityTitlePlaceholder" placeholder="用一句话说明你卡住的地方" />
+        </label>
+        <label><span data-i18n="communityTagsLabel">标签</span>
+          <select id="communityTagSelect">
+            <option value="question" data-i18n="communityTagQuestion">题目</option>
+            <option value="topic" data-i18n="communityTagTopic">知识点</option>
+            <option value="paper" data-i18n="communityTagPaper">试卷</option>
+            <option value="teacher-note" data-i18n="communityTagTeacherNote">教师说明</option>
+          </select>
+        </label>
+      </div>
+      <label><span data-i18n="communityBodyLabel">内容</span>
+        <textarea id="communityBody" rows="7" maxlength="4000" data-i18n-placeholder="communityBodyPlaceholder" placeholder="写下你的思路、已尝试的方法和具体疑问"></textarea>
+      </label>
+      <div class="actions">
+        <button id="communitySubmitThread" class="btn-primary" data-i18n="communitySubmitThread">发布讨论</button>
+        <button id="communityCancelComposer" class="btn-secondary" data-i18n="communityCancel">取消</button>
+      </div>
+    </section>
+
+    <section id="communityDetailPanel" class="card panel" hidden>
+      <div id="communityThreadDetail"></div>
+      <label><span data-i18n="communityReplyLabel">回复</span>
+        <textarea id="communityReplyBody" rows="5" maxlength="4000" data-i18n-placeholder="communityReplyPlaceholder" placeholder="补充解释或回答问题"></textarea>
+      </label>
+      <div class="actions">
+        <button id="communitySubmitReply" class="btn-primary" data-i18n="communitySubmitReply">发布回复</button>
+        <button id="communityCloseDetail" class="btn-secondary" data-i18n="communityCloseDetail">关闭详情</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../scripts/i18n.js"></script>
+  <script src="../scripts/data.js"></script>
+  <script src="../scripts/api.js"></script>
+  <script src="../scripts/community.js"></script>
+</body>
+</html>

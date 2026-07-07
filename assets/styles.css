@@ -1055,3 +1055,198 @@ button {
     flex-wrap: wrap;
   }
 }
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border-radius: 10px;
+  padding: 0.58rem 0.9rem;
+  background: var(--secondary);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.compact-actions {
+  margin-top: 0.65rem;
+  gap: 0.45rem;
+}
+
+.community-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.community-sidebar {
+  display: grid;
+  gap: 0.75rem;
+  border-right: 1px solid var(--line);
+  padding-right: 1rem;
+}
+
+.community-sidebar h2,
+.community-main h2 {
+  margin: 0;
+}
+
+.inline-check {
+  display: flex;
+  grid-template-columns: none;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.inline-check input {
+  width: auto;
+}
+
+.community-main {
+  min-width: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.community-toolbar,
+.discussion-detail-head,
+.discussion-thread-head,
+.discussion-post-meta,
+.moderation-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.community-toolbar {
+  flex-wrap: wrap;
+}
+
+.question-context {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f8fbff;
+  padding: 0.75rem;
+}
+
+.question-context:empty {
+  display: none;
+}
+
+.discussion-list,
+.discussion-posts {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.discussion-thread,
+.discussion-post {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fbfdff;
+  padding: 0.85rem;
+}
+
+.discussion-thread.is-sticky {
+  border-color: #f3bd72;
+  background: #fffaf2;
+}
+
+.thread-title-button {
+  padding: 0;
+  background: transparent;
+  color: var(--text);
+  border-radius: 0;
+  font-size: 1rem;
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  background: #eef4ff;
+  color: #244779;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-solved {
+  background: #e5f8ef;
+  color: #17704e;
+}
+
+.status-locked,
+.status-hidden {
+  background: #f7e8e6;
+  color: #a6322b;
+}
+
+.discussion-detail-head {
+  align-items: flex-start;
+  margin-bottom: 0.9rem;
+}
+
+.discussion-detail-head h2 {
+  margin: 0 0 0.4rem;
+}
+
+.discussion-post-meta {
+  justify-content: flex-start;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.discussion-post p {
+  line-height: 1.58;
+}
+
+.moderation-row {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f8fbff;
+  padding: 0.75rem;
+  margin-bottom: 0.8rem;
+}
+
+.moderation-row label {
+  min-width: 160px;
+}
+
+textarea {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem;
+  font: inherit;
+  resize: vertical;
+}
+
+@media (max-width: 860px) {
+  .community-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .community-sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding-right: 0;
+    padding-bottom: 1rem;
+  }
+
+  .discussion-thread-head,
+  .discussion-detail-head,
+  .moderation-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
