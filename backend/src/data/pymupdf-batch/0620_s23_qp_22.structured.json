@@ -1,0 +1,566 @@
+{
+  "pdf": "/home/ubuntu/chemis/pdf/0620_s23_qp_22.pdf",
+  "anchorCount": 40,
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q01.png",
+      "rawText": "Four physical changes of ethanol are listed. 1 condensation",
+      "parseStatus": "ok",
+      "stem": "Four physical changes of ethanol are listed. Which changes are physical changes?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      }
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q02.png",
+      "rawText": "An atom of element X contains: ● 5 protons ● 6 neutrons ● 5 electrons. Which statements about element X are correct? 1 X has an atomic number of 6. 2 X has a nucleon number of 11.",
+      "parseStatus": "ok",
+      "stem": "An atom of element X contains 5 protons, 6 neutrons and 5 electrons. Which statements about element X are correct?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 3",
+        "D": "2 only"
+      }
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q03.png",
+      "rawText": "Ammonia, NH3, is a covalent molecule. Which diagram shows the outer-shell electron arrangement in a molecule of ammonia? N A H H H N B H H H N C H H H N D H H H",
+      "parseStatus": "ok",
+      "stem": "Ammonia, NH3, is a covalent molecule. Which diagram shows the outer-shell electron arrangement in a molecule of ammonia? N",
+      "options": {
+        "A": "H H H N",
+        "B": "H H H N",
+        "C": "H H H N",
+        "D": "H H H"
+      }
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q04.png",
+      "rawText": "Which structure does silicon(IV) oxide most closely resemble? A carbon dioxide B diamond C graphite D sodium chloride",
+      "parseStatus": "ok",
+      "stem": "Which structure does silicon(IV) oxide most closely resemble?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "diamond",
+        "C": "graphite",
+        "D": "sodium chloride"
+      }
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q05.png",
+      "rawText": "Substance P conducts electricity when solid. Which particles move in solid P so that it can conduct electricity? 1 anions 2 cations 3 electrons A 1 and 2 B 1 only C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "Substance P conducts electricity when solid. Which particles move in solid P so that it can conduct electricity? 1 anions 2 cations 3 electrons",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 only",
+        "C": "2 and 3",
+        "D": "3 only"
+      }
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q06.png",
+      "rawText": "Which equation represents a chemical change? A BaCl 2(s)  BaCl 2(l) B Ca2+(aq) + SO4 2–(aq)  CaSO4(s) C KCl (s) + H2O(l)  K+(aq) + Cl –(aq) D Na+(aq) + NO3 –(aq)  NaNO3(aq)",
+      "parseStatus": "ok",
+      "stem": "Which equation represents a chemical change?",
+      "options": {
+        "A": "BaCl 2(s)  BaCl 2(l)",
+        "B": "Ca2+(aq) + SO4 2–(aq)  CaSO4(s)",
+        "C": "KCl (s) + H2O(l)  K+(aq) + Cl –(aq)",
+        "D": "Na+(aq) + NO3 –(aq)  NaNO3(aq)"
+      }
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q07.png",
+      "rawText": "Which sample contains the largest number of molecules? A 16 g of methane, CH4(g) B 16 g of oxygen, O2(g) C 16 g of phosphorus, P4(s) D 16 dm3 of methane at r.t.p., CH4(g)",
+      "parseStatus": "ok",
+      "stem": "Which sample contains the largest number of molecules?",
+      "options": {
+        "A": "16 g of methane, CH4(g)",
+        "B": "16 g of oxygen, O2(g)",
+        "C": "16 g of phosphorus, P4(s)",
+        "D": "16 dm3 of methane at r.t.p., CH4(g)"
+      }
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q08.png",
+      "rawText": "The concentration of a sample of dilute aqueous sodium hydroxide is found by titration. The apparatus used is shown. dilute aqueous hydrochloric acid, HCl (aq) dilute aqueous sodium hydroxide, NaOH(aq) Which information is needed to calculate the concentration of the dilute aqueous sodium hydroxide in mol / dm3? concentration of HCl volume of HCl used molar mass of HCl volume of NaOH used molar mass of NaOH A \u0016 \u0016 \u0016 \u0016 \u0016 B \u0016 \u0016 \u001a \u0016 \u001a C \u001a \u0016 \u0016 \u0016 \u001a D \u0016 \u001a \u001a \u001a \u0016 key \u0016 = needed \u001a = not needed",
+      "parseStatus": "ok",
+      "stem": "The concentration of a sample of dilute aqueous sodium hydroxide is found by titration. The apparatus used is shown. dilute aqueous hydrochloric acid, HCl (aq) dilute aqueous sodium hydroxide, NaOH(aq) Which information is needed to calculate the concentration of the dilute aqueous sodium hydroxide in mol / dm3? concentration of HCl volume of HCl used molar mass of HCl volume of NaOH used molar mass of NaOH",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u0016 \u0016",
+        "B": "\u0016 \u0016 \u001a \u0016 \u001a",
+        "C": "\u001a \u0016 \u0016 \u0016 \u001a",
+        "D": "\u0016 \u001a \u001a \u001a \u0016 key \u0016 = needed \u001a = not needed"
+      }
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q09.png",
+      "rawText": "In experiment 1, aqueous copper(II) sulfate is electrolysed using graphite electrodes. In experiment 2, aqueous copper(II) sulfate is electrolysed using copper electrodes. Which statement identifies a half-equation for a reaction at one of the electrodes? A In experiment 1, the half-equation for the anode reaction is 4OH–  2H2O + O2 + 4e–. B In experiment 1, the half-equation for the cathode reaction is 2H+ + 2e–  H2. C In experiment 2, the half-equation for the anode reaction is Cu2+ + 2e–  Cu. D In experiment 2, the half-equation for the cathode reaction is 4OH–  2H2O + O2 + 4e–.",
+      "parseStatus": "ok",
+      "stem": "In experiment 1, aqueous copper(II) sulfate is electrolysed using graphite electrodes. In experiment 2, aqueous copper(II) sulfate is electrolysed using copper electrodes. Which statement identifies a half-equation for a reaction at one of the electrodes?",
+      "options": {
+        "A": "In experiment 1, the half-equation for the anode reaction is 4OH–  2H2O + O2 + 4e–.",
+        "B": "In experiment 1, the half-equation for the cathode reaction is 2H+ + 2e–  H2.",
+        "C": "In experiment 2, the half-equation for the anode reaction is Cu2+ + 2e–  Cu.",
+        "D": "In experiment 2, the half-equation for the cathode reaction is 4OH–  2H2O + O2 + 4e–."
+      }
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 5,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q10.png",
+      "rawText": "Which substance is not produced during the electrolysis of concentrated aqueous sodium chloride? A chlorine B hydrogen C sodium D sodium hydroxide",
+      "parseStatus": "ok",
+      "stem": "Which substance is not produced during the electrolysis of concentrated aqueous sodium chloride?",
+      "options": {
+        "A": "chlorine",
+        "B": "hydrogen",
+        "C": "sodium",
+        "D": "sodium hydroxide"
+      }
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q11.png",
+      "rawText": "Methane burns in excess oxygen. The equation is shown. CH4(g) + 2O2(g)  CO2(g) + 2H2O(g) Bond energies are shown. bond bond energy in kJ / mol C=O 805 C–H 410 O=O 496 O–H 460 What is the energy change for the reaction? A (4  410 + 2  496) – (2  805 + 4  460) B (2  805 + 4  460) – (4  410 + 2  496) C (410 + 2  496) – (805 + 2  460) D (410 + 496) – (805 + 460)",
+      "parseStatus": "ok",
+      "stem": "Methane burns in excess oxygen. The equation is shown. CH4(g) + 2O2(g)  CO2(g) + 2H2O(g) Bond energies are shown. bond bond energy in kJ / mol C=O 805 C–H 410 O=O 496 O–H 460 What is the energy change for the reaction?",
+      "options": {
+        "A": "(4  410 + 2  496) – (2  805 + 4  460)",
+        "B": "(2  805 + 4  460) – (4  410 + 2  496)",
+        "C": "(410 + 2  496) – (805 + 2  460)",
+        "D": "(410 + 496) – (805 + 460)"
+      }
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q12.png",
+      "rawText": "Which change increases the rate of reaction by decreasing the activation energy, Ea? A addition of a catalyst B decrease in size of solid reactants C increase in concentration of solutions D increase in temperature",
+      "parseStatus": "ok",
+      "stem": "Which change increases the rate of reaction by decreasing the activation energy, Ea?",
+      "options": {
+        "A": "addition of a catalyst",
+        "B": "decrease in size of solid reactants",
+        "C": "increase in concentration of solutions",
+        "D": "increase in temperature"
+      }
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q13.png",
+      "rawText": "In the Contact process, sulfur dioxide is reacted with oxygen to form sulfur trioxide. Which conditions are used in this reaction? temperature / C pressure / kPa catalyst A 300 200 iron B 300 20 000 vanadium(V) oxide C 450 200 vanadium(V) oxide D 450 20 000 iron",
+      "parseStatus": "ok",
+      "stem": "In the Contact process, sulfur dioxide is reacted with oxygen to form sulfur trioxide. Which conditions are used in this reaction? temperature / C pressure / kPa catalyst",
+      "options": {
+        "A": "300 200 iron",
+        "B": "300 20 000 vanadium(V) oxide",
+        "C": "450 200 vanadium(V) oxide",
+        "D": "450 20 000 iron"
+      }
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q14.png",
+      "rawText": "Which reaction is reversible? A an iron nail rusting when left in moist air B limestone reacting with an acid to form carbon dioxide gas C magnesium burning in air to produce a white ash D white anhydrous copper(II) sulfate turning blue when water is added",
+      "parseStatus": "ok",
+      "stem": "Which reaction is reversible?",
+      "options": {
+        "A": "an iron nail rusting when left in moist air",
+        "B": "limestone reacting with an acid to form carbon dioxide gas",
+        "C": "magnesium burning in air to produce a white ash",
+        "D": "white anhydrous copper(II) sulfate turning blue when water is added"
+      }
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q15.png",
+      "rawText": "The equation for the reaction of sulfur dioxide with acidified potassium dichromate(VI) is shown. 3SO2 + Cr2O7 2– + 2H+  3SO4 2– + 2Cr3+ + H2O What is oxidised and what is the oxidising agent? oxidised oxidising agent A SO2 Cr2O7 2– B SO2 H+ C Cr2O7 2– H+ D Cr2O7 2– Cr2O7 2–",
+      "parseStatus": "ok",
+      "stem": "The equation for the reaction of sulfur dioxide with acidified potassium dichromate(VI) is shown. 3SO2 + Cr2O7 2– + 2H+  3SO4 2– + 2Cr3+ + H2O What is oxidised and what is the oxidising agent? oxidised oxidising agent",
+      "options": {
+        "A": "SO2 Cr2O7 2–",
+        "B": "SO2 H+",
+        "C": "Cr2O7 2– H+",
+        "D": "Cr2O7 2– Cr2O7 2–"
+      }
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q16.png",
+      "rawText": "What is the definition of a strong acid? A a proton acceptor that is completely dissociated in aqueous solution B a proton acceptor that is partially dissociated in aqueous solution C a proton donor that is completely dissociated in aqueous solution D a proton donor that is partially dissociated in aqueous solution",
+      "parseStatus": "ok",
+      "stem": "What is the definition of a strong acid?",
+      "options": {
+        "A": "a proton acceptor that is completely dissociated in aqueous solution",
+        "B": "a proton acceptor that is partially dissociated in aqueous solution",
+        "C": "a proton donor that is completely dissociated in aqueous solution",
+        "D": "a proton donor that is partially dissociated in aqueous solution"
+      }
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q17.png",
+      "rawText": "Which statement about amphoteric oxides is correct? A They are made by combining an acidic oxide with a basic oxide. B They react with water to give a solution of pH 7. C They react with both acids and bases. D They do not react with acids or bases.",
+      "parseStatus": "ok",
+      "stem": "Which statement about amphoteric oxides is correct?",
+      "options": {
+        "A": "They are made by combining an acidic oxide with a basic oxide.",
+        "B": "They react with water to give a solution of pH 7.",
+        "C": "They react with both acids and bases.",
+        "D": "They do not react with acids or bases."
+      }
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q18.png",
+      "rawText": "Copper(II) carbonate is formed when aqueous sodium carbonate is added to aqueous copper(II) nitrate. The ionic equation for the reaction is shown. CO3 2–(aq) + Cu2+(aq)  CuCO3(s) How is pure copper(II) carbonate obtained from the reaction mixture? A evaporate  filter  dry B evaporate  wash  crystallise C filter  evaporate  crystallise D filter  wash  dry",
+      "parseStatus": "ok",
+      "stem": "Copper(II) carbonate is formed when aqueous sodium carbonate is added to aqueous copper(II) nitrate. The ionic equation for the reaction is shown. CO3 2–(aq) + Cu2+(aq)  CuCO3(s) How is pure copper(II) carbonate obtained from the reaction mixture?",
+      "options": {
+        "A": "evaporate  filter  dry",
+        "B": "evaporate  wash  crystallise",
+        "C": "filter  evaporate  crystallise",
+        "D": "filter  wash  dry"
+      }
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q19.png",
+      "rawText": "Q and R are elements in the same period of the Periodic Table. Q has 7 electrons in its outer shell and R has 2 electrons in its outer shell. Which statement about Q and R is correct? A Q is a metal and R is a non-metal. B Q and R have different numbers of electron shells. C R is found to the right of Q in the Periodic Table. D The proton number of R is less than the proton number of Q.",
+      "parseStatus": "ok",
+      "stem": "Q and R are elements in the same period of the Periodic Table. Q has 7 electrons in its outer shell and R has 2 electrons in its outer shell. Which statement about Q and R is correct?",
+      "options": {
+        "A": "Q is a metal and R is a non-metal.",
+        "B": "Q and R have different numbers of electron shells.",
+        "C": "R is found to the right of Q in the Periodic Table.",
+        "D": "The proton number of R is less than the proton number of Q."
+      }
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q20.png",
+      "rawText": "Lead(II) sulfate is an insoluble salt. Which reaction produces a mixture from which lead(II) sulfate is obtained by filtration? A adding solid lead(II) carbonate to dilute sulfuric acid B adding solid lead(II) hydroxide to dilute sulfuric acid C adding metallic lead to dilute sulfuric acid D adding aqueous lead(II) nitrate to dilute sulfuric acid",
+      "parseStatus": "ok",
+      "stem": "Lead(II) sulfate is an insoluble salt. Which reaction produces a mixture from which lead(II) sulfate is obtained by filtration?",
+      "options": {
+        "A": "adding solid lead(II) carbonate to dilute sulfuric acid",
+        "B": "adding solid lead(II) hydroxide to dilute sulfuric acid",
+        "C": "adding metallic lead to dilute sulfuric acid",
+        "D": "adding aqueous lead(II) nitrate to dilute sulfuric acid"
+      }
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q21.png",
+      "rawText": "Which statement about alkali metals is correct? A Lithium is more dense than sodium. B Sodium is more reactive than potassium. C Sodium has a higher melting point than potassium. D They are in Group II of the Periodic Table.",
+      "parseStatus": "ok",
+      "stem": "Which statement about alkali metals is correct?",
+      "options": {
+        "A": "Lithium is more dense than sodium.",
+        "B": "Sodium is more reactive than potassium.",
+        "C": "Sodium has a higher melting point than potassium.",
+        "D": "They are in Group II of the Periodic Table."
+      }
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q22.png",
+      "rawText": "Which row describes the properties of a transition element? melting point density forms coloured compounds A high low no B high high yes C low low no D low low yes",
+      "parseStatus": "ok",
+      "stem": "Which row describes the properties of a transition element? melting point density forms coloured compounds",
+      "options": {
+        "A": "high low no",
+        "B": "high high yes",
+        "C": "low low no",
+        "D": "low low yes"
+      }
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q23.png",
+      "rawText": "Which row identifies the properties of zinc? thermal conductivity reacts with dilute acid A good yes B good no C poor yes D poor no",
+      "parseStatus": "ok",
+      "stem": "Which row identifies the properties of zinc? thermal conductivity reacts with dilute acid",
+      "options": {
+        "A": "good yes",
+        "B": "good no",
+        "C": "poor yes",
+        "D": "poor no"
+      }
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q24.png",
+      "rawText": "Uses of metals depend on their properties. Which property is necessary for the use given? use of the metal property of the metal A car bodies ductile B cutlery conducts heat C food containers resists corrosion D overhead electrical cables high density",
+      "parseStatus": "ok",
+      "stem": "Uses of metals depend on their properties. Which property is necessary for the use given? use of the metal property of the metal",
+      "options": {
+        "A": "car bodies ductile",
+        "B": "cutlery conducts heat",
+        "C": "food containers resists corrosion",
+        "D": "overhead electrical cables high density"
+      }
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q25.png",
+      "rawText": "Which compounds both contribute to acid rain? A carbon monoxide and carbon dioxide B carbon monoxide and oxides of nitrogen C oxides of nitrogen and sulfur dioxide D sulfur dioxide and carbon dioxide",
+      "parseStatus": "ok",
+      "stem": "Which compounds both contribute to acid rain?",
+      "options": {
+        "A": "carbon monoxide and carbon dioxide",
+        "B": "carbon monoxide and oxides of nitrogen",
+        "C": "oxides of nitrogen and sulfur dioxide",
+        "D": "sulfur dioxide and carbon dioxide"
+      }
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q26.png",
+      "rawText": "P, Q, R and S are metals. P reacts with dilute hydrochloric acid, forming hydrogen. Q reacts violently with water. R reacts with water to give hydrogen. S is formed by heating its oxide with carbon. Which row identifies the metals? P Q R S A copper sodium potassium iron B zinc magnesium calcium iron C zinc sodium calcium magnesium D iron potassium sodium zinc",
+      "parseStatus": "ok",
+      "stem": "P, Q, R and S are metals. P reacts with dilute hydrochloric acid, forming hydrogen. Q reacts violently with water. R reacts with water to give hydrogen. S is formed by heating its oxide with carbon. Which row identifies the metals? P Q R S",
+      "options": {
+        "A": "copper sodium potassium iron",
+        "B": "zinc magnesium calcium iron",
+        "C": "zinc sodium calcium magnesium",
+        "D": "iron potassium sodium zinc"
+      }
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q27.png",
+      "rawText": "Which compound is formed when iron rusts? A anhydrous iron(II) oxide B anhydrous iron(III) oxide C hydrated iron(III) hydroxide D hydrated iron(III) oxide",
+      "parseStatus": "ok",
+      "stem": "Which compound is formed when iron rusts?",
+      "options": {
+        "A": "anhydrous iron(II) oxide",
+        "B": "anhydrous iron(III) oxide",
+        "C": "hydrated iron(III) hydroxide",
+        "D": "hydrated iron(III) oxide"
+      }
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q28.png",
+      "rawText": "Why is cryolite used in the extraction of aluminium by electrolysis? A It dissolves the aluminium oxide. B It protects the anodes from corrosion. C It changes bauxite to aluminium oxide. D It decreases the melting point of the aluminium.",
+      "parseStatus": "ok",
+      "stem": "Why is cryolite used in the extraction of aluminium by electrolysis?",
+      "options": {
+        "A": "It dissolves the aluminium oxide.",
+        "B": "It protects the anodes from corrosion.",
+        "C": "It changes bauxite to aluminium oxide.",
+        "D": "It decreases the melting point of the aluminium."
+      }
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q29.png",
+      "rawText": "A wax candle is made from a mixture of hydrocarbons. The candle is lit and placed in a gas jar along with a strip of cobalt(II) chloride test paper as shown. cobalt(II) chloride paper gas jar combustion products wax candle After a short time, the oxygen in the jar is used up and the candle flame goes out. Which substance does the cobalt(II) chloride paper identify? A carbon dioxide B carbon monoxide C sulfur dioxide D water",
+      "parseStatus": "ok",
+      "stem": "A wax candle is made from a mixture of hydrocarbons. The candle is lit and placed in a gas jar along with a strip of cobalt(II) chloride test paper as shown. cobalt(II) chloride paper gas jar combustion products wax candle After a short time, the oxygen in the jar is used up and the candle flame goes out. Which substance does the cobalt(II) chloride paper identify?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "carbon monoxide",
+        "C": "sulfur dioxide",
+        "D": "water"
+      }
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q30.png",
+      "rawText": "The hydrocarbon C4H8 has two structural isomers, but-1-ene and but-2-ene. Which statement is correct? A But-2-ene has the structural formula CH3CH=CHCH3 and the same general formula as butane. B But-2-ene has the structural formula CH3CH=CHCH3 and the same empirical formula as ethene. C But-1-ene has the structural formula CH3CH2CH=CH2 and the same general formula as butane. D But-1-ene has the structural formula CH3CHCH2=CH and the same empirical formula as ethene.",
+      "parseStatus": "ok",
+      "stem": "The hydrocarbon C4H8 has two structural isomers, but-1-ene and but-2-ene. Which statement is correct?",
+      "options": {
+        "A": "But-2-ene has the structural formula CH3CH=CHCH3 and the same general formula as butane.",
+        "B": "But-2-ene has the structural formula CH3CH=CHCH3 and the same empirical formula as ethene.",
+        "C": "But-1-ene has the structural formula CH3CH2CH=CH2 and the same general formula as butane.",
+        "D": "But-1-ene has the structural formula CH3CHCH2=CH and the same empirical formula as ethene."
+      }
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q31.png",
+      "rawText": "Which compound rapidly decolourises aqueous bromine? A propane B propanoic acid C propanol D propene",
+      "parseStatus": "ok",
+      "stem": "Which compound rapidly decolourises aqueous bromine?",
+      "options": {
+        "A": "propane",
+        "B": "propanoic acid",
+        "C": "propanol",
+        "D": "propene"
+      }
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q32.png",
+      "rawText": "What are the products of the addition reactions of ethene with bromine and hydrogen? bromine hydrogen A CH2BrCH2Br CH3CH3 B CH2BrCH2Br CH2CH2 C CH3CH2Br CH3CH3 D CH3CH2Br CH2CH2",
+      "parseStatus": "ok",
+      "stem": "What are the products of the addition reactions of ethene with bromine and hydrogen? bromine hydrogen",
+      "options": {
+        "A": "CH2BrCH2Br CH3CH3",
+        "B": "CH2BrCH2Br CH2CH2",
+        "C": "CH3CH2Br CH3CH3",
+        "D": "CH3CH2Br CH2CH2"
+      }
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q33.png",
+      "rawText": "Ethanol is manufactured by fermentation and the catalytic addition of steam to ethene. Which row describes an advantage of both methods? from sugar by fermentation from ethene and steam A ethanol needs to be purified the process is continuous B it is a batch process ethene comes from petroleum C the process is slow the process is rapid D renewable resources are used the ethanol produced is pure",
+      "parseStatus": "ok",
+      "stem": "Ethanol is manufactured by fermentation and the catalytic addition of steam to ethene. Which row describes an advantage of both methods? from sugar by fermentation from ethene and steam",
+      "options": {
+        "A": "ethanol needs to be purified the process is continuous",
+        "B": "it is a batch process ethene comes from petroleum",
+        "C": "the process is slow the process is rapid",
+        "D": "renewable resources are used the ethanol produced is pure"
+      }
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q34.png",
+      "rawText": "Methanoic acid and propan-1-ol react to form an ester. What is the structural formula of the ester? A HCOOCH2CH2CH3 B CH3CH2COOCH3 C CH3COOCH2CH3 D CH3CH2CH2COOH",
+      "parseStatus": "ok",
+      "stem": "Methanoic acid and propan-1-ol react to form an ester. What is the structural formula of the ester?",
+      "options": {
+        "A": "HCOOCH2CH2CH3",
+        "B": "CH3CH2COOCH3",
+        "C": "CH3COOCH2CH3",
+        "D": "CH3CH2CH2COOH"
+      }
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q35.png",
+      "rawText": "What is the correct structure of PET? C A O C O C C O O N H N H N H N H C B O C O C C O O O O O O C C O C O C C O O N H H N H N N H C D O C O C C O O O O O",
+      "parseStatus": "ok",
+      "stem": "What is the correct structure of PET?",
+      "options": {
+        "A": "structure A",
+        "B": "structure B",
+        "C": "structure C",
+        "D": "structure D"
+      }
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q36.png",
+      "rawText": "Alkanes undergo substitution reactions in the presence of UV light. Which equation represents a substitution reaction of ethane? A C2H6 + Cl 2  C2H4 + 2HCl B C2H6 + Cl 2  C2H5Cl + HCl C C2H6 + Cl 2  C2H4Cl 2 + H2 D C2H6 + HCl  C2H5Cl + H2",
+      "parseStatus": "ok",
+      "stem": "Alkanes undergo substitution reactions in the presence of UV light. Which equation represents a substitution reaction of ethane?",
+      "options": {
+        "A": "C2H6 + Cl 2  C2H4 + 2HCl",
+        "B": "C2H6 + Cl 2  C2H5Cl + HCl",
+        "C": "C2H6 + Cl 2  C2H4Cl 2 + H2",
+        "D": "C2H6 + HCl  C2H5Cl + H2"
+      }
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q37.png",
+      "rawText": "Methane reacts with chlorine in substitution reactions. How many different products, containing a single carbon atom, can be made during the reactions? A 2 B 3 C 4 D 5",
+      "parseStatus": "ok",
+      "stem": "Methane reacts with chlorine in substitution reactions. How many different products, containing a single carbon atom, can be made during the reactions?",
+      "options": {
+        "A": "2",
+        "B": "3",
+        "C": "4",
+        "D": "5"
+      }
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q38.png",
+      "rawText": "Rock salt is a mixture of salt and sand. The method used to separate the sand from the salt is listed. step 1 Crush the rock salt, add to warm water and stir. step 2 Pour the mixture through a filter paper held in a funnel. step 3 Evaporate the water to crystallise the salt. Which statement about the method is correct? A The filtrate in step 2 is pure water. B The residue in step 2 is pure crystals of salt. C The solute is salt. D The solvent is a mixture of salt and water.",
+      "parseStatus": "ok",
+      "stem": "Rock salt is a mixture of salt and sand. The method used to separate the sand from the salt is listed. step 1 Crush the rock salt, add to warm water and stir. step 2 Pour the mixture through a filter paper held in a funnel. step 3 Evaporate the water to crystallise the salt. Which statement about the method is correct?",
+      "options": {
+        "A": "The filtrate in step 2 is pure water.",
+        "B": "The residue in step 2 is pure crystals of salt.",
+        "C": "The solute is salt.",
+        "D": "The solvent is a mixture of salt and water."
+      }
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q39.png",
+      "rawText": "Two compounds, M and N, are dissolved in water and separated by chromatography. The results are shown. 10 cm 2 cm solvent front baseline M N What is the Rf value of M and which compound is most soluble in water? Rf value of M most soluble compound A 0.2 M B 0.2 N C 5.0 M D 5.0 N",
+      "parseStatus": "ok",
+      "stem": "Two compounds, M and N, are dissolved in water and separated by chromatography. The results are shown. 10 cm 2 cm solvent front baseline M N What is the Rf value of M and which compound is most soluble in water? Rf value of M most soluble compound",
+      "options": {
+        "A": "0.2 M",
+        "B": "0.2 N",
+        "C": "5.0 M",
+        "D": "5.0 N"
+      }
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_22/q40.png",
+      "rawText": "When acid is added to salt X, a gas is produced which turns limewater milky. When sodium hydroxide is added to salt X, a gas is produced which turns litmus paper blue. What is X? A CaCO3 B (NH4)2CO3 C NH4NO3 D ZnCO3",
+      "parseStatus": "ok",
+      "stem": "When acid is added to salt X, a gas is produced which turns limewater milky. When sodium hydroxide is added to salt X, a gas is produced which turns litmus paper blue. What is X?",
+      "options": {
+        "A": "CaCO3",
+        "B": "(NH4)2CO3",
+        "C": "NH4NO3",
+        "D": "ZnCO3"
+      }
+    }
+  ]
+}

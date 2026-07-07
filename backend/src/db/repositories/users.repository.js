@@ -8,6 +8,7 @@ function mapUser(row) {
     role: row.role,
     grade: row.grade,
     targetScore: row.target_score,
+    language: row.language || "zh-CN",
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -22,8 +23,8 @@ function mapUserWithAuth(row) {
 
 export async function createUser(input) {
   const sql = `
-    insert into users (email, display_name, role, grade, target_score)
-    values ($1, $2, $3, $4, $5)
+    insert into users (email, display_name, role, grade, target_score, language)
+    values ($1, $2, $3, $4, $5, $6)
     returning *
   `;
   const params = [
@@ -32,6 +33,7 @@ export async function createUser(input) {
     input.role || "student",
     input.grade || null,
     input.targetScore ?? null,
+    input.language || "zh-CN",
   ];
   const result = await query(sql, params);
   return mapUser(result.rows[0]);
@@ -72,8 +74,8 @@ export async function findUserByEmail(email) {
 
 export async function createUserWithPassword(input) {
   const sql = `
-    insert into users (email, display_name, role, grade, target_score, password_hash)
-    values ($1, $2, $3, $4, $5, $6)
+    insert into users (email, display_name, role, grade, target_score, password_hash, language)
+    values ($1, $2, $3, $4, $5, $6, $7)
     returning *
   `;
   const params = [
@@ -83,6 +85,7 @@ export async function createUserWithPassword(input) {
     input.grade || null,
     input.targetScore ?? null,
     input.passwordHash,
+    input.language || "zh-CN",
   ];
   const result = await query(sql, params);
   return mapUser(result.rows[0]);
@@ -95,6 +98,7 @@ export async function updateUserProfile(userId, input) {
       display_name = $2,
       grade = $3,
       target_score = $4,
+      language = $5,
       updated_at = now()
     where id = $1
     returning *
@@ -104,6 +108,7 @@ export async function updateUserProfile(userId, input) {
     input.displayName,
     input.grade || null,
     input.targetScore ?? null,
+    input.language || "zh-CN",
   ];
   const result = await query(sql, params);
   return result.rows[0] ? mapUser(result.rows[0]) : null;

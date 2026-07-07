@@ -3,40 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>后台数据面板</title>
+  <title data-i18n="adminPageTitle">后台数据面板</title>
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
 <body>
   <main class="container">
     <section class="card hero">
-      <h1>后台数据面板</h1>
-      <p>查看最近用户、练习记录与整体统计。</p>
+      <h1 data-i18n="adminHeroTitle">后台数据面板</h1>
+      <p data-i18n="adminHeroSubtitle">查看最近用户、练习记录与整体统计。</p>
       <p id="adminStatus" class="tip"></p>
     </section>
 
     <section class="card panel">
-      <h2>筛选设置</h2>
+      <h2 data-i18n="adminFilterTitle">筛选设置</h2>
       <div class="grid-2">
-        <label>最近用户数量
+        <label><span data-i18n="recentUsersLabel">最近用户数量</span>
           <input id="usersLimit" type="number" min="1" max="100" value="10" />
         </label>
-        <label>最近练习数量
+        <label><span data-i18n="recentPracticesLabel">最近练习数量</span>
           <input id="practicesLimit" type="number" min="1" max="100" value="20" />
         </label>
       </div>
       <div class="actions">
-        <button id="refreshBtn" class="btn-primary">刷新数据</button>
-        <button id="backHome" class="btn-secondary">返回首页</button>
+        <button id="refreshBtn" class="btn-primary" data-i18n="refreshBtn">刷新数据</button>
+        <button id="openMapper" class="btn-secondary" data-i18n="openMapper">题图绑定工具</button>
+        <button id="backHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
       </div>
     </section>
 
     <section class="card panel">
-      <h2>总览统计</h2>
+      <h2 data-i18n="adminSummaryTitle">总览统计</h2>
       <div id="summaryCards" class="stats-grid"></div>
     </section>
 
     <section class="card panel">
-      <h2>最近用户</h2>
+      <h2 data-i18n="latestUsersTitle">最近用户</h2>
       <div class="table-wrap">
         <table class="data-table">
           <thead>
@@ -56,7 +57,7 @@
     </section>
 
     <section class="card panel">
-      <h2>最近练习记录</h2>
+      <h2 data-i18n="latestPracticesTitle">最近练习记录</h2>
       <div class="table-wrap">
         <table class="data-table">
           <thead>
@@ -76,6 +77,7 @@
     </section>
   </main>
 
+  <script src="../scripts/i18n.js"></script>
   <script src="../scripts/api.js"></script>
   <script src="../scripts/admin.js"></script>
 </body>

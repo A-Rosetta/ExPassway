@@ -1,0 +1,65 @@
+{
+  "pdfDir": "/home/ubuntu/chemis/pdf",
+  "files": [
+    {
+      "pdf": "0620_s23_qp_21.pdf",
+      "slug": "0620_s23_qp_21",
+      "anchorCount": 40,
+      "rowCount": 40,
+      "structuredOk": 37,
+      "structuredNeedsReview": 3,
+      "cutOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_s23_qp_21.cut.json",
+      "structuredOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_s23_qp_21.structured.json"
+    },
+    {
+      "pdf": "0620_s23_qp_22.pdf",
+      "slug": "0620_s23_qp_22",
+      "anchorCount": 40,
+      "rowCount": 40,
+      "structuredOk": 37,
+      "structuredNeedsReview": 3,
+      "cutOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_s23_qp_22.cut.json",
+      "structuredOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_s23_qp_22.structured.json"
+    },
+    {
+      "pdf": "0620_s23_qp_23.pdf",
+      "slug": "0620_s23_qp_23",
+      "anchorCount": 40,
+      "rowCount": 40,
+      "structuredOk": 36,
+      "structuredNeedsReview": 4,
+      "cutOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_s23_qp_23.cut.json",
+      "structuredOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_s23_qp_23.structured.json"
+    },
+    {
+      "pdf": "0620_w23_qp_21(1).pdf",
+      "slug": "0620_w23_qp_211",
+      "anchorCount": 40,
+      "rowCount": 40,
+      "structuredOk": 35,
+      "structuredNeedsReview": 5,
+      "cutOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_w23_qp_211.cut.json",
+      "structuredOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_w23_qp_211.structured.json"
+    },
+    {
+      "pdf": "0620_w23_qp_22(1).pdf",
+      "slug": "0620_w23_qp_221",
+      "anchorCount": 40,
+      "rowCount": 40,
+      "structuredOk": 35,
+      "structuredNeedsReview": 5,
+      "cutOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_w23_qp_221.cut.json",
+      "structuredOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_w23_qp_221.structured.json"
+    },
+    {
+      "pdf": "0620_w23_qp_23(1).pdf",
+      "slug": "0620_w23_qp_231",
+      "anchorCount": 40,
+      "rowCount": 40,
+      "structuredOk": 38,
+      "structuredNeedsReview": 2,
+      "cutOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_w23_qp_231.cut.json",
+      "structuredOutput": "/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch/0620_w23_qp_231.structured.json"
+    }
+  ]
+}

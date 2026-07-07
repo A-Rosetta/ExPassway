@@ -10,12 +10,16 @@ create table if not exists users (
   role text not null default 'student' check (role in ('student', 'teacher', 'parent')),
   grade text,
   target_score integer check (target_score between 0 and 100),
+  language text not null default 'zh-CN',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 
 alter table users
 add column if not exists password_hash text;
+
+alter table users
+add column if not exists language text not null default 'zh-CN';
 
 create index if not exists idx_users_role on users(role);
 create index if not exists idx_users_created_at on users(created_at desc);
@@ -50,6 +54,33 @@ create index if not exists idx_practice_status on practice_sessions(status);
 create index if not exists idx_practice_board_subject_paper on practice_sessions(board, subject, paper);
 create index if not exists idx_practice_topics_gin on practice_sessions using gin(topics);
 
+-- Per-user wrong notebook entries aggregated across submitted practices.
+create table if not exists wrong_notebook_entries (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  question_key text not null,
+  board text,
+  subject text,
+  paper text,
+  topic text,
+  year text,
+  stem text,
+  answer integer,
+  answer_text text,
+  last_selected integer,
+  last_selected_text text,
+  wrong_count integer not null default 1 check (wrong_count >= 1),
+  first_wrong_at timestamptz not null default now(),
+  last_wrong_at timestamptz not null default now(),
+  mastered boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (user_id, question_key)
+);
+
+create index if not exists idx_wrong_notebook_user_last_wrong
+on wrong_notebook_entries(user_id, last_wrong_at desc);
+
 -- Convenience analytics view for per-user practice summary.
 create or replace view user_practice_summary as
 select
@@ -60,3 +91,64 @@ select
   max(submitted_at) as last_submitted_at
 from practice_sessions
 group by user_id;
+
+
+-- Question bank storage (DB-first mode).
+create table if not exists question_bank (
+  id text primary key,
+  board text not null,
+  subject text not null,
+  paper text not null,
+  difficulty text,
+  topic text,
+  year text,
+  stem text not null,
+  options jsonb not null default '[]'::jsonb,
+  answer integer not null default 0,
+  mistake_type text not null default 'unknown',
+  template_id text,
+  skills jsonb not null default '[]'::jsonb,
+  hints jsonb not null default '[]'::jsonb,
+  images jsonb not null default '[]'::jsonb,
+  source jsonb
+);
+
+create index if not exists idx_qbank_selection on question_bank(board, subject, paper);
+create index if not exists idx_qbank_year on question_bank(year);
+
+-- Import jobs and review queue for strict publishing workflow.
+create table if not exists question_import_jobs (
+  id uuid primary key default gen_random_uuid(),
+  status text not null default 'running' check (status in ('running', 'completed', 'failed')),
+  input_dir text not null,
+  output_json text not null,
+  report_json text not null,
+  total_candidates integer not null default 0,
+  published_count integer not null default 0,
+  review_count integer not null default 0,
+  summary jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  completed_at timestamptz
+);
+
+create table if not exists question_review_queue (
+  id uuid primary key default gen_random_uuid(),
+  job_id uuid references question_import_jobs(id) on delete set null,
+  question_id text,
+  board text,
+  subject text,
+  paper text,
+  year text,
+  source_file text,
+  question_no integer,
+  stem text,
+  options jsonb not null default '[]'::jsonb,
+  images jsonb not null default '[]'::jsonb,
+  reasons jsonb not null default '[]'::jsonb,
+  quality jsonb not null default '{}'::jsonb,
+  source jsonb,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_qreview_job on question_review_queue(job_id);
+create index if not exists idx_qreview_file_qno on question_review_queue(source_file, question_no);

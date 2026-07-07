@@ -1,5 +1,8 @@
 import { questionBank } from "../data/questionBank.js";
+import { loadImportedQuestionBank } from "../data/importedQuestionBank.js";
 import { toClampedInteger } from "../utils/validate.js";
+import { isDbEnabled } from "../db/client.js";
+import { listQuestionBankBySelection, listQuestionBankByBoardSubject } from "../db/repositories/questionBank.repository.js";
 
 function shuffle(list) {
   const arr = [...list];
@@ -69,6 +72,22 @@ function pickWithoutTemplateDup(pool, limit, usedTemplateIds) {
   return picked;
 }
 
+function buildBucketsByDifficulty(list) {
+  const buckets = {
+    "基础": [],
+    "中等": [],
+    "冲刺": [],
+  };
+
+  list.forEach((question) => {
+    if (buckets[question.difficulty]) {
+      buckets[question.difficulty].push(question);
+    }
+  });
+
+  return buckets;
+}
+
 export function sanitizeQuestion(question) {
   return {
     id: question.id,
@@ -77,30 +96,43 @@ export function sanitizeQuestion(question) {
     paper: question.paper,
     difficulty: question.difficulty,
     topic: question.topic,
+    year: question.year || "",
     skills: Array.isArray(question.skills) ? question.skills : [],
     hints: Array.isArray(question.hints) ? question.hints : [],
     stem: question.stem,
     options: question.options,
+    images: Array.isArray(question.images) ? question.images : [],
   };
 }
 
-export function generatePaper(selection, options) {
+export async function generatePaper(selection, options) {
+  const importedBank = loadImportedQuestionBank();
   const topics = Array.isArray(options.topics) ? options.topics : [];
-  const requestedCount = toClampedInteger(options.count, 8, 1, 30);
+  const topicSet = new Set(topics);
+  const requestedCount = toClampedInteger(options.count, 8, 1, 40);
   const difficulty = options.difficulty || "";
+  const year = options.year || "";
 
-  let pool = questionBank.filter(
-    (q) =>
-      q.board === selection.board &&
-      q.subject === selection.subject &&
-      q.paper === selection.paper
-  );
+  const runtimeBank = [...questionBank, ...importedBank];
 
-  if (difficulty || topics.length) {
+  let pool = [];
+  if (isDbEnabled()) {
+    pool = await listQuestionBankBySelection(selection);
+  } else {
+    pool = runtimeBank.filter(
+      (q) =>
+        q.board === selection.board &&
+        q.subject === selection.subject &&
+        q.paper === selection.paper
+    );
+  }
+
+  if (difficulty || topics.length || year) {
     const refined = pool.filter((q) => {
       const matchesDifficulty = difficulty ? q.difficulty === difficulty : false;
-      const matchesTopic = topics.length ? topics.includes(q.topic) : false;
-      return matchesDifficulty || matchesTopic;
+      const matchesTopic = topicSet.size ? topicSet.has(q.topic) : false;
+      const matchesYear = year ? String(q.year || "") === year : false;
+      return matchesDifficulty || matchesTopic || matchesYear;
     });
     if (refined.length) {
       pool = refined;
@@ -110,25 +142,35 @@ export function generatePaper(selection, options) {
   let fallbackApplied = false;
   if (!pool.length) {
     fallbackApplied = true;
-    pool = questionBank.filter(
-      (q) => q.board === selection.board && q.subject === selection.subject
-    );
+    if (isDbEnabled()) {
+      pool = await listQuestionBankByBoardSubject(selection);
+    } else {
+      pool = runtimeBank.filter(
+        (q) => q.board === selection.board && q.subject === selection.subject
+      );
+    }
   }
 
   const shuffled = shuffle(pool);
+  const buckets = buildBucketsByDifficulty(shuffled);
   const difficultyTargets = buildDifficultyTargets(requestedCount, difficulty);
   const usedTemplateIds = new Set();
   const selected = [];
+  const selectedIds = new Set();
 
   Object.entries(difficultyTargets).forEach(([difficultyKey, limit]) => {
-    const bucket = shuffled.filter((q) => q.difficulty === difficultyKey);
+    const bucket = buckets[difficultyKey] || [];
     selected.push(...pickWithoutTemplateDup(bucket, limit, usedTemplateIds));
+  });
+
+  selected.forEach((question) => {
+    selectedIds.add(question.id);
   });
 
   if (selected.length < requestedCount) {
     selected.push(
       ...pickWithoutTemplateDup(
-        shuffled.filter((q) => !selected.includes(q)),
+        shuffled.filter((q) => !selectedIds.has(q.id)),
         requestedCount - selected.length,
         usedTemplateIds
       )
@@ -143,5 +185,6 @@ export function generatePaper(selection, options) {
     requestedCount,
     fallbackApplied,
     topicCoverageCount,
+    source: isDbEnabled() ? "db-bank" : (importedBank.length ? "imported-bank" : "built-in-bank"),
   };
 }

@@ -7,13 +7,18 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
-    "db:schema": "psql \"$DATABASE_URL\" -f db/schema.sql"
+    "db:schema": "psql \"$DATABASE_URL\" -f db/schema.sql",
+    "import:pdf-bank": "node scripts/import-pdf-bank.mjs",
+    "import:chemis-all": "node scripts/import-all-chemis-pdfs.mjs",
+    "import:bank-db": "node scripts/import-bank-to-db.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "morgan": "^1.10.0",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^3.11.174",
     "pg": "^8.13.1"
   }
 }

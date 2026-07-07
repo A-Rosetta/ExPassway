@@ -3,47 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>登录 / 注册</title>
+  <title data-i18n="loginPageTitle">登录 / 注册</title>
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
 <body>
   <main class="container">
     <section class="card hero">
-      <h1>账号登录 / 注册</h1>
-      <p>登录后会自动长期保持，下次打开可自动识别。</p>
+      <h1 data-i18n="loginHeroTitle">账号登录 / 注册</h1>
+      <p data-i18n="loginHeroSubtitle">登录后会自动长期保持，下次打开可自动识别。</p>
       <p id="authStatus" class="tip"></p>
     </section>
 
     <section class="card panel">
-      <h2>账号信息</h2>
+      <h2 data-i18n="loginSectionTitle">账号信息</h2>
       <div class="grid-2">
-        <label>姓名
-          <input id="userDisplayName" type="text" placeholder="例如：Alice" />
+        <label><span data-i18n="userNameLabel">姓名</span>
+          <input id="userDisplayName" type="text" data-i18n-placeholder="userDisplayNamePlaceholder" placeholder="例如：Alice" />
         </label>
-        <label>邮箱
-          <input id="userEmail" type="email" placeholder="例如：alice@example.com" />
+        <label><span data-i18n="userEmailLabel">邮箱</span>
+          <input id="userEmail" type="email" data-i18n-placeholder="userEmailPlaceholder" placeholder="例如：alice@example.com" />
         </label>
-        <label>密码
-          <input id="userPassword" type="password" placeholder="至少 6 位" />
+        <label><span data-i18n="userPasswordLabel">密码</span>
+          <input id="userPassword" type="password" data-i18n-placeholder="userPasswordPlaceholder" placeholder="至少 6 位" />
         </label>
-        <label>年级
-          <input id="userGrade" type="text" placeholder="例如：AS" />
+        <label><span data-i18n="userGradeLabel">年级</span>
+          <input id="userGrade" type="text" data-i18n-placeholder="userGradePlaceholder" placeholder="例如：AS" />
         </label>
-        <label>目标分
-          <input id="userTargetScore" type="number" min="0" max="100" placeholder="例如：85" />
+        <label><span data-i18n="userTargetScoreLabel">目标分</span>
+          <input id="userTargetScore" type="number" min="0" max="100" data-i18n-placeholder="userTargetScorePlaceholder" placeholder="例如：85" />
         </label>
       </div>
 
       <div class="actions">
-        <button id="registerBtn" class="btn-primary">注册并长期登录</button>
-        <button id="loginBtn" class="btn-primary">登录</button>
-        <button id="logoutBtn" class="btn-secondary">退出登录</button>
-        <button id="goHomeBtn" class="btn-secondary">去答题页面</button>
+        <button id="registerBtn" class="btn-primary" data-i18n="registerBtn">注册并长期登录</button>
+        <button id="loginBtn" class="btn-primary" data-i18n="loginBtn">登录</button>
+        <button id="logoutBtn" class="btn-secondary" data-i18n="logoutBtn">退出登录</button>
+        <button id="goHomeBtn" class="btn-secondary" data-i18n="goHomeBtn">去答题页面</button>
+        <button id="goAdminLoginBtn" class="btn-secondary" data-i18n="goAdminLoginBtn">管理员入口</button>
       </div>
     </section>
 
   </main>
 
+  <script src="../scripts/i18n.js"></script>
   <script src="../scripts/api.js"></script>
   <script src="../scripts/login.js"></script>
 </body>

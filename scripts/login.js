@@ -2,6 +2,8 @@
   const USER_PROFILE_KEY = "alevel.userProfile";
   const USER_ID_KEY = "alevel.userId";
   const AUTH_TOKEN_KEY = "alevel.authToken";
+  const USER_LANGUAGE_KEY = "alevel.language";
+  const { t, getLanguage, applyPage } = window.ALevelI18n;
 
   function byId(id) {
     return document.getElementById(id);
@@ -28,6 +30,10 @@
     localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(profile));
     if (profile?.id) {
       localStorage.setItem(USER_ID_KEY, profile.id);
+    }
+    if (profile?.language) {
+      localStorage.setItem(USER_LANGUAGE_KEY, profile.language);
+      window.ALevelI18n.setLanguage(profile.language);
     }
   }
 
@@ -73,9 +79,9 @@
     const existing = readUserProfile();
     if (existing?.displayName && readAuthToken()) {
       fillForm(existing);
-      setAuthStatus(`已登录：${existing.displayName}（长期保存）`, false);
+      setAuthStatus(t("alreadyLoggedIn", { name: existing.displayName }), false);
     } else {
-      setAuthStatus("当前未登录，请先注册或登录。", true);
+      setAuthStatus(t("notLoggedIn"), true);
     }
 
     registerBtn.addEventListener("click", async () => {
@@ -87,17 +93,17 @@
       const targetScore = targetScoreRaw === "" ? null : Number.parseInt(targetScoreRaw, 10);
 
       if (!displayName || !email || !password) {
-        setAuthStatus("注册需要填写姓名、邮箱、密码。", true);
+        setAuthStatus(t("registerFieldsRequired"), true);
         return;
       }
       if (password.length < 6) {
-        setAuthStatus("密码至少 6 位。", true);
+        setAuthStatus(t("passwordTooShort"), true);
         return;
       }
 
       registerBtn.disabled = true;
       const old = registerBtn.textContent;
-      registerBtn.textContent = "注册中...";
+      registerBtn.textContent = t("registering");
       try {
         const data = await window.ALevelApi.register({
           displayName,
@@ -105,13 +111,15 @@
           password,
           grade: grade || null,
           targetScore: Number.isNaN(targetScore) ? null : targetScore,
+          language: getLanguage(),
         });
-        applyAuthSuccess(data, `注册成功：${data.user.displayName}`);
+        applyAuthSuccess(data, t("registerSuccess", { name: data.user.displayName }));
       } catch (err) {
-        setAuthStatus(`注册失败：${err.message || "请稍后重试"}`, true);
+        setAuthStatus(t("registerFailed", { message: err.message || t("retryLater") }), true);
       } finally {
         registerBtn.disabled = false;
         registerBtn.textContent = old;
+        applyPage();
       }
     });
 
@@ -119,33 +127,41 @@
       const email = byId("userEmail").value.trim();
       const password = byId("userPassword").value.trim();
       if (!email || !password) {
-        setAuthStatus("登录需要邮箱和密码。", true);
+        setAuthStatus(t("loginFieldsRequired"), true);
         return;
       }
 
       loginBtn.disabled = true;
       const old = loginBtn.textContent;
-      loginBtn.textContent = "登录中...";
+      loginBtn.textContent = t("loggingIn");
       try {
         const data = await window.ALevelApi.login({ email, password });
-        applyAuthSuccess(data, `登录成功：${data.user.displayName}`);
+        applyAuthSuccess(data, t("loginSuccess", { name: data.user.displayName }));
       } catch (err) {
-        setAuthStatus(`登录失败：${err.message || "账号或密码错误"}`, true);
+        setAuthStatus(t("loginFailed", { message: err.message || t("invalidCredentials") }), true);
       } finally {
         loginBtn.disabled = false;
         loginBtn.textContent = old;
+        applyPage();
       }
     });
 
     logoutBtn.addEventListener("click", () => {
       clearAuth();
       fillForm(null);
-      setAuthStatus("已退出登录。", false);
+      setAuthStatus(t("loggedOut"), false);
     });
 
     goHomeBtn.addEventListener("click", () => {
       location.href = "../index.html";
     });
+
+    const goAdminLoginBtn = byId("goAdminLoginBtn");
+    if (goAdminLoginBtn) {
+      goAdminLoginBtn.addEventListener("click", () => {
+        location.href = "./admin-login.html";
+      });
+    }
 
     const token = readAuthToken();
     if (token) {
@@ -153,17 +169,18 @@
         .then((user) => {
           writeUserProfile(user);
           fillForm(user);
-          setAuthStatus(`已自动登录：${user.displayName}`, false);
+          setAuthStatus(t("autoLoginSuccess", { name: user.displayName }), false);
           setTimeout(() => {
             location.href = "../index.html";
           }, 300);
         })
         .catch(() => {
           clearAuth();
-          setAuthStatus("登录已过期，请重新登录。", true);
+          setAuthStatus(t("loginExpired"), true);
         });
     }
   }
 
+  applyPage();
   init();
 })();

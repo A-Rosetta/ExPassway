@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="adminLoginPageTitle">管理员登录</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card hero">
+      <h1 data-i18n="adminLoginHeroTitle">管理员登录</h1>
+      <p data-i18n="adminLoginHeroSubtitle">仅管理员账号可进入后台数据面板。</p>
+      <p id="adminLoginStatus" class="tip"></p>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="adminLoginSectionTitle">登录信息</h2>
+      <div class="grid-2">
+        <label><span data-i18n="adminAccountLabel">管理员账号</span>
+          <input id="adminEmail" type="text" data-i18n-placeholder="adminAccountPlaceholder" placeholder="例如：admin" />
+        </label>
+        <label><span data-i18n="adminPasswordLabel">密码</span>
+          <input id="adminPassword" type="password" data-i18n-placeholder="adminPasswordPlaceholder" placeholder="请输入密码" />
+        </label>
+      </div>
+      <div class="actions">
+        <button id="adminLoginBtn" class="btn-primary" data-i18n="adminLoginBtn">管理员登录</button>
+        <button id="goUserLoginBtn" class="btn-secondary" data-i18n="goUserLoginBtn">普通用户登录</button>
+        <button id="goHomeBtn" class="btn-secondary" data-i18n="backHome">返回首页</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../scripts/i18n.js"></script>
+  <script src="../scripts/api.js"></script>
+  <script src="../scripts/admin-login.js"></script>
+</body>
+</html>

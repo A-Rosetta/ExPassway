@@ -101,6 +101,15 @@ export async function listPracticeSessionsByUserId(userId, limit = 20) {
   return result.rows.map(mapSession);
 }
 
+export async function deletePracticeSessionsByUserId(userId) {
+  const sql = `
+    delete from practice_sessions
+    where user_id = $1
+  `;
+  const result = await query(sql, [userId]);
+  return Number(result.rowCount || 0);
+}
+
 export async function listRecentPracticeSessions(limit = 20) {
   const sql = `
     select

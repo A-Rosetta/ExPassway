@@ -1,0 +1,566 @@
+{
+  "pdf": "/home/ubuntu/chemis/pdf/0620_w23_qp_23(1).pdf",
+  "anchorCount": 40,
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q01.png",
+      "rawText": "A sample of a gas occupies 340 cm3 at room temperature and pressure. The temperature and pressure are both increased, but the volume occupied by the gas remains 340 cm3. Which row describes what happens to the particle speed and the average distance between the particles in the gas when the temperature and pressure are both increased? particle speed average distance between particles A unchanged unchanged B unchanged increased C increased unchanged D increased increased",
+      "parseStatus": "ok",
+      "stem": "A sample of a gas occupies 340 cm3 at room temperature and pressure. The temperature and pressure are both increased, but the volume occupied by the gas remains 340 cm3. Which row describes what happens to the particle speed and the average distance between the particles in the gas when the temperature and pressure are both increased? particle speed average distance between particles",
+      "options": {
+        "A": "unchanged unchanged",
+        "B": "unchanged increased",
+        "C": "increased unchanged",
+        "D": "increased increased"
+      }
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q02.png",
+      "rawText": "Which statements about the rate of diffusion of the gases ammonia, carbon monoxide, nitrogen and oxygen are correct? 1 Nitrogen and carbon monoxide will diffuse at the same rate. 2 Oxygen will diffuse slowest because it is an element, whereas the others are compounds.",
+      "parseStatus": "ok",
+      "stem": "Which statements about the rate of diffusion of the gases ammonia, carbon monoxide, nitrogen and oxygen are correct?",
+      "options": {
+        "A": "1 only",
+        "B": "2 only",
+        "C": "1 and 2",
+        "D": "neither 1 nor 2"
+      }
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q03.png",
+      "rawText": "The structure of an atom of element X is shown. 5p 6n key = electron = neutron = proton n p What is element X? A boron B carbon C sodium D sulfur",
+      "parseStatus": "ok",
+      "stem": "The structure of an atom of element X is shown. 5p 6n key = electron = neutron = proton n p What is element X?",
+      "options": {
+        "A": "boron",
+        "B": "carbon",
+        "C": "sodium",
+        "D": "sulfur"
+      }
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q04.png",
+      "rawText": "Which statement explains why isotopes of an element have the same chemical reactions? A They have different numbers of neutrons. B They have ions with different numbers of electrons. C They have the same number of outer shell electrons. D They have the same number of protons.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why isotopes of an element have the same chemical reactions?",
+      "options": {
+        "A": "They have different numbers of neutrons.",
+        "B": "They have ions with different numbers of electrons.",
+        "C": "They have the same number of outer shell electrons.",
+        "D": "They have the same number of protons."
+      }
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q05.png",
+      "rawText": "Magnesium reacts with oxygen to form magnesium oxide. What happens to magnesium atoms and oxygen atoms during this reaction? A Magnesium and oxygen share two electrons. B Magnesium gains two electrons and oxygen loses two electrons. C Magnesium loses one electron and oxygen gains one electron. D Magnesium loses two electrons and oxygen gains two electrons.",
+      "parseStatus": "ok",
+      "stem": "Magnesium reacts with oxygen to form magnesium oxide. What happens to magnesium atoms and oxygen atoms during this reaction?",
+      "options": {
+        "A": "Magnesium and oxygen share two electrons.",
+        "B": "Magnesium gains two electrons and oxygen loses two electrons.",
+        "C": "Magnesium loses one electron and oxygen gains one electron.",
+        "D": "Magnesium loses two electrons and oxygen gains two electrons."
+      }
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q06.png",
+      "rawText": "Which row about the properties of both diamond and silicon(IV) oxide is correct? conductor of electricity type of molecule A yes giant covalent B yes simple covalent C no giant covalent D no simple covalent",
+      "parseStatus": "ok",
+      "stem": "Which row about the properties of both diamond and silicon(IV) oxide is correct? conductor of electricity type of molecule",
+      "options": {
+        "A": "yes giant covalent",
+        "B": "yes simple covalent",
+        "C": "no giant covalent",
+        "D": "no simple covalent"
+      }
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q07.png",
+      "rawText": "The equation represents the reaction between solid magnesium oxide and dilute hydrochloric acid to form magnesium chloride and water. MgO + 2HCl  MgCl 2 + H2O Which row shows the state symbols for hydrochloric acid, magnesium chloride and water? HCl MgCl 2 H2O A (aq) (aq) (l) B (aq) (l) (l) C (l) (aq) (aq) D (l) (l) (aq)",
+      "parseStatus": "ok",
+      "stem": "The equation represents the reaction between solid magnesium oxide and dilute hydrochloric acid to form magnesium chloride and water. MgO + 2HCl  MgCl 2 + H2O Which row shows the state symbols for hydrochloric acid, magnesium chloride and water? HCl MgCl 2 H2O",
+      "options": {
+        "A": "(aq) (aq) (l)",
+        "B": "(aq) (l) (l)",
+        "C": "(l) (aq) (aq)",
+        "D": "(l) (l) (aq)"
+      }
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q08.png",
+      "rawText": "Which substance is a mixture? A air B graphite C oxygen D water",
+      "parseStatus": "ok",
+      "stem": "Which substance is a mixture?",
+      "options": {
+        "A": "air",
+        "B": "graphite",
+        "C": "oxygen",
+        "D": "water"
+      }
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q09.png",
+      "rawText": "The number of moles of atoms X, Y and Z, in a compound, are shown. atom moles X 0.6 Y 1.2 Z 0.3 What is the formula of the compound? A XY2Z4 B XY4Z2 C X2YZ4 D X2Y4Z",
+      "parseStatus": "ok",
+      "stem": "The number of moles of atoms X, Y and Z, in a compound, are shown. atom moles X 0.6 Y 1.2 Z 0.3 What is the formula of the compound?",
+      "options": {
+        "A": "XY2Z4",
+        "B": "XY4Z2",
+        "C": "X2YZ4",
+        "D": "X2Y4Z"
+      }
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q10.png",
+      "rawText": "1.0 mol of silver nitrate, AgNO3, contains 1.2  1024 ions. How many ions are there in 0.25 mol of iron(III) oxide, Fe2O3? A 1.5  1023 B 3.0  1023 C 7.5  1023 D 3.0  1024",
+      "parseStatus": "ok",
+      "stem": "1.0 mol of silver nitrate, AgNO3, contains 1.2  1024 ions. How many ions are there in 0.25 mol of iron(III) oxide, Fe2O3?",
+      "options": {
+        "A": "1.5  1023",
+        "B": "3.0  1023",
+        "C": "7.5  1023",
+        "D": "3.0  1024"
+      }
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q11.png",
+      "rawText": "Concentrated aqueous magnesium bromide is electrolysed using carbon electrodes. Which equations represent the reactions occurring at each electrode? positive electrode negative electrode A 2Br –(aq)  Br2(aq) + 2e– 2H+(aq) + 2e–  H2(g) B 2H+(aq) + 2e–  H2(g) 2O2–(aq)  O2(aq) + 4e– C Mg2+(aq) + 2e–  Mg(s) 2Br –(aq)  Br2(aq) + 2e– D 2O2–(aq)  O2(aq) + 4e– Mg2+(aq) + 2e–  Mg(s)",
+      "parseStatus": "ok",
+      "stem": "Concentrated aqueous magnesium bromide is electrolysed using carbon electrodes. Which equations represent the reactions occurring at each electrode? positive electrode negative electrode",
+      "options": {
+        "A": "2Br –(aq)  Br2(aq) + 2e– 2H+(aq) + 2e–  H2(g)",
+        "B": "2H+(aq) + 2e–  H2(g) 2O2–(aq)  O2(aq) + 4e–",
+        "C": "Mg2+(aq) + 2e–  Mg(s) 2Br –(aq)  Br2(aq) + 2e–",
+        "D": "2O2–(aq)  O2(aq) + 4e– Mg2+(aq) + 2e–  Mg(s)"
+      }
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 3,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q12.png",
+      "rawText": "Aqueous copper(II) sulfate is electrolysed using carbon electrodes. Which statement is correct? A Bubbles of hydrogen gas are formed at the anode. B Bubbles of oxygen gas are formed at the cathode. C Copper is deposited at the anode. D The blue colour of the solution fades.",
+      "parseStatus": "ok",
+      "stem": "Aqueous copper(II) sulfate is electrolysed using carbon electrodes. Which statement is correct?",
+      "options": {
+        "A": "Bubbles of hydrogen gas are formed at the anode.",
+        "B": "Bubbles of oxygen gas are formed at the cathode.",
+        "C": "Copper is deposited at the anode.",
+        "D": "The blue colour of the solution fades."
+      }
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q13.png",
+      "rawText": "When water is added to anhydrous iron(III) chloride, FeCl 3, hydrated iron(III) chloride, FeCl 3•6H2O, is formed and energy is given out. FeCl 3 + 6H2O FeCl 3•6H2O Which reaction pathway diagram represents the formation of anhydrous iron(III) chloride in the reverse reaction? energy progress of reaction FeCl 3 + 6H2O FeCl 3•6H2O energy progress of reaction A B FeCl 3 + 6H2O FeCl 3•6H2O energy progress of reaction FeCl 3•6H2O energy progress of reaction C D FeCl 3 + 6H2O FeCl 3 + 6H2O FeCl 3•6H2O",
+      "parseStatus": "ok",
+      "stem": "When water is added to anhydrous iron(III) chloride, hydrated iron(III) chloride is formed and energy is given out. Which reaction pathway diagram represents the formation of anhydrous iron(III) chloride in the reverse reaction?",
+      "options": {
+        "A": "diagram A",
+        "B": "diagram B",
+        "C": "diagram C",
+        "D": "diagram D"
+      }
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q14.png",
+      "rawText": "Ethene reacts with hydrogen. The equation is shown. C2H4 + H2  C2H6 The bond energies are shown. bond bond energy in kJ / mol C–C +350 C=C +610 C–H +410 H–H +436 What is the energy change for the reaction? A –560 kJ / mol B –124 kJ / mol C +486 kJ / mol D +5496 kJ / mol",
+      "parseStatus": "ok",
+      "stem": "Ethene reacts with hydrogen. The equation is shown. C2H4 + H2  C2H6 The bond energies are shown. bond bond energy in kJ / mol C–C +350 C=C +610 C–H +410 H–H +436 What is the energy change for the reaction?",
+      "options": {
+        "A": "–560 kJ / mol",
+        "B": "–124 kJ / mol",
+        "C": "+486 kJ / mol",
+        "D": "+5496 kJ / mol"
+      }
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q15.png",
+      "rawText": "Statements about four different acids are listed. ● A 0.0100 mol / dm3 solution of hydrochloric acid has a pH of 2. ● A 0.0100 mol / dm3 solution of ethanoic acid has a pH of 3.4. ● Hydrobromic acid, HBr, is a strong acid. ● Ethanoic acid is a slightly stronger acid than trimethylethanoic acid. What are the pH values of 0.0100 mol / dm3 HBr and 0.0100 mol / dm3 trimethylethanoic acid? pH of 0.0100 mol / dm3 HBr pH of 0.0100 mol / dm3 trimethylethanoic acid A 2 3.3 B 2 3.5 C 3.4 3.3 D 3.4 3.5",
+      "parseStatus": "ok",
+      "stem": "Statements about four different acids are listed. ●",
+      "options": {
+        "A": "0.0100 mol / dm3 solution of hydrochloric acid has a pH of 2. ● A 0.0100 mol / dm3 solution of ethanoic acid has a pH of 3.4. ● Hydrobromic acid, HBr, is a strong acid. ● Ethanoic acid is a slightly stronger acid than trimethylethanoic acid. What are the pH values of 0.0100 mol / dm3 HBr and 0.0100 mol / dm3 trimethylethanoic acid? pH of 0.0100 mol / dm3 HBr pH of 0.0100 mol / dm3 trimethylethanoic acid A 2 3.3",
+        "B": "2 3.5",
+        "C": "3.4 3.3",
+        "D": "3.4 3.5"
+      }
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q16.png",
+      "rawText": "Anhydrous cobalt(II) chloride is blue and turns pink when water is added. How is this reaction reversed? A adding dilute acid B filtering C heating D cooling",
+      "parseStatus": "ok",
+      "stem": "Anhydrous cobalt(II) chloride is blue and turns pink when water is added. How is this reaction reversed?",
+      "options": {
+        "A": "adding dilute acid",
+        "B": "filtering",
+        "C": "heating",
+        "D": "cooling"
+      }
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q17.png",
+      "rawText": "The reaction between hydrogen and nitrogen is reversible. The forward reaction is exothermic. N2(g) + 3H2(g) 2NH3(g) Which change to the conditions would increase the yield of ammonia? A add a catalyst B increase the pressure C increase the temperature D reduce the concentration of nitrogen",
+      "parseStatus": "ok",
+      "stem": "The reaction between hydrogen and nitrogen is reversible. The forward reaction is exothermic. N2(g) + 3H2(g) 2NH3(g) Which change to the conditions would increase the yield of ammonia?",
+      "options": {
+        "A": "add a catalyst",
+        "B": "increase the pressure",
+        "C": "increase the temperature",
+        "D": "reduce the concentration of nitrogen"
+      }
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q18.png",
+      "rawText": "Ethanol can be turned into ethanoic acid by passing it over hot copper(II) oxide. CH3CH2OH + 2CuO  CH3COOH + H2O + 2Cu What is this type of reaction? A precipitation B redox C thermal decomposition D neutralisation",
+      "parseStatus": "ok",
+      "stem": "Ethanol can be turned into ethanoic acid by passing it over hot copper(II) oxide. CH3CH2OH + 2CuO  CH3COOH + H2O + 2Cu What is this type of reaction?",
+      "options": {
+        "A": "precipitation",
+        "B": "redox",
+        "C": "thermal decomposition",
+        "D": "neutralisation"
+      }
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q19.png",
+      "rawText": "When heated strongly, silicon(IV) oxide reacts with carbon. SiO2 + 2C  Si + 2CO Which term describes what happens to silicon(IV) oxide? A thermal decomposition B neutralisation C oxidation D reduction",
+      "parseStatus": "ok",
+      "stem": "When heated strongly, silicon(IV) oxide reacts with carbon. SiO2 + 2C  Si + 2CO Which term describes what happens to silicon(IV) oxide?",
+      "options": {
+        "A": "thermal decomposition",
+        "B": "neutralisation",
+        "C": "oxidation",
+        "D": "reduction"
+      }
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q20.png",
+      "rawText": "Which statement about aqueous weak acids is correct? A Weak acids are always dilute aqueous solutions. B Weak acids dissociate fully in aqueous solution. C When a weak acid is added to blue litmus paper, it stays blue. D When a weak acid is added to solid magnesium, effervescence is seen.",
+      "parseStatus": "ok",
+      "stem": "Which statement about aqueous weak acids is correct?",
+      "options": {
+        "A": "Weak acids are always dilute aqueous solutions.",
+        "B": "Weak acids dissociate fully in aqueous solution.",
+        "C": "When a weak acid is added to blue litmus paper, it stays blue.",
+        "D": "When a weak acid is added to solid magnesium, effervescence is seen."
+      }
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q21.png",
+      "rawText": "Which oxides are basic? 1 calcium oxide 2 sodium oxide 3 iron(II) oxide A 1, 2 and 3 B 1 and 2 only C 2 and 3 only D 3 only",
+      "parseStatus": "ok",
+      "stem": "Which oxides are basic? 1 calcium oxide 2 sodium oxide 3 iron(II) oxide",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "2 and 3 only",
+        "D": "3 only"
+      }
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q22.png",
+      "rawText": "Zinc oxide is an amphoteric oxide. Zinc oxide is added to excess dilute hydrochloric acid. Zinc oxide is added to excess aqueous sodium hydroxide. Which row describes the observations made in these reactions? excess dilute hydrochloric acid excess aqueous sodium hydroxide A colourless solution forms colourless solution forms B colourless solution forms no visible change C fizzing colourless solution forms D fizzing no visible change",
+      "parseStatus": "ok",
+      "stem": "Zinc oxide is an amphoteric oxide. Zinc oxide is added to excess dilute hydrochloric acid. Zinc oxide is added to excess aqueous sodium hydroxide. Which row describes the observations made in these reactions? excess dilute hydrochloric acid excess aqueous sodium hydroxide",
+      "options": {
+        "A": "colourless solution forms colourless solution forms",
+        "B": "colourless solution forms no visible change",
+        "C": "fizzing colourless solution forms",
+        "D": "fizzing no visible change"
+      }
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q23.png",
+      "rawText": "Which row shows properties of an element that is in the same group of the Periodic Table as lithium? electrical conductivity density in g / cm3 A high 0.97 B high 8.93 C low 0.07 D low 3.12",
+      "parseStatus": "ok",
+      "stem": "Which row shows properties of an element that is in the same group of the Periodic Table as lithium? electrical conductivity density in g / cm3",
+      "options": {
+        "A": "high 0.97",
+        "B": "high 8.93",
+        "C": "low 0.07",
+        "D": "low 3.12"
+      }
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 7,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q24.png",
+      "rawText": "The elements in Group VII include chlorine, bromine and iodine. Which statements are correct? 1 Iodine is more dense than chlorine. 2 Iodine displaces chlorine from a solution containing chloride ions. 3 Bromine is a diatomic non-metal. 4 Chlorine gas is darker in colour than bromine vapour. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The elements in Group VII include chlorine, bromine and iodine. Which statements are correct? 1 Iodine is more dense than chlorine. 2 Iodine displaces chlorine from a solution containing chloride ions. 3 Bromine is a diatomic non-metal. 4 Chlorine gas is darker in colour than bromine vapour.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      }
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q25.png",
+      "rawText": "Cobalt is a transition element. What is a property of cobalt? A It can form coloured compounds. B It is a poor electrical conductor. C It has a low density. D It has a low melting point.",
+      "parseStatus": "ok",
+      "stem": "Cobalt is a transition element. What is a property of cobalt?",
+      "options": {
+        "A": "It can form coloured compounds.",
+        "B": "It is a poor electrical conductor.",
+        "C": "It has a low density.",
+        "D": "It has a low melting point."
+      }
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q26.png",
+      "rawText": "Which metal has variable oxidation numbers? A aluminium B calcium C copper D sodium",
+      "parseStatus": "ok",
+      "stem": "Which metal has variable oxidation numbers?",
+      "options": {
+        "A": "aluminium",
+        "B": "calcium",
+        "C": "copper",
+        "D": "sodium"
+      }
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q27.png",
+      "rawText": "Which statement about alloys is correct? A Alloys are pure metal elements. B At least two or more metals react together to make alloys. C Alloys can be harder and stronger than a pure metal. D Steel is not an alloy because it can contain the non-metal carbon.",
+      "parseStatus": "ok",
+      "stem": "Which statement about alloys is correct?",
+      "options": {
+        "A": "Alloys are pure metal elements.",
+        "B": "At least two or more metals react together to make alloys.",
+        "C": "Alloys can be harder and stronger than a pure metal.",
+        "D": "Steel is not an alloy because it can contain the non-metal carbon."
+      }
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 8,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q28.png",
+      "rawText": "A metal M is between sodium and magnesium in the reactivity series. Which reactions occur with M and its oxide? M reacts with steam M can be extracted by heating its oxide with carbon A no no B no yes C yes no D yes yes",
+      "parseStatus": "ok",
+      "stem": "A metal M is between sodium and magnesium in the reactivity series. Which reactions occur with M and its oxide? M reacts with steam M can be extracted by heating its oxide with carbon",
+      "options": {
+        "A": "no no",
+        "B": "no yes",
+        "C": "yes no",
+        "D": "yes yes"
+      }
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q29.png",
+      "rawText": "The diagrams show experiments to investigate rusting of iron nails. 3 boiled water 2 salt water 1 tap water layer of oil In which test-tubes do the nails rust? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 1 only",
+      "parseStatus": "ok",
+      "stem": "The diagrams show experiments to investigate rusting of iron nails. 3 boiled water 2 salt water 1 tap water layer of oil In which test-tubes do the nails rust?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "1 only"
+      }
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 9,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q30.png",
+      "rawText": "Which equation represents a reaction that takes place when iron is extracted from its ore in the blast furnace? A CaO + SiO2  CaSiO3 B CaO + CO2  CaCO3 C 2CO  C + CO2 D 2Fe + 3CO2  Fe2CO3 + 3CO",
+      "parseStatus": "ok",
+      "stem": "Which equation represents a reaction that takes place when iron is extracted from its ore in the blast furnace?",
+      "options": {
+        "A": "CaO + SiO2  CaSiO3",
+        "B": "CaO + CO2  CaCO3",
+        "C": "2CO  C + CO2",
+        "D": "2Fe + 3CO2  Fe2CO3 + 3CO"
+      }
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 9,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q31.png",
+      "rawText": "Some uses of water are listed. 1 for drinking 2 in chemical reactions 3 in swimming pools 4 in washing For which uses is it necessary to chlorinate the water? A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Some uses of water are listed. 1 for drinking 2 in chemical reactions 3 in swimming pools 4 in washing For which uses is it necessary to chlorinate the water?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      }
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q32.png",
+      "rawText": "Oxides of nitrogen are formed in car engines and are a source of air pollution. To decrease this pollution, catalytic converters are fitted to car exhausts. What happens to the oxides of nitrogen in the catalytic converter? A combustion B cracking C oxidation D reduction",
+      "parseStatus": "ok",
+      "stem": "Oxides of nitrogen are formed in car engines and are a source of air pollution. To decrease this pollution, catalytic converters are fitted to car exhausts. What happens to the oxides of nitrogen in the catalytic converter?",
+      "options": {
+        "A": "combustion",
+        "B": "cracking",
+        "C": "oxidation",
+        "D": "reduction"
+      }
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q33.png",
+      "rawText": "Which pair of compounds are structural isomers of each other? A CH3CH2CH3 and CH3CH2CH2CH3 B CH2=CHCH3 and CH3CH=CH2 C CH2(OH)CH2CH3 and CH3CH2CH2OH D CH3CH2CH2COOH and CH3COOCH2CH3",
+      "parseStatus": "ok",
+      "stem": "Which pair of compounds are structural isomers of each other?",
+      "options": {
+        "A": "CH3CH2CH3 and CH3CH2CH2CH3",
+        "B": "CH2=CHCH3 and CH3CH=CH2",
+        "C": "CH2(OH)CH2CH3 and CH3CH2CH2OH",
+        "D": "CH3CH2CH2COOH and CH3COOCH2CH3"
+      }
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 10,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q34.png",
+      "rawText": "Methane reacts with chlorine in sunlight. CH4 + Cl 2  CH3Cl + HCl Which statements about this reaction are correct? 1 It is a substitution reaction. 2 It is an addition reaction. 3 It is a photochemical reaction. 4 It is catalysed by nickel. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Methane reacts with chlorine in sunlight. CH4 + Cl 2  CH3Cl + HCl Which statements about this reaction are correct? 1 It is a substitution reaction. 2 It is an addition reaction. 3 It is a photochemical reaction. 4 It is catalysed by nickel.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      }
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 10,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q35.png",
+      "rawText": "Propene reacts with bromine to give one product only. What is the formula of the product? A CH3CH2CHBr2 B CH2BrCH2CH2Br C CH3CHBrCH2Br D CH3CH2CH2Br",
+      "parseStatus": "ok",
+      "stem": "Propene reacts with bromine to give one product only. What is the formula of the product?",
+      "options": {
+        "A": "CH3CH2CHBr2",
+        "B": "CH2BrCH2CH2Br",
+        "C": "CH3CHBrCH2Br",
+        "D": "CH3CH2CH2Br"
+      }
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 11,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q36.png",
+      "rawText": "Ethanol can be manufactured by fermentation or by the catalytic addition of steam to ethene. Which statements describe an advantage of manufacturing ethanol by fermentation? 1 The yield of ethanol is low. 2 The method uses a batch process. 3 The process takes place at a lower temperature. 4 The ethanol is made from a renewable source. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Ethanol can be manufactured by fermentation or by the catalytic addition of steam to ethene. Which statements describe an advantage of manufacturing ethanol by fermentation? 1 The yield of ethanol is low. 2 The method uses a batch process. 3 The process takes place at a lower temperature. 4 The ethanol is made from a renewable source.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      }
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 11,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q37.png",
+      "rawText": "A compound with the formula CH3COOC2H5 is formed from ethanol in two separate reactions. reaction 1 Ethanol reacts to form ethanoic acid. reaction 2 Ethanoic acid and ethanol react together to form CH3COOC2H5. Which row describes reaction 1 and reaction 2? reaction 1 reaction 2 A oxidation ester formation B oxidation addition C reduction ester formation D reduction addition",
+      "parseStatus": "ok",
+      "stem": "A compound with the formula CH3COOC2H5 is formed from ethanol in two separate reactions. reaction 1 Ethanol reacts to form ethanoic acid. reaction 2 Ethanoic acid and ethanol react together to form CH3COOC2H5. Which row describes reaction 1 and reaction 2? reaction 1 reaction 2",
+      "options": {
+        "A": "oxidation ester formation",
+        "B": "oxidation addition",
+        "C": "reduction ester formation",
+        "D": "reduction addition"
+      }
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 11,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q38.png",
+      "rawText": "The flow diagram shows how poly(ethene) may be made from petroleum. petroleum fuel oil ethene poly(ethene) 1 2 3 What are stages 1, 2 and 3? 1 2 3 A cracking polymerisation fractional distillation B cracking fractional distillation polymerisation C fractional distillation cracking polymerisation D fractional distillation polymerisation cracking",
+      "parseStatus": "ok",
+      "stem": "The flow diagram shows how poly(ethene) may be made from petroleum. petroleum fuel oil ethene poly(ethene) 1 2 3 What are stages 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "cracking polymerisation fractional distillation",
+        "B": "cracking fractional distillation polymerisation",
+        "C": "fractional distillation cracking polymerisation",
+        "D": "fractional distillation polymerisation cracking"
+      }
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 12,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q39.png",
+      "rawText": "Rf values are used to identify unknown substances using paper chromatography. Which statements about Rf values are correct? 1 Rf values are always less than 1.0. 2 Rf value = distance travelled by solvent  distance travelled by unknown substance. 3 The higher the Rf value, the further the unknown substance travels. 4 Rf values are not affected by the solubility of the unknown substance. A 1 and 2 B 1 and 3 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Rf values are used to identify unknown substances using paper chromatography. Which statements about Rf values are correct? 1 Rf values are always less than 1.0. 2 Rf value = distance travelled by solvent  distance travelled by unknown substance. 3 The higher the Rf value, the further the unknown substance travels. 4 Rf values are not affected by the solubility of the unknown substance.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      }
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 12,
+      "imageUrl": "/assets/question-cut-preview/0620_w23_qp_231/q40.png",
+      "rawText": "The results of some tests on an aqueous solution of substance X are listed. 1 A cream precipitate is produced when adding aqueous silver nitrate. 2 Adding aqueous sodium hydroxide produces a green precipitate which dissolves in excess alkali. 3 Adding aqueous ammonia produces a green precipitate which is insoluble in excess ammonia. What is substance X? A chromium(III) bromide B chromium(III) chloride C iron(II) bromide D iron(II) chloride",
+      "parseStatus": "ok",
+      "stem": "The results of some tests on an aqueous solution of substance X are listed. 1",
+      "options": {
+        "A": "cream precipitate is produced when adding aqueous silver nitrate. 2 Adding aqueous sodium hydroxide produces a green precipitate which dissolves in excess alkali. 3 Adding aqueous ammonia produces a green precipitate which is insoluble in excess ammonia. What is substance X? A chromium(III) bromide",
+        "B": "chromium(III) chloride",
+        "C": "iron(II) bromide",
+        "D": "iron(II) chloride"
+      }
+    }
+  ]
+}

@@ -28,7 +28,15 @@ async function ensureAuthColumns() {
     alter table users
     add column if not exists password_hash text
   `);
+  await query(`
+    alter table users
+    add column if not exists language text not null default 'zh-CN'
+  `);
   authColumnsReady = true;
+}
+
+function normalizeLanguage(value) {
+  return value === "en" ? "en" : "zh-CN";
 }
 
 function assertUsersApiEnabled() {
@@ -65,6 +73,7 @@ router.post("/register", asyncHandler(async (req, res) => {
     grade: typeof body.grade === "string" ? body.grade.trim() : null,
     targetScore: toOptionalInteger(body.targetScore, "targetScore", 0, 100),
     passwordHash: hashPassword(password),
+    language: normalizeLanguage(body.language),
   });
   const token = issueToken(user);
   res.status(201).json({ ok: true, data: { user, token } });
@@ -101,6 +110,7 @@ router.get("/me", asyncHandler(async (req, res) => {
 
 router.patch("/me", asyncHandler(async (req, res) => {
   assertUsersApiEnabled();
+  await ensureAuthColumns();
   const token = readAuthToken(req);
   const payload = verifyToken(token);
   const body = req.body || {};
@@ -113,6 +123,7 @@ router.patch("/me", asyncHandler(async (req, res) => {
     displayName,
     grade,
     targetScore,
+    language: normalizeLanguage(body.language),
   });
   if (!updated) {
     throw new ApiError(404, "User not found.", "USER_NOT_FOUND");

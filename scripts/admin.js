@@ -1,4 +1,7 @@
 (function () {
+  const AUTH_TOKEN_KEY = "alevel.authToken";
+  const { t, applyPage } = window.ALevelI18n;
+
   function byId(id) {
     return document.getElementById(id);
   }
@@ -30,9 +33,9 @@
     if (!wrap) return;
 
     const cards = [
-      { label: "用户总数", value: summary?.usersCount ?? 0 },
-      { label: "练习总数", value: summary?.practiceCount ?? 0 },
-      { label: "已提交练习", value: summary?.submittedCount ?? 0 },
+      { label: t("totalUsers"), value: summary?.usersCount ?? 0 },
+      { label: t("totalPractices"), value: summary?.practiceCount ?? 0 },
+      { label: t("submittedPractices"), value: summary?.submittedCount ?? 0 },
     ];
 
     wrap.innerHTML = cards
@@ -52,7 +55,7 @@
     if (!body) return;
 
     if (!users?.length) {
-      body.innerHTML = "<tr><td colspan='7' class='tip'>暂无用户数据</td></tr>";
+      body.innerHTML = `<tr><td colspan='7' class='tip'>${t("noUsers")}</td></tr>`;
       return;
     }
 
@@ -78,7 +81,7 @@
     if (!body) return;
 
     if (!practices?.length) {
-      body.innerHTML = "<tr><td colspan='7' class='tip'>暂无练习记录</td></tr>";
+      body.innerHTML = `<tr><td colspan='7' class='tip'>${t("noPractices")}</td></tr>`;
       return;
     }
 
@@ -110,7 +113,7 @@
     const refreshBtn = byId("refreshBtn");
     const oldText = refreshBtn.textContent;
     refreshBtn.disabled = true;
-    refreshBtn.textContent = "刷新中...";
+    refreshBtn.textContent = t("refreshing");
 
     const usersLimit = Number(byId("usersLimit").value || 10);
     const practicesLimit = Number(byId("practicesLimit").value || 20);
@@ -128,15 +131,16 @@
       renderSummary(data.summary || {});
       renderUsers(data.latestUsers || []);
       renderPractices(data.latestPractices || []);
-      setStatus("数据加载成功（来源：后端数据库）。", false);
+      setStatus(t("adminDataLoaded"), false);
     } catch (err) {
       renderSummary({ usersCount: 0, practiceCount: 0, submittedCount: 0 });
       renderUsers([]);
       renderPractices([]);
-      setStatus(`加载失败：${err.message || "请检查后端服务与数据库配置。"}`, true);
+      setStatus(t("adminLoadFailed", { message: err.message || t("checkBackendDb") }), true);
     } finally {
       refreshBtn.disabled = false;
       refreshBtn.textContent = oldText;
+      applyPage();
     }
   }
 
@@ -144,9 +148,44 @@
     loadRecords();
   });
 
+  byId("openMapper").addEventListener("click", () => {
+    location.href = "./image-mapper.html";
+  });
+
   byId("backHome").addEventListener("click", () => {
     location.href = "../index.html";
   });
 
-  loadRecords();
+  async function init() {
+    const token = localStorage.getItem(AUTH_TOKEN_KEY) || "";
+    if (!token) {
+      setStatus(t("adminLoginRequired"), true);
+      setTimeout(() => {
+        location.href = "./admin-login.html";
+      }, 350);
+      return;
+    }
+
+    try {
+      const user = await window.ALevelApi.getCurrentUser(token);
+      if (user?.role !== "admin") {
+        setStatus(t("notAdmin"), true);
+        setTimeout(() => {
+          location.href = "./admin-login.html";
+        }, 500);
+        return;
+      }
+    } catch (_err) {
+      setStatus(t("adminSessionInvalid"), true);
+      setTimeout(() => {
+        location.href = "./admin-login.html";
+      }, 500);
+      return;
+    }
+
+    loadRecords();
+  }
+
+  applyPage();
+  init();
 })();

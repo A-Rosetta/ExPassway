@@ -1,0 +1,824 @@
+[
+  {
+    "id": "CIE-IGCHEM-2023-S-21-30",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "冲刺",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "seconds 2.62 768 barium 10 seconds 3.51 714 Which row shows the correct trends in reactivity, density and melting point of the elements going down Group II of the Periodic Table? reactivity density melting point",
+    "options": [
+      "decreases down group increases down group decreases down group",
+      "decreases down group decreases down group no clear trend",
+      "increases down group no clear trend increases down group",
+      "increases down group no clear trend no clear trend 20 A new element oxfordium, Ox, was discovered with the following properties. solubility electrical conduction formula of element bonding in a molecule of Ox 2 insoluble in water does not conduct Ox 2 Ox Ox In which group of the Periodic Table should the new element be placed? A Group III B Group V C Group VII D Group VIII 8 0620/21/M/J/23 21 Which row describes a similarity and a difference between chlorine and bromine? similarity difference A both are gases at room temperature and pressure chlorine and bromine have different colours B both exist as diatomic molecules chlorine is more dense than bromine C both have atoms with seven outer-shell electrons only bromine will react with aqueous sodium chloride D both react with aqueous potassium iodide chlorine is more reactive than bromine 22 Which statement describes transition elements? A They have high densities and high melting points. B They have high densities and low melting points. C They have low densities and high melting points. D They have low densities and low melting points. 23 Which gas is made when powdered zinc is added to dilute hydrochloric acid? A carbon dioxide B chlorine C hydrogen D oxygen 24 The diagram represents the structure of a solid. Which solids does the diagram represent? brass graphite sodium chloride A \u0016 \u0016 \u001a B \u0016 \u001a \u001a C \u001a \u0016 \u0016 D \u001a \u001a \u0016 9 0620/21/M/J/23 25 Steel is an alloy of iron. Which statement explains why steel is stronger than iron? A Steel contains carbon which is a very hard substance. B The carbon atoms in steel bond together very strongly. C The carbon atoms in steel make the iron atoms bond together very strongly. D The carbon atoms prevent layers of iron atoms from sliding over each other. 26 Three students, X, Y and Z, are told that solid P reacts with dilute acids and also conducts electricity. The table shows the students’ suggestions about the identity of P. X Y Z copper iron graphite Which students are correct? A X, Y and Z B X only C Y only D Z only 27 Which statement explains why aluminium appears to be unreactive? A It is coated in an oxide layer. B It has a low density. C It is low in the reactivity series. D It is solid at room temperature. 28 During the electrolysis of aluminium oxide, the mass of the carbon anode changes. Which row describes the change and gives a reason for this change? mass change of the anode reason A decreases carbon reacts to form carbon dioxide B decreases carbon dissolves in molten cryolite C increases electrodes become coated with cryolite D increases electrodes become coated with aluminium 10 0620/21/M/J/23 29 Several processes are used to treat domestic water. Which row identifies a reason for the given process? process reason A chlorination removes impurities B filtration removes insoluble solids C sedimentation removes soluble solids D use of carbon kills bacteria 30 What is the equation for photosynthesis? A CO 2 + 3H 2 → CH 3 OH + H 2 O B 6CO 2 + 6H 2 O → C 6 H 12 O 6 + 6O 2 C C 6 H 12 O 6 → 2C 2 H 5 OH + 2CO 2 D C 6 H 12 O 6 + 6O 2 → 6CO 2 + 6H 2 O"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-21-30",
+    "skills": [],
+    "hints": [],
+    "images": [
+      {
+        "url": "/assets/question-images/0620_s23_qp_21/q30_full.png",
+        "position": "stem",
+        "order": 1
+      }
+    ],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_21.pdf",
+      "questionNo": 30,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.700Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-S-21-40",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "冲刺",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "Which chromatogram shows how the R f value of a substance is calculated?",
+    "options": [
+      "y x R f = y x",
+      "y x x R f = y x",
+      "y R f = x y",
+      "y x R f = x y 14 0620/21/M/J/23 15 Permission to reproduce items where third-party owned material protected by copyright is included has been sought and cleared where possible. Every reasonable effort has been made by the publisher (UCLES) to trace copyright holders, but if any items requiring clearance have unwittingly been included, the publisher will be pleased to make amends at the earliest possible opportunity. To avoid the issue of disclosure of answer-related information to candidates, all copyright acknowledgements are reproduced online in the Cambridge Assessment International Education Copyright Acknowledgements Booklet. This is produced for each series of examinations and is freely available to download at www.cambridgeinternational.org after the live examination series. Cambridge Assessment International Education is part of Cambridge Assessment. Cambridge Assessment is the brand name of the University of Cambridge Local Examinations Syndicate (UCLES), which is a department of the University of Cambridge. 0620/21/M/J/23 16 0620/21/M/J/23 Group The Periodic Table of Elements 1 H hydrogen 1 2 He helium 4 I II III IV V VI VII VIII 3 Li lithium 7 4 Be beryllium 9 atomic number atomic symbol Key name relative atomic mass 11 Na sodium 23 12 Mg magnesium 24 19 K potassium 39 20 Ca calcium 40 37 Rb rubidium 85 38 Sr strontium 88 55 Cs caesium 133 56 Ba barium 137 87 Fr francium – 88 Ra radium – 5 B boron 11 13 A l aluminium 27 31 Ga gallium 70 49 I n indium 115 81 T l thallium 204 113 Nh nihonium – 6 C carbon 12 14 Si silicon 28 32 Ge germanium 73 50 Sn tin 119 82 Pb lead 207 22 Ti titanium 48 40 Zr zirconium 91 72 Hf hafnium 178 104 Rf rutherfordium – 23 V vanadium 51 41 Nb niobium 93 73 Ta tantalum 181 105 Db dubnium – 24 Cr chromium 52 42 Mo molybdenum 96 74 W tungsten 184 106 Sg seaborgium – 25 Mn manganese 55 43 Tc technetium – 75 Re rhenium 186 107 Bh bohrium – 26 Fe iron 56 44 Ru ruthenium 101 76 Os osmium 190 108 Hs hassium – 27 Co cobalt 59 45 Rh rhodium 103 77 I r iridium 192 109 Mt meitnerium – 28 Ni nickel 59 46 Pd palladium 106 78 Pt platinum 195 110 Ds darmstadtium – 29 Cu copper 64 47 Ag silver 108 79 Au gold 197 111 Rg roentgenium – 30 Zn zinc 65 48 Cd cadmium 112 80 Hg mercury 201 112 Cn copernicium – 114 F l flerovium – 116 Lv livermorium – 7 N nitrogen 14 15 P phosphorus 31 33 As arsenic 75 51 Sb antimony 122 83 Bi bismuth 209 115 Mc moscovium – 8 O oxygen 16 16 S sulfur 32 34 Se selenium 79 52 Te tellurium 128 84 Po polonium – 9 F fluorine 19 17 C l chlorine 35.5 35 Br bromine 80 53 I iodine 127 85 At astatine – 117 Ts tennessine – 10 Ne neon 20 18 Ar argon 40 36 Kr krypton 84 54 Xe xenon 131 86 Rn radon – 118 Og oganesson – 21 Sc scandium 45 39 Y yttrium 89 57–71 lanthanoids 89–103 actinoids 57 La lanthanum 139 89 Ac lanthanoids actinoids The volume of one mole of any gas is 24 dm 3 at room temperature and pressure (r.t.p.). actinium – 58 Ce cerium 140 90 Th thorium 232 59 Pr praseodymium 141 91 Pa protactinium 231 60 Nd neodymium 144 92 U uranium 238 61 Pm promethium – 93 Np neptunium – 62 Sm samarium 150 94 Pu plutonium – 63 Eu europium 152 95 Am americium – 64 Gd gadolinium 157 96 Cm curium – 65 Tb terbium 159 97 Bk berkelium – 66 Dy dysprosium 163 98 Cf californium – 67 Ho holmium 165 99 Es einsteinium – 68 Er erbium 167 100 Fm fermium – 69 Tm thulium 169 101 Md mendelevium – 70 Yb ytterbium 173 102 No nobelium – 71 Lu lutetium 175 103 Lr lawrencium –"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-21-40",
+    "skills": [],
+    "hints": [],
+    "images": [
+      {
+        "url": "/assets/question-images/0620_s23_qp_21/q40_full.png",
+        "position": "stem",
+        "order": 1
+      }
+    ],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_21.pdf",
+      "questionNo": 40,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.700Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-S-22-06",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "基础",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "neutrons ● 5 electrons. Which statements about element X are correct? 1 X has an atomic number of 6. 2 X has a nucleon number of 11. 3 X is in Group II of the Periodic Table. 4 X is in the second period of the Periodic Table.",
+    "options": [
+      "1 and 3",
+      "1 and 4",
+      "2 and 3",
+      "2 and 4 3 0620/22/M/J/23 3 Ammonia, NH 3 , is a covalent molecule. Which diagram shows the outer-shell electron arrangement in a molecule of ammonia? N A H H H N B H H H N C H H H N D H H H 4 Which structure does silicon( IV ) oxide most closely resemble? A carbon dioxide B diamond C graphite D sodium chloride 5 Substance P conducts electricity when solid. Which particles move in solid P so that it can conduct electricity? 1 anions 2 cations 3 electrons A 1 and 2 B 1 only C 2 and 3 D 3 only 4 0620/22/M/J/23 6 Which equation represents a chemical change? A BaC l 2 (s)  BaC l 2 (l) B Ca 2+ (aq) + SO 4 2– (aq)  CaSO 4 (s) C KC l (s) + H 2 O(l)  K + (aq) + C l – (aq) D Na + (aq) + NO 3 – (aq)  NaNO 3 (aq)"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-22-6",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_22.pdf",
+      "questionNo": 6,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.732Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-S-22-37",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "冲刺",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "Methane reacts with chlorine in substitution reactions. How many different products, containing a single carbon atom, can be made during the reactions?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5 14 0620/22/M/J/23"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-22-37",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_22.pdf",
+      "questionNo": 37,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.732Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "empty_option"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "empty_option"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-S-22-40",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "冲刺",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "When acid is added to salt X, a gas is produced which turns limewater milky. When sodium hydroxide is added to salt X, a gas is produced which turns litmus paper blue. What is X?",
+    "options": [
+      "CaCO 3",
+      "(NH 4 ) 2 CO 3",
+      "NH 4 NO 3",
+      "ZnCO 3 16 0620/22/M/J/23 Group The Periodic Table of Elements 1 H hydrogen 1 2 He helium 4 I II III IV V VI VII VIII 3 Li lithium 7 4 Be beryllium 9 atomic number atomic symbol Key name relative atomic mass 11 Na sodium 23 12 Mg magnesium 24 19 K potassium 39 20 Ca calcium 40 37 Rb rubidium 85 38 Sr strontium 88 55 Cs caesium 133 56 Ba barium 137 87 Fr francium – 88 Ra radium – 5 B boron 11 13 A l aluminium 27 31 Ga gallium 70 49 I n indium 115 81 T l thallium 204 113 Nh nihonium – 6 C carbon 12 14 Si silicon 28 32 Ge germanium 73 50 Sn tin 119 82 Pb lead 207 22 Ti titanium 48 40 Zr zirconium 91 72 Hf hafnium 178 104 Rf rutherfordium – 23 V vanadium 51 41 Nb niobium 93 73 Ta tantalum 181 105 Db dubnium – 24 Cr chromium 52 42 Mo molybdenum 96 74 W tungsten 184 106 Sg seaborgium – 25 Mn manganese 55 43 Tc technetium – 75 Re rhenium 186 107 Bh bohrium – 26 Fe iron 56 44 Ru ruthenium 101 76 Os osmium 190 108 Hs hassium – 27 Co cobalt 59 45 Rh rhodium 103 77 I r iridium 192 109 Mt meitnerium – 28 Ni nickel 59 46 Pd palladium 106 78 Pt platinum 195 110 Ds darmstadtium – 29 Cu copper 64 47 Ag silver 108 79 Au gold 197 111 Rg roentgenium – 30 Zn zinc 65 48 Cd cadmium 112 80 Hg mercury 201 112 Cn copernicium – 114 F l flerovium – 116 Lv livermorium – 7 N nitrogen 14 15 P phosphorus 31 33 As arsenic 75 51 Sb antimony 122 83 Bi bismuth 209 115 Mc moscovium – 8 O oxygen 16 16 S sulfur 32 34 Se selenium 79 52 Te tellurium 128 84 Po polonium – 9 F fluorine 19 17 C l chlorine 35.5 35 Br bromine 80 53 I iodine 127 85 At astatine – 117 Ts tennessine – 10 Ne neon 20 18 Ar argon 40 36 Kr krypton 84 54 Xe xenon 131 86 Rn radon – 118 Og oganesson – 21 Sc scandium 45 39 Y yttrium 89 57–71 lanthanoids 89–103 actinoids 57 La lanthanum 139 89 Ac lanthanoids actinoids The volume of one mole of any gas is 24 dm 3 at room temperature and pressure (r.t.p.). actinium – 58 Ce cerium 140 90 Th thorium 232 59 Pr praseodymium 141 91 Pa protactinium 231 60 Nd neodymium 144 92 U uranium 238 61 Pm promethium – 93 Np neptunium – 62 Sm samarium 150 94 Pu plutonium – 63 Eu europium 152 95 Am americium – 64 Gd gadolinium 157 96 Cm curium – 65 Tb terbium 159 97 Bk berkelium – 66 Dy dysprosium 163 98 Cf californium – 67 Ho holmium 165 99 Es einsteinium – 68 Er erbium 167 100 Fm fermium – 69 Tm thulium 169 101 Md mendelevium – 70 Yb ytterbium 173 102 No nobelium – 71 Lu lutetium 175 103 Lr lawrencium –"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-22-40",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_22.pdf",
+      "questionNo": 40,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.733Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-S-23-04",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "基础",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "Their speed remains unchanged.",
+    "options": [
+      "1 and 2",
+      "1 and 4",
+      "2 and 3",
+      "3 and 4 2 The diagrams represent some elements, compounds and mixtures. 1 2 3 4 Which row describes the numbered substances? 1 2 3 4 A element mixture of compounds compound mixture of elements B compound mixture of compounds element mixture of elements C element mixture of elements compound mixture of compounds D compound mixture of elements element mixture of compounds 3 Two atoms, X and Y, have the same mass number but different atomic numbers. Which statement about X and Y is correct? A They have the same number of protons. B They have the same number of electrons. C They are in the same group of the Periodic Table. D They have different numbers of neutrons. 3 0620/23/M/J/23 4 A sample of pure iron contains three isotopes only. percentage abundance of isotope / % isotope 2 n Fe 6 54 Fe 92 56 Fe The iron in the sample has a relative atomic mass of 55.9. What is the value of n ? A 53 B 55 C 57 D 58"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-23-4",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_23.pdf",
+      "questionNo": 4,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.740Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-S-23-06",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "基础",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "54 Fe 92 56 Fe The iron in the sample has a relative atomic mass of 55.9. What is the value of n ?",
+    "options": [
+      "53",
+      "55",
+      "57",
+      "58 5 Magnesium oxide is a white solid at room temperature and pressure. Part of the structure of solid magnesium oxide is shown. key = Mg 2+ magnesium ion = O 2– oxide ion Three statements are listed. 1 Magnesium ions are smaller than oxide ions because they contain fewer electrons. 2 Magnesium oxide has good electrical conductivity when molten because the ions are mobile. 3 Magnesium oxide has a high melting point because of the strong electrostatic attraction between the ions and delocalised electrons in the giant lattice. Which statements are correct? A 1 and 2 B 1 and 3 C 2 and 3 D 2 only 6 In which molecule are all the outer-shell electrons involved in covalent bonding? A C l 2 B CH 4 C HC l D NH 3 4 0620/23/M/J/23"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-23-6",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_23.pdf",
+      "questionNo": 6,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.740Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-S-23-11",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "基础",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "Aluminium is extracted by electrolysis, as shown. – – + + graphite anode graphite cathode steel case aluminium oxide dissolved in molten cryolite molten aluminium Which row shows the ionic half-equations at the cathode and the anode? cathode anode",
+    "options": [
+      "A l 3+  A l + 3e – 2O 2–  O 2 + 4e –",
+      "A l 3+  A l + 3e – 2O 2– + 4e –  O 2",
+      "A l 3+ + 3e –  A l 2O 2–  O 2 + 4e –",
+      "A l 3+ + 3e –  A l 2O 2– + 4e –  O 2"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-23-11",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_23.pdf",
+      "questionNo": 11,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.740Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-S-23-40",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "冲刺",
+    "topic": "Past Paper Summer",
+    "year": "2023",
+    "stem": "Element X burns in air to form an acidic gas that decolourises potassium manganate( VII ). What is X?",
+    "options": [
+      "carbon",
+      "nitrogen",
+      "magnesium",
+      "sulfur 14 0620/23/M/J/23 15 Permission to reproduce items where third-party owned material protected by copyright is included has been sought and cleared where possible. Every reasonable effort has been made by the publisher (UCLES) to trace copyright holders, but if any items requiring clearance have unwittingly been included, the publisher will be pleased to make amends at the earliest possible opportunity. To avoid the issue of disclosure of answer-related information to candidates, all copyright acknowledgements are reproduced online in the Cambridge Assessment International Education Copyright Acknowledgements Booklet. This is produced for each series of examinations and is freely available to download at www.cambridgeinternational.org after the live examination series. Cambridge Assessment International Education is part of Cambridge Assessment. Cambridge Assessment is the brand name of the University of Cambridge Local Examinations Syndicate (UCLES), which is a department of the University of Cambridge. 0620/23/M/J/23 16 0620/23/M/J/23 Group The Periodic Table of Elements 1 H hydrogen 1 2 He helium 4 I II III IV V VI VII VIII 3 Li lithium 7 4 Be beryllium 9 atomic number atomic symbol Key name relative atomic mass 11 Na sodium 23 12 Mg magnesium 24 19 K potassium 39 20 Ca calcium 40 37 Rb rubidium 85 38 Sr strontium 88 55 Cs caesium 133 56 Ba barium 137 87 Fr francium – 88 Ra radium – 5 B boron 11 13 A l aluminium 27 31 Ga gallium 70 49 I n indium 115 81 T l thallium 204 113 Nh nihonium – 6 C carbon 12 14 Si silicon 28 32 Ge germanium 73 50 Sn tin 119 82 Pb lead 207 22 Ti titanium 48 40 Zr zirconium 91 72 Hf hafnium 178 104 Rf rutherfordium – 23 V vanadium 51 41 Nb niobium 93 73 Ta tantalum 181 105 Db dubnium – 24 Cr chromium 52 42 Mo molybdenum 96 74 W tungsten 184 106 Sg seaborgium – 25 Mn manganese 55 43 Tc technetium – 75 Re rhenium 186 107 Bh bohrium – 26 Fe iron 56 44 Ru ruthenium 101 76 Os osmium 190 108 Hs hassium – 27 Co cobalt 59 45 Rh rhodium 103 77 I r iridium 192 109 Mt meitnerium – 28 Ni nickel 59 46 Pd palladium 106 78 Pt platinum 195 110 Ds darmstadtium – 29 Cu copper 64 47 Ag silver 108 79 Au gold 197 111 Rg roentgenium – 30 Zn zinc 65 48 Cd cadmium 112 80 Hg mercury 201 112 Cn copernicium – 114 F l flerovium – 116 Lv livermorium – 7 N nitrogen 14 15 P phosphorus 31 33 As arsenic 75 51 Sb antimony 122 83 Bi bismuth 209 115 Mc moscovium – 8 O oxygen 16 16 S sulfur 32 34 Se selenium 79 52 Te tellurium 128 84 Po polonium – 9 F fluorine 19 17 C l chlorine 35.5 35 Br bromine 80 53 I iodine 127 85 At astatine – 117 Ts tennessine – 10 Ne neon 20 18 Ar argon 40 36 Kr krypton 84 54 Xe xenon 131 86 Rn radon – 118 Og oganesson – 21 Sc scandium 45 39 Y yttrium 89 57–71 lanthanoids 89–103 actinoids 57 La lanthanum 139 89 Ac lanthanoids actinoids The volume of one mole of any gas is 24 dm 3 at room temperature and pressure (r.t.p.). actinium – 58 Ce cerium 140 90 Th thorium 232 59 Pr praseodymium 141 91 Pa protactinium 231 60 Nd neodymium 144 92 U uranium 238 61 Pm promethium – 93 Np neptunium – 62 Sm samarium 150 94 Pu plutonium – 63 Eu europium 152 95 Am americium – 64 Gd gadolinium 157 96 Cm curium – 65 Tb terbium 159 97 Bk berkelium – 66 Dy dysprosium 163 98 Cf californium – 67 Ho holmium 165 99 Es einsteinium – 68 Er erbium 167 100 Fm fermium – 69 Tm thulium 169 101 Md mendelevium – 70 Yb ytterbium 173 102 No nobelium – 71 Lu lutetium 175 103 Lr lawrencium –"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-S-23-40",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_s23_qp_23.pdf",
+      "questionNo": 40,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Summer",
+      "importedAt": "2026-05-30T14:40:34.740Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-21-28",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "中等",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "Aluminium is extracted from purified bauxite by electrolysis. Which row shows the ionic half-equations for the reaction at each electrode? anode cathode",
+    "options": [
+      "A l  A l 3+ + 3e – 2O 2– + 4e –  O 2",
+      "A l 3+ + 3e –  A l 2O 2–  O 2 + 4e –",
+      "2O 2– + 4e –  O 2 A l  A l 3+ + 3e –",
+      "2O 2–  O 2 + 4e – A l 3+ + 3e –  A l 12 0620/21/O/N/23"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-21-28",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_21(1).pdf",
+      "questionNo": 28,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.748Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-22-03",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "基础",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "It contains only non-metals.",
+    "options": [
+      "1 and 3",
+      "1 only",
+      "2 and 3",
+      "2 only 3 A representation of an atom is shown. + + + + + + – – – – – – What is the nucleon number of this atom? A 6 B 7 C 12 D 13 3 0620/22/O/N/23"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-22-3",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_22(1).pdf",
+      "questionNo": 3,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.756Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-22-10",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "基础",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "90.48 Ne 21 10 0.27 Ne 22 10 9.25 What is the relative atomic mass,",
+    "options": [
+      "r , of this sample of neon? A 10.19",
+      "20.19",
+      "21.00",
+      "30.19 5 Potassium reacts with iodine to form potassium iodide. Which statement about potassium iodide is correct? A Each potassium atom shares a pair of electrons with an iodine atom. B In potassium iodide, the particles of potassium have more protons than electrons. C Potassium iodide has a high melting point because it is a covalent compound. D Potassium iodide has a low melting point because it is an ionic compound. 6 Which substance has the lowest melting point? A graphite B methanol C silicon( IV ) oxide D sodium chloride 7 The diagram shows the structure of a molecule of ethyl ethanoate. C O O C H H H C H H C H H H What is the molecular formula of a molecule of ethyl ethanoate? A CHO B C 4 H 8 O 2 C C 4 (H 2 ) 2 (O 2 ) D C 2 H 4 O 4 0620/22/O/N/23 8 A hydrocarbon contains 85.7% of carbon by mass. What is the empirical formula of the hydrocarbon? A CH 2 B CH 4 C C 2 H 5 D C 3 H 6 9 The formula of a compound containing element X is Na 2 X 2 O 3 . The relative formula mass of the compound is 158. What is the relative atomic mass of X? A 32 B 59.5 C 64 D 119 10 Dilute aqueous potassium chloride is electrolysed using platinum electrodes. Which row identifies the product at each electrode? anode cathode A chlorine hydrogen B chlorine potassium C oxygen hydrogen D oxygen potassium 5 0620/22/O/N/23"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-22-10",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_22(1).pdf",
+      "questionNo": 10,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.756Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-22-13",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "基础",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "3 0620/22/O/N/23 4 The percentage abundances of three isotopes in a sample of neon are shown. isotope percentage abundance / % Ne 20 10 90.48 Ne 21 10 0.27 Ne 22 10 9.25 What is the relative atomic mass,",
+    "options": [
+      "r , of this sample of neon? A 10.19",
+      "20.19",
+      "21.00",
+      "30.19 5 Potassium reacts with iodine to form potassium iodide. Which statement about potassium iodide is correct? A Each potassium atom shares a pair of electrons with an iodine atom. B In potassium iodide, the particles of potassium have more protons than electrons. C Potassium iodide has a high melting point because it is a covalent compound. D Potassium iodide has a low melting point because it is an ionic compound. 6 Which substance has the lowest melting point? A graphite B methanol C silicon( IV ) oxide D sodium chloride 7 The diagram shows the structure of a molecule of ethyl ethanoate. C O O C H H H C H H C H H H What is the molecular formula of a molecule of ethyl ethanoate? A CHO B C 4 H 8 O 2 C C 4 (H 2 ) 2 (O 2 ) D C 2 H 4 O 4 0620/22/O/N/23 8 A hydrocarbon contains 85.7% of carbon by mass. What is the empirical formula of the hydrocarbon? A CH 2 B CH 4 C C 2 H 5 D C 3 H 6 9 The formula of a compound containing element X is Na 2 X 2 O 3 . The relative formula mass of the compound is 158. What is the relative atomic mass of X? A 32 B 59.5 C 64 D 119 10 Dilute aqueous potassium chloride is electrolysed using platinum electrodes. Which row identifies the product at each electrode? anode cathode A chlorine hydrogen B chlorine potassium C oxygen hydrogen D oxygen potassium 5 0620/22/O/N/23 11 Concentrated aqueous copper( II ) chloride is electrolysed using copper electrodes, as shown. + – copper electrodes aqueous copper( II ) chloride power supply What happens to the mass of each electrode during this process? positive electrode negative electrode A decreases decreases B decreases increases C increases decreases D increases increases 12 The initial and final temperatures of four different reactions are measured. Which reaction is the least exothermic? initial temperature /  C final temperature /  C A 19 25 B 21 18 C 22 17 D 22 26 13 Which equation represents an endothermic reaction? A C l 2 (g)  2C l (g) B CH 4 (g) + 2O 2 (g)  CO 2 (g) + 2H 2 O(l) C H(g) + H(g)  H 2 (g) D 2K(s) + 2H 2 O(l)  2KOH(aq) + H 2 (g) 6 0620/22/O/N/23"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-22-13",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_22(1).pdf",
+      "questionNo": 13,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.756Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-22-22",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "中等",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "10 9.25 What is the relative atomic mass,",
+    "options": [
+      "r , of this sample of neon? A 10.19",
+      "20.19",
+      "21.00",
+      "30.19 5 Potassium reacts with iodine to form potassium iodide. Which statement about potassium iodide is correct? A Each potassium atom shares a pair of electrons with an iodine atom. B In potassium iodide, the particles of potassium have more protons than electrons. C Potassium iodide has a high melting point because it is a covalent compound. D Potassium iodide has a low melting point because it is an ionic compound. 6 Which substance has the lowest melting point? A graphite B methanol C silicon( IV ) oxide D sodium chloride 7 The diagram shows the structure of a molecule of ethyl ethanoate. C O O C H H H C H H C H H H What is the molecular formula of a molecule of ethyl ethanoate? A CHO B C 4 H 8 O 2 C C 4 (H 2 ) 2 (O 2 ) D C 2 H 4 O 4 0620/22/O/N/23 8 A hydrocarbon contains 85.7% of carbon by mass. What is the empirical formula of the hydrocarbon? A CH 2 B CH 4 C C 2 H 5 D C 3 H 6 9 The formula of a compound containing element X is Na 2 X 2 O 3 . The relative formula mass of the compound is 158. What is the relative atomic mass of X? A 32 B 59.5 C 64 D 119 10 Dilute aqueous potassium chloride is electrolysed using platinum electrodes. Which row identifies the product at each electrode? anode cathode A chlorine hydrogen B chlorine potassium C oxygen hydrogen D oxygen potassium 5 0620/22/O/N/23 11 Concentrated aqueous copper( II ) chloride is electrolysed using copper electrodes, as shown. + – copper electrodes aqueous copper( II ) chloride power supply What happens to the mass of each electrode during this process? positive electrode negative electrode A decreases decreases B decreases increases C increases decreases D increases increases 12 The initial and final temperatures of four different reactions are measured. Which reaction is the least exothermic? initial temperature /  C final temperature /  C A 19 25 B 21 18 C 22 17 D 22 26 13 Which equation represents an endothermic reaction? A C l 2 (g)  2C l (g) B CH 4 (g) + 2O 2 (g)  CO 2 (g) + 2H 2 O(l) C H(g) + H(g)  H 2 (g) D 2K(s) + 2H 2 O(l)  2KOH(aq) + H 2 (g) 6 0620/22/O/N/23 14 Methane burns in oxygen to form carbon dioxide and water. CH 4 (g) + 2O 2 (g)  CO 2 (g) + 2H 2 O(l) The bond energies are shown. bond bond energy in kJ / mol C–H 410 C–O 360 C=O 805 O–H 460 O–O 146 O=O 496 What is the energy change for this reaction? A –818 kJ / mol B –102 kJ / mol C +102 kJ / mol D +818 kJ / mol 7 0620/22/O/N/23 15 Hydrochloric acid is added to excess calcium carbonate in two separate experiments. Two different concentrations of hydrochloric acid are used but the temperature is the same in both experiments. The graph of the results shows the volume of carbon dioxide gas given off over time. volume of carbon dioxide given off time 2.0 mol / dm 3 1.0 mol / dm 3 Which row is correct? particles in 2.0 mol / dm 3 compared to 1.0 mol / dm 3 collision rate collision energy A higher no change B higher higher C lower no change D lower higher 16 The decomposition of dinitrogen tetroxide, N 2 O 4 , into nitrogen dioxide, NO 2 , is a reversible reaction. The equation for the reaction is shown. N 2 O 4 (g) 2NO 2 (g) The forward reaction is endothermic. Which row shows the effect on the position of equilibrium and the rate of the reverse reaction when the temperature is increased? position of equilibrium rate of the reverse reaction A shifts to the left decreases B shifts to the left increases C shifts to the right decreases D shifts to the right increases 8 0620/22/O/N/23 17 In a blast furnace, iron( III ) oxide is converted to iron and carbon monoxide is converted to carbon dioxide. Fe 2 O 3 + 3CO  2Fe + 3CO 2 What happens to each of these reactants? A Both iron( III ) oxide and carbon monoxide are oxidised. B Both iron( III ) oxide and carbon monoxide are reduced. C Iron( III ) oxide is oxidised and carbon monoxide is reduced. D Iron( III ) oxide is reduced and carbon monoxide is oxidised. 18 Which row describes what happens to Fe 2+ ions when they are oxidised? electron movement oxidation number of iron A they gain electrons decreases B they gain electrons increases C they lose electrons decreases D they lose electrons increases 19 In which reaction does an acid react with a base? A Dilute sulfuric acid is added to a piece of magnesium ribbon producing hydrogen. B Dilute sulfuric acid is added to aqueous barium chloride producing a white precipitate of barium sulfate. C Aqueous sodium hydroxide is added to aqueous copper( II ) sulfate producing a blue precipitate of copper( II ) hydroxide. D Aqueous sodium hydroxide is added to solid ammonium sulfate producing gaseous ammonia. 20 Which element forms an oxide that reacts with an aqueous solution of a base? A argon B sulfur C magnesium D copper 9 0620/22/O/N/23 21 Which method is used to produce insoluble salts? A addition of excess insoluble base to an acid B addition of excess metal to an acid C precipitation using two aqueous solutions D titration using an acid and an alkali 22 The noble gases are in Group VIII of the Periodic Table. Some properties of the first four noble gases are shown. noble gas boiling point in  C density in g / dm 3 helium –267 0.179 neon –246 0.900 argon –186 1.782 krypton –152 3.708 Which row identifies the trends in boiling point and in density as Group VIII is descended? boiling point density A decreasing increasing B increasing increasing C decreasing decreasing D increasing decreasing"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-22-22",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_22(1).pdf",
+      "questionNo": 22,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.756Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-22-40",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "冲刺",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "Substance Q is investigated using chromatography. The chromatogram is shown. The diagram is not drawn to scale. Q 13 mm 83 mm 114 mm 129 mm baseline solvent front Q What is the R f value of Q?",
+    "options": [
+      "0.60",
+      "0.64",
+      "0.69",
+      "0.72 16 0620/22/O/N/23 Group The Periodic Table of Elements 1 H hydrogen 1 2 He helium 4 I II III IV V VI VII VIII 3 Li lithium 7 4 Be beryllium 9 atomic number atomic symbol Key name relative atomic mass 11 Na sodium 23 12 Mg magnesium 24 19 K potassium 39 20 Ca calcium 40 37 Rb rubidium 85 38 Sr strontium 88 55 Cs caesium 133 56 Ba barium 137 87 Fr francium – 88 Ra radium – 5 B boron 11 13 A l aluminium 27 31 Ga gallium 70 49 I n indium 115 81 T l thallium 204 113 Nh nihonium – 6 C carbon 12 14 Si silicon 28 32 Ge germanium 73 50 Sn tin 119 82 Pb lead 207 22 Ti titanium 48 40 Zr zirconium 91 72 Hf hafnium 178 104 Rf rutherfordium – 23 V vanadium 51 41 Nb niobium 93 73 Ta tantalum 181 105 Db dubnium – 24 Cr chromium 52 42 Mo molybdenum 96 74 W tungsten 184 106 Sg seaborgium – 25 Mn manganese 55 43 Tc technetium – 75 Re rhenium 186 107 Bh bohrium – 26 Fe iron 56 44 Ru ruthenium 101 76 Os osmium 190 108 Hs hassium – 27 Co cobalt 59 45 Rh rhodium 103 77 I r iridium 192 109 Mt meitnerium – 28 Ni nickel 59 46 Pd palladium 106 78 Pt platinum 195 110 Ds darmstadtium – 29 Cu copper 64 47 Ag silver 108 79 Au gold 197 111 Rg roentgenium – 30 Zn zinc 65 48 Cd cadmium 112 80 Hg mercury 201 112 Cn copernicium – 114 F l flerovium – 116 Lv livermorium – 7 N nitrogen 14 15 P phosphorus 31 33 As arsenic 75 51 Sb antimony 122 83 Bi bismuth 209 115 Mc moscovium – 8 O oxygen 16 16 S sulfur 32 34 Se selenium 79 52 Te tellurium 128 84 Po polonium – 9 F fluorine 19 17 C l chlorine 35.5 35 Br bromine 80 53 I iodine 127 85 At astatine – 117 Ts tennessine – 10 Ne neon 20 18 Ar argon 40 36 Kr krypton 84 54 Xe xenon 131 86 Rn radon – 118 Og oganesson – 21 Sc scandium 45 39 Y yttrium 89 57–71 lanthanoids 89–103 actinoids 57 La lanthanum 139 89 Ac lanthanoids actinoids The volume of one mole of any gas is 24 dm 3 at room temperature and pressure (r.t.p.). actinium – 58 Ce cerium 140 90 Th thorium 232 59 Pr praseodymium 141 91 Pa protactinium 231 60 Nd neodymium 144 92 U uranium 238 61 Pm promethium – 93 Np neptunium – 62 Sm samarium 150 94 Pu plutonium – 63 Eu europium 152 95 Am americium – 64 Gd gadolinium 157 96 Cm curium – 65 Tb terbium 159 97 Bk berkelium – 66 Dy dysprosium 163 98 Cf californium – 67 Ho holmium 165 99 Es einsteinium – 68 Er erbium 167 100 Fm fermium – 69 Tm thulium 169 101 Md mendelevium – 70 Yb ytterbium 173 102 No nobelium – 71 Lu lutetium 175 103 Lr lawrencium –"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-22-40",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_22(1).pdf",
+      "questionNo": 40,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.757Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-23-03",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "基础",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "at room temperature and pressure. The temperature and pressure are both increased, but the volume occupied by the gas remains 340 cm 3 . Which row describes what happens to the particle speed and the average distance between the particles in the gas when the temperature and pressure are both increased? particle speed average distance between particles",
+    "options": [
+      "unchanged unchanged",
+      "unchanged increased",
+      "increased unchanged",
+      "increased increased 2 Which statements about the rate of diffusion of the gases ammonia, carbon monoxide, nitrogen and oxygen are correct? 1 Nitrogen and carbon monoxide will diffuse at the same rate. 2 Oxygen will diffuse slowest because it is an element, whereas the others are compounds. 3 Ammonia will diffuse fastest. A 1 and 2 B 1 and 3 C 1 only D 2 and 3 3 The structure of an atom of element X is shown. 5p 6n key = electron = neutron = proton n p What is element X? A boron B carbon C sodium D sulfur 3 0620/23/O/N/23"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-23-3",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_23(1).pdf",
+      "questionNo": 3,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.764Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-23-24",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "中等",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "ions. How many ions are there in 0.25 mol of iron( III ) oxide, Fe 2 O 3 ?",
+    "options": [
+      "1.5  10 23",
+      "3.0  10 23",
+      "7.5  10 23",
+      "3.0  10 24 11 Concentrated aqueous magnesium bromide is electrolysed using carbon electrodes. Which equations represent the reactions occurring at each electrode? positive electrode negative electrode A 2Br – (aq)  Br 2 (aq) + 2e – 2H + (aq) + 2e –  H 2 (g) B 2H + (aq) + 2e –  H 2 (g) 2O 2– (aq)  O 2 (aq) + 4e – C Mg 2+ (aq) + 2e –  Mg(s) 2Br – (aq)  Br 2 (aq) + 2e – D 2O 2– (aq)  O 2 (aq) + 4e – Mg 2+ (aq) + 2e –  Mg(s) 12 Aqueous copper( II ) sulfate is electrolysed using carbon electrodes. Which statement is correct? A Bubbles of hydrogen gas are formed at the anode. B Bubbles of oxygen gas are formed at the cathode. C Copper is deposited at the anode. D The blue colour of the solution fades. 5 0620/23/O/N/23 13 When water is added to anhydrous iron( III ) chloride, FeC l 3 , hydrated iron( III ) chloride, FeC l 3 •6H 2 O, is formed and energy is given out. FeC l 3 + 6H 2 O FeC l 3 •6H 2 O Which reaction pathway diagram represents the formation of anhydrous iron( III ) chloride in the reverse reaction? energy progress of reaction FeC l 3 + 6H 2 O FeC l 3 •6H 2 O energy progress of reaction A B FeC l 3 + 6H 2 O FeC l 3 •6H 2 O energy progress of reaction FeC l 3 •6H 2 O energy progress of reaction C D FeC l 3 + 6H 2 O FeC l 3 + 6H 2 O FeC l 3 •6H 2 O 6 0620/23/O/N/23 14 Ethene reacts with hydrogen. The equation is shown. C 2 H 4 + H 2  C 2 H 6 The bond energies are shown. bond bond energy in kJ / mol C–C +350 C=C +610 C–H +410 H–H +436 What is the energy change for the reaction? A –560 kJ / mol B –124 kJ / mol C +486 kJ / mol D +5496 kJ / mol 15 Statements about four different acids are listed. ● A 0.0100 mol / dm 3 solution of hydrochloric acid has a pH of 2. ● A 0.0100 mol / dm 3 solution of ethanoic acid has a pH of 3.4. ● Hydrobromic acid, HBr, is a strong acid. ● Ethanoic acid is a slightly stronger acid than trimethylethanoic acid. What are the pH values of 0.0100 mol / dm 3 HBr and 0.0100 mol / dm 3 trimethylethanoic acid? pH of 0.0100 mol / dm 3 HBr pH of 0.0100 mol / dm 3 trimethylethanoic acid A 2 3.3 B 2 3.5 C 3.4 3.3 D 3.4 3.5 16 Anhydrous cobalt( II ) chloride is blue and turns pink when water is added. How is this reaction reversed? A adding dilute acid B filtering C heating D cooling 7 0620/23/O/N/23 17 The reaction between hydrogen and nitrogen is reversible. The forward reaction is exothermic. N 2 (g) + 3H 2 (g) 2NH 3 (g) Which change to the conditions would increase the yield of ammonia? A add a catalyst B increase the pressure C increase the temperature D reduce the concentration of nitrogen 18 Ethanol can be turned into ethanoic acid by passing it over hot copper( II ) oxide. CH 3 CH 2 OH + 2CuO  CH 3 COOH + H 2 O + 2Cu What is this type of reaction? A precipitation B redox C thermal decomposition D neutralisation 19 When heated strongly, silicon( IV ) oxide reacts with carbon. SiO 2 + 2C  Si + 2CO Which term describes what happens to silicon( IV ) oxide? A thermal decomposition B neutralisation C oxidation D reduction 20 Which statement about aqueous weak acids is correct? A Weak acids are always dilute aqueous solutions. B Weak acids dissociate fully in aqueous solution. C When a weak acid is added to blue litmus paper, it stays blue. D When a weak acid is added to solid magnesium, effervescence is seen. 8 0620/23/O/N/23 21 Which oxides are basic? 1 calcium oxide 2 sodium oxide 3 iron( II ) oxide A 1, 2 and 3 B 1 and 2 only C 2 and 3 only D 3 only 22 Zinc oxide is an amphoteric oxide. Zinc oxide is added to excess dilute hydrochloric acid. Zinc oxide is added to excess aqueous sodium hydroxide. Which row describes the observations made in these reactions? excess dilute hydrochloric acid excess aqueous sodium hydroxide A colourless solution forms colourless solution forms B colourless solution forms no visible change C fizzing colourless solution forms D fizzing no visible change 23 Which row shows properties of an element that is in the same group of the Periodic Table as lithium? electrical conductivity density in g / cm 3 A high 0.97 B high 8.93 C low 0.07 D low 3.12 24 The elements in Group VII include chlorine, bromine and iodine. Which statements are correct? 1 Iodine is more dense than chlorine. 2 Iodine displaces chlorine from a solution containing chloride ions. 3 Bromine is a diatomic non-metal. 4 Chlorine gas is darker in colour than bromine vapour. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4 9 0620/23/O/N/23"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-23-24",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_23(1).pdf",
+      "questionNo": 24,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.764Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  },
+  {
+    "id": "CIE-IGCHEM-2023-W-23-40",
+    "board": "CIE",
+    "subject": "IGCSE Chemistry",
+    "paper": "MCQ",
+    "difficulty": "冲刺",
+    "topic": "Past Paper Winter",
+    "year": "2023",
+    "stem": "The results of some tests on an aqueous solution of substance X are listed. 1",
+    "options": [
+      "cream precipitate is produced when adding aqueous silver nitrate. 2 Adding aqueous sodium hydroxide produces a green precipitate which dissolves in excess alkali. 3 Adding aqueous ammonia produces a green precipitate which is insoluble in excess ammonia. What is substance X? A chromium( III ) bromide",
+      "chromium( III ) chloride",
+      "iron( II ) bromide",
+      "iron( II ) chloride 14 0620/23/O/N/23 15 Permission to reproduce items where third-party owned material protected by copyright is included has been sought and cleared where possible. Every reasonable effort has been made by the publisher (UCLES) to trace copyright holders, but if any items requiring clearance have unwittingly been included, the publisher will be pleased to make amends at the earliest possible opportunity. To avoid the issue of disclosure of answer-related information to candidates, all copyright acknowledgements are reproduced online in the Cambridge Assessment International Education Copyright Acknowledgements Booklet. This is produced for each series of examinations and is freely available to download at www.cambridgeinternational.org after the live examination series. Cambridge Assessment International Education is part of Cambridge Assessment. Cambridge Assessment is the brand name of the University of Cambridge Local Examinations Syndicate (UCLES), which is a department of the University of Cambridge. 0620/23/O/N/23 16 0620/23/O/N/23 Group The Periodic Table of Elements 1 H hydrogen 1 2 He helium 4 I II III IV V VI VII VIII 3 Li lithium 7 4 Be beryllium 9 atomic number atomic symbol Key name relative atomic mass 11 Na sodium 23 12 Mg magnesium 24 19 K potassium 39 20 Ca calcium 40 37 Rb rubidium 85 38 Sr strontium 88 55 Cs caesium 133 56 Ba barium 137 87 Fr francium – 88 Ra radium – 5 B boron 11 13 A l aluminium 27 31 Ga gallium 70 49 I n indium 115 81 T l thallium 204 113 Nh nihonium – 6 C carbon 12 14 Si silicon 28 32 Ge germanium 73 50 Sn tin 119 82 Pb lead 207 22 Ti titanium 48 40 Zr zirconium 91 72 Hf hafnium 178 104 Rf rutherfordium – 23 V vanadium 51 41 Nb niobium 93 73 Ta tantalum 181 105 Db dubnium – 24 Cr chromium 52 42 Mo molybdenum 96 74 W tungsten 184 106 Sg seaborgium – 25 Mn manganese 55 43 Tc technetium – 75 Re rhenium 186 107 Bh bohrium – 26 Fe iron 56 44 Ru ruthenium 101 76 Os osmium 190 108 Hs hassium – 27 Co cobalt 59 45 Rh rhodium 103 77 I r iridium 192 109 Mt meitnerium – 28 Ni nickel 59 46 Pd palladium 106 78 Pt platinum 195 110 Ds darmstadtium – 29 Cu copper 64 47 Ag silver 108 79 Au gold 197 111 Rg roentgenium – 30 Zn zinc 65 48 Cd cadmium 112 80 Hg mercury 201 112 Cn copernicium – 114 F l flerovium – 116 Lv livermorium – 7 N nitrogen 14 15 P phosphorus 31 33 As arsenic 75 51 Sb antimony 122 83 Bi bismuth 209 115 Mc moscovium – 8 O oxygen 16 16 S sulfur 32 34 Se selenium 79 52 Te tellurium 128 84 Po polonium – 9 F fluorine 19 17 C l chlorine 35.5 35 Br bromine 80 53 I iodine 127 85 At astatine – 117 Ts tennessine – 10 Ne neon 20 18 Ar argon 40 36 Kr krypton 84 54 Xe xenon 131 86 Rn radon – 118 Og oganesson – 21 Sc scandium 45 39 Y yttrium 89 57–71 lanthanoids 89–103 actinoids 57 La lanthanum 139 89 Ac lanthanoids actinoids The volume of one mole of any gas is 24 dm 3 at room temperature and pressure (r.t.p.). actinium – 58 Ce cerium 140 90 Th thorium 232 59 Pr praseodymium 141 91 Pa protactinium 231 60 Nd neodymium 144 92 U uranium 238 61 Pm promethium – 93 Np neptunium – 62 Sm samarium 150 94 Pu plutonium – 63 Eu europium 152 95 Am americium – 64 Gd gadolinium 157 96 Cm curium – 65 Tb terbium 159 97 Bk berkelium – 66 Dy dysprosium 163 98 Cf californium – 67 Ho holmium 165 99 Es einsteinium – 68 Er erbium 167 100 Fm fermium – 69 Tm thulium 169 101 Md mendelevium – 70 Yb ytterbium 173 102 No nobelium – 71 Lu lutetium 175 103 Lr lawrencium –"
+    ],
+    "answer": 0,
+    "mistakeType": "unknown",
+    "templateId": "2023-W-23-40",
+    "skills": [],
+    "hints": [],
+    "images": [],
+    "source": {
+      "type": "txt_import_hybrid",
+      "fileName": "0620_w23_qp_23(1).pdf",
+      "questionNo": 40,
+      "optionsParsed": true,
+      "year": "2023",
+      "season": "Past Paper Winter",
+      "importedAt": "2026-05-30T14:40:34.764Z"
+    },
+    "quality": {
+      "pass": false,
+      "reasons": [
+        "cross_question_concat"
+      ],
+      "metrics": {
+        "badCharCount": 0,
+        "badCharRatio": 0
+      }
+    },
+    "reviewReasons": [
+      "cross_question_concat"
+    ],
+    "importJobId": "job-1780152034672"
+  }
+]

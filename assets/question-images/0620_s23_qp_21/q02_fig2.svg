@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320">
+  <rect width="720" height="320" fill="#eff5ff"/>
+  <rect x="18" y="18" width="684" height="284" rx="12" fill="#ffffff" stroke="#2f5ea8" stroke-width="2"/>
+  <text x="40" y="74" font-size="32" fill="#2f5ea8" font-family="Arial">Q2 第二张图占位</text>
+  <text x="40" y="124" font-size="24" fill="#3f4f68" font-family="Arial">验证前端顺序渲染</text>
+  <polyline points="420,230 480,170 550,210 640,120" fill="none" stroke="#2f5ea8" stroke-width="5"/>
+</svg>

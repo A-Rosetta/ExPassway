@@ -11,8 +11,13 @@
       return normalizeBaseUrl(saved);
     }
 
+    // Local static preview server should call backend on port 3001.
+    if (window.location.hostname === "localhost" && window.location.port === "8080") {
+      return "http://localhost:3001";
+    }
+
     if (window.location.protocol.startsWith("http")) {
-      // Prefer same-origin API (served by reverse proxy) to avoid cross-port latency.
+      // Default same-origin API.
       return "";
     }
 
@@ -86,6 +91,12 @@
         body: JSON.stringify(input),
       });
     },
+    async submitLocalPaper(input) {
+      return request("/api/papers/submit-local", {
+        method: "POST",
+        body: JSON.stringify(input),
+      });
+    },
     async buildAnalysis(input) {
       return request("/api/analysis", {
         method: "POST",
@@ -106,6 +117,24 @@
     },
     async getUserById(userId) {
       return request(`/api/users/${encodeURIComponent(userId)}`);
+    },
+    async getUserPractices(userId, input = {}) {
+      const limit = Number(input.limit || 20);
+      return request(`/api/users/${encodeURIComponent(userId)}/practices?limit=${limit}`);
+    },
+    async getUserNotebook(userId) {
+      return request(`/api/users/${encodeURIComponent(userId)}/notebook`);
+    },
+    async updateNotebookEntry(userId, entryId, input) {
+      return request(`/api/users/${encodeURIComponent(userId)}/notebook/${encodeURIComponent(entryId)}`, {
+        method: "PATCH",
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async clearUserPractices(userId) {
+      return request(`/api/users/${encodeURIComponent(userId)}/practices`, {
+        method: "DELETE",
+      });
     },
     async register(input) {
       return request("/api/auth/register", {

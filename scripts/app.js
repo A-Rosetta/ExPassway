@@ -2,9 +2,22 @@
   const USER_PROFILE_KEY = "alevel.userProfile";
   const USER_ID_KEY = "alevel.userId";
   const AUTH_TOKEN_KEY = "alevel.authToken";
+  const NOTEBOOK_KEY = "alevel.wrongNotebook";
+  const { getLanguage, setLanguage, normalizeLanguage, t, applyPage } = window.ALevelI18n;
+  let currentLanguage = getLanguage();
+  let backendStatusState = null;
+  let accountStatusState = null;
 
   function getEl(id) {
     return document.getElementById(id);
+  }
+
+  function currentUserScope() {
+    return localStorage.getItem(USER_ID_KEY) || "guest";
+  }
+
+  function scopedKey(base) {
+    return `${base}:${currentUserScope()}`;
   }
 
   function fillSelect(select, items) {
@@ -17,27 +30,96 @@
     });
   }
 
-  function setBackendStatus(text, isBad) {
-    const statusEl = getEl("backendStatus");
-    if (!statusEl) return;
-    statusEl.textContent = text;
-    statusEl.className = isBad ? "tip bad" : "tip good";
+  function applyStatus(elementId, state) {
+    const statusEl = getEl(elementId);
+    if (!statusEl || !state) return;
+    statusEl.textContent = t(state.key, state.vars);
+    statusEl.className = state.isBad ? "tip bad" : "tip good";
   }
 
-  function setAccountStatus(text, isBad) {
-    const statusEl = getEl("accountStatus");
-    if (!statusEl) return;
-    statusEl.textContent = text;
-    statusEl.className = isBad ? "tip bad" : "tip good";
+  function setBackendStatus(key, isBad, vars) {
+    backendStatusState = { key, isBad, vars };
+    applyStatus("backendStatus", backendStatusState);
+  }
+
+  function setAccountStatus(key, isBad, vars) {
+    accountStatusState = { key, isBad, vars };
+    applyStatus("accountStatus", accountStatusState);
+  }
+
+  function applyLanguage(language) {
+    currentLanguage = setLanguage(language);
+    applyPage();
+
+    const languageSelect = getEl("preferredLanguage");
+    if (languageSelect) {
+      languageSelect.value = currentLanguage;
+    }
+
+    renderNotebookOverview();
+    applyStatus("backendStatus", backendStatusState);
+    applyStatus("accountStatus", accountStatusState);
   }
 
   function readAuthToken() {
     return localStorage.getItem(AUTH_TOKEN_KEY) || "";
   }
 
+  function readNotebookRows() {
+    try {
+      const raw = localStorage.getItem(scopedKey(NOTEBOOK_KEY));
+      const rows = raw ? JSON.parse(raw) : [];
+      return Array.isArray(rows) ? rows : [];
+    } catch (_e) {
+      return [];
+    }
+  }
+
+  async function syncNotebookRowsFromApi() {
+    const userId = localStorage.getItem(USER_ID_KEY) || "";
+    if (!userId || !window.ALevelApi?.getUserNotebook) return readNotebookRows();
+    try {
+      const rows = await window.ALevelApi.getUserNotebook(userId);
+      localStorage.setItem(scopedKey(NOTEBOOK_KEY), JSON.stringify(Array.isArray(rows) ? rows : []));
+      return Array.isArray(rows) ? rows : [];
+    } catch (_err) {
+      return readNotebookRows();
+    }
+  }
+
+  function renderNotebookOverview(rowsInput) {
+    const box = getEl("notebookOverview");
+    if (!box) return;
+    const rows = (Array.isArray(rowsInput) ? rowsInput : readNotebookRows())
+      .sort((a, b) => new Date(b.lastWrongAt || 0) - new Date(a.lastWrongAt || 0));
+    const totalWrongCount = rows.reduce((sum, r) => sum + Number(r.wrongCount || 0), 0);
+    const masteredCount = rows.filter((r) => r.mastered).length;
+    const latest = rows[0];
+    const time = latest?.lastWrongAt
+      ? new Date(latest.lastWrongAt).toLocaleString(currentLanguage === "en" ? "en-US" : "zh-CN")
+      : "";
+
+    box.innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-label">${t("notebookItems")}</div><div class="stat-value">${rows.length}</div></div>
+        <div class="stat-card"><div class="stat-label">${t("totalWrongAttempts")}</div><div class="stat-value">${totalWrongCount}</div></div>
+        <div class="stat-card"><div class="stat-label">${t("mastered")}</div><div class="stat-value">${masteredCount}</div></div>
+      </div>
+      <p class="tip">${
+        latest
+          ? t("latestWrongRecord", {
+            subject: latest.subject || "-",
+            paper: latest.paper || "-",
+            time,
+          })
+          : t("noWrongRecords")
+      }</p>
+    `;
+  }
+
   async function loadCurriculumData() {
     if (!window.ALevelApi) {
-      setBackendStatus("未检测到 API 客户端，当前使用本地示例数据。", true);
+      setBackendStatus("apiMissing", true);
       return window.CURRICULUM_DATA;
     }
 
@@ -46,11 +128,11 @@
         window.ALevelApi.getCurriculum(),
         window.ALevelApi.getStorageMode().catch(() => null),
       ]);
-      const modeText = storage?.mode ? `（存储模式：${storage.mode}）` : "";
-      setBackendStatus(`后端连接成功，课程配置来自 API ${modeText}`, false);
+      const modeText = storage?.mode ? t("storageMode", { mode: storage.mode }) : "";
+      setBackendStatus("backendConnected", false, { modeText });
       return curriculum;
     } catch (_err) {
-      setBackendStatus("后端连接失败，当前回退到本地示例数据。", true);
+      setBackendStatus("backendUnavailable", true);
       return window.CURRICULUM_DATA;
     }
   }
@@ -61,6 +143,7 @@
       location.href = "pages/login.html";
       return;
     }
+
     let currentUser = null;
     try {
       currentUser = await window.ALevelApi.getCurrentUser(token);
@@ -72,41 +155,32 @@
       return;
     }
 
+    applyLanguage(currentUser?.language || getLanguage());
+
     const gradeEl = getEl("grade");
     if (!gradeEl) return;
 
     const boardEl = getEl("board");
     const subjectEl = getEl("subject");
     const paperEl = getEl("paper");
+    const preferredLanguageEl = getEl("preferredLanguage");
 
-    const data = await loadCurriculumData();
-    const boards = data?.boards || {};
-    const boardKeys = Object.keys(boards);
-    if (!boardKeys.length) {
-      setBackendStatus("课程配置为空，请检查后端 /api/meta/curriculum。", true);
-      return;
-    }
+    await loadCurriculumData();
 
-    fillSelect(gradeEl, data?.grades || ["AS"]);
-    fillSelect(boardEl, boardKeys);
+    fillSelect(gradeEl, ["IGCSE"]);
+    fillSelect(boardEl, ["CIE"]);
 
     function refreshSubjects() {
-      const board = boardEl.value;
-      const subjects = Object.keys(boards[board] || {});
-      fillSelect(subjectEl, subjects);
+      fillSelect(subjectEl, ["IGCSE Chemistry"]);
       refreshPapers();
     }
 
     function refreshPapers() {
-      const board = boardEl.value;
-      const subject = subjectEl.value;
-      const papers = boards?.[board]?.[subject] || [];
-      fillSelect(paperEl, papers);
+      fillSelect(paperEl, ["MCQ"]);
     }
 
     boardEl.addEventListener("change", refreshSubjects);
     subjectEl.addEventListener("change", refreshPapers);
-
     refreshSubjects();
 
     const packSelection = () => {
@@ -130,6 +204,20 @@
       location.href = "pages/analysis.html";
     });
 
+    const goNotebook = getEl("goNotebook");
+    if (goNotebook) {
+      goNotebook.addEventListener("click", () => {
+        location.href = "pages/notebook.html";
+      });
+    }
+
+    const goNotebookFromPanel = getEl("goNotebookFromPanel");
+    if (goNotebookFromPanel) {
+      goNotebookFromPanel.addEventListener("click", () => {
+        location.href = "pages/notebook.html";
+      });
+    }
+
     const goAdmin = getEl("goAdmin");
     if (goAdmin) {
       goAdmin.addEventListener("click", () => {
@@ -144,6 +232,13 @@
       });
     }
 
+    const showAlertBtn = getEl("showAlertBtn");
+    if (showAlertBtn) {
+      showAlertBtn.addEventListener("click", () => {
+        alert(currentLanguage === "en" ? "Hello from the main page." : "这是主页上的提示。");
+      });
+    }
+
     function fillAccountForm(user) {
       getEl("newDisplayName").value = user?.displayName || "";
       getEl("newGrade").value = user?.grade || "";
@@ -151,10 +246,23 @@
         user?.targetScore == null ? "" : String(user.targetScore);
       getEl("oldPassword").value = "";
       getEl("newPassword").value = "";
+      if (preferredLanguageEl) {
+        preferredLanguageEl.value = normalizeLanguage(user?.language || currentLanguage);
+      }
+    }
+
+    if (preferredLanguageEl) {
+      preferredLanguageEl.addEventListener("change", () => {
+        applyLanguage(preferredLanguageEl.value);
+      });
     }
 
     fillAccountForm(currentUser);
-    setAccountStatus(`当前登录：${currentUser?.displayName || "未知用户"}`, false);
+    const notebookRows = await syncNotebookRowsFromApi();
+    renderNotebookOverview(notebookRows);
+    setAccountStatus("signedInAs", false, {
+      name: currentUser?.displayName || t("unknownUser"),
+    });
 
     const updateProfileBtn = getEl("updateProfileBtn");
     if (updateProfileBtn) {
@@ -163,25 +271,31 @@
         const grade = getEl("newGrade").value.trim();
         const targetScoreRaw = getEl("newTargetScore").value.trim();
         const targetScore = targetScoreRaw === "" ? null : Number.parseInt(targetScoreRaw, 10);
+        const language = normalizeLanguage(preferredLanguageEl?.value);
+
         if (!displayName) {
-          setAccountStatus("昵称不能为空。", true);
+          setAccountStatus("displayNameRequired", true);
           return;
         }
 
         updateProfileBtn.disabled = true;
         const oldText = updateProfileBtn.textContent;
-        updateProfileBtn.textContent = "保存中...";
+        updateProfileBtn.textContent = t("saving");
         try {
           const user = await window.ALevelApi.updateCurrentUser(token, {
             displayName,
             grade: grade || null,
             targetScore: Number.isNaN(targetScore) ? null : targetScore,
+            language,
           });
           localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(user));
+          applyLanguage(user.language);
           fillAccountForm(user);
-          setAccountStatus("资料修改成功。", false);
+          setAccountStatus("profileUpdated", false);
         } catch (err) {
-          setAccountStatus(`资料修改失败：${err.message || "请稍后重试"}`, true);
+          setAccountStatus("profileUpdateFailed", true, {
+            message: err.message || t("retryLater"),
+          });
         } finally {
           updateProfileBtn.disabled = false;
           updateProfileBtn.textContent = oldText;
@@ -195,35 +309,37 @@
         const oldPassword = getEl("oldPassword").value.trim();
         const newPassword = getEl("newPassword").value.trim();
         if (!oldPassword || !newPassword) {
-          setAccountStatus("请填写旧密码和新密码。", true);
+          setAccountStatus("passwordFieldsRequired", true);
           return;
         }
         if (newPassword.length < 6) {
-          setAccountStatus("新密码至少 6 位。", true);
+          setAccountStatus("passwordTooShort", true);
           return;
         }
 
         changePasswordBtn.disabled = true;
         const oldText = changePasswordBtn.textContent;
-        changePasswordBtn.textContent = "修改中...";
+        changePasswordBtn.textContent = t("updating");
         try {
           await window.ALevelApi.changePassword(token, { oldPassword, newPassword });
           getEl("oldPassword").value = "";
           getEl("newPassword").value = "";
-          setAccountStatus("密码修改成功。", false);
+          setAccountStatus("passwordChanged", false);
         } catch (err) {
-          setAccountStatus(`密码修改失败：${err.message || "请稍后重试"}`, true);
+          setAccountStatus("passwordChangeFailed", true, {
+            message: err.message || t("retryLater"),
+          });
         } finally {
           changePasswordBtn.disabled = false;
           changePasswordBtn.textContent = oldText;
         }
       });
     }
-
   }
 
   window.ALevelApp = { fillSelect };
   buildHome().catch(() => {
-    setBackendStatus("初始化失败，请刷新页面后重试。", true);
+    applyLanguage(getLanguage());
+    setBackendStatus("initFailed", true);
   });
 })();

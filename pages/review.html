@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="reviewPageTitle">练习总结</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card hero">
+      <h1 data-i18n="reviewHeroTitle">练习总结</h1>
+      <p class="tip" data-i18n="reviewHeroSubtitle">总结页已调整为答题总览：左侧答案表，右侧正确率分布，下方保留逐题复盘。</p>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="reviewScoreTitle">成绩概览</h2>
+      <div id="reviewSummary"></div>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="reviewWrongTitle">错题列表</h2>
+      <div id="reviewNavTop"></div>
+      <div id="wrongQuestions"></div>
+      <div id="reviewNavBottom"></div>
+      <div class="actions">
+        <button id="backGenerate" class="btn-secondary" data-i18n="backGenerate">返回出题页</button>
+        <button id="goAnalysis" class="btn-primary" data-i18n="goToAnalysis">进入错题分析页</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../scripts/i18n.js"></script>
+  <script src="../scripts/api.js"></script>
+  <script src="../scripts/review.js"></script>
+</body>
+</html>

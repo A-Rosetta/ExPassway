@@ -3,47 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>生成模拟试卷</title>
+  <title data-i18n="generatePageTitle">生成模拟试卷</title>
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
 <body>
   <main class="container">
-    <section class="card hero">
-      <h1>生成模拟试卷</h1>
+    <script id="paperSetSeed" type="application/json">
+      [
+        { "slug": "0620_s23_qp_21", "pdf": "0620_s23_qp_21.pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 37, "structuredNeedsReview": 3 },
+        { "slug": "0620_s23_qp_22", "pdf": "0620_s23_qp_22.pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 37, "structuredNeedsReview": 3 },
+        { "slug": "0620_s23_qp_23", "pdf": "0620_s23_qp_23.pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 36, "structuredNeedsReview": 4 },
+        { "slug": "0620_w23_qp_211", "pdf": "0620_w23_qp_21(1).pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 35, "structuredNeedsReview": 5 },
+        { "slug": "0620_w23_qp_221", "pdf": "0620_w23_qp_22(1).pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 35, "structuredNeedsReview": 5 },
+        { "slug": "0620_w23_qp_231", "pdf": "0620_w23_qp_23(1).pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 38, "structuredNeedsReview": 2 }
+      ]
+    </script>
+    <section class="card paper-picker" id="paperPickerPage">
+      <div class="paper-picker-head">
+        <div>
+          <h1 data-i18n="choosePaperTitle">选择试卷</h1>
+          <p class="tip" data-i18n="choosePaperSubtitle">先选一套真题，再选做题模式，最后打开题目开始作答。</p>
+        </div>
+        <div class="paper-picker-actions">
+          <button id="goHistoryBtn" class="mode-btn-secondary" type="button" data-i18n="goHistoryBtn">查看记录</button>
+          <button id="goHomeFromPickerBtn" class="mode-btn-primary" type="button" data-i18n="homeBtn">返回首页</button>
+        </div>
+      </div>
+      <div id="paperSetList" class="paper-set-list"></div>
+    </section>
+
+    <section class="card mode-landing hidden-panel" id="modeLanding">
+      <div class="stageo-hero-art" aria-hidden="true">
+        <div class="stageo-blob"></div>
+        <div class="stageo-desk"></div>
+        <div class="stageo-book-stack">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="stageo-mug"></div>
+        <div class="stageo-character">
+          <div class="stageo-hair"></div>
+          <div class="stageo-head"></div>
+          <div class="stageo-body"></div>
+          <div class="stageo-arm stageo-arm-left"></div>
+          <div class="stageo-arm stageo-arm-right"></div>
+          <div class="stageo-book"></div>
+        </div>
+      </div>
+      <div class="mode-landing-copy">
+        <h1 id="modeLandingTitle" data-i18n="getReadyTitle">Get ready for the test!</h1>
+        <div class="mode-summary-list">
+          <div class="mode-summary-row">
+            <span class="mode-summary-label" data-i18n="subjectText">Subject:</span>
+            <span id="modeSubjectValue">Chemistry (0620)</span>
+          </div>
+          <div class="mode-summary-row">
+            <span class="mode-summary-label" data-i18n="paperText">Paper:</span>
+            <span id="modePaperValue" data-i18n="selectPaperFirst">Select a paper first</span>
+          </div>
+          <div class="mode-summary-row">
+            <span class="mode-summary-label" data-i18n="questionCountText">Number of questions:</span>
+            <span id="modeQuestionCountValue">40</span>
+          </div>
+        </div>
+        <div class="mode-choice-block">
+          <p class="mode-choice-title" data-i18n="chooseModeTitle">Choose your preferred mode:</p>
+          <div class="mode-option-grid">
+            <label class="mode-option-card selected" data-mode-card="practice">
+              <input type="radio" name="practiceMode" value="practice" checked />
+              <span class="mode-option-radio"></span>
+              <span class="mode-option-copy">
+                <strong data-i18n="practiceModeTitle">Practice Mode</strong>
+                <small data-i18n="practiceModeDesc">Take your time and practice without time constraints</small>
+              </span>
+            </label>
+            <label class="mode-option-card" data-mode-card="timed">
+              <input type="radio" name="practiceMode" value="timed" />
+              <span class="mode-option-radio"></span>
+              <span class="mode-option-copy">
+                <strong data-i18n="timedModeTitle">Timed Test</strong>
+                <small data-i18n="timedModeDesc">Test yourself under exam conditions with a timer</small>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="mode-landing-actions">
+          <button id="backToPaperPickerBtn" class="mode-btn-secondary" type="button" data-i18n="backBtn">Back</button>
+          <button id="startModePageBtn" class="mode-btn-primary" type="button" data-i18n="startNowBtn">Start Now</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card hero hidden-panel" id="generateHero">
+      <h1 data-i18n="generateHeroTitle">生成模拟试卷</h1>
       <p id="selectionSummary"></p>
       <p id="runMode" class="tip"></p>
+      <p id="timerDisplay" class="tip" data-i18n="timerLabel">计时器：00:00</p>
     </section>
 
-    <section class="card panel">
-      <h2>组卷参数</h2>
-      <div class="grid-2">
-        <label>题目数量
-          <input id="count" type="number" min="3" max="30" value="8" />
-        </label>
-        <label>难度
-          <select id="difficulty">
-            <option>基础</option>
-            <option selected>中等</option>
-            <option>冲刺</option>
-          </select>
-        </label>
-        <label>知识点（逗号分隔）
-          <input id="topics" type="text" value="Functions,Trigonometry,Differentiation" />
-        </label>
-      </div>
-
-      <div class="actions">
-        <button id="generateBtn" class="btn-primary">确认生成题目</button>
-        <button id="backBtn" class="btn-secondary">返回首页</button>
-      </div>
-    </section>
-
-    <section class="card panel">
-      <h2>生成结果</h2>
+    <section class="card panel hidden-panel" id="resultPanel">
+      <h2 data-i18n="resultPanelTitle">生成结果</h2>
       <div id="paperResult"></div>
     </section>
   </main>
 
+  <script src="../scripts/i18n.js"></script>
   <script src="../scripts/data.js"></script>
   <script src="../scripts/api.js"></script>
   <script src="../scripts/generate.js"></script>

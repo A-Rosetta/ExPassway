@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="imageMapperPageTitle">题图绑定工具</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card hero">
+      <h1 data-i18n="imageMapperHeroTitle">题图绑定工具</h1>
+      <p data-i18n-html="imageMapperHeroSubtitle">把题号和图片 URL 绑定成 JSON，直接用于 PDF 导入脚本的 <code>--image-map</code> 参数。</p>
+      <p id="mapperStatus" class="tip" data-i18n="mapperReady">准备就绪</p>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="inputSectionTitle">输入区</h2>
+      <label><span data-i18n="basePrefixLabel">图片根目录前缀（可选）</span>
+        <input id="basePrefix" type="text" data-i18n-placeholder="basePrefixPlaceholder" placeholder="例如 /assets/question-images/0620_s23_qp_21" />
+      </label>
+      <label><span data-i18n="mappingInputLabel">绑定内容（每行一题）</span>
+        <textarea id="mappingInput" rows="14" style="width:100%;border:1px solid var(--line);border-radius:10px;padding:0.7rem;" data-i18n-placeholder="mappingInputPlaceholder" placeholder="示例：\n1 q01_fig1.png\n2 q02_fig1.png,q02_fig2.png\n3 /assets/question-images/0620_s23_qp_21/q03_fig1.png"></textarea>
+      </label>
+      <div class="actions">
+        <button id="previewBtn" class="btn-primary" data-i18n="previewBtn">生成预览</button>
+        <button id="downloadBtn" class="btn-secondary" data-i18n="downloadBtn">下载 image-map.json</button>
+        <button id="copyBtn" class="btn-secondary" data-i18n="copyBtn">复制 JSON</button>
+        <button id="backAdmin" class="btn-secondary" data-i18n="backAdmin">返回后台</button>
+      </div>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="jsonOutputTitle">JSON 输出</h2>
+      <pre id="jsonOutput" style="margin:0;white-space:pre-wrap;background:#f8fbff;border:1px solid var(--line);border-radius:10px;padding:0.8rem;"></pre>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="imagePreviewTitle">图片预览</h2>
+      <div id="previewWrap" class="bar-wrap"></div>
+    </section>
+  </main>
+
+  <script src="../scripts/i18n.js"></script>
+  <script src="../scripts/image-mapper.js"></script>
+</body>
+</html>

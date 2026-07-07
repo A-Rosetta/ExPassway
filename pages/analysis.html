@@ -3,31 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>错题分析</title>
+  <title data-i18n="analysisPageTitle">错题分析</title>
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
 <body>
   <main class="container">
     <section class="card hero">
-      <h1>错题分析与学习建议</h1>
+      <h1 data-i18n="analysisHeroTitle">错题分析与学习建议</h1>
       <p id="selectionSummary"></p>
       <p id="analysisMode" class="tip"></p>
     </section>
 
     <section class="card panel">
-      <h2>知识点错误率</h2>
+      <h2 data-i18n="analysisTopicTitle">知识点错误率</h2>
       <div id="bars" class="bar-wrap"></div>
     </section>
 
     <section class="card panel">
-      <h2>诊断建议</h2>
+      <h2 data-i18n="analysisAdviceTitle">诊断建议</h2>
       <ul id="advice"></ul>
       <div class="actions">
-        <button id="backHome" class="btn-secondary">返回首页</button>
+        <button id="backHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
       </div>
     </section>
   </main>
 
+  <script src="../scripts/i18n.js"></script>
   <script src="../scripts/data.js"></script>
   <script src="../scripts/api.js"></script>
   <script src="../scripts/analysis.js"></script>

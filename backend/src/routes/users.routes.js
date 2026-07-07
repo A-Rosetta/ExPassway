@@ -2,11 +2,18 @@ import { Router } from "express";
 import { ApiError } from "../utils/http.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { toClampedInteger, toOptionalInteger, requireString } from "../utils/validate.js";
-import { isDbEnabled } from "../db/client.js";
+import { isDbEnabled, query } from "../db/client.js";
 import { createUser, getUserById, listUsers } from "../db/repositories/users.repository.js";
+import { deletePracticeSessionsByUserId } from "../db/repositories/practice.repository.js";
+import {
+  deleteWrongNotebookEntriesByUserId,
+  listWrongNotebookEntriesByUserId,
+  updateWrongNotebookEntryMastered,
+} from "../db/repositories/wrongNotebook.repository.js";
 import { listUserPracticeRecords } from "../services/paperStore.service.js";
 
 const router = Router();
+let userColumnsReady = false;
 
 function assertUsersApiEnabled() {
   if (!isDbEnabled()) {
@@ -18,6 +25,15 @@ function assertUsersApiEnabled() {
   }
 }
 
+async function ensureUserColumns() {
+  if (userColumnsReady) return;
+  await query(`
+    alter table users
+    add column if not exists language text not null default 'zh-CN'
+  `);
+  userColumnsReady = true;
+}
+
 router.get("/", asyncHandler(async (req, res) => {
   assertUsersApiEnabled();
   const limit = toClampedInteger(req.query.limit, 20, 1, 100);
@@ -27,6 +43,7 @@ router.get("/", asyncHandler(async (req, res) => {
 
 router.post("/", asyncHandler(async (req, res) => {
   assertUsersApiEnabled();
+  await ensureUserColumns();
   const body = req.body || {};
   const displayName = requireString(body.displayName, "displayName");
   const role = typeof body.role === "string" && body.role.trim()
@@ -42,6 +59,7 @@ router.post("/", asyncHandler(async (req, res) => {
     role,
     grade: typeof body.grade === "string" ? body.grade.trim() : null,
     targetScore: toOptionalInteger(body.targetScore, "targetScore", 0, 100),
+    language: body.language === "en" ? "en" : "zh-CN",
   });
 
   res.status(201).json({
@@ -73,6 +91,42 @@ router.get("/:userId/practices", asyncHandler(async (req, res) => {
   res.json({
     ok: true,
     data: practices,
+  });
+}));
+
+router.get("/:userId/notebook", asyncHandler(async (req, res) => {
+  assertUsersApiEnabled();
+  const userId = requireString(req.params.userId, "userId");
+  const rows = await listWrongNotebookEntriesByUserId(userId);
+  res.json({
+    ok: true,
+    data: rows,
+  });
+}));
+
+router.patch("/:userId/notebook/:entryId", asyncHandler(async (req, res) => {
+  assertUsersApiEnabled();
+  const userId = requireString(req.params.userId, "userId");
+  const entryId = requireString(req.params.entryId, "entryId");
+  const mastered = Boolean(req.body?.mastered);
+  const row = await updateWrongNotebookEntryMastered(userId, entryId, mastered);
+  if (!row) {
+    throw new ApiError(404, "Wrong notebook entry not found.", "NOTEBOOK_ENTRY_NOT_FOUND");
+  }
+  res.json({
+    ok: true,
+    data: row,
+  });
+}));
+
+router.delete("/:userId/practices", asyncHandler(async (req, res) => {
+  assertUsersApiEnabled();
+  const userId = requireString(req.params.userId, "userId");
+  const deleted = await deletePracticeSessionsByUserId(userId);
+  const deletedNotebook = await deleteWrongNotebookEntriesByUserId(userId);
+  res.json({
+    ok: true,
+    data: { deleted, deletedNotebook },
   });
 }));
 

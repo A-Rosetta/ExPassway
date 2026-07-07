@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320">
+  <rect width="720" height="320" fill="#fff8ef"/>
+  <rect x="18" y="18" width="684" height="284" rx="12" fill="#ffffff" stroke="#e28a2d" stroke-width="2"/>
+  <text x="40" y="74" font-size="32" fill="#b7650d" font-family="Arial">Q2 图示占位</text>
+  <text x="40" y="124" font-size="24" fill="#5c4a3d" font-family="Arial">支持一题多图绑定</text>
+  <rect x="430" y="116" width="210" height="130" rx="8" fill="#ffe4c7" stroke="#e28a2d" stroke-width="3"/>
+</svg>

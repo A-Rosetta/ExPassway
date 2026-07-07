@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="pdfPreviewPageTitle">PDF 切题预览</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card hero">
+      <h1 data-i18n="pdfPreviewHeroTitle">PDF 切题预览</h1>
+      <p class="tip" data-i18n="pdfPreviewHeroSubtitle">当前预览文件：`0620_s23_qp_21.pdf`，用于检查 1-40 题按题号切块后的截图和文本。</p>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="pdfCutResultTitle">切题结果</h2>
+      <div id="cutSummary"></div>
+      <div id="cutPreviewList"></div>
+    </section>
+  </main>
+
+  <script src="../scripts/i18n.js"></script>
+  <script src="../scripts/pdf-cut-preview.js"></script>
+</body>
+</html>

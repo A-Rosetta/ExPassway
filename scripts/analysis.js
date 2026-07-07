@@ -1,6 +1,51 @@
 (function () {
+  const USER_ID_KEY = "alevel.userId";
+  const { t, applyPage } = window.ALevelI18n;
+
   function byId(id) {
     return document.getElementById(id);
+  }
+
+  function currentUserScope() {
+    return localStorage.getItem(USER_ID_KEY) || "guest";
+  }
+
+  function scopedKey(base) {
+    return `${base}:${currentUserScope()}`;
+  }
+
+  async function loadAnalysisSource() {
+    const userId = localStorage.getItem(USER_ID_KEY) || "";
+    if (userId && window.ALevelApi?.getUserPractices) {
+      try {
+        const practices = await window.ALevelApi.getUserPractices(userId, { limit: 20 });
+        const latestSubmitted = (Array.isArray(practices) ? practices : []).find((row) => {
+          return row?.status === "submitted" && Array.isArray(row?.wrongLog) && row?.wrongLog.length && row?.result;
+        });
+        if (latestSubmitted) {
+          const result = latestSubmitted.result || null;
+          const wrongLog = latestSubmitted.wrongLog || [];
+          localStorage.setItem(scopedKey("alevel.lastResult"), JSON.stringify(result));
+          localStorage.setItem(scopedKey("alevel.wrongLog"), JSON.stringify(wrongLog));
+          return {
+            logs: wrongLog,
+            lastResult: result,
+            source: "backend-practices",
+          };
+        }
+      } catch (_err) {
+      }
+    }
+
+    const localLogRaw = localStorage.getItem(scopedKey("alevel.wrongLog"));
+    const logs = localLogRaw ? JSON.parse(localLogRaw) : [];
+    const lastResultRaw = localStorage.getItem(scopedKey("alevel.lastResult"));
+    const lastResult = lastResultRaw ? JSON.parse(lastResultRaw) : null;
+    return {
+      logs,
+      lastResult,
+      source: "local-storage",
+    };
   }
 
   function setMode(text, isBad) {
@@ -26,16 +71,16 @@
     const weakTopics = sorted
       .slice(0, 2)
       .map((x) => x.topic)
-      .join("、") || "基础模块";
+      .join(" / ") || t("weakTopicFallback");
 
     const advices = [
-      `7天短期：优先复习 ${weakTopics}，每天20分钟概念回顾 + 4道定向训练。`,
-      "30天长期：每周一次限时小测，建立错因标签（概念/计算/审题）并复盘。",
-      "策略建议：先做基础题保证正确率，再逐步增加冲刺题比例至40%。",
+      t("adviceShortTerm", { topics: weakTopics }),
+      t("adviceLongTerm"),
+      t("adviceStrategy"),
     ];
 
     if (lastResult && typeof lastResult.accuracy === "number" && lastResult.accuracy < 60) {
-      advices.unshift("本周建议先降难度到“基础/中等”，先把正确率稳定到70%以上，再冲刺高难题。");
+      advices.unshift(t("adviceLowAccuracy"));
     }
 
     return {
@@ -48,11 +93,16 @@
     const bars = byId("bars");
     bars.innerHTML = "";
 
+    if (!rows.length) {
+      bars.innerHTML = `<p class='tip'>${t("noAnalysisData")}</p>`;
+      return;
+    }
+
     rows.forEach((row) => {
       const wrongRate = Number(row.wrongRate || 0);
       const block = document.createElement("div");
       block.innerHTML = `
-        <div>${row.topic}（错因：${row.mistake || "concept"}）</div>
+        <div>${row.topic} (${row.mistake || "concept"})</div>
         <div class="bar">
           <span style="width:${wrongRate.toFixed(1)}%"></span>
           <em>${wrongRate.toFixed(1)}%</em>
@@ -65,6 +115,12 @@
   function renderAdvices(lines) {
     const advice = byId("advice");
     advice.innerHTML = "";
+    if (!(lines || []).length) {
+      const li = document.createElement("li");
+      li.textContent = t("noAdviceYet");
+      advice.appendChild(li);
+      return;
+    }
     (lines || []).forEach((line) => {
       const li = document.createElement("li");
       li.textContent = line;
@@ -76,30 +132,41 @@
     if (rate == null) return;
     const summary = document.createElement("p");
     summary.className = "tip";
-    summary.textContent = `提示依赖率：${Number(rate).toFixed(1)}%（使用过提示的题目占比）`;
+    summary.textContent = t("hintUsageRate", { rate: Number(rate).toFixed(1) });
     byId("analysisMode").after(summary);
   }
 
   const raw = localStorage.getItem("alevel.selection");
   const selection = raw ? JSON.parse(raw) : null;
   byId("selectionSummary").textContent = selection
-    ? `当前路径：${selection.grade} / ${selection.board} / ${selection.subject} / ${selection.paper}`
-    : "未读取到路径配置（可返回首页重新选择）";
-
-  const localLogRaw = localStorage.getItem("alevel.wrongLog");
-  const logs = localLogRaw ? JSON.parse(localLogRaw) : window.SAMPLE_WRONG_LOG;
-
-  const lastResultRaw = localStorage.getItem("alevel.lastResult");
-  const lastResult = lastResultRaw ? JSON.parse(lastResultRaw) : null;
-
-  if (lastResult) {
-    const brief = document.createElement("p");
-    brief.className = "tip";
-    brief.innerHTML = `最近一次练习：${lastResult.correct}/${lastResult.total}，正确率 ${lastResult.accuracy.toFixed(1)}%`;
-    byId("selectionSummary").after(brief);
-  }
+    ? t("selectionSummary", selection)
+    : t("selectionMissing");
 
   (async () => {
+    const source = await loadAnalysisSource();
+    const logs = source.logs || [];
+    const lastResult = source.lastResult || null;
+
+    const oldBrief = document.getElementById("latestAttemptBrief");
+    if (oldBrief) oldBrief.remove();
+    if (lastResult) {
+      const brief = document.createElement("p");
+      brief.id = "latestAttemptBrief";
+      brief.className = "tip";
+      brief.innerHTML = t("latestAttempt", {
+        correct: lastResult.correct,
+        total: lastResult.total,
+        accuracy: lastResult.accuracy.toFixed(1),
+      });
+      byId("selectionSummary").after(brief);
+    }
+
+    if (!logs.length) {
+      renderBars([]);
+      renderAdvices([]);
+      setMode(t("noPracticeHistory"), true);
+      return;
+    }
     try {
       if (!window.ALevelApi) {
         throw new Error("API client not loaded");
@@ -111,7 +178,7 @@
       renderBars(analysis.bars || []);
       renderAdvices(analysis.advices || []);
       renderHintRate(analysis.hintRate);
-      setMode("分析结果来自后端 API。", false);
+      setMode(source.source === "backend-practices" ? t("analysisFromBackend") : t("analysisFallback"), false);
     } catch (_err) {
       const localAnalysis = buildLocalAnalysis(logs, lastResult);
       renderBars(localAnalysis.bars || []);
@@ -120,10 +187,11 @@
         const rate = ((lastResult.hintUsedQuestions || 0) / lastResult.total) * 100;
         renderHintRate(rate);
       }
-      setMode("后端分析不可用，当前展示本地规则分析。", true);
+      setMode(t("analysisFallback"), true);
     }
   })();
 
+  applyPage();
   byId("backHome").addEventListener("click", () => {
     location.href = "../index.html";
   });

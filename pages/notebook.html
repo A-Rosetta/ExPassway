@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="notebookPageTitle">错题本</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card hero">
+      <h1 data-i18n="notebookHeroTitle">历史错题本</h1>
+      <p class="tip" data-i18n="notebookHeroSubtitle">记录历次练习中的错题，支持按科目筛选与错题次数追踪。</p>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="notebookStatsTitle">错题统计</h2>
+      <div id="notebookStats"></div>
+      <div class="actions">
+        <label><span data-i18n="subjectFilterLabel">科目筛选</span>
+          <select id="subjectFilter"></select>
+        </label>
+        <label><span data-i18n="sortByLabel">排序</span>
+          <select id="sortBy">
+            <option value="time_desc" data-i18n="sortLatest">按最近时间</option>
+            <option value="count_desc" data-i18n="sortWrongCount">按错误次数</option>
+          </select>
+        </label>
+        <label>
+          <input id="hideMastered" type="checkbox" />
+          <span data-i18n="hideMasteredLabel">隐藏已掌握</span>
+        </label>
+        <button id="clearNotebook" class="btn-secondary" data-i18n="clearNotebook">重置当前用户记录</button>
+      </div>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="notebookRecordsTitle">错题记录</h2>
+      <div id="notebookList"></div>
+      <div class="actions">
+        <button id="backHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
+        <button id="goGenerate" class="btn-primary" data-i18n="startPractice">去刷题</button>
+      </div>
+    </section>
+  </main>
+  <script src="../scripts/i18n.js"></script>
+  <script src="../scripts/notebook.js"></script>
+</body>
+</html>
