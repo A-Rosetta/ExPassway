@@ -1,95 +1,105 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="homePageTitle">A-Level 智能练习</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260718-2" />
+  <link rel="stylesheet" href="assets/styles.css?v=20260719-2" />
 </head>
-<body>
-  <div class="bg-shape"></div>
-  <main class="container">
-    <section class="card hero">
-      <h1 id="heroTitle" data-i18n="homeHeroTitle">A-Level 智能练习</h1>
-      <p id="heroSubtitle" data-i18n="homeHeroSubtitle">练习已发布的 CIE IGCSE 选择题真题，并查看错题诊断。</p>
+<body class="home-dashboard">
+  <header class="home-topbar">
+    <div class="home-topbar__inner">
+      <a class="home-brand" href="index.html" aria-label="A-Level Smart Practice">
+        <span class="home-brand__mark" aria-hidden="true">A</span>
+        <span data-i18n="homeBrand">A-Level 智能练习</span>
+      </a>
+      <nav class="home-nav-actions" aria-label="主页功能" data-i18n-aria-label="homeNavLabel">
+        <button id="goCommunity" class="home-nav-button" type="button" data-i18n="homeForum">论坛</button>
+        <button id="openProfile" class="home-nav-button" type="button" data-i18n="homeProfile">个人资料</button>
+        <button id="logoutHome" class="home-nav-button home-nav-button--logout" type="button" data-i18n="homeLogout">退出登录</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="home-main">
+    <section class="home-course-section" aria-labelledby="mySubjectsTitle">
+      <div class="home-section-heading">
+        <div>
+          <p class="home-eyebrow" data-i18n="homeCourseEyebrow">CIE IGCSE 选择题</p>
+          <h1 id="mySubjectsTitle" data-i18n="homeMySubjects">我的学科</h1>
+        </div>
+        <button id="goAdmin" class="btn-secondary home-admin-button" type="button" data-i18n="goAdmin" hidden>查看后台数据面板</button>
+      </div>
+
+      <div id="subjectCourses" class="course-grid" aria-live="polite" aria-busy="true">
+        <div class="course-card course-card--loading" aria-hidden="true"></div>
+        <div class="course-card course-card--loading" aria-hidden="true"></div>
+        <div class="course-card course-card--loading" aria-hidden="true"></div>
+        <div class="course-card course-card--loading" aria-hidden="true"></div>
+      </div>
+      <p id="backendStatus" class="home-status" role="status"></p>
     </section>
 
-    <section class="card form-card">
-      <h2 id="studyPathTitle" data-i18n="studyPathTitle">学习路径配置</h2>
-      <div class="grid-2">
-        <label><span id="gradeLabel" data-i18n="gradeLabel">年级</span>
-          <select id="grade"></select>
-        </label>
-        <label><span id="boardLabel" data-i18n="boardLabel">考试局</span>
-          <select id="board"></select>
-        </label>
-        <label><span id="subjectLabel" data-i18n="subjectLabel">科目</span>
-          <select id="subject"></select>
-        </label>
-        <label><span id="paperLabel" data-i18n="paperLabel">模块/卷别</span>
-          <select id="paper"></select>
-        </label>
+    <section class="home-overview-section" aria-labelledby="notebookTitle">
+      <div class="home-section-heading home-section-heading--compact">
+        <div>
+          <p class="home-eyebrow" data-i18n="learningOverview">学习概览</p>
+          <h2 id="notebookTitle" data-i18n="notebookTitle">错题本概览</h2>
+        </div>
       </div>
-      <div class="actions">
-        <button id="goGenerate" class="btn-primary" data-i18n="goGenerate">生成模拟试卷练习题</button>
-        <button id="goCommunity" class="btn-secondary" data-i18n="goCommunity">学习讨论</button>
-        <button id="goAdmin" class="btn-secondary" data-i18n="goAdmin" hidden>查看后台数据面板</button>
-      </div>
-      <p id="backendStatus" class="tip"></p>
-      <p id="homeNotice" class="tip" data-i18n="homeNotice">科目和试卷选项会根据已发布的 MCQ 自动更新。</p>
-    </section>
-
-    <section class="card panel">
-      <h2 id="notebookTitle" data-i18n="notebookTitle">错题本概览</h2>
       <div id="notebookOverview"></div>
-    </section>
-
-    <section class="card panel">
-      <details class="account-collapsible">
-        <summary id="accountSummary" data-i18n="accountSummary">个人资料与设置</summary>
-        <p id="accountStatus" class="tip"></p>
-        <div class="actions">
-          <button id="goLogin" class="btn-secondary" data-i18n="goLogin">去登录页面</button>
-        </div>
-        <div class="grid-2">
-          <label><span id="displayNameLabel" data-i18n="displayNameLabel">昵称</span>
-            <input id="newDisplayName" type="text" data-i18n-placeholder="displayNamePlaceholder" placeholder="例如 Alice Zhang" />
-          </label>
-          <label><span id="profileGradeLabel" data-i18n="profileGradeLabel">年级</span>
-            <input id="newGrade" type="text" data-i18n-placeholder="gradePlaceholder" placeholder="例如 A2" />
-          </label>
-          <label><span id="targetScoreLabel" data-i18n="targetScoreLabel">目标分</span>
-            <input id="newTargetScore" type="number" min="0" max="100" data-i18n-placeholder="targetScorePlaceholder" placeholder="例如 90" />
-          </label>
-          <label><span id="languageLabel" data-i18n="languageLabel">语言</span>
-            <select id="preferredLanguage">
-              <option value="zh-CN">中文</option>
-              <option value="en">English</option>
-            </select>
-          </label>
-        </div>
-        <div class="actions">
-          <button id="updateProfileBtn" class="btn-primary" data-i18n="updateProfileBtn">保存资料修改</button>
-        </div>
-
-        <div class="grid-2" style="margin-top: 0.8rem;">
-          <label><span id="oldPasswordLabel" data-i18n="oldPasswordLabel">旧密码</span>
-            <input id="oldPassword" type="password" data-i18n-placeholder="oldPasswordPlaceholder" placeholder="请输入旧密码" />
-          </label>
-          <label><span id="newPasswordLabel" data-i18n="newPasswordLabel">新密码</span>
-            <input id="newPassword" type="password" data-i18n-placeholder="newPasswordPlaceholder" placeholder="至少 6 位" />
-          </label>
-        </div>
-        <div class="actions">
-          <button id="changePasswordBtn" class="btn-primary" data-i18n="changePasswordBtn">修改密码</button>
-        </div>
-      </details>
     </section>
   </main>
 
-  <script src="scripts/i18n.js?v=20260719-1"></script>
+  <dialog id="profileDialog" class="profile-dialog" aria-labelledby="profileDialogTitle">
+    <div class="profile-dialog__shell">
+      <div class="profile-dialog__header">
+        <div>
+          <h2 id="profileDialogTitle" data-i18n="profileDialogTitle">个人资料与设置</h2>
+        </div>
+        <button id="closeProfile" class="profile-dialog__close" type="button" aria-label="关闭个人资料" data-i18n-aria-label="closeProfile">×</button>
+      </div>
+
+      <p id="accountStatus" class="tip"></p>
+      <div class="grid-2">
+        <label><span data-i18n="displayNameLabel">昵称</span>
+          <input id="newDisplayName" type="text" data-i18n-placeholder="displayNamePlaceholder" placeholder="例如 Alice Zhang" />
+        </label>
+        <label><span data-i18n="profileGradeLabel">年级</span>
+          <input id="newGrade" type="text" data-i18n-placeholder="gradePlaceholder" placeholder="例如 A2" />
+        </label>
+        <label><span data-i18n="targetScoreLabel">目标分</span>
+          <input id="newTargetScore" type="number" min="0" max="100" data-i18n-placeholder="targetScorePlaceholder" placeholder="例如 90" />
+        </label>
+        <label><span data-i18n="languageLabel">语言</span>
+          <select id="preferredLanguage">
+            <option value="zh-CN">中文</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+      </div>
+      <div class="actions">
+        <button id="updateProfileBtn" class="btn-primary" type="button" data-i18n="updateProfileBtn">保存资料修改</button>
+      </div>
+
+      <div class="profile-dialog__divider"></div>
+      <div class="grid-2">
+        <label><span data-i18n="oldPasswordLabel">旧密码</span>
+          <input id="oldPassword" type="password" data-i18n-placeholder="oldPasswordPlaceholder" placeholder="请输入旧密码" />
+        </label>
+        <label><span data-i18n="newPasswordLabel">新密码</span>
+          <input id="newPassword" type="password" data-i18n-placeholder="newPasswordPlaceholder" placeholder="至少 6 位" />
+        </label>
+      </div>
+      <div class="actions">
+        <button id="changePasswordBtn" class="btn-primary" type="button" data-i18n="changePasswordBtn">修改密码</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="scripts/i18n.js?v=20260719-2"></script>
   <script src="scripts/data.js?v=20260718-1"></script>
   <script src="scripts/api.js?v=20260718-2"></script>
-  <script src="scripts/app.js?v=20260718-2"></script>
+  <script src="scripts/app.js?v=20260719-2"></script>
 </body>
 </html>

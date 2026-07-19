@@ -3,10 +3,12 @@
   const USER_ID_KEY = "alevel.userId";
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const NOTEBOOK_KEY = "alevel.wrongNotebook";
+  const SELECTION_KEY = "alevel.selection";
   const { getLanguage, setLanguage, normalizeLanguage, t, applyPage } = window.ALevelI18n;
   let currentLanguage = getLanguage();
   let backendStatusState = null;
   let accountStatusState = null;
+  let catalogSubjects = [];
 
   function getEl(id) {
     return document.getElementById(id);
@@ -20,21 +22,11 @@
     return `${base}:${currentUserScope()}`;
   }
 
-  function fillSelect(select, items) {
-    select.innerHTML = "";
-    items.forEach((item) => {
-      const opt = document.createElement("option");
-      opt.value = item;
-      opt.textContent = item;
-      select.appendChild(opt);
-    });
-  }
-
   function applyStatus(elementId, state) {
     const statusEl = getEl(elementId);
     if (!statusEl || !state) return;
     statusEl.textContent = t(state.key, state.vars);
-    statusEl.className = state.isBad ? "tip bad" : "tip good";
+    statusEl.className = state.isBad ? "home-status bad" : "home-status good";
   }
 
   function setBackendStatus(key, isBad, vars) {
@@ -44,7 +36,10 @@
 
   function setAccountStatus(key, isBad, vars) {
     accountStatusState = { key, isBad, vars };
-    applyStatus("accountStatus", accountStatusState);
+    const statusEl = getEl("accountStatus");
+    if (!statusEl) return;
+    statusEl.textContent = t(key, vars);
+    statusEl.className = isBad ? "tip bad" : "tip good";
   }
 
   function applyLanguage(language) {
@@ -52,13 +47,14 @@
     applyPage();
 
     const languageSelect = getEl("preferredLanguage");
-    if (languageSelect) {
-      languageSelect.value = currentLanguage;
-    }
+    if (languageSelect) languageSelect.value = currentLanguage;
 
+    renderSubjectCourses(catalogSubjects);
     renderNotebookOverview();
     applyStatus("backendStatus", backendStatusState);
-    applyStatus("accountStatus", accountStatusState);
+    if (accountStatusState) {
+      setAccountStatus(accountStatusState.key, accountStatusState.isBad, accountStatusState.vars);
+    }
   }
 
   function readAuthToken() {
@@ -79,7 +75,7 @@
       const raw = localStorage.getItem(scopedKey(NOTEBOOK_KEY));
       const rows = raw ? JSON.parse(raw) : [];
       return Array.isArray(rows) ? rows : [];
-    } catch (_e) {
+    } catch (_err) {
       return [];
     }
   }
@@ -101,8 +97,8 @@
     if (!box) return;
     const rows = (Array.isArray(rowsInput) ? rowsInput : readNotebookRows())
       .sort((a, b) => new Date(b.lastWrongAt || 0) - new Date(a.lastWrongAt || 0));
-    const totalWrongCount = rows.reduce((sum, r) => sum + Number(r.wrongCount || 0), 0);
-    const masteredCount = rows.filter((r) => r.mastered).length;
+    const totalWrongCount = rows.reduce((sum, row) => sum + Number(row.wrongCount || 0), 0);
+    const masteredCount = rows.filter((row) => row.mastered).length;
     const latest = rows[0];
     const time = latest?.lastWrongAt
       ? new Date(latest.lastWrongAt).toLocaleString(currentLanguage === "en" ? "en-US" : "zh-CN")
@@ -126,24 +122,116 @@
     `;
   }
 
-  async function loadCurriculumData() {
-    if (!window.ALevelApi) {
-      setBackendStatus("apiMissing", true);
-      return window.CURRICULUM_DATA;
+  function subjectTheme(code) {
+    return {
+      "0610": { className: "biology", emblem: "DNA" },
+      "0620": { className: "chemistry", emblem: "H₂O" },
+      "0654": { className: "sciences", emblem: "SCI" },
+      "0455": { className: "economics", emblem: "ECO" },
+    }[code] || { className: "default", emblem: code || "MCQ" };
+  }
+
+  function selectSubject(subject) {
+    localStorage.setItem(SELECTION_KEY, JSON.stringify({
+      grade: subject.qualification,
+      board: subject.board,
+      subject: `${subject.qualification} ${subject.name}`,
+      subjectCode: subject.code,
+      paper: "MCQ",
+    }));
+    location.href = "pages/generate.html";
+  }
+
+  function renderSubjectCourses(subjects) {
+    const grid = getEl("subjectCourses");
+    if (!grid) return;
+    grid.replaceChildren();
+    grid.setAttribute("aria-busy", "false");
+
+    if (!subjects.length) {
+      const empty = document.createElement("p");
+      empty.className = "course-grid__empty";
+      empty.textContent = t("noPublishedSubjects");
+      grid.appendChild(empty);
+      return;
     }
 
+    subjects.forEach((subject) => {
+      const theme = subjectTheme(subject.code);
+      const subjectName = currentLanguage === "en"
+        ? subject.name
+        : (subject.nameZh || subject.name);
+      const course = document.createElement("button");
+      course.type = "button";
+      course.className = `course-card course-card--${theme.className}`;
+      course.setAttribute("aria-label", t("openSubjectAria", { subject: subjectName }));
+
+      const book = document.createElement("span");
+      book.className = "subject-book";
+      book.setAttribute("aria-hidden", "true");
+      book.innerHTML = `
+        <span class="subject-book__pages"></span>
+        <span class="subject-book__cover">
+          <span class="subject-book__spine"></span>
+          <span class="subject-book__level"></span>
+          <span class="subject-book__emblem"></span>
+          <span class="subject-book__name"></span>
+          <span class="subject-book__code"></span>
+        </span>
+      `;
+      book.querySelector(".subject-book__level").textContent = subject.qualification;
+      book.querySelector(".subject-book__emblem").textContent = theme.emblem;
+      book.querySelector(".subject-book__name").textContent = subjectName;
+      book.querySelector(".subject-book__code").textContent = `CIE · ${subject.code}`;
+
+      const details = document.createElement("span");
+      details.className = "course-card__details";
+      const title = document.createElement("strong");
+      title.className = "course-card__title";
+      title.textContent = subjectName;
+      const qualification = document.createElement("span");
+      qualification.className = "course-card__qualification";
+      qualification.textContent = `${subject.qualification} · ${subject.board} · ${subject.code}`;
+      const stats = document.createElement("span");
+      stats.className = "course-card__stats";
+      stats.textContent = t("subjectCourseStats", {
+        papers: Number(subject.paperCount || 0),
+        questions: Number(subject.questionCount || 0),
+      });
+      const action = document.createElement("span");
+      action.className = "course-card__action";
+      action.textContent = t("openSubjectPicker");
+      action.setAttribute("aria-hidden", "true");
+      details.append(title, qualification, stats, action);
+      course.append(book, details);
+      course.addEventListener("click", () => selectSubject(subject));
+      grid.appendChild(course);
+    });
+  }
+
+  async function loadSubjectCourses() {
+    if (!window.ALevelApi?.getCatalogSubjects) {
+      setBackendStatus("apiMissing", true);
+      return [];
+    }
     try {
-      const [curriculum, storage] = await Promise.all([
-        window.ALevelApi.getCurriculum(),
+      const [subjects, storage] = await Promise.all([
+        window.ALevelApi.getCatalogSubjects(),
         window.ALevelApi.getStorageMode().catch(() => null),
       ]);
       const modeText = storage?.mode ? t("storageMode", { mode: storage.mode }) : "";
       setBackendStatus("backendConnected", false, { modeText });
-      return curriculum;
+      return Array.isArray(subjects) ? subjects.filter((subject) => subject.active !== false) : [];
     } catch (_err) {
       setBackendStatus("backendUnavailable", true);
-      return window.CURRICULUM_DATA;
+      return [];
     }
+  }
+
+  function clearSession() {
+    localStorage.removeItem(USER_PROFILE_KEY);
+    localStorage.removeItem(USER_ID_KEY);
+    localStorage.removeItem(AUTH_TOKEN_KEY);
   }
 
   async function buildHome() {
@@ -158,9 +246,7 @@
       currentUser = await window.ALevelApi.getCurrentUser(token);
     } catch (err) {
       if (err?.status === 401 || err?.status === 403) {
-        localStorage.removeItem(USER_PROFILE_KEY);
-        localStorage.removeItem(USER_ID_KEY);
-        localStorage.removeItem(AUTH_TOKEN_KEY);
+        clearSession();
         location.href = "pages/login.html";
         return;
       }
@@ -171,85 +257,34 @@
     applyLanguage(currentUser?.language || getLanguage());
 
     const goAdmin = getEl("goAdmin");
-    if (goAdmin) goAdmin.hidden = currentUser?.role !== "admin";
-
-    const gradeEl = getEl("grade");
-    if (!gradeEl) return;
-
-    const boardEl = getEl("board");
-    const subjectEl = getEl("subject");
-    const paperEl = getEl("paper");
-    const preferredLanguageEl = getEl("preferredLanguage");
-
-    const curriculum = await loadCurriculumData();
-    const grades = Array.isArray(curriculum?.grades) && curriculum.grades.length
-      ? curriculum.grades
-      : ["IGCSE"];
-    const boards = curriculum?.boards && typeof curriculum.boards === "object"
-      ? Object.keys(curriculum.boards)
-      : ["CIE"];
-
-    fillSelect(gradeEl, grades);
-    fillSelect(boardEl, boards);
-
-    function refreshSubjects() {
-      const subjects = Object.keys(curriculum?.boards?.[boardEl.value] || {});
-      fillSelect(subjectEl, subjects.length ? subjects : ["IGCSE Chemistry"]);
-      refreshPapers();
-    }
-
-    function refreshPapers() {
-      const papers = curriculum?.boards?.[boardEl.value]?.[subjectEl.value];
-      fillSelect(paperEl, Array.isArray(papers) && papers.length ? papers : ["MCQ"]);
-    }
-
-    boardEl.addEventListener("change", refreshSubjects);
-    subjectEl.addEventListener("change", refreshPapers);
-    refreshSubjects();
-
-    const packSelection = () => {
-      const payload = {
-        grade: gradeEl.value,
-        board: boardEl.value,
-        subject: subjectEl.value,
-        subjectCode: curriculum?.subjectCodes?.[subjectEl.value] || "",
-        paper: paperEl.value,
-      };
-      localStorage.setItem("alevel.selection", JSON.stringify(payload));
-      return payload;
-    };
-
-    getEl("goGenerate").addEventListener("click", () => {
-      packSelection();
-      location.href = "pages/generate.html";
-    });
-
-    const goCommunity = getEl("goCommunity");
-    if (goCommunity) {
-      goCommunity.addEventListener("click", () => {
-        packSelection();
-        location.href = "pages/community.html";
-      });
-    }
-
     if (goAdmin) {
+      goAdmin.hidden = currentUser?.role !== "admin";
       goAdmin.addEventListener("click", () => {
         location.href = "pages/admin.html";
       });
     }
 
-    const goLogin = getEl("goLogin");
-    if (goLogin) {
-      goLogin.addEventListener("click", () => {
-        location.href = "pages/login.html";
-      });
-    }
+    getEl("goCommunity")?.addEventListener("click", () => {
+      location.href = "pages/community.html";
+    });
+    getEl("logoutHome")?.addEventListener("click", () => {
+      clearSession();
+      location.href = "pages/login.html";
+    });
+
+    const profileDialog = getEl("profileDialog");
+    getEl("openProfile")?.addEventListener("click", () => profileDialog?.showModal());
+    getEl("closeProfile")?.addEventListener("click", () => profileDialog?.close());
+    profileDialog?.addEventListener("click", (event) => {
+      if (event.target === profileDialog) profileDialog.close();
+    });
+
+    const preferredLanguageEl = getEl("preferredLanguage");
 
     function fillAccountForm(user) {
       getEl("newDisplayName").value = user?.displayName || "";
       getEl("newGrade").value = user?.grade || "";
-      getEl("newTargetScore").value =
-        user?.targetScore == null ? "" : String(user.targetScore);
+      getEl("newTargetScore").value = user?.targetScore == null ? "" : String(user.targetScore);
       getEl("oldPassword").value = "";
       getEl("newPassword").value = "";
       if (preferredLanguageEl) {
@@ -257,93 +292,90 @@
       }
     }
 
-    if (preferredLanguageEl) {
-      preferredLanguageEl.addEventListener("change", () => {
-        applyLanguage(preferredLanguageEl.value);
-      });
-    }
+    preferredLanguageEl?.addEventListener("change", () => {
+      applyLanguage(preferredLanguageEl.value);
+    });
 
     fillAccountForm(currentUser);
-    const notebookRows = await syncNotebookRowsFromApi();
-    renderNotebookOverview(notebookRows);
     setAccountStatus("signedInAs", false, {
       name: currentUser?.displayName || t("unknownUser"),
     });
 
+    catalogSubjects = await loadSubjectCourses();
+    renderSubjectCourses(catalogSubjects);
+
+    const notebookRows = await syncNotebookRowsFromApi();
+    renderNotebookOverview(notebookRows);
+
     const updateProfileBtn = getEl("updateProfileBtn");
-    if (updateProfileBtn) {
-      updateProfileBtn.addEventListener("click", async () => {
-        const displayName = getEl("newDisplayName").value.trim();
-        const grade = getEl("newGrade").value.trim();
-        const targetScoreRaw = getEl("newTargetScore").value.trim();
-        const targetScore = targetScoreRaw === "" ? null : Number.parseInt(targetScoreRaw, 10);
-        const language = normalizeLanguage(preferredLanguageEl?.value);
+    updateProfileBtn?.addEventListener("click", async () => {
+      const displayName = getEl("newDisplayName").value.trim();
+      const grade = getEl("newGrade").value.trim();
+      const targetScoreRaw = getEl("newTargetScore").value.trim();
+      const targetScore = targetScoreRaw === "" ? null : Number.parseInt(targetScoreRaw, 10);
+      const language = normalizeLanguage(preferredLanguageEl?.value);
 
-        if (!displayName) {
-          setAccountStatus("displayNameRequired", true);
-          return;
-        }
+      if (!displayName) {
+        setAccountStatus("displayNameRequired", true);
+        return;
+      }
 
-        updateProfileBtn.disabled = true;
-        const oldText = updateProfileBtn.textContent;
-        updateProfileBtn.textContent = t("saving");
-        try {
-          const user = await window.ALevelApi.updateCurrentUser(token, {
-            displayName,
-            grade: grade || null,
-            targetScore: Number.isNaN(targetScore) ? null : targetScore,
-            language,
-          });
-          localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(user));
-          applyLanguage(user.language);
-          fillAccountForm(user);
-          setAccountStatus("profileUpdated", false);
-        } catch (err) {
-          setAccountStatus("profileUpdateFailed", true, {
-            message: err.message || t("retryLater"),
-          });
-        } finally {
-          updateProfileBtn.disabled = false;
-          updateProfileBtn.textContent = oldText;
-        }
-      });
-    }
+      updateProfileBtn.disabled = true;
+      const oldText = updateProfileBtn.textContent;
+      updateProfileBtn.textContent = t("saving");
+      try {
+        const user = await window.ALevelApi.updateCurrentUser(token, {
+          displayName,
+          grade: grade || null,
+          targetScore: Number.isNaN(targetScore) ? null : targetScore,
+          language,
+        });
+        localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(user));
+        applyLanguage(user.language);
+        fillAccountForm(user);
+        setAccountStatus("profileUpdated", false);
+      } catch (err) {
+        setAccountStatus("profileUpdateFailed", true, {
+          message: err.message || t("retryLater"),
+        });
+      } finally {
+        updateProfileBtn.disabled = false;
+        updateProfileBtn.textContent = oldText;
+      }
+    });
 
     const changePasswordBtn = getEl("changePasswordBtn");
-    if (changePasswordBtn) {
-      changePasswordBtn.addEventListener("click", async () => {
-        const oldPassword = getEl("oldPassword").value.trim();
-        const newPassword = getEl("newPassword").value.trim();
-        if (!oldPassword || !newPassword) {
-          setAccountStatus("passwordFieldsRequired", true);
-          return;
-        }
-        if (newPassword.length < 6) {
-          setAccountStatus("passwordTooShort", true);
-          return;
-        }
+    changePasswordBtn?.addEventListener("click", async () => {
+      const oldPassword = getEl("oldPassword").value.trim();
+      const newPassword = getEl("newPassword").value.trim();
+      if (!oldPassword || !newPassword) {
+        setAccountStatus("passwordFieldsRequired", true);
+        return;
+      }
+      if (newPassword.length < 6) {
+        setAccountStatus("passwordTooShort", true);
+        return;
+      }
 
-        changePasswordBtn.disabled = true;
-        const oldText = changePasswordBtn.textContent;
-        changePasswordBtn.textContent = t("updating");
-        try {
-          await window.ALevelApi.changePassword(token, { oldPassword, newPassword });
-          getEl("oldPassword").value = "";
-          getEl("newPassword").value = "";
-          setAccountStatus("passwordChanged", false);
-        } catch (err) {
-          setAccountStatus("passwordChangeFailed", true, {
-            message: err.message || t("retryLater"),
-          });
-        } finally {
-          changePasswordBtn.disabled = false;
-          changePasswordBtn.textContent = oldText;
-        }
-      });
-    }
+      changePasswordBtn.disabled = true;
+      const oldText = changePasswordBtn.textContent;
+      changePasswordBtn.textContent = t("updating");
+      try {
+        await window.ALevelApi.changePassword(token, { oldPassword, newPassword });
+        getEl("oldPassword").value = "";
+        getEl("newPassword").value = "";
+        setAccountStatus("passwordChanged", false);
+      } catch (err) {
+        setAccountStatus("passwordChangeFailed", true, {
+          message: err.message || t("retryLater"),
+        });
+      } finally {
+        changePasswordBtn.disabled = false;
+        changePasswordBtn.textContent = oldText;
+      }
+    });
   }
 
-  window.ALevelApp = { fillSelect };
   buildHome().catch(() => {
     applyLanguage(getLanguage());
     setBackendStatus("initFailed", true);
