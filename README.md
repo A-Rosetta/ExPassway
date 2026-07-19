@@ -16,6 +16,41 @@ A lightweight full-stack scaffold for international high school students studyin
    - Actionable study suggestions
 5. Mini-program prompting templates included
 
+## Current Past-Paper Subjects
+
+- `CIE IGCSE Chemistry 0620`, Paper 2 MCQ: 6 papers / 240 questions
+- `CIE IGCSE Co-ordinated Sciences 0654`, Paper 2 MCQ: 21 papers / 839 valid questions
+
+Question images are stored by subject under `assets/exam-question-images/`. The official
+discounted question 17 in `0654_s23_qp_22` is retained in the source audit data but is not
+offered for practice or scoring.
+
+The homepage, paper picker, practice page, and discussion filters now read their subject and
+paper lists from PostgreSQL. New published subjects therefore appear without editing frontend
+catalogue arrays.
+
+## Import More CIE Paper 2 PDFs
+
+1. Sign in through the normal login page with an administrator account, then open the admin
+   dashboard.
+2. If the four-digit subject code is new, register its English name, Chinese name, and lowercase
+   asset key first.
+3. Select the subject and upload one or more complete Question Paper / Mark Scheme pairs.
+4. Run validation and review the report. Publish only after the job status is `validated`.
+
+Accepted official filenames use this exact pattern:
+
+```text
+0654_s25_qp_22.pdf
+0654_s25_ms_22.pdf
+```
+
+The importer currently supports CIE IGCSE Paper 2 MCQ only. Each PDF is limited to 12 MB. It
+requires 40 question anchors and a Mark Scheme entry for every question; official `Question
+Discounted` entries are excluded, while a missing or conflicting answer rejects that paper.
+Re-importing the same paper reuses existing question IDs, so practice history, stars, wrong-answer
+records, and discussions remain linked.
+
 ## Run Frontend
 
 Open `index.html` directly in browser, or use a static server.
@@ -38,6 +73,7 @@ cd backend
 cp .env.example .env
 # edit DATABASE_URL in .env
 npm run db:schema
+npm run catalog:migrate
 npm run dev
 ```
 
@@ -46,13 +82,13 @@ If `DATABASE_URL` is configured, generated papers and submitted practice records
 ## Frontend API Base URL
 
 Default API base is:
-1. `http(s)://<current-host>:3001` when opened over HTTP
-2. `http://localhost:3001` when opened via file protocol
+1. Same-origin `/api/*` when served from the deployed site
+2. `http://localhost:3002` for the IDE static preview on port `8080` or when opened via the file protocol
 
 You can override it from browser console:
 
 ```js
-localStorage.setItem("alevel.apiBase", "http://your-server-ip:3001");
+localStorage.setItem("alevel.apiBase", "http://your-server-ip:3002");
 location.reload();
 ```
 
@@ -70,6 +106,10 @@ location.reload();
 10. `GET /api/users/:userId`
 11. `GET /api/users/:userId/practices`
 12. `GET /api/admin/records`
+13. `GET /api/catalog/subjects`
+14. `GET /api/catalog/subjects/:subjectCode/papers`
+15. `GET /api/catalog/papers/:paperSlug/questions`
+16. `POST /api/admin/imports` and `/api/admin/imports/:jobId/*` (administrator only)
 
 ### Example: Generate Paper
 

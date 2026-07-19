@@ -1,0 +1,758 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2023/summer/0654_s23_qp_21.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2023/summer/0654_s23_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.66,
+      "bottom": 181.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q01.png",
+      "rawText": "What is meant by respiration? A protein synthesis B sweating to lose heat C the function of lungs D the release of energy",
+      "parseStatus": "ok",
+      "stem": "What is meant by respiration?",
+      "options": {
+        "A": "protein synthesis",
+        "B": "sweating to lose heat",
+        "C": "the function of lungs",
+        "D": "the release of energy"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 183.2,
+      "bottom": 358.32,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q02.png",
+      "rawText": "What is meant by osmosis? A the net movement of water molecules from a region of higher water potential to a region of lower water potential through a cell wall B the net movement of water molecules from a region of higher water potential to a region of lower water potential through a partially permeable membrane C the net movement of water molecules from a region of lower water potential to a region of higher water potential through a cell wall D the net movement of water molecules from a region of lower water potential to a region of higher water potential through a partially permeable membrane",
+      "parseStatus": "ok",
+      "stem": "What is meant by osmosis?",
+      "options": {
+        "A": "the net movement of water molecules from a region of higher water potential to a region of lower water potential through a cell wall",
+        "B": "the net movement of water molecules from a region of higher water potential to a region of lower water potential through a partially permeable membrane",
+        "C": "the net movement of water molecules from a region of lower water potential to a region of higher water potential through a cell wall",
+        "D": "the net movement of water molecules from a region of lower water potential to a region of higher water potential through a partially permeable membrane"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 360.32,
+      "bottom": 510.12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q03.png",
+      "rawText": "Linoleic acid is a fatty acid. Which larger molecule may contain linoleic acid? A glycogen B oil C protein D starch",
+      "parseStatus": "ok",
+      "stem": "Linoleic acid is a fatty acid. Which larger molecule may contain linoleic acid?",
+      "options": {
+        "A": "glycogen",
+        "B": "oil",
+        "C": "protein",
+        "D": "starch"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "top": 512.12,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q04.png",
+      "rawText": "Which row about enzymes is correct? each enzyme catalyses many different reactions the active site is the part of the enzyme where the substrate binds enzymes are complex carbohydrates enzymes are denatured at their optimum temperature enzymes can work outside of cells A \u0016 \u0016 \u001a \u001a \u001a B \u0016 \u001a \u0016 \u001a \u0016 C \u001a \u0016 \u001a \u001a \u0016 D \u001a \u0016 \u0016 \u0016 \u001a key \u0016 = true \u001a = false",
+      "parseStatus": "ok",
+      "stem": "Which row about enzymes is correct? each enzyme catalyses many different reactions the active site is the part of the enzyme where the substrate binds enzymes are complex carbohydrates enzymes are denatured at their optimum temperature enzymes can work outside of cells",
+      "options": {
+        "A": "\u0016 \u0016 \u001a \u001a \u001a",
+        "B": "\u0016 \u001a \u0016 \u001a \u0016",
+        "C": "\u001a \u0016 \u001a \u001a \u0016",
+        "D": "\u001a \u0016 \u0016 \u0016 \u001a key \u0016 = true \u001a = false"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q05.png",
+      "rawText": "An experiment is set up to investigate the effect of changing the light intensity on the rate of photosynthesis. The lamp is moved in 10 cm intervals away from the plant and the number of bubbles of gas recorded in 60 seconds. bubbles plant beaker lamp ruler move lamp away by 10 cm intervals up to 50 cm What will be the result of moving the lamp further away from the beaker containing the plant? A The number of bubbles of carbon dioxide will decrease. B The number of bubbles of carbon dioxide will increase. C The number of bubbles of oxygen will decrease. D The number of bubbles of oxygen will increase.",
+      "parseStatus": "ok",
+      "stem": "An experiment is set up to investigate the effect of changing the light intensity on the rate of photosynthesis. The lamp is moved in 10 cm intervals away from the plant and the number of bubbles of gas recorded in 60 seconds. bubbles plant beaker lamp ruler move lamp away by 10 cm intervals up to 50 cm What will be the result of moving the lamp further away from the beaker containing the plant?",
+      "options": {
+        "A": "The number of bubbles of carbon dioxide will decrease.",
+        "B": "The number of bubbles of carbon dioxide will increase.",
+        "C": "The number of bubbles of oxygen will decrease.",
+        "D": "The number of bubbles of oxygen will increase."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q06.png",
+      "rawText": "Some processes that occur in the alimentary canal and associated organs are listed. 1 absorption 2 assimilation 3 digestion 4 egestion 5 ingestion Which diagram correctly links each process to the part of the alimentary canal or associated organs? A 5 1 2 3 4 B 3 1 4 5 2 C 4 2 1 3 5 D 5 2 1 3 4",
+      "parseStatus": "ok",
+      "stem": "Some processes that occur in the alimentary canal and associated organs are listed. 1 absorption 2 assimilation 3 digestion 4 egestion 5 ingestion Which diagram correctly links each process to the part of the alimentary canal or associated organs?",
+      "options": {
+        "A": "5 1 2 3 4",
+        "B": "3 1 4 5 2",
+        "C": "4 2 1 3 5",
+        "D": "5 2 1 3 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 197.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q07.png",
+      "rawText": "What is the sequence of blood vessels that a red blood cell passes through as it travels from the vena cava to the kidney? A pulmonary artery  pulmonary vein  aorta  renal artery B pulmonary artery  pulmonary vein  aorta  renal vein C pulmonary vein  pulmonary artery  aorta  renal artery D pulmonary vein  pulmonary artery  aorta  renal vein",
+      "parseStatus": "ok",
+      "stem": "What is the sequence of blood vessels that a red blood cell passes through as it travels from the vena cava to the kidney?",
+      "options": {
+        "A": "pulmonary artery  pulmonary vein  aorta  renal artery",
+        "B": "pulmonary artery  pulmonary vein  aorta  renal vein",
+        "C": "pulmonary vein  pulmonary artery  aorta  renal artery",
+        "D": "pulmonary vein  pulmonary artery  aorta  renal vein"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "top": 199.16,
+      "bottom": 323.7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q08.png",
+      "rawText": "Which statement about anaerobic respiration is correct? A It does not cause an oxygen debt. B It occurs in the muscles during vigorous exercise. C It uses oxygen to release energy from nutrient molecules. D It releases more energy per glucose molecule compared to aerobic respiration.",
+      "parseStatus": "ok",
+      "stem": "Which statement about anaerobic respiration is correct?",
+      "options": {
+        "A": "It does not cause an oxygen debt.",
+        "B": "It occurs in the muscles during vigorous exercise.",
+        "C": "It uses oxygen to release energy from nutrient molecules.",
+        "D": "It releases more energy per glucose molecule compared to aerobic respiration."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "top": 325.7,
+      "bottom": 450.24,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q09.png",
+      "rawText": "What is the function of the cornea? A It carries impulses to the brain. B It controls how much light enters the pupil. C It focuses light onto the retina. D It refracts light.",
+      "parseStatus": "ok",
+      "stem": "What is the function of the cornea?",
+      "options": {
+        "A": "It carries impulses to the brain.",
+        "B": "It controls how much light enters the pupil.",
+        "C": "It focuses light onto the retina.",
+        "D": "It refracts light."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 452.24,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q10.png",
+      "rawText": "In a plant, what leads to offspring that are genetically identical to the parent? A asexual reproduction B insect pollination C seed germination D sexual reproduction",
+      "parseStatus": "ok",
+      "stem": "In a plant, what leads to offspring that are genetically identical to the parent?",
+      "options": {
+        "A": "asexual reproduction",
+        "B": "insect pollination",
+        "C": "seed germination",
+        "D": "sexual reproduction"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 389.64,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q11.png",
+      "rawText": "The diagram shows eggs and sperm containing sex chromosomes. X X 1 X 2 X Y 3 Y 4 X 5 6 7 8 Y X X X Y sperm egg Which row gives the correct combination of sex chromosomes for a male and female offspring? male offspring female offspring A 1 and 8 3 and 7 B 2 and 6 2 and 5 C 3 and 8 1 and 7 D 4 and 6 2 and 5",
+      "parseStatus": "ok",
+      "stem": "The diagram shows eggs and sperm containing sex chromosomes. X X 1 X 2 X Y 3 Y 4 X 5 6 7 8 Y X X X Y sperm egg Which row gives the correct combination of sex chromosomes for a male and female offspring? male offspring female offspring",
+      "options": {
+        "A": "1 and 8 3 and 7",
+        "B": "2 and 6 2 and 5",
+        "C": "3 and 8 1 and 7",
+        "D": "4 and 6 2 and 5"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "top": 391.64,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q12.png",
+      "rawText": "The diagram shows a food web. grass bank voles hogweed goldfinches ivy aphids wrens oak tree caterpillars kestrels How many primary consumers, secondary consumers, tertiary consumers and quaternary consumers are present? primary secondary tertiary quaternary A 1 1 4 4 B 2 4 2 0 C 4 2 1 0 D 4 4 1 1",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food web. grass bank voles hogweed goldfinches ivy aphids wrens oak tree caterpillars kestrels How many primary consumers, secondary consumers, tertiary consumers and quaternary consumers are present? primary secondary tertiary quaternary",
+      "options": {
+        "A": "1 1 4 4",
+        "B": "2 4 2 0",
+        "C": "4 2 1 0",
+        "D": "4 4 1 1"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q13.png",
+      "rawText": "What causes eutrophication? A combustion of fossil fuels B cutting down of forests C discarded plastic rubbish D overuse of nitrogen-containing fertiliser",
+      "parseStatus": "ok",
+      "stem": "What causes eutrophication?",
+      "options": {
+        "A": "combustion of fossil fuels",
+        "B": "cutting down of forests",
+        "C": "discarded plastic rubbish",
+        "D": "overuse of nitrogen-containing fertiliser"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "top": 183.14,
+      "bottom": 333.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q14.png",
+      "rawText": "An aqueous salt solution contains an insoluble impurity. Which processes are used to obtain pure salt crystals? A distillation then crystallisation B distillation then chromatography C filtration then crystallisation D filtration then chromatography",
+      "parseStatus": "ok",
+      "stem": "An aqueous salt solution contains an insoluble impurity. Which processes are used to obtain pure salt crystals?",
+      "options": {
+        "A": "distillation then crystallisation",
+        "B": "distillation then chromatography",
+        "C": "filtration then crystallisation",
+        "D": "filtration then chromatography"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "top": 335.0,
+      "bottom": 510.96,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q15.png",
+      "rawText": "The element phosphorus burns in air, as shown. 4P + 5O2  P4O10 What does the formula P4O10 show? A a mixture of atoms of two elements B a mixture of molecules of two elements C a molecule of a compound D an atom of a compound",
+      "parseStatus": "ok",
+      "stem": "The element phosphorus burns in air, as shown. 4P + 5O2  P4O10 What does the formula P4O10 show?",
+      "options": {
+        "A": "a mixture of atoms of two elements",
+        "B": "a mixture of molecules of two elements",
+        "C": "a molecule of a compound",
+        "D": "an atom of a compound"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "top": 512.96,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q16.png",
+      "rawText": "Which row describes an atom that has the nucleon number 24? number of protons number of neutrons number of electrons A 8 8 8 B 12 12 12 C 21 24 21 D 24 28 24",
+      "parseStatus": "ok",
+      "stem": "Which row describes an atom that has the nucleon number 24? number of protons number of neutrons number of electrons",
+      "options": {
+        "A": "8 8 8",
+        "B": "12 12 12",
+        "C": "21 24 21",
+        "D": "24 28 24"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "top": 56.66,
+      "bottom": 184.62,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q17.png",
+      "rawText": "Which symbol equation is not balanced? A C3H8 + 5O2  3CO2 + 4H2O B Fe3O4 + 2H2  3Fe + 2H2O C Mg(OH)2 + 2HCl  MgCl 2 + 2H2O D 2Na + 2H2O  2NaOH + H2",
+      "parseStatus": "ok",
+      "stem": "Which symbol equation is not balanced?",
+      "options": {
+        "A": "C3H8 + 5O2  3CO2 + 4H2O",
+        "B": "Fe3O4 + 2H2  3Fe + 2H2O",
+        "C": "Mg(OH)2 + 2HCl  MgCl 2 + 2H2O",
+        "D": "2Na + 2H2O  2NaOH + H2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "top": 186.62,
+      "bottom": 444.78,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q18.png",
+      "rawText": "Sodium hydroxide is manufactured by the electrolysis of concentrated aqueous sodium chloride. During the process, a gas is given off at each electrode and the aqueous sodium hydroxide collects around one of the electrodes. Which row identifies the gas at each electrode and the electrode around which the aqueous sodium hydroxide collects? at the anode at the cathode electrode at which sodium hydroxide collects A chlorine hydrogen cathode B chlorine hydrogen anode C oxygen chlorine cathode D oxygen chlorine anode",
+      "parseStatus": "ok",
+      "stem": "Sodium hydroxide is manufactured by the electrolysis of concentrated aqueous sodium chloride. During the process, a gas is given off at each electrode and the aqueous sodium hydroxide collects around one of the electrodes. Which row identifies the gas at each electrode and the electrode around which the aqueous sodium hydroxide collects? at the anode at the cathode electrode at which sodium hydroxide collects",
+      "options": {
+        "A": "chlorine hydrogen cathode",
+        "B": "chlorine hydrogen anode",
+        "C": "oxygen chlorine cathode",
+        "D": "oxygen chlorine anode"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "top": 446.78,
+      "bottom": 629.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q19.png",
+      "rawText": "Which row explains why increasing the concentration of a reactant increases the rate of reaction? proportion of particles with the minimum energy to react collision frequency between reacting particles A increases increases B increases stays the same C stays the same increases D stays the same stays the same",
+      "parseStatus": "ok",
+      "stem": "Which row explains why increasing the concentration of a reactant increases the rate of reaction? proportion of particles with the minimum energy to react collision frequency between reacting particles",
+      "options": {
+        "A": "increases increases",
+        "B": "increases stays the same",
+        "C": "stays the same increases",
+        "D": "stays the same stays the same"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 631.1,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q20.png",
+      "rawText": "Which statements about neutralisation are correct? 1 Acids and bases produce water when they neutralise each other. 2 During neutralisation, bases transfer protons to acids. 3 Neutral solutions turn universal indicator green. 4 During neutralisation, acids transfer hydroxide ions to bases. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about neutralisation are correct? 1 Acids and bases produce water when they neutralise each other. 2 During neutralisation, bases transfer protons to acids. 3 Neutral solutions turn universal indicator green. 4 During neutralisation, acids transfer hydroxide ions to bases.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 231.78,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q21.png",
+      "rawText": "The properties of some substances are listed. 1 form acidic oxides 2 have high melting points 3 act as catalysts 4 form coloured compounds What are the properties of transition metals? A 1, 2 and 3 B 1, 2 and 4 C 1, 3 and 4 D 2, 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The properties of some substances are listed. 1 form acidic oxides 2 have high melting points 3 act as catalysts 4 form coloured compounds What are the properties of transition metals?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1, 2 and 4",
+        "C": "1, 3 and 4",
+        "D": "2, 3 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "top": 233.78,
+      "bottom": 358.32,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q22.png",
+      "rawText": "Which atmospheric pollutant is removed from air by lime? A ammonia B carbon monoxide C hydrocarbons D sulfur dioxide",
+      "parseStatus": "ok",
+      "stem": "Which atmospheric pollutant is removed from air by lime?",
+      "options": {
+        "A": "ammonia",
+        "B": "carbon monoxide",
+        "C": "hydrocarbons",
+        "D": "sulfur dioxide"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "top": 360.32,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q23.png",
+      "rawText": "Which row describes how hydrogen and nitrogen are obtained for use in the Haber process? hydrogen nitrogen A electrolysis of sulfuric acid catalytic reduction of nitrogen oxides B electrolysis of sulfuric acid distillation of air C reaction of methane and steam catalytic reduction of nitrogen oxides D reaction of methane and steam distillation of air",
+      "parseStatus": "ok",
+      "stem": "Which row describes how hydrogen and nitrogen are obtained for use in the Haber process? hydrogen nitrogen",
+      "options": {
+        "A": "electrolysis of sulfuric acid catalytic reduction of nitrogen oxides",
+        "B": "electrolysis of sulfuric acid distillation of air",
+        "C": "reaction of methane and steam catalytic reduction of nitrogen oxides",
+        "D": "reaction of methane and steam distillation of air"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "top": 56.6,
+      "bottom": 358.62,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q24.png",
+      "rawText": "Equations representing reactions in the Contact process are listed. reaction 1 S + O2  SO2 reaction 2 2SO2 + O2 2SO3 reaction 3 H2SO4 + SO3  H2S2O7 reaction 4 H2S2O7 + H2O  2H2SO4 Which row identifies the reactions that use the stated conditions? requires a vanadium(V) oxide catalyst requires a temperature of 450 C requires a pressure of 2 atmospheres A reaction 2 reaction 1 reaction 4 B reaction 2 reaction 2 reaction 2 C reaction 3 reaction 1 reaction 2 D reaction 3 reaction 2 reaction 4",
+      "parseStatus": "ok",
+      "stem": "Equations representing reactions in the Contact process are listed. reaction 1 S + O2  SO2 reaction 2 2SO2 + O2 2SO3 reaction 3 H2SO4 + SO3  H2S2O7 reaction 4 H2S2O7 + H2O  2H2SO4 Which row identifies the reactions that use the stated conditions? requires a vanadium(V) oxide catalyst requires a temperature of 450 C requires a pressure of 2 atmospheres",
+      "options": {
+        "A": "reaction 2 reaction 1 reaction 4",
+        "B": "reaction 2 reaction 2 reaction 2",
+        "C": "reaction 3 reaction 1 reaction 2",
+        "D": "reaction 3 reaction 2 reaction 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "top": 360.62,
+      "bottom": 512.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q25.png",
+      "rawText": "Which statements about limestone are correct? 1 Its main constituent is calcium oxide. 2 It can be used to manufacture lime. 3 It thermally decomposes to release carbon dioxide. 4 It is used to neutralise alkaline soils. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about limestone are correct? 1 Its main constituent is calcium oxide. 2 It can be used to manufacture lime. 3 It thermally decomposes to release carbon dioxide. 4 It is used to neutralise alkaline soils.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "top": 514.1,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q26.png",
+      "rawText": "Petroleum is separated into fractions by fractional distillation. Information about uses of some fractions and positions in the fractionating column where they are collected is shown. fraction use position 1 gasoline making roads below refinery gas 2 bitumen petrol for car engines bottom of column 3 naphtha making chemicals below gasoline 4 refinery gas heating and cooking top of column Which rows are correct? A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Petroleum is separated into fractions by fractional distillation. Information about uses of some fractions and positions in the fractionating column where they are collected is shown. fraction use position 1 gasoline making roads below refinery gas 2 bitumen petrol for car engines bottom of column 3 naphtha making chemicals below gasoline 4 refinery gas heating and cooking top of column Which rows are correct?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 315.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q27.png",
+      "rawText": "Which structure represents the addition polymer made from the monomer propene, C3H6? C H H C H H C H H C H H A C CH3 CH3 CH3 CH3 CH3 CH3 CH3 CH3 CH3 CH3 CH3 CH3 CH3 CH3 H C H H C H C H H B C H C H C H C H C C C C C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "top": 317.18,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q28.png",
+      "rawText": "The diagram shows the speed–time graph for a moving object. 20 10 0 0 2.0 4.0 speed m / s time / s What is the distance travelled by the object in 4.0 s? A 30 m B 40 m C 50 m D 80 m",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the speed–time graph for a moving object. 20 10 0 0 2.0 4.0 speed m / s time / s What is the distance travelled by the object in 4.0 s?",
+      "options": {
+        "A": "30 m",
+        "B": "40 m",
+        "C": "50 m",
+        "D": "80 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 371.76,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q29.png",
+      "rawText": "The diagram shows a triangular sheet of metal with sides of length 50 cm, 40 cm and",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "top": 373.76,
+      "bottom": 595.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q30.png",
+      "rawText": "A machine has useful output energy of 1000 J and wasted energy of 300 J. Which expression is used to calculate the efficiency of the machine? A 300 1000 300   100% B 1000 300  100% C 1000 300 1000   100% D 300 1000 1000   100%",
+      "parseStatus": "ok",
+      "stem": "A machine has useful output energy of 1000 J and wasted energy of 300 J. Which expression is used to calculate the efficiency of the machine?",
+      "options": {
+        "A": "300 1000 300   100%",
+        "B": "1000 300  100%",
+        "C": "1000 300 1000   100%",
+        "D": "300 1000 1000   100%"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "top": 597.08,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q31.png",
+      "rawText": "Which statement about thermal radiation is correct? A A dull surface is a good absorber and a good reflector of thermal radiation. B A dull surface is a poor absorber and a poor reflector of thermal radiation. C A shiny surface is a good absorber but a poor reflector of thermal radiation. D A shiny surface is a poor absorber but a good reflector of thermal radiation.",
+      "parseStatus": "ok",
+      "stem": "Which statement about thermal radiation is correct?",
+      "options": {
+        "A": "A dull surface is a good absorber and a good reflector of thermal radiation.",
+        "B": "A dull surface is a poor absorber and a poor reflector of thermal radiation.",
+        "C": "A shiny surface is a good absorber but a poor reflector of thermal radiation.",
+        "D": "A shiny surface is a poor absorber but a good reflector of thermal radiation."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 206.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q32.png",
+      "rawText": "A student stands in front of a plane mirror on a wall. Which statement about the image of the student is not correct? A The image is laterally inverted (left to right). B The image is smaller than the student. C The image is upright. D The student and the image are equal distances from the mirror.",
+      "parseStatus": "ok",
+      "stem": "A student stands in front of a plane mirror on a wall. Which statement about the image of the student is not correct?",
+      "options": {
+        "A": "The image is laterally inverted (left to right).",
+        "B": "The image is smaller than the student.",
+        "C": "The image is upright.",
+        "D": "The student and the image are equal distances from the mirror."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "top": 208.46,
+      "bottom": 294.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q33.png",
+      "rawText": "A wave has a frequency of 3.0 MHz and a speed of 1500 m / s. What is the wavelength of the wave? A 5.0  10–4 m B 0.50 m C 500 m D 4500 m",
+      "parseStatus": "ok",
+      "stem": "A wave has a frequency of 3.0 MHz and a speed of 1500 m / s. What is the wavelength of the wave?",
+      "options": {
+        "A": "5.0  10–4 m",
+        "B": "0.50 m",
+        "C": "500 m",
+        "D": "4500 m"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "top": 296.18,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q34.png",
+      "rawText": "The diagram shows a ray of light passing from air into plastic. The sizes of four angles are given. 30° 60° 72° 18° air plastic The table gives the value of the sine of each angle. angle /  sine 18 0.31 30 0.50 60 0.87 72 0.95 What is the refractive index of the plastic? A 0.62 B 0.92 C 1.6 D 1.7",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light passing from air into plastic. The sizes of four angles are given. 30° 60° 72° 18° air plastic The table gives the value of the sine of each angle. angle /  sine 18 0.31 30 0.50 60 0.87 72 0.95 What is the refractive index of the plastic?",
+      "options": {
+        "A": "0.62",
+        "B": "0.92",
+        "C": "1.6",
+        "D": "1.7"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 231.72,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q35.png",
+      "rawText": "Two insulators are charged by rubbing them with a cloth. After this, the charged insulators repel each other. Which statement is a possible description of how the insulators become charged? A One gained electrons and the other gained protons. B One gained electrons and the other lost electrons. C They both lost electrons. D They both lost protons.",
+      "parseStatus": "ok",
+      "stem": "Two insulators are charged by rubbing them with a cloth. After this, the charged insulators repel each other. Which statement is a possible description of how the insulators become charged?",
+      "options": {
+        "A": "One gained electrons and the other gained protons.",
+        "B": "One gained electrons and the other lost electrons.",
+        "C": "They both lost electrons.",
+        "D": "They both lost protons."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "top": 233.72,
+      "bottom": 529.26,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q36.png",
+      "rawText": "A battery of e.m.f. V is connected across a resistor of resistance R. There is a current in the resistor. R V current Which row shows two changes that both increase the current in the resistor? change 1 change 2 A decrease V decrease R B decrease V increase R C increase V decrease R D increase V increase R",
+      "parseStatus": "ok",
+      "stem": "A battery of e.m.f. V is connected across a resistor of resistance R. There is a current in the resistor. R V current Which row shows two changes that both increase the current in the resistor? change 1 change 2",
+      "options": {
+        "A": "decrease V decrease R",
+        "B": "decrease V increase R",
+        "C": "increase V decrease R",
+        "D": "increase V increase R"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "top": 531.26,
+      "bottom": 628.86,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q37.png",
+      "rawText": "An electric kettle is connected to a 250 V supply. The current in the heating element of the kettle is 10 A. How much electrical energy is transferred in 3.0 minutes? A 75 J B 4500 J C 7500 J D 450 000 J",
+      "parseStatus": "ok",
+      "stem": "An electric kettle is connected to a 250 V supply. The current in the heating element of the kettle is 10 A. How much electrical energy is transferred in 3.0 minutes?",
+      "options": {
+        "A": "75 J",
+        "B": "4500 J",
+        "C": "7500 J",
+        "D": "450 000 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 630.86,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q38.png",
+      "rawText": "Fuses are used in domestic electric circuits. Which statement about fuses is correct? A A fuse is connected in the live wire. B A fuse is connected in the neutral wire. C A 3.0 A fuse produces a current of exactly 3.0 A in the circuit. D A 3.0 A fuse produces a minimum current of 3.0 A in the circuit.",
+      "parseStatus": "ok",
+      "stem": "Fuses are used in domestic electric circuits. Which statement about fuses is correct?",
+      "options": {
+        "A": "A fuse is connected in the live wire.",
+        "B": "A fuse is connected in the neutral wire.",
+        "C": "A 3.0 A fuse produces a current of exactly 3.0 A in the circuit.",
+        "D": "A 3.0 A fuse produces a minimum current of 3.0 A in the circuit."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "top": 59.42,
+      "bottom": 152.22,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q39.png",
+      "rawText": "A radioactive nucleus U 238 92 decays into a thorium (Th) nucleus by emitting an alpha-particle. What is the symbol for the thorium nucleus formed? A Th 234 90 B Th 234 92 C Th 238 90 D Th 238 92",
+      "parseStatus": "ok",
+      "stem": "A radioactive nucleus U 238 92 decays into a thorium (Th) nucleus by emitting an alpha-particle. What is the symbol for the thorium nucleus formed?",
+      "options": {
+        "A": "Th 234 90",
+        "B": "Th 234 92",
+        "C": "Th 238 90",
+        "D": "Th 238 92"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "top": 154.22,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_21/q40.png",
+      "rawText": "The diagrams show a beam of beta-particles passing into an electric field and another beam of beta-particles passing into a magnetic field. + + + + + – – – – – beta-particles beta-particles N S In which direction is the beam deflected in each case? electric field magnetic field A towards the negative plate into the page B towards the negative plate out of the page C towards the positive plate into the page D towards the positive plate out of the page",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a beam of beta-particles passing into an electric field and another beam of beta-particles passing into a magnetic field. + + + + + – – – – – beta-particles beta-particles N S In which direction is the beam deflected in each case? electric field magnetic field",
+      "options": {
+        "A": "towards the negative plate into the page",
+        "B": "towards the negative plate out of the page",
+        "C": "towards the positive plate into the page",
+        "D": "towards the positive plate out of the page"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

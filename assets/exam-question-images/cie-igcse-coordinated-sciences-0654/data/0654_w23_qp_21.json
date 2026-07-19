@@ -1,0 +1,753 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2023/winter/0654_w23_qp_21.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2023/winter/0654_w23_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q01.png",
+      "rawText": "Which characteristic of a living organism releases energy for growth? A excretion B reproduction C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "Which characteristic of a living organism releases energy for growth?",
+      "options": {
+        "A": "excretion",
+        "B": "reproduction",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 183.14,
+      "bottom": 345.72,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q02.png",
+      "rawText": "When a plant cell is put into a solution that has a lower water potential than the cell, the cytoplasm can pull away from the cell wall. What is the term for this? A flaccid B plasmolysis C turgid D turgor pressure",
+      "parseStatus": "ok",
+      "stem": "When a plant cell is put into a solution that has a lower water potential than the cell, the cytoplasm can pull away from the cell wall. What is the term for this?",
+      "options": {
+        "A": "flaccid",
+        "B": "plasmolysis",
+        "C": "turgid",
+        "D": "turgor pressure"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 347.72,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q03.png",
+      "rawText": "Which colour does Benedict’s solution change to when heated with a reducing sugar? A blue B blue-black C orange D purple",
+      "parseStatus": "ok",
+      "stem": "Which colour does Benedict’s solution change to when heated with a reducing sugar?",
+      "options": {
+        "A": "blue",
+        "B": "blue-black",
+        "C": "orange",
+        "D": "purple"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 388.98,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q04.png",
+      "rawText": "The graph shows the effect of increasing temperature on the time taken for amylase to fully digest a sample of starch. time taken to fully digest starch temperature Which statements are correct? 1 As the temperature increases, the kinetic energy of the amylase and starch molecules increases. 2 The time taken to fully digest the starch decreases as temperature increases because there are more frequent collisions between starch and amylase molecules. 3 The time taken to fully digest the starch decreases as temperature increases because the shape of the amylase changes as it denatures. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of increasing temperature on the time taken for amylase to fully digest a sample of starch. time taken to fully digest starch temperature Which statements are correct? 1 As the temperature increases, the kinetic energy of the amylase and starch molecules increases. 2 The time taken to fully digest the starch decreases as temperature increases because there are more frequent collisions between starch and amylase molecules. 3 The time taken to fully digest the starch decreases as temperature increases because the shape of the amylase changes as it denatures.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 390.98,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q05.png",
+      "rawText": "The diagram shows a cross-section through a leaf. Which tissue is adapted for gas exchange? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 219.12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q06.png",
+      "rawText": "Pancreatic insufficiency is a condition that occurs when the pancreas is unable to produce enough enzymes. Which secretions are reduced due to this condition? A amylase, lipase and protease B amylase, lipase and bile C amylase, insulin and protease D glucagon, insulin and protease",
+      "parseStatus": "ok",
+      "stem": "Pancreatic insufficiency is a condition that occurs when the pancreas is unable to produce enough enzymes. Which secretions are reduced due to this condition?",
+      "options": {
+        "A": "amylase, lipase and protease",
+        "B": "amylase, lipase and bile",
+        "C": "amylase, insulin and protease",
+        "D": "glucagon, insulin and protease"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 221.12,
+      "bottom": 383.34,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q07.png",
+      "rawText": "Which label shows the position of the xylem in the cross-section of the root of a dicotyledonous plant? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 385.34,
+      "bottom": 602.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q08.png",
+      "rawText": "Aerobic respiration releases energy from nutrient molecules. One molecule of glucose requires ......1...... molecules of oxygen. The reaction releases ......2...... molecules of carbon dioxide and ......3...... molecules of water. Which row completes gaps 1, 2 and 3? 1 2 3 A six two two B two six six C two two two D six six six",
+      "parseStatus": "ok",
+      "stem": "Aerobic respiration releases energy from nutrient molecules. One molecule of glucose requires ......1...... molecules of oxygen. The reaction releases ......2...... molecules of carbon dioxide and ......3...... molecules of water. Which row completes gaps 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "six two two",
+        "B": "two six six",
+        "C": "two two two",
+        "D": "six six six"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 604.52,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q09.png",
+      "rawText": "During an experiment, auxin is applied to one side of a shoot just behind the tip. What will this stimulate? A decreased cell elongation in all cells B decreased cell elongation on the side with extra auxin C increased cell elongation in all cells D increased cell elongation on the side with extra auxin",
+      "parseStatus": "ok",
+      "stem": "During an experiment, auxin is applied to one side of a shoot just behind the tip. What will this stimulate?",
+      "options": {
+        "A": "decreased cell elongation in all cells",
+        "B": "decreased cell elongation on the side with extra auxin",
+        "C": "increased cell elongation in all cells",
+        "D": "increased cell elongation on the side with extra auxin"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 210.06,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q10.png",
+      "rawText": "Which part of the male reproductive system is correctly matched to its function? part function A prostate gland transfers sperm to the urethra B scrotum holds the testes outside of body C testes secrete fluids for sperm to swim in D urethra transfers semen to ovary",
+      "parseStatus": "ok",
+      "stem": "Which part of the male reproductive system is correctly matched to its function? part function",
+      "options": {
+        "A": "prostate gland transfers sperm to the urethra",
+        "B": "scrotum holds the testes outside of body",
+        "C": "testes secrete fluids for sperm to swim in",
+        "D": "urethra transfers semen to ovary"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 212.06,
+      "bottom": 505.56,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q11.png",
+      "rawText": "Cats with polydactyly have an extra digit on their paw. The allele for polydactyly, P, is dominant to the allele for having five digits, p. The pedigree diagram shows a family of cats where polydactyly is present. 1 2 3 4 5 6 male with polydactyly male without polydactyly female with polydactyly female without polydactyly key What is the probability that the next kitten from the mating of 3 and 4 has five digits? A 0.00 B 0.25 C 0.50 D 0.75",
+      "parseStatus": "ok",
+      "stem": "Cats with polydactyly have an extra digit on their paw. The allele for polydactyly, P, is dominant to the allele for having five digits, p. The pedigree diagram shows a family of cats where polydactyly is present. 1 2 3 4 5 6 male with polydactyly male without polydactyly female with polydactyly female without polydactyly key What is the probability that the next kitten from the mating of 3 and 4 has five digits?",
+      "options": {
+        "A": "0.00",
+        "B": "0.25",
+        "C": "0.50",
+        "D": "0.75"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 507.56,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q12.png",
+      "rawText": "Four processes that occur in mammals are listed. 1 muscle contraction 2 cell division 3 excretion 4 maintenance of a constant body temperature Which processes reduce the amount of energy available to the next trophic level? A 1, 2, 3 and 4 B 1 and 2 only C 1, 3 and 4 only D 4 only",
+      "parseStatus": "ok",
+      "stem": "Four processes that occur in mammals are listed. 1 muscle contraction 2 cell division 3 excretion 4 maintenance of a constant body temperature Which processes reduce the amount of energy available to the next trophic level?",
+      "options": {
+        "A": "1, 2, 3 and 4",
+        "B": "1 and 2 only",
+        "C": "1, 3 and 4 only",
+        "D": "4 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 206.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q13.png",
+      "rawText": "Forests are cut down and burnt in deforestation programmes. As a result of this, which gas in the atmosphere increases in concentration? A carbon dioxide B hydrogen C nitrogen D oxygen",
+      "parseStatus": "ok",
+      "stem": "Forests are cut down and burnt in deforestation programmes. As a result of this, which gas in the atmosphere increases in concentration?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "hydrogen",
+        "C": "nitrogen",
+        "D": "oxygen"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 208.46,
+      "bottom": 513.6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q14.png",
+      "rawText": "Dye X is a mixture of different coloured substances. Chromatography is used to compare X with three other mixtures, P, Q and R. The results are shown. X P Q R Which mixtures contain dye X? A P, Q and R B P and Q only C P only D R only",
+      "parseStatus": "ok",
+      "stem": "Dye X is a mixture of different coloured substances. Chromatography is used to compare X with three other mixtures, P, Q and R. The results are shown. X P Q R Which mixtures contain dye X?",
+      "options": {
+        "A": "P, Q and R",
+        "B": "P and Q only",
+        "C": "P only",
+        "D": "R only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 515.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q15.png",
+      "rawText": "What do the chemical symbols N2 and Ni represent? N2 Ni A a compound a compound B a compound an element C an element a compound D an element an element",
+      "parseStatus": "ok",
+      "stem": "What do the chemical symbols N2 and Ni represent? N2 Ni",
+      "options": {
+        "A": "a compound a compound",
+        "B": "a compound an element",
+        "C": "an element a compound",
+        "D": "an element an element"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 206.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q16.png",
+      "rawText": "The nucleon number of a hydrogen atom is 1. What is present inside the nucleus of this atom? A one proton and one electron B one proton and one neutron C one proton only D one neutron only",
+      "parseStatus": "ok",
+      "stem": "The nucleon number of a hydrogen atom is 1. What is present inside the nucleus of this atom?",
+      "options": {
+        "A": "one proton and one electron",
+        "B": "one proton and one neutron",
+        "C": "one proton only",
+        "D": "one neutron only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 208.46,
+      "bottom": 358.38,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q17.png",
+      "rawText": "When magnesium carbonate reacts with dilute hydrochloric acid, carbon dioxide gas is released. The equation for this reaction is shown. MgCO3 + 2HCl  MgCl 2 + CO2 + H2O Which volume of carbon dioxide, collected at room temperature and pressure, is released when 4.2 g of magnesium carbonate reacts with excess dilute hydrochloric acid? A 1.2 dm3 B 2.4 dm3 C 4.8 dm3 D 12 dm3",
+      "parseStatus": "ok",
+      "stem": "When magnesium carbonate reacts with dilute hydrochloric acid, carbon dioxide gas is released. The equation for this reaction is shown. MgCO3 + 2HCl  MgCl 2 + CO2 + H2O Which volume of carbon dioxide, collected at room temperature and pressure, is released when 4.2 g of magnesium carbonate reacts with excess dilute hydrochloric acid?",
+      "options": {
+        "A": "1.2 dm3",
+        "B": "2.4 dm3",
+        "C": "4.8 dm3",
+        "D": "12 dm3"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 360.38,
+      "bottom": 536.34,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q18.png",
+      "rawText": "The temperature of solution Q is 21 C. The temperature of solution P is 24 C. The two solutions are mixed. The temperature of the mixture is 31 C. Which statement is correct? A An endothermic reaction occurs and the reacting chemicals gain energy. B An endothermic reaction occurs and the reacting chemicals lose energy. C An exothermic reaction occurs and the reacting chemicals gain energy. D An exothermic reaction occurs and the reacting chemicals lose energy.",
+      "parseStatus": "ok",
+      "stem": "The temperature of solution Q is 21 C. The temperature of solution P is 24 C. The two solutions are mixed. The temperature of the mixture is 31 C. Which statement is correct?",
+      "options": {
+        "A": "An endothermic reaction occurs and the reacting chemicals gain energy.",
+        "B": "An endothermic reaction occurs and the reacting chemicals lose energy.",
+        "C": "An exothermic reaction occurs and the reacting chemicals gain energy.",
+        "D": "An exothermic reaction occurs and the reacting chemicals lose energy."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 538.34,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q19.png",
+      "rawText": "The rate of reaction between calcium carbonate and dilute hydrochloric acid is determined either by measuring the change in gas volume per unit time or by measuring the change in mass per unit time. Which piece of apparatus must be used for both methods? A a balance B a gas syringe C a stop-clock D a thermometer",
+      "parseStatus": "ok",
+      "stem": "The rate of reaction between calcium carbonate and dilute hydrochloric acid is determined either by measuring the change in gas volume per unit time or by measuring the change in mass per unit time. Which piece of apparatus must be used for both methods?",
+      "options": {
+        "A": "a balance",
+        "B": "a gas syringe",
+        "C": "a stop-clock",
+        "D": "a thermometer"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 57.44,
+      "bottom": 277.44,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q20.png",
+      "rawText": "The ionic equation for the reaction between iron(II) chloride and chlorine is shown. 2Fe2+ + Cl 2  2Fe3+ + 2Cl – Which row shows the substance that is reduced and the oxidising agent? substance reduced oxidising agent A Cl 2 Cl 2 B Cl 2 Fe2+ C Fe2+ Cl 2 D Fe2+ Fe2+",
+      "parseStatus": "ok",
+      "stem": "The ionic equation for the reaction between iron(II) chloride and chlorine is shown. 2Fe2+ + Cl 2  2Fe3+ + 2Cl – Which row shows the substance that is reduced and the oxidising agent? substance reduced oxidising agent",
+      "options": {
+        "A": "Cl 2 Cl 2",
+        "B": "Cl 2 Fe2+",
+        "C": "Fe2+ Cl 2",
+        "D": "Fe2+ Fe2+"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 279.44,
+      "bottom": 389.58,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q21.png",
+      "rawText": "Substance X is mixed with aqueous sodium hydroxide. A green precipitate is produced. Which metal ion is present in X? A Cu2+ B Fe2+ C Fe3+ D Zn2+",
+      "parseStatus": "ok",
+      "stem": "Substance X is mixed with aqueous sodium hydroxide.",
+      "options": {
+        "A": "green precipitate is produced. Which metal ion is present in X? A Cu2+",
+        "B": "Fe2+",
+        "C": "Fe3+",
+        "D": "Zn2+"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 391.58,
+      "bottom": 541.5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q22.png",
+      "rawText": "Potassium is in Group I of the Periodic Table. Which statement about potassium is correct? A It is a relatively hard metal. B It is less dense than lithium. C It has a higher melting point than sodium. D It reacts more vigorously with water than sodium.",
+      "parseStatus": "ok",
+      "stem": "Potassium is in Group I of the Periodic Table. Which statement about potassium is correct?",
+      "options": {
+        "A": "It is a relatively hard metal.",
+        "B": "It is less dense than lithium.",
+        "C": "It has a higher melting point than sodium.",
+        "D": "It reacts more vigorously with water than sodium."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "top": 543.5,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q23.png",
+      "rawText": "What is a use for argon? A as a catalyst B in alloys C in lamps D neutralising chemical waste",
+      "parseStatus": "ok",
+      "stem": "What is a use for argon?",
+      "options": {
+        "A": "as a catalyst",
+        "B": "in alloys",
+        "C": "in lamps",
+        "D": "neutralising chemical waste"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 423.78,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q24.png",
+      "rawText": "Silver oxide is reduced by heating with carbon more easily than copper oxide is reduced by heating with carbon. A copper strip is placed into a solution of silver nitrate as shown. copper strip silver nitrate solution Which row describes the reaction? the colourless solution slowly turns blue the copper strip slowly dissolves a silver-grey metal is formed A \u001a \u001a \u001a B \u0016 \u0016 \u0016 C \u0016 \u001a \u0016 D \u001a \u0016 \u001a",
+      "parseStatus": "ok",
+      "stem": "Silver oxide is reduced by heating with carbon more easily than copper oxide is reduced by heating with carbon.",
+      "options": {
+        "A": "copper strip is placed into a solution of silver nitrate as shown. copper strip silver nitrate solution Which row describes the reaction? the colourless solution slowly turns blue the copper strip slowly dissolves a silver-grey metal is formed A \u001a \u001a \u001a",
+        "B": "\u0016 \u0016 \u0016",
+        "C": "\u0016 \u001a \u0016",
+        "D": "\u001a \u0016 \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "top": 425.78,
+      "bottom": 575.64,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q25.png",
+      "rawText": "Catalytic converters are fitted to cars to remove some gases from exhaust emissions. Which gases are released by catalytic converters? A carbon dioxide and nitrogen B carbon dioxide and nitrogen monoxide C carbon monoxide and nitrogen D carbon monoxide and nitrogen monoxide",
+      "parseStatus": "ok",
+      "stem": "Catalytic converters are fitted to cars to remove some gases from exhaust emissions. Which gases are released by catalytic converters?",
+      "options": {
+        "A": "carbon dioxide and nitrogen",
+        "B": "carbon dioxide and nitrogen monoxide",
+        "C": "carbon monoxide and nitrogen",
+        "D": "carbon monoxide and nitrogen monoxide"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 577.64,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q26.png",
+      "rawText": "Sulfuric acid is manufactured by the Contact process. One of the reactions in this process converts sulfur dioxide to sulfur trioxide. Which statements about the conditions for this reaction are correct? 1 A nickel catalyst is used. 2 A pressure of about 1–2 atmospheres is used. 3 A temperature of about 450 C is used. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Sulfuric acid is manufactured by the Contact process. One of the reactions in this process converts sulfur dioxide to sulfur trioxide. Which statements about the conditions for this reaction are correct? 1",
+      "options": {
+        "A": "nickel catalyst is used. 2 A pressure of about 1–2 atmospheres is used. 3 A temperature of about 450 C is used. A 1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 56.6,
+      "bottom": 208.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q27.png",
+      "rawText": "Which statements about monomers and polymers are correct? 1 Different polymers can have different linkages between monomers. 2 An addition polymerisation reaction produces more than one type of polymer. 3 Addition polymers are made from saturated monomer molecules. 4 Nylon is a condensation polymer formed from two different monomers. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about monomers and polymers are correct? 1 Different polymers can have different linkages between monomers. 2 An addition polymerisation reaction produces more than one type of polymer. 3 Addition polymers are made from saturated monomer molecules. 4 Nylon is a condensation polymer formed from two different monomers.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 210.08,
+      "bottom": 474.66,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q28.png",
+      "rawText": "The speed–time graph represents part of a car journey. 0 18 10 0 5 time / s speed m / s How far does the car travel in the part of the journey shown? A 20 m B 45 m C 70 m D 90 m",
+      "parseStatus": "ok",
+      "stem": "The speed–time graph represents part of a car journey. 0 18 10 0 5 time / s speed m / s How far does the car travel in the part of the journey shown?",
+      "options": {
+        "A": "20 m",
+        "B": "45 m",
+        "C": "70 m",
+        "D": "90 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "top": 476.66,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q29.png",
+      "rawText": "A rocket has a mass of 300 kg. Its motors produce a force of 12 000 N vertically upwards. The acceleration of free fall g is 10 m / s2. What is the resultant force on the rocket and what is the acceleration of the rocket? resultant force / N acceleration m / s2 A 9 000",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 256.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q30.png",
+      "rawText": "A uniform metre rule rests on a pivot at the 50 cm mark. A load L is placed at the 30 cm mark and a load of 6.0 N is placed at the 80 cm mark. The arrangement is balanced. 0 cm 30 cm 50 cm 80 cm 100 cm L 6.0 N pivot What is the weight of load L? A 6.0 N B 9.0 N C 16 N D 24 N",
+      "parseStatus": "ok",
+      "stem": "A uniform metre rule rests on a pivot at the 50 cm mark.",
+      "options": {
+        "A": "load L is placed at the 30 cm mark and a load of 6.0 N is placed at the 80 cm mark. The arrangement is balanced. 0 cm 30 cm 50 cm 80 cm 100 cm L 6.0 N pivot What is the weight of load L? A 6.0 N",
+        "B": "9.0 N",
+        "C": "16 N",
+        "D": "24 N"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 258.8,
+      "bottom": 420.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q31.png",
+      "rawText": "A hydroelectric energy storage scheme stores energy by pumping water up a mountain into a lake behind a dam. In 1.0 s, 10 000 kg of water is pumped into the lake and gains a height of 150 m. The efficiency of this process is 60%. Gravitational field strength = 10 N / kg. What is the energy input in 1.0 s? A 9.0  105 J B 2.5  106 J C 9.0  106 J D 2.5  107 J",
+      "parseStatus": "ok",
+      "stem": "A hydroelectric energy storage scheme stores energy by pumping water up a mountain into a lake behind a dam. In 1.0 s, 10 000 kg of water is pumped into the lake and gains a height of 150 m. The efficiency of this process is 60%. Gravitational field strength = 10 N / kg. What is the energy input in 1.0 s?",
+      "options": {
+        "A": "9.0  105 J",
+        "B": "2.5  106 J",
+        "C": "9.0  106 J",
+        "D": "2.5  107 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 422.48,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q32.png",
+      "rawText": "What is a thermocouple used to measure? A expansion B pressure C resistance D temperature",
+      "parseStatus": "ok",
+      "stem": "What is a thermocouple used to measure?",
+      "options": {
+        "A": "expansion",
+        "B": "pressure",
+        "C": "resistance",
+        "D": "temperature"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 392.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q33.png",
+      "rawText": "A vacuum flask uses a vacuum between two shiny surfaces to keep a drink hot for a long time. hot drink vacuum glass walls with silvered surfaces How do the vacuum and the shiny surfaces help to keep the drink hot? vacuum shiny surfaces A prevents conduction and convection reduce conduction and radiation B prevents conduction and convection reduce radiation only C prevents radiation reduce conduction and convection D prevents radiation reduce convection only",
+      "parseStatus": "ok",
+      "stem": "A vacuum flask uses a vacuum between two shiny surfaces to keep a drink hot for a long time. hot drink vacuum glass walls with silvered surfaces How do the vacuum and the shiny surfaces help to keep the drink hot? vacuum shiny surfaces",
+      "options": {
+        "A": "prevents conduction and convection reduce conduction and radiation",
+        "B": "prevents conduction and convection reduce radiation only",
+        "C": "prevents radiation reduce conduction and convection",
+        "D": "prevents radiation reduce convection only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 394.52,
+      "bottom": 612.6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q34.png",
+      "rawText": "When light passes from air into glass its speed decreases but its frequency remains constant. Light travelling in air enters a glass block at an angle of incidence that is greater than 0. Which row describes what happens to the direction and what happens to the wavelength of the light? direction wavelength A moves away from the normal decreases B moves away from the normal increases C moves towards the normal decreases D moves towards the normal increases",
+      "parseStatus": "ok",
+      "stem": "When light passes from air into glass its speed decreases but its frequency remains constant. Light travelling in air enters a glass block at an angle of incidence that is greater than 0. Which row describes what happens to the direction and what happens to the wavelength of the light? direction wavelength",
+      "options": {
+        "A": "moves away from the normal decreases",
+        "B": "moves away from the normal increases",
+        "C": "moves towards the normal decreases",
+        "D": "moves towards the normal increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 614.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q35.png",
+      "rawText": "Which change to a sound wave makes the sound louder? A decreasing the amplitude B decreasing the wavelength C increasing the amplitude D increasing the wavelength",
+      "parseStatus": "ok",
+      "stem": "Which change to a sound wave makes the sound louder?",
+      "options": {
+        "A": "decreasing the amplitude",
+        "B": "decreasing the wavelength",
+        "C": "increasing the amplitude",
+        "D": "increasing the wavelength"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q36.png",
+      "rawText": "Three charged balls P, Q and R are suspended by insulating threads. Ball P is negatively charged. Ball Q is brought close to ball P. The balls move away from each other. – P Q insulating thread Ball Q is now brought close to ball R. The balls move closer to each other. Q R What are the signs of the charges on ball Q and ball R? ball Q ball R A negative negative B negative positive C positive negative D positive positive",
+      "parseStatus": "ok",
+      "stem": "Three charged balls P, Q and R are suspended by insulating threads. Ball P is negatively charged. Ball Q is brought close to ball P. The balls move away from each other. – P Q insulating thread Ball Q is now brought close to ball R. The balls move closer to each other. Q R What are the signs of the charges on ball Q and ball R? ball Q ball R",
+      "options": {
+        "A": "negative negative",
+        "B": "negative positive",
+        "C": "positive negative",
+        "D": "positive positive"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 440.04,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q37.png",
+      "rawText": "Which graph shows the current–voltage characteristics of an ohmic resistor and a filament lamp? 0 0 current voltage ohmic resistor filament lamp A 0 0 current voltage ohmic resistor filament lamp B 0 0 current voltage ohmic resistor filament lamp C 0 0 current voltage filament lamp D ohmic resistor",
+      "parseStatus": "ok",
+      "stem": "Which graph shows the current–voltage characteristics of an ohmic resistor and a filament lamp? 0 0 current voltage ohmic resistor filament lamp",
+      "options": {
+        "A": "0 0 current voltage ohmic resistor filament lamp",
+        "B": "0 0 current voltage ohmic resistor filament lamp",
+        "C": "0 0 current voltage filament lamp",
+        "D": "ohmic resistor"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 442.04,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q38.png",
+      "rawText": "A battery is connected in a circuit to a 3.0  resistor, a 6.0  resistor and two ammeters P and Q. A A Q P 3.0 Ω 6.0 Ω What is the combined resistance of the two resistors and which ammeter has the greater reading? combined resistance /  ammeter with greater reading A less than 3.0 P B less than 3.0 Q C 9.0 P D 9.0 Q",
+      "parseStatus": "ok",
+      "stem": "A battery is connected in a circuit to a 3.0  resistor, a 6.0  resistor and two ammeters P and Q.",
+      "options": {
+        "A": "A Q P 3.0 Ω 6.0 Ω What is the combined resistance of the two resistors and which ammeter has the greater reading? combined resistance /  ammeter with greater reading A less than 3.0 P",
+        "B": "less than 3.0 Q",
+        "C": "9.0 P",
+        "D": "9.0 Q"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "top": 56.6,
+      "bottom": 141.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q39.png",
+      "rawText": "The current in an electric kettle used to boil water is 9.0 A. What is the most appropriate rating of fuse to use with this kettle? A 1 A B 3 A C 8 A D 13 A",
+      "parseStatus": "ok",
+      "stem": "The current in an electric kettle used to boil water is 9.0 A. What is the most appropriate rating of fuse to use with this kettle?",
+      "options": {
+        "A": "1 A",
+        "B": "3 A",
+        "C": "8 A",
+        "D": "13 A"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "top": 143.48,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_21/q40.png",
+      "rawText": "Three types of ionising radiation enter a magnetic field at right angles to the field. Which types of radiation are deflected? A  and  only B  and  only C  and  only D ,  and ",
+      "parseStatus": "ok",
+      "stem": "Three types of ionising radiation enter a magnetic field at right angles to the field. Which types of radiation are deflected?",
+      "options": {
+        "A": " and  only",
+        "B": " and  only",
+        "C": " and  only",
+        "D": ",  and "
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

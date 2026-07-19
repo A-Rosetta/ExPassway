@@ -4,27 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="communityPageTitle">学习讨论</title>
-  <link rel="stylesheet" href="../assets/styles.css" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260718-2" />
+  <link rel="stylesheet" href="../assets/vendor/katex/katex-0.17.0.min.css" />
+  <link rel="stylesheet" href="../assets/vendor/mathlive/mathlive-fonts-0.110.0.css" />
 </head>
 <body>
   <main class="container community-shell">
-    <section class="card hero">
-      <h1 data-i18n="communityHeroTitle">学习讨论</h1>
-      <p class="tip" data-i18n="communityHeroSubtitle">围绕真题、错题和知识点提问，沉淀可复用的解题讨论。</p>
+    <section class="card hero community-page-head">
+      <div>
+        <h1 data-i18n="communityHeroTitle">学习讨论</h1>
+        <p class="tip" data-i18n="communityHeroSubtitle">围绕真题、错题和知识点提问，沉淀可复用的解题讨论。</p>
+      </div>
+      <button id="communityLogout" class="btn-secondary" type="button" data-i18n="communityLogout">退出登录</button>
     </section>
 
     <section class="card panel community-layout">
       <div class="community-sidebar">
         <h2 data-i18n="communityFiltersTitle">筛选</h2>
-        <label><span data-i18n="subjectFilterLabel">科目筛选</span>
-          <select id="communitySubjectFilter"></select>
+        <label><span data-i18n="communitySyllabusCodeLabel">科目代码</span>
+          <select id="communitySyllabusCode">
+          </select>
         </label>
-        <label><span data-i18n="paperLabel">模块/卷别</span>
-          <select id="communityPaperFilter"></select>
+        <label><span data-i18n="communityExamSeasonLabel">考试季</span>
+          <select id="communityExamSeason">
+            <option value="" data-i18n="communityAllExamSeasons">全部考试季</option>
+          </select>
         </label>
-        <label><span data-i18n="communityTopicLabel">知识点</span>
-          <input id="communityTopicFilter" type="text" data-i18n-placeholder="communityTopicPlaceholder" placeholder="例如 Atomic structure" />
+        <label><span data-i18n="communityExamYearLabel">年份</span>
+          <select id="communityExamYear">
+            <option value="" data-i18n="communityAllExamYears">全部年份</option>
+          </select>
         </label>
+        <label><span data-i18n="communityQuestionPaperTypeLabel">试卷类型</span>
+          <select id="communityQuestionPaperType" disabled>
+            <option value="qp" data-i18n="communityQuestionPaperType">qp · Question Paper</option>
+          </select>
+        </label>
+        <label><span data-i18n="communityPaperNumberLabel">试卷</span>
+          <select id="communityPaperNumber">
+            <option value="" data-i18n="communityAllPaperNumbers">全部试卷</option>
+          </select>
+        </label>
+        <label><span data-i18n="communityVariantLabel">变体版本</span>
+          <select id="communityVariant">
+            <option value="" data-i18n="communityAllVariants">全部变体</option>
+          </select>
+        </label>
+        <p id="communityPaperReferencePreview" class="paper-reference-preview"></p>
         <label><span data-i18n="communityStatusLabel">状态</span>
           <select id="communityStatusFilter">
             <option value="" data-i18n="communityAllStatuses">全部状态</option>
@@ -33,12 +59,9 @@
             <option value="locked" data-i18n="communityStatusLocked">已锁定</option>
           </select>
         </label>
-        <label class="inline-check">
-          <input id="communityFollowedOnly" type="checkbox" />
-          <span data-i18n="communityFollowedOnly">只看已关注</span>
-        </label>
         <div class="actions compact-actions">
           <button id="communityApplyFilters" class="btn-primary" data-i18n="communityApplyFilters">应用筛选</button>
+          <button id="communityResetFilters" class="btn-secondary" type="button" data-i18n="communityResetFilters">重置筛选</button>
           <button id="communityBackHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
         </div>
       </div>
@@ -49,7 +72,10 @@
             <h2 data-i18n="communityThreadsTitle">讨论列表</h2>
             <p id="communityStatus" class="tip"></p>
           </div>
-          <button id="communityNewThread" class="btn-primary" data-i18n="communityNewThread">发起讨论</button>
+          <div class="actions compact-actions">
+            <button id="communityFollowedToggle" class="btn-secondary" type="button" aria-pressed="false" data-i18n="communityShowFollowed">我的关注</button>
+            <button id="communityNewThread" class="btn-primary" data-i18n="communityNewThread">发起讨论</button>
+          </div>
         </div>
         <div id="communityQuestionContext" class="question-context"></div>
         <div id="communityThreadList" class="discussion-list"></div>
@@ -71,9 +97,18 @@
           </select>
         </label>
       </div>
-      <label><span data-i18n="communityBodyLabel">内容</span>
-        <textarea id="communityBody" rows="7" maxlength="4000" data-i18n-placeholder="communityBodyPlaceholder" placeholder="写下你的思路、已尝试的方法和具体疑问"></textarea>
-      </label>
+      <div class="markdown-editor-head">
+        <span data-i18n="communityBodyLabel">内容</span>
+        <div class="actions compact-actions">
+          <button id="communityAddPhoto" class="btn-secondary editor-tool-toggle" type="button" data-image-editor-target="communityBodyEditor" data-image-input="communityPhotoInput" data-i18n="communityAddPhoto">添加照片</button>
+          <button id="communityInsertFormula" class="btn-secondary editor-tool-toggle" type="button" data-editor-target="communityBodyEditor" data-i18n="communityInsertFormula">Σ 插入公式</button>
+          <input id="communityPhotoInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp" hidden />
+        </div>
+      </div>
+      <div class="markdown-editor-field">
+        <textarea id="communityBody" class="rich-editor-source" maxlength="4000" hidden></textarea>
+        <div id="communityBodyEditor" class="rich-text-editor markdown-body is-empty" contenteditable="true" role="textbox" aria-multiline="true" data-source-id="communityBody" data-i18n-aria-label="communityBodyLabel"></div>
+      </div>
       <div class="actions">
         <button id="communitySubmitThread" class="btn-primary" data-i18n="communitySubmitThread">发布讨论</button>
         <button id="communityCancelComposer" class="btn-secondary" data-i18n="communityCancel">取消</button>
@@ -82,19 +117,62 @@
 
     <section id="communityDetailPanel" class="card panel" hidden>
       <div id="communityThreadDetail"></div>
-      <label><span data-i18n="communityReplyLabel">回复</span>
-        <textarea id="communityReplyBody" rows="5" maxlength="4000" data-i18n-placeholder="communityReplyPlaceholder" placeholder="补充解释或回答问题"></textarea>
-      </label>
+      <div class="markdown-editor-head">
+        <span data-i18n="communityReplyLabel">回复</span>
+        <div class="actions compact-actions">
+          <button id="communityReplyAddPhoto" class="btn-secondary editor-tool-toggle" type="button" data-image-editor-target="communityReplyEditor" data-image-input="communityReplyPhotoInput" data-i18n="communityAddPhoto">添加照片</button>
+          <button id="communityReplyInsertFormula" class="btn-secondary editor-tool-toggle" type="button" data-editor-target="communityReplyEditor" data-i18n="communityInsertFormula">Σ 插入公式</button>
+          <input id="communityReplyPhotoInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp" hidden />
+        </div>
+      </div>
+      <div class="markdown-editor-field">
+        <textarea id="communityReplyBody" class="rich-editor-source" maxlength="4000" hidden></textarea>
+        <div id="communityReplyEditor" class="rich-text-editor markdown-body is-empty" contenteditable="true" role="textbox" aria-multiline="true" data-source-id="communityReplyBody" data-i18n-aria-label="communityReplyLabel"></div>
+      </div>
       <div class="actions">
         <button id="communitySubmitReply" class="btn-primary" data-i18n="communitySubmitReply">发布回复</button>
         <button id="communityCloseDetail" class="btn-secondary" data-i18n="communityCloseDetail">关闭详情</button>
       </div>
     </section>
+
+    <section id="communityMathKeyboard" class="card panel math-input-panel" hidden aria-labelledby="communityMathKeyboardTitle">
+      <div class="math-input-head">
+        <div>
+          <h3 id="communityMathKeyboardTitle" data-i18n="communityMathKeyboardTitle">数学键盘</h3>
+          <p class="tip" data-i18n="communityMathKeyboardHint">键盘会直接编辑内容框中的公式。</p>
+        </div>
+        <button id="communityMathKeyboardClose" class="btn-secondary math-icon-btn" type="button" aria-label="关闭数学键盘" data-i18n-aria-label="communityMathKeyboardClose" title="关闭数学键盘" data-i18n-title="communityMathKeyboardClose">×</button>
+      </div>
+      <div id="communityMathKeyboardTabs" class="math-keyboard-tabs" role="tablist" aria-label="数学键盘分类" data-i18n-aria-label="communityMathKeyboardCategories"></div>
+      <div id="communityMathKeyboardKeys" class="math-keyboard-keys" role="tabpanel"></div>
+      <div class="math-input-footer">
+        <div class="math-edit-controls" aria-label="公式编辑操作" data-i18n-aria-label="communityMathEditControls">
+          <button type="button" class="btn-secondary math-icon-btn" data-math-command="moveToPreviousChar" aria-label="向左移动" data-i18n-aria-label="communityMathMoveLeft" title="向左移动" data-i18n-title="communityMathMoveLeft">←</button>
+          <button type="button" class="btn-secondary math-icon-btn" data-math-command="moveToNextChar" aria-label="向右移动" data-i18n-aria-label="communityMathMoveRight" title="向右移动" data-i18n-title="communityMathMoveRight">→</button>
+          <button type="button" class="btn-secondary math-icon-btn" data-math-command="deleteBackward" aria-label="退格" data-i18n-aria-label="communityMathBackspace" title="退格" data-i18n-title="communityMathBackspace">⌫</button>
+          <button id="communityMathClear" type="button" class="btn-secondary math-icon-btn" aria-label="清空公式" data-i18n-aria-label="communityMathClear" title="清空公式" data-i18n-title="communityMathClear">C</button>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <script src="../scripts/i18n.js"></script>
+  <div id="communityFormattingToolbar" class="formatting-toolbar" role="toolbar" aria-label="文本格式" data-i18n-aria-label="communityFormattingToolbar" hidden>
+    <button type="button" data-format-command="bold" aria-pressed="false" aria-label="粗体" data-i18n-aria-label="communityFormatBold" title="粗体" data-i18n-title="communityFormatBold"><strong>B</strong></button>
+    <button type="button" data-format-command="italic" aria-pressed="false" aria-label="斜体" data-i18n-aria-label="communityFormatItalic" title="斜体" data-i18n-title="communityFormatItalic"><em>I</em></button>
+    <button type="button" data-format-command="strike" aria-pressed="false" aria-label="删除线" data-i18n-aria-label="communityFormatStrike" title="删除线" data-i18n-title="communityFormatStrike"><s>S</s></button>
+    <button type="button" data-format-command="code" aria-pressed="false" aria-label="行内代码" data-i18n-aria-label="communityFormatCode" title="行内代码" data-i18n-title="communityFormatCode">&lt;/&gt;</button>
+    <button type="button" class="formatting-link-button" data-format-command="link" aria-pressed="false" data-i18n="communityFormatLink">链接</button>
+  </div>
+
+  <script src="../scripts/i18n.js?v=20260718-2"></script>
   <script src="../scripts/data.js"></script>
-  <script src="../scripts/api.js"></script>
-  <script src="../scripts/community.js"></script>
+  <script src="../assets/vendor/marked-15.0.12.min.js"></script>
+  <script src="../assets/vendor/katex/katex-0.17.0.min.js"></script>
+  <script src="../assets/vendor/katex/mhchem-0.17.0.min.js"></script>
+  <script src="../assets/vendor/marked-katex-extension-5.1.10.umd.js"></script>
+  <script src="../assets/vendor/dompurify-3.2.6.min.js"></script>
+  <script src="../assets/vendor/mathlive/mathlive-0.110.0.min.js"></script>
+  <script src="../scripts/api.js?v=20260718-2"></script>
+  <script src="../scripts/community.js?v=20260718-2"></script>
 </body>
 </html>

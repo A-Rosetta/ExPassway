@@ -1,0 +1,748 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2025/winter/0654_w25_qp_21.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2025/winter/0654_w25_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.49,
+      "bottom": 333.37,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q01.png",
+      "rawText": "When light shines from one direction only, a plant shoot bends towards the light. light Which row gives the characteristics of living organisms shown by the plant shoot? growth movement sensitivity A no yes yes B yes yes no C yes no yes D yes yes yes",
+      "parseStatus": "ok",
+      "stem": "When light shines from one direction only, a plant shoot bends towards the light. light Which row gives the characteristics of living organisms shown by the plant shoot? growth movement sensitivity",
+      "options": {
+        "A": "no yes yes",
+        "B": "yes yes no",
+        "C": "yes no yes",
+        "D": "yes yes yes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 335.37,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q02.png",
+      "rawText": "The diagram shows a section through a root hair cell. Which statement describes how the structure of the root hair cell relates to its main function? A The nucleus is not at the centre of the cell. B The shape helps to support the plant. C The surface area is large. D The volume of the vacuole is small.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through a root hair cell. Which statement describes how the structure of the root hair cell relates to its main function?",
+      "options": {
+        "A": "The nucleus is not at the centre of the cell.",
+        "B": "The shape helps to support the plant.",
+        "C": "The surface area is large.",
+        "D": "The volume of the vacuole is small."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "top": 56.49,
+      "bottom": 502.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q03.png",
+      "rawText": "The photograph shows a potato plant. Potato plants have storage organs labelled Y. X Y Which statement correctly describes the transport of sucrose in the potato plant? A Sucrose is translocated from X to Y in the phloem. B Sucrose is translocated from Y to X in the xylem. C Sucrose is transpired from X to Y in the phloem. D Sucrose is transpired from Y to X in the xylem.",
+      "parseStatus": "ok",
+      "stem": "The photograph shows a potato plant. Potato plants have storage organs labelled Y. X Y Which statement correctly describes the transport of sucrose in the potato plant?",
+      "options": {
+        "A": "Sucrose is translocated from X to Y in the phloem.",
+        "B": "Sucrose is translocated from Y to X in the xylem.",
+        "C": "Sucrose is transpired from X to Y in the phloem.",
+        "D": "Sucrose is transpired from Y to X in the xylem."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 504.93,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q04.png",
+      "rawText": "A student tests a sample of food for the presence of different biological molecules. The results of the tests are shown. test results of test add iodine solution orange-brown colour heat with Benedict’s solution red precipitate formed add biuret reagent lilac colour ethanol emulsion test clear solution Which biological molecules are present in the food? A fat and starch B reducing sugars and protein C reducing sugars and starch D starch and protein",
+      "parseStatus": "ok",
+      "stem": "A student tests a sample of food for the presence of different biological molecules. The results of the tests are shown. test results of test add iodine solution orange-brown colour heat with Benedict’s solution red precipitate formed add biuret reagent lilac colour ethanol emulsion test clear solution Which biological molecules are present in the food?",
+      "options": {
+        "A": "fat and starch",
+        "B": "reducing sugars and protein",
+        "C": "reducing sugars and starch",
+        "D": "starch and protein"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 3,
+      "top": 56.49,
+      "bottom": 256.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q05.png",
+      "rawText": "Enzyme action stops due to denaturation. What causes denaturation? A a change in shape of the active site of the enzyme that occurs at a temperature that is lower than the optimum temperature B a change in shape of the active site of the substrate that occurs at a temperature that is lower than the optimum temperature C a change in shape of the active site of the enzyme that occurs at a temperature that is higher than the optimum temperature D a change in shape of the active site of the substrate that occurs at a temperature that is higher than the optimum temperature",
+      "parseStatus": "ok",
+      "stem": "Enzyme action stops due to denaturation. What causes denaturation?",
+      "options": {
+        "A": "a change in shape of the active site of the enzyme that occurs at a temperature that is lower than the optimum temperature",
+        "B": "a change in shape of the active site of the substrate that occurs at a temperature that is lower than the optimum temperature",
+        "C": "a change in shape of the active site of the enzyme that occurs at a temperature that is higher than the optimum temperature",
+        "D": "a change in shape of the active site of the substrate that occurs at a temperature that is higher than the optimum temperature"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "top": 258.93,
+      "bottom": 512.77,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q06.png",
+      "rawText": "The diagram shows a section through a leaf. Which labelled part enables oxygen to escape from the leaf? C D B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 514.77,
+      "bottom": 668.77,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q07.png",
+      "rawText": "Which row about digestion is correct? type of digestion before digestion after digestion A chemical large pieces of food small pieces of food B chemical large insoluble molecules small soluble molecules C physical large soluble molecules small insoluble molecules D physical large pieces of food small soluble molecules",
+      "parseStatus": "ok",
+      "stem": "Which row about digestion is correct? type of digestion before digestion after digestion",
+      "options": {
+        "A": "chemical large pieces of food small pieces of food",
+        "B": "chemical large insoluble molecules small soluble molecules",
+        "C": "physical large soluble molecules small insoluble molecules",
+        "D": "physical large pieces of food small soluble molecules"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 670.77,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q08.png",
+      "rawText": "Which statement about the mammalian circulatory system is correct? A The atria contract to send blood directly to the body. B The blood passes through the heart once for every complete circulation. C The blood travels from the heart to the lungs and then back to the heart. D The left ventricle contracts to send blood to the lungs.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the mammalian circulatory system is correct?",
+      "options": {
+        "A": "The atria contract to send blood directly to the body.",
+        "B": "The blood passes through the heart once for every complete circulation.",
+        "C": "The blood travels from the heart to the lungs and then back to the heart.",
+        "D": "The left ventricle contracts to send blood to the lungs."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "top": 56.49,
+      "bottom": 422.89,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q09.png",
+      "rawText": "Two flasks are set up as shown. A student breathes out through tube X of flask 1. Another student breathes in through tube Y of flask 2. X limewater flask 1 Y limewater flask 2 The students obtain different results. Which body process causes this difference? A absorption B assimilation C digestion D respiration",
+      "parseStatus": "ok",
+      "stem": "Two flasks are set up as shown.",
+      "options": {
+        "A": "student breathes out through tube X of flask 1. Another student breathes in through tube Y of flask 2. X limewater flask 1 Y limewater flask 2 The students obtain different results. Which body process causes this difference? A absorption",
+        "B": "assimilation",
+        "C": "digestion",
+        "D": "respiration"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 424.89,
+      "bottom": 600.01,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q10.png",
+      "rawText": "A man eats a meal high in carbohydrates. There is only a small change in his blood glucose concentration. Which statement explains why? A The pancreas releases insulin and this causes the excess glucose to be stored as glucagon. B The pancreas releases insulin and this causes the excess glucose to be stored as glycogen. C The pancreas releases glucagon and this causes the excess glucose to be stored as glycogen. D The pancreas releases glucagon and this causes the excess glucose to be stored as insulin.",
+      "parseStatus": "ok",
+      "stem": "A man eats a meal high in carbohydrates. There is only a small change in his blood glucose concentration. Which statement explains why?",
+      "options": {
+        "A": "The pancreas releases insulin and this causes the excess glucose to be stored as glucagon.",
+        "B": "The pancreas releases insulin and this causes the excess glucose to be stored as glycogen.",
+        "C": "The pancreas releases glucagon and this causes the excess glucose to be stored as glycogen.",
+        "D": "The pancreas releases glucagon and this causes the excess glucose to be stored as insulin."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 602.01,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q11.png",
+      "rawText": "Three features of flowers are listed. 1 anthers located within the petals 2 large colourful petals 3 feathery stigma Which features are adaptations for wind pollination? A 1 and 2 B 1 only C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "Three features of flowers are listed. 1 anthers located within the petals 2 large colourful petals 3 feathery stigma Which features are adaptations for wind pollination?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 only",
+        "C": "2 and 3",
+        "D": "3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "top": 56.49,
+      "bottom": 141.37,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q12.png",
+      "rawText": "Chimpanzee gametes contain one more chromosome than human gametes. What is the chromosome number in a chimpanzee diploid cell? A 23 B 24 C 46 D 48",
+      "parseStatus": "ok",
+      "stem": "Chimpanzee gametes contain one more chromosome than human gametes. What is the chromosome number in a chimpanzee diploid cell?",
+      "options": {
+        "A": "23",
+        "B": "24",
+        "C": "46",
+        "D": "48"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "top": 143.37,
+      "bottom": 270.61,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q13.png",
+      "rawText": "Which statement explains why food chains usually have fewer than five trophic levels? A All the carnivores consume herbivores. B The energy passed on decreases from one trophic level to the next. C There is less protein in each individual higher up the chain. D There is only one producer in each chain.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why food chains usually have fewer than five trophic levels?",
+      "options": {
+        "A": "All the carnivores consume herbivores.",
+        "B": "The energy passed on decreases from one trophic level to the next.",
+        "C": "There is less protein in each individual higher up the chain.",
+        "D": "There is only one producer in each chain."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 272.61,
+      "bottom": 341.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q14.png",
+      "rawText": "Which particle has the same number of electrons in its outer shell as an atom of sodium, Na? 23 11 A 23 + 11Na B  23 11Na C 24 11Na D 24 2+ 12Na",
+      "parseStatus": "ok",
+      "stem": "Which particle has the same number of electrons in its outer shell as an atom of sodium, Na? 23 11",
+      "options": {
+        "A": "23 + 11Na",
+        "B": " 23 11Na",
+        "C": "24 11Na",
+        "D": "24 2+ 12Na"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 343.17,
+      "bottom": 454.81,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q15.png",
+      "rawText": "Which dot-and-cross diagram shows the outer-shell electrons in a molecule of carbon dioxide? C A O O C B O O C C O O C D O O",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "top": 456.81,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q16.png",
+      "rawText": "During electrolysis, reactions occur at the cathode and anode. Which statements about the electrode reactions are correct? 1 At the anode, anions gain electrons and are reduced. 2 At the anode, anions lose electrons and are oxidised. 3 At the cathode, cations gain electrons and are reduced. 4 At the cathode, cations lose electrons and are oxidised. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "During electrolysis, reactions occur at the cathode and anode. Which statements about the electrode reactions are correct? 1 At the anode, anions gain electrons and are reduced. 2 At the anode, anions lose electrons and are oxidised. 3 At the cathode, cations gain electrons and are reduced. 4 At the cathode, cations lose electrons and are oxidised.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 56.49,
+      "bottom": 233.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q17.png",
+      "rawText": "Increasing the temperature of a reaction mixture increases the rate of the reaction. Which statements explain this increase in the rate of the reaction at higher temperatures? 1 The activation energy is increased. 2 The reacting particles are closer together. 3 There are more frequent collisions between reacting particles. 4 More collisions between reacting particles result in a reaction. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Increasing the temperature of a reaction mixture increases the rate of the reaction. Which statements explain this increase in the rate of the reaction at higher temperatures? 1 The activation energy is increased. 2 The reacting particles are closer together. 3 There are more frequent collisions between reacting particles. 4 More collisions between reacting particles result in a reaction.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 235.17,
+      "bottom": 435.61,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q18.png",
+      "rawText": "Sodium is a metal. Silicon is a non-metal. Both sodium and silicon form oxides. Which statement is correct? A Sodium oxide is acidic and silicon dioxide is basic. B Sodium oxide is basic and silicon dioxide is acidic. C Sodium oxide and silicon dioxide are both acidic. D Sodium oxide and silicon dioxide are both basic.",
+      "parseStatus": "ok",
+      "stem": "Sodium is a metal. Silicon is a non-metal. Both sodium and silicon form oxides. Which statement is correct?",
+      "options": {
+        "A": "Sodium oxide is acidic and silicon dioxide is basic.",
+        "B": "Sodium oxide is basic and silicon dioxide is acidic.",
+        "C": "Sodium oxide and silicon dioxide are both acidic.",
+        "D": "Sodium oxide and silicon dioxide are both basic."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 437.61,
+      "bottom": 638.05,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q19.png",
+      "rawText": "Zinc sulfate is a soluble salt. Zinc sulfate is prepared by reacting zinc with dilute sulfuric acid. Which statement about this preparation is correct? A Excess dilute sulfuric acid is used and after the reaction has finished the unreacted acid is removed by evaporation. B Excess dilute sulfuric acid is used and after the reaction has finished the unreacted acid is removed by adding an aqueous base. C Excess zinc is used and after the reaction has finished the unreacted zinc is removed by filtration. D Excess zinc is used and after the reaction has finished the zinc sulfate is purified by distillation.",
+      "parseStatus": "ok",
+      "stem": "Zinc sulfate is a soluble salt. Zinc sulfate is prepared by reacting zinc with dilute sulfuric acid. Which statement about this preparation is correct?",
+      "options": {
+        "A": "Excess dilute sulfuric acid is used and after the reaction has finished the unreacted acid is removed by evaporation.",
+        "B": "Excess dilute sulfuric acid is used and after the reaction has finished the unreacted acid is removed by adding an aqueous base.",
+        "C": "Excess zinc is used and after the reaction has finished the unreacted zinc is removed by filtration.",
+        "D": "Excess zinc is used and after the reaction has finished the zinc sulfate is purified by distillation."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "top": 640.05,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q20.png",
+      "rawText": "Substance Q is added to cold water. Q floats on the water and hydrogen gas is made. What is Q? A iodine B lithium C magnesium D zinc",
+      "parseStatus": "ok",
+      "stem": "Substance Q is added to cold water. Q floats on the water and hydrogen gas is made. What is Q?",
+      "options": {
+        "A": "iodine",
+        "B": "lithium",
+        "C": "magnesium",
+        "D": "zinc"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 56.49,
+      "bottom": 180.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q21.png",
+      "rawText": "Which statement about the elements in Group VII of the Periodic Table is correct? A Chlorine is more reactive than bromine. B The colour of the elements becomes darker up the group. C The melting point of the elements decreases down the group. D The reactivity of the elements increases down the group.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the elements in Group VII of the Periodic Table is correct?",
+      "options": {
+        "A": "Chlorine is more reactive than bromine.",
+        "B": "The colour of the elements becomes darker up the group.",
+        "C": "The melting point of the elements decreases down the group.",
+        "D": "The reactivity of the elements increases down the group."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 182.97,
+      "bottom": 363.73,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q22.png",
+      "rawText": "Which row shows the properties of aluminium that make it useful in the manufacture of overhead electrical cables? low density good electrical conductivity A no no B no yes C yes no D yes yes",
+      "parseStatus": "ok",
+      "stem": "Which row shows the properties of aluminium that make it useful in the manufacture of overhead electrical cables? low density good electrical conductivity",
+      "options": {
+        "A": "no no",
+        "B": "no yes",
+        "C": "yes no",
+        "D": "yes yes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "top": 365.73,
+      "bottom": 559.09,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q23.png",
+      "rawText": "Gasoline and diesel oil are fractions obtained by the fractional distillation of petroleum. Which row about gasoline and diesel oil is correct? temperature at which the fraction is collected size of molecules in the fraction A gasoline higher than diesel oil gasoline larger than diesel oil B gasoline higher than diesel oil gasoline smaller than diesel oil C diesel oil higher than gasoline diesel oil larger than gasoline D diesel oil higher than gasoline diesel oil smaller than gasoline",
+      "parseStatus": "ok",
+      "stem": "Gasoline and diesel oil are fractions obtained by the fractional distillation of petroleum. Which row about gasoline and diesel oil is correct? temperature at which the fraction is collected size of molecules in the fraction",
+      "options": {
+        "A": "gasoline higher than diesel oil gasoline larger than diesel oil",
+        "B": "gasoline higher than diesel oil gasoline smaller than diesel oil",
+        "C": "diesel oil higher than gasoline diesel oil larger than gasoline",
+        "D": "diesel oil higher than gasoline diesel oil smaller than gasoline"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 7,
+      "top": 561.09,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q24.png",
+      "rawText": "Which statements about the addition reactions of ethene are correct? 1 Ethene reacts with hydrogen to form ethane. 2 Ethene reacts with steam to form ethane. 3 Ethene undergoes addition reactions because it is a saturated hydrocarbon. 4 During addition reactions of ethene, only one product is produced. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about the addition reactions of ethene are correct? 1 Ethene reacts with hydrogen to form ethane. 2 Ethene reacts with steam to form ethane. 3 Ethene undergoes addition reactions because it is a saturated hydrocarbon. 4 During addition reactions of ethene, only one product is produced.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "top": 56.49,
+      "bottom": 290.89,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q25.png",
+      "rawText": "A section of polymer X is shown. n C H CH3 CH3 C H Which statement about X is correct? A It is a condensation polymer made from but-1-ene. B It is an addition polymer made from but-1-ene. C It is a condensation polymer made from but-2-ene. D It is an addition polymer made from but-2-ene.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 292.89,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q26.png",
+      "rawText": "The chromatogram for substances P, Q, R and S is shown. P Q R S solvent front baseline Which statement is correct? A P and R are both pure substances. B P has a higher Rf value than Q. C R is a mixture of P and Q. D S is a mixture of Q and one other substance.",
+      "parseStatus": "ok",
+      "stem": "The chromatogram for substances P, Q, R and S is shown. P Q R S solvent front baseline Which statement is correct?",
+      "options": {
+        "A": "P and R are both pure substances.",
+        "B": "P has a higher Rf value than Q.",
+        "C": "R is a mixture of P and Q.",
+        "D": "S is a mixture of Q and one other substance."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 56.49,
+      "bottom": 274.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q27.png",
+      "rawText": "The results of tests on aqueous G are listed. 1 Adding aqueous sodium hydroxide produces a white precipitate that is insoluble in excess. 2 Adding acidified aqueous silver nitrate produces a cream precipitate. What is G? A calcium bromide B calcium chloride C zinc bromide D zinc chloride",
+      "parseStatus": "ok",
+      "stem": "The results of tests on aqueous G are listed. 1 Adding aqueous sodium hydroxide produces a white precipitate that is insoluble in excess. 2 Adding acidified aqueous silver nitrate produces a cream precipitate. What is G?",
+      "options": {
+        "A": "calcium bromide",
+        "B": "calcium chloride",
+        "C": "zinc bromide",
+        "D": "zinc chloride"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 276.93,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q28.png",
+      "rawText": "A stone of mass 60 g is placed in a measuring cylinder containing water. The water level in the measuring cylinder rises as shown. 100 90 80 70 60 50 40 30 20 10 100 90 80 70 60 50 40 30 20 10 stone cm3 cm3 What is the density of the stone? A 0.50 g / cm3 B 0.75 g / cm3 C 1.3 g / cm3 D 2.0 g / cm3",
+      "parseStatus": "ok",
+      "stem": "A stone of mass 60 g is placed in a measuring cylinder containing water. The water level in the measuring cylinder rises as shown. 100 90 80 70 60 50 40 30 20 10 100 90 80 70 60 50 40 30 20 10 stone cm3 cm3 What is the density of the stone?",
+      "options": {
+        "A": "0.50 g / cm3",
+        "B": "0.75 g / cm3",
+        "C": "1.3 g / cm3",
+        "D": "2.0 g / cm3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "top": 56.49,
+      "bottom": 306.37,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q29.png",
+      "rawText": "The diagram shows the two vertical forces acting on an object of mass m falling through the air. F W Which expression is equal to the magnitude of the vertical acceleration of the object? A ( – ) W F m B ( + ) W F m C ( – ) m W F D ( + ) m W F",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the two vertical forces acting on an object of mass m falling through the air. F W Which expression is equal to the magnitude of the vertical acceleration of the object?",
+      "options": {
+        "A": "( – ) W F m",
+        "B": "( + ) W F m",
+        "C": "( – ) m W F",
+        "D": "( + ) m W F"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 308.37,
+      "bottom": 443.77,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q30.png",
+      "rawText": "The power of sunlight falling on each m2 of a solar panel is 200 W. The solar panel has an area of 2.0 m2. The efficiency of the solar panel is 20%. What is the useful power output of the solar panel? A 80 W B 400 W C 500 W D 2000 W",
+      "parseStatus": "ok",
+      "stem": "The power of sunlight falling on each m2 of a solar panel is 200 W. The solar panel has an area of 2.0 m2. The efficiency of the solar panel is 20%. What is the useful power output of the solar panel?",
+      "options": {
+        "A": "80 W",
+        "B": "400 W",
+        "C": "500 W",
+        "D": "2000 W"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 445.77,
+      "bottom": 637.69,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q31.png",
+      "rawText": "Boiling is a process in which a liquid changes its state to become a gas. Which row describes the temperature at which boiling takes place and where it takes place in a pure liquid? temperature where it takes place A at a definite temperature only at the surface of the liquid B at a definite temperature throughout the liquid C at any temperature only at the surface of the liquid D at any temperature throughout the liquid",
+      "parseStatus": "ok",
+      "stem": "Boiling is a process in which a liquid changes its state to become a gas. Which row describes the temperature at which boiling takes place and where it takes place in a pure liquid? temperature where it takes place",
+      "options": {
+        "A": "at a definite temperature only at the surface of the liquid",
+        "B": "at a definite temperature throughout the liquid",
+        "C": "at any temperature only at the surface of the liquid",
+        "D": "at any temperature throughout the liquid"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 639.69,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q32.png",
+      "rawText": "A wave passes a rock in the sea. Five complete wavelengths pass the rock in 20 s. What is the frequency of this wave? A 0.25 Hz B 4.0 Hz C 15 Hz D 100 Hz",
+      "parseStatus": "ok",
+      "stem": "A wave passes a rock in the sea. Five complete wavelengths pass the rock in 20 s. What is the frequency of this wave?",
+      "options": {
+        "A": "0.25 Hz",
+        "B": "4.0 Hz",
+        "C": "15 Hz",
+        "D": "100 Hz"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 56.49,
+      "bottom": 415.33,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q33.png",
+      "rawText": "In the diagrams, F is one principal focus of the converging lens. Which diagram shows the use of a lens as a magnifying glass? A F B F C F D F",
+      "parseStatus": "ok",
+      "stem": "In the diagrams, F is one principal focus of the converging lens. Which diagram shows the use of a lens as a magnifying glass?",
+      "options": {
+        "A": "F",
+        "B": "F",
+        "C": "F",
+        "D": "F"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 417.33,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q34.png",
+      "rawText": "The graphs represent the sound waves of sounds P and Q. The graphs are drawn to the same scale. displacement time sound P displacement sound Q time time time Which statement is correct? A Sound P is higher pitched than sound Q. B Sound P is louder than sound Q. C Sound P is lower pitched than sound Q. D Sound P is quieter than sound Q.",
+      "parseStatus": "ok",
+      "stem": "The graphs represent the sound waves of sounds P and Q. The graphs are drawn to the same scale. displacement time sound P displacement sound Q time time time Which statement is correct?",
+      "options": {
+        "A": "Sound P is higher pitched than sound Q.",
+        "B": "Sound P is louder than sound Q.",
+        "C": "Sound P is lower pitched than sound Q.",
+        "D": "Sound P is quieter than sound Q."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "top": 56.49,
+      "bottom": 206.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q35.png",
+      "rawText": "A ray of light strikes the boundary between water and air. Which statement describes when the angle of incidence is equal to the critical angle? A The light passes from air into water and no light is reflected. B The light passes from air into water and the angle of refraction is 90°. C The light passes from water into air and no light is reflected. D The light passes from water into air and the angle of refraction is 90°.",
+      "parseStatus": "ok",
+      "stem": "A ray of light strikes the boundary between water and air. Which statement describes when the angle of incidence is equal to the critical angle?",
+      "options": {
+        "A": "The light passes from air into water and no light is reflected.",
+        "B": "The light passes from air into water and the angle of refraction is 90°.",
+        "C": "The light passes from water into air and no light is reflected.",
+        "D": "The light passes from water into air and the angle of refraction is 90°."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "top": 208.29,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q36.png",
+      "rawText": "Which circuit shows an ammeter that measures the current in the lamp and a voltmeter that measures the potential difference (p.d.) across the lamp? A V A A V B V A C V A D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "top": 56.49,
+      "bottom": 443.89,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q37.png",
+      "rawText": "The diagram shows the magnetic field around a straight current-carrying wire. Point X lies in the magnetic field. current X The current is now reduced and its direction is reversed. Which row shows the effect on the strength and direction of the magnetic field at point X? strength of magnetic field direction of magnetic field A decreases reverses B decreases unchanged C increases reverses D increases unchanged",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the magnetic field around a straight current-carrying wire. Point X lies in the magnetic field. current X The current is now reduced and its direction is reversed. Which row shows the effect on the strength and direction of the magnetic field at point X? strength of magnetic field direction of magnetic field",
+      "options": {
+        "A": "decreases reverses",
+        "B": "decreases unchanged",
+        "C": "increases reverses",
+        "D": "increases unchanged"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 445.89,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q38.png",
+      "rawText": "The output from the generator in a power station is connected to a transformer before electricity is sent along a transmission cable. What is a reason for using this transformer? A to decrease the voltage and decrease the current B to decrease the voltage and increase the current C to increase the voltage and decrease the current D to increase the voltage and increase the current",
+      "parseStatus": "ok",
+      "stem": "The output from the generator in a power station is connected to a transformer before electricity is sent along a transmission cable. What is a reason for using this transformer?",
+      "options": {
+        "A": "to decrease the voltage and decrease the current",
+        "B": "to decrease the voltage and increase the current",
+        "C": "to increase the voltage and decrease the current",
+        "D": "to increase the voltage and increase the current"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "top": 57.33,
+      "bottom": 305.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q39.png",
+      "rawText": "A carbon-14 nucleus undergoes – decay and produces an isotope of nitrogen. The decay equation is shown. 14 6C A ZN + β– Which row gives the values of A and Z? A Z A 13 6 B 13 7 C 14 6 D 14 7",
+      "parseStatus": "ok",
+      "stem": "A carbon-14 nucleus undergoes – decay and produces an isotope of nitrogen. The decay equation is shown. 14 6C",
+      "options": {
+        "A": "ZN + β– Which row gives the values of A and Z? A Z A 13 6",
+        "B": "13 7",
+        "C": "14 6",
+        "D": "14 7"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "top": 307.29,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_21/q40.png",
+      "rawText": "A moon that orbits a planet has an orbit radius of 1.1  109 m and an orbital period of 170 hours. What is the orbital speed of this moon? A 3.6  103 m / s B 1.1  104 m / s C 6.8  105 m / s D 4.2  1015 m / s",
+      "parseStatus": "ok",
+      "stem": "A moon that orbits a planet has an orbit radius of 1.1  109 m and an orbital period of 170 hours. What is the orbital speed of this moon?",
+      "options": {
+        "A": "3.6  103 m / s",
+        "B": "1.1  104 m / s",
+        "C": "6.8  105 m / s",
+        "D": "4.2  1015 m / s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

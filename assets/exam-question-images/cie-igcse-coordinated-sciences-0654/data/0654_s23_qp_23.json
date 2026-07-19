@@ -1,0 +1,733 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2023/summer/0654_s23_qp_23.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2023/summer/0654_s23_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q01.png",
+      "rawText": "Which term is used to describe the removal of toxic materials from living organisms? A excretion B nutrition C respiration D secretion",
+      "parseStatus": "ok",
+      "stem": "Which term is used to describe the removal of toxic materials from living organisms?",
+      "options": {
+        "A": "excretion",
+        "B": "nutrition",
+        "C": "respiration",
+        "D": "secretion"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 183.14,
+      "bottom": 385.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q02.png",
+      "rawText": "The diagrams show four different cells found in living organisms. 2 1",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 387.68,
+      "bottom": 581.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q03.png",
+      "rawText": "Eggs contain fat, protein and water. Which results are obtained from doing food tests on an egg? Benedict’s test biuret test ethanol emulsion test iodine test A blue purple white emulsion yellow B orange purple white emulsion blue-black C orange blue colourless yellow D blue blue colourless blue-black",
+      "parseStatus": "ok",
+      "stem": "Eggs contain fat, protein and water. Which results are obtained from doing food tests on an egg? Benedict’s test biuret test ethanol emulsion test iodine test",
+      "options": {
+        "A": "blue purple white emulsion yellow",
+        "B": "orange purple white emulsion blue-black",
+        "C": "orange blue colourless yellow",
+        "D": "blue blue colourless blue-black"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "top": 583.1,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q04.png",
+      "rawText": "During an enzyme-controlled reaction, the temperature is gradually lowered from the enzyme’s optimum temperature of 20 C to",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 376.74,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q05.png",
+      "rawText": "The diagram shows some of the uses in a plant of the initial carbohydrate made by photosynthesis. initial carbohydrate made in photosynthesis many of the same molecules combined together addition of X Y amino acids Which statement is correct? A X is a magnesium ion. B X is iron. C Y is starch. D Y is an oil molecule.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the uses in a plant of the initial carbohydrate made by photosynthesis. initial carbohydrate made in photosynthesis many of the same molecules combined together addition of X Y amino acids Which statement is correct?",
+      "options": {
+        "A": "X is a magnesium ion.",
+        "B": "X is iron.",
+        "C": "Y is starch.",
+        "D": "Y is an oil molecule."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 378.74,
+      "bottom": 597.24,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q06.png",
+      "rawText": "A person is unwell with the following symptoms. ● swollen abdomen (belly) ● red patches on their skin ● loss of muscle mass What is the likely condition that this person has? A iron deficiency B kwashiorkor C marasmus D scurvy",
+      "parseStatus": "ok",
+      "stem": "A person is unwell with the following symptoms. ● swollen abdomen (belly) ● red patches on their skin ● loss of muscle mass What is the likely condition that this person has?",
+      "options": {
+        "A": "iron deficiency",
+        "B": "kwashiorkor",
+        "C": "marasmus",
+        "D": "scurvy"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "top": 599.24,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q07.png",
+      "rawText": "Which cells lose water by evaporation from their surfaces during transpiration? A epidermis cells B guard cells C mesophyll cells D root hair cells",
+      "parseStatus": "ok",
+      "stem": "Which cells lose water by evaporation from their surfaces during transpiration?",
+      "options": {
+        "A": "epidermis cells",
+        "B": "guard cells",
+        "C": "mesophyll cells",
+        "D": "root hair cells"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 260.7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q08.png",
+      "rawText": "Endothermic reactions use up more energy than they release while exothermic reactions release energy overall. Which row describes the type of reaction that occurs in the process of photosynthesis and in the process of respiration? respiration photosynthesis A endothermic endothermic B endothermic exothermic C exothermic endothermic D exothermic exothermic",
+      "parseStatus": "ok",
+      "stem": "Endothermic reactions use up more energy than they release while exothermic reactions release energy overall. Which row describes the type of reaction that occurs in the process of photosynthesis and in the process of respiration? respiration photosynthesis",
+      "options": {
+        "A": "endothermic endothermic",
+        "B": "endothermic exothermic",
+        "C": "exothermic endothermic",
+        "D": "exothermic exothermic"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 262.7,
+      "bottom": 387.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q09.png",
+      "rawText": "Which type of chemical is adrenaline? A enzyme B hormone C mineral salt D vitamin",
+      "parseStatus": "ok",
+      "stem": "Which type of chemical is adrenaline?",
+      "options": {
+        "A": "enzyme",
+        "B": "hormone",
+        "C": "mineral salt",
+        "D": "vitamin"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "top": 389.18,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q10.png",
+      "rawText": "The diagram shows a section through an insect-pollinated flower. When pollination occurs, where must the pollen grains reach? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 269.7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q11.png",
+      "rawText": "A student writes down the statement shown. ‘Selective breeding by natural selection is carried out over many generations to improve crop plants and domesticated animals.’ The statement is not correct. Which change makes the statement correct? A Change crop plants to flowering plants. B Change domesticated to wild. C Change generations to offspring. D Change natural to artificial.",
+      "parseStatus": "ok",
+      "stem": "A student writes down the statement shown. ‘Selective breeding by natural selection is carried out over many generations to improve crop plants and domesticated animals.’ The statement is not correct. Which change makes the statement correct?",
+      "options": {
+        "A": "Change crop plants to flowering plants.",
+        "B": "Change domesticated to wild.",
+        "C": "Change generations to offspring.",
+        "D": "Change natural to artificial."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 271.7,
+      "bottom": 601.62,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q12.png",
+      "rawText": "The diagram shows a marine food web around a kelp (seaweed) forest. kelp small fish large fish seal sea otter crab sea urchin killer whale Which organisms are secondary consumers and which organisms are tertiary consumers? secondary consumers tertiary consumers A seal killer whale B sea otter, large fish killer whale, seal, large fish C sea otter, large fish sea otter, killer whale, seal D sea urchin, small fish, crab sea otter, large fish",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a marine food web around a kelp (seaweed) forest. kelp small fish large fish seal sea otter crab sea urchin killer whale Which organisms are secondary consumers and which organisms are tertiary consumers? secondary consumers tertiary consumers",
+      "options": {
+        "A": "seal killer whale",
+        "B": "sea otter, large fish killer whale, seal, large fish",
+        "C": "sea otter, large fish sea otter, killer whale, seal",
+        "D": "sea urchin, small fish, crab sea otter, large fish"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "top": 603.62,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q13.png",
+      "rawText": "What decreases as a result of eutrophication? A aerobic respiration by decomposers B decomposition of dead producers C dissolved oxygen in the water D growth of producers",
+      "parseStatus": "ok",
+      "stem": "What decreases as a result of eutrophication?",
+      "options": {
+        "A": "aerobic respiration by decomposers",
+        "B": "decomposition of dead producers",
+        "C": "dissolved oxygen in the water",
+        "D": "growth of producers"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 258.72,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q14.png",
+      "rawText": "A mixture of solid sulfur and solid sodium chloride is added to water and stirred. Sulfur is insoluble in water. Sodium chloride is soluble in water. Which processes are used to obtain pure sodium chloride from the mixture? A distillation then chromatography B distillation then crystallisation C filtration then chromatography D filtration then crystallisation",
+      "parseStatus": "ok",
+      "stem": "A mixture of solid sulfur and solid sodium chloride is added to water and stirred. Sulfur is insoluble in water. Sodium chloride is soluble in water. Which processes are used to obtain pure sodium chloride from the mixture?",
+      "options": {
+        "A": "distillation then chromatography",
+        "B": "distillation then crystallisation",
+        "C": "filtration then chromatography",
+        "D": "filtration then crystallisation"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 260.72,
+      "bottom": 453.6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q15.png",
+      "rawText": "An atom of indium has the atomic number 49 and the nucleon number 115. Which row shows the numbers of protons, neutrons and electrons in this atom? number of protons number of neutrons number of electrons A 49 66 49 B 49 115 49 C 66 49 49 D 49 66 66",
+      "parseStatus": "ok",
+      "stem": "An atom of indium has the atomic number 49 and the nucleon number 115. Which row shows the numbers of protons, neutrons and electrons in this atom? number of protons number of neutrons number of electrons",
+      "options": {
+        "A": "49 66 49",
+        "B": "49 115 49",
+        "C": "66 49 49",
+        "D": "49 66 66"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "top": 455.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q16.png",
+      "rawText": "Pentane, C5H12, burns in a limited air supply to produce some carbon dioxide and some carbon monoxide. What is a balanced equation for this reaction? A C5H12 + 7O2  3CO2 + 2CO + 6H2O B C5H12 + 9O2  CO2 + 4CO + 12H2O C C5H12 + 14O  3CO2 + 2CO + 6H2O D C5H12 + 18O  CO2 + 4CO + 12H2O",
+      "parseStatus": "ok",
+      "stem": "Pentane, C5H12, burns in a limited air supply to produce some carbon dioxide and some carbon monoxide. What is a balanced equation for this reaction?",
+      "options": {
+        "A": "C5H12 + 7O2  3CO2 + 2CO + 6H2O",
+        "B": "C5H12 + 9O2  CO2 + 4CO + 12H2O",
+        "C": "C5H12 + 14O  3CO2 + 2CO + 6H2O",
+        "D": "C5H12 + 18O  CO2 + 4CO + 12H2O"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 234.6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q17.png",
+      "rawText": "Copper is refined by electrolysis. Which statements about this process are correct? 1 Aqueous copper(II) sulfate is the electrolyte. 2 Inert anodes are used. 3 Cu2+ ions are reduced at the cathode. 4 Pure copper is deposited at the anode. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Copper is refined by electrolysis. Which statements about this process are correct? 1 Aqueous copper(II) sulfate is the electrolyte. 2 Inert anodes are used. 3 Cu2+ ions are reduced at the cathode. 4 Pure copper is deposited at the anode.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 236.6,
+      "bottom": 361.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q18.png",
+      "rawText": "Which statement about chemical reactions is correct? A Endothermic reactions result in a temperature decrease. B Endothermic reactions result in a temperature increase. C Exothermic reactions always produce a large temperature rise. D Exothermic reactions always produce a small temperature rise.",
+      "parseStatus": "ok",
+      "stem": "Which statement about chemical reactions is correct?",
+      "options": {
+        "A": "Endothermic reactions result in a temperature decrease.",
+        "B": "Endothermic reactions result in a temperature increase.",
+        "C": "Exothermic reactions always produce a large temperature rise.",
+        "D": "Exothermic reactions always produce a small temperature rise."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 363.08,
+      "bottom": 544.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q19.png",
+      "rawText": "Which row describes the effect of increasing temperature on the collisions between particles in a chemical reaction? frequency of collisions energy of collisions A decreases increases B decreases decreases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "Which row describes the effect of increasing temperature on the collisions between particles in a chemical reaction? frequency of collisions energy of collisions",
+      "options": {
+        "A": "decreases increases",
+        "B": "decreases decreases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "top": 546.2,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q20.png",
+      "rawText": "Crystals of copper(II) sulfate, a soluble salt, are made by reacting excess copper(II) oxide with dilute sulfuric acid. After filtering off the unreacted copper(II) oxide, the solution is heated until it is saturated. It is then left to cool. Which statements about this preparation are correct? 1 Excess copper(II) oxide is used in order to ensure a high yield is obtained. 2 After filtering, the solution is heated to evaporate some of the water. 3 When the saturated solution cools, crystals of copper(II) sulfate begin to appear. 4 After cooling, the water is rapidly removed by evaporation. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Crystals of copper(II) sulfate, a soluble salt, are made by reacting excess copper(II) oxide with dilute sulfuric acid. After filtering off the unreacted copper(II) oxide, the solution is heated until it is saturated. It is then left to cool. Which statements about this preparation are correct? 1 Excess copper(II) oxide is used in order to ensure a high yield is obtained. 2 After filtering, the solution is heated to evaporate some of the water. 3 When the saturated solution cools, crystals of copper(II) sulfate begin to appear. 4 After cooling, the water is rapidly removed by evaporation.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 252.36,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q21.png",
+      "rawText": "The first row of the transition elements is shown. Sc Ti V Cr Mn Fe Co Ni Cu Zn Which statement about transition elements is not correct? A They are often used as catalysts. B They always form colourless compounds. C They have high densities. D They have high melting points.",
+      "parseStatus": "ok",
+      "stem": "The first row of the transition elements is shown. Sc Ti V Cr Mn Fe Co Ni Cu Zn Which statement about transition elements is not correct?",
+      "options": {
+        "A": "They are often used as catalysts.",
+        "B": "They always form colourless compounds.",
+        "C": "They have high densities.",
+        "D": "They have high melting points."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 254.36,
+      "bottom": 382.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q22.png",
+      "rawText": "Which equation represents a reaction that takes place in the catalytic converter of a car? A N2 + 2O2  2NO2 B 2NO  N2 + O2 C N2 + 3H2  2NH3 D 2SO2 + O2  2SO3",
+      "parseStatus": "ok",
+      "stem": "Which equation represents a reaction that takes place in the catalytic converter of a car?",
+      "options": {
+        "A": "N2 + 2O2  2NO2",
+        "B": "2NO  N2 + O2",
+        "C": "N2 + 3H2  2NH3",
+        "D": "2SO2 + O2  2SO3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "top": 384.14,
+      "bottom": 535.98,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q23.png",
+      "rawText": "The Haber process is used to make ammonia. Which statement about the Haber process is not correct? A A vanadium(V) oxide catalyst is used. B The nitrogen used is obtained from the air. C The pressure used is 200 atmospheres. D The temperature used is 450 C.",
+      "parseStatus": "ok",
+      "stem": "The Haber process is used to make ammonia. Which statement about the Haber process is not correct?",
+      "options": {
+        "A": "A vanadium(V) oxide catalyst is used.",
+        "B": "The nitrogen used is obtained from the air.",
+        "C": "The pressure used is 200 atmospheres.",
+        "D": "The temperature used is 450 C."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 7,
+      "top": 537.98,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q24.png",
+      "rawText": "Four different reactions occur in the manufacture of sulfuric acid by the Contact process. Which substance is a reactant in one of these reactions and a product in another? A H2O B O2 C S D SO3",
+      "parseStatus": "ok",
+      "stem": "Four different reactions occur in the manufacture of sulfuric acid by the Contact process. Which substance is a reactant in one of these reactions and a product in another?",
+      "options": {
+        "A": "H2O",
+        "B": "O2",
+        "C": "S",
+        "D": "SO3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 235.44,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q25.png",
+      "rawText": "When limestone is heated, it decomposes. Which row about limestone and the decomposition is correct? chemical name for limestone decomposition products A calcium carbonate calcium oxide only B calcium carbonate calcium oxide and carbon dioxide C calcium oxide calcium carbonate only D calcium oxide calcium carbonate and carbon dioxide",
+      "parseStatus": "ok",
+      "stem": "When limestone is heated, it decomposes. Which row about limestone and the decomposition is correct? chemical name for limestone decomposition products",
+      "options": {
+        "A": "calcium carbonate calcium oxide only",
+        "B": "calcium carbonate calcium oxide and carbon dioxide",
+        "C": "calcium oxide calcium carbonate only",
+        "D": "calcium oxide calcium carbonate and carbon dioxide"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 237.44,
+      "bottom": 361.92,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q26.png",
+      "rawText": "Which fraction obtained from petroleum is used as a feedstock for making chemicals? A bitumen B gasoline C naphtha D refinery gas",
+      "parseStatus": "ok",
+      "stem": "Which fraction obtained from petroleum is used as a feedstock for making chemicals?",
+      "options": {
+        "A": "bitumen",
+        "B": "gasoline",
+        "C": "naphtha",
+        "D": "refinery gas"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "top": 363.92,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q27.png",
+      "rawText": "What is the structure of the addition polymer formed from but-2-ene? n C H H C H H C H H C H H A n C H H C CH3 CH3 B C n C CH2CH3 H C H H n C H C H CH3 CH3 D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 56.6,
+      "bottom": 311.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q28.png",
+      "rawText": "The speed–time graph represents the journey of a bicycle. 0.8 0.6 0.4 0.2 0.0 0 1 2 3 4 speed km / minute time / minutes What is the total distance travelled by the bicycle? A 1.6 km B 2.0 km C 2.4 km D 3.2 km",
+      "parseStatus": "ok",
+      "stem": "The speed–time graph represents the journey of a bicycle. 0.8 0.6 0.4 0.2 0.0 0 1 2 3 4 speed km / minute time / minutes What is the total distance travelled by the bicycle?",
+      "options": {
+        "A": "1.6 km",
+        "B": "2.0 km",
+        "C": "2.4 km",
+        "D": "3.2 km"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "top": 313.16,
+      "bottom": 568.98,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q29.png",
+      "rawText": "The diagram shows a cuboid box resting on the ground. The dimensions of the box are shown. 0.50 m 0.50 m 0.40 m The pressure on the ground due to the weight of the box is 50 Pa. What is the weight of the box? A 5.0 N B 10 N C 250 N D 500 N",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cuboid box resting on the ground. The dimensions of the box are shown. 0.50 m 0.50 m 0.40 m The pressure on the ground due to the weight of the box is 50 Pa. What is the weight of the box?",
+      "options": {
+        "A": "5.0 N",
+        "B": "10 N",
+        "C": "250 N",
+        "D": "500 N"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 9,
+      "top": 570.98,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q30.png",
+      "rawText": "Electricity can be generated in different types of power station. Which statement about geothermal power and nuclear power is correct? A Geothermal power and nuclear power are both renewable. B Geothermal power and nuclear power are both non-renewable. C Geothermal power is renewable but nuclear power is not. D Nuclear power is renewable but geothermal power is not.",
+      "parseStatus": "ok",
+      "stem": "Electricity can be generated in different types of power station. Which statement about geothermal power and nuclear power is correct?",
+      "options": {
+        "A": "Geothermal power and nuclear power are both renewable.",
+        "B": "Geothermal power and nuclear power are both non-renewable.",
+        "C": "Geothermal power is renewable but nuclear power is not.",
+        "D": "Nuclear power is renewable but geothermal power is not."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 56.66,
+      "bottom": 251.58,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q31.png",
+      "rawText": "What is the definition of efficiency? A output energy useful input energy  100% B energy wasted input energy  100% C input energy output energy useful  100% D input energy energy wasted  100%",
+      "parseStatus": "ok",
+      "stem": "What is the definition of efficiency?",
+      "options": {
+        "A": "output energy useful input energy  100%",
+        "B": "energy wasted input energy  100%",
+        "C": "input energy output energy useful  100%",
+        "D": "input energy energy wasted  100%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 253.58,
+      "bottom": 623.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q32.png",
+      "rawText": "The diagrams represent the arrangement of molecules in three states of matter. Arrows P and Q represent two changes of state. Q P Which row identifies the changes of state? P Q A evaporation condensation B evaporation solidification C melting condensation D melting solidification",
+      "parseStatus": "ok",
+      "stem": "The diagrams represent the arrangement of molecules in three states of matter. Arrows P and Q represent two changes of state. Q P Which row identifies the changes of state? P Q",
+      "options": {
+        "A": "evaporation condensation",
+        "B": "evaporation solidification",
+        "C": "melting condensation",
+        "D": "melting solidification"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "top": 625.1,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q33.png",
+      "rawText": "A sound wave has a frequency of 16 kHz. The speed of sound is 320 m / s. What is the wavelength of the wave? A 0.020 m B 0.050 m C 20 m D 50 m",
+      "parseStatus": "ok",
+      "stem": "A sound wave has a frequency of 16 kHz. The speed of sound is 320 m / s. What is the wavelength of the wave?",
+      "options": {
+        "A": "0.020 m",
+        "B": "0.050 m",
+        "C": "20 m",
+        "D": "50 m"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 408.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q34.png",
+      "rawText": "Light passes from air through a solid glass block and back into the air. Which diagram shows the path of the light? A B C D glass block glass block glass block glass block",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 410.48,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q35.png",
+      "rawText": "The diagram shows an object at position P in front of a thin converging lens of focal length f. The lens produces a real image of the object. f 2f P Q The object is moved to position Q. The image produced is now virtual. What happens to the image? A It changes from a diminished image to an enlarged image. B It changes from an enlarged image to a diminished image. C It remains a diminished image. D It remains an enlarged image.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an object at position P in front of a thin converging lens of focal length f. The lens produces a real image of the object. f 2f P Q The object is moved to position Q. The image produced is now virtual. What happens to the image?",
+      "options": {
+        "A": "It changes from a diminished image to an enlarged image.",
+        "B": "It changes from an enlarged image to a diminished image.",
+        "C": "It remains a diminished image.",
+        "D": "It remains an enlarged image."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 295.32,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q36.png",
+      "rawText": "A student measures the current in a resistor and the potential difference (p.d.) across it. Which circuit shows an ammeter and a voltmeter both connected correctly? A B C D A A A A V V V V",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "top": 297.32,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q37.png",
+      "rawText": "A 3.0  resistor is connected to a 12 V power supply. 3.0 Ω 12 V How much electrical energy does the resistor transfer in 10 s? A 3.6 J B 4.8 J C 360 J D 480 J",
+      "parseStatus": "ok",
+      "stem": "A 3.0  resistor is connected to a 12 V power supply. 3.0 Ω 12 V How much electrical energy does the resistor transfer in 10 s?",
+      "options": {
+        "A": "3.6 J",
+        "B": "4.8 J",
+        "C": "360 J",
+        "D": "480 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q38.png",
+      "rawText": "A solenoid carrying a current produces a magnetic field. Which diagram shows the magnetic field pattern? A B D C current current current current magnetic field magnetic field magnetic field magnetic field",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q39.png",
+      "rawText": "The diagram shows a motor. One part of the motor is labelled X. N S X brush contact What is the name of part X and how does it help the motor to work? name of part X how X helps the motor to work A split-ring commutator reduces the current so the coil does not overheat B split-ring commutator reverses the current in the coil every half turn C step-down transformer reduces the current so the coil does not overheat D step-down transformer reverses the current in the coil every half turn",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a motor. One part of the motor is labelled X. N S X brush contact What is the name of part X and how does it help the motor to work? name of part X how X helps the motor to work",
+      "options": {
+        "A": "split-ring commutator reduces the current so the coil does not overheat",
+        "B": "split-ring commutator reverses the current in the coil every half turn",
+        "C": "step-down transformer reduces the current so the coil does not overheat",
+        "D": "step-down transformer reverses the current in the coil every half turn"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "top": 57.44,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_23/q40.png",
+      "rawText": "A radioactive source emits -particles and -particles that pass into the space between two charged plates. + + + + + + + + – – – – – – – – α-particles and β-particles from radioactive source In which directions are the particles deflected as they pass between the plates and which particles are deflected more? direction of deflection amount of deflection A  towards lower plate,  towards upper plate -particles deflected more B  towards lower plate,  towards upper plate -particles deflected more C  towards upper plate,  towards lower plate -particles deflected more D  towards upper plate,  towards lower plate -particles deflected more",
+      "parseStatus": "ok",
+      "stem": "A radioactive source emits -particles and -particles that pass into the space between two charged plates. + + + + + + + + – – – – – – – – α-particles and β-particles from radioactive source In which directions are the particles deflected as they pass between the plates and which particles are deflected more? direction of deflection amount of deflection",
+      "options": {
+        "A": " towards lower plate,  towards upper plate -particles deflected more",
+        "B": " towards lower plate,  towards upper plate -particles deflected more",
+        "C": " towards upper plate,  towards lower plate -particles deflected more",
+        "D": " towards upper plate,  towards lower plate -particles deflected more"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

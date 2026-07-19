@@ -1,0 +1,748 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2025/summer/0654_s25_qp_21.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2025/summer/0654_s25_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.66,
+      "bottom": 181.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q01.png",
+      "rawText": "Which result with the biuret test shows that protein is present? A blue B green C orange D purple",
+      "parseStatus": "ok",
+      "stem": "Which result with the biuret test shows that protein is present?",
+      "options": {
+        "A": "blue",
+        "B": "green",
+        "C": "orange",
+        "D": "purple"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 183.2,
+      "bottom": 307.74,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q02.png",
+      "rawText": "Which term describes the removal of waste products? A excretion B growth C metabolism D mitosis",
+      "parseStatus": "ok",
+      "stem": "Which term describes the removal of waste products?",
+      "options": {
+        "A": "excretion",
+        "B": "growth",
+        "C": "metabolism",
+        "D": "mitosis"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 309.74,
+      "bottom": 434.28,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q03.png",
+      "rawText": "Which type of molecule are enzymes? A carbohydrate B DNA C fat D protein",
+      "parseStatus": "ok",
+      "stem": "Which type of molecule are enzymes?",
+      "options": {
+        "A": "carbohydrate",
+        "B": "DNA",
+        "C": "fat",
+        "D": "protein"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "top": 436.28,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q04.png",
+      "rawText": "Which substance is essential to make chlorophyll? A calcium ions B cellulose C iron ions D magnesium ions",
+      "parseStatus": "ok",
+      "stem": "Which substance is essential to make chlorophyll?",
+      "options": {
+        "A": "calcium ions",
+        "B": "cellulose",
+        "C": "iron ions",
+        "D": "magnesium ions"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 371.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q05.png",
+      "rawText": "The table shows the energy demand of males and females of different ages. age range energy demand / kJ per person per day males females 0– 4 5520 5230 5–14 9100 7890 15–19 11 300 8870 20–59 10 290 8330 60+ 8410 7450 Which conclusions can be made from this data? 1 The energy demand of males is greater than that of females at all ages. 2 The energy demand of both males and females for age range 0– 4 is the lowest. 3 The energy demand of males and females decreases after age range 15–19. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 only",
+      "parseStatus": "ok",
+      "stem": "The table shows the energy demand of males and females of different ages. age range energy demand / kJ per person per day males females 0– 4 5520 5230 5–14 9100 7890 15–19 11 300 8870 20–59 10 290 8330 60+ 8410 7450 Which conclusions can be made from this data? 1 The energy demand of males is greater than that of females at all ages. 2 The energy demand of both males and females for age range 0– 4 is the lowest. 3 The energy demand of males and females decreases after age range 15–19.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 373.16,
+      "bottom": 497.64,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q06.png",
+      "rawText": "Which organ produces an alkaline mixture that neutralises gastric juices? A salivary glands B large intestine C liver D stomach",
+      "parseStatus": "ok",
+      "stem": "Which organ produces an alkaline mixture that neutralises gastric juices?",
+      "options": {
+        "A": "salivary glands",
+        "B": "large intestine",
+        "C": "liver",
+        "D": "stomach"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "top": 499.64,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q07.png",
+      "rawText": "Which row about translocation is correct? substances transported source sink A amino acids and glucose region of production region of use B amino acids and glucose region of growth region of production C amino acids and sucrose region of production region of use D amino acids and sucrose region of growth region of production",
+      "parseStatus": "ok",
+      "stem": "Which row about translocation is correct? substances transported source sink",
+      "options": {
+        "A": "amino acids and glucose region of production region of use",
+        "B": "amino acids and glucose region of growth region of production",
+        "C": "amino acids and sucrose region of production region of use",
+        "D": "amino acids and sucrose region of growth region of production"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 219.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q08.png",
+      "rawText": "Yogurt is a food made by adding bacteria to milk. The bacteria feed on sugars in the milk and produce lactic acid. The lactic acid denatures the milk protein. Which process produces the lactic acid? A aerobic respiration B anaerobic respiration C assimilation D decomposition",
+      "parseStatus": "ok",
+      "stem": "Yogurt is a food made by adding bacteria to milk. The bacteria feed on sugars in the milk and produce lactic acid. The lactic acid denatures the milk protein. Which process produces the lactic acid?",
+      "options": {
+        "A": "aerobic respiration",
+        "B": "anaerobic respiration",
+        "C": "assimilation",
+        "D": "decomposition"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 221.18,
+      "bottom": 345.66,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q09.png",
+      "rawText": "What is secreted by the pancreas? A glucagon B glucose C glycerol D glycogen",
+      "parseStatus": "ok",
+      "stem": "What is secreted by the pancreas?",
+      "options": {
+        "A": "glucagon",
+        "B": "glucose",
+        "C": "glycerol",
+        "D": "glycogen"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "top": 347.66,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q10.png",
+      "rawText": "The diagram shows a flower. P What is structure P and which type of pollination is used by the flower? structure P type of pollination A filament insect B filament wind C stigma insect D stigma wind",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a flower. P What is structure P and which type of pollination is used by the flower? structure P type of pollination",
+      "options": {
+        "A": "filament insect",
+        "B": "filament wind",
+        "C": "stigma insect",
+        "D": "stigma wind"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 290.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q11.png",
+      "rawText": "Polydactyly is the possession of additional fingers or toes. It is caused by a dominant allele. The pedigree diagram shows the inheritance of polydactyly by a family. key male with polydactyly female with polydactyly male without polydactyly female without polydactyly How many people in this family are heterozygous? A 3 B 4 C 6 D 7",
+      "parseStatus": "ok",
+      "stem": "Polydactyly is the possession of additional fingers or toes. It is caused by a dominant allele. The pedigree diagram shows the inheritance of polydactyly by a family. key male with polydactyly female with polydactyly male without polydactyly female without polydactyly How many people in this family are heterozygous?",
+      "options": {
+        "A": "3",
+        "B": "4",
+        "C": "6",
+        "D": "7"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 292.46,
+      "bottom": 416.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q12.png",
+      "rawText": "In the food chain shown, 10% of the energy is transferred between each trophic level. grass  grasshopper  frog  snake  buzzard How much energy is transferred to the tertiary consumer for every 100 kJ of energy in the herbivore? A 0.1 kJ B 1 kJ C 10 kJ D 100 kJ",
+      "parseStatus": "ok",
+      "stem": "In the food chain shown, 10% of the energy is transferred between each trophic level. grass  grasshopper  frog  snake  buzzard How much energy is transferred to the tertiary consumer for every 100 kJ of energy in the herbivore?",
+      "options": {
+        "A": "0.1 kJ",
+        "B": "1 kJ",
+        "C": "10 kJ",
+        "D": "100 kJ"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "top": 418.1,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q13.png",
+      "rawText": "The table shows the dates that different antibiotics were introduced and the dates that antibiotic-resistant bacteria were first reported. antibiotic date introduced date resistance first reported penicillin 1943 1946 tetracycline 1948 1953 erythromycin 1952 1988 ampicillin 1961 1973 Which statements about the development of antibiotic resistance are supported by the data? 1 Tetracycline was the last antibiotic to be introduced. 2 Erythromycin took the longest time for bacteria to become resistant. 3 Penicillin had the shortest time between introduction and the first report of resistance. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "The table shows the dates that different antibiotics were introduced and the dates that antibiotic-resistant bacteria were first reported. antibiotic date introduced date resistance first reported penicillin 1943 1946 tetracycline 1948 1953 erythromycin 1952 1988 ampicillin 1961 1973 Which statements about the development of antibiotic resistance are supported by the data? 1 Tetracycline was the last antibiotic to be introduced. 2 Erythromycin took the longest time for bacteria to become resistant. 3 Penicillin had the shortest time between introduction and the first report of resistance.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 411.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q14.png",
+      "rawText": "Which graph shows the temperature change when an impure, solid substance is heated? time A temperature time B temperature time C temperature time D temperature",
+      "parseStatus": "ok",
+      "stem": "Which graph shows the temperature change when an impure, solid substance is heated? time",
+      "options": {
+        "A": "temperature time",
+        "B": "temperature time",
+        "C": "temperature time",
+        "D": "temperature"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 413.18,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q15.png",
+      "rawText": "Information about four gases is shown. gas molecular formula ammonia NH3 butane C4H10 carbon dioxide CO2 chlorine Cl 2 Which gas has the greatest rate of diffusion? A ammonia B butane C carbon dioxide D chlorine",
+      "parseStatus": "ok",
+      "stem": "Information about four gases is shown. gas molecular formula ammonia NH3 butane C4H10 carbon dioxide CO2 chlorine Cl 2 Which gas has the greatest rate of diffusion?",
+      "options": {
+        "A": "ammonia",
+        "B": "butane",
+        "C": "carbon dioxide",
+        "D": "chlorine"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 237.36,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q16.png",
+      "rawText": "The electronic configurations of four particles are shown. 1 2 3 4 Which diagrams represent the electronic configurations of a Group VI atom and its ion? A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The electronic configurations of four particles are shown. 1 2 3 4 Which diagrams represent the electronic configurations of a Group VI atom and its ion?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 239.36,
+      "bottom": 389.34,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q17.png",
+      "rawText": "An aluminium atom forms an aluminium ion, Al 3+. Which statement describes what happens to the aluminium atom? A It gains 3 electrons. B It gains 3 protons. C It loses 3 electrons. D It loses 3 protons.",
+      "parseStatus": "ok",
+      "stem": "An aluminium atom forms an aluminium ion, Al 3+. Which statement describes what happens to the aluminium atom?",
+      "options": {
+        "A": "It gains 3 electrons.",
+        "B": "It gains 3 protons.",
+        "C": "It loses 3 electrons.",
+        "D": "It loses 3 protons."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 391.34,
+      "bottom": 519.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q18.png",
+      "rawText": "What is the balanced equation for the combustion of hydrogen? A 2H + O  H2O B H2 + O2  H2O C H2 + O  H2O D 2H2 + O2  2H2O",
+      "parseStatus": "ok",
+      "stem": "What is the balanced equation for the combustion of hydrogen?",
+      "options": {
+        "A": "2H + O  H2O",
+        "B": "H2 + O2  H2O",
+        "C": "H2 + O  H2O",
+        "D": "2H2 + O2  2H2O"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 521.18,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q19.png",
+      "rawText": "Which description of mass is used to define relative atomic mass, Ar? A the mass of 12 1 of a mole of 12C atoms B the mass of one mole of 12C atoms C the mass of 12 1 the mass of one atom of 12C D the mass of one atom of 12C",
+      "parseStatus": "ok",
+      "stem": "Which description of mass is used to define relative atomic mass, Ar?",
+      "options": {
+        "A": "the mass of 12 1 of a mole of 12C atoms",
+        "B": "the mass of one mole of 12C atoms",
+        "C": "the mass of 12 1 the mass of one atom of 12C",
+        "D": "the mass of one atom of 12C"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 220.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q20.png",
+      "rawText": "Which quantities, when measured at room temperature and pressure, contain one mole of oxygen molecules? 1 16 g of oxygen molecules 2 12 dm3 of oxygen molecules 3 the Avogadro constant number of oxygen molecules 4 24 dm3 of oxygen molecules A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which quantities, when measured at room temperature and pressure, contain one mole of oxygen molecules? 1 16 g of oxygen molecules 2 12 dm3 of oxygen molecules 3 the Avogadro constant number of oxygen molecules 4 24 dm3 of oxygen molecules",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 222.8,
+      "bottom": 347.28,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q21.png",
+      "rawText": "Which gas is formed at the cathode during electrolysis? A carbon dioxide B chlorine C hydrogen D oxygen",
+      "parseStatus": "ok",
+      "stem": "Which gas is formed at the cathode during electrolysis?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "chlorine",
+        "C": "hydrogen",
+        "D": "oxygen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 349.28,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q22.png",
+      "rawText": "A reaction pathway diagram for a reaction is shown. 400 300 200 100 0 reactants products energy kJ / mol progress of reaction What is the value of the activation energy for this reaction? A 100 kJ / mol B 150 kJ / mol C 250 kJ / mol D 350 kJ / mol",
+      "parseStatus": "ok",
+      "stem": "A reaction pathway diagram for a reaction is shown. 400 300 200 100 0 reactants products energy kJ / mol progress of reaction What is the value of the activation energy for this reaction?",
+      "options": {
+        "A": "100 kJ / mol",
+        "B": "150 kJ / mol",
+        "C": "250 kJ / mol",
+        "D": "350 kJ / mol"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 286.5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q23.png",
+      "rawText": "Compounds are made up from two or more different elements ……1…… bonded together. Compounds cannot be broken down into simpler substances by ……2…… processes. Compounds and their elements have ……3…… properties. Which words complete gaps 1, 2 and 3? 1 2 3 A chemically chemical similar B chemically physical different C physically chemical similar D physically physical different",
+      "parseStatus": "ok",
+      "stem": "Compounds are made up from two or more different elements ……1…… bonded together. Compounds cannot be broken down into simpler substances by ……2…… processes. Compounds and their elements have ……3…… properties. Which words complete gaps 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "chemically chemical similar",
+        "B": "chemically physical different",
+        "C": "physically chemical similar",
+        "D": "physically physical different"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 288.5,
+      "bottom": 412.98,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q24.png",
+      "rawText": "Which statement describes an amphoteric oxide? A It does not react with either sodium hydroxide or hydrochloric acid. B It reacts with sodium hydroxide but not hydrochloric acid. C It reacts with hydrochloric acid but not sodium hydroxide. D It reacts with both sodium hydroxide and hydrochloric acid.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes an amphoteric oxide?",
+      "options": {
+        "A": "It does not react with either sodium hydroxide or hydrochloric acid.",
+        "B": "It reacts with sodium hydroxide but not hydrochloric acid.",
+        "C": "It reacts with hydrochloric acid but not sodium hydroxide.",
+        "D": "It reacts with both sodium hydroxide and hydrochloric acid."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "top": 414.98,
+      "bottom": 542.58,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q25.png",
+      "rawText": "Which diagram represents the structure of an alloy? + – + – + + – + – + – + – – + A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 544.58,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q26.png",
+      "rawText": "The structure of compound P is shown. C H O C H C H H C H H H H H H Which type of compound is P? A polymer B alcohol C alkane D alkene",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 56.6,
+      "bottom": 321.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q27.png",
+      "rawText": "The chromatogram of four substances is shown. Which substance has an Rf value of 0.25? 10 cm 8 cm 6 cm 4 cm 2 cm 0 cm solvent front baseline A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 323.48,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q28.png",
+      "rawText": "The diagram shows the extension–load graph for a spring. The length of the unloaded spring is 4.0 cm. 6.0 5.0 4.0 3.0 2.0 1.0 0 0 2.0 4.0 6.0 8.0 load / N extension / cm 10 12 A load is suspended from the spring and the length of the spring increases to 5.0 cm. What is the value of the load? A 0.50 N B 2.0 N C 8.0 N D 10 N",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the extension–load graph for a spring. The length of the unloaded spring is 4.0 cm. 6.0 5.0 4.0 3.0 2.0 1.0 0 0 2.0 4.0 6.0 8.0 load / N extension / cm 10 12",
+      "options": {
+        "A": "load is suspended from the spring and the length of the spring increases to 5.0 cm. What is the value of the load? A 0.50 N",
+        "B": "2.0 N",
+        "C": "8.0 N",
+        "D": "10 N"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 224.7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q29.png",
+      "rawText": "What is the unit of work and what is an equivalent combination of units? unit equivalent combination A joule newton metre B joule newton / metre C newton joule metre D newton joule / metre",
+      "parseStatus": "ok",
+      "stem": "What is the unit of work and what is an equivalent combination of units? unit equivalent combination",
+      "options": {
+        "A": "joule newton metre",
+        "B": "joule newton / metre",
+        "C": "newton joule metre",
+        "D": "newton joule / metre"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 226.7,
+      "bottom": 336.9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q30.png",
+      "rawText": "The total energy input to an electric lamp is 20 J. The useful energy output is 12 J. What is the efficiency of the lamp? A 33% B 40% C 60% D 66%",
+      "parseStatus": "ok",
+      "stem": "The total energy input to an electric lamp is 20 J. The useful energy output is 12 J. What is the efficiency of the lamp?",
+      "options": {
+        "A": "33%",
+        "B": "40%",
+        "C": "60%",
+        "D": "66%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 338.9,
+      "bottom": 476.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q31.png",
+      "rawText": "Which statement explains why smoke particles are made to move by other particles in Brownian motion? A The other particles are larger and move faster than smoke particles. B The other particles are larger and move slower than smoke particles. C The other particles are smaller and move faster than smoke particles. D The other particles are smaller and move slower than smoke particles.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why smoke particles are made to move by other particles in Brownian motion?",
+      "options": {
+        "A": "The other particles are larger and move faster than smoke particles.",
+        "B": "The other particles are larger and move slower than smoke particles.",
+        "C": "The other particles are smaller and move faster than smoke particles.",
+        "D": "The other particles are smaller and move slower than smoke particles."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 478.1,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q32.png",
+      "rawText": "Some materials use atomic or molecular lattice vibrations and some materials use the movement of delocalised electrons for thermal conduction. Which row shows the correct materials? atomic or molecular lattice vibrations movement of delocalised electrons A metals only metals and plastics B plastics only metals and plastics C metals and plastics metals only D metals and plastics plastics only",
+      "parseStatus": "ok",
+      "stem": "Some materials use atomic or molecular lattice vibrations and some materials use the movement of delocalised electrons for thermal conduction. Which row shows the correct materials? atomic or molecular lattice vibrations movement of delocalised electrons",
+      "options": {
+        "A": "metals only metals and plastics",
+        "B": "plastics only metals and plastics",
+        "C": "metals and plastics metals only",
+        "D": "metals and plastics plastics only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q33.png",
+      "rawText": "Which surface is the best absorber of thermal radiation? A dull black B dull white C shiny black D shiny white",
+      "parseStatus": "ok",
+      "stem": "Which surface is the best absorber of thermal radiation?",
+      "options": {
+        "A": "dull black",
+        "B": "dull white",
+        "C": "shiny black",
+        "D": "shiny white"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 183.14,
+      "bottom": 527.28,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q34.png",
+      "rawText": "The diagram shows a ray of light passing from medium P to medium Q and then to medium R. The speeds of light in each of the mediums P, Q and R are cP, cQ and cR respectively. R Q P Which list compares the speeds of light in the three mediums in order from lowest to highest? A cP  cQ  cR B cP  cR  cQ C cQ  cP  cR D cR  cQ  cP",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light passing from medium P to medium Q and then to medium R. The speeds of light in each of the mediums P, Q and R are cP, cQ and cR respectively. R Q P Which list compares the speeds of light in the three mediums in order from lowest to highest?",
+      "options": {
+        "A": "cP  cQ  cR",
+        "B": "cP  cR  cQ",
+        "C": "cQ  cP  cR",
+        "D": "cR  cQ  cP"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 529.28,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q35.png",
+      "rawText": "What is the speed of X-rays in a vacuum? A 3.0  102 m / s B 3.0  104 m / s C 3.0  106 m / s D 3.0  108 m / s",
+      "parseStatus": "ok",
+      "stem": "What is the speed of X-rays in a vacuum?",
+      "options": {
+        "A": "3.0  102 m / s",
+        "B": "3.0  104 m / s",
+        "C": "3.0  106 m / s",
+        "D": "3.0  108 m / s"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 248.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q36.png",
+      "rawText": "An electric kettle is rated at 3.0 kW and is connected to a 250 V supply. The kettle is switched on for 2.0 minutes. Which row shows the current in the kettle and the energy transferred by the kettle? current / A energy / J A 12 6000 B 12 360 000 C 750 6000 D 750 360 000",
+      "parseStatus": "ok",
+      "stem": "An electric kettle is rated at 3.0 kW and is connected to a 250 V supply. The kettle is switched on for 2.0 minutes. Which row shows the current in the kettle and the energy transferred by the kettle? current /",
+      "options": {
+        "A": "energy / J A 12 6000",
+        "B": "12 360 000",
+        "C": "750 6000",
+        "D": "750 360 000"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "top": 250.52,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q37.png",
+      "rawText": "The diagram shows resistors of resistance R1 and R2 connected in parallel. The combined resistance of the resistors is RT. Currents I1, I2 and I3 are labelled. I1 I2 R1 R2 I3 Which row is correct? current I1 resistance RT A larger than I3 smaller than R2 B larger than I3 larger than R1 C smaller than I2 smaller than R2 D smaller than I2 larger than R1",
+      "parseStatus": "ok",
+      "stem": "The diagram shows resistors of resistance R1 and R2 connected in parallel. The combined resistance of the resistors is RT. Currents I1, I2 and I3 are labelled. I1 I2 R1 R2 I3 Which row is correct? current I1 resistance RT",
+      "options": {
+        "A": "larger than I3 smaller than R2",
+        "B": "larger than I3 larger than R1",
+        "C": "smaller than I2 smaller than R2",
+        "D": "smaller than I2 larger than R1"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 292.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q38.png",
+      "rawText": "The diagram shows the direction of the current in a wire. The wire is placed between the poles of a magnet and this causes a force to act on the wire. In which labelled direction does the force act? N S A C B D current",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "top": 294.2,
+      "bottom": 418.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q39.png",
+      "rawText": "Which statement about background radiation is correct? A All of it comes from the ground. B None of it comes from the air. C Only people who fly long distances are exposed to it. D Some of it comes from food and drink.",
+      "parseStatus": "ok",
+      "stem": "Which statement about background radiation is correct?",
+      "options": {
+        "A": "All of it comes from the ground.",
+        "B": "None of it comes from the air.",
+        "C": "Only people who fly long distances are exposed to it.",
+        "D": "Some of it comes from food and drink."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "top": 420.68,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_21/q40.png",
+      "rawText": "Planet X and planet Y orbit the Sun and are at different distances from the Sun. The gravitational field strength of the Sun is greater at the position of planet X than it is at the position of planet Y. Which row compares the distances from the Sun and the orbital speeds of planet X and planet Y? distance from the Sun orbital speed A greater for planet X greater for planet X B greater for planet X less for planet X C less for planet X greater for planet X D less for planet X less for planet X",
+      "parseStatus": "ok",
+      "stem": "Planet X and planet Y orbit the Sun and are at different distances from the Sun. The gravitational field strength of the Sun is greater at the position of planet X than it is at the position of planet Y. Which row compares the distances from the Sun and the orbital speeds of planet X and planet Y? distance from the Sun orbital speed",
+      "options": {
+        "A": "greater for planet X greater for planet X",
+        "B": "greater for planet X less for planet X",
+        "C": "less for planet X greater for planet X",
+        "D": "less for planet X less for planet X"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

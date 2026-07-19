@@ -1,4 +1,4 @@
-export function evaluatePaper(questions, answers) {
+export function evaluatePaper(questions, answers, input = {}) {
   let correct = 0;
   const details = [];
 
@@ -17,6 +17,7 @@ export function evaluatePaper(questions, answers) {
       skills: Array.isArray(question.skills) ? question.skills : [],
       mistakeType: question.mistakeType || "concept",
       correct: isCorrect,
+      starred: Boolean(input.starred?.[idx]),
       selectedIndex,
       answer: question.answer,
       hintsUsed: 0,

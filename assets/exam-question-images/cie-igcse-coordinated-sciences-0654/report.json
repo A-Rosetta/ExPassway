@@ -1,0 +1,246 @@
+{
+  "sourceRoot": "/home/ubuntu/ig_coorinate_science",
+  "assetRoot": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654",
+  "syllabus": "0654",
+  "subject": "CIE IGCSE Co-ordinated Sciences",
+  "paper": "Paper 2 Multiple Choice",
+  "paperCount": 21,
+  "questionImageCount": 840,
+  "validAnswerCount": 839,
+  "discountedQuestionCount": 1,
+  "files": [
+    {
+      "paper": "0654_m23_qp_22",
+      "questionPaper": "0654_m23_qp_22.pdf",
+      "markScheme": "0654_m23_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 36,
+      "imageOnly": 4,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_m23_qp_22.json"
+    },
+    {
+      "paper": "0654_s23_qp_21",
+      "questionPaper": "0654_s23_qp_21.pdf",
+      "markScheme": "0654_s23_ms_21.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 38,
+      "imageOnly": 2,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s23_qp_21.json"
+    },
+    {
+      "paper": "0654_s23_qp_22",
+      "questionPaper": "0654_s23_qp_22.pdf",
+      "markScheme": "0654_s23_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 39,
+      "discountedQuestions": [
+        17
+      ],
+      "textParseOk": 36,
+      "imageOnly": 4,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s23_qp_22.json"
+    },
+    {
+      "paper": "0654_s23_qp_23",
+      "questionPaper": "0654_s23_qp_23.pdf",
+      "markScheme": "0654_s23_ms_23.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 33,
+      "imageOnly": 7,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s23_qp_23.json"
+    },
+    {
+      "paper": "0654_w23_qp_21",
+      "questionPaper": "0654_w23_qp_21.pdf",
+      "markScheme": "0654_w23_ms_21.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 37,
+      "imageOnly": 3,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w23_qp_21.json"
+    },
+    {
+      "paper": "0654_w23_qp_22",
+      "questionPaper": "0654_w23_qp_22.pdf",
+      "markScheme": "0654_w23_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 35,
+      "imageOnly": 5,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w23_qp_22.json"
+    },
+    {
+      "paper": "0654_w23_qp_23",
+      "questionPaper": "0654_w23_qp_23.pdf",
+      "markScheme": "0654_w23_ms_23.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 36,
+      "imageOnly": 4,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w23_qp_23.json"
+    },
+    {
+      "paper": "0654_m24_qp_22",
+      "questionPaper": "0654_m24_qp_22.pdf",
+      "markScheme": "0654_m24_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 36,
+      "imageOnly": 4,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_m24_qp_22.json"
+    },
+    {
+      "paper": "0654_s24_qp_21",
+      "questionPaper": "0654_s24_qp_21.pdf",
+      "markScheme": "0654_s24_ms_21.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 34,
+      "imageOnly": 6,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s24_qp_21.json"
+    },
+    {
+      "paper": "0654_s24_qp_22",
+      "questionPaper": "0654_s24_qp_22.pdf",
+      "markScheme": "0654_s24_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 38,
+      "imageOnly": 2,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s24_qp_22.json"
+    },
+    {
+      "paper": "0654_s24_qp_23",
+      "questionPaper": "0654_s24_qp_23.pdf",
+      "markScheme": "0654_s24_ms_23.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 30,
+      "imageOnly": 10,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s24_qp_23.json"
+    },
+    {
+      "paper": "0654_w24_qp_21",
+      "questionPaper": "0654_w24_qp_21.pdf",
+      "markScheme": "0654_w24_ms_21.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 38,
+      "imageOnly": 2,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w24_qp_21.json"
+    },
+    {
+      "paper": "0654_w24_qp_22",
+      "questionPaper": "0654_w24_qp_22.pdf",
+      "markScheme": "0654_w24_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 38,
+      "imageOnly": 2,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w24_qp_22.json"
+    },
+    {
+      "paper": "0654_w24_qp_23",
+      "questionPaper": "0654_w24_qp_23.pdf",
+      "markScheme": "0654_w24_ms_23.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 33,
+      "imageOnly": 7,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w24_qp_23.json"
+    },
+    {
+      "paper": "0654_m25_qp_22",
+      "questionPaper": "0654_m25_qp_22.pdf",
+      "markScheme": "0654_m25_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 36,
+      "imageOnly": 4,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_m25_qp_22.json"
+    },
+    {
+      "paper": "0654_s25_qp_21",
+      "questionPaper": "0654_s25_qp_21.pdf",
+      "markScheme": "0654_s25_ms_21.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 36,
+      "imageOnly": 4,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s25_qp_21.json"
+    },
+    {
+      "paper": "0654_s25_qp_22",
+      "questionPaper": "0654_s25_qp_22.pdf",
+      "markScheme": "0654_s25_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 37,
+      "imageOnly": 3,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s25_qp_22.json"
+    },
+    {
+      "paper": "0654_s25_qp_23",
+      "questionPaper": "0654_s25_qp_23.pdf",
+      "markScheme": "0654_s25_ms_23.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 35,
+      "imageOnly": 5,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_s25_qp_23.json"
+    },
+    {
+      "paper": "0654_w25_qp_21",
+      "questionPaper": "0654_w25_qp_21.pdf",
+      "markScheme": "0654_w25_ms_21.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 36,
+      "imageOnly": 4,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w25_qp_21.json"
+    },
+    {
+      "paper": "0654_w25_qp_22",
+      "questionPaper": "0654_w25_qp_22.pdf",
+      "markScheme": "0654_w25_ms_22.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 38,
+      "imageOnly": 2,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w25_qp_22.json"
+    },
+    {
+      "paper": "0654_w25_qp_23",
+      "questionPaper": "0654_w25_qp_23.pdf",
+      "markScheme": "0654_w25_ms_23.pdf",
+      "questionCount": 40,
+      "answerCount": 40,
+      "discountedQuestions": [],
+      "textParseOk": 34,
+      "imageOnly": 6,
+      "dataFile": "/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data/0654_w25_qp_23.json"
+    }
+  ]
+}

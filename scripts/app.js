@@ -65,6 +65,15 @@
     return localStorage.getItem(AUTH_TOKEN_KEY) || "";
   }
 
+  function readUserProfile() {
+    try {
+      const raw = localStorage.getItem(USER_PROFILE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (_err) {
+      return null;
+    }
+  }
+
   function readNotebookRows() {
     try {
       const raw = localStorage.getItem(scopedKey(NOTEBOOK_KEY));
@@ -147,15 +156,22 @@
     let currentUser = null;
     try {
       currentUser = await window.ALevelApi.getCurrentUser(token);
-    } catch (_err) {
-      localStorage.removeItem(USER_PROFILE_KEY);
-      localStorage.removeItem(USER_ID_KEY);
-      localStorage.removeItem(AUTH_TOKEN_KEY);
-      location.href = "pages/login.html";
-      return;
+    } catch (err) {
+      if (err?.status === 401 || err?.status === 403) {
+        localStorage.removeItem(USER_PROFILE_KEY);
+        localStorage.removeItem(USER_ID_KEY);
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+        location.href = "pages/login.html";
+        return;
+      }
+      currentUser = readUserProfile() || {};
+      setBackendStatus("backendUnavailable", true);
     }
 
     applyLanguage(currentUser?.language || getLanguage());
+
+    const goAdmin = getEl("goAdmin");
+    if (goAdmin) goAdmin.hidden = currentUser?.role !== "admin";
 
     const gradeEl = getEl("grade");
     if (!gradeEl) return;
@@ -165,18 +181,26 @@
     const paperEl = getEl("paper");
     const preferredLanguageEl = getEl("preferredLanguage");
 
-    await loadCurriculumData();
+    const curriculum = await loadCurriculumData();
+    const grades = Array.isArray(curriculum?.grades) && curriculum.grades.length
+      ? curriculum.grades
+      : ["IGCSE"];
+    const boards = curriculum?.boards && typeof curriculum.boards === "object"
+      ? Object.keys(curriculum.boards)
+      : ["CIE"];
 
-    fillSelect(gradeEl, ["IGCSE"]);
-    fillSelect(boardEl, ["CIE"]);
+    fillSelect(gradeEl, grades);
+    fillSelect(boardEl, boards);
 
     function refreshSubjects() {
-      fillSelect(subjectEl, ["IGCSE Chemistry"]);
+      const subjects = Object.keys(curriculum?.boards?.[boardEl.value] || {});
+      fillSelect(subjectEl, subjects.length ? subjects : ["IGCSE Chemistry"]);
       refreshPapers();
     }
 
     function refreshPapers() {
-      fillSelect(paperEl, ["MCQ"]);
+      const papers = curriculum?.boards?.[boardEl.value]?.[subjectEl.value];
+      fillSelect(paperEl, Array.isArray(papers) && papers.length ? papers : ["MCQ"]);
     }
 
     boardEl.addEventListener("change", refreshSubjects);
@@ -188,6 +212,7 @@
         grade: gradeEl.value,
         board: boardEl.value,
         subject: subjectEl.value,
+        subjectCode: curriculum?.subjectCodes?.[subjectEl.value] || "",
         paper: paperEl.value,
       };
       localStorage.setItem("alevel.selection", JSON.stringify(payload));
@@ -199,25 +224,6 @@
       location.href = "pages/generate.html";
     });
 
-    getEl("goAnalysis").addEventListener("click", () => {
-      packSelection();
-      location.href = "pages/analysis.html";
-    });
-
-    const goNotebook = getEl("goNotebook");
-    if (goNotebook) {
-      goNotebook.addEventListener("click", () => {
-        location.href = "pages/notebook.html";
-      });
-    }
-
-    const goNotebookFromPanel = getEl("goNotebookFromPanel");
-    if (goNotebookFromPanel) {
-      goNotebookFromPanel.addEventListener("click", () => {
-        location.href = "pages/notebook.html";
-      });
-    }
-
     const goCommunity = getEl("goCommunity");
     if (goCommunity) {
       goCommunity.addEventListener("click", () => {
@@ -226,7 +232,6 @@
       });
     }
 
-    const goAdmin = getEl("goAdmin");
     if (goAdmin) {
       goAdmin.addEventListener("click", () => {
         location.href = "pages/admin.html";
@@ -237,13 +242,6 @@
     if (goLogin) {
       goLogin.addEventListener("click", () => {
         location.href = "pages/login.html";
-      });
-    }
-
-    const showAlertBtn = getEl("showAlertBtn");
-    if (showAlertBtn) {
-      showAlertBtn.addEventListener("click", () => {
-        alert(currentLanguage === "en" ? "Hello from the main page." : "这是主页上的提示。");
       });
     }
 

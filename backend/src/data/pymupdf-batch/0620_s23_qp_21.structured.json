@@ -5,7 +5,7 @@
     {
       "questionNo": 1,
       "pageIndex": 1,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q01.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q01.png",
       "rawText": "The diagram shows the result of dropping a purple crystal into water. water purple crystal after five hours purple solution Which processes take place in this experiment? chemical reaction diffusing dissolving A \u0016 \u0016 \u001a B \u0016 \u001a \u001a C \u001a \u001a \u0016 D \u001a \u0016 \u0016",
       "parseStatus": "ok",
       "stem": "The diagram shows the result of dropping a purple crystal into water. water purple crystal after five hours purple solution Which processes take place in this experiment? chemical reaction diffusing dissolving",
@@ -19,7 +19,7 @@
     {
       "questionNo": 2,
       "pageIndex": 1,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q02.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q02.png",
       "rawText": "Which row about elements, mixtures and compounds is correct? metallic element non-metallic element mixture compound A copper methane brass sulfur B brass sulfur copper methane C copper sulfur brass methane D brass methane copper sulfur",
       "parseStatus": "ok",
       "stem": "Which row about elements, mixtures and compounds is correct? metallic element non-metallic element mixture compound",
@@ -33,7 +33,7 @@
     {
       "questionNo": 3,
       "pageIndex": 1,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q03.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q03.png",
       "rawText": "The atomic structures of four particles, W, X, Y and Z, are shown. electrons neutrons protons W 2 2 2 X 2 2 3 Y 2 3 2 Z 3 2 3 Which particles are isotopes of the same element? A W and X B W and Y C X and Y D X and Z",
       "parseStatus": "ok",
       "stem": "The atomic structures of four particles, W, X, Y and Z, are shown. electrons neutrons protons W 2 2 2 X 2 2 3 Y 2 3 2 Z 3 2 3 Which particles are isotopes of the same element?",
@@ -47,7 +47,7 @@
     {
       "questionNo": 4,
       "pageIndex": 2,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q04.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q04.png",
       "rawText": "Which statement explains why isotopes of the same element have the same chemical properties? A They have the same number of outer shell electrons. B They have the same number of neutrons. C They have different numbers of protons. D They have different mass numbers.",
       "parseStatus": "ok",
       "stem": "Which statement explains why isotopes of the same element have the same chemical properties?",
@@ -61,7 +61,7 @@
     {
       "questionNo": 5,
       "pageIndex": 2,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q05.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q05.png",
       "rawText": "Nitrogen forms a nitride ion with the formula N3–. Which particle does not have the same electronic configuration as the nitride ion? A Al 3+ B Cl – C Na+ D O2–",
       "parseStatus": "ok",
       "stem": "Nitrogen forms a nitride ion with the formula N3–. Which particle does not have the same electronic configuration as the nitride ion?",
@@ -75,7 +75,7 @@
     {
       "questionNo": 6,
       "pageIndex": 2,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q06.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q06.png",
       "rawText": "Which row describes the formation of single covalent bonds in methane? A atoms share a pair of electrons both atoms gain a noble gas electronic structure B atoms share a pair of electrons both atoms have the same number of electrons in their outer shell C electrons are transferred from one atom to another both atoms gain a noble gas electronic structure D electrons are transferred from one atom to another both atoms have the same number of electrons in their outer shell",
       "parseStatus": "ok",
       "stem": "Which row describes the formation of single covalent bonds in methane?",
@@ -89,7 +89,7 @@
     {
       "questionNo": 7,
       "pageIndex": 2,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q07.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q07.png",
       "rawText": "Which formula is an empirical formula? A C2H4O B C4H8O2 C C3H7COOH D CH3CH2CH2COOH",
       "parseStatus": "ok",
       "stem": "Which formula is an empirical formula?",
@@ -103,7 +103,7 @@
     {
       "questionNo": 8,
       "pageIndex": 2,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q08.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q08.png",
       "rawText": "Heating iron sulfide, FeS2, in air produces sulfur dioxide. 4FeS2 + 11O2 → 2Fe2O3 + 8SO2 What is the maximum mass of sulfur dioxide produced from 120 kg of iron sulfide? A 64 kg B 128 kg C 240 kg D 512 kg",
       "parseStatus": "ok",
       "stem": "Heating iron sulfide, FeS2, in air produces sulfur dioxide. 4FeS2 + 11O2 → 2Fe2O3 + 8SO2 What is the maximum mass of sulfur dioxide produced from 120 kg of iron sulfide?",
@@ -117,7 +117,7 @@
     {
       "questionNo": 9,
       "pageIndex": 3,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q09.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q09.png",
       "rawText": "Which substance produces hydrogen and bromine when electrolysed? A concentrated aqueous copper(II) bromide B concentrated aqueous sodium bromide C dilute aqueous potassium bromide D molten lead(II) bromide",
       "parseStatus": "ok",
       "stem": "Which substance produces hydrogen and bromine when electrolysed?",
@@ -131,7 +131,7 @@
     {
       "questionNo": 10,
       "pageIndex": 3,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q10.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q10.png",
       "rawText": "Which statements about hydrogen fuel cells are correct? 1 Water is formed as the only waste product. 2 Both water and carbon dioxide are formed as waste products. 3 The overall reaction is 2H2 + O2 → 2H2O. 4 The overall reaction is endothermic. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
       "parseStatus": "ok",
       "stem": "Which statements about hydrogen fuel cells are correct? 1 Water is formed as the only waste product. 2 Both water and carbon dioxide are formed as waste products. 3 The overall reaction is 2H2 + O2 → 2H2O. 4 The overall reaction is endothermic.",
@@ -145,7 +145,7 @@
     {
       "questionNo": 11,
       "pageIndex": 3,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q11.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q11.png",
       "rawText": "Ethene gas, C2H4, is completely burned in excess oxygen to form carbon dioxide and water. The equation for this exothermic reaction is shown. C2H4 + 3O2 → 2CO2 + 2H2O The table shows the bond energies involved in the reaction. bond bond energy in kJ / mol C=C 614 C–H 413 O=O 495 C=O 799 O–H 467 What is the total energy change in this reaction? A –954 kJ / mol B –1010 kJ / mol C –1313 kJ / mol D –1369 kJ / mol",
       "parseStatus": "ok",
       "stem": "Ethene gas, C2H4, is completely burned in excess oxygen to form carbon dioxide and water. The equation for this exothermic reaction is shown. C2H4 + 3O2 → 2CO2 + 2H2O The table shows the bond energies involved in the reaction. bond bond energy in kJ / mol C=C 614 C–H 413 O=O 495 C=O 799 O–H 467 What is the total energy change in this reaction?",
@@ -159,7 +159,7 @@
     {
       "questionNo": 12,
       "pageIndex": 4,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q12.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q12.png",
       "rawText": "Which row describes the effect on the activation energy and the frequency of particle collisions when the temperature of a chemical reaction is increased? activation energy frequency of collisions A increases increases B no change increases C increases no change D no change no change",
       "parseStatus": "ok",
       "stem": "Which row describes the effect on the activation energy and the frequency of particle collisions when the temperature of a chemical reaction is increased? activation energy frequency of collisions",
@@ -173,7 +173,7 @@
     {
       "questionNo": 13,
       "pageIndex": 4,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q13.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q13.png",
       "rawText": "Solid copper(II) sulfate exists in two different forms, anhydrous and hydrated. One of these forms is blue and the other is white. The change between these two forms is reversible. blue form white form What is the blue form and how is the change from the blue form to the white form brought about? blue form change to white form A anhydrous add water B anhydrous heat C hydrated add water D hydrated heat",
       "parseStatus": "ok",
       "stem": "Solid copper(II) sulfate exists in two different forms, anhydrous and hydrated. One of these forms is blue and the other is white. The change between these two forms is reversible. blue form white form What is the blue form and how is the change from the blue form to the white form brought about? blue form change to white form",
@@ -187,7 +187,7 @@
     {
       "questionNo": 14,
       "pageIndex": 4,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q14.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q14.png",
       "rawText": "Sodium ions, Na+, and oxygen ions, O2–, combine with chromium ions to form a salt. The salt sodium dichromate has the formula Na2Cr2O7. What is the oxidation state of chromium in this salt? A +2 B +3 C +6 D +12",
       "parseStatus": "ok",
       "stem": "Sodium ions, Na+, and oxygen ions, O2–, combine with chromium ions to form a salt. The salt sodium dichromate has the formula Na2Cr2O7. What is the oxidation state of chromium in this salt?",
@@ -201,7 +201,7 @@
     {
       "questionNo": 15,
       "pageIndex": 4,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q15.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q15.png",
       "rawText": "The concentration of hydrogen ions in 100 cm3 of 0.1 mol / dm3 hydrochloric acid is higher than the concentration of hydrogen ions in 100 cm3 of 0.1 mol / dm3 ethanoic acid. Which statement explains the difference in hydrogen ion concentration? A Ethanoic acid is an organic acid. B Ethanoic acid has a lower pH than hydrochloric acid. C Ethanoic acid is partially dissociated. D Ethanoic acid is a strong acid.",
       "parseStatus": "ok",
       "stem": "The concentration of hydrogen ions in 100 cm3 of 0.1 mol / dm3 hydrochloric acid is higher than the concentration of hydrogen ions in 100 cm3 of 0.1 mol / dm3 ethanoic acid. Which statement explains the difference in hydrogen ion concentration?",
@@ -215,7 +215,7 @@
     {
       "questionNo": 16,
       "pageIndex": 5,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q16.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q16.png",
       "rawText": "Which oxide is classified as an amphoteric oxide? A aluminium oxide B calcium oxide C copper(II) oxide D nitrogen oxide",
       "parseStatus": "ok",
       "stem": "Which oxide is classified as an amphoteric oxide?",
@@ -229,7 +229,7 @@
     {
       "questionNo": 17,
       "pageIndex": 5,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q17.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q17.png",
       "rawText": "Which method produces the salt copper(II) carbonate? A Add copper(II) oxide to water, then add excess aqueous sodium carbonate. Filter off the precipitate. B Add copper(II) oxide to dilute sulfuric acid, then add excess aqueous sodium carbonate. Filter off the precipitate. C Add copper to dilute hydrochloric acid, then add aqueous sodium carbonate. Filter off the precipitate. D Add copper(II) oxide to excess aqueous sodium carbonate. Filter off the precipitate.",
       "parseStatus": "ok",
       "stem": "Which method produces the salt copper(II) carbonate?",
@@ -243,7 +243,7 @@
     {
       "questionNo": 18,
       "pageIndex": 5,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q18.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q18.png",
       "rawText": "Which statements about the trends across a period of the Periodic Table are correct? 1 Aluminium is more metallic than sodium. 2 Beryllium is more metallic than carbon. 3 Boron is more metallic than lithium. 4 Magnesium is more metallic than silicon. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
       "parseStatus": "ok",
       "stem": "Which statements about the trends across a period of the Periodic Table are correct? 1 Aluminium is more metallic than sodium. 2 Beryllium is more metallic than carbon. 3 Boron is more metallic than lithium. 4 Magnesium is more metallic than silicon.",
@@ -257,7 +257,7 @@
     {
       "questionNo": 19,
       "pageIndex": 6,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q19.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q19.png",
       "rawText": "Some information about elements in Group II of the Periodic Table is shown. element time taken to make 10 cm3 of hydrogen gas when 1 g of metal is added to cold water density in g / cm3 melting point / °C beryllium no reaction 1.85 1280 magnesium >300 seconds 1.74 650 calcium 60 seconds 1.54 850 strontium 30 seconds 2.62 768 barium 10 seconds 3.51 714 Which row shows the correct trends in reactivity, density and melting point of the elements going down Group II of the Periodic Table? reactivity density melting point A decreases down group increases down group decreases down group B decreases down group decreases down group no clear trend C increases down group no clear trend increases down group D increases down group no clear trend no clear trend",
       "parseStatus": "ok",
       "stem": "Some information about elements in Group II of the Periodic Table is shown. element time taken to make 10 cm3 of hydrogen gas when 1 g of metal is added to cold water density in g / cm3 melting point / °C beryllium no reaction 1.85 1280 magnesium >300 seconds 1.74 650 calcium 60 seconds 1.54 850 strontium 30 seconds 2.62 768 barium 10 seconds 3.51 714 Which row shows the correct trends in reactivity, density and melting point of the elements going down Group II of the Periodic Table? reactivity density melting point",
@@ -271,7 +271,7 @@
     {
       "questionNo": 20,
       "pageIndex": 6,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q20.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q20.png",
       "rawText": "A new element oxfordium, Ox, was discovered with the following properties. solubility electrical conduction formula of element bonding in a molecule of Ox2 insoluble in water does not conduct Ox2 Ox Ox In which group of the Periodic Table should the new element be placed? A Group III B Group V C Group VII D Group VIII",
       "parseStatus": "ok",
       "stem": "A new element oxfordium, Ox, was discovered with the following properties. solubility electrical conduction formula of element bonding in a molecule of Ox2 insoluble in water does not conduct Ox2 Ox Ox In which group of the Periodic Table should the new element be placed?",
@@ -285,7 +285,7 @@
     {
       "questionNo": 21,
       "pageIndex": 7,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q21.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q21.png",
       "rawText": "Which row describes a similarity and a difference between chlorine and bromine? similarity difference A both are gases at room temperature and pressure chlorine and bromine have different colours B both exist as diatomic molecules chlorine is more dense than bromine C both have atoms with seven outer-shell electrons only bromine will react with aqueous sodium chloride D both react with aqueous potassium iodide chlorine is more reactive than bromine",
       "parseStatus": "ok",
       "stem": "Which row describes a similarity and a difference between chlorine and bromine? similarity difference",
@@ -299,7 +299,7 @@
     {
       "questionNo": 22,
       "pageIndex": 7,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q22.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q22.png",
       "rawText": "Which statement describes transition elements? A They have high densities and high melting points. B They have high densities and low melting points. C They have low densities and high melting points. D They have low densities and low melting points.",
       "parseStatus": "ok",
       "stem": "Which statement describes transition elements?",
@@ -313,7 +313,7 @@
     {
       "questionNo": 23,
       "pageIndex": 7,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q23.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q23.png",
       "rawText": "Which gas is made when powdered zinc is added to dilute hydrochloric acid? A carbon dioxide B chlorine C hydrogen D oxygen",
       "parseStatus": "ok",
       "stem": "Which gas is made when powdered zinc is added to dilute hydrochloric acid?",
@@ -327,7 +327,7 @@
     {
       "questionNo": 24,
       "pageIndex": 7,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q24.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q24.png",
       "rawText": "The diagram represents the structure of a solid. Which solids does the diagram represent? brass graphite sodium chloride A \u0016 \u0016 \u001a B \u0016 \u001a \u001a C \u001a \u0016 \u0016 D \u001a \u001a \u0016",
       "parseStatus": "ok",
       "stem": "The diagram represents the structure of a solid. Which solids does the diagram represent? brass graphite sodium chloride",
@@ -341,7 +341,7 @@
     {
       "questionNo": 25,
       "pageIndex": 8,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q25.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q25.png",
       "rawText": "Steel is an alloy of iron. Which statement explains why steel is stronger than iron? A Steel contains carbon which is a very hard substance. B The carbon atoms in steel bond together very strongly. C The carbon atoms in steel make the iron atoms bond together very strongly. D The carbon atoms prevent layers of iron atoms from sliding over each other.",
       "parseStatus": "ok",
       "stem": "Steel is an alloy of iron. Which statement explains why steel is stronger than iron?",
@@ -355,7 +355,7 @@
     {
       "questionNo": 26,
       "pageIndex": 8,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q26.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q26.png",
       "rawText": "Three students, X, Y and Z, are told that solid P reacts with dilute acids and also conducts electricity. The table shows the students’ suggestions about the identity of P. X Y Z copper iron graphite Which students are correct? A X, Y and Z B X only C Y only D Z only",
       "parseStatus": "ok",
       "stem": "Three students, X, Y and Z, are told that solid P reacts with dilute acids and also conducts electricity. The table shows the students’ suggestions about the identity of P. X Y Z copper iron graphite Which students are correct?",
@@ -369,7 +369,7 @@
     {
       "questionNo": 27,
       "pageIndex": 8,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q27.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q27.png",
       "rawText": "Which statement explains why aluminium appears to be unreactive? A It is coated in an oxide layer. B It has a low density. C It is low in the reactivity series. D It is solid at room temperature.",
       "parseStatus": "ok",
       "stem": "Which statement explains why aluminium appears to be unreactive?",
@@ -383,7 +383,7 @@
     {
       "questionNo": 28,
       "pageIndex": 8,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q28.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q28.png",
       "rawText": "During the electrolysis of aluminium oxide, the mass of the carbon anode changes. Which row describes the change and gives a reason for this change? mass change of the anode reason A decreases carbon reacts to form carbon dioxide B decreases carbon dissolves in molten cryolite C increases electrodes become coated with cryolite D increases electrodes become coated with aluminium",
       "parseStatus": "ok",
       "stem": "During the electrolysis of aluminium oxide, the mass of the carbon anode changes. Which row describes the change and gives a reason for this change? mass change of the anode reason",
@@ -397,7 +397,7 @@
     {
       "questionNo": 29,
       "pageIndex": 9,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q29.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q29.png",
       "rawText": "Several processes are used to treat domestic water. Which row identifies a reason for the given process? process reason A chlorination removes impurities B filtration removes insoluble solids C sedimentation removes soluble solids D use of carbon kills bacteria",
       "parseStatus": "ok",
       "stem": "Several processes are used to treat domestic water. Which row identifies a reason for the given process? process reason",
@@ -411,7 +411,7 @@
     {
       "questionNo": 30,
       "pageIndex": 9,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q30.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q30.png",
       "rawText": "What is the equation for photosynthesis? A CO2 + 3H2 → CH3OH + H2O B 6CO2 + 6H2O → C6H12O6 + 6O2 C C6H12O6 → 2C2H5OH + 2CO2 D C6H12O6 + 6O2 → 6CO2 + 6H2O",
       "parseStatus": "ok",
       "stem": "What is the equation for photosynthesis?",
@@ -425,7 +425,7 @@
     {
       "questionNo": 31,
       "pageIndex": 9,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q31.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q31.png",
       "rawText": "Which statement describes how the C–H bonds in methane gas in the atmosphere contribute to global warming? A They absorb thermal energy from the Sun and emit some of this energy into space. B They absorb thermal energy from the Sun and emit all of this energy towards the Earth. C They absorb thermal energy from the Earth and emit all of this energy towards the Earth. D They absorb thermal energy from the Earth and emit some of this energy towards the Earth.",
       "parseStatus": "ok",
       "stem": "Which statement describes how the C–H bonds in methane gas in the atmosphere contribute to global warming?",
@@ -439,7 +439,7 @@
     {
       "questionNo": 32,
       "pageIndex": 9,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q32.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q32.png",
       "rawText": "The structural formulae of two hydrocarbons are shown. CH3CH2CH2CH3 CH3CH(CH3)CH3 Which statement about the hydrocarbons is correct? A They are both alkenes. B They decolourise aqueous bromine. C They are structural isomers. D They undergo addition reactions.",
       "parseStatus": "ok",
       "stem": "The structural formulae of two hydrocarbons are shown. CH3CH2CH2CH3 CH3CH(CH3)CH3 Which statement about the hydrocarbons is correct?",
@@ -453,7 +453,7 @@
     {
       "questionNo": 33,
       "pageIndex": 10,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q33.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q33.png",
       "rawText": "The structural formula of compound Q is given. CH3CH2CH2COOCH2CH2CH3 What is compound Q? A butyl butanoate B butyl propanoate C propyl butanoate D propyl propanoate",
       "parseStatus": "ok",
       "stem": "The structural formula of compound Q is given. CH3CH2CH2COOCH2CH2CH3 What is compound Q?",
@@ -467,7 +467,7 @@
     {
       "questionNo": 34,
       "pageIndex": 10,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q34.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q34.png",
       "rawText": "The fractional distillation of petroleum is shown. Which fraction contains hydrocarbons with the longest chain length? A fuel gas bitumen B C D petroleum",
       "parseStatus": "ok",
       "stem": "The fractional distillation of petroleum is shown. Which fraction contains hydrocarbons with the longest chain length?",
@@ -481,7 +481,7 @@
     {
       "questionNo": 35,
       "pageIndex": 10,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q35.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q35.png",
       "rawText": "Which equation represents the cracking of an alkane? A 3C2H4 → C6H12 B C6H12 + H2 → C6H14 C C6H14 → 6C + 7H2 D C6H14 → C2H4 + C4H10",
       "parseStatus": "ok",
       "stem": "Which equation represents the cracking of an alkane?",
@@ -495,7 +495,7 @@
     {
       "questionNo": 36,
       "pageIndex": 10,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q36.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q36.png",
       "rawText": "What is the structure of the product of the reaction of propene with bromine? C H H H C A H H C Br H H C H H H C B Br Br C H C H H H C C H C Br Br H H C H H C D H H C Br Br H H",
       "parseStatus": "ok",
       "stem": "What is the structure of the product of the reaction of propene with bromine?",
@@ -509,7 +509,7 @@
     {
       "questionNo": 37,
       "pageIndex": 11,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q37.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q37.png",
       "rawText": "In reaction R, 2000 molecules of CH2=CH2 react to form a single molecule X only. 2000 CH2=CH2 → X Which terms describe reaction R, CH2=CH2 and X? reaction R CH2=CH2 X A addition monomer polymer B addition polymer monomer C substitution monomer polymer D substitution polymer monomer",
       "parseStatus": "ok",
       "stem": "In reaction R, 2000 molecules of CH2=CH2 react to form a single molecule X only. 2000 CH2=CH2 → X Which terms describe reaction R, CH2=CH2 and X? reaction R CH2=CH2 X",
@@ -523,7 +523,7 @@
     {
       "questionNo": 38,
       "pageIndex": 11,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q38.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q38.png",
       "rawText": "Part of the structure of a polymer is shown. C O O C N H H N C O H N Which statements about the polymer are correct? 1 The polymer is nylon. 2 The polymer is formed by condensation polymerisation. 3 There are ester linkages between the monomers. A 1 and 2 B 2 and 3 C 2 only D 3 only",
       "parseStatus": "ok",
       "stem": "Part of the structure of a polymer is shown. Which statements about the polymer are correct? 1 The polymer is nylon. 2 The polymer is formed by condensation polymerisation. 3 There are ester linkages between the monomers.",
@@ -537,7 +537,7 @@
     {
       "questionNo": 39,
       "pageIndex": 11,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q39.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q39.png",
       "rawText": "The concentration of acids and alkalis can be determined by titration. Which pieces of equipment are needed to perform a titration? 1 2 3 4 A 1 and 2 B 1 and 3 C 2 and 3 D 2 and 4",
       "parseStatus": "ok",
       "stem": "The concentration of acids and alkalis can be determined by titration. Which pieces of equipment are needed to perform a titration? 1 2 3 4",
@@ -551,7 +551,7 @@
     {
       "questionNo": 40,
       "pageIndex": 12,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_21/q40.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_21/q40.png",
       "rawText": "Which chromatogram shows how the Rf value of a substance is calculated? A y x Rf = y x B y x x Rf = y x C y Rf = x y D y x Rf = x y",
       "parseStatus": "ok",
       "stem": "Which chromatogram shows how the Rf value of a substance is calculated?",

@@ -66,7 +66,7 @@
     fillForm(payload.user);
     setAuthStatus(text, false);
     setTimeout(() => {
-      location.href = "../index.html";
+      location.href = payload.user?.role === "admin" ? "./admin.html" : "../index.html";
     }, 300);
   }
 
@@ -135,10 +135,15 @@
       const old = loginBtn.textContent;
       loginBtn.textContent = t("loggingIn");
       try {
-        const data = await window.ALevelApi.login({ email, password });
+        const data = await window.ALevelApi.login({ identifier: email, password });
         applyAuthSuccess(data, t("loginSuccess", { name: data.user.displayName }));
       } catch (err) {
-        setAuthStatus(t("loginFailed", { message: err.message || t("invalidCredentials") }), true);
+        setAuthStatus(
+          err?.status === 403
+            ? t("accountDisabled")
+            : t("loginFailed", { message: err.message || t("invalidCredentials") }),
+          true
+        );
       } finally {
         loginBtn.disabled = false;
         loginBtn.textContent = old;
@@ -156,13 +161,6 @@
       location.href = "../index.html";
     });
 
-    const goAdminLoginBtn = byId("goAdminLoginBtn");
-    if (goAdminLoginBtn) {
-      goAdminLoginBtn.addEventListener("click", () => {
-        location.href = "./admin-login.html";
-      });
-    }
-
     const token = readAuthToken();
     if (token) {
       window.ALevelApi.getCurrentUser(token)
@@ -171,12 +169,18 @@
           fillForm(user);
           setAuthStatus(t("autoLoginSuccess", { name: user.displayName }), false);
           setTimeout(() => {
-            location.href = "../index.html";
+            location.href = user?.role === "admin" ? "./admin.html" : "../index.html";
           }, 300);
         })
-        .catch(() => {
-          clearAuth();
-          setAuthStatus(t("loginExpired"), true);
+        .catch((err) => {
+          if (err?.status === 401 || err?.status === 403) {
+            clearAuth();
+            setAuthStatus(t(err?.status === 403 ? "accountDisabled" : "loginExpired"), true);
+            return;
+          }
+          setAuthStatus(t("loginCheckUnavailable", {
+            message: err?.message || t("retryLater"),
+          }), true);
         });
     }
   }

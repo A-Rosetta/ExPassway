@@ -2,15 +2,38 @@ import { Router } from "express";
 import { curriculumData } from "../data/curriculum.js";
 import { questionBank } from "../data/questionBank.js";
 import { isDbEnabled } from "../db/client.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { listPublishedSubjects } from "../db/repositories/examCatalog.repository.js";
 
 const router = Router();
 
-router.get("/curriculum", (_req, res) => {
+router.get("/curriculum", asyncHandler(async (_req, res) => {
+  if (isDbEnabled()) {
+    const subjects = await listPublishedSubjects();
+    const boards = {};
+    subjects.forEach((subject) => {
+      const board = subject.board || "CIE";
+      boards[board] ||= {};
+      boards[board][`${subject.qualification} ${subject.name}`] = ["MCQ"];
+    });
+    res.json({
+      ok: true,
+      data: {
+        grades: [...new Set(subjects.map((subject) => subject.qualification))],
+        boards,
+        subjectCodes: Object.fromEntries(subjects.map((subject) => [
+          `${subject.qualification} ${subject.name}`,
+          subject.code,
+        ])),
+      },
+    });
+    return;
+  }
   res.json({
     ok: true,
     data: curriculumData,
   });
-});
+}));
 
 router.get("/stats", (_req, res) => {
   const boardCounts = questionBank.reduce((acc, question) => {

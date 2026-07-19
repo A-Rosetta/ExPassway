@@ -37,6 +37,10 @@ body {
   gap: 1rem;
 }
 
+.container > * {
+  min-width: 0;
+}
+
 .card {
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -86,8 +90,19 @@ button {
   font-weight: 700;
 }
 
+.data-table button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.data-table button {
+  min-width: 4.5rem;
+  padding: 0.45rem 0.7rem;
+}
+
 .btn-primary { background: var(--primary); }
 .btn-secondary { background: var(--secondary); }
+.btn-danger { background: #b3362d; }
 
 .tip {
   margin-top: 0.7rem;
@@ -96,6 +111,75 @@ button {
 }
 
 .panel { margin-top: 1rem; }
+
+.admin-import-section {
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.admin-import-section:first-of-type {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.admin-import-section h3,
+.admin-import-section h4 {
+  margin: 0 0 0.75rem;
+}
+
+.admin-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-section-heading h3 {
+  margin: 0;
+}
+
+.admin-import-progress {
+  width: 100%;
+  height: 0.85rem;
+  margin-top: 0.85rem;
+  accent-color: var(--primary);
+}
+
+.admin-import-summary {
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.admin-import-stat-value {
+  font-size: 1.15rem;
+  overflow-wrap: anywhere;
+}
+
+.admin-import-table {
+  min-width: 680px;
+}
+
+.admin-import-issues {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #9b2c2c;
+}
+
+.admin-import-issues li + li {
+  margin-top: 0.35rem;
+}
+
+.admin-import-status-validated,
+.admin-import-status-published {
+  color: #176346;
+  background: #e6f5ed;
+}
+
+.admin-import-status-failed {
+  color: #8e2721;
+  background: #fbeae8;
+}
 
 .account-collapsible > summary {
   cursor: pointer;
@@ -147,6 +231,81 @@ button {
 .question h4 {
   margin: 0 0 0.4rem;
   font-size: 0.96rem;
+}
+
+.question-title-row,
+.review-question-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.question-star-btn {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #cbd5e5;
+  border-radius: 8px;
+  background: #fff;
+  color: #64748b;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.question-star-btn.is-starred {
+  border-color: #d99b13;
+  background: #fff8dc;
+  color: #b77900;
+}
+
+.review-star {
+  color: #b77900;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.review-question-image {
+  margin: 0.5rem 0 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.5rem;
+}
+
+.review-question-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 720px;
+  object-fit: contain;
+}
+
+.review-question-answers {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.review-question-answers > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fbff;
+  padding: 0.65rem 0.75rem;
+}
+
+.review-question-answers span {
+  color: var(--muted);
+}
+
+.review-question-answers strong {
+  font-size: 1.15rem;
 }
 
 .question-images-wrap {
@@ -416,6 +575,15 @@ button {
   .review-pie-chart {
     width: min(240px, 68vw);
   }
+
+  .admin-import-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 .text-modal {
@@ -511,6 +679,7 @@ button {
 }
 
 .jump-btn {
+  position: relative;
   border: 1px solid var(--line);
   background: #f3f7ff;
   color: #2c4672;
@@ -527,7 +696,6 @@ button {
 }
 
 .jump-btn.answered {
-  position: relative;
   border-color: #1f7a5a;
   box-shadow: inset 0 0 0 1px rgba(31, 122, 90, 0.25);
 }
@@ -545,6 +713,25 @@ button {
 
 .jump-btn.active.answered::after {
   background: #fff;
+}
+
+.jump-btn.starred::before {
+  content: "★";
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  color: #b77900;
+  font-size: 0.62rem;
+}
+
+.jump-btn.active.starred::before {
+  color: #ffe07a;
+}
+
+@media (max-width: 620px) {
+  .review-question-answers {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 980px) {
@@ -1093,6 +1280,18 @@ button {
   margin: 0;
 }
 
+.paper-reference-preview {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fbff;
+  padding: 0.65rem 0.7rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
 .inline-check {
   display: flex;
   grid-template-columns: none;
@@ -1134,6 +1333,85 @@ button {
 
 .question-context:empty {
   display: none;
+}
+
+.discussion-question-reference {
+  position: relative;
+  max-width: 820px;
+  margin: 0 0 0.85rem;
+  padding: 0;
+}
+
+.discussion-question-reference img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 680px;
+  object-fit: contain;
+  object-position: left top;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.discussion-question-reference figcaption {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.discussion-question-menu {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+}
+
+.discussion-question-menu summary {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+  list-style: none;
+  box-shadow: 0 4px 14px rgba(24, 44, 76, 0.12);
+}
+
+.discussion-question-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.discussion-question-menu-list {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  width: max-content;
+  min-width: 180px;
+  display: grid;
+  padding: 0.3rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(24, 44, 76, 0.16);
+}
+
+.discussion-question-menu-list a {
+  padding: 0.6rem 0.7rem;
+  border-radius: 6px;
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.discussion-question-menu-list a:hover {
+  background: #eef4ff;
 }
 
 .discussion-list,
@@ -1207,6 +1485,486 @@ button {
 
 .discussion-post p {
   line-height: 1.58;
+}
+
+.markdown-body {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.58;
+}
+
+.markdown-body img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 520px;
+  margin: 0.65rem 0;
+  object-fit: contain;
+}
+
+.community-page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.community-page-head > div {
+  min-width: 0;
+}
+
+.community-page-head > button {
+  flex: 0 0 auto;
+}
+
+.markdown-editor-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.markdown-editor-head > span {
+  font-weight: 700;
+}
+
+.editor-tool-toggle {
+  min-height: 36px;
+  padding: 0.4rem 0.7rem;
+}
+
+.markdown-editor-field {
+  margin-top: 0.35rem;
+}
+
+.rich-editor-source[hidden] {
+  display: none;
+}
+
+.rich-text-editor {
+  min-height: 140px;
+  max-height: 520px;
+  overflow: auto;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfdff;
+}
+
+.rich-text-editor:focus {
+  border-color: #2455d6;
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(36, 85, 214, 0.1);
+}
+
+.rich-text-editor[contenteditable="false"] {
+  background: #f3f5f8;
+  color: #667085;
+}
+
+.rich-text-editor img {
+  cursor: default;
+}
+
+@media (max-width: 520px) {
+  .community-page-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .community-page-head > button {
+    align-self: flex-start;
+  }
+}
+
+.rich-text-editor.is-empty::before {
+  color: #7c879a;
+  content: attr(data-placeholder);
+  pointer-events: none;
+}
+
+.rich-text-editor a {
+  color: #2455d6;
+  text-decoration: underline;
+}
+
+.rich-editor-math {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  margin: 0 0.15rem;
+  vertical-align: middle;
+}
+
+.rich-editor-math.is-display {
+  display: flex;
+  width: 100%;
+  margin: 0.45rem 0;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.rich-editor-math math-field {
+  display: inline-block;
+  min-width: 1.8rem;
+  max-width: 100%;
+  padding: 0.12rem 4.2rem 0.12rem 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 1.1em;
+  --caret-color: #2455d6;
+  --selection-background-color: #d8e6ff;
+  --contains-highlight-background-color: #edf3ff;
+}
+
+.rich-editor-math math-field:focus-within {
+  border-color: #2455d6;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(36, 85, 214, 0.1);
+}
+
+.rich-editor-math math-field::part(menu-toggle),
+.rich-editor-math math-field::part(virtual-keyboard-toggle) {
+  display: none;
+}
+
+.rich-editor-math-actions {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rich-editor-math.is-active .rich-editor-math-actions {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rich-editor-math-action,
+.rich-editor-math-menu summary {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  min-height: 26px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #c8d0dd;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  list-style: none;
+}
+
+.rich-editor-math-action:hover,
+.rich-editor-math-action:focus-visible,
+.rich-editor-math-menu summary:hover,
+.rich-editor-math-menu summary:focus-visible {
+  border-color: #5e83dc;
+  background: #edf3ff;
+  outline: 0;
+}
+
+.rich-editor-math-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.rich-editor-math-menu-list {
+  position: fixed;
+  z-index: 100;
+  display: grid;
+  width: max-content;
+  min-width: 142px;
+  padding: 0.3rem;
+  border: 1px solid #c8d0dd;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(27, 38, 59, 0.16);
+}
+
+.rich-editor-math-menu-list button {
+  min-height: 34px;
+  padding: 0.45rem 0.6rem;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+}
+
+.rich-editor-math-menu-list button:hover,
+.rich-editor-math-menu-list button:focus-visible,
+.rich-editor-math-menu-list button.is-active {
+  background: #edf3ff;
+  outline: 0;
+}
+
+.rich-editor-math-menu-list button.is-active::before {
+  content: "✓";
+  display: inline-block;
+  width: 1.2rem;
+  color: #2455d6;
+  font-weight: 800;
+}
+
+.rich-editor-math-menu-list button:not(.is-active)::before {
+  content: "";
+  display: inline-block;
+  width: 1.2rem;
+}
+
+.markdown-body .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.2rem 0;
+}
+
+.math-input-panel {
+  margin-top: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fbff;
+  padding: 0.8rem;
+}
+
+.math-input-panel[hidden] {
+  display: none;
+}
+
+.math-input-head,
+.math-input-footer,
+.math-edit-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.math-input-head,
+.math-input-footer {
+  justify-content: space-between;
+}
+
+.math-input-head h3 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.math-input-head .tip {
+  margin: 0.2rem 0 0;
+}
+
+.math-keyboard-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+  padding-bottom: 0.15rem;
+  overflow-x: auto;
+}
+
+.math-keyboard-tab {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.math-keyboard-tab.is-active {
+  border-color: #2455d6;
+  background: #e9f0ff;
+  color: #173f9f;
+}
+
+.math-keyboard-keys {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(54px, 1fr));
+  gap: 0.45rem;
+  margin-top: 0.6rem;
+}
+
+.math-key {
+  min-width: 0;
+  height: 44px;
+  padding: 0.3rem;
+  border: 1px solid #ced7e5;
+  border-radius: 7px;
+  background: #fff;
+  color: #1d2b46;
+  font-family: "Cambria Math", "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.math-key:hover,
+.math-key:focus-visible {
+  border-color: #5e83dc;
+  background: #edf3ff;
+}
+
+.math-input-footer {
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.math-icon-btn {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.formatting-toolbar {
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border: 1px solid #c8d0dd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(27, 38, 59, 0.16);
+}
+
+.formatting-toolbar[hidden] {
+  display: none;
+}
+
+.formatting-toolbar button {
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+}
+
+.formatting-toolbar button:hover,
+.formatting-toolbar button:focus-visible,
+.formatting-toolbar button.is-active {
+  background: #edf3ff;
+  outline: 0;
+}
+
+.formatting-toolbar button.is-active {
+  color: #173f9f;
+  box-shadow: inset 0 0 0 1px #8eaae9;
+}
+
+.formatting-toolbar .formatting-link-button {
+  width: auto;
+  padding: 0 0.55rem;
+}
+
+@media (max-width: 760px) {
+  .math-keyboard-keys {
+    grid-template-columns: repeat(4, minmax(52px, 1fr));
+  }
+
+  .math-input-head,
+  .math-input-footer {
+    align-items: stretch;
+  }
+
+  .math-input-footer {
+    flex-direction: column;
+  }
+
+}
+
+.markdown-body > :first-child {
+  margin-top: 0;
+}
+
+.markdown-body > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4 {
+  margin: 1rem 0 0.45rem;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+.markdown-body h1 { font-size: 1.35rem; }
+.markdown-body h2 { font-size: 1.2rem; }
+.markdown-body h3,
+.markdown-body h4 { font-size: 1.05rem; }
+
+.markdown-body pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background: #172033;
+  color: #f4f7fb;
+}
+
+.markdown-body code {
+  padding: 0.12rem 0.3rem;
+  border-radius: 4px;
+  background: #eef1f6;
+  font-size: 0.9em;
+}
+
+.markdown-body pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.markdown-body blockquote {
+  margin-left: 0;
+  padding-left: 0.8rem;
+  border-left: 3px solid #8ea7d6;
+  color: var(--muted);
+}
+
+.markdown-body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.markdown-body th,
+.markdown-body td {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--line);
+}
+
+.answer-status-table tr.is-target-question td {
+  background: #fff3c4;
+  box-shadow: inset 0 1px #e2b93b, inset 0 -1px #e2b93b;
 }
 
 .moderation-row {

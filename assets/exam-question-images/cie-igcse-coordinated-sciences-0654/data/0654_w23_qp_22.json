@@ -1,0 +1,743 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2023/winter/0654_w23_qp_22.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2023/winter/0654_w23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.6,
+      "bottom": 208.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q01.png",
+      "rawText": "Which characteristics of living things are demonstrated by phototropism? 1 growth",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 210.14,
+      "bottom": 385.26,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q02.png",
+      "rawText": "What is osmosis? A the diffusion of sugar molecules from a concentrated solution to a dilute solution through a partially permeable membrane B the diffusion of sugar molecules from a dilute solution to a concentrated solution through a partially permeable membrane C the diffusion of water molecules from a concentrated solution to a dilute solution through a partially permeable membrane D the diffusion of water molecules from a dilute solution to a concentrated solution through a partially permeable membrane",
+      "parseStatus": "ok",
+      "stem": "What is osmosis?",
+      "options": {
+        "A": "the diffusion of sugar molecules from a concentrated solution to a dilute solution through a partially permeable membrane",
+        "B": "the diffusion of sugar molecules from a dilute solution to a concentrated solution through a partially permeable membrane",
+        "C": "the diffusion of water molecules from a concentrated solution to a dilute solution through a partially permeable membrane",
+        "D": "the diffusion of water molecules from a dilute solution to a concentrated solution through a partially permeable membrane"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 387.26,
+      "bottom": 633.66,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q03.png",
+      "rawText": "A colourless liquid gives the test results shown. test colour obtained Benedict’s blue biuret purple iodine blue / black Which nutrients are in the colourless liquid? A protein, reducing sugar and starch B protein and reducing sugar only C protein and starch only D protein only",
+      "parseStatus": "ok",
+      "stem": "A colourless liquid gives the test results shown. test colour obtained Benedict’s blue biuret purple iodine blue / black Which nutrients are in the colourless liquid?",
+      "options": {
+        "A": "protein, reducing sugar and starch",
+        "B": "protein and reducing sugar only",
+        "C": "protein and starch only",
+        "D": "protein only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "top": 635.66,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q04.png",
+      "rawText": "Which type of molecule are enzymes? A carbohydrate B fat C protein D starch",
+      "parseStatus": "ok",
+      "stem": "Which type of molecule are enzymes?",
+      "options": {
+        "A": "carbohydrate",
+        "B": "fat",
+        "C": "protein",
+        "D": "starch"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 210.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q05.png",
+      "rawText": "Which row shows the correct raw materials and products of photosynthesis? raw materials products A CO2 H2O C6H12O6 O2 B C6H12O6 H2O CO2 O2 C O2 CO2 C6H12O6 H2O D O2 C6H12O6 CO2 H2O",
+      "parseStatus": "ok",
+      "stem": "Which row shows the correct raw materials and products of photosynthesis? raw materials products",
+      "options": {
+        "A": "CO2 H2O C6H12O6 O2",
+        "B": "C6H12O6 H2O CO2 O2",
+        "C": "O2 CO2 C6H12O6 H2O",
+        "D": "O2 C6H12O6 CO2 H2O"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 212.54,
+      "bottom": 398.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q06.png",
+      "rawText": "Which row provides the greatest amount of the nutrient needed to move food through the alimentary canal? nutrient content / 100 g calcium / mg fibre / g protein / g sugar / g A 36.0 5.1 9.0 24.8 B 35.0 2.8 3.3 20.0 C 46.0 10.9 9.0 0.8 D 8.5 0.0 28.0 0.0",
+      "parseStatus": "ok",
+      "stem": "Which row provides the greatest amount of the nutrient needed to move food through the alimentary canal? nutrient content / 100 g calcium / mg fibre / g protein / g sugar / g",
+      "options": {
+        "A": "36.0 5.1 9.0 24.8",
+        "B": "35.0 2.8 3.3 20.0",
+        "C": "46.0 10.9 9.0 0.8",
+        "D": "8.5 0.0 28.0 0.0"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "top": 400.52,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q07.png",
+      "rawText": "The rates of water uptake and loss are measured in four leaves. The results are shown in the table. Which leaf is least likely to wilt? rate of water uptake / mm3 per minute rate of water loss / mm3 per minute A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 363.12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q08.png",
+      "rawText": "An experiment is set up, as shown. boiling tube soda lime (absorbs carbon dioxide) wire mesh live insects level X coloured liquid What will happen to the level of coloured liquid at X? A It goes down. B It goes up. C It goes up and then down. D It stays the same.",
+      "parseStatus": "ok",
+      "stem": "An experiment is set up, as shown. boiling tube soda lime (absorbs carbon dioxide) wire mesh live insects level X coloured liquid What will happen to the level of coloured liquid at X?",
+      "options": {
+        "A": "It goes down.",
+        "B": "It goes up.",
+        "C": "It goes up and then down.",
+        "D": "It stays the same."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 365.12,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q09.png",
+      "rawText": "The diagram shows a section through the front of the eye and a front view of the eye. P pupil Q R Which muscles contract when viewing a distant object in dim light? A P and R B P only C Q and R D Q only",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through the front of the eye and a front view of the eye. P pupil Q R Which muscles contract when viewing a distant object in dim light?",
+      "options": {
+        "A": "P and R",
+        "B": "P only",
+        "C": "Q and R",
+        "D": "Q only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 342.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q10.png",
+      "rawText": "The diagram shows human gamete formation and fertilisation. male gametes made in V fertilisation occurs in Z female gametes made in W male gametes female gametes Which row is correct? structure V structure W structure Z A scrotum uterus oviduct B testes oviduct ovary C testes ovary oviduct D scrotum oviduct uterus",
+      "parseStatus": "ok",
+      "stem": "The diagram shows human gamete formation and fertilisation. male gametes made in V fertilisation occurs in Z female gametes made in W male gametes female gametes Which row is correct? structure V structure W structure Z",
+      "options": {
+        "A": "scrotum uterus oviduct",
+        "B": "testes oviduct ovary",
+        "C": "testes ovary oviduct",
+        "D": "scrotum oviduct uterus"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 344.54,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q11.png",
+      "rawText": "Which statement about variation is correct? A Continuous variation results only from environmental differences. B Continuous variation results only from genetic differences. C Discontinuous variation results only from environmental differences. D Discontinuous variation results only from genetic differences.",
+      "parseStatus": "ok",
+      "stem": "Which statement about variation is correct?",
+      "options": {
+        "A": "Continuous variation results only from environmental differences.",
+        "B": "Continuous variation results only from genetic differences.",
+        "C": "Discontinuous variation results only from environmental differences.",
+        "D": "Discontinuous variation results only from genetic differences."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 392.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q12.png",
+      "rawText": "The diagram shows a North American food web. deer mice birds beech tree berries grasses snake owl mountain lion fox squirrel rabbit Which organism is both a primary and secondary consumer? A birds B owl C snake D squirrel",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a North American food web. deer mice birds beech tree berries grasses snake owl mountain lion fox squirrel rabbit Which organism is both a primary and secondary consumer?",
+      "options": {
+        "A": "birds",
+        "B": "owl",
+        "C": "snake",
+        "D": "squirrel"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "top": 394.1,
+      "bottom": 543.96,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q13.png",
+      "rawText": "The concentration of carbon dioxide in the atmosphere has increased during the last 200 years. What has contributed to this increase? A burning large areas of forest B increasing use of pesticides C planting more crops D using fewer fossil fuels",
+      "parseStatus": "ok",
+      "stem": "The concentration of carbon dioxide in the atmosphere has increased during the last 200 years. What has contributed to this increase?",
+      "options": {
+        "A": "burning large areas of forest",
+        "B": "increasing use of pesticides",
+        "C": "planting more crops",
+        "D": "using fewer fossil fuels"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 545.96,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q14.png",
+      "rawText": "A sample of water contains two useful substances, insoluble chalk and a soluble salt. Which two processes are used to individually separate the insoluble chalk from the soluble salt and from the water? A distillation and chromatography B distillation and crystallisation C filtration and chromatography D filtration and crystallisation",
+      "parseStatus": "ok",
+      "stem": "A sample of water contains two useful substances, insoluble chalk and a soluble salt. Which two processes are used to individually separate the insoluble chalk from the soluble salt and from the water?",
+      "options": {
+        "A": "distillation and chromatography",
+        "B": "distillation and crystallisation",
+        "C": "filtration and chromatography",
+        "D": "filtration and crystallisation"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "top": 56.66,
+      "bottom": 181.98,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q15.png",
+      "rawText": "Which statement about isotopes of the same element is correct? A They have the same number of protons but different number of electrons. B They have the same number of protons but different number of neutrons. C They have the same number of neutrons but different number of electrons. D They have the same number of neutrons but different number of protons.",
+      "parseStatus": "ok",
+      "stem": "Which statement about isotopes of the same element is correct?",
+      "options": {
+        "A": "They have the same number of protons but different number of electrons.",
+        "B": "They have the same number of protons but different number of neutrons.",
+        "C": "They have the same number of neutrons but different number of electrons.",
+        "D": "They have the same number of neutrons but different number of protons."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "top": 183.98,
+      "bottom": 350.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q16.png",
+      "rawText": "When dilute sodium hydroxide is added to aqueous iron(II) sulfate, insoluble iron(II) hydroxide and aqueous sodium sulfate are formed. What is the ionic equation for this reaction? A Fe2+(aq) + 2OH–(aq)  Fe(OH)2(s) B Fe2+(aq) + SO4 2–(aq) + 2Na+(aq) + 2OH–(aq)  Fe(OH)2(s) + 2Na+(aq) + SO4 2–(aq) C FeSO4(aq) + 2NaOH(aq)  Fe(OH)2(s) + Na2SO4(aq) D SO4 2–(aq) + 2Na+(aq)  Na2SO4(aq)",
+      "parseStatus": "ok",
+      "stem": "When dilute sodium hydroxide is added to aqueous iron(II) sulfate, insoluble iron(II) hydroxide and aqueous sodium sulfate are formed. What is the ionic equation for this reaction?",
+      "options": {
+        "A": "Fe2+(aq) + 2OH–(aq)  Fe(OH)2(s)",
+        "B": "Fe2+(aq) + SO4 2–(aq) + 2Na+(aq) + 2OH–(aq)  Fe(OH)2(s) + 2Na+(aq) + SO4 2–(aq)",
+        "C": "FeSO4(aq) + 2NaOH(aq)  Fe(OH)2(s) + Na2SO4(aq)",
+        "D": "SO4 2–(aq) + 2Na+(aq)  Na2SO4(aq)"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 352.1,
+      "bottom": 558.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q17.png",
+      "rawText": "Concentrated aqueous sodium chloride is electrolysed using inert electrodes. Which row describes how the number of sodium ions and the number of chloride ions changes during the electrolysis? number of sodium ions number of chloride ions A decreases decreases B decreases no change C no change decreases D no change no change",
+      "parseStatus": "ok",
+      "stem": "Concentrated aqueous sodium chloride is electrolysed using inert electrodes. Which row describes how the number of sodium ions and the number of chloride ions changes during the electrolysis? number of sodium ions number of chloride ions",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases no change",
+        "C": "no change decreases",
+        "D": "no change no change"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 560.18,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q18.png",
+      "rawText": "Which change decreases the frequency of collisions between reactant particles? A increasing the concentration of reactant solutions B increasing the pressure on gaseous reactants C increasing the temperature of the reaction mixture D using larger pieces of a solid reactant",
+      "parseStatus": "ok",
+      "stem": "Which change decreases the frequency of collisions between reactant particles?",
+      "options": {
+        "A": "increasing the concentration of reactant solutions",
+        "B": "increasing the pressure on gaseous reactants",
+        "C": "increasing the temperature of the reaction mixture",
+        "D": "using larger pieces of a solid reactant"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 192.9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q19.png",
+      "rawText": "Iron displaces copper ions from its aqueous salts. An equation for this reaction is shown. Fe + Cu2+  Fe2+ + Cu What is the reducing agent in this reaction? A Cu B Cu2+ C Fe D Fe2+",
+      "parseStatus": "ok",
+      "stem": "Iron displaces copper ions from its aqueous salts. An equation for this reaction is shown. Fe + Cu2+  Fe2+ + Cu What is the reducing agent in this reaction?",
+      "options": {
+        "A": "Cu",
+        "B": "Cu2+",
+        "C": "Fe",
+        "D": "Fe2+"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 194.9,
+      "bottom": 507.72,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q20.png",
+      "rawText": "Solid S is added to dilute hydrochloric acid in the apparatus shown. solid S + dilute hydrochloric acid universal indicator solution The universal indicator solution shows the pH decreases. What is solid S? A zinc B zinc carbonate C zinc hydroxide D zinc oxide",
+      "parseStatus": "ok",
+      "stem": "Solid S is added to dilute hydrochloric acid in the apparatus shown. solid S + dilute hydrochloric acid universal indicator solution The universal indicator solution shows the pH decreases. What is solid S?",
+      "options": {
+        "A": "zinc",
+        "B": "zinc carbonate",
+        "C": "zinc hydroxide",
+        "D": "zinc oxide"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 509.72,
+      "bottom": 661.26,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q21.png",
+      "rawText": "Which statements about the halogens are correct? 1 They are diatomic metals. 2 Their atoms have seven outer-shell electrons. 3 Going down the group, they change from solid to liquid to gas. 4 Going down the group, they become darker in colour. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about the halogens are correct? 1 They are diatomic metals. 2 Their atoms have seven outer-shell electrons. 3 Going down the group, they change from solid to liquid to gas. 4 Going down the group, they become darker in colour.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 663.26,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q22.png",
+      "rawText": "Which statement explains why argon is used to fill lamps? A It is a gas. B It is colourless. C It is reactive. D It is unreactive.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why argon is used to fill lamps?",
+      "options": {
+        "A": "It is a gas.",
+        "B": "It is colourless.",
+        "C": "It is reactive.",
+        "D": "It is unreactive."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 356.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q23.png",
+      "rawText": "W, X, Y and Z are metals. Three statements about these metals are listed. 1 Metal W reduces the oxide of X. 2 Metal Z is not able to reduce the oxide of W, but it does reduce the oxides of X and Y. 3 Metal X displaces Y from its aqueous solution. Which row shows the order of reactivity? most reactive least reactive A W X Z Y B W Z X Y C W Z Y X D Z W X Y",
+      "parseStatus": "ok",
+      "stem": "W, X, Y and Z are metals. Three statements about these metals are listed. 1 Metal W reduces the oxide of X. 2 Metal Z is not able to reduce the oxide of W, but it does reduce the oxides of X and Y. 3 Metal X displaces Y from its aqueous solution. Which row shows the order of reactivity? most reactive least reactive",
+      "options": {
+        "A": "W X Z Y",
+        "B": "W Z X Y",
+        "C": "W Z Y X",
+        "D": "Z W X Y"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 358.52,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q24.png",
+      "rawText": "The change in the concentration of carbon dioxide in the atmosphere over time is shown. 400 380 360 340 320 300 280 CO2 concentration / ppm 1900 1920 1940 1960 1980 2000 year Which row identifies the cause of this change and an environmental problem caused by this change? cause environmental problem A increased combustion of sulfur containing fossil fuels acid rain B increased combustion of gasoline climate change C increased fermentation of sugars acid rain D increased cracking of crude oil climate change",
+      "parseStatus": "ok",
+      "stem": "The change in the concentration of carbon dioxide in the atmosphere over time is shown. 400 380 360 340 320 300 280 CO2 concentration / ppm 1900 1920 1940 1960 1980 2000 year Which row identifies the cause of this change and an environmental problem caused by this change? cause environmental problem",
+      "options": {
+        "A": "increased combustion of sulfur containing fossil fuels acid rain",
+        "B": "increased combustion of gasoline climate change",
+        "C": "increased fermentation of sugars acid rain",
+        "D": "increased cracking of crude oil climate change"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "top": 56.66,
+      "bottom": 184.5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q25.png",
+      "rawText": "Which equation does not represent a reaction that occurs in the Contact process? A CaO + SO2  CaSO3 B H2S2O7 + H2O  2H2SO4 C 2SO2 + O2  2SO3 D S + O2  SO2",
+      "parseStatus": "ok",
+      "stem": "Which equation does not represent a reaction that occurs in the Contact process?",
+      "options": {
+        "A": "CaO + SO2  CaSO3",
+        "B": "H2S2O7 + H2O  2H2SO4",
+        "C": "2SO2 + O2  2SO3",
+        "D": "S + O2  SO2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "top": 186.5,
+      "bottom": 314.34,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q26.png",
+      "rawText": "Which word equation describes the manufacture of lime from limestone? A calcium carbonate  calcium hydroxide + carbon dioxide B calcium carbonate  calcium oxide + carbon dioxide C calcium hydroxide  calcium oxide + water D calcium oxide + carbon dioxide  calcium carbonate",
+      "parseStatus": "ok",
+      "stem": "Which word equation describes the manufacture of lime from limestone?",
+      "options": {
+        "A": "calcium carbonate  calcium hydroxide + carbon dioxide",
+        "B": "calcium carbonate  calcium oxide + carbon dioxide",
+        "C": "calcium hydroxide  calcium oxide + water",
+        "D": "calcium oxide + carbon dioxide  calcium carbonate"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 316.34,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q27.png",
+      "rawText": "Which row about the formation of condensation polymers is correct? monomer description product formation A contains C=C double bond the condensation polymer only B contains C=C double bond the condensation polymer and a small molecule C two different monomers used the condensation polymer only D two different monomers used the condensation polymer and a small molecule",
+      "parseStatus": "ok",
+      "stem": "Which row about the formation of condensation polymers is correct? monomer description product formation",
+      "options": {
+        "A": "contains C=C double bond the condensation polymer only",
+        "B": "contains C=C double bond the condensation polymer and a small molecule",
+        "C": "two different monomers used the condensation polymer only",
+        "D": "two different monomers used the condensation polymer and a small molecule"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q28.png",
+      "rawText": "A student tests three identical springs that obey Hooke’s Law. Each spring stretches by 3.0 cm when a 3.0 N load is attached to one end of it. The three springs are connected together as shown. A 1.0 N load is placed on the end of the springs. The mass of the springs can be ignored. 1.0 N What is the total extension of all the springs together? A 1.0 cm B 3.0 cm C 6.0 cm D 9.0 cm",
+      "parseStatus": "ok",
+      "stem": "A student tests three identical springs that obey Hooke’s Law. Each spring stretches by 3.0 cm when a 3.0 N load is attached to one end of it. The three springs are connected together as shown.",
+      "options": {
+        "A": "1.0 N load is placed on the end of the springs. The mass of the springs can be ignored. 1.0 N What is the total extension of all the springs together? A 1.0 cm",
+        "B": "3.0 cm",
+        "C": "6.0 cm",
+        "D": "9.0 cm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 449.04,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q29.png",
+      "rawText": "The diagram shows a crane supporting a load of 6000 N. The horizontal distance between the load and the pivot is x. The load is balanced about the pivot by a concrete block of mass 10 000 kg. The horizontal distance of the concrete block from the pivot is 2.0 m. Gravitational field strength g is 10 N / kg. concrete block 10 000 kg crane pivot 2.0 m x load 6000 N NOT TO SCALE What is the distance of x? A 1.2 m B 3.3 m C 12 m D 33 m",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a crane supporting a load of 6000 N. The horizontal distance between the load and the pivot is x. The load is balanced about the pivot by a concrete block of mass 10 000 kg. The horizontal distance of the concrete block from the pivot is 2.0 m. Gravitational field strength g is 10 N / kg. concrete block 10 000 kg crane pivot 2.0 m x load 6000 N NOT TO SCALE What is the distance of x?",
+      "options": {
+        "A": "1.2 m",
+        "B": "3.3 m",
+        "C": "12 m",
+        "D": "33 m"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "top": 451.04,
+      "bottom": 683.22,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q30.png",
+      "rawText": "A rectangular block weighs 1200 N and has the dimensions shown. 10 cm 15 cm 8.0 cm What is the minimum pressure that the block can exert on the ground by standing on one of its faces? A 1.0 N / cm2 B 8.0 N / cm2 C 10 N / cm2 D 15 N / cm2",
+      "parseStatus": "ok",
+      "stem": "A rectangular block weighs 1200 N and has the dimensions shown. 10 cm 15 cm 8.0 cm What is the minimum pressure that the block can exert on the ground by standing on one of its faces?",
+      "options": {
+        "A": "1.0 N / cm2",
+        "B": "8.0 N / cm2",
+        "C": "10 N / cm2",
+        "D": "15 N / cm2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "top": 685.22,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q31.png",
+      "rawText": "A brick falls from rest at a height of 45 m above the ground. The acceleration of free fall g is 10 m / s2. There is no air resistance. What is the speed of the brick as it hits the ground? A 9.5 m / s B 21 m / s C 30 m / s D 450 m / s",
+      "parseStatus": "ok",
+      "stem": "A brick falls from rest at a height of 45 m above the ground. The acceleration of free fall g is 10 m / s2. There is no air resistance. What is the speed of the brick as it hits the ground?",
+      "options": {
+        "A": "9.5 m / s",
+        "B": "21 m / s",
+        "C": "30 m / s",
+        "D": "450 m / s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "top": 56.66,
+      "bottom": 181.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q32.png",
+      "rawText": "For which energy resource is the Sun the source of all the energy stored? A geothermal B nuclear fission C tidal D wind",
+      "parseStatus": "ok",
+      "stem": "For which energy resource is the Sun the source of all the energy stored?",
+      "options": {
+        "A": "geothermal",
+        "B": "nuclear fission",
+        "C": "tidal",
+        "D": "wind"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "top": 183.2,
+      "bottom": 307.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q33.png",
+      "rawText": "Which change on its own increases the sensitivity of a liquid-in-glass thermometer? A decreasing the internal diameter of the tube B increasing the internal diameter of the tube C making the thermometer longer D making the thermometer shorter",
+      "parseStatus": "ok",
+      "stem": "Which change on its own increases the sensitivity of a liquid-in-glass thermometer?",
+      "options": {
+        "A": "decreasing the internal diameter of the tube",
+        "B": "increasing the internal diameter of the tube",
+        "C": "making the thermometer longer",
+        "D": "making the thermometer shorter"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "top": 309.68,
+      "bottom": 488.94,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q34.png",
+      "rawText": "The amplitude of a sound wave increases, and the frequency of the wave decreases. What is the effect on the loudness of the sound and on the pitch of the sound? loudness pitch A greater higher B greater lower C less higher D less lower",
+      "parseStatus": "ok",
+      "stem": "The amplitude of a sound wave increases, and the frequency of the wave decreases. What is the effect on the loudness of the sound and on the pitch of the sound? loudness pitch",
+      "options": {
+        "A": "greater higher",
+        "B": "greater lower",
+        "C": "less higher",
+        "D": "less lower"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "top": 490.94,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q35.png",
+      "rawText": "A plastic rod is rubbed with a cloth. The rod becomes positively charged. Which statement describes why this happens? A Electrons move from the cloth to the rod. B Electrons move from the rod to the cloth. C Protons move from the cloth to the rod. D Protons move from the rod to the cloth.",
+      "parseStatus": "ok",
+      "stem": "A plastic rod is rubbed with a cloth. The rod becomes positively charged. Which statement describes why this happens?",
+      "options": {
+        "A": "Electrons move from the cloth to the rod.",
+        "B": "Electrons move from the rod to the cloth.",
+        "C": "Protons move from the cloth to the rod.",
+        "D": "Protons move from the rod to the cloth."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q36.png",
+      "rawText": "Which graph is the current–voltage characteristic of a filament lamp? current voltage 0 A 0 current voltage 0 B 0 current voltage 0 C 0 current voltage 0 D 0",
+      "parseStatus": "ok",
+      "stem": "Which graph is the current–voltage characteristic of a filament lamp? current voltage 0",
+      "options": {
+        "A": "0 current voltage 0",
+        "B": "0 current voltage 0",
+        "C": "0 current voltage 0",
+        "D": "0"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "top": 56.6,
+      "bottom": 468.78,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q37.png",
+      "rawText": "A lamp is connected in four circuits in turn. The batteries are identical and the resistors are identical. In which circuit is the lamp the brightest? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "top": 470.78,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q38.png",
+      "rawText": "The series circuit shown includes a single component hidden in a box. The switch is open. component hidden in box The switch is now closed and the lamp lights briefly before going off. The switch is now opened, and then closed again. This time the lamp does not light. Which symbol represents the component in the box? A A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "top": 56.6,
+      "bottom": 283.5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q39.png",
+      "rawText": "The diagrams show a wire carrying a current out of the page. Which diagram shows the pattern of magnetic field lines near the wire? C D A B current out of the page current out of the page current out of the page current out of the page",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "top": 285.5,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_22/q40.png",
+      "rawText": "Electric and magnetic fields can cause deflection of ionising radiation. Which statements about the deflection are correct? 1 In an electric field, -particles and -particles are deflected in opposite directions. 2 In a magnetic field, -particles and -particles are deflected in the same direction. 3 -rays are not deflected by electric fields or by magnetic fields. A 1 and 3 B 1 only C 2 and 3 D 2 only",
+      "parseStatus": "ok",
+      "stem": "Electric and magnetic fields can cause deflection of ionising radiation. Which statements about the deflection are correct? 1 In an electric field, -particles and -particles are deflected in opposite directions. 2 In a magnetic field, -particles and -particles are deflected in the same direction. 3 -rays are not deflected by electric fields or by magnetic fields.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 only",
+        "C": "2 and 3",
+        "D": "2 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

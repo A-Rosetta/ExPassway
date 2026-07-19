@@ -1,0 +1,748 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2025/march/0654_m25_qp_22.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2025/march/0654_m25_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.49,
+      "bottom": 180.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q01.png",
+      "rawText": "Which feature of a red blood cell allows it to transport oxygen? A presence of haemoglobin B presence of a nucleus C small surface area to volume ratio D spherical shape",
+      "parseStatus": "ok",
+      "stem": "Which feature of a red blood cell allows it to transport oxygen?",
+      "options": {
+        "A": "presence of haemoglobin",
+        "B": "presence of a nucleus",
+        "C": "small surface area to volume ratio",
+        "D": "spherical shape"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 182.97,
+      "bottom": 518.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q02.png",
+      "rawText": "A salmon is a fish that can live in both fresh and salt water. Salmon are affected by water movement when the environment changes. Which diagram shows the internal and external water potential and the movement of water when a salmon is in fresh water? A high water potential low water potential B high water potential low water potential C low water potential high water potential D low water potential high water potential",
+      "parseStatus": "ok",
+      "stem": "A salmon is a fish that can live in both fresh and salt water. Salmon are affected by water movement when the environment changes. Which diagram shows the internal and external water potential and the movement of water when a salmon is in fresh water?",
+      "options": {
+        "A": "high water potential low water potential",
+        "B": "high water potential low water potential",
+        "C": "low water potential high water potential",
+        "D": "low water potential high water potential"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 520.17,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q03.png",
+      "rawText": "The graph shows the effect of temperature on an enzyme-controlled reaction. Which point has the highest frequency of effective collisions? enzyme activity temperature / °C A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.49,
+      "bottom": 206.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q04.png",
+      "rawText": "Plants do not grow well when they are deficient in magnesium ions. What is the reason for this? A increased water uptake from the soil B not able to synthesise proteins from carbohydrates C reduced diffusion of carbon dioxide into the leaf D reduced production of chlorophyll",
+      "parseStatus": "ok",
+      "stem": "Plants do not grow well when they are deficient in magnesium ions. What is the reason for this?",
+      "options": {
+        "A": "increased water uptake from the soil",
+        "B": "not able to synthesise proteins from carbohydrates",
+        "C": "reduced diffusion of carbon dioxide into the leaf",
+        "D": "reduced production of chlorophyll"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 208.29,
+      "bottom": 332.77,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q05.png",
+      "rawText": "What is a definition of translocation? A the movement of amino acids and sucrose in phloem B the movement of amino acids and sucrose in xylem C the movement of glucose and amino acids in phloem D the movement of glucose and amino acids in xylem",
+      "parseStatus": "ok",
+      "stem": "What is a definition of translocation?",
+      "options": {
+        "A": "the movement of amino acids and sucrose in phloem",
+        "B": "the movement of amino acids and sucrose in xylem",
+        "C": "the movement of glucose and amino acids in phloem",
+        "D": "the movement of glucose and amino acids in xylem"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 334.77,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q06.png",
+      "rawText": "The diagram shows a section through the human heart. 1 2 3 4 Which two blood vessels are arteries? A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through the human heart. 1 2 3 4 Which two blood vessels are arteries?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 56.49,
+      "bottom": 231.61,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q07.png",
+      "rawText": "An athlete runs as fast as possible. After 200 m, the athlete cannot continue and is breathing deeply. What accumulated in the athlete’s muscles? A alcohol B carbon dioxide C lactic acid D water",
+      "parseStatus": "ok",
+      "stem": "An athlete runs as fast as possible. After 200 m, the athlete cannot continue and is breathing deeply. What accumulated in the athlete’s muscles?",
+      "options": {
+        "A": "alcohol",
+        "B": "carbon dioxide",
+        "C": "lactic acid",
+        "D": "water"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 233.61,
+      "bottom": 428.53,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q08.png",
+      "rawText": "Which row names a hormone, the organ that produces it and the hormone’s effect on blood glucose concentration? hormone produced by effect on blood glucose concentration A glucagon liver decreases B glucagon pancreas increases C insulin liver decreases D insulin pancreas increases",
+      "parseStatus": "ok",
+      "stem": "Which row names a hormone, the organ that produces it and the hormone’s effect on blood glucose concentration? hormone produced by effect on blood glucose concentration",
+      "options": {
+        "A": "glucagon liver decreases",
+        "B": "glucagon pancreas increases",
+        "C": "insulin liver decreases",
+        "D": "insulin pancreas increases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 430.53,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q09.png",
+      "rawText": "Growing new plants from cuttings is asexual reproduction. Growing new plants from seeds is sexual reproduction. Which row is correct for both cuttings and seeds? cuttings seeds nucleus of cells offspring nucleus of cells offspring A diploid genetically different haploid genetically identical B diploid genetically identical diploid genetically different C haploid genetically different haploid genetically different D haploid genetically identical diploid genetically identical",
+      "parseStatus": "ok",
+      "stem": "Growing new plants from cuttings is asexual reproduction. Growing new plants from seeds is sexual reproduction. Which row is correct for both cuttings and seeds? cuttings seeds nucleus of cells offspring nucleus of cells offspring",
+      "options": {
+        "A": "diploid genetically different haploid genetically identical",
+        "B": "diploid genetically identical diploid genetically different",
+        "C": "haploid genetically different haploid genetically different",
+        "D": "haploid genetically identical diploid genetically identical"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 56.49,
+      "bottom": 254.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q10.png",
+      "rawText": "The diagram shows the human female reproductive system. Which label shows the oviduct? C B A D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 256.29,
+      "bottom": 380.89,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q11.png",
+      "rawText": "What is homeostasis? A the maintenance of the body’s external environment B the maintenance of the body’s internal environment C the processes that produce heat in the body D the removal of waste from the body",
+      "parseStatus": "ok",
+      "stem": "What is homeostasis?",
+      "options": {
+        "A": "the maintenance of the body’s external environment",
+        "B": "the maintenance of the body’s internal environment",
+        "C": "the processes that produce heat in the body",
+        "D": "the removal of waste from the body"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 382.89,
+      "bottom": 654.01,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q12.png",
+      "rawText": "Polydactyly is a condition that causes babies to be born with extra fingers or toes. The allele that causes polydactyly is dominant. key affected female unaffected female affected male unaffected male How many individuals on the pedigree diagram are heterozygous for polydactyly? A 5 B 6 C 7 D 8",
+      "parseStatus": "ok",
+      "stem": "Polydactyly is a condition that causes babies to be born with extra fingers or toes. The allele that causes polydactyly is dominant. key affected female unaffected female affected male unaffected male How many individuals on the pedigree diagram are heterozygous for polydactyly?",
+      "options": {
+        "A": "5",
+        "B": "6",
+        "C": "7",
+        "D": "8"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "top": 656.01,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q13.png",
+      "rawText": "What could be a result of deforestation? A a decrease in flooding because there are fewer tree roots B an increase in carbon dioxide because there are fewer tree leaves respiring C a decrease in soil loss because there are fewer tree roots D an increase in extinction because there are fewer habitats",
+      "parseStatus": "ok",
+      "stem": "What could be a result of deforestation?",
+      "options": {
+        "A": "a decrease in flooding because there are fewer tree roots",
+        "B": "an increase in carbon dioxide because there are fewer tree leaves respiring",
+        "C": "a decrease in soil loss because there are fewer tree roots",
+        "D": "an increase in extinction because there are fewer habitats"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 56.49,
+      "bottom": 209.89,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q14.png",
+      "rawText": "Which row compares the rates of diffusion of fluorine and hydrogen? diffuses faster reason A fluorine higher molecular mass B fluorine lower molecular mass C hydrogen lower molecular mass D hydrogen higher molecular mass",
+      "parseStatus": "ok",
+      "stem": "Which row compares the rates of diffusion of fluorine and hydrogen? diffuses faster reason",
+      "options": {
+        "A": "fluorine higher molecular mass",
+        "B": "fluorine lower molecular mass",
+        "C": "hydrogen lower molecular mass",
+        "D": "hydrogen higher molecular mass"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 211.89,
+      "bottom": 414.49,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q15.png",
+      "rawText": "The symbols representing four different particles are shown. P 1 1 – 2 1Q R 2 1 + 3 1S Which particles have the same chemical properties? A P 1 1 and R 2 1 only B – 2 1Q and + 3 1S only C – 2 1Q and R 2 1 only D P 1 1 , – 2 1Q , R 2 1 and + 3 1S",
+      "parseStatus": "ok",
+      "stem": "The symbols representing four different particles are shown. P 1 1 – 2 1Q R 2 1 + 3 1S Which particles have the same chemical properties?",
+      "options": {
+        "A": "P 1 1 and R 2 1 only",
+        "B": "– 2 1Q and + 3 1S only",
+        "C": "– 2 1Q and R 2 1 only",
+        "D": "P 1 1 , – 2 1Q , R 2 1 and + 3 1S"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "top": 416.49,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q16.png",
+      "rawText": "Copper reacts with dilute nitric acid to form copper(II) nitrate, nitrogen dioxide and water. The equation for the reaction is shown. Cu(s) + q HNO3(aq)  Cu(NO3)2(aq) + s NO2(g) + t H2O(l) Which row shows the numerical values of q and s? q s A 2 1 B 2 2 C 4 1 D 4 2",
+      "parseStatus": "ok",
+      "stem": "Copper reacts with dilute nitric acid to form copper(II) nitrate, nitrogen dioxide and water. The equation for the reaction is shown. Cu(s) + q HNO3(aq)  Cu(NO3)2(aq) + s NO2(g) + t H2O(l) Which row shows the numerical values of q and s? q s",
+      "options": {
+        "A": "2 1",
+        "B": "2 2",
+        "C": "4 1",
+        "D": "4 2"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 56.49,
+      "bottom": 249.85,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q17.png",
+      "rawText": "A fixed mass of zinc reacts with 100 cm3 of dilute sulfuric acid. Which row identifies changes that increase the rate of the reaction? change to the size of the zinc particles change to the acid A decrease decrease the concentration B decrease increase the temperature C increase decrease the temperature D increase increase the concentration",
+      "parseStatus": "ok",
+      "stem": "A fixed mass of zinc reacts with 100 cm3 of dilute sulfuric acid. Which row identifies changes that increase the rate of the reaction? change to the size of the zinc particles change to the acid",
+      "options": {
+        "A": "decrease decrease the concentration",
+        "B": "decrease increase the temperature",
+        "C": "increase decrease the temperature",
+        "D": "increase increase the concentration"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 251.85,
+      "bottom": 434.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q18.png",
+      "rawText": "Which row describes chemical properties of dilute hydrochloric acid? effect on litmus paper produces a gas when added to a metal carbonate A turns red litmus blue no B turns blue litmus red no C turns red litmus blue yes D turns blue litmus red yes",
+      "parseStatus": "ok",
+      "stem": "Which row describes chemical properties of dilute hydrochloric acid? effect on litmus paper produces a gas when added to a metal carbonate",
+      "options": {
+        "A": "turns red litmus blue no",
+        "B": "turns blue litmus red no",
+        "C": "turns red litmus blue yes",
+        "D": "turns blue litmus red yes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 436.17,
+      "bottom": 590.05,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q19.png",
+      "rawText": "Which row describes metallic oxides and non-metallic oxides? metallic oxides non-metallic oxides A acidic acidic B acidic basic C basic acidic D basic basic",
+      "parseStatus": "ok",
+      "stem": "Which row describes metallic oxides and non-metallic oxides? metallic oxides non-metallic oxides",
+      "options": {
+        "A": "acidic acidic",
+        "B": "acidic basic",
+        "C": "basic acidic",
+        "D": "basic basic"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "top": 592.05,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q20.png",
+      "rawText": "Which row describes the trends shown by the Group I elements lithium to potassium? trend in melting point trend in reaction with water A decrease decrease B decrease increase C increase decrease D increase increase",
+      "parseStatus": "ok",
+      "stem": "Which row describes the trends shown by the Group I elements lithium to potassium? trend in melting point trend in reaction with water",
+      "options": {
+        "A": "decrease decrease",
+        "B": "decrease increase",
+        "C": "increase decrease",
+        "D": "increase increase"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 56.49,
+      "bottom": 275.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q21.png",
+      "rawText": "Bromine has a boiling point of 59 °C. It reacts with hydrogen rapidly. Iodine has a boiling point of 184 °C. It reacts with hydrogen slowly. Which row about fluorine is correct? boiling point / °C reaction with hydrogen A –188 explosive B –188 very slow C 114 explosive D 114 very slow",
+      "parseStatus": "ok",
+      "stem": "Bromine has a boiling point of 59 °C. It reacts with hydrogen rapidly. Iodine has a boiling point of 184 °C. It reacts with hydrogen slowly. Which row about fluorine is correct? boiling point / °C reaction with hydrogen",
+      "options": {
+        "A": "–188 explosive",
+        "B": "–188 very slow",
+        "C": "114 explosive",
+        "D": "114 very slow"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 277.17,
+      "bottom": 428.65,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q22.png",
+      "rawText": "Which statements explain why zinc is used to galvanise steel? 1 It is less reactive than steel. 2 It forms an alloy with steel. 3 It prevents air and water coming into contact with steel. 4 It provides sacrificial protection for the steel. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements explain why zinc is used to galvanise steel? 1 It is less reactive than steel. 2 It forms an alloy with steel. 3 It prevents air and water coming into contact with steel. 4 It provides sacrificial protection for the steel.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "top": 430.65,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q23.png",
+      "rawText": "The ore cassiterite contains tin dioxide. Tin is more reactive than copper but less reactive than iron. Which row shows the industrial method used to extract tin based on tin’s position in the reactivity series? using carbon in a blast furnace electrolysis A yes yes B yes no C no yes D no no",
+      "parseStatus": "ok",
+      "stem": "The ore cassiterite contains tin dioxide. Tin is more reactive than copper but less reactive than iron. Which row shows the industrial method used to extract tin based on tin’s position in the reactivity series? using carbon in a blast furnace electrolysis",
+      "options": {
+        "A": "yes yes",
+        "B": "yes no",
+        "C": "no yes",
+        "D": "no no"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 56.49,
+      "bottom": 220.57,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q24.png",
+      "rawText": "Which statements about global warming are correct? 1 Global warming contributes to climate change. 2 Methane is a greenhouse gas. 3 Decreasing concentrations of greenhouse gases in the atmosphere cause global warming. 4 Carbon is a greenhouse gas. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about global warming are correct? 1 Global warming contributes to climate change. 2 Methane is a greenhouse gas. 3 Decreasing concentrations of greenhouse gases in the atmosphere cause global warming. 4 Carbon is a greenhouse gas.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "top": 222.57,
+      "bottom": 347.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q25.png",
+      "rawText": "What is the main constituent of natural gas? A ethane B ethene C methane D nitrogen",
+      "parseStatus": "ok",
+      "stem": "What is the main constituent of natural gas?",
+      "options": {
+        "A": "ethane",
+        "B": "ethene",
+        "C": "methane",
+        "D": "nitrogen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 349.17,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q26.png",
+      "rawText": "Which row shows the structure of poly(ethene) and the type of polymerisation used to make it? structure of polymer type of polymerisation A C O C O N H N H n addition B C O C O N H N H n condensation C n C H H C H H addition D n C H H C H H condensation",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 56.49,
+      "bottom": 329.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q27.png",
+      "rawText": "The chromatogram of four different inks is shown. Which ink has an Rf value of 0.53? solvent front baseline 10 cm A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 331.29,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q28.png",
+      "rawText": "The graph shows how the extension in cm of a spring changes with the load applied to it. 40 35 30 25 20 15 10 5 0 0 1 2 3 4 5 6 load / N extension / cm What is the spring constant of this spring in N / m? A 0.16 N / m B 0.20 N / m C 16 N / m D 20 N / m",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the extension in cm of a spring changes with the load applied to it. 40 35 30 25 20 15 10 5 0 0 1 2 3 4 5 6 load / N extension / cm What is the spring constant of this spring in N / m?",
+      "options": {
+        "A": "0.16 N / m",
+        "B": "0.20 N / m",
+        "C": "16 N / m",
+        "D": "20 N / m"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "top": 56.49,
+      "bottom": 336.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q29.png",
+      "rawText": "The diagrams show uniform metre rulers each pivoted at the 50 cm mark. Different weights are placed on the rulers at different distances from the 0 cm end. Which ruler rotates in a clockwise direction? 0 20 4.0 N 50 A 60 12 N 0 25 8.0 N 50 B 90 4.0 N 0 10 6.0 N 50 C 65 8.0 N 0 10 3.0 N 50 D 75 100 cm 100 cm 100 cm 100 cm 5.0 N",
+      "parseStatus": "ok",
+      "stem": "The diagrams show uniform metre rulers each pivoted at the 50 cm mark. Different weights are placed on the rulers at different distances from the 0 cm end. Which ruler rotates in a clockwise direction? 0 20 4.0 N 50",
+      "options": {
+        "A": "60 12 N 0 25 8.0 N 50",
+        "B": "90 4.0 N 0 10 6.0 N 50",
+        "C": "65 8.0 N 0 10 3.0 N 50",
+        "D": "75 100 cm 100 cm 100 cm 100 cm 5.0 N"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 338.97,
+      "bottom": 484.33,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q30.png",
+      "rawText": "Which expression gives the kinetic energy of an object of mass m travelling at speed v ? A 2 1  m  v B 2 1  m  v 2 C 2 1  (m  v)2 D ( 2 1  m  v)2",
+      "parseStatus": "ok",
+      "stem": "Which expression gives the kinetic energy of an object of mass m travelling at speed v ?",
+      "options": {
+        "A": "2 1  m  v",
+        "B": "2 1  m  v 2",
+        "C": "2 1  (m  v)2",
+        "D": "( 2 1  m  v)2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 486.33,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q31.png",
+      "rawText": "Gas is trapped in a container. The piston is moved to the right. The temperature of the gas does not change. gas piston moved to the right Which statement about the gas is correct? A The kinetic energy of the gas particles decreases. B The kinetic energy of the gas particles increases. C The pressure of the gas decreases. D The pressure of the gas increases.",
+      "parseStatus": "ok",
+      "stem": "Gas is trapped in a container. The piston is moved to the right. The temperature of the gas does not change. gas piston moved to the right Which statement about the gas is correct?",
+      "options": {
+        "A": "The kinetic energy of the gas particles decreases.",
+        "B": "The kinetic energy of the gas particles increases.",
+        "C": "The pressure of the gas decreases.",
+        "D": "The pressure of the gas increases."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "top": 56.49,
+      "bottom": 250.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q32.png",
+      "rawText": "Which method of thermal energy transfer occurs in a vacuum and which region of the electromagnetic spectrum is mainly involved in this type of thermal energy transfer? method of thermal energy transfer region of the electromagnetic spectrum A convection infrared B convection radio waves C radiation infrared D radiation radio waves",
+      "parseStatus": "ok",
+      "stem": "Which method of thermal energy transfer occurs in a vacuum and which region of the electromagnetic spectrum is mainly involved in this type of thermal energy transfer? method of thermal energy transfer region of the electromagnetic spectrum",
+      "options": {
+        "A": "convection infrared",
+        "B": "convection radio waves",
+        "C": "radiation infrared",
+        "D": "radiation radio waves"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 252.93,
+      "bottom": 495.37,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q33.png",
+      "rawText": "Four rods have the same dimensions. They are made of four different metals and are all at room temperature. All the rods are heated equally at one end for the same time. The final temperature of the other end of each rod is shown in the table. Which rod is the worst conductor of heat? final temperature / °C A 50 B 62 C 70 D 82",
+      "parseStatus": "ok",
+      "stem": "Four rods have the same dimensions. They are made of four different metals and are all at room temperature. All the rods are heated equally at one end for the same time. The final temperature of the other end of each rod is shown in the table. Which rod is the worst conductor of heat? final temperature / °C",
+      "options": {
+        "A": "50",
+        "B": "62",
+        "C": "70",
+        "D": "82"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 497.37,
+      "bottom": 627.25,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q34.png",
+      "rawText": "Which statements about electromagnetic waves are correct? 1 The frequency of the waves increases as the wavelength increases. 2 The speed of the waves in a vacuum is 300 000 000 m / s. 3 Electromagnetic waves are transverse. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which statements about electromagnetic waves are correct? 1 The frequency of the waves increases as the wavelength increases. 2 The speed of the waves in a vacuum is 300 000 000 m / s. 3 Electromagnetic waves are transverse.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 629.25,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q35.png",
+      "rawText": "Which statement about real and virtual images formed by a thin converging lens is correct? A All real images are enlarged and inverted. B All real images can be produced on a screen. C All virtual images are diminished and upright. D All virtual images can be produced on a screen.",
+      "parseStatus": "ok",
+      "stem": "Which statement about real and virtual images formed by a thin converging lens is correct?",
+      "options": {
+        "A": "All real images are enlarged and inverted.",
+        "B": "All real images can be produced on a screen.",
+        "C": "All virtual images are diminished and upright.",
+        "D": "All virtual images can be produced on a screen."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "top": 56.49,
+      "bottom": 207.01,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q36.png",
+      "rawText": "A guitar produces a loud sound with a low pitch. Which description of the sound wave produced by the guitar is correct? A It has a large amplitude and a large frequency. B It has a large amplitude and a small frequency. C It has a small amplitude and a large frequency. D It has a small amplitude and a small frequency.",
+      "parseStatus": "ok",
+      "stem": "A guitar produces a loud sound with a low pitch. Which description of the sound wave produced by the guitar is correct?",
+      "options": {
+        "A": "It has a large amplitude and a large frequency.",
+        "B": "It has a large amplitude and a small frequency.",
+        "C": "It has a small amplitude and a large frequency.",
+        "D": "It has a small amplitude and a small frequency."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "top": 209.01,
+      "bottom": 506.65,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q37.png",
+      "rawText": "A 3.0 V battery is connected to a resistor of resistance R. The current in the resistor is I. R I 3.0 V Which row gives possible values of I and of R ? I / A R /  A 1.5 1.5 B 1.5 2.0 C 6.0 2.0 D 4.0 12",
+      "parseStatus": "ok",
+      "stem": "A 3.0 V battery is connected to a resistor of resistance R. The current in the resistor is I. R I 3.0 V Which row gives possible values of I and of R ? I /",
+      "options": {
+        "A": "R /  A 1.5 1.5",
+        "B": "1.5 2.0",
+        "C": "6.0 2.0",
+        "D": "4.0 12"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "top": 508.65,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q38.png",
+      "rawText": "When electricity is generated in a power station, a step-up transformer is used before it is transmitted around the country. Which statement explains why a step-up transformer is used? A The current decreases, the voltage increases so more energy is transferred by heating in the transmission cables. B The current increases, the voltage decreases so less energy is transferred by heating in the transmission cables. C The voltage decreases, the current increases so more energy is transferred by heating in the transmission cables. D The voltage increases, the current decreases so less energy is transferred by heating in the transmission cables.",
+      "parseStatus": "ok",
+      "stem": "When electricity is generated in a power station, a step-up transformer is used before it is transmitted around the country. Which statement explains why a step-up transformer is used?",
+      "options": {
+        "A": "The current decreases, the voltage increases so more energy is transferred by heating in the transmission cables.",
+        "B": "The current increases, the voltage decreases so less energy is transferred by heating in the transmission cables.",
+        "C": "The voltage decreases, the current increases so more energy is transferred by heating in the transmission cables.",
+        "D": "The voltage increases, the current decreases so less energy is transferred by heating in the transmission cables."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "top": 56.49,
+      "bottom": 288.01,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q39.png",
+      "rawText": "The isotope uranium-238 (U) decays by alpha emission to thorium (Th). The decay equation is shown. 238 92U x 90Th + y 2α What are x and y ? x y A 234 4 B 236 2 C 240 2 D 242 4",
+      "parseStatus": "ok",
+      "stem": "The isotope uranium-238 (U) decays by alpha emission to thorium (Th). The decay equation is shown. 238 92U x 90Th + y 2α What are x and y ? x y",
+      "options": {
+        "A": "234 4",
+        "B": "236 2",
+        "C": "240 2",
+        "D": "242 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "top": 290.01,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m25_qp_22/q40.png",
+      "rawText": "In the Solar System, a planet orbits around the Sun. The radius of the orbit is r and the orbital period is T. Which equation gives the orbital speed v ? A v = r T  2 B v = T r  2 C v = T r  2 D v = rT  2",
+      "parseStatus": "ok",
+      "stem": "In the Solar System, a planet orbits around the Sun. The radius of the orbit is r and the orbital period is T. Which equation gives the orbital speed v ?",
+      "options": {
+        "A": "v = r T  2",
+        "B": "v = T r  2",
+        "C": "v = T r  2",
+        "D": "v = rT  2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

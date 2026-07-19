@@ -1,0 +1,748 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2023/winter/0654_w23_qp_23.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2023/winter/0654_w23_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.6,
+      "bottom": 206.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q01.png",
+      "rawText": "A person throws a ball which their dog runs after and brings back to them. Which characteristics of living things is the dog showing by this action? A growth and nutrition B movement and nutrition C movement and sensitivity D sensitivity and growth",
+      "parseStatus": "ok",
+      "stem": "A person throws a ball which their dog runs after and brings back to them. Which characteristics of living things is the dog showing by this action?",
+      "options": {
+        "A": "growth and nutrition",
+        "B": "movement and nutrition",
+        "C": "movement and sensitivity",
+        "D": "sensitivity and growth"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 208.46,
+      "bottom": 418.98,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q02.png",
+      "rawText": "The diagram shows a section through a red blood cell. Which statement is correct for red blood cells? A The cell has no nucleus to minimise oxygen binding. B The cell membrane has a small surface area in relation to volume. C The cytoplasm contains haemoglobin. D The flat structure makes it easier to be carried through arteries.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through a red blood cell. Which statement is correct for red blood cells?",
+      "options": {
+        "A": "The cell has no nucleus to minimise oxygen binding.",
+        "B": "The cell membrane has a small surface area in relation to volume.",
+        "C": "The cytoplasm contains haemoglobin.",
+        "D": "The flat structure makes it easier to be carried through arteries."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 420.98,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q03.png",
+      "rawText": "Which food test requires heating? A fat B protein C reducing sugar D starch",
+      "parseStatus": "ok",
+      "stem": "Which food test requires heating?",
+      "options": {
+        "A": "fat",
+        "B": "protein",
+        "C": "reducing sugar",
+        "D": "starch"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 354.12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q04.png",
+      "rawText": "The diagram shows the effect of temperature on enzyme activity. enzyme activity temperature X Y What has increased the enzyme activity between points X and Y? A decreased denaturation B decreased kinetic energy C increased denaturation D increased kinetic energy",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the effect of temperature on enzyme activity. enzyme activity temperature X Y What has increased the enzyme activity between points X and Y?",
+      "options": {
+        "A": "decreased denaturation",
+        "B": "decreased kinetic energy",
+        "C": "increased denaturation",
+        "D": "increased kinetic energy"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 356.12,
+      "bottom": 532.86,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q05.png",
+      "rawText": "Plants need magnesium ions and nitrate ions. Which statements correctly show what the plants make using these ions? 1 Magnesium ions are needed for making amino acids. 2 Nitrate ions are needed for making amino acids. 3 Magnesium ions are needed for making chlorophyll. 4 Nitrate ions are needed for making chlorophyll. A 1 and 4 B 2 and 3 C 2 only D 4 only",
+      "parseStatus": "ok",
+      "stem": "Plants need magnesium ions and nitrate ions. Which statements correctly show what the plants make using these ions? 1 Magnesium ions are needed for making amino acids. 2 Nitrate ions are needed for making amino acids. 3 Magnesium ions are needed for making chlorophyll. 4 Nitrate ions are needed for making chlorophyll.",
+      "options": {
+        "A": "1 and 4",
+        "B": "2 and 3",
+        "C": "2 only",
+        "D": "4 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 534.86,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q06.png",
+      "rawText": "Which statements about mechanical digestion are correct? 1 Food is broken down into smaller pieces. 2 Food molecules do not undergo chemical changes. 3 Soluble molecules are formed from insoluble ones. 4 Large molecules are broken down to smaller ones. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about mechanical digestion are correct? 1 Food is broken down into smaller pieces. 2 Food molecules do not undergo chemical changes. 3 Soluble molecules are formed from insoluble ones. 4 Large molecules are broken down to smaller ones.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 210.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q07.png",
+      "rawText": "Which row names the substances carried by xylem vessels and the direction of travel? substances direction of travel A sucrose only leaves to roots B sucrose only roots to leaves C water and dissolved minerals leaves to roots D water and dissolved minerals roots to leaves",
+      "parseStatus": "ok",
+      "stem": "Which row names the substances carried by xylem vessels and the direction of travel? substances direction of travel",
+      "options": {
+        "A": "sucrose only leaves to roots",
+        "B": "sucrose only roots to leaves",
+        "C": "water and dissolved minerals leaves to roots",
+        "D": "water and dissolved minerals roots to leaves"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 212.54,
+      "bottom": 366.06,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q08.png",
+      "rawText": "What is the expected concentration of oxygen and the water vapour content in expired air? oxygen / % water vapour A 16 saturated B 16 variable C 21 saturated D 21 variable",
+      "parseStatus": "ok",
+      "stem": "What is the expected concentration of oxygen and the water vapour content in expired air? oxygen / % water vapour",
+      "options": {
+        "A": "16 saturated",
+        "B": "16 variable",
+        "C": "21 saturated",
+        "D": "21 variable"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 368.06,
+      "bottom": 492.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q09.png",
+      "rawText": "Which statement about the role of blood vessels in the skin is correct? A If the environment is too cold, vasoconstriction of capillaries occurs. B If the environment is too cold, vasodilation of arterioles occurs. C If the environment is too hot, vasoconstriction of capillaries occurs. D If the environment is too hot, vasodilation of arterioles occurs.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the role of blood vessels in the skin is correct?",
+      "options": {
+        "A": "If the environment is too cold, vasoconstriction of capillaries occurs.",
+        "B": "If the environment is too cold, vasodilation of arterioles occurs.",
+        "C": "If the environment is too hot, vasoconstriction of capillaries occurs.",
+        "D": "If the environment is too hot, vasodilation of arterioles occurs."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "top": 494.54,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q10.png",
+      "rawText": "The table shows some features of insect-pollinated flowers and wind-pollinated flowers. Which rows are correct? insect-pollinated flowers wind-pollinated flowers 1 anthers dangle outside the flower anthers are inside the flower 2 large petals small petals 3 not scented scented 4 stigma inside the flower stigma dangles outside the flower A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The table shows some features of insect-pollinated flowers and wind-pollinated flowers. Which rows are correct? insect-pollinated flowers wind-pollinated flowers 1 anthers dangle outside the flower anthers are inside the flower 2 large petals small petals 3 not scented scented 4 stigma inside the flower stigma dangles outside the flower",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 56.66,
+      "bottom": 181.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q11.png",
+      "rawText": "What is a difference between a haploid nucleus and a diploid nucleus from the same plant? A The diploid nucleus has more chromosomes. B The diploid nucleus is the result of meiosis. C The haploid nucleus is the result of mitosis. D The haploid nucleus has more alleles.",
+      "parseStatus": "ok",
+      "stem": "What is a difference between a haploid nucleus and a diploid nucleus from the same plant?",
+      "options": {
+        "A": "The diploid nucleus has more chromosomes.",
+        "B": "The diploid nucleus is the result of meiosis.",
+        "C": "The haploid nucleus is the result of mitosis.",
+        "D": "The haploid nucleus has more alleles."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 183.2,
+      "bottom": 307.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q12.png",
+      "rawText": "What is an ecosystem? A a network of interconnected food chains in a given area B all the members of one species in a given habitat C all the organisms and their environment interacting together in a given area D all the transfer of energy in a given habitat",
+      "parseStatus": "ok",
+      "stem": "What is an ecosystem?",
+      "options": {
+        "A": "a network of interconnected food chains in a given area",
+        "B": "all the members of one species in a given habitat",
+        "C": "all the organisms and their environment interacting together in a given area",
+        "D": "all the transfer of energy in a given habitat"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "top": 309.68,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q13.png",
+      "rawText": "Which row describes the effects of deforestation? level of carbon dioxide in the air risk of flooding A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "Which row describes the effects of deforestation? level of carbon dioxide in the air risk of flooding",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 384.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q14.png",
+      "rawText": "The colours in an ink are separated by chromatography. Which diagram shows the assembled apparatus? D spot of ink solvent B spot of ink solvent C spot of ink solvent A spot of ink solvent",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 386.48,
+      "bottom": 530.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q15.png",
+      "rawText": "Which diagram represents a mixture of an element and a compound? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "top": 532.1,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q16.png",
+      "rawText": "X and Y are isotopes of the same element. Which statement about X and Y is correct? A They have the same nucleon number but different numbers of protons. B They have the same number of neutrons but different numbers of electrons. C They have the same atomic number but different numbers of electrons. D They have the same number of protons but different numbers of neutrons.",
+      "parseStatus": "ok",
+      "stem": "X and Y are isotopes of the same element. Which statement about X and Y is correct?",
+      "options": {
+        "A": "They have the same nucleon number but different numbers of protons.",
+        "B": "They have the same number of neutrons but different numbers of electrons.",
+        "C": "They have the same atomic number but different numbers of electrons.",
+        "D": "They have the same number of protons but different numbers of neutrons."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 192.9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q17.png",
+      "rawText": "Nonane, C9H20, burns in oxygen to form carbon dioxide and water. The equation for this reaction is shown. C9H20 + 14O2  9CO2 + 10H2O What is the mass of oxygen required for the complete combustion of 64 g of nonane? A 32 g B 224 g C 396 g D 448 g",
+      "parseStatus": "ok",
+      "stem": "Nonane, C9H20, burns in oxygen to form carbon dioxide and water. The equation for this reaction is shown. C9H20 + 14O2  9CO2 + 10H2O What is the mass of oxygen required for the complete combustion of 64 g of nonane?",
+      "options": {
+        "A": "32 g",
+        "B": "224 g",
+        "C": "396 g",
+        "D": "448 g"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 194.9,
+      "bottom": 332.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q18.png",
+      "rawText": "Which statement correctly describes how aluminium is changed during the electrolysis of aluminium oxide? A At the anode, aluminium ions gain electrons and so are oxidised. B At the anode, aluminium ions lose electrons and so are oxidised. C At the cathode, aluminium ions gain electrons and so are reduced. D At the cathode, aluminium ions lose electrons and so are reduced.",
+      "parseStatus": "ok",
+      "stem": "Which statement correctly describes how aluminium is changed during the electrolysis of aluminium oxide?",
+      "options": {
+        "A": "At the anode, aluminium ions gain electrons and so are oxidised.",
+        "B": "At the anode, aluminium ions lose electrons and so are oxidised.",
+        "C": "At the cathode, aluminium ions gain electrons and so are reduced.",
+        "D": "At the cathode, aluminium ions lose electrons and so are reduced."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 334.1,
+      "bottom": 496.62,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q19.png",
+      "rawText": "Dilute hydrochloric acid is reacted with magnesium. The reaction is repeated using a higher concentration of acid. Which statement about the second reaction is not correct? A The rate of reaction is greater. B The particles have more energy. C There are more frequent collisions between reacting particles. D There are more reacting particles.",
+      "parseStatus": "ok",
+      "stem": "Dilute hydrochloric acid is reacted with magnesium. The reaction is repeated using a higher concentration of acid. Which statement about the second reaction is not correct?",
+      "options": {
+        "A": "The rate of reaction is greater.",
+        "B": "The particles have more energy.",
+        "C": "There are more frequent collisions between reacting particles.",
+        "D": "There are more reacting particles."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "top": 498.62,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q20.png",
+      "rawText": "A piece of damp blue litmus paper is put in a test-tube of a gas. The litmus paper turns red and then changes to white. What is the gas? A ammonia B carbon dioxide C chlorine D oxygen",
+      "parseStatus": "ok",
+      "stem": "A piece of damp blue litmus paper is put in a test-tube of a gas. The litmus paper turns red and then changes to white. What is the gas?",
+      "options": {
+        "A": "ammonia",
+        "B": "carbon dioxide",
+        "C": "chlorine",
+        "D": "oxygen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 206.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q21.png",
+      "rawText": "The elements in Group I of the Periodic Table are metals. What are the trends as the group is descended? A decrease in melting point and less reactive with water B decrease in melting point and more reactive with water C increase in melting point and less reactive with water D increase in melting point and more reactive with water",
+      "parseStatus": "ok",
+      "stem": "The elements in Group I of the Periodic Table are metals. What are the trends as the group is descended?",
+      "options": {
+        "A": "decrease in melting point and less reactive with water",
+        "B": "decrease in melting point and more reactive with water",
+        "C": "increase in melting point and less reactive with water",
+        "D": "increase in melting point and more reactive with water"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 208.52,
+      "bottom": 333.06,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q22.png",
+      "rawText": "Why is argon used in lamps? A It is heavier than air. B It is lighter than air. C It is reactive. D It is unreactive.",
+      "parseStatus": "ok",
+      "stem": "Why is argon used in lamps?",
+      "options": {
+        "A": "It is heavier than air.",
+        "B": "It is lighter than air.",
+        "C": "It is reactive.",
+        "D": "It is unreactive."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "top": 335.06,
+      "bottom": 459.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q23.png",
+      "rawText": "Which metal can only be extracted from its ore using electrolysis? A calcium B copper C iron D zinc",
+      "parseStatus": "ok",
+      "stem": "Which metal can only be extracted from its ore using electrolysis?",
+      "options": {
+        "A": "calcium",
+        "B": "copper",
+        "C": "iron",
+        "D": "zinc"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 7,
+      "top": 461.54,
+      "bottom": 615.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q24.png",
+      "rawText": "Which row shows the conditions used for making ammonia by the Haber process? pressure / atm temperature / C catalyst A 250 450 iron B 250 200 vanadium pentoxide C 2 200 iron D 2 450 vanadium pentoxide",
+      "parseStatus": "ok",
+      "stem": "Which row shows the conditions used for making ammonia by the Haber process? pressure / atm temperature / C catalyst",
+      "options": {
+        "A": "250 450 iron",
+        "B": "250 200 vanadium pentoxide",
+        "C": "2 200 iron",
+        "D": "2 450 vanadium pentoxide"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 7,
+      "top": 617.0,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q25.png",
+      "rawText": "Four reaction equations involving sulfur and its compounds are shown. 1 S + O2  SO2 2 SO2 + H2O  H2SO3 3 2H2SO3 + O2  2H2SO4 4 H2SO4 + SO3  H2S2O7 Which reactions take place in the manufacture of sulfuric acid by the Contact process? A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Four reaction equations involving sulfur and its compounds are shown. 1 S + O2  SO2 2 SO2 + H2O  H2SO3 3 2H2SO3 + O2  2H2SO4 4 H2SO4 + SO3  H2S2O7 Which reactions take place in the manufacture of sulfuric acid by the Contact process?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q26.png",
+      "rawText": "Which formula represents but-1-ene? A CH3CH=CH2 B CH3CH2CH2CH3 C CH3CH2CH=CH2 D CH3CH=CHCH3",
+      "parseStatus": "ok",
+      "stem": "Which formula represents but-1-ene?",
+      "options": {
+        "A": "CH3CH=CH2",
+        "B": "CH3CH2CH2CH3",
+        "C": "CH3CH2CH=CH2",
+        "D": "CH3CH=CHCH3"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "top": 183.14,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q27.png",
+      "rawText": "The structure of the monomer chloroethene is shown. C H H C Cl H What is a part of the structure of the addition polymer formed from this monomer? C H H C Cl Cl H C H H C H A C H C Cl Cl Cl Cl H C H C H B C H C Cl Cl Cl Cl H C H C H C C H C Cl Cl C H C H D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q28.png",
+      "rawText": "The graph shows the variation of speed with time for an object moving in a straight line. speed 0 0 time Which statement about the motion of the object is correct? A At time 0, the acceleration is zero. B The acceleration decreases with time. C The gradient of the line is equal to the distance travelled. D The velocity of the object decreases with time.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the variation of speed with time for an object moving in a straight line. speed 0 0 time Which statement about the motion of the object is correct?",
+      "options": {
+        "A": "At time 0, the acceleration is zero.",
+        "B": "The acceleration decreases with time.",
+        "C": "The gradient of the line is equal to the distance travelled.",
+        "D": "The velocity of the object decreases with time."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 637.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q29.png",
+      "rawText": "Diagram 1 shows a spring with its length indicated. Diagram 2 shows the same spring with a 20 N load hung from it, and the new length of the spring. The spring obeys Hooke’s Law. 20 N 25 cm 15 cm diagram 1 diagram 2 Which graph is the extension–load graph for the spring?",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 639.08,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q30.png",
+      "rawText": "A force of 4.0 N acts on an object for 4.0 s. The object moves a distance of 8.0 m in the direction of the force. What is the work done by the force? A 1.0 J B 2.0 J C 16 J D 32 J",
+      "parseStatus": "ok",
+      "stem": "A force of 4.0 N acts on an object for 4.0 s. The object moves a distance of 8.0 m in the direction of the force. What is the work done by the force?",
+      "options": {
+        "A": "1.0 J",
+        "B": "2.0 J",
+        "C": "16 J",
+        "D": "32 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 154.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q31.png",
+      "rawText": "An electric motor transfers 4000 J of electrical energy to useful energy and 12 000 J of electrical energy is wasted. What is the efficiency of the motor? A 25% B 33% C 50% D 75%",
+      "parseStatus": "ok",
+      "stem": "An electric motor transfers 4000 J of electrical energy to useful energy and 12 000 J of electrical energy is wasted. What is the efficiency of the motor?",
+      "options": {
+        "A": "25%",
+        "B": "33%",
+        "C": "50%",
+        "D": "75%"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "top": 156.14,
+      "bottom": 360.78,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q32.png",
+      "rawText": "The pressure of a gas in a container is caused by gas molecules colliding with the walls. The pressure can be increased by heating the gas or by reducing its volume. Which row explains why the pressure increases in each case? heating the gas reducing the volume A collisions more frequent and harder collisions more frequent and harder B collisions more frequent and harder collisions more frequent only C collisions harder only collisions more frequent and harder D collisions harder only collisions more frequent only",
+      "parseStatus": "ok",
+      "stem": "The pressure of a gas in a container is caused by gas molecules colliding with the walls. The pressure can be increased by heating the gas or by reducing its volume. Which row explains why the pressure increases in each case? heating the gas reducing the volume",
+      "options": {
+        "A": "collisions more frequent and harder collisions more frequent and harder",
+        "B": "collisions more frequent and harder collisions more frequent only",
+        "C": "collisions harder only collisions more frequent and harder",
+        "D": "collisions harder only collisions more frequent only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 362.78,
+      "bottom": 487.26,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q33.png",
+      "rawText": "Which statement explains why metals are better thermal conductors than non-metals? A Atoms in metals are fixed in a lattice by bonds. B Atoms in metals vibrate about fixed positions. C Metals contain free electrons. D Metals contain free protons.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why metals are better thermal conductors than non-metals?",
+      "options": {
+        "A": "Atoms in metals are fixed in a lattice by bonds.",
+        "B": "Atoms in metals vibrate about fixed positions.",
+        "C": "Metals contain free electrons.",
+        "D": "Metals contain free protons."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 489.26,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q34.png",
+      "rawText": "The sound heard from the siren of a police car becomes quieter and lower pitched as the car moves away from an observer. Which row describes what happens to the amplitude and frequency of the sound wave heard by the observer? amplitude frequency A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The sound heard from the siren of a police car becomes quieter and lower pitched as the car moves away from an observer. Which row describes what happens to the amplitude and frequency of the sound wave heard by the observer? amplitude frequency",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 327.72,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q35.png",
+      "rawText": "A bar magnet is brought near to a metal rod. The metal rod is attracted to the magnet. N S metal rod magnet The magnet is then turned around so that the N-pole is on the right. The magnet is again brought near to the metal rod and is again attracted to the magnet. What could the metal rod be? A another bar magnet B a piece of aluminium C a piece of copper D a piece of iron",
+      "parseStatus": "ok",
+      "stem": "A bar magnet is brought near to a metal rod. The metal rod is attracted to the magnet. N S metal rod magnet The magnet is then turned around so that the N-pole is on the right. The magnet is again brought near to the metal rod and is again attracted to the magnet. What could the metal rod be?",
+      "options": {
+        "A": "another bar magnet",
+        "B": "a piece of aluminium",
+        "C": "a piece of copper",
+        "D": "a piece of iron"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "top": 329.72,
+      "bottom": 522.42,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q36.png",
+      "rawText": "Four resistors are connected into circuits. The current in each resistor and the potential difference (p.d.) across each resistor are shown. Which resistor has a resistance of 2.0 ? current / A p.d. / V A 2.0 1.0 B 4.0 2.0 C 12 6.0 D 4.0 8.0",
+      "parseStatus": "ok",
+      "stem": "Four resistors are connected into circuits. The current in each resistor and the potential difference (p.d.) across each resistor are shown. Which resistor has a resistance of 2.0 ? current /",
+      "options": {
+        "A": "p.d. / V A 2.0 1.0",
+        "B": "4.0 2.0",
+        "C": "12 6.0",
+        "D": "4.0 8.0"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "top": 524.42,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q37.png",
+      "rawText": "Two lamps can be connected to a battery either in series or in parallel. Which statement is not a benefit of connecting two lamps in parallel rather than in series? A If one lamp breaks, the other lamp stays lit. B The lamps are brighter. C The lamps can be controlled individually using switches. D There is a smaller current in the battery.",
+      "parseStatus": "ok",
+      "stem": "Two lamps can be connected to a battery either in series or in parallel. Which statement is not a benefit of connecting two lamps in parallel rather than in series?",
+      "options": {
+        "A": "If one lamp breaks, the other lamp stays lit.",
+        "B": "The lamps are brighter.",
+        "C": "The lamps can be controlled individually using switches.",
+        "D": "There is a smaller current in the battery."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q38.png",
+      "rawText": "What is the purpose of a fuse in an electric circuit? A to make the circuit more efficient B to protect the circuit from damage by a large current C to provide a constant current in the circuit D to provide a constant potential difference (p.d.) across the circuit",
+      "parseStatus": "ok",
+      "stem": "What is the purpose of a fuse in an electric circuit?",
+      "options": {
+        "A": "to make the circuit more efficient",
+        "B": "to protect the circuit from damage by a large current",
+        "C": "to provide a constant current in the circuit",
+        "D": "to provide a constant potential difference (p.d.) across the circuit"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "top": 183.14,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q39.png",
+      "rawText": "A current-carrying wire is placed between the poles P and Q of a magnet, as shown. force current P Q The direction of the current is shown. A force acts on the wire upwards, as shown. What is the direction of the magnetic field? A from P to Q B from Q to P C towards the bottom of the page D towards the top of the page",
+      "parseStatus": "ok",
+      "stem": "A current-carrying wire is placed between the poles P and Q of a magnet, as shown. force current P Q The direction of the current is shown.",
+      "options": {
+        "A": "force acts on the wire upwards, as shown. What is the direction of the magnetic field? A from P to Q",
+        "B": "from Q to P",
+        "C": "towards the bottom of the page",
+        "D": "towards the top of the page"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "top": 57.44,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w23_qp_23/q40.png",
+      "rawText": "The diagram shows a beam of -particles and a beam of -rays entering the electric field between two charged plates. + + + + + + + + + + + + – – – – – – – – – – – – β-particles γ-rays What is the effect of the electric field on each of the beams? -particles -rays A deflected to the – plate deflected to the + plate B deflected to the + plate deflected to the – plate C deflected to the + plate no effect D no effect deflected to the – plate",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a beam of -particles and a beam of -rays entering the electric field between two charged plates. + + + + + + + + + + + + – – – – – – – – – – – – β-particles γ-rays What is the effect of the electric field on each of the beams? -particles -rays",
+      "options": {
+        "A": "deflected to the – plate deflected to the + plate",
+        "B": "deflected to the + plate deflected to the – plate",
+        "C": "deflected to the + plate no effect",
+        "D": "no effect deflected to the – plate"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

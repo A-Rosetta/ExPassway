@@ -1,20 +1,42 @@
-(function () {
+(async function () {
   const PRACTICE_MODE_KEY = "alevel.practiceMode";
   const PAPER_SET_KEY = "alevel.selectedPaperSet";
   const USER_ID_KEY = "alevel.userId";
   const { t, applyPage } = window.ALevelI18n;
-  const PAPER_SETS = readPaperSets();
+  const requestedTarget = readRequestedTarget();
+  const selection = getPracticeSelection();
+  let subjectConfig = window.EXAM_CATALOG?.[selection.subject]
+    || (selection.subjectCode === "0620" ? window.EXAM_CATALOG?.["IGCSE Chemistry"] : null);
+  let catalogSubject = null;
+  let PAPER_SETS = readPaperSets();
+
+  function readRequestedTarget() {
+    const params = new URLSearchParams(location.search);
+    const questionNo = Number(params.get("question") || 0);
+    return {
+      paperSlug: String(params.get("paper") || "").toLowerCase(),
+      questionNo: Number.isInteger(questionNo) && questionNo > 0 ? questionNo : 0,
+    };
+  }
 
   function parseSelection() {
     const raw = localStorage.getItem("alevel.selection");
     return raw ? JSON.parse(raw) : null;
   }
 
-  function getChemistrySelection() {
+  function getPracticeSelection() {
+    const saved = parseSelection() || {};
+    const requestedCode = requestedTarget.paperSlug.match(/^(\d{4})_/)?.[1] || "";
+    const requestedSubject = Object.entries(window.EXAM_CATALOG || {})
+      .find(([, config]) => config.syllabus === requestedCode)?.[0] || "";
+    const subject = requestedSubject || (window.EXAM_CATALOG?.[saved.subject]
+      ? saved.subject
+      : saved.subject || "IGCSE Chemistry");
     return {
       grade: "IGCSE",
       board: "CIE",
-      subject: "IGCSE Chemistry",
+      subject,
+      subjectCode: requestedCode || saved.subjectCode || window.EXAM_CATALOG?.[subject]?.syllabus || "0620",
       paper: "MCQ",
     };
   }
@@ -55,19 +77,8 @@
     return next;
   }
 
-  function parsePaperSeed() {
-    const seedEl = byId("paperSetSeed");
-    if (!seedEl?.textContent) return [];
-    try {
-      const parsed = JSON.parse(seedEl.textContent);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (_err) {
-      return [];
-    }
-  }
-
   function buildPaperTitleFromSlug(slug) {
-    const match = String(slug || "").match(/^0620_([sw])(\d{2})_qp_(\d+)$/i);
+    const match = String(slug || "").match(/^(\d{4})_([msw])(\d{2})_qp_(\d+)$/i);
     if (!match) {
       return {
         title: slug || "Unknown Paper",
@@ -76,38 +87,77 @@
       };
     }
 
-    const seasonType = match[1].toLowerCase();
-    const year = `20${match[2]}`;
-    const qpCode = match[3];
-    const seasonLabel = seasonType === "s" ? `May/Jun ${year}` : `Oct/Nov ${year}`;
-    const displayCode = `0620/${qpCode.slice(0, 2)}`;
+    const syllabus = match[1];
+    const seasonType = match[2].toLowerCase();
+    const year = `20${match[3]}`;
+    const qpCode = match[4];
+    const seasonNames = { m: "Feb/Mar", s: "May/Jun", w: "Oct/Nov" };
+    const seasonLabel = `${seasonNames[seasonType] || "Unknown"} ${year}`;
+    const displayCode = `${syllabus}/${qpCode.slice(0, 2)}`;
     return {
-      title: `${seasonLabel} Chemistry Question Paper - ${displayCode}`,
+      title: `${seasonLabel} ${subjectConfig?.paperLabel || selection.subject} Question Paper - ${displayCode}`,
       seasonLabel,
       paperCode: displayCode,
+      year,
+      seasonType,
     };
   }
 
   function readPaperSets() {
-    return parsePaperSeed().map((item, index) => {
+    return (subjectConfig?.papers || []).map((item) => {
       const info = buildPaperTitleFromSlug(item.slug);
       return {
         id: item.slug,
         slug: item.slug,
-        pdf: item.pdf || "",
         title: info.title,
         minutes: 45,
-        questions: Number(item.rowCount || item.anchorCount || 40),
+        questions: Number(item.questions || 40),
         seasonLabel: info.seasonLabel,
         paperCode: info.paperCode,
-        done: index === 0,
-        structuredOk: Number(item.structuredOk || 0),
-        structuredNeedsReview: Number(item.structuredNeedsReview || 0),
+        year: info.year,
+        seasonType: info.seasonType,
+      };
+    });
+  }
+
+  async function loadPublishedPaperSets() {
+    if (!window.ALevelApi?.getCatalogSubjects || !window.ALevelApi?.getCatalogPapers) return;
+    const subjects = await window.ALevelApi.getCatalogSubjects();
+    const requestedCode = requestedTarget.paperSlug.match(/^(\d{4})_/)?.[1] || "";
+    catalogSubject = (subjects || []).find((subject) => subject.code === (requestedCode || selection.subjectCode))
+      || (subjects || []).find((subject) => `${subject.qualification} ${subject.name}` === selection.subject)
+      || null;
+    if (!catalogSubject) return;
+    const papers = await window.ALevelApi.getCatalogPapers(catalogSubject.code);
+    selection.grade = catalogSubject.qualification;
+    selection.board = catalogSubject.board;
+    selection.subject = `${catalogSubject.qualification} ${catalogSubject.name}`;
+    selection.subjectCode = catalogSubject.code;
+    subjectConfig = window.EXAM_CATALOG?.[selection.subject] || {
+      syllabus: catalogSubject.code,
+      displayName: `${catalogSubject.name} (${catalogSubject.code})`,
+      paperLabel: catalogSubject.name,
+      papers: [],
+    };
+    PAPER_SETS = (papers || []).map((paper) => {
+      const info = buildPaperTitleFromSlug(paper.slug);
+      return {
+        id: paper.slug,
+        slug: paper.slug,
+        title: info.title,
+        minutes: paper.durationMinutes || 45,
+        questions: paper.validQuestionCount,
+        seasonLabel: info.seasonLabel,
+        paperCode: info.paperCode,
+        year: info.year,
+        seasonType: info.seasonType,
       };
     });
   }
 
   function readSelectedPaperSet() {
+    const requested = PAPER_SETS.find((item) => item.slug === requestedTarget.paperSlug);
+    if (requested) return requested;
     const savedId = localStorage.getItem(PAPER_SET_KEY);
     return PAPER_SETS.find((item) => item.id === savedId) || PAPER_SETS[1] || PAPER_SETS[0] || null;
   }
@@ -288,10 +338,11 @@
     }, 0);
   }
 
-  function buildSubmitPayload(answers, hintUsageMap) {
+  function buildSubmitPayload(answers, hintUsageMap, starredQuestions = []) {
     return answers.map((selectedIndex, idx) => ({
       selectedIndex: Number.isInteger(selectedIndex) ? selectedIndex : -1,
       hintsUsed: Number(hintUsageMap?.[idx]?.used || 0),
+      starred: Boolean(starredQuestions[idx]),
     }));
   }
 
@@ -336,7 +387,7 @@
     return Object.values(logs);
   }
 
-  function evaluateLocal(questions, answers, hintUsageMap) {
+  function evaluateLocal(questions, answers, hintUsageMap, starredQuestions = []) {
     let correct = 0;
     const details = [];
 
@@ -352,6 +403,7 @@
         skills: Array.isArray(q.skills) ? q.skills : [],
         mistakeType: q.mistakeType || "concept",
         correct: ok,
+        starred: Boolean(starredQuestions[idx]),
         selectedIndex,
         answer: q.answer,
         hintsUsed: Number(hintUsageMap?.[idx]?.used || 0),
@@ -451,16 +503,59 @@
     writeScopedJson("alevel.pendingSubmit", payload);
   }
 
-  function hasPracticeHistory() {
-    return Array.isArray(state.userPracticeHistory) && state.userPracticeHistory.length > 0;
+  function paperSlugFromQuestions(questions) {
+    const question = questions?.[0] || {};
+    const standardSlug = String(question.paperSlug || "").toLowerCase();
+    if (standardSlug) return standardSlug;
+    const id = String(question.id || "");
+    const legacyChemistry = id.match(/^CIE-IGCHEM-(\d{4})-([SMW])-(\d)(\d)-/i);
+    if (legacyChemistry) {
+      return `0620_${legacyChemistry[2].toLowerCase()}${legacyChemistry[1].slice(-2)}_qp_${legacyChemistry[3]}${legacyChemistry[4]}`;
+    }
+    const match = id.match(/(\d{4}_[msw]\d{2}_qp_\d{2,3})/i);
+    if (!match) return "";
+    return match[1].replace(/^(0620_w\d{2}_qp_\d{2})1$/i, "$1").toLowerCase();
+  }
+
+  function paperSlugFromPractice(row) {
+    return paperSlugFromQuestions(row?.questions || row?.generatedQuestions || []);
+  }
+
+  function localPaperResult(slug) {
+    const saved = readScopedJson(`alevel.paperResult.${slug}`, null);
+    if (saved?.result) return saved;
+
+    const legacyQuestions = readScopedJson("alevel.generatedPaper", []);
+    const legacyResult = readScopedJson("alevel.lastResult", null);
+    if (
+      paperSlugFromQuestions(legacyQuestions) !== slug ||
+      paperSlugFromQuestions(legacyResult?.details) !== slug ||
+      !Array.isArray(legacyResult?.details)
+    ) {
+      return null;
+    }
+
+    const migrated = { result: legacyResult, questions: legacyQuestions, savedAt: new Date().toISOString() };
+    writeScopedJson(`alevel.paperResult.${slug}`, migrated);
+    return migrated;
   }
 
   function hasCompletedPaper(paper) {
-    if (!paper) return false;
-    return (state.userPracticeHistory || []).some((row) => {
-      const paperName = String(row.paper || "");
-      return row.status === "submitted" && paperName.includes(paper.paperCode || "");
+    if (!paper?.slug) return false;
+    const slug = paper.slug.toLowerCase();
+    const synced = (state.userPracticeHistory || []).some(
+      (row) => row.status === "submitted" && paperSlugFromPractice(row) === slug
+    );
+    return synced || Boolean(localPaperResult(slug)?.result);
+  }
+
+  function latestCompletedPaperSlug() {
+    const synced = (state.userPracticeHistory || []).find((row) => {
+      const slug = paperSlugFromPractice(row);
+      return row.status === "submitted" && PAPER_SETS.some((paper) => paper.slug === slug);
     });
+    if (synced) return paperSlugFromPractice(synced);
+    return PAPER_SETS.find((paper) => localPaperResult(paper.slug)?.result)?.slug || "";
   }
 
   async function loadUserPracticeHistory() {
@@ -476,21 +571,38 @@
     }
   }
 
-  function hasPracticeHistory() {
-    const result = readScopedJson("alevel.lastResult", null);
-    return Boolean(result && Array.isArray(result.details) && result.details.length);
-  }
-
   function getStructuredPaperSlug() {
-    return state.selectedPaperSet?.slug || PAPER_SETS[1]?.slug || PAPER_SETS[0]?.slug || "0620_s23_qp_21";
+    return state.selectedPaperSet?.slug || PAPER_SETS[0]?.slug || "";
   }
 
   async function loadStructuredPaperSet() {
     const base = window.location.pathname.startsWith("/alevel/") ? "/alevel" : "..";
     const slug = getStructuredPaperSlug();
+    if (!slug || !subjectConfig) throw new Error("No paper configuration is available for this subject.");
+    if (window.ALevelApi?.getCatalogPaperQuestions) {
+      try {
+        const questions = await window.ALevelApi.getCatalogPaperQuestions(slug);
+        return (questions || []).map((row, index) => {
+          const question = {
+            ...row,
+            answer: Number(row.answer),
+            questionNo: Number(row.questionNo),
+            templateId: `${slug}-${row.questionNo}`,
+            mistakeType: row.mistakeType || "unknown",
+            imageUrl: row.images?.[0]?.url || "",
+          };
+          return {
+            ...question,
+            normalizedImages: normalizeQuestionImages(question, index),
+          };
+        });
+      } catch (error) {
+        if (!subjectConfig.dataRoot) throw error;
+      }
+    }
     const [paperRes, answerRes] = await Promise.all([
-      fetch(`${base}/backend/src/data/pymupdf-batch/${slug}.structured.json`),
-      fetch(`${base}/backend/src/data/pymupdf-batch/answer-keys.json`),
+      fetch(`${base}/${subjectConfig.dataRoot}/${slug}${subjectConfig.dataSuffix}`),
+      fetch(`${base}/${subjectConfig.answerKeys}`),
     ]);
     if (!paperRes.ok) {
       throw new Error(`Load paper set failed: ${paperRes.status}`);
@@ -500,19 +612,25 @@
     const answerMap = answerKeys?.[slug] || {};
     const rows = Array.isArray(payload.rows) ? payload.rows : [];
     return rows
-      .filter((row) => row.options && row.options.A && row.options.B && row.options.C && row.options.D)
+      .filter((row) => Number.isInteger(answerMap?.[row.questionNo]))
       .map((row, index) => {
+        const hasParsedOptions = row.options?.A && row.options?.B && row.options?.C && row.options?.D;
         const question = {
-          id: `CIE-IGCHEM-SET-${slug}-${String(row.questionNo).padStart(2, "0")}`,
+          id: `${subjectConfig.idPrefix}-${slug}-${String(row.questionNo).padStart(2, "0")}`,
           board: "CIE",
-          subject: "IGCSE Chemistry",
+          subject: selection.subject,
           paper: "MCQ",
           difficulty: row.questionNo <= 14 ? "Basic" : row.questionNo <= 28 ? "Medium" : "Challenge",
-          topic: slug.includes("_w23_") ? "Past Paper Winter" : "Past Paper Summer",
-          year: state.selectedPaperSet?.seasonLabel || "2023",
+          topic: state.selectedPaperSet?.seasonType === "m"
+            ? "Past Paper March"
+            : state.selectedPaperSet?.seasonType === "w" ? "Past Paper Winter" : "Past Paper Summer",
+          year: state.selectedPaperSet?.year || "",
+          questionNo: Number(row.questionNo),
           stem: row.stem || row.rawText || "",
-          options: [row.options?.A || "", row.options?.B || "", row.options?.C || "", row.options?.D || ""],
-          answer: Number.isInteger(answerMap?.[row.questionNo]) ? answerMap[row.questionNo] : 0,
+          options: hasParsedOptions
+            ? [row.options.A, row.options.B, row.options.C, row.options.D]
+            : ["A", "B", "C", "D"],
+          answer: answerMap[row.questionNo],
           mistakeType: "unknown",
           templateId: `${slug}-${row.questionNo}`,
           skills: [],
@@ -635,7 +753,9 @@
         const pageEnd = Math.min(picked.length, pageStart + state.pageSize) - 1;
         const active = idx >= pageStart && idx <= pageEnd ? "active" : "";
         const answered = Number.isInteger(state.selectedAnswers?.[idx]) && state.selectedAnswers[idx] >= 0 ? "answered" : "";
-        return `<button type="button" class="jump-btn ${active} ${answered}" data-jump-index="${idx}">${idx + 1}</button>`;
+        const starred = state.starredQuestions?.[idx] ? "starred" : "";
+        const questionNo = Number(picked[idx]?.questionNo || idx + 1);
+        return `<button type="button" class="jump-btn ${active} ${answered} ${starred}" data-jump-index="${idx}">${questionNo}</button>`;
       })
       .join("");
 
@@ -667,6 +787,7 @@
       .map((q, localIdx) => {
         const idx = start + localIdx;
         const selectedAnswer = Number.isInteger(state.selectedAnswers?.[idx]) ? state.selectedAnswers[idx] : -1;
+        const starred = Boolean(state.starredQuestions?.[idx]);
         const renderableImages = getRenderableImages(q, idx);
         const hasImages = renderableImages.length > 0;
         const optionsHtml = (q.options || [])
@@ -674,7 +795,9 @@
             (opt, optIdx) => `
           <label class="option-item">
             <input type="radio" name="q_${idx}" value="${optIdx}" ${selectedAnswer === optIdx ? "checked" : ""} />
-            <span class="chem-text">${String.fromCharCode(65 + optIdx)}. ${hasImages ? String.fromCharCode(65 + optIdx) : formatChemText(opt)}</span>
+            <span class="chem-text">${hasImages
+              ? String.fromCharCode(65 + optIdx)
+              : `${String.fromCharCode(65 + optIdx)}. ${formatChemText(opt)}`}</span>
           </label>
         `
           )
@@ -699,7 +822,17 @@
         const textViewId = `textView_${idx}`;
         return `
           <div class="question">
-            <h4 class="chem-text">Q${idx + 1}. ${hasImages ? "" : formatChemText(q.stem)}</h4>
+            <div class="question-title-row">
+              <h4 class="chem-text">Q${Number(q.questionNo || idx + 1)}. ${hasImages ? "" : formatChemText(q.stem)}</h4>
+              <button
+                class="question-star-btn ${starred ? "is-starred" : ""}"
+                type="button"
+                data-star-question="${idx}"
+                aria-pressed="${starred ? "true" : "false"}"
+                aria-label="${starred ? t("unstarQuestion") : t("starQuestion")}"
+                title="${starred ? t("unstarQuestion") : t("starQuestion")}"
+              ><span aria-hidden="true">${starred ? "★" : "☆"}</span></button>
+            </div>
             ${
               hasImages
                 ? `
@@ -806,9 +939,28 @@
         renderJumpPanel(state.questions, state);
       });
     });
+
+    const starButtons = document.querySelectorAll("[data-star-question]");
+    starButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const idx = Number(button.getAttribute("data-star-question"));
+        if (!Number.isInteger(idx)) return;
+        state.starredQuestions[idx] = !state.starredQuestions[idx];
+        const starred = state.starredQuestions[idx];
+        button.classList.toggle("is-starred", starred);
+        button.setAttribute("aria-pressed", starred ? "true" : "false");
+        button.setAttribute("aria-label", starred ? t("unstarQuestion") : t("starQuestion"));
+        button.title = starred ? t("unstarQuestion") : t("starQuestion");
+        button.querySelector("span").textContent = starred ? "★" : "☆";
+        renderJumpPanel(state.questions, state);
+      });
+    });
   }
 
-  const selection = getChemistrySelection();
+  try {
+    await loadPublishedPaperSets();
+  } catch (_err) {
+  }
   localStorage.setItem("alevel.selection", JSON.stringify(selection));
   const state = {
     mode: "backend",
@@ -819,6 +971,7 @@
     questions: [],
     hintUsageMap: {},
     selectedAnswers: [],
+    starredQuestions: [],
     currentPageIndex: 0,
     pageSize: 1,
     prefetchedImageUrls: new Set(),
@@ -875,7 +1028,7 @@
     const subjectValue = byId("modeSubjectValue");
     const paperValue = byId("modePaperValue");
     const countValue = byId("modeQuestionCountValue");
-    if (subjectValue) subjectValue.textContent = "Chemistry (0620)";
+    if (subjectValue) subjectValue.textContent = subjectConfig?.displayName || selection.subject;
     if (paperValue) paperValue.textContent = state.selectedPaperSet?.title || t("selectPaperFirst");
     if (countValue) countValue.textContent = String(state.selectedPaperSet?.questions || 40);
   }
@@ -883,21 +1036,27 @@
   function renderPaperSetList() {
     const wrap = byId("paperSetList");
     if (!wrap) return;
-    wrap.innerHTML = PAPER_SETS.map((paper) => `
-      <div class="paper-set-item">
-        <div class="paper-set-icon ${paper.done ? "done" : "idle"}">${paper.done ? "✓" : "?"}</div>
-        <div class="paper-set-main">
-          <p class="paper-set-title">${paper.title}</p>
-          <div class="paper-set-meta">${paper.minutes} minutes  •  ${paper.questions} questions  •  ${paper.structuredOk} parsed ok / ${paper.structuredNeedsReview} needs review</div>
+    wrap.innerHTML = PAPER_SETS.map((paper) => {
+      const completed = hasCompletedPaper(paper);
+      return `
+        <div class="paper-set-item">
+          <div class="paper-set-icon ${completed ? "done" : "idle"}">${completed ? "✓" : "?"}</div>
+          <div class="paper-set-main">
+            <p class="paper-set-title">${paper.title}</p>
+            <div class="paper-set-meta">${paper.minutes} minutes  •  ${paper.questions} questions</div>
+          </div>
+          <div class="paper-set-actions">
+            ${completed ? `<a class="paper-set-history" href="./review.html?paper=${encodeURIComponent(paper.slug)}">View My History</a>` : ""}
+            <button class="paper-set-btn ${completed ? "retry" : "start"}" type="button" data-paper-id="${paper.id}">
+              ${completed ? "Retry Test" : "Start Test"}
+            </button>
+          </div>
         </div>
-        <div class="paper-set-actions">
-          ${hasPracticeHistory() ? '<a class="paper-set-history" href="./review.html">View My History</a>' : ""}
-          <button class="paper-set-btn ${hasCompletedPaper(paper) ? "retry" : "start"}" type="button" data-paper-id="${paper.id}">
-            ${hasCompletedPaper(paper) ? "Retry Test" : "Start Test"}
-          </button>
-        </div>
-      </div>
-    `).join("");
+      `;
+    }).join("");
+
+    const historyButton = byId("goHistoryBtn");
+    if (historyButton) historyButton.hidden = !latestCompletedPaperSlug();
 
     const buttons = wrap.querySelectorAll("[data-paper-id]");
     buttons.forEach((button) => {
@@ -948,6 +1107,39 @@
     updateTimerDisplay();
   }
 
+  async function openSelectedPaper(questionNo = 0) {
+    if (!state.selectedPaperSet) return;
+    state.practiceMode = writePracticeMode(readPracticeMode());
+    showGenerateFlow();
+    try {
+      const questions = await loadStructuredPaperSet();
+      state.mode = "local";
+      state.paperId = null;
+      state.questions = questions;
+      state.selectedPaperSet.questions = questions.length;
+      syncModeSummary();
+      state.prefetchedImageUrls = new Set();
+      state.hintUsageMap = initHintState(state.questions);
+      writeScopedJson("alevel.generatedPaper", state.questions);
+      state.selectedAnswers = new Array(state.questions.length).fill(-1);
+      state.starredQuestions = new Array(state.questions.length).fill(false);
+      const questionIndex = questionNo
+        ? state.questions.findIndex((question) => Number(question.templateId?.split("-").pop()) === questionNo)
+        : -1;
+      state.currentPageIndex = questionIndex >= 0 ? Math.floor(questionIndex / state.pageSize) : 0;
+      startTimer();
+      renderPaper(state.questions, state);
+      bindPaperActions();
+      const modeLabel = state.practiceMode === "timed" ? t("timedModeTitle") : t("practiceModeTitle");
+      setRunMode(t("paperOpened", { title: state.selectedPaperSet.title, mode: modeLabel }), false);
+      if (questionIndex >= 0) {
+        byId("questionSlot")?.scrollIntoView({ block: "start" });
+      }
+    } catch (err) {
+      setRunMode(t("failedToOpenPaper", { message: toErrText(err) }), true);
+    }
+  }
+
   const summaryEl = byId("selectionSummary");
   if (summaryEl) {
     summaryEl.textContent = t("fixedPathChemistry", selection);
@@ -956,6 +1148,11 @@
   setRunMode(t("chemistryOnlyGenerate"), false);
   (async function initHistoryState() {
     state.userPracticeHistory = await loadUserPracticeHistory();
+    if (requestedTarget.paperSlug && state.selectedPaperSet?.slug === requestedTarget.paperSlug) {
+      writeSelectedPaperSet(state.selectedPaperSet.id);
+      await openSelectedPaper(requestedTarget.questionNo);
+      return;
+    }
     showPaperPicker();
   })();
 
@@ -981,27 +1178,7 @@
   const startModePageBtn = byId("startModePageBtn");
   if (startModePageBtn) {
     startModePageBtn.addEventListener("click", async () => {
-      if (!state.selectedPaperSet) return;
-      state.practiceMode = writePracticeMode(readPracticeMode());
-      showGenerateFlow();
-      try {
-        const questions = await loadStructuredPaperSet();
-        state.mode = "local";
-        state.paperId = null;
-        state.questions = questions;
-        state.prefetchedImageUrls = new Set();
-        state.hintUsageMap = initHintState(state.questions);
-        writeScopedJson("alevel.generatedPaper", state.questions);
-        state.selectedAnswers = new Array(state.questions.length).fill(-1);
-        state.currentPageIndex = 0;
-        startTimer();
-        renderPaper(state.questions, state);
-        bindPaperActions();
-        const modeLabel = state.practiceMode === "timed" ? t("timedModeTitle") : t("practiceModeTitle");
-        setRunMode(t("paperOpened", { title: state.selectedPaperSet.title, mode: modeLabel }), false);
-      } catch (err) {
-        setRunMode(t("failedToOpenPaper", { message: toErrText(err) }), true);
-      }
+      await openSelectedPaper();
     });
   }
 
@@ -1022,7 +1199,8 @@
   const goHistoryBtn = byId("goHistoryBtn");
   if (goHistoryBtn) {
     goHistoryBtn.addEventListener("click", () => {
-      location.href = "./review.html";
+      const slug = latestCompletedPaperSlug();
+      if (slug) location.href = `./review.html?paper=${encodeURIComponent(slug)}`;
     });
   }
 
@@ -1095,6 +1273,20 @@
 
     submitBtn.onclick = async () => {
       if (!state.questions.length) return;
+      const answeredCount = state.selectedAnswers.filter(
+        (answer) => Number.isInteger(answer) && answer >= 0
+      ).length;
+      const unansweredCount = state.questions.length - answeredCount;
+      if (
+        unansweredCount > 0 &&
+        !window.confirm(t("confirmIncompleteSubmit", {
+          answered: answeredCount,
+          total: state.questions.length,
+          unanswered: unansweredCount,
+        }))
+      ) {
+        return;
+      }
       state.timerElapsedSeconds = state.timerStartedAt
         ? Math.floor((Date.now() - state.timerStartedAt) / 1000)
         : 0;
@@ -1104,8 +1296,10 @@
       savePendingSubmit({
         mode: state.mode,
         paperId: state.paperId || null,
+        paperSlug: state.selectedPaperSet?.slug || "",
         questions: state.questions || [],
         answers,
+        starredQuestions: [...state.starredQuestions],
         hintUsageMap: state.hintUsageMap || {},
         selection: selection || null,
         submittedAt: new Date().toISOString(),

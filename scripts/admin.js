@@ -1,6 +1,8 @@
 (function () {
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const { t, applyPage } = window.ALevelI18n;
+  let authToken = "";
+  let currentImportJob = null;
 
   function byId(id) {
     return document.getElementById(id);
@@ -26,6 +28,148 @@
     if (!statusEl) return;
     statusEl.textContent = text;
     statusEl.className = isBad ? "tip bad" : "tip good";
+  }
+
+  function setImportStatus(text, isBad) {
+    const statusEl = byId("adminImportStatus");
+    if (!statusEl) return;
+    statusEl.textContent = text || "";
+    statusEl.className = isBad ? "tip bad" : "tip good";
+  }
+
+  function setSubjectStatus(text, isBad) {
+    const statusEl = byId("adminSubjectStatus");
+    if (!statusEl) return;
+    statusEl.textContent = text || "";
+    statusEl.className = isBad ? "tip bad" : "tip good";
+  }
+
+  function formatBytes(value) {
+    const bytes = Number(value || 0);
+    if (bytes < 1024) return `${bytes} B`;
+    return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
+  }
+
+  function fileToDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error || new Error(t("adminImportReadFailed")));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function statusLabel(status) {
+    const key = {
+      uploading: "adminImportStatusUploading",
+      processing: "adminImportStatusProcessing",
+      validated: "adminImportStatusValidated",
+      published: "adminImportStatusPublished",
+      failed: "adminImportStatusFailed",
+    }[status];
+    return key ? t(key) : status || "-";
+  }
+
+  function summaryValue(summary, key) {
+    return Number(summary?.[key] || 0);
+  }
+
+  function renderImportJob(job) {
+    currentImportJob = job || null;
+    const detail = byId("adminImportDetail");
+    if (!detail) return;
+    detail.hidden = !job;
+    byId("adminProcessImport").disabled = !job || !["uploading", "failed"].includes(job.status);
+    byId("adminPublishImport").disabled = !job || job.status !== "validated";
+    if (!job) return;
+
+    const summary = job.summary || {};
+    const summaryRows = [
+      [t("adminImportStatusLabel"), statusLabel(job.status)],
+      [t("adminImportValidatedPapers"), summaryValue(summary, "validatedPaperCount")],
+      [t("adminImportRejectedPapers"), summaryValue(summary, "rejectedPaperCount")],
+      [t("adminImportValidQuestions"), summaryValue(summary, "validQuestionCount")],
+      [t("adminImportDiscountedQuestions"), summaryValue(summary, "discountedQuestionCount")],
+    ];
+    byId("adminImportSummary").innerHTML = summaryRows.map(([label, value]) => `
+      <div class="stat-card">
+        <div class="stat-label">${safeText(label)}</div>
+        <div class="stat-value admin-import-stat-value">${safeText(value)}</div>
+      </div>
+    `).join("");
+
+    const files = Array.isArray(job.files) ? job.files : [];
+    byId("adminImportFilesBody").innerHTML = files.length
+      ? files.map((file) => `
+          <tr>
+            <td class="mono">${safeText(file.fileName)}</td>
+            <td class="mono">${safeText(file.paperSlug)}</td>
+            <td>${safeText(file.documentType.toUpperCase())}</td>
+            <td>${safeText(formatBytes(file.byteSize))}</td>
+          </tr>
+        `).join("")
+      : `<tr><td colspan="4" class="tip">${safeText(t("adminImportNoFiles"))}</td></tr>`;
+
+    const issues = Array.isArray(job.issues) ? job.issues : [];
+    const failures = Array.isArray(summary.publishFailures) ? summary.publishFailures : [];
+    byId("adminImportIssues").innerHTML = issues.length || failures.length
+      ? `<h4>${safeText(t("adminImportIssuesTitle"))}</h4><ul class="admin-import-issues">${[
+          ...issues.map((issue) => `${issue.paperSlug ? `${issue.paperSlug}: ` : ""}${issue.message}`),
+          ...failures.map((failure) => `${failure.paperSlug}: ${failure.message}`),
+        ].map((message) => `<li>${safeText(message)}</li>`).join("")}</ul>`
+      : `<p class="tip">${safeText(t("adminImportNoIssues"))}</p>`;
+  }
+
+  function renderSubjects(subjects) {
+    const select = byId("adminImportSubject");
+    if (!select) return;
+    const selected = select.value;
+    select.innerHTML = (subjects || []).map((subject) => `
+      <option value="${safeText(subject.code)}">${safeText(`${subject.code} - ${subject.nameZh || subject.name}`)}</option>
+    `).join("");
+    if ([...select.options].some((option) => option.value === selected)) select.value = selected;
+  }
+
+  function renderImportHistory(jobs) {
+    const body = byId("adminImportsBody");
+    if (!body) return;
+    body.innerHTML = jobs?.length
+      ? jobs.map((job) => `
+          <tr>
+            <td>${safeText(fmtDate(job.createdAt))}</td>
+            <td>${safeText(`${job.subjectCode} - ${job.subjectName}`)}</td>
+            <td><span class="status-pill admin-import-status-${safeText(job.status)}">${safeText(statusLabel(job.status))}</span></td>
+            <td>${safeText(job.fileCount)}</td>
+            <td><button type="button" class="btn-secondary" data-import-id="${safeText(job.id)}">${safeText(t("adminImportView"))}</button></td>
+          </tr>
+        `).join("")
+      : `<tr><td colspan="5" class="tip">${safeText(t("adminImportNoHistory"))}</td></tr>`;
+    body.querySelectorAll("[data-import-id]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        button.disabled = true;
+        try {
+          renderImportJob(await window.ALevelApi.getAdminImport(authToken, button.dataset.importId));
+          byId("adminImportDetail").scrollIntoView({ behavior: "smooth", block: "start" });
+        } catch (err) {
+          setImportStatus(t("adminImportLoadFailed", { message: err.message }), true);
+        } finally {
+          button.disabled = false;
+        }
+      });
+    });
+  }
+
+  async function loadImportAdminData() {
+    try {
+      const [subjects, jobs] = await Promise.all([
+        window.ALevelApi.getAdminSubjects(authToken),
+        window.ALevelApi.getAdminImports(authToken),
+      ]);
+      renderSubjects(subjects);
+      renderImportHistory(jobs);
+    } catch (err) {
+      setImportStatus(t("adminImportLoadFailed", { message: err.message || t("checkBackendDb") }), true);
+    }
   }
 
   function renderSummary(summary) {
@@ -55,7 +199,7 @@
     if (!body) return;
 
     if (!users?.length) {
-      body.innerHTML = `<tr><td colspan='7' class='tip'>${t("noUsers")}</td></tr>`;
+      body.innerHTML = `<tr><td colspan='9' class='tip'>${t("noUsers")}</td></tr>`;
       return;
     }
 
@@ -69,11 +213,32 @@
         <td>${safeText(u.role)}</td>
         <td>${safeText(u.grade || "-")}</td>
         <td>${safeText(u.targetScore ?? "-")}</td>
+        <td>${safeText(u.isDisabled ? t("adminUserDisabled") : t("adminUserActive"))}</td>
         <td>${safeText(fmtDate(u.createdAt))}</td>
+        <td>${u.role === "admin"
+          ? "-"
+          : `<button type="button" class="${u.isDisabled ? "btn-secondary" : "btn-danger"}" data-user-status="${safeText(u.id)}" data-disabled="${u.isDisabled ? "1" : "0"}">${u.isDisabled ? t("adminEnableUser") : t("adminDisableUser")}</button>`}
+        </td>
       </tr>
     `
       )
       .join("");
+
+    body.querySelectorAll("[data-user-status]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const disabled = button.dataset.disabled !== "1";
+        if (!window.confirm(t(disabled ? "adminDisableUserConfirm" : "adminEnableUserConfirm"))) return;
+        button.disabled = true;
+        try {
+          await window.ALevelApi.setAdminUserDisabled(authToken, button.dataset.userStatus, disabled);
+          await loadRecords();
+          setStatus(t(disabled ? "adminUserDisabledSuccess" : "adminUserEnabledSuccess"), false);
+        } catch (err) {
+          button.disabled = false;
+          setStatus(t("adminUserStatusFailed", { message: err.message || t("checkBackendDb") }), true);
+        }
+      });
+    });
   }
 
   function renderPractices(practices) {
@@ -123,7 +288,7 @@
         throw new Error("API client not loaded");
       }
 
-      const data = await window.ALevelApi.getAdminRecords({
+      const data = await window.ALevelApi.getAdminRecords(authToken, {
         usersLimit,
         practicesLimit,
       });
@@ -156,34 +321,134 @@
     location.href = "../index.html";
   });
 
+  byId("adminRegisterSubject").addEventListener("click", async () => {
+    const button = byId("adminRegisterSubject");
+    const input = {
+      code: byId("adminSubjectCode").value.trim(),
+      name: byId("adminSubjectName").value.trim(),
+      nameZh: byId("adminSubjectNameZh").value.trim(),
+      assetKey: byId("adminSubjectAssetKey").value.trim(),
+    };
+    button.disabled = true;
+    try {
+      const subject = await window.ALevelApi.createAdminSubject(authToken, input);
+      setSubjectStatus(t("adminSubjectSaved", { code: subject.code }), false);
+      await loadImportAdminData();
+      byId("adminImportSubject").value = subject.code;
+    } catch (err) {
+      setSubjectStatus(t("adminSubjectSaveFailed", { message: err.message }), true);
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  byId("adminUploadImport").addEventListener("click", async () => {
+    const button = byId("adminUploadImport");
+    const files = [...byId("adminImportFiles").files];
+    const subjectCode = byId("adminImportSubject").value;
+    if (!subjectCode || !files.length) {
+      setImportStatus(t("adminImportFilesRequired"), true);
+      return;
+    }
+    const progress = byId("adminImportProgress");
+    button.disabled = true;
+    progress.hidden = false;
+    progress.max = files.length;
+    progress.value = 0;
+    try {
+      const job = await window.ALevelApi.createAdminImport(authToken, subjectCode);
+      currentImportJob = job;
+      for (const file of files) {
+        const dataUrl = await fileToDataUrl(file);
+        await window.ALevelApi.uploadAdminImportFile(authToken, job.id, {
+          fileName: file.name,
+          dataUrl,
+        });
+        progress.value += 1;
+        setImportStatus(t("adminImportUploadingProgress", {
+          current: progress.value,
+          total: files.length,
+        }), false);
+      }
+      renderImportJob(await window.ALevelApi.getAdminImport(authToken, job.id));
+      setImportStatus(t("adminImportUploaded"), false);
+      await loadImportAdminData();
+    } catch (err) {
+      if (currentImportJob?.id) {
+        const job = await window.ALevelApi.getAdminImport(authToken, currentImportJob.id).catch(() => null);
+        if (job) renderImportJob(job);
+      }
+      setImportStatus(t("adminImportUploadFailed", { message: err.message }), true);
+    } finally {
+      button.disabled = false;
+      progress.hidden = true;
+    }
+  });
+
+  byId("adminProcessImport").addEventListener("click", async () => {
+    if (!currentImportJob?.id) return;
+    const button = byId("adminProcessImport");
+    button.disabled = true;
+    setImportStatus(t("adminImportProcessing"), false);
+    try {
+      renderImportJob(await window.ALevelApi.processAdminImport(authToken, currentImportJob.id));
+      setImportStatus(t("adminImportProcessed"), false);
+      await loadImportAdminData();
+    } catch (err) {
+      const job = await window.ALevelApi.getAdminImport(authToken, currentImportJob.id).catch(() => null);
+      if (job) renderImportJob(job);
+      setImportStatus(t("adminImportProcessFailed", { message: err.message }), true);
+    } finally {
+      if (currentImportJob?.status !== "validated") button.disabled = false;
+    }
+  });
+
+  byId("adminPublishImport").addEventListener("click", async () => {
+    if (!currentImportJob?.id || !window.confirm(t("adminImportPublishConfirm"))) return;
+    const button = byId("adminPublishImport");
+    button.disabled = true;
+    setImportStatus(t("adminImportPublishing"), false);
+    try {
+      renderImportJob(await window.ALevelApi.publishAdminImport(authToken, currentImportJob.id));
+      setImportStatus(t("adminImportPublished"), false);
+      await loadImportAdminData();
+    } catch (err) {
+      const job = await window.ALevelApi.getAdminImport(authToken, currentImportJob.id).catch(() => null);
+      if (job) renderImportJob(job);
+      setImportStatus(t("adminImportPublishFailed", { message: err.message }), true);
+    }
+  });
+
+  byId("adminRefreshImports").addEventListener("click", loadImportAdminData);
+
   async function init() {
-    const token = localStorage.getItem(AUTH_TOKEN_KEY) || "";
-    if (!token) {
+    authToken = localStorage.getItem(AUTH_TOKEN_KEY) || "";
+    if (!authToken) {
       setStatus(t("adminLoginRequired"), true);
       setTimeout(() => {
-        location.href = "./admin-login.html";
+        location.href = "./login.html";
       }, 350);
       return;
     }
 
     try {
-      const user = await window.ALevelApi.getCurrentUser(token);
-      if (user?.role !== "admin") {
+      const currentUser = await window.ALevelApi.getCurrentUser(authToken);
+      if (currentUser?.role !== "admin") {
         setStatus(t("notAdmin"), true);
         setTimeout(() => {
-          location.href = "./admin-login.html";
+          location.href = "./login.html";
         }, 500);
         return;
       }
     } catch (_err) {
       setStatus(t("adminSessionInvalid"), true);
       setTimeout(() => {
-        location.href = "./admin-login.html";
+        location.href = "./login.html";
       }, 500);
       return;
     }
 
-    loadRecords();
+    await Promise.all([loadRecords(), loadImportAdminData()]);
   }
 
   applyPage();

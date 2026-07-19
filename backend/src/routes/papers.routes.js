@@ -94,8 +94,9 @@ router.post("/submit", asyncHandler(async (req, res) => {
     }
     return -1;
   });
+  const starred = answers.map((item) => Boolean(item && typeof item === "object" && item.starred));
 
-  const result = evaluatePaper(paperRecord.questions, normalizedAnswers);
+  const result = evaluatePaper(paperRecord.questions, normalizedAnswers, { starred });
   result.hintUsedQuestions = answers.filter((item) => item && typeof item === "object" && Number(item.hintsUsed || 0) > 0).length;
   result.totalHintClicks = answers.reduce((sum, item) => {
     if (item && typeof item === "object") {
@@ -165,8 +166,9 @@ router.post("/submit-local", asyncHandler(async (req, res) => {
     }
     return -1;
   });
+  const starred = answers.map((item) => Boolean(item && typeof item === "object" && item.starred));
 
-  const result = evaluatePaper(questions, normalizedAnswers);
+  const result = evaluatePaper(questions, normalizedAnswers, { starred });
   result.hintUsedQuestions = answers.filter((item) => item && typeof item === "object" && Number(item.hintsUsed || 0) > 0).length;
   result.totalHintClicks = answers.reduce((sum, item) => {
     if (item && typeof item === "object") {

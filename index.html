@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="homePageTitle">A-Level 智能练习</title>
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/styles.css?v=20260718-2" />
 </head>
 <body>
   <div class="bg-shape"></div>
   <main class="container">
     <section class="card hero">
       <h1 id="heroTitle" data-i18n="homeHeroTitle">A-Level 智能练习</h1>
-      <p id="heroSubtitle" data-i18n="homeHeroSubtitle">当前版本仅保留 CIE IGCSE Chemistry MCQ 练习与错题诊断。</p>
+      <p id="heroSubtitle" data-i18n="homeHeroSubtitle">练习已发布的 CIE IGCSE Paper 2 真题，并查看错题诊断。</p>
     </section>
 
     <section class="card form-card">
@@ -32,29 +32,25 @@
       </div>
       <div class="actions">
         <button id="goGenerate" class="btn-primary" data-i18n="goGenerate">生成模拟试卷练习题</button>
-        <button id="goAnalysis" class="btn-secondary" data-i18n="goAnalysis">查看错题分析示例</button>
-        <button id="goNotebook" class="btn-secondary" data-i18n="goNotebook">错题本</button>
         <button id="goCommunity" class="btn-secondary" data-i18n="goCommunity">学习讨论</button>
-        <button id="goAdmin" class="btn-secondary" data-i18n="goAdmin">查看后台数据面板</button>
-        <button id="goLogin" class="btn-secondary" data-i18n="goLogin">去登录页面</button>
-        <button id="showAlertBtn" class="btn-secondary" data-i18n="showAlertBtn">显示提示</button>
+        <button id="goAdmin" class="btn-secondary" data-i18n="goAdmin" hidden>查看后台数据面板</button>
       </div>
       <p id="backendStatus" class="tip"></p>
-      <p id="homeNotice" class="tip" data-i18n="homeNotice">当前首页和出题页都已固定为 IGCSE Chemistry MCQ。</p>
+      <p id="homeNotice" class="tip" data-i18n="homeNotice">科目和试卷选项会根据已发布的 Paper 2 MCQ 自动更新。</p>
     </section>
 
     <section class="card panel">
       <h2 id="notebookTitle" data-i18n="notebookTitle">错题本概览</h2>
       <div id="notebookOverview"></div>
-      <div class="actions">
-        <button id="goNotebookFromPanel" class="btn-primary" data-i18n="goNotebookFromPanel">进入错题本</button>
-      </div>
     </section>
 
     <section class="card panel">
       <details class="account-collapsible">
         <summary id="accountSummary" data-i18n="accountSummary">个人资料与设置</summary>
         <p id="accountStatus" class="tip"></p>
+        <div class="actions">
+          <button id="goLogin" class="btn-secondary" data-i18n="goLogin">去登录页面</button>
+        </div>
         <div class="grid-2">
           <label><span id="displayNameLabel" data-i18n="displayNameLabel">昵称</span>
             <input id="newDisplayName" type="text" data-i18n-placeholder="displayNamePlaceholder" placeholder="例如 Alice Zhang" />
@@ -91,9 +87,9 @@
     </section>
   </main>
 
-  <script src="scripts/i18n.js"></script>
-  <script src="scripts/data.js"></script>
-  <script src="scripts/api.js"></script>
-  <script src="scripts/app.js"></script>
+  <script src="scripts/i18n.js?v=20260718-2"></script>
+  <script src="scripts/data.js?v=20260718-1"></script>
+  <script src="scripts/api.js?v=20260718-2"></script>
+  <script src="scripts/app.js?v=20260718-2"></script>
 </body>
 </html>

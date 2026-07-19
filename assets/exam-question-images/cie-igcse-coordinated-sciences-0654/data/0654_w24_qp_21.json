@@ -1,0 +1,758 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2024/winter/0654_w24_qp_21.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2024/winter/0654_w24_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q01.png",
+      "rawText": "Which term describes the ability to detect and respond to changes in the environment? A excretion B growth C movement D sensitivity",
+      "parseStatus": "ok",
+      "stem": "Which term describes the ability to detect and respond to changes in the environment?",
+      "options": {
+        "A": "excretion",
+        "B": "growth",
+        "C": "movement",
+        "D": "sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 183.14,
+      "bottom": 503.76,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q02.png",
+      "rawText": "The diagram shows some cells in the gas exchange system. Which label shows the part of the gas exchange system where these cells are found? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 505.76,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q03.png",
+      "rawText": "Which biological molecule contains the elements carbon, hydrogen, nitrogen and oxygen? A carbohydrate B fat C oil D protein",
+      "parseStatus": "ok",
+      "stem": "Which biological molecule contains the elements carbon, hydrogen, nitrogen and oxygen?",
+      "options": {
+        "A": "carbohydrate",
+        "B": "fat",
+        "C": "oil",
+        "D": "protein"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 396.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q04.png",
+      "rawText": "The graph shows the effect of temperature on the rate of an enzyme-controlled reaction. rate of an enzyme- controlled reaction 0 10 20 30 40 50 60 70 temperature / °C Which statements are correct? 1 Enzyme molecules denature above 50 C and below 20 C. 2 Increasing the temperature between 10 C and 40 C increases the kinetic energy of enzyme molecules. 3 The shape of the active site changes between 40 C and 60 C. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of temperature on the rate of an enzyme-controlled reaction. rate of an enzyme- controlled reaction 0 10 20 30 40 50 60 70 temperature / °C Which statements are correct? 1 Enzyme molecules denature above 50 C and below 20 C. 2 Increasing the temperature between 10 C and 40 C increases the kinetic energy of enzyme molecules. 3 The shape of the active site changes between 40 C and 60 C.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 398.54,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q05.png",
+      "rawText": "The diagram shows a mesophyll cell. In which structure does photosynthesis take place? D C A B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 473.04,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q06.png",
+      "rawText": "The diagram shows a villus. P Q What are structures P and Q and which substances do they absorb? structure substance absorbed capillary lacteal amino acids fatty acids A P Q P Q B P Q Q P C Q P P Q D Q P Q P",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a villus. P Q What are structures P and Q and which substances do they absorb? structure substance absorbed capillary lacteal amino acids fatty acids",
+      "options": {
+        "A": "P Q P Q",
+        "B": "P Q Q P",
+        "C": "Q P P Q",
+        "D": "Q P Q P"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 475.04,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q07.png",
+      "rawText": "In which weather conditions is the rate of transpiration fastest? A cold and dry B cold and wet C warm and dry D warm and wet",
+      "parseStatus": "ok",
+      "stem": "In which weather conditions is the rate of transpiration fastest?",
+      "options": {
+        "A": "cold and dry",
+        "B": "cold and wet",
+        "C": "warm and dry",
+        "D": "warm and wet"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 436.5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q08.png",
+      "rawText": "A student breathed gently in and out of the mouthpiece of the apparatus shown. P Q limewater mouthpiece tube What were the results after 10 breaths? P Q A colourless colourless B colourless milky C milky colourless D milky milky",
+      "parseStatus": "ok",
+      "stem": "A student breathed gently in and out of the mouthpiece of the apparatus shown. P Q limewater mouthpiece tube What were the results after 10 breaths? P Q",
+      "options": {
+        "A": "colourless colourless",
+        "B": "colourless milky",
+        "C": "milky colourless",
+        "D": "milky milky"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "top": 438.5,
+      "bottom": 601.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q09.png",
+      "rawText": "A student looks at an object at a distance and then looks at an object close by. This ability to focus on both objects is brought about by changing the shape of the lens. What is this called? A accommodation B coordination C pupil reflex D transmission",
+      "parseStatus": "ok",
+      "stem": "A student looks at an object at a distance and then looks at an object close by. This ability to focus on both objects is brought about by changing the shape of the lens. What is this called?",
+      "options": {
+        "A": "accommodation",
+        "B": "coordination",
+        "C": "pupil reflex",
+        "D": "transmission"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 603.08,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q10.png",
+      "rawText": "Which statement describes one similarity between asexual and sexual reproduction? A They both involve gametes. B They both involve parent and offspring. C They both produce genetically identical individuals. D They both require fertilisation to take place.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes one similarity between asexual and sexual reproduction?",
+      "options": {
+        "A": "They both involve gametes.",
+        "B": "They both involve parent and offspring.",
+        "C": "They both produce genetically identical individuals.",
+        "D": "They both require fertilisation to take place."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 338.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q11.png",
+      "rawText": "Horn development in some cattle is controlled by a pair of alleles. The allele for not developing horns is dominant to the allele for developing horns. The pedigree diagram shows cattle with and without horns. male without horns male with horns female without horns female with horns key How many of the cattle are definitely heterozygous? A 2 B 3 C 4 D 5",
+      "parseStatus": "ok",
+      "stem": "Horn development in some cattle is controlled by a pair of alleles. The allele for not developing horns is dominant to the allele for developing horns. The pedigree diagram shows cattle with and without horns. male without horns male with horns female without horns female with horns key How many of the cattle are definitely heterozygous?",
+      "options": {
+        "A": "2",
+        "B": "3",
+        "C": "4",
+        "D": "5"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "top": 340.16,
+      "bottom": 464.64,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q12.png",
+      "rawText": "What is an example of an ecosystem? A a decomposing log and the organisms in it B a food chain C the network of burrows in which some rabbits live D the oak trees in a forest",
+      "parseStatus": "ok",
+      "stem": "What is an example of an ecosystem?",
+      "options": {
+        "A": "a decomposing log and the organisms in it",
+        "B": "a food chain",
+        "C": "the network of burrows in which some rabbits live",
+        "D": "the oak trees in a forest"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "top": 466.64,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q13.png",
+      "rawText": "Which processes change the amount of carbon dioxide in the air? process causing increase in carbon dioxide process causing decrease in carbon dioxide A burning fossil fuels photosynthesis in plants B photosynthesis in plants respiration in animals C respiration in animals respiration in plants D respiration in plants burning fossil fuels",
+      "parseStatus": "ok",
+      "stem": "Which processes change the amount of carbon dioxide in the air? process causing increase in carbon dioxide process causing decrease in carbon dioxide",
+      "options": {
+        "A": "burning fossil fuels photosynthesis in plants",
+        "B": "photosynthesis in plants respiration in animals",
+        "C": "respiration in animals respiration in plants",
+        "D": "respiration in plants burning fossil fuels"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 413.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q14.png",
+      "rawText": "Sea water is heated in the apparatus shown. cold water in water out heat X sea water Y Which row describes changes at positions X and Y? at X at Y A concentration of solution decreases solvent condenses B concentration of solution decreases solute condenses C concentration of solution increases solvent condenses D concentration of solution increases solute condenses",
+      "parseStatus": "ok",
+      "stem": "Sea water is heated in the apparatus shown. cold water in water out heat X sea water Y Which row describes changes at positions X and Y? at X at Y",
+      "options": {
+        "A": "concentration of solution decreases solvent condenses",
+        "B": "concentration of solution decreases solute condenses",
+        "C": "concentration of solution increases solvent condenses",
+        "D": "concentration of solution increases solute condenses"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "top": 415.52,
+      "bottom": 603.36,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q15.png",
+      "rawText": "An experiment is assembled to measure the rate of reaction between limestone and hydrochloric acid. In the experiment a gas is released. The volume of gas produced is measured every five seconds. Which piece of apparatus cannot be used to measure the volume of gas? A burette B measuring cylinder C pipette D gas syringe",
+      "parseStatus": "ok",
+      "stem": "An experiment is assembled to measure the rate of reaction between limestone and hydrochloric acid. In the experiment a gas is released. The volume of gas produced is measured every five seconds. Which piece of apparatus cannot be used to measure the volume of gas?",
+      "options": {
+        "A": "burette",
+        "B": "measuring cylinder",
+        "C": "pipette",
+        "D": "gas syringe"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "top": 605.36,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q16.png",
+      "rawText": "What is a property of a typical covalent compound? A low electrical conductivity B high melting point C low volatility D soluble in water",
+      "parseStatus": "ok",
+      "stem": "What is a property of a typical covalent compound?",
+      "options": {
+        "A": "low electrical conductivity",
+        "B": "high melting point",
+        "C": "low volatility",
+        "D": "soluble in water"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 166.86,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q17.png",
+      "rawText": "The formula of an ammonium ion is NH4 +. The formula of a phosphate ion is PO4 3–. What is the formula of ammonium phosphate? A (NH4)3PO4 B (NH4)2PO4 C NH4PO4 D NH4(PO4)3",
+      "parseStatus": "ok",
+      "stem": "The formula of an ammonium ion is NH4 +. The formula of a phosphate ion is PO4 3–. What is the formula of ammonium phosphate?",
+      "options": {
+        "A": "(NH4)3PO4",
+        "B": "(NH4)2PO4",
+        "C": "NH4PO4",
+        "D": "NH4(PO4)3"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "top": 168.86,
+      "bottom": 293.34,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q18.png",
+      "rawText": "Which statement describes what happens during electrolysis? A Covalent compounds produce more complex substances. B Covalent compounds produce simpler substances. C Ionic compounds produce more complex substances. D Ionic compounds produce simpler substances.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes what happens during electrolysis?",
+      "options": {
+        "A": "Covalent compounds produce more complex substances.",
+        "B": "Covalent compounds produce simpler substances.",
+        "C": "Ionic compounds produce more complex substances.",
+        "D": "Ionic compounds produce simpler substances."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "top": 295.34,
+      "bottom": 474.6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q19.png",
+      "rawText": "When a match burns, heat and light energy are produced. Which row describes the type of change and the type of reaction taking place? type of change type of reaction A chemical endothermic B chemical exothermic C physical endothermic D physical exothermic",
+      "parseStatus": "ok",
+      "stem": "When a match burns, heat and light energy are produced. Which row describes the type of change and the type of reaction taking place? type of change type of reaction",
+      "options": {
+        "A": "chemical endothermic",
+        "B": "chemical exothermic",
+        "C": "physical endothermic",
+        "D": "physical exothermic"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 476.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q20.png",
+      "rawText": "The equation for the reaction between sulfur dioxide and oxygen is shown. 2SO2(g) + O2(g)  2SO3(g) Which statements explain why the rate of this reaction increases at higher temperatures? 1 The molecules move closer together so they collide more frequently. 2 The molecules move more quickly so they collide more frequently. 3 The activation energy is decreased. 4 More colliding particles possess the activation energy. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "The equation for the reaction between sulfur dioxide and oxygen is shown. 2SO2(g) + O2(g)  2SO3(g) Which statements explain why the rate of this reaction increases at higher temperatures? 1 The molecules move closer together so they collide more frequently. 2 The molecules move more quickly so they collide more frequently. 3 The activation energy is decreased. 4 More colliding particles possess the activation energy.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 269.76,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q21.png",
+      "rawText": "All Group I metal compounds and all Group II metal chlorides are soluble in water. All Group II metal carbonates and barium sulfate are insoluble. Which method is used to prepare barium sulfate using barium carbonate? A direct combination of solid barium carbonate and dilute sulfuric acid B reaction of solid barium carbonate and hydrogen chloride gas, followed by reaction with dilute sulfuric acid C reaction of aqueous barium carbonate with dilute hydrochloric acid, followed by reaction with aqueous sodium sulfate D reaction of solid barium carbonate with dilute hydrochloric acid, followed by reaction with aqueous sodium sulfate",
+      "parseStatus": "ok",
+      "stem": "All Group I metal compounds and all Group II metal chlorides are soluble in water. All Group II metal carbonates and barium sulfate are insoluble. Which method is used to prepare barium sulfate using barium carbonate?",
+      "options": {
+        "A": "direct combination of solid barium carbonate and dilute sulfuric acid",
+        "B": "reaction of solid barium carbonate and hydrogen chloride gas, followed by reaction with dilute sulfuric acid",
+        "C": "reaction of aqueous barium carbonate with dilute hydrochloric acid, followed by reaction with aqueous sodium sulfate",
+        "D": "reaction of solid barium carbonate with dilute hydrochloric acid, followed by reaction with aqueous sodium sulfate"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "top": 271.76,
+      "bottom": 331.32,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q22.png",
+      "rawText": "Which electronic structure belongs to a non-metallic element? A 2 B 2,2 C 2,8,2 D 2,8,8,2",
+      "parseStatus": "ok",
+      "stem": "Which electronic structure belongs to a non-metallic element?",
+      "options": {
+        "A": "2",
+        "B": "2,2",
+        "C": "2,8,2",
+        "D": "2,8,8,2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "top": 333.32,
+      "bottom": 566.22,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q23.png",
+      "rawText": "Tennessine is a newly discovered halogen and is below astatine in Group VII of the Periodic Table. Which row predicts the appearance of tennessine and the effect of adding aqueous potassium iodide? appearance of tennessine effect of adding aqueous potassium iodide to tennessine A black solid iodine is formed B black solid no reaction C brown liquid iodine is formed D brown liquid no reaction",
+      "parseStatus": "ok",
+      "stem": "Tennessine is a newly discovered halogen and is below astatine in Group VII of the Periodic Table. Which row predicts the appearance of tennessine and the effect of adding aqueous potassium iodide? appearance of tennessine effect of adding aqueous potassium iodide to tennessine",
+      "options": {
+        "A": "black solid iodine is formed",
+        "B": "black solid no reaction",
+        "C": "brown liquid iodine is formed",
+        "D": "brown liquid no reaction"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 568.22,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q24.png",
+      "rawText": "Which statement about the extraction of metals is correct? A Aluminium ore is called hematite. B Aluminium is extracted from its ore by heating with carbon. C Iron oxide is reduced to iron by heating with carbon monoxide. D Limestone is used to remove basic impurities in a blast furnace.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the extraction of metals is correct?",
+      "options": {
+        "A": "Aluminium ore is called hematite.",
+        "B": "Aluminium is extracted from its ore by heating with carbon.",
+        "C": "Iron oxide is reduced to iron by heating with carbon monoxide.",
+        "D": "Limestone is used to remove basic impurities in a blast furnace."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "top": 57.44,
+      "bottom": 237.06,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q25.png",
+      "rawText": "In a test for water, water turns anhydrous copper(II) ......1...... from ......2...... to ......3...... . Which words complete gaps 1, 2 and 3? 1 2 3 A chloride blue white B chloride white blue C sulfate blue white D sulfate white blue",
+      "parseStatus": "ok",
+      "stem": "In a test for water, water turns anhydrous copper(II) ......1...... from ......2...... to ......3...... . Which words complete gaps 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "chloride blue white",
+        "B": "chloride white blue",
+        "C": "sulfate blue white",
+        "D": "sulfate white blue"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "top": 239.06,
+      "bottom": 298.62,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q26.png",
+      "rawText": "What is a general formula for unsaturated hydrocarbons? A CnHn+2 B C2nH2n+2 C CnH2n D CnH2n+2",
+      "parseStatus": "ok",
+      "stem": "What is a general formula for unsaturated hydrocarbons?",
+      "options": {
+        "A": "CnHn+2",
+        "B": "C2nH2n+2",
+        "C": "CnH2n",
+        "D": "CnH2n+2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 300.62,
+      "bottom": 448.44,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q27.png",
+      "rawText": "Poly(ethene) and nylon are two different types of polymer. Which statement about these polymers is correct? A Nylon is an addition polymer. B The linkage between monomers in nylon is –CONH–. C Poly(ethene) and nylon are made from the same monomers. D Poly(ethene) and nylon have the same linkages between their monomers.",
+      "parseStatus": "ok",
+      "stem": "Poly(ethene) and nylon are two different types of polymer. Which statement about these polymers is correct?",
+      "options": {
+        "A": "Nylon is an addition polymer.",
+        "B": "The linkage between monomers in nylon is –CONH–.",
+        "C": "Poly(ethene) and nylon are made from the same monomers.",
+        "D": "Poly(ethene) and nylon have the same linkages between their monomers."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 450.44,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q28.png",
+      "rawText": "A solid, rectangular metal block has the dimensions shown. 8 cm 25 cm 5 cm The mass of the block is 2700 g. What is the density of the metal? A 2700 5 25  g / cm3 B 2700 8 5 25   g / cm3 C 5 25 2700  g / cm3 D 8 5 25 2700   g / cm3",
+      "parseStatus": "ok",
+      "stem": "A solid, rectangular metal block has the dimensions shown. 8 cm 25 cm 5 cm The mass of the block is 2700 g. What is the density of the metal?",
+      "options": {
+        "A": "2700 5 25  g / cm3",
+        "B": "2700 8 5 25   g / cm3",
+        "C": "5 25 2700  g / cm3",
+        "D": "8 5 25 2700   g / cm3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 287.88,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q29.png",
+      "rawText": "The length of a spring changes when a force is applied to stretch the spring. The table shows how the length of the spring depends on the force. force / N 0 1.0 2.0 3.0 4.0 5.0 length of spring / cm 22 25 28 31 35 45 What is the length of the spring when the limit of proportionality is reached? A exactly 22 cm B between 31 cm and 35 cm C exactly 35 cm D between 35 cm and 45 cm",
+      "parseStatus": "ok",
+      "stem": "The length of a spring changes when a force is applied to stretch the spring. The table shows how the length of the spring depends on the force. force / N 0 1.0 2.0 3.0 4.0 5.0 length of spring / cm 22 25 28 31 35 45 What is the length of the spring when the limit of proportionality is reached?",
+      "options": {
+        "A": "exactly 22 cm",
+        "B": "between 31 cm and 35 cm",
+        "C": "exactly 35 cm",
+        "D": "between 35 cm and 45 cm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 289.88,
+      "bottom": 478.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q30.png",
+      "rawText": "A see-saw (teeter-totter) rests on a pivot at its centre. NOT TO SCALE A child of weight 250 N sits on one side of the see-saw at a distance of 1.6 m from the pivot. A second child balances the see-saw by sitting on the other side of the pivot at a distance of 1.2 m from the pivot. What is the weight of the second child? A 190 N B 250 N C 330 N D 400 N",
+      "parseStatus": "ok",
+      "stem": "A see-saw (teeter-totter) rests on a pivot at its centre. NOT TO SCALE",
+      "options": {
+        "A": "child of weight 250 N sits on one side of the see-saw at a distance of 1.6 m from the pivot. A second child balances the see-saw by sitting on the other side of the pivot at a distance of 1.2 m from the pivot. What is the weight of the second child? A 190 N",
+        "B": "250 N",
+        "C": "330 N",
+        "D": "400 N"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 480.68,
+      "bottom": 630.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q31.png",
+      "rawText": "The Sun is the source of energy for most energy resources. In which group of resources is energy input from the Sun the only source of energy? A coal, geothermal, gasoline B hydroelectric, tidal, waves C natural gas, solar, wind D nuclear, solar, wood",
+      "parseStatus": "ok",
+      "stem": "The Sun is the source of energy for most energy resources. In which group of resources is energy input from the Sun the only source of energy?",
+      "options": {
+        "A": "coal, geothermal, gasoline",
+        "B": "hydroelectric, tidal, waves",
+        "C": "natural gas, solar, wind",
+        "D": "nuclear, solar, wood"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 632.54,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q32.png",
+      "rawText": "A student observes that a substance X does not flow. Which statement about substance X is correct? A It can be either a gas or a liquid. B It can only be a gas. C It can only be a liquid. D It can only be a solid.",
+      "parseStatus": "ok",
+      "stem": "A student observes that a substance X does not flow. Which statement about substance X is correct?",
+      "options": {
+        "A": "It can be either a gas or a liquid.",
+        "B": "It can only be a gas.",
+        "C": "It can only be a liquid.",
+        "D": "It can only be a solid."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 387.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q33.png",
+      "rawText": "A ray of light travels from glass into air. normal ray of light air glass In which direction is the light refracted and how does the speed of the light change? direction of refracted light speed of light A bends away from the normal decreases B bends away from the normal increases C bends towards the normal decreases D bends towards the normal increases",
+      "parseStatus": "ok",
+      "stem": "A ray of light travels from glass into air. normal ray of light air glass In which direction is the light refracted and how does the speed of the light change? direction of refracted light speed of light",
+      "options": {
+        "A": "bends away from the normal decreases",
+        "B": "bends away from the normal increases",
+        "C": "bends towards the normal decreases",
+        "D": "bends towards the normal increases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 389.48,
+      "bottom": 539.4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q34.png",
+      "rawText": "Gamma rays and microwaves are both electromagnetic radiations. Which statement about their frequencies and speeds in a vacuum is correct? A Gamma rays have greater frequencies than microwaves and travel at a greater speed. B Gamma rays have greater frequencies than microwaves and travel at the same speed. C Gamma rays have smaller frequencies than microwaves and travel at a greater speed. D Gamma rays have smaller frequencies than microwaves and travel at the same speed.",
+      "parseStatus": "ok",
+      "stem": "Gamma rays and microwaves are both electromagnetic radiations. Which statement about their frequencies and speeds in a vacuum is correct?",
+      "options": {
+        "A": "Gamma rays have greater frequencies than microwaves and travel at a greater speed.",
+        "B": "Gamma rays have greater frequencies than microwaves and travel at the same speed.",
+        "C": "Gamma rays have smaller frequencies than microwaves and travel at a greater speed.",
+        "D": "Gamma rays have smaller frequencies than microwaves and travel at the same speed."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 541.4,
+      "bottom": 666.72,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q35.png",
+      "rawText": "Which statement about the core of an electromagnet is correct? A It is made of soft iron because soft iron is easy to magnetise. B It is made of soft iron because soft iron does not lose its magnetism easily. C It is made of steel because steel is easy to magnetise. D It is made of steel because steel loses its magnetism easily.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the core of an electromagnet is correct?",
+      "options": {
+        "A": "It is made of soft iron because soft iron is easy to magnetise.",
+        "B": "It is made of soft iron because soft iron does not lose its magnetism easily.",
+        "C": "It is made of steel because steel is easy to magnetise.",
+        "D": "It is made of steel because steel loses its magnetism easily."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 11,
+      "top": 668.72,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q36.png",
+      "rawText": "A wire of a certain length has a resistance of 8.0 . A second wire made of the same material has double the length and double the cross-sectional area of the first wire. What is the resistance of the second wire? A 4.0  B 8.0  C 16  D 32 ",
+      "parseStatus": "ok",
+      "stem": "A wire of a certain length has a resistance of 8.0 .",
+      "options": {
+        "A": "second wire made of the same material has double the length and double the cross-sectional area of the first wire. What is the resistance of the second wire? A 4.0 ",
+        "B": "8.0 ",
+        "C": "16 ",
+        "D": "32 "
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 306.3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q37.png",
+      "rawText": "A circuit contains a cell and two resistors connected in parallel. The currents in each part of the circuit are labelled I1, I2 and I3. I1 I2 I3 What is the relationship between the currents? A I1 = I2 B I1 = I3 C I1 > I2 + I3 D I1 = I2 + I3",
+      "parseStatus": "ok",
+      "stem": "A circuit contains a cell and two resistors connected in parallel. The currents in each part of the circuit are labelled I1, I2 and I3. I1 I2 I3 What is the relationship between the currents?",
+      "options": {
+        "A": "I1 = I2",
+        "B": "I1 = I3",
+        "C": "I1 > I2 + I3",
+        "D": "I1 = I2 + I3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "top": 308.3,
+      "bottom": 458.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q38.png",
+      "rawText": "The instructions for a household lamp state that the plug must be fitted with a 3 A fuse. What happens if a 13 A fuse is fitted by mistake? A The fuse blows too easily. B The lamp lights less brightly. C The wires connecting the lamp to the plug overheat if a fault develops. D Too much voltage is supplied to the lamp.",
+      "parseStatus": "ok",
+      "stem": "The instructions for a household lamp state that the plug must be fitted with a 3",
+      "options": {
+        "A": "fuse. What happens if a 13 A fuse is fitted by mistake? A The fuse blows too easily.",
+        "B": "The lamp lights less brightly.",
+        "C": "The wires connecting the lamp to the plug overheat if a fault develops.",
+        "D": "Too much voltage is supplied to the lamp."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 12,
+      "top": 460.1,
+      "bottom": 557.64,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q39.png",
+      "rawText": "A transformer with an efficiency of 100% has an input current of 10 A. The input voltage is 100 V and the output voltage is 20 V. What is the output current? A 2.0 A B 10 A C 50 A D 200 A",
+      "parseStatus": "ok",
+      "stem": "A transformer with an efficiency of 100% has an input current of 10 A. The input voltage is 100 V and the output voltage is 20 V. What is the output current?",
+      "options": {
+        "A": "2.0 A",
+        "B": "10 A",
+        "C": "50 A",
+        "D": "200 A"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 12,
+      "top": 559.64,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_21/q40.png",
+      "rawText": "A uranium nucleus decays into a thorium nucleus. The thorium nucleus then decays into a protactinium nucleus. U 238 92  Th 234 90  Pa 234 91 Which emissions take place during the decays? A an alpha-particle followed by a beta-particle B an alpha-particle followed by another alpha-particle C a beta-particle followed by an alpha-particle D a beta-particle followed by another beta-particle",
+      "parseStatus": "ok",
+      "stem": "A uranium nucleus decays into a thorium nucleus. The thorium nucleus then decays into a protactinium nucleus. U 238 92  Th 234 90  Pa 234 91 Which emissions take place during the decays?",
+      "options": {
+        "A": "an alpha-particle followed by a beta-particle",
+        "B": "an alpha-particle followed by another alpha-particle",
+        "C": "a beta-particle followed by an alpha-particle",
+        "D": "a beta-particle followed by another beta-particle"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,733 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2024/winter/0654_w24_qp_23.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2024/winter/0654_w24_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.6,
+      "bottom": 206.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q01.png",
+      "rawText": "Soya seeds contain a lot of protein and are often fed to farm animals. Which characteristic of living things will benefit from the soya seeds? A excretion B growth C movement D sensitivity",
+      "parseStatus": "ok",
+      "stem": "Soya seeds contain a lot of protein and are often fed to farm animals. Which characteristic of living things will benefit from the soya seeds?",
+      "options": {
+        "A": "excretion",
+        "B": "growth",
+        "C": "movement",
+        "D": "sensitivity"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 208.46,
+      "bottom": 451.02,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q02.png",
+      "rawText": "Pieces of potato of the same length were placed in sucrose solutions of different concentrations. Their length was measured again after two hours. At which sucrose concentration were the pieces of potato most flaccid? 0 + – change in length concentration of sucrose solution A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 453.02,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q03.png",
+      "rawText": "Four different foods labelled A, B, C and D are tested to find out which nutrients they contain. Which food contains both starch and protein but no reducing sugar? final colour with Benedict’s solution final colour with biuret solution final colour with iodine solution A blue blue orange B blue purple blue-black C red blue orange D red purple blue-black",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 420.42,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q04.png",
+      "rawText": "When the phenol molecules in apples are exposed to air, they react with oxygen and the fruit turns brown. This is an enzyme-controlled reaction. The graph shows the effect of pH on the time taken for pieces of apple to turn brown. time taken to turn brown 0 1 2 3 4",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 422.42,
+      "bottom": 546.96,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q05.png",
+      "rawText": "What causes plant leaves to turn yellow? A a lack of magnesium in the soil B a lack of starch in the leaves C a reduction in the rate of photosynthesis D a reduction in the rate of respiration",
+      "parseStatus": "ok",
+      "stem": "What causes plant leaves to turn yellow?",
+      "options": {
+        "A": "a lack of magnesium in the soil",
+        "B": "a lack of starch in the leaves",
+        "C": "a reduction in the rate of photosynthesis",
+        "D": "a reduction in the rate of respiration"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 548.96,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q06.png",
+      "rawText": "Which component of a balanced diet is needed to prevent constipation? A carbohydrate B fat C protein D fibre",
+      "parseStatus": "ok",
+      "stem": "Which component of a balanced diet is needed to prevent constipation?",
+      "options": {
+        "A": "carbohydrate",
+        "B": "fat",
+        "C": "protein",
+        "D": "fibre"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 660.36,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q07.png",
+      "rawText": "The diagram shows the life cycle of a plant that takes two years to grow from a seed and produce new seeds. spring summer autumn winter spring year 1 year 2 summer autumn winter Which row about the large root in year 1 and in year 2 is correct? in year 1 the root acts as a in year 2 the root acts as a A sink sink B sink source C source sink D source source",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the life cycle of a plant that takes two years to grow from a seed and produce new seeds. spring summer autumn winter spring year 1 year 2 summer autumn winter Which row about the large root in year 1 and in year 2 is correct? in year 1 the root acts as a in year 2 the root acts as a",
+      "options": {
+        "A": "sink sink",
+        "B": "sink source",
+        "C": "source sink",
+        "D": "source source"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 662.36,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q08.png",
+      "rawText": "Which equation shows the metabolic process used in bread making? A carbon dioxide + water  glucose + oxygen B glucose + oxygen  carbon dioxide + water C glucose  ethanol + carbon dioxide D glucose  lactic acid",
+      "parseStatus": "ok",
+      "stem": "Which equation shows the metabolic process used in bread making?",
+      "options": {
+        "A": "carbon dioxide + water  glucose + oxygen",
+        "B": "glucose + oxygen  carbon dioxide + water",
+        "C": "glucose  ethanol + carbon dioxide",
+        "D": "glucose  lactic acid"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 186.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q09.png",
+      "rawText": "What are examples of involuntary actions? 1 widening of the pupil in dim light 2 increasing the pulse rate during exercise 3 contracting muscles to pick up a pencil A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "What are examples of involuntary actions? 1 widening of the pupil in dim light 2 increasing the pulse rate during exercise 3 contracting muscles to pick up a pencil",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 188.48,
+      "bottom": 546.36,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q10.png",
+      "rawText": "The diagram shows a flower. P Q R Which row names the structures labelled P, Q and R? P Q R A anther ovary sepal B anther style carpel C filament ovary carpel D filament style sepal",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a flower. P Q R Which row names the structures labelled P, Q and R? P Q R",
+      "options": {
+        "A": "anther ovary sepal",
+        "B": "anther style carpel",
+        "C": "filament ovary carpel",
+        "D": "filament style sepal"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 548.36,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q11.png",
+      "rawText": "The boxes show the steps involved in artificial selection of an animal species. identify offspring with desirable features mate a male and a female with desirable features mate male and female offspring with desirable features humans select animals with desirable features 1 2 3 4 Which sequence of steps is correct? A 2  1  4  3 B 2  4  3  1 C 4  3  2  1 D 4  2  1  3",
+      "parseStatus": "ok",
+      "stem": "The boxes show the steps involved in artificial selection of an animal species. identify offspring with desirable features mate a male and a female with desirable features mate male and female offspring with desirable features humans select animals with desirable features 1 2 3 4 Which sequence of steps is correct?",
+      "options": {
+        "A": "2  1  4  3",
+        "B": "2  4  3  1",
+        "C": "4  3  2  1",
+        "D": "4  2  1  3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q12.png",
+      "rawText": "Which statement about all food chains is correct? A All the carnivores are producers. B All the consumers are carnivores. C All the herbivores are consumers. D All the producers are herbivores.",
+      "parseStatus": "ok",
+      "stem": "Which statement about all food chains is correct?",
+      "options": {
+        "A": "All the carnivores are producers.",
+        "B": "All the consumers are carnivores.",
+        "C": "All the herbivores are consumers.",
+        "D": "All the producers are herbivores."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "top": 183.14,
+      "bottom": 345.66,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q13.png",
+      "rawText": "The release of fertiliser into rivers and lakes causes eutrophication which can lead to the death of fish. What causes the fish to die? A Decreased photosynthesis by producers reduces the carbon dioxide. B Increased photosynthesis by producers reduces the oxygen. C Increased decomposition reduces the carbon dioxide. D Increased decomposition reduces the oxygen.",
+      "parseStatus": "ok",
+      "stem": "The release of fertiliser into rivers and lakes causes eutrophication which can lead to the death of fish. What causes the fish to die?",
+      "options": {
+        "A": "Decreased photosynthesis by producers reduces the carbon dioxide.",
+        "B": "Increased photosynthesis by producers reduces the oxygen.",
+        "C": "Increased decomposition reduces the carbon dioxide.",
+        "D": "Increased decomposition reduces the oxygen."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 347.66,
+      "bottom": 564.66,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q14.png",
+      "rawText": "The numbers of protons, neutrons and electrons in four particles are shown. particle number of protons number of neutrons number of electrons W 20 20 20 X 19 20 19 Y 20 22 18 Z 21 24 21 Which two particles are isotopes of the same element? A W and X B W and Y C X and Y D Y and Z",
+      "parseStatus": "ok",
+      "stem": "The numbers of protons, neutrons and electrons in four particles are shown. particle number of protons number of neutrons number of electrons W 20 20 20 X 19 20 19 Y 20 22 18 Z 21 24 21 Which two particles are isotopes of the same element?",
+      "options": {
+        "A": "W and X",
+        "B": "W and Y",
+        "C": "X and Y",
+        "D": "Y and Z"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 566.66,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q15.png",
+      "rawText": "A sample of methane has mass 16.0 g at r.t.p. and contains the Avogadro number of molecules. What is the volume of 4.0 g of methane at r.t.p.? A 4.0 dm3 B 6.0 dm3 C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "top": 57.44,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q16.png",
+      "rawText": "The diagram shows the electrolysis of molten lead(II) bromide using inert electrodes. electrode X electrode Y electrolyte grey solid coloured fumes Which statement about this experiment is correct? A Electrode X is positively charged. B The coloured fumes are produced at the negative electrode. C The electrolyte is lead(II) bromide. D The grey solid is lead(II) bromide.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the electrolysis of molten lead(II) bromide using inert electrodes. electrode X electrode Y electrolyte grey solid coloured fumes Which statement about this experiment is correct?",
+      "options": {
+        "A": "Electrode X is positively charged.",
+        "B": "The coloured fumes are produced at the negative electrode.",
+        "C": "The electrolyte is lead(II) bromide.",
+        "D": "The grey solid is lead(II) bromide."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 503.22,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q17.png",
+      "rawText": "Which energy level diagram shows the activation energy for an exothermic reaction? energy progress of reaction reactants product activation energy A reactants product activation energy energy progress of reaction B energy progress of reaction reactants product activation energy C reactants product activation energy energy progress of reaction D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "top": 505.22,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q18.png",
+      "rawText": "The apparatus used to determine the rate of a chemical reaction is shown. For which reaction is the rate determined using this apparatus? A CaCO3  CaO + CO2 B 2C2H6 + 7O2  4CO2 + 6H2O C MgCO3 + 2HCl  MgCl 2 + CO2 + H2O D Cl 2 + 2NaBr  Br2 + 2NaCl",
+      "parseStatus": "ok",
+      "stem": "The apparatus used to determine the rate of a chemical reaction is shown. For which reaction is the rate determined using this apparatus?",
+      "options": {
+        "A": "CaCO3  CaO + CO2",
+        "B": "2C2H6 + 7O2  4CO2 + 6H2O",
+        "C": "MgCO3 + 2HCl  MgCl 2 + CO2 + H2O",
+        "D": "Cl 2 + 2NaBr  Br2 + 2NaCl"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 233.4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q19.png",
+      "rawText": "The equation for the reaction between magnesium and zinc sulfate is shown. Mg + ZnSO4  Zn + MgSO4 What happens to magnesium in this reaction? A It is oxidised because it gains electrons. B It is oxidised because it loses electrons. C It is reduced because it gains electrons. D It is reduced because it loses electrons.",
+      "parseStatus": "ok",
+      "stem": "The equation for the reaction between magnesium and zinc sulfate is shown. Mg + ZnSO4  Zn + MgSO4 What happens to magnesium in this reaction?",
+      "options": {
+        "A": "It is oxidised because it gains electrons.",
+        "B": "It is oxidised because it loses electrons.",
+        "C": "It is reduced because it gains electrons.",
+        "D": "It is reduced because it loses electrons."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "top": 235.4,
+      "bottom": 443.1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q20.png",
+      "rawText": "Cobalt(II) chloride, cobalt(II) nitrate, and cobalt(II) sulfate are soluble in water. Cobalt(II) oxide and cobalt(II) carbonate are insoluble in water. Which method can be used to prepare a sample of solid cobalt(II) sulfate? A Mix aqueous sodium sulfate and aqueous cobalt(II) nitrate, then filter. B Mix excess aqueous sulfuric acid and aqueous cobalt(II) chloride, then filter and evaporate the filtrate. C Mix dilute sulfuric acid and an excess of cobalt(II) oxide, then distil. D Mix dilute sulfuric acid and an excess of cobalt(II) carbonate, then filter and evaporate the filtrate.",
+      "parseStatus": "ok",
+      "stem": "Cobalt(II) chloride, cobalt(II) nitrate, and cobalt(II) sulfate are soluble in water. Cobalt(II) oxide and cobalt(II) carbonate are insoluble in water. Which method can be used to prepare a sample of solid cobalt(II) sulfate?",
+      "options": {
+        "A": "Mix aqueous sodium sulfate and aqueous cobalt(II) nitrate, then filter.",
+        "B": "Mix excess aqueous sulfuric acid and aqueous cobalt(II) chloride, then filter and evaporate the filtrate.",
+        "C": "Mix dilute sulfuric acid and an excess of cobalt(II) oxide, then distil.",
+        "D": "Mix dilute sulfuric acid and an excess of cobalt(II) carbonate, then filter and evaporate the filtrate."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "top": 445.1,
+      "bottom": 569.64,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q21.png",
+      "rawText": "What is warmed with a salt to test for ammonium ions? A aqueous barium chloride B aqueous litmus C aqueous silver nitrate D aqueous sodium hydroxide",
+      "parseStatus": "ok",
+      "stem": "What is warmed with a salt to test for ammonium ions?",
+      "options": {
+        "A": "aqueous barium chloride",
+        "B": "aqueous litmus",
+        "C": "aqueous silver nitrate",
+        "D": "aqueous sodium hydroxide"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "top": 571.64,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q22.png",
+      "rawText": "Which statement about the halogens is not correct? A Bromine is darker in colour than iodine. B Iodine is solid at room temperature. C They all have seven electrons in their outer shell. D They all form diatomic molecules.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the halogens is not correct?",
+      "options": {
+        "A": "Bromine is darker in colour than iodine.",
+        "B": "Iodine is solid at room temperature.",
+        "C": "They all have seven electrons in their outer shell.",
+        "D": "They all form diatomic molecules."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q23.png",
+      "rawText": "Which statement describes a typical transition element? A It has a high melting point, high density and forms a coloured salt. B It has a high melting point, low density and forms a white salt. C It has a low melting point, low density and forms a coloured salt. D It has a low melting point, high density and forms a white salt.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes a typical transition element?",
+      "options": {
+        "A": "It has a high melting point, high density and forms a coloured salt.",
+        "B": "It has a high melting point, low density and forms a white salt.",
+        "C": "It has a low melting point, low density and forms a coloured salt.",
+        "D": "It has a low melting point, high density and forms a white salt."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "top": 183.14,
+      "bottom": 360.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q24.png",
+      "rawText": "When iron is galvanised, it is coated with a layer of zinc. Which statements about galvanising are correct? 1 Zinc has a greater tendency to form positive ions than iron. 2 Zinc prevents iron from rusting by sacrificial protection. 3 Iron is more reactive than zinc. 4 Zinc acts as a barrier method of rust prevention if scratched. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "When iron is galvanised, it is coated with a layer of zinc. Which statements about galvanising are correct? 1 Zinc has a greater tendency to form positive ions than iron. 2 Zinc prevents iron from rusting by sacrificial protection. 3 Iron is more reactive than zinc. 4 Zinc acts as a barrier method of rust prevention if scratched.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "top": 362.0,
+      "bottom": 422.4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q25.png",
+      "rawText": "Which three elements do most fertilisers contain? A Na, C, P B Na, P, K C K, C, N D K, P, N",
+      "parseStatus": "ok",
+      "stem": "Which three elements do most fertilisers contain?",
+      "options": {
+        "A": "Na, C, P",
+        "B": "Na, P, K",
+        "C": "K, C, N",
+        "D": "K, P, N"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "top": 424.4,
+      "bottom": 565.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q26.png",
+      "rawText": "Which reaction that occurs in the Contact process requires the use of a vanadium(V) oxide catalyst? A S + O2  SO2 B 2SO2 + O2  2SO3 C SO3 + H2SO4  H2S2O7 D H2S2O7 + H2O  2H2SO4",
+      "parseStatus": "ok",
+      "stem": "Which reaction that occurs in the Contact process requires the use of a vanadium(V) oxide catalyst?",
+      "options": {
+        "A": "S + O2  SO2",
+        "B": "2SO2 + O2  2SO3",
+        "C": "SO3 + H2SO4  H2S2O7",
+        "D": "H2S2O7 + H2O  2H2SO4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 567.2,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q27.png",
+      "rawText": "Reactants for three chemical processes are listed. 1 ethene + steam 2 ethene + hydrogen 3 ethene forming poly(ethene) Which processes form saturated hydrocarbons? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Reactants for three chemical processes are listed. 1 ethene + steam 2 ethene + hydrogen 3 ethene forming poly(ethene) Which processes form saturated hydrocarbons?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q28.png",
+      "rawText": "The diagrams show four solid blocks of equal mass. Which block is made from the least dense material? A B C D 2.0 cm 1.0 cm 2.0 cm 3.0 cm 2.0 cm 2.0 cm 8.0 cm 4.0 cm 2.0 cm 3.0 cm 3.0 cm 5.0 cm",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 354.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q29.png",
+      "rawText": "A person uses a bar that is 3.0 m long to lift a rock of weight 900 N off the ground. There is a pivot under the bar at 0.50 m from the rock. The person pushes vertically downwards on the other end of the bar from the rock, as shown. rock pivot 0.50 m bar 3.0 m force Ignore the weight of the bar. What is the minimum force needed to lift the rock off the ground? A 150 N B 180 N C 4500 N D 5400 N",
+      "parseStatus": "ok",
+      "stem": "A person uses a bar that is 3.0 m long to lift a rock of weight 900 N off the ground. There is a pivot under the bar at 0.50 m from the rock. The person pushes vertically downwards on the other end of the bar from the rock, as shown. rock pivot 0.50 m bar 3.0 m force Ignore the weight of the bar. What is the minimum force needed to lift the rock off the ground?",
+      "options": {
+        "A": "150 N",
+        "B": "180 N",
+        "C": "4500 N",
+        "D": "5400 N"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "top": 356.48,
+      "bottom": 480.96,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q30.png",
+      "rawText": "Which energy resource does not have the Sun as its source of energy? A coal B geothermal C hydroelectric D water waves",
+      "parseStatus": "ok",
+      "stem": "Which energy resource does not have the Sun as its source of energy?",
+      "options": {
+        "A": "coal",
+        "B": "geothermal",
+        "C": "hydroelectric",
+        "D": "water waves"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "top": 482.96,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q31.png",
+      "rawText": "A sample of gas is sealed inside a container. The volume of the container is slowly decreased. The temperature of the gas remains constant. Which row describes and explains what happens to the pressure of the gas? description explanation A pressure decreases molecules collide with the container at lower speed B pressure decreases molecules collide with the container less frequently C pressure increases molecules collide with the container at greater speed D pressure increases molecules collide with the container more frequently",
+      "parseStatus": "ok",
+      "stem": "A sample of gas is sealed inside a container. The volume of the container is slowly decreased. The temperature of the gas remains constant. Which row describes and explains what happens to the pressure of the gas? description explanation",
+      "options": {
+        "A": "pressure decreases molecules collide with the container at lower speed",
+        "B": "pressure decreases molecules collide with the container less frequently",
+        "C": "pressure increases molecules collide with the container at greater speed",
+        "D": "pressure increases molecules collide with the container more frequently"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 206.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q32.png",
+      "rawText": "There is a vacuum in the space between the Sun and the Earth. How is thermal energy transferred from the Sun to the Earth? A by conduction only B by convection only C by radiation only D by convection and radiation",
+      "parseStatus": "ok",
+      "stem": "There is a vacuum in the space between the Sun and the Earth. How is thermal energy transferred from the Sun to the Earth?",
+      "options": {
+        "A": "by conduction only",
+        "B": "by convection only",
+        "C": "by radiation only",
+        "D": "by convection and radiation"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "top": 208.46,
+      "bottom": 400.32,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q33.png",
+      "rawText": "A light wave travelling in air is refracted as it enters a glass block. Which row shows the effect on the speed and the wavelength of the light wave as it enters the glass? speed wavelength A decreases decreases B decreases no change C increases increases D increases no change",
+      "parseStatus": "ok",
+      "stem": "A light wave travelling in air is refracted as it enters a glass block. Which row shows the effect on the speed and the wavelength of the light wave as it enters the glass? speed wavelength",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases no change",
+        "C": "increases increases",
+        "D": "increases no change"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "top": 402.32,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q34.png",
+      "rawText": "The diagram shows the formation of an image of an object by a converging lens. Three points are labelled X, Y and Z. Z Y X converging lens object image Which labelled point is a principal focus of the lens and which distance is the focal length? principal focus focal length A Y XY B Y XZ C Z XY D Z XZ",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the formation of an image of an object by a converging lens. Three points are labelled X, Y and Z. Z Y X converging lens object image Which labelled point is a principal focus of the lens and which distance is the focal length? principal focus focal length",
+      "options": {
+        "A": "Y XY",
+        "B": "Y XZ",
+        "C": "Z XY",
+        "D": "Z XZ"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 428.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q35.png",
+      "rawText": "The current–voltage characteristic for a filament lamp is shown. 0 0 current voltage As the current increases, what happens to the temperature of the lamp filament and what happens to the resistance of the lamp filament? temperature of lamp filament resistance of lamp filament A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The current–voltage characteristic for a filament lamp is shown. 0 0 current voltage As the current increases, what happens to the temperature of the lamp filament and what happens to the resistance of the lamp filament? temperature of lamp filament resistance of lamp filament",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "top": 430.16,
+      "bottom": 515.82,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q36.png",
+      "rawText": "A 12  resistor is connected in parallel with a 6.0  resistor. What is the combined resistance of the two resistors? A 0.25  B 4.0  C 9.0  D 18 ",
+      "parseStatus": "ok",
+      "stem": "A 12  resistor is connected in parallel with a 6.0  resistor. What is the combined resistance of the two resistors?",
+      "options": {
+        "A": "0.25 ",
+        "B": "4.0 ",
+        "C": "9.0 ",
+        "D": "18 "
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "top": 517.82,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q37.png",
+      "rawText": "An electric motor is connected to a power supply by insulated wires. The circuit is protected by a fuse, but the wires become hot. + – motor M power supply Which change prevents the wires from becoming so hot? A Connect a second identical fuse in the circuit. B Use a fuse with a higher current rating. C Use thicker connecting wires. D Use thicker insulation on the connecting wires.",
+      "parseStatus": "ok",
+      "stem": "An electric motor is connected to a power supply by insulated wires. The circuit is protected by a fuse, but the wires become hot. + – motor M power supply Which change prevents the wires from becoming so hot?",
+      "options": {
+        "A": "Connect a second identical fuse in the circuit.",
+        "B": "Use a fuse with a higher current rating.",
+        "C": "Use thicker connecting wires.",
+        "D": "Use thicker insulation on the connecting wires."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "top": 56.6,
+      "bottom": 533.94,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q38.png",
+      "rawText": "Which diagram shows the pattern and the direction of the magnetic field around a straight wire carrying a current into the page? current into page B current into page A current into page D current into page C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "top": 535.94,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q39.png",
+      "rawText": "What is the purpose of the slip rings in an alternating current (a.c.) generator? A to allow each end of the coil to contact each carbon brush alternately B to allow each end of the coil to remain in contact with the same carbon brush at all times C to maintain a constant voltage in the output circuit while the coil is rotating D to remain stationary while the coil rotates between them",
+      "parseStatus": "ok",
+      "stem": "What is the purpose of the slip rings in an alternating current (a.c.) generator?",
+      "options": {
+        "A": "to allow each end of the coil to contact each carbon brush alternately",
+        "B": "to allow each end of the coil to remain in contact with the same carbon brush at all times",
+        "C": "to maintain a constant voltage in the output circuit while the coil is rotating",
+        "D": "to remain stationary while the coil rotates between them"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "top": 57.44,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w24_qp_23/q40.png",
+      "rawText": "A radioactive source emits beta ()-particles and gamma ()-rays. Both types of radiation enter the magnetic field between the poles of a magnet, as shown. β-particles and γ-rays radioactive source S N In which direction does each type of radiation travel after entering the magnetic field? -particles -rays A into the page into the page B into the page straight on C out of the page into the page D out of the page straight on",
+      "parseStatus": "ok",
+      "stem": "A radioactive source emits beta ()-particles and gamma ()-rays. Both types of radiation enter the magnetic field between the poles of a magnet, as shown. β-particles and γ-rays radioactive source S N In which direction does each type of radiation travel after entering the magnetic field? -particles -rays",
+      "options": {
+        "A": "into the page into the page",
+        "B": "into the page straight on",
+        "C": "out of the page into the page",
+        "D": "out of the page straight on"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

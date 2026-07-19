@@ -3,6 +3,7 @@
   boards: {
     CIE: {
       "IGCSE Chemistry": ["MCQ"],
+      "IGCSE Co-ordinated Sciences": ["MCQ"],
     },
   },
 };

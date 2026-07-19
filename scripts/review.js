@@ -33,6 +33,71 @@
     localStorage.setItem(scopedKey(key), JSON.stringify(value));
   }
 
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function resolveImageUrl(value) {
+    const url = String(value || "").trim();
+    if (!url) return "";
+    if (url.startsWith("/assets/") && location.pathname.startsWith("/alevel/")) {
+      return `/alevel${url}`;
+    }
+    return url;
+  }
+
+  function questionImageUrl(question) {
+    const normalized = question?.normalizedImages?.[0]?.src;
+    if (normalized) return resolveImageUrl(normalized);
+
+    const image = question?.images?.[0];
+    if (typeof image === "string") return resolveImageUrl(image);
+    if (image && typeof image === "object") {
+      return resolveImageUrl(image.detailUrl || image.url || image.thumbnailUrl);
+    }
+    return resolveImageUrl(question?.imageUrl);
+  }
+
+  function paperSlugFromQuestions(questions) {
+    const id = String(questions?.[0]?.id || "");
+    const match = id.match(/^CIE-(?:IGCHEM|IGCOORD)-SET-((?:0620|0654)_[msw]\d{2}_qp_\d+)-\d+$/i);
+    return match ? match[1].toLowerCase() : "";
+  }
+
+  function persistPaperResult(result, questions, paperSlug = "") {
+    const slug = paperSlug || paperSlugFromQuestions(questions);
+    if (!slug) return;
+    writeJson(`alevel.paperResult.${slug}`, {
+      result,
+      questions,
+      savedAt: new Date().toISOString(),
+    });
+  }
+
+  async function loadPaperResult(paperSlug) {
+    const userId = localStorage.getItem(USER_ID_KEY) || "";
+    if (userId && window.ALevelApi?.getUserPractices) {
+      try {
+        const rows = await window.ALevelApi.getUserPractices(userId, { limit: 100 });
+        const match = (rows || []).find(
+          (row) => row.status === "submitted" && paperSlugFromQuestions(row.questions) === paperSlug
+        );
+        if (match?.result) {
+          const record = { result: match.result, questions: match.questions || [] };
+          persistPaperResult(record.result, record.questions, paperSlug);
+          return record;
+        }
+      } catch (_err) {
+      }
+    }
+    return readJson(`alevel.paperResult.${paperSlug}`, null);
+  }
+
   function optLabel(idx) {
     return Number.isInteger(idx) && idx >= 0 ? String.fromCharCode(65 + idx) : t("unanswered");
   }
@@ -51,10 +116,11 @@
     return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   }
 
-  function buildSubmitPayload(answers, hintUsageMap) {
+  function buildSubmitPayload(answers, hintUsageMap, starredQuestions = []) {
     return answers.map((selectedIndex, idx) => ({
       selectedIndex: Number.isInteger(selectedIndex) ? selectedIndex : -1,
       hintsUsed: Number(hintUsageMap?.[idx]?.used || 0),
+      starred: Boolean(starredQuestions[idx]),
     }));
   }
 
@@ -70,7 +136,7 @@
     return Object.values(logs);
   }
 
-  function evaluateLocal(questions, answers, hintUsageMap) {
+  function evaluateLocal(questions, answers, hintUsageMap, starredQuestions = []) {
     let correct = 0;
     const details = [];
 
@@ -86,6 +152,7 @@
         skills: Array.isArray(q.skills) ? q.skills : [],
         mistakeType: q.mistakeType || "concept",
         correct: ok,
+        starred: Boolean(starredQuestions[idx]),
         selectedIndex,
         answer: q.answer,
         hintsUsed: Number(hintUsageMap?.[idx]?.used || 0),
@@ -166,40 +233,13 @@
     return [status, code, msg].filter(Boolean).join(" | ");
   }
 
-  function buildAnalysisText(question, detail) {
-    const hints = Array.isArray(question?.hints) ? question.hints.filter(Boolean) : [];
-    const skills = Array.isArray(question?.skills) ? question.skills.filter(Boolean) : [];
-    const mistakeType = detail?.mistakeType || question?.mistakeType || "unknown";
-
-    if (hints.length) {
-      return t("reviewAnalysisHint", { hint: hints[0] });
-    }
-
-    if (skills.length) {
-      return t("reviewAnalysisSkills", { skills: skills.slice(0, 2).join(" / ") });
-    }
-
-    if (mistakeType === "calculation") {
-      return t("reviewAnalysisCalculation");
-    }
-
-    if (mistakeType === "question_reading") {
-      return t("reviewAnalysisReading");
-    }
-
-    if (mistakeType === "concept") {
-      return t("reviewAnalysisConcept");
-    }
-
-    return t("reviewAnalysisGeneric");
-  }
-
   function buildCommunityUrl(question, detail, idx) {
     const params = new URLSearchParams();
     const questionKey = question?.id || detail?.id || "";
     if (questionKey) params.set("questionKey", questionKey);
     if (question?.board) params.set("board", question.board);
     if (question?.subject) params.set("subject", question.subject);
+    if (question?.subjectCode) params.set("subjectCode", question.subjectCode);
     if (question?.paper) params.set("paper", question.paper);
     if (question?.topic) params.set("topic", question.topic);
     const stem = question?.stem ? String(question.stem).slice(0, 220) : "";
@@ -208,33 +248,11 @@
     return `./community.html?${params.toString()}`;
   }
 
-  function buildImproveText(question, detail) {
-    const skills = Array.isArray(question?.skills) ? question.skills.filter(Boolean) : [];
-    const hintTotal = Number(detail?.hintTotal || 0);
-    const hintsUsed = Number(detail?.hintsUsed || 0);
-    const mistakeType = detail?.mistakeType || question?.mistakeType || "unknown";
-
-    if (skills.length) {
-      return t("reviewImproveSkills", { skills: skills.slice(0, 2).join(" / ") });
-    }
-
-    if (hintsUsed > 0 || hintTotal > 0) {
-      return t("reviewImproveHint");
-    }
-
-    if (mistakeType === "calculation") {
-      return t("reviewImproveCalculation");
-    }
-
-    if (mistakeType === "question_reading") {
-      return t("reviewImproveReading");
-    }
-
-    if (mistakeType === "concept") {
-      return t("reviewImproveConcept");
-    }
-
-    return t("reviewImproveGeneric");
+  function scrollToReviewQuestions() {
+    byId("reviewQuestionSection")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   }
 
   function renderPager() {
@@ -285,7 +303,7 @@
           if (state.pageIndex > 0) {
             state.pageIndex -= 1;
             renderQuestionPage();
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            scrollToReviewQuestions();
           }
         };
       }
@@ -295,7 +313,7 @@
           if (state.pageIndex < totalPages - 1) {
             state.pageIndex += 1;
             renderQuestionPage();
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            scrollToReviewQuestions();
           }
         };
       }
@@ -305,7 +323,7 @@
           const nextPage = Math.max(1, Math.min(totalPages, Math.round(raw || 1)));
           state.pageIndex = nextPage - 1;
           renderQuestionPage();
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          scrollToReviewQuestions();
         };
         input.onkeydown = (evt) => {
           if (evt.key === "Enter") {
@@ -338,23 +356,24 @@
     wrongWrap.innerHTML = currentRows
       .map(({ d, idx }) => {
         const q = state.questions[idx] || {};
-        const stem = q.stem || t("stemMissing");
-        const yourText = Number.isInteger(d.selectedIndex) && d.selectedIndex >= 0
-          ? `${optLabel(d.selectedIndex)}. ${q.options?.[d.selectedIndex] || ""}`
+        const imageUrl = questionImageUrl(q);
+        const yourAnswer = Number.isInteger(d.selectedIndex) && d.selectedIndex >= 0
+          ? optLabel(d.selectedIndex)
           : t("unanswered");
-        const rightText = `${optLabel(d.answer)}. ${q.options?.[d.answer] || ""}`;
-        const analysisText = buildAnalysisText(q, d);
-        const improveText = buildImproveText(q, d);
+        const correctAnswer = optLabel(d.answer);
+        const questionNo = Number(q.questionNo || idx + 1);
         return `
-          <article class="question">
-            <h4>${t("questionNumber", { number: idx + 1 })}</h4>
-            <p class="chem-text">${stem}</p>
-            <p class="${d.correct ? "good" : "bad"}">${d.correct ? t("correctStatus") : t("incorrectStatus")}</p>
-            <p class="bad">${t("yourAnswer", { answer: yourText })}</p>
-            <p class="good">${t("correctAnswer", { answer: rightText })}</p>
-            <div class="text-view-box">
-              <p><strong>${t("analysisLabel")}</strong> ${analysisText}</p>
-              <p><strong>${t("improvementLabel")}</strong> ${improveText}</p>
+          <article class="question review-question-card">
+            <div class="review-question-head">
+              <h4>${t("questionNumber", { number: questionNo })}</h4>
+              ${d.starred ? `<span class="review-star" title="${t("starredQuestion")}" aria-label="${t("starredQuestion")}">★</span>` : ""}
+            </div>
+            ${imageUrl
+              ? `<figure class="review-question-image"><img src="${escapeHtml(imageUrl)}" alt="${t("questionImageAlt", { number: questionNo })}" loading="lazy" decoding="async" /></figure>`
+              : `<p class="tip">${t("questionImageUnavailable")}</p>`}
+            <div class="review-question-answers">
+              <div><span>${t("myAnswer")}</span><strong class="${d.correct ? "good" : "bad"}">${yourAnswer}</strong></div>
+              <div><span>${t("correctAnswerShort")}</span><strong class="good">${correctAnswer}</strong></div>
             </div>
             <div class="actions compact-actions">
               <a class="btn-link" href="${buildCommunityUrl(q, d, idx)}">${t("discussQuestion")}</a>
@@ -389,13 +408,15 @@
       pieStops.push(`${slice.color} ${start}deg ${offset}deg`);
     });
     const pieBackground = pieStops.length ? `conic-gradient(${pieStops.join(", ")})` : "#c9cfde";
+    const requestedQuestion = Number(new URLSearchParams(location.search).get("question") || 0);
     const answerRows = details
       .map((detail, idx) => {
         const question = questions?.[idx] || {};
+        const questionNo = Number(question.questionNo || idx + 1);
         const answerClass = detail.correct ? "good" : (detail.selectedIndex === -1 ? "tip-text" : "bad");
         return `
-          <tr>
-            <td>${idx + 1}</td>
+          <tr id="answerIndexQuestion${questionNo}" class="${requestedQuestion === questionNo ? "is-target-question" : ""}">
+            <td>${questionNo}</td>
             <td class="${answerClass}">${buildOptionText(question, detail.selectedIndex)}</td>
             <td class="good">${buildOptionText(question, detail.answer)}</td>
           </tr>
@@ -454,9 +475,22 @@
     `;
 
     state.questions = questions || [];
-    state.allRows = result.details.map((d, idx) => ({ d, idx }));
+    state.allRows = result.details
+      .map((d, idx) => ({ d, idx }))
+      .filter(({ d }) => !d.correct || d.starred);
     state.pageIndex = 0;
     renderQuestionPage();
+    const requestedQuestionExists = questions.some(
+      (question, idx) => Number(question?.questionNo || idx + 1) === requestedQuestion
+    );
+    if (requestedQuestion > 0 && requestedQuestionExists) {
+      requestAnimationFrame(() => {
+        document.getElementById(`answerIndexQuestion${requestedQuestion}`)?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      });
+    }
   }
 
   async function runSubmitInReview() {
@@ -468,7 +502,9 @@
     const questions = pending.questions || [];
     const answers = pending.answers || [];
     const hintUsageMap = pending.hintUsageMap || {};
+    const starredQuestions = Array.isArray(pending.starredQuestions) ? pending.starredQuestions : [];
     const selection = pending.selection || null;
+    const paperSlug = pending.paperSlug || paperSlugFromQuestions(questions);
     const elapsedSeconds = Number(pending.elapsedSeconds || 0);
     const userId = localStorage.getItem(USER_ID_KEY) || "";
 
@@ -479,13 +515,14 @@
             userId,
             selection,
             questions,
-            answers: buildSubmitPayload(answers, hintUsageMap),
+            answers: buildSubmitPayload(answers, hintUsageMap, starredQuestions),
           });
           const result = data.result;
           const wrongLog = data.wrongLog || buildWrongLog(result.details || []);
           result.elapsedSeconds = elapsedSeconds;
           writeJson("alevel.lastResult", result);
           writeJson("alevel.wrongLog", wrongLog);
+          persistPaperResult(result, questions, paperSlug);
           persistWrongNotebook(questions, result.details || [], selection);
           localStorage.removeItem(scopedKey("alevel.pendingSubmit"));
           return { result, questions, modeText: t("localPaperSynced") };
@@ -493,11 +530,12 @@
       } catch (_err) {
       }
 
-      const result = evaluateLocal(questions, answers, hintUsageMap);
+      const result = evaluateLocal(questions, answers, hintUsageMap, starredQuestions);
       result.elapsedSeconds = elapsedSeconds;
       const wrongLog = buildWrongLog(result.details || []);
       writeJson("alevel.lastResult", result);
       writeJson("alevel.wrongLog", wrongLog);
+      persistPaperResult(result, questions, paperSlug);
       persistWrongNotebook(questions, result.details || [], selection);
       localStorage.removeItem(scopedKey("alevel.pendingSubmit"));
       return { result, questions, modeText: t("localScoringUsed") };
@@ -509,7 +547,7 @@
       }
       const data = await window.ALevelApi.submitPaper({
         paperId: pending.paperId,
-        answers: buildSubmitPayload(answers, hintUsageMap),
+        answers: buildSubmitPayload(answers, hintUsageMap, starredQuestions),
       });
       const result = data.result;
       const wrongLog = data.wrongLog || buildWrongLog(result.details || []);
@@ -518,15 +556,17 @@
       result.elapsedSeconds = elapsedSeconds;
       writeJson("alevel.lastResult", result);
       writeJson("alevel.wrongLog", wrongLog);
+      persistPaperResult(result, questions, paperSlug);
       persistWrongNotebook(questions, result.details || [], selection);
       localStorage.removeItem(scopedKey("alevel.pendingSubmit"));
       return { result, questions, modeText: t("backendScoringDone") };
     } catch (err) {
-      const result = evaluateLocal(questions, answers, hintUsageMap);
+      const result = evaluateLocal(questions, answers, hintUsageMap, starredQuestions);
       result.elapsedSeconds = elapsedSeconds;
       const wrongLog = buildWrongLog(result.details || []);
       writeJson("alevel.lastResult", result);
       writeJson("alevel.wrongLog", wrongLog);
+      persistPaperResult(result, questions, paperSlug);
       persistWrongNotebook(questions, result.details || [], selection);
       localStorage.removeItem(scopedKey("alevel.pendingSubmit"));
       return { result, questions, modeText: t("backendSubmitFallback", { message: toErrText(err) }) };
@@ -547,8 +587,10 @@
       tips.textContent = justSubmitted.modeText;
       byId("reviewSummary").appendChild(tips);
     } else {
-      const result = readJson("alevel.lastResult", null);
-      const questions = readJson("alevel.generatedPaper", []);
+      const requestedPaper = new URLSearchParams(location.search).get("paper") || "";
+      const paperRecord = requestedPaper ? await loadPaperResult(requestedPaper) : null;
+      const result = requestedPaper ? paperRecord?.result : readJson("alevel.lastResult", null);
+      const questions = requestedPaper ? (paperRecord?.questions || []) : readJson("alevel.generatedPaper", []);
       if (!result || !Array.isArray(result.details)) {
         byId("reviewSummary").innerHTML = `<p class='bad'>${t("noRecentSubmission")}</p>`;
         byId("wrongQuestions").innerHTML = "";

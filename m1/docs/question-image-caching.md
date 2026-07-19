@@ -2,7 +2,7 @@
 
 Use different cache rules for versioned question images and mutable paper data.
 
-- Path: `/assets/question-cut-preview/**`
+- Path: `/assets/exam-question-images/cie-igcse-chemistry-0620/**`
   - Requirement: file names or query params must change when the image content changes
   - Response header: `Cache-Control: public, max-age=31536000, immutable`
   - Purpose: long-lived browser and CDN caching for stable image assets

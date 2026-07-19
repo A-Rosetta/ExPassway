@@ -1,0 +1,758 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2025/winter/0654_w25_qp_22.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2025/winter/0654_w25_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.49,
+      "bottom": 167.41,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q01.png",
+      "rawText": "The length of an insect in a photograph is measured as 17 mm. The actual length of the insect is 12 mm. What is the magnification of the insect in the photograph? A 0.7 B 0.8 C 1.4 D 1.5",
+      "parseStatus": "ok",
+      "stem": "The length of an insect in a photograph is measured as 17 mm. The actual length of the insect is 12 mm. What is the magnification of the insect in the photograph?",
+      "options": {
+        "A": "0.7",
+        "B": "0.8",
+        "C": "1.4",
+        "D": "1.5"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 169.41,
+      "bottom": 509.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q02.png",
+      "rawText": "The mass of a potato cylinder is recorded. The potato cylinder is then placed into concentrated sucrose solution. After 2 hours, the potato cylinder is removed from the solution and the mass recorded. The results are shown. time / hours mass / g 0 2.50 2 1.65 Which statement explains the change in mass of the potato? A Sucrose moves out of the potato cells because the solution has a higher water potential than the cells. B Sucrose moves out of the potato cells because the solution has a lower water potential than the cells. C Water moves out of the potato cells because the solution has a higher water potential than the cells. D Water moves out of the potato cells because the solution has a lower water potential than the cells.",
+      "parseStatus": "ok",
+      "stem": "The mass of a potato cylinder is recorded. The potato cylinder is then placed into concentrated sucrose solution. After 2 hours, the potato cylinder is removed from the solution and the mass recorded. The results are shown. time / hours mass / g 0 2.50 2 1.65 Which statement explains the change in mass of the potato?",
+      "options": {
+        "A": "Sucrose moves out of the potato cells because the solution has a higher water potential than the cells.",
+        "B": "Sucrose moves out of the potato cells because the solution has a lower water potential than the cells.",
+        "C": "Water moves out of the potato cells because the solution has a higher water potential than the cells.",
+        "D": "Water moves out of the potato cells because the solution has a lower water potential than the cells."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 511.17,
+      "bottom": 570.73,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q03.png",
+      "rawText": "Which molecule is a component of proteins? A C2H5NO2 B C3H8O3 C C6H12O6 D C10H20O2",
+      "parseStatus": "ok",
+      "stem": "Which molecule is a component of proteins?",
+      "options": {
+        "A": "C2H5NO2",
+        "B": "C3H8O3",
+        "C": "C6H12O6",
+        "D": "C10H20O2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "top": 572.73,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q04.png",
+      "rawText": "Which molecule in this reaction has an active site? lipase fat fatty acid + glycerol A fat B fatty acid C glycerol D lipase",
+      "parseStatus": "ok",
+      "stem": "Which molecule in this reaction has an active site? lipase fat fatty acid + glycerol",
+      "options": {
+        "A": "fat",
+        "B": "fatty acid",
+        "C": "glycerol",
+        "D": "lipase"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 56.49,
+      "bottom": 210.37,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q05.png",
+      "rawText": "Which row shows the effect of magnesium ion deficiency on plants? leaf colour growth A green good B green poor C yellow good D yellow poor",
+      "parseStatus": "ok",
+      "stem": "Which row shows the effect of magnesium ion deficiency on plants? leaf colour growth",
+      "options": {
+        "A": "green good",
+        "B": "green poor",
+        "C": "yellow good",
+        "D": "yellow poor"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 212.37,
+      "bottom": 511.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q06.png",
+      "rawText": "The diagram shows part of the human digestive system. P Q R S Which organs produce digestive enzymes? A P and Q B Q and R C R and S D S and P",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the human digestive system. P Q R S Which organs produce digestive enzymes?",
+      "options": {
+        "A": "P and Q",
+        "B": "Q and R",
+        "C": "R and S",
+        "D": "S and P"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "top": 513.93,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q07.png",
+      "rawText": "Which statement about the human circulatory system is correct? A Blood flows through the aorta towards the heart. B Blood flows through the pulmonary artery towards the lungs. C Blood flows through the pulmonary vein away from the heart. D Blood flows through the vena cava away from the lungs.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the human circulatory system is correct?",
+      "options": {
+        "A": "Blood flows through the aorta towards the heart.",
+        "B": "Blood flows through the pulmonary artery towards the lungs.",
+        "C": "Blood flows through the pulmonary vein away from the heart.",
+        "D": "Blood flows through the vena cava away from the lungs."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 56.49,
+      "bottom": 310.33,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q08.png",
+      "rawText": "The diagram shows part of the breathing system in humans. Which labelled part is the trachea? A B D C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 312.33,
+      "bottom": 435.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q09.png",
+      "rawText": "The word equation for aerobic respiration is shown. glucose + oxygen  carbon dioxide + water How many molecules of carbon dioxide will be produced from the breakdown of four molecules of glucose? A 4 B 8 C 16 D 24",
+      "parseStatus": "ok",
+      "stem": "The word equation for aerobic respiration is shown. glucose + oxygen  carbon dioxide + water How many molecules of carbon dioxide will be produced from the breakdown of four molecules of glucose?",
+      "options": {
+        "A": "4",
+        "B": "8",
+        "C": "16",
+        "D": "24"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "top": 437.97,
+      "bottom": 575.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q10.png",
+      "rawText": "Which statement about blood flow to the skin in the maintenance of a constant internal body temperature is correct? A If the internal body temperature is too high then vasoconstriction of skin arterioles occurs. B If the internal body temperature is too low then vasoconstriction of skin capillaries occurs. C If the internal body temperature is too high then vasodilation of skin arterioles occurs. D If the internal body temperature is too low then vasodilation of skin capillaries occurs.",
+      "parseStatus": "ok",
+      "stem": "Which statement about blood flow to the skin in the maintenance of a constant internal body temperature is correct?",
+      "options": {
+        "A": "If the internal body temperature is too high then vasoconstriction of skin arterioles occurs.",
+        "B": "If the internal body temperature is too low then vasoconstriction of skin capillaries occurs.",
+        "C": "If the internal body temperature is too high then vasodilation of skin arterioles occurs.",
+        "D": "If the internal body temperature is too low then vasodilation of skin capillaries occurs."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "top": 577.17,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q11.png",
+      "rawText": "Which statement is correct? A Asexual reproduction produces offspring which can adapt quickly to changes in the environment. B Asexual reproduction produces genetically different offspring much faster than sexual reproduction. C Sexual reproduction produces genetically different offspring enabling natural selection to occur. D Sexual reproduction produces genetically identical offspring by the production of gametes.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "Asexual reproduction produces offspring which can adapt quickly to changes in the environment.",
+        "B": "Asexual reproduction produces genetically different offspring much faster than sexual reproduction.",
+        "C": "Sexual reproduction produces genetically different offspring enabling natural selection to occur.",
+        "D": "Sexual reproduction produces genetically identical offspring by the production of gametes."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 56.49,
+      "bottom": 116.05,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q12.png",
+      "rawText": "Which combination of chromosomes produces a male in humans? A XO B XY C YY D XX",
+      "parseStatus": "ok",
+      "stem": "Which combination of chromosomes produces a male in humans?",
+      "options": {
+        "A": "XO",
+        "B": "XY",
+        "C": "YY",
+        "D": "XX"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "top": 118.05,
+      "bottom": 202.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q13.png",
+      "rawText": "Rabbits are herbivores. Which trophic levels can the rabbit occupy? A 1 only B 2 and 3 C 2 only D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Rabbits are herbivores. Which trophic levels can the rabbit occupy?",
+      "options": {
+        "A": "1 only",
+        "B": "2 and 3",
+        "C": "2 only",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "top": 204.93,
+      "bottom": 358.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q14.png",
+      "rawText": "Which row shows the electronic configuration of a calcium atom and of a fluoride ion? calcium atom fluoride ion A 2,8,8 2,7 B 2,8,8 2,8 C 2,8,8,2 2,7 D 2,8,8,2 2,8",
+      "parseStatus": "ok",
+      "stem": "Which row shows the electronic configuration of a calcium atom and of a fluoride ion? calcium atom fluoride ion",
+      "options": {
+        "A": "2,8,8 2,7",
+        "B": "2,8,8 2,8",
+        "C": "2,8,8,2 2,7",
+        "D": "2,8,8,2 2,8"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 4,
+      "top": 360.93,
+      "bottom": 485.41,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q15.png",
+      "rawText": "Which statement explains why isotopes of an element have the same chemical properties? A They have the same atomic mass. B They have the same number of neutrons. C They have the same electronic configuration. D They have the same density.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why isotopes of an element have the same chemical properties?",
+      "options": {
+        "A": "They have the same atomic mass.",
+        "B": "They have the same number of neutrons.",
+        "C": "They have the same electronic configuration.",
+        "D": "They have the same density."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 4,
+      "top": 487.41,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q16.png",
+      "rawText": "Which changes take place at the electrodes during electrolysis? anode cathode A negatively charged ions gain electrons positively charged ions lose electrons B negatively charged ions lose electrons positively charged ions gain electrons C positively charged ions gain electrons negatively charged ions lose electrons D positively charged ions lose electrons negatively charged ions gain electrons",
+      "parseStatus": "ok",
+      "stem": "Which changes take place at the electrodes during electrolysis? anode cathode",
+      "options": {
+        "A": "negatively charged ions gain electrons positively charged ions lose electrons",
+        "B": "negatively charged ions lose electrons positively charged ions gain electrons",
+        "C": "positively charged ions gain electrons negatively charged ions lose electrons",
+        "D": "positively charged ions lose electrons negatively charged ions gain electrons"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "top": 56.49,
+      "bottom": 387.01,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q17.png",
+      "rawText": "Which row shows the dot-and-cross diagrams for nitrogen and ethene? N N C H H H H C nitrogen ethene A N N C C H H H H H H C C H H H H H H B N N C H H H H C C N N D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 5,
+      "top": 389.01,
+      "bottom": 542.53,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q18.png",
+      "rawText": "Which particles are free to move in a giant metallic lattice? positive ions negative ions electrons A \u0016 \u0016 \u001a B \u0016 \u001a \u0016 C \u001a \u0016 \u001a D \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which particles are free to move in a giant metallic lattice? positive ions negative ions electrons",
+      "options": {
+        "A": "\u0016 \u0016 \u001a",
+        "B": "\u0016 \u001a \u0016",
+        "C": "\u001a \u0016 \u001a",
+        "D": "\u001a \u001a \u0016"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 5,
+      "top": 544.53,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q19.png",
+      "rawText": "P is in Group II of the Periodic Table. Q is a non-metallic element. P reacts with Q to form an ionic compound, P3Q2. What is the charge on the element Q ion in P3Q2? A 1– B 2– C 3– D 4–",
+      "parseStatus": "ok",
+      "stem": "P is in Group II of the Periodic Table. Q is a non-metallic element. P reacts with Q to form an ionic compound, P3Q2. What is the charge on the element Q ion in P3Q2?",
+      "options": {
+        "A": "1–",
+        "B": "2–",
+        "C": "3–",
+        "D": "4–"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "top": 56.49,
+      "bottom": 180.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q20.png",
+      "rawText": "Which statement about the Avogadro constant is correct? A It is the volume of 1 mole of a gas at room temperature and pressure. B It is the mass of 1 mole of a substance. C It is the number of particles in 1 mole of a substance. D It has a value of 24 dm3.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Avogadro constant is correct?",
+      "options": {
+        "A": "It is the volume of 1 mole of a gas at room temperature and pressure.",
+        "B": "It is the mass of 1 mole of a substance.",
+        "C": "It is the number of particles in 1 mole of a substance.",
+        "D": "It has a value of 24 dm3."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 6,
+      "top": 182.97,
+      "bottom": 319.33,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q21.png",
+      "rawText": "Lead sulfate, PbSO4, is prepared by reacting lead oxide, PbO, with excess dilute sulfuric acid. The equation for the reaction is shown. PbO + H2SO4  PbSO4 + H2O What is the mass of lead oxide required to produce 22.6 g of lead sulfate? A 15.4 g B 16.6 g C 17.6 g D 17.8 g",
+      "parseStatus": "ok",
+      "stem": "Lead sulfate, PbSO4, is prepared by reacting lead oxide, PbO, with excess dilute sulfuric acid. The equation for the reaction is shown. PbO + H2SO4  PbSO4 + H2O What is the mass of lead oxide required to produce 22.6 g of lead sulfate?",
+      "options": {
+        "A": "15.4 g",
+        "B": "16.6 g",
+        "C": "17.6 g",
+        "D": "17.8 g"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 6,
+      "top": 321.33,
+      "bottom": 471.13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q22.png",
+      "rawText": "When magnesium reacts with dilute hydrochloric acid, the temperature of the mixture increases. Which statement about this reaction is correct? A It is endothermic as thermal energy is taken in from the surroundings. B It is endothermic as thermal energy is transferred to the surroundings. C It is exothermic as thermal energy is taken in from the surroundings. D It is exothermic as thermal energy is transferred to the surroundings.",
+      "parseStatus": "ok",
+      "stem": "When magnesium reacts with dilute hydrochloric acid, the temperature of the mixture increases. Which statement about this reaction is correct?",
+      "options": {
+        "A": "It is endothermic as thermal energy is taken in from the surroundings.",
+        "B": "It is endothermic as thermal energy is transferred to the surroundings.",
+        "C": "It is exothermic as thermal energy is taken in from the surroundings.",
+        "D": "It is exothermic as thermal energy is transferred to the surroundings."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 6,
+      "top": 473.13,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q23.png",
+      "rawText": "Which change to the conditions of a reaction can produce the same number of successful collisions between reacting particles per second? temperature reactant concentration A higher lower B higher unchanged C lower lower D lower unchanged",
+      "parseStatus": "ok",
+      "stem": "Which change to the conditions of a reaction can produce the same number of successful collisions between reacting particles per second? temperature reactant concentration",
+      "options": {
+        "A": "higher lower",
+        "B": "higher unchanged",
+        "C": "lower lower",
+        "D": "lower unchanged"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 7,
+      "top": 56.49,
+      "bottom": 207.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q24.png",
+      "rawText": "Which statements about oxidation and reduction are correct? 1 Oxidation is the gain of oxygen. 2 Oxidation is the loss of oxygen. 3 Reduction is the gain of oxygen. 4 Reduction is the loss of oxygen. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about oxidation and reduction are correct? 1 Oxidation is the gain of oxygen. 2 Oxidation is the loss of oxygen. 3 Reduction is the gain of oxygen. 4 Reduction is the loss of oxygen.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 7,
+      "top": 209.97,
+      "bottom": 385.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q25.png",
+      "rawText": "The word equation shown is incomplete. acid + alkali  X + water What is X? A base B carbon dioxide C hydrogen D salt",
+      "parseStatus": "ok",
+      "stem": "The word equation shown is incomplete. acid + alkali  X + water What is X?",
+      "options": {
+        "A": "base",
+        "B": "carbon dioxide",
+        "C": "hydrogen",
+        "D": "salt"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 7,
+      "top": 387.93,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q26.png",
+      "rawText": "Which type of reaction occurs when ethene reacts with steam? A addition B cracking C displacement D polymerisation",
+      "parseStatus": "ok",
+      "stem": "Which type of reaction occurs when ethene reacts with steam?",
+      "options": {
+        "A": "addition",
+        "B": "cracking",
+        "C": "displacement",
+        "D": "polymerisation"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "top": 56.49,
+      "bottom": 470.53,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q27.png",
+      "rawText": "The boiling points of three substances, W, X and Y, are shown. W X Y boiling point / °C 116–118 132 141–145 The substances are tested using chromatography. The chromatogram is shown. W X Y Which statement is correct? A One of the components of Y has a boiling point of 132 °C. B Substance Y has a smaller boiling point range than substance W. C Substance W produces the largest Rf value. D Substance X is an impure mixture.",
+      "parseStatus": "ok",
+      "stem": "The boiling points of three substances, W, X and Y, are shown. W X Y boiling point / °C 116–118 132 141–145 The substances are tested using chromatography. The chromatogram is shown. W X Y Which statement is correct?",
+      "options": {
+        "A": "One of the components of Y has a boiling point of 132 °C.",
+        "B": "Substance Y has a smaller boiling point range than substance W.",
+        "C": "Substance W produces the largest Rf value.",
+        "D": "Substance X is an impure mixture."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 8,
+      "top": 472.53,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q28.png",
+      "rawText": "An object of mass m falls through a vacuum. The speed of the object at one instant is v. Which row shows the quantities that affect the acceleration of free fall of the object? m v A no no B no yes C yes no D yes yes",
+      "parseStatus": "ok",
+      "stem": "An object of mass m falls through a vacuum. The speed of the object at one instant is v. Which row shows the quantities that affect the acceleration of free fall of the object? m v",
+      "options": {
+        "A": "no no",
+        "B": "no yes",
+        "C": "yes no",
+        "D": "yes yes"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "top": 56.49,
+      "bottom": 493.21,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q29.png",
+      "rawText": "The diagram shows the apparatus that a student uses to determine the centre of gravity of a piece of card. The student: ● makes several holes in the card ● suspends the card from a pin placed through one of the holes ● hangs a load from a thread attached to the pin ● marks the line of the thread on the card. hole pin card thread load The student repeats the steps using a different hole each time. What is the smallest number of lines that the student needs to draw to determine the position of the centre of gravity of the card? A 1 B 2 C 3 D 4",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the apparatus that a student uses to determine the centre of gravity of a piece of card. The student: ● makes several holes in the card ● suspends the card from a pin placed through one of the holes ● hangs a load from a thread attached to the pin ● marks the line of the thread on the card. hole pin card thread load The student repeats the steps using a different hole each time. What is the smallest number of lines that the student needs to draw to determine the position of the centre of gravity of the card?",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 9,
+      "top": 495.21,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q30.png",
+      "rawText": "A 60 W lamp is switched on and 30 J of energy is transferred by the lamp. How long is the lamp switched on for? A 0.50 s B 2.0 s C 90 s D 1800 s",
+      "parseStatus": "ok",
+      "stem": "A 60 W lamp is switched on and 30 J of energy is transferred by the lamp. How long is the lamp switched on for?",
+      "options": {
+        "A": "0.50 s",
+        "B": "2.0 s",
+        "C": "90 s",
+        "D": "1800 s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 56.49,
+      "bottom": 262.45,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q31.png",
+      "rawText": "The temperature of a liquid in a beaker decreases because particles escape from the surface of the liquid. Which row gives the name of this process and shows which particles escape from the liquid? name of process particles that escape A condensation less energetic B condensation more energetic C evaporation less energetic D evaporation more energetic",
+      "parseStatus": "ok",
+      "stem": "The temperature of a liquid in a beaker decreases because particles escape from the surface of the liquid. Which row gives the name of this process and shows which particles escape from the liquid? name of process particles that escape",
+      "options": {
+        "A": "condensation less energetic",
+        "B": "condensation more energetic",
+        "C": "evaporation less energetic",
+        "D": "evaporation more energetic"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 264.45,
+      "bottom": 389.05,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q32.png",
+      "rawText": "What is the main method of thermal energy transfer in liquid water? A boiling B conduction C convection D radiation",
+      "parseStatus": "ok",
+      "stem": "What is the main method of thermal energy transfer in liquid water?",
+      "options": {
+        "A": "boiling",
+        "B": "conduction",
+        "C": "convection",
+        "D": "radiation"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "top": 391.05,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q33.png",
+      "rawText": "Which row contains an example of a longitudinal wave and an example of a transverse wave? longitudinal wave transverse wave A radio wave water wave B sound wave radio wave C water wave radio wave D water wave sound wave",
+      "parseStatus": "ok",
+      "stem": "Which row contains an example of a longitudinal wave and an example of a transverse wave? longitudinal wave transverse wave",
+      "options": {
+        "A": "radio wave water wave",
+        "B": "sound wave radio wave",
+        "C": "water wave radio wave",
+        "D": "water wave sound wave"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 56.49,
+      "bottom": 408.61,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q34.png",
+      "rawText": "The diagram shows a ray of light that passes from a vacuum into plastic. The plastic has a refractive index of 1.5. An angle X is labelled on the diagram. vacuum plastic X normal incident ray refracted ray 55° 35° What is angle X? A 22° B 23° C 33° D 37°",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light that passes from a vacuum into plastic. The plastic has a refractive index of 1.5. An angle X is labelled on the diagram. vacuum plastic X normal incident ray refracted ray 55° 35° What is angle X?",
+      "options": {
+        "A": "22°",
+        "B": "23°",
+        "C": "33°",
+        "D": "37°"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 410.61,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q35.png",
+      "rawText": "Sound travels at different speeds in water, in steel and in air. Each row in the table gives the three speeds at room temperature. Which row gives the correct speeds? s / m water in sound of speed s / m steel in sound of speed s / m air in sound of speed A 300 1500 4500 B 300 4500 1500 C 1500 4500 300 D 4500 1500 300",
+      "parseStatus": "ok",
+      "stem": "Sound travels at different speeds in water, in steel and in air. Each row in the table gives the three speeds at room temperature. Which row gives the correct speeds? s / m water in sound of speed s / m steel in sound of speed s / m air in sound of speed",
+      "options": {
+        "A": "300 1500 4500",
+        "B": "300 4500 1500",
+        "C": "1500 4500 300",
+        "D": "4500 1500 300"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "top": 56.49,
+      "bottom": 288.25,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q36.png",
+      "rawText": "An electric heater operates at 220 V. The current in the heater is 15 A. Which expression gives the time for the heater to transfer 1.0  104 J of energy? A 15 220 10 1.0 4   s B 220 15 10 1.0 4   s C 15 220 10 1.0 4   s D 1.0  104  220  15 s",
+      "parseStatus": "ok",
+      "stem": "An electric heater operates at 220 V. The current in the heater is 15 A. Which expression gives the time for the heater to transfer 1.0  104 J of energy?",
+      "options": {
+        "A": "15 220 10 1.0 4   s",
+        "B": "220 15 10 1.0 4   s",
+        "C": "15 220 10 1.0 4   s",
+        "D": "1.0  104  220  15 s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "top": 290.25,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q37.png",
+      "rawText": "The diagram shows the magnetic field due to a current in a solenoid. current solenoid Which change reverses the direction of the magnetic field? A Change the current direction. B Decrease the current. C Increase the current. D Switch off the current.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the magnetic field due to a current in a solenoid. current solenoid Which change reverses the direction of the magnetic field?",
+      "options": {
+        "A": "Change the current direction.",
+        "B": "Decrease the current.",
+        "C": "Increase the current.",
+        "D": "Switch off the current."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 56.49,
+      "bottom": 341.65,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q38.png",
+      "rawText": "Which graph shows how the output electromotive force (e.m.f.) of an a.c. generator varies with time? voltage 0 0 A time voltage 0 0 B time voltage 0 0 C time voltage 0 0 D time",
+      "parseStatus": "ok",
+      "stem": "Which graph shows how the output electromotive force (e.m.f.) of an a.c. generator varies with time? voltage 0 0",
+      "options": {
+        "A": "time voltage 0 0",
+        "B": "time voltage 0 0",
+        "C": "time voltage 0 0",
+        "D": "time"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "top": 343.65,
+      "bottom": 601.33,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q39.png",
+      "rawText": "A carbon-14 nucleus decays to form a nitrogen-14 nucleus and one particle X of ionising radiation. The decay equation is shown. 14 6C 14 ZN + 0 –1X Which row gives the value of Z and the identity of particle X? Z particle X A 5  B 7  C 7  D 8 ",
+      "parseStatus": "ok",
+      "stem": "A carbon-14 nucleus decays to form a nitrogen-14 nucleus and one particle X of ionising radiation. The decay equation is shown. 14 6C 14 ZN + 0 –1X Which row gives the value of Z and the identity of particle X? Z particle X",
+      "options": {
+        "A": "5 ",
+        "B": "7 ",
+        "C": "7 ",
+        "D": "8 "
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "top": 603.33,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_22/q40.png",
+      "rawText": "A moon that orbits a planet has an orbit radius of 9.4  106 m and an orbital period of 7.7 hours. What is the orbital speed of this moon? A 6.8  102 m / s B 2.1  103 m / s C 1.3  105 m / s D 1.6  1012 m / s",
+      "parseStatus": "ok",
+      "stem": "A moon that orbits a planet has an orbit radius of 9.4  106 m and an orbital period of 7.7 hours. What is the orbital speed of this moon?",
+      "options": {
+        "A": "6.8  102 m / s",
+        "B": "2.1  103 m / s",
+        "C": "1.3  105 m / s",
+        "D": "1.6  1012 m / s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

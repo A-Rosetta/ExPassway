@@ -2,6 +2,8 @@
 node_modules/
 backend/node_modules/
 .venv-pdf/
+backend/imports/
+backend/scripts/__pycache__/
 
 # environment files
 .env
@@ -17,3 +19,7 @@ pnpm-debug.log*
 # OS/editor
 .DS_Store
 .vscode/
+
+# user-uploaded community images
+assets/uploads/community/*
+!assets/uploads/community/.gitkeep

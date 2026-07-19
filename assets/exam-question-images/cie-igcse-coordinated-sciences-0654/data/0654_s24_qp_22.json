@@ -1,0 +1,758 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2024/summer/0654_s24_qp_22.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2024/summer/0654_s24_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.6,
+      "bottom": 238.98,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q01.png",
+      "rawText": "Which processes are examples of excretion? release of energy from food release of oxygen from photosynthesis A \u001a \u001a key B \u001a \u0016 \u0016 = yes C \u0016 \u001a \u001a = no D \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "Which processes are examples of excretion? release of energy from food release of oxygen from photosynthesis",
+      "options": {
+        "A": "\u001a \u001a key",
+        "B": "\u001a \u0016 \u0016 = yes",
+        "C": "\u0016 \u001a \u001a = no",
+        "D": "\u0016 \u0016"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 240.98,
+      "bottom": 365.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q02.png",
+      "rawText": "What are all living organisms made from? A cells B eggs C mesophyll D sperm",
+      "parseStatus": "ok",
+      "stem": "What are all living organisms made from?",
+      "options": {
+        "A": "cells",
+        "B": "eggs",
+        "C": "mesophyll",
+        "D": "sperm"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 367.46,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q03.png",
+      "rawText": "Analysis of a large food molecule shows that it contains the elements carbon, hydrogen and oxygen only. Which food groups could this molecule be from? A carbohydrates and fats only B carbohydrates and proteins only C fats and proteins only D carbohydrates, fats and proteins",
+      "parseStatus": "ok",
+      "stem": "Analysis of a large food molecule shows that it contains the elements carbon, hydrogen and oxygen only. Which food groups could this molecule be from?",
+      "options": {
+        "A": "carbohydrates and fats only",
+        "B": "carbohydrates and proteins only",
+        "C": "fats and proteins only",
+        "D": "carbohydrates, fats and proteins"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 398.94,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q04.png",
+      "rawText": "The graph shows the mass of product produced by an enzyme-controlled reaction over time when the reaction mixture is placed separately at 37 C and at 60 C. The starting concentration of the substrate and the concentration of the enzyme used are kept constant. mass of product time 37 °C 60 °C Y X What can be concluded from the graph? A At point X on the graph, the enzyme has run out of substrate. B The enzyme denatures at point Y on the graph. C The reaction mixture has a higher kinetic energy at 37 C. D The reaction mixture has a higher initial rate of reaction when placed at 60 C.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the mass of product produced by an enzyme-controlled reaction over time when the reaction mixture is placed separately at 37 C and at 60 C. The starting concentration of the substrate and the concentration of the enzyme used are kept constant. mass of product time 37 °C 60 °C Y X What can be concluded from the graph?",
+      "options": {
+        "A": "At point X on the graph, the enzyme has run out of substrate.",
+        "B": "The enzyme denatures at point Y on the graph.",
+        "C": "The reaction mixture has a higher kinetic energy at 37 C.",
+        "D": "The reaction mixture has a higher initial rate of reaction when placed at 60 C."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 400.94,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q05.png",
+      "rawText": "How many molecules of carbon dioxide are needed to produce six molecules of glucose? A 1 B 2 C 3 D 36",
+      "parseStatus": "ok",
+      "stem": "How many molecules of carbon dioxide are needed to produce six molecules of glucose?",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "36"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 403.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q06.png",
+      "rawText": "A student investigates the effect of size of gelatine cubes on the rate of digestion by protease. The student places a cube of gelatine with a volume of 8 cm3 into a beaker of protease. The time taken for the cube to be digested is recorded. A second 8 cm3 cube of gelatine is cut up into eight 1 cm3 cubes to represent mechanical digestion and the experiment is repeated. The results are shown. gelatine time taken to digest the gelatine / minutes one 8 cm3 cube 320 eight 1 cm3 cubes 80 Which statements are correct? 1 Cutting up the 8 cm3 cube increases the surface area exposed to the enzyme. 2 Chemical digestion cannot occur unless mechanical digestion also occurs. 3 Mechanical digestion increases the rate of chemical digestion. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "A student investigates the effect of size of gelatine cubes on the rate of digestion by protease. The student places a cube of gelatine with a volume of 8 cm3 into a beaker of protease. The time taken for the cube to be digested is recorded.",
+      "options": {
+        "A": "second 8 cm3 cube of gelatine is cut up into eight 1 cm3 cubes to represent mechanical digestion and the experiment is repeated. The results are shown. gelatine time taken to digest the gelatine / minutes one 8 cm3 cube 320 eight 1 cm3 cubes 80 Which statements are correct? 1 Cutting up the 8 cm3 cube increases the surface area exposed to the enzyme. 2 Chemical digestion cannot occur unless mechanical digestion also occurs. 3 Mechanical digestion increases the rate of chemical digestion. A 1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 405.08,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q07.png",
+      "rawText": "Which graph shows the effect of humidity on the rate of transpiration? humidity A rate of transpiration humidity B rate of transpiration humidity C rate of transpiration humidity D rate of transpiration",
+      "parseStatus": "ok",
+      "stem": "Which graph shows the effect of humidity on the rate of transpiration? humidity",
+      "options": {
+        "A": "rate of transpiration humidity",
+        "B": "rate of transpiration humidity",
+        "C": "rate of transpiration humidity",
+        "D": "rate of transpiration"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 453.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q08.png",
+      "rawText": "A student places a mixture of yeast and glucose in a boiling tube, as shown in the diagram. They cover the mixture with a layer of oil. A delivery tube is used to bubble gas produced by the yeast through limewater. After 10 minutes, the limewater is milky. limewater yeast and glucose solution oil screw clip (closed when experiment is started) Why does the limewater go milky? A The yeast produces carbon dioxide by anaerobic respiration. B The yeast produces lactic acid by anaerobic respiration. C The yeast produces carbon dioxide by photosynthesis. D The yeast produces oxygen by aerobic respiration.",
+      "parseStatus": "ok",
+      "stem": "A student places a mixture of yeast and glucose in a boiling tube, as shown in the diagram. They cover the mixture with a layer of oil.",
+      "options": {
+        "A": "delivery tube is used to bubble gas produced by the yeast through limewater. After 10 minutes, the limewater is milky. limewater yeast and glucose solution oil screw clip (closed when experiment is started) Why does the limewater go milky? A The yeast produces carbon dioxide by anaerobic respiration.",
+        "B": "The yeast produces lactic acid by anaerobic respiration.",
+        "C": "The yeast produces carbon dioxide by photosynthesis.",
+        "D": "The yeast produces oxygen by aerobic respiration."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "top": 455.0,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q09.png",
+      "rawText": "A person touches a hot object and pulls their hand away. This is a reflex action. What is the pathway for the reflex action? A stimulus  motor neurone  relay neurone  sensory neurone  response B stimulus  relay neurone  motor neurone  sensory neurone  response C stimulus  sensory neurone  relay neurone  motor neurone  response D stimulus  sensory neurone  motor neurone  relay neurone  response",
+      "parseStatus": "ok",
+      "stem": "A person touches a hot object and pulls their hand away. This is a reflex action. What is the pathway for the reflex action?",
+      "options": {
+        "A": "stimulus  motor neurone  relay neurone  sensory neurone  response",
+        "B": "stimulus  relay neurone  motor neurone  sensory neurone  response",
+        "C": "stimulus  sensory neurone  relay neurone  motor neurone  response",
+        "D": "stimulus  sensory neurone  motor neurone  relay neurone  response"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 473.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q10.png",
+      "rawText": "The diagram shows the human male reproductive system. X Y Z Which row identifies structures X, Y and Z? urethra sperm duct prostate gland A X Y Z B X Z Y C Z X Y D Z Y X",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the human male reproductive system. X Y Z Which row identifies structures X, Y and Z? urethra sperm duct prostate gland",
+      "options": {
+        "A": "X Y Z",
+        "B": "X Z Y",
+        "C": "Z X Y",
+        "D": "Z Y X"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "top": 475.16,
+      "bottom": 643.32,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q11.png",
+      "rawText": "Which row about the nucleus of human cells is correct? description of nucleus number of chromosomes example of cell A diploid 23 gamete B diploid 46 body C haploid 23 body D haploid 46 gamete",
+      "parseStatus": "ok",
+      "stem": "Which row about the nucleus of human cells is correct? description of nucleus number of chromosomes example of cell",
+      "options": {
+        "A": "diploid 23 gamete",
+        "B": "diploid 46 body",
+        "C": "haploid 23 body",
+        "D": "haploid 46 gamete"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "top": 645.32,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q12.png",
+      "rawText": "What is an ecosystem? A a chart showing the flow of energy from one organism to another B a diagram giving the energy level of an organism in its environment C a network of interconnected food chains D a unit containing all of the organisms and their environment",
+      "parseStatus": "ok",
+      "stem": "What is an ecosystem?",
+      "options": {
+        "A": "a chart showing the flow of energy from one organism to another",
+        "B": "a diagram giving the energy level of an organism in its environment",
+        "C": "a network of interconnected food chains",
+        "D": "a unit containing all of the organisms and their environment"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 309.84,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q13.png",
+      "rawText": "Which line shows how the oxygen concentration of the water changes after excess fertiliser has entered a stream? oxygen concentration of the water fertiliser run-off distance downstream A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "top": 311.84,
+      "bottom": 567.36,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q14.png",
+      "rawText": "W, X, Y and Z are diagrams representing atoms and molecules. W X Y Z Which statement is correct? A W and Z are molecules and X and Y are atoms. B W, X and Z are molecules and Y is an atom. C W, Y and Z are molecules and X is an atom. D X, Y and Z are molecules and W is an atom.",
+      "parseStatus": "ok",
+      "stem": "W, X, Y and Z are diagrams representing atoms and molecules. W X Y Z Which statement is correct?",
+      "options": {
+        "A": "W and Z are molecules and X and Y are atoms.",
+        "B": "W, X and Z are molecules and Y is an atom.",
+        "C": "W, Y and Z are molecules and X is an atom.",
+        "D": "X, Y and Z are molecules and W is an atom."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "top": 569.36,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q15.png",
+      "rawText": "Which row describes the properties of a covalent compound? volatility electrical conductivity when molten A high none B high high C low none D low high",
+      "parseStatus": "ok",
+      "stem": "Which row describes the properties of a covalent compound? volatility electrical conductivity when molten",
+      "options": {
+        "A": "high none",
+        "B": "high high",
+        "C": "low none",
+        "D": "low high"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 168.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q16.png",
+      "rawText": "The equation for the reaction of sodium with water is shown. 2Na(s) + 2H2O(l)  2NaOH(aq) + H2(g) Which mass of sodium produces 30 cm3 of hydrogen? A 0.0288 g B 0.0575 g C 28.8 g D 57.5 g",
+      "parseStatus": "ok",
+      "stem": "The equation for the reaction of sodium with water is shown. 2Na(s) + 2H2O(l)  2NaOH(aq) + H2(g) Which mass of sodium produces 30 cm3 of hydrogen?",
+      "options": {
+        "A": "0.0288 g",
+        "B": "0.0575 g",
+        "C": "28.8 g",
+        "D": "57.5 g"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "top": 170.48,
+      "bottom": 323.94,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q17.png",
+      "rawText": "Aqueous copper(II) sulfate is electrolysed using carbon electrodes. What is the ionic half-equation for the reaction at the cathode? A Cu2+ + 2e–  Cu B 2H+ + 2e–  H2 C Cu  Cu2+ + 2e– D 4OH–  O2 + 2H2O + 4e–",
+      "parseStatus": "ok",
+      "stem": "Aqueous copper(II) sulfate is electrolysed using carbon electrodes. What is the ionic half-equation for the reaction at the cathode?",
+      "options": {
+        "A": "Cu2+ + 2e–  Cu",
+        "B": "2H+ + 2e–  H2",
+        "C": "Cu  Cu2+ + 2e–",
+        "D": "4OH–  O2 + 2H2O + 4e–"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "top": 325.94,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q18.png",
+      "rawText": "The energy level diagram for a reaction is shown. progress of reaction reactants products energy The diagram represents an ......1...... reaction. Heat is ......2...... during this reaction. Which words complete gaps 1 and 2? 1 2 A endothermic given out B endothermic taken in C exothermic given out D exothermic taken in",
+      "parseStatus": "ok",
+      "stem": "The energy level diagram for a reaction is shown. progress of reaction reactants products energy The diagram represents an ......1...... reaction. Heat is ......2...... during this reaction. Which words complete gaps 1 and 2? 1 2",
+      "options": {
+        "A": "endothermic given out",
+        "B": "endothermic taken in",
+        "C": "exothermic given out",
+        "D": "exothermic taken in"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "top": 56.66,
+      "bottom": 184.74,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q19.png",
+      "rawText": "In which equation is the underlined substance acting as an oxidising agent? A AgNO3 + NaCl  AgCl + NaNO3 B Cl 2 + 2KBr  Br2 + 2KCl C Fe2O3 + 3CO  2Fe + 3CO2 D H2 + PbO  Pb + H2O",
+      "parseStatus": "ok",
+      "stem": "In which equation is the underlined substance acting as an oxidising agent?",
+      "options": {
+        "A": "AgNO3 + NaCl  AgCl + NaNO3",
+        "B": "Cl 2 + 2KBr  Br2 + 2KCl",
+        "C": "Fe2O3 + 3CO  2Fe + 3CO2",
+        "D": "H2 + PbO  Pb + H2O"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "top": 186.74,
+      "bottom": 551.64,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q20.png",
+      "rawText": "Universal indicator solution is added to test-tubes W, X and Y. W dilute hydrochloric acid X aqueous sodium hydroxide Y aqueous sodium chloride What are the colours of the universal indicator? in test-tube W in test-tube X in test-tube Y A green red purple B purple green red C red green purple D red purple green",
+      "parseStatus": "ok",
+      "stem": "Universal indicator solution is added to test-tubes W, X and Y. W dilute hydrochloric acid X aqueous sodium hydroxide Y aqueous sodium chloride What are the colours of the universal indicator? in test-tube W in test-tube X in test-tube Y",
+      "options": {
+        "A": "green red purple",
+        "B": "purple green red",
+        "C": "red green purple",
+        "D": "red purple green"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "top": 553.64,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q21.png",
+      "rawText": "Copper is a transition element. Which row shows two properties of copper? property 1 property 2 A high melting point forms coloured compounds B high melting point forms white compounds C low melting point forms coloured compounds D low melting point forms white compounds",
+      "parseStatus": "ok",
+      "stem": "Copper is a transition element. Which row shows two properties of copper? property 1 property 2",
+      "options": {
+        "A": "high melting point forms coloured compounds",
+        "B": "high melting point forms white compounds",
+        "C": "low melting point forms coloured compounds",
+        "D": "low melting point forms white compounds"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "top": 56.6,
+      "bottom": 287.28,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q22.png",
+      "rawText": "Metal X reacts with aqueous metal Y2+ ions. The ionic equation for the reaction is shown. X + Y2+  X2+ + Y What are metals X and Y? X Y A copper iron B copper zinc C zinc copper D aluminium iron",
+      "parseStatus": "ok",
+      "stem": "Metal X reacts with aqueous metal Y2+ ions. The ionic equation for the reaction is shown. X + Y2+  X2+ + Y What are metals X and Y? X Y",
+      "options": {
+        "A": "copper iron",
+        "B": "copper zinc",
+        "C": "zinc copper",
+        "D": "aluminium iron"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "top": 289.28,
+      "bottom": 468.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q23.png",
+      "rawText": "Ammonia is displaced from its salts by reaction with substance Z. Which row identifies substance Z and the test for ammonia? substance Z test for ammonia A hydrochloric acid turns red litmus blue B hydrochloric acid turns blue litmus red C sodium hydroxide turns red litmus blue D sodium hydroxide turns blue litmus red",
+      "parseStatus": "ok",
+      "stem": "Ammonia is displaced from its salts by reaction with substance Z. Which row identifies substance Z and the test for ammonia? substance Z test for ammonia",
+      "options": {
+        "A": "hydrochloric acid turns red litmus blue",
+        "B": "hydrochloric acid turns blue litmus red",
+        "C": "sodium hydroxide turns red litmus blue",
+        "D": "sodium hydroxide turns blue litmus red"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "top": 470.54,
+      "bottom": 649.02,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q24.png",
+      "rawText": "Four equations are listed. 1 H2S2O7 + H2O  H2SO4 + SO3 + H2O 2 2S + 3O2  2SO3 3 H2SO4 + SO3  H2S2O7 4 2SO2 + O2  2SO3 Which equations represent reactions that are involved in the Contact process? A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Four equations are listed. 1 H2S2O7 + H2O  H2SO4 + SO3 + H2O 2 2S + 3O2  2SO3 3 H2SO4 + SO3  H2S2O7 4 2SO2 + O2  2SO3 Which equations represent reactions that are involved in the Contact process?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "top": 651.02,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q25.png",
+      "rawText": "Which substance is produced by the thermal decomposition of limestone? A calcium B calcium carbonate C calcium hydroxide D calcium oxide",
+      "parseStatus": "ok",
+      "stem": "Which substance is produced by the thermal decomposition of limestone?",
+      "options": {
+        "A": "calcium",
+        "B": "calcium carbonate",
+        "C": "calcium hydroxide",
+        "D": "calcium oxide"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 283.5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q26.png",
+      "rawText": "A gasoline fraction from the fractional distillation of petroleum includes compounds with the formulas C6H14 and C12H26. Which statements about these compounds are correct? 1 C12H26 has a higher boiling point than C6H14. 2 C12H26 has a lower relative molecular mass than C6H14. 3 C6H14 and C12H26 are members of different homologous series. 4 C6H14 and C12H26 both undergo complete combustion to form carbon dioxide and water. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4 O",
+      "parseStatus": "ok",
+      "stem": "A gasoline fraction from the fractional distillation of petroleum includes compounds with the formulas C6H14 and C12H26. Which statements about these compounds are correct? 1 C12H26 has a higher boiling point than C6H14. 2 C12H26 has a lower relative molecular mass than C6H14. 3 C6H14 and C12H26 are members of different homologous series. 4 C6H14 and C12H26 both undergo complete combustion to form carbon dioxide and water.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4 O"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "top": 285.5,
+      "bottom": 546.6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q27.png",
+      "rawText": "The molecule shown contains some amide linkages, N H C . C O C C CH CH CH CH2 CH3 CH3 H H N C OH CH3 H2C N OH CH N H H C H C N OH H2N O O O C O O How many amide linkages are present in this molecule? A 4 B 5 C 6 D 9",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "top": 548.6,
+      "bottom": 658.86,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q28.png",
+      "rawText": "A ball is moving at a speed of 3.0 m / s. The ball now accelerates with a constant acceleration of 2.0 m / s2 in the direction that it is moving. What is the speed of the ball 5.0 s after it begins to accelerate? A 10 m / s B 13 m / s C 17 m / s D 30 m / s",
+      "parseStatus": "ok",
+      "stem": "A ball is moving at a speed of 3.0 m / s. The ball now accelerates with a constant acceleration of 2.0 m / s2 in the direction that it is moving. What is the speed of the ball 5.0 s after it begins to accelerate?",
+      "options": {
+        "A": "10 m / s",
+        "B": "13 m / s",
+        "C": "17 m / s",
+        "D": "30 m / s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "top": 660.86,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q29.png",
+      "rawText": "What is meant by the moment of a force? A the speed of an object moved by a force B the time taken for a force to move an object C the turning effect of a force D the work done by a force",
+      "parseStatus": "ok",
+      "stem": "What is meant by the moment of a force?",
+      "options": {
+        "A": "the speed of an object moved by a force",
+        "B": "the time taken for a force to move an object",
+        "C": "the turning effect of a force",
+        "D": "the work done by a force"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 141.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q30.png",
+      "rawText": "A paralympic athlete of mass 70 kg uses a wheelchair of mass 10 kg in a race. What is the kinetic energy of the athlete and wheelchair when they are moving at 6.0 m / s? A 240 J B 480 J C 1440 J D 2880 J",
+      "parseStatus": "ok",
+      "stem": "A paralympic athlete of mass 70 kg uses a wheelchair of mass 10 kg in a race. What is the kinetic energy of the athlete and wheelchair when they are moving at 6.0 m / s?",
+      "options": {
+        "A": "240 J",
+        "B": "480 J",
+        "C": "1440 J",
+        "D": "2880 J"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "top": 143.48,
+      "bottom": 322.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q31.png",
+      "rawText": "The table shows four sources of energy used to generate electricity. Which row about the energy source is correct? source renewable reliable at all times A coal yes no B nuclear fission no yes C tides no no D wind yes yes",
+      "parseStatus": "ok",
+      "stem": "The table shows four sources of energy used to generate electricity. Which row about the energy source is correct? source renewable reliable at all times",
+      "options": {
+        "A": "coal yes no",
+        "B": "nuclear fission no yes",
+        "C": "tides no no",
+        "D": "wind yes yes"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "top": 324.8,
+      "bottom": 449.28,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q32.png",
+      "rawText": "Which region of the electromagnetic spectrum is often involved in heat transfer by radiation? A infrared B radio C ultraviolet D X-rays",
+      "parseStatus": "ok",
+      "stem": "Which region of the electromagnetic spectrum is often involved in heat transfer by radiation?",
+      "options": {
+        "A": "infrared",
+        "B": "radio",
+        "C": "ultraviolet",
+        "D": "X-rays"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 451.28,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q33.png",
+      "rawText": "The diagram shows the direction of a wave that passes a particle. The particle is made to vibrate by the wave. The direction of vibration of the particle is shown. direction of wave direction of vibration of particle particle Which row states the type of wave that passes the particle and gives an example of this type of wave? type of wave example A longitudinal light B longitudinal sound C transverse light D transverse sound",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the direction of a wave that passes a particle. The particle is made to vibrate by the wave. The direction of vibration of the particle is shown. direction of wave direction of vibration of particle particle Which row states the type of wave that passes the particle and gives an example of this type of wave? type of wave example",
+      "options": {
+        "A": "longitudinal light",
+        "B": "longitudinal sound",
+        "C": "transverse light",
+        "D": "transverse sound"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 206.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q34.png",
+      "rawText": "A plane mirror is fixed to a vertical wall and forms an image of an object. What are the characteristics of the image? A enlarged and upright B enlarged and inverted C same size as the object and upright D same size as the object and inverted",
+      "parseStatus": "ok",
+      "stem": "A plane mirror is fixed to a vertical wall and forms an image of an object. What are the characteristics of the image?",
+      "options": {
+        "A": "enlarged and upright",
+        "B": "enlarged and inverted",
+        "C": "same size as the object and upright",
+        "D": "same size as the object and inverted"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "top": 208.46,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q35.png",
+      "rawText": "The diagram shows two soft-iron rods JK and LM placed between the poles of two magnets. J N S K L M magnet magnet Which row shows the poles induced in the soft-iron rods? at J at K at L at M A N N S S B N S N S C S S N N D S N S N",
+      "parseStatus": "ok",
+      "stem": "The diagram shows two soft-iron rods JK and LM placed between the poles of two magnets. J N S K L M magnet magnet Which row shows the poles induced in the soft-iron rods? at J at K at L at M",
+      "options": {
+        "A": "N N S S",
+        "B": "N S N S",
+        "C": "S S N N",
+        "D": "S N S N"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 394.26,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q36.png",
+      "rawText": "The graph shows how the resistance of a thermistor changes with temperature. 0 10 20 30 40 50 60 70 80 90 100 temperature / °C 6.0 5.0 4.0 3.0 2.0 1.0 0 resistance of thermistor / kΩ There is a potential difference (p.d.) of 6.0 V across the thermistor. What is the current in the thermistor when it is at a temperature of 50 C? A 0.0020 A B 0.50 A C 2.0 A D 500 A",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the resistance of a thermistor changes with temperature. 0 10 20 30 40 50 60 70 80 90 100 temperature / °C 6.0 5.0 4.0 3.0 2.0 1.0 0 resistance of thermistor / kΩ There is a potential difference (p.d.) of 6.0 V across the thermistor. What is the current in the thermistor when it is at a temperature of 50 C?",
+      "options": {
+        "A": "0.0020 A",
+        "B": "0.50 A",
+        "C": "2.0 A",
+        "D": "500 A"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "top": 396.26,
+      "bottom": 481.26,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q37.png",
+      "rawText": "A kettle is connected to a 230 V mains supply. The current in the kettle is 10 A. How much energy is transferred in 3.0 minutes? A 12.8 J B 767 J C 6900 J D 414 000 J",
+      "parseStatus": "ok",
+      "stem": "A kettle is connected to a 230 V mains supply. The current in the kettle is 10 A. How much energy is transferred in 3.0 minutes?",
+      "options": {
+        "A": "12.8 J",
+        "B": "767 J",
+        "C": "6900 J",
+        "D": "414 000 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 483.26,
+      "bottom": 607.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q38.png",
+      "rawText": "What is the function of a fuse in a circuit? A It decreases the resistance of the circuit. B It ensures a constant current in the circuit. C It ensures a constant resistance in the circuit. D It prevents the cables from overheating.",
+      "parseStatus": "ok",
+      "stem": "What is the function of a fuse in a circuit?",
+      "options": {
+        "A": "It decreases the resistance of the circuit.",
+        "B": "It ensures a constant current in the circuit.",
+        "C": "It ensures a constant resistance in the circuit.",
+        "D": "It prevents the cables from overheating."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "top": 609.8,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q39.png",
+      "rawText": "What is the purpose of the commutator in a direct current (d.c.) motor? A It reverses the direction of the current in the coil every half turn. B It reverses the direction of rotation of the coil every complete turn. C It reverses the direction of rotation of the coil every half turn. D It reverses the magnetic field due to the permanent magnet every complete turn.",
+      "parseStatus": "ok",
+      "stem": "What is the purpose of the commutator in a direct current (d.c.) motor?",
+      "options": {
+        "A": "It reverses the direction of the current in the coil every half turn.",
+        "B": "It reverses the direction of rotation of the coil every complete turn.",
+        "C": "It reverses the direction of rotation of the coil every half turn.",
+        "D": "It reverses the magnetic field due to the permanent magnet every complete turn."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "top": 57.44,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_22/q40.png",
+      "rawText": "A uranium nucleus decays by emitting an alpha ()-particle. The nuclide equation shows this decay. 92U X  234Th Y + -particle What are the numbers X and Y ? X Y A 234 90 B 234 92 C 238 90 D 238 92",
+      "parseStatus": "ok",
+      "stem": "A uranium nucleus decays by emitting an alpha ()-particle. The nuclide equation shows this decay. 92U X  234Th Y + -particle What are the numbers X and Y ? X Y",
+      "options": {
+        "A": "234 90",
+        "B": "234 92",
+        "C": "238 90",
+        "D": "238 92"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

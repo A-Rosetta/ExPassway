@@ -1,0 +1,748 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2023/march/0654_m23_qp_22.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2023/march/0654_m23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.6,
+      "bottom": 383.82,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q01.png",
+      "rawText": "The diagram shows how an aquatic carnivorous bladderwort plant reacts to tiny aquatic organisms that swim by. aquatic carnivorous bladderwort plant contains air animal swims in animal is digested by juices produced by the plant plant stalk Which characteristics of living organisms are shown by this plant? A excretion and growth B growth and sensitivity C nutrition and excretion D nutrition and sensitivity",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how an aquatic carnivorous bladderwort plant reacts to tiny aquatic organisms that swim by. aquatic carnivorous bladderwort plant contains air animal swims in animal is digested by juices produced by the plant plant stalk Which characteristics of living organisms are shown by this plant?",
+      "options": {
+        "A": "excretion and growth",
+        "B": "growth and sensitivity",
+        "C": "nutrition and excretion",
+        "D": "nutrition and sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 385.82,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q02.png",
+      "rawText": "Which description for the process of osmosis is correct? A Osmosis is the movement of water molecules from a region of high water potential across a fully permeable membrane to a region of lower water potential. B Osmosis is the movement of water molecules from a region of low water potential across a partially permeable membrane to a region of high water potential. C Osmosis is the movement of water molecules from a region of high water potential across a partially permeable membrane to a region of lower water potential. D Osmosis is the movement of water molecules from a region of low water potential across a fully permeable membrane to a region of high water potential.",
+      "parseStatus": "ok",
+      "stem": "Which description for the process of osmosis is correct?",
+      "options": {
+        "A": "Osmosis is the movement of water molecules from a region of high water potential across a fully permeable membrane to a region of lower water potential.",
+        "B": "Osmosis is the movement of water molecules from a region of low water potential across a partially permeable membrane to a region of high water potential.",
+        "C": "Osmosis is the movement of water molecules from a region of high water potential across a partially permeable membrane to a region of lower water potential.",
+        "D": "Osmosis is the movement of water molecules from a region of low water potential across a fully permeable membrane to a region of high water potential."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 303.42,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q03.png",
+      "rawText": "Tests are carried out on a colourless liquid. The results are shown. test resultant colour biuret purple ethanol emulsion white iodine brown Which food groups does the liquid contain? A protein and fat B protein and starch C reducing sugar and fat D starch and fat",
+      "parseStatus": "ok",
+      "stem": "Tests are carried out on a colourless liquid. The results are shown. test resultant colour biuret purple ethanol emulsion white iodine brown Which food groups does the liquid contain?",
+      "options": {
+        "A": "protein and fat",
+        "B": "protein and starch",
+        "C": "reducing sugar and fat",
+        "D": "starch and fat"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 305.42,
+      "bottom": 558.54,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q04.png",
+      "rawText": "The graph shows the rate at which 10 g of starch is broken down by amylase at four different temperatures. mass of starch / g time 40 °C 25 °C 70 °C 10 °C 10 8 6 4 2 0 At which temperature does amylase work best to break down starch? A 10 C B 25 C C 40 C D 70 C",
+      "parseStatus": "ok",
+      "stem": "The graph shows the rate at which 10 g of starch is broken down by amylase at four different temperatures. mass of starch / g time 40 °C 25 °C 70 °C 10 °C 10 8 6 4 2 0 At which temperature does amylase work best to break down starch?",
+      "options": {
+        "A": "10 C",
+        "B": "25 C",
+        "C": "40 C",
+        "D": "70 C"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 560.54,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q05.png",
+      "rawText": "Why are nitrate ions necessary for plant growth? A They are essential for producing starch. B They are found in the chloroplasts. C They are part of the cell sap. D They are used in making amino acids.",
+      "parseStatus": "ok",
+      "stem": "Why are nitrate ions necessary for plant growth?",
+      "options": {
+        "A": "They are essential for producing starch.",
+        "B": "They are found in the chloroplasts.",
+        "C": "They are part of the cell sap.",
+        "D": "They are used in making amino acids."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 427.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q06.png",
+      "rawText": "The diagram shows the human alimentary canal. S R P Q In which labelled organs are large insoluble molecules broken down into small soluble molecules? A P and R B R and S C S and Q D Q and P",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the human alimentary canal. S R P Q In which labelled organs are large insoluble molecules broken down into small soluble molecules?",
+      "options": {
+        "A": "P and R",
+        "B": "R and S",
+        "C": "S and Q",
+        "D": "Q and P"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 429.8,
+      "bottom": 664.74,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q07.png",
+      "rawText": "The arrows in the diagram represent blood vessels. Which vessel is the pulmonary vein? lungs heart kidneys D C A B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 666.74,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q08.png",
+      "rawText": "What is the word equation for anaerobic respiration in yeast? A glucose  alcohol + carbon dioxide B glucose  carbon dioxide + water C glucose  lactic acid D glucose + oxygen  carbon dioxide + water",
+      "parseStatus": "ok",
+      "stem": "What is the word equation for anaerobic respiration in yeast?",
+      "options": {
+        "A": "glucose  alcohol + carbon dioxide",
+        "B": "glucose  carbon dioxide + water",
+        "C": "glucose  lactic acid",
+        "D": "glucose + oxygen  carbon dioxide + water"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "top": 56.66,
+      "bottom": 181.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q09.png",
+      "rawText": "Which statement explains how the iris responds to an increase in light intensity? A The circular muscles contract and radial muscles relax causing the pupil to decrease in size. B The circular muscles relax and radial muscles contract causing the pupil to decrease in size. C The circular muscles contract and radial muscles relax causing the pupil to increase in size. D The circular muscles relax and radial muscles contract causing the pupil to increase in size.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains how the iris responds to an increase in light intensity?",
+      "options": {
+        "A": "The circular muscles contract and radial muscles relax causing the pupil to decrease in size.",
+        "B": "The circular muscles relax and radial muscles contract causing the pupil to decrease in size.",
+        "C": "The circular muscles contract and radial muscles relax causing the pupil to increase in size.",
+        "D": "The circular muscles relax and radial muscles contract causing the pupil to increase in size."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 183.2,
+      "bottom": 307.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q10.png",
+      "rawText": "Which statement about reproduction is correct? A In asexual reproduction, a diploid offspring is formed after fusion of haploid gametes. B In asexual reproduction, a haploid offspring is formed after fusion of diploid gametes. C In sexual reproduction, a diploid offspring is formed after fusion of haploid gametes. D In sexual reproduction, a haploid offspring is formed after fusion of diploid gametes.",
+      "parseStatus": "ok",
+      "stem": "Which statement about reproduction is correct?",
+      "options": {
+        "A": "In asexual reproduction, a diploid offspring is formed after fusion of haploid gametes.",
+        "B": "In asexual reproduction, a haploid offspring is formed after fusion of diploid gametes.",
+        "C": "In sexual reproduction, a diploid offspring is formed after fusion of haploid gametes.",
+        "D": "In sexual reproduction, a haploid offspring is formed after fusion of diploid gametes."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 309.68,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q11.png",
+      "rawText": "In one area, two forms of peppered moth exist. One form is pale white with a black and grey pattern. The other form is completely black. The diagram shows the changes in colour that have occurred in the peppered moth over a period of more than 200 years. up to 1811 black forms are rare in 1860 black forms are more common than white forms in 2015 black forms are less common than white forms humans caused the environment to become more polluted X the environment became less polluted Y Which row shows what happened? caused the black forms to first appear process X process Y A adaptation artificial selection artificial selection B adaptation natural selection natural selection C mutation artificial selection artificial selection D mutation natural selection natural selection",
+      "parseStatus": "ok",
+      "stem": "In one area, two forms of peppered moth exist. One form is pale white with a black and grey pattern. The other form is completely black. The diagram shows the changes in colour that have occurred in the peppered moth over a period of more than 200 years. up to 1811 black forms are rare in 1860 black forms are more common than white forms in 2015 black forms are less common than white forms humans caused the environment to become more polluted X the environment became less polluted Y Which row shows what happened? caused the black forms to first appear process X process Y",
+      "options": {
+        "A": "adaptation artificial selection artificial selection",
+        "B": "adaptation natural selection natural selection",
+        "C": "mutation artificial selection artificial selection",
+        "D": "mutation natural selection natural selection"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 360.12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q12.png",
+      "rawText": "The diagram shows the energy flow in part of an ecosystem. Sun animals X green plants Which group of organisms is X? A carnivores B decomposers C herbivores D producers",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the energy flow in part of an ecosystem. Sun animals X green plants Which group of organisms is X?",
+      "options": {
+        "A": "carnivores",
+        "B": "decomposers",
+        "C": "herbivores",
+        "D": "producers"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "top": 362.12,
+      "bottom": 594.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q13.png",
+      "rawText": "What is the correct sequence of events that occur during eutrophication following an increase of nitrate ions in water? 1 increased aerobic respiration by decomposers 2 death of producers 3 rapid growth of producer organisms 4 death of animals due to lack of oxygen A 4  2  3  1 B 3  2  1  4 C 3  1  2  4 D 4  2  1  3",
+      "parseStatus": "ok",
+      "stem": "What is the correct sequence of events that occur during eutrophication following an increase of nitrate ions in water? 1 increased aerobic respiration by decomposers 2 death of producers 3 rapid growth of producer organisms 4 death of animals due to lack of oxygen",
+      "options": {
+        "A": "4  2  3  1",
+        "B": "3  2  1  4",
+        "C": "3  1  2  4",
+        "D": "4  2  1  3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 596.48,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q14.png",
+      "rawText": "A student adds excess copper oxide powder to warm dilute sulfuric acid. Aqueous copper sulfate is formed. Which method is used to remove the unreacted copper oxide? A chromatography B crystallisation C distillation D filtration",
+      "parseStatus": "ok",
+      "stem": "A student adds excess copper oxide powder to warm dilute sulfuric acid. Aqueous copper sulfate is formed. Which method is used to remove the unreacted copper oxide?",
+      "options": {
+        "A": "chromatography",
+        "B": "crystallisation",
+        "C": "distillation",
+        "D": "filtration"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 208.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q15.png",
+      "rawText": "Which diagram represents molecules of a compound? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "top": 210.2,
+      "bottom": 361.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q16.png",
+      "rawText": "Which statements about the mole are correct? 1 One mole of 12C contains twice as many atoms as one mole of 24Mg. 2 One mole of 12C has a mass of 12 g. 3 One mole of C contains Avogadro’s number of atoms. 4 One mole of oxygen gas at room temperature and pressure occupies 32 dm3. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 363.68,
+      "bottom": 513.6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q17.png",
+      "rawText": "Dilute aqueous potassium chloride is electrolysed using inert electrodes. Which substance is produced at the cathode? A chlorine B hydrogen C oxygen D potassium",
+      "parseStatus": "ok",
+      "stem": "Dilute aqueous potassium chloride is electrolysed using inert electrodes. Which substance is produced at the cathode?",
+      "options": {
+        "A": "chlorine",
+        "B": "hydrogen",
+        "C": "oxygen",
+        "D": "potassium"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 515.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q18.png",
+      "rawText": "Which process is exothermic? A boiling water B cracking a long chain alkane C decomposition of limestone D identification of hydrogen using a lighted splint",
+      "parseStatus": "ok",
+      "stem": "Which process is exothermic?",
+      "options": {
+        "A": "boiling water",
+        "B": "cracking a long chain alkane",
+        "C": "decomposition of limestone",
+        "D": "identification of hydrogen using a lighted splint"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 501.72,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q19.png",
+      "rawText": "Dilute hydrochloric acid reacts with calcium carbonate. The equation for the reaction is shown. 2HCl + CaCO3  CaCl 2 + H2O + CO2 The effect of concentration of the acid on the rate of this reaction is investigated. The volume of gas produced over time is measured for two different concentrations of the acid. The results for experiments 1 and 2 are shown. volume of gas time experiment 1 experiment 2 Which row shows the reaction that has the higher rate of reaction and explains why? higher rate reason A experiment 1 the activation energy is lower in experiment 1 B experiment 1 the collision frequency is greater in experiment 1 C experiment 2 the activation energy is lower in experiment 1 D experiment 2 the collision frequency is greater in experiment 1",
+      "parseStatus": "ok",
+      "stem": "Dilute hydrochloric acid reacts with calcium carbonate. The equation for the reaction is shown. 2HCl + CaCO3  CaCl 2 + H2O + CO2 The effect of concentration of the acid on the rate of this reaction is investigated. The volume of gas produced over time is measured for two different concentrations of the acid. The results for experiments 1 and 2 are shown. volume of gas time experiment 1 experiment 2 Which row shows the reaction that has the higher rate of reaction and explains why? higher rate reason",
+      "options": {
+        "A": "experiment 1 the activation energy is lower in experiment 1",
+        "B": "experiment 1 the collision frequency is greater in experiment 1",
+        "C": "experiment 2 the activation energy is lower in experiment 1",
+        "D": "experiment 2 the collision frequency is greater in experiment 1"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 503.72,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q20.png",
+      "rawText": "In which equation is the underlined zinc an oxidising agent? A Zn + Cl 2  ZnCl 2 B Zn + 2H+  Zn2+ + H2 C Zn2+ + Mg  Zn + Mg2+ D 2Zn + O2  2ZnO",
+      "parseStatus": "ok",
+      "stem": "In which equation is the underlined zinc an oxidising agent?",
+      "options": {
+        "A": "Zn + Cl 2  ZnCl 2",
+        "B": "Zn + 2H+  Zn2+ + H2",
+        "C": "Zn2+ + Mg  Zn + Mg2+",
+        "D": "2Zn + O2  2ZnO"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 307.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q21.png",
+      "rawText": "A student makes lists of acidic oxides and basic oxides. acidic oxides carbon dioxide potassium oxide nitrogen dioxide phosphorus oxide basic oxides calcium oxide magnesium oxide sodium oxide sulfur dioxide Which oxides are not in the correct list? A carbon dioxide and sodium oxide B potassium oxide and sulfur dioxide C nitrogen dioxide and sulfur dioxide D potassium oxide and calcium oxide",
+      "parseStatus": "ok",
+      "stem": "A student makes lists of acidic oxides and basic oxides. acidic oxides carbon dioxide potassium oxide nitrogen dioxide phosphorus oxide basic oxides calcium oxide magnesium oxide sodium oxide sulfur dioxide Which oxides are not in the correct list?",
+      "options": {
+        "A": "carbon dioxide and sodium oxide",
+        "B": "potassium oxide and sulfur dioxide",
+        "C": "nitrogen dioxide and sulfur dioxide",
+        "D": "potassium oxide and calcium oxide"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "top": 309.08,
+      "bottom": 577.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q22.png",
+      "rawText": "The diagram shows overlapping circles into which different chemical formulae can be placed. is an element forms coloured ions forms a basic oxide Which formula can be placed in the shaded area because it has all three properties? A Br2 B CO C Cu D Na",
+      "parseStatus": "ok",
+      "stem": "The diagram shows overlapping circles into which different chemical formulae can be placed. is an element forms coloured ions forms a basic oxide Which formula can be placed in the shaded area because it has all three properties?",
+      "options": {
+        "A": "Br2",
+        "B": "CO",
+        "C": "Cu",
+        "D": "Na"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "top": 579.68,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q23.png",
+      "rawText": "Why are the elements in Group VIII of the Periodic Table unreactive? A They are gaseous elements. B They are monatomic elements. C They have full inner shells of electrons. D They have full outer shells of electrons.",
+      "parseStatus": "ok",
+      "stem": "Why are the elements in Group VIII of the Periodic Table unreactive?",
+      "options": {
+        "A": "They are gaseous elements.",
+        "B": "They are monatomic elements.",
+        "C": "They have full inner shells of electrons.",
+        "D": "They have full outer shells of electrons."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q24.png",
+      "rawText": "Which metal cannot be extracted from its ore by heating with carbon? A aluminium B copper C iron D zinc",
+      "parseStatus": "ok",
+      "stem": "Which metal cannot be extracted from its ore by heating with carbon?",
+      "options": {
+        "A": "aluminium",
+        "B": "copper",
+        "C": "iron",
+        "D": "zinc"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "top": 183.14,
+      "bottom": 434.94,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q25.png",
+      "rawText": "Four watch-glasses contain solid salts as shown. blue copper(II) sulfate white copper(II) sulfate blue cobalt(II) chloride pink cobalt(II) chloride Water is added to each salt. Which statement describes the salt solutions that form? A They are blue or pink only. B They are white or blue only. C They are all pink. D They are all blue.",
+      "parseStatus": "ok",
+      "stem": "Four watch-glasses contain solid salts as shown. blue copper(II) sulfate white copper(II) sulfate blue cobalt(II) chloride pink cobalt(II) chloride Water is added to each salt. Which statement describes the salt solutions that form?",
+      "options": {
+        "A": "They are blue or pink only.",
+        "B": "They are white or blue only.",
+        "C": "They are all pink.",
+        "D": "They are all blue."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "top": 436.94,
+      "bottom": 547.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q26.png",
+      "rawText": "Hydrocarbon X has two carbon atoms in each molecule. It does not decolourise bromine water. Hydrocarbon Y has three carbon atoms in each molecule. It does decolourise bromine water. What is the difference in the number of hydrogen atoms in the molecules of X and Y? A 0 B 1 C 2 D 4",
+      "parseStatus": "ok",
+      "stem": "Hydrocarbon X has two carbon atoms in each molecule. It does not decolourise bromine water. Hydrocarbon Y has three carbon atoms in each molecule. It does decolourise bromine water. What is the difference in the number of hydrogen atoms in the molecules of X and Y?",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "2",
+        "D": "4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 549.14,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q27.png",
+      "rawText": "During fermentation, an organic liquid and a colourless gas are produced. Which row identifies a use for the liquid and describes the result of a test on the colourless gas? use for the liquid gas test result A monomer in addition polymerisation reactions turns limewater milky B monomer in addition polymerisation reactions relights glowing splint C solvent turns limewater milky D solvent relights glowing splint",
+      "parseStatus": "ok",
+      "stem": "During fermentation, an organic liquid and a colourless gas are produced. Which row identifies a use for the liquid and describes the result of a test on the colourless gas? use for the liquid gas test result",
+      "options": {
+        "A": "monomer in addition polymerisation reactions turns limewater milky",
+        "B": "monomer in addition polymerisation reactions relights glowing splint",
+        "C": "solvent turns limewater milky",
+        "D": "solvent relights glowing splint"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 382.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q28.png",
+      "rawText": "Which diagram shows the distance–time graph for an object moving with constant speed? distance time A distance time B distance time C distance time D 0 0 0 0 0 0 0 0",
+      "parseStatus": "ok",
+      "stem": "Which diagram shows the distance–time graph for an object moving with constant speed? distance time",
+      "options": {
+        "A": "distance time",
+        "B": "distance time",
+        "C": "distance time",
+        "D": "0 0 0 0 0 0 0 0"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "top": 384.2,
+      "bottom": 638.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q29.png",
+      "rawText": "Four objects with different masses have different forces applied to them, as shown. Which object has the greatest acceleration? 10 kg 80 N 10 N A 15 kg 240 N 90 N B 12 kg 160 N 100 N C 20 kg 60 N 150 N D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 640.16,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q30.png",
+      "rawText": "Which source of energy is non-renewable? A chemical energy in a fossil fuel B energy in tides C geothermal energy D wind energy",
+      "parseStatus": "ok",
+      "stem": "Which source of energy is non-renewable?",
+      "options": {
+        "A": "chemical energy in a fossil fuel",
+        "B": "energy in tides",
+        "C": "geothermal energy",
+        "D": "wind energy"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 287.46,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q31.png",
+      "rawText": "Some gas is put in a sealed metal container of constant volume. The gas is now cooled. What happens to the average speed of the gas molecules, and what happens to the pressure of the gas? average speed of molecules pressure of gas A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "Some gas is put in a sealed metal container of constant volume. The gas is now cooled. What happens to the average speed of the gas molecules, and what happens to the pressure of the gas? average speed of molecules pressure of gas",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "top": 289.46,
+      "bottom": 468.72,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q32.png",
+      "rawText": "Four liquid-in-glass thermometers are made with different bulb sizes and different tube diameters. Which thermometer is the most sensitive? bulb size tube diameter A large large B large small C small large D small small",
+      "parseStatus": "ok",
+      "stem": "Four liquid-in-glass thermometers are made with different bulb sizes and different tube diameters. Which thermometer is the most sensitive? bulb size tube diameter",
+      "options": {
+        "A": "large large",
+        "B": "large small",
+        "C": "small large",
+        "D": "small small"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 470.72,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q33.png",
+      "rawText": "A water wave passes point Y. A student counts how many wave crests pass point Y in 30 seconds. Using only this information, what can the student calculate? A the amplitude of the wave B the frequency of the wave C the speed of the wave D the wavelength of the wave",
+      "parseStatus": "ok",
+      "stem": "A water wave passes point Y.",
+      "options": {
+        "A": "student counts how many wave crests pass point Y in 30 seconds. Using only this information, what can the student calculate? A the amplitude of the wave",
+        "B": "the frequency of the wave",
+        "C": "the speed of the wave",
+        "D": "the wavelength of the wave"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 298.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q34.png",
+      "rawText": "The diagram shows a ray of light passing from air into a transparent medium. air medium 70° 35° normal What is the refractive index of the medium? A 0.50 B 0.61 C 2.4 D 2.8",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light passing from air into a transparent medium. air medium 70° 35° normal What is the refractive index of the medium?",
+      "options": {
+        "A": "0.50",
+        "B": "0.61",
+        "C": "2.4",
+        "D": "2.8"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "top": 300.14,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q35.png",
+      "rawText": "The diagram is a displacement–time graph for the molecules in air as a sound wave passes. displacement 0 0 time The graphs below are drawn to the same scale. Which graph represents a quieter sound with a higher pitch? displacement A 0 0 time displacement B 0 0 time displacement C 0 0 time displacement D 0 0 time",
+      "parseStatus": "ok",
+      "stem": "The diagram is a displacement–time graph for the molecules in air as a sound wave passes. displacement 0 0 time The graphs below are drawn to the same scale. Which graph represents a quieter sound with a higher pitch? displacement",
+      "options": {
+        "A": "0 0 time displacement",
+        "B": "0 0 time displacement",
+        "C": "0 0 time displacement",
+        "D": "0 0 time"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "top": 56.78,
+      "bottom": 251.28,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q36.png",
+      "rawText": "A wire of length l and cross-sectional area X has resistance R. Which wire has resistance 4R? length of wire cross-sectional area of wire A 2l 2X B 2l 1 2 X C 1 2l 2X D 1 2l 1 2 X",
+      "parseStatus": "ok",
+      "stem": "A wire of length l and cross-sectional area X has resistance R. Which wire has resistance 4R? length of wire cross-sectional area of wire",
+      "options": {
+        "A": "2l 2X",
+        "B": "2l 1 2 X",
+        "C": "1 2l 2X",
+        "D": "1 2l 1 2 X"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "top": 253.28,
+      "bottom": 338.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q37.png",
+      "rawText": "There is a current of 3.0 A in a resistor. The potential difference across the resistor is 3.0 V. How much electrical energy is transferred to other forms in 3.0 minutes? A 3.0 J B 9.0 J C 540 J D 1620 J",
+      "parseStatus": "ok",
+      "stem": "There is a current of 3.0",
+      "options": {
+        "A": "in a resistor. The potential difference across the resistor is 3.0 V. How much electrical energy is transferred to other forms in 3.0 minutes? A 3.0 J",
+        "B": "9.0 J",
+        "C": "540 J",
+        "D": "1620 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 340.16,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q38.png",
+      "rawText": "The current in an electric heater is 10 A when in normal use. The heater circuit contains a fuse. What is the purpose of the fuse and what is a suitable rating for the fuse? purpose of fuse suitable fuse rating / A A maintains a constant current 9 B maintains a constant current 13 C protects the circuit from the effects of overheating 9 D protects the circuit from the effects of overheating 13",
+      "parseStatus": "ok",
+      "stem": "The current in an electric heater is 10",
+      "options": {
+        "A": "when in normal use. The heater circuit contains a fuse. What is the purpose of the fuse and what is a suitable rating for the fuse? purpose of fuse suitable fuse rating / A A maintains a constant current 9",
+        "B": "maintains a constant current 13",
+        "C": "protects the circuit from the effects of overheating 9",
+        "D": "protects the circuit from the effects of overheating 13"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "top": 56.6,
+      "bottom": 385.02,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q39.png",
+      "rawText": "The diagram shows a wire carrying a current. The direction of the current is shown by the arrow. The wire lies in the magnetic field between two magnetic poles. N S wire carrying current What is the direction of the magnetic field and what is the direction of the force on the wire? magnetic field force on wire A to the left downwards B to the left upwards C to the right downwards D to the right upwards",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a wire carrying a current. The direction of the current is shown by the arrow. The wire lies in the magnetic field between two magnetic poles. N S wire carrying current What is the direction of the magnetic field and what is the direction of the force on the wire? magnetic field force on wire",
+      "options": {
+        "A": "to the left downwards",
+        "B": "to the left upwards",
+        "C": "to the right downwards",
+        "D": "to the right upwards"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "top": 387.02,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m23_qp_22/q40.png",
+      "rawText": "The diagram shows -rays travelling in the direction shown. They enter a magnetic field that is directed into the page. magnetic field into page γ-rays In which direction are the -rays deflected by the magnetic field, if at all? A They are deflected out of the page. B They are deflected towards the bottom of the page. C They are deflected towards the top of the page. D They are not deflected.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows -rays travelling in the direction shown. They enter a magnetic field that is directed into the page. magnetic field into page γ-rays In which direction are the -rays deflected by the magnetic field, if at all?",
+      "options": {
+        "A": "They are deflected out of the page.",
+        "B": "They are deflected towards the bottom of the page.",
+        "C": "They are deflected towards the top of the page.",
+        "D": "They are not deflected."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

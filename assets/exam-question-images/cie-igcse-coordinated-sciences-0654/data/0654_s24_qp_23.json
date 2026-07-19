@@ -1,0 +1,638 @@
+{
+  "questionPaper": "0654_s24_qp_23.pdf",
+  "markScheme": "0654_s24_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q01.png",
+      "rawText": "What do both animals and plants need to meet their nutritional requirements? A carbon dioxide B ions C light D organic compounds",
+      "parseStatus": "ok",
+      "stem": "What do both animals and plants need to meet their nutritional requirements?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "ions",
+        "C": "light",
+        "D": "organic compounds"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q02.png",
+      "rawText": "Oxygen produced in palisade mesophyll cells by photosynthesis diffuses into the air spaces in the leaf. What causes this movement? A osmosis between the leaf cells B evaporation of water from mesophyll cells C difference in oxygen concentration inside and outside the cells D wind blowing over the leaves",
+      "parseStatus": "ok",
+      "stem": "Oxygen produced in palisade mesophyll cells by photosynthesis diffuses into the air spaces in the leaf. What causes this movement?",
+      "options": {
+        "A": "osmosis between the leaf cells",
+        "B": "evaporation of water from mesophyll cells",
+        "C": "difference in oxygen concentration inside and outside the cells",
+        "D": "wind blowing over the leaves"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q03.png",
+      "rawText": "A student tests a sample of food to identify its composition. The results are shown. test final colour of test Benedict’s test brick-red precipitate biuret test blue iodine solution blue-black Which substances are shown to be present in the food sample? A protein, reducing sugar and starch B protein and starch only C reducing sugar and starch only D reducing sugar and protein only",
+      "parseStatus": "ok",
+      "stem": "A student tests a sample of food to identify its composition. The results are shown. test final colour of test Benedict’s test brick-red precipitate biuret test blue iodine solution blue-black Which substances are shown to be present in the food sample?",
+      "options": {
+        "A": "protein, reducing sugar and starch",
+        "B": "protein and starch only",
+        "C": "reducing sugar and starch only",
+        "D": "reducing sugar and protein only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q04.png",
+      "rawText": "The diagram shows a functional human enzyme at 37 C. Which row shows the likely shape of this enzyme at",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q05.png",
+      "rawText": "What is the manufacture of carbohydrates from raw materials using light energy called? A growth B photosynthesis C respiration D reproduction",
+      "parseStatus": "ok",
+      "stem": "What is the manufacture of carbohydrates from raw materials using light energy called?",
+      "options": {
+        "A": "growth",
+        "B": "photosynthesis",
+        "C": "respiration",
+        "D": "reproduction"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q06.png",
+      "rawText": "Which row about secretions in the alimentary canal is correct? substance secreted action area of alimentary canal A amylase breaks down fats into fatty acids and glycerol small intestine B bile breaks down fats into fatty acids and glycerol small intestine C hydrochloric acid breaks down proteins into amino acids stomach D protease breaks down proteins into amino acids stomach",
+      "parseStatus": "ok",
+      "stem": "Which row about secretions in the alimentary canal is correct? substance secreted action area of alimentary canal",
+      "options": {
+        "A": "amylase breaks down fats into fatty acids and glycerol small intestine",
+        "B": "bile breaks down fats into fatty acids and glycerol small intestine",
+        "C": "hydrochloric acid breaks down proteins into amino acids stomach",
+        "D": "protease breaks down proteins into amino acids stomach"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q07.png",
+      "rawText": "Which vessels carry blood towards the heart? aorta pulmonary artery pulmonary vein vena cava A \u0016 \u0016 \u001a \u001a key B \u0016 \u001a \u0016 \u001a \u0016 = yes C \u001a \u0016 \u001a \u0016 \u001a = no D \u001a \u001a \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "Which vessels carry blood towards the heart? aorta pulmonary artery pulmonary vein vena cava",
+      "options": {
+        "A": "\u0016 \u0016 \u001a \u001a key",
+        "B": "\u0016 \u001a \u0016 \u001a \u0016 = yes",
+        "C": "\u001a \u0016 \u001a \u0016 \u001a = no",
+        "D": "\u001a \u001a \u0016 \u0016"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q08.png",
+      "rawText": "Which process releases the most energy? A carbon dioxide + water  glucose + oxygen B glucose + oxygen  carbon dioxide + water C glucose  alcohol + carbon dioxide D glucose  lactic acid",
+      "parseStatus": "ok",
+      "stem": "Which process releases the most energy?",
+      "options": {
+        "A": "carbon dioxide + water  glucose + oxygen",
+        "B": "glucose + oxygen  carbon dioxide + water",
+        "C": "glucose  alcohol + carbon dioxide",
+        "D": "glucose  lactic acid"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q09.png",
+      "rawText": "The arterioles that supply blood to the skin's surface capillaries undergo vasodilation. Which row describes the effect of this on the core body temperature and the volume of blood passing through these capillaries? core body temperature volume of blood A decreases decreases B increases decreases C decreases increases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The arterioles that supply blood to the skin's surface capillaries undergo vasodilation. Which row describes the effect of this on the core body temperature and the volume of blood passing through these capillaries? core body temperature volume of blood",
+      "options": {
+        "A": "decreases decreases",
+        "B": "increases decreases",
+        "C": "decreases increases",
+        "D": "increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q10.png",
+      "rawText": "Which statements about human egg and sperm cells are correct? 1 The egg cell’s membrane changes to prevent other sperm from entering it after fertilisation. 2 The egg and sperm cells have a diploid nucleus. 3 The sperm’s enzymes allow it to penetrate the egg to fertilise it. 4 The process of fertilisation occurs in the ovary. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about human egg and sperm cells are correct? 1 The egg cell’s membrane changes to prevent other sperm from entering it after fertilisation. 2 The egg and sperm cells have a diploid nucleus. 3 The sperm’s enzymes allow it to penetrate the egg to fertilise it. 4 The process of fertilisation occurs in the ovary.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q11.png",
+      "rawText": "Which row shows the sex chromosomes in humans? female male A XX XY B XY XX C YY XX D XX YY",
+      "parseStatus": "ok",
+      "stem": "Which row shows the sex chromosomes in humans? female male",
+      "options": {
+        "A": "XX XY",
+        "B": "XY XX",
+        "C": "YY XX",
+        "D": "XX YY"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q12.png",
+      "rawText": "The diagram shows part of a food web in a rainforest. brazil nut tree fruit tree leaf-cutter ant agouti orb spider praying mantis crocodile tanager (bird) green anaconda jaguar Which animals are feeding as quaternary consumers? A crocodile and green anaconda B crocodile and jaguar C green anaconda and tanager D jaguar and tanager",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a food web in a rainforest. brazil nut tree fruit tree leaf-cutter ant agouti orb spider praying mantis crocodile tanager (bird) green anaconda jaguar Which animals are feeding as quaternary consumers?",
+      "options": {
+        "A": "crocodile and green anaconda",
+        "B": "crocodile and jaguar",
+        "C": "green anaconda and tanager",
+        "D": "jaguar and tanager"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q13.png",
+      "rawText": "The diagram shows part of the carbon cycle. Which process, due to human activities, has increased the concentration of carbon dioxide in the atmosphere? carbon dioxide in the atmosphere animals decaying matter plants fossils C B A D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q14.png",
+      "rawText": "Which process is used to obtain water from a salt solution? A chromatography B crystallisation C distillation D filtration",
+      "parseStatus": "ok",
+      "stem": "Which process is used to obtain water from a salt solution?",
+      "options": {
+        "A": "chromatography",
+        "B": "crystallisation",
+        "C": "distillation",
+        "D": "filtration"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q15.png",
+      "rawText": "One isotope of oxygen is represented by O.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q16.png",
+      "rawText": "Which row shows the ionic half-equation for the reaction at the cathode during the electrolysis of the named electrolyte? electrolyte equation A molten aluminium oxide Al 3+ + 3e–  Al B molten aluminium oxide 2O2–  O2 + 4e– C concentrated aqueous sodium chloride H2  2H+ + 2e– D concentrated aqueous sodium chloride Na+ + e–  Na",
+      "parseStatus": "ok",
+      "stem": "Which row shows the ionic half-equation for the reaction at the cathode during the electrolysis of the named electrolyte? electrolyte equation",
+      "options": {
+        "A": "molten aluminium oxide Al 3+ + 3e–  Al",
+        "B": "molten aluminium oxide 2O2–  O2 + 4e–",
+        "C": "concentrated aqueous sodium chloride H2  2H+ + 2e–",
+        "D": "concentrated aqueous sodium chloride Na+ + e–  Na"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q17.png",
+      "rawText": "When dilute hydrochloric acid reacts with calcium carbonate, carbon dioxide is produced. Which pieces of apparatus are used to investigate the effect of temperature on the rate of this reaction? 1 2 3 A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "When dilute hydrochloric acid reacts with calcium carbonate, carbon dioxide is produced. Which pieces of apparatus are used to investigate the effect of temperature on the rate of this reaction? 1 2 3",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q18.png",
+      "rawText": "Solid zinc reacts with aqueous copper(II) sulfate. The ionic equation for the reaction is shown. Zn + Cu2+  Zn2+ + Cu Which row identifies the substance being oxidised and the reducing agent? substance being oxidised reducing agent A Cu2+ Cu2+ B Cu2+ Zn C Zn Cu2+ D Zn Zn",
+      "parseStatus": "ok",
+      "stem": "Solid zinc reacts with aqueous copper(II) sulfate. The ionic equation for the reaction is shown. Zn + Cu2+  Zn2+ + Cu Which row identifies the substance being oxidised and the reducing agent? substance being oxidised reducing agent",
+      "options": {
+        "A": "Cu2+ Cu2+",
+        "B": "Cu2+ Zn",
+        "C": "Zn Cu2+",
+        "D": "Zn Zn"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q19.png",
+      "rawText": "Chromium(III) oxide reacts with dilute hydrochloric acid and with aqueous sodium hydroxide. Which word describes chromium(III) oxide? A acidic B amphoteric C basic D neutral",
+      "parseStatus": "ok",
+      "stem": "Chromium(III) oxide reacts with dilute hydrochloric acid and with aqueous sodium hydroxide. Which word describes chromium(III) oxide?",
+      "options": {
+        "A": "acidic",
+        "B": "amphoteric",
+        "C": "basic",
+        "D": "neutral"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q20.png",
+      "rawText": "Gas X turns limewater milky. What is X? A carbon dioxide B chlorine C hydrogen D oxygen",
+      "parseStatus": "ok",
+      "stem": "Gas X turns limewater milky. What is X?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "chlorine",
+        "C": "hydrogen",
+        "D": "oxygen"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q21.png",
+      "rawText": "Which statements about the elements in Group VII of the Periodic Table are correct? 1 Bromine is lighter in colour than chlorine. 2 Chlorine is more reactive than bromine. 3 Chlorine displaces iodide ions from aqueous solution. 4 Iodine displaces bromide ions from aqueous solution. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about the elements in Group VII of the Periodic Table are correct? 1 Bromine is lighter in colour than chlorine. 2 Chlorine is more reactive than bromine. 3 Chlorine displaces iodide ions from aqueous solution. 4 Iodine displaces bromide ions from aqueous solution.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q22.png",
+      "rawText": "Neon is in Group Vlll of the Periodic Table. Which row about neon is correct? unreactive diatomic full inner electron shell incomplete outer electron shell A \u0016 \u001a \u0016 \u0016 key B \u001a \u0016 \u001a \u001a \u0016 = true C \u0016 \u001a \u0016 \u001a \u001a = false D \u001a \u0016 \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Neon is in Group Vlll of the Periodic Table. Which row about neon is correct? unreactive diatomic full inner electron shell incomplete outer electron shell",
+      "options": {
+        "A": "\u0016 \u001a \u0016 \u0016 key",
+        "B": "\u001a \u0016 \u001a \u001a \u0016 = true",
+        "C": "\u0016 \u001a \u0016 \u001a \u001a = false",
+        "D": "\u001a \u0016 \u001a \u0016"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q23.png",
+      "rawText": "Which row identifies an ore of aluminium and the method of extraction of aluminium from its ore? ore method of extraction A bauxite electrolysis B bauxite reduction using carbon C hematite electrolysis D hematite reduction using carbon",
+      "parseStatus": "ok",
+      "stem": "Which row identifies an ore of aluminium and the method of extraction of aluminium from its ore? ore method of extraction",
+      "options": {
+        "A": "bauxite electrolysis",
+        "B": "bauxite reduction using carbon",
+        "C": "hematite electrolysis",
+        "D": "hematite reduction using carbon"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q24.png",
+      "rawText": "Copper(II) sulfate and cobalt(II) chloride are used to test for water. Which rows show the colour changes for these two substances? substance initial colour final colour 1 cobalt(II) chloride blue pink 2 cobalt(II) chloride pink blue 3 copper(II) sulfate blue white 4 copper(II) sulfate white blue A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Copper(II) sulfate and cobalt(II) chloride are used to test for water. Which rows show the colour changes for these two substances? substance initial colour final colour 1 cobalt(II) chloride blue pink 2 cobalt(II) chloride pink blue 3 copper(II) sulfate blue white 4 copper(II) sulfate white blue",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q25.png",
+      "rawText": "Sulfuric acid is manufactured by the Contact process. Which reaction in this process uses a catalyst? A S + O2  SO2 B 2SO2 + O2  2SO3 C SO3 + H2SO4  H2S2O7 D H2S2O7 + H2O  2H2SO4",
+      "parseStatus": "ok",
+      "stem": "Sulfuric acid is manufactured by the Contact process. Which reaction in this process uses a catalyst?",
+      "options": {
+        "A": "S + O2  SO2",
+        "B": "2SO2 + O2  2SO3",
+        "C": "SO3 + H2SO4  H2S2O7",
+        "D": "H2S2O7 + H2O  2H2SO4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q26.png",
+      "rawText": "What is the main constituent of clean air and of natural gas? clean air natural gas A nitrogen ethane B nitrogen methane C oxygen ethane D oxygen methane",
+      "parseStatus": "ok",
+      "stem": "What is the main constituent of clean air and of natural gas? clean air natural gas",
+      "options": {
+        "A": "nitrogen ethane",
+        "B": "nitrogen methane",
+        "C": "oxygen ethane",
+        "D": "oxygen methane"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q27.png",
+      "rawText": "The structure of a monomer is shown. HO C H C CH3 H Which structure represents a section of the addition polymer that is formed from this monomer? C H OH C H A H H H C C O H C H B H H H H C C CH3 C H C H OH C CH3 C H H D OH",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q28.png",
+      "rawText": "The speed–time graph represents the motion of a vehicle during the first 10 s of a journey. speed m / s time / s 0 5 10 0 5 10 How far does the vehicle travel during the 10 s? A 25 m B 50 m C 75 m D 100 m",
+      "parseStatus": "ok",
+      "stem": "The speed–time graph represents the motion of a vehicle during the first 10 s of a journey. speed m / s time / s 0 5 10 0 5 10 How far does the vehicle travel during the 10 s?",
+      "options": {
+        "A": "25 m",
+        "B": "50 m",
+        "C": "75 m",
+        "D": "100 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q29.png",
+      "rawText": "The diagram shows a spring without a load and then with a load of mass 500 g suspended from the same spring. The spring obeys Hooke’s law. load The length of the unloaded spring is",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q30.png",
+      "rawText": "A weightless L-shaped beam is pivoted as shown. A load of mass 2.4 kg is suspended from the beam at point X. The beam is held in equilibrium by a horizontal force F acting at the point shown. 15 cm 30 cm F X pivot load The gravitational field strength g is 10 N / kg. What is F ? A 4.8 N B 48 N C 72 N D 720 N",
+      "parseStatus": "ok",
+      "stem": "A weightless L-shaped beam is pivoted as shown.",
+      "options": {
+        "A": "load of mass 2.4 kg is suspended from the beam at point X. The beam is held in equilibrium by a horizontal force F acting at the point shown. 15 cm 30 cm F X pivot load The gravitational field strength g is 10 N / kg. What is F ? A 4.8 N",
+        "B": "48 N",
+        "C": "72 N",
+        "D": "720 N"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q31.png",
+      "rawText": "Four different kettles contain different masses of water. They are used to heat the water from room temperature to boiling point. The kettles take different times to do this. Which kettle has the lowest useful power output? mass of water / g time to heat water to boiling point / minute A 1000 3.0 B 1000 5.0 C 2500 3.0 D 2500 5.0",
+      "parseStatus": "ok",
+      "stem": "Four different kettles contain different masses of water. They are used to heat the water from room temperature to boiling point. The kettles take different times to do this. Which kettle has the lowest useful power output? mass of water / g time to heat water to boiling point / minute",
+      "options": {
+        "A": "1000 3.0",
+        "B": "1000 5.0",
+        "C": "2500 3.0",
+        "D": "2500 5.0"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q32.png",
+      "rawText": "A gas in a balloon is heated at constant pressure. What happens to the gas? A Its density decreases. B Its mass decreases. C Its temperature decreases. D Its volume decreases.",
+      "parseStatus": "ok",
+      "stem": "A gas in a balloon is heated at constant pressure. What happens to the gas?",
+      "options": {
+        "A": "Its density decreases.",
+        "B": "Its mass decreases.",
+        "C": "Its temperature decreases.",
+        "D": "Its volume decreases."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q33.png",
+      "rawText": "Which diagram shows a ray of light undergoing total internal reflection? air glass C incident ray air glass D incident ray glass air A incident ray glass air B incident ray",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q34.png",
+      "rawText": "Which two types of wave cannot travel at the same speed as each other in a vacuum? A infrared and gamma B ultraviolet and X-rays C light and microwaves D radio waves and sound",
+      "parseStatus": "ok",
+      "stem": "Which two types of wave cannot travel at the same speed as each other in a vacuum?",
+      "options": {
+        "A": "infrared and gamma",
+        "B": "ultraviolet and X-rays",
+        "C": "light and microwaves",
+        "D": "radio waves and sound"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q35.png",
+      "rawText": "The electromotive force (e.m.f.) of a battery is 2.0 V. Which statement is correct? A The battery supplies 0.50 J of energy for every 1.0 C of charge driven around a circuit. B The battery supplies 0.50 J of energy for every 2.0 C of charge driven around a circuit. C The battery supplies 2.0 J of energy for every 1.0 C of charge driven around a circuit. D The battery supplies 2.0 J of energy for every 2.0 C of charge driven around a circuit.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q36.png",
+      "rawText": "The potential difference (p.d.) across a 60  resistor is 12 V. How much time does it take for a charge of 100 C to pass through the resistor? A 0.0020 s B 0.050 s C 20 s D 500 s",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q37.png",
+      "rawText": "A heater circuit is protected by a 10 A fuse. How does the fuse protect the circuit? A It cuts off the current when the current in the heater is greater than 10 A. B It decreases the current in the heater to 10 A when the current is more than 10 A. C It increases the current in the heater to 10 A when the current is less than 10 A. D It maintains a constant temperature in the heater.",
+      "parseStatus": "ok",
+      "stem": "A heater circuit is protected by a 10",
+      "options": {
+        "A": "fuse. How does the fuse protect the circuit? A It cuts off the current when the current in the heater is greater than 10 A.",
+        "B": "It decreases the current in the heater to 10 A when the current is more than 10 A.",
+        "C": "It increases the current in the heater to 10 A when the current is less than 10 A.",
+        "D": "It maintains a constant temperature in the heater."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q38.png",
+      "rawText": "The diagram shows a wire carrying an electric current in the direction shown (towards the bottom of the page). The wire is at right angles to a magnetic field that is directed into the page. A force acts on the wire because of the current and the magnetic field. In which labelled direction does this force act? wire carrying current magnetic field into page A B D C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q39.png",
+      "rawText": "Which voltage–time graph shows the output voltage of a simple a.c. generator? 0 0 voltage time A 0 0 voltage time B 0 0 voltage time C 0 0 voltage time D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s24_qp_23/q40.png",
+      "rawText": "A beam of different types of ionising radiation passes through an electric field between two metal plates. The diagram shows the direction of each type of radiation as it passes through the field. + – + – + – + – + – What does the beam contain? A alpha ()-particles, beta ()-particles and gamma ()-rays B alpha ()-particles and beta ()-particles only C alpha ()-particles and gamma ()-rays only D beta ()-particles and gamma ()-rays only",
+      "parseStatus": "ok",
+      "stem": "A beam of different types of ionising radiation passes through an electric field between two metal plates. The diagram shows the direction of each type of radiation as it passes through the field. + – + – + – + – + – What does the beam contain?",
+      "options": {
+        "A": "alpha ()-particles, beta ()-particles and gamma ()-rays",
+        "B": "alpha ()-particles and beta ()-particles only",
+        "C": "alpha ()-particles and gamma ()-rays only",
+        "D": "beta ()-particles and gamma ()-rays only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

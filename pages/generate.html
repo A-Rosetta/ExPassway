@@ -4,20 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="generatePageTitle">生成模拟试卷</title>
-  <link rel="stylesheet" href="../assets/styles.css" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260716-1" />
 </head>
 <body>
   <main class="container">
-    <script id="paperSetSeed" type="application/json">
-      [
-        { "slug": "0620_s23_qp_21", "pdf": "0620_s23_qp_21.pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 37, "structuredNeedsReview": 3 },
-        { "slug": "0620_s23_qp_22", "pdf": "0620_s23_qp_22.pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 37, "structuredNeedsReview": 3 },
-        { "slug": "0620_s23_qp_23", "pdf": "0620_s23_qp_23.pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 36, "structuredNeedsReview": 4 },
-        { "slug": "0620_w23_qp_211", "pdf": "0620_w23_qp_21(1).pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 35, "structuredNeedsReview": 5 },
-        { "slug": "0620_w23_qp_221", "pdf": "0620_w23_qp_22(1).pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 35, "structuredNeedsReview": 5 },
-        { "slug": "0620_w23_qp_231", "pdf": "0620_w23_qp_23(1).pdf", "anchorCount": 40, "rowCount": 40, "structuredOk": 38, "structuredNeedsReview": 2 }
-      ]
-    </script>
     <section class="card paper-picker" id="paperPickerPage">
       <div class="paper-picker-head">
         <div>
@@ -25,7 +15,7 @@
           <p class="tip" data-i18n="choosePaperSubtitle">先选一套真题，再选做题模式，最后打开题目开始作答。</p>
         </div>
         <div class="paper-picker-actions">
-          <button id="goHistoryBtn" class="mode-btn-secondary" type="button" data-i18n="goHistoryBtn">查看记录</button>
+          <button id="goHistoryBtn" class="mode-btn-secondary" type="button" data-i18n="goHistoryBtn" hidden>查看记录</button>
           <button id="goHomeFromPickerBtn" class="mode-btn-primary" type="button" data-i18n="homeBtn">返回首页</button>
         </div>
       </div>
@@ -56,7 +46,7 @@
         <div class="mode-summary-list">
           <div class="mode-summary-row">
             <span class="mode-summary-label" data-i18n="subjectText">Subject:</span>
-            <span id="modeSubjectValue">Chemistry (0620)</span>
+            <span id="modeSubjectValue">IGCSE Paper 2</span>
           </div>
           <div class="mode-summary-row">
             <span class="mode-summary-label" data-i18n="paperText">Paper:</span>
@@ -108,9 +98,10 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js"></script>
-  <script src="../scripts/data.js"></script>
-  <script src="../scripts/api.js"></script>
-  <script src="../scripts/generate.js"></script>
+  <script src="../scripts/i18n.js?v=20260718-1"></script>
+  <script src="../scripts/data.js?v=20260718-1"></script>
+  <script src="../scripts/exam-catalog.js?v=20260718-1"></script>
+  <script src="../scripts/api.js?v=20260718-2"></script>
+  <script src="../scripts/generate.js?v=20260718-2"></script>
 </body>
 </html>

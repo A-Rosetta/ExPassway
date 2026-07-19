@@ -5,7 +5,7 @@
     {
       "questionNo": 1,
       "pageIndex": 1,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q01.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q01.png",
       "rawText": "Nitrogen is heated in a balloon, which expands slightly. Which statements about the molecules of nitrogen are correct? 1 They move further apart.",
       "parseStatus": "ok",
       "stem": "Nitrogen is heated in a balloon, which expands slightly. Which statements about the molecules of nitrogen are correct?",
@@ -19,7 +19,7 @@
     {
       "questionNo": 2,
       "pageIndex": 1,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q02.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q02.png",
       "rawText": "The diagrams represent some elements, compounds and mixtures. 1 2",
       "parseStatus": "ok",
       "stem": "The diagrams represent some elements, compounds and mixtures. Which row identifies them correctly?",
@@ -33,7 +33,7 @@
     {
       "questionNo": 3,
       "pageIndex": 1,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q03.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q03.png",
       "rawText": "Two atoms, X and Y, have the same mass number but different atomic numbers. Which statement about X and Y is correct? A They have the same number of protons. B They have the same number of electrons. C They are in the same group of the Periodic Table. D They have different numbers of neutrons.",
       "parseStatus": "ok",
       "stem": "Two atoms, X and Y, have the same mass number but different atomic numbers. Which statement about X and Y is correct?",
@@ -47,7 +47,7 @@
     {
       "questionNo": 4,
       "pageIndex": 2,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q04.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q04.png",
       "rawText": "A sample of pure iron contains three isotopes only. percentage abundance of isotope / % isotope 2 nFe 6 54Fe 92 56Fe The iron in the sample has a relative atomic mass of 55.9. What is the value of n? A 53 B 55 C 57 D 58",
       "parseStatus": "ok",
       "stem": "A sample of pure iron contains three isotopes only. percentage abundance of isotope / % isotope 2 nFe 6 54Fe 92 56Fe The iron in the sample has a relative atomic mass of 55.9. What is the value of n?",
@@ -61,7 +61,7 @@
     {
       "questionNo": 5,
       "pageIndex": 2,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q05.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q05.png",
       "rawText": "Magnesium oxide is a white solid at room temperature and pressure. Part of the structure of solid magnesium oxide is shown. key = Mg2+ magnesium ion = O2– oxide ion Three statements are listed. 1 Magnesium ions are smaller than oxide ions because they contain fewer electrons. 2 Magnesium oxide has good electrical conductivity when molten because the ions are mobile. 3 Magnesium oxide has a high melting point because of the strong electrostatic attraction between the ions and delocalised electrons in the giant lattice. Which statements are correct? A 1 and 2 B 1 and 3 C 2 and 3 D 2 only",
       "parseStatus": "ok",
       "stem": "Magnesium oxide is a white solid at room temperature and pressure. Part of the structure of solid magnesium oxide is shown. key = Mg2+ magnesium ion = O2– oxide ion Three statements are listed. 1 Magnesium ions are smaller than oxide ions because they contain fewer electrons. 2 Magnesium oxide has good electrical conductivity when molten because the ions are mobile. 3 Magnesium oxide has a high melting point because of the strong electrostatic attraction between the ions and delocalised electrons in the giant lattice. Which statements are correct?",
@@ -75,7 +75,7 @@
     {
       "questionNo": 6,
       "pageIndex": 2,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q06.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q06.png",
       "rawText": "In which molecule are all the outer-shell electrons involved in covalent bonding? A Cl 2 B CH4 C HCl D NH3",
       "parseStatus": "ok",
       "stem": "In which molecule are all the outer-shell electrons involved in covalent bonding?",
@@ -89,7 +89,7 @@
     {
       "questionNo": 7,
       "pageIndex": 3,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q07.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q07.png",
       "rawText": "Which row describes the properties of silicon(IV) oxide? giant covalent structure melting point A no high B no low C yes high D yes low",
       "parseStatus": "ok",
       "stem": "Which row describes the properties of silicon(IV) oxide? giant covalent structure melting point",
@@ -103,7 +103,7 @@
     {
       "questionNo": 8,
       "pageIndex": 3,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q08.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q08.png",
       "rawText": "Which row describes the structure of a solid metal and explains the property? structure of solid metal property of solid metal A lattice of negative ions in a sea of electrons conducts electricity because the electrons are free to move B lattice of negative ions in a sea of electrons is malleable because the layers of ions can slide over each other C lattice of positive ions in a sea of electrons conducts electricity because the ions are free to move D lattice of positive ions in a sea of electrons is malleable because the layers of ions can slide over each other",
       "parseStatus": "ok",
       "stem": "Which row describes the structure of a solid metal and explains the property? structure of solid metal property of solid metal",
@@ -117,7 +117,7 @@
     {
       "questionNo": 9,
       "pageIndex": 3,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q09.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q09.png",
       "rawText": "What is the formula of potassium oxide? A P2O B PO2 C KO D K2O",
       "parseStatus": "ok",
       "stem": "What is the formula of potassium oxide?",
@@ -131,7 +131,7 @@
     {
       "questionNo": 10,
       "pageIndex": 3,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q10.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q10.png",
       "rawText": "A dilute aqueous solution of sodium bromide is electrolysed using inert electrodes. Which row identifies the product at the cathode and at the anode? cathode anode A bromine hydrogen B hydrogen bromine C hydrogen oxygen D oxygen hydrogen",
       "parseStatus": "ok",
       "stem": "A dilute aqueous solution of sodium bromide is electrolysed using inert electrodes. Which row identifies the product at the cathode and at the anode? cathode anode",
@@ -145,7 +145,7 @@
     {
       "questionNo": 11,
       "pageIndex": 4,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q11.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q11.png",
       "rawText": "Aluminium is extracted by electrolysis, as shown. – – + + graphite anode graphite cathode steel case aluminium oxide dissolved in molten cryolite molten aluminium Which row shows the ionic half-equations at the cathode and the anode? cathode anode A Al 3+  Al + 3e– 2O2–  O2 + 4e– B Al 3+  Al + 3e– 2O2– + 4e–  O2 C Al 3+ + 3e–  Al 2O2–  O2 + 4e– D Al 3+ + 3e–  Al 2O2– + 4e–  O2",
       "parseStatus": "ok",
       "stem": "Aluminium is extracted by electrolysis, as shown. – – + + graphite anode graphite cathode steel case aluminium oxide dissolved in molten cryolite molten aluminium Which row shows the ionic half-equations at the cathode and the anode? cathode anode",
@@ -159,7 +159,7 @@
     {
       "questionNo": 12,
       "pageIndex": 4,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q12.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q12.png",
       "rawText": "The reaction pathway diagram for an exothermic reaction is shown. energy progress of reaction 1 2 3 4 Which row identifies labels 1, 2, 3 and 4? 1 2 3 4 A reactants H Ea products B products H Ea reactants C reactants Ea H products D products Ea H reactants",
       "parseStatus": "ok",
       "stem": "The reaction pathway diagram for an exothermic reaction is shown. energy progress of reaction 1 2 3 4 Which row identifies labels 1, 2, 3 and 4? 1 2 3 4",
@@ -173,7 +173,7 @@
     {
       "questionNo": 13,
       "pageIndex": 5,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q13.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q13.png",
       "rawText": "The equation for the complete combustion of ethene is shown. C2H4(g) + 3O2(g)  2CO2(g) + 2H2O(g) Some bond energies are listed. bond bond energy in kJ / mol C–H 412 C–C 348 C=C 612 C–O 360 C=O 743 O–O 146 O=O 496 O–H 463 What is the overall energy change when one mole of ethene is completely burned? A –456 B –1076 C –1340 D –2126",
       "parseStatus": "ok",
       "stem": "The equation for the complete combustion of ethene is shown. C2H4(g) + 3O2(g)  2CO2(g) + 2H2O(g) Some bond energies are listed. bond bond energy in kJ / mol C–H 412 C–C 348 C=C 612 C–O 360 C=O 743 O–O 146 O=O 496 O–H 463 What is the overall energy change when one mole of ethene is completely burned?",
@@ -187,7 +187,7 @@
     {
       "questionNo": 14,
       "pageIndex": 5,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q14.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q14.png",
       "rawText": "Magnesium reacts with hydrochloric acid to form magnesium chloride and hydrogen. Why does magnesium powder react faster than magnesium ribbon? A The magnesium atoms in the powder have a lower activation energy. B The powder has a smaller surface area. C The magnesium atoms in the powder have more frequent collisions with acid particles. D The magnesium atoms in the powder have greater kinetic energy.",
       "parseStatus": "ok",
       "stem": "Magnesium reacts with hydrochloric acid to form magnesium chloride and hydrogen. Why does magnesium powder react faster than magnesium ribbon?",
@@ -201,7 +201,7 @@
     {
       "questionNo": 15,
       "pageIndex": 5,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q15.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q15.png",
       "rawText": "Which row shows the conditions used in the Contact process? catalyst pressure / atm temperature / C A iron 2 100 B iron 200 450 C vanadium(V) oxide 2 450 D vanadium(V) oxide 200 100",
       "parseStatus": "ok",
       "stem": "Which row shows the conditions used in the Contact process? catalyst pressure / atm temperature / C",
@@ -215,7 +215,7 @@
     {
       "questionNo": 16,
       "pageIndex": 6,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q16.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q16.png",
       "rawText": "A student heats hydrated copper(II) sulfate. The blue crystals change to a white powder. How can the student reverse this reaction? A Add anhydrous copper(II) sulfate to the white powder. B Add water to the white powder. C Cool the white powder. D Reheat the white powder.",
       "parseStatus": "ok",
       "stem": "A student heats hydrated copper(II) sulfate. The blue crystals change to a white powder. How can the student reverse this reaction?",
@@ -229,7 +229,7 @@
     {
       "questionNo": 17,
       "pageIndex": 6,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q17.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q17.png",
       "rawText": "Which reaction of hydrochloric acid is a redox reaction? A MgCO3 + 2HCl  MgCl 2 + H2O + CO2 B Mg(OH)2 + 2HCl  MgCl 2 + 2H2O C MgO + 2HCl  MgCl 2 + H2O D Mg + 2HCl  MgCl 2 + H2",
       "parseStatus": "ok",
       "stem": "Which reaction of hydrochloric acid is a redox reaction?",
@@ -243,7 +243,7 @@
     {
       "questionNo": 18,
       "pageIndex": 6,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q18.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q18.png",
       "rawText": "Which oxide is amphoteric? A Al 2O3 B CaO C Na2O D SO2",
       "parseStatus": "ok",
       "stem": "Which oxide is amphoteric?",
@@ -257,7 +257,7 @@
     {
       "questionNo": 19,
       "pageIndex": 6,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q19.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q19.png",
       "rawText": "Four statements about strong acids are listed. 1 They react with carbonates to form carbon dioxide. 2 They completely dissociate in aqueous solution. 3 They react with ammonium salts to form ammonia. 4 They are proton acceptors. Which statements are correct? A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
       "parseStatus": "ok",
       "stem": "Four statements about strong acids are listed. 1 They react with carbonates to form carbon dioxide. 2 They completely dissociate in aqueous solution. 3 They react with ammonium salts to form ammonia. 4 They are proton acceptors. Which statements are correct?",
@@ -271,7 +271,7 @@
     {
       "questionNo": 20,
       "pageIndex": 6,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q20.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q20.png",
       "rawText": "Which reaction mixture will produce a precipitate? A aqueous Na2CO3 and aqueous CuSO4 B dilute H2SO4 and aqueous NaOH C dilute HNO3 and solid MgO D solid CuO and dilute H2SO4",
       "parseStatus": "ok",
       "stem": "Which reaction mixture will produce a precipitate?",
@@ -285,7 +285,7 @@
     {
       "questionNo": 21,
       "pageIndex": 7,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q21.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q21.png",
       "rawText": "Which set of elements shows the change from metallic to non-metallic character across a period of the Periodic Table? A beryllium  magnesium  calcium B fluorine  bromine  iodine C oxygen  boron  lithium D sodium  silicon  chlorine",
       "parseStatus": "ok",
       "stem": "Which set of elements shows the change from metallic to non-metallic character across a period of the Periodic Table?",
@@ -299,7 +299,7 @@
     {
       "questionNo": 22,
       "pageIndex": 7,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q22.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q22.png",
       "rawText": "A sample of ethanoic acid and a sample of hydrochloric acid have the same concentration. How do the hydrogen ion concentration and pH of ethanoic acid compare to those of hydrochloric acid? ethanoic acid compared to hydrochloric acid hydrogen ion concentration pH A higher higher B higher lower C lower higher D lower lower",
       "parseStatus": "ok",
       "stem": "A sample of ethanoic acid and a sample of hydrochloric acid have the same concentration. How do the hydrogen ion concentration and pH of ethanoic acid compare to those of hydrochloric acid? ethanoic acid compared to hydrochloric acid hydrogen ion concentration pH",
@@ -313,7 +313,7 @@
     {
       "questionNo": 23,
       "pageIndex": 7,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q23.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q23.png",
       "rawText": "What is a typical property of transition elements? A can act as catalysts B poor electrical conductivity C low melting point D low density",
       "parseStatus": "ok",
       "stem": "What is a typical property of transition elements?",
@@ -327,7 +327,7 @@
     {
       "questionNo": 24,
       "pageIndex": 7,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q24.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q24.png",
       "rawText": "Which statement about copper or aluminium is correct? A Aluminium is more dense than copper. B Aluminium is less reactive than copper. C Copper has high ductility. D Copper has poor electrical conductivity.",
       "parseStatus": "ok",
       "stem": "Which statement about copper or aluminium is correct?",
@@ -341,7 +341,7 @@
     {
       "questionNo": 25,
       "pageIndex": 8,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q25.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q25.png",
       "rawText": "Water from a reservoir flows to the water works where purification process 1 takes place followed by process 2. What are processes 1 and 2? process 1 process 2 A chlorination filtration B filtration chlorination C fractional distillation filtration D filtration fractional distillation",
       "parseStatus": "ok",
       "stem": "Water from a reservoir flows to the water works where purification process 1 takes place followed by process 2. What are processes 1 and 2? process 1 process 2",
@@ -355,7 +355,7 @@
     {
       "questionNo": 26,
       "pageIndex": 8,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q26.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q26.png",
       "rawText": "Calcium reacts with cold water to produce hydrogen. Lead reacts slowly when heated in air to form an oxide but has almost no reaction with steam. Silver does not react with either air or water. Zinc reacts when heated with steam to produce hydrogen. What is the order of reactivity starting with the least reactive? least reactive most reactive A calcium lead zinc silver B calcium zinc lead silver C silver lead zinc calcium D silver zinc lead calcium",
       "parseStatus": "ok",
       "stem": "Calcium reacts with cold water to produce hydrogen. Lead reacts slowly when heated in air to form an oxide but has almost no reaction with steam. Silver does not react with either air or water. Zinc reacts when heated with steam to produce hydrogen. What is the order of reactivity starting with the least reactive? least reactive most reactive",
@@ -369,7 +369,7 @@
     {
       "questionNo": 27,
       "pageIndex": 8,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q27.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q27.png",
       "rawText": "Blocks of magnesium are attached to the bottom of a steel boat to prevent rusting. Which equation describes a change that prevents the steel from rusting? A Fe  Fe3+ + 3e– B Fe2O3 + 3Mg  2Fe + 3MgO C 3Mg2+ + 2Fe  2Fe3+ + 3Mg D Mg  Mg2+ + 2e–",
       "parseStatus": "ok",
       "stem": "Blocks of magnesium are attached to the bottom of a steel boat to prevent rusting. Which equation describes a change that prevents the steel from rusting?",
@@ -383,7 +383,7 @@
     {
       "questionNo": 28,
       "pageIndex": 9,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q28.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q28.png",
       "rawText": "Which statements about the extraction of iron in a blast furnace are correct? 1 The temperature inside the blast furnace is increased by burning carbon. 2 Iron(III) oxide is reduced to iron by carbon monoxide. 3 The thermal decomposition of calcium carbonate forms slag. 4 Slag reacts with acidic impurities. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
       "parseStatus": "ok",
       "stem": "Which statements about the extraction of iron in a blast furnace are correct? 1 The temperature inside the blast furnace is increased by burning carbon. 2 Iron(III) oxide is reduced to iron by carbon monoxide. 3 The thermal decomposition of calcium carbonate forms slag. 4 Slag reacts with acidic impurities.",
@@ -397,7 +397,7 @@
     {
       "questionNo": 29,
       "pageIndex": 9,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q29.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q29.png",
       "rawText": "Which statements about water are correct? 1 Tap water has fewer impurities than distilled water. 2 Tap water will turn anhydrous cobalt(II) chloride pink. 3 The domestic water supply is treated with carbon to kill microbes. 4 Phosphates from fertilisers can cause deoxygenation of water. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
       "parseStatus": "ok",
       "stem": "Which statements about water are correct? 1 Tap water has fewer impurities than distilled water. 2 Tap water will turn anhydrous cobalt(II) chloride pink. 3 The domestic water supply is treated with carbon to kill microbes. 4 Phosphates from fertilisers can cause deoxygenation of water.",
@@ -411,7 +411,7 @@
     {
       "questionNo": 30,
       "pageIndex": 9,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q30.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q30.png",
       "rawText": "Oxides of nitrogen form in car engines and are removed by catalytic converters. Which equation represents a reaction that occurs in a catalytic converter? A CO + NO2  NO + CO2 B 2CO + 2NO  N2 + 2CO2 C CO2 + NO  NO2 + CO D CO2 + 2NO2  N2 + 3O2 + C",
       "parseStatus": "ok",
       "stem": "Oxides of nitrogen form in car engines and are removed by catalytic converters. Which equation represents a reaction that occurs in a catalytic converter?",
@@ -425,7 +425,7 @@
     {
       "questionNo": 31,
       "pageIndex": 9,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q31.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q31.png",
       "rawText": "An alkene is represented by the formula CH3CH=CH2. Which name is given to this type of formula? A displayed B empirical C general D structural",
       "parseStatus": "ok",
       "stem": "An alkene is represented by the formula CH3CH=CH2. Which name is given to this type of formula?",
@@ -439,7 +439,7 @@
     {
       "questionNo": 32,
       "pageIndex": 10,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q32.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q32.png",
       "rawText": "What is the structure of propanoic acid? H C H H C H C H C H H OH H C H H C H A H C O OH H C H H C H D H C H H C H H OH H C H H C H B H H H C C O OH",
       "parseStatus": "ok",
       "stem": "What is the structure of propanoic acid?",
@@ -453,7 +453,7 @@
     {
       "questionNo": 33,
       "pageIndex": 10,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q33.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q33.png",
       "rawText": "Butane reacts with chlorine in the presence of ultraviolet radiation. What is the equation for this reaction? A C4H10 + Cl 2  C4H8Cl 2 + H2 B C4H10 + Cl 2  C4H9Cl + HCl C C4H10 + Cl 2  2C2H5Cl + H2 D C4H10 + Cl 2  C2H4 + C2H5Cl + HCl",
       "parseStatus": "ok",
       "stem": "Butane reacts with chlorine in the presence of ultraviolet radiation. What is the equation for this reaction?",
@@ -467,7 +467,7 @@
     {
       "questionNo": 34,
       "pageIndex": 10,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q34.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q34.png",
       "rawText": "A hydrocarbon P is cracked to make compound Q and hydrogen. Compound R is formed by the addition polymerisation of compound Q. To which homologous series do P, Q and R belong? alkene alkane A P only Q and R B Q only P and R C P and Q R only D P and R Q only",
       "parseStatus": "ok",
       "stem": "A hydrocarbon P is cracked to make compound Q and hydrogen. Compound R is formed by the addition polymerisation of compound Q. To which homologous series do P, Q and R belong? alkene alkane",
@@ -481,7 +481,7 @@
     {
       "questionNo": 35,
       "pageIndex": 10,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q35.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q35.png",
       "rawText": "Which substances are structural isomers? A but-2-ene and propene B ethyl ethanoate and butanoic acid C methyl methanoate and ethanol D propan-1-ol and butan-1-ol",
       "parseStatus": "ok",
       "stem": "Which substances are structural isomers?",
@@ -495,7 +495,7 @@
     {
       "questionNo": 36,
       "pageIndex": 11,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q36.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q36.png",
       "rawText": "Ethanol is produced by: 1 the catalytic addition of steam to ethene 2 fermentation. Which statement is correct? A Both processes use similar amounts of energy. B Both processes use a catalyst. C Process 1 uses a temperature of 25–35 °C. D Process 2 uses a pressure of 60 atm.",
       "parseStatus": "ok",
       "stem": "Ethanol is produced by: 1 the catalytic addition of steam to ethene 2 fermentation. Which statement is correct?",
@@ -509,7 +509,7 @@
     {
       "questionNo": 37,
       "pageIndex": 11,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q37.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q37.png",
       "rawText": "The two monomers shown can be used to form a condensation polymer. N N H H H H C O H O C H H H H H H H H C C C C C H H H H H H H H C C C C H H H H C O O H Which small molecule is released during this reaction? A H2O B NH3 C CO2 D CONH2",
       "parseStatus": "ok",
       "stem": "The two monomers shown can be used to form a condensation polymer. Which small molecule is released during this reaction?",
@@ -523,7 +523,7 @@
     {
       "questionNo": 38,
       "pageIndex": 11,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q38.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q38.png",
       "rawText": "Dilute hydrochloric acid is titrated into a conical flask containing sodium hydroxide solution and a few drops of methyl orange indicator. Which piece of apparatus is used to add the hydrochloric acid? A beaker B burette C measuring cylinder D pipette",
       "parseStatus": "ok",
       "stem": "Dilute hydrochloric acid is titrated into a conical flask containing sodium hydroxide solution and a few drops of methyl orange indicator. Which piece of apparatus is used to add the hydrochloric acid?",
@@ -537,7 +537,7 @@
     {
       "questionNo": 39,
       "pageIndex": 12,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q39.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q39.png",
       "rawText": "The chromatogram obtained from a chromatography experiment on substance S is shown. 4.5 cm 4.7 cm 6.0 cm 1.8 cm solvent front baseline S What is the Rf value of S? A 0.39 B 0.46 C 0.56 D 0.62",
       "parseStatus": "ok",
       "stem": "The chromatogram obtained from a chromatography experiment on substance S is shown. 4.5 cm 4.7 cm 6.0 cm 1.8 cm solvent front baseline S What is the Rf value of S?",
@@ -551,7 +551,7 @@
     {
       "questionNo": 40,
       "pageIndex": 12,
-      "imageUrl": "/assets/question-cut-preview/0620_s23_qp_23/q40.png",
+      "imageUrl": "/assets/exam-question-images/cie-igcse-chemistry-0620/0620_s23_qp_23/q40.png",
       "rawText": "Element X burns in air to form an acidic gas that decolourises potassium manganate(VII). What is X? A carbon B nitrogen C magnesium D sulfur",
       "parseStatus": "ok",
       "stem": "Element X burns in air to form an acidic gas that decolourises potassium manganate(VII). What is X?",

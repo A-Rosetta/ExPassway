@@ -9,19 +9,19 @@ npm install
 npm run dev
 ```
 
-Server starts at `http://localhost:3001` by default.
+`npm run dev` starts at `http://localhost:3001` by default. The deployed service runs on port `3002` behind Nginx `/api/*`.
 
 ## Run As Persistent Service (systemd)
 
-Service name: `alevel-smart-practice-backend.service`
+Service name: `alevel-backend-3002.service`
 
 ```bash
-sudo systemctl status alevel-smart-practice-backend.service
-sudo systemctl restart alevel-smart-practice-backend.service
-sudo systemctl stop alevel-smart-practice-backend.service
-sudo systemctl start alevel-smart-practice-backend.service
-sudo systemctl enable alevel-smart-practice-backend.service
-sudo journalctl -u alevel-smart-practice-backend.service -f
+sudo systemctl status alevel-backend-3002.service
+sudo systemctl restart alevel-backend-3002.service
+sudo systemctl stop alevel-backend-3002.service
+sudo systemctl start alevel-backend-3002.service
+sudo systemctl enable alevel-backend-3002.service
+sudo journalctl -u alevel-backend-3002.service -f
 ```
 
 ## PostgreSQL Setup
@@ -37,6 +37,57 @@ npm run db:schema
 When `DATABASE_URL` is set, backend uses PostgreSQL for paper/session persistence.
 If `DATABASE_URL` is not set, backend falls back to in-memory storage.
 
+For an existing database that already contains the legacy Chemistry 0620 or Co-ordinated Sciences
+0654 rows, register them in the dynamic catalogue once:
+
+```bash
+npm run catalog:migrate
+```
+
+The migration is idempotent and only fills missing catalogue data. It does not overwrite papers
+that were later published through the administrator importer.
+
+## Generic CIE Paper 2 Import
+
+Use the import section of `pages/admin.html`; all import endpoints require an authenticated admin.
+The workflow is:
+
+```text
+uploading -> processing -> validated -> published
+                         -> failed
+```
+
+- Register unknown four-digit subject codes before creating a job.
+- Upload official QP/MS pairs such as `0654_s25_qp_22.pdf` and `0654_s25_ms_22.pdf`.
+- Only Paper 2 MCQ is accepted; each PDF must be no larger than 12 MB.
+- Processing happens under `backend/imports/<job-id>/` and does not change live assets or rows.
+- A paper must contain 40 ordered question anchors and complete A-D Mark Scheme entries.
+- Official `Question Discounted` entries are allowed and remain absent from active practice.
+- Publishing uses a database transaction and temporary asset swap. Re-import keeps IDs by
+  `(paper_slug, question_no)` and marks questions no longer valid as inactive.
+- Published images and per-paper JSON are stored under
+  `../assets/exam-question-images/cie-igcse-<asset-key>/`.
+
+After deploying backend code or schema changes:
+
+```bash
+npm run db:schema
+sudo systemctl restart alevel-backend-3002.service
+```
+
+## Co-ordinated Sciences Import
+
+The processed `0654` Paper 2 data is stored in
+`../assets/exam-question-images/cie-igcse-coordinated-sciences-0654/`. Import or refresh its
+839 valid questions without replacing existing Chemistry rows:
+
+```bash
+npm run import:coordinated-sciences
+```
+
+The command uses an idempotent upsert. It excludes the official discounted question 17 from
+`0654_s23_qp_22` and rejects an unexpected source question count.
+
 ## API Overview
 
 1. `GET /health`: health check
@@ -51,6 +102,11 @@ If `DATABASE_URL` is not set, backend falls back to in-memory storage.
 10. `GET /api/users/:userId`: get user by id (DB mode)
 11. `GET /api/users/:userId/practices`: list user practice records (DB mode)
 12. `GET /api/admin/records`: dashboard-like latest users and practices (DB mode)
+13. `GET /api/catalog/subjects`: published subjects
+14. `GET /api/catalog/subjects/:subjectCode/papers`: published Paper 2 catalogue
+15. `GET /api/catalog/papers/:paperSlug/questions`: active questions in original number order
+16. `GET/POST /api/admin/subjects`: administrator subject registry
+17. `GET/POST /api/admin/imports` and `POST /api/admin/imports/:jobId/{files,process,publish}`
 
 ## Notes
 

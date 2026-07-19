@@ -9,6 +9,8 @@ function mapUser(row) {
     grade: row.grade,
     targetScore: row.target_score,
     language: row.language || "zh-CN",
+    isDisabled: Boolean(row.disabled_at),
+    disabledAt: row.disabled_at || null,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -125,4 +127,17 @@ export async function updateUserPasswordHash(userId, passwordHash) {
   `;
   const result = await query(sql, [userId, passwordHash]);
   return Boolean(result.rows[0]);
+}
+
+export async function setUserDisabled(userId, disabled) {
+  const result = await query(`
+    update users
+    set
+      disabled_at = case when $2::boolean then now() else null end,
+      updated_at = now()
+    where id = $1
+      and role <> 'admin'
+    returning *
+  `, [userId, Boolean(disabled)]);
+  return result.rows[0] ? mapUser(result.rows[0]) : null;
 }

@@ -1,0 +1,753 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2025/summer/0654_s25_qp_22.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2025/summer/0654_s25_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.49,
+      "bottom": 180.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q01.png",
+      "rawText": "Which characteristic occurs in all living organisms? A egestion B excretion C photosynthesis D plasmolysis",
+      "parseStatus": "ok",
+      "stem": "Which characteristic occurs in all living organisms?",
+      "options": {
+        "A": "egestion",
+        "B": "excretion",
+        "C": "photosynthesis",
+        "D": "plasmolysis"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 182.97,
+      "bottom": 336.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q02.png",
+      "rawText": "Which row shows a specialised cell type matched with its function? cell type function A ciliated movement of mucus B egg transport of oxygen C red blood phagocytosis D root hair photosynthesis",
+      "parseStatus": "ok",
+      "stem": "Which row shows a specialised cell type matched with its function? cell type function",
+      "options": {
+        "A": "ciliated movement of mucus",
+        "B": "egg transport of oxygen",
+        "C": "red blood phagocytosis",
+        "D": "root hair photosynthesis"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 338.97,
+      "bottom": 539.41,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q03.png",
+      "rawText": "The mass of a peeled potato is recorded. The potato is put in a salt solution with a lower water potential than the potato for two hours. The outside of the potato is then dried and the mass recorded. Which statement explains what happens to the potato after two hours in the salt solution? A It gained mass by osmosis as salt moved into the potato from the surrounding solution. B It gained mass by osmosis as water moved into the potato from the surrounding solution. C It lost mass by osmosis as water moved from the potato into the surrounding solution. D It lost mass by osmosis as salt moved from the potato into the surrounding solution.",
+      "parseStatus": "ok",
+      "stem": "The mass of a peeled potato is recorded. The potato is put in a salt solution with a lower water potential than the potato for two hours. The outside of the potato is then dried and the mass recorded. Which statement explains what happens to the potato after two hours in the salt solution?",
+      "options": {
+        "A": "It gained mass by osmosis as salt moved into the potato from the surrounding solution.",
+        "B": "It gained mass by osmosis as water moved into the potato from the surrounding solution.",
+        "C": "It lost mass by osmosis as water moved from the potato into the surrounding solution.",
+        "D": "It lost mass by osmosis as salt moved from the potato into the surrounding solution."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "top": 541.41,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q04.png",
+      "rawText": "Which row shows a large molecule and the small molecule it is made from? large molecule small molecule A glycogen glucose B glycogen amino acid C oil amino acid D oil glucose",
+      "parseStatus": "ok",
+      "stem": "Which row shows a large molecule and the small molecule it is made from? large molecule small molecule",
+      "options": {
+        "A": "glycogen glucose",
+        "B": "glycogen amino acid",
+        "C": "oil amino acid",
+        "D": "oil glucose"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 56.49,
+      "bottom": 233.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q05.png",
+      "rawText": "Six test-tubes contain amylase and starch solution. The temperatures of the test-tube contents are different. All other conditions are the same. The table shows the time taken for the amylase to break down the starch. temperature / °C 25 30 35 40 45 50 time / seconds 121 87 46 43 72 99 At which temperature is the activity of the amylase greatest? A 25 °C B 35 °C C 40 °C D 50 °C",
+      "parseStatus": "ok",
+      "stem": "Six test-tubes contain amylase and starch solution. The temperatures of the test-tube contents are different. All other conditions are the same. The table shows the time taken for the amylase to break down the starch. temperature / °C 25 30 35 40 45 50 time / seconds 121 87 46 43 72 99 At which temperature is the activity of the amylase greatest?",
+      "options": {
+        "A": "25 °C",
+        "B": "35 °C",
+        "C": "40 °C",
+        "D": "50 °C"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 235.17,
+      "bottom": 417.37,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q06.png",
+      "rawText": "Which row shows the transport and use of nitrate ions by plants? tissue used to transport nitrate ions around plant nitrate ions used to make A phloem amino acids B xylem glucose C phloem glucose D xylem amino acids",
+      "parseStatus": "ok",
+      "stem": "Which row shows the transport and use of nitrate ions by plants? tissue used to transport nitrate ions around plant nitrate ions used to make",
+      "options": {
+        "A": "phloem amino acids",
+        "B": "xylem glucose",
+        "C": "phloem glucose",
+        "D": "xylem amino acids"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "top": 419.37,
+      "bottom": 569.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q07.png",
+      "rawText": "Starch is chemically digested into maltose by the enzyme amylase. What are the properties of the maltose molecules? A large and insoluble B large and soluble C small and insoluble D small and soluble",
+      "parseStatus": "ok",
+      "stem": "Starch is chemically digested into maltose by the enzyme amylase. What are the properties of the maltose molecules?",
+      "options": {
+        "A": "large and insoluble",
+        "B": "large and soluble",
+        "C": "small and insoluble",
+        "D": "small and soluble"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 2,
+      "top": 571.29,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q08.png",
+      "rawText": "Which row shows the conditions that will increase the rate of transpiration from a plant? temperature humidity A high low B high high C low high D low low",
+      "parseStatus": "ok",
+      "stem": "Which row shows the conditions that will increase the rate of transpiration from a plant? temperature humidity",
+      "options": {
+        "A": "high low",
+        "B": "high high",
+        "C": "low high",
+        "D": "low low"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 56.49,
+      "bottom": 369.25,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q09.png",
+      "rawText": "The diagram shows a front view of a human heart. R S Q P What is the sequence in which a blood cell passes through the four chambers of the heart? A P  S  R  Q B Q  P  R  S C R  Q  P  S D S  R  Q  P",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a front view of a human heart. R S Q P What is the sequence in which a blood cell passes through the four chambers of the heart?",
+      "options": {
+        "A": "P  S  R  Q",
+        "B": "Q  P  R  S",
+        "C": "R  Q  P  S",
+        "D": "S  R  Q  P"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "top": 371.25,
+      "bottom": 560.77,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q10.png",
+      "rawText": "The homeostatic control of body temperature is shown. constant internal body temperature constant internal body temperature increase in body temperature X Which processes happen at X? A vasodilation and increased shivering B vasodilation and increased sweating C vasoconstriction and increased shivering D vasoconstriction and increased sweating",
+      "parseStatus": "ok",
+      "stem": "The homeostatic control of body temperature is shown. constant internal body temperature constant internal body temperature increase in body temperature X Which processes happen at X?",
+      "options": {
+        "A": "vasodilation and increased shivering",
+        "B": "vasodilation and increased sweating",
+        "C": "vasoconstriction and increased shivering",
+        "D": "vasoconstriction and increased sweating"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "top": 562.77,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q11.png",
+      "rawText": "Some information about a donkey and a horse is shown. ● The sperm from a donkey is able to fertilise the egg from a horse. ● The nucleus of a body cell from a horse has 64 chromosomes. ● The nucleus of a sperm cell from a donkey has 31 chromosomes. ● The offspring from a cross between a donkey and a horse is called a mule. How many chromosomes are in the nucleus of a body cell from a mule? A 31 B 63 C 64 D 95",
+      "parseStatus": "ok",
+      "stem": "Some information about a donkey and a horse is shown. ● The sperm from a donkey is able to fertilise the egg from a horse. ● The nucleus of a body cell from a horse has 64 chromosomes. ● The nucleus of a sperm cell from a donkey has 31 chromosomes. ● The offspring from a cross between a donkey and a horse is called a mule. How many chromosomes are in the nucleus of a body cell from a mule?",
+      "options": {
+        "A": "31",
+        "B": "63",
+        "C": "64",
+        "D": "95"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 56.49,
+      "bottom": 352.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q12.png",
+      "rawText": "The diagram shows a flower. What is the method of pollination for this flower and the structural adaptation that enables this? A insect pollination because the anthers are feathery B insect pollination because the stigmas are feathery C wind pollination because the anthers are feathery D wind pollination because the stigmas are feathery",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a flower. What is the method of pollination for this flower and the structural adaptation that enables this?",
+      "options": {
+        "A": "insect pollination because the anthers are feathery",
+        "B": "insect pollination because the stigmas are feathery",
+        "C": "wind pollination because the anthers are feathery",
+        "D": "wind pollination because the stigmas are feathery"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "top": 354.93,
+      "bottom": 594.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q13.png",
+      "rawText": "Information about a lake is shown. ● Aquatic plants grow in the lake. ● Aquatic plants are eaten by small fish. ● Small fish are eaten by large fish. ● Small fish are eaten by frogs. Which statement is correct? A The frogs are primary consumers. B The large fish are secondary consumers. C The small fish are at trophic level 1. D The aquatic plants are herbivores.",
+      "parseStatus": "ok",
+      "stem": "Information about a lake is shown. ● Aquatic plants grow in the lake. ● Aquatic plants are eaten by small fish. ● Small fish are eaten by large fish. ● Small fish are eaten by frogs. Which statement is correct?",
+      "options": {
+        "A": "The frogs are primary consumers.",
+        "B": "The large fish are secondary consumers.",
+        "C": "The small fish are at trophic level 1.",
+        "D": "The aquatic plants are herbivores."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "top": 596.97,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q14.png",
+      "rawText": "Which statement explains why metals conduct electricity? A There is a ‘sea’ of delocalised electrons. B The positive ions move over each other. C There is an electrostatic attraction between the oppositely charged particles. D The particles in a metal vibrate and pass on the electric current.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why metals conduct electricity?",
+      "options": {
+        "A": "There is a ‘sea’ of delocalised electrons.",
+        "B": "The positive ions move over each other.",
+        "C": "There is an electrostatic attraction between the oppositely charged particles.",
+        "D": "The particles in a metal vibrate and pass on the electric current."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 56.49,
+      "bottom": 243.37,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q15.png",
+      "rawText": "Ammonia decomposes when heated in a sealed container in the presence of an iron catalyst. The equation for the reaction is shown. 2NH3(g)  N2(g) + 3H2(g) 40.0 dm3 of ammonia is heated. After several hours, 21.0 dm3 of hydrogen is present. The volumes are measured at r.t.p. What is the percentage of unreacted ammonia? A 35.0% B 47.5% C 52.5% D 65.0%",
+      "parseStatus": "ok",
+      "stem": "Ammonia decomposes when heated in a sealed container in the presence of an iron catalyst. The equation for the reaction is shown. 2NH3(g)  N2(g) + 3H2(g) 40.0 dm3 of ammonia is heated. After several hours, 21.0 dm3 of hydrogen is present. The volumes are measured at r.t.p. What is the percentage of unreacted ammonia?",
+      "options": {
+        "A": "35.0%",
+        "B": "47.5%",
+        "C": "52.5%",
+        "D": "65.0%"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "top": 245.37,
+      "bottom": 462.37,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q16.png",
+      "rawText": "The table shows the initial and final temperatures of four different reactions. reaction initial temperature / °C final temperature / °C 1 20 20 2 20 30 3 25 20 4 25 30 Which reactions are exothermic? A 1 and 3 B 2 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The table shows the initial and final temperatures of four different reactions. reaction initial temperature / °C final temperature / °C 1 20 20 2 20 30 3 25 20 4 25 30 Which reactions are exothermic?",
+      "options": {
+        "A": "1 and 3",
+        "B": "2 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "top": 464.37,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q17.png",
+      "rawText": "Which processes are physical changes? 1 Hydrogen gas joins with oxygen gas to form steam. 2 Liquid water turns into steam. 3 Cl 2(g)  2Cl (g) 4 CH4(l)  CH4(g) A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which processes are physical changes? 1 Hydrogen gas joins with oxygen gas to form steam. 2 Liquid water turns into steam. 3 Cl 2(g)  2Cl (g) 4 CH4(l)  CH4(g)",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 56.49,
+      "bottom": 436.81,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q18.png",
+      "rawText": "Equal masses of limestone pieces are reacted with acid in two experiments. Only one change to the conditions is made between experiment 1 and experiment 2. The volume of gas produced is measured over time. The results are shown. volume of gas / cm3 time / s experiment 1 experiment 2 Which statement about the experiments is correct? A The concentration of acid used in experiment 2 is higher than in experiment 1. B The temperature used in experiment 2 is lower than in experiment 1. C The limestone pieces used in experiment 1 are larger than in experiment 2. D The volume of acid used in experiment 1 is greater than in experiment 2.",
+      "parseStatus": "ok",
+      "stem": "Equal masses of limestone pieces are reacted with acid in two experiments. Only one change to the conditions is made between experiment 1 and experiment 2. The volume of gas produced is measured over time. The results are shown. volume of gas / cm3 time / s experiment 1 experiment 2 Which statement about the experiments is correct?",
+      "options": {
+        "A": "The concentration of acid used in experiment 2 is higher than in experiment 1.",
+        "B": "The temperature used in experiment 2 is lower than in experiment 1.",
+        "C": "The limestone pieces used in experiment 1 are larger than in experiment 2.",
+        "D": "The volume of acid used in experiment 1 is greater than in experiment 2."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 438.81,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q19.png",
+      "rawText": "Which row describes an element on the left of the Periodic Table and its oxide? type of element type of oxide A metallic basic B non-metallic acidic C metallic acidic D non-metallic basic",
+      "parseStatus": "ok",
+      "stem": "Which row describes an element on the left of the Periodic Table and its oxide? type of element type of oxide",
+      "options": {
+        "A": "metallic basic",
+        "B": "non-metallic acidic",
+        "C": "metallic acidic",
+        "D": "non-metallic basic"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 56.49,
+      "bottom": 316.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q20.png",
+      "rawText": "Part of the Periodic Table is shown. W X Y Z Which description is correct? A W is a soft solid at room temperature. It has a low melting point and it can act as a catalyst. B X is a solid at room temperature. It has a high melting point and it can act as a catalyst. C Y is a solid at room temperature. It forms a coloured vapour and it displaces iodide ions. D Z is a gas at room temperature. It is very reactive and it has a low boiling point.",
+      "parseStatus": "ok",
+      "stem": "Part of the Periodic Table is shown. W X Y Z Which description is correct?",
+      "options": {
+        "A": "W is a soft solid at room temperature. It has a low melting point and it can act as a catalyst.",
+        "B": "X is a solid at room temperature. It has a high melting point and it can act as a catalyst.",
+        "C": "Y is a solid at room temperature. It forms a coloured vapour and it displaces iodide ions.",
+        "D": "Z is a gas at room temperature. It is very reactive and it has a low boiling point."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 318.93,
+      "bottom": 456.13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q21.png",
+      "rawText": "Which statement describes what happens when calcium carbonate is added to the blast furnace during the extraction of iron? A It burns and provides heat. B It decomposes and calcium oxide is a product. C It reacts with silicon dioxide. D It reduces the iron ore.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes what happens when calcium carbonate is added to the blast furnace during the extraction of iron?",
+      "options": {
+        "A": "It burns and provides heat.",
+        "B": "It decomposes and calcium oxide is a product.",
+        "C": "It reacts with silicon dioxide.",
+        "D": "It reduces the iron ore."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 458.13,
+      "bottom": 611.53,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q22.png",
+      "rawText": "Which row shows a greenhouse gas and its environmental effect? gas environmental effect A methane acid rain B methane global warming C carbon monoxide acid rain D carbon monoxide global warming",
+      "parseStatus": "ok",
+      "stem": "Which row shows a greenhouse gas and its environmental effect? gas environmental effect",
+      "options": {
+        "A": "methane acid rain",
+        "B": "methane global warming",
+        "C": "carbon monoxide acid rain",
+        "D": "carbon monoxide global warming"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "top": 613.53,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q23.png",
+      "rawText": "Which statement explains how oxides of nitrogen are formed in a car engine? A Nitrogen from the air reacts with the fuel. B Oxygen and nitrogen from the air react together. C Oxygen from the air reacts with sulfur impurities in the fuel. D Oxygen from the air reacts with the fuel.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains how oxides of nitrogen are formed in a car engine?",
+      "options": {
+        "A": "Nitrogen from the air reacts with the fuel.",
+        "B": "Oxygen and nitrogen from the air react together.",
+        "C": "Oxygen from the air reacts with sulfur impurities in the fuel.",
+        "D": "Oxygen from the air reacts with the fuel."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 56.49,
+      "bottom": 206.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q24.png",
+      "rawText": "A student prepares an insoluble salt by neutralising an acid with an alkali. Which method is used to separate the salt from the reaction mixture? A chromatography B distillation C evaporation D filtration",
+      "parseStatus": "ok",
+      "stem": "A student prepares an insoluble salt by neutralising an acid with an alkali. Which method is used to separate the salt from the reaction mixture?",
+      "options": {
+        "A": "chromatography",
+        "B": "distillation",
+        "C": "evaporation",
+        "D": "filtration"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "top": 208.29,
+      "bottom": 318.49,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q25.png",
+      "rawText": "A molecule of methane contains one carbon atom and has the formula CH4. A molecule of octane contains eight carbon atoms. How many hydrogen atoms are in a molecule of octane? A 11 B 16 C 18 D 32",
+      "parseStatus": "ok",
+      "stem": "A molecule of methane contains one carbon atom and has the formula CH4.",
+      "options": {
+        "A": "molecule of octane contains eight carbon atoms. How many hydrogen atoms are in a molecule of octane? A 11",
+        "B": "16",
+        "C": "18",
+        "D": "32"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 320.49,
+      "bottom": 500.53,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q26.png",
+      "rawText": "Large alkane molecules are cracked to form smaller molecules. Which equations represent cracking reactions? 1 C18H38  2C6H14 + C6H12 2 C18H38  H2 + 3C6H12 3 C15H32  C5H10 + 2C5H12 4 C15H32  C6H14 + C5H10 + C4H8 A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Large alkane molecules are cracked to form smaller molecules. Which equations represent cracking reactions? 1 C18H38  2C6H14 + C6H12 2 C18H38  H2 + 3C6H12 3 C15H32  C5H10 + 2C5H12 4 C15H32  C6H14 + C5H10 + C4H8",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "top": 502.53,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q27.png",
+      "rawText": "Which diagram represents the structure of nylon? C O C O N H N H A B C H H C H H C H H C H H C O C O N H N H C D C CH3 H C H H C CH3 H C H H",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 56.49,
+      "bottom": 371.05,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q28.png",
+      "rawText": "In which speed–time graph is acceleration not constant or 0? speed time A speed time B speed time C speed time D 0 0 0 0 0 0 0 0",
+      "parseStatus": "ok",
+      "stem": "In which speed–time graph is acceleration not constant or 0? speed time",
+      "options": {
+        "A": "speed time",
+        "B": "speed time",
+        "C": "speed time",
+        "D": "0 0 0 0 0 0 0 0"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "top": 373.05,
+      "bottom": 458.77,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q29.png",
+      "rawText": "A lamp produces 760 J of wasted energy for every 1000 J of energy supplied to it. What is the efficiency of the lamp? A 0.24% B 0.76% C 24% D 76%",
+      "parseStatus": "ok",
+      "stem": "A lamp produces 760 J of wasted energy for every 1000 J of energy supplied to it. What is the efficiency of the lamp?",
+      "options": {
+        "A": "0.24%",
+        "B": "0.76%",
+        "C": "24%",
+        "D": "76%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 9,
+      "top": 460.77,
+      "bottom": 571.81,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q30.png",
+      "rawText": "Atmospheric pressure is 1.0  105 Pa. A football pitch is 105 m long and 68 m wide. What is the total weight of the air above the football pitch? A 14 N B 1.7  107 N C 3.5  107 N D 7.1  108 N",
+      "parseStatus": "ok",
+      "stem": "Atmospheric pressure is 1.0  105 Pa.",
+      "options": {
+        "A": "football pitch is 105 m long and 68 m wide. What is the total weight of the air above the football pitch? A 14 N",
+        "B": "1.7  107 N",
+        "C": "3.5  107 N",
+        "D": "7.1  108 N"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 9,
+      "top": 573.81,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q31.png",
+      "rawText": "Which surface reflects the most thermal radiation? A a black, dull surface B a black, shiny surface C a white, dull surface D a white, shiny surface",
+      "parseStatus": "ok",
+      "stem": "Which surface reflects the most thermal radiation?",
+      "options": {
+        "A": "a black, dull surface",
+        "B": "a black, shiny surface",
+        "C": "a white, dull surface",
+        "D": "a white, shiny surface"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 56.49,
+      "bottom": 231.61,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q32.png",
+      "rawText": "Liquid water boils at 100 °C to produce steam. The volume of the steam at 100 °C is much greater than the volume of the liquid water. Which statement explains the increase in volume at 100 °C? A The water molecules move faster in steam than in liquid water. B The water molecules are further apart in steam than in liquid water. C The water molecules are larger in steam than in liquid water. D The water molecules are regularly arranged in liquid water but are randomly arranged in steam.",
+      "parseStatus": "ok",
+      "stem": "Liquid water boils at 100 °C to produce steam. The volume of the steam at 100 °C is much greater than the volume of the liquid water. Which statement explains the increase in volume at 100 °C?",
+      "options": {
+        "A": "The water molecules move faster in steam than in liquid water.",
+        "B": "The water molecules are further apart in steam than in liquid water.",
+        "C": "The water molecules are larger in steam than in liquid water.",
+        "D": "The water molecules are regularly arranged in liquid water but are randomly arranged in steam."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "top": 233.61,
+      "bottom": 644.17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q33.png",
+      "rawText": "A wave approaches a gap in a barrier. The gap is the same size as the wavelength of the wave. The arrow shows the direction of the wave. Which diagram shows what happens to the wave after it passes through the gap? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 10,
+      "top": 646.17,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q34.png",
+      "rawText": "What is the difference between a real image and a virtual image? A A real image can be shown on a screen, but a virtual image cannot. B A real image is always formed by a magnifying glass. C A real image is always formed by a plane mirror. D A virtual image can be shown on a screen, but a real image cannot.",
+      "parseStatus": "ok",
+      "stem": "What is the difference between a real image and a virtual image?",
+      "options": {
+        "A": "A real image can be shown on a screen, but a virtual image cannot.",
+        "B": "A real image is always formed by a magnifying glass.",
+        "C": "A real image is always formed by a plane mirror.",
+        "D": "A virtual image can be shown on a screen, but a real image cannot."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 56.49,
+      "bottom": 224.53,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q35.png",
+      "rawText": "Which row shows the type of electromagnetic wave used in each application? television remote controllers satellite television A infrared microwaves B infrared ultraviolet C microwaves microwaves D microwaves ultraviolet",
+      "parseStatus": "ok",
+      "stem": "Which row shows the type of electromagnetic wave used in each application? television remote controllers satellite television",
+      "options": {
+        "A": "infrared microwaves",
+        "B": "infrared ultraviolet",
+        "C": "microwaves microwaves",
+        "D": "microwaves ultraviolet"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 11,
+      "top": 226.53,
+      "bottom": 401.65,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q36.png",
+      "rawText": "A student makes an electromagnet with a steel core. There is a problem with the electromagnet. Which problem with the electromagnet is caused by using a steel core? A The electromagnet does not become magnetised. B The electromagnet has the same type of magnetic pole at each end. C The electromagnet remains magnetised when it is switched off. D The electromagnet repels unmagnetised magnetic materials.",
+      "parseStatus": "ok",
+      "stem": "A student makes an electromagnet with a steel core. There is a problem with the electromagnet. Which problem with the electromagnet is caused by using a steel core?",
+      "options": {
+        "A": "The electromagnet does not become magnetised.",
+        "B": "The electromagnet has the same type of magnetic pole at each end.",
+        "C": "The electromagnet remains magnetised when it is switched off.",
+        "D": "The electromagnet repels unmagnetised magnetic materials."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 11,
+      "top": 403.65,
+      "bottom": 488.53,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q37.png",
+      "rawText": "There is a current of 100 mA in a circuit. How much charge flows through the circuit in 1.5 minutes? A 0.15 C B 9.0 C C 150 C D 9000 C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 11,
+      "top": 490.53,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q38.png",
+      "rawText": "A student connects a length of metal resistance wire to a battery. metal resistance wire current Which change increases the current in the resistance wire? A connecting a second wire in series with the first wire B heating the wire C making the wire shorter D making the wire thinner",
+      "parseStatus": "ok",
+      "stem": "A student connects a length of metal resistance wire to a battery. metal resistance wire current Which change increases the current in the resistance wire?",
+      "options": {
+        "A": "connecting a second wire in series with the first wire",
+        "B": "heating the wire",
+        "C": "making the wire shorter",
+        "D": "making the wire thinner"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 12,
+      "top": 59.37,
+      "bottom": 250.69,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q39.png",
+      "rawText": "A nucleus of 238 92U undergoes radioactive decay to produce a nucleus of thorium (Th) and an alpha particle. Which equation shows this decay? A 238 92U  238 93Th + 0 –1 B 238 92U  239 92Th + –1 0 C 238 92U  236 88Th + 2 4 D 238 92U  234 90Th + 4 2",
+      "parseStatus": "ok",
+      "stem": "A nucleus of 238 92U undergoes radioactive decay to produce a nucleus of thorium (Th) and an alpha particle. Which equation shows this decay?",
+      "options": {
+        "A": "238 92U  238 93Th + 0 –1",
+        "B": "238 92U  239 92Th + –1 0",
+        "C": "238 92U  236 88Th + 2 4",
+        "D": "238 92U  234 90Th + 4 2"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 12,
+      "top": 252.69,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_22/q40.png",
+      "rawText": "Which process describes how energy is released from a stable star? A fission of helium into hydrogen B fission of hydrogen into helium C fusion of helium into hydrogen D fusion of hydrogen into helium",
+      "parseStatus": "ok",
+      "stem": "Which process describes how energy is released from a stable star?",
+      "options": {
+        "A": "fission of helium into hydrogen",
+        "B": "fission of hydrogen into helium",
+        "C": "fusion of helium into hydrogen",
+        "D": "fusion of hydrogen into helium"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

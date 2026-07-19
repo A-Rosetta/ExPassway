@@ -1,0 +1,743 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2025/summer/0654_s25_qp_23.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2025/summer/0654_s25_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.49,
+      "bottom": 349.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q01.png",
+      "rawText": "The diagram shows an incomplete plant cell. Which structure is not shown? A nucleus B cell wall C chloroplast D vacuole",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an incomplete plant cell. Which structure is not shown?",
+      "options": {
+        "A": "nucleus",
+        "B": "cell wall",
+        "C": "chloroplast",
+        "D": "vacuole"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 351.93,
+      "bottom": 505.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q02.png",
+      "rawText": "Which row describes the diffusion of molecules from P to Q? P Q movement A higher concentration lower concentration down a concentration gradient B higher concentration lower concentration up a concentration gradient C lower concentration higher concentration down a concentration gradient D lower concentration higher concentration up a concentration gradient",
+      "parseStatus": "ok",
+      "stem": "Which row describes the diffusion of molecules from P to Q? P Q movement",
+      "options": {
+        "A": "higher concentration lower concentration down a concentration gradient",
+        "B": "higher concentration lower concentration up a concentration gradient",
+        "C": "lower concentration higher concentration down a concentration gradient",
+        "D": "lower concentration higher concentration up a concentration gradient"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 507.93,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q03.png",
+      "rawText": "What is a characteristic of enzymes? A act as catalysts B made from fatty acids C turn Benedict’s solution red when heated D physically digest food",
+      "parseStatus": "ok",
+      "stem": "What is a characteristic of enzymes?",
+      "options": {
+        "A": "act as catalysts",
+        "B": "made from fatty acids",
+        "C": "turn Benedict’s solution red when heated",
+        "D": "physically digest food"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.49,
+      "bottom": 223.09,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q04.png",
+      "rawText": "Which row shows the parts of the alimentary canal where the enzymes amylase, lipase and protease are secreted? mouth small intestine stomach A amylase protease amylase B amylase lipase protease C protease protease lipase D protease lipase lipase",
+      "parseStatus": "ok",
+      "stem": "Which row shows the parts of the alimentary canal where the enzymes amylase, lipase and protease are secreted? mouth small intestine stomach",
+      "options": {
+        "A": "amylase protease amylase",
+        "B": "amylase lipase protease",
+        "C": "protease protease lipase",
+        "D": "protease lipase lipase"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 225.09,
+      "bottom": 611.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q05.png",
+      "rawText": "More stomata are found on the lower surfaces of leaves than on the upper surfaces of leaves. A student puts petroleum jelly on the surfaces of four leaves. ● One leaf has petroleum jelly on the upper surface. ● One leaf has petroleum jelly on the lower surface. ● One leaf has petroleum jelly on both surfaces. ● One leaf has petroleum jelly on neither surface. The leaves are weighed and left in the air for one week before being weighed again. The percentage decrease in mass of each of the leaves is shown in the table. leaf percentage decrease in mass W 45 X 12 Y 17 Z 42 Which leaf has petroleum jelly on its lower surface only? A W B X C Y D Z",
+      "parseStatus": "ok",
+      "stem": "More stomata are found on the lower surfaces of leaves than on the upper surfaces of leaves.",
+      "options": {
+        "A": "student puts petroleum jelly on the surfaces of four leaves. ● One leaf has petroleum jelly on the upper surface. ● One leaf has petroleum jelly on the lower surface. ● One leaf has petroleum jelly on both surfaces. ● One leaf has petroleum jelly on neither surface. The leaves are weighed and left in the air for one week before being weighed again. The percentage decrease in mass of each of the leaves is shown in the table. leaf percentage decrease in mass W 45 X 12 Y 17 Z 42 Which leaf has petroleum jelly on its lower surface only? A W",
+        "B": "X",
+        "C": "Y",
+        "D": "Z"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 613.29,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q06.png",
+      "rawText": "What reduces the risk of suffering from coronary heart disease? 1 exercise 2 low fat diet 3 high salt diet 4 smoking A 1, 2 and 3 B 1, 3 and 4 C 1 and 2 only D 3 and 4 only",
+      "parseStatus": "ok",
+      "stem": "What reduces the risk of suffering from coronary heart disease? 1 exercise 2 low fat diet 3 high salt diet 4 smoking",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1, 3 and 4",
+        "C": "1 and 2 only",
+        "D": "3 and 4 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "top": 56.49,
+      "bottom": 180.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q07.png",
+      "rawText": "What is the role of glucagon? A decrease blood glucose B decrease blood insulin C increase blood glucose D increase blood insulin",
+      "parseStatus": "ok",
+      "stem": "What is the role of glucagon?",
+      "options": {
+        "A": "decrease blood glucose",
+        "B": "decrease blood insulin",
+        "C": "increase blood glucose",
+        "D": "increase blood insulin"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 182.97,
+      "bottom": 382.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q08.png",
+      "rawText": "The diagram shows a sperm cell. Which structure contains enzymes to digest the outer jelly layer of an egg cell? A D B C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 384.93,
+      "bottom": 470.77,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q09.png",
+      "rawText": "Kangaroos have 16 chromosomes in their skin cells. How many chromosomes are there in a kangaroo sperm cell? A 4 B 8 C 16 D 32",
+      "parseStatus": "ok",
+      "stem": "Kangaroos have 16 chromosomes in their skin cells. How many chromosomes are there in a kangaroo sperm cell?",
+      "options": {
+        "A": "4",
+        "B": "8",
+        "C": "16",
+        "D": "32"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "top": 472.77,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q10.png",
+      "rawText": "Which characteristic is an example of discontinuous variation? A body height B body mass C blood group D hand span",
+      "parseStatus": "ok",
+      "stem": "Which characteristic is an example of discontinuous variation?",
+      "options": {
+        "A": "body height",
+        "B": "body mass",
+        "C": "blood group",
+        "D": "hand span"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 56.49,
+      "bottom": 259.33,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q11.png",
+      "rawText": "A food chain is shown. plant  insect  mouse  snake  eagle Which statements are correct for this food chain? 1 The eagle is a tertiary consumer. 2 The insect is at trophic level 1. 3 The mouse is a secondary consumer. 4 The plant is a producer. A 1 and 2 B 2 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "A food chain is shown. plant  insect  mouse  snake  eagle Which statements are correct for this food chain? 1 The eagle is a tertiary consumer. 2 The insect is at trophic level 1. 3 The mouse is a secondary consumer. 4 The plant is a producer.",
+      "options": {
+        "A": "1 and 2",
+        "B": "2 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 261.33,
+      "bottom": 415.33,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q12.png",
+      "rawText": "Which row shows a cause and an effect that results from deforestation? cause effect A fewer tree roots decrease in flooding B fewer tree leaves respire increase in carbon dioxide C fewer tree roots decrease in soil erosion D fewer habitats increase in extinctions",
+      "parseStatus": "ok",
+      "stem": "Which row shows a cause and an effect that results from deforestation? cause effect",
+      "options": {
+        "A": "fewer tree roots decrease in flooding",
+        "B": "fewer tree leaves respire increase in carbon dioxide",
+        "C": "fewer tree roots decrease in soil erosion",
+        "D": "fewer habitats increase in extinctions"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "top": 417.33,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q13.png",
+      "rawText": "During physical activity, the rate and depth of breathing increases. This increase in breathing is caused by the detection of an increase in carbon dioxide concentration. Which row describes this detection? location where increase is detected organ that detects the increase A alveoli brain B alveoli lungs C blood brain D blood lungs",
+      "parseStatus": "ok",
+      "stem": "During physical activity, the rate and depth of breathing increases. This increase in breathing is caused by the detection of an increase in carbon dioxide concentration. Which row describes this detection? location where increase is detected organ that detects the increase",
+      "options": {
+        "A": "alveoli brain",
+        "B": "alveoli lungs",
+        "C": "blood brain",
+        "D": "blood lungs"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 56.49,
+      "bottom": 206.29,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q14.png",
+      "rawText": "Atoms of element X have 11 nucleons and 6 neutrons. What is element X? A boron B carbon C chlorine D sodium",
+      "parseStatus": "ok",
+      "stem": "Atoms of element X have 11 nucleons and 6 neutrons. What is element X?",
+      "options": {
+        "A": "boron",
+        "B": "carbon",
+        "C": "chlorine",
+        "D": "sodium"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 208.29,
+      "bottom": 333.01,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q15.png",
+      "rawText": "Which statement explains why isotopes of the same element have the same properties? A They have equal numbers of protons and electrons. B They have the same number of electrons in their outer shell. C They have the same number of protons. D They have the same number of electron shells.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why isotopes of the same element have the same properties?",
+      "options": {
+        "A": "They have equal numbers of protons and electrons.",
+        "B": "They have the same number of electrons in their outer shell.",
+        "C": "They have the same number of protons.",
+        "D": "They have the same number of electron shells."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "top": 335.01,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q16.png",
+      "rawText": "Which diagram represents the structure of sodium chloride, NaCl ? Cl – Na+ Na+ Cl – Na+ Cl – Cl – Cl – Na+ Na+ B A Na+ Na+ Cl – Cl – D Cl – Na+ Cl – Cl – Na+ C Na+ Na+ Cl – Cl – Na+ Na+ Cl –",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "top": 56.49,
+      "bottom": 234.85,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q17.png",
+      "rawText": "Limestone contains calcium carbonate, CaCO3. It is used to neutralise nitric acid, HNO3. What is the balanced ionic equation for the reaction between calcium carbonate and nitric acid? A Ca2+ + CO3 2– + H+ + NO3 –  CaNO3 + H2O + CO2 B Ca2+ + CO3 2– + 2H+ + 2NO3 –  Ca(NO3)2 + H2O + CO2 C CO3 2– + 2H+  H2O + CO2 D CaCO3 + 2HNO3  Ca(NO3)2 + H2O + CO2",
+      "parseStatus": "ok",
+      "stem": "Limestone contains calcium carbonate, CaCO3. It is used to neutralise nitric acid, HNO3. What is the balanced ionic equation for the reaction between calcium carbonate and nitric acid?",
+      "options": {
+        "A": "Ca2+ + CO3 2– + H+ + NO3 –  CaNO3 + H2O + CO2",
+        "B": "Ca2+ + CO3 2– + 2H+ + 2NO3 –  Ca(NO3)2 + H2O + CO2",
+        "C": "CO3 2– + 2H+  H2O + CO2",
+        "D": "CaCO3 + 2HNO3  Ca(NO3)2 + H2O + CO2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 236.85,
+      "bottom": 577.69,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q18.png",
+      "rawText": "A reaction pathway diagram for a reaction is shown. progress of reaction energy reactants products Which reactions have a reaction pathway diagram like the one shown? 1 C + O2  CO2 2 CaCO3  CaO + CO2 3 2C3H6 + 9O2  6CO2 + 6H2O 4 H2O(l)  H2O(g) A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 579.69,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q19.png",
+      "rawText": "Solid P reacts with dilute acid. Which change in reaction conditions increases both the frequency of particle collisions and the number of colliding particles that have the minimum energy needed to react? A Decrease the particle size of solid P. B Increase the concentration of the acid. C Increase the surface area of solid P. D Increase the temperature of the reaction.",
+      "parseStatus": "ok",
+      "stem": "Solid P reacts with dilute acid. Which change in reaction conditions increases both the frequency of particle collisions and the number of colliding particles that have the minimum energy needed to react?",
+      "options": {
+        "A": "Decrease the particle size of solid P.",
+        "B": "Increase the concentration of the acid.",
+        "C": "Increase the surface area of solid P.",
+        "D": "Increase the temperature of the reaction."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 56.49,
+      "bottom": 325.09,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q20.png",
+      "rawText": "Zinc sulfate is made by adding zinc oxide to dilute sulfuric acid. The steps used to obtain zinc sulfate crystals are listed. 1 Filter the solution to remove excess zinc oxide. 2 Warm the zinc sulfate solution. 3 Add excess zinc oxide and stir. 4 Filter and dry the crystals. What is the correct order of the steps? A 1  3  4  2 B 2  1  3  4 C 3  1  2  4 D 3  2  1  4",
+      "parseStatus": "ok",
+      "stem": "Zinc sulfate is made by adding zinc oxide to dilute sulfuric acid. The steps used to obtain zinc sulfate crystals are listed. 1 Filter the solution to remove excess zinc oxide. 2 Warm the zinc sulfate solution. 3 Add excess zinc oxide and stir. 4 Filter and dry the crystals. What is the correct order of the steps?",
+      "options": {
+        "A": "1  3  4  2",
+        "B": "2  1  3  4",
+        "C": "3  1  2  4",
+        "D": "3  2  1  4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 327.09,
+      "bottom": 451.69,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q21.png",
+      "rawText": "Which property of aluminium explains why it is used to manufacture parts for aircraft? A high melting point B ductile C good electrical conductivity D low density",
+      "parseStatus": "ok",
+      "stem": "Which property of aluminium explains why it is used to manufacture parts for aircraft?",
+      "options": {
+        "A": "high melting point",
+        "B": "ductile",
+        "C": "good electrical conductivity",
+        "D": "low density"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 453.69,
+      "bottom": 578.89,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q22.png",
+      "rawText": "Which element is used to extract some metals from their ores? A carbon B copper C iron D nitrogen",
+      "parseStatus": "ok",
+      "stem": "Which element is used to extract some metals from their ores?",
+      "options": {
+        "A": "carbon",
+        "B": "copper",
+        "C": "iron",
+        "D": "nitrogen"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "top": 580.89,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q23.png",
+      "rawText": "Which row shows the conditions that each turn a sample of white copper(II) sulfate blue? add water heat A \u001a \u001a B \u001a \u0016 C \u0016 \u0016 D \u0016 \u001a",
+      "parseStatus": "ok",
+      "stem": "Which row shows the conditions that each turn a sample of white copper(II) sulfate blue? add water heat",
+      "options": {
+        "A": "\u001a \u001a",
+        "B": "\u001a \u0016",
+        "C": "\u0016 \u0016",
+        "D": "\u0016 \u001a"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 56.49,
+      "bottom": 180.97,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q24.png",
+      "rawText": "Which two processes are used to treat the domestic water supply? A chlorination and evaporation B chlorination and filtration C crystallisation and evaporation D crystallisation and filtration",
+      "parseStatus": "ok",
+      "stem": "Which two processes are used to treat the domestic water supply?",
+      "options": {
+        "A": "chlorination and evaporation",
+        "B": "chlorination and filtration",
+        "C": "crystallisation and evaporation",
+        "D": "crystallisation and filtration"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "top": 182.97,
+      "bottom": 335.65,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q25.png",
+      "rawText": "Which processes add carbon dioxide to the air? 1 complete combustion of ethanol 2 displacement of copper from aqueous copper(II) sulfate 3 reaction of dilute hydrochloric acid with magnesium 4 reaction of dilute sulfuric acid with copper carbonate A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which processes add carbon dioxide to the air? 1 complete combustion of ethanol 2 displacement of copper from aqueous copper(II) sulfate 3 reaction of dilute hydrochloric acid with magnesium 4 reaction of dilute sulfuric acid with copper carbonate",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 337.65,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q26.png",
+      "rawText": "A chromatography experiment is performed on a coloured solution. The solution contains substance Y. The chromatogram is shown. Y solvent front baseline r s t How is the Rf value of substance Y calculated? A r  s B s  r C s  t D t  s",
+      "parseStatus": "ok",
+      "stem": "A chromatography experiment is performed on a coloured solution. The solution contains substance Y. The chromatogram is shown. Y solvent front baseline r s t How is the Rf value of substance Y calculated?",
+      "options": {
+        "A": "r  s",
+        "B": "s  r",
+        "C": "s  t",
+        "D": "t  s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 56.49,
+      "bottom": 209.89,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q27.png",
+      "rawText": "Three processes are listed. 1 cracking of hydrocarbons 2 combustion of methane 3 reaction of magnesium with steam Which processes produce hydrogen? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Three processes are listed. 1 cracking of hydrocarbons 2 combustion of methane 3 reaction of magnesium with steam Which processes produce hydrogen?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 211.89,
+      "bottom": 360.85,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q28.png",
+      "rawText": "An object of mass 2.0 kg is taken from planet W to Jupiter. The gravitational field strength on planet W is 10 N / kg. The gravitational field strength on Jupiter is 25 N / kg. By which factor does the weight of the object change when the object is on planet W compared to when it is on Jupiter? A 0.040 B 2.5 C 5.0 D 250",
+      "parseStatus": "ok",
+      "stem": "An object of mass 2.0 kg is taken from planet W to Jupiter. The gravitational field strength on planet W is 10 N / kg. The gravitational field strength on Jupiter is 25 N / kg. By which factor does the weight of the object change when the object is on planet W compared to when it is on Jupiter?",
+      "options": {
+        "A": "0.040",
+        "B": "2.5",
+        "C": "5.0",
+        "D": "250"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "top": 362.85,
+      "bottom": 581.53,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q29.png",
+      "rawText": "An object X with mass 2.0 kg is moving with a speed of 4.0 m / s. Object Y has kinetic energy equal to that of object X. Which row shows the mass and the speed of object Y? mass of object Y / kg s / m Y object of speed A 0.50 16 B 1.0 8.0 C 8.0 2.0 D 16 1.0",
+      "parseStatus": "ok",
+      "stem": "An object X with mass 2.0 kg is moving with a speed of 4.0 m / s. Object Y has kinetic energy equal to that of object X. Which row shows the mass and the speed of object Y? mass of object Y / kg s / m Y object of speed",
+      "options": {
+        "A": "0.50 16",
+        "B": "1.0 8.0",
+        "C": "8.0 2.0",
+        "D": "16 1.0"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 9,
+      "top": 583.53,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q30.png",
+      "rawText": "Which material is a good thermal conductor? A aluminium B cardboard C rubber D wool",
+      "parseStatus": "ok",
+      "stem": "Which material is a good thermal conductor?",
+      "options": {
+        "A": "aluminium",
+        "B": "cardboard",
+        "C": "rubber",
+        "D": "wool"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 56.49,
+      "bottom": 343.93,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q31.png",
+      "rawText": "At the coast on a hot day, the air above the land is warmer than the air above the sea. This causes a convection current. The convection current causes a gentle wind. land sea warmer air cooler air Which row describes the density of the air above the land and the direction of the wind? density of air above land direction of wind A greater than above sea from land to sea B greater than above sea from sea to land C less than above sea from land to sea D less than above sea from sea to land",
+      "parseStatus": "ok",
+      "stem": "At the coast on a hot day, the air above the land is warmer than the air above the sea. This causes a convection current. The convection current causes a gentle wind. land sea warmer air cooler air Which row describes the density of the air above the land and the direction of the wind? density of air above land direction of wind",
+      "options": {
+        "A": "greater than above sea from land to sea",
+        "B": "greater than above sea from sea to land",
+        "C": "less than above sea from land to sea",
+        "D": "less than above sea from sea to land"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 345.93,
+      "bottom": 495.85,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q32.png",
+      "rawText": "An image of an object is formed by a plane mirror. The image formed is virtual. Which statement describes what is meant by a virtual image? A The reflected rays do not meet where the image is formed. B The image is formed directly opposite the object. C The image is the same distance from the mirror as the distance of the object from the mirror. D The angle of incidence is equal to the angle of reflection.",
+      "parseStatus": "ok",
+      "stem": "An image of an object is formed by a plane mirror. The image formed is virtual. Which statement describes what is meant by a virtual image?",
+      "options": {
+        "A": "The reflected rays do not meet where the image is formed.",
+        "B": "The image is formed directly opposite the object.",
+        "C": "The image is the same distance from the mirror as the distance of the object from the mirror.",
+        "D": "The angle of incidence is equal to the angle of reflection."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "top": 497.85,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q33.png",
+      "rawText": "The diagram shows a ray of light travelling in glass from point P towards a glass–air boundary. Angle x is greater than the critical angle. In which labelled direction does the ray continue? A B C D air glass x P",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 56.49,
+      "bottom": 227.41,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q34.png",
+      "rawText": "Which row describes all electromagnetic waves? type of wave s / m vacuum a in speed e approximat A longitudinal 300 B longitudinal 300 million C transverse 300 D transverse 300 million",
+      "parseStatus": "ok",
+      "stem": "Which row describes all electromagnetic waves? type of wave s / m vacuum a in speed e approximat",
+      "options": {
+        "A": "longitudinal 300",
+        "B": "longitudinal 300 million",
+        "C": "transverse 300",
+        "D": "transverse 300 million"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 229.41,
+      "bottom": 380.05,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q35.png",
+      "rawText": "An iron bar is placed within the magnetic field of a permanent magnet. What happens to the iron bar? A It becomes an induced permanent magnet. B It becomes an induced temporary magnet. C It becomes negatively charged. D It becomes positively charged.",
+      "parseStatus": "ok",
+      "stem": "An iron bar is placed within the magnetic field of a permanent magnet. What happens to the iron bar?",
+      "options": {
+        "A": "It becomes an induced permanent magnet.",
+        "B": "It becomes an induced temporary magnet.",
+        "C": "It becomes negatively charged.",
+        "D": "It becomes positively charged."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 11,
+      "top": 382.05,
+      "bottom": 575.65,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q36.png",
+      "rawText": "The diagram shows two 30  resistors and an ammeter connected to a 120 V battery. A 30 Ω 120 V 30 Ω What is the reading on the ammeter? A 0.25 A B 0.50 A C 2.0 A D 4.0 A",
+      "parseStatus": "ok",
+      "stem": "The diagram shows two 30  resistors and an ammeter connected to a 120 V battery.",
+      "options": {
+        "A": "30 Ω 120 V 30 Ω What is the reading on the ammeter? A 0.25 A",
+        "B": "0.50 A",
+        "C": "2.0 A",
+        "D": "4.0 A"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 11,
+      "top": 577.65,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q37.png",
+      "rawText": "There is a current of 0.50 A in a lamp when the potential difference (p.d.) across the lamp is 12 V. How much time does it take for the lamp to transfer 100 J of energy? A 0.060 s B 4.2 s C 17 s D 600 s",
+      "parseStatus": "ok",
+      "stem": "There is a current of 0.50",
+      "options": {
+        "A": "in a lamp when the potential difference (p.d.) across the lamp is 12 V. How much time does it take for the lamp to transfer 100 J of energy? A 0.060 s",
+        "B": "4.2 s",
+        "C": "17 s",
+        "D": "600 s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "top": 56.49,
+      "bottom": 310.45,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q38.png",
+      "rawText": "The circuit shown includes a battery and four lamps. All the lamps are on. One lamp fails and all the lamps go off. Which lamp failed? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 12,
+      "top": 312.45,
+      "bottom": 462.25,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q39.png",
+      "rawText": "A radioisotope decays by the emission of an alpha ()-particle. What is lost by the nucleus as it decays? A one proton and one neutron only B one proton, one neutron and one electron C two protons and two neutrons only D two protons, two neutrons and two electrons",
+      "parseStatus": "ok",
+      "stem": "A radioisotope decays by the emission of an alpha ()-particle. What is lost by the nucleus as it decays?",
+      "options": {
+        "A": "one proton and one neutron only",
+        "B": "one proton, one neutron and one electron",
+        "C": "two protons and two neutrons only",
+        "D": "two protons, two neutrons and two electrons"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 12,
+      "top": 464.25,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s25_qp_23/q40.png",
+      "rawText": "Which gases make up most of the Sun and in which regions of the electromagnetic spectrum does the Sun mostly radiate its energy? gases electromagnetic regions A hydrogen and helium infrared, visible, ultraviolet B hydrogen and helium visible, ultraviolet, X-rays C methane and helium infrared, visible, ultraviolet D methane and helium visible, ultraviolet, X-rays",
+      "parseStatus": "ok",
+      "stem": "Which gases make up most of the Sun and in which regions of the electromagnetic spectrum does the Sun mostly radiate its energy? gases electromagnetic regions",
+      "options": {
+        "A": "hydrogen and helium infrared, visible, ultraviolet",
+        "B": "hydrogen and helium visible, ultraviolet, X-rays",
+        "C": "methane and helium infrared, visible, ultraviolet",
+        "D": "methane and helium visible, ultraviolet, X-rays"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

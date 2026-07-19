@@ -1,0 +1,670 @@
+{
+  "questionPaper": "0654_s23_qp_22.pdf",
+  "markScheme": "0654_s23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [
+    17
+  ],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q01.png",
+      "rawText": "Which is not a characteristic of all living organisms? A excretion B growth C photosynthesis D sensitivity",
+      "parseStatus": "ok",
+      "stem": "Which is not a characteristic of all living organisms?",
+      "options": {
+        "A": "excretion",
+        "B": "growth",
+        "C": "photosynthesis",
+        "D": "sensitivity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q02.png",
+      "rawText": "The diagram shows a specialised cell from a plant. W X Y Z Which structures not found in animal cells are shown in the diagram and which structure often found in other plant cells is missing? structures not found in animal cells structure found in other plant cells A W and X chloroplast B X and Y nucleus C Y and Z nucleus D Z and W chloroplast",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a specialised cell from a plant. W X Y Z Which structures not found in animal cells are shown in the diagram and which structure often found in other plant cells is missing? structures not found in animal cells structure found in other plant cells",
+      "options": {
+        "A": "W and X chloroplast",
+        "B": "X and Y nucleus",
+        "C": "Y and Z nucleus",
+        "D": "Z and W chloroplast"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q03.png",
+      "rawText": "Which row shows the elements and the small molecules that are used to make the larger molecules? elements small molecule larger molecule A carbon, hydrogen and oxygen glucose fats B carbon, hydrogen, oxygen and nitrogen amino acids fats C carbon, hydrogen and oxygen glucose proteins D carbon, hydrogen, oxygen and nitrogen amino acids proteins",
+      "parseStatus": "ok",
+      "stem": "Which row shows the elements and the small molecules that are used to make the larger molecules? elements small molecule larger molecule",
+      "options": {
+        "A": "carbon, hydrogen and oxygen glucose fats",
+        "B": "carbon, hydrogen, oxygen and nitrogen amino acids fats",
+        "C": "carbon, hydrogen and oxygen glucose proteins",
+        "D": "carbon, hydrogen, oxygen and nitrogen amino acids proteins"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q04.png",
+      "rawText": "Which type of molecules speed up chemical digestion? A carbohydrates B enzymes C hormones D fatty acids",
+      "parseStatus": "ok",
+      "stem": "Which type of molecules speed up chemical digestion?",
+      "options": {
+        "A": "carbohydrates",
+        "B": "enzymes",
+        "C": "hormones",
+        "D": "fatty acids"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q05.png",
+      "rawText": "The graph shows the effect of increasing light intensity on the rate of photosynthesis of a submerged aquatic plant. rate of photosynthesis light intensity X Which factor is limiting the rate of photosynthesis at X? A carbon dioxide concentration B humidity C light intensity D temperature",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of increasing light intensity on the rate of photosynthesis of a submerged aquatic plant. rate of photosynthesis light intensity X Which factor is limiting the rate of photosynthesis at X?",
+      "options": {
+        "A": "carbon dioxide concentration",
+        "B": "humidity",
+        "C": "light intensity",
+        "D": "temperature"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q06.png",
+      "rawText": "What is one of the functions of bile? A denaturing lipase B digesting fats C emulsifying fats D increasing acidity",
+      "parseStatus": "ok",
+      "stem": "What is one of the functions of bile?",
+      "options": {
+        "A": "denaturing lipase",
+        "B": "digesting fats",
+        "C": "emulsifying fats",
+        "D": "increasing acidity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q07.png",
+      "rawText": "The diagram shows the circulatory system of a mammal. lungs rest of body heart X Y Z Which row shows the correct names for blood vessels X and Y and for chamber Z? X Y Z A pulmonary artery aorta left ventricle B vena cava pulmonary vein left ventricle C vena cava aorta right ventricle D pulmonary artery pulmonary vein right ventricle",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the circulatory system of a mammal. lungs rest of body heart X Y Z Which row shows the correct names for blood vessels X and Y and for chamber Z? X Y Z",
+      "options": {
+        "A": "pulmonary artery aorta left ventricle",
+        "B": "vena cava pulmonary vein left ventricle",
+        "C": "vena cava aorta right ventricle",
+        "D": "pulmonary artery pulmonary vein right ventricle"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q08.png",
+      "rawText": "During cold weather, warm blooded animals, such as mammals and birds, require more food. Which statement explains the reason for this? energy required to maintain constant body temperature rate of respiration A high high B high low C low high D low low",
+      "parseStatus": "ok",
+      "stem": "During cold weather, warm blooded animals, such as mammals and birds, require more food. Which statement explains the reason for this? energy required to maintain constant body temperature rate of respiration",
+      "options": {
+        "A": "high high",
+        "B": "high low",
+        "C": "low high",
+        "D": "low low"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q09.png",
+      "rawText": "The diagram shows an experiment using the shoots of seedlings. control shoot at start shoot five days later light lightproof cover placed over shoot tip at start shoot five days later light Which statement explains why the covered shoot tip does not grow towards the light? A The lightproof cover decreases auxin production by the shoot tip. B The lightproof cover keeps auxin distribution even on all sides of the shoot. C The lightproof cover prevents auxin from diffusing from the shoot tip. D The lightproof cover stimulates cell elongation without requiring auxin.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment using the shoots of seedlings. control shoot at start shoot five days later light lightproof cover placed over shoot tip at start shoot five days later light Which statement explains why the covered shoot tip does not grow towards the light?",
+      "options": {
+        "A": "The lightproof cover decreases auxin production by the shoot tip.",
+        "B": "The lightproof cover keeps auxin distribution even on all sides of the shoot.",
+        "C": "The lightproof cover prevents auxin from diffusing from the shoot tip.",
+        "D": "The lightproof cover stimulates cell elongation without requiring auxin."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q10.png",
+      "rawText": "The diagram shows a section through a flower. S R P Q Which labelled structures are the anther and the ovary? anther ovary A R P B R Q C S P D S Q",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through a flower. S R P Q Which labelled structures are the anther and the ovary? anther ovary",
+      "options": {
+        "A": "R P",
+        "B": "R Q",
+        "C": "S P",
+        "D": "S Q"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q11.png",
+      "rawText": "Which process results in the development of strains of antibiotic-resistant bacteria? A artificial selection B discontinuous variation C natural selection D selective breeding",
+      "parseStatus": "ok",
+      "stem": "Which process results in the development of strains of antibiotic-resistant bacteria?",
+      "options": {
+        "A": "artificial selection",
+        "B": "discontinuous variation",
+        "C": "natural selection",
+        "D": "selective breeding"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q12.png",
+      "rawText": "The diagram shows a food web. phytoplankton zooplankton jellyfish shellfish fish turtles seabirds Which groups of organisms are both primary and secondary consumers? A fish and jellyfish B fish and shellfish C seabirds and turtles D shellfish and zooplankton",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food web. phytoplankton zooplankton jellyfish shellfish fish turtles seabirds Which groups of organisms are both primary and secondary consumers?",
+      "options": {
+        "A": "fish and jellyfish",
+        "B": "fish and shellfish",
+        "C": "seabirds and turtles",
+        "D": "shellfish and zooplankton"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q13.png",
+      "rawText": "The flow diagram shows the consequence of the overuse of fertilisers on farm land. leaching fertiliser  fast growth of algae  death of algae  fast growth of X  death of fish Which group of organisms is represented by X? A decomposers B fish C invertebrates D plants",
+      "parseStatus": "ok",
+      "stem": "The flow diagram shows the consequence of the overuse of fertilisers on farm land. leaching fertiliser  fast growth of algae  death of algae  fast growth of X  death of fish Which group of organisms is represented by X?",
+      "options": {
+        "A": "decomposers",
+        "B": "fish",
+        "C": "invertebrates",
+        "D": "plants"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q14.png",
+      "rawText": "Hexane and octane are liquid hydrocarbons that mix together. Which apparatus is used to separate a mixture of these two liquids? xxxxxxxxx xxxxxxxxx D C B A heat heat",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q15.png",
+      "rawText": "When solid zinc carbonate is heated, a different solid and a gas are formed. Which type of change occurs? A chemical B exothermic C physical D separation",
+      "parseStatus": "ok",
+      "stem": "When solid zinc carbonate is heated, a different solid and a gas are formed. Which type of change occurs?",
+      "options": {
+        "A": "chemical",
+        "B": "exothermic",
+        "C": "physical",
+        "D": "separation"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q16.png",
+      "rawText": "An atom of osmium is represented by 190 76Os. How many neutrons are in this atom? A 76 B 114 C 190 D 266",
+      "parseStatus": "ok",
+      "stem": "An atom of osmium is represented by 190 76Os. How many neutrons are in this atom?",
+      "options": {
+        "A": "76",
+        "B": "114",
+        "C": "190",
+        "D": "266"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q17.png",
+      "rawText": "Due to an issue with Question 17, the question has been removed from the question paper.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": null,
+      "answerLetter": null,
+      "answerStatus": "discounted"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q18.png",
+      "rawText": "Which statement about the extraction of aluminium from its ore by electrolysis is correct? A Aluminium gains electrons from the anode. B Aluminium ions are oxidised at the cathode. C Aluminium ore is called cryolite. D Aluminium oxide is in the electrolyte.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the extraction of aluminium from its ore by electrolysis is correct?",
+      "options": {
+        "A": "Aluminium gains electrons from the anode.",
+        "B": "Aluminium ions are oxidised at the cathode.",
+        "C": "Aluminium ore is called cryolite.",
+        "D": "Aluminium oxide is in the electrolyte."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q19.png",
+      "rawText": "Which statement explains why increasing the concentration of reactants increases the rate of a reaction? A The proportion of particles that possess the activation energy is greater. B The particles collide more frequently. C The particles collide more slowly. D The particles collide with greater energy.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why increasing the concentration of reactants increases the rate of a reaction?",
+      "options": {
+        "A": "The proportion of particles that possess the activation energy is greater.",
+        "B": "The particles collide more frequently.",
+        "C": "The particles collide more slowly.",
+        "D": "The particles collide with greater energy."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q20.png",
+      "rawText": "Copper(II) sulfate is produced by reacting copper(II) oxide with dilute sulfuric acid. The stages in the process to produce pure dry crystals are listed. 1 Leave to crystallise in a cool place. 2 Filter the reaction mixture. 3 Press the crystals between dry filter papers. 4 Add copper(II) oxide until it is in excess. 5 Heat the filtrate to concentrate it. 6 Heat the dilute sulfuric acid. What is the correct order for these stages? A 6  4  2  5  3  1 B 6  4  1  2  5  3 C 6  4  2  5  1  3 D 4  6  2  1  5  3",
+      "parseStatus": "ok",
+      "stem": "Copper(II) sulfate is produced by reacting copper(II) oxide with dilute sulfuric acid. The stages in the process to produce pure dry crystals are listed. 1 Leave to crystallise in a cool place. 2 Filter the reaction mixture. 3 Press the crystals between dry filter papers. 4 Add copper(II) oxide until it is in excess. 5 Heat the filtrate to concentrate it. 6 Heat the dilute sulfuric acid. What is the correct order for these stages?",
+      "options": {
+        "A": "6  4  2  5  3  1",
+        "B": "6  4  1  2  5  3",
+        "C": "6  4  2  5  1  3",
+        "D": "4  6  2  1  5  3"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q21.png",
+      "rawText": "The box lists four substances. Br2 CO Cu Na Which substance is an element that forms a basic oxide and coloured compounds? A Br2 B CO C Cu D Na",
+      "parseStatus": "ok",
+      "stem": "The box lists four substances. Br2 CO Cu Na Which substance is an element that forms a basic oxide and coloured compounds?",
+      "options": {
+        "A": "Br2",
+        "B": "CO",
+        "C": "Cu",
+        "D": "Na"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q22.png",
+      "rawText": "Car engines produce pollutant gases. Which gases are removed by catalytic converters? A carbon monoxide, nitrogen monoxide and sulfur dioxide B carbon monoxide and nitrogen monoxide only C nitrogen monoxide and sulfur dioxide only D carbon dioxide and sulfur dioxide",
+      "parseStatus": "ok",
+      "stem": "Car engines produce pollutant gases. Which gases are removed by catalytic converters?",
+      "options": {
+        "A": "carbon monoxide, nitrogen monoxide and sulfur dioxide",
+        "B": "carbon monoxide and nitrogen monoxide only",
+        "C": "nitrogen monoxide and sulfur dioxide only",
+        "D": "carbon dioxide and sulfur dioxide"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q23.png",
+      "rawText": "In the blast furnace, which substance is added to make slag? A calcium carbonate B carbon dioxide C carbon monoxide D coke",
+      "parseStatus": "ok",
+      "stem": "In the blast furnace, which substance is added to make slag?",
+      "options": {
+        "A": "calcium carbonate",
+        "B": "carbon dioxide",
+        "C": "carbon monoxide",
+        "D": "coke"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q24.png",
+      "rawText": "Which catalyst is used in the Contact process? A iron B phosphoric(V) acid C nickel D vanadium(V) oxide",
+      "parseStatus": "ok",
+      "stem": "Which catalyst is used in the Contact process?",
+      "options": {
+        "A": "iron",
+        "B": "phosphoric(V) acid",
+        "C": "nickel",
+        "D": "vanadium(V) oxide"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q25.png",
+      "rawText": "Which statements about limestone are correct? 1 It contains calcium oxide. 2 It is used to manufacture lime. 3 It neutralises acidic industrial waste products. 4 It neutralises alkaline soil. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about limestone are correct? 1 It contains calcium oxide. 2 It is used to manufacture lime. 3 It neutralises acidic industrial waste products. 4 It neutralises alkaline soil.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q26.png",
+      "rawText": "Naphtha is obtained by the fractional distillation of petroleum. Which statements about naphtha are correct? 1 It burns to form carbon dioxide and water. 2 It is a mixture of hydrocarbons. 3 It is present in bottled gas. 4 The main component of naphtha is methane. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Naphtha is obtained by the fractional distillation of petroleum. Which statements about naphtha are correct? 1 It burns to form carbon dioxide and water. 2 It is a mixture of hydrocarbons. 3 It is present in bottled gas. 4 The main component of naphtha is methane.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q27.png",
+      "rawText": "The structure of an addition polymer is shown. n C H C H CH3 CH3 Which monomer is used to make this polymer? C C H H H H C A C H H H B C C H CH3 CH3 CH3 CH3 CH3 H C C C H H D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q28.png",
+      "rawText": "The diagram shows the speed–time graph for an object moving in a straight line. 0 0 10 speed time / s Which statement about the motion of the object is not correct? A The acceleration is constant during the first 10 s. B The acceleration steadily increases and then becomes constant. C The rate of change of speed is constant during the first 10 s. D The speed steadily increases and then becomes constant.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the speed–time graph for an object moving in a straight line. 0 0 10 speed time / s Which statement about the motion of the object is not correct?",
+      "options": {
+        "A": "The acceleration is constant during the first 10 s.",
+        "B": "The acceleration steadily increases and then becomes constant.",
+        "C": "The rate of change of speed is constant during the first 10 s.",
+        "D": "The speed steadily increases and then becomes constant."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q29.png",
+      "rawText": "A uniform beam has a mass of 12 kg and a length of 4.0 m. The beam rests on horizontal ground. One end of the beam is now raised from the ground by a vertical force F. The other end of the beam remains in contact with the ground and acts as a pivot. 4.0 m uniform beam F pivot The gravitational field strength g is 10 N / kg. What is the value of F ? A 6.0 N B 24 N C 60 N D 240 N",
+      "parseStatus": "ok",
+      "stem": "A uniform beam has a mass of 12 kg and a length of 4.0 m. The beam rests on horizontal ground. One end of the beam is now raised from the ground by a vertical force F. The other end of the beam remains in contact with the ground and acts as a pivot. 4.0 m uniform beam F pivot The gravitational field strength g is 10 N / kg. What is the value of F ?",
+      "options": {
+        "A": "6.0 N",
+        "B": "24 N",
+        "C": "60 N",
+        "D": "240 N"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q30.png",
+      "rawText": "A solid block of weight 14 N rests on a horizontal table. The pressure on the table due to the block is 70 Pa. What is the area of the surface of the block in contact with the table? A 0.20 m2 B 5.0 m2 C 98 m2 D 980 m2",
+      "parseStatus": "ok",
+      "stem": "A solid block of weight 14 N rests on a horizontal table. The pressure on the table due to the block is 70 Pa. What is the area of the surface of the block in contact with the table?",
+      "options": {
+        "A": "0.20 m2",
+        "B": "5.0 m2",
+        "C": "98 m2",
+        "D": "980 m2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q31.png",
+      "rawText": "Which object is mainly responsible for the energy stored in tides in the sea? A Mars B the Earth C the Moon D the Sun",
+      "parseStatus": "ok",
+      "stem": "Which object is mainly responsible for the energy stored in tides in the sea?",
+      "options": {
+        "A": "Mars",
+        "B": "the Earth",
+        "C": "the Moon",
+        "D": "the Sun"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q32.png",
+      "rawText": "Which statement about gas particles is not correct? A Increasing the temperature of a gas makes the gas particles move more slowly. B The gas particles are in constant random motion. C The pressure of a gas is caused by the collision of gas particles with the container. D Very small particles suspended in a gas are in constant random motion.",
+      "parseStatus": "ok",
+      "stem": "Which statement about gas particles is not correct?",
+      "options": {
+        "A": "Increasing the temperature of a gas makes the gas particles move more slowly.",
+        "B": "The gas particles are in constant random motion.",
+        "C": "The pressure of a gas is caused by the collision of gas particles with the container.",
+        "D": "Very small particles suspended in a gas are in constant random motion."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q33.png",
+      "rawText": "Two methods of cooking are grilling under a red-hot heater and frying in a shallow metal pan. method 2: frying method 1: grilling shallow metal pan food food air heater How does thermal energy pass through the air to reach the food in method 1 and how does thermal energy pass through the bottom of the metal pan in method 2? method 1 method 2 A convection conduction B convection radiation C radiation conduction D radiation radiation",
+      "parseStatus": "ok",
+      "stem": "Two methods of cooking are grilling under a red-hot heater and frying in a shallow metal pan. method 2: frying method 1: grilling shallow metal pan food food air heater How does thermal energy pass through the air to reach the food in method 1 and how does thermal energy pass through the bottom of the metal pan in method 2? method 1 method 2",
+      "options": {
+        "A": "convection conduction",
+        "B": "convection radiation",
+        "C": "radiation conduction",
+        "D": "radiation radiation"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q34.png",
+      "rawText": "An object is placed in front of a plane mirror on a wall. What are the characteristics of the image formed? A same size as object and inverted top to bottom B same size as object and laterally inverted (left to right) C smaller than object and inverted top to bottom D smaller than object and laterally inverted (left to right)",
+      "parseStatus": "ok",
+      "stem": "An object is placed in front of a plane mirror on a wall. What are the characteristics of the image formed?",
+      "options": {
+        "A": "same size as object and inverted top to bottom",
+        "B": "same size as object and laterally inverted (left to right)",
+        "C": "smaller than object and inverted top to bottom",
+        "D": "smaller than object and laterally inverted (left to right)"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q35.png",
+      "rawText": "A ray of light in air enters glass at an angle of incidence of 34. The refractive index of glass is 1.5. What is the angle of refraction of the ray of light in the glass? A 22 B 24 C 56 D 57",
+      "parseStatus": "ok",
+      "stem": "A ray of light in air enters glass at an angle of incidence of 34. The refractive index of glass is 1.5. What is the angle of refraction of the ray of light in the glass?",
+      "options": {
+        "A": "22",
+        "B": "24",
+        "C": "56",
+        "D": "57"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q36.png",
+      "rawText": "Which material is used for the core of an electromagnet? A aluminium B copper C iron D steel",
+      "parseStatus": "ok",
+      "stem": "Which material is used for the core of an electromagnet?",
+      "options": {
+        "A": "aluminium",
+        "B": "copper",
+        "C": "iron",
+        "D": "steel"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q37.png",
+      "rawText": "There is a current-carrying wire perpendicular to the page. The direction of the current is into the page. Which diagram shows the pattern and direction of the magnetic field around the wire? C D A B current into page current into page current into page current into page",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q38.png",
+      "rawText": "When a straight conductor moves through a magnetic field, an electromotive force (e.m.f.) is induced between the ends of the conductor. Which factor does not affect the magnitude of the induced e.m.f.? A the length of conductor in the field B the resistance of the conductor C the speed at which the conductor moves D the strength of the magnetic field",
+      "parseStatus": "ok",
+      "stem": "When a straight conductor moves through a magnetic field, an electromotive force (e.m.f.) is induced between the ends of the conductor. Which factor does not affect the magnitude of the induced e.m.f.?",
+      "options": {
+        "A": "the length of conductor in the field",
+        "B": "the resistance of the conductor",
+        "C": "the speed at which the conductor moves",
+        "D": "the strength of the magnetic field"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q39.png",
+      "rawText": "Cables transmit electrical power. The power input to the cables is constant, but the voltage input is increased. What happens to the power loss from the cables, and what happens to the current in the cables? power loss from cables current in cables A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "Cables transmit electrical power. The power input to the cables is constant, but the voltage input is increased. What happens to the power loss from the cables, and what happens to the current in the cables? power loss from cables current in cables",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_s23_qp_22/q40.png",
+      "rawText": "The diagram shows a current-carrying conductor in a magnetic field. The direction of the current is shown. N S current In which direction is the force on the wire due to the magnetic field? A downwards B to the left C to the right D upwards",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a current-carrying conductor in a magnetic field. The direction of the current is shown. N S current In which direction is the force on the wire due to the magnetic field?",
+      "options": {
+        "A": "downwards",
+        "B": "to the left",
+        "C": "to the right",
+        "D": "upwards"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

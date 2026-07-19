@@ -7,7 +7,7 @@ import fitz
 
 PDF_DIR = Path("/home/ubuntu/chemis/pdf")
 DATA_DIR = Path("/home/ubuntu/alevel-smart-practice/backend/src/data/pymupdf-batch")
-IMAGE_ROOT = Path("/home/ubuntu/alevel-smart-practice/assets/question-cut-preview")
+IMAGE_ROOT = Path("/home/ubuntu/alevel-smart-practice/assets/exam-question-images/cie-igcse-chemistry-0620")
 REPORT_PATH = DATA_DIR / "report.json"
 
 
@@ -119,7 +119,7 @@ def cut_question_regions(doc, anchors, pdf_slug: str):
                 "bottom": round(bottom, 2),
                 "text": text,
                 "textLength": len(text),
-                "imageUrl": f"/assets/question-cut-preview/{pdf_slug}/{image_name}",
+                "imageUrl": f"/assets/exam-question-images/cie-igcse-chemistry-0620/{pdf_slug}/{image_name}",
             }
         )
     return rows

@@ -1,0 +1,738 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2025/winter/0654_w25_qp_23.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2025/winter/0654_w25_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.6,
+      "bottom": 302.04,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q01.png",
+      "rawText": "Which rows match characteristics of living things with their descriptions? characteristic description 1 excretion removal of waste products of metabolism and substances in excess of requirements",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 304.04,
+      "bottom": 547.98,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q02.png",
+      "rawText": "Which type of specialised cell is shown? A ciliated cell B palisade mesophyll cell C root hair cell D sperm cell",
+      "parseStatus": "ok",
+      "stem": "Which type of specialised cell is shown?",
+      "options": {
+        "A": "ciliated cell",
+        "B": "palisade mesophyll cell",
+        "C": "root hair cell",
+        "D": "sperm cell"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 549.98,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q03.png",
+      "rawText": "What is a definition of diffusion? A the net movement of molecules from a region of their higher concentration to a region of their lower concentration down a concentration gradient B the net movement of molecules from a region of their higher concentration to a region of their lower concentration up a concentration gradient C the net movement of molecules from a region of their lower concentration to a region of their higher concentration down a concentration gradient D the net movement of molecules from a region of their lower concentration to a region of their higher concentration up a concentration gradient",
+      "parseStatus": "ok",
+      "stem": "What is a definition of diffusion?",
+      "options": {
+        "A": "the net movement of molecules from a region of their higher concentration to a region of their lower concentration down a concentration gradient",
+        "B": "the net movement of molecules from a region of their higher concentration to a region of their lower concentration up a concentration gradient",
+        "C": "the net movement of molecules from a region of their lower concentration to a region of their higher concentration down a concentration gradient",
+        "D": "the net movement of molecules from a region of their lower concentration to a region of their higher concentration up a concentration gradient"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 206.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q04.png",
+      "rawText": "Enzymes work best at an optimum pH. Protease in the stomach works best at pH 1.6. What is a reason why the activity of protease decreases at pH values greater than 1.6? A The enzyme’s active site changes shape. B The kinetic energy of the molecules increases. C There are more effective collisions. D There is a higher substrate concentration.",
+      "parseStatus": "ok",
+      "stem": "Enzymes work best at an optimum pH. Protease in the stomach works best at pH 1.6. What is a reason why the activity of protease decreases at pH values greater than 1.6?",
+      "options": {
+        "A": "The enzyme’s active site changes shape.",
+        "B": "The kinetic energy of the molecules increases.",
+        "C": "There are more effective collisions.",
+        "D": "There is a higher substrate concentration."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 208.52,
+      "bottom": 333.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q05.png",
+      "rawText": "Which statement about transport in plants is correct? A Amino acids are moved from source to sink in the xylem. B Glucose is moved from sink to source in the xylem. C Sucrose is moved from source to sink in the phloem. D Starch is moved from sink to source in the phloem.",
+      "parseStatus": "ok",
+      "stem": "Which statement about transport in plants is correct?",
+      "options": {
+        "A": "Amino acids are moved from source to sink in the xylem.",
+        "B": "Glucose is moved from sink to source in the xylem.",
+        "C": "Sucrose is moved from source to sink in the phloem.",
+        "D": "Starch is moved from sink to source in the phloem."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 335.0,
+      "bottom": 562.86,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q06.png",
+      "rawText": "Scientists measure the heart rate of an athlete during and after exercise. Which point on the graph shows the time when the oxygen debt is removed from the athlete? heart rate time A B C D exercise ends",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "top": 564.86,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q07.png",
+      "rawText": "Which row describes part of the circulatory system in mammals? name of blood vessel type of blood transported comes from goes to A aorta oxygenated right ventricle body B pulmonary artery oxygenated left ventricle lungs C pulmonary vein deoxygenated lungs left atrium D vena cava deoxygenated body right atrium",
+      "parseStatus": "ok",
+      "stem": "Which row describes part of the circulatory system in mammals? name of blood vessel type of blood transported comes from goes to",
+      "options": {
+        "A": "aorta oxygenated right ventricle body",
+        "B": "pulmonary artery oxygenated left ventricle lungs",
+        "C": "pulmonary vein deoxygenated lungs left atrium",
+        "D": "vena cava deoxygenated body right atrium"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 486.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q08.png",
+      "rawText": "The diagram shows a simple reflex arc. spinal cord pin finger 2 4 1 3 muscle Which row gives the correct labels for the diagram? 1 2 3 4 A motor neurone sensory neurone receptor relay neurone B motor neurone relay neurone receptor effector C relay neurone motor neurone effector sensory neurone D relay neurone sensory neurone effector motor neurone",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a simple reflex arc. spinal cord pin finger 2 4 1 3 muscle Which row gives the correct labels for the diagram? 1 2 3 4",
+      "options": {
+        "A": "motor neurone sensory neurone receptor relay neurone",
+        "B": "motor neurone relay neurone receptor effector",
+        "C": "relay neurone motor neurone effector sensory neurone",
+        "D": "relay neurone sensory neurone effector motor neurone"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 488.48,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q09.png",
+      "rawText": "Sheep have 54 chromosomes in their body cells. Which row is correct for a female sheep? number of chromosomes in egg cells egg cells A 27 haploid B 54 haploid C 27 diploid D 54 diploid",
+      "parseStatus": "ok",
+      "stem": "Sheep have 54 chromosomes in their body cells. Which row is correct for a female sheep? number of chromosomes in egg cells egg cells",
+      "options": {
+        "A": "27 haploid",
+        "B": "54 haploid",
+        "C": "27 diploid",
+        "D": "54 diploid"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 341.52,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q10.png",
+      "rawText": "The diagram shows part of a flower. P What is structure P and which type of pollination is used by the flower? structure P type of pollination A stamen insect B stamen wind C stigma insect D stigma wind",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a flower. P What is structure P and which type of pollination is used by the flower? structure P type of pollination",
+      "options": {
+        "A": "stamen insect",
+        "B": "stamen wind",
+        "C": "stigma insect",
+        "D": "stigma wind"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 343.52,
+      "bottom": 591.36,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q11.png",
+      "rawText": "A student makes three statements about processes in cell division. 1 Process 1 is involved in the production of gametes. 2 The cells produced by process 2 are genetically different. 3 The zygote then divides by process 3, which leads to growth. Which row identifies each process? process 1 process 2 process 3 A meiosis meiosis mitosis B meiosis mitosis meiosis C mitosis mitosis meiosis D mitosis meiosis mitosis",
+      "parseStatus": "ok",
+      "stem": "A student makes three statements about processes in cell division. 1 Process 1 is involved in the production of gametes. 2 The cells produced by process 2 are genetically different. 3 The zygote then divides by process 3, which leads to growth. Which row identifies each process? process 1 process 2 process 3",
+      "options": {
+        "A": "meiosis meiosis mitosis",
+        "B": "meiosis mitosis meiosis",
+        "C": "mitosis mitosis meiosis",
+        "D": "mitosis meiosis mitosis"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 593.36,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q12.png",
+      "rawText": "Which row shows the monohybrid crosses that produce predicted phenotype ratios of 1 : 1 and 3 : 1? 1 : 1 ratio 3 : 1 ratio A AA  aa Aa  aa B Aa  Aa Aa  aa C Aa  aa Aa  Aa D Aa  aa AA  Aa",
+      "parseStatus": "ok",
+      "stem": "Which row shows the monohybrid crosses that produce predicted phenotype ratios of 1 : 1 and 3 : 1? 1 : 1 ratio 3 : 1 ratio",
+      "options": {
+        "A": "AA  aa Aa  aa",
+        "B": "Aa  Aa Aa  aa",
+        "C": "Aa  aa Aa  Aa",
+        "D": "Aa  aa AA  Aa"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q13.png",
+      "rawText": "What is the most energy efficient resource for humans to eat? A herbivores B primary consumers C producers D secondary consumers",
+      "parseStatus": "ok",
+      "stem": "What is the most energy efficient resource for humans to eat?",
+      "options": {
+        "A": "herbivores",
+        "B": "primary consumers",
+        "C": "producers",
+        "D": "secondary consumers"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "top": 183.14,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q14.png",
+      "rawText": "Concentrated aqueous sodium chloride is electrolysed using inert electrodes. What is the ionic half-equation for the reaction at the cathode? A 2Cl –  Cl 2 + 2e– B 2H+ + 2e–  H2 C Na+ + e–  Na D NaCl  Na+ + Cl –",
+      "parseStatus": "ok",
+      "stem": "Concentrated aqueous sodium chloride is electrolysed using inert electrodes. What is the ionic half-equation for the reaction at the cathode?",
+      "options": {
+        "A": "2Cl –  Cl 2 + 2e–",
+        "B": "2H+ + 2e–  H2",
+        "C": "Na+ + e–  Na",
+        "D": "NaCl  Na+ + Cl –"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 553.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q15.png",
+      "rawText": "Magnesium reacts with dilute hydrochloric acid. During the reaction, the reaction mixture becomes warm. What is the reaction pathway diagram for this reaction? energy progress of reaction reactants products activation energy A energy progress of reaction reactants products activation energy B energy progress of reaction reactants products activation energy C energy progress of reaction reactants products activation energy D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "top": 555.8,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q16.png",
+      "rawText": "Calcium carbonate and dilute hydrochloric acid react together in a beaker. When the reaction mixture is heated, the rate of the reaction increases. Which statements explain this observation? 1 The frequency of particle collisions increases. 2 More colliding particles have energy greater than the activation energy. 3 The gas pressure in the beaker increases. 4 The activation energy decreases. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Calcium carbonate and dilute hydrochloric acid react together in a beaker. When the reaction mixture is heated, the rate of the reaction increases. Which statements explain this observation? 1 The frequency of particle collisions increases. 2 More colliding particles have energy greater than the activation energy. 3 The gas pressure in the beaker increases. 4 The activation energy decreases.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "top": 56.66,
+      "bottom": 181.14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q17.png",
+      "rawText": "Which element in Period 3 of the Periodic Table has the greatest metallic character? A the element with the highest relative atomic mass B the element with the lowest group number C the element with the most outer-shell electrons D the element with the most protons",
+      "parseStatus": "ok",
+      "stem": "Which element in Period 3 of the Periodic Table has the greatest metallic character?",
+      "options": {
+        "A": "the element with the highest relative atomic mass",
+        "B": "the element with the lowest group number",
+        "C": "the element with the most outer-shell electrons",
+        "D": "the element with the most protons"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "top": 183.14,
+      "bottom": 400.26,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q18.png",
+      "rawText": "The melting points of some Group I metals are shown. element melting point / °C caesium 28 potassium 64 rubidium – sodium 98 What is the melting point of rubidium? A 20 °C B 40 °C C 80 °C D 100 °C",
+      "parseStatus": "ok",
+      "stem": "The melting points of some Group I metals are shown. element melting point / °C caesium 28 potassium 64 rubidium – sodium 98 What is the melting point of rubidium?",
+      "options": {
+        "A": "20 °C",
+        "B": "40 °C",
+        "C": "80 °C",
+        "D": "100 °C"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "top": 402.26,
+      "bottom": 526.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q19.png",
+      "rawText": "Which statement describes all metals? A They break when hit with a hammer. B They have good electrical conductivity. C They dissolve in water. D They have high densities.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes all metals?",
+      "options": {
+        "A": "They break when hit with a hammer.",
+        "B": "They have good electrical conductivity.",
+        "C": "They dissolve in water.",
+        "D": "They have high densities."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 528.8,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q20.png",
+      "rawText": "What is brass? A a mixture of a compound of copper and a compound of zinc B a compound of copper and zinc C a mixture of copper and a compound of zinc D a mixture of copper and zinc",
+      "parseStatus": "ok",
+      "stem": "What is brass?",
+      "options": {
+        "A": "a mixture of a compound of copper and a compound of zinc",
+        "B": "a compound of copper and zinc",
+        "C": "a mixture of copper and a compound of zinc",
+        "D": "a mixture of copper and zinc"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 207.3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q21.png",
+      "rawText": "Metal X reacts rapidly with steam but only very slowly with cold water. What is X? A calcium B copper C magnesium D sodium",
+      "parseStatus": "ok",
+      "stem": "Metal X reacts rapidly with steam but only very slowly with cold water. What is X?",
+      "options": {
+        "A": "calcium",
+        "B": "copper",
+        "C": "magnesium",
+        "D": "sodium"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "top": 209.3,
+      "bottom": 377.34,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q22.png",
+      "rawText": "Which row describes the colour changes when water is added to anhydrous copper(II) sulfate and to anhydrous cobalt(II) chloride? copper(II) sulfate cobalt(II) chloride A blue  white blue  pink B blue  white pink  blue C white  blue blue  pink D white  blue pink  blue",
+      "parseStatus": "ok",
+      "stem": "Which row describes the colour changes when water is added to anhydrous copper(II) sulfate and to anhydrous cobalt(II) chloride? copper(II) sulfate cobalt(II) chloride",
+      "options": {
+        "A": "blue  white blue  pink",
+        "B": "blue  white pink  blue",
+        "C": "white  blue blue  pink",
+        "D": "white  blue pink  blue"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "top": 379.34,
+      "bottom": 545.94,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q23.png",
+      "rawText": "Which row explains why filtration and chlorination are used in the treatment of the domestic water supply? filtration chlorination A to remove soluble substances to kill microbes B to remove insoluble substances to kill microbes C to kill microbes to remove insoluble substances D to remove insoluble substances to remove soluble substances",
+      "parseStatus": "ok",
+      "stem": "Which row explains why filtration and chlorination are used in the treatment of the domestic water supply? filtration chlorination",
+      "options": {
+        "A": "to remove soluble substances to kill microbes",
+        "B": "to remove insoluble substances to kill microbes",
+        "C": "to kill microbes to remove insoluble substances",
+        "D": "to remove insoluble substances to remove soluble substances"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 547.94,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q24.png",
+      "rawText": "Which statements about air pollution are correct? 1 Carbon monoxide is a toxic gas that is formed by the incomplete combustion of carbon-based fuels. 2 Oxides of nitrogen damage buildings and are produced by impurities in carbon-based fuels. 3 Sulfur dioxide produces acid rain and is formed by the combustion of fossil fuels. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which statements about air pollution are correct? 1 Carbon monoxide is a toxic gas that is formed by the incomplete combustion of carbon-based fuels. 2 Oxides of nitrogen damage buildings and are produced by impurities in carbon-based fuels. 3 Sulfur dioxide produces acid rain and is formed by the combustion of fossil fuels.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "top": 56.6,
+      "bottom": 451.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q25.png",
+      "rawText": "The structures of four organic compounds, P, Q, R and S, are shown. H C H H C H H C H H C H H C H H C H H H S H C H H C H H C H H C H H C H H H R H C C H H C H C H H C H H Q P C C H H H H H H Which statements about P, Q, R and S are correct? 1 P and Q have the same general formula. 2 Q and R have similar chemical properties. 3 R and S are members of the same homologous series. 4 R and Q have the same molecular mass, Mr. A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "top": 453.08,
+      "bottom": 577.62,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q26.png",
+      "rawText": "What is the structure of but-2-ene? A CH3–CH=CH2 B CH3–CH2–CH3 C CH3–CH2–CH=CH2 D CH3–CH=CH–CH3",
+      "parseStatus": "ok",
+      "stem": "What is the structure of but-2-ene?",
+      "options": {
+        "A": "CH3–CH=CH2",
+        "B": "CH3–CH2–CH3",
+        "C": "CH3–CH2–CH=CH2",
+        "D": "CH3–CH=CH–CH3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 579.62,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q27.png",
+      "rawText": "Which statement about polymerisation is correct? A Addition polymerisation requires monomers from different homologous series. B Condensation polymerisation produces a small molecule as well as a polymer. C Polymerisation always produces polymers of the same chain length. D The formation of poly(ethene) is by condensation polymerisation.",
+      "parseStatus": "ok",
+      "stem": "Which statement about polymerisation is correct?",
+      "options": {
+        "A": "Addition polymerisation requires monomers from different homologous series.",
+        "B": "Condensation polymerisation produces a small molecule as well as a polymer.",
+        "C": "Polymerisation always produces polymers of the same chain length.",
+        "D": "The formation of poly(ethene) is by condensation polymerisation."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "top": 56.6,
+      "bottom": 166.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q28.png",
+      "rawText": "A spring is 16 cm long when it supports a load of 12 N. The spring is 20 cm long when it supports a load of 20 N. What is the spring constant of the spring? A 0.50 N / cm B 1.0 N / cm C 2.0 N / cm D 5.0 N / cm",
+      "parseStatus": "ok",
+      "stem": "A spring is 16 cm long when it supports a load of 12 N. The spring is 20 cm long when it supports a load of 20 N. What is the spring constant of the spring?",
+      "options": {
+        "A": "0.50 N / cm",
+        "B": "1.0 N / cm",
+        "C": "2.0 N / cm",
+        "D": "5.0 N / cm"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "top": 168.8,
+      "bottom": 441.6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q29.png",
+      "rawText": "The diagram shows two teams, Y and Z, pulling on a rope. Team Y pulls with a force of 500 N to the left and team Z pulls with a force of 800 N to the right. team Y team Z rope 500 N 800 N What is the resultant force produced by the two forces? A 300 N to the left B 300 N to the right C 1300 N to the left D 1300 N to the right",
+      "parseStatus": "ok",
+      "stem": "The diagram shows two teams, Y and Z, pulling on a rope. Team Y pulls with a force of 500 N to the left and team Z pulls with a force of 800 N to the right. team Y team Z rope 500 N 800 N What is the resultant force produced by the two forces?",
+      "options": {
+        "A": "300 N to the left",
+        "B": "300 N to the right",
+        "C": "1300 N to the left",
+        "D": "1300 N to the right"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 443.6,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q30.png",
+      "rawText": "A student labels an object with four possible positions for the centre of gravity. Which position for the centre of gravity makes the object the most stable? A B D C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "top": 56.6,
+      "bottom": 250.02,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q31.png",
+      "rawText": "When a liquid evaporates, particles escape from the surface of the liquid. Which row shows the particles that escape and the average energy of the remaining particles? particles that escape average energy of remaining particles A less energetic particles decreases B less energetic particles stays the same C more energetic particles decreases D more energetic particles stays the same",
+      "parseStatus": "ok",
+      "stem": "When a liquid evaporates, particles escape from the surface of the liquid. Which row shows the particles that escape and the average energy of the remaining particles? particles that escape average energy of remaining particles",
+      "options": {
+        "A": "less energetic particles decreases",
+        "B": "less energetic particles stays the same",
+        "C": "more energetic particles decreases",
+        "D": "more energetic particles stays the same"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "top": 252.02,
+      "bottom": 470.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q32.png",
+      "rawText": "Which row shows the colour of outer clothing that helps to keep the wearer cool on a hot, sunny day and the reason why this colour is effective? colour reason A black it is a good absorber of radiation from the Sun B black it is a bad absorber of radiation from the Sun C white it is a good absorber of radiation from the Sun D white it is a bad absorber of radiation from the Sun",
+      "parseStatus": "ok",
+      "stem": "Which row shows the colour of outer clothing that helps to keep the wearer cool on a hot, sunny day and the reason why this colour is effective? colour reason",
+      "options": {
+        "A": "black it is a good absorber of radiation from the Sun",
+        "B": "black it is a bad absorber of radiation from the Sun",
+        "C": "white it is a good absorber of radiation from the Sun",
+        "D": "white it is a bad absorber of radiation from the Sun"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "top": 472.16,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q33.png",
+      "rawText": "Which statement describes the term critical angle? A the largest angle of incidence in a denser medium for which refraction into a less dense medium occurs B the largest angle of incidence in a less dense medium for which refraction into a denser medium occurs C the smallest angle of incidence in a denser medium for which refraction into a less dense medium occurs D the smallest angle of incidence in a less dense medium for which refraction into a denser medium occurs",
+      "parseStatus": "ok",
+      "stem": "Which statement describes the term critical angle?",
+      "options": {
+        "A": "the largest angle of incidence in a denser medium for which refraction into a less dense medium occurs",
+        "B": "the largest angle of incidence in a less dense medium for which refraction into a denser medium occurs",
+        "C": "the smallest angle of incidence in a denser medium for which refraction into a less dense medium occurs",
+        "D": "the smallest angle of incidence in a less dense medium for which refraction into a denser medium occurs"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 431.22,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q34.png",
+      "rawText": "Which ray diagram shows the formation of a virtual image? object image A object image B object image C object image D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "top": 433.22,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q35.png",
+      "rawText": "Person X stands facing a high wall that is 90 m away. Person Y stands 45 m behind person X on a line perpendicular to the wall, as shown. wall Y X 90 m 45 m Person X claps loudly once. Person Y hears the sound of this clap, then an echo of the sound from the wall. The speed of sound in air is 330 m / s. What is the time interval between person Y hearing the first sound and the echo? A 0.27 s B 0.41 s C 0.55 s D 0.68 s",
+      "parseStatus": "ok",
+      "stem": "Person X stands facing a high wall that is 90 m away. Person Y stands 45 m behind person X on a line perpendicular to the wall, as shown. wall Y X 90 m 45 m Person X claps loudly once. Person Y hears the sound of this clap, then an echo of the sound from the wall. The speed of sound in air is 330 m / s. What is the time interval between person Y hearing the first sound and the echo?",
+      "options": {
+        "A": "0.27 s",
+        "B": "0.41 s",
+        "C": "0.55 s",
+        "D": "0.68 s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 193.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q36.png",
+      "rawText": "What is defined in terms of the electrical work done by a source in moving unit charge around a complete circuit? A electromotive force (e.m.f.) B current C potential difference (p.d.) D power",
+      "parseStatus": "ok",
+      "stem": "What is defined in terms of the electrical work done by a source in moving unit charge around a complete circuit?",
+      "options": {
+        "A": "electromotive force (e.m.f.)",
+        "B": "current",
+        "C": "potential difference (p.d.)",
+        "D": "power"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "top": 195.8,
+      "bottom": 487.62,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q37.png",
+      "rawText": "The diagram shows a circuit. 4.0 Ω 6.0 V 6.0 Ω Which statement is correct? A The current in the 4.0  resistor is 1.0 A. B The current in the 4.0  resistor is 1.5 A. C The current in the 6.0  resistor is 1.5 A. D The current in the 6.0  resistor is 2.5 A.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a circuit. 4.0 Ω 6.0 V 6.0 Ω Which statement is correct?",
+      "options": {
+        "A": "The current in the 4.0  resistor is 1.0 A.",
+        "B": "The current in the 4.0  resistor is 1.5 A.",
+        "C": "The current in the 6.0  resistor is 1.5 A.",
+        "D": "The current in the 6.0  resistor is 2.5 A."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "top": 489.62,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q38.png",
+      "rawText": "A current-carrying conductor is in a magnetic field. This causes a force to act on the conductor. The current is increased and the magnetic field is reversed. Which statement describes the force after the changes to the current and the magnetic field? A The force is greater and in the opposite direction. B The force is greater and in the same direction. C The force is the same and in the same direction. D The force is the same and in the opposite direction.",
+      "parseStatus": "ok",
+      "stem": "A current-carrying conductor is in a magnetic field. This causes a force to act on the conductor. The current is increased and the magnetic field is reversed. Which statement describes the force after the changes to the current and the magnetic field?",
+      "options": {
+        "A": "The force is greater and in the opposite direction.",
+        "B": "The force is greater and in the same direction.",
+        "C": "The force is the same and in the same direction.",
+        "D": "The force is the same and in the opposite direction."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "top": 56.6,
+      "bottom": 246.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q39.png",
+      "rawText": "A decay equation for strontium-90 is shown. 90 38Sr 90 39Y + x What is x ? A alpha particle B beta particle C neutron D proton",
+      "parseStatus": "ok",
+      "stem": "A decay equation for strontium-90 is shown. 90 38Sr 90 39Y + x What is x ?",
+      "options": {
+        "A": "alpha particle",
+        "B": "beta particle",
+        "C": "neutron",
+        "D": "proton"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "top": 248.18,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_w25_qp_23/q40.png",
+      "rawText": "Which statement about the Universe is included in the Big Bang Theory? A The Universe is approximately 13.8 thousand years old. B The Universe is contracting. C The Universe started as a single point. D The Universe started at a low temperature and a low density.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Universe is included in the Big Bang Theory?",
+      "options": {
+        "A": "The Universe is approximately 13.8 thousand years old.",
+        "B": "The Universe is contracting.",
+        "C": "The Universe started as a single point.",
+        "D": "The Universe started at a low temperature and a low density."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

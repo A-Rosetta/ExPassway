@@ -32,6 +32,10 @@ async function ensureAuthColumns() {
     alter table users
     add column if not exists language text not null default 'zh-CN'
   `);
+  await query(`
+    alter table users
+    add column if not exists disabled_at timestamptz
+  `);
   authColumnsReady = true;
 }
 
@@ -84,12 +88,15 @@ router.post("/login", asyncHandler(async (req, res) => {
   await ensureAuthColumns();
 
   const body = req.body || {};
-  const email = requireString(body.email, "email").toLowerCase();
+  const email = requireString(body.identifier ?? body.email, "identifier").toLowerCase();
   const password = requireString(body.password, "password");
   const user = await findUserByEmail(email);
 
   if (!user?.passwordHash || !verifyPassword(password, user.passwordHash)) {
-    throw new ApiError(401, "Email or password is incorrect.", "UNAUTHORIZED");
+    throw new ApiError(401, "Account or password is incorrect.", "UNAUTHORIZED");
+  }
+  if (user.isDisabled) {
+    throw new ApiError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
   }
 
   const token = issueToken(user);
@@ -99,11 +106,15 @@ router.post("/login", asyncHandler(async (req, res) => {
 
 router.get("/me", asyncHandler(async (req, res) => {
   assertUsersApiEnabled();
+  await ensureAuthColumns();
   const token = readAuthToken(req);
   const payload = verifyToken(token);
   const user = await getUserById(payload.sub);
   if (!user) {
     throw new ApiError(401, "User no longer exists.", "UNAUTHORIZED");
+  }
+  if (user.isDisabled) {
+    throw new ApiError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
   }
   res.json({ ok: true, data: user });
 }));
@@ -113,6 +124,13 @@ router.patch("/me", asyncHandler(async (req, res) => {
   await ensureAuthColumns();
   const token = readAuthToken(req);
   const payload = verifyToken(token);
+  const currentUser = await getUserById(payload.sub);
+  if (!currentUser) {
+    throw new ApiError(401, "User no longer exists.", "UNAUTHORIZED");
+  }
+  if (currentUser.isDisabled) {
+    throw new ApiError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
+  }
   const body = req.body || {};
 
   const displayName = requireString(body.displayName, "displayName");
@@ -147,6 +165,9 @@ router.post("/change-password", asyncHandler(async (req, res) => {
   const user = await getUserById(payload.sub);
   if (!user?.email) {
     throw new ApiError(404, "User not found.", "USER_NOT_FOUND");
+  }
+  if (user.isDisabled) {
+    throw new ApiError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
   }
   const userWithAuth = await findUserByEmail(user.email);
   if (!userWithAuth?.passwordHash || !verifyPassword(oldPassword, userWithAuth.passwordHash)) {

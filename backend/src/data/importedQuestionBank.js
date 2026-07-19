@@ -6,6 +6,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DATA_PATH = path.resolve(__dirname, "./importedQuestionBank.json");
 const STRUCTURED_DIR = path.resolve(__dirname, "./pymupdf-batch");
+const COORDINATED_DATA_DIR = path.resolve(
+  __dirname,
+  "../../../assets/exam-question-images/cie-igcse-coordinated-sciences-0654/data"
+);
 let importedQuestionBankCache = null;
 
 function yearSeasonPaperFromSlug(slug) {
@@ -91,4 +95,73 @@ export function loadImportedQuestionBank() {
   } catch {
     return [];
   }
+}
+
+function referenceParts(questionKey) {
+  const key = String(questionKey || "").trim();
+  const paperSet = key.match(/^CIE-IGCHEM-SET-(0620_[sw]\d{2}_qp_\d{2})-(\d{1,2})$/i);
+  if (paperSet) {
+    return { source: "chemistry", paperSlug: paperSet[1].toLowerCase(), questionNo: Number(paperSet[2]) };
+  }
+
+  const coordinatedSet = key.match(/^CIE-IGCOORD-SET-(0654_[msw]\d{2}_qp_\d{2})-(\d{1,2})$/i);
+  if (coordinatedSet) {
+    return {
+      source: "coordinated-sciences",
+      paperSlug: coordinatedSet[1].toLowerCase(),
+      questionNo: Number(coordinatedSet[2]),
+    };
+  }
+
+  const standard = key.match(/^CIE-IGCHEM-(\d{4})-([SW])-(\d{2})-(\d{1,2})$/i);
+  if (!standard) return null;
+  return {
+    source: "chemistry",
+    paperSlug: `0620_${standard[2].toLowerCase()}${standard[1].slice(-2)}_qp_${standard[3]}`,
+    questionNo: Number(standard[4]),
+  };
+}
+
+export function getImportedQuestionReference(questionKey) {
+  const parts = referenceParts(questionKey);
+  if (!parts || !Number.isInteger(parts.questionNo) || parts.questionNo < 1) return null;
+
+  if (parts.source === "coordinated-sciences") {
+    try {
+      const dataPath = path.join(COORDINATED_DATA_DIR, `${parts.paperSlug}.json`);
+      const payload = JSON.parse(fs.readFileSync(dataPath, "utf8"));
+      const row = (payload.rows || []).find((item) => Number(item.questionNo) === parts.questionNo);
+      if (!row || !Number.isInteger(row.answer)) return null;
+      return {
+        id: String(questionKey),
+        questionKey: String(questionKey),
+        paperSlug: parts.paperSlug,
+        questionNo: parts.questionNo,
+        imageUrl: row.imageUrl || "",
+        board: "CIE",
+        subject: "IGCSE Co-ordinated Sciences",
+        paper: "MCQ",
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  const templateId = `${parts.paperSlug}-${parts.questionNo}`.toLowerCase();
+  const question = loadImportedQuestionBank().find(
+    (item) => String(item.templateId || "").toLowerCase() === templateId
+  );
+  if (!question) return null;
+
+  const firstImage = Array.isArray(question.images) ? question.images[0] : null;
+  return {
+    id: question.id,
+    questionKey: String(questionKey),
+    paperSlug: parts.paperSlug,
+    questionNo: parts.questionNo,
+    imageUrl: typeof firstImage === "string" ? firstImage : firstImage?.url || "",
+    board: question.board,
+    subject: question.subject,
+    paper: question.paper,
+  };
 }

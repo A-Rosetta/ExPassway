@@ -10,6 +10,8 @@ import { checkDbConnection } from "./db/client.js";
 const app = express();
 
 app.use(cors());
+app.use("/api/discussions/images", express.json({ limit: "7mb" }));
+app.use("/api/admin/imports", express.json({ limit: "17mb" }));
 app.use(express.json({ limit: "1mb" }));
 app.use(morgan(env.nodeEnv === "production" ? "combined" : "dev"));
 

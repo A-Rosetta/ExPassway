@@ -20,7 +20,27 @@ function mapRow(row) {
     hints: row.hints || [],
     images: row.images || [],
     source: row.source || null,
+    subjectCode: row.subject_code || "",
+    paperSlug: row.paper_slug || "",
+    questionNo: row.question_no == null ? null : Number(row.question_no),
+    active: row.active !== false,
   };
+}
+
+export async function getQuestionBankById(questionId) {
+  const result = await query(`
+    select * from question_bank where id = $1 limit 1
+  `, [questionId]);
+  return result.rows[0] ? mapRow(result.rows[0]) : null;
+}
+
+export async function listQuestionBankByPaperSlug(paperSlug) {
+  const result = await query(`
+    select * from question_bank
+    where active = true and paper_slug = $1
+    order by question_no
+  `, [paperSlug]);
+  return result.rows.map(mapRow);
 }
 
 export async function replaceQuestionBank(rows) {
@@ -83,7 +103,7 @@ export async function listQuestionBankBySelection(selection) {
   const sql = `
     select *
     from question_bank
-    where board = $1 and subject = $2 and paper = $3
+    where active = true and board = $1 and subject = $2 and paper = $3
   `;
   const res = await query(sql, [selection.board, selection.subject, selection.paper]);
   return res.rows.map(mapRow);
@@ -93,7 +113,7 @@ export async function listQuestionBankByBoardSubject(selection) {
   const sql = `
     select *
     from question_bank
-    where board = $1 and subject = $2
+    where active = true and board = $1 and subject = $2
   `;
   const res = await query(sql, [selection.board, selection.subject]);
   return res.rows.map(mapRow);

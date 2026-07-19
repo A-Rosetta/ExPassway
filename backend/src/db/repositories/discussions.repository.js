@@ -7,7 +7,10 @@ function mapThread(row) {
     title: row.title,
     board: row.board,
     subject: row.subject,
+    subjectCode: row.subject_code || "",
     paper: row.paper,
+    paperSlug: row.paper_slug || "",
+    questionNo: row.question_no == null ? null : Number(row.question_no),
     topic: row.topic,
     tags: row.tags || [],
     status: row.status,
@@ -64,7 +67,37 @@ export async function listDiscussionThreads(input = {}) {
   const filters = buildVisibilityFilters(input.includeHidden, input.includeUnapproved);
 
   addFilter(filters, params, "t.question_key", input.questionKey || null);
-  addFilter(filters, params, "t.subject", input.subject || null);
+  let patternFilter = "";
+  if (Array.isArray(input.questionKeyPatterns) && input.questionKeyPatterns.length) {
+    const patternRefs = input.questionKeyPatterns.map((pattern) => {
+      params.push(pattern);
+      return `t.question_key ~* $${params.length}`;
+    });
+    patternFilter = patternRefs.join(" or ");
+  }
+  if (Array.isArray(input.paperSlugs)) {
+    if (input.paperSlugs.length) {
+      params.push(input.paperSlugs);
+      const paperFilter = `t.paper_slug = any($${params.length}::text[])`;
+      filters.push(patternFilter ? `(${paperFilter} or ${patternFilter})` : paperFilter);
+    } else {
+      filters.push(patternFilter ? `(${patternFilter})` : "false");
+    }
+  } else if (patternFilter) {
+    filters.push(`(${patternFilter})`);
+  }
+  if (input.subjectCode) {
+    params.push(input.subjectCode);
+    const subjectCodeRef = `$${params.length}`;
+    if (input.subject) {
+      params.push(input.subject);
+      filters.push(`(t.subject_code = ${subjectCodeRef} or t.subject = $${params.length})`);
+    } else {
+      filters.push(`t.subject_code = ${subjectCodeRef}`);
+    }
+  } else {
+    addFilter(filters, params, "t.subject", input.subject || null);
+  }
   addFilter(filters, params, "t.paper", input.paper || null);
   addFilter(filters, params, "t.topic", input.topic || null);
   addFilter(filters, params, "t.status", input.status || null);
@@ -135,10 +168,39 @@ export async function listDiscussionPosts(threadId, input = {}) {
   return result.rows.map(mapPost);
 }
 
+export async function getDiscussionPostById(postId) {
+  const result = await query(`
+    select
+      p.id,
+      p.thread_id,
+      p.author_id,
+      p.id = (
+        select first_post.id
+        from discussion_posts first_post
+        where first_post.thread_id = p.thread_id
+        order by first_post.created_at asc, first_post.id asc
+        limit 1
+      ) as is_thread_post
+    from discussion_posts p
+    where p.id = $1
+    limit 1
+  `, [postId]);
+  const row = result.rows[0];
+  return row ? {
+    id: row.id,
+    threadId: row.thread_id,
+    authorId: row.author_id,
+    isThreadPost: Boolean(row.is_thread_post),
+  } : null;
+}
+
 export async function createDiscussionThread(input) {
   const threadResult = await query(`
     insert into discussion_threads (
       question_key,
+      subject_code,
+      paper_slug,
+      question_no,
       title,
       board,
       subject,
@@ -147,10 +209,13 @@ export async function createDiscussionThread(input) {
       tags,
       author_id
     )
-    values ($1, $2, $3, $4, $5, $6, $7::text[], $8)
+    values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::text[], $11)
     returning *
   `, [
     input.questionKey || null,
+    input.subjectCode || null,
+    input.paperSlug || null,
+    input.questionNo || null,
     input.title,
     input.board || null,
     input.subject || null,
@@ -184,6 +249,37 @@ export async function createDiscussionPost(input) {
     where id = $1
   `, [input.threadId]);
   return result.rows[0] ? mapPost(result.rows[0]) : null;
+}
+
+export async function deleteDiscussionPost(postId, authorId, deleteAnyReply = false) {
+  const result = await query(`
+    delete from discussion_posts p
+    where p.id = $1
+      and ($3::boolean or p.author_id = $2)
+      and p.id <> (
+        select first_post.id
+        from discussion_posts first_post
+        where first_post.thread_id = p.thread_id
+        order by first_post.created_at asc, first_post.id asc
+        limit 1
+      )
+    returning p.id, p.thread_id
+  `, [postId, authorId, Boolean(deleteAnyReply)]);
+  const deleted = result.rows[0];
+  if (!deleted) return null;
+
+  await query(`
+    update discussion_threads t
+    set
+      last_post_at = coalesce(
+        (select max(p.created_at) from discussion_posts p where p.thread_id = t.id),
+        t.created_at
+      ),
+      updated_at = now()
+    where t.id = $1
+  `, [deleted.thread_id]);
+
+  return { id: deleted.id, threadId: deleted.thread_id };
 }
 
 export async function likeDiscussionPost(postId, userId) {

@@ -1,0 +1,748 @@
+{
+  "questionPaper": "/home/ubuntu/ig_coorinate_science/2024/march/0654_m24_qp_22.pdf",
+  "markScheme": "/home/ubuntu/ig_coorinate_science/2024/march/0654_m24_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "top": 56.6,
+      "bottom": 193.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q01.png",
+      "rawText": "Which characteristic of living things is shown when a green plant absorbs light energy and produces glucose? A excretion B growth C nutrition D respiration",
+      "parseStatus": "ok",
+      "stem": "Which characteristic of living things is shown when a green plant absorbs light energy and produces glucose?",
+      "options": {
+        "A": "excretion",
+        "B": "growth",
+        "C": "nutrition",
+        "D": "respiration"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "top": 195.8,
+      "bottom": 579.42,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q02.png",
+      "rawText": "What is the effect of increasing the concentration gradient on the rate of diffusion? A rate of diffusion concentration gradient B rate of diffusion concentration gradient C rate of diffusion concentration gradient D rate of diffusion concentration gradient",
+      "parseStatus": "ok",
+      "stem": "What is the effect of increasing the concentration gradient on the rate of diffusion?",
+      "options": {
+        "A": "rate of diffusion concentration gradient",
+        "B": "rate of diffusion concentration gradient",
+        "C": "rate of diffusion concentration gradient",
+        "D": "rate of diffusion concentration gradient"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "top": 581.42,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q03.png",
+      "rawText": "Which row identifies the elements that are found in a protein molecule? carbon hydrogen nitrogen oxygen A \u0016 \u001a \u0016 \u0016 B \u0016 \u0016 \u001a \u0016 C \u0016 \u0016 \u0016 \u0016 D \u001a \u0016 \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "Which row identifies the elements that are found in a protein molecule? carbon hydrogen nitrogen oxygen",
+      "options": {
+        "A": "\u0016 \u001a \u0016 \u0016",
+        "B": "\u0016 \u0016 \u001a \u0016",
+        "C": "\u0016 \u0016 \u0016 \u0016",
+        "D": "\u001a \u0016 \u0016 \u0016"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "top": 56.6,
+      "bottom": 186.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q04.png",
+      "rawText": "Which statements explain why an enzyme stops working when heated to high temperatures? 1 There is a low frequency of collisions between substrate and enzyme. 2 The active site no longer has a complementary shape to the substrate. 3 The enzyme is denatured. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which statements explain why an enzyme stops working when heated to high temperatures? 1 There is a low frequency of collisions between substrate and enzyme. 2 The active site no longer has a complementary shape to the substrate. 3 The enzyme is denatured.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "top": 188.48,
+      "bottom": 338.28,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q05.png",
+      "rawText": "A farmer notices that the older leaves of his maize plant are becoming yellow between the veins. What is the plant lacking? A carbon dioxide B magnesium ions C sunlight D water",
+      "parseStatus": "ok",
+      "stem": "A farmer notices that the older leaves of his maize plant are becoming yellow between the veins. What is the plant lacking?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "magnesium ions",
+        "C": "sunlight",
+        "D": "water"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "top": 340.28,
+      "bottom": 491.82,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q06.png",
+      "rawText": "Which statements are correct? 1 A lack of vitamin C causes scurvy. 2 A lack of vitamin D causes softening of bones. 3 A lack of calcium causes kwashiorkor. 4 A lack of iron causes marasmus. A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "top": 493.82,
+      "bottom": 618.3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q07.png",
+      "rawText": "Which statement is correct? A Xylem vessels are living and are involved in translocation. B Xylem vessels are living and are involved in transpiration. C Xylem vessels are dead and are involved in translocation. D Xylem vessels are dead and are involved in transpiration.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "Xylem vessels are living and are involved in translocation.",
+        "B": "Xylem vessels are living and are involved in transpiration.",
+        "C": "Xylem vessels are dead and are involved in translocation.",
+        "D": "Xylem vessels are dead and are involved in transpiration."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 2,
+      "top": 620.3,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q08.png",
+      "rawText": "Which substances are used and produced in aerobic respiration? carbon dioxide oxygen glucose water A produced used produced used B produced used used produced C used produced produced used D used produced used produced",
+      "parseStatus": "ok",
+      "stem": "Which substances are used and produced in aerobic respiration? carbon dioxide oxygen glucose water",
+      "options": {
+        "A": "produced used produced used",
+        "B": "produced used used produced",
+        "C": "used produced produced used",
+        "D": "used produced used produced"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "top": 56.6,
+      "bottom": 388.68,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q09.png",
+      "rawText": "The diagram shows a neurone and associated structures. J K muscle Which type of neurone is shown and in which direction do impulses travel? type of neurone direction of impulse A motor J to K B motor K to J C sensory J to K D sensory K to J",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a neurone and associated structures. J K muscle Which type of neurone is shown and in which direction do impulses travel? type of neurone direction of impulse",
+      "options": {
+        "A": "motor J to K",
+        "B": "motor K to J",
+        "C": "sensory J to K",
+        "D": "sensory K to J"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "top": 390.68,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q10.png",
+      "rawText": "The body cells of tigers have 38 chromosomes. Which row shows the numbers of chromosomes involved during sexual reproduction in tigers? egg cell sperm cell zygote offspring body cell A 38 38 19 38 B 19 19 38 76 C 19 19 38 38 D 38 38 76 76",
+      "parseStatus": "ok",
+      "stem": "The body cells of tigers have 38 chromosomes. Which row shows the numbers of chromosomes involved during sexual reproduction in tigers? egg cell sperm cell zygote offspring body cell",
+      "options": {
+        "A": "38 38 19 38",
+        "B": "19 19 38 76",
+        "C": "19 19 38 38",
+        "D": "38 38 76 76"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "top": 56.6,
+      "bottom": 303.78,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q11.png",
+      "rawText": "Cystic fibrosis is a genetic condition. The allele for cystic fibrosis is recessive. The diagram shows inheritance of cystic fibrosis in a family. male non-sufferer male sufferer female non-sufferer female sufferer key What is the chance of the next child having cystic fibrosis? A 0% B 25% C 75% D 100%",
+      "parseStatus": "ok",
+      "stem": "Cystic fibrosis is a genetic condition. The allele for cystic fibrosis is recessive. The diagram shows inheritance of cystic fibrosis in a family. male non-sufferer male sufferer female non-sufferer female sufferer key What is the chance of the next child having cystic fibrosis?",
+      "options": {
+        "A": "0%",
+        "B": "25%",
+        "C": "75%",
+        "D": "100%"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "top": 305.78,
+      "bottom": 430.32,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q12.png",
+      "rawText": "Which type of organism obtains energy by feeding only on plants? A herbivore B carnivore C producer D secondary consumer",
+      "parseStatus": "ok",
+      "stem": "Which type of organism obtains energy by feeding only on plants?",
+      "options": {
+        "A": "herbivore",
+        "B": "carnivore",
+        "C": "producer",
+        "D": "secondary consumer"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "top": 432.32,
+      "bottom": 607.44,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q13.png",
+      "rawText": "Deforestation changes the concentration of carbon dioxide and oxygen in the atmosphere. Which statement is correct? A There is less carbon dioxide and more oxygen because there are fewer trees photosynthesising. B There is less carbon dioxide and less oxygen because there are fewer trees respiring. C There is more carbon dioxide and less oxygen because there are fewer trees photosynthesising. D There is more carbon dioxide and more oxygen because there are fewer trees respiring.",
+      "parseStatus": "ok",
+      "stem": "Deforestation changes the concentration of carbon dioxide and oxygen in the atmosphere. Which statement is correct?",
+      "options": {
+        "A": "There is less carbon dioxide and more oxygen because there are fewer trees photosynthesising.",
+        "B": "There is less carbon dioxide and less oxygen because there are fewer trees respiring.",
+        "C": "There is more carbon dioxide and less oxygen because there are fewer trees photosynthesising.",
+        "D": "There is more carbon dioxide and more oxygen because there are fewer trees respiring."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "top": 609.44,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q14.png",
+      "rawText": "Which changes are chemical changes? 1 iron rusting 2 burning coal 3 dissolving sugar in water 4 boiling water A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which changes are chemical changes? 1 iron rusting 2 burning coal 3 dissolving sugar in water 4 boiling water",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "top": 56.6,
+      "bottom": 223.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q15.png",
+      "rawText": "Which row identifies the types of elements that form covalent compounds and a physical property of covalent compounds? types of elements physical property A metals and non-metals high volatility B metals and non-metals low volatility C non-metals only high volatility D non-metals only low volatility",
+      "parseStatus": "ok",
+      "stem": "Which row identifies the types of elements that form covalent compounds and a physical property of covalent compounds? types of elements physical property",
+      "options": {
+        "A": "metals and non-metals high volatility",
+        "B": "metals and non-metals low volatility",
+        "C": "non-metals only high volatility",
+        "D": "non-metals only low volatility"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "top": 225.2,
+      "bottom": 497.7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q16.png",
+      "rawText": "In an experiment, 2.4 g of magnesium, Mg, is burned in 5.0 g of oxygen, O2. The equation for the reaction is shown. 2Mg + O2  2MgO Which row identifies the substance that reacts completely and shows the mass of magnesium oxide formed? substance that reacts completely mass of magnesium oxide formed / g A magnesium 4.0 B magnesium 7.4 C oxygen 4.0 D oxygen 7.4",
+      "parseStatus": "ok",
+      "stem": "In an experiment, 2.4 g of magnesium, Mg, is burned in 5.0 g of oxygen, O2. The equation for the reaction is shown. 2Mg + O2  2MgO Which row identifies the substance that reacts completely and shows the mass of magnesium oxide formed? substance that reacts completely mass of magnesium oxide formed / g",
+      "options": {
+        "A": "magnesium 4.0",
+        "B": "magnesium 7.4",
+        "C": "oxygen 4.0",
+        "D": "oxygen 7.4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "top": 499.7,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q17.png",
+      "rawText": "Aqueous copper(II) sulfate is electrolysed using carbon electrodes. Which row describes this electrolysis? gas bubbles are seen at the anode oxygen is produced at the negative electrode copper ions are reduced A no no no B yes yes yes C yes no yes D no yes no",
+      "parseStatus": "ok",
+      "stem": "Aqueous copper(II) sulfate is electrolysed using carbon electrodes. Which row describes this electrolysis? gas bubbles are seen at the anode oxygen is produced at the negative electrode copper ions are reduced",
+      "options": {
+        "A": "no no no",
+        "B": "yes yes yes",
+        "C": "yes no yes",
+        "D": "no yes no"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "top": 56.6,
+      "bottom": 493.08,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q18.png",
+      "rawText": "Ultraviolet light causes a chlorine molecule to break down to form two chlorine atoms. The equation for the reaction is shown. Cl 2(g)  2Cl (g) What is the energy level diagram for this reaction? energy reaction progress Cl 2(g) 2Cl (g) exothermic reaction A energy reaction progress Cl 2(g) 2Cl (g) endothermic reaction B energy reaction progress Cl 2(g) 2Cl (g) exothermic reaction C energy reaction progress Cl 2(g) 2Cl (g) endothermic reaction D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "top": 495.08,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q19.png",
+      "rawText": "A reaction is carried out at two different temperatures. Which statement about the reaction at the higher temperature is not correct? A A greater proportion of reacting particles possess the activation energy. B Reacting particles collide more frequently. C Reacting particles have greater kinetic energy. D The activation energy of the reaction decreases.",
+      "parseStatus": "ok",
+      "stem": "A reaction is carried out at two different temperatures. Which statement about the reaction at the higher temperature is not correct?",
+      "options": {
+        "A": "A greater proportion of reacting particles possess the activation energy.",
+        "B": "Reacting particles collide more frequently.",
+        "C": "Reacting particles have greater kinetic energy.",
+        "D": "The activation energy of the reaction decreases."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "top": 56.6,
+      "bottom": 232.62,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q20.png",
+      "rawText": "The equation for the reaction between sodium bromide and concentrated sulfuric acid is shown. 2NaBr + 2H2SO4  Na2SO4 + Br2 + SO2 + 2H2O What is oxidised in this reaction? A sodium ions B bromide ions C hydrogen ions D sulfate ions",
+      "parseStatus": "ok",
+      "stem": "The equation for the reaction between sodium bromide and concentrated sulfuric acid is shown. 2NaBr + 2H2SO4  Na2SO4 + Br2 + SO2 + 2H2O What is oxidised in this reaction?",
+      "options": {
+        "A": "sodium ions",
+        "B": "bromide ions",
+        "C": "hydrogen ions",
+        "D": "sulfate ions"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "top": 234.62,
+      "bottom": 359.16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q21.png",
+      "rawText": "What is used to test for ammonia gas? A a lighted splint B aqueous sodium hydroxide C damp red litmus paper D limewater",
+      "parseStatus": "ok",
+      "stem": "What is used to test for ammonia gas?",
+      "options": {
+        "A": "a lighted splint",
+        "B": "aqueous sodium hydroxide",
+        "C": "damp red litmus paper",
+        "D": "limewater"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "top": 361.16,
+      "bottom": 485.64,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q22.png",
+      "rawText": "Which description of the Group I elements is correct? A relatively hard metals B relatively soft metals C low melting point non-metals D unreactive gases",
+      "parseStatus": "ok",
+      "stem": "Which description of the Group I elements is correct?",
+      "options": {
+        "A": "relatively hard metals",
+        "B": "relatively soft metals",
+        "C": "low melting point non-metals",
+        "D": "unreactive gases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "top": 487.64,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q23.png",
+      "rawText": "Element E is a transition element. It reacts with oxygen to form an oxide with the formula EO. A student suggests three properties for element E and its oxide. 1 Element E floats on water. 2 The oxide EO is a white solid. 3 The oxide EO is basic and reacts with dilute acid. Which of the suggestions must be correct? A 1 and 2 B 1 only C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "Element E is a transition element. It reacts with oxygen to form an oxide with the formula EO.",
+      "options": {
+        "A": "student suggests three properties for element E and its oxide. 1 Element E floats on water. 2 The oxide EO is a white solid. 3 The oxide EO is basic and reacts with dilute acid. Which of the suggestions must be correct? A 1 and 2",
+        "B": "1 only",
+        "C": "2 and 3",
+        "D": "3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "top": 56.6,
+      "bottom": 250.8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q24.png",
+      "rawText": "Elements Q, T, X and Z are metals. The equations for three reactions between some of these metals and some oxides and chlorides of these metals are shown. Q(s) + XO(s)  QO(s) + X(s) T(s) + ZCl 2(aq)  TCl 2(aq) + Z(s) X(s) + TCl 2(aq)  XCl 2(aq) + T(s) Which metal has the greatest tendency to form positive ions? A Q B T C X D Z",
+      "parseStatus": "ok",
+      "stem": "Elements Q, T, X and Z are metals. The equations for three reactions between some of these metals and some oxides and chlorides of these metals are shown. Q(s) + XO(s)  QO(s) + X(s) T(s) + ZCl 2(aq)  TCl 2(aq) + Z(s) X(s) + TCl 2(aq)  XCl 2(aq) + T(s) Which metal has the greatest tendency to form positive ions?",
+      "options": {
+        "A": "Q",
+        "B": "T",
+        "C": "X",
+        "D": "Z"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "top": 252.8,
+      "bottom": 406.74,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q25.png",
+      "rawText": "Which row explains the use of chlorination and filtration in the treatment of the water supply? chlorination filtration A to neutralise acids to remove dissolved substances B to neutralise bases to remove insoluble substances C to kill bacteria to remove dissolved substances D to kill bacteria to remove insoluble substances",
+      "parseStatus": "ok",
+      "stem": "Which row explains the use of chlorination and filtration in the treatment of the water supply? chlorination filtration",
+      "options": {
+        "A": "to neutralise acids to remove dissolved substances",
+        "B": "to neutralise bases to remove insoluble substances",
+        "C": "to kill bacteria to remove dissolved substances",
+        "D": "to kill bacteria to remove insoluble substances"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "top": 408.74,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q26.png",
+      "rawText": "The Contact process is used to manufacture sulfuric acid. Which step in the Contact process is reversible? A sulfur reacting with oxygen B sulfur dioxide reacting with oxygen C sulfuric acid reacting with sulfur trioxide D oleum, H2S2O7, reacting with water",
+      "parseStatus": "ok",
+      "stem": "The Contact process is used to manufacture sulfuric acid. Which step in the Contact process is reversible?",
+      "options": {
+        "A": "sulfur reacting with oxygen",
+        "B": "sulfur dioxide reacting with oxygen",
+        "C": "sulfuric acid reacting with sulfur trioxide",
+        "D": "oleum, H2S2O7, reacting with water"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "top": 56.6,
+      "bottom": 345.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q27.png",
+      "rawText": "Which compound name matches the structure shown? H C H H C H H C H H C H H H propane A C H H C H C H H H propene B C H H C H C H H C H H H butane D H C H H C H H H methane C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "top": 347.18,
+      "bottom": 682.02,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q28.png",
+      "rawText": "X and Y are two springs. The graph shows how the lengths of X and Y vary with the loads suspended from them. length load 0 0 X Y Which statement about X and Y is correct? A Neither spring obeys Hooke’s law for any value of load. B The unstretched lengths of X and Y are different. C The spring constant of X is greater than the spring constant of Y. D Y needs a greater load than X to reach its limit of proportionality.",
+      "parseStatus": "ok",
+      "stem": "X and Y are two springs. The graph shows how the lengths of X and Y vary with the loads suspended from them. length load 0 0 X Y Which statement about X and Y is correct?",
+      "options": {
+        "A": "Neither spring obeys Hooke’s law for any value of load.",
+        "B": "The unstretched lengths of X and Y are different.",
+        "C": "The spring constant of X is greater than the spring constant of Y.",
+        "D": "Y needs a greater load than X to reach its limit of proportionality."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "top": 684.02,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q29.png",
+      "rawText": "A 900 W oven operates for 2.0 minutes. How much energy is transferred by the oven? A 7.5 J B 450 J C 1.8 kJ D 108 kJ",
+      "parseStatus": "ok",
+      "stem": "A 900 W oven operates for 2.0 minutes. How much energy is transferred by the oven?",
+      "options": {
+        "A": "7.5 J",
+        "B": "450 J",
+        "C": "1.8 kJ",
+        "D": "108 kJ"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "top": 56.66,
+      "bottom": 181.2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q30.png",
+      "rawText": "Which list of energy sources contains only non-renewable sources? A coal, gas, nuclear fission B coal, gas, geothermal C gas, geothermal, nuclear fission D gas, solar, wind",
+      "parseStatus": "ok",
+      "stem": "Which list of energy sources contains only non-renewable sources?",
+      "options": {
+        "A": "coal, gas, nuclear fission",
+        "B": "coal, gas, geothermal",
+        "C": "gas, geothermal, nuclear fission",
+        "D": "gas, solar, wind"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "top": 183.2,
+      "bottom": 331.32,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q31.png",
+      "rawText": "The more energetic molecules of a liquid are escaping from its surface, causing the liquid to cool. What is happening to the liquid? A It is boiling. B It is condensing. C It is evaporating. D It is melting.",
+      "parseStatus": "ok",
+      "stem": "The more energetic molecules of a liquid are escaping from its surface, causing the liquid to cool. What is happening to the liquid?",
+      "options": {
+        "A": "It is boiling.",
+        "B": "It is condensing.",
+        "C": "It is evaporating.",
+        "D": "It is melting."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "top": 333.32,
+      "bottom": 486.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q32.png",
+      "rawText": "When solids, liquids and gases are heated, they expand. What is the order of the expansions of solids, liquids and gases, from smallest to largest? A gas  liquid  solid B liquid  gas  solid C solid  gas  liquid D solid  liquid  gas",
+      "parseStatus": "ok",
+      "stem": "When solids, liquids and gases are heated, they expand. What is the order of the expansions of solids, liquids and gases, from smallest to largest?",
+      "options": {
+        "A": "gas  liquid  solid",
+        "B": "liquid  gas  solid",
+        "C": "solid  gas  liquid",
+        "D": "solid  liquid  gas"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "top": 488.48,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q33.png",
+      "rawText": "An object is placed in front of a mirror on a wall. Which statement about the image formed by the mirror is correct? A The image and the object are equal distances from the mirror. B The image is diminished (smaller than the object). C The image is enlarged (larger than the object). D The image is inverted (upside down).",
+      "parseStatus": "ok",
+      "stem": "An object is placed in front of a mirror on a wall. Which statement about the image formed by the mirror is correct?",
+      "options": {
+        "A": "The image and the object are equal distances from the mirror.",
+        "B": "The image is diminished (smaller than the object).",
+        "C": "The image is enlarged (larger than the object).",
+        "D": "The image is inverted (upside down)."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "top": 56.66,
+      "bottom": 261.48,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q34.png",
+      "rawText": "What is the definition of the refractive index n of a substance? A substance the in light of speed vacuum a in light of speed B vacuum a in light of speed substance the in light of speed C frequency of light in a vacuum frequency of light in the substance D vacuum a in light of frequency substance the in light of frequency",
+      "parseStatus": "ok",
+      "stem": "What is the definition of the refractive index n of a substance?",
+      "options": {
+        "A": "substance the in light of speed vacuum a in light of speed",
+        "B": "vacuum a in light of speed substance the in light of speed",
+        "C": "frequency of light in a vacuum frequency of light in the substance",
+        "D": "vacuum a in light of frequency substance the in light of frequency"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "top": 263.48,
+      "bottom": 426.18,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q35.png",
+      "rawText": "The electromagnetic spectrum includes radio waves, infrared waves and X-rays. What is the correct sequence of these waves in order of increasing wavelength (smallest wavelength first)? A infrared waves, radio waves, X-rays B infrared waves, X-rays, radio waves C X-rays, infrared waves, radio waves D X-rays, radio waves, infrared waves",
+      "parseStatus": "ok",
+      "stem": "The electromagnetic spectrum includes radio waves, infrared waves and X-rays. What is the correct sequence of these waves in order of increasing wavelength (smallest wavelength first)?",
+      "options": {
+        "A": "infrared waves, radio waves, X-rays",
+        "B": "infrared waves, X-rays, radio waves",
+        "C": "X-rays, infrared waves, radio waves",
+        "D": "X-rays, radio waves, infrared waves"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 11,
+      "top": 428.18,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q36.png",
+      "rawText": "The diagram shows a wire of length l and diameter d. l d Which pair of changes must increase the resistance of the wire? A decreasing l and decreasing d B decreasing l and increasing d C increasing l and decreasing d D increasing l and increasing d",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a wire of length l and diameter d. l d Which pair of changes must increase the resistance of the wire?",
+      "options": {
+        "A": "decreasing l and decreasing d",
+        "B": "decreasing l and increasing d",
+        "C": "increasing l and decreasing d",
+        "D": "increasing l and increasing d"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "top": 56.6,
+      "bottom": 438.24,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q37.png",
+      "rawText": "The circuit shows a resistor and an NTC thermistor connected in series with a power supply. A voltmeter is connected across the resistor. V power supply The temperature of the thermistor increases. What happens to the resistance of the thermistor and what happens to the reading on the voltmeter? resistance of thermistor reading on voltmeter A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The circuit shows a resistor and an NTC thermistor connected in series with a power supply.",
+      "options": {
+        "A": "voltmeter is connected across the resistor. V power supply The temperature of the thermistor increases. What happens to the resistance of the thermistor and what happens to the reading on the voltmeter? resistance of thermistor reading on voltmeter A decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "top": 440.24,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q38.png",
+      "rawText": "The table shows the usual current in each of four household appliances and the fuse used to protect each of them. The only fuses available are rated at 3 A, 5 A or 13 A. Which row shows an appliance that has been fitted with the most appropriate of the fuses available? appliance current / A fuse rating / A A hairdryer 5.5 5 B kettle 7.5 13 C lawnmower 5.0 3 D slow cooker 1.0 5",
+      "parseStatus": "ok",
+      "stem": "The table shows the usual current in each of four household appliances and the fuse used to protect each of them. The only fuses available are rated at 3 A, 5",
+      "options": {
+        "A": "or 13 A. Which row shows an appliance that has been fitted with the most appropriate of the fuses available? appliance current / A fuse rating / A A hairdryer 5.5 5",
+        "B": "kettle 7.5 13",
+        "C": "lawnmower 5.0 3",
+        "D": "slow cooker 1.0 5"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "top": 56.6,
+      "bottom": 209.28,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q39.png",
+      "rawText": "A magnet is moved in and out of a coil and an electromotive force (e.m.f.) is induced. How can the size of the induced e.m.f. be decreased? A Add more turns to the coil. B Move the magnet more quickly. C Move the magnet more slowly. D Turn the magnet around before moving it in and out.",
+      "parseStatus": "ok",
+      "stem": "A magnet is moved in and out of a coil and an electromotive force (e.m.f.) is induced. How can the size of the induced e.m.f. be decreased?",
+      "options": {
+        "A": "Add more turns to the coil.",
+        "B": "Move the magnet more quickly.",
+        "C": "Move the magnet more slowly.",
+        "D": "Turn the magnet around before moving it in and out."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "top": 211.28,
+      "bottom": 818.0,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-coordinated-sciences-0654/0654_m24_qp_22/q40.png",
+      "rawText": "A nucleus of carbon C 14 6 decays by beta (–)-emission to an isotope of nitrogen N. What is the nuclide of nitrogen formed? A N 10 4 B N 14 5 C N 14 7 D N 15 7",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

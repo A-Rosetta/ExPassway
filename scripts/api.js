@@ -1,19 +1,34 @@
 (function () {
   const DEFAULT_TIMEOUT_MS = 8000;
+  const API_BASE_KEY = "alevel.apiBase";
 
   function normalizeBaseUrl(url) {
     return String(url || "").trim().replace(/\/+$/, "");
   }
 
   function resolveBaseUrl() {
-    const saved = localStorage.getItem("alevel.apiBase");
-    if (saved && normalizeBaseUrl(saved)) {
-      return normalizeBaseUrl(saved);
+    const saved = normalizeBaseUrl(localStorage.getItem(API_BASE_KEY));
+    const isStaticPreview = window.location.protocol === "http:" && window.location.port === "8080";
+    let savedUrl = null;
+    try {
+      savedUrl = saved ? new URL(saved) : null;
+    } catch (_err) {
+    }
+    const legacyLocalBase = savedUrl?.port === "3001" && (
+      savedUrl.hostname === window.location.hostname ||
+      savedUrl.hostname === "localhost" ||
+      savedUrl.hostname === "127.0.0.1"
+    );
+
+    if (legacyLocalBase && (isStaticPreview || window.location.pathname.startsWith("/alevel/"))) {
+      localStorage.removeItem(API_BASE_KEY);
+    } else if (saved) {
+      return saved;
     }
 
-    // Local static preview server should call backend on port 3001.
-    if (window.location.hostname === "localhost" && window.location.port === "8080") {
-      return "http://localhost:3001";
+    // The IDE static preview runs separately from the deployed backend.
+    if (isStaticPreview) {
+      return `http://${window.location.hostname}:3002`;
     }
 
     if (window.location.protocol.startsWith("http")) {
@@ -21,7 +36,7 @@
       return "";
     }
 
-    return "http://localhost:3001";
+    return "http://localhost:3002";
   }
 
   let apiBaseUrl = resolveBaseUrl();
@@ -71,13 +86,25 @@
       const normalized = normalizeBaseUrl(url);
       if (!normalized) return;
       apiBaseUrl = normalized;
-      localStorage.setItem("alevel.apiBase", normalized);
+      localStorage.setItem(API_BASE_KEY, normalized);
     },
     async getCurriculum() {
       return request("/api/meta/curriculum");
     },
     async getStorageMode() {
       return request("/api/meta/storage");
+    },
+    async getCatalogSubjects() {
+      return request("/api/catalog/subjects");
+    },
+    async getCatalogPapers(subjectCode) {
+      return request(`/api/catalog/subjects/${encodeURIComponent(subjectCode)}/papers`);
+    },
+    async getCatalogPaper(paperSlug) {
+      return request(`/api/catalog/papers/${encodeURIComponent(paperSlug)}`);
+    },
+    async getCatalogPaperQuestions(paperSlug) {
+      return request(`/api/catalog/papers/${encodeURIComponent(paperSlug)}/questions`);
     },
     async generatePaper(input) {
       return request("/api/papers/generate", {
@@ -103,11 +130,63 @@
         body: JSON.stringify(input),
       });
     },
-    async getAdminRecords(input = {}) {
+    async getAdminRecords(token, input = {}) {
       const usersLimit = Number(input.usersLimit || 20);
       const practicesLimit = Number(input.practicesLimit || 20);
       const query = `?usersLimit=${usersLimit}&practicesLimit=${practicesLimit}`;
-      return request(`/api/admin/records${query}`);
+      return request(`/api/admin/records${query}`, { token });
+    },
+    async setAdminUserDisabled(token, userId, disabled) {
+      return request(`/api/admin/users/${encodeURIComponent(userId)}/status`, {
+        method: "PATCH",
+        token,
+        body: JSON.stringify({ disabled: Boolean(disabled) }),
+      });
+    },
+    async getAdminSubjects(token) {
+      return request("/api/admin/subjects", { token });
+    },
+    async createAdminSubject(token, input) {
+      return request("/api/admin/subjects", {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async getAdminImports(token) {
+      return request("/api/admin/imports", { token, timeoutMs: 30000 });
+    },
+    async getAdminImport(token, jobId) {
+      return request(`/api/admin/imports/${encodeURIComponent(jobId)}`, { token, timeoutMs: 30000 });
+    },
+    async createAdminImport(token, subjectCode) {
+      return request("/api/admin/imports", {
+        method: "POST",
+        token,
+        body: JSON.stringify({ subjectCode }),
+      });
+    },
+    async uploadAdminImportFile(token, jobId, input) {
+      return request(`/api/admin/imports/${encodeURIComponent(jobId)}/files`, {
+        method: "POST",
+        token,
+        timeoutMs: 120000,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async processAdminImport(token, jobId) {
+      return request(`/api/admin/imports/${encodeURIComponent(jobId)}/process`, {
+        method: "POST",
+        token,
+        timeoutMs: 10 * 60 * 1000,
+      });
+    },
+    async publishAdminImport(token, jobId) {
+      return request(`/api/admin/imports/${encodeURIComponent(jobId)}/publish`, {
+        method: "POST",
+        token,
+        timeoutMs: 10 * 60 * 1000,
+      });
     },
     async createUser(input) {
       return request("/api/users", {
@@ -180,14 +259,31 @@
         body: JSON.stringify(input || {}),
       });
     },
+    async uploadDiscussionImage(token, dataUrl) {
+      return request("/api/discussions/images", {
+        method: "POST",
+        token,
+        body: JSON.stringify({ dataUrl }),
+        timeoutMs: 30000,
+      });
+    },
     async getDiscussion(token, threadId) {
       return request(`/api/discussions/${encodeURIComponent(threadId)}`, { token });
+    },
+    async getQuestionReference(token, questionKey) {
+      return request(`/api/questions/${encodeURIComponent(questionKey)}`, { token });
     },
     async replyDiscussion(token, threadId, input) {
       return request(`/api/discussions/${encodeURIComponent(threadId)}/posts`, {
         method: "POST",
         token,
         body: JSON.stringify(input || {}),
+      });
+    },
+    async deleteDiscussionPost(token, postId) {
+      return request(`/api/discussions/posts/${encodeURIComponent(postId)}`, {
+        method: "DELETE",
+        token,
       });
     },
     async likeDiscussionPost(token, postId) {
