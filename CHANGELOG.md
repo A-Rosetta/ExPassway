@@ -2,6 +2,31 @@
 
 All notable changes to this project are recorded in this file.
 
+## 2026-07-19 13:08 CST
+
+### Summary
+- Replaced the signed-in homepage with a responsive subject-book dashboard backed by the published course catalogue.
+- Added a year-only filter to the paper picker shown after selecting a subject book.
+
+### Added
+- Added distinct CSS book covers for Biology `0610`, Chemistry `0620`, Co-ordinated Sciences `0654`, and Economics `0455`.
+- Added top-level forum, profile, and logout controls to the homepage.
+- Added a year selector that derives available years from the selected subject's published papers and sorts them newest first.
+- Added a live count of papers matching the selected year.
+
+### Changed
+- Changed subject selection from the previous dropdown form to direct book-card navigation.
+- Preserved profile and password editing in a profile dialog.
+- Preserved the wrong-answer notebook overview and administrator-only dashboard entry.
+- Changed the paper picker to default to all years and filter its existing paper list without changing practice or timed-test behavior.
+
+### Verification
+- Verified the live catalogue totals for all four subjects.
+- Verified Economics opens its single `0455_s25_qp_12` paper and Biology opens all 41 published papers.
+- Verified Biology year options from 2019 through 2024 and seven papers for both 2023 and 2024.
+- Verified filtered paper selection still opens the existing mode-selection flow.
+- Verified desktop and mobile layouts with zero horizontal overflow and no page, API, or runtime errors.
+
 ## 2026-05-25 18:30 CST
 
 ### Summary
