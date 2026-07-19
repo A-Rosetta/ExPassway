@@ -1,0 +1,548 @@
+{
+  "questionPaper": "0610_m24_qp_22.pdf",
+  "markScheme": "0610_m24_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q01.png",
+      "rawText": "excretion A growth B nutrition C reproduction D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q02.png",
+      "rawText": "Homo habilis Homo erectus Homo heidelbergensis Homo sapiens (modern people) Which statement about modern people and their ancestors is correct? They are the same species and the same genus. A They are the same species but not the same genus. B They are the same genus but not the same species. C They are neither the same species nor the same genus. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q03.png",
+      "rawText": "eight legs A exoskeleton B only three pairs of legs C wings D 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "eight legs",
+      "options": {
+        "A": "exoskeleton",
+        "B": "only three pairs of legs",
+        "C": "wings",
+        "D": "03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q04.png",
+      "rawText": "amphibians A fish B mammals C reptiles D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q05.png",
+      "rawText": "mitochondrion A nucleus B ribosome C vacuole D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q06.png",
+      "rawText": "actual size = Which formula shows the correct way to calculate the actual size of an object? actual size = B actual size = image size × magnification C actual size = image size – magnification D A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q07.png",
+      "rawText": "The oxygen concentration in the alveolus is greater than the carbon dioxide concentration in the blood. A The oxygen concentration in the alveolus is greater than the oxygen concentration in the blood. B The oxygen concentration in the blood is greater than the oxygen concentration in the alveolus. C The oxygen concentration in the blood is greater than the carbon dioxide concentration in the alveolus. D [Turn over 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "The oxygen concentration in the alveolus is greater than the carbon dioxide concentration in the blood.",
+      "options": {
+        "A": "The oxygen concentration in the alveolus is greater than the oxygen concentration in the blood.",
+        "B": "The oxygen concentration in the blood is greater than the oxygen concentration in the alveolus.",
+        "C": "The oxygen concentration in the blood is greater than the carbon dioxide concentration in the alveolus.",
+        "D": "[Turn over 03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q08.png",
+      "rawText": "cell X high water potential cell Y low water potential Which statement describes what will happen to the water in the cells? equal movement between cells A net movement from cell X to cell Y B net movement from cell Y to cell X C no movement between cells D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q09.png",
+      "rawText": "requires a protein carrier in the cell membrane requires energy from respiration moves substances from a lower to a higher concentration no no no A yes no no B no yes yes C yes yes yes D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q10.png",
+      "rawText": "oxygen nitrogen hydrogen carbon yes yes no no A yes no yes no B yes no yes yes C no yes yes yes D 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "oxygen nitrogen hydrogen carbon yes yes no no",
+      "options": {
+        "A": "yes no yes no",
+        "B": "yes no yes yes",
+        "C": "no yes yes yes",
+        "D": "03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q11.png",
+      "rawText": "small molecules large molecule glucose cellulose A glycogen fat B fatty acid glycogen C amino acid starch D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q12.png",
+      "rawText": "enzyme activity 1 2 temperature Which statements about the enzyme and substrate at temperatures 1 and 2 are correct? temperature 2 temperature 1 A B C The substrate changes shape so that it cannot fit into the active site. The enzyme and substrate have different shapes. The enzyme and substrate have complementary shapes. The active site changes shape so that the substrate cannot fit into it. The active site fits into the substrate of the enzyme. The enzyme and substrate have the same shape. The enzyme is denatured. The substrate fits into the active site of the enzyme. D [Turn over 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q13.png",
+      "rawText": "rate of photosynthesis 0 10 20 30 temperature / °C high light intensity medium light intensity low light intensity X What is the limiting factor for the rate of photosynthesis at point X? temperature light intensity no no A yes no B no yes C yes yes D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q14.png",
+      "rawText": "magnesium A nitrates B phosphates C potassium D 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "magnesium",
+      "options": {
+        "A": "nitrates",
+        "B": "phosphates",
+        "C": "potassium",
+        "D": "03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q15.png",
+      "rawText": "B C D A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q16.png",
+      "rawText": "vitamin D vitamin C iron calcium key ✗ ✓ ✗ ✓ A ✓= substance present ✓ ✗ ✗ ✓ B ✗= substance absent ✗ ✓ ✓ ✗ C ✓ ✗ ✓ ✗ D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q17.png",
+      "rawText": "carbohydrates A mineral salts B proteins C vitamins D [Turn over 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "carbohydrates",
+      "options": {
+        "A": "mineral salts",
+        "B": "proteins",
+        "C": "vitamins",
+        "D": "[Turn over 03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q18.png",
+      "rawText": "process involved effect of bile on fat droplet surface area organ where bile is produced chemical digestion increases gall bladder A physical digestion decreases gall bladder B chemical digestion decreases liver C physical digestion increases liver D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q19.png",
+      "rawText": "Each villus contains a network of capillaries. 1 Each villus contains a lacteal. 2 The surface of each epithelial cell is covered with microvilli. 3 Villi increase the internal surface area of the small intestine. 4 Which statements about the villi are important for the efficient absorption of glucose? 1, 2, 3 and 4 A 1, 3 and 4 only B 1 and 3 only C 2 and 4 only D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q20.png",
+      "rawText": "Xylem vessels have cells with cross walls. 1 Xylem vessels have thick walls with lignin. 2 Xylem vessels transport water and mineral ions. 3 3 only D 2 and 3 only C 1 and 2 only B 1, 2 and 3 A 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q21.png",
+      "rawText": "dodder host leaves sink sink A source sink B sink source C source source D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q22.png",
+      "rawText": "lungs heart liver small intestine kidney C A B D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q23.png",
+      "rawText": "Antibodies are acquired from another individual. A It can be gained through infection with a pathogen. B Long-term protection is gained. C Memory cells are produced. D [Turn over 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "Antibodies are acquired from another individual.",
+      "options": {
+        "A": "It can be gained through infection with a pathogen.",
+        "B": "Long-term protection is gained.",
+        "C": "Memory cells are produced.",
+        "D": "[Turn over 03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q24.png",
+      "rawText": "rate of breathing time Y What causes the response during time period Y? a decrease in the concentration of oxygen in the blood A a decrease in the concentration of urea in the blood B an increase in the concentration of carbon dioxide in the blood C an increase in the concentration of red blood cells in the blood D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q25.png",
+      "rawText": "active transport 1 cell division 2 osmosis 3 transpiration 4 Which processes use energy from respiration? 3 and 4 D 2 and 3 C 1 and 4 B 1 and 2 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q26.png",
+      "rawText": "6O2 + C6H12O6 →6CO2 + 6H2O A C6H12O6 →2C2H5OH + 2CO2 B C6H12O6 →2C3H6O3 C 6CO2 + 6H2O →C6H12O6 + 6O2 D 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "6O2 + C6H12O6 →6CO2 + 6H2O",
+      "options": {
+        "A": "C6H12O6 →2C2H5OH + 2CO2",
+        "B": "C6H12O6 →2C3H6O3",
+        "C": "6CO2 + 6H2O →C6H12O6 + 6O2",
+        "D": "03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q27.png",
+      "rawText": "A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q28.png",
+      "rawText": "The toxin blocks the binding of neurotransmitters to receptors on motor neurones. A The toxin increases the release of neurotransmitters from relay neurones. B The toxin increases the release of neurotransmitters from sensory neurones. C The toxin stimulates impulses in motor neurones. D [Turn over 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "The toxin blocks the binding of neurotransmitters to receptors on motor neurones.",
+      "options": {
+        "A": "The toxin increases the release of neurotransmitters from relay neurones.",
+        "B": "The toxin increases the release of neurotransmitters from sensory neurones.",
+        "C": "The toxin stimulates impulses in motor neurones.",
+        "D": "[Turn over 03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q29.png",
+      "rawText": "A B C D 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q30.png",
+      "rawText": "pulse rate blood glucose concentration A 0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration B 0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration C 0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration D 0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration key [Turn over 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "pulse rate blood glucose concentration",
+      "options": {
+        "A": "0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration",
+        "B": "0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration",
+        "C": "0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration",
+        "D": "0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration key [Turn over 03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q31.png",
+      "rawText": "The diagram shows the shoot and root of a seedling, responding to gravity. Which row shows where the auxin accumulates and the effect of this in the shoot? effect accumulates inhibits cell elongation lower surface A promotes cell elongation lower surface B inhibits cell division upper surface C promotes cell division upper surface D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q32.png",
+      "rawText": "regularly giving antibiotics to healthy livestock 1 only using antibiotics to treat bacterial infections 2 using several different antibiotics to treat an infection 3 using good personal hygiene to avoid infection 4 3 and 4 D 2 and 4 C 1 and 3 B 1 and 2 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q33.png",
+      "rawText": "It can reliably produce many crop plants with a desirable characteristic. A It increases genetic variation. B It only requires wind pollination. C It reduces the chance of a new disease spreading through all the crop plants. D 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "It can reliably produce many crop plants with a desirable characteristic.",
+      "options": {
+        "A": "It increases genetic variation.",
+        "B": "It only requires wind pollination.",
+        "C": "It reduces the chance of a new disease spreading through all the crop plants.",
+        "D": "03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q34.png",
+      "rawText": "hormone concentration in the blood hormone concentration in the blood 0 7 14 time / days 21 28 A C D B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q35.png",
+      "rawText": "total number of cells in the tissue sample number of cells not dividing by mitosis number of cells dividing by mitosis tissue sample 80 55 25 X 110 95 15 Y Which statement is correct? Tissue X is growing fastest with a mitotic index of 31.3%. A Tissue X is growing fastest with a mitotic index of 45.4%. B Tissue Y is growing fastest with a mitotic index of 13.6%. C Tissue Y is growing fastest with a mitotic index of 15.8%. D [Turn over 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "total number of cells in the tissue sample number of cells not dividing by mitosis number of cells dividing by mitosis tissue sample 80 55 25 X 110 95 15 Y Which statement is correct? Tissue X is growing fastest with a mitotic index of 31.3%.",
+      "options": {
+        "A": "Tissue X is growing fastest with a mitotic index of 45.4%.",
+        "B": "Tissue Y is growing fastest with a mitotic index of 13.6%.",
+        "C": "Tissue Y is growing fastest with a mitotic index of 15.8%.",
+        "D": "[Turn over 03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q36.png",
+      "rawText": "100% D 75% C 50% B 25% A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q37.png",
+      "rawText": "ABO blood groups show continuous variation. A Body mass shows discontinuous variation. B Seed colour in peas shows continuous variation. C Seed shape in peas shows discontinuous variation. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q38.png",
+      "rawText": "chemical produced chemical changed name of process protein ammonium ions decomposition A ammonium ions nitrate ions denitrification B nitrogen gas nitrate ions nitrogen fixation C nitrate ions ammonium ions nitrification D 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "chemical produced chemical changed name of process protein ammonium ions decomposition",
+      "options": {
+        "A": "ammonium ions nitrate ions denitrification",
+        "B": "nitrogen gas nitrate ions nitrogen fixation",
+        "C": "nitrate ions ammonium ions nitrification",
+        "D": "03_0610_22_2024_1.11 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q39.png",
+      "rawText": "When in vitro fertilisation (IVF) is used in captive breeding programmes, these processes occur. The egg cell is fertilised. 1 The egg cell is removed from an ovary. 2 The embryo is implanted into the uterus. 3 The sperm cells are added. 4 In which order do these processes occur? 2 →3 →4 →1 A 2 →4 →1 →3 B 4 →1 →2 →3 C 4 →3 →2 →1 D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m24_qp_22/q40.png",
+      "rawText": "A B C D 03_0610_22_2024_1.11 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,678 @@
+{
+  "questionPaper": "0610_w19_qp_21.pdf",
+  "markScheme": "0610_w19_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q01.png",
+      "rawText": "The diagram shows a plant. light Which characteristic of living organisms is shown by the plant in the diagram? A excretion B reproduction C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a plant. light Which characteristic of living organisms is shown by the plant in the diagram?",
+      "options": {
+        "A": "excretion",
+        "B": "reproduction",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q02.png",
+      "rawText": "Using the binomial system of naming organisms, the name of the lion is Panthera leo. Which statement is correct? A The lion belongs to the kingdom Panthera. B The lion belongs to the genus Panthera. C The lion belongs to the species Panthera. D The lion belongs to the genus leo.",
+      "parseStatus": "ok",
+      "stem": "Using the binomial system of naming organisms, the name of the lion is Panthera leo. Which statement is correct?",
+      "options": {
+        "A": "The lion belongs to the kingdom Panthera.",
+        "B": "The lion belongs to the genus Panthera.",
+        "C": "The lion belongs to the species Panthera.",
+        "D": "The lion belongs to the genus leo."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q03.png",
+      "rawText": "The table shows the number of animals collected in a sample from a woodland and the groups to which they belong. animal group number in sample arachnids 10 crustaceans 8 insects 80 myriapods 7 How many arthropods in total, in this sample, have six or eight legs? A 15 B 88 C 90 D 98",
+      "parseStatus": "ok",
+      "stem": "The table shows the number of animals collected in a sample from a woodland and the groups to which they belong. animal group number in sample arachnids 10 crustaceans 8 insects 80 myriapods 7 How many arthropods in total, in this sample, have six or eight legs?",
+      "options": {
+        "A": "15",
+        "B": "88",
+        "C": "90",
+        "D": "98"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q04.png",
+      "rawText": "Which features do animal cells share with plant cells? chloroplast cytoplasm nucleus A \u0016 \u0016 \u0016 key B \u0016 \u001a \u0016 \u0016 = yes C \u001a \u0016 \u0016 \u001a = no D \u001a \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which features do animal cells share with plant cells? chloroplast cytoplasm nucleus",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016 \u0016 = yes",
+        "C": "\u001a \u0016 \u0016 \u001a = no",
+        "D": "\u001a \u001a \u001a"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q05.png",
+      "rawText": "The diagram shows a cell with an actual size of 30 µm. 30 mm What is the magnification of the diagram? A ×10 B ×100 C ×1000 D ×10 000",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cell with an actual size of 30 µm. 30 mm What is the magnification of the diagram?",
+      "options": {
+        "A": "×10",
+        "B": "×100",
+        "C": "×1000",
+        "D": "×10 000"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q06.png",
+      "rawText": "Red blood cells were placed in pure water. Movement of water across the cell membrane caused a change in their appearance. What caused this change in appearance? direction of water movement from higher to lower water potential from lower to higher water potential A into cells yes no B into cells no yes C out of cells yes no D out of cells no yes",
+      "parseStatus": "ok",
+      "stem": "Red blood cells were placed in pure water. Movement of water across the cell membrane caused a change in their appearance. What caused this change in appearance? direction of water movement from higher to lower water potential from lower to higher water potential",
+      "options": {
+        "A": "into cells yes no",
+        "B": "into cells no yes",
+        "C": "out of cells yes no",
+        "D": "out of cells no yes"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q07.png",
+      "rawText": "Some examples of substances moving across membranes are listed. 1 glucose molecules into the epithelium that lines the small intestine 2 nitrate ions from a dilute solution in soil into a more concentrated solution in root hair cells 3 water molecules from mesophyll cells into the air spaces of a leaf For which must oxygen be present? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Some examples of substances moving across membranes are listed. 1 glucose molecules into the epithelium that lines the small intestine 2 nitrate ions from a dilute solution in soil into a more concentrated solution in root hair cells 3 water molecules from mesophyll cells into the air spaces of a leaf For which must oxygen be present?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q08.png",
+      "rawText": "Which identifies the chemical elements found in proteins? carbon hydrogen oxygen nitrogen A \u0016 \u0016 \u0016 \u0016 key B \u0016 \u0016 \u0016 \u001a \u0016= present C \u0016 \u001a \u0016 \u001a \u001a= absent D \u001a \u0016 \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which identifies the chemical elements found in proteins? carbon hydrogen oxygen nitrogen",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u0016 \u0016 \u001a \u0016= present",
+        "C": "\u0016 \u001a \u0016 \u001a \u001a= absent",
+        "D": "\u001a \u0016 \u001a \u0016"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q09.png",
+      "rawText": "What is the correct definition of the term enzyme? A carbohydrates that act as biological catalysts B carbohydrates that act as substrates C proteins that act as biological catalysts D proteins that act as substrates",
+      "parseStatus": "ok",
+      "stem": "What is the correct definition of the term enzyme?",
+      "options": {
+        "A": "carbohydrates that act as biological catalysts",
+        "B": "carbohydrates that act as substrates",
+        "C": "proteins that act as biological catalysts",
+        "D": "proteins that act as substrates"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q10.png",
+      "rawText": "Two sealed test-tubes containing aquatic plants and hydrogencarbonate indicator were set up. hydrogencarbonate indicator aquatic plant stopper The indicator in the sealed test-tubes shows the concentration of dissolved carbon dioxide present. concentration of carbon dioxide colour of indicator low red medium orange high yellow One of the sealed test-tubes was kept in the light for 24 hours and one of the sealed test-tubes was kept in the dark for 24 hours. The results are shown in the table. test-tube kept in start colour end colour light orange red dark orange yellow What is the correct explanation of what has taken place? A Photosynthesis and respiration both occur in the light, but the rate of photosynthesis is higher. B Photosynthesis occurs in the light, but respiration does not. C Respiration can only occur when photosynthesis is not taking place. D The amount of carbon dioxide used and produced in the light is equal.",
+      "parseStatus": "ok",
+      "stem": "Two sealed test-tubes containing aquatic plants and hydrogencarbonate indicator were set up. hydrogencarbonate indicator aquatic plant stopper The indicator in the sealed test-tubes shows the concentration of dissolved carbon dioxide present. concentration of carbon dioxide colour of indicator low red medium orange high yellow One of the sealed test-tubes was kept in the light for 24 hours and one of the sealed test-tubes was kept in the dark for 24 hours. The results are shown in the table. test-tube kept in start colour end colour light orange red dark orange yellow What is the correct explanation of what has taken place?",
+      "options": {
+        "A": "Photosynthesis and respiration both occur in the light, but the rate of photosynthesis is higher.",
+        "B": "Photosynthesis occurs in the light, but respiration does not.",
+        "C": "Respiration can only occur when photosynthesis is not taking place.",
+        "D": "The amount of carbon dioxide used and produced in the light is equal."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q11.png",
+      "rawText": "The diagram shows a leaf as seen in cross-section under the microscope. 1 2 3 What are tissues 1, 2 and 3? 1 2 3 A epidermis palisade mesophyll spongy mesophyll B epidermis spongy mesophyll palisade mesophyll C palisade mesophyll epidermis spongy mesophyll D spongy mesophyll palisade mesophyll epidermis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a leaf as seen in cross-section under the microscope. 1 2 3 What are tissues 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "epidermis palisade mesophyll spongy mesophyll",
+        "B": "epidermis spongy mesophyll palisade mesophyll",
+        "C": "palisade mesophyll epidermis spongy mesophyll",
+        "D": "spongy mesophyll palisade mesophyll epidermis"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q12.png",
+      "rawText": "The pie charts show the composition of 100 g of four different foods. Which food provides the most energy? key carbohydrate fats and oils protein water A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q13.png",
+      "rawText": "One of the symptoms of the disease cholera is diarrhoea. This is due to water loss by osmosis caused by the cholera toxin. Cholera toxins result in A secretion of chloride ions out of the small intestine lowering the water potential. B secretion of chloride ions out of the small intestine raising the water potential. C secretion of chloride ions into the small intestine lowering the water potential. D secretion of chloride ions into the small intestine raising the water potential.",
+      "parseStatus": "ok",
+      "stem": "One of the symptoms of the disease cholera is diarrhoea. This is due to water loss by osmosis caused by the cholera toxin. Cholera toxins result in",
+      "options": {
+        "A": "secretion of chloride ions out of the small intestine lowering the water potential.",
+        "B": "secretion of chloride ions out of the small intestine raising the water potential.",
+        "C": "secretion of chloride ions into the small intestine lowering the water potential.",
+        "D": "secretion of chloride ions into the small intestine raising the water potential."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q14.png",
+      "rawText": "The diagram shows an experiment kept at room temperature. tubing containing starch, protease, protein and simple sugars membrane permeable to small molecules only distilled water test-tube What is present in the water surrounding the membrane after 45 minutes? A amino acids and simple sugars B protein and amino acids C protein and simple sugars D starch and simple sugars",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment kept at room temperature. tubing containing starch, protease, protein and simple sugars membrane permeable to small molecules only distilled water test-tube What is present in the water surrounding the membrane after 45 minutes?",
+      "options": {
+        "A": "amino acids and simple sugars",
+        "B": "protein and amino acids",
+        "C": "protein and simple sugars",
+        "D": "starch and simple sugars"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q15.png",
+      "rawText": "What is an example of diffusion? A dust particles being moved by ciliated cells in the trachea B oxygen molecules moving into a red blood cell in the lungs C pollen grains moving from anthers to stigmas in the wind D red blood cells moving in a blood capillary in a muscle",
+      "parseStatus": "ok",
+      "stem": "What is an example of diffusion?",
+      "options": {
+        "A": "dust particles being moved by ciliated cells in the trachea",
+        "B": "oxygen molecules moving into a red blood cell in the lungs",
+        "C": "pollen grains moving from anthers to stigmas in the wind",
+        "D": "red blood cells moving in a blood capillary in a muscle"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q16.png",
+      "rawText": "In plants, what is transported by translocation? A glucagon B glycogen C starch D sucrose",
+      "parseStatus": "ok",
+      "stem": "In plants, what is transported by translocation?",
+      "options": {
+        "A": "glucagon",
+        "B": "glycogen",
+        "C": "starch",
+        "D": "sucrose"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q17.png",
+      "rawText": "The diagram shows human blood cells, as seen under a microscope. X What is the function of cell X? A to carry glucose B to carry oxygen C to defend against disease D to make the blood clot",
+      "parseStatus": "ok",
+      "stem": "The diagram shows human blood cells, as seen under a microscope. X What is the function of cell X?",
+      "options": {
+        "A": "to carry glucose",
+        "B": "to carry oxygen",
+        "C": "to defend against disease",
+        "D": "to make the blood clot"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q18.png",
+      "rawText": "Which row describes the features of passive immunity? antibodies made involves memory cells effective period A no no short term B no yes short term C yes no long term D yes yes long term",
+      "parseStatus": "ok",
+      "stem": "Which row describes the features of passive immunity? antibodies made involves memory cells effective period",
+      "options": {
+        "A": "no no short term",
+        "B": "no yes short term",
+        "C": "yes no long term",
+        "D": "yes yes long term"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q19.png",
+      "rawText": "Which row shows the approximate percentage of gases in expired air? percentage of carbon dioxide percentage of oxygen A 12 9 B 4 16 C 24 24 D 27 20",
+      "parseStatus": "ok",
+      "stem": "Which row shows the approximate percentage of gases in expired air? percentage of carbon dioxide percentage of oxygen",
+      "options": {
+        "A": "12 9",
+        "B": "4 16",
+        "C": "24 24",
+        "D": "27 20"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q20.png",
+      "rawText": "What is the correct equation for aerobic respiration? A 6CO2 + 6H2O → C6H12O6 + 6O2 B C6H12O6 + 6CO2 → 6O2 + 6H2O C C6H12O6 + O2 → CO2 + H2O D C6H12O6 + 6O2 → 6CO2 + 6H2O",
+      "parseStatus": "ok",
+      "stem": "What is the correct equation for aerobic respiration?",
+      "options": {
+        "A": "6CO2 + 6H2O → C6H12O6 + 6O2",
+        "B": "C6H12O6 + 6CO2 → 6O2 + 6H2O",
+        "C": "C6H12O6 + O2 → CO2 + H2O",
+        "D": "C6H12O6 + 6O2 → 6CO2 + 6H2O"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q21.png",
+      "rawText": "Lactic acid builds up in the muscles during vigorous exercise. During recovery, how is this lactic acid removed? A aerobic respiration of lactic acid in the liver B anaerobic respiration of lactic acid in the muscles C excretion of lactic acid by the lungs D removal of lactic acid by the alimentary canal",
+      "parseStatus": "ok",
+      "stem": "Lactic acid builds up in the muscles during vigorous exercise. During recovery, how is this lactic acid removed?",
+      "options": {
+        "A": "aerobic respiration of lactic acid in the liver",
+        "B": "anaerobic respiration of lactic acid in the muscles",
+        "C": "excretion of lactic acid by the lungs",
+        "D": "removal of lactic acid by the alimentary canal"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q22.png",
+      "rawText": "The neurones at synapses contain vesicles. Which type of substance is found inside the vesicles? A enzyme B chromosomes C neurotransmitter D steroid",
+      "parseStatus": "ok",
+      "stem": "The neurones at synapses contain vesicles. Which type of substance is found inside the vesicles?",
+      "options": {
+        "A": "enzyme",
+        "B": "chromosomes",
+        "C": "neurotransmitter",
+        "D": "steroid"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q23.png",
+      "rawText": "The diagram shows the muscles that control the size of the pupil in an eye. radial muscles iris pupil circular muscles How do the muscles make the pupil smaller? circular muscles radial muscles A contract contract B contract relax C relax contract D relax relax",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the muscles that control the size of the pupil in an eye. radial muscles iris pupil circular muscles How do the muscles make the pupil smaller? circular muscles radial muscles",
+      "options": {
+        "A": "contract contract",
+        "B": "contract relax",
+        "C": "relax contract",
+        "D": "relax relax"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q24.png",
+      "rawText": "More adrenaline is produced by the adrenal glands when a person is frightened. This increase affects several parts of the body. change increases decreases 1 blood glucose concentration \u001a \u0016 key 2 heart rate \u0016 \u001a \u0016= yes 3 breathing rate and depth \u0016 \u001a \u001a= no 4 dilation of pupil \u001a \u0016 Which rows are correct? A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "More adrenaline is produced by the adrenal glands when a person is frightened. This increase affects several parts of the body. change increases decreases 1 blood glucose concentration \u001a \u0016 key 2 heart rate \u0016 \u001a \u0016= yes 3 breathing rate and depth \u0016 \u001a \u001a= no 4 dilation of pupil \u001a \u0016 Which rows are correct?",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q25.png",
+      "rawText": "A patient has dye injected into the blood supply to his kidneys. The dye appears in his excretory system as shown. key dye no dye Which part is blocked? A the kidney B the ureter C the bladder D the urethra",
+      "parseStatus": "ok",
+      "stem": "A patient has dye injected into the blood supply to his kidneys. The dye appears in his excretory system as shown. key dye no dye Which part is blocked?",
+      "options": {
+        "A": "the kidney",
+        "B": "the ureter",
+        "C": "the bladder",
+        "D": "the urethra"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q26.png",
+      "rawText": "Which statement is a reason why viruses are unharmed by antibiotics such as penicillin? A They are very small in size. B They do not have a cell wall. C They have genetic material. D They have a protein coat.",
+      "parseStatus": "ok",
+      "stem": "Which statement is a reason why viruses are unharmed by antibiotics such as penicillin?",
+      "options": {
+        "A": "They are very small in size.",
+        "B": "They do not have a cell wall.",
+        "C": "They have genetic material.",
+        "D": "They have a protein coat."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q27.png",
+      "rawText": "Several athletes have been banned from their sport for using the drug nandrolone. This drug helps the body to build up muscle tissue. What sort of drug is nandrolone? A anabolic steroid B antibiotic C depressant D neurotransmitter",
+      "parseStatus": "ok",
+      "stem": "Several athletes have been banned from their sport for using the drug nandrolone. This drug helps the body to build up muscle tissue. What sort of drug is nandrolone?",
+      "options": {
+        "A": "anabolic steroid",
+        "B": "antibiotic",
+        "C": "depressant",
+        "D": "neurotransmitter"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q28.png",
+      "rawText": "Which statement about the hormone FSH is correct? A It stimulates ovulation. B It stimulates ovulation and menstruation. C It stimulates the maturation of follicles. D It stimulates the maturation of follicles and menstruation.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the hormone FSH is correct?",
+      "options": {
+        "A": "It stimulates ovulation.",
+        "B": "It stimulates ovulation and menstruation.",
+        "C": "It stimulates the maturation of follicles.",
+        "D": "It stimulates the maturation of follicles and menstruation."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q29.png",
+      "rawText": "HIV is transmitted by body fluids during sexual contact. HIV affects the immune system. Which statement best describes the effect of HIV? A The body has increased immunity. B The body produces fewer antibodies. C The body produces more antibodies. D The number of lymphocytes increases.",
+      "parseStatus": "ok",
+      "stem": "HIV is transmitted by body fluids during sexual contact. HIV affects the immune system. Which statement best describes the effect of HIV?",
+      "options": {
+        "A": "The body has increased immunity.",
+        "B": "The body produces fewer antibodies.",
+        "C": "The body produces more antibodies.",
+        "D": "The number of lymphocytes increases."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q30.png",
+      "rawText": "How many chromosomes are there in each of the human cells shown in the table? goblet cell motor neurone mature red blood cell sperm A 0 23 0 0 B 23 23 23 0 C 46 46 0 23 D 46 46 46 23",
+      "parseStatus": "ok",
+      "stem": "How many chromosomes are there in each of the human cells shown in the table? goblet cell motor neurone mature red blood cell sperm",
+      "options": {
+        "A": "0 23 0 0",
+        "B": "23 23 23 0",
+        "C": "46 46 0 23",
+        "D": "46 46 46 23"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q31.png",
+      "rawText": "The diagram shows a diploid cell and alleles R and r on one pair of chromosomes. R r nucleus cytoplasm When this cell divides by mitosis, which daughter cells will be produced? chromosome number genotype A diploid heterozygous B diploid homozygous C haploid heterozygous D haploid homozygous",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a diploid cell and alleles R and r on one pair of chromosomes. R r nucleus cytoplasm When this cell divides by mitosis, which daughter cells will be produced? chromosome number genotype",
+      "options": {
+        "A": "diploid heterozygous",
+        "B": "diploid homozygous",
+        "C": "haploid heterozygous",
+        "D": "haploid homozygous"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q32.png",
+      "rawText": "The diagram shows breeding rats where the allele for grey fur is dominant to white fur. 1 2 3 4 × × 6 5 Which two individuals are definitely heterozygous for fur colour? A 1 and 4 B 2 and 3 C 2 and 5 D 3 and 6",
+      "parseStatus": "ok",
+      "stem": "The diagram shows breeding rats where the allele for grey fur is dominant to white fur. 1 2 3 4 × × 6 5 Which two individuals are definitely heterozygous for fur colour?",
+      "options": {
+        "A": "1 and 4",
+        "B": "2 and 3",
+        "C": "2 and 5",
+        "D": "3 and 6"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q33.png",
+      "rawText": "The diagram shows a hydrophyte in a lake. surface of water Which statement about the leaves is correct? A They cannot photosynthesise. B They have a thick cuticle. C They have large air spaces in the spongy mesophyll. D They require many xylem vessels for support.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a hydrophyte in a lake. surface of water Which statement about the leaves is correct?",
+      "options": {
+        "A": "They cannot photosynthesise.",
+        "B": "They have a thick cuticle.",
+        "C": "They have large air spaces in the spongy mesophyll.",
+        "D": "They require many xylem vessels for support."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q34.png",
+      "rawText": "Some disease-causing bacteria survive treatment with an antibiotic. Which statement about the surviving bacteria is correct? A The antibiotic will work better on the next generation of bacteria. B The bacteria have undergone a process of natural selection. C The bacteria will now be resistant to all antibiotics. D The resistance of the bacteria is a result of selective breeding.",
+      "parseStatus": "ok",
+      "stem": "Some disease-causing bacteria survive treatment with an antibiotic. Which statement about the surviving bacteria is correct?",
+      "options": {
+        "A": "The antibiotic will work better on the next generation of bacteria.",
+        "B": "The bacteria have undergone a process of natural selection.",
+        "C": "The bacteria will now be resistant to all antibiotics.",
+        "D": "The resistance of the bacteria is a result of selective breeding."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q35.png",
+      "rawText": "Which row describes the energy flow into and through a food chain that starts with a plant? energy entering a food chain energy transferred between organisms in a food chain A chemical chemical B chemical heat C light chemical D light heat",
+      "parseStatus": "ok",
+      "stem": "Which row describes the energy flow into and through a food chain that starts with a plant? energy entering a food chain energy transferred between organisms in a food chain",
+      "options": {
+        "A": "chemical chemical",
+        "B": "chemical heat",
+        "C": "light chemical",
+        "D": "light heat"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q36.png",
+      "rawText": "The diagram shows part of the nitrogen cycle. mineral ions animals plants decomposers What is one of the mineral ions? A amino acids B nitrate C nitrogen D protein",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the nitrogen cycle. mineral ions animals plants decomposers What is one of the mineral ions?",
+      "options": {
+        "A": "amino acids",
+        "B": "nitrate",
+        "C": "nitrogen",
+        "D": "protein"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q37.png",
+      "rawText": "Which part of a bacterial cell makes it useful in genetic engineering? A cell wall B cytoplasm C flagellum D plasmid",
+      "parseStatus": "ok",
+      "stem": "Which part of a bacterial cell makes it useful in genetic engineering?",
+      "options": {
+        "A": "cell wall",
+        "B": "cytoplasm",
+        "C": "flagellum",
+        "D": "plasmid"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q38.png",
+      "rawText": "Which enzyme would be used in a biological washing powder? A DNA ligase B lactase C pectinase D protease",
+      "parseStatus": "ok",
+      "stem": "Which enzyme would be used in a biological washing powder?",
+      "options": {
+        "A": "DNA ligase",
+        "B": "lactase",
+        "C": "pectinase",
+        "D": "protease"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q39.png",
+      "rawText": "What are the possible effects of deforestation? loss of soil flooding decrease in atmospheric carbon dioxide A yes yes no B yes no yes C no yes no D no no yes",
+      "parseStatus": "ok",
+      "stem": "What are the possible effects of deforestation? loss of soil flooding decrease in atmospheric carbon dioxide",
+      "options": {
+        "A": "yes yes no",
+        "B": "yes no yes",
+        "C": "no yes no",
+        "D": "no no yes"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_21/q40.png",
+      "rawText": "The bloodworm is an organism that is found in heavily polluted water. The diagram shows where raw sewage flows into a river. Where would there be fewest bloodworms? input of raw sewage B A C D direction of flow",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

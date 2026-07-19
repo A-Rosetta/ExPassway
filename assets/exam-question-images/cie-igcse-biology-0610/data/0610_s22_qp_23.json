@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0610_s22_qp_23.pdf",
+  "markScheme": "0610_s22_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q01.png",
+      "rawText": "All living organisms release energy from nutrient molecules within their cells. What is the name of this characteristic? A growth B nutrition C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "All living organisms release energy from nutrient molecules within their cells. What is the name of this characteristic?",
+      "options": {
+        "A": "growth",
+        "B": "nutrition",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q02.png",
+      "rawText": "Which diagram shows a flower from a monocotyledon? C D B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q03.png",
+      "rawText": "The diagram shows a cross-section through two guard cells of a leaf. W X Y Z Which labelled structures would also be found in an animal cell? A W and X B X and Y C Y and Z D Z and W",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cross-section through two guard cells of a leaf. W X Y Z Which labelled structures would also be found in an animal cell?",
+      "options": {
+        "A": "W and X",
+        "B": "X and Y",
+        "C": "Y and Z",
+        "D": "Z and W"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q04.png",
+      "rawText": "Which level of organisation is shown by the heart of a mammal? A a cell B a tissue C an organ D an organ system",
+      "parseStatus": "ok",
+      "stem": "Which level of organisation is shown by the heart of a mammal?",
+      "options": {
+        "A": "a cell",
+        "B": "a tissue",
+        "C": "an organ",
+        "D": "an organ system"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q05.png",
+      "rawText": "Female moths release chemicals into the air. Male moths detect these chemicals and fly towards the females. How do the chemicals spread through the air? A active transport B diffusion C osmosis D transpiration",
+      "parseStatus": "ok",
+      "stem": "Female moths release chemicals into the air. Male moths detect these chemicals and fly towards the females. How do the chemicals spread through the air?",
+      "options": {
+        "A": "active transport",
+        "B": "diffusion",
+        "C": "osmosis",
+        "D": "transpiration"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q06.png",
+      "rawText": "The diagram shows a section through a mesophyll cell of a leaf. Which part is partially permeable? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q07.png",
+      "rawText": "What are the smaller basic units of starch and glycogen molecules? starch glycogen A amino acids fatty acids and glycerol B amino acids glucose C glucose fatty acids and glycerol D glucose glucose",
+      "parseStatus": "ok",
+      "stem": "What are the smaller basic units of starch and glycogen molecules? starch glycogen",
+      "options": {
+        "A": "amino acids fatty acids and glycerol",
+        "B": "amino acids glucose",
+        "C": "glucose fatty acids and glycerol",
+        "D": "glucose glucose"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q08.png",
+      "rawText": "DNA is made up of ......1...... strands coiled together. The strands contain chemicals called ......2...... . These chemicals form ......3...... , A pairing with T and C pairing with G. Which words correctly complete gaps 1, 2 and 3? 1 2 3 A three amino acids cross-links B two bases cross-links C three bases proteins D two amino acids proteins",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q09.png",
+      "rawText": "What is the correct definition of an enzyme? A a carbohydrate that functions as a biological catalyst B a protein that functions as a biological catalyst C a substance that is changed by the reaction D a substance made of fats that changes the rate of a reaction",
+      "parseStatus": "ok",
+      "stem": "What is the correct definition of an enzyme?",
+      "options": {
+        "A": "a carbohydrate that functions as a biological catalyst",
+        "B": "a protein that functions as a biological catalyst",
+        "C": "a substance that is changed by the reaction",
+        "D": "a substance made of fats that changes the rate of a reaction"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q10.png",
+      "rawText": "Which statement describes the effect of temperature on enzymes? A High temperatures denature enzymes making it difficult for substrate molecules to fit into the active site. B High temperatures denature enzymes making it easy for substrate molecules to fit into the active site. C Low temperatures denature enzymes making it difficult for substrate molecules to fit into the active site. D Low temperatures denature enzymes making it easy for substrate molecules to fit into the active site.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes the effect of temperature on enzymes?",
+      "options": {
+        "A": "High temperatures denature enzymes making it difficult for substrate molecules to fit into the active site.",
+        "B": "High temperatures denature enzymes making it easy for substrate molecules to fit into the active site.",
+        "C": "Low temperatures denature enzymes making it difficult for substrate molecules to fit into the active site.",
+        "D": "Low temperatures denature enzymes making it easy for substrate molecules to fit into the active site."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q11.png",
+      "rawText": "The graph shows the rate of photosynthesis at different carbon dioxide concentrations. X rate of photosynthesis carbon dioxide concentration What could be the limiting factor of photosynthesis at X on the graph? A oxygen B carbon dioxide C glucose D light intensity",
+      "parseStatus": "ok",
+      "stem": "The graph shows the rate of photosynthesis at different carbon dioxide concentrations. X rate of photosynthesis carbon dioxide concentration What could be the limiting factor of photosynthesis at X on the graph?",
+      "options": {
+        "A": "oxygen",
+        "B": "carbon dioxide",
+        "C": "glucose",
+        "D": "light intensity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q12.png",
+      "rawText": "The list shows features of a plant leaf. 1 air spaces between spongy mesophyll cells 2 chloroplasts in mesophyll cells 3 contains a natural insecticide 4 xylem vessels close to mesophyll cells Which features are adaptations for photosynthesis? A 1, 2 and 3 B 1, 2 and 4 C 1, 3 and 4 D 2, 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The list shows features of a plant leaf. 1 air spaces between spongy mesophyll cells 2 chloroplasts in mesophyll cells 3 contains a natural insecticide 4 xylem vessels close to mesophyll cells Which features are adaptations for photosynthesis?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1, 2 and 4",
+        "C": "1, 3 and 4",
+        "D": "2, 3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q13.png",
+      "rawText": "Which nutrient is required to prevent scurvy? A calcium B iron C vitamin C D vitamin D",
+      "parseStatus": "ok",
+      "stem": "Which nutrient is required to prevent scurvy?",
+      "options": {
+        "A": "calcium",
+        "B": "iron",
+        "C": "vitamin C",
+        "D": "vitamin D"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q14.png",
+      "rawText": "Which diagram represents the action of lipase? A + + B + + + C + + D + + key enzyme substance 1 substance 2 substance 3",
+      "parseStatus": "ok",
+      "stem": "Which diagram represents the action of lipase?",
+      "options": {
+        "A": "+ +",
+        "B": "+ + +",
+        "C": "+ +",
+        "D": "+ + key enzyme substance 1 substance 2 substance 3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q15.png",
+      "rawText": "The image shows a cross-section of part of a leaf. Which labelled structure is the xylem? A C B D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q16.png",
+      "rawText": "The diagram shows a cross-section of a root. Three regions of the root are numbered. 1 2 3 Which regions contain cells through which water must pass to reach the xylem? A 1, 2 and 3 B 1 and 2 only C 2 and 3 only D 2 only",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cross-section of a root. Three regions of the root are numbered. 1 2 3 Which regions contain cells through which water must pass to reach the xylem?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "2 and 3 only",
+        "D": "2 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q17.png",
+      "rawText": "In a double circulation, what is the role of the right side of the heart? A to receive oxygenated blood from the body and to pump oxygenated blood to the lungs B to receive oxygenated blood from the body and to pump deoxygenated blood to the lungs C to receive deoxygenated blood from the body and to pump oxygenated blood to the lungs D to receive deoxygenated blood from the body and to pump deoxygenated blood to the lungs",
+      "parseStatus": "ok",
+      "stem": "In a double circulation, what is the role of the right side of the heart?",
+      "options": {
+        "A": "to receive oxygenated blood from the body and to pump oxygenated blood to the lungs",
+        "B": "to receive oxygenated blood from the body and to pump deoxygenated blood to the lungs",
+        "C": "to receive deoxygenated blood from the body and to pump oxygenated blood to the lungs",
+        "D": "to receive deoxygenated blood from the body and to pump deoxygenated blood to the lungs"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q18.png",
+      "rawText": "The photomicrograph shows some human blood cells. X What is the name of cell X and what is its function? name function A lymphocyte produces antibodies B lymphocyte engulfs pathogens C phagocyte produces antibodies D phagocyte engulfs pathogens",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows some human blood cells. X What is the name of cell X and what is its function? name function",
+      "options": {
+        "A": "lymphocyte produces antibodies",
+        "B": "lymphocyte engulfs pathogens",
+        "C": "phagocyte produces antibodies",
+        "D": "phagocyte engulfs pathogens"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q19.png",
+      "rawText": "Three statements about immune responses are listed. 1 Antigens trigger an immune response which produces antibodies. 2 Memory cells are produced. 3 Antibodies are acquired from another individual. Which statements are correct when describing active immunity? A 1 only B 1 and 2 only C 2 and 3 only D 1, 2 and 3",
+      "parseStatus": "ok",
+      "stem": "Three statements about immune responses are listed. 1 Antigens trigger an immune response which produces antibodies. 2 Memory cells are produced. 3 Antibodies are acquired from another individual. Which statements are correct when describing active immunity?",
+      "options": {
+        "A": "1 only",
+        "B": "1 and 2 only",
+        "C": "2 and 3 only",
+        "D": "1, 2 and 3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q20.png",
+      "rawText": "Which row shows the action of muscles during inspiration? internal intercostal muscles external intercostal muscles diaphragm A contract relax relax B contract relax contract C relax contract relax D relax contract contract",
+      "parseStatus": "ok",
+      "stem": "Which row shows the action of muscles during inspiration? internal intercostal muscles external intercostal muscles diaphragm",
+      "options": {
+        "A": "contract relax relax",
+        "B": "contract relax contract",
+        "C": "relax contract relax",
+        "D": "relax contract contract"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q21.png",
+      "rawText": "Carbon dioxide is produced by aerobic respiration. How many molecules of carbon dioxide are produced from the aerobic respiration of three molecules of glucose? A 3 B 6 C 12 D 18",
+      "parseStatus": "ok",
+      "stem": "Carbon dioxide is produced by aerobic respiration. How many molecules of carbon dioxide are produced from the aerobic respiration of three molecules of glucose?",
+      "options": {
+        "A": "3",
+        "B": "6",
+        "C": "12",
+        "D": "18"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q22.png",
+      "rawText": "Which statements describe how an oxygen debt is removed after vigorous exercise? 1 Lactic acid is transported to the liver. 2 Lactic acid is respired aerobically. 3 Heart rate stays high to remove lactic acid from the muscles. A 1 and 2 only B 1 and 3 only C 1, 2 and 3 D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which statements describe how an oxygen debt is removed after vigorous exercise? 1 Lactic acid is transported to the liver. 2 Lactic acid is respired aerobically. 3 Heart rate stays high to remove lactic acid from the muscles.",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "1, 2 and 3",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q23.png",
+      "rawText": "Which statement about urea is correct? A Amino acids are transported to the kidneys where they are converted to urea. B Urea travels from liver cells to the kidneys where it is filtered out of the blood. C Liver cells break down proteins to amino acids which are then converted to urea in the kidneys. D Urea is made in the kidneys and then removed from the body by the liver.",
+      "parseStatus": "ok",
+      "stem": "Which statement about urea is correct?",
+      "options": {
+        "A": "Amino acids are transported to the kidneys where they are converted to urea.",
+        "B": "Urea travels from liver cells to the kidneys where it is filtered out of the blood.",
+        "C": "Liver cells break down proteins to amino acids which are then converted to urea in the kidneys.",
+        "D": "Urea is made in the kidneys and then removed from the body by the liver."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q24.png",
+      "rawText": "The diagram shows the junction between two neurones. X What is labelled at X? A neurotransmitter B vesicle C neurotransmitter receptor molecule D synaptic cleft",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the junction between two neurones. X What is labelled at X?",
+      "options": {
+        "A": "neurotransmitter",
+        "B": "vesicle",
+        "C": "neurotransmitter receptor molecule",
+        "D": "synaptic cleft"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q25.png",
+      "rawText": "The diagram shows the density of rods and cones across a section of the retina. What is the position of the fovea? density of receptors A B C D distance across the retina rods cones",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q26.png",
+      "rawText": "What is the synthetic plant hormone 2,4-D used for? A genetic engineering B inhibiting phototropism C killing weeds D promoting germination",
+      "parseStatus": "ok",
+      "stem": "What is the synthetic plant hormone 2,4-D used for?",
+      "options": {
+        "A": "genetic engineering",
+        "B": "inhibiting phototropism",
+        "C": "killing weeds",
+        "D": "promoting germination"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q27.png",
+      "rawText": "Which statement about asexual reproduction would be a disadvantage for a farmer growing crop plants? A Desirable qualities are shown throughout the crop. B No pollinators are required. C Only one parent plant is required so growth is rapid. D All of the crop plants have the same risk of disease.",
+      "parseStatus": "ok",
+      "stem": "Which statement about asexual reproduction would be a disadvantage for a farmer growing crop plants?",
+      "options": {
+        "A": "Desirable qualities are shown throughout the crop.",
+        "B": "No pollinators are required.",
+        "C": "Only one parent plant is required so growth is rapid.",
+        "D": "All of the crop plants have the same risk of disease."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q28.png",
+      "rawText": "The diagram shows an abnormal sperm cell. Why would the abnormal sperm cell be unable to fertilise an egg? A It has no acrosome so is unable to digest the jelly coat of the egg. B It has no mitochondria so lacks energy to swim to the egg. C It has no flagellum so cannot swim to the egg. D It has no nucleus so cannot fuse with the egg.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an abnormal sperm cell. Why would the abnormal sperm cell be unable to fertilise an egg?",
+      "options": {
+        "A": "It has no acrosome so is unable to digest the jelly coat of the egg.",
+        "B": "It has no mitochondria so lacks energy to swim to the egg.",
+        "C": "It has no flagellum so cannot swim to the egg.",
+        "D": "It has no nucleus so cannot fuse with the egg."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q29.png",
+      "rawText": "One type of contraceptive pill contains progesterone and oestrogen. Some effects of the pill are listed. 1 inhibit FSH production 2 inhibit LH production 3 inhibit thickening of the uterus wall Which prevent the development and the release of an egg cell? A 1, 2 and 3 B 1 and 2 only C 2 and 3 only D 3 only",
+      "parseStatus": "ok",
+      "stem": "One type of contraceptive pill contains progesterone and oestrogen. Some effects of the pill are listed. 1 inhibit FSH production 2 inhibit LH production 3 inhibit thickening of the uterus wall Which prevent the development and the release of an egg cell?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "2 and 3 only",
+        "D": "3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q30.png",
+      "rawText": "Some fruit flies have orange eyes and others have red eyes. If two orange-eyed fruit flies are crossed, their offspring always have orange eyes. If two red-eyed fruit flies are crossed, their offspring can have orange eyes or red eyes. What can be concluded from these observations? A The allele for orange eyes is dominant. B The allele for orange eyes is recessive. C The alleles for orange and red eyes are codominant. D This is an example of sex linkage.",
+      "parseStatus": "ok",
+      "stem": "Some fruit flies have orange eyes and others have red eyes. If two orange-eyed fruit flies are crossed, their offspring always have orange eyes. If two red-eyed fruit flies are crossed, their offspring can have orange eyes or red eyes. What can be concluded from these observations?",
+      "options": {
+        "A": "The allele for orange eyes is dominant.",
+        "B": "The allele for orange eyes is recessive.",
+        "C": "The alleles for orange and red eyes are codominant.",
+        "D": "This is an example of sex linkage."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q31.png",
+      "rawText": "The diagram shows a section of a flower that has been cross-pollinated. Which statements about this flower are correct? 1 The pollen produced by this flower will be genetically different from the pollen on the stigma. 2 The pollen was carried to the stigma by wind. 3 This flower is insect-pollinated because the stigma is enclosed by the petals. 4 The pollen was produced by another flower on the same plant. A 1, 2 and 4 B 1 and 3 C 3 only D 2 and 4 only",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section of a flower that has been cross-pollinated. Which statements about this flower are correct? 1 The pollen produced by this flower will be genetically different from the pollen on the stigma. 2 The pollen was carried to the stigma by wind. 3 This flower is insect-pollinated because the stigma is enclosed by the petals. 4 The pollen was produced by another flower on the same plant.",
+      "options": {
+        "A": "1, 2 and 4",
+        "B": "1 and 3",
+        "C": "3 only",
+        "D": "2 and 4 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q32.png",
+      "rawText": "A woman with normal colour vision is a carrier for the colour blindness allele (XBXb). She has a male child with a man who has normal colour vision (XBY). What is the chance of the male child being colour-blind? A 0% B 25% C 50% D 100%",
+      "parseStatus": "ok",
+      "stem": "A woman with normal colour vision is a carrier for the colour blindness allele (XBXb). She has a male child with a man who has normal colour vision (XBY). What is the chance of the male child being colour-blind?",
+      "options": {
+        "A": "0%",
+        "B": "25%",
+        "C": "50%",
+        "D": "100%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q33.png",
+      "rawText": "Sickle cell anaemia is a genetic disorder which results in severe illness in homozygous individuals. In some human populations, being heterozygous can be beneficial. What could be the reason for this? A Heterozygous individuals are not affected by the disorder. B Heterozygous individuals are more resistant to malaria. C The disorder is caused by a dominant allele. D The disorder is sex-linked.",
+      "parseStatus": "ok",
+      "stem": "Sickle cell anaemia is a genetic disorder which results in severe illness in homozygous individuals. In some human populations, being heterozygous can be beneficial. What could be the reason for this?",
+      "options": {
+        "A": "Heterozygous individuals are not affected by the disorder.",
+        "B": "Heterozygous individuals are more resistant to malaria.",
+        "C": "The disorder is caused by a dominant allele.",
+        "D": "The disorder is sex-linked."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q34.png",
+      "rawText": "Which statement about selective breeding is correct? A It does not involve humans. B It involves a struggle for survival. C It always involves only one parent. D It involves parents that possess desirable features.",
+      "parseStatus": "ok",
+      "stem": "Which statement about selective breeding is correct?",
+      "options": {
+        "A": "It does not involve humans.",
+        "B": "It involves a struggle for survival.",
+        "C": "It always involves only one parent.",
+        "D": "It involves parents that possess desirable features."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q35.png",
+      "rawText": "What is the name of an organism that obtains its energy from dead organic material? A carnivore B consumer C decomposer D herbivore",
+      "parseStatus": "ok",
+      "stem": "What is the name of an organism that obtains its energy from dead organic material?",
+      "options": {
+        "A": "carnivore",
+        "B": "consumer",
+        "C": "decomposer",
+        "D": "herbivore"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q36.png",
+      "rawText": "A herd of red deer live in a forest that contains snakes and a large variety of birds. Which group of organisms is an example of a population? A all the animals in the forest B all the red deer in the forest C all the organisms in the forest D all the plants in the forest",
+      "parseStatus": "ok",
+      "stem": "A herd of red deer live in a forest that contains snakes and a large variety of birds. Which group of organisms is an example of a population?",
+      "options": {
+        "A": "all the animals in the forest",
+        "B": "all the red deer in the forest",
+        "C": "all the organisms in the forest",
+        "D": "all the plants in the forest"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q37.png",
+      "rawText": "With which kingdoms do bacteria share the same genetic code? A animal, plant, fungus and protoctist B animal, plant and fungus only C animal and plant only D animal only",
+      "parseStatus": "ok",
+      "stem": "With which kingdoms do bacteria share the same genetic code?",
+      "options": {
+        "A": "animal, plant, fungus and protoctist",
+        "B": "animal, plant and fungus only",
+        "C": "animal and plant only",
+        "D": "animal only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q38.png",
+      "rawText": "Which process makes use of a genetically engineered organism? A using bacteria to produce insulin B using enzymes in biological washing powders C using pectinase in fruit juice production D using yeast to produce ethanol",
+      "parseStatus": "ok",
+      "stem": "Which process makes use of a genetically engineered organism?",
+      "options": {
+        "A": "using bacteria to produce insulin",
+        "B": "using enzymes in biological washing powders",
+        "C": "using pectinase in fruit juice production",
+        "D": "using yeast to produce ethanol"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q39.png",
+      "rawText": "What is a reason for conserving plant species? A to absorb oxygen from the air B to decrease rainfall C to obtain drugs for medicinal use D to release carbon dioxide into the air",
+      "parseStatus": "ok",
+      "stem": "What is a reason for conserving plant species?",
+      "options": {
+        "A": "to absorb oxygen from the air",
+        "B": "to decrease rainfall",
+        "C": "to obtain drugs for medicinal use",
+        "D": "to release carbon dioxide into the air"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_23/q40.png",
+      "rawText": "The food web shows the feeding relationships in a woodland. trees wood pigeons caterpillars chaffinches sparrowhawks grey squirrels If all the chaffinches in the food web die, which effect would this have? A The amount of damage to trees will increase. B The food supply for grey squirrels will increase. C The number of wood pigeons will increase. D The population of caterpillars will decrease.",
+      "parseStatus": "ok",
+      "stem": "The food web shows the feeding relationships in a woodland. trees wood pigeons caterpillars chaffinches sparrowhawks grey squirrels If all the chaffinches in the food web die, which effect would this have?",
+      "options": {
+        "A": "The amount of damage to trees will increase.",
+        "B": "The food supply for grey squirrels will increase.",
+        "C": "The number of wood pigeons will increase.",
+        "D": "The population of caterpillars will decrease."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

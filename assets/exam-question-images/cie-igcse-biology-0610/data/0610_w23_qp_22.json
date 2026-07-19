@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0610_w23_qp_22.pdf",
+  "markScheme": "0610_w23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q01.png",
+      "rawText": "Which processes are characteristics of all living organisms? 1 digestion",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q02.png",
+      "rawText": "Using the binomial system, the Arctic fox is called Vulpes lagopus. Which row is correct? Vulpes lagopus A genus kingdom B genus species C species genus D species kingdom",
+      "parseStatus": "ok",
+      "stem": "Using the binomial system, the Arctic fox is called Vulpes lagopus. Which row is correct? Vulpes lagopus",
+      "options": {
+        "A": "genus kingdom",
+        "B": "genus species",
+        "C": "species genus",
+        "D": "species kingdom"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q03.png",
+      "rawText": "Which feature is found in viruses? A cell wall B mitochondria C nucleus D protein coat",
+      "parseStatus": "ok",
+      "stem": "Which feature is found in viruses?",
+      "options": {
+        "A": "cell wall",
+        "B": "mitochondria",
+        "C": "nucleus",
+        "D": "protein coat"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q04.png",
+      "rawText": "Which features are possessed by all plant cells? a cell wall chloroplasts A \u0016 \u0016 key B \u0016 \u001a \u0016 = yes C \u001a \u0016 \u001a = no D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which features are possessed by all plant cells? a cell wall chloroplasts",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016 = yes",
+        "C": "\u001a \u0016 \u001a = no",
+        "D": "\u001a \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q05.png",
+      "rawText": "The length of a bacterium in a diagram is 50 mm. The magnification of the diagram is 5000. What is the actual length of the bacterium? A 1 m B 10 m C 100 m D 1000 m",
+      "parseStatus": "ok",
+      "stem": "The length of a bacterium in a diagram is 50 mm. The magnification of the diagram is 5000. What is the actual length of the bacterium?",
+      "options": {
+        "A": "1 m",
+        "B": "10 m",
+        "C": "100 m",
+        "D": "1000 m"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q06.png",
+      "rawText": "The diagram shows an experiment to investigate osmosis in living cells. water glass dish potato concentrated sugar solution What happens to the volumes of water and sugar solution after 12 hours? volume of water volume of sugar solution A decreases increases B increases increases C increases remains the same D remains the same decreases",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment to investigate osmosis in living cells. water glass dish potato concentrated sugar solution What happens to the volumes of water and sugar solution after 12 hours? volume of water volume of sugar solution",
+      "options": {
+        "A": "decreases increases",
+        "B": "increases increases",
+        "C": "increases remains the same",
+        "D": "remains the same decreases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q07.png",
+      "rawText": "Which statements about active transport are correct? 1 It transports particles from a low concentration to a high concentration. 2 It always transports particles into cells. 3 It involves protein molecules in the cell membrane. 4 It uses energy from respiration. A 1, 2, 3 and 4 B 1, 3 and 4 only C 1 and 2 only D 3 and 4 only",
+      "parseStatus": "ok",
+      "stem": "Which statements about active transport are correct? 1 It transports particles from a low concentration to a high concentration. 2 It always transports particles into cells. 3 It involves protein molecules in the cell membrane. 4 It uses energy from respiration.",
+      "options": {
+        "A": "1, 2, 3 and 4",
+        "B": "1, 3 and 4 only",
+        "C": "1 and 2 only",
+        "D": "3 and 4 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q08.png",
+      "rawText": "Which row identifies the chemical elements in proteins? carbon hydrogen oxygen nitrogen A \u0016 \u0016 \u0016 \u0016 key B \u0016 \u001a \u0016 \u001a \u0016 = present C \u001a \u0016 \u0016 \u0016 \u001a = absent D \u0016 \u0016 \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which row identifies the chemical elements in proteins? carbon hydrogen oxygen nitrogen",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016 \u001a \u0016 = present",
+        "C": "\u001a \u0016 \u0016 \u0016 \u001a = absent",
+        "D": "\u0016 \u0016 \u001a \u001a"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q09.png",
+      "rawText": "The table shows some large biological molecules and some small biological molecules. large biological molecules small biological molecules 1 cellulose glucose 2 oil amino acids 3 glycogen glucose 4 protein ethanol Which rows correctly pair large molecules with the smaller molecules used to make them? A 1 and 2 B 1 and 3 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The table shows some large biological molecules and some small biological molecules. large biological molecules small biological molecules 1 cellulose glucose 2 oil amino acids 3 glycogen glucose 4 protein ethanol Which rows correctly pair large molecules with the smaller molecules used to make them?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q10.png",
+      "rawText": "The graph shows the results of an experiment to investigate the rate of respiration in an organism in different environmental temperatures. 10 0 15 20 25 temperature / °C rate of respiration 30 35 40 What explains the increase in the rate of respiration between 10 C and 30 C? A The enzymes are denaturing. B There are more frequent effective collisions between enzyme and substrate molecules. C There are fewer enzyme-substrate complexes formed. D There is less kinetic energy.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the results of an experiment to investigate the rate of respiration in an organism in different environmental temperatures. 10 0 15 20 25 temperature / °C rate of respiration 30 35 40 What explains the increase in the rate of respiration between 10 C and 30 C?",
+      "options": {
+        "A": "The enzymes are denaturing.",
+        "B": "There are more frequent effective collisions between enzyme and substrate molecules.",
+        "C": "There are fewer enzyme-substrate complexes formed.",
+        "D": "There is less kinetic energy."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q11.png",
+      "rawText": "The diagram shows how the rate of photosynthesis varies with light intensity. The four curves show different conditions of temperature and carbon dioxide concentration. rate of photosynthesis light intensity 30 °C, 0.2% CO2 20 °C, 0.2% CO2 30 °C, 0.1% CO2 20 °C, 0.1% CO2 P What limits the rate of photosynthesis at point P? light intensity carbon dioxide concentration temperature A \u0016 \u0016 \u001a key B \u0016 \u001a \u001a \u0016 = yes C \u001a \u0016 \u0016 \u001a = no D \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how the rate of photosynthesis varies with light intensity. The four curves show different conditions of temperature and carbon dioxide concentration. rate of photosynthesis light intensity 30 °C, 0.2% CO2 20 °C, 0.2% CO2 30 °C, 0.1% CO2 20 °C, 0.1% CO2 P What limits the rate of photosynthesis at point P? light intensity carbon dioxide concentration temperature",
+      "options": {
+        "A": "\u0016 \u0016 \u001a key",
+        "B": "\u0016 \u001a \u001a \u0016 = yes",
+        "C": "\u001a \u0016 \u0016 \u001a = no",
+        "D": "\u001a \u001a \u0016"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q12.png",
+      "rawText": "The diagram shows a cell with groups of bacteria around its edge. cell cytoplasm bacteria spiral-shaped chloroplast The bacteria have moved to areas of high oxygen concentration. Which process in the cell causes the bacteria to form these groups? A digestion B photosynthesis C reproduction D respiration",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cell with groups of bacteria around its edge. cell cytoplasm bacteria spiral-shaped chloroplast The bacteria have moved to areas of high oxygen concentration. Which process in the cell causes the bacteria to form these groups?",
+      "options": {
+        "A": "digestion",
+        "B": "photosynthesis",
+        "C": "reproduction",
+        "D": "respiration"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q13.png",
+      "rawText": "The diagram shows the teeth in the lower jaw of a human. Which tooth is a premolar? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q14.png",
+      "rawText": "Some medicines are made into tablets which are coated in a starch-like substance. The coating protects the medicine from the effects of gastric juice. Which enzyme digests the coating and what is produced by this action? enzyme products A amylase fatty acids and glycerol B amylase simple reducing sugars C lipase fatty acids and glycerol D lipase simple reducing sugars",
+      "parseStatus": "ok",
+      "stem": "Some medicines are made into tablets which are coated in a starch-like substance. The coating protects the medicine from the effects of gastric juice. Which enzyme digests the coating and what is produced by this action? enzyme products",
+      "options": {
+        "A": "amylase fatty acids and glycerol",
+        "B": "amylase simple reducing sugars",
+        "C": "lipase fatty acids and glycerol",
+        "D": "lipase simple reducing sugars"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q15.png",
+      "rawText": "The diagram shows a villus. The arrows show the direction of flow within vessels associated with the villus. Which vessel carries blood to the liver? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q16.png",
+      "rawText": "From which part of a leaf does most water evaporate during transpiration? A the cuticle B the guard cells C the spongy mesophyll cells D the xylem vessels",
+      "parseStatus": "ok",
+      "stem": "From which part of a leaf does most water evaporate during transpiration?",
+      "options": {
+        "A": "the cuticle",
+        "B": "the guard cells",
+        "C": "the spongy mesophyll cells",
+        "D": "the xylem vessels"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q17.png",
+      "rawText": "The photograph shows a cross-section through a sunflower stem. Z What is the name and function of the tissue labelled Z? name of tissue function of tissue A phloem transport of mineral ions B phloem transport of sucrose C xylem transport of mineral ions D xylem transport of sucrose",
+      "parseStatus": "ok",
+      "stem": "The photograph shows a cross-section through a sunflower stem. Z What is the name and function of the tissue labelled Z? name of tissue function of tissue",
+      "options": {
+        "A": "phloem transport of mineral ions",
+        "B": "phloem transport of sucrose",
+        "C": "xylem transport of mineral ions",
+        "D": "xylem transport of sucrose"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q18.png",
+      "rawText": "The photomicrograph shows some blood cells. P What is the function of cell P? A It carries carbon dioxide. B It carries oxygen. C It helps to clot blood. D It produces antibodies.",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows some blood cells. P What is the function of cell P?",
+      "options": {
+        "A": "It carries carbon dioxide.",
+        "B": "It carries oxygen.",
+        "C": "It helps to clot blood.",
+        "D": "It produces antibodies."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q19.png",
+      "rawText": "The diagram shows the blood vessels associated with the liver. liver X Z aorta Y key direction of blood flow small intestine NOT TO SCALE What are the blood vessels labelled X, Y and Z? X Y Z A hepatic artery hepatic portal vein hepatic vein B hepatic portal vein hepatic artery hepatic vein C hepatic vein hepatic artery hepatic portal vein D hepatic vein hepatic portal vein hepatic artery",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the blood vessels associated with the liver. liver X Z aorta Y key direction of blood flow small intestine NOT TO SCALE What are the blood vessels labelled X, Y and Z? X Y Z",
+      "options": {
+        "A": "hepatic artery hepatic portal vein hepatic vein",
+        "B": "hepatic portal vein hepatic artery hepatic vein",
+        "C": "hepatic vein hepatic artery hepatic portal vein",
+        "D": "hepatic vein hepatic portal vein hepatic artery"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q20.png",
+      "rawText": "When a pathogen enters the blood, the immune system uses different mechanisms to destroy the pathogen. The diagram shows one of these mechanisms. X Y pathogen Which row describes the structures involved? structure X X is made by structure Y A antigen lymphocytes antibody B antigen phagocytes antibody C antibody lymphocytes antigen D antibody phagocytes antigen",
+      "parseStatus": "ok",
+      "stem": "When a pathogen enters the blood, the immune system uses different mechanisms to destroy the pathogen. The diagram shows one of these mechanisms. X Y pathogen Which row describes the structures involved? structure X X is made by structure Y",
+      "options": {
+        "A": "antigen lymphocytes antibody",
+        "B": "antigen phagocytes antibody",
+        "C": "antibody lymphocytes antigen",
+        "D": "antibody phagocytes antigen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q21.png",
+      "rawText": "What is the composition of expired air compared with inspired air? carbon dioxide oxygen water vapour A decreased increased increased B decreased decreased increased C increased decreased decreased D increased decreased increased",
+      "parseStatus": "ok",
+      "stem": "What is the composition of expired air compared with inspired air? carbon dioxide oxygen water vapour",
+      "options": {
+        "A": "decreased increased increased",
+        "B": "decreased decreased increased",
+        "C": "increased decreased decreased",
+        "D": "increased decreased increased"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q22.png",
+      "rawText": "During exercise, receptors detect a change in the blood and cause the breathing rate to increase. Which change do the receptors detect and where are they found in the body? change detected in the blood location of receptors A carbon dioxide increases brain B carbon dioxide increases lung C carbon dioxide decreases brain D carbon dioxide decreases lung",
+      "parseStatus": "ok",
+      "stem": "During exercise, receptors detect a change in the blood and cause the breathing rate to increase. Which change do the receptors detect and where are they found in the body? change detected in the blood location of receptors",
+      "options": {
+        "A": "carbon dioxide increases brain",
+        "B": "carbon dioxide increases lung",
+        "C": "carbon dioxide decreases brain",
+        "D": "carbon dioxide decreases lung"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q23.png",
+      "rawText": "Yeast cells can convert glucose into alcohol and carbon dioxide. Which statement about this process is correct? A The alcohol produced can be used to make bread rise. B The carbon dioxide produced can be burnt as a biofuel. C The yeast cells are using oxygen for this process. D The yeast cells are carrying out anaerobic respiration.",
+      "parseStatus": "ok",
+      "stem": "Yeast cells can convert glucose into alcohol and carbon dioxide. Which statement about this process is correct?",
+      "options": {
+        "A": "The alcohol produced can be used to make bread rise.",
+        "B": "The carbon dioxide produced can be burnt as a biofuel.",
+        "C": "The yeast cells are using oxygen for this process.",
+        "D": "The yeast cells are carrying out anaerobic respiration."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q24.png",
+      "rawText": "What is the correct balanced equation for one type of respiration? A C2H5OH  2C6H12O6 + 2CO2 B 2C2H5OH  C6H12O6 + 2H2O C C6H12O6  2C2H5OH + 2CO2 D C6H12O6  2C2H5OH + 2H2O",
+      "parseStatus": "ok",
+      "stem": "What is the correct balanced equation for one type of respiration?",
+      "options": {
+        "A": "C2H5OH  2C6H12O6 + 2CO2",
+        "B": "2C2H5OH  C6H12O6 + 2H2O",
+        "C": "C6H12O6  2C2H5OH + 2CO2",
+        "D": "C6H12O6  2C2H5OH + 2H2O"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q25.png",
+      "rawText": "Which row shows an organ and the substance it excretes? organ substance excreted A bladder water B kidney ions C lung oxygen D urethra urea",
+      "parseStatus": "ok",
+      "stem": "Which row shows an organ and the substance it excretes? organ substance excreted",
+      "options": {
+        "A": "bladder water",
+        "B": "kidney ions",
+        "C": "lung oxygen",
+        "D": "urethra urea"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q26.png",
+      "rawText": "The diagram shows a reflex arc in a human nervous system. The person’s finger has just made contact with a sharp object. Which part is the motor neurone? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q27.png",
+      "rawText": "Which hormones can increase blood glucose concentration? A adrenaline and insulin B adrenaline and glucagon C adrenaline only D glucagon only",
+      "parseStatus": "ok",
+      "stem": "Which hormones can increase blood glucose concentration?",
+      "options": {
+        "A": "adrenaline and insulin",
+        "B": "adrenaline and glucagon",
+        "C": "adrenaline only",
+        "D": "glucagon only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q28.png",
+      "rawText": "What is defined as a substance that is taken into the body and modifies or affects chemical reactions in the body? A antibody B drug C hormone D pathogen",
+      "parseStatus": "ok",
+      "stem": "What is defined as a substance that is taken into the body and modifies or affects chemical reactions in the body?",
+      "options": {
+        "A": "antibody",
+        "B": "drug",
+        "C": "hormone",
+        "D": "pathogen"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q29.png",
+      "rawText": "What is a disadvantage of sexual reproduction for a population in the wild? A a reduction in genetic diversity B a decreased ability to adapt to changes in the environment C a reduction in reproduction if individuals are isolated D an increased likelihood of a disease affecting all individuals",
+      "parseStatus": "ok",
+      "stem": "What is a disadvantage of sexual reproduction for a population in the wild?",
+      "options": {
+        "A": "a reduction in genetic diversity",
+        "B": "a decreased ability to adapt to changes in the environment",
+        "C": "a reduction in reproduction if individuals are isolated",
+        "D": "an increased likelihood of a disease affecting all individuals"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q30.png",
+      "rawText": "Pollen grains from a plant were placed onto the stigma of a flower of the same plant. The lengths of the pollen tubes were measured for four hours. (The mean length of the style in this species of plant is 2 mm.) This was repeated using pollen from a different plant. The results are shown. 3500 3000 2500 2000 1500 1000 500 0 mean length of the pollen tubes / μm time / hours 0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 pollen from a different plant pollen from the same plant Which statements are correct? 1 Self-pollination does not lead to fertilisation. 2 The difference in growth of the two types of pollen is an adaptation to increase variation. 3 The pollen tubes from a different plant grew fastest between 2.0 hours and 4.0 hours. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Pollen grains from a plant were placed onto the stigma of a flower of the same plant. The lengths of the pollen tubes were measured for four hours. (The mean length of the style in this species of plant is 2 mm.) This was repeated using pollen from a different plant. The results are shown. 3500 3000 2500 2000 1500 1000 500 0 mean length of the pollen tubes / μm time / hours 0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 pollen from a different plant pollen from the same plant Which statements are correct? 1 Self-pollination does not lead to fertilisation. 2 The difference in growth of the two types of pollen is an adaptation to increase variation. 3 The pollen tubes from a different plant grew fastest between 2.0 hours and 4.0 hours.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q31.png",
+      "rawText": "Which hormones are released by the placenta during pregnancy? A FSH and LH B FSH and progesterone C oestrogen and LH D progesterone and oestrogen",
+      "parseStatus": "ok",
+      "stem": "Which hormones are released by the placenta during pregnancy?",
+      "options": {
+        "A": "FSH and LH",
+        "B": "FSH and progesterone",
+        "C": "oestrogen and LH",
+        "D": "progesterone and oestrogen"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q32.png",
+      "rawText": "Why are cells in the pancreas the only body cells that produce insulin? A All of the genes in the nucleus of a cell in the pancreas are expressed. B Other body cells do not have the gene for insulin. C The cells in the pancreas have twice as many genes as the other body cells. D The gene for insulin is only expressed by cells in the pancreas.",
+      "parseStatus": "ok",
+      "stem": "Why are cells in the pancreas the only body cells that produce insulin?",
+      "options": {
+        "A": "All of the genes in the nucleus of a cell in the pancreas are expressed.",
+        "B": "Other body cells do not have the gene for insulin.",
+        "C": "The cells in the pancreas have twice as many genes as the other body cells.",
+        "D": "The gene for insulin is only expressed by cells in the pancreas."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q33.png",
+      "rawText": "Which statement is correct? A Mitosis always produces offspring that are homozygous. B Mitosis produces cells that are genetically identical. C Mitosis produces gametes in animals. D Mitosis only produces haploid cells.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "Mitosis always produces offspring that are homozygous.",
+        "B": "Mitosis produces cells that are genetically identical.",
+        "C": "Mitosis produces gametes in animals.",
+        "D": "Mitosis only produces haploid cells."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q34.png",
+      "rawText": "What are sources of genetic variation in populations? 1 meiosis 2 random mating 3 random fertilisation A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "What are sources of genetic variation in populations? 1 meiosis 2 random mating 3 random fertilisation",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q35.png",
+      "rawText": "Which row shows features of xerophytes that reduce water loss? green colour from chlorophyll leaves reduced to spines presence of stomata thick cuticle A \u0016 \u001a \u0016 \u001a B \u0016 \u0016 \u001a \u001a C \u001a \u0016 \u001a \u0016 D \u001a \u001a \u0016 \u0016 key \u0016 = reduces water loss \u001a = does not reduce water loss",
+      "parseStatus": "ok",
+      "stem": "Which row shows features of xerophytes that reduce water loss? green colour from chlorophyll leaves reduced to spines presence of stomata thick cuticle",
+      "options": {
+        "A": "\u0016 \u001a \u0016 \u001a",
+        "B": "\u0016 \u0016 \u001a \u001a",
+        "C": "\u001a \u0016 \u001a \u0016",
+        "D": "\u001a \u001a \u0016 \u0016 key \u0016 = reduces water loss \u001a = does not reduce water loss"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q36.png",
+      "rawText": "The diagram shows a food chain. tree  insect  blue tit  hawk Which statement about a pyramid based on this food chain is correct? A Drawn as a pyramid of biomass, the hawk would have the largest bar size. B Drawn as a pyramid of energy, the tree would have the largest bar size. C Drawn as a pyramid of energy, the tree would have the smallest bar size. D Drawn as a pyramid of numbers, the hawk would have the largest bar size.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food chain. tree  insect  blue tit  hawk Which statement about a pyramid based on this food chain is correct?",
+      "options": {
+        "A": "Drawn as a pyramid of biomass, the hawk would have the largest bar size.",
+        "B": "Drawn as a pyramid of energy, the tree would have the largest bar size.",
+        "C": "Drawn as a pyramid of energy, the tree would have the smallest bar size.",
+        "D": "Drawn as a pyramid of numbers, the hawk would have the largest bar size."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q37.png",
+      "rawText": "During the nitrogen cycle, which process releases nitrogen gas into the air? A decomposition B denitrification C nitrification D nitrogen fixation",
+      "parseStatus": "ok",
+      "stem": "During the nitrogen cycle, which process releases nitrogen gas into the air?",
+      "options": {
+        "A": "decomposition",
+        "B": "denitrification",
+        "C": "nitrification",
+        "D": "nitrogen fixation"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q38.png",
+      "rawText": "Red-green colour blindness is a sex-linked characteristic caused by a recessive allele. Which prediction can be made about the children of a woman who is colour-blind and a man with normal vision? A Boys will be colour-blind, and girls will have a 50% chance of being colour-blind. B Boys will be colour-blind, and girls will have normal vision. C Girls will be colour-blind, and boys will have a 50% chance of being colour-blind. D Girls will be colour-blind, and boys will have normal vision.",
+      "parseStatus": "ok",
+      "stem": "Red-green colour blindness is a sex-linked characteristic caused by a recessive allele. Which prediction can be made about the children of a woman who is colour-blind and a man with normal vision?",
+      "options": {
+        "A": "Boys will be colour-blind, and girls will have a 50% chance of being colour-blind.",
+        "B": "Boys will be colour-blind, and girls will have normal vision.",
+        "C": "Girls will be colour-blind, and boys will have a 50% chance of being colour-blind.",
+        "D": "Girls will be colour-blind, and boys will have normal vision."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q39.png",
+      "rawText": "One method of conserving fish stocks is to have a minimum mesh size for fishing nets. How is the mesh size chosen to conserve a particular fish species? A The holes in the net must be small enough to catch only young fish. B The holes in the net must be small enough to catch all fish old enough to reproduce. C The holes in the net must be large enough to catch some fish of all ages. D The holes in the net must be large enough to allow young fish to escape.",
+      "parseStatus": "ok",
+      "stem": "One method of conserving fish stocks is to have a minimum mesh size for fishing nets. How is the mesh size chosen to conserve a particular fish species?",
+      "options": {
+        "A": "The holes in the net must be small enough to catch only young fish.",
+        "B": "The holes in the net must be small enough to catch all fish old enough to reproduce.",
+        "C": "The holes in the net must be large enough to catch some fish of all ages.",
+        "D": "The holes in the net must be large enough to allow young fish to escape."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_22/q40.png",
+      "rawText": "The diagram shows how a human gene can be inserted into a bacterium. human cell bacterium a bacterial plasmid is removed and cut 2 a human gene is inserted into the plasmid 3 gene removed from a human chromosome 1 4 Which row shows the correct processes at 1, 2, 3 and 4? using restriction enzymes using ligase enzymes multiplication of bacteria A 1 2 3 B 1 and 2 3 4 C 1 and 3 2 4 D 4 1 and 2 3",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how a human gene can be inserted into a bacterium. human cell bacterium a bacterial plasmid is removed and cut 2 a human gene is inserted into the plasmid 3 gene removed from a human chromosome 1 4 Which row shows the correct processes at 1, 2, 3 and 4? using restriction enzymes using ligase enzymes multiplication of bacteria",
+      "options": {
+        "A": "1 2 3",
+        "B": "1 and 2 3 4",
+        "C": "1 and 3 2 4",
+        "D": "4 1 and 2 3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

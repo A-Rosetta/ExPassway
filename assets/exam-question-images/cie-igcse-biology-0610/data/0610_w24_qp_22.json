@@ -1,0 +1,673 @@
+{
+  "questionPaper": "0610_w24_qp_22.pdf",
+  "markScheme": "0610_w24_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q01.png",
+      "rawText": "Which organisms carry out respiration, growth, movement and excretion? A all animals and all plants B animals only C arthropods and flowering plants only D plants only",
+      "parseStatus": "ok",
+      "stem": "Which organisms carry out respiration, growth, movement and excretion?",
+      "options": {
+        "A": "all animals and all plants",
+        "B": "animals only",
+        "C": "arthropods and flowering plants only",
+        "D": "plants only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q02.png",
+      "rawText": "The chimpanzee belongs to the species Pan troglodytes. What is the genus of this species? A chimpanzee B Pan C Pan troglodytes D troglodytes",
+      "parseStatus": "ok",
+      "stem": "The chimpanzee belongs to the species Pan troglodytes. What is the genus of this species?",
+      "options": {
+        "A": "chimpanzee",
+        "B": "Pan",
+        "C": "Pan troglodytes",
+        "D": "troglodytes"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q03.png",
+      "rawText": "The diagram shows a tree leaf. Use the key to identify the tree species to which the leaf belongs. leaf is simple, with no leaflets leaf edge smooth Fagus sylvatica leaf edge jagged Ulmus minor leaf is compound, with many leaflets leaf edge smooth Fraxinus americana leaf edge jagged Sorbus aucuparia leaf shape A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q04.png",
+      "rawText": "What is the function of mitochondria in cells? A to absorb light energy B to produce glucose C to release energy D to transport oxygen",
+      "parseStatus": "ok",
+      "stem": "What is the function of mitochondria in cells?",
+      "options": {
+        "A": "to absorb light energy",
+        "B": "to produce glucose",
+        "C": "to release energy",
+        "D": "to transport oxygen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q05.png",
+      "rawText": "Which row shows a function of the cell membrane and a function of the cell wall in a palisade cell? cell membrane cell wall A active transport active transport B active transport support C support active transport D support support",
+      "parseStatus": "ok",
+      "stem": "Which row shows a function of the cell membrane and a function of the cell wall in a palisade cell? cell membrane cell wall",
+      "options": {
+        "A": "active transport active transport",
+        "B": "active transport support",
+        "C": "support active transport",
+        "D": "support support"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q06.png",
+      "rawText": "A specimen is viewed under a microscope with a 10 magnification. The specimen image measures 30 mm. What is the actual size of the specimen? A 3 m B 30 m C 300 m D 3000 m",
+      "parseStatus": "ok",
+      "stem": "A specimen is viewed under a microscope with a 10 magnification. The specimen image measures 30 mm. What is the actual size of the specimen?",
+      "options": {
+        "A": "3 m",
+        "B": "30 m",
+        "C": "300 m",
+        "D": "3000 m"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q07.png",
+      "rawText": "The diagram shows the water potential of three plant cells. The more negative the value, the higher the solute concentration. –360 kPa P –340 kPa R – 400 kPa Q What is the immediate movement of water that will occur between the three cells? A from P to Q, and from R to P and Q B from Q to P and R only C from Q to P and R, and from P to R D from R to Q only",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the water potential of three plant cells. The more negative the value, the higher the solute concentration. –360 kPa P –340 kPa R – 400 kPa Q What is the immediate movement of water that will occur between the three cells?",
+      "options": {
+        "A": "from P to Q, and from R to P and Q",
+        "B": "from Q to P and R only",
+        "C": "from Q to P and R, and from P to R",
+        "D": "from R to Q only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q08.png",
+      "rawText": "Which base in a DNA molecule always pairs with a G base? A A B G C C D T",
+      "parseStatus": "ok",
+      "stem": "Which base in a DNA molecule always pairs with a G base?",
+      "options": {
+        "A": "A",
+        "B": "G",
+        "C": "C",
+        "D": "T"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q09.png",
+      "rawText": "The diagram shows the steps in an enzyme-controlled reaction. X enzyme enzyme What describes the part labelled X? A active site B enzyme–substrate complex C product D substrate",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the steps in an enzyme-controlled reaction. X enzyme enzyme What describes the part labelled X?",
+      "options": {
+        "A": "active site",
+        "B": "enzyme–substrate complex",
+        "C": "product",
+        "D": "substrate"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q10.png",
+      "rawText": "The graph shows the effect of temperature on the time taken for the complete digestion of starch. time for complete digestion / minutes temperature / °C 0 10 20 30 40 50 60 6 5 4 3 2 1 0 At which temperature is the rate of digestion of starch the greatest? A 10 °C B 30 °C C 40 °C D 50 °C",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of temperature on the time taken for the complete digestion of starch. time for complete digestion / minutes temperature / °C 0 10 20 30 40 50 60 6 5 4 3 2 1 0 At which temperature is the rate of digestion of starch the greatest?",
+      "options": {
+        "A": "10 °C",
+        "B": "30 °C",
+        "C": "40 °C",
+        "D": "50 °C"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q11.png",
+      "rawText": "Which substance is needed to make chlorophyll and which part of the plant absorbs the substance? substance part of the plant where the substance is absorbed A calcium root hairs B calcium stomata C magnesium root hairs D magnesium stomata",
+      "parseStatus": "ok",
+      "stem": "Which substance is needed to make chlorophyll and which part of the plant absorbs the substance? substance part of the plant where the substance is absorbed",
+      "options": {
+        "A": "calcium root hairs",
+        "B": "calcium stomata",
+        "C": "magnesium root hairs",
+        "D": "magnesium stomata"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q12.png",
+      "rawText": "The diagram shows a type of plant cell. cytoplasm nucleus vacuole chloroplast In which tissue is this cell found? A leaf epidermis B palisade mesophyll C root epidermis D xylem",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a type of plant cell. cytoplasm nucleus vacuole chloroplast In which tissue is this cell found?",
+      "options": {
+        "A": "leaf epidermis",
+        "B": "palisade mesophyll",
+        "C": "root epidermis",
+        "D": "xylem"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q13.png",
+      "rawText": "Which components of a balanced diet are needed to make haemoglobin and to prevent scurvy and rickets? A carbohydrates and mineral ions B carbohydrates and proteins C mineral ions and vitamins D vitamins and fibre",
+      "parseStatus": "ok",
+      "stem": "Which components of a balanced diet are needed to make haemoglobin and to prevent scurvy and rickets?",
+      "options": {
+        "A": "carbohydrates and mineral ions",
+        "B": "carbohydrates and proteins",
+        "C": "mineral ions and vitamins",
+        "D": "vitamins and fibre"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q14.png",
+      "rawText": "Which group of organs belongs to the same organ system? A diaphragm, oesophagus, trachea B heart, liver, lungs C heart, stomach, trachea D oesophagus, intestine, stomach",
+      "parseStatus": "ok",
+      "stem": "Which group of organs belongs to the same organ system?",
+      "options": {
+        "A": "diaphragm, oesophagus, trachea",
+        "B": "heart, liver, lungs",
+        "C": "heart, stomach, trachea",
+        "D": "oesophagus, intestine, stomach"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q15.png",
+      "rawText": "The diagram shows a villus. 1 4 2 3 Which parts transport glucose and fatty acids away from the villus? glucose fatty acids A 3 1 B 3 2 C 4 3 D 4 4",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a villus. 1 4 2 3 Which parts transport glucose and fatty acids away from the villus? glucose fatty acids",
+      "options": {
+        "A": "3 1",
+        "B": "3 2",
+        "C": "4 3",
+        "D": "4 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q16.png",
+      "rawText": "Which conditions lead to the lowest rate of transpiration in a plant? A cool and high humidity B cool and windy C warm and low humidity D warm and windy",
+      "parseStatus": "ok",
+      "stem": "Which conditions lead to the lowest rate of transpiration in a plant?",
+      "options": {
+        "A": "cool and high humidity",
+        "B": "cool and windy",
+        "C": "warm and low humidity",
+        "D": "warm and windy"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q17.png",
+      "rawText": "The table shows the transport tissues of plants and some substances that may or may not travel through these tissues. Which row is correct for translocation? plant tissue substance transported A phloem maltose B phloem sucrose C xylem amino acids D xylem water",
+      "parseStatus": "ok",
+      "stem": "The table shows the transport tissues of plants and some substances that may or may not travel through these tissues. Which row is correct for translocation? plant tissue substance transported",
+      "options": {
+        "A": "phloem maltose",
+        "B": "phloem sucrose",
+        "C": "xylem amino acids",
+        "D": "xylem water"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q18.png",
+      "rawText": "The diagram shows the circulatory system of a fish. oxygenated blood deoxygenated blood direction of blood flow key X What is the structure labelled X? A aorta B gills C heart D vena cava",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the circulatory system of a fish. oxygenated blood deoxygenated blood direction of blood flow key X What is the structure labelled X?",
+      "options": {
+        "A": "aorta",
+        "B": "gills",
+        "C": "heart",
+        "D": "vena cava"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q19.png",
+      "rawText": "Which factors increase the risk of developing coronary heart disease? 1 increased age 2 regular exercise 3 smoking 4 stress A 1, 2 and 3 B 1, 2 and 4 C 1, 3 and 4 D 2, 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which factors increase the risk of developing coronary heart disease? 1 increased age 2 regular exercise 3 smoking 4 stress",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1, 2 and 4",
+        "C": "1, 3 and 4",
+        "D": "2, 3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q20.png",
+      "rawText": "Which features of the human body protect against pathogens in food? red blood cells stomach acid white blood cells A yes yes no B yes no no C no yes yes D no no yes",
+      "parseStatus": "ok",
+      "stem": "Which features of the human body protect against pathogens in food? red blood cells stomach acid white blood cells",
+      "options": {
+        "A": "yes yes no",
+        "B": "yes no no",
+        "C": "no yes yes",
+        "D": "no no yes"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q21.png",
+      "rawText": "What causes air to enter the lungs? external intercostal muscles volume of thorax air pressure in thorax A contract decreases decreases B relax decreases increases C contract increases decreases D relax increases increases",
+      "parseStatus": "ok",
+      "stem": "What causes air to enter the lungs? external intercostal muscles volume of thorax air pressure in thorax",
+      "options": {
+        "A": "contract decreases decreases",
+        "B": "relax decreases increases",
+        "C": "contract increases decreases",
+        "D": "relax increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q22.png",
+      "rawText": "The symbol equation for aerobic respiration is shown. C6HxOy + 6O2  6COz + 6H2O Which numbers represent the letters shown in the equation as x, y and z? x y z A 2 12 6 B 6 2 12 C 6 12 2 D 12 6 2",
+      "parseStatus": "ok",
+      "stem": "The symbol equation for aerobic respiration is shown. C6HxOy + 6O2  6COz + 6H2O Which numbers represent the letters shown in the equation as x, y and z? x y z",
+      "options": {
+        "A": "2 12 6",
+        "B": "6 2 12",
+        "C": "6 12 2",
+        "D": "12 6 2"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q23.png",
+      "rawText": "A student investigates the rate of anaerobic respiration in yeast. The total volume of carbon dioxide produced is measured every 10 minutes for 40 minutes. The table shows the results. time / minutes total volume of carbon dioxide produced / cm3 0 6 10 30 20 37 30 40 40 41 Between which times is the rate of anaerobic respiration fastest? A 0–10 minutes B 10–20 minutes C 20–30 minutes D 30–40 minutes",
+      "parseStatus": "ok",
+      "stem": "A student investigates the rate of anaerobic respiration in yeast. The total volume of carbon dioxide produced is measured every 10 minutes for 40 minutes. The table shows the results. time / minutes total volume of carbon dioxide produced / cm3 0 6 10 30 20 37 30 40 40 41 Between which times is the rate of anaerobic respiration fastest?",
+      "options": {
+        "A": "0–10 minutes",
+        "B": "10–20 minutes",
+        "C": "20–30 minutes",
+        "D": "30–40 minutes"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q24.png",
+      "rawText": "Which part of an amino acid is removed during deamination? A the carbon-containing part B the nitrogen-containing part C the oxygen-containing part D the iron-containing part",
+      "parseStatus": "ok",
+      "stem": "Which part of an amino acid is removed during deamination?",
+      "options": {
+        "A": "the carbon-containing part",
+        "B": "the nitrogen-containing part",
+        "C": "the oxygen-containing part",
+        "D": "the iron-containing part"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q25.png",
+      "rawText": "Which process happens in a glomerulus in the kidney? A assimilation B deamination C filtration D reabsorption",
+      "parseStatus": "ok",
+      "stem": "Which process happens in a glomerulus in the kidney?",
+      "options": {
+        "A": "assimilation",
+        "B": "deamination",
+        "C": "filtration",
+        "D": "reabsorption"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q26.png",
+      "rawText": "The diagram shows a synapse in a reflex arc. P Q What are the identities of the two neurones and in which direction does the neurotransmitter pass? neurone P neurone Q direction of passage of the neurotransmitter A motor relay P  Q B motor sensory P  Q C relay motor Q  P D relay sensory Q  P",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a synapse in a reflex arc. P Q What are the identities of the two neurones and in which direction does the neurotransmitter pass? neurone P neurone Q direction of passage of the neurotransmitter",
+      "options": {
+        "A": "motor relay P  Q",
+        "B": "motor sensory P  Q",
+        "C": "relay motor Q  P",
+        "D": "relay sensory Q  P"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q27.png",
+      "rawText": "Which responses occur in the iris of the eye when a person walks from a brightly lit area to a dimly lit area? circular muscles radial muscles A contract contract B contract relax C relax contract D relax relax",
+      "parseStatus": "ok",
+      "stem": "Which responses occur in the iris of the eye when a person walks from a brightly lit area to a dimly lit area? circular muscles radial muscles",
+      "options": {
+        "A": "contract contract",
+        "B": "contract relax",
+        "C": "relax contract",
+        "D": "relax relax"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q28.png",
+      "rawText": "Which statements about hormones are correct? 1 Adrenaline decreases pupil diameter. 2 Adrenaline increases pupil diameter. 3 Insulin decreases blood glucose concentration. 4 Insulin increases blood glucose concentration. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about hormones are correct? 1 Adrenaline decreases pupil diameter. 2 Adrenaline increases pupil diameter. 3 Insulin decreases blood glucose concentration. 4 Insulin increases blood glucose concentration.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q29.png",
+      "rawText": "Bacteria such as MRSA are resistant to antibiotics. These processes can occur in bacteria. 1 artificial selection 2 genetic variation 3 mutation 4 natural selection Which processes lead to the development of antibiotic resistance? A 1, 2, 3 and 4 B 1, 2 and 3 only C 2, 3 and 4 only D 2 and 4 only",
+      "parseStatus": "ok",
+      "stem": "Bacteria such as MRSA are resistant to antibiotics. These processes can occur in bacteria. 1 artificial selection 2 genetic variation 3 mutation 4 natural selection Which processes lead to the development of antibiotic resistance?",
+      "options": {
+        "A": "1, 2, 3 and 4",
+        "B": "1, 2 and 3 only",
+        "C": "2, 3 and 4 only",
+        "D": "2 and 4 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q30.png",
+      "rawText": "A farmer grows hot pepper plants and sweet pepper plants in different fields on his farm. Each year, the farmer saves seeds from the pepper plants to grow the next crop of peppers. One year, the farmer notices that some of the seeds from the sweet pepper plants have grown into plants which produce hot and sweet peppers. What is the most likely explanation? A Self-pollination has occurred and pollen has been transferred from the anther of a hot pepper plant to the stigma of a sweet pepper plant. B Cross-pollination has occurred and pollen has been transferred from the stigma of a hot pepper plant to the anther of a sweet pepper plant. C Self-pollination has occurred and pollen has been transferred from the stigma of a hot pepper plant to the anther of a sweet pepper plant. D Cross-pollination has occurred and pollen has been transferred from the anther of a hot pepper plant to the stigma of a sweet pepper plant.",
+      "parseStatus": "ok",
+      "stem": "A farmer grows hot pepper plants and sweet pepper plants in different fields on his farm. Each year, the farmer saves seeds from the pepper plants to grow the next crop of peppers. One year, the farmer notices that some of the seeds from the sweet pepper plants have grown into plants which produce hot and sweet peppers. What is the most likely explanation?",
+      "options": {
+        "A": "Self-pollination has occurred and pollen has been transferred from the anther of a hot pepper plant to the stigma of a sweet pepper plant.",
+        "B": "Cross-pollination has occurred and pollen has been transferred from the stigma of a hot pepper plant to the anther of a sweet pepper plant.",
+        "C": "Self-pollination has occurred and pollen has been transferred from the stigma of a hot pepper plant to the anther of a sweet pepper plant.",
+        "D": "Cross-pollination has occurred and pollen has been transferred from the anther of a hot pepper plant to the stigma of a sweet pepper plant."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q31.png",
+      "rawText": "Why do different cells in a human body produce different proteins? A Alleles can be dominant or recessive. B Only particular genes are expressed. C Cells have different genes. D The sequence of bases in the DNA varies between different cells.",
+      "parseStatus": "ok",
+      "stem": "Why do different cells in a human body produce different proteins?",
+      "options": {
+        "A": "Alleles can be dominant or recessive.",
+        "B": "Only particular genes are expressed.",
+        "C": "Cells have different genes.",
+        "D": "The sequence of bases in the DNA varies between different cells."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q32.png",
+      "rawText": "Which graph shows the mean mass of DNA per cell before, during and after mitosis? 8 7 6 5 4 3 2 1 0 mean mass of DNA per cell / arbitrary units time B 8 7 6 5 4 3 2 1 0 mean mass of DNA per cell / arbitrary units time A 8 7 6 5 4 3 2 1 0 mean mass of DNA per cell / arbitrary units time D 8 7 6 5 4 3 2 1 0 mean mass of DNA per cell / arbitrary units time C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q33.png",
+      "rawText": "Which statement about gene mutations is correct? A A mutation is a change in the amino acid sequence of DNA. B Mutations are a source of genetic variation. C Mutations are caused by random mating. D Mutations happen during random fertilisation.",
+      "parseStatus": "ok",
+      "stem": "Which statement about gene mutations is correct?",
+      "options": {
+        "A": "A mutation is a change in the amino acid sequence of DNA.",
+        "B": "Mutations are a source of genetic variation.",
+        "C": "Mutations are caused by random mating.",
+        "D": "Mutations happen during random fertilisation."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q34.png",
+      "rawText": "The diagram shows the amount of energy in kJ m–2 yr–1 at each trophic level of a food chain. producers 88 000 primary consumers 14 000 secondary consumers 2000 Approximately how much energy is lost between the producers and the secondary consumers? A 0.2% B 2.0% C 84% D 98%",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the amount of energy in kJ m–2 yr–1 at each trophic level of a food chain. producers 88 000 primary consumers 14 000 secondary consumers 2000 Approximately how much energy is lost between the producers and the secondary consumers?",
+      "options": {
+        "A": "0.2%",
+        "B": "2.0%",
+        "C": "84%",
+        "D": "98%"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q35.png",
+      "rawText": "Which process in the nitrogen cycle removes nitrogen gas from the atmosphere? A decomposition B denitrification C nitrification D nitrogen fixation",
+      "parseStatus": "ok",
+      "stem": "Which process in the nitrogen cycle removes nitrogen gas from the atmosphere?",
+      "options": {
+        "A": "decomposition",
+        "B": "denitrification",
+        "C": "nitrification",
+        "D": "nitrogen fixation"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q36.png",
+      "rawText": "What is a population? A a group of different organisms living in different areas at the same time B a group of organisms of different species living in the same area C a group of organisms of one species living in the same area at different times D a group of organisms of one species living in the same area at the same time",
+      "parseStatus": "ok",
+      "stem": "What is a population?",
+      "options": {
+        "A": "a group of different organisms living in different areas at the same time",
+        "B": "a group of organisms of different species living in the same area",
+        "C": "a group of organisms of one species living in the same area at different times",
+        "D": "a group of organisms of one species living in the same area at the same time"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q37.png",
+      "rawText": "A farmer has a small pond on their farm land. One year, most of the organisms in the pond die. The next year, the farmer decreases their use of nitrate fertilisers and fewer organisms in the pond die. Which statement explains why this will help increase the number of organisms living in the pond? A There is a decrease in dissolved oxygen due to an increase in decomposition. B There is a decrease in dissolved oxygen due to an increase in photosynthesis. C There is an increase in dissolved oxygen due to a decrease in decomposition. D There is an increase in dissolved oxygen due to a decrease in photosynthesis.",
+      "parseStatus": "ok",
+      "stem": "A farmer has a small pond on their farm land. One year, most of the organisms in the pond die. The next year, the farmer decreases their use of nitrate fertilisers and fewer organisms in the pond die. Which statement explains why this will help increase the number of organisms living in the pond?",
+      "options": {
+        "A": "There is a decrease in dissolved oxygen due to an increase in decomposition.",
+        "B": "There is a decrease in dissolved oxygen due to an increase in photosynthesis.",
+        "C": "There is an increase in dissolved oxygen due to a decrease in decomposition.",
+        "D": "There is an increase in dissolved oxygen due to a decrease in photosynthesis."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q38.png",
+      "rawText": "The graph shows how the population of a species of bird has increased following a conservation programme. 1990 1992 1994 1996 1998 2000 2002 2004 400 350 300 250 200 150 100 50 0 number of breeding pairs of birds year What is the percentage increase in the number of breeding pairs of birds from 1996 to 2002, to the nearest whole number? A 35% B 74% C 170% D 283%",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the population of a species of bird has increased following a conservation programme. 1990 1992 1994 1996 1998 2000 2002 2004 400 350 300 250 200 150 100 50 0 number of breeding pairs of birds year What is the percentage increase in the number of breeding pairs of birds from 1996 to 2002, to the nearest whole number?",
+      "options": {
+        "A": "35%",
+        "B": "74%",
+        "C": "170%",
+        "D": "283%"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q39.png",
+      "rawText": "The diagram shows a bacterial cell that is used in genetic modification. Which labelled structure makes the bacterium useful for genetic modification? D A B C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_22/q40.png",
+      "rawText": "The diagram shows some apparatus that was used to produce lactose-free milk. alginate beads containing X milk milk containing Y The alginate beads do not react with any of the substances. X is an enzyme that catalyses a reaction involving one of the substances found in milk. What are X and Y? X Y A amylase glucose B amylase starch C lactase glucose D lactase starch",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some apparatus that was used to produce lactose-free milk. alginate beads containing X milk milk containing Y The alginate beads do not react with any of the substances. X is an enzyme that catalyses a reaction involving one of the substances found in milk. What are X and Y? X Y",
+      "options": {
+        "A": "amylase glucose",
+        "B": "amylase starch",
+        "C": "lactase glucose",
+        "D": "lactase starch"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

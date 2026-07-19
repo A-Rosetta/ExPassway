@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0610_s20_qp_23.pdf",
+  "markScheme": "0610_s20_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q01.png",
+      "rawText": "The diagram shows what happened in an experiment with plant seedlings. start light next day light Which characteristic of living things made the seedlings grow towards the light? A excretion B nutrition C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "The diagram shows what happened in an experiment with plant seedlings. start light next day light Which characteristic of living things made the seedlings grow towards the light?",
+      "options": {
+        "A": "excretion",
+        "B": "nutrition",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q02.png",
+      "rawText": "A rat has the scientific name Rattus rattus. What do the two parts of this name refer to? A genus and species B kingdom and genus C kingdom and species D variety and genus",
+      "parseStatus": "ok",
+      "stem": "A rat has the scientific name Rattus rattus. What do the two parts of this name refer to?",
+      "options": {
+        "A": "genus and species",
+        "B": "kingdom and genus",
+        "C": "kingdom and species",
+        "D": "variety and genus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q03.png",
+      "rawText": "Onion plant cells swell but do not burst when placed in distilled water. Which cell component prevents the onion plant cells from bursting? A cell membrane B cell wall C nucleus D vacuole",
+      "parseStatus": "ok",
+      "stem": "Onion plant cells swell but do not burst when placed in distilled water. Which cell component prevents the onion plant cells from bursting?",
+      "options": {
+        "A": "cell membrane",
+        "B": "cell wall",
+        "C": "nucleus",
+        "D": "vacuole"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q04.png",
+      "rawText": "The diagram shows an onion plant epidermal cell. The distance between X and Y on the diagram is 60 mm. The actual length of the cell between X and Y was 150 µm. X Y What is the magnification of the cell? A ×40 B ×250 C ×400 D ×2500",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an onion plant epidermal cell. The distance between X and Y on the diagram is 60 mm. The actual length of the cell between X and Y was 150 µm. X Y What is the magnification of the cell?",
+      "options": {
+        "A": "×40",
+        "B": "×250",
+        "C": "×400",
+        "D": "×2500"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q05.png",
+      "rawText": "Which diagram shows the appearance of a plant cell several minutes after it has been placed in a concentrated solution of sugar? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q06.png",
+      "rawText": "The diagram shows two adjacent plant cells. cell X high water potential cell Y low water potential Which statement describes what will happen to the water in the cells? A equal movement between cells B net movement from X to Y C net movement from Y to X D no movement between cells",
+      "parseStatus": "ok",
+      "stem": "The diagram shows two adjacent plant cells. cell X high water potential cell Y low water potential Which statement describes what will happen to the water in the cells?",
+      "options": {
+        "A": "equal movement between cells",
+        "B": "net movement from X to Y",
+        "C": "net movement from Y to X",
+        "D": "no movement between cells"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q07.png",
+      "rawText": "The diagram shows a section of DNA, with four bases identified on one strand. G A C T Which sequence of bases would be on the other strand, starting from the top? A AGTC B CTGA C GACT D TCAG",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q08.png",
+      "rawText": "Which food-testing solution shows a positive result when it turns from blue to purple? A Benedict’s solution B biuret solution C ethanol D iodine solution",
+      "parseStatus": "ok",
+      "stem": "Which food-testing solution shows a positive result when it turns from blue to purple?",
+      "options": {
+        "A": "Benedict’s solution",
+        "B": "biuret solution",
+        "C": "ethanol",
+        "D": "iodine solution"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q09.png",
+      "rawText": "Which statement about enzyme-controlled reactions is correct? A During the reaction, a substrate changes into a product. B The enzyme is slowly broken down during the reaction. C The higher the pH the faster the reaction. D The product is gradually used up during the reaction.",
+      "parseStatus": "ok",
+      "stem": "Which statement about enzyme-controlled reactions is correct?",
+      "options": {
+        "A": "During the reaction, a substrate changes into a product.",
+        "B": "The enzyme is slowly broken down during the reaction.",
+        "C": "The higher the pH the faster the reaction.",
+        "D": "The product is gradually used up during the reaction."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q10.png",
+      "rawText": "Increasing temperature above the optimum for the enzyme results in loss of enzyme activity. How is this explained? A less frequent collisions between the enzyme and the substrate B reduced kinetic energy of the enzyme molecule C substrate molecules move faster and effective collisions are less likely D the shape of the active site is changed and the substrate will no longer fit into it",
+      "parseStatus": "ok",
+      "stem": "Increasing temperature above the optimum for the enzyme results in loss of enzyme activity. How is this explained?",
+      "options": {
+        "A": "less frequent collisions between the enzyme and the substrate",
+        "B": "reduced kinetic energy of the enzyme molecule",
+        "C": "substrate molecules move faster and effective collisions are less likely",
+        "D": "the shape of the active site is changed and the substrate will no longer fit into it"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q11.png",
+      "rawText": "The diagram shows how the rate of photosynthesis varies with light intensity. The four curves show different conditions of temperature and carbon dioxide concentration. rate of photosynthesis light intensity 30 °C, 0.2% CO2 20 °C, 0.2% CO2 30 °C, 0.1% CO2 20 °C, 0.1% CO2 P What limits the rate of photosynthesis at point P? light intensity carbon dioxide concentration temperature A \u0016 \u0016 \u001a key B \u0016 \u001a \u001a \u0016= yes C \u001a \u0016 \u0016 \u001a= no D \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how the rate of photosynthesis varies with light intensity. The four curves show different conditions of temperature and carbon dioxide concentration. rate of photosynthesis light intensity 30 °C, 0.2% CO2 20 °C, 0.2% CO2 30 °C, 0.1% CO2 20 °C, 0.1% CO2 P What limits the rate of photosynthesis at point P? light intensity carbon dioxide concentration temperature",
+      "options": {
+        "A": "\u0016 \u0016 \u001a key",
+        "B": "\u0016 \u001a \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u0016 \u001a= no",
+        "D": "\u001a \u001a \u0016"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q12.png",
+      "rawText": "Why do plants need nitrate ions? A to make amino acids B to make fats C to make glucose D to make starch",
+      "parseStatus": "ok",
+      "stem": "Why do plants need nitrate ions?",
+      "options": {
+        "A": "to make amino acids",
+        "B": "to make fats",
+        "C": "to make glucose",
+        "D": "to make starch"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q13.png",
+      "rawText": "The table shows the percentage of the daily recommended intake of nutrients in a serving of four foods. Which food would be the best choice to prevent scurvy? percentage of daily recommended intake in a serving of food calcium iron vitamin C vitamin D A 71 1 0 6 B 24 11 2 73 C 3 3 72 0 D 1 72 1 0",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q14.png",
+      "rawText": "The diagram shows a villus in the small intestine. X What is absorbed at X? A fats B glucose C glycogen D starch",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a villus in the small intestine. X What is absorbed at X?",
+      "options": {
+        "A": "fats",
+        "B": "glucose",
+        "C": "glycogen",
+        "D": "starch"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q15.png",
+      "rawText": "Samphire is a plant that grows in coastal areas. It has adaptations that enable it to live in areas with high salt concentration in the soil and strong winds. Which adaptations would samphire possess to minimise water loss from root cells by osmosis and leaves by evaporation? salt concentration in root cells leaf surface area A high high B high low C low high D low low",
+      "parseStatus": "ok",
+      "stem": "Samphire is a plant that grows in coastal areas. It has adaptations that enable it to live in areas with high salt concentration in the soil and strong winds. Which adaptations would samphire possess to minimise water loss from root cells by osmosis and leaves by evaporation? salt concentration in root cells leaf surface area",
+      "options": {
+        "A": "high high",
+        "B": "high low",
+        "C": "low high",
+        "D": "low low"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q16.png",
+      "rawText": "Which row correctly states the pair of conditions that will result in the highest rate of transpiration? temperature humidity A high low B high high C low high D low low",
+      "parseStatus": "ok",
+      "stem": "Which row correctly states the pair of conditions that will result in the highest rate of transpiration? temperature humidity",
+      "options": {
+        "A": "high low",
+        "B": "high high",
+        "C": "low high",
+        "D": "low low"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q17.png",
+      "rawText": "The diagram shows some veins in the human arm and the valves that they contain. If blood is squeezed out of section X–Y, where should pressure be placed on a vein to stop blood flowing into this section again? valve A D B C Y X",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q18.png",
+      "rawText": "The diagram shows some of the blood vessels leaving and returning to the heart. lungs heart body X Y Which row is correct for blood vessels X and Y? name of blood vessel X description of oxygen content of the blood in X name of blood vessel Y description of oxygen content of the blood in Y A aorta deoxygenated pulmonary artery oxygenated B aorta oxygenated pulmonary vein deoxygenated C vena cava deoxygenated pulmonary vein oxygenated D vena cava oxygenated pulmonary artery deoxygenated",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the blood vessels leaving and returning to the heart. lungs heart body X Y Which row is correct for blood vessels X and Y? name of blood vessel X description of oxygen content of the blood in X name of blood vessel Y description of oxygen content of the blood in Y",
+      "options": {
+        "A": "aorta deoxygenated pulmonary artery oxygenated",
+        "B": "aorta oxygenated pulmonary vein deoxygenated",
+        "C": "vena cava deoxygenated pulmonary vein oxygenated",
+        "D": "vena cava oxygenated pulmonary artery deoxygenated"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q19.png",
+      "rawText": "Vaccinations can be given to gain active immunity. Which statement about this type of vaccination is correct? A The vaccination contains antibodies. B The vaccination must contain harmful pathogens. C The vaccination triggers antibody production in the body. D The vaccination triggers antigen production in the body.",
+      "parseStatus": "ok",
+      "stem": "Vaccinations can be given to gain active immunity. Which statement about this type of vaccination is correct?",
+      "options": {
+        "A": "The vaccination contains antibodies.",
+        "B": "The vaccination must contain harmful pathogens.",
+        "C": "The vaccination triggers antibody production in the body.",
+        "D": "The vaccination triggers antigen production in the body."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q20.png",
+      "rawText": "The diagram shows an alveolus and capillary in a human lung. alveolus capillary X Y Which row shows the correct gas and concentrations for diffusion from X to Y in normal conditions? at point X at point Y A high concentration of carbon dioxide low concentration of carbon dioxide B high concentration of oxygen low concentration of oxygen C low concentration of carbon dioxide high concentration of carbon dioxide D low concentration of oxygen high concentration of oxygen",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an alveolus and capillary in a human lung. alveolus capillary X Y Which row shows the correct gas and concentrations for diffusion from X to Y in normal conditions? at point X at point Y",
+      "options": {
+        "A": "high concentration of carbon dioxide low concentration of carbon dioxide",
+        "B": "high concentration of oxygen low concentration of oxygen",
+        "C": "low concentration of carbon dioxide high concentration of carbon dioxide",
+        "D": "low concentration of oxygen high concentration of oxygen"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q21.png",
+      "rawText": "The symbol equation for aerobic respiration is shown. C6HxOy + 6O2 → 6COz + 6H2O Which numbers represent the letters shown in the equation as x, y and z? x y z A 2 12 6 B 6 2 12 C 6 12 2 D 12 6 2",
+      "parseStatus": "ok",
+      "stem": "The symbol equation for aerobic respiration is shown. C6HxOy + 6O2 → 6COz + 6H2O Which numbers represent the letters shown in the equation as x, y and z? x y z",
+      "options": {
+        "A": "2 12 6",
+        "B": "6 2 12",
+        "C": "6 12 2",
+        "D": "12 6 2"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q22.png",
+      "rawText": "Blood glucose level is kept between 5–7 mmol per dm3. The concentration of glucose in the intestine varies and is often less than that value. What would be required for the absorption of glucose into the blood when the concentration of glucose in the intestine is less than 5 mmol per dm3? 1 mitochondria 2 oxygen 3 membrane proteins A 1 only B 1 and 2 only C 2 and 3 only D 1, 2 and 3",
+      "parseStatus": "ok",
+      "stem": "Blood glucose level is kept between 5–7 mmol per dm3. The concentration of glucose in the intestine varies and is often less than that value. What would be required for the absorption of glucose into the blood when the concentration of glucose in the intestine is less than 5 mmol per dm3? 1 mitochondria 2 oxygen 3 membrane proteins",
+      "options": {
+        "A": "1 only",
+        "B": "1 and 2 only",
+        "C": "2 and 3 only",
+        "D": "1, 2 and 3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q23.png",
+      "rawText": "The diagram shows a synapse between a motor neurone and a relay neurone. relay neurone motor neurone P Q What passes from P to Q? A an electrical impulse B an enzyme C a hormone D a neurotransmitter",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a synapse between a motor neurone and a relay neurone. relay neurone motor neurone P Q What passes from P to Q?",
+      "options": {
+        "A": "an electrical impulse",
+        "B": "an enzyme",
+        "C": "a hormone",
+        "D": "a neurotransmitter"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q24.png",
+      "rawText": "What change occurs in a ‘fight or flight’ situation? A constriction of pupils B decrease in breathing rate C decrease in pulse rate D increase in blood glucose concentration",
+      "parseStatus": "ok",
+      "stem": "What change occurs in a ‘fight or flight’ situation?",
+      "options": {
+        "A": "constriction of pupils",
+        "B": "decrease in breathing rate",
+        "C": "decrease in pulse rate",
+        "D": "increase in blood glucose concentration"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q25.png",
+      "rawText": "What happens when a person enters a very hot room? A Sweating decreases and vasoconstriction increases. B Sweating decreases and vasodilation decreases. C Sweating increases and vasoconstriction increases. D Sweating increases and vasodilation increases.",
+      "parseStatus": "ok",
+      "stem": "What happens when a person enters a very hot room?",
+      "options": {
+        "A": "Sweating decreases and vasoconstriction increases.",
+        "B": "Sweating decreases and vasodilation decreases.",
+        "C": "Sweating increases and vasoconstriction increases.",
+        "D": "Sweating increases and vasodilation increases."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q26.png",
+      "rawText": "Which disease is caused by a virus? A AIDS B kwashiorkor C cholera D MRSA infection",
+      "parseStatus": "ok",
+      "stem": "Which disease is caused by a virus?",
+      "options": {
+        "A": "AIDS",
+        "B": "kwashiorkor",
+        "C": "cholera",
+        "D": "MRSA infection"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q27.png",
+      "rawText": "Which row describes cross-pollination? pollen transferred from anther to stigma of a different flower on same plant a flower on a different plant of same species a flower on a different plant of a different species A \u0016 \u0016 \u001a B \u0016 \u001a \u0016 C \u001a \u0016 \u001a D \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which row describes cross-pollination? pollen transferred from anther to stigma of a different flower on same plant a flower on a different plant of same species a flower on a different plant of a different species",
+      "options": {
+        "A": "\u0016 \u0016 \u001a",
+        "B": "\u0016 \u001a \u0016",
+        "C": "\u001a \u0016 \u001a",
+        "D": "\u001a \u001a \u0016"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q28.png",
+      "rawText": "The diagram shows the head of a sperm. Y X What are the functions of structures X and Y? X Y A protein synthesis digestion of egg cell jelly coat B releases energy for movement digestion of egg cell jelly coat C protein synthesis energy store D releases energy for movement energy store",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the head of a sperm. Y X What are the functions of structures X and Y? X Y",
+      "options": {
+        "A": "protein synthesis digestion of egg cell jelly coat",
+        "B": "releases energy for movement digestion of egg cell jelly coat",
+        "C": "protein synthesis energy store",
+        "D": "releases energy for movement energy store"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q29.png",
+      "rawText": "Which row describes what happens in the production of proteins? what forms the genetic code what the DNA codes for what carries a copy of the gene to the cytoplasm A sequence of amino acids sequence of bases mRNA B sequence of amino acids sequence of proteins ribosomes C sequence of bases sequence of amino acids mRNA D sequence of bases sequence of proteins ribosomes",
+      "parseStatus": "ok",
+      "stem": "Which row describes what happens in the production of proteins? what forms the genetic code what the DNA codes for what carries a copy of the gene to the cytoplasm",
+      "options": {
+        "A": "sequence of amino acids sequence of bases mRNA",
+        "B": "sequence of amino acids sequence of proteins ribosomes",
+        "C": "sequence of bases sequence of amino acids mRNA",
+        "D": "sequence of bases sequence of proteins ribosomes"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q30.png",
+      "rawText": "Which statement about meiosis is correct? A Meiosis produces diploid cells. B Meiosis produces genetically identical cells. C Meiosis produces gametes. D Meiosis produces cells for growth of tissues.",
+      "parseStatus": "ok",
+      "stem": "Which statement about meiosis is correct?",
+      "options": {
+        "A": "Meiosis produces diploid cells.",
+        "B": "Meiosis produces genetically identical cells.",
+        "C": "Meiosis produces gametes.",
+        "D": "Meiosis produces cells for growth of tissues."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q31.png",
+      "rawText": "The diagram shows the inheritance of ABO blood groups. The blood groups of some of the individuals are given. A O B O A 1 2 3 4 5 6 7 What could be person 2’s genotype? A IAIo B IBIB C IBIo D IoIo",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the inheritance of ABO blood groups. The blood groups of some of the individuals are given.",
+      "options": {
+        "A": "O",
+        "B": "O A 1 2 3 4 5 6 7 What could be person 2’s genotype? A IAIo B IBIB",
+        "C": "IBIo",
+        "D": "IoIo"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q32.png",
+      "rawText": "In mice, the allele for black hair is dominant to the allele for brown hair. What proportion of offspring will have brown hair if a cross is made between a homozygous black mouse and a heterozygous black mouse? A 0% B 25% C 50% D 100%",
+      "parseStatus": "ok",
+      "stem": "In mice, the allele for black hair is dominant to the allele for brown hair. What proportion of offspring will have brown hair if a cross is made between a homozygous black mouse and a heterozygous black mouse?",
+      "options": {
+        "A": "0%",
+        "B": "25%",
+        "C": "50%",
+        "D": "100%"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q33.png",
+      "rawText": "The graph shows the masses of two different types of tomato. 0 20 40 60 80 100 120 140 160 180 200 220 240 number of tomatoes mass / g type 1 type 2 What can be concluded from the graph? A Genes do not affect the mass of tomatoes. B Type 1 tomatoes show continuous variation. C Type 2 tomatoes are sometimes smaller than type 1 tomatoes. D Type 2 tomatoes show discontinuous variation.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the masses of two different types of tomato. 0 20 40 60 80 100 120 140 160 180 200 220 240 number of tomatoes mass / g type 1 type 2 What can be concluded from the graph?",
+      "options": {
+        "A": "Genes do not affect the mass of tomatoes.",
+        "B": "Type 1 tomatoes show continuous variation.",
+        "C": "Type 2 tomatoes are sometimes smaller than type 1 tomatoes.",
+        "D": "Type 2 tomatoes show discontinuous variation."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q34.png",
+      "rawText": "Which adaptation may be present in a xerophyte? A leaves with small surface area and large numbers of stomata B little or no xylem tissue and leaves with large surface area C stomatal hairs and rolled leaves D thin or no cuticle and deep roots",
+      "parseStatus": "ok",
+      "stem": "Which adaptation may be present in a xerophyte?",
+      "options": {
+        "A": "leaves with small surface area and large numbers of stomata",
+        "B": "little or no xylem tissue and leaves with large surface area",
+        "C": "stomatal hairs and rolled leaves",
+        "D": "thin or no cuticle and deep roots"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q35.png",
+      "rawText": "The diagram shows a food chain in a rock pool. seaweed → whelks → crabs → seagulls What will happen if the number of secondary consumers increases? There will be A fewer crabs. B fewer seagulls. C fewer whelks. D less seaweed.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food chain in a rock pool. seaweed → whelks → crabs → seagulls What will happen if the number of secondary consumers increases? There will be",
+      "options": {
+        "A": "fewer crabs.",
+        "B": "fewer seagulls.",
+        "C": "fewer whelks.",
+        "D": "less seaweed."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q36.png",
+      "rawText": "What is defined as ‘all of the populations of different species in an ecosystem’? A community B environment C habitat D trophic level",
+      "parseStatus": "ok",
+      "stem": "What is defined as ‘all of the populations of different species in an ecosystem’?",
+      "options": {
+        "A": "community",
+        "B": "environment",
+        "C": "habitat",
+        "D": "trophic level"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q37.png",
+      "rawText": "What is the role of anaerobic respiration in bread-making? A to produce alcohol to flavour the bread B to produce gas to make the bread rise C to release enough energy to bake the bread D to release enough lactic acid to kill the yeast",
+      "parseStatus": "ok",
+      "stem": "What is the role of anaerobic respiration in bread-making?",
+      "options": {
+        "A": "to produce alcohol to flavour the bread",
+        "B": "to produce gas to make the bread rise",
+        "C": "to release enough energy to bake the bread",
+        "D": "to release enough lactic acid to kill the yeast"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q38.png",
+      "rawText": "A crop plant has been genetically modified to make it resistant to herbicides. Which is a possible disadvantage of introducing this new crop plant? A Loss of weeds reduces competition. B Some weeds might become resistant to the herbicide. C The crop plant is unharmed and produces a higher yield. D The new gene will appear in new generations of the crop.",
+      "parseStatus": "ok",
+      "stem": "A crop plant has been genetically modified to make it resistant to herbicides. Which is a possible disadvantage of introducing this new crop plant?",
+      "options": {
+        "A": "Loss of weeds reduces competition.",
+        "B": "Some weeds might become resistant to the herbicide.",
+        "C": "The crop plant is unharmed and produces a higher yield.",
+        "D": "The new gene will appear in new generations of the crop."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q39.png",
+      "rawText": "Chickens are birds that are farmed to produce eggs for human consumption. A type of chicken has been bred to lay more eggs. Which method would be used to produce this type of chicken? A asexual reproduction B biotechnology C natural selection D selective breeding",
+      "parseStatus": "ok",
+      "stem": "Chickens are birds that are farmed to produce eggs for human consumption.",
+      "options": {
+        "A": "type of chicken has been bred to lay more eggs. Which method would be used to produce this type of chicken? A asexual reproduction",
+        "B": "biotechnology",
+        "C": "natural selection",
+        "D": "selective breeding"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_23/q40.png",
+      "rawText": "When a river is polluted by fertiliser, the following processes may occur. 1 increased aerobic respiration of decomposers 2 increased growth of producers 3 decreased oxygen concentration in the water What is the correct sequence for these processes? A 1 → 2 → 3 B 1 → 3 → 2 C 2 → 1 → 3 D 2 → 3 → 1",
+      "parseStatus": "ok",
+      "stem": "When a river is polluted by fertiliser, the following processes may occur. 1 increased aerobic respiration of decomposers 2 increased growth of producers 3 decreased oxygen concentration in the water What is the correct sequence for these processes?",
+      "options": {
+        "A": "1 → 2 → 3",
+        "B": "1 → 3 → 2",
+        "C": "2 → 1 → 3",
+        "D": "2 → 3 → 1"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

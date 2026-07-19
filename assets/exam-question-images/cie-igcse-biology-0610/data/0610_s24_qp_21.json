@@ -1,0 +1,548 @@
+{
+  "questionPaper": "0610_s24_qp_21.pdf",
+  "markScheme": "0610_s24_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q01.png",
+      "rawText": "excretion A growth B reproduction C sensitivity D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q02.png",
+      "rawText": "arachnids A bacteria B myriapods C ferns D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q03.png",
+      "rawText": "cytoplasm • cell membrane • cell wall • chloroplast • How many of these structures are found in the cells of all living organisms?",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q04.png",
+      "rawText": "×2500 D A student draws a red blood cell. The diameter of the red blood cell they draw is 20 mm. The actual diameter of the red blood cell is 0.008 mm. What is the magnification of the student’s drawing? A ×0.0004 B ×0.16 C ×250 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q05.png",
+      "rawText": "high concentration sucrose solution low concentration sucrose solution distilled water flaccid plasmolysed turgid A plasmolysed turgid flaccid B flaccid plasmolysed flaccid C plasmolysed turgid turgid D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q06.png",
+      "rawText": "active transport A diffusion B osmosis C transpiration D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q07.png",
+      "rawText": "G T G A C What is the correct sequence of the missing bases? CACTG D GTCAC C GTGAC B CAGTG A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q08.png",
+      "rawText": "biuret solution A DCPIP solution B iodine solution C Benedict’s solution D [Turn over 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "biuret solution",
+      "options": {
+        "A": "DCPIP solution",
+        "B": "iodine solution",
+        "C": "Benedict’s solution",
+        "D": "[Turn over 06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q09.png",
+      "rawText": "lipase boiled lipase bile milk key ✓ ✗ ✓ ✓ A ✓ ✗ ✓ ✓ ✓ B ✗ = present ✗ ✓ ✗ ✓ C ✓ ✓ ✓ ✗ D = absent",
+      "parseStatus": "ok",
+      "stem": "lipase boiled lipase bile milk key ✓ ✗ ✓ ✓",
+      "options": {
+        "A": "✓ ✗ ✓ ✓ ✓",
+        "B": "✗ = present ✗ ✓ ✗ ✓",
+        "C": "✓ ✓ ✓ ✗",
+        "D": "= absent"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q10.png",
+      "rawText": "light bubble Which statement describes why the rate of bubble release becomes constant at high light intensities? Carbon dioxide concentration becomes a limiting factor. A Light intensity becomes a limiting factor. B Oxygen availability becomes a limiting factor. C Water availability becomes a limiting factor. D 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "light bubble Which statement describes why the rate of bubble release becomes constant at high light intensities? Carbon dioxide concentration becomes a limiting factor.",
+      "options": {
+        "A": "Light intensity becomes a limiting factor.",
+        "B": "Oxygen availability becomes a limiting factor.",
+        "C": "Water availability becomes a limiting factor.",
+        "D": "06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q11.png",
+      "rawText": "1 4 2 3 Where does photosynthesis take place? 3 and 4 D 2 and 3 C 1 and 4 B 1 and 2 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q12.png",
+      "rawText": "A B C D [Turn over 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q13.png",
+      "rawText": "Villi increase the efficiency of the absorption of nutrients. 1 Villi increase the efficiency of the alveoli during gas exchange. 2 Villi provide a large surface area. 3 Villi filter urea from the blood. 4 Which two statements explain the role of the villi in humans? 3 and 4 D 2 and 4 C 1 and 3 B 1 and 2 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q14.png",
+      "rawText": "before taking into the mouth after some time in the mouth after some time in the small intestine A B C D 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q15.png",
+      "rawText": "trypsin maltase lipase secreted by the pancreas acts in the stomach acts in acidic conditions A acts in acidic conditions secreted in the mouth secreted by the pancreas B secreted in the stomach acts in alkaline conditions secreted by the small intestine C acts in alkaline conditions acts in the small intestine acts in the small intestine D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q16.png",
+      "rawText": "fat A fibre B minerals C vitamins D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q17.png",
+      "rawText": "on a cool, dry, windy day A on a cool, wet, windy day B on a hot, dry, windy day C on a hot, wet, windy day D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q18.png",
+      "rawText": "The flowers, fruits, leaves and roots are all sources of sucrose. A The fruits are a source of sucrose and the flowers are a sink. B The leaves are a source of sucrose and the fruits are a sink. C The roots are a source of sucrose and the leaves are a sink. D [Turn over 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "The flowers, fruits, leaves and roots are all sources of sucrose.",
+      "options": {
+        "A": "The fruits are a source of sucrose and the flowers are a sink.",
+        "B": "The leaves are a source of sucrose and the fruits are a sink.",
+        "C": "The roots are a source of sucrose and the leaves are a sink.",
+        "D": "[Turn over 06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q19.png",
+      "rawText": "It uses less energy because blood flows through the heart only once in each circuit around the body. A Concentration gradients of solutes and gases are kept low. B Deoxygenated and oxygenated blood are separated to allow a high rate of oxygen supply to the tissues. C It maintains high-pressure blood flow to the lungs and low-pressure blood flow to the body. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q20.png",
+      "rawText": "D C A B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q21.png",
+      "rawText": "secretion of chloride ions out of the small intestine lowering the water potential A secretion of chloride ions out of the small intestine raising the water potential B secretion of chloride ions into the small intestine lowering the water potential C secretion of chloride ions into the small intestine raising the water potential D 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "secretion of chloride ions out of the small intestine lowering the water potential",
+      "options": {
+        "A": "secretion of chloride ions out of the small intestine raising the water potential",
+        "B": "secretion of chloride ions into the small intestine lowering the water potential",
+        "C": "secretion of chloride ions into the small intestine raising the water potential",
+        "D": "06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q22.png",
+      "rawText": "A part of the antibody molecule has the same shape as the antigen it acts on. A Babies develop passive immunity from the antibodies they receive in breast milk. B Phagocytes produce antibodies. C Vaccines contain weakened antibodies. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q23.png",
+      "rawText": "cilia diaphragm carry mucus to the throat contracts to cause breathing in A trap bacteria from the air contracts to cause breathing out B filter dust from the air relaxes to cause breathing in C produce mucus relaxes to cause breathing out D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q24.png",
+      "rawText": "aerobic respiration of lactic acid in the liver A a decrease in breathing rate B a decrease in heart rate C an increase in blood supply to the skin D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q25.png",
+      "rawText": "glucose A salts B urea C water D [Turn over 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "glucose",
+      "options": {
+        "A": "salts",
+        "B": "urea",
+        "C": "water",
+        "D": "[Turn over 06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q26.png",
+      "rawText": "lens shape pupil size fat large A thin large B fat small C thin small D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q27.png",
+      "rawText": "Vasoconstriction increases blood flow to the skin surface capillaries. A Vasoconstriction decreases blood flow to the skin surface capillaries. B Vasodilation increases blood flow to the skin surface capillaries. C Vasodilation decreases blood flow to the skin surface capillaries. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q28.png",
+      "rawText": "increased release of adrenaline A increased release of amylase B increased release of glucagon C increased release of insulin D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q29.png",
+      "rawText": "Antibiotics do not affect bacteria but kill viruses. A Antibiotics do not affect bacteria or viruses. B Antibiotics kill bacteria and kill viruses. C Antibiotics kill bacteria but do not affect viruses. D 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "Antibiotics do not affect bacteria but kill viruses.",
+      "options": {
+        "A": "Antibiotics do not affect bacteria or viruses.",
+        "B": "Antibiotics kill bacteria and kill viruses.",
+        "C": "Antibiotics kill bacteria but do not affect viruses.",
+        "D": "06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q30.png",
+      "rawText": "X What is the name of the part labelled X? filament A ovule B pollen tube C stigma D [Turn over 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "X What is the name of the part labelled X? filament",
+      "options": {
+        "A": "ovule",
+        "B": "pollen tube",
+        "C": "stigma",
+        "D": "[Turn over 06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q31.png",
+      "rawText": "person Q with low fertility person P with low fertility person with normal fertility 2 25 2 percentage of sperm with no acrosome 35 11 11 percentage of sperm with deformed flagellum 30 4 4 percentage of sperm with few mitochondria What are the causes of low fertility in person P and person Q? person Q person P too many sperm cannot digest jelly coat of egg cell too many sperm cannot digest jelly coat of egg cell A too many sperm cannot move to oviduct too many sperm cannot digest jelly coat of egg cell B too many sperm cannot digest jelly coat of egg cell too many sperm cannot move to oviduct C too many sperm cannot move to oviduct too many sperm cannot move to oviduct D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q32.png",
+      "rawText": "gametes A haploid B homozygous C unspecialised D 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "gametes",
+      "options": {
+        "A": "haploid",
+        "B": "homozygous",
+        "C": "unspecialised",
+        "D": "06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q33.png",
+      "rawText": "[Turn over 06_0610_21_2024_1.12 © UCLES 2024 The graph shows the concentration of four hormones during the menstrual cycle. Which line represents progesterone? hormone concentration day of cycle ovulation 0 14 28 A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q34.png",
+      "rawText": "A B C D key unaffected male affected male unaffected female affected female",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q35.png",
+      "rawText": "involved in repair of damaged tissues produces genetically identical cells yes yes A no yes B yes no C no no D 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "involved in repair of damaged tissues produces genetically identical cells yes yes",
+      "options": {
+        "A": "no yes",
+        "B": "yes no",
+        "C": "no no",
+        "D": "06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q36.png",
+      "rawText": "Which statements explain how natural selection caused the leafy sea-dragon species to develop? Leafy sea-dragons that looked like seaweed were better adapted to their environment. 1 Leafy sea-dragons that survived passed on the allele for their appearance to their offspring. 2 Humans selected leafy sea-dragons that looked like seaweed. 3 2 and 3 only D 1 and 3 only C 1 and 2 only B 1, 2 and 3 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q37.png",
+      "rawText": "glucose A oxygen B plants C the Sun D [Turn over 06_0610_21_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "glucose",
+      "options": {
+        "A": "oxygen",
+        "B": "plants",
+        "C": "the Sun",
+        "D": "[Turn over 06_0610_21_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q38.png",
+      "rawText": "denitrifying bacteria and nitrogen-fixing bacteria in root nodules A denitrifying bacteria and plants B nitrifying bacteria and plants C nitrogen-fixing bacteria in root nodules D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q39.png",
+      "rawText": "habitat destruction 1 monitoring 2 education 3 pollution 4 captive breeding programmes 5 3 and 4 D 2 and 3 C 1 and 5 B 1 and 4 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_21/q40.png",
+      "rawText": "choosing cattle to breed so that alleles for high milk yield will be passed on to their offspring A increasing food production by using insecticides to improve quality and yield B inserting genes into crop plants to improve the nutritional qualities of the plant C selecting crop plants with desirable characteristics and crossing these to produce the next generation D 06_0610_21_2024_1.12 © UCLES 2024 Permission to reproduce items where third-party owned material protected by copyright is included has been sought and cleared where possible. Every reasonable effort has been made by the publisher (UCLES) to trace copyright holders, but if any items requiring clearance have unwittingly been included, the publisher will be pleased to make amends at the earliest possible opportunity. To avoid the issue of disclosure of answer-related information to candidates, all copyright acknowledgements are reproduced online in the Cambridge Assessment International Education Copyright Acknowledgements Booklet. This is produced for each series of examinations and is freely available to download at www.cambridgeinternational.org after the live examination series. Cambridge Assessment International Education is part of Cambridge Assessment. Cambridge Assessment is the brand name of the University of Cambridge Local Examinations Syndicate (UCLES), which is a department of the University of Cambridge.",
+      "parseStatus": "ok",
+      "stem": "choosing cattle to breed so that alleles for high milk yield will be passed on to their offspring",
+      "options": {
+        "A": "increasing food production by using insecticides to improve quality and yield",
+        "B": "inserting genes into crop plants to improve the nutritional qualities of the plant",
+        "C": "selecting crop plants with desirable characteristics and crossing these to produce the next generation",
+        "D": "06_0610_21_2024_1.12 © UCLES 2024 Permission to reproduce items where third-party owned material protected by copyright is included has been sought and cleared where possible. Every reasonable effort has been made by the publisher (UCLES) to trace copyright holders, but if any items requiring clearance have unwittingly been included, the publisher will be pleased to make amends at the earliest possible opportunity. To avoid the issue of disclosure of answer-related information to candidates, all copyright acknowledgements are reproduced online in the Cambridge Assessment International Education Copyright Acknowledgements Booklet. This is produced for each series of examinations and is freely available to download at www.cambridgeinternational.org after the live examination series. Cambridge Assessment International Education is part of Cambridge Assessment. Cambridge Assessment is the brand name of the University of Cambridge Local Examinations Syndicate (UCLES), which is a department of the University of Cambridge."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

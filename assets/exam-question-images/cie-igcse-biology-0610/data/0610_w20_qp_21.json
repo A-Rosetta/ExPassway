@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0610_w20_qp_21.pdf",
+  "markScheme": "0610_w20_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q01.png",
+      "rawText": "Hedgehogs are mammals. Touching a hedgehog causes it to roll into a ball to protect itself. Which characteristics is it displaying? A excretion and movement B growth and sensitivity C movement and growth D movement and sensitivity",
+      "parseStatus": "ok",
+      "stem": "Hedgehogs are mammals. Touching a hedgehog causes it to roll into a ball to protect itself. Which characteristics is it displaying?",
+      "options": {
+        "A": "excretion and movement",
+        "B": "growth and sensitivity",
+        "C": "movement and growth",
+        "D": "movement and sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q02.png",
+      "rawText": "What are features of the leaves of a plant that is a dicotyledon? broad leaves parallel veins A \u0016 \u0016 key B \u0016 \u001a \u0016= yes C \u001a \u0016 \u001a= no D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "What are features of the leaves of a plant that is a dicotyledon? broad leaves parallel veins",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u001a= no",
+        "D": "\u001a \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q03.png",
+      "rawText": "The photomicrograph shows a cell from a type of aquatic plant. P Q S R Which parts labelled on the photomicrograph indicate that this is a plant cell? A P and R B P and S C Q and R D Q and S",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows a cell from a type of aquatic plant. P Q S R Which parts labelled on the photomicrograph indicate that this is a plant cell?",
+      "options": {
+        "A": "P and R",
+        "B": "P and S",
+        "C": "Q and R",
+        "D": "Q and S"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q04.png",
+      "rawText": "The diagram shows an image of a chloroplast. The image is",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q05.png",
+      "rawText": "What are features of osmosis? diffusion is involved requires cell walls requires a partially permeable membrane A \u0016 \u001a \u0016 key B \u0016 \u001a \u001a \u0016= yes C \u001a \u0016 \u0016 \u001a= no D \u001a \u0016 \u001a",
+      "parseStatus": "ok",
+      "stem": "What are features of osmosis? diffusion is involved requires cell walls requires a partially permeable membrane",
+      "options": {
+        "A": "\u0016 \u001a \u0016 key",
+        "B": "\u0016 \u001a \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u0016 \u001a= no",
+        "D": "\u001a \u0016 \u001a"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q06.png",
+      "rawText": "The diagram shows apparatus which can be used to demonstrate osmosis. glass tube liquid level water partially permeable membrane very concentrated sucrose solution concentrated sucrose solution 1 2 After one hour, what would happen to the liquid levels in the glass tubes? liquid level in tube 1 liquid level in tube 2 A falls falls B falls rises C rises falls D rises rises",
+      "parseStatus": "ok",
+      "stem": "The diagram shows apparatus which can be used to demonstrate osmosis. glass tube liquid level water partially permeable membrane very concentrated sucrose solution concentrated sucrose solution 1 2 After one hour, what would happen to the liquid levels in the glass tubes? liquid level in tube 1 liquid level in tube 2",
+      "options": {
+        "A": "falls falls",
+        "B": "falls rises",
+        "C": "rises falls",
+        "D": "rises rises"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q07.png",
+      "rawText": "Which substances are made by linking together glucose molecules only? A cellulose, glycogen and starch B fats, cellulose and proteins C proteins, oils and glycogen D starch, fats and oils",
+      "parseStatus": "ok",
+      "stem": "Which substances are made by linking together glucose molecules only?",
+      "options": {
+        "A": "cellulose, glycogen and starch",
+        "B": "fats, cellulose and proteins",
+        "C": "proteins, oils and glycogen",
+        "D": "starch, fats and oils"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q08.png",
+      "rawText": "When bases pair up in the formation of DNA, what is one of the pairings? A G with A B G with C C G with G D G with T",
+      "parseStatus": "ok",
+      "stem": "When bases pair up in the formation of DNA, what is one of the pairings?",
+      "options": {
+        "A": "G with A",
+        "B": "G with",
+        "C": "C G with G",
+        "D": "G with T"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q09.png",
+      "rawText": "The graph shows the effect of pH on the rate of reaction of an enzyme. 3 4 5 6 7 8 9 rate of reaction pH What does the graph show? A The enzyme is destroyed at pH 9. B The enzyme works best at pH 6. C The rate of reaction halves as the pH changes from pH 5 to pH 7. D The rate of reaction is the same at pH 5 and pH 8.5.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of pH on the rate of reaction of an enzyme. 3 4 5 6 7 8 9 rate of reaction pH What does the graph show?",
+      "options": {
+        "A": "The enzyme is destroyed at pH 9.",
+        "B": "The enzyme works best at pH 6.",
+        "C": "The rate of reaction halves as the pH changes from pH 5 to pH 7.",
+        "D": "The rate of reaction is the same at pH 5 and pH 8.5."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q10.png",
+      "rawText": "The graph shows how enzyme activity is affected by temperature. 0 20 40 60 rate of reaction temperature / °C How can the change in activity between 40 C and 55 C be explained? A Heat has killed the enzyme. B The enzyme has been used up. C The reactants are moving faster. D The substrate is less likely to fit into the active site.",
+      "parseStatus": "ok",
+      "stem": "The graph shows how enzyme activity is affected by temperature. 0 20 40 60 rate of reaction temperature / °C How can the change in activity between 40 C and 55 C be explained?",
+      "options": {
+        "A": "Heat has killed the enzyme.",
+        "B": "The enzyme has been used up.",
+        "C": "The reactants are moving faster.",
+        "D": "The substrate is less likely to fit into the active site."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q11.png",
+      "rawText": "The graph shows how the rate of photosynthesis of a plant changes with light intensity, at three different carbon dioxide concentrations. In each case the temperature is 15 C. 0.10% carbon dioxide 0.04% carbon dioxide 0.02% carbon dioxide light intensity rate of photosynthesis X What is the limiting factor for the rate of photosynthesis at point X on the graph? A carbon dioxide concentration B light intensity C surface area of the plant D temperature",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the rate of photosynthesis of a plant changes with light intensity, at three different carbon dioxide concentrations. In each case the temperature is 15 C. 0.10% carbon dioxide 0.04% carbon dioxide 0.02% carbon dioxide light intensity rate of photosynthesis X What is the limiting factor for the rate of photosynthesis at point X on the graph?",
+      "options": {
+        "A": "carbon dioxide concentration",
+        "B": "light intensity",
+        "C": "surface area of the plant",
+        "D": "temperature"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q12.png",
+      "rawText": "The diagram shows a section through a leaf. Y X Which row correctly identifies tissues X and Y? X Y A palisade mesophyll cuticle B palisade mesophyll upper epidermis C spongy mesophyll cuticle D spongy mesophyll upper epidermis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through a leaf. Y X Which row correctly identifies tissues X and Y? X Y",
+      "options": {
+        "A": "palisade mesophyll cuticle",
+        "B": "palisade mesophyll upper epidermis",
+        "C": "spongy mesophyll cuticle",
+        "D": "spongy mesophyll upper epidermis"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q13.png",
+      "rawText": "Which stage of nutrition takes place when food molecules become part of a body cell? A absorption B assimilation C digestion D ingestion",
+      "parseStatus": "ok",
+      "stem": "Which stage of nutrition takes place when food molecules become part of a body cell?",
+      "options": {
+        "A": "absorption",
+        "B": "assimilation",
+        "C": "digestion",
+        "D": "ingestion"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q14.png",
+      "rawText": "What is the definition of chemical digestion? A Large insoluble molecules are changed into smaller soluble molecules. B Large soluble molecules are changed into smaller soluble molecules. C Small insoluble molecules and ions are passed through the wall of the small intestine. D Small soluble molecules and ions are passed through the wall of the small intestine.",
+      "parseStatus": "ok",
+      "stem": "What is the definition of chemical digestion?",
+      "options": {
+        "A": "Large insoluble molecules are changed into smaller soluble molecules.",
+        "B": "Large soluble molecules are changed into smaller soluble molecules.",
+        "C": "Small insoluble molecules and ions are passed through the wall of the small intestine.",
+        "D": "Small soluble molecules and ions are passed through the wall of the small intestine."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q15.png",
+      "rawText": "In which order does water pass through these structures in a plant? A mesophyll  root hair  xylem B mesophyll  xylem  root hair C root hair  mesophyll  xylem D root hair  xylem  mesophyll",
+      "parseStatus": "ok",
+      "stem": "In which order does water pass through these structures in a plant?",
+      "options": {
+        "A": "mesophyll  root hair  xylem",
+        "B": "mesophyll  xylem  root hair",
+        "C": "root hair  mesophyll  xylem",
+        "D": "root hair  xylem  mesophyll"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q16.png",
+      "rawText": "The photomicrograph shows a cross-section through a plant stem. X What is the name and function of the tissue labelled X? tissue function A phloem transports sugars B phloem transports water and minerals C xylem transports sugars D xylem transports water and minerals",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows a cross-section through a plant stem. X What is the name and function of the tissue labelled X? tissue function",
+      "options": {
+        "A": "phloem transports sugars",
+        "B": "phloem transports water and minerals",
+        "C": "xylem transports sugars",
+        "D": "xylem transports water and minerals"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q17.png",
+      "rawText": "The table shows some features of blood vessels. Which row shows the features of a vein? direction of blood flow size of the central hole (lumen) thickness of wall A away from the heart large thick B away from the heart small thick C towards heart small thin D towards heart large thin",
+      "parseStatus": "ok",
+      "stem": "The table shows some features of blood vessels. Which row shows the features of a vein? direction of blood flow size of the central hole (lumen) thickness of wall",
+      "options": {
+        "A": "away from the heart large thick",
+        "B": "away from the heart small thick",
+        "C": "towards heart small thin",
+        "D": "towards heart large thin"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q18.png",
+      "rawText": "Where are valves found that prevent blood from flowing in the wrong direction? A capillaries and arteries B lungs and veins C heart and capillaries D heart and veins",
+      "parseStatus": "ok",
+      "stem": "Where are valves found that prevent blood from flowing in the wrong direction?",
+      "options": {
+        "A": "capillaries and arteries",
+        "B": "lungs and veins",
+        "C": "heart and capillaries",
+        "D": "heart and veins"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q19.png",
+      "rawText": "The sequence of amino acids in antibodies enables them to complete which function? A bind to a specific antigen B bind to all pathogens C perform phagocytosis D confer passive immunity for all diseases",
+      "parseStatus": "ok",
+      "stem": "The sequence of amino acids in antibodies enables them to complete which function?",
+      "options": {
+        "A": "bind to a specific antigen",
+        "B": "bind to all pathogens",
+        "C": "perform phagocytosis",
+        "D": "confer passive immunity for all diseases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q20.png",
+      "rawText": "The diagram shows some of the structures in a human lung. Where is the carbon dioxide concentration highest? to pulmonary vein from pulmonary artery A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q21.png",
+      "rawText": "The list shows some processes that happen in the human body. 1 water enters cells by osmosis 2 muscles contract 3 impulses travel along neurones 4 oxygen diffuses into cells Which of these require energy released by respiration? A 2 only B 1 and 3 only C 2 and 3 only D 1, 2, 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The list shows some processes that happen in the human body. 1 water enters cells by osmosis 2 muscles contract 3 impulses travel along neurones 4 oxygen diffuses into cells Which of these require energy released by respiration?",
+      "options": {
+        "A": "2 only",
+        "B": "1 and 3 only",
+        "C": "2 and 3 only",
+        "D": "1, 2, 3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q22.png",
+      "rawText": "The table shows the composition of blood entering and leaving the liver and the kidneys. Which row is correct? highest concentration of urea in the blood lowest concentration of urea in the blood A entering kidneys leaving liver B entering kidneys entering liver C leaving kidneys entering liver D leaving kidneys leaving liver",
+      "parseStatus": "ok",
+      "stem": "The table shows the composition of blood entering and leaving the liver and the kidneys. Which row is correct? highest concentration of urea in the blood lowest concentration of urea in the blood",
+      "options": {
+        "A": "entering kidneys leaving liver",
+        "B": "entering kidneys entering liver",
+        "C": "leaving kidneys entering liver",
+        "D": "leaving kidneys leaving liver"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q23.png",
+      "rawText": "Which is the correct sequence of structures through which a nerve impulse passes in a reflex arc? A effector  motor neurone  relay neurone  sensory neurone  receptor B effector  sensory neurone  relay neurone  motor neurone  receptor C receptor  motor neurone  relay neurone  sensory neurone  effector D receptor  sensory neurone  relay neurone  motor neurone  effector",
+      "parseStatus": "ok",
+      "stem": "Which is the correct sequence of structures through which a nerve impulse passes in a reflex arc?",
+      "options": {
+        "A": "effector  motor neurone  relay neurone  sensory neurone  receptor",
+        "B": "effector  sensory neurone  relay neurone  motor neurone  receptor",
+        "C": "receptor  motor neurone  relay neurone  sensory neurone  effector",
+        "D": "receptor  sensory neurone  relay neurone  motor neurone  effector"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q24.png",
+      "rawText": "The diagram shows an eye. Which labelled part contains cells that are sensitive to light? D C B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q25.png",
+      "rawText": "When hormones are secreted, they affect different parts of the body. The table shows some features that are affected by four different hormones. Which hormone is adrenaline? feature pulse rate blood glucose concentration pupil size menstrual cycle sperm production A \u0016 \u0016 \u001a \u001a \u001a key B \u001a \u001a \u001a \u001a \u0016 \u0016= affected by hormone C \u0016 \u0016 \u0016 \u001a \u001a \u001a= not affected by hormone D \u001a \u001a \u001a \u0016 \u001a",
+      "parseStatus": "ok",
+      "stem": "When hormones are secreted, they affect different parts of the body. The table shows some features that are affected by four different hormones. Which hormone is adrenaline? feature pulse rate blood glucose concentration pupil size menstrual cycle sperm production",
+      "options": {
+        "A": "\u0016 \u0016 \u001a \u001a \u001a key",
+        "B": "\u001a \u001a \u001a \u001a \u0016 \u0016= affected by hormone",
+        "C": "\u0016 \u0016 \u0016 \u001a \u001a \u001a= not affected by hormone",
+        "D": "\u001a \u001a \u001a \u0016 \u001a"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q26.png",
+      "rawText": "When the environment is hot, how do the arterioles in the skin and hair erector muscles react? arterioles hair erector muscles A dilate relax B dilate contract C constrict relax D constrict contract",
+      "parseStatus": "ok",
+      "stem": "When the environment is hot, how do the arterioles in the skin and hair erector muscles react? arterioles hair erector muscles",
+      "options": {
+        "A": "dilate relax",
+        "B": "dilate contract",
+        "C": "constrict relax",
+        "D": "constrict contract"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q27.png",
+      "rawText": "The diagram shows one parent Hydra growing and releasing an offspring from the side of its body. parent hydra offspring Which row is correct? parent and offspring are genetically identical involves asexual reproduction A \u0016 \u0016 key B \u0016 \u001a \u0016= yes C \u001a \u0016 \u001a= no D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "The diagram shows one parent Hydra growing and releasing an offspring from the side of its body. parent hydra offspring Which row is correct? parent and offspring are genetically identical involves asexual reproduction",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u001a= no",
+        "D": "\u001a \u001a"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q28.png",
+      "rawText": "Which row describes self-pollination? pollen transferred from anther to stigma of a different flower on the same plant a flower on a different plant of the same species same flower A \u0016 \u0016 \u001a key B \u0016 \u001a \u0016 \u0016= yes C \u001a \u001a \u0016 \u001a= no D \u001a \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "Which row describes self-pollination? pollen transferred from anther to stigma of a different flower on the same plant a flower on a different plant of the same species same flower",
+      "options": {
+        "A": "\u0016 \u0016 \u001a key",
+        "B": "\u0016 \u001a \u0016 \u0016= yes",
+        "C": "\u001a \u001a \u0016 \u001a= no",
+        "D": "\u001a \u0016 \u0016"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q29.png",
+      "rawText": "Which feature is only found in the male gamete? A acrosome B enzymes C jelly coat D mitochondria",
+      "parseStatus": "ok",
+      "stem": "Which feature is only found in the male gamete?",
+      "options": {
+        "A": "acrosome",
+        "B": "enzymes",
+        "C": "jelly coat",
+        "D": "mitochondria"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q30.png",
+      "rawText": "The graph shows how the mass of DNA changes during a mitotic cell division. Where on the graph are two cells formed? mass of DNA per cell / arbitrary units time / hours D C A B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q31.png",
+      "rawText": "What happens during meiosis? A A diploid cell divides to form diploid cells. B A diploid cell divides to form haploid cells. C A haploid cell divides to form diploid cells. D A haploid cell divides to form haploid cells.",
+      "parseStatus": "ok",
+      "stem": "What happens during meiosis?",
+      "options": {
+        "A": "A diploid cell divides to form diploid cells.",
+        "B": "A diploid cell divides to form haploid cells.",
+        "C": "A haploid cell divides to form diploid cells.",
+        "D": "A haploid cell divides to form haploid cells."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q32.png",
+      "rawText": "Red-green colour blindness is a condition that occurs more frequently in men than in women. Which statement about this condition is correct? A It can pass from father to son. B It is a sex-linked characteristic. C It shows co-dominance. D The gene is on the Y chromosome.",
+      "parseStatus": "ok",
+      "stem": "Red-green colour blindness is a condition that occurs more frequently in men than in women. Which statement about this condition is correct?",
+      "options": {
+        "A": "It can pass from father to son.",
+        "B": "It is a sex-linked characteristic.",
+        "C": "It shows co-dominance.",
+        "D": "The gene is on the Y chromosome."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q33.png",
+      "rawText": "Which statement explains why the allele for sickle-cell anaemia is commonly found in human populations in certain parts of the world? A It is transmitted by mosquitoes. B It protects people against malaria. C It prevents people being bitten by mosquitoes. D It increases oxygen transport.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why the allele for sickle-cell anaemia is commonly found in human populations in certain parts of the world?",
+      "options": {
+        "A": "It is transmitted by mosquitoes.",
+        "B": "It protects people against malaria.",
+        "C": "It prevents people being bitten by mosquitoes.",
+        "D": "It increases oxygen transport."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q34.png",
+      "rawText": "The development of antibiotic resistance in bacteria is an example of which process? A evolution by artificial selection B evolution by natural selection C variation due to genetic engineering D variation due to asexual reproduction",
+      "parseStatus": "ok",
+      "stem": "The development of antibiotic resistance in bacteria is an example of which process?",
+      "options": {
+        "A": "evolution by artificial selection",
+        "B": "evolution by natural selection",
+        "C": "variation due to genetic engineering",
+        "D": "variation due to asexual reproduction"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q35.png",
+      "rawText": "The diagram contains information about the number and mass of organisms in a food web. 500 000 hazelnuts 150 squirrels 3500 shrews 2 foxes 25 owls fox hazelnut shrew owl squirrel 13 000 3 20 600 400 average mass / g organism What is the total biomass of all the primary consumers in this food web? A 130 kg B 420 kg C 3650 kg D 130 000 kg",
+      "parseStatus": "ok",
+      "stem": "The diagram contains information about the number and mass of organisms in a food web. 500 000 hazelnuts 150 squirrels 3500 shrews 2 foxes 25 owls fox hazelnut shrew owl squirrel 13 000 3 20 600 400 average mass / g organism What is the total biomass of all the primary consumers in this food web?",
+      "options": {
+        "A": "130 kg",
+        "B": "420 kg",
+        "C": "3650 kg",
+        "D": "130 000 kg"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q36.png",
+      "rawText": "The diagram shows some of the stages in the nitrogen cycle. Which arrow represents the process of nitrogen fixation? nitrogen in the air dead organic matter herbivore bean plant with root nodules nitrates A D B C not to scale",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q37.png",
+      "rawText": "Which term is used to describe the phase of fastest growth in a population of bacteria? A stationary B lag C exponential D sigmoid",
+      "parseStatus": "ok",
+      "stem": "Which term is used to describe the phase of fastest growth in a population of bacteria?",
+      "options": {
+        "A": "stationary",
+        "B": "lag",
+        "C": "exponential",
+        "D": "sigmoid"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q38.png",
+      "rawText": "Which are reasons why bacteria are often useful in biotechnology? 1 lack of ethical concerns over their manipulation and growth 2 they have the same genetic code as all other organisms 3 their DNA is located in a nucleus that can easily be altered with enzymes A 1 and 2 only B 1 and 3 only C 1, 2 and 3 D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which are reasons why bacteria are often useful in biotechnology? 1 lack of ethical concerns over their manipulation and growth 2 they have the same genetic code as all other organisms 3 their DNA is located in a nucleus that can easily be altered with enzymes",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "1, 2 and 3",
+        "D": "2 and 3 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q39.png",
+      "rawText": "Penicillin is produced in a fermenter by growing the fungus Penicillium. The graph shows how the mass of living Penicillium fungus and the concentration of penicillin changed over time. mass concentration mass of living Penicillium fungus 0 1 2 time / days 3 4 5 concentration of penicillin When is the best time to collect the penicillin? A at 1.5 days B at 3 days C at 3.5 days D at 5 days",
+      "parseStatus": "ok",
+      "stem": "Penicillin is produced in a fermenter by growing the fungus Penicillium. The graph shows how the mass of living Penicillium fungus and the concentration of penicillin changed over time. mass concentration mass of living Penicillium fungus 0 1 2 time / days 3 4 5 concentration of penicillin When is the best time to collect the penicillin?",
+      "options": {
+        "A": "at 1.5 days",
+        "B": "at 3 days",
+        "C": "at 3.5 days",
+        "D": "at 5 days"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_21/q40.png",
+      "rawText": "The number of Atlantic bluefin tuna fish found in the Atlantic Ocean has significantly decreased in the last 50 years. Which method would make the biggest improvement in the conservation of tuna fish stocks? A decreasing the size of holes in fishing nets B genetic engineering of tuna C introducing fishing quotas D selective breeding of tuna",
+      "parseStatus": "ok",
+      "stem": "The number of Atlantic bluefin tuna fish found in the Atlantic Ocean has significantly decreased in the last 50 years. Which method would make the biggest improvement in the conservation of tuna fish stocks?",
+      "options": {
+        "A": "decreasing the size of holes in fishing nets",
+        "B": "genetic engineering of tuna",
+        "C": "introducing fishing quotas",
+        "D": "selective breeding of tuna"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

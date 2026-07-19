@@ -1,0 +1,638 @@
+{
+  "questionPaper": "0610_s19_qp_22.pdf",
+  "markScheme": "0610_s19_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q01.png",
+      "rawText": "Carbon dioxide diffuses into a leaf. Which characteristic of living things requires this? A excretion B movement C nutrition D respiration",
+      "parseStatus": "ok",
+      "stem": "Carbon dioxide diffuses into a leaf. Which characteristic of living things requires this?",
+      "options": {
+        "A": "excretion",
+        "B": "movement",
+        "C": "nutrition",
+        "D": "respiration"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q02.png",
+      "rawText": "The diagram shows how Homo sapiens (modern people) could have evolved from earlier ancestors. Homo habilis Homo erectus Homo heidelbergensis Homo sapiens (modern people) Which statement about modern people and their ancestors is correct? A They are in the same species and the same genus. B They are in the same species but not the same genus. C They are in the same genus but not the same species. D They are neither the same species nor the same genus.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how Homo sapiens (modern people) could have evolved from earlier ancestors. Homo habilis Homo erectus Homo heidelbergensis Homo sapiens (modern people) Which statement about modern people and their ancestors is correct?",
+      "options": {
+        "A": "They are in the same species and the same genus.",
+        "B": "They are in the same species but not the same genus.",
+        "C": "They are in the same genus but not the same species.",
+        "D": "They are neither the same species nor the same genus."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q03.png",
+      "rawText": "Heart muscle cells have a high rate of metabolism. Which structure do they require to be present in high numbers? A chloroplasts B mitochondria C cell walls D vacuoles",
+      "parseStatus": "ok",
+      "stem": "Heart muscle cells have a high rate of metabolism. Which structure do they require to be present in high numbers?",
+      "options": {
+        "A": "chloroplasts",
+        "B": "mitochondria",
+        "C": "cell walls",
+        "D": "vacuoles"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q04.png",
+      "rawText": "Which features are possessed by all plant cells? a cell wall chloroplasts A \u0016 \u0016 key B \u0016 \u001a \u0016= present C \u001a \u0016 \u001a= absent D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which features are possessed by all plant cells? a cell wall chloroplasts",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= present",
+        "C": "\u001a \u0016 \u001a= absent",
+        "D": "\u001a \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q05.png",
+      "rawText": "The diagram shows a xylem vessel in a plant stem. The magnification is ×400. X Y X Y ×400 What is the actual width of the xylem vessel along the line XY? A 8.75 µm B 14 µm C 87.5 µm D 140 µm",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a xylem vessel in a plant stem. The magnification is ×400. X Y X Y ×400 What is the actual width of the xylem vessel along the line XY?",
+      "options": {
+        "A": "8.75 µm",
+        "B": "14 µm",
+        "C": "87.5 µm",
+        "D": "140 µm"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q06.png",
+      "rawText": "The diagram shows a test-tube containing clear jelly. A drop of blue ink is injected into the middle of the jelly. clear jelly drop of blue ink The blue colour of the ink spreads throughout the jelly. By which process does the blue ink spread through the jelly? A active transport B catalysis C diffusion D osmosis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a test-tube containing clear jelly.",
+      "options": {
+        "A": "drop of blue ink is injected into the middle of the jelly. clear jelly drop of blue ink The blue colour of the ink spreads throughout the jelly. By which process does the blue ink spread through the jelly? A active transport",
+        "B": "catalysis",
+        "C": "diffusion",
+        "D": "osmosis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q07.png",
+      "rawText": "Which process describes osmosis? A diffusion of water through a cell wall B diffusion of water through a partially permeable membrane C diffusion of water through the cell sap D diffusion of water through the cytoplasm",
+      "parseStatus": "ok",
+      "stem": "Which process describes osmosis?",
+      "options": {
+        "A": "diffusion of water through a cell wall",
+        "B": "diffusion of water through a partially permeable membrane",
+        "C": "diffusion of water through the cell sap",
+        "D": "diffusion of water through the cytoplasm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q08.png",
+      "rawText": "Which row shows the chemical elements contained in fats? carbon hydrogen nitrogen oxygen A \u0016 \u0016 \u001a \u0016 key B \u0016 \u0016 \u0016 \u0016 \u0016= present C \u001a \u0016 \u0016 \u001a \u001a= absent D \u0016 \u001a \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "Which row shows the chemical elements contained in fats? carbon hydrogen nitrogen oxygen",
+      "options": {
+        "A": "\u0016 \u0016 \u001a \u0016 key",
+        "B": "\u0016 \u0016 \u0016 \u0016 \u0016= present",
+        "C": "\u001a \u0016 \u0016 \u001a \u001a= absent",
+        "D": "\u0016 \u001a \u0016 \u0016"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q09.png",
+      "rawText": "Small molecules are used as the basic units in the synthesis of large food molecules. Which statement is correct? A Amino acids are basic units of carbohydrates. B Fatty acids are basic units of glycogen. C Glycerol is a basic unit of oils. D Simple sugar is a basic unit of protein.",
+      "parseStatus": "ok",
+      "stem": "Small molecules are used as the basic units in the synthesis of large food molecules. Which statement is correct?",
+      "options": {
+        "A": "Amino acids are basic units of carbohydrates.",
+        "B": "Fatty acids are basic units of glycogen.",
+        "C": "Glycerol is a basic unit of oils.",
+        "D": "Simple sugar is a basic unit of protein."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q10.png",
+      "rawText": "The diagrams show a protease enzyme catalysing the breaking of part of a protein molecule into smaller pieces. Which diagram has three correct labels? A substrate product enzyme B active site active site product enzyme C substrate enzyme D active site product substrate",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a protease enzyme catalysing the breaking of part of a protein molecule into smaller pieces. Which diagram has three correct labels?",
+      "options": {
+        "A": "substrate product enzyme",
+        "B": "active site active site product enzyme",
+        "C": "substrate enzyme",
+        "D": "active site product substrate"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q11.png",
+      "rawText": "The diagram shows an experiment to investigate the balance between respiration and photosynthesis. In which tube are photosynthesis and respiration taking place at the same time? A B C D black polythene to keep out light water snail pond weed light light light",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q12.png",
+      "rawText": "Some gardeners use Epsom salts (magnesium sulfate) as a fertiliser for their plants. Epsom salts release magnesium ions into the soil. How would this benefit the plants? A prevents pests from eating the leaves B prevents the leaves from going yellow C prevents water loss from the leaves D prevents the growth of weeds",
+      "parseStatus": "ok",
+      "stem": "Some gardeners use Epsom salts (magnesium sulfate) as a fertiliser for their plants. Epsom salts release magnesium ions into the soil. How would this benefit the plants?",
+      "options": {
+        "A": "prevents pests from eating the leaves",
+        "B": "prevents the leaves from going yellow",
+        "C": "prevents water loss from the leaves",
+        "D": "prevents the growth of weeds"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q13.png",
+      "rawText": "The food label is from a packet of cereal. The label can help someone who is concerned about their diet. Nutrition Typical values 100 g contains Energy Fat of which saturates Carbohydrate of which sugars Fibre Protein Salt 985 kJ 235 kcal 1.5 g 0.3 g 45.5 g 3.8 g 2.8 g 7.7 g 0.5 g A person eats 45 g of cereal. One of the food types listed in the label can help prevent constipation. How many grams of this food type does the person eat? A 1.3 g B 2.8 g C 3.5 g D 7.7 g",
+      "parseStatus": "ok",
+      "stem": "The food label is from a packet of cereal. The label can help someone who is concerned about their diet. Nutrition Typical values 100 g contains Energy Fat of which saturates Carbohydrate of which sugars Fibre Protein Salt 985 kJ 235 kcal 1.5 g 0.3 g 45.5 g 3.8 g 2.8 g 7.7 g 0.5 g",
+      "options": {
+        "A": "person eats 45 g of cereal. One of the food types listed in the label can help prevent constipation. How many grams of this food type does the person eat? A 1.3 g",
+        "B": "2.8 g",
+        "C": "3.5 g",
+        "D": "7.7 g"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q14.png",
+      "rawText": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. How does this affect the water potential of blood in the intestinal capillaries and the intestinal contents? water potential blood in capillaries contents of small intestine A lowered lowered B lowered raised C raised lowered D raised raised",
+      "parseStatus": "ok",
+      "stem": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. How does this affect the water potential of blood in the intestinal capillaries and the intestinal contents? water potential blood in capillaries contents of small intestine",
+      "options": {
+        "A": "lowered lowered",
+        "B": "lowered raised",
+        "C": "raised lowered",
+        "D": "raised raised"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q15.png",
+      "rawText": "A person eats some cheese which contains a lot of fats and protein. Which row shows the combination of substances that will digest the cheese most effectively? substances present amylase bile lipase protease A \u0016 \u001a \u0016 \u001a key B \u001a \u0016 \u001a \u0016 \u0016= present C \u0016 \u001a \u0016 \u0016 \u001a= absent D \u001a \u0016 \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "A person eats some cheese which contains a lot of fats and protein. Which row shows the combination of substances that will digest the cheese most effectively? substances present amylase bile lipase protease",
+      "options": {
+        "A": "\u0016 \u001a \u0016 \u001a key",
+        "B": "\u001a \u0016 \u001a \u0016 \u0016= present",
+        "C": "\u0016 \u001a \u0016 \u0016 \u001a= absent",
+        "D": "\u001a \u0016 \u0016 \u0016"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q16.png",
+      "rawText": "A celery stalk was placed into a beaker of blue dye. When the dye reached the leaves, the stalk was taken out and a section was cut, as shown in the diagram. celery stalk blue dye cut Which diagram shows the appearance of the cut end of the stalk? A B C D blue dye blue dye blue dye",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q17.png",
+      "rawText": "The table shows the rate of water flow through a tree over a 12 hour period. time of day rate of flow / cm per hour 17:00 100 19:00 120 11:00 140 13:00 250 15:00 300 17:00 260 19:00 180 What conclusion can be drawn from the table? A Between 7:00 and 17:00 hours the rate of flow continuously increases. B The greatest increase in rate of flow in a two-hour period is between 11:00 and 13:00 hours. C Water does not flow up through a tree at night. D Water flow is affected by humidity.",
+      "parseStatus": "ok",
+      "stem": "The table shows the rate of water flow through a tree over a 12 hour period. time of day rate of flow / cm per hour 17:00 100 19:00 120 11:00 140 13:00 250 15:00 300 17:00 260 19:00 180 What conclusion can be drawn from the table?",
+      "options": {
+        "A": "Between 7:00 and 17:00 hours the rate of flow continuously increases.",
+        "B": "The greatest increase in rate of flow in a two-hour period is between 11:00 and 13:00 hours.",
+        "C": "Water does not flow up through a tree at night.",
+        "D": "Water flow is affected by humidity."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q18.png",
+      "rawText": "The diagram shows some potato tubers. New shoots are beginning to grow. Sucrose is being translocated from source to sink. soil tuber Which statement is correct? A The tuber is a sink. B The soil is a sink. C The shoots are sources. D The shoots are sinks.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some potato tubers. New shoots are beginning to grow. Sucrose is being translocated from source to sink. soil tuber Which statement is correct?",
+      "options": {
+        "A": "The tuber is a sink.",
+        "B": "The soil is a sink.",
+        "C": "The shoots are sources.",
+        "D": "The shoots are sinks."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q19.png",
+      "rawText": "The diagram shows cross-sections through three types of blood vessel, not drawn to the same scale. W V X Which section is from a vein and which is from a capillary? vein capillary A V W B W V C W X D X W",
+      "parseStatus": "ok",
+      "stem": "The diagram shows cross-sections through three types of blood vessel, not drawn to the same scale. W V X Which section is from a vein and which is from a capillary? vein capillary",
+      "options": {
+        "A": "V W",
+        "B": "W V",
+        "C": "W X",
+        "D": "X W"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q20.png",
+      "rawText": "Which disease is transmissible? A cholera B coronary heart disease C lung cancer D scurvy",
+      "parseStatus": "ok",
+      "stem": "Which disease is transmissible?",
+      "options": {
+        "A": "cholera",
+        "B": "coronary heart disease",
+        "C": "lung cancer",
+        "D": "scurvy"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q21.png",
+      "rawText": "The diagram illustrates changes in air pressure taking place inside the lungs during a complete cycle of breathing. Atmospheric pressure is 101 kPa. At which point on the diagram are the ribs beginning to be lowered? A B C D 102 101 100 time pressure in lungs / kPa",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q22.png",
+      "rawText": "Which pathway is followed by air passing into the body? A larynx → trachea → bronchi → bronchioles → alveoli B larynx → trachea → bronchioles → bronchi → alveoli C trachea → larynx → bronchi → alveoli → bronchioles D trachea → larynx → bronchi → bronchioles → alveoli",
+      "parseStatus": "ok",
+      "stem": "Which pathway is followed by air passing into the body?",
+      "options": {
+        "A": "larynx → trachea → bronchi → bronchioles → alveoli",
+        "B": "larynx → trachea → bronchioles → bronchi → alveoli",
+        "C": "trachea → larynx → bronchi → alveoli → bronchioles",
+        "D": "trachea → larynx → bronchi → bronchioles → alveoli"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q23.png",
+      "rawText": "Oxygen is required for aerobic respiration. How many molecules of oxygen are required for the aerobic respiration of three molecules of glucose? A 3 B 6 C 12 D 18",
+      "parseStatus": "ok",
+      "stem": "Oxygen is required for aerobic respiration. How many molecules of oxygen are required for the aerobic respiration of three molecules of glucose?",
+      "options": {
+        "A": "3",
+        "B": "6",
+        "C": "12",
+        "D": "18"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q24.png",
+      "rawText": "Which statement about involuntary responses is correct? A They always result in the same response to the same stimulus. B They are learned responses. C They are slower than voluntary responses. D They never use voluntary muscles.",
+      "parseStatus": "ok",
+      "stem": "Which statement about involuntary responses is correct?",
+      "options": {
+        "A": "They always result in the same response to the same stimulus.",
+        "B": "They are learned responses.",
+        "C": "They are slower than voluntary responses.",
+        "D": "They never use voluntary muscles."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q25.png",
+      "rawText": "The diagram shows the first part of a kidney tubule and its blood supply. During filtration, protein molecules do not pass through the wall of the glomerulus. Which part contains the highest concentration of protein? C D B A direction of blood flow",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q26.png",
+      "rawText": "The diagram shows a cross-section of the human eye. Which label points to the spot in the eye where vision is the sharpest? C A B D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q27.png",
+      "rawText": "Three plant shoots have their tips removed. Two of the shoots have a piece of agar gel placed on them, as shown in the diagram. The agar gel contains auxin. The shoots are exposed to light coming from one direction. plant shoot plant shoot plant shoot light agar gel containing auxin What is the appearance of the shoots after two days? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q28.png",
+      "rawText": "The diagram shows a synapse. Heroin affects the neurone. Which labelled part does the heroin directly affect? direction of movement of impulse A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q29.png",
+      "rawText": "What is an advantage of self-pollination? A Evolution is not possible. B Genetic variation cannot occur. C Isolated individuals can reproduce. D It does not require gametes.",
+      "parseStatus": "ok",
+      "stem": "What is an advantage of self-pollination?",
+      "options": {
+        "A": "Evolution is not possible.",
+        "B": "Genetic variation cannot occur.",
+        "C": "Isolated individuals can reproduce.",
+        "D": "It does not require gametes."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q30.png",
+      "rawText": "Which feature allows the sperm to dissolve the jelly coating of the egg cell? A acrosome B flagellum C mitochondria D nucleus",
+      "parseStatus": "ok",
+      "stem": "Which feature allows the sperm to dissolve the jelly coating of the egg cell?",
+      "options": {
+        "A": "acrosome",
+        "B": "flagellum",
+        "C": "mitochondria",
+        "D": "nucleus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q31.png",
+      "rawText": "The graph shows the relative concentration of hormones in the blood during days 14–28 of the menstrual cycle. Which letter represents the hormone progesterone in a woman who is not pregnant? relative concentration of hormones in the blood 14 16 18 20 22 24 26 28 time / days A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q32.png",
+      "rawText": "The diagram shows the chromosomes in the nucleus of a cell that divides by mitosis. Which diagram shows the chromosomes in the nucleus of one of the daughter cells produced? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q33.png",
+      "rawText": "The diploid number for mice is 40 chromosomes. How many chromosomes will be in a mouse cell formed by meiosis? A 10 B 20 C 40 D 80",
+      "parseStatus": "ok",
+      "stem": "The diploid number for mice is 40 chromosomes. How many chromosomes will be in a mouse cell formed by meiosis?",
+      "options": {
+        "A": "10",
+        "B": "20",
+        "C": "40",
+        "D": "80"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q34.png",
+      "rawText": "Which statement is correct? A People who are heterozygous for the sickle-cell allele have a resistance to malaria. B Sickle-cell anaemia is caused by a change in the amino acid sequence of the haemoglobin gene. C Sickle-cell anaemia is caused by both genetic and environmental factors interacting. D The sickle-cell allele is rare in human populations in areas where there is malaria.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "People who are heterozygous for the sickle-cell allele have a resistance to malaria.",
+        "B": "Sickle-cell anaemia is caused by a change in the amino acid sequence of the haemoglobin gene.",
+        "C": "Sickle-cell anaemia is caused by both genetic and environmental factors interacting.",
+        "D": "The sickle-cell allele is rare in human populations in areas where there is malaria."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q35.png",
+      "rawText": "When antibiotics are overused they become less effective. Which statement is correct? A Artificial selection results in resistant strains of bacteria. B Patients become resistant to the antibiotic. C The antibiotic causes the bacteria to mutate. D The antibiotic does not kill resistant bacteria.",
+      "parseStatus": "ok",
+      "stem": "When antibiotics are overused they become less effective. Which statement is correct?",
+      "options": {
+        "A": "Artificial selection results in resistant strains of bacteria.",
+        "B": "Patients become resistant to the antibiotic.",
+        "C": "The antibiotic causes the bacteria to mutate.",
+        "D": "The antibiotic does not kill resistant bacteria."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q36.png",
+      "rawText": "The diagram shows how sewage is treated. screen water to river settling tank second settling tank aeration tank air out air in sludge digester sludge disposal sludge sludge Why is air bubbled through the aeration tank? A to encourage microorganisms to reproduce quickly B to float the sludge C to settle the sludge D to stop microorganisms from reproducing too quickly",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how sewage is treated. screen water to river settling tank second settling tank aeration tank air out air in sludge digester sludge disposal sludge sludge Why is air bubbled through the aeration tank?",
+      "options": {
+        "A": "to encourage microorganisms to reproduce quickly",
+        "B": "to float the sludge",
+        "C": "to settle the sludge",
+        "D": "to stop microorganisms from reproducing too quickly"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q37.png",
+      "rawText": "Which trophic level has the greatest amount of energy? A B C D 1 mahogany tree with several thousand leaves → 1500 aphids → 10 small birds → 2 eagles",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q38.png",
+      "rawText": "All organisms share the same genetic code. This means that bacteria can be used to A improve the health of the digestive system. B manufacture biofuels in large quantities. C produce foods such as yoghurt and cheese. D make proteins using human DNA.",
+      "parseStatus": "ok",
+      "stem": "All organisms share the same genetic code. This means that bacteria can be used to",
+      "options": {
+        "A": "improve the health of the digestive system.",
+        "B": "manufacture biofuels in large quantities.",
+        "C": "produce foods such as yoghurt and cheese.",
+        "D": "make proteins using human DNA."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q39.png",
+      "rawText": "Evidence shows that some aquatic organisms have been feminised. What is the most likely cause of this? A increased nitrates running off farmland into the rivers B female hormones excreted by women taking contraceptive pills C infectious diseases in the fish D decreasing levels of oxygen in the rivers",
+      "parseStatus": "ok",
+      "stem": "Evidence shows that some aquatic organisms have been feminised. What is the most likely cause of this?",
+      "options": {
+        "A": "increased nitrates running off farmland into the rivers",
+        "B": "female hormones excreted by women taking contraceptive pills",
+        "C": "infectious diseases in the fish",
+        "D": "decreasing levels of oxygen in the rivers"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_22/q40.png",
+      "rawText": "What is not a reason for using chemical fertilisers in food production? A improving growth rate B improving mineral content of the soil C increasing yields D reducing competition with weeds",
+      "parseStatus": "ok",
+      "stem": "What is not a reason for using chemical fertilisers in food production?",
+      "options": {
+        "A": "improving growth rate",
+        "B": "improving mineral content of the soil",
+        "C": "increasing yields",
+        "D": "reducing competition with weeds"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

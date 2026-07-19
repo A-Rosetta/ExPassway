@@ -1,0 +1,653 @@
+{
+  "questionPaper": "0610_w24_qp_21.pdf",
+  "markScheme": "0610_w24_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q01.png",
+      "rawText": "A living organism, X, can make its own food, get rid of toxic materials and detect and respond to stimuli. What other four processes must organism X carry out to stay alive? A excretion, growth, movement, sensitivity B excretion, growth, nutrition, respiration C growth, movement, reproduction, respiration D movement, reproduction, respiration, sensitivity",
+      "parseStatus": "ok",
+      "stem": "A living organism, X, can make its own food, get rid of toxic materials and detect and respond to stimuli. What other four processes must organism X carry out to stay alive?",
+      "options": {
+        "A": "excretion, growth, movement, sensitivity",
+        "B": "excretion, growth, nutrition, respiration",
+        "C": "growth, movement, reproduction, respiration",
+        "D": "movement, reproduction, respiration, sensitivity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q02.png",
+      "rawText": "The diagram shows an animal. Using the key, which genus does the animal belong to? has jointed legs three pairs of legs more than three pairs of legs has tail A Hexagenia no tail B Dytiscus four pairs of legs C Argyroneta more than four pairs of legs D Asellus",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an animal. Using the key, which genus does the animal belong to? has jointed legs three pairs of legs more than three pairs of legs has tail",
+      "options": {
+        "A": "Hexagenia no tail",
+        "B": "Dytiscus four pairs of legs",
+        "C": "Argyroneta more than four pairs of legs",
+        "D": "Asellus"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q03.png",
+      "rawText": "Which statement is true for all species of organisms? A A species is a group of organisms that are genetically identical. B A species is a group of organisms that produce fertile offspring. C A species is a group of organisms that reproduce both asexually and sexually. D A species is a group of organisms that reproduce by sexual means only.",
+      "parseStatus": "ok",
+      "stem": "Which statement is true for all species of organisms?",
+      "options": {
+        "A": "A species is a group of organisms that are genetically identical.",
+        "B": "A species is a group of organisms that produce fertile offspring.",
+        "C": "A species is a group of organisms that reproduce both asexually and sexually.",
+        "D": "A species is a group of organisms that reproduce by sexual means only."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q04.png",
+      "rawText": "Which group of living organisms includes the myriapods? A arthropods B prokaryotes C protoctists D vertebrates",
+      "parseStatus": "ok",
+      "stem": "Which group of living organisms includes the myriapods?",
+      "options": {
+        "A": "arthropods",
+        "B": "prokaryotes",
+        "C": "protoctists",
+        "D": "vertebrates"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q05.png",
+      "rawText": "The diagram shows a liver cell. Which features are present in this cell and also in most plant cells? A cell membrane and cytoplasm B cell membrane and sap vacuole C cell wall and cytoplasm D cell wall and sap vacuole",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a liver cell. Which features are present in this cell and also in most plant cells?",
+      "options": {
+        "A": "cell membrane and cytoplasm",
+        "B": "cell membrane and sap vacuole",
+        "C": "cell wall and cytoplasm",
+        "D": "cell wall and sap vacuole"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q06.png",
+      "rawText": "A tick is a type of arachnid. The length of an adult tick is 2.3 mm. What is the length of the tick in micrometres? A 0.23 μm B 23 μm C 230 μm D 2300 μm",
+      "parseStatus": "ok",
+      "stem": "A tick is a type of arachnid. The length of an adult tick is 2.3 mm. What is the length of the tick in micrometres?",
+      "options": {
+        "A": "0.23 μm",
+        "B": "23 μm",
+        "C": "230 μm",
+        "D": "2300 μm"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q07.png",
+      "rawText": "Cylinders of potato tissue were left in different concentrations of sucrose solution for one hour. The graph shows the percentage change in the length of the potato cylinders after one hour. 0.0 0.1 0.2 0.3 0.4 0.5 concentration of sucrose solution / mol dm–3 0.6 0.7 0.8 0.9 1.0 percentage change in potato cylinder length 7.0 6.0 5.0 4.0 3.0 2.0 1.0 0.0 –1.0 –2.0 –3.0 –4.0 –5.0 –6.0 What can be concluded about the cells of the potato cylinders that were left in 0.2 mol dm–3 sucrose solution? A The cells in the potato cylinders became flaccid. B The cells in the potato cylinders became plasmolysed. C The net movement of water into the potato cells was equal to the net movement of water out of the potato cells. D The water potential of the potato cells was zero.",
+      "parseStatus": "ok",
+      "stem": "Cylinders of potato tissue were left in different concentrations of sucrose solution for one hour. The graph shows the percentage change in the length of the potato cylinders after one hour. 0.0 0.1 0.2 0.3 0.4 0.5 concentration of sucrose solution / mol dm–3 0.6 0.7 0.8 0.9 1.0 percentage change in potato cylinder length 7.0 6.0 5.0 4.0 3.0 2.0 1.0 0.0 –1.0 –2.0 –3.0 –4.0 –5.0 –6.0 What can be concluded about the cells of the potato cylinders that were left in 0.2 mol dm–3 sucrose solution?",
+      "options": {
+        "A": "The cells in the potato cylinders became flaccid.",
+        "B": "The cells in the potato cylinders became plasmolysed.",
+        "C": "The net movement of water into the potato cells was equal to the net movement of water out of the potato cells.",
+        "D": "The water potential of the potato cells was zero."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q08.png",
+      "rawText": "Which statement about biological molecules is correct? A DNA molecules contain pairs of bases: A pairs with G and C pairs with T. B Fatty acids and glycerol molecules can be joined together to form proteins. C Glucose molecules can be joined together to make cellulose and glycogen. D Starch molecules are made of maltase.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q09.png",
+      "rawText": "The graph shows how temperature affects an enzyme-controlled reaction. Where on the graph do the enzyme and substrate molecules have the most kinetic energy? rate of reaction temperature A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q10.png",
+      "rawText": "Which substance is an energy store that is made in plant cells from the products of photosynthesis? A cellulose B glycogen C nectar D starch",
+      "parseStatus": "ok",
+      "stem": "Which substance is an energy store that is made in plant cells from the products of photosynthesis?",
+      "options": {
+        "A": "cellulose",
+        "B": "glycogen",
+        "C": "nectar",
+        "D": "starch"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q11.png",
+      "rawText": "Which nutrient is lacking when a person has scurvy? A calcium B iron C vitamin C D vitamin D",
+      "parseStatus": "ok",
+      "stem": "Which nutrient is lacking when a person has scurvy?",
+      "options": {
+        "A": "calcium",
+        "B": "iron",
+        "C": "vitamin C",
+        "D": "vitamin D"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q12.png",
+      "rawText": "The diagram shows part of the alimentary canal. J K L M Which row correctly identifies the structures labelled J to M? J K L M A oesophagus pancreas small intestine stomach B pancreas small intestine stomach oesophagus C small intestine stomach oesophagus pancreas D stomach oesophagus pancreas small intestine",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the alimentary canal. J K L M Which row correctly identifies the structures labelled J to M? J K L M",
+      "options": {
+        "A": "oesophagus pancreas small intestine stomach",
+        "B": "pancreas small intestine stomach oesophagus",
+        "C": "small intestine stomach oesophagus pancreas",
+        "D": "stomach oesophagus pancreas small intestine"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q13.png",
+      "rawText": "Which statement about enzymes in digestion is correct? A Amylase catalyses the breakdown of fats to fatty acids and glycerol. B Amylase catalyses the breakdown of oils to fatty acids and glucose. C Lipase catalyses the breakdown of fats to fatty acids and glycerol. D Lipase catalyses the breakdown of oils to fatty acids and glucose.",
+      "parseStatus": "ok",
+      "stem": "Which statement about enzymes in digestion is correct?",
+      "options": {
+        "A": "Amylase catalyses the breakdown of fats to fatty acids and glycerol.",
+        "B": "Amylase catalyses the breakdown of oils to fatty acids and glucose.",
+        "C": "Lipase catalyses the breakdown of fats to fatty acids and glycerol.",
+        "D": "Lipase catalyses the breakdown of oils to fatty acids and glucose."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q14.png",
+      "rawText": "The diagram shows a villus. X Y Which statement about absorption is correct? A Amino acids move into X. B Fatty acids move into X. C Cellulose moves into Y. D Maltose moves into Y.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a villus. X Y Which statement about absorption is correct?",
+      "options": {
+        "A": "Amino acids move into X.",
+        "B": "Fatty acids move into X.",
+        "C": "Cellulose moves into Y.",
+        "D": "Maltose moves into Y."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q15.png",
+      "rawText": "Which substance strengthens the walls of xylem vessels? A glycerol B glycogen C lignin D starch",
+      "parseStatus": "ok",
+      "stem": "Which substance strengthens the walls of xylem vessels?",
+      "options": {
+        "A": "glycerol",
+        "B": "glycogen",
+        "C": "lignin",
+        "D": "starch"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q16.png",
+      "rawText": "Which row explains why a plant wilts? water loss at the leaf surface water uptake in the roots state of the plant cells A low high flaccid B low high turgid C high low flaccid D high low turgid",
+      "parseStatus": "ok",
+      "stem": "Which row explains why a plant wilts? water loss at the leaf surface water uptake in the roots state of the plant cells",
+      "options": {
+        "A": "low high flaccid",
+        "B": "low high turgid",
+        "C": "high low flaccid",
+        "D": "high low turgid"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q17.png",
+      "rawText": "Scientists investigated the movement of sucrose through a plant. They used carbon dioxide containing radioactive carbon, 14C. They covered one leaf on a plant with a clear plastic bag containing 14CO2. After 24 hours, the plant was placed onto photographic film. The photographic film went black where the radioactive carbon was present. Diagram 1 shows the plant at the start of the experiment, and diagram 2 shows the photographic film at the end of the experiment. growing shoot tip stem root flower leaf clear plastic bag 14CO2 diagram 1 diagram 2 Which conclusions can be made from the experiment? 1 Translocation occurs in upwards and downwards directions. 2 The leaf and shoot tip are sources. 3 The roots and flowers are sinks. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Scientists investigated the movement of sucrose through a plant. They used carbon dioxide containing radioactive carbon, 14C. They covered one leaf on a plant with a clear plastic bag containing 14CO2. After 24 hours, the plant was placed onto photographic film. The photographic film went black where the radioactive carbon was present. Diagram 1 shows the plant at the start of the experiment, and diagram 2 shows the photographic film at the end of the experiment. growing shoot tip stem root flower leaf clear plastic bag 14CO2 diagram 1 diagram 2 Which conclusions can be made from the experiment? 1 Translocation occurs in upwards and downwards directions. 2 The leaf and shoot tip are sources. 3 The roots and flowers are sinks.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q18.png",
+      "rawText": "The diagram shows a section through the human heart. Which valve is the right atrioventricular valve? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q19.png",
+      "rawText": "Which row shows the features of a blood vessel that transports blood at low pressure? size of lumen thickness of wall valves A large thick absent B small thin present C small thick absent D large thin present",
+      "parseStatus": "ok",
+      "stem": "Which row shows the features of a blood vessel that transports blood at low pressure? size of lumen thickness of wall valves",
+      "options": {
+        "A": "large thick absent",
+        "B": "small thin present",
+        "C": "small thick absent",
+        "D": "large thin present"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q20.png",
+      "rawText": "The diagram shows a component of blood. What is the name of this component? A lymphocyte B phagocyte C platelet D red blood cell",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a component of blood. What is the name of this component?",
+      "options": {
+        "A": "lymphocyte",
+        "B": "phagocyte",
+        "C": "platelet",
+        "D": "red blood cell"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q21.png",
+      "rawText": "Which statement about immunity is correct? A Antibodies are present on the surface of pathogens. B Antibodies are produced by lymphocytes. C Antigens are produced by memory cells. D Antigens are produced by phagocytes.",
+      "parseStatus": "ok",
+      "stem": "Which statement about immunity is correct?",
+      "options": {
+        "A": "Antibodies are present on the surface of pathogens.",
+        "B": "Antibodies are produced by lymphocytes.",
+        "C": "Antigens are produced by memory cells.",
+        "D": "Antigens are produced by phagocytes."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q22.png",
+      "rawText": "The intercostal muscles and diaphragm contract and relax during ventilation. Which row shows the actions of muscles that result in the largest volume inside the thorax? internal intercostal muscles diaphragm A relax contract B relax relax C contract contract D contract relax",
+      "parseStatus": "ok",
+      "stem": "The intercostal muscles and diaphragm contract and relax during ventilation. Which row shows the actions of muscles that result in the largest volume inside the thorax? internal intercostal muscles diaphragm",
+      "options": {
+        "A": "relax contract",
+        "B": "relax relax",
+        "C": "contract contract",
+        "D": "contract relax"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q23.png",
+      "rawText": "How many molecules of carbon dioxide, glucose, oxygen and water are there in the balanced chemical equation for aerobic respiration? carbon dioxide glucose oxygen water A 3 1 6 3 B 3 2 3 3 C 6 1 6 6 D 6 6 6 6",
+      "parseStatus": "ok",
+      "stem": "How many molecules of carbon dioxide, glucose, oxygen and water are there in the balanced chemical equation for aerobic respiration? carbon dioxide glucose oxygen water",
+      "options": {
+        "A": "3 1 6 3",
+        "B": "3 2 3 3",
+        "C": "6 1 6 6",
+        "D": "6 6 6 6"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q24.png",
+      "rawText": "Where is urea formed and excreted? formed excreted A bladder heart B heart liver C kidney bladder D liver kidney",
+      "parseStatus": "ok",
+      "stem": "Where is urea formed and excreted? formed excreted",
+      "options": {
+        "A": "bladder heart",
+        "B": "heart liver",
+        "C": "kidney bladder",
+        "D": "liver kidney"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q25.png",
+      "rawText": "A growing seedling was pinned sideways onto a wooden board that was covered in wet blotting paper. The seedling was kept in a dark box. The diagram shows the seedling after 24 hours. Auxin had become concentrated on the lower side of the shoot and the root. shoot root upper side lower side What can be concluded from this experiment about the effect of auxin on the seedling? A A high concentration of auxin stimulates cell elongation on the lower side of the root. B A high concentration of auxin stimulates cell elongation on the lower side of the shoot. C A low concentration of auxin stimulates cell elongation on the upper side of the shoot. D A low concentration of auxin stimulates cell elongation on the upper sides of the shoot and the root.",
+      "parseStatus": "ok",
+      "stem": "A growing seedling was pinned sideways onto a wooden board that was covered in wet blotting paper. The seedling was kept in a dark box. The diagram shows the seedling after 24 hours. Auxin had become concentrated on the lower side of the shoot and the root. shoot root upper side lower side What can be concluded from this experiment about the effect of auxin on the seedling?",
+      "options": {
+        "A": "A high concentration of auxin stimulates cell elongation on the lower side of the root.",
+        "B": "A high concentration of auxin stimulates cell elongation on the lower side of the shoot.",
+        "C": "A low concentration of auxin stimulates cell elongation on the upper side of the shoot.",
+        "D": "A low concentration of auxin stimulates cell elongation on the upper sides of the shoot and the root."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q26.png",
+      "rawText": "Which statement describes a drug? A a substance that is produced in the body and alters the activity of target organs B a substance that is produced in the body and increases the rate of chemical reactions in the body C any substance taken into the body that modifies or affects chemical reactions in the body D any substance that helps the body maintain a constant internal environment",
+      "parseStatus": "ok",
+      "stem": "Which statement describes a drug?",
+      "options": {
+        "A": "a substance that is produced in the body and alters the activity of target organs",
+        "B": "a substance that is produced in the body and increases the rate of chemical reactions in the body",
+        "C": "any substance taken into the body that modifies or affects chemical reactions in the body",
+        "D": "any substance that helps the body maintain a constant internal environment"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q27.png",
+      "rawText": "The diagram shows a plant that is producing small plantlets. plantlet flower Which statement about the plantlets is correct? A They are genetically different from the parent plant. B They are genetically identical to the parent plant. C They are produced as a result of the fusion of nuclei. D They are produced by fertilising the flowers.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a plant that is producing small plantlets. plantlet flower Which statement about the plantlets is correct?",
+      "options": {
+        "A": "They are genetically different from the parent plant.",
+        "B": "They are genetically identical to the parent plant.",
+        "C": "They are produced as a result of the fusion of nuclei.",
+        "D": "They are produced by fertilising the flowers."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q28.png",
+      "rawText": "Which hormone maintains the thickness of the lining of the uterus during pregnancy? A follicle-stimulating hormone (FSH) B luteinising hormone (LH) C oestrogen D progesterone",
+      "parseStatus": "ok",
+      "stem": "Which hormone maintains the thickness of the lining of the uterus during pregnancy?",
+      "options": {
+        "A": "follicle-stimulating hormone (FSH)",
+        "B": "luteinising hormone (LH)",
+        "C": "oestrogen",
+        "D": "progesterone"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q29.png",
+      "rawText": "The table shows the number of new HIV infections in 1990 and 2021 in one country. year 1990 2021 number of new HIV infections 8800 830 Which statement could explain the change in the number of new HIV infections between 1990 and 2021? A Condoms, which prevent the transmission of STIs, increased in price between 1990 and 2021. B People in 2021 had more sexual partners. C Testing of donated blood for pathogens was introduced in 1990. D There was an increase in drug abuse between 1990 and 2021.",
+      "parseStatus": "ok",
+      "stem": "The table shows the number of new HIV infections in 1990 and 2021 in one country. year 1990 2021 number of new HIV infections 8800 830 Which statement could explain the change in the number of new HIV infections between 1990 and 2021?",
+      "options": {
+        "A": "Condoms, which prevent the transmission of STIs, increased in price between 1990 and 2021.",
+        "B": "People in 2021 had more sexual partners.",
+        "C": "Testing of donated blood for pathogens was introduced in 1990.",
+        "D": "There was an increase in drug abuse between 1990 and 2021."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q30.png",
+      "rawText": "Where are amino acids assembled into protein molecules? A the DNA B the genes C the nucleus D the ribosomes",
+      "parseStatus": "ok",
+      "stem": "Where are amino acids assembled into protein molecules?",
+      "options": {
+        "A": "the DNA",
+        "B": "the genes",
+        "C": "the nucleus",
+        "D": "the ribosomes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q31.png",
+      "rawText": "The diagram shows the changes in the mass of DNA in one cell before, during and after mitosis. mean mass of DNA per cell time X What is happening at X in the graph? A the cell is changing from haploid to diploid B the cell is dividing C DNA replication D reduction division",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the changes in the mass of DNA in one cell before, during and after mitosis. mean mass of DNA per cell time X What is happening at X in the graph?",
+      "options": {
+        "A": "the cell is changing from haploid to diploid",
+        "B": "the cell is dividing",
+        "C": "DNA replication",
+        "D": "reduction division"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q32.png",
+      "rawText": "A woman who has blood group AB has a child with a man who has blood group B and is heterozygous. What is the chance of the child having blood group B? A 0% B 25% C 50% D 100%",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q33.png",
+      "rawText": "Plants are adapted to survive in different environments. What are features of xerophytes? cuticle number of stomata A thick few B thick many C thin few D thin many",
+      "parseStatus": "ok",
+      "stem": "Plants are adapted to survive in different environments. What are features of xerophytes? cuticle number of stomata",
+      "options": {
+        "A": "thick few",
+        "B": "thick many",
+        "C": "thin few",
+        "D": "thin many"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q34.png",
+      "rawText": "Which diagram correctly shows the flow of energy? A producers consumers decomposers B C producers consumers decomposers D decomposers consumers producers consumers producers decomposers",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q35.png",
+      "rawText": "The diagram shows a food chain. tree  small insects  small birds  birds of prey What is the correct pyramid of numbers for this food chain? birds of prey small birds small insects tree A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q36.png",
+      "rawText": "Acidic soils encourage the increase of anaerobic bacteria that cause denitrification. How do acidic conditions affect the nitrogen cycle? A Ammonia will not enter the nitrogen cycle. B More nitrogen gas will be released from the soil. C The concentration of nitrates in the soil will increase. D The plants growing in the soil will produce more proteins.",
+      "parseStatus": "ok",
+      "stem": "Acidic soils encourage the increase of anaerobic bacteria that cause denitrification. How do acidic conditions affect the nitrogen cycle?",
+      "options": {
+        "A": "Ammonia will not enter the nitrogen cycle.",
+        "B": "More nitrogen gas will be released from the soil.",
+        "C": "The concentration of nitrates in the soil will increase.",
+        "D": "The plants growing in the soil will produce more proteins."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q37.png",
+      "rawText": "The graph shows the population of yeast over a period of time. Which phase shows when the number of yeast cells dying is equal to the number of new yeast cells being produced? number of yeast cells time A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q38.png",
+      "rawText": "Wheat plants are often grown in large areas as a monoculture. What is a negative environmental impact of this method of farming? A The variety of species in the area is reduced. B Fewer types of pesticide are needed. C Larger harvests can be produced. D Specialist machinery can be used.",
+      "parseStatus": "ok",
+      "stem": "Wheat plants are often grown in large areas as a monoculture. What is a negative environmental impact of this method of farming?",
+      "options": {
+        "A": "The variety of species in the area is reduced.",
+        "B": "Fewer types of pesticide are needed.",
+        "C": "Larger harvests can be produced.",
+        "D": "Specialist machinery can be used."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q39.png",
+      "rawText": "How will these natural processes be affected by deforestation? flooding loss of soil transpiration A decreased decreased increased B decreased increased decreased C increased decreased increased D increased increased decreased",
+      "parseStatus": "ok",
+      "stem": "How will these natural processes be affected by deforestation? flooding loss of soil transpiration",
+      "options": {
+        "A": "decreased decreased increased",
+        "B": "decreased increased decreased",
+        "C": "increased decreased increased",
+        "D": "increased increased decreased"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w24_qp_21/q40.png",
+      "rawText": "The stages describe how genetic modification can be used to produce human insulin from bacteria. 1 Cut bacterial plasmid DNA with restriction enzymes. 2 Extract the gene for insulin from human DNA with restriction enzymes. 3 Insert the recombinant plasmids into bacteria. 4 Join human DNA to bacterial plasmid DNA using DNA ligase. 5 Replicate bacteria containing recombinant plasmids. Which sequence will lead to the production of human insulin by bacteria? A 2  1  4  3  5 B 2  5  1  3  4 C 4  2  3  1  5 D 4  3  5  1  2",
+      "parseStatus": "ok",
+      "stem": "The stages describe how genetic modification can be used to produce human insulin from bacteria. 1 Cut bacterial plasmid DNA with restriction enzymes. 2 Extract the gene for insulin from human DNA with restriction enzymes. 3 Insert the recombinant plasmids into bacteria. 4 Join human DNA to bacterial plasmid DNA using DNA ligase. 5 Replicate bacteria containing recombinant plasmids. Which sequence will lead to the production of human insulin by bacteria?",
+      "options": {
+        "A": "2  1  4  3  5",
+        "B": "2  5  1  3  4",
+        "C": "4  2  3  1  5",
+        "D": "4  3  5  1  2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ A lightweight full-stack scaffold for international high school students studyin
 
 ## Current Past-Paper Subjects
 
+- `CIE IGCSE Biology 0610`, Paper 2 MCQ: 41 papers / 1640 questions
 - `CIE IGCSE Chemistry 0620`, Paper 2 MCQ: 6 papers / 240 questions
 - `CIE IGCSE Co-ordinated Sciences 0654`, Paper 2 MCQ: 21 papers / 839 valid questions
 

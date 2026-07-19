@@ -52,7 +52,7 @@ def collect_question_anchors(doc):
             if not token.isdigit():
                 continue
             question_no = int(token)
-            if question_no not in EXPECTED_QUESTIONS or x0 > 90 or (y1 - y0) < 6:
+            if question_no not in EXPECTED_QUESTIONS or x0 > 60 or (y1 - y0) < 6:
                 continue
             anchors.append(
                 (question_no, page_index, float(y0), float(y1), float(x0), float(x1))

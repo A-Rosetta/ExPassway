@@ -1,0 +1,673 @@
+{
+  "questionPaper": "0610_w22_qp_22.pdf",
+  "markScheme": "0610_w22_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q01.png",
+      "rawText": "Which process provides an organism with the raw materials needed for tissue repair? A excretion B growth C nutrition D respiration",
+      "parseStatus": "ok",
+      "stem": "Which process provides an organism with the raw materials needed for tissue repair?",
+      "options": {
+        "A": "excretion",
+        "B": "growth",
+        "C": "nutrition",
+        "D": "respiration"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q02.png",
+      "rawText": "Which name is given to a group of individuals that can reproduce to produce fertile offspring? A a genus B a kingdom C a species D an organ system",
+      "parseStatus": "ok",
+      "stem": "Which name is given to a group of individuals that can reproduce to produce fertile offspring?",
+      "options": {
+        "A": "a genus",
+        "B": "a kingdom",
+        "C": "a species",
+        "D": "an organ system"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q03.png",
+      "rawText": "Root hair cells are found on plant roots. Which feature is present in a root hair cell but not in a sperm cell? A cell membrane B cell wall C chloroplasts D cytoplasm",
+      "parseStatus": "ok",
+      "stem": "Root hair cells are found on plant roots. Which feature is present in a root hair cell but not in a sperm cell?",
+      "options": {
+        "A": "cell membrane",
+        "B": "cell wall",
+        "C": "chloroplasts",
+        "D": "cytoplasm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q04.png",
+      "rawText": "The cells listed have specialised structures that allow them to carry out their functions. 1 ciliated cell 2 nerve cell 3 root cortex cell 4 sperm cell Which cells have structures that can move? A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The cells listed have specialised structures that allow them to carry out their functions. 1 ciliated cell 2 nerve cell 3 root cortex cell 4 sperm cell Which cells have structures that can move?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q05.png",
+      "rawText": "Some examples of substances moving across membranes are listed. 1 glucose molecules into the epithelium that lines the small intestine 2 nitrate ions from a dilute solution in soil into a more concentrated solution in root hair cells 3 water molecules from mesophyll cells into the air spaces of a leaf For which examples must oxygen be present? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Some examples of substances moving across membranes are listed. 1 glucose molecules into the epithelium that lines the small intestine 2 nitrate ions from a dilute solution in soil into a more concentrated solution in root hair cells 3 water molecules from mesophyll cells into the air spaces of a leaf For which examples must oxygen be present?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q06.png",
+      "rawText": "Plant tissue is placed in a solution. What would cause plasmolysis of the plant cells? 1 the external solution having a higher water potential than the plant cells 2 the external solution having a lower water potential than the plant cells 3 water moving out of the plant cells 4 water moving into the plant cells A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Plant tissue is placed in a solution. What would cause plasmolysis of the plant cells? 1 the external solution having a higher water potential than the plant cells 2 the external solution having a lower water potential than the plant cells 3 water moving out of the plant cells 4 water moving into the plant cells",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q07.png",
+      "rawText": "DNA is a molecule consisting of two linked strands. Part of a single strand of DNA has the sequence of bases shown. ACCGTTGAA What is the sequence of bases in the second strand? A ACCGTTGAA B GTTACCAGG C TGGCAACTT D CAATGGTCC",
+      "parseStatus": "ok",
+      "stem": "DNA is a molecule consisting of two linked strands. Part of a single strand of DNA has the sequence of bases shown. ACCGTTGAA What is the sequence of bases in the second strand?",
+      "options": {
+        "A": "ACCGTTGAA",
+        "B": "GTTACCAGG",
+        "C": "TGGCAACTT",
+        "D": "CAATGGTCC"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q08.png",
+      "rawText": "The graph shows the concentration of a substance during the course of an enzyme-controlled reaction. concentration time Which substance is this? A enzyme B enzyme-substrate complex C product D substrate",
+      "parseStatus": "ok",
+      "stem": "The graph shows the concentration of a substance during the course of an enzyme-controlled reaction. concentration time Which substance is this?",
+      "options": {
+        "A": "enzyme",
+        "B": "enzyme-substrate complex",
+        "C": "product",
+        "D": "substrate"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q09.png",
+      "rawText": "The graph shows the effect of temperature on the activity of an enzyme. 0 20 40 temperature / °C 60 80 enzyme activity At which temperature do effective collisions happen most frequently? A 15 C B 40 C C 60 C D 80 C",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of temperature on the activity of an enzyme. 0 20 40 temperature / °C 60 80 enzyme activity At which temperature do effective collisions happen most frequently?",
+      "options": {
+        "A": "15 C",
+        "B": "40 C",
+        "C": "60 C",
+        "D": "80 C"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q10.png",
+      "rawText": "Which statement about enzymes is correct? A They are made of carbohydrates. B Their activity is unaffected by pH. C They are used up during the reaction. D They have a complementary shape to their substrate.",
+      "parseStatus": "ok",
+      "stem": "Which statement about enzymes is correct?",
+      "options": {
+        "A": "They are made of carbohydrates.",
+        "B": "Their activity is unaffected by pH.",
+        "C": "They are used up during the reaction.",
+        "D": "They have a complementary shape to their substrate."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q11.png",
+      "rawText": "Two test-tubes were filled with hydrogencarbonate indicator. An aquatic plant was placed into each test-tube and the test-tubes were sealed with bungs, as shown. aquatic plants hydrogencarbonate indicator lamp test-tube X test-tube Y box that excludes light Test-tube X was illuminated and test-tube Y was kept in the dark. The results are shown. test-tube colour of the hydrogencarbonate indicator at the start of the investigation at the end of the investigation X orange red Y orange yellow What causes the colour changes in the hydrogencarbonate indicator in X and Y? X Y A a decrease in the concentration of carbon dioxide an increase in the concentration of carbon dioxide B a decrease in the concentration of oxygen an increase in the concentration of oxygen C an increase in the concentration of carbon dioxide a decrease in the concentration of carbon dioxide D an increase in the concentration of oxygen a decrease in the concentration of oxygen",
+      "parseStatus": "ok",
+      "stem": "Two test-tubes were filled with hydrogencarbonate indicator. An aquatic plant was placed into each test-tube and the test-tubes were sealed with bungs, as shown. aquatic plants hydrogencarbonate indicator lamp test-tube X test-tube Y box that excludes light Test-tube X was illuminated and test-tube Y was kept in the dark. The results are shown. test-tube colour of the hydrogencarbonate indicator at the start of the investigation at the end of the investigation X orange red Y orange yellow What causes the colour changes in the hydrogencarbonate indicator in X and Y? X Y",
+      "options": {
+        "A": "a decrease in the concentration of carbon dioxide an increase in the concentration of carbon dioxide",
+        "B": "a decrease in the concentration of oxygen an increase in the concentration of oxygen",
+        "C": "an increase in the concentration of carbon dioxide a decrease in the concentration of carbon dioxide",
+        "D": "an increase in the concentration of oxygen a decrease in the concentration of oxygen"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q12.png",
+      "rawText": "The substances listed are found in the leaf of a plant. Which substance is obtained from the soil? A carbon dioxide B chlorophyll C glucose D mineral ions",
+      "parseStatus": "ok",
+      "stem": "The substances listed are found in the leaf of a plant. Which substance is obtained from the soil?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "chlorophyll",
+        "C": "glucose",
+        "D": "mineral ions"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q13.png",
+      "rawText": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. What is the immediate effect of this on the water potential of blood in the intestinal capillaries, and on the water potential of the contents of the small intestine? water potential blood in capillaries contents of small intestine A lowered lowered B lowered raised C raised lowered D raised raised",
+      "parseStatus": "ok",
+      "stem": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. What is the immediate effect of this on the water potential of blood in the intestinal capillaries, and on the water potential of the contents of the small intestine? water potential blood in capillaries contents of small intestine",
+      "options": {
+        "A": "lowered lowered",
+        "B": "lowered raised",
+        "C": "raised lowered",
+        "D": "raised raised"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q14.png",
+      "rawText": "The graph shows the concentration of maltose in different parts of the alimentary canal. maltose concentration mouth stomach small intestine distance through the alimentary canal X What causes the change in concentration at X? A absorption of maltose B action of amylase C action of maltase D assimilation of maltose",
+      "parseStatus": "ok",
+      "stem": "The graph shows the concentration of maltose in different parts of the alimentary canal. maltose concentration mouth stomach small intestine distance through the alimentary canal X What causes the change in concentration at X?",
+      "options": {
+        "A": "absorption of maltose",
+        "B": "action of amylase",
+        "C": "action of maltase",
+        "D": "assimilation of maltose"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q15.png",
+      "rawText": "The diagram shows a bean seedling soon after it has germinated. Where is most water absorbed? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q16.png",
+      "rawText": "Scientists investigate the movement of substances in a plant. They cut a ring of tissue from the stem. Removing the tissue removes some of the transport vessels found around the edge of the stem. A few days later they notice swelling above the area where the tissue has been removed. tissue removed time swelling leaves roots What causes the swelling? A Phloem vessels have been removed and sucrose cannot move to the sink. B Phloem vessels have been removed and sucrose cannot move to the source. C Xylem vessels have been removed and minerals cannot move to the sink. D Xylem vessels have been removed and minerals cannot move to the source.",
+      "parseStatus": "ok",
+      "stem": "Scientists investigate the movement of substances in a plant. They cut a ring of tissue from the stem. Removing the tissue removes some of the transport vessels found around the edge of the stem.",
+      "options": {
+        "A": "few days later they notice swelling above the area where the tissue has been removed. tissue removed time swelling leaves roots What causes the swelling? A Phloem vessels have been removed and sucrose cannot move to the sink.",
+        "B": "Phloem vessels have been removed and sucrose cannot move to the source.",
+        "C": "Xylem vessels have been removed and minerals cannot move to the sink.",
+        "D": "Xylem vessels have been removed and minerals cannot move to the source."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q17.png",
+      "rawText": "The diagram shows the outside of a human heart. Which structure is a coronary artery? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q18.png",
+      "rawText": "The photomicrograph shows some different types of blood cell. X What is the function of the cell labelled X? A clotting blood B phagocytosis C producing antibodies D transporting oxygen",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows some different types of blood cell. X What is the function of the cell labelled X?",
+      "options": {
+        "A": "clotting blood",
+        "B": "phagocytosis",
+        "C": "producing antibodies",
+        "D": "transporting oxygen"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q19.png",
+      "rawText": "Campylobacter is a bacterium that can cause food poisoning. Which word describes Campylobacter? A antibody B disease C pathogen D symptom",
+      "parseStatus": "ok",
+      "stem": "Campylobacter is a bacterium that can cause food poisoning. Which word describes Campylobacter?",
+      "options": {
+        "A": "antibody",
+        "B": "disease",
+        "C": "pathogen",
+        "D": "symptom"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q20.png",
+      "rawText": "What is the approximate percentage of oxygen in expired air? A 0.04% B 4% C 16% D 21%",
+      "parseStatus": "ok",
+      "stem": "What is the approximate percentage of oxygen in expired air?",
+      "options": {
+        "A": "0.04%",
+        "B": "4%",
+        "C": "16%",
+        "D": "21%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q21.png",
+      "rawText": "Which process could continue without energy from respiration? A active transport B growth C osmosis D protein synthesis",
+      "parseStatus": "ok",
+      "stem": "Which process could continue without energy from respiration?",
+      "options": {
+        "A": "active transport",
+        "B": "growth",
+        "C": "osmosis",
+        "D": "protein synthesis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q22.png",
+      "rawText": "Which row shows the products of anaerobic respiration in humans and yeast? products in humans products in yeast A lactic acid only alcohol only B lactic acid only alcohol and carbon dioxide C lactic acid and carbon dioxide alcohol only D lactic acid and carbon dioxide alcohol and carbon dioxide",
+      "parseStatus": "ok",
+      "stem": "Which row shows the products of anaerobic respiration in humans and yeast? products in humans products in yeast",
+      "options": {
+        "A": "lactic acid only alcohol only",
+        "B": "lactic acid only alcohol and carbon dioxide",
+        "C": "lactic acid and carbon dioxide alcohol only",
+        "D": "lactic acid and carbon dioxide alcohol and carbon dioxide"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q23.png",
+      "rawText": "A person eats foods containing proteins. Some of the amino acids in the proteins are converted to urea and excreted from the body. 1 2 3 proteins amino acids urea urine Which row identifies the sites of processes 1, 2 and 3? site of process 1 site of process 2 site of process 3 A stomach liver kidney B liver kidney bladder C stomach kidney liver D liver stomach kidney",
+      "parseStatus": "ok",
+      "stem": "A person eats foods containing proteins. Some of the amino acids in the proteins are converted to urea and excreted from the body. 1 2 3 proteins amino acids urea urine Which row identifies the sites of processes 1, 2 and 3? site of process 1 site of process 2 site of process 3",
+      "options": {
+        "A": "stomach liver kidney",
+        "B": "liver kidney bladder",
+        "C": "stomach kidney liver",
+        "D": "liver stomach kidney"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q24.png",
+      "rawText": "What is a response to a low concentration of glucose in the blood? A Glucagon will cause the body to convert glucose into glycogen. B Glucagon will cause the body to convert glycogen into glucose. C Insulin will cause the body to convert glucose into glycogen. D Insulin will cause the body to convert glycogen into glucose.",
+      "parseStatus": "ok",
+      "stem": "What is a response to a low concentration of glucose in the blood?",
+      "options": {
+        "A": "Glucagon will cause the body to convert glucose into glycogen.",
+        "B": "Glucagon will cause the body to convert glycogen into glucose.",
+        "C": "Insulin will cause the body to convert glucose into glycogen.",
+        "D": "Insulin will cause the body to convert glycogen into glucose."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q25.png",
+      "rawText": "Which hormone causes an increase in breathing rate, an increase in heart rate and the widening of pupils? A insulin B adrenaline C oestrogen D testosterone",
+      "parseStatus": "ok",
+      "stem": "Which hormone causes an increase in breathing rate, an increase in heart rate and the widening of pupils?",
+      "options": {
+        "A": "insulin",
+        "B": "adrenaline",
+        "C": "oestrogen",
+        "D": "testosterone"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q26.png",
+      "rawText": "Which row about tropic responses is correct? gravitropism phototropism A root grows away from gravity shoot grows away from light source B root grows away from gravity shoot grows towards light source C root grows towards gravity shoot grows away from light source D root grows towards gravity shoot grows towards light source",
+      "parseStatus": "ok",
+      "stem": "Which row about tropic responses is correct? gravitropism phototropism",
+      "options": {
+        "A": "root grows away from gravity shoot grows away from light source",
+        "B": "root grows away from gravity shoot grows towards light source",
+        "C": "root grows towards gravity shoot grows away from light source",
+        "D": "root grows towards gravity shoot grows towards light source"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q27.png",
+      "rawText": "What is the definition of a drug? A a substance produced by a gland that is carried in the blood and alters the activity of target organs B a substance produced by white blood cells that is carried in the blood and destroys bacteria and viruses C a substance taken into the body that modifies or affects chemical reactions carried out in the body D a substance that increases the rate of chemical reactions in the body and is not changed by the reaction",
+      "parseStatus": "ok",
+      "stem": "What is the definition of a drug?",
+      "options": {
+        "A": "a substance produced by a gland that is carried in the blood and alters the activity of target organs",
+        "B": "a substance produced by white blood cells that is carried in the blood and destroys bacteria and viruses",
+        "C": "a substance taken into the body that modifies or affects chemical reactions carried out in the body",
+        "D": "a substance that increases the rate of chemical reactions in the body and is not changed by the reaction"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q28.png",
+      "rawText": "What is the sequence of events in sexual reproduction in plants? A growth of pollen tube  fertilisation  pollination B growth of pollen tube  pollination  fertilisation C pollination  fertilisation  growth of pollen tube D pollination  growth of pollen tube  fertilisation",
+      "parseStatus": "ok",
+      "stem": "What is the sequence of events in sexual reproduction in plants?",
+      "options": {
+        "A": "growth of pollen tube  fertilisation  pollination",
+        "B": "growth of pollen tube  pollination  fertilisation",
+        "C": "pollination  fertilisation  growth of pollen tube",
+        "D": "pollination  growth of pollen tube  fertilisation"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q29.png",
+      "rawText": "Which statement describes passive immunity? A the process of antigen production in the body B defence against pathogens by antibodies acquired from another individual C the type of immunity that results from vaccination D immunity that results in the production of memory cells",
+      "parseStatus": "ok",
+      "stem": "Which statement describes passive immunity?",
+      "options": {
+        "A": "the process of antigen production in the body",
+        "B": "defence against pathogens by antibodies acquired from another individual",
+        "C": "the type of immunity that results from vaccination",
+        "D": "immunity that results in the production of memory cells"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q30.png",
+      "rawText": "What happens to the number of chromosomes when a cell divides by meiosis? A doubles from diploid to haploid B doubles from haploid to diploid C halves from diploid to haploid D halves from haploid to diploid",
+      "parseStatus": "ok",
+      "stem": "What happens to the number of chromosomes when a cell divides by meiosis?",
+      "options": {
+        "A": "doubles from diploid to haploid",
+        "B": "doubles from haploid to diploid",
+        "C": "halves from diploid to haploid",
+        "D": "halves from haploid to diploid"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q31.png",
+      "rawText": "A sex-linked condition is caused by a recessive allele. A healthy male and female are both unaffected by the condition but the female has one copy of the recessive allele. What is the chance of their offspring being affected by the sex-linked condition? A 50% of all their offspring B 100% of male offspring and 0% of female offspring C 25% of all their offspring D 50% of male offspring and 25% of female offspring",
+      "parseStatus": "ok",
+      "stem": "A sex-linked condition is caused by a recessive allele.",
+      "options": {
+        "A": "healthy male and female are both unaffected by the condition but the female has one copy of the recessive allele. What is the chance of their offspring being affected by the sex-linked condition? A 50% of all their offspring",
+        "B": "100% of male offspring and 0% of female offspring",
+        "C": "25% of all their offspring",
+        "D": "50% of male offspring and 25% of female offspring"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q32.png",
+      "rawText": "The diagram shows the unspecialised cells of a mammalian embryo soon after fertilisation. What is the correct description of these cells? A embryo cells undergoing meiosis B gametes undergoing mitosis C stem cells undergoing mitosis D zygote undergoing meiosis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the unspecialised cells of a mammalian embryo soon after fertilisation. What is the correct description of these cells?",
+      "options": {
+        "A": "embryo cells undergoing meiosis",
+        "B": "gametes undergoing mitosis",
+        "C": "stem cells undergoing mitosis",
+        "D": "zygote undergoing meiosis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q33.png",
+      "rawText": "Which feature is a leaf adaptation for a xerophyte? A hair-like structures on the leaves B large surface area C many stomata D thin waxy cuticle",
+      "parseStatus": "ok",
+      "stem": "Which feature is a leaf adaptation for a xerophyte?",
+      "options": {
+        "A": "hair-like structures on the leaves",
+        "B": "large surface area",
+        "C": "many stomata",
+        "D": "thin waxy cuticle"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q34.png",
+      "rawText": "What is an example of evolution? A the genetic engineering of bacteria to produce human insulin B the development of antibiotic-resistant bacteria C the changes made to livestock as a result of artificial selection D the production of lactose-free milk",
+      "parseStatus": "ok",
+      "stem": "What is an example of evolution?",
+      "options": {
+        "A": "the genetic engineering of bacteria to produce human insulin",
+        "B": "the development of antibiotic-resistant bacteria",
+        "C": "the changes made to livestock as a result of artificial selection",
+        "D": "the production of lactose-free milk"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q35.png",
+      "rawText": "The diagram shows the flow of energy through living organisms. energy from the Sun energy in plants photosynthesis feeding energy in animals Which term should be placed in both boxes to complete the diagram? A chemical B heat C kinetic D light",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the flow of energy through living organisms. energy from the Sun energy in plants photosynthesis feeding energy in animals Which term should be placed in both boxes to complete the diagram?",
+      "options": {
+        "A": "chemical",
+        "B": "heat",
+        "C": "kinetic",
+        "D": "light"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q36.png",
+      "rawText": "The diagram shows the nitrogen cycle in the ocean. Which stage represents nitrification? lower part of the sea without sunlight upper part of the sea with sunlight atmosphere nitrogen nitrate phytoplankton zooplankton and fish ammonia nitrate C D A B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q37.png",
+      "rawText": "The graph shows how much penicillin is produced by the fungus Penicillium in a fermenter. It also shows the concentrations of sugars, ammonium ions and Penicillium. Penicillium uses sugars as a food source and needs ammonium ions. concentration time penicillin sugars ammonium ions Penicillium What does the graph show about the conditions needed for penicillin production? A A high concentration of ammonium ions must be maintained. B Most penicillin is produced when nutrient concentrations are low. C Penicillium cannot produce penicillin when its concentration decreases. D Sugars must be added constantly to the fermenter.",
+      "parseStatus": "ok",
+      "stem": "The graph shows how much penicillin is produced by the fungus Penicillium in a fermenter. It also shows the concentrations of sugars, ammonium ions and Penicillium. Penicillium uses sugars as a food source and needs ammonium ions. concentration time penicillin sugars ammonium ions Penicillium What does the graph show about the conditions needed for penicillin production?",
+      "options": {
+        "A": "A high concentration of ammonium ions must be maintained.",
+        "B": "Most penicillin is produced when nutrient concentrations are low.",
+        "C": "Penicillium cannot produce penicillin when its concentration decreases.",
+        "D": "Sugars must be added constantly to the fermenter."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q38.png",
+      "rawText": "The list shows some of the steps in the production of human insulin by genetic engineering. 1 The human insulin gene is inserted into a bacterial plasmid using DNA ligase. 2 A recombinant plasmid is inserted into a bacterium. 3 The bacterium containing the recombinant plasmid replicates. 4 The insulin gene is removed from human DNA using a restriction enzyme. What is the correct sequence of these steps? A 1  2  4  3 B 2  4  3  1 C 3  2  1  4 D 4  1  2  3",
+      "parseStatus": "ok",
+      "stem": "The list shows some of the steps in the production of human insulin by genetic engineering. 1 The human insulin gene is inserted into a bacterial plasmid using DNA ligase. 2",
+      "options": {
+        "A": "recombinant plasmid is inserted into a bacterium. 3 The bacterium containing the recombinant plasmid replicates. 4 The insulin gene is removed from human DNA using a restriction enzyme. What is the correct sequence of these steps? A 1  2  4  3",
+        "B": "2  4  3  1",
+        "C": "3  2  1  4",
+        "D": "4  1  2  3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q39.png",
+      "rawText": "Deforestation results in an increase in the concentration of carbon dioxide in the atmosphere. What is the correct explanation? A There is less decay. B There is less photosynthesis. C There is less respiration. D There is less transpiration.",
+      "parseStatus": "ok",
+      "stem": "Deforestation results in an increase in the concentration of carbon dioxide in the atmosphere. What is the correct explanation?",
+      "options": {
+        "A": "There is less decay.",
+        "B": "There is less photosynthesis.",
+        "C": "There is less respiration.",
+        "D": "There is less transpiration."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_22/q40.png",
+      "rawText": "Which definition of sustainable development is correct? A providing for the needs of an increasing human population without harming the environment B using a resource more quickly than it can be replaced C using increasing areas of land for crops, livestock production and housing D conservation of endangered species by captive breeding programmes and seed banks",
+      "parseStatus": "ok",
+      "stem": "Which definition of sustainable development is correct?",
+      "options": {
+        "A": "providing for the needs of an increasing human population without harming the environment",
+        "B": "using a resource more quickly than it can be replaced",
+        "C": "using increasing areas of land for crops, livestock production and housing",
+        "D": "conservation of endangered species by captive breeding programmes and seed banks"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

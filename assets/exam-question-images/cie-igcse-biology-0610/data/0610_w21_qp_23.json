@@ -1,0 +1,648 @@
+{
+  "questionPaper": "0610_w21_qp_23.pdf",
+  "markScheme": "0610_w21_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q01.png",
+      "rawText": "An Amoeba is a single-celled organism. The diagram shows an Amoeba engulfing a food particle. Amoeba food particle Which characteristics of living organisms are shown? A excretion, movement and nutrition B excretion, nutrition and sensitivity C movement, nutrition and sensitivity D movement, reproduction and sensitivity",
+      "parseStatus": "ok",
+      "stem": "An Amoeba is a single-celled organism. The diagram shows an Amoeba engulfing a food particle. Amoeba food particle Which characteristics of living organisms are shown?",
+      "options": {
+        "A": "excretion, movement and nutrition",
+        "B": "excretion, nutrition and sensitivity",
+        "C": "movement, nutrition and sensitivity",
+        "D": "movement, reproduction and sensitivity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q02.png",
+      "rawText": "Two animals have an identical sequence of amino acids in one of the proteins found in their cells. What does this indicate about these animals? A They have been eating the same types of food. B They have not been exposed to substances that cause mutation. C They must be members of the same genus. D They share an ancestor.",
+      "parseStatus": "ok",
+      "stem": "Two animals have an identical sequence of amino acids in one of the proteins found in their cells. What does this indicate about these animals?",
+      "options": {
+        "A": "They have been eating the same types of food.",
+        "B": "They have not been exposed to substances that cause mutation.",
+        "C": "They must be members of the same genus.",
+        "D": "They share an ancestor."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q03.png",
+      "rawText": "The diagram shows two guard cells. Which label is correct? A cell membrane B cell wall C vacuole D cytoplasm",
+      "parseStatus": "ok",
+      "stem": "The diagram shows two guard cells. Which label is correct?",
+      "options": {
+        "A": "cell membrane",
+        "B": "cell wall",
+        "C": "vacuole",
+        "D": "cytoplasm"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q04.png",
+      "rawText": "The length of a mitochondrion in a photomicrograph is 15 mm. The actual length of the mitochondrion is 3 m. What is the magnification of the photomicrograph? A 5 B 45 C 5000 D 45 000",
+      "parseStatus": "ok",
+      "stem": "The length of a mitochondrion in a photomicrograph is 15 mm. The actual length of the mitochondrion is 3 m. What is the magnification of the photomicrograph?",
+      "options": {
+        "A": "5",
+        "B": "45",
+        "C": "5000",
+        "D": "45 000"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q05.png",
+      "rawText": "The diagram shows some cells. cilia cytoplasm nucleus Where are these cells found? A alimentary canal B blood C bronchus D plant roots",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some cells. cilia cytoplasm nucleus Where are these cells found?",
+      "options": {
+        "A": "alimentary canal",
+        "B": "blood",
+        "C": "bronchus",
+        "D": "plant roots"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q06.png",
+      "rawText": "In which diagram would oxygen diffuse into the cell? high oxygen concentration in the cell cell membrane low oxygen concentration outside of the cell A high oxygen concentration in the cell cell membrane high oxygen concentration outside of the cell B low oxygen concentration in the cell cell membrane low oxygen concentration outside of the cell C low oxygen concentration in the cell cell membrane high oxygen concentration outside of the cell D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q07.png",
+      "rawText": "Which statement about the role of the pressure of water in supporting plants is correct? A The pressure of water inside the cells presses inwards on the cell wall. B The pressure of water outside the cells presses inwards on the cell wall. C The pressure of water inside the cells presses outwards on the cell wall. D The pressure of water outside the cells presses outwards on the cell wall.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the role of the pressure of water in supporting plants is correct?",
+      "options": {
+        "A": "The pressure of water inside the cells presses inwards on the cell wall.",
+        "B": "The pressure of water outside the cells presses inwards on the cell wall.",
+        "C": "The pressure of water inside the cells presses outwards on the cell wall.",
+        "D": "The pressure of water outside the cells presses outwards on the cell wall."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q08.png",
+      "rawText": "The bases on one of the strands of a DNA molecule have the sequence shown. A-A-T-C-T-G What is the corresponding sequence of bases on the other strand? A A-A-T-C-T-G B C-C-G-A-G-T C G-G-C-T-C-A D T-T-A-G-A-C",
+      "parseStatus": "ok",
+      "stem": "The bases on one of the strands of a DNA molecule have the sequence shown. A-A-T-C-T-G What is the corresponding sequence of bases on the other strand?",
+      "options": {
+        "A": "A-A-T-C-T-G",
+        "B": "C-C-G-A-G-T",
+        "C": "G-G-C-T-C-A",
+        "D": "T-T-A-G-A-C"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q09.png",
+      "rawText": "In a photosynthesis experiment, a plant is left in bright sunlight for several hours. A leaf is then removed from the plant and tested for starch, using iodine solution. The diagram shows the leaf from the plant that was used in the experiment. white area green area Which diagram shows the result of the experiment? A B C D iodine solution turns blue-black iodine solution stays brown key",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q10.png",
+      "rawText": "An experiment was carried out to investigate the effect of pH on enzyme action. The graph shows the results. y-axis x-axis What are the labels for the x-axis and the y-axis? x-axis y-axis A pH rate of reaction B pH time C rate of reaction pH D time pH",
+      "parseStatus": "ok",
+      "stem": "An experiment was carried out to investigate the effect of pH on enzyme action. The graph shows the results. y-axis x-axis What are the labels for the x-axis and the y-axis? x-axis y-axis",
+      "options": {
+        "A": "pH rate of reaction",
+        "B": "pH time",
+        "C": "rate of reaction pH",
+        "D": "time pH"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q11.png",
+      "rawText": "Four test-tubes were set up as shown in the diagram. In which test-tube is the starch digested most quickly? A B water-bath at 15 °C starch solution and amylase C D starch solution and boiled amylase water-bath at 35 °C starch solution and amylase starch solution and boiled amylase",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q12.png",
+      "rawText": "Two similar leaves are set up in test-tubes as shown. One is exposed to light, while the other is kept in the dark. orange hydrogencarbonate indicator solution green leaf black paper green leaf After a few hours, which colour would the hydrogencarbonate indicator solution be in each test-tube? light dark A colourless blue-black B purple yellow C red blue D yellow purple",
+      "parseStatus": "ok",
+      "stem": "Two similar leaves are set up in test-tubes as shown. One is exposed to light, while the other is kept in the dark. orange hydrogencarbonate indicator solution green leaf black paper green leaf After a few hours, which colour would the hydrogencarbonate indicator solution be in each test-tube? light dark",
+      "options": {
+        "A": "colourless blue-black",
+        "B": "purple yellow",
+        "C": "red blue",
+        "D": "yellow purple"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q13.png",
+      "rawText": "The diagram shows part of a leaf cross-section. 1 2 3 4 5 Which cells can carry out photosynthesis? A 1, 2 and 3 B 2, 3 and 4 C 2, 4 and 5 D 1, 3 and 5",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a leaf cross-section. 1 2 3 4 5 Which cells can carry out photosynthesis?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "2, 3 and 4",
+        "C": "2, 4 and 5",
+        "D": "1, 3 and 5"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q14.png",
+      "rawText": "Which part of the alimentary canal produces an enzyme that digests proteins? C D A B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q15.png",
+      "rawText": "The diagram shows a large food molecule changing into smaller molecules. process X What is process X? A absorption B chewing C digestion D secretion",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a large food molecule changing into smaller molecules. process X What is process X?",
+      "options": {
+        "A": "absorption",
+        "B": "chewing",
+        "C": "digestion",
+        "D": "secretion"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q16.png",
+      "rawText": "How is the structure of root hair cells related to their function? A They have chloroplasts for photosynthesis. B Their cell wall is partially permeable to absorb water by osmosis. C They have a large surface area to increase the rate of mineral ion uptake. D Both the cell wall and cell membrane control the active uptake of mineral ions.",
+      "parseStatus": "ok",
+      "stem": "How is the structure of root hair cells related to their function?",
+      "options": {
+        "A": "They have chloroplasts for photosynthesis.",
+        "B": "Their cell wall is partially permeable to absorb water by osmosis.",
+        "C": "They have a large surface area to increase the rate of mineral ion uptake.",
+        "D": "Both the cell wall and cell membrane control the active uptake of mineral ions."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q17.png",
+      "rawText": "In plants, how are amino acids moved between sources and sinks? A by translocation through xylem vessels B by transpiration through phloem tissues C by translocation through phloem tissues D by transpiration through xylem vessels",
+      "parseStatus": "ok",
+      "stem": "In plants, how are amino acids moved between sources and sinks?",
+      "options": {
+        "A": "by translocation through xylem vessels",
+        "B": "by transpiration through phloem tissues",
+        "C": "by translocation through phloem tissues",
+        "D": "by transpiration through xylem vessels"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q18.png",
+      "rawText": "Which component of blood produces antibodies? A lymphocytes B phagocytes C plasma D red blood cells",
+      "parseStatus": "ok",
+      "stem": "Which component of blood produces antibodies?",
+      "options": {
+        "A": "lymphocytes",
+        "B": "phagocytes",
+        "C": "plasma",
+        "D": "red blood cells"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q19.png",
+      "rawText": "The diagram shows the external structure of the human heart. Which label identifies a coronary artery? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q20.png",
+      "rawText": "Which row shows what happens at the start of inspiration? external intercostal muscles contract internal intercostal muscles contract diaphragm contracts volume of thorax increases air pressure in thorax increases A \u0016 \u001a \u0016 \u0016 \u001a key B \u0016 \u001a \u0016 \u001a \u0016 \u0016 = yes C \u001a \u0016 \u001a \u0016 \u001a \u001a = no D \u001a \u0016 \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which row shows what happens at the start of inspiration? external intercostal muscles contract internal intercostal muscles contract diaphragm contracts volume of thorax increases air pressure in thorax increases",
+      "options": {
+        "A": "\u0016 \u001a \u0016 \u0016 \u001a key",
+        "B": "\u0016 \u001a \u0016 \u001a \u0016 \u0016 = yes",
+        "C": "\u001a \u0016 \u001a \u0016 \u001a \u001a = no",
+        "D": "\u001a \u0016 \u001a \u001a \u0016"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q21.png",
+      "rawText": "Some features that help to defend the body against pathogens are listed. 1 mucus 2 skin 3 stomach acid 4 phagocytosis Which features can prevent pathogens entering body tissues? A 1, 2, 3 and 4 B 1, 2 and 3 only C 2 and 3 only D 4 only",
+      "parseStatus": "ok",
+      "stem": "Some features that help to defend the body against pathogens are listed. 1 mucus 2 skin 3 stomach acid 4 phagocytosis Which features can prevent pathogens entering body tissues?",
+      "options": {
+        "A": "1, 2, 3 and 4",
+        "B": "1, 2 and 3 only",
+        "C": "2 and 3 only",
+        "D": "4 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q22.png",
+      "rawText": "The diagram shows the human gas exchange system. 1 3 2 4 Which row shows the correct labels? part of the gas exchange system 1 2 3 4 A trachea larynx bronchus diaphragm B larynx trachea bronchus diaphragm C trachea larynx diaphragm bronchus D larynx trachea diaphragm bronchus",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the human gas exchange system. 1 3 2 4 Which row shows the correct labels? part of the gas exchange system 1 2 3 4",
+      "options": {
+        "A": "trachea larynx bronchus diaphragm",
+        "B": "larynx trachea bronchus diaphragm",
+        "C": "trachea larynx diaphragm bronchus",
+        "D": "larynx trachea diaphragm bronchus"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q23.png",
+      "rawText": "What is the equation for anaerobic respiration in yeast? A C6H12O6 + 6O2  6CO2 + 6H2O B C6H12O6  2C3H6O3 C C6H12O6  2C2H5OH + 2CO2 D 6CO2 + 6H2O  C6H12O6 + 6O2",
+      "parseStatus": "ok",
+      "stem": "What is the equation for anaerobic respiration in yeast?",
+      "options": {
+        "A": "C6H12O6 + 6O2  6CO2 + 6H2O",
+        "B": "C6H12O6  2C3H6O3",
+        "C": "C6H12O6  2C2H5OH + 2CO2",
+        "D": "6CO2 + 6H2O  C6H12O6 + 6O2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q24.png",
+      "rawText": "The diagram shows a kidney tubule. In which part of the tubule is the glucose concentration highest? to ureter position of glomerulus A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q25.png",
+      "rawText": "What happens to the muscles in the iris when a person moves from a brightly lit room to a dimly lit room? A The circular muscles and the radial muscles relax. B The circular muscles contract and the radial muscles relax. C The circular muscles and the radial muscles contract. D The circular muscles relax and the radial muscles contract.",
+      "parseStatus": "ok",
+      "stem": "What happens to the muscles in the iris when a person moves from a brightly lit room to a dimly lit room?",
+      "options": {
+        "A": "The circular muscles and the radial muscles relax.",
+        "B": "The circular muscles contract and the radial muscles relax.",
+        "C": "The circular muscles and the radial muscles contract.",
+        "D": "The circular muscles relax and the radial muscles contract."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q26.png",
+      "rawText": "What happens when someone has a low blood glucose concentration? A Insulin is released from the pancreas. B Glycogen is released from the pancreas. C Glucagon is released from the liver. D Glucose is released from the liver.",
+      "parseStatus": "ok",
+      "stem": "What happens when someone has a low blood glucose concentration?",
+      "options": {
+        "A": "Insulin is released from the pancreas.",
+        "B": "Glycogen is released from the pancreas.",
+        "C": "Glucagon is released from the liver.",
+        "D": "Glucose is released from the liver."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q27.png",
+      "rawText": "How can the development of antibiotic resistance in bacteria be reduced? A treating every disease with antibiotics B treating infections caused by a virus with antibiotics C using antibiotics only when essential D using antibiotics regularly to prevent disease",
+      "parseStatus": "ok",
+      "stem": "How can the development of antibiotic resistance in bacteria be reduced?",
+      "options": {
+        "A": "treating every disease with antibiotics",
+        "B": "treating infections caused by a virus with antibiotics",
+        "C": "using antibiotics only when essential",
+        "D": "using antibiotics regularly to prevent disease"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q28.png",
+      "rawText": "A seed is placed and grown on a rotating disc, as shown. seed pinned to the constantly rotating disc Which diagram shows the appearance of the seedling shoot after seven days? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q29.png",
+      "rawText": "Which statement describes a structural adaptation of wind-pollinated flowers? A They have long filaments so that the anthers hang outside of the flower. B They have round, sticky sepals to trap pollen grains. C Their large petals protect the stigma. D Their stamens are feathery so there is a large surface area.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes a structural adaptation of wind-pollinated flowers?",
+      "options": {
+        "A": "They have long filaments so that the anthers hang outside of the flower.",
+        "B": "They have round, sticky sepals to trap pollen grains.",
+        "C": "Their large petals protect the stigma.",
+        "D": "Their stamens are feathery so there is a large surface area."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q30.png",
+      "rawText": "What are likely consequences of HIV infection? 1 decreased lymphocyte numbers 2 reduced active immunity 3 reduced passive immunity A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "What are likely consequences of HIV infection? 1 decreased lymphocyte numbers 2 reduced active immunity 3 reduced passive immunity",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q31.png",
+      "rawText": "Which row is correct for the type of cell? type of cell nucleus sets of chromosomes A body diploid two B gamete diploid one C gamete haploid two D body haploid one",
+      "parseStatus": "ok",
+      "stem": "Which row is correct for the type of cell? type of cell nucleus sets of chromosomes",
+      "options": {
+        "A": "body diploid two",
+        "B": "gamete diploid one",
+        "C": "gamete haploid two",
+        "D": "body haploid one"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q32.png",
+      "rawText": "Which structures in bacterial cells synthesise proteins? A cell wall B chloroplasts C nucleus D ribosomes",
+      "parseStatus": "ok",
+      "stem": "Which structures in bacterial cells synthesise proteins?",
+      "options": {
+        "A": "cell wall",
+        "B": "chloroplasts",
+        "C": "nucleus",
+        "D": "ribosomes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q33.png",
+      "rawText": "A man with blood group AB and a woman with blood group O have a child. What are the correct percentages of the possible blood groups for this child? A 50% A and 50% B B 50% AB and 50% O C 25% A, 25% B and 50% O D 25% AB, 25% A, 25% B and 25% O",
+      "parseStatus": "ok",
+      "stem": "A man with blood group AB and a woman with blood group O have a child. What are the correct percentages of the possible blood groups for this child?",
+      "options": {
+        "A": "50% A and 50%",
+        "B": "B 50% AB and 50% O",
+        "C": "25% A, 25% B and 50% O",
+        "D": "25% AB, 25% A, 25% B and 25% O"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q34.png",
+      "rawText": "Which statement about a person who is heterozygous for the sickle-cell allele is correct? A They are not resistant to malaria and their genotype is HbAHbS. B They are not resistant to malaria and their genotype is HbSHbS. C They are resistant to malaria and their genotype is HbAHbS. D They are resistant to malaria and their genotype is HbSHbS.",
+      "parseStatus": "ok",
+      "stem": "Which statement about a person who is heterozygous for the sickle-cell allele is correct?",
+      "options": {
+        "A": "They are not resistant to malaria and their genotype is HbAHbS.",
+        "B": "They are not resistant to malaria and their genotype is HbSHbS.",
+        "C": "They are resistant to malaria and their genotype is HbAHbS.",
+        "D": "They are resistant to malaria and their genotype is HbSHbS."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q35.png",
+      "rawText": "A species of insect usually has pale-coloured wings. This helps to camouflage them on pale-coloured tree trunks. A few of the insects in this species have darker coloured wings. After a number of years the tree trunks become darker in colour due to environmental changes. The insects with dark-coloured wings become more common than insects with pale-coloured wings in this species. Which process causes this change in the proportion of insects with dark-coloured wings? A biotechnology B conservation C natural selection D selective breeding",
+      "parseStatus": "ok",
+      "stem": "A species of insect usually has pale-coloured wings. This helps to camouflage them on pale-coloured tree trunks.",
+      "options": {
+        "A": "few of the insects in this species have darker coloured wings. After a number of years the tree trunks become darker in colour due to environmental changes. The insects with dark-coloured wings become more common than insects with pale-coloured wings in this species. Which process causes this change in the proportion of insects with dark-coloured wings? A biotechnology",
+        "B": "conservation",
+        "C": "natural selection",
+        "D": "selective breeding"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q36.png",
+      "rawText": "The diagram shows part of the nitrogen cycle. Which letter represents denitrification? nitrogen gas in air animals faeces ammonium ions in soil nitrate ions in soil plants D A B C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q37.png",
+      "rawText": "Reasons why bacteria might be used in biotechnology and genetic engineering are listed. 1 All bacteria are harmless organisms. 2 Bacteria contain plasmids. 3 Bacteria share the same genetic code as other organisms. 4 There is a lack of ethical concerns about using bacteria. Which reasons make bacteria useful in biotechnology and genetic engineering? A 1, 2 and 3 B 2, 3 and 4 C 1 and 4 D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Reasons why bacteria might be used in biotechnology and genetic engineering are listed. 1 All bacteria are harmless organisms. 2 Bacteria contain plasmids. 3 Bacteria share the same genetic code as other organisms. 4 There is a lack of ethical concerns about using bacteria. Which reasons make bacteria useful in biotechnology and genetic engineering?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "2, 3 and 4",
+        "C": "1 and 4",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q38.png",
+      "rawText": "Bacteria can be genetically engineered to produce human proteins, such as human insulin. Which enzyme is used to join the human gene and the bacterial plasmid together to create a recombinant plasmid? A lipase B recombinant enzyme C DNA ligase D restriction enzyme",
+      "parseStatus": "ok",
+      "stem": "Bacteria can be genetically engineered to produce human proteins, such as human insulin. Which enzyme is used to join the human gene and the bacterial plasmid together to create a recombinant plasmid?",
+      "options": {
+        "A": "lipase",
+        "B": "recombinant enzyme",
+        "C": "DNA ligase",
+        "D": "restriction enzyme"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q39.png",
+      "rawText": "The bar chart shows the tolerance of some river organisms to different levels of pH. trout bass perch frogs salamanders clams crayfish snails mayflies 6.5 6.0 5.5 pH 5.0 4.5 4.0 Which organisms would be most affected if the pH of a river decreased from pH 6.0 to pH 5.5? A crayfish and mayflies B frogs and perch C snails and clams D trout and salamanders",
+      "parseStatus": "ok",
+      "stem": "The bar chart shows the tolerance of some river organisms to different levels of pH. trout bass perch frogs salamanders clams crayfish snails mayflies 6.5 6.0 5.5 pH 5.0 4.5 4.0 Which organisms would be most affected if the pH of a river decreased from pH 6.0 to pH 5.5?",
+      "options": {
+        "A": "crayfish and mayflies",
+        "B": "frogs and perch",
+        "C": "snails and clams",
+        "D": "trout and salamanders"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w21_qp_23/q40.png",
+      "rawText": "What is meant by a sustainable resource? A a resource that is produced by non-intensive farming and is rarely used B a resource that is removed from a habitat without changing the environment C a resource that does not pollute the environment D a resource that is produced as rapidly as it is removed from the environment",
+      "parseStatus": "ok",
+      "stem": "What is meant by a sustainable resource?",
+      "options": {
+        "A": "a resource that is produced by non-intensive farming and is rarely used",
+        "B": "a resource that is removed from a habitat without changing the environment",
+        "C": "a resource that does not pollute the environment",
+        "D": "a resource that is produced as rapidly as it is removed from the environment"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,673 @@
+{
+  "questionPaper": "0610_s22_qp_22.pdf",
+  "markScheme": "0610_s22_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q01.png",
+      "rawText": "All living organisms release energy from nutrient molecules within their cells. What is the name of this characteristic? A growth B nutrition C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "All living organisms release energy from nutrient molecules within their cells. What is the name of this characteristic?",
+      "options": {
+        "A": "growth",
+        "B": "nutrition",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q02.png",
+      "rawText": "Which diagram shows a flower from a monocotyledon? C D B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q03.png",
+      "rawText": "The diagram shows a cross-section through two guard cells of a leaf. W X Y Z Which labelled structures would also be found in an animal cell? A W and X B X and Y C Y and Z D Z and W",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cross-section through two guard cells of a leaf. W X Y Z Which labelled structures would also be found in an animal cell?",
+      "options": {
+        "A": "W and X",
+        "B": "X and Y",
+        "C": "Y and Z",
+        "D": "Z and W"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q04.png",
+      "rawText": "The table shows some structures found in the human body. Which row shows the correct level of organisation, from the simplest structure to the most complex? simple complex A red blood cell heart heart muscle circulatory system B heart muscle circulatory system red blood cell heart C red blood cell heart muscle heart circulatory system D heart muscle red blood cell circulatory system heart",
+      "parseStatus": "ok",
+      "stem": "The table shows some structures found in the human body. Which row shows the correct level of organisation, from the simplest structure to the most complex? simple complex",
+      "options": {
+        "A": "red blood cell heart heart muscle circulatory system",
+        "B": "heart muscle circulatory system red blood cell heart",
+        "C": "red blood cell heart muscle heart circulatory system",
+        "D": "heart muscle red blood cell circulatory system heart"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q05.png",
+      "rawText": "By which process does oxygen move from a region of higher concentration in the alveoli to a region of lower concentration in the blood? A osmosis B breathing C diffusion D active transport",
+      "parseStatus": "ok",
+      "stem": "By which process does oxygen move from a region of higher concentration in the alveoli to a region of lower concentration in the blood?",
+      "options": {
+        "A": "osmosis",
+        "B": "breathing",
+        "C": "diffusion",
+        "D": "active transport"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q06.png",
+      "rawText": "The diagram shows a section through a mesophyll cell of a leaf. Which part is partially permeable? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q07.png",
+      "rawText": "What are the smaller basic units of starch and glycogen molecules? starch glycogen A amino acids fatty acids and glycerol B amino acids glucose C glucose fatty acids and glycerol D glucose glucose",
+      "parseStatus": "ok",
+      "stem": "What are the smaller basic units of starch and glycogen molecules? starch glycogen",
+      "options": {
+        "A": "amino acids fatty acids and glycerol",
+        "B": "amino acids glucose",
+        "C": "glucose fatty acids and glycerol",
+        "D": "glucose glucose"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q08.png",
+      "rawText": "A chromosome was analysed and found to have 6125 pairs of bases. The type of each base was identified and 2345 of the bases were G. How many of the bases in this chromosome are T? A 1435 B 3780 C 6125 D 7560",
+      "parseStatus": "ok",
+      "stem": "A chromosome was analysed and found to have 6125 pairs of bases. The type of each base was identified and 2345 of the bases were G. How many of the bases in this chromosome are T?",
+      "options": {
+        "A": "1435",
+        "B": "3780",
+        "C": "6125",
+        "D": "7560"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q09.png",
+      "rawText": "Which type of molecule are enzymes made of? A carbohydrates B fats C proteins D vitamins",
+      "parseStatus": "ok",
+      "stem": "Which type of molecule are enzymes made of?",
+      "options": {
+        "A": "carbohydrates",
+        "B": "fats",
+        "C": "proteins",
+        "D": "vitamins"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q10.png",
+      "rawText": "Which statement describes the effect of temperature on enzymes? A High temperatures denature enzymes making it difficult for substrate molecules to fit into the active site. B High temperatures denature enzymes making it easy for substrate molecules to fit into the active site. C Low temperatures denature enzymes making it difficult for substrate molecules to fit into the active site. D Low temperatures denature enzymes making it easy for substrate molecules to fit into the active site.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes the effect of temperature on enzymes?",
+      "options": {
+        "A": "High temperatures denature enzymes making it difficult for substrate molecules to fit into the active site.",
+        "B": "High temperatures denature enzymes making it easy for substrate molecules to fit into the active site.",
+        "C": "Low temperatures denature enzymes making it difficult for substrate molecules to fit into the active site.",
+        "D": "Low temperatures denature enzymes making it easy for substrate molecules to fit into the active site."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q11.png",
+      "rawText": "The statements describe some of the events that occur in a plant after light energy is absorbed by chlorophyll. 1 converted to chemical energy 2 converted to sucrose for translocation 3 starch is stored in the roots or seeds 4 glucose is produced In which order do these events occur? A 1  4  3  2 B 4  2  3  1 C 4  1  2  3 D 1  4  2  3",
+      "parseStatus": "ok",
+      "stem": "The statements describe some of the events that occur in a plant after light energy is absorbed by chlorophyll. 1 converted to chemical energy 2 converted to sucrose for translocation 3 starch is stored in the roots or seeds 4 glucose is produced In which order do these events occur?",
+      "options": {
+        "A": "1  4  3  2",
+        "B": "4  2  3  1",
+        "C": "4  1  2  3",
+        "D": "1  4  2  3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q12.png",
+      "rawText": "A deficiency of magnesium ions can cause plant leaves to become yellow between the leaf veins. What is the reason for this? A increased chlorophyll production B increased protein production C decreased chlorophyll production D decreased protein production",
+      "parseStatus": "ok",
+      "stem": "A deficiency of magnesium ions can cause plant leaves to become yellow between the leaf veins. What is the reason for this?",
+      "options": {
+        "A": "increased chlorophyll production",
+        "B": "increased protein production",
+        "C": "decreased chlorophyll production",
+        "D": "decreased protein production"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q13.png",
+      "rawText": "The table shows some different components in a balanced diet. Which row correctly matches the components to the reasons why they are needed? vitamin D water fats A insulation bone growth to make haemoglobin B bone growth transport insulation C transport to make haemoglobin bone growth D to make haemoglobin insulation transport",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q14.png",
+      "rawText": "Which process involves the removal of material from the rectum? A egestion B ingestion C chemical digestion D mechanical digestion",
+      "parseStatus": "ok",
+      "stem": "Which process involves the removal of material from the rectum?",
+      "options": {
+        "A": "egestion",
+        "B": "ingestion",
+        "C": "chemical digestion",
+        "D": "mechanical digestion"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q15.png",
+      "rawText": "The diagram shows a cross-section of part of a plant. H Which part of the plant is shown and what is the tissue labelled H? plant part tissue H A root phloem B root xylem C stem phloem D stem xylem",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cross-section of part of a plant. H Which part of the plant is shown and what is the tissue labelled H? plant part tissue H",
+      "options": {
+        "A": "root phloem",
+        "B": "root xylem",
+        "C": "stem phloem",
+        "D": "stem xylem"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q16.png",
+      "rawText": "The apparatus shown can be used to investigate the effect of temperature and humidity on the rate of transpiration. 500 g plant pot soil polythene bag balance Which set of conditions would give the highest rate of transpiration and the greatest decrease in mass? temperature humidity A cool high B cool low C warm high D warm low",
+      "parseStatus": "ok",
+      "stem": "The apparatus shown can be used to investigate the effect of temperature and humidity on the rate of transpiration. 500 g plant pot soil polythene bag balance Which set of conditions would give the highest rate of transpiration and the greatest decrease in mass? temperature humidity",
+      "options": {
+        "A": "cool high",
+        "B": "cool low",
+        "C": "warm high",
+        "D": "warm low"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q17.png",
+      "rawText": "People are sometimes born with a ‘hole in the heart’. This is caused by a gap in the septum, as shown. key direction of blood flow If the gap in the septum is not repaired, it causes the person to become breathless more quickly. What is a possible explanation for this? A Deoxygenated blood in the left atrium mixes with oxygenated blood from the right atrium. B Deoxygenated blood in the right atrium mixes with oxygenated blood from the left atrium. C Oxygenated blood in the left ventricle mixes with deoxygenated blood from the right ventricle. D Oxygenated blood in the right ventricle mixes with deoxygenated blood from the left ventricle.",
+      "parseStatus": "ok",
+      "stem": "People are sometimes born with a ‘hole in the heart’. This is caused by a gap in the septum, as shown. key direction of blood flow If the gap in the septum is not repaired, it causes the person to become breathless more quickly. What is a possible explanation for this?",
+      "options": {
+        "A": "Deoxygenated blood in the left atrium mixes with oxygenated blood from the right atrium.",
+        "B": "Deoxygenated blood in the right atrium mixes with oxygenated blood from the left atrium.",
+        "C": "Oxygenated blood in the left ventricle mixes with deoxygenated blood from the right ventricle.",
+        "D": "Oxygenated blood in the right ventricle mixes with deoxygenated blood from the left ventricle."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q18.png",
+      "rawText": "The flow diagram shows stages in blood clotting. components of blood involved in clotting circulate the body blood loss and pathogen entry stops component X is converted to component Y component Y forms a mesh blood vessel walls are damaged What is component X? A fibrin B fibrinogen C plasma D platelet",
+      "parseStatus": "ok",
+      "stem": "The flow diagram shows stages in blood clotting. components of blood involved in clotting circulate the body blood loss and pathogen entry stops component X is converted to component Y component Y forms a mesh blood vessel walls are damaged What is component X?",
+      "options": {
+        "A": "fibrin",
+        "B": "fibrinogen",
+        "C": "plasma",
+        "D": "platelet"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q19.png",
+      "rawText": "What is an example of passive immunity? A immunity against influenza after an individual has been infected with the influenza virus B the formation of memory cells in response to a cholera infection C giving chickenpox antibodies to people at risk of developing a severe infection D vaccination against measles where a harmless version of the virus is given",
+      "parseStatus": "ok",
+      "stem": "What is an example of passive immunity?",
+      "options": {
+        "A": "immunity against influenza after an individual has been infected with the influenza virus",
+        "B": "the formation of memory cells in response to a cholera infection",
+        "C": "giving chickenpox antibodies to people at risk of developing a severe infection",
+        "D": "vaccination against measles where a harmless version of the virus is given"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q20.png",
+      "rawText": "What happens at the start of inspiration? internal intercostal muscles external intercostal muscles diaphragm volume of thorax A contract relax contracts increases B contract relax relaxes decreases C relax contract contracts increases D relax contract relaxes increases",
+      "parseStatus": "ok",
+      "stem": "What happens at the start of inspiration? internal intercostal muscles external intercostal muscles diaphragm volume of thorax",
+      "options": {
+        "A": "contract relax contracts increases",
+        "B": "contract relax relaxes decreases",
+        "C": "relax contract contracts increases",
+        "D": "relax contract relaxes increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q21.png",
+      "rawText": "Germinating seeds respire aerobically to release energy that can be used for growth. The balanced equation for aerobic respiration in seeds can be represented as shown. Q + R  S + T Which row gives the balanced equation for aerobic respiration in seeds? Q R S T A 6CO2 6H2O C6H12O6 6O2 B C6H12O6 6O2 6CO2 6H2O C 6CO2 6O2 C6H12O6 6H2O D C6H12O6 6H2O 6CO2 6O2",
+      "parseStatus": "ok",
+      "stem": "Germinating seeds respire aerobically to release energy that can be used for growth. The balanced equation for aerobic respiration in seeds can be represented as shown. Q + R  S + T Which row gives the balanced equation for aerobic respiration in seeds? Q R S T",
+      "options": {
+        "A": "6CO2 6H2O C6H12O6 6O2",
+        "B": "C6H12O6 6O2 6CO2 6H2O",
+        "C": "6CO2 6O2 C6H12O6 6H2O",
+        "D": "C6H12O6 6H2O 6CO2 6O2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q22.png",
+      "rawText": "During vigorous exercise, lactic acid builds up in muscles leading to an oxygen debt. Which statement describes a stage in the removal of the oxygen debt during recovery? A Anaerobic respiration breaks down lactic acid in the muscles. B Aerobic respiration breaks down lactic acid in the muscles. C Anaerobic respiration breaks down lactic acid in the liver. D Aerobic respiration breaks down lactic acid in the liver.",
+      "parseStatus": "ok",
+      "stem": "During vigorous exercise, lactic acid builds up in muscles leading to an oxygen debt. Which statement describes a stage in the removal of the oxygen debt during recovery?",
+      "options": {
+        "A": "Anaerobic respiration breaks down lactic acid in the muscles.",
+        "B": "Aerobic respiration breaks down lactic acid in the muscles.",
+        "C": "Anaerobic respiration breaks down lactic acid in the liver.",
+        "D": "Aerobic respiration breaks down lactic acid in the liver."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q23.png",
+      "rawText": "The table shows the concentration of sodium ions in blood plasma, in glomerular filtrate (the liquid that passes through the glomerulus) and in urine. blood plasma glomerular filtrate urine concentration of sodium ions / arbitrary units 141 141 127 What is the percentage concentration of sodium ions reabsorbed in the kidney tubules? A 0.0% B 9.9% C 10.9% D 14.0%",
+      "parseStatus": "ok",
+      "stem": "The table shows the concentration of sodium ions in blood plasma, in glomerular filtrate (the liquid that passes through the glomerulus) and in urine. blood plasma glomerular filtrate urine concentration of sodium ions / arbitrary units 141 141 127 What is the percentage concentration of sodium ions reabsorbed in the kidney tubules?",
+      "options": {
+        "A": "0.0%",
+        "B": "9.9%",
+        "C": "10.9%",
+        "D": "14.0%"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q24.png",
+      "rawText": "Which effects does adrenaline have on blood glucose concentration and pulse rate? blood glucose concentration pulse rate A increases reduces B increases increases C reduces reduces D reduces increases",
+      "parseStatus": "ok",
+      "stem": "Which effects does adrenaline have on blood glucose concentration and pulse rate? blood glucose concentration pulse rate",
+      "options": {
+        "A": "increases reduces",
+        "B": "increases increases",
+        "C": "reduces reduces",
+        "D": "reduces increases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q25.png",
+      "rawText": "The concentration of glucose in the blood is controlled by negative feedback. When blood glucose concentration falls too low, the ......1...... releases the hormone ......2...... . This hormone causes cells to break down ......3...... to glucose, which is released into the blood. Which words correctly complete gaps 1, 2 and 3? 1 2 3 A liver glucagon glycogen B liver glycogen glucagon C pancreas glucagon glycogen D pancreas glycogen glucagon",
+      "parseStatus": "ok",
+      "stem": "The concentration of glucose in the blood is controlled by negative feedback. When blood glucose concentration falls too low, the ......1...... releases the hormone ......2...... . This hormone causes cells to break down ......3...... to glucose, which is released into the blood. Which words correctly complete gaps 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "liver glucagon glycogen",
+        "B": "liver glycogen glucagon",
+        "C": "pancreas glucagon glycogen",
+        "D": "pancreas glycogen glucagon"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q26.png",
+      "rawText": "A young maize seedling is grown from a seed. The seedling is placed on its side and left in a room with a light source for several days. shoot root direction of light What will happen to the young shoot? A Auxin becomes concentrated in the lower part of the shoot and the shoot grows towards the light. B Auxin becomes concentrated in the upper part of the shoot and the shoot grows towards the light. C Auxin is evenly distributed in the shoot and the shoot grows towards the light. D Auxin is evenly distributed in the shoot and the shoot grows away from the light.",
+      "parseStatus": "ok",
+      "stem": "A young maize seedling is grown from a seed. The seedling is placed on its side and left in a room with a light source for several days. shoot root direction of light What will happen to the young shoot?",
+      "options": {
+        "A": "Auxin becomes concentrated in the lower part of the shoot and the shoot grows towards the light.",
+        "B": "Auxin becomes concentrated in the upper part of the shoot and the shoot grows towards the light.",
+        "C": "Auxin is evenly distributed in the shoot and the shoot grows towards the light.",
+        "D": "Auxin is evenly distributed in the shoot and the shoot grows away from the light."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q27.png",
+      "rawText": "What is an adaptive feature of sperm? A large stores of energy B enzymes in the acrosome C jelly coating that changes after fertilisation D diploid nucleus",
+      "parseStatus": "ok",
+      "stem": "What is an adaptive feature of sperm?",
+      "options": {
+        "A": "large stores of energy",
+        "B": "enzymes in the acrosome",
+        "C": "jelly coating that changes after fertilisation",
+        "D": "diploid nucleus"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q28.png",
+      "rawText": "The list contains statements about sexual and asexual reproduction in plants. 1 It promotes genetic variation. 2 It requires self-pollination. 3 It requires meiosis. 4 It produces offspring that are identical to the parent. 5 It allows the population to increase rapidly. Which statements describe asexual reproduction in plants? A 1, 2 and 5 B 1 and 2 only C 4 and 5 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The list contains statements about sexual and asexual reproduction in plants. 1 It promotes genetic variation. 2 It requires self-pollination. 3 It requires meiosis. 4 It produces offspring that are identical to the parent. 5 It allows the population to increase rapidly. Which statements describe asexual reproduction in plants?",
+      "options": {
+        "A": "1, 2 and 5",
+        "B": "1 and 2 only",
+        "C": "4 and 5",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q29.png",
+      "rawText": "The graph shows the levels of two hormones during a 28-day menstrual cycle. concentration of hormone 0 7 14 time / days 21 28 Y X Which hormones are represented by X and Y on the graph? X Y A FSH oestrogen B LH FSH C oestrogen progesterone D progesterone LH",
+      "parseStatus": "ok",
+      "stem": "The graph shows the levels of two hormones during a 28-day menstrual cycle. concentration of hormone 0 7 14 time / days 21 28 Y X Which hormones are represented by X and Y on the graph? X Y",
+      "options": {
+        "A": "FSH oestrogen",
+        "B": "LH FSH",
+        "C": "oestrogen progesterone",
+        "D": "progesterone LH"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q30.png",
+      "rawText": "Before meiosis takes place, a cell has 24 chromosomes. How many chromosomes will be found in each of the cells that are produced by meiosis? A 6 B 12 C 24 D 48",
+      "parseStatus": "ok",
+      "stem": "Before meiosis takes place, a cell has 24 chromosomes. How many chromosomes will be found in each of the cells that are produced by meiosis?",
+      "options": {
+        "A": "6",
+        "B": "12",
+        "C": "24",
+        "D": "48"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q31.png",
+      "rawText": "When a horse with red hair (genotype HRHR) breeds with a horse with white hair (genotype HWHW) the offspring have red and white hair (genotype HRHW). These horses are described as having roan-coloured hair. This is an example of codominance. When two horses with roan-coloured hair are bred together, what is the chance of their offspring also having roan-coloured hair? A 100% B 75% C 50% D 25%",
+      "parseStatus": "ok",
+      "stem": "When a horse with red hair (genotype HRHR) breeds with a horse with white hair (genotype HWHW) the offspring have red and white hair (genotype HRHW). These horses are described as having roan-coloured hair. This is an example of codominance. When two horses with roan-coloured hair are bred together, what is the chance of their offspring also having roan-coloured hair?",
+      "options": {
+        "A": "100%",
+        "B": "75%",
+        "C": "50%",
+        "D": "25%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q32.png",
+      "rawText": "The diagram shows a hydrophyte. air water soil What is an adaptive feature of this hydrophyte? A no stomata on the upper surface or the lower surface of the leaves B a network of large air spaces inside the leaves C leaf stalks containing many xylem vessels for support D a thick waxy cuticle on the lower surface of the leaves",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a hydrophyte. air water soil What is an adaptive feature of this hydrophyte?",
+      "options": {
+        "A": "no stomata on the upper surface or the lower surface of the leaves",
+        "B": "a network of large air spaces inside the leaves",
+        "C": "leaf stalks containing many xylem vessels for support",
+        "D": "a thick waxy cuticle on the lower surface of the leaves"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q33.png",
+      "rawText": "Sickle cell anaemia is a genetic disorder which results in severe illness in homozygous individuals. In some human populations, being heterozygous can be beneficial. What could be the reason for this? A Heterozygous individuals are not affected by the disorder. B Heterozygous individuals are more resistant to malaria. C The disorder is caused by a dominant allele. D The disorder is sex-linked.",
+      "parseStatus": "ok",
+      "stem": "Sickle cell anaemia is a genetic disorder which results in severe illness in homozygous individuals. In some human populations, being heterozygous can be beneficial. What could be the reason for this?",
+      "options": {
+        "A": "Heterozygous individuals are not affected by the disorder.",
+        "B": "Heterozygous individuals are more resistant to malaria.",
+        "C": "The disorder is caused by a dominant allele.",
+        "D": "The disorder is sex-linked."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q34.png",
+      "rawText": "Which statement about selective breeding is correct? A It does not involve humans. B It involves a struggle for survival. C It always involves only one parent. D It involves parents that possess desirable features.",
+      "parseStatus": "ok",
+      "stem": "Which statement about selective breeding is correct?",
+      "options": {
+        "A": "It does not involve humans.",
+        "B": "It involves a struggle for survival.",
+        "C": "It always involves only one parent.",
+        "D": "It involves parents that possess desirable features."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q35.png",
+      "rawText": "The diagram shows part of the carbon cycle. consumers fossil fuels producers carbon dioxide in the atmosphere decomposers X X X Which process is shown by the arrows labelled X? A combustion B fossilisation C photosynthesis D respiration",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the carbon cycle. consumers fossil fuels producers carbon dioxide in the atmosphere decomposers X X X Which process is shown by the arrows labelled X?",
+      "options": {
+        "A": "combustion",
+        "B": "fossilisation",
+        "C": "photosynthesis",
+        "D": "respiration"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q36.png",
+      "rawText": "A herd of red deer live in a forest that contains snakes and a large variety of birds. Which group of organisms is an example of a population? A all the animals in the forest B all the red deer in the forest C all the organisms in the forest D all the plants in the forest",
+      "parseStatus": "ok",
+      "stem": "A herd of red deer live in a forest that contains snakes and a large variety of birds. Which group of organisms is an example of a population?",
+      "options": {
+        "A": "all the animals in the forest",
+        "B": "all the red deer in the forest",
+        "C": "all the organisms in the forest",
+        "D": "all the plants in the forest"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q37.png",
+      "rawText": "With which kingdoms do bacteria share the same genetic code? A animal, plant, fungus and protoctist B animal, plant and fungus only C animal and plant only D animal only",
+      "parseStatus": "ok",
+      "stem": "With which kingdoms do bacteria share the same genetic code?",
+      "options": {
+        "A": "animal, plant, fungus and protoctist",
+        "B": "animal, plant and fungus only",
+        "C": "animal and plant only",
+        "D": "animal only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q38.png",
+      "rawText": "Which process makes use of a genetically engineered organism? A using bacteria to produce insulin B using enzymes in biological washing powders C using pectinase in fruit juice production D using yeast to produce ethanol",
+      "parseStatus": "ok",
+      "stem": "Which process makes use of a genetically engineered organism?",
+      "options": {
+        "A": "using bacteria to produce insulin",
+        "B": "using enzymes in biological washing powders",
+        "C": "using pectinase in fruit juice production",
+        "D": "using yeast to produce ethanol"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q39.png",
+      "rawText": "What is a reason for conserving plant species? A to absorb oxygen from the air B to decrease rainfall C to obtain drugs for medicinal use D to release carbon dioxide into the air",
+      "parseStatus": "ok",
+      "stem": "What is a reason for conserving plant species?",
+      "options": {
+        "A": "to absorb oxygen from the air",
+        "B": "to decrease rainfall",
+        "C": "to obtain drugs for medicinal use",
+        "D": "to release carbon dioxide into the air"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s22_qp_22/q40.png",
+      "rawText": "The food web shows the feeding relationships in a woodland. trees wood pigeons caterpillars chaffinches sparrowhawks grey squirrels If all the chaffinches in the food web die, which effect would this have? A The amount of damage to trees will increase. B The food supply for grey squirrels will increase. C The number of wood pigeons will increase. D The population of caterpillars will decrease.",
+      "parseStatus": "ok",
+      "stem": "The food web shows the feeding relationships in a woodland. trees wood pigeons caterpillars chaffinches sparrowhawks grey squirrels If all the chaffinches in the food web die, which effect would this have?",
+      "options": {
+        "A": "The amount of damage to trees will increase.",
+        "B": "The food supply for grey squirrels will increase.",
+        "C": "The number of wood pigeons will increase.",
+        "D": "The population of caterpillars will decrease."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

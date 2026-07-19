@@ -1,0 +1,658 @@
+{
+  "questionPaper": "0610_w22_qp_21.pdf",
+  "markScheme": "0610_w22_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q01.png",
+      "rawText": "Which process provides an organism with the raw materials needed for tissue repair? A excretion B growth C nutrition D respiration",
+      "parseStatus": "ok",
+      "stem": "Which process provides an organism with the raw materials needed for tissue repair?",
+      "options": {
+        "A": "excretion",
+        "B": "growth",
+        "C": "nutrition",
+        "D": "respiration"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q02.png",
+      "rawText": "Which name is given to a group of individuals that can reproduce to produce fertile offspring? A a genus B a kingdom C a species D an organ system",
+      "parseStatus": "ok",
+      "stem": "Which name is given to a group of individuals that can reproduce to produce fertile offspring?",
+      "options": {
+        "A": "a genus",
+        "B": "a kingdom",
+        "C": "a species",
+        "D": "an organ system"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q03.png",
+      "rawText": "Root hair cells are found on plant roots. Which feature is present in a root hair cell but not in a sperm cell? A cell membrane B cell wall C chloroplasts D cytoplasm",
+      "parseStatus": "ok",
+      "stem": "Root hair cells are found on plant roots. Which feature is present in a root hair cell but not in a sperm cell?",
+      "options": {
+        "A": "cell membrane",
+        "B": "cell wall",
+        "C": "chloroplasts",
+        "D": "cytoplasm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q04.png",
+      "rawText": "The diagram shows a cross-section of part of a leaf. Which type of cell carries out the most photosynthesis? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q05.png",
+      "rawText": "Some examples of substances moving across membranes are listed. 1 glucose molecules into the epithelium that lines the small intestine 2 nitrate ions from a dilute solution in soil into a more concentrated solution in root hair cells 3 water molecules from mesophyll cells into the air spaces of a leaf For which examples must oxygen be present? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Some examples of substances moving across membranes are listed. 1 glucose molecules into the epithelium that lines the small intestine 2 nitrate ions from a dilute solution in soil into a more concentrated solution in root hair cells 3 water molecules from mesophyll cells into the air spaces of a leaf For which examples must oxygen be present?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q06.png",
+      "rawText": "The graph shows how the turgor pressure inside a plant cell varies when the cell is placed in external solutions of different concentrations. turgor pressure inside cell concentration of external solution X What is the state of the cell at point X? A It has gained water and is flaccid. B It has gained water and is turgid. C It has lost water and is flaccid. D It has lost water and is turgid.",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the turgor pressure inside a plant cell varies when the cell is placed in external solutions of different concentrations. turgor pressure inside cell concentration of external solution X What is the state of the cell at point X?",
+      "options": {
+        "A": "It has gained water and is flaccid.",
+        "B": "It has gained water and is turgid.",
+        "C": "It has lost water and is flaccid.",
+        "D": "It has lost water and is turgid."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q07.png",
+      "rawText": "The diagram shows a length of DNA. A A T G C C What is the sequence of bases in the unlabelled strand of DNA, starting from the top of the diagram? A CGTACA B TACGTG C GCTAGA D ATGCAC",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q08.png",
+      "rawText": "Amylase and pepsin are digestive enzymes. The shapes of their active sites are different. What causes the difference in the shapes of their active sites? A They are produced by different parts of the digestive system. B They have different pH ranges. C They contain different sequences of amino acids. D They are made of different proportions of the bases A, T, C and G.",
+      "parseStatus": "ok",
+      "stem": "Amylase and pepsin are digestive enzymes. The shapes of their active sites are different. What causes the difference in the shapes of their active sites?",
+      "options": {
+        "A": "They are produced by different parts of the digestive system.",
+        "B": "They have different pH ranges.",
+        "C": "They contain different sequences of amino acids.",
+        "D": "They are made of different proportions of the bases A, T, C and G."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q09.png",
+      "rawText": "The rate of an enzyme-controlled reaction decreases when the temperature falls below the optimum. Some possible reasons why it slows down are listed. 1 The enzyme molecules are denatured. 2 The molecules have less kinetic energy. 3 The shapes of the substrate molecules are changed. 4 There are less frequent collisions between molecules. Which reasons cause the reaction to slow down? A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "The rate of an enzyme-controlled reaction decreases when the temperature falls below the optimum. Some possible reasons why it slows down are listed. 1 The enzyme molecules are denatured. 2 The molecules have less kinetic energy. 3 The shapes of the substrate molecules are changed. 4 There are less frequent collisions between molecules. Which reasons cause the reaction to slow down?",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q10.png",
+      "rawText": "Which description of an enzyme-catalysed reaction is correct? A The substrate binds to an enzyme with the same shape and a product is formed. B The product binds to an enzyme with the same shape and a substrate is formed. C The product binds to an enzyme with a complementary shape and a substrate is formed. D The substrate binds to an enzyme with a complementary shape and a product is formed.",
+      "parseStatus": "ok",
+      "stem": "Which description of an enzyme-catalysed reaction is correct?",
+      "options": {
+        "A": "The substrate binds to an enzyme with the same shape and a product is formed.",
+        "B": "The product binds to an enzyme with the same shape and a substrate is formed.",
+        "C": "The product binds to an enzyme with a complementary shape and a substrate is formed.",
+        "D": "The substrate binds to an enzyme with a complementary shape and a product is formed."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q11.png",
+      "rawText": "Four test-tubes are set up as shown. The test-tubes are kept at 20 C in a water-bath, in the light, for two hours. In which test-tube does the hydrogencarbonate indicator turn yellow? A B C D equal volumes of red hydrogencarbonate indicator black paper",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q12.png",
+      "rawText": "The substances listed are found in the leaf of a plant. Which substance is obtained from the soil? A carbon dioxide B chlorophyll C glucose D mineral ions",
+      "parseStatus": "ok",
+      "stem": "The substances listed are found in the leaf of a plant. Which substance is obtained from the soil?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "chlorophyll",
+        "C": "glucose",
+        "D": "mineral ions"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q13.png",
+      "rawText": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. What is the immediate effect of this on the water potential of blood in the intestinal capillaries, and on the water potential of the contents of the small intestine? water potential blood in capillaries contents of small intestine A lowered lowered B lowered raised C raised lowered D raised raised",
+      "parseStatus": "ok",
+      "stem": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. What is the immediate effect of this on the water potential of blood in the intestinal capillaries, and on the water potential of the contents of the small intestine? water potential blood in capillaries contents of small intestine",
+      "options": {
+        "A": "lowered lowered",
+        "B": "lowered raised",
+        "C": "raised lowered",
+        "D": "raised raised"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q14.png",
+      "rawText": "The graph shows the concentration of maltose in different parts of the alimentary canal. maltose concentration mouth stomach small intestine distance through the alimentary canal X What causes the change in concentration at X? A absorption of maltose B action of amylase C action of maltase D assimilation of maltose",
+      "parseStatus": "ok",
+      "stem": "The graph shows the concentration of maltose in different parts of the alimentary canal. maltose concentration mouth stomach small intestine distance through the alimentary canal X What causes the change in concentration at X?",
+      "options": {
+        "A": "absorption of maltose",
+        "B": "action of amylase",
+        "C": "action of maltase",
+        "D": "assimilation of maltose"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q15.png",
+      "rawText": "The diagram shows a bean seedling soon after it has germinated. Where is most water absorbed? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q16.png",
+      "rawText": "Scientists investigate the movement of substances in a plant. They cut a ring of tissue from the stem. Removing the tissue removes some of the transport vessels found around the edge of the stem. A few days later they notice swelling above the area where the tissue has been removed. tissue removed time swelling leaves roots What causes the swelling? A Phloem vessels have been removed and sucrose cannot move to the sink. B Phloem vessels have been removed and sucrose cannot move to the source. C Xylem vessels have been removed and minerals cannot move to the sink. D Xylem vessels have been removed and minerals cannot move to the source.",
+      "parseStatus": "ok",
+      "stem": "Scientists investigate the movement of substances in a plant. They cut a ring of tissue from the stem. Removing the tissue removes some of the transport vessels found around the edge of the stem.",
+      "options": {
+        "A": "few days later they notice swelling above the area where the tissue has been removed. tissue removed time swelling leaves roots What causes the swelling? A Phloem vessels have been removed and sucrose cannot move to the sink.",
+        "B": "Phloem vessels have been removed and sucrose cannot move to the source.",
+        "C": "Xylem vessels have been removed and minerals cannot move to the sink.",
+        "D": "Xylem vessels have been removed and minerals cannot move to the source."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q17.png",
+      "rawText": "The diagram shows the outside of a human heart. Which structure is a coronary artery? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q18.png",
+      "rawText": "What happens in the heart when blood flows from the atria to the ventricles? atria muscles atrioventricular valves ventricle muscles A contract close relax B contract open relax C relax close contract D relax open contract",
+      "parseStatus": "ok",
+      "stem": "What happens in the heart when blood flows from the atria to the ventricles? atria muscles atrioventricular valves ventricle muscles",
+      "options": {
+        "A": "contract close relax",
+        "B": "contract open relax",
+        "C": "relax close contract",
+        "D": "relax open contract"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q19.png",
+      "rawText": "Campylobacter is a bacterium that can cause food poisoning. Which word describes Campylobacter? A antibody B disease C pathogen D symptom",
+      "parseStatus": "ok",
+      "stem": "Campylobacter is a bacterium that can cause food poisoning. Which word describes Campylobacter?",
+      "options": {
+        "A": "antibody",
+        "B": "disease",
+        "C": "pathogen",
+        "D": "symptom"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q20.png",
+      "rawText": "What is the approximate percentage of oxygen in expired air? A 0.04% B 4% C 16% D 21%",
+      "parseStatus": "ok",
+      "stem": "What is the approximate percentage of oxygen in expired air?",
+      "options": {
+        "A": "0.04%",
+        "B": "4%",
+        "C": "16%",
+        "D": "21%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q21.png",
+      "rawText": "Which row shows processes that all use energy from respiration? diffusion cell division osmosis muscle contraction passage of nerve impulses active transport A \u001a \u0016 \u0016 \u0016 \u0016 \u0016 B \u0016 \u001a \u0016 \u001a \u001a \u001a C \u0016 \u001a \u001a \u0016 \u001a \u001a D \u001a \u0016 \u001a \u0016 \u0016 \u0016 key \u0016 = uses energy from respiration \u001a = does not use energy from respiration",
+      "parseStatus": "ok",
+      "stem": "Which row shows processes that all use energy from respiration? diffusion cell division osmosis muscle contraction passage of nerve impulses active transport",
+      "options": {
+        "A": "\u001a \u0016 \u0016 \u0016 \u0016 \u0016",
+        "B": "\u0016 \u001a \u0016 \u001a \u001a \u001a",
+        "C": "\u0016 \u001a \u001a \u0016 \u001a \u001a",
+        "D": "\u001a \u0016 \u001a \u0016 \u0016 \u0016 key \u0016 = uses energy from respiration \u001a = does not use energy from respiration"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q22.png",
+      "rawText": "What is the word equation for anaerobic respiration in yeast? A glucose  alcohol + carbon dioxide B glucose  alcohol C glucose  lactic acid + carbon dioxide D glucose  lactic acid",
+      "parseStatus": "ok",
+      "stem": "What is the word equation for anaerobic respiration in yeast?",
+      "options": {
+        "A": "glucose  alcohol + carbon dioxide",
+        "B": "glucose  alcohol",
+        "C": "glucose  lactic acid + carbon dioxide",
+        "D": "glucose  lactic acid"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q23.png",
+      "rawText": "Which substances are excreted from the human body? 1 carbon dioxide 2 urea 3 water A 1 and 2 only B 1 and 3 only C 1, 2 and 3 D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which substances are excreted from the human body? 1 carbon dioxide 2 urea 3 water",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "1, 2 and 3",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q24.png",
+      "rawText": "What is a response to a low concentration of glucose in the blood? A Glucagon will cause the body to convert glucose into glycogen. B Glucagon will cause the body to convert glycogen into glucose. C Insulin will cause the body to convert glucose into glycogen. D Insulin will cause the body to convert glycogen into glucose.",
+      "parseStatus": "ok",
+      "stem": "What is a response to a low concentration of glucose in the blood?",
+      "options": {
+        "A": "Glucagon will cause the body to convert glucose into glycogen.",
+        "B": "Glucagon will cause the body to convert glycogen into glucose.",
+        "C": "Insulin will cause the body to convert glucose into glycogen.",
+        "D": "Insulin will cause the body to convert glycogen into glucose."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q25.png",
+      "rawText": "Which structure can reduce how much light enters the eye? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q26.png",
+      "rawText": "The diagram shows a section through human skin. X Z Y What are the structures labelled X, Y and Z? X Y Z A receptor sweat gland hair erector muscle B receptor hair erector muscle sweat gland C sweat gland receptor hair erector muscle D sweat gland hair erector muscle receptor",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through human skin. X Z Y What are the structures labelled X, Y and Z? X Y Z",
+      "options": {
+        "A": "receptor sweat gland hair erector muscle",
+        "B": "receptor hair erector muscle sweat gland",
+        "C": "sweat gland receptor hair erector muscle",
+        "D": "sweat gland hair erector muscle receptor"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q27.png",
+      "rawText": "A disease cannot be treated with antibiotics. What could be the reasons for this? 1 It is not a bacterial disease. 2 The pathogen is a virus. 3 The patient has become resistant to the antibiotic. A 1 and 2 only B 1 and 3 only C 2 and 3 only D 1, 2 and 3",
+      "parseStatus": "ok",
+      "stem": "A disease cannot be treated with antibiotics. What could be the reasons for this? 1 It is not a bacterial disease. 2 The pathogen is a virus. 3 The patient has become resistant to the antibiotic.",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "2 and 3 only",
+        "D": "1, 2 and 3"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q28.png",
+      "rawText": "The diagram shows a strawberry plant. These plants can reproduce asexually by producing ‘plantlets’. plantlet Why is this method of reproduction useful to strawberry farmers? A Plantlets are produced by meiosis and are genetically different. B Plantlets are produced by meiosis and are genetically identical. C Plantlets are produced by mitosis and are genetically different. D Plantlets are produced by mitosis and are genetically identical.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a strawberry plant. These plants can reproduce asexually by producing ‘plantlets’. plantlet Why is this method of reproduction useful to strawberry farmers?",
+      "options": {
+        "A": "Plantlets are produced by meiosis and are genetically different.",
+        "B": "Plantlets are produced by meiosis and are genetically identical.",
+        "C": "Plantlets are produced by mitosis and are genetically different.",
+        "D": "Plantlets are produced by mitosis and are genetically identical."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q29.png",
+      "rawText": "Which statement about human gametes is correct? A The female gamete has an acrosome and is non-motile. B The female gamete has a jelly coating and is motile. C The male gamete has a flagellum and is non-motile. D The male gamete has an acrosome and is motile.",
+      "parseStatus": "ok",
+      "stem": "Which statement about human gametes is correct?",
+      "options": {
+        "A": "The female gamete has an acrosome and is non-motile.",
+        "B": "The female gamete has a jelly coating and is motile.",
+        "C": "The male gamete has a flagellum and is non-motile.",
+        "D": "The male gamete has an acrosome and is motile."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q30.png",
+      "rawText": "The diagram shows the stages of protein synthesis in a cell. 1 nucleus ribosome protein 2 3 cytoplasm NOT TO SCALE Which row identifies molecules 1, 2 and 3? 1 2 3 A DNA amino acid mRNA B amino acid DNA mRNA C DNA mRNA amino acid D mRNA DNA amino acid",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the stages of protein synthesis in a cell. 1 nucleus ribosome protein 2 3 cytoplasm NOT TO SCALE Which row identifies molecules 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "DNA amino acid mRNA",
+        "B": "amino acid DNA mRNA",
+        "C": "DNA mRNA amino acid",
+        "D": "mRNA DNA amino acid"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q31.png",
+      "rawText": "Which description of stem cells is correct? A unspecialised cells that divide by meiosis to produce daughter cells that may become specialised for specific functions B specialised cells that divide by mitosis to produce daughter cells that may become further specialised for specific functions C unspecialised cells that divide by mitosis to produce daughter cells that may become specialised for specific functions D specialised cells that divide by meiosis to produce daughter cells that may become specialised for specific functions",
+      "parseStatus": "ok",
+      "stem": "Which description of stem cells is correct?",
+      "options": {
+        "A": "unspecialised cells that divide by meiosis to produce daughter cells that may become specialised for specific functions",
+        "B": "specialised cells that divide by mitosis to produce daughter cells that may become further specialised for specific functions",
+        "C": "unspecialised cells that divide by mitosis to produce daughter cells that may become specialised for specific functions",
+        "D": "specialised cells that divide by meiosis to produce daughter cells that may become specialised for specific functions"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q32.png",
+      "rawText": "In some breeds of cattle, hair colour shows codominance. The coats may be red, white or roan (a mixture of red and white hairs). What are the expected phenotypes when a parent with a red coat (HRHR) is crossed with a parent with a roan coat (HRHW)? A 50% red : 50% roan B 75% red : 25% roan C 75% red : 25% white D 50% red : 50% white",
+      "parseStatus": "ok",
+      "stem": "In some breeds of cattle, hair colour shows codominance. The coats may be red, white or roan (a mixture of red and white hairs). What are the expected phenotypes when a parent with a red coat (HRHR) is crossed with a parent with a roan coat (HRHW)?",
+      "options": {
+        "A": "50% red : 50% roan",
+        "B": "75% red : 25% roan",
+        "C": "75% red : 25% white",
+        "D": "50% red : 50% white"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q33.png",
+      "rawText": "Which statement is correct? A Discontinuous variation is mainly caused by environmental factors. B Ionising radiation and some chemicals decrease the rate of mutation. C A gene mutation is a change in the base sequence of a DNA molecule. D Small variations in height within a human population are an example of discontinuous variation.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "Discontinuous variation is mainly caused by environmental factors.",
+        "B": "Ionising radiation and some chemicals decrease the rate of mutation.",
+        "C": "A gene mutation is a change in the base sequence of a DNA molecule.",
+        "D": "Small variations in height within a human population are an example of discontinuous variation."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q34.png",
+      "rawText": "A person who is homozygous for the sickle cell allele has a child with a person that is heterozygous. What is the likelihood that the offspring would be homozygous for the sickle cell allele? A 100% B 75% C 50% D 25%",
+      "parseStatus": "ok",
+      "stem": "A person who is homozygous for the sickle cell allele has a child with a person that is heterozygous. What is the likelihood that the offspring would be homozygous for the sickle cell allele?",
+      "options": {
+        "A": "100%",
+        "B": "75%",
+        "C": "50%",
+        "D": "25%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q35.png",
+      "rawText": "The diagram shows a food web. hare bee beetle shrew heather rabbit grouse adder stoat eagle NOT TO SCALE How many organisms are feeding at more than one trophic level? A 0 B 1 C 2 D 3",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food web. hare bee beetle shrew heather rabbit grouse adder stoat eagle NOT TO SCALE How many organisms are feeding at more than one trophic level?",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "2",
+        "D": "3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q36.png",
+      "rawText": "The diagram shows part of the nitrogen cycle. nitrogen in atmosphere ammonium ions decomposers nitrite ions soil bacteria nitrogen-containing compounds nitrate ions bacteria in plant roots plants animals 5 4 2 3 1 6 Which row shows the correct labels? denitrification absorption nitrification nitrogen fixation A 3 2 4 6 B 3 5 4 1 C 1 2 3 6 D 1 5 3 4",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the nitrogen cycle. nitrogen in atmosphere ammonium ions decomposers nitrite ions soil bacteria nitrogen-containing compounds nitrate ions bacteria in plant roots plants animals 5 4 2 3 1 6 Which row shows the correct labels? denitrification absorption nitrification nitrogen fixation",
+      "options": {
+        "A": "3 2 4 6",
+        "B": "3 5 4 1",
+        "C": "1 2 3 6",
+        "D": "1 5 3 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q37.png",
+      "rawText": "Which statement explains why bacteria are used in genetic engineering? A Bacteria can only manufacture simple molecules. B Bacteria growing in a laboratory cause ethical concerns. C Bacteria have a slow reproduction rate. D Bacteria have plasmids.",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why bacteria are used in genetic engineering?",
+      "options": {
+        "A": "Bacteria can only manufacture simple molecules.",
+        "B": "Bacteria growing in a laboratory cause ethical concerns.",
+        "C": "Bacteria have a slow reproduction rate.",
+        "D": "Bacteria have plasmids."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q38.png",
+      "rawText": "The graph shows the growth of the fungus Penicillium and its production of the antibiotic penicillin in a fermenter. time concentration of penicillin mass of Penicillium concentration or mass Which stage of the Penicillium growth curve produces the highest concentration of penicillin? A lag phase B exponential phase C stationary phase D death phase",
+      "parseStatus": "ok",
+      "stem": "The graph shows the growth of the fungus Penicillium and its production of the antibiotic penicillin in a fermenter. time concentration of penicillin mass of Penicillium concentration or mass Which stage of the Penicillium growth curve produces the highest concentration of penicillin?",
+      "options": {
+        "A": "lag phase",
+        "B": "exponential phase",
+        "C": "stationary phase",
+        "D": "death phase"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q39.png",
+      "rawText": "Which statement about sustainable resources is correct? A They include fossil fuels. B They include non-renewable resources. C Their production rate is equal to their removal rate. D Their production rate is smaller than their removal rate.",
+      "parseStatus": "ok",
+      "stem": "Which statement about sustainable resources is correct?",
+      "options": {
+        "A": "They include fossil fuels.",
+        "B": "They include non-renewable resources.",
+        "C": "Their production rate is equal to their removal rate.",
+        "D": "Their production rate is smaller than their removal rate."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w22_qp_21/q40.png",
+      "rawText": "What is the least sustainable method of helping to maintain a population of fish in a lake? A Only allow female fish to be caught and eaten. B Only allow fishing at certain times of the year. C Only allow fishing in certain areas of the lake. D Only allow the largest fish to be caught and eaten.",
+      "parseStatus": "ok",
+      "stem": "What is the least sustainable method of helping to maintain a population of fish in a lake?",
+      "options": {
+        "A": "Only allow female fish to be caught and eaten.",
+        "B": "Only allow fishing at certain times of the year.",
+        "C": "Only allow fishing in certain areas of the lake.",
+        "D": "Only allow the largest fish to be caught and eaten."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0610_w19_qp_22.pdf",
+  "markScheme": "0610_w19_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q01.png",
+      "rawText": "The diagrams show a test-tube containing pond water. The green colour is caused by microorganisms that have chloroplasts. pale green pond water light off dark green area light on oxygen bubble Which characteristics of living organisms are shown? A excretion, growth and movement B movement, nutrition and sensitivity C nutrition, reproduction and respiration D reproduction, sensitivity and growth",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a test-tube containing pond water. The green colour is caused by microorganisms that have chloroplasts. pale green pond water light off dark green area light on oxygen bubble Which characteristics of living organisms are shown?",
+      "options": {
+        "A": "excretion, growth and movement",
+        "B": "movement, nutrition and sensitivity",
+        "C": "nutrition, reproduction and respiration",
+        "D": "reproduction, sensitivity and growth"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q02.png",
+      "rawText": "Which shows an organism that has been named using the binomial system? A Brown seaweed B Polar bear C Red fox D Vulpes vulpes",
+      "parseStatus": "ok",
+      "stem": "Which shows an organism that has been named using the binomial system?",
+      "options": {
+        "A": "Brown seaweed",
+        "B": "Polar bear",
+        "C": "Red fox",
+        "D": "Vulpes vulpes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q03.png",
+      "rawText": "The diagram shows an arthropod. pedipalp legs To which group does it belong? A arachnids B crustaceans C insects D myriapods",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an arthropod. pedipalp legs To which group does it belong?",
+      "options": {
+        "A": "arachnids",
+        "B": "crustaceans",
+        "C": "insects",
+        "D": "myriapods"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q04.png",
+      "rawText": "Which features do animal cells share with plant cells? chloroplast cytoplasm nucleus A \u0016 \u0016 \u0016 key B \u0016 \u001a \u0016 \u0016 = yes C \u001a \u0016 \u0016 \u001a = no D \u001a \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which features do animal cells share with plant cells? chloroplast cytoplasm nucleus",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016 \u0016 = yes",
+        "C": "\u001a \u0016 \u0016 \u001a = no",
+        "D": "\u001a \u001a \u001a"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q05.png",
+      "rawText": "The diagram shows a drawing of a human cheek cell. X Y The distance between points X and Y on the diagram is 30 mm. The actual length of the cell between X and Y was 60 µm. What is the magnification of the cell? A ×50 B ×200 C ×500 D ×2000",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a drawing of a human cheek cell. X Y The distance between points X and Y on the diagram is 30 mm. The actual length of the cell between X and Y was 60 µm. What is the magnification of the cell?",
+      "options": {
+        "A": "×50",
+        "B": "×200",
+        "C": "×500",
+        "D": "×2000"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q06.png",
+      "rawText": "Red blood cells were placed in pure water. Movement of water across the cell membrane caused a change in their appearance. What caused this change in appearance? direction of water movement from higher to lower water potential from lower to higher water potential A into cells yes no B into cells no yes C out of cells yes no D out of cells no yes",
+      "parseStatus": "ok",
+      "stem": "Red blood cells were placed in pure water. Movement of water across the cell membrane caused a change in their appearance. What caused this change in appearance? direction of water movement from higher to lower water potential from lower to higher water potential",
+      "options": {
+        "A": "into cells yes no",
+        "B": "into cells no yes",
+        "C": "out of cells yes no",
+        "D": "out of cells no yes"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q07.png",
+      "rawText": "Which process depends on active transport? A absorption of carbon dioxide by plant leaves B reabsorption of glucose by kidney tubules C removal of carbon dioxide in the alveoli D uptake of water by plant roots",
+      "parseStatus": "ok",
+      "stem": "Which process depends on active transport?",
+      "options": {
+        "A": "absorption of carbon dioxide by plant leaves",
+        "B": "reabsorption of glucose by kidney tubules",
+        "C": "removal of carbon dioxide in the alveoli",
+        "D": "uptake of water by plant roots"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q08.png",
+      "rawText": "Which identifies the chemical elements found in proteins? carbon hydrogen oxygen nitrogen A \u0016 \u0016 \u0016 \u0016 key B \u0016 \u0016 \u0016 \u001a \u0016= present C \u0016 \u001a \u0016 \u001a \u001a= absent D \u001a \u0016 \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which identifies the chemical elements found in proteins? carbon hydrogen oxygen nitrogen",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u0016 \u0016 \u001a \u0016= present",
+        "C": "\u0016 \u001a \u0016 \u001a \u001a= absent",
+        "D": "\u001a \u0016 \u001a \u0016"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q09.png",
+      "rawText": "A student carries out a test to see whether the solution in a test-tube contains protein. Which row shows the correct food test and a positive result? name of test colour seen with a positive result A Benedict’s test blue-black B Benedict’s test purple C biuret test blue-black D biuret test purple",
+      "parseStatus": "ok",
+      "stem": "A student carries out a test to see whether the solution in a test-tube contains protein. Which row shows the correct food test and a positive result? name of test colour seen with a positive result",
+      "options": {
+        "A": "Benedict’s test blue-black",
+        "B": "Benedict’s test purple",
+        "C": "biuret test blue-black",
+        "D": "biuret test purple"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q10.png",
+      "rawText": "The diagram shows an experiment investigating the effect of light intensity on an aquatic plant. Q P light source light source 10 cm 20 cm Photosynthesis occurred in both test-tube P and test-tube Q. Both test-tubes were kept at the same temperature. The number of bubbles produced in test-tube P was 12 bubbles per minute. What is the most likely number of bubbles produced in one minute in test-tube Q? A 0 B 3 C 12 D 48",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment investigating the effect of light intensity on an aquatic plant. Q P light source light source 10 cm 20 cm Photosynthesis occurred in both test-tube P and test-tube Q. Both test-tubes were kept at the same temperature. The number of bubbles produced in test-tube P was 12 bubbles per minute. What is the most likely number of bubbles produced in one minute in test-tube Q?",
+      "options": {
+        "A": "0",
+        "B": "3",
+        "C": "12",
+        "D": "48"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q11.png",
+      "rawText": "The diagram shows a leaf as seen in cross-section under the microscope. 1 2 3 What are tissues 1, 2 and 3? 1 2 3 A epidermis palisade mesophyll spongy mesophyll B epidermis spongy mesophyll palisade mesophyll C palisade mesophyll epidermis spongy mesophyll D spongy mesophyll palisade mesophyll epidermis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a leaf as seen in cross-section under the microscope. 1 2 3 What are tissues 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "epidermis palisade mesophyll spongy mesophyll",
+        "B": "epidermis spongy mesophyll palisade mesophyll",
+        "C": "palisade mesophyll epidermis spongy mesophyll",
+        "D": "spongy mesophyll palisade mesophyll epidermis"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q12.png",
+      "rawText": "The pie charts show the composition of 100 g of four different foods. Which food provides the most energy? key carbohydrate fats and oils protein water A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q13.png",
+      "rawText": "The cholera bacterium produces a toxin that results in water entering the alimentary canal and causing diarrhoea. The diagram shows the human alimentary canal. Into which region are chloride ions secreted as a result of the toxin? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q14.png",
+      "rawText": "The diagram shows an experiment kept at room temperature. tubing containing starch, protease, protein and simple sugars membrane permeable to small molecules only distilled water test-tube What is present in the water surrounding the membrane after 45 minutes? A amino acids and simple sugars B protein and amino acids C protein and simple sugars D starch and simple sugars",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment kept at room temperature. tubing containing starch, protease, protein and simple sugars membrane permeable to small molecules only distilled water test-tube What is present in the water surrounding the membrane after 45 minutes?",
+      "options": {
+        "A": "amino acids and simple sugars",
+        "B": "protein and amino acids",
+        "C": "protein and simple sugars",
+        "D": "starch and simple sugars"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q15.png",
+      "rawText": "The diagram shows an experiment to investigate transpiration. balance plant 1 plant 2 transparent plastic bag Plant 1 is not covered. Plant 2 and its pot are covered by a transparent plastic bag. The mass of each plant and its pot is measured. The masses are measured again after two hours. What is the result? A The mass of both plants decreases by the same percentage. B The mass of both plants stays the same. C The mass of plant 1 decreases more than the mass of plant 2. D The mass of plant 2 decreases more than the mass of plant 1.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment to investigate transpiration. balance plant 1 plant 2 transparent plastic bag Plant 1 is not covered. Plant 2 and its pot are covered by a transparent plastic bag. The mass of each plant and its pot is measured. The masses are measured again after two hours. What is the result?",
+      "options": {
+        "A": "The mass of both plants decreases by the same percentage.",
+        "B": "The mass of both plants stays the same.",
+        "C": "The mass of plant 1 decreases more than the mass of plant 2.",
+        "D": "The mass of plant 2 decreases more than the mass of plant 1."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q16.png",
+      "rawText": "Which description of translocation is correct? A movement of glucose and amino acids from a sink to a source B movement of glucose and amino acids from a source to a sink C movement of sucrose and amino acids from a sink to a source D movement of sucrose and amino acids from a source to a sink",
+      "parseStatus": "ok",
+      "stem": "Which description of translocation is correct?",
+      "options": {
+        "A": "movement of glucose and amino acids from a sink to a source",
+        "B": "movement of glucose and amino acids from a source to a sink",
+        "C": "movement of sucrose and amino acids from a sink to a source",
+        "D": "movement of sucrose and amino acids from a source to a sink"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q17.png",
+      "rawText": "Which factor increases the risk of developing coronary heart disease? A low fat diet B regular exercise C relaxation D smoking",
+      "parseStatus": "ok",
+      "stem": "Which factor increases the risk of developing coronary heart disease?",
+      "options": {
+        "A": "low fat diet",
+        "B": "regular exercise",
+        "C": "relaxation",
+        "D": "smoking"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q18.png",
+      "rawText": "Which row describes the features of passive immunity? antibodies made involves memory cells effective period A no no short term B no yes short term C yes no long term D yes yes long term",
+      "parseStatus": "ok",
+      "stem": "Which row describes the features of passive immunity? antibodies made involves memory cells effective period",
+      "options": {
+        "A": "no no short term",
+        "B": "no yes short term",
+        "C": "yes no long term",
+        "D": "yes yes long term"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q19.png",
+      "rawText": "The diagram shows part of the human gas exchange system. to P R Q Which row identifies P, Q and R? P Q R A alveolus wall capillary wall vein B bronchiole alveolus wall capillary C capillary layer of moisture bronchiole D alveolus wall bronchiole capillary",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the human gas exchange system. to P R Q Which row identifies P, Q and R? P Q R",
+      "options": {
+        "A": "alveolus wall capillary wall vein",
+        "B": "bronchiole alveolus wall capillary",
+        "C": "capillary layer of moisture bronchiole",
+        "D": "alveolus wall bronchiole capillary"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q20.png",
+      "rawText": "What is the effect on germinating seeds of increasing the temperature from 10 °C to 20 °C? A a decrease in the production of oxygen B a decrease in the respiration rate C an increase in the respiration rate D an increase in the transpiration rate",
+      "parseStatus": "ok",
+      "stem": "What is the effect on germinating seeds of increasing the temperature from 10 °C to 20 °C?",
+      "options": {
+        "A": "a decrease in the production of oxygen",
+        "B": "a decrease in the respiration rate",
+        "C": "an increase in the respiration rate",
+        "D": "an increase in the transpiration rate"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q21.png",
+      "rawText": "Lactic acid builds up in the muscles during vigorous exercise. During recovery, how is this lactic acid removed? A aerobic respiration of lactic acid in the liver B anaerobic respiration of lactic acid in the muscles C excretion of lactic acid by the lungs D removal of lactic acid by the alimentary canal",
+      "parseStatus": "ok",
+      "stem": "Lactic acid builds up in the muscles during vigorous exercise. During recovery, how is this lactic acid removed?",
+      "options": {
+        "A": "aerobic respiration of lactic acid in the liver",
+        "B": "anaerobic respiration of lactic acid in the muscles",
+        "C": "excretion of lactic acid by the lungs",
+        "D": "removal of lactic acid by the alimentary canal"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q22.png",
+      "rawText": "Which process transmits an impulse across a synapse? A active transport B diffusion C gravity D osmosis",
+      "parseStatus": "ok",
+      "stem": "Which process transmits an impulse across a synapse?",
+      "options": {
+        "A": "active transport",
+        "B": "diffusion",
+        "C": "gravity",
+        "D": "osmosis"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q23.png",
+      "rawText": "The diagram shows the muscles that control the size of the pupil in an eye. radial muscles iris pupil circular muscles How do the muscles make the pupil smaller? circular muscles radial muscles A contract contract B contract relax C relax contract D relax relax",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the muscles that control the size of the pupil in an eye. radial muscles iris pupil circular muscles How do the muscles make the pupil smaller? circular muscles radial muscles",
+      "options": {
+        "A": "contract contract",
+        "B": "contract relax",
+        "C": "relax contract",
+        "D": "relax relax"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q24.png",
+      "rawText": "The diagram shows the shoot and root of a seedling responding to gravity. Which row shows where the auxin accumulates and the effect of this in the shoot? accumulates effect A lower surface inhibits cell elongation B lower surface promotes cell elongation C upper surface inhibits cell division D upper surface promotes cell division",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the shoot and root of a seedling responding to gravity. Which row shows where the auxin accumulates and the effect of this in the shoot? accumulates effect",
+      "options": {
+        "A": "lower surface inhibits cell elongation",
+        "B": "lower surface promotes cell elongation",
+        "C": "upper surface inhibits cell division",
+        "D": "upper surface promotes cell division"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q25.png",
+      "rawText": "A patient has dye injected into the blood supply to his kidneys. The dye appears in his excretory system as shown. key dye no dye Which part is blocked? A the kidney B the ureter C the bladder D the urethra",
+      "parseStatus": "ok",
+      "stem": "A patient has dye injected into the blood supply to his kidneys. The dye appears in his excretory system as shown. key dye no dye Which part is blocked?",
+      "options": {
+        "A": "the kidney",
+        "B": "the ureter",
+        "C": "the bladder",
+        "D": "the urethra"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q26.png",
+      "rawText": "Bacteria such as MRSA are resistant to antibiotics. These processes can occur in bacteria. 1 artificial selection 2 genetic variation 3 mutation 4 natural selection What would contribute to the development of antibiotic resistance? A 1, 2, 3 and 4 B 1, 2 and 3 only C 2, 3 and 4 only D 2 and 4 only",
+      "parseStatus": "ok",
+      "stem": "Bacteria such as MRSA are resistant to antibiotics. These processes can occur in bacteria. 1 artificial selection 2 genetic variation 3 mutation 4 natural selection What would contribute to the development of antibiotic resistance?",
+      "options": {
+        "A": "1, 2, 3 and 4",
+        "B": "1, 2 and 3 only",
+        "C": "2, 3 and 4 only",
+        "D": "2 and 4 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q27.png",
+      "rawText": "Why do some athletes take anabolic steroids? A to decrease blood glucose concentration B to increase muscle mass C to kill bacteria D to reduce aggression",
+      "parseStatus": "ok",
+      "stem": "Why do some athletes take anabolic steroids?",
+      "options": {
+        "A": "to decrease blood glucose concentration",
+        "B": "to increase muscle mass",
+        "C": "to kill bacteria",
+        "D": "to reduce aggression"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q28.png",
+      "rawText": "In humans, why are sperm cells produced in much greater numbers than egg cells? A Many sperm cells are needed to fertilise an egg cell. B Sperm cells are small in size. C Sperm cells are non-motile. D The chance of one sperm cell reaching an egg is very small.",
+      "parseStatus": "ok",
+      "stem": "In humans, why are sperm cells produced in much greater numbers than egg cells?",
+      "options": {
+        "A": "Many sperm cells are needed to fertilise an egg cell.",
+        "B": "Sperm cells are small in size.",
+        "C": "Sperm cells are non-motile.",
+        "D": "The chance of one sperm cell reaching an egg is very small."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q29.png",
+      "rawText": "There are many reasons why a woman does not become pregnant. What can be treated by a drug that increases the secretion of FSH? A inactive sperm B follicles not developing C thin uterine lining D too few sperm",
+      "parseStatus": "ok",
+      "stem": "There are many reasons why a woman does not become pregnant. What can be treated by a drug that increases the secretion of FSH?",
+      "options": {
+        "A": "inactive sperm",
+        "B": "follicles not developing",
+        "C": "thin uterine lining",
+        "D": "too few sperm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q30.png",
+      "rawText": "The diagram shows the cells of a mammalian embryo shortly after fertilisation. Which is the correct description of these cells? A gametes undergoing meiosis B gametes undergoing mitosis C stem cells undergoing meiosis D stem cells undergoing mitosis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the cells of a mammalian embryo shortly after fertilisation. Which is the correct description of these cells?",
+      "options": {
+        "A": "gametes undergoing meiosis",
+        "B": "gametes undergoing mitosis",
+        "C": "stem cells undergoing meiosis",
+        "D": "stem cells undergoing mitosis"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q31.png",
+      "rawText": "The diagram shows a diploid cell and alleles R and r on one pair of chromosomes. R r nucleus cytoplasm When this cell divides by mitosis, which daughter cells will be produced? chromosome number genotype A diploid heterozygous B diploid homozygous C haploid heterozygous D haploid homozygous",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a diploid cell and alleles R and r on one pair of chromosomes. R r nucleus cytoplasm When this cell divides by mitosis, which daughter cells will be produced? chromosome number genotype",
+      "options": {
+        "A": "diploid heterozygous",
+        "B": "diploid homozygous",
+        "C": "haploid heterozygous",
+        "D": "haploid homozygous"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q32.png",
+      "rawText": "The diagram shows a genetic cross between a male bird with black feathers and a female bird with white feathers. All of the offspring have blue feathers. parents FBFB × FWFW black white offspring FBFW 100% blue Two of the blue offspring are crossed. Which row shows the correct phenotype percentages for the cross? percentage black percentage blue percentage white A 25 75 0 B 25 50 25 C 50 20 25 D 75 0 25",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a genetic cross between a male bird with black feathers and a female bird with white feathers. All of the offspring have blue feathers. parents FBFB × FWFW black white offspring FBFW 100% blue Two of the blue offspring are crossed. Which row shows the correct phenotype percentages for the cross? percentage black percentage blue percentage white",
+      "options": {
+        "A": "25 75 0",
+        "B": "25 50 25",
+        "C": "50 20 25",
+        "D": "75 0 25"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q33.png",
+      "rawText": "What is a feature of some xerophytes? A large air spaces in the tissues B leaves rolled up and covered with hairs C leaves with stomata on the upper surface D thin cuticle",
+      "parseStatus": "ok",
+      "stem": "What is a feature of some xerophytes?",
+      "options": {
+        "A": "large air spaces in the tissues",
+        "B": "leaves rolled up and covered with hairs",
+        "C": "leaves with stomata on the upper surface",
+        "D": "thin cuticle"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q34.png",
+      "rawText": "The diagram shows a pyramid of biomass. X Which organisms are found in position X? A decomposers B herbivores C primary consumers D producers",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a pyramid of biomass. X Which organisms are found in position X?",
+      "options": {
+        "A": "decomposers",
+        "B": "herbivores",
+        "C": "primary consumers",
+        "D": "producers"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q35.png",
+      "rawText": "What is a trophic level? A a group of interconnected food chains B all of the consumers in an ecosystem C an organism’s position in a food web D the transfer of energy between organisms",
+      "parseStatus": "ok",
+      "stem": "What is a trophic level?",
+      "options": {
+        "A": "a group of interconnected food chains",
+        "B": "all of the consumers in an ecosystem",
+        "C": "an organism’s position in a food web",
+        "D": "the transfer of energy between organisms"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q36.png",
+      "rawText": "The diagram shows part of the nitrogen cycle. At which stage is denitrification occurring? nitrogen in the atmosphere nitrogen in plants animals nitrates nitrites ammonium compounds A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q37.png",
+      "rawText": "Which structures found in bacteria make bacteria useful in genetic engineering? A cell walls B membranes C nuclei D plasmids",
+      "parseStatus": "ok",
+      "stem": "Which structures found in bacteria make bacteria useful in genetic engineering?",
+      "options": {
+        "A": "cell walls",
+        "B": "membranes",
+        "C": "nuclei",
+        "D": "plasmids"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q38.png",
+      "rawText": "Which chemical reaction is catalysed by maltase? A glycogen → glucose + maltose B maltose → glucose + glucose C maltose → starch D starch → glucose + maltose",
+      "parseStatus": "ok",
+      "stem": "Which chemical reaction is catalysed by maltase?",
+      "options": {
+        "A": "glycogen → glucose + maltose",
+        "B": "maltose → glucose + glucose",
+        "C": "maltose → starch",
+        "D": "starch → glucose + maltose"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q39.png",
+      "rawText": "What are the possible effects of deforestation? loss of soil flooding decrease in atmospheric carbon dioxide A yes yes no B yes no yes C no yes no D no no yes",
+      "parseStatus": "ok",
+      "stem": "What are the possible effects of deforestation? loss of soil flooding decrease in atmospheric carbon dioxide",
+      "options": {
+        "A": "yes yes no",
+        "B": "yes no yes",
+        "C": "no yes no",
+        "D": "no no yes"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_22/q40.png",
+      "rawText": "The bloodworm is an organism that is found in heavily polluted water. The diagram shows where raw sewage flows into a river. Where would there be fewest bloodworms? input of raw sewage B A C D direction of flow",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,563 @@
+{
+  "questionPaper": "0610_s24_qp_22.pdf",
+  "markScheme": "0610_s24_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q01.png",
+      "rawText": "growth A photosynthesis B sexual reproduction C transpiration D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q02.png",
+      "rawText": "genus A group B kingdom C species D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q03.png",
+      "rawText": "D cell wall A vacuole B chloroplast C nucleus 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q04.png",
+      "rawText": "Y The diagram shows an epidermal cell from an onion plant. The distance between X and Y on the diagram is 60 mm. The actual length of the cell between X and Y is 150 μm. X What is the magnification of the cell? ×2500 D ×400 C ×250 B ×40 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q05.png",
+      "rawText": "burst A flaccid B plasmolysed C turgid D [Turn over 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "burst",
+      "options": {
+        "A": "flaccid",
+        "B": "plasmolysed",
+        "C": "turgid",
+        "D": "[Turn over 06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q06.png",
+      "rawText": "partially permeable cell membrane A partially permeable cell membrane B partially permeable cell membrane C partially permeable cell membrane D requires energy from respiration requires energy from respiration does not require energy from respiration does not require energy from respiration",
+      "parseStatus": "ok",
+      "stem": "partially permeable cell membrane",
+      "options": {
+        "A": "partially permeable cell membrane",
+        "B": "partially permeable cell membrane",
+        "C": "partially permeable cell membrane",
+        "D": "requires energy from respiration requires energy from respiration does not require energy from respiration does not require energy from respiration"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q07.png",
+      "rawText": "G−C−T−T−C−G−A−T−C A G−T−C−C−T−G−A−C−T B T−C−A−A−C−T−G−A−C C T−G−A−A−G−T−C−A−G D 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "G−C−T−T−C−G−A−T−C",
+      "options": {
+        "A": "G−T−C−C−T−G−A−C−T",
+        "B": "T−C−A−A−C−T−G−A−C",
+        "C": "T−G−A−A−G−T−C−A−G",
+        "D": "06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q08.png",
+      "rawText": "rate of reaction pH 0 1 2 3 4 5 6 7 8",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q09.png",
+      "rawText": "Vascular bundles transport carbon dioxide to the leaf. A Vascular bundles transport oxygen to the leaf. B Vascular bundles transport starch to the leaf. C Vascular bundles transport water to the leaf. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q10.png",
+      "rawText": "amino acids A fatty acids B glucose C glycerol D [Turn over 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "amino acids",
+      "options": {
+        "A": "fatty acids",
+        "B": "glucose",
+        "C": "glycerol",
+        "D": "[Turn over 06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q11.png",
+      "rawText": "gall bladder A kidney B oesophagus C pancreas D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q12.png",
+      "rawText": "amino acids A fatty acids B lactic acid C hydrochloric acid D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q13.png",
+      "rawText": "A B C D 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q14.png",
+      "rawText": "A B C D lacteal capillary",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q15.png",
+      "rawText": "cells are joined end to end A no cell contents B no cross-walls C lignin present D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q16.png",
+      "rawText": "decreasing humidity A decreasing light intensity B decreasing temperature C decreasing wind speed D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q17.png",
+      "rawText": "the movement of amino acids and sucrose from the source to the sink in phloem A the movement of amino acids and sucrose from the source to the sink in xylem B the movement of amino acids and sucrose from the sink to the source in phloem C the movement of amino acids and sucrose from the sink to the source in xylem D [Turn over 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "the movement of amino acids and sucrose from the source to the sink in phloem",
+      "options": {
+        "A": "the movement of amino acids and sucrose from the source to the sink in xylem",
+        "B": "the movement of amino acids and sucrose from the sink to the source in phloem",
+        "C": "the movement of amino acids and sucrose from the sink to the source in xylem",
+        "D": "[Turn over 06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q18.png",
+      "rawText": "gills →heart →body →gills A body →gills →heart →body B heart →gills →body →heart C heart →body →gills →body D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q19.png",
+      "rawText": "plasma A platelets B red blood cells C white blood cells D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q20.png",
+      "rawText": "the secretion of chloride ions from the blood into the lumen of the large intestine A the secretion of chloride ions from the blood into the lumen of the small intestine B the secretion of chloride ions from the lumen of the large intestine into the blood C the secretion of chloride ions from the lumen of the small intestine into the blood D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q21.png",
+      "rawText": "breathing rate increases 1 the rate of respiration increases 2 nerve impulses sent from the brain to the intercostal muscles and diaphragm 3 receptors in the brain detect increased concentration of carbon dioxide in the blood 4 What is the correct order for these changes? 1 →2 →4 →3 A 1 →3 →4 →2 B 2 →1 →4 →3 C 2 →4 →3 →1 D 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "breathing rate increases 1 the rate of respiration increases 2 nerve impulses sent from the brain to the intercostal muscles and diaphragm 3 receptors in the brain detect increased concentration of carbon dioxide in the blood 4 What is the correct order for these changes? 1 →2 →4 →3",
+      "options": {
+        "A": "1 →3 →4 →2",
+        "B": "2 →1 →4 →3",
+        "C": "2 →4 →3 →1",
+        "D": "06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q22.png",
+      "rawText": "12 D 6 C 2 B 1 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q23.png",
+      "rawText": "carbon dioxide A glucose B oxygen C urea D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q24.png",
+      "rawText": "bladder A kidneys B liver C pancreas D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q25.png",
+      "rawText": "active transport A diffusion B gravity C osmosis D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q26.png",
+      "rawText": "organ hormone liver glucagon A pancreas glucagon B liver insulin C pancreas insulin D [Turn over 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "organ hormone liver glucagon",
+      "options": {
+        "A": "pancreas glucagon",
+        "B": "liver insulin",
+        "C": "pancreas insulin",
+        "D": "[Turn over 06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q27.png",
+      "rawText": "Cells on the side in the light have more auxin. 1 Cells on the side in the shade have more auxin. 2 Cells on the side in the light elongate more. 3 Cells on the side in the shade elongate more. 4 Which statements explain why the shoot grows towards the light? 2 and 4 D 2 and 3 C 1 and 4 B 1 and 3 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q28.png",
+      "rawText": "Antibiotics are used to treat all transmissible diseases. A Antibiotics are used to treat diseases caused by viruses. B Antibiotic resistance can be stopped by increasing their use. C Antibiotics are used to treat diseases caused by bacteria. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q29.png",
+      "rawText": "area affected with Fusarium wilt / hectares year 0 1967 100 1970 1200 1976 1500 1983 3000 1999 What was the percentage increase in the area affected with Fusarium wilt from 1976 to 1999? A 40% B 60% C 150% D 250% 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "area affected with Fusarium wilt / hectares year 0 1967 100 1970 1200 1976 1500 1983 3000 1999 What was the percentage increase in the area affected with Fusarium wilt from 1976 to 1999?",
+      "options": {
+        "A": "40%",
+        "B": "60%",
+        "C": "150%",
+        "D": "250% 06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q30.png",
+      "rawText": "Which processes have taken place? fertilisation pollination no no A yes no B no yes C yes yes D [Turn over 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "Which processes have taken place? fertilisation pollination no no",
+      "options": {
+        "A": "yes no",
+        "B": "no yes",
+        "C": "yes yes",
+        "D": "[Turn over 06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q31.png",
+      "rawText": "maternal blood umbilical artery umbilical vein umbilical cord key direction of blood flow placenta What is the function of the umbilical vein? to stop pathogens passing into the fetus A to stop toxins passing into the fetus B to transport carbon dioxide away from the fetus C to transport oxygen to the fetus D 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "maternal blood umbilical artery umbilical vein umbilical cord key direction of blood flow placenta What is the function of the umbilical vein? to stop pathogens passing into the fetus",
+      "options": {
+        "A": "to stop toxins passing into the fetus",
+        "B": "to transport carbon dioxide away from the fetus",
+        "C": "to transport oxygen to the fetus",
+        "D": "06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q32.png",
+      "rawText": "time mass of DNA per cell Which row describes the type of nuclear division and the chromosome number of the daughter cells shown in the graph? chromosome number of daughter cells produced type of nuclear division diploid meiosis A haploid meiosis B diploid mitosis C haploid mitosis D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q33.png",
+      "rawText": "IAIA and IBIB A IAIB and IAIo B IAIo and IBIo C IBIo and IBIA D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q34.png",
+      "rawText": "Continuous variation is usually caused by the environment only. A Continuous variation results in a limited range of phenotypes with no intermediates. B Discontinuous variation is usually caused by genes only. C Discontinuous variation results in a range of phenotypes between two extremes. D [Turn over 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "Continuous variation is usually caused by the environment only.",
+      "options": {
+        "A": "Continuous variation results in a limited range of phenotypes with no intermediates.",
+        "B": "Discontinuous variation is usually caused by genes only.",
+        "C": "Discontinuous variation results in a range of phenotypes between two extremes.",
+        "D": "[Turn over 06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q35.png",
+      "rawText": "Which statement explains why the stomata are located on the upper surface of the leaf? to allow carbon dioxide from the air to enter the leaf for use in photosynthesis A to allow carbon dioxide produced by photosynthesis to leave the leaf B to allow oxygen from the air to enter the leaf for use in photosynthesis C to allow oxygen from the water to enter the leaf for respiration D 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why the stomata are located on the upper surface of the leaf? to allow carbon dioxide from the air to enter the leaf for use in photosynthesis",
+      "options": {
+        "A": "to allow carbon dioxide produced by photosynthesis to leave the leaf",
+        "B": "to allow oxygen from the air to enter the leaf for use in photosynthesis",
+        "C": "to allow oxygen from the water to enter the leaf for respiration",
+        "D": "06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q36.png",
+      "rawText": "genetic breeding A natural breeding B pure-breeding C selective breeding D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q37.png",
+      "rawText": "nitrogen gas in atmosphere A nitrates nitrogen fixation denitrification nitrogen gas in atmosphere B nitrates nitrogen fixation denitrification nitrogen gas in atmosphere C nitrates nitrogen fixation denitrification nitrogen gas in atmosphere D nitrates nitrogen fixation denitrification",
+      "parseStatus": "ok",
+      "stem": "nitrogen gas in atmosphere",
+      "options": {
+        "A": "nitrates nitrogen fixation denitrification nitrogen gas in atmosphere",
+        "B": "nitrates nitrogen fixation denitrification nitrogen gas in atmosphere",
+        "C": "nitrates nitrogen fixation denitrification nitrogen gas in atmosphere",
+        "D": "nitrates nitrogen fixation denitrification"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q38.png",
+      "rawText": "Biodiversity is increased. A Genetic variation is increased. B Water use is increased. C Yield of the crop is increased. D [Turn over 06_0610_22_2024_1.12 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "Biodiversity is increased.",
+      "options": {
+        "A": "Genetic variation is increased.",
+        "B": "Water use is increased.",
+        "C": "Yield of the crop is increased.",
+        "D": "[Turn over 06_0610_22_2024_1.12 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q39.png",
+      "rawText": "ethanol carbon dioxide washing powder biofuel A fruit juice washing powder B bread fruit juice C biofuel bread D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_22/q40.png",
+      "rawText": "insertion of human DNA into bacterial plasmid DNA A insertion of recombinant plasmids into bacteria B isolation of the DNA making up the human gene C expression of the human gene in bacteria D 06_0610_22_2024_1.12 © UCLES 2024 Permission to reproduce items where third-party owned material protected by copyright is included has been sought and cleared where possible. Every reasonable effort has been made by the publisher (UCLES) to trace copyright holders, but if any items requiring clearance have unwittingly been included, the publisher will be pleased to make amends at the earliest possible opportunity. To avoid the issue of disclosure of answer-related information to candidates, all copyright acknowledgements are reproduced online in the Cambridge Assessment International Education Copyright Acknowledgements Booklet. This is produced for each series of examinations and is freely available to download at www.cambridgeinternational.org after the live examination series. Cambridge Assessment International Education is part of Cambridge Assessment. Cambridge Assessment is the brand name of the University of Cambridge Local Examinations Syndicate (UCLES), which is a department of the University of Cambridge.",
+      "parseStatus": "ok",
+      "stem": "insertion of human DNA into bacterial plasmid DNA",
+      "options": {
+        "A": "insertion of recombinant plasmids into bacteria",
+        "B": "isolation of the DNA making up the human gene",
+        "C": "expression of the human gene in bacteria",
+        "D": "06_0610_22_2024_1.12 © UCLES 2024 Permission to reproduce items where third-party owned material protected by copyright is included has been sought and cleared where possible. Every reasonable effort has been made by the publisher (UCLES) to trace copyright holders, but if any items requiring clearance have unwittingly been included, the publisher will be pleased to make amends at the earliest possible opportunity. To avoid the issue of disclosure of answer-related information to candidates, all copyright acknowledgements are reproduced online in the Cambridge Assessment International Education Copyright Acknowledgements Booklet. This is produced for each series of examinations and is freely available to download at www.cambridgeinternational.org after the live examination series. Cambridge Assessment International Education is part of Cambridge Assessment. Cambridge Assessment is the brand name of the University of Cambridge Local Examinations Syndicate (UCLES), which is a department of the University of Cambridge."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

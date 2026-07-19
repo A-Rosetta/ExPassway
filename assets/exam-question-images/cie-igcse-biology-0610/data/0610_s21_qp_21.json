@@ -1,0 +1,658 @@
+{
+  "questionPaper": "0610_s21_qp_21.pdf",
+  "markScheme": "0610_s21_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q01.png",
+      "rawText": "What is a characteristic of all living organisms? A breathing B circulation C egestion D sensitivity",
+      "parseStatus": "ok",
+      "stem": "What is a characteristic of all living organisms?",
+      "options": {
+        "A": "breathing",
+        "B": "circulation",
+        "C": "egestion",
+        "D": "sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q02.png",
+      "rawText": "The table shows a section of DNA taken from four different organisms. organism base sequence W C A C A A T C G A A X G T C A A T G G T G Y C T C A A T C G T A Z C T C A T T C G T A Which two organisms are the most distantly related to each other? A W and X B W and Z C X and Y D X and Z",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q03.png",
+      "rawText": "Scientists discover a new species of animal. It has a segmented body with two pairs of legs on each segment. To which group of animals does this new species belong? A arachnids B crustaceans C insects D myriapods",
+      "parseStatus": "ok",
+      "stem": "Scientists discover a new species of animal. It has a segmented body with two pairs of legs on each segment. To which group of animals does this new species belong?",
+      "options": {
+        "A": "arachnids",
+        "B": "crustaceans",
+        "C": "insects",
+        "D": "myriapods"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q04.png",
+      "rawText": "The diagram shows a single-celled organism called Euglena. chloroplasts large permanent vacuole nucleus cytoplasm cell membrane Which labelled structures would also be found in an animal cell? A cell membrane, chloroplast, nucleus B chloroplast, cytoplasm, nucleus C cell membrane, cytoplasm, nucleus D cell membrane, cytoplasm, large permanent vacuole",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a single-celled organism called Euglena. chloroplasts large permanent vacuole nucleus cytoplasm cell membrane Which labelled structures would also be found in an animal cell?",
+      "options": {
+        "A": "cell membrane, chloroplast, nucleus",
+        "B": "chloroplast, cytoplasm, nucleus",
+        "C": "cell membrane, cytoplasm, nucleus",
+        "D": "cell membrane, cytoplasm, large permanent vacuole"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q05.png",
+      "rawText": "The diagram shows some of the blood vessels and other structures in the human body. The blood vessels shown are all parts of the same A cell. B organ. C organ system. D tissue.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the blood vessels and other structures in the human body. The blood vessels shown are all parts of the same",
+      "options": {
+        "A": "cell.",
+        "B": "organ.",
+        "C": "organ system.",
+        "D": "tissue."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q06.png",
+      "rawText": "A photograph shows a plant cell nucleus measuring 2 mm across. If the magnification of the cell is 500, what is the actual size of the nucleus? A 0.00002 mm B 0.004 mm C 0.04 mm D 250 mm",
+      "parseStatus": "ok",
+      "stem": "A photograph shows a plant cell nucleus measuring 2 mm across. If the magnification of the cell is 500, what is the actual size of the nucleus?",
+      "options": {
+        "A": "0.00002 mm",
+        "B": "0.004 mm",
+        "C": "0.04 mm",
+        "D": "250 mm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q07.png",
+      "rawText": "By which process do oxygen and carbon dioxide move between cells and capillaries? A breathing B diffusion C excretion D respiration",
+      "parseStatus": "ok",
+      "stem": "By which process do oxygen and carbon dioxide move between cells and capillaries?",
+      "options": {
+        "A": "breathing",
+        "B": "diffusion",
+        "C": "excretion",
+        "D": "respiration"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q08.png",
+      "rawText": "Which process is involved in the uptake of glucose by the epithelial cells of kidney tubules? A active transport B osmosis C translocation D transpiration",
+      "parseStatus": "ok",
+      "stem": "Which process is involved in the uptake of glucose by the epithelial cells of kidney tubules?",
+      "options": {
+        "A": "active transport",
+        "B": "osmosis",
+        "C": "translocation",
+        "D": "transpiration"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q09.png",
+      "rawText": "Which element is found in proteins but not carbohydrates? A carbon B hydrogen C nitrogen D oxygen",
+      "parseStatus": "ok",
+      "stem": "Which element is found in proteins but not carbohydrates?",
+      "options": {
+        "A": "carbon",
+        "B": "hydrogen",
+        "C": "nitrogen",
+        "D": "oxygen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q10.png",
+      "rawText": "The diagram shows a short section of a single strand of DNA. A C C T Which strand of DNA will combine with this strand to form part of a double helix? A C A C T C A B A G G T C T C T G D G A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q11.png",
+      "rawText": "Starch is digested by amylase in the mouth, but it is not digested in the stomach. What is the reason for this? A All starch digestion is completed in the mouth. B The pH in the stomach is not suitable for the amylase to work. C The starch does not stay in the stomach long enough to be digested. D The temperature in the stomach is not suitable for the amylase to work.",
+      "parseStatus": "ok",
+      "stem": "Starch is digested by amylase in the mouth, but it is not digested in the stomach. What is the reason for this?",
+      "options": {
+        "A": "All starch digestion is completed in the mouth.",
+        "B": "The pH in the stomach is not suitable for the amylase to work.",
+        "C": "The starch does not stay in the stomach long enough to be digested.",
+        "D": "The temperature in the stomach is not suitable for the amylase to work."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q12.png",
+      "rawText": "Which statement describes a catalyst? A a substance that decreases the rate of a chemical reaction and is not changed by the reaction B a substance that decreases the rate of a chemical reaction and is changed by the reaction C a substance that increases the rate of a chemical reaction and is changed by the reaction D a substance that increases the rate of a chemical reaction and is not changed by the reaction",
+      "parseStatus": "ok",
+      "stem": "Which statement describes a catalyst?",
+      "options": {
+        "A": "a substance that decreases the rate of a chemical reaction and is not changed by the reaction",
+        "B": "a substance that decreases the rate of a chemical reaction and is changed by the reaction",
+        "C": "a substance that increases the rate of a chemical reaction and is changed by the reaction",
+        "D": "a substance that increases the rate of a chemical reaction and is not changed by the reaction"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q13.png",
+      "rawText": "A plant with striped leaves was kept in bright light for six hours. white stripe green stripe A leaf was taken from the plant and the chlorophyll was removed. The leaf was then tested for starch using iodine solution. Which diagram shows the result of the test? yellow-brown blue-black A white blue-black B blue-black green C yellow-brown green D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q14.png",
+      "rawText": "The graph shows daily carbon dioxide uptake and transpiration by the plant Agave americana. The plant is adapted to live in very dry conditions. 10 8 6 4 2 0 0.6 0.4 0.2 0 0 4 8 12 16 20 24 time of day / hours CO2 uptake / mg per dm2 per hour transpiration / g H2O per dm2 per hour transpiration CO2 uptake What can be concluded from this graph? A More stomata are closed during dark periods. B More stomata are closed during light periods. C There is no carbon dioxide uptake during dark periods. D There is no water uptake during light periods.",
+      "parseStatus": "ok",
+      "stem": "The graph shows daily carbon dioxide uptake and transpiration by the plant Agave americana. The plant is adapted to live in very dry conditions. 10 8 6 4 2 0 0.6 0.4 0.2 0 0 4 8 12 16 20 24 time of day / hours CO2 uptake / mg per dm2 per hour transpiration / g H2O per dm2 per hour transpiration CO2 uptake What can be concluded from this graph?",
+      "options": {
+        "A": "More stomata are closed during dark periods.",
+        "B": "More stomata are closed during light periods.",
+        "C": "There is no carbon dioxide uptake during dark periods.",
+        "D": "There is no water uptake during light periods."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q15.png",
+      "rawText": "Statements 1 to 4 describe stages in the development of cholera. 1 Chloride ions are secreted into the gut. 2 Osmosis causes water to move into the gut. 3 The infected person becomes dehydrated. 4 Toxins are produced by the pathogenic bacteria. What is the correct sequence of the four stages? A 1  2  3  4 B 1  4  3  2 C 4  1  2  3 D 4  1  3  2",
+      "parseStatus": "ok",
+      "stem": "Statements 1 to 4 describe stages in the development of cholera. 1 Chloride ions are secreted into the gut. 2 Osmosis causes water to move into the gut. 3 The infected person becomes dehydrated. 4 Toxins are produced by the pathogenic bacteria. What is the correct sequence of the four stages?",
+      "options": {
+        "A": "1  2  3  4",
+        "B": "1  4  3  2",
+        "C": "4  1  2  3",
+        "D": "4  1  3  2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q16.png",
+      "rawText": "What are the products when proteins are broken down? A amino acids B fatty acids C glycerol D simple sugars",
+      "parseStatus": "ok",
+      "stem": "What are the products when proteins are broken down?",
+      "options": {
+        "A": "amino acids",
+        "B": "fatty acids",
+        "C": "glycerol",
+        "D": "simple sugars"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q17.png",
+      "rawText": "The diagram shows part of a cross-section of a root. 1 2 3 What are cells 1, 2 and 3? 1 2 3 A root cortex cell root hair cell mesophyll cell B root hair cell root cortex cell xylem C root hair cell root cortex cell mesophyll cell D root cortex cell root hair cell xylem",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a cross-section of a root. 1 2 3 What are cells 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "root cortex cell root hair cell mesophyll cell",
+        "B": "root hair cell root cortex cell xylem",
+        "C": "root hair cell root cortex cell mesophyll cell",
+        "D": "root cortex cell root hair cell xylem"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q18.png",
+      "rawText": "The diagram shows an onion plant that has been grown from a seed. Each onion plant takes two years to flower and produce more seeds. 1 2 3 4 5 6 7 8 year 1 year 2 bulb bulb seed soil level developing flower leaves What is the onion bulb acting as in stage 3 and in stage 6? stage 3 stage 6 A sink sink B sink source C source sink D source source",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an onion plant that has been grown from a seed. Each onion plant takes two years to flower and produce more seeds. 1 2 3 4 5 6 7 8 year 1 year 2 bulb bulb seed soil level developing flower leaves What is the onion bulb acting as in stage 3 and in stage 6? stage 3 stage 6",
+      "options": {
+        "A": "sink sink",
+        "B": "sink source",
+        "C": "source sink",
+        "D": "source source"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q19.png",
+      "rawText": "What are the main vessels carrying blood to and from the kidney? to kidney from kidney A pulmonary artery pulmonary vein B pulmonary vein pulmonary artery C renal artery renal vein D renal vein renal artery",
+      "parseStatus": "ok",
+      "stem": "What are the main vessels carrying blood to and from the kidney? to kidney from kidney",
+      "options": {
+        "A": "pulmonary artery pulmonary vein",
+        "B": "pulmonary vein pulmonary artery",
+        "C": "renal artery renal vein",
+        "D": "renal vein renal artery"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q20.png",
+      "rawText": "The photomicrograph shows human blood. Which blood component makes antibodies? B C D A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q21.png",
+      "rawText": "A child is vaccinated against measles. After a period of time the child is infected with the measles virus. The graph shows the concentration of measles antibodies in the child’s bloodstream during this time. antibody concentration in the blood time Which statement is consistent with the information in the graph? A After the vaccination, the child produced memory cells. B The child had passive immunity against measles. C The measles virus contains antibodies. D The vaccination failed to protect the child against measles.",
+      "parseStatus": "ok",
+      "stem": "A child is vaccinated against measles. After a period of time the child is infected with the measles virus. The graph shows the concentration of measles antibodies in the child’s bloodstream during this time. antibody concentration in the blood time Which statement is consistent with the information in the graph?",
+      "options": {
+        "A": "After the vaccination, the child produced memory cells.",
+        "B": "The child had passive immunity against measles.",
+        "C": "The measles virus contains antibodies.",
+        "D": "The vaccination failed to protect the child against measles."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q22.png",
+      "rawText": "Which sequence of changes takes place when we breathe in? A diaphragm contracts  volume of thorax increases  pressure in lungs decreases B diaphragm contracts  volume of thorax increases  pressure in lungs increases C diaphragm relaxes  volume of thorax increases  pressure in lungs decreases D diaphragm relaxes  volume of thorax increases  pressure in lungs increases",
+      "parseStatus": "ok",
+      "stem": "Which sequence of changes takes place when we breathe in?",
+      "options": {
+        "A": "diaphragm contracts  volume of thorax increases  pressure in lungs decreases",
+        "B": "diaphragm contracts  volume of thorax increases  pressure in lungs increases",
+        "C": "diaphragm relaxes  volume of thorax increases  pressure in lungs decreases",
+        "D": "diaphragm relaxes  volume of thorax increases  pressure in lungs increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q23.png",
+      "rawText": "The list shows some processes that take place in a human body. 1 production of new red blood cells 2 transmission of nerve impulses from the eyes to the brain 3 diffusion of gases into and out of the lungs Which processes use energy released by respiration? A 1 and 2 only B 1 and 3 only C 2 and 3 only D 1, 2 and 3",
+      "parseStatus": "ok",
+      "stem": "The list shows some processes that take place in a human body. 1 production of new red blood cells 2 transmission of nerve impulses from the eyes to the brain 3 diffusion of gases into and out of the lungs Which processes use energy released by respiration?",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "2 and 3 only",
+        "D": "1, 2 and 3"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q24.png",
+      "rawText": "Which equation is aerobic respiration? A 6CO2 + 6H2O  6C6H12O6 + 6O2 B 6O2 + 6CO2  6H2O + C6H12O6 C C6H12O6 + 6O2  6CO2 + 6H2O D C6H12O6  2C2H5OH + 2CO2",
+      "parseStatus": "ok",
+      "stem": "Which equation is aerobic respiration?",
+      "options": {
+        "A": "6CO2 + 6H2O  6C6H12O6 + 6O2",
+        "B": "6O2 + 6CO2  6H2O + C6H12O6",
+        "C": "C6H12O6 + 6O2  6CO2 + 6H2O",
+        "D": "C6H12O6  2C2H5OH + 2CO2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q25.png",
+      "rawText": "Which statement about urea is correct? A Urea is formed from excess amino acids in the kidneys and excreted by the liver. B Urea is formed from excess glucose in the liver and egested by the kidneys. C Urea is formed from excess glucose in the kidneys and egested by the liver. D Urea is formed from excess amino acids in the liver and excreted by the kidneys.",
+      "parseStatus": "ok",
+      "stem": "Which statement about urea is correct?",
+      "options": {
+        "A": "Urea is formed from excess amino acids in the kidneys and excreted by the liver.",
+        "B": "Urea is formed from excess glucose in the liver and egested by the kidneys.",
+        "C": "Urea is formed from excess glucose in the kidneys and egested by the liver.",
+        "D": "Urea is formed from excess amino acids in the liver and excreted by the kidneys."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q26.png",
+      "rawText": "The diagram shows the appearance of an eye when in bright light. bright light Which row gives the correct states of the iris muscles in bright light? radial muscles circular muscles A contracted contracted B contracted relaxed C relaxed contracted D relaxed relaxed",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the appearance of an eye when in bright light. bright light Which row gives the correct states of the iris muscles in bright light? radial muscles circular muscles",
+      "options": {
+        "A": "contracted contracted",
+        "B": "contracted relaxed",
+        "C": "relaxed contracted",
+        "D": "relaxed relaxed"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q27.png",
+      "rawText": "What is the effect of adrenaline on pulse rate and blood glucose concentration? pulse rate blood glucose A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "What is the effect of adrenaline on pulse rate and blood glucose concentration? pulse rate blood glucose",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q28.png",
+      "rawText": "Which statements about auxin are correct? 1 Auxin is made in all cells in plants. 2 Auxin causes cells to elongate. 3 Auxin moves between the cells by osmosis. 4 Auxin is unequally distributed. A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements about auxin are correct? 1 Auxin is made in all cells in plants. 2 Auxin causes cells to elongate. 3 Auxin moves between the cells by osmosis. 4 Auxin is unequally distributed.",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q29.png",
+      "rawText": "Scientists carried out a survey on the effect of giving up smoking on the risk of developing lung cancer. The results are shown in the graph. 15 10 5 0 percentage cumulative risk of developing lung cancer 45 55 65 75 age, in years, of people surveyed continued smoking stopped smoking at 60 years of age stopped smoking at",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q30.png",
+      "rawText": "A zygote has ten chromosomes in its nucleus. Which row shows the number of chromosomes in the cells of this species? body cells sperm cells embryo cells A 5 5 10 B 5 10 20 C 10 5 10 D 10 10 20",
+      "parseStatus": "ok",
+      "stem": "A zygote has ten chromosomes in its nucleus. Which row shows the number of chromosomes in the cells of this species? body cells sperm cells embryo cells",
+      "options": {
+        "A": "5 5 10",
+        "B": "5 10 20",
+        "C": "10 5 10",
+        "D": "10 10 20"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q31.png",
+      "rawText": "How will the composition of a pregnant woman’s blood change as it passes through the placenta? concentration of dissolved oxygen concentration of urea A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "How will the composition of a pregnant woman’s blood change as it passes through the placenta? concentration of dissolved oxygen concentration of urea",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q32.png",
+      "rawText": "What carries a copy of the gene to the cytoplasm to make a protein? A alleles B DNA molecules C ribosomes D mRNA molecules",
+      "parseStatus": "ok",
+      "stem": "What carries a copy of the gene to the cytoplasm to make a protein?",
+      "options": {
+        "A": "alleles",
+        "B": "DNA molecules",
+        "C": "ribosomes",
+        "D": "mRNA molecules"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q33.png",
+      "rawText": "Which statement about meiosis is correct? A Daughter cells are genetically identical. B The chromosome number changes from haploid to diploid. C It is used to produce body cells. D It allows the formation of new combinations of chromosomes.",
+      "parseStatus": "ok",
+      "stem": "Which statement about meiosis is correct?",
+      "options": {
+        "A": "Daughter cells are genetically identical.",
+        "B": "The chromosome number changes from haploid to diploid.",
+        "C": "It is used to produce body cells.",
+        "D": "It allows the formation of new combinations of chromosomes."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q34.png",
+      "rawText": "Colour blindness is a characteristic that is sex-linked. Which statement about colour blindness is correct? A The gene for colour blindness is located on the Y chromosome and colour blindness is more common in males than in females. B The gene for colour blindness is located on the X chromosome and colour blindness is more common in males than in females. C The gene for colour blindness is located on the X chromosome and colour blindness is more common in females than in males. D The gene for colour blindness is located on the Y chromosome and colour blindness is more common in females than in males.",
+      "parseStatus": "ok",
+      "stem": "Colour blindness is a characteristic that is sex-linked. Which statement about colour blindness is correct?",
+      "options": {
+        "A": "The gene for colour blindness is located on the Y chromosome and colour blindness is more common in males than in females.",
+        "B": "The gene for colour blindness is located on the X chromosome and colour blindness is more common in males than in females.",
+        "C": "The gene for colour blindness is located on the X chromosome and colour blindness is more common in females than in males.",
+        "D": "The gene for colour blindness is located on the Y chromosome and colour blindness is more common in females than in males."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q35.png",
+      "rawText": "The graph shows the percentage of different blood groups in a human population. 40 30 20 10 0 percentage in the population A B AB O blood group Which type of variation is shown by human blood groups? A continuous variation caused by genetic and environmental factors B continuous variation caused by genetic factors only C discontinuous variation caused by genetic and environmental factors D discontinuous variation caused by genetic factors only",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q36.png",
+      "rawText": "New strains of the crop plant wheat can be produced by cross-breeding disease resistant plants with those that give high yields of grain. What is this an example of? A natural selection B artificial selection C genetic engineering D asexual reproduction",
+      "parseStatus": "ok",
+      "stem": "New strains of the crop plant wheat can be produced by cross-breeding disease resistant plants with those that give high yields of grain. What is this an example of?",
+      "options": {
+        "A": "natural selection",
+        "B": "artificial selection",
+        "C": "genetic engineering",
+        "D": "asexual reproduction"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q37.png",
+      "rawText": "The diagram shows the flow of energy. 1 3 Sun grass rabbit fox Which form of energy is transferred at points 1 and 3 in the diagram? 1 3 A chemical chemical B heat light C light chemical D light heat",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the flow of energy. 1 3 Sun grass rabbit fox Which form of energy is transferred at points 1 and 3 in the diagram? 1 3",
+      "options": {
+        "A": "chemical chemical",
+        "B": "heat light",
+        "C": "light chemical",
+        "D": "light heat"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q38.png",
+      "rawText": "The diagram shows the feeding relationships in a food web. grass wheat rabbit mouse fox owl grasshopper blackbird Which organism may feed as both a secondary and a tertiary consumer? A fox B owl C blackbird D rabbit",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the feeding relationships in a food web. grass wheat rabbit mouse fox owl grasshopper blackbird Which organism may feed as both a secondary and a tertiary consumer?",
+      "options": {
+        "A": "fox",
+        "B": "owl",
+        "C": "blackbird",
+        "D": "rabbit"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q39.png",
+      "rawText": "Why are bacteria useful in genetic engineering? A Their genetic code is different to other organisms. B They have cell walls. C They have plasmids. D They reproduce sexually.",
+      "parseStatus": "ok",
+      "stem": "Why are bacteria useful in genetic engineering?",
+      "options": {
+        "A": "Their genetic code is different to other organisms.",
+        "B": "They have cell walls.",
+        "C": "They have plasmids.",
+        "D": "They reproduce sexually."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_21/q40.png",
+      "rawText": "Which hormones can cause the feminisation of male fish? A adrenaline and progesterone B adrenaline and testosterone C oestrogen and progesterone D oestrogen and testosterone",
+      "parseStatus": "ok",
+      "stem": "Which hormones can cause the feminisation of male fish?",
+      "options": {
+        "A": "adrenaline and progesterone",
+        "B": "adrenaline and testosterone",
+        "C": "oestrogen and progesterone",
+        "D": "oestrogen and testosterone"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

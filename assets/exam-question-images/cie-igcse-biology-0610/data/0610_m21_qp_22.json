@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0610_m21_qp_22.pdf",
+  "markScheme": "0610_m21_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q01.png",
+      "rawText": "Woodlice are small organisms that live in damp places. In an experiment, three live woodlice are put into a glass container. The diagram shows what happens after 30 minutes. woodlice placed in hole here damp dry water gauze chemical to absorb water Which characteristic of living organisms is shown by this experiment? A growth B nutrition C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "Woodlice are small organisms that live in damp places. In an experiment, three live woodlice are put into a glass container. The diagram shows what happens after 30 minutes. woodlice placed in hole here damp dry water gauze chemical to absorb water Which characteristic of living organisms is shown by this experiment?",
+      "options": {
+        "A": "growth",
+        "B": "nutrition",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q02.png",
+      "rawText": "Which species can breed with Prunella vulgaris to produce fertile offspring? Prunella modularis Vespula vulgaris A \u0016 \u0016 key B \u0016 \u001a \u0016 = yes C \u001a \u0016 \u001a = no D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which species can breed with Prunella vulgaris to produce fertile offspring? Prunella modularis Vespula vulgaris",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016 = yes",
+        "C": "\u001a \u0016 \u001a = no",
+        "D": "\u001a \u001a"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q03.png",
+      "rawText": "What is the correct order of arthropod groups, from those with the most legs to those with the fewest legs? A arachnids  crustaceans  insects  myriapods B arachnids  insects  myriapods  crustaceans C myriapods  crustaceans  arachnids  insects D myriapods  insects  arachnids  crustaceans",
+      "parseStatus": "ok",
+      "stem": "What is the correct order of arthropod groups, from those with the most legs to those with the fewest legs?",
+      "options": {
+        "A": "arachnids  crustaceans  insects  myriapods",
+        "B": "arachnids  insects  myriapods  crustaceans",
+        "C": "myriapods  crustaceans  arachnids  insects",
+        "D": "myriapods  insects  arachnids  crustaceans"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q04.png",
+      "rawText": "The diagram shows four animal cells, as seen under a light microscope. X What will be present at X? A one cell membrane B one cell wall C two cell membranes D two cell walls",
+      "parseStatus": "ok",
+      "stem": "The diagram shows four animal cells, as seen under a light microscope. X What will be present at X?",
+      "options": {
+        "A": "one cell membrane",
+        "B": "one cell wall",
+        "C": "two cell membranes",
+        "D": "two cell walls"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q05.png",
+      "rawText": "The diagram shows a root hair cell. cytoplasm vacuole nucleus cellulose cell wall How is this cell modified for the absorption of water? A It has a cellulose cell wall. B It has a thin layer of cytoplasm. C It has a large surface area. D It has a large vacuole.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a root hair cell. cytoplasm vacuole nucleus cellulose cell wall How is this cell modified for the absorption of water?",
+      "options": {
+        "A": "It has a cellulose cell wall.",
+        "B": "It has a thin layer of cytoplasm.",
+        "C": "It has a large surface area.",
+        "D": "It has a large vacuole."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q06.png",
+      "rawText": "A student draws a diagram of a mitochondrion. The diagram has a magnification of 20 000. The diagram is 5 cm long. What is the actual size of the mitochondrion? A 0.00025 m B 0.0025 m C 0.025 m D 2.5 m",
+      "parseStatus": "ok",
+      "stem": "A student draws a diagram of a mitochondrion. The diagram has a magnification of 20 000. The diagram is 5 cm long. What is the actual size of the mitochondrion?",
+      "options": {
+        "A": "0.00025 m",
+        "B": "0.0025 m",
+        "C": "0.025 m",
+        "D": "2.5 m"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q07.png",
+      "rawText": "A jar of air was placed upside down on top of a jar containing a brown gas as shown. at start after one hour air brown gas air and brown gas Which process has taken place? A diffusion both upwards and downwards B diffusion downwards only C diffusion upwards only D diffusion and osmosis",
+      "parseStatus": "ok",
+      "stem": "A jar of air was placed upside down on top of a jar containing a brown gas as shown. at start after one hour air brown gas air and brown gas Which process has taken place?",
+      "options": {
+        "A": "diffusion both upwards and downwards",
+        "B": "diffusion downwards only",
+        "C": "diffusion upwards only",
+        "D": "diffusion and osmosis"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q08.png",
+      "rawText": "Which row describes active transport? particles move through a cell membrane energy from respiration needed from a region of to a region of A higher concentration lower concentration no B higher concentration lower concentration yes C lower concentration higher concentration no D lower concentration higher concentration yes",
+      "parseStatus": "ok",
+      "stem": "Which row describes active transport? particles move through a cell membrane energy from respiration needed from a region of to a region of",
+      "options": {
+        "A": "higher concentration lower concentration no",
+        "B": "higher concentration lower concentration yes",
+        "C": "lower concentration higher concentration no",
+        "D": "lower concentration higher concentration yes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q09.png",
+      "rawText": "The bases on one strand of a DNA molecule have the sequence CAGCT. What is the sequence of bases on the other strand? A CAGCT B GTCGA C TGATC D GCTAG",
+      "parseStatus": "ok",
+      "stem": "The bases on one strand of a DNA molecule have the sequence CAGCT. What is the sequence of bases on the other strand?",
+      "options": {
+        "A": "CAGCT",
+        "B": "GTCGA",
+        "C": "TGATC",
+        "D": "GCTAG"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q10.png",
+      "rawText": "The graph shows the effect of temperature on the rate of an enzyme-controlled reaction. Y X Z rate temperature Which statements are correct? 1 The collision frequency between substrate and enzyme increases between X and Y. 2 The shape of the active site is altered between Y and Z. 3 The enzyme is denatured irreversibly at X and Z. A 1, 2 and 3 B 1 and 2 only C 1 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of temperature on the rate of an enzyme-controlled reaction. Y X Z rate temperature Which statements are correct? 1 The collision frequency between substrate and enzyme increases between X and Y. 2 The shape of the active site is altered between Y and Z. 3 The enzyme is denatured irreversibly at X and Z.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q11.png",
+      "rawText": "Which graph represents the effect of pH on the activity of a digestive enzyme? 1 7 pH 13 activity of enzyme A 1 7 pH 13 activity of enzyme B 1 7 pH 13 activity of enzyme C 1 7 pH 13 activity of enzyme D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q12.png",
+      "rawText": "In which process is oxygen a waste product? A active transport B aerobic respiration C anaerobic respiration D photosynthesis",
+      "parseStatus": "ok",
+      "stem": "In which process is oxygen a waste product?",
+      "options": {
+        "A": "active transport",
+        "B": "aerobic respiration",
+        "C": "anaerobic respiration",
+        "D": "photosynthesis"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q13.png",
+      "rawText": "Which layer in the leaf contains interconnecting air spaces? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q14.png",
+      "rawText": "Where does egestion take place? B A C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q15.png",
+      "rawText": "The diagram shows a fat globule (P) in one part of the alimentary canal and the same fat globule (Q) as it appears in another part of the alimentary canal. P Q In which parts of the alimentary canal are P and Q found? P Q A duodenum stomach B ileum oesophagus C oesophagus ileum D rectum ileum",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a fat globule (P) in one part of the alimentary canal and the same fat globule (Q) as it appears in another part of the alimentary canal. P Q In which parts of the alimentary canal are P and Q found? P Q",
+      "options": {
+        "A": "duodenum stomach",
+        "B": "ileum oesophagus",
+        "C": "oesophagus ileum",
+        "D": "rectum ileum"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q16.png",
+      "rawText": "The diagram shows enzymes and the products of the reactions they catalyse. amylase lipase protease amino acids fatty acids glycerol simple sugars Which diagram matches the enzymes with the correct products? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q17.png",
+      "rawText": "Which statement about a function of xylem tissue is correct? A It carries glucose from the roots to the leaves. B It helps to support stems and leaves. C It is the only transport tissue in the plant. D It carries water away from the leaves.",
+      "parseStatus": "ok",
+      "stem": "Which statement about a function of xylem tissue is correct?",
+      "options": {
+        "A": "It carries glucose from the roots to the leaves.",
+        "B": "It helps to support stems and leaves.",
+        "C": "It is the only transport tissue in the plant.",
+        "D": "It carries water away from the leaves."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q18.png",
+      "rawText": "What is part of the definition of transpiration? A the loss of water vapour from plant leaves by evaporation of water at the surfaces of the mesophyll cells B the movement of molecules into the cells of the organism where they are used C the movement of particles through a cell membrane from a region of lower concentration to a region of higher concentration D the transport of mineral ions from the roots into the stem and leaves",
+      "parseStatus": "ok",
+      "stem": "What is part of the definition of transpiration?",
+      "options": {
+        "A": "the loss of water vapour from plant leaves by evaporation of water at the surfaces of the mesophyll cells",
+        "B": "the movement of molecules into the cells of the organism where they are used",
+        "C": "the movement of particles through a cell membrane from a region of lower concentration to a region of higher concentration",
+        "D": "the transport of mineral ions from the roots into the stem and leaves"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q19.png",
+      "rawText": "The diagram shows the circulation of blood in an organism. capillaries O2 CO2 heart capillaries CO2 O2 heart heart In which part of the organism is the location of the capillaries in the box? A fish body B fish gills C mammalian lungs D mammalian body",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the circulation of blood in an organism. capillaries O2 CO2 heart capillaries CO2 O2 heart heart In which part of the organism is the location of the capillaries in the box?",
+      "options": {
+        "A": "fish body",
+        "B": "fish gills",
+        "C": "mammalian lungs",
+        "D": "mammalian body"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q20.png",
+      "rawText": "The photomicrograph shows human blood. Which blood component can carry out the process of phagocytosis? A D C B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q21.png",
+      "rawText": "Which diagram shows how a vaccination can lead to long-term immunity? antigen injected A lymphocytes multiply antibodies produced memory cells produced memory cell injected B antigens multiply lymphocytes produced antibodies produced antigen injected C memory cells multiply lymphocytes produced antibodies produced antibody injected D lymphocytes multiply antigens produced memory cells produced",
+      "parseStatus": "ok",
+      "stem": "Which diagram shows how a vaccination can lead to long-term immunity? antigen injected",
+      "options": {
+        "A": "lymphocytes multiply antibodies produced memory cells produced memory cell injected",
+        "B": "antigens multiply lymphocytes produced antibodies produced antigen injected",
+        "C": "memory cells multiply lymphocytes produced antibodies produced antibody injected",
+        "D": "lymphocytes multiply antigens produced memory cells produced"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q22.png",
+      "rawText": "Air entering human lungs contains approximately 21% oxygen and 0.04% carbon dioxide. Which row shows the concentrations of these gases in air leaving the lungs? percentage of oxygen in expired air percentage of carbon dioxide in expired air A 4 21.0 B 12 4.0 C 16 4.0 D 20 0.4",
+      "parseStatus": "ok",
+      "stem": "Air entering human lungs contains approximately 21% oxygen and 0.04% carbon dioxide. Which row shows the concentrations of these gases in air leaving the lungs? percentage of oxygen in expired air percentage of carbon dioxide in expired air",
+      "options": {
+        "A": "4 21.0",
+        "B": "12 4.0",
+        "C": "16 4.0",
+        "D": "20 0.4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q23.png",
+      "rawText": "After running a fast race a student had pains in their leg muscles. The pain was caused by the build-up of a product of anaerobic respiration. Which product caused the pain? A carbon dioxide B ethanol C lactic acid D water",
+      "parseStatus": "ok",
+      "stem": "After running a fast race a student had pains in their leg muscles. The pain was caused by the build-up of a product of anaerobic respiration. Which product caused the pain?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "ethanol",
+        "C": "lactic acid",
+        "D": "water"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q24.png",
+      "rawText": "The diagram shows the production and excretion of materials from the human body. cells carbon dioxide X amino acids liver Y excess salt Z V W What are V, W, X, Y and Z in the diagram? V W X Y Z A anaerobic respiration deamination kidneys urea lungs B anaerobic respiration filtration lungs kidneys urea C aerobic respiration deamination lungs urea kidneys D aerobic respiration filtration urea lungs kidneys",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the production and excretion of materials from the human body. cells carbon dioxide X amino acids liver Y excess salt Z V W What are V, W, X, Y and Z in the diagram? V W X Y Z",
+      "options": {
+        "A": "anaerobic respiration deamination kidneys urea lungs",
+        "B": "anaerobic respiration filtration lungs kidneys urea",
+        "C": "aerobic respiration deamination lungs urea kidneys",
+        "D": "aerobic respiration filtration urea lungs kidneys"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q25.png",
+      "rawText": "What is a function of a synapse? A to allow impulses to travel in both directions B to ensure impulses travel in one direction C to release vesicles into the synaptic gap D to transport neurotransmitters by osmosis",
+      "parseStatus": "ok",
+      "stem": "What is a function of a synapse?",
+      "options": {
+        "A": "to allow impulses to travel in both directions",
+        "B": "to ensure impulses travel in one direction",
+        "C": "to release vesicles into the synaptic gap",
+        "D": "to transport neurotransmitters by osmosis"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q26.png",
+      "rawText": "Hormones and the nervous system both control our bodies. Which statement about the control provided by our hormones is correct? A fast response and long lasting B fast response and short lived C slow response and long lasting D slow response and short lived",
+      "parseStatus": "ok",
+      "stem": "Hormones and the nervous system both control our bodies. Which statement about the control provided by our hormones is correct?",
+      "options": {
+        "A": "fast response and long lasting",
+        "B": "fast response and short lived",
+        "C": "slow response and long lasting",
+        "D": "slow response and short lived"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q27.png",
+      "rawText": "Auxin is a chemical produced by plants. It controls plant growth. Which statement about auxin is correct? A Auxin affects the cells only where it is made. B Auxin is equally distributed in response to light from one direction. C Auxin elongates the cells in the shoot tip. D Auxin is made in the shoot tip.",
+      "parseStatus": "ok",
+      "stem": "Auxin is a chemical produced by plants. It controls plant growth. Which statement about auxin is correct?",
+      "options": {
+        "A": "Auxin affects the cells only where it is made.",
+        "B": "Auxin is equally distributed in response to light from one direction.",
+        "C": "Auxin elongates the cells in the shoot tip.",
+        "D": "Auxin is made in the shoot tip."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q28.png",
+      "rawText": "How do some antibiotics kill bacteria? A They damage the cell wall. B They damage the endoplasmic reticulum. C They damage the nucleus. D They damage the protein coat.",
+      "parseStatus": "ok",
+      "stem": "How do some antibiotics kill bacteria?",
+      "options": {
+        "A": "They damage the cell wall.",
+        "B": "They damage the endoplasmic reticulum.",
+        "C": "They damage the nucleus.",
+        "D": "They damage the protein coat."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q29.png",
+      "rawText": "Some statements about asexual reproduction are listed. 1 Offspring are genetically identical. 2 Offspring are genetically different. 3 Only one parent is required. 4 Two parents are required. Which statements are correct? A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Some statements about asexual reproduction are listed. 1 Offspring are genetically identical. 2 Offspring are genetically different. 3 Only one parent is required. 4 Two parents are required. Which statements are correct?",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q30.png",
+      "rawText": "Which types of contact between humans can spread HIV? 1 blood transfusions 2 sexual intercourse 3 saliva A 1 and 2 only B 1 and 3 only C 2 and 3 only D 1, 2 and 3",
+      "parseStatus": "ok",
+      "stem": "Which types of contact between humans can spread HIV? 1 blood transfusions 2 sexual intercourse 3 saliva",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "2 and 3 only",
+        "D": "1, 2 and 3"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q31.png",
+      "rawText": "Which method of birth control works by preventing an egg from being released? A condom B contraceptive pill C monitoring body temperature D vasectomy",
+      "parseStatus": "ok",
+      "stem": "Which method of birth control works by preventing an egg from being released?",
+      "options": {
+        "A": "condom",
+        "B": "contraceptive pill",
+        "C": "monitoring body temperature",
+        "D": "vasectomy"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q32.png",
+      "rawText": "What is defined as ‘a thread-like structure of DNA, carrying genetic information in the form of genes’? A allele B chromosome C protein D zygote",
+      "parseStatus": "ok",
+      "stem": "What is defined as ‘a thread-like structure of DNA, carrying genetic information in the form of genes’?",
+      "options": {
+        "A": "allele",
+        "B": "chromosome",
+        "C": "protein",
+        "D": "zygote"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q33.png",
+      "rawText": "The statements describe steps in protein synthesis. 1 Copies of the gene are carried to the cytoplasm as mRNA molecules. 2 Each ribosome assembles amino acids into a protein molecule. 3 The gene coding for a protein is copied in the nucleus. 4 The mRNA molecules pass through ribosomes. Which sequence of steps is correct? A 1  2  4  3 B 1  3  2  4 C 3  1  4  2 D 3  4  2  1",
+      "parseStatus": "ok",
+      "stem": "The statements describe steps in protein synthesis. 1 Copies of the gene are carried to the cytoplasm as mRNA molecules. 2 Each ribosome assembles amino acids into a protein molecule. 3 The gene coding for a protein is copied in the nucleus. 4 The mRNA molecules pass through ribosomes. Which sequence of steps is correct?",
+      "options": {
+        "A": "1  2  4  3",
+        "B": "1  3  2  4",
+        "C": "3  1  4  2",
+        "D": "3  4  2  1"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q34.png",
+      "rawText": "A sunflower has 17 chromosomes in each pollen nucleus. These nuclei are produced by the process of ……1…… in the anthers. They are genetically ……2…… all the pollen nuclei produced by those anthers. After fertilisation the resulting zygote will have ……3…… chromosomes. Which row correctly completes gaps 1, 2 and 3? 1 2 3 A meiosis identical to 34 B meiosis different from 34 C mitosis identical to 17 D mitosis different from 34",
+      "parseStatus": "ok",
+      "stem": "A sunflower has 17 chromosomes in each pollen nucleus. These nuclei are produced by the process of ……1…… in the anthers. They are genetically ……2…… all the pollen nuclei produced by those anthers. After fertilisation the resulting zygote will have ……3…… chromosomes. Which row correctly completes gaps 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "meiosis identical to 34",
+        "B": "meiosis different from 34",
+        "C": "mitosis identical to 17",
+        "D": "mitosis different from 34"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q35.png",
+      "rawText": "A man heterozygous for the sickle cell anaemia allele, HbSHbA, has children with a woman who is homozygous for the normal haemoglobin allele, HbAHbA. What is the probability that the first child will be resistant to malaria? A 0.125 B 0.25 C 0.5 D 0.75",
+      "parseStatus": "ok",
+      "stem": "A man heterozygous for the sickle cell anaemia allele, HbSHbA, has children with a woman who is homozygous for the normal haemoglobin allele, HbAHbA. What is the probability that the first child will be resistant to malaria?",
+      "options": {
+        "A": "0.125",
+        "B": "0.25",
+        "C": "0.5",
+        "D": "0.75"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q36.png",
+      "rawText": "Which leaf feature is an adaptation of xerophytes to their environment? A hairs surrounding stomata B large internal hollow spaces C large numbers of stomata D thin cuticle on both surfaces",
+      "parseStatus": "ok",
+      "stem": "Which leaf feature is an adaptation of xerophytes to their environment?",
+      "options": {
+        "A": "hairs surrounding stomata",
+        "B": "large internal hollow spaces",
+        "C": "large numbers of stomata",
+        "D": "thin cuticle on both surfaces"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q37.png",
+      "rawText": "The graph shows the change in population of an organism over time in an ecosystem. X Y Z time population Which row correctly identifies each phase of the population graph? X Y Z A lag exponential (log) stationary B lag stationary death C exponential (log) death stationary D exponential (log) stationary death",
+      "parseStatus": "ok",
+      "stem": "The graph shows the change in population of an organism over time in an ecosystem. X Y Z time population Which row correctly identifies each phase of the population graph? X Y Z",
+      "options": {
+        "A": "lag exponential (log) stationary",
+        "B": "lag stationary death",
+        "C": "exponential (log) death stationary",
+        "D": "exponential (log) stationary death"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q38.png",
+      "rawText": "The diagram shows the structure of a bacterium. X The presence of structure X is one reason why bacteria are used in genetic engineering. What is structure X? A chloroplast B mitochondrion C nucleus D plasmid",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the structure of a bacterium. X The presence of structure X is one reason why bacteria are used in genetic engineering. What is structure X?",
+      "options": {
+        "A": "chloroplast",
+        "B": "mitochondrion",
+        "C": "nucleus",
+        "D": "plasmid"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q39.png",
+      "rawText": "When nitrates enter a lake they cause rapid growth of algae on the surface of the water. This causes the following changes in the lake: 1 The concentration of dissolved oxygen in the water decreases. 2 Fish and other aquatic animals die. 3 Aerobic respiration in decomposers increases. 4 Producers die and decomposition increases. In which order do these changes occur? A 1  2  4  3 B 3  1  2  4 C 4  2  3  1 D 4  3  1  2",
+      "parseStatus": "ok",
+      "stem": "When nitrates enter a lake they cause rapid growth of algae on the surface of the water. This causes the following changes in the lake: 1 The concentration of dissolved oxygen in the water decreases. 2 Fish and other aquatic animals die. 3 Aerobic respiration in decomposers increases. 4 Producers die and decomposition increases. In which order do these changes occur?",
+      "options": {
+        "A": "1  2  4  3",
+        "B": "3  1  2  4",
+        "C": "4  2  3  1",
+        "D": "4  3  1  2"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m21_qp_22/q40.png",
+      "rawText": "The action of which type of bacteria would cause soil to be lacking in nitrates? A aerobic B denitrifying C nitrifying D nitrogen fixing",
+      "parseStatus": "ok",
+      "stem": "The action of which type of bacteria would cause soil to be lacking in nitrates?",
+      "options": {
+        "A": "aerobic",
+        "B": "denitrifying",
+        "C": "nitrifying",
+        "D": "nitrogen fixing"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

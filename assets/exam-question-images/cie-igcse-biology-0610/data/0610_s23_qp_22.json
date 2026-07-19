@@ -1,0 +1,643 @@
+{
+  "questionPaper": "0610_s23_qp_22.pdf",
+  "markScheme": "0610_s23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q01.png",
+      "rawText": "Which process occurs both in plants and in animals? A excretion B phagocytosis C photosynthesis D transpiration",
+      "parseStatus": "ok",
+      "stem": "Which process occurs both in plants and in animals?",
+      "options": {
+        "A": "excretion",
+        "B": "phagocytosis",
+        "C": "photosynthesis",
+        "D": "transpiration"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q02.png",
+      "rawText": "Some statements about species are given. 1 Members of a species all look identical. 2 Members of a species belong to the same genus.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q03.png",
+      "rawText": "Which structures are found in the cells of all living organisms? 1 cell membrane 2 chloroplast 3 cytoplasm A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which structures are found in the cells of all living organisms? 1 cell membrane 2 chloroplast 3 cytoplasm",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q04.png",
+      "rawText": "In the diagram of the palisade cell, the distance between X and Y is 20 mm. The actual width of the cell between X and Y is 40 µm. X Y What is the magnification of the diagram? A ×200 B ×500 C ×2500 D ×5000",
+      "parseStatus": "ok",
+      "stem": "In the diagram of the palisade cell, the distance between X and Y is 20 mm. The actual width of the cell between X and Y is 40 µm. X Y What is the magnification of the diagram?",
+      "options": {
+        "A": "×200",
+        "B": "×500",
+        "C": "×2500",
+        "D": "×5000"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q05.png",
+      "rawText": "The diagram shows a root hair cell. When does water enter the cell by osmosis? A when the concentration of solutes outside the cell is greater than inside the cell B when the concentration of solutes inside and outside the cell are equal C when the water potential inside the cell is higher than outside the cell D when the water potential outside the cell is higher than inside the cell",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a root hair cell. When does water enter the cell by osmosis?",
+      "options": {
+        "A": "when the concentration of solutes outside the cell is greater than inside the cell",
+        "B": "when the concentration of solutes inside and outside the cell are equal",
+        "C": "when the water potential inside the cell is higher than outside the cell",
+        "D": "when the water potential outside the cell is higher than inside the cell"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q06.png",
+      "rawText": "Which row shows the changes that occur during the germination of a seed? respiration rate amount of energy required how ions are absorbed A decreased decreased active transport B decreased increased diffusion C increased decreased diffusion D increased increased active transport",
+      "parseStatus": "ok",
+      "stem": "Which row shows the changes that occur during the germination of a seed? respiration rate amount of energy required how ions are absorbed",
+      "options": {
+        "A": "decreased decreased active transport",
+        "B": "decreased increased diffusion",
+        "C": "increased decreased diffusion",
+        "D": "increased increased active transport"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q07.png",
+      "rawText": "The diagram shows the human alimentary canal. In which structure is most glucose absorbed into the blood? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q08.png",
+      "rawText": "DNA contains pairs of bases. Which pair shows a correct combination of bases? A A and C B C and G C G and A D T and G",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q09.png",
+      "rawText": "In which region of the alimentary canal is maltose digested? A colon B rectum C small intestine D stomach",
+      "parseStatus": "ok",
+      "stem": "In which region of the alimentary canal is maltose digested?",
+      "options": {
+        "A": "colon",
+        "B": "rectum",
+        "C": "small intestine",
+        "D": "stomach"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q10.png",
+      "rawText": "The graphs show the effect of temperature on enzyme activity. This enzyme has an optimum temperature of 30 °C. Which graph shows the effect of temperature on the activity of this enzyme? 0 10 20 30 40 50 60 temperature / °C enzyme activity 0 10 20 30 40 50 60 temperature / °C A B enzyme activity 0 10 20 30 40 50 60 temperature / °C enzyme activity 0 10 20 30 40 50 60 temperature / °C C D enzyme activity",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q11.png",
+      "rawText": "The diagram shows a leaf on a plant used in a photosynthesis experiment. At the start of the experiment, there is no starch in the leaf. A piece of black paper is attached to the upper surface of the leaf. The plant is placed in bright light for",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q12.png",
+      "rawText": "The graph shows the effect of temperature on the rate of photosynthesis. rate of photosynthesis 0 5 10 15 20 25 30 35 40 temperature / °C Which statement explains the change in rate of photosynthesis between 15 °C and 20 °C? A Chlorophyll is able to transfer more energy in chemicals to energy in light. B Enzymes involved in photosynthesis have denatured. C Kinetic energy of molecules is increasing, resulting in more effective collisions. D Light intensity and not temperature is limiting the rate of photosynthesis.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of temperature on the rate of photosynthesis. rate of photosynthesis 0 5 10 15 20 25 30 35 40 temperature / °C Which statement explains the change in rate of photosynthesis between 15 °C and 20 °C?",
+      "options": {
+        "A": "Chlorophyll is able to transfer more energy in chemicals to energy in light.",
+        "B": "Enzymes involved in photosynthesis have denatured.",
+        "C": "Kinetic energy of molecules is increasing, resulting in more effective collisions.",
+        "D": "Light intensity and not temperature is limiting the rate of photosynthesis."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q13.png",
+      "rawText": "The lack of which component of a balanced diet will lead to the development of scurvy? A calcium B iron C vitamin C D vitamin D",
+      "parseStatus": "ok",
+      "stem": "The lack of which component of a balanced diet will lead to the development of scurvy?",
+      "options": {
+        "A": "calcium",
+        "B": "iron",
+        "C": "vitamin C",
+        "D": "vitamin D"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q14.png",
+      "rawText": "Which structure is the duodenum? A D B C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q15.png",
+      "rawText": "Humidity and wind speed are two factors that affect the rate of transpiration. How do these two factors affect the concentration gradient of water molecules between the inside of the leaf and the outside atmosphere? high humidity high wind speed A lowers concentration gradient raises concentration gradient B raises concentration gradient raises concentration gradient C lowers concentration gradient lowers concentration gradient D raises concentration gradient lowers concentration gradient",
+      "parseStatus": "ok",
+      "stem": "Humidity and wind speed are two factors that affect the rate of transpiration. How do these two factors affect the concentration gradient of water molecules between the inside of the leaf and the outside atmosphere? high humidity high wind speed",
+      "options": {
+        "A": "lowers concentration gradient raises concentration gradient",
+        "B": "raises concentration gradient raises concentration gradient",
+        "C": "lowers concentration gradient lowers concentration gradient",
+        "D": "raises concentration gradient lowers concentration gradient"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q16.png",
+      "rawText": "During an investigation into the movement of substances in a plant, a ring of tissue containing the outer part of the transport tissue is removed, as shown. epidermis and outer part of transport tissue time swelling Which statement explains why a swelling develops in the stem? A Phloem has been removed causing a build up of sucrose and amino acids. B Phloem has been removed causing a build up of water and mineral ions. C Xylem has been removed causing a build up of sucrose and amino acids. D Xylem has been removed causing a build up of water and mineral ions.",
+      "parseStatus": "ok",
+      "stem": "During an investigation into the movement of substances in a plant, a ring of tissue containing the outer part of the transport tissue is removed, as shown. epidermis and outer part of transport tissue time swelling Which statement explains why a swelling develops in the stem?",
+      "options": {
+        "A": "Phloem has been removed causing a build up of sucrose and amino acids.",
+        "B": "Phloem has been removed causing a build up of water and mineral ions.",
+        "C": "Xylem has been removed causing a build up of sucrose and amino acids.",
+        "D": "Xylem has been removed causing a build up of water and mineral ions."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q17.png",
+      "rawText": "The diagram shows the human heart. Which label shows the left ventricle? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q18.png",
+      "rawText": "Which row shows the features of an artery or a vein? blood vessel diameter of lumen thickness of wall A artery large thick B artery small thin C vein large thin D vein small thick",
+      "parseStatus": "ok",
+      "stem": "Which row shows the features of an artery or a vein? blood vessel diameter of lumen thickness of wall",
+      "options": {
+        "A": "artery large thick",
+        "B": "artery small thin",
+        "C": "vein large thin",
+        "D": "vein small thick"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q19.png",
+      "rawText": "Cholera bacteria in the gut cause secretion of chloride ions which leads to diarrhoea. Which diagram shows the correct movement of chloride ions (Cl –) and water (H2O)? gut small intestine epithelial cell A gut small intestine epithelial cell B gut small intestine epithelial cell C gut small intestine epithelial cell D Cl – H2O Cl – H2O Cl – H2O Cl – H2O",
+      "parseStatus": "ok",
+      "stem": "Cholera bacteria in the gut cause secretion of chloride ions which leads to diarrhoea. Which diagram shows the correct movement of chloride ions (Cl –) and water (H2O)? gut small intestine epithelial cell",
+      "options": {
+        "A": "gut small intestine epithelial cell",
+        "B": "gut small intestine epithelial cell",
+        "C": "gut small intestine epithelial cell",
+        "D": "Cl – H2O Cl – H2O Cl – H2O Cl – H2O"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q20.png",
+      "rawText": "Different stages in the process of expiration are listed. 1 Rib cage moves downwards and inwards. 2 Volume of thorax decreases and pressure in lungs increases. 3 Air is pushed out of lungs. 4 Diaphragm and external intercostal muscles relax. What is the correct order of these stages? A 1 → 2 → 3 → 4 B 1 → 4 → 2 → 3 C 4 → 3 → 2 → 1 D 4 → 1 → 2 → 3",
+      "parseStatus": "ok",
+      "stem": "Different stages in the process of expiration are listed. 1 Rib cage moves downwards and inwards. 2 Volume of thorax decreases and pressure in lungs increases. 3 Air is pushed out of lungs. 4 Diaphragm and external intercostal muscles relax. What is the correct order of these stages?",
+      "options": {
+        "A": "1 → 2 → 3 → 4",
+        "B": "1 → 4 → 2 → 3",
+        "C": "4 → 3 → 2 → 1",
+        "D": "4 → 1 → 2 → 3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q21.png",
+      "rawText": "Which row shows aerobic respiration? substrates products A 6CO2 + 6H2O C6H12O6 + 6O2 B C6H12O6 + 6CO2 6H2O + 6O2 C 6CO2 + 6O2 C6H12O6 + 6H2O D C6H12O6 + 6O2 6CO2 + 6H2O",
+      "parseStatus": "ok",
+      "stem": "Which row shows aerobic respiration? substrates products",
+      "options": {
+        "A": "6CO2 + 6H2O C6H12O6 + 6O2",
+        "B": "C6H12O6 + 6CO2 6H2O + 6O2",
+        "C": "6CO2 + 6O2 C6H12O6 + 6H2O",
+        "D": "C6H12O6 + 6O2 6CO2 + 6H2O"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q22.png",
+      "rawText": "In which organ is lactic acid respired aerobically to remove an oxygen debt? A brain B heart C liver D lungs",
+      "parseStatus": "ok",
+      "stem": "In which organ is lactic acid respired aerobically to remove an oxygen debt?",
+      "options": {
+        "A": "brain",
+        "B": "heart",
+        "C": "liver",
+        "D": "lungs"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q23.png",
+      "rawText": "The diagram shows a cross-section of a kidney. R Q P What are the correct names for structures P, Q and R? P Q R A urethra cortex medulla B ureter medulla cortex C urethra medulla cortex D ureter cortex medulla",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cross-section of a kidney. R Q P What are the correct names for structures P, Q and R? P Q R",
+      "options": {
+        "A": "urethra cortex medulla",
+        "B": "ureter medulla cortex",
+        "C": "urethra medulla cortex",
+        "D": "ureter cortex medulla"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q24.png",
+      "rawText": "Which statement describes what happens during the transmission of an electrical impulse along a reflex arc? A The relay neurone has receptor proteins which bind with neurotransmitter molecules. B The relay neurone has vesicles which bind with neurotransmitter molecules. C The sensory neurone causes receptor proteins to release neurotransmitter molecules. D The sensory neurone impulses cause vesicles to release receptor protein molecules.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes what happens during the transmission of an electrical impulse along a reflex arc?",
+      "options": {
+        "A": "The relay neurone has receptor proteins which bind with neurotransmitter molecules.",
+        "B": "The relay neurone has vesicles which bind with neurotransmitter molecules.",
+        "C": "The sensory neurone causes receptor proteins to release neurotransmitter molecules.",
+        "D": "The sensory neurone impulses cause vesicles to release receptor protein molecules."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q25.png",
+      "rawText": "During the pupil reflex in bright light, what describes the actions of the muscles in the iris? A The circular muscles of the iris contract and the radial muscles relax. B The circular muscles of the iris contract and the radial muscles contract. C The circular muscles of the iris relax and the radial muscles contract. D The circular muscles of the iris relax and the radial muscles relax.",
+      "parseStatus": "ok",
+      "stem": "During the pupil reflex in bright light, what describes the actions of the muscles in the iris?",
+      "options": {
+        "A": "The circular muscles of the iris contract and the radial muscles relax.",
+        "B": "The circular muscles of the iris contract and the radial muscles contract.",
+        "C": "The circular muscles of the iris relax and the radial muscles contract.",
+        "D": "The circular muscles of the iris relax and the radial muscles relax."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q26.png",
+      "rawText": "Which distribution of auxin will cause the shoot tip to grow towards the light? A D C B key direction of light auxin",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q27.png",
+      "rawText": "What is an advantage of asexual reproduction in a wild population? A The population has reduced ability to respond to changes in the environment. B The population can increase rapidly when conditions are suitable. C The population shows a lot of variation. D The whole population may be killed by a disease pathogen.",
+      "parseStatus": "ok",
+      "stem": "What is an advantage of asexual reproduction in a wild population?",
+      "options": {
+        "A": "The population has reduced ability to respond to changes in the environment.",
+        "B": "The population can increase rapidly when conditions are suitable.",
+        "C": "The population shows a lot of variation.",
+        "D": "The whole population may be killed by a disease pathogen."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q28.png",
+      "rawText": "The diagram shows the structure of part of a flower. anther stigma The arrow represents the transfer of pollen. Which statement about the arrow is correct? A The arrow represents cross-pollination in an insect-pollinated flower. B The arrow represents cross-pollination in a wind-pollinated flower. C The arrow represents self-pollination in an insect-pollinated flower. D The arrow represents self-pollination in a wind-pollinated flower.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the structure of part of a flower. anther stigma The arrow represents the transfer of pollen. Which statement about the arrow is correct?",
+      "options": {
+        "A": "The arrow represents cross-pollination in an insect-pollinated flower.",
+        "B": "The arrow represents cross-pollination in a wind-pollinated flower.",
+        "C": "The arrow represents self-pollination in an insect-pollinated flower.",
+        "D": "The arrow represents self-pollination in a wind-pollinated flower."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q29.png",
+      "rawText": "In a sperm cell, which structure contains enzymes that can digest the jelly coat of an egg cell? A acrosome B flagellum C mitochondria D nucleus",
+      "parseStatus": "ok",
+      "stem": "In a sperm cell, which structure contains enzymes that can digest the jelly coat of an egg cell?",
+      "options": {
+        "A": "acrosome",
+        "B": "flagellum",
+        "C": "mitochondria",
+        "D": "nucleus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q30.png",
+      "rawText": "The following are involved in protein synthesis. 1 amino acids assembled in order 2 mRNA moves to the cytoplasm 3 mRNA passing through a ribosome 4 DNA in the nucleus In which order do they become involved when proteins are made? A 1 → 3 → 2 → 4 B 3 → 2 → 1 → 4 C 4 → 2 → 3 → 1 D 4 → 3 → 2 → 1",
+      "parseStatus": "ok",
+      "stem": "The following are involved in protein synthesis. 1 amino acids assembled in order 2 mRNA moves to the cytoplasm 3 mRNA passing through a ribosome 4 DNA in the nucleus In which order do they become involved when proteins are made?",
+      "options": {
+        "A": "1 → 3 → 2 → 4",
+        "B": "3 → 2 → 1 → 4",
+        "C": "4 → 2 → 3 → 1",
+        "D": "4 → 3 → 2 → 1"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q31.png",
+      "rawText": "A man of genotype IAIo and woman of genotype IBIo have a child. What is the chance that the child will have the same blood group as one of its parents? A zero B 1 in 4 C 1 in 2 D 3 in 4",
+      "parseStatus": "ok",
+      "stem": "A man of genotype IAIo and woman of genotype IBIo have a child. What is the chance that the child will have the same blood group as one of its parents?",
+      "options": {
+        "A": "zero",
+        "B": "1 in 4",
+        "C": "1 in 2",
+        "D": "3 in 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q32.png",
+      "rawText": "A man who has red-green colour blindness has a child with a woman who does not have red-green colour blindness. The child has red-green colour blindness. The man and woman decide to have another child. What is the percentage probability that their next child will have red-green colour blindness? A 0% B 25% C 50% D 100%",
+      "parseStatus": "ok",
+      "stem": "A man who has red-green colour blindness has a child with a woman who does not have red-green colour blindness. The child has red-green colour blindness. The man and woman decide to have another child. What is the percentage probability that their next child will have red-green colour blindness?",
+      "options": {
+        "A": "0%",
+        "B": "25%",
+        "C": "50%",
+        "D": "100%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q33.png",
+      "rawText": "Which types of variation can be inherited? variation caused by genes variation caused by the environment A \u0016 \u0016 key B \u0016 \u001a \u0016= yes C \u001a \u0016 \u001a= no D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which types of variation can be inherited? variation caused by genes variation caused by the environment",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u001a= no",
+        "D": "\u001a \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q34.png",
+      "rawText": "Which feature is a leaf adaptation for living in a hot, dry desert? A hairy B large surface area C many stomata D thin waxy cuticle",
+      "parseStatus": "ok",
+      "stem": "Which feature is a leaf adaptation for living in a hot, dry desert?",
+      "options": {
+        "A": "hairy",
+        "B": "large surface area",
+        "C": "many stomata",
+        "D": "thin waxy cuticle"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q35.png",
+      "rawText": "Which term is used to describe an organism that makes its own organic nutrients? A carnivore B decomposer C herbivore D producer",
+      "parseStatus": "ok",
+      "stem": "Which term is used to describe an organism that makes its own organic nutrients?",
+      "options": {
+        "A": "carnivore",
+        "B": "decomposer",
+        "C": "herbivore",
+        "D": "producer"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q36.png",
+      "rawText": "The diagram shows two pyramids based on food chains in which the producer is a large tree. P Q What do the two pyramids represent? P Q A biomass biomass B biomass numbers C numbers biomass D numbers numbers",
+      "parseStatus": "ok",
+      "stem": "The diagram shows two pyramids based on food chains in which the producer is a large tree. P Q What do the two pyramids represent? P Q",
+      "options": {
+        "A": "biomass biomass",
+        "B": "biomass numbers",
+        "C": "numbers biomass",
+        "D": "numbers numbers"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q37.png",
+      "rawText": "What is a negative impact on the environment caused by deforestation? A decrease in land for livestock production B decreased levels of carbon dioxide in the air C increase in flooding D increased levels of soil",
+      "parseStatus": "ok",
+      "stem": "What is a negative impact on the environment caused by deforestation?",
+      "options": {
+        "A": "decrease in land for livestock production",
+        "B": "decreased levels of carbon dioxide in the air",
+        "C": "increase in flooding",
+        "D": "increased levels of soil"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q38.png",
+      "rawText": "The diagram shows the positions of four farms and the concentrations of nitrate at different points in a river. Which farm is likely to have been using too much fertiliser on its land? farm A farm B farm D farm C 60 40 20 0 nitrate concentration / ppm direction of flow direction of flow",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q39.png",
+      "rawText": "The diagram shows a bacterial cell containing a plasmid. plasmid What is inserted into the plasmid if this cell is to be used for the production of insulin? A a length of DNA from a human B a length of DNA from another bacterium C a molecule of insulin D an enzyme",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a bacterial cell containing a plasmid. plasmid What is inserted into the plasmid if this cell is to be used for the production of insulin?",
+      "options": {
+        "A": "a length of DNA from a human",
+        "B": "a length of DNA from another bacterium",
+        "C": "a molecule of insulin",
+        "D": "an enzyme"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_22/q40.png",
+      "rawText": "Yeast carries out anaerobic respiration, making carbon dioxide and ethanol as end-products. Which end-products can be used to make biofuel and bread? biofuel bread A carbon dioxide carbon dioxide B carbon dioxide ethanol C ethanol carbon dioxide D ethanol ethanol",
+      "parseStatus": "ok",
+      "stem": "Yeast carries out anaerobic respiration, making carbon dioxide and ethanol as end-products. Which end-products can be used to make biofuel and bread? biofuel bread",
+      "options": {
+        "A": "carbon dioxide carbon dioxide",
+        "B": "carbon dioxide ethanol",
+        "C": "ethanol carbon dioxide",
+        "D": "ethanol ethanol"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

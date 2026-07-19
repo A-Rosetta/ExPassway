@@ -1,0 +1,673 @@
+{
+  "questionPaper": "0610_w19_qp_23.pdf",
+  "markScheme": "0610_w19_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q01.png",
+      "rawText": "The diagrams show a plant at the start of an experiment, and the same plant two weeks later. start of experiment after two weeks light from one side Which characteristics of living organisms are demonstrated by this experiment? A excretion, growth, movement B excretion, movement, reproduction C growth, movement, sensitivity D sensitivity, growth, respiration",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a plant at the start of an experiment, and the same plant two weeks later. start of experiment after two weeks light from one side Which characteristics of living organisms are demonstrated by this experiment?",
+      "options": {
+        "A": "excretion, growth, movement",
+        "B": "excretion, movement, reproduction",
+        "C": "growth, movement, sensitivity",
+        "D": "sensitivity, growth, respiration"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q02.png",
+      "rawText": "Donkeys and zebras are different species. They can breed to produce an animal called a zedonk. Zedonks are not fertile. Which statement is correct? A Zedonks and donkeys are the same species. B Zedonks and zebras are the same species. C Zedonks are a species. D Zedonks are not a species.",
+      "parseStatus": "ok",
+      "stem": "Donkeys and zebras are different species. They can breed to produce an animal called a zedonk. Zedonks are not fertile. Which statement is correct?",
+      "options": {
+        "A": "Zedonks and donkeys are the same species.",
+        "B": "Zedonks and zebras are the same species.",
+        "C": "Zedonks are a species.",
+        "D": "Zedonks are not a species."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q03.png",
+      "rawText": "Which feature is characteristic only of birds? A hair and wings B hard-shelled eggs and feathers C scales and soft-shelled eggs D wings and soft-shelled eggs",
+      "parseStatus": "ok",
+      "stem": "Which feature is characteristic only of birds?",
+      "options": {
+        "A": "hair and wings",
+        "B": "hard-shelled eggs and feathers",
+        "C": "scales and soft-shelled eggs",
+        "D": "wings and soft-shelled eggs"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q04.png",
+      "rawText": "Which features do animal cells share with plant cells? chloroplast cytoplasm nucleus A \u0016 \u0016 \u0016 key B \u0016 \u001a \u0016 \u0016 = yes C \u001a \u0016 \u0016 \u001a = no D \u001a \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which features do animal cells share with plant cells? chloroplast cytoplasm nucleus",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016 \u0016 = yes",
+        "C": "\u001a \u0016 \u0016 \u001a = no",
+        "D": "\u001a \u001a \u001a"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q05.png",
+      "rawText": "A bacterium is 0.5 µm long. A student makes a drawing of the bacterium. The student’s drawing is 100 mm long. What is the magnification of the student’s drawing? A ×0.005 B ×50 C ×200 D ×200 000",
+      "parseStatus": "ok",
+      "stem": "A bacterium is 0.5 µm long.",
+      "options": {
+        "A": "student makes a drawing of the bacterium. The student’s drawing is 100 mm long. What is the magnification of the student’s drawing? A ×0.005",
+        "B": "×50",
+        "C": "×200",
+        "D": "×200 000"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q06.png",
+      "rawText": "Red blood cells were placed in pure water. Movement of water across the cell membrane caused a change in their appearance. What caused this change in appearance? direction of water movement from higher to lower water potential from lower to higher water potential A into cells yes no B into cells no yes C out of cells yes no D out of cells no yes",
+      "parseStatus": "ok",
+      "stem": "Red blood cells were placed in pure water. Movement of water across the cell membrane caused a change in their appearance. What caused this change in appearance? direction of water movement from higher to lower water potential from lower to higher water potential",
+      "options": {
+        "A": "into cells yes no",
+        "B": "into cells no yes",
+        "C": "out of cells yes no",
+        "D": "out of cells no yes"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q07.png",
+      "rawText": "The diagram shows a root hair cell. cytoplasm mitochondria nucleus vacuole Why does a root hair cell contain a large number of mitochondria? A to provide energy for the absorption of water from the soil B to provide energy for the diffusion of mineral ions from the soil C to provide energy for osmosis D to provide energy for the active transport of mineral ions from the soil",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a root hair cell. cytoplasm mitochondria nucleus vacuole Why does a root hair cell contain a large number of mitochondria?",
+      "options": {
+        "A": "to provide energy for the absorption of water from the soil",
+        "B": "to provide energy for the diffusion of mineral ions from the soil",
+        "C": "to provide energy for osmosis",
+        "D": "to provide energy for the active transport of mineral ions from the soil"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q08.png",
+      "rawText": "Which identifies the chemical elements found in proteins? carbon hydrogen oxygen nitrogen A \u0016 \u0016 \u0016 \u0016 key B \u0016 \u0016 \u0016 \u001a \u0016= present C \u0016 \u001a \u0016 \u001a \u001a= absent D \u001a \u0016 \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which identifies the chemical elements found in proteins? carbon hydrogen oxygen nitrogen",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u0016 \u0016 \u001a \u0016= present",
+        "C": "\u0016 \u001a \u0016 \u001a \u001a= absent",
+        "D": "\u001a \u0016 \u001a \u0016"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q09.png",
+      "rawText": "Enzyme X digests protein in the stomach. Four test-tubes were set up, each contained the same amounts of protein and enzyme X. The test-tubes are kept at different levels of pH and temperature, as shown in the table. In which test-tube will protein digestion be quickest? pH temperature / °C A 2 20 B 2 35 C 7 20 D 7 35",
+      "parseStatus": "ok",
+      "stem": "Enzyme X digests protein in the stomach. Four test-tubes were set up, each contained the same amounts of protein and enzyme X. The test-tubes are kept at different levels of pH and temperature, as shown in the table. In which test-tube will protein digestion be quickest? pH temperature / °C",
+      "options": {
+        "A": "2 20",
+        "B": "2 35",
+        "C": "7 20",
+        "D": "7 35"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q10.png",
+      "rawText": "Which substance is used up in photosynthesis? A chlorophyll B light C oxygen D water",
+      "parseStatus": "ok",
+      "stem": "Which substance is used up in photosynthesis?",
+      "options": {
+        "A": "chlorophyll",
+        "B": "light",
+        "C": "oxygen",
+        "D": "water"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q11.png",
+      "rawText": "The diagram shows a leaf as seen in cross-section under the microscope. 1 2 3 What are tissues 1, 2 and 3? 1 2 3 A epidermis palisade mesophyll spongy mesophyll B epidermis spongy mesophyll palisade mesophyll C palisade mesophyll epidermis spongy mesophyll D spongy mesophyll palisade mesophyll epidermis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a leaf as seen in cross-section under the microscope. 1 2 3 What are tissues 1, 2 and 3? 1 2 3",
+      "options": {
+        "A": "epidermis palisade mesophyll spongy mesophyll",
+        "B": "epidermis spongy mesophyll palisade mesophyll",
+        "C": "palisade mesophyll epidermis spongy mesophyll",
+        "D": "spongy mesophyll palisade mesophyll epidermis"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q12.png",
+      "rawText": "The pie charts show the composition of 100 g of four different foods. Which food provides the most energy? key carbohydrate fats and oils protein water A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q13.png",
+      "rawText": "Cholera is a disease caused by a bacterium called Vibrio cholerae which produces a toxin in the infected person’s gut. What is the effect of this toxin? A It causes loss of water from the gut into the blood. B It causes loss of water from the gall bladder into the blood. C It causes water to enter the gut from the blood. D It causes water to enter the gall bladder from the blood.",
+      "parseStatus": "ok",
+      "stem": "Cholera is a disease caused by a bacterium called Vibrio cholerae which produces a toxin in the infected person’s gut. What is the effect of this toxin?",
+      "options": {
+        "A": "It causes loss of water from the gut into the blood.",
+        "B": "It causes loss of water from the gall bladder into the blood.",
+        "C": "It causes water to enter the gut from the blood.",
+        "D": "It causes water to enter the gall bladder from the blood."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q14.png",
+      "rawText": "The diagram shows an experiment kept at room temperature. tubing containing starch, protease, protein and simple sugars membrane permeable to small molecules only distilled water test-tube What is present in the water surrounding the membrane after 45 minutes? A amino acids and simple sugars B protein and amino acids C protein and simple sugars D starch and simple sugars",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment kept at room temperature. tubing containing starch, protease, protein and simple sugars membrane permeable to small molecules only distilled water test-tube What is present in the water surrounding the membrane after 45 minutes?",
+      "options": {
+        "A": "amino acids and simple sugars",
+        "B": "protein and amino acids",
+        "C": "protein and simple sugars",
+        "D": "starch and simple sugars"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q15.png",
+      "rawText": "The diagram shows a cross-section through a plant root. Q R What is found at Q and R? Q R A palisade mesophyll spongy mesophyll B phloem xylem C spongy mesophyll palisade mesophyll D xylem phloem",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cross-section through a plant root. Q R What is found at Q and R? Q R",
+      "options": {
+        "A": "palisade mesophyll spongy mesophyll",
+        "B": "phloem xylem",
+        "C": "spongy mesophyll palisade mesophyll",
+        "D": "xylem phloem"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q16.png",
+      "rawText": "Rabbits can damage trees by eating the bark and phloem. remaining stem bark leaves roots bark If the damage goes all the way around the stem, what will happen in the tree? A Sugars cannot move from the leaves to the roots causing swelling above the ring. B Sugars cannot move from the leaves to the roots causing swelling below the ring. C Water cannot move from the leaves to the roots causing swelling above the ring. D Water cannot move from the leaves to the roots causing swelling below the ring.",
+      "parseStatus": "ok",
+      "stem": "Rabbits can damage trees by eating the bark and phloem. remaining stem bark leaves roots bark If the damage goes all the way around the stem, what will happen in the tree?",
+      "options": {
+        "A": "Sugars cannot move from the leaves to the roots causing swelling above the ring.",
+        "B": "Sugars cannot move from the leaves to the roots causing swelling below the ring.",
+        "C": "Water cannot move from the leaves to the roots causing swelling above the ring.",
+        "D": "Water cannot move from the leaves to the roots causing swelling below the ring."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q17.png",
+      "rawText": "The table shows the concentration of red blood cells, white blood cells and platelets in the blood of four patients. Which patient is most likely to have a deficiency of iron in their diet and will find it difficult to form a blood clot? red blood cells / cells per mm3 white blood cells / cells per mm3 platelets / cells per mm3 A 2 525 000 643 296 000 B 2 275 000 756 27 500 C 7 250 000 650 275 000 D 7 325 000 405 25 000",
+      "parseStatus": "ok",
+      "stem": "The table shows the concentration of red blood cells, white blood cells and platelets in the blood of four patients. Which patient is most likely to have a deficiency of iron in their diet and will find it difficult to form a blood clot? red blood cells / cells per mm3 white blood cells / cells per mm3 platelets / cells per mm3",
+      "options": {
+        "A": "2 525 000 643 296 000",
+        "B": "2 275 000 756 27 500",
+        "C": "7 250 000 650 275 000",
+        "D": "7 325 000 405 25 000"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q18.png",
+      "rawText": "Which row describes the features of passive immunity? antibodies made involves memory cells effective period A no no short term B no yes short term C yes no long term D yes yes long term",
+      "parseStatus": "ok",
+      "stem": "Which row describes the features of passive immunity? antibodies made involves memory cells effective period",
+      "options": {
+        "A": "no no short term",
+        "B": "no yes short term",
+        "C": "yes no long term",
+        "D": "yes yes long term"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q19.png",
+      "rawText": "What is the sequence of structures through which a molecule of oxygen passes from the air to the blood of a person? 1 bronchiole 2 capillary 3 alveolus wall 4 larynx A 1 → 4 → 2 → 3 B 3 → 2 → 1 → 4 C 4 → 1 → 3 → 2 D 4 → 2 → 1 → 3",
+      "parseStatus": "ok",
+      "stem": "What is the sequence of structures through which a molecule of oxygen passes from the air to the blood of a person? 1 bronchiole 2 capillary 3 alveolus wall 4 larynx",
+      "options": {
+        "A": "1 → 4 → 2 → 3",
+        "B": "3 → 2 → 1 → 4",
+        "C": "4 → 1 → 3 → 2",
+        "D": "4 → 2 → 1 → 3"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q20.png",
+      "rawText": "How do green plants and mammals obtain their energy? green plants mammals A from the soil from sleeping and resting B from the air around the plant from the air they breathe C from the Sun from digested and absorbed food D from water and carbon dioxide from water and oxygen",
+      "parseStatus": "ok",
+      "stem": "How do green plants and mammals obtain their energy? green plants mammals",
+      "options": {
+        "A": "from the soil from sleeping and resting",
+        "B": "from the air around the plant from the air they breathe",
+        "C": "from the Sun from digested and absorbed food",
+        "D": "from water and carbon dioxide from water and oxygen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q21.png",
+      "rawText": "Lactic acid builds up in the muscles during vigorous exercise. During recovery, how is this lactic acid removed? A aerobic respiration of lactic acid in the liver B anaerobic respiration of lactic acid in the muscles C excretion of lactic acid by the lungs D removal of lactic acid by the alimentary canal",
+      "parseStatus": "ok",
+      "stem": "Lactic acid builds up in the muscles during vigorous exercise. During recovery, how is this lactic acid removed?",
+      "options": {
+        "A": "aerobic respiration of lactic acid in the liver",
+        "B": "anaerobic respiration of lactic acid in the muscles",
+        "C": "excretion of lactic acid by the lungs",
+        "D": "removal of lactic acid by the alimentary canal"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q22.png",
+      "rawText": "The diagram shows a synapse. neurone 1 neurone 2 Heroin is a drug that can bind with receptors in a synapse. What is the most likely effect heroin will have on the synapse? A cause the impulse to travel back along neurone 1 B prevent neurotransmitter binding with receptors on neurone 2 C stop the impulse being generated in neurone 1 D transfer the impulse to a different neurone other than neurone 2",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a synapse. neurone 1 neurone 2 Heroin is a drug that can bind with receptors in a synapse. What is the most likely effect heroin will have on the synapse?",
+      "options": {
+        "A": "cause the impulse to travel back along neurone 1",
+        "B": "prevent neurotransmitter binding with receptors on neurone 2",
+        "C": "stop the impulse being generated in neurone 1",
+        "D": "transfer the impulse to a different neurone other than neurone 2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q23.png",
+      "rawText": "The diagram shows the muscles that control the size of the pupil in an eye. radial muscles iris pupil circular muscles How do the muscles make the pupil smaller? circular muscles radial muscles A contract contract B contract relax C relax contract D relax relax",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the muscles that control the size of the pupil in an eye. radial muscles iris pupil circular muscles How do the muscles make the pupil smaller? circular muscles radial muscles",
+      "options": {
+        "A": "contract contract",
+        "B": "contract relax",
+        "C": "relax contract",
+        "D": "relax relax"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q24.png",
+      "rawText": "In a plant shoot, where is auxin made and what is its effect? where made effect A leaves promotes cell division B leaves promotes cell elongation C shoot tip promotes cell division D shoot tip promotes cell elongation",
+      "parseStatus": "ok",
+      "stem": "In a plant shoot, where is auxin made and what is its effect? where made effect",
+      "options": {
+        "A": "leaves promotes cell division",
+        "B": "leaves promotes cell elongation",
+        "C": "shoot tip promotes cell division",
+        "D": "shoot tip promotes cell elongation"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q25.png",
+      "rawText": "A patient has dye injected into the blood supply to his kidneys. The dye appears in his excretory system as shown. key dye no dye Which part is blocked? A the kidney B the ureter C the bladder D the urethra",
+      "parseStatus": "ok",
+      "stem": "A patient has dye injected into the blood supply to his kidneys. The dye appears in his excretory system as shown. key dye no dye Which part is blocked?",
+      "options": {
+        "A": "the kidney",
+        "B": "the ureter",
+        "C": "the bladder",
+        "D": "the urethra"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q26.png",
+      "rawText": "Which statement about antibiotics is correct? A Antibiotics are used to treat all transmissible diseases. B Antibiotics are used to treat diseases caused by viruses. C Antibiotic resistance can be stopped by increasing their use. D Antibiotics are used to treat diseases caused by bacteria.",
+      "parseStatus": "ok",
+      "stem": "Which statement about antibiotics is correct?",
+      "options": {
+        "A": "Antibiotics are used to treat all transmissible diseases.",
+        "B": "Antibiotics are used to treat diseases caused by viruses.",
+        "C": "Antibiotic resistance can be stopped by increasing their use.",
+        "D": "Antibiotics are used to treat diseases caused by bacteria."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q27.png",
+      "rawText": "Which substance in tobacco smoke directly reduces the oxygenation of blood? A carbon dioxide B carbon monoxide C nicotine D tar",
+      "parseStatus": "ok",
+      "stem": "Which substance in tobacco smoke directly reduces the oxygenation of blood?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "carbon monoxide",
+        "C": "nicotine",
+        "D": "tar"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q28.png",
+      "rawText": "The concentrations of LH and oestrogen are measured during part of a menstrual cycle. On which day does ovulation occur? day from start of menstrual cycle concentration of LH / arbitrary units concentration of oestrogen / arbitrary units A 7 10 30 B 10 12 135 C 13 120 130 D 16 20 25",
+      "parseStatus": "ok",
+      "stem": "The concentrations of LH and oestrogen are measured during part of a menstrual cycle. On which day does ovulation occur? day from start of menstrual cycle concentration of LH / arbitrary units concentration of oestrogen / arbitrary units",
+      "options": {
+        "A": "7 10 30",
+        "B": "10 12 135",
+        "C": "13 120 130",
+        "D": "16 20 25"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q29.png",
+      "rawText": "Where are oestrogen and progesterone produced during the menstrual cycle in a woman who is not pregnant? oestrogen progesterone A adrenal gland ovary B ovary ovary C ovary placenta D placenta pancreas",
+      "parseStatus": "ok",
+      "stem": "Where are oestrogen and progesterone produced during the menstrual cycle in a woman who is not pregnant? oestrogen progesterone",
+      "options": {
+        "A": "adrenal gland ovary",
+        "B": "ovary ovary",
+        "C": "ovary placenta",
+        "D": "placenta pancreas"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q30.png",
+      "rawText": "A haploid nucleus is defined as one that contains A one chromosome. B one set of unpaired chromosomes. C two chromosomes. D two sets of chromosomes.",
+      "parseStatus": "ok",
+      "stem": "A haploid nucleus is defined as one that contains",
+      "options": {
+        "A": "one chromosome.",
+        "B": "one set of unpaired chromosomes.",
+        "C": "two chromosomes.",
+        "D": "two sets of chromosomes."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q31.png",
+      "rawText": "The diagram shows a diploid cell and alleles R and r on one pair of chromosomes. R r nucleus cytoplasm When this cell divides by mitosis, which daughter cells will be produced? chromosome number genotype A diploid heterozygous B diploid homozygous C haploid heterozygous D haploid homozygous",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a diploid cell and alleles R and r on one pair of chromosomes. R r nucleus cytoplasm When this cell divides by mitosis, which daughter cells will be produced? chromosome number genotype",
+      "options": {
+        "A": "diploid heterozygous",
+        "B": "diploid homozygous",
+        "C": "haploid heterozygous",
+        "D": "haploid homozygous"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q32.png",
+      "rawText": "Sickle-cell anaemia is caused by a mutation in the haemoglobin gene. The normal base sequence is shown in 1, and the sickle-cell base sequence is shown in 2. 1 TGA GGA CTC CTC 2 TGA GGA CAC CTC What causes the change in the DNA? A the addition of one base B the addition of two bases C the change of one base for another D the deletion of one base",
+      "parseStatus": "ok",
+      "stem": "Sickle-cell anaemia is caused by a mutation in the haemoglobin gene. The normal base sequence is shown in 1, and the sickle-cell base sequence is shown in 2. 1 TGA GGA CTC CTC 2 TGA GGA CAC CTC What causes the change in the DNA?",
+      "options": {
+        "A": "the addition of one base",
+        "B": "the addition of two bases",
+        "C": "the change of one base for another",
+        "D": "the deletion of one base"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q33.png",
+      "rawText": "The diagram shows part of a section through the leaf of a water lily. Their leaves are adapted to help them to live on the surface of the water. How is the leaf of this plant adapted to being a hydrophyte? A It does not have a cuticle. B It has a palisade layer. C It has an epidermis. D It has stomata on upper surface.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a section through the leaf of a water lily. Their leaves are adapted to help them to live on the surface of the water. How is the leaf of this plant adapted to being a hydrophyte?",
+      "options": {
+        "A": "It does not have a cuticle.",
+        "B": "It has a palisade layer.",
+        "C": "It has an epidermis.",
+        "D": "It has stomata on upper surface."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q34.png",
+      "rawText": "What could be responsible for the conversion of nitrogen in the atmosphere to nitrates in the soil? A decomposers B denitrifying bacteria C lightning D nitrifying bacteria",
+      "parseStatus": "ok",
+      "stem": "What could be responsible for the conversion of nitrogen in the atmosphere to nitrates in the soil?",
+      "options": {
+        "A": "decomposers",
+        "B": "denitrifying bacteria",
+        "C": "lightning",
+        "D": "nitrifying bacteria"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q35.png",
+      "rawText": "Which statement describes the effect of a disease which kills members of a population? A It causes an exponential (log) increase in the population size. B It decreases the rate of growth of the population. C It decreases the food supply available to the population. D It reduces the lag phase of the population.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes the effect of a disease which kills members of a population?",
+      "options": {
+        "A": "It causes an exponential (log) increase in the population size.",
+        "B": "It decreases the rate of growth of the population.",
+        "C": "It decreases the food supply available to the population.",
+        "D": "It reduces the lag phase of the population."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q36.png",
+      "rawText": "The diagram shows a pyramid of numbers in a food chain. hawks tree shrews caterpillars kapok tree What type of organism is the tree shrew? A producer B primary consumer C secondary consumer D tertiary consumer",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a pyramid of numbers in a food chain. hawks tree shrews caterpillars kapok tree What type of organism is the tree shrew?",
+      "options": {
+        "A": "producer",
+        "B": "primary consumer",
+        "C": "secondary consumer",
+        "D": "tertiary consumer"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q37.png",
+      "rawText": "The diagram shows a bacterium. Which structure is used in genetic engineering? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q38.png",
+      "rawText": "Penicillin is made in a fermenter by growing organisms. Which type of organism is used in the production of penicillin? A bacterium B fungus C protoctist D virus",
+      "parseStatus": "ok",
+      "stem": "Penicillin is made in a fermenter by growing organisms. Which type of organism is used in the production of penicillin?",
+      "options": {
+        "A": "bacterium",
+        "B": "fungus",
+        "C": "protoctist",
+        "D": "virus"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q39.png",
+      "rawText": "What are the possible effects of deforestation? loss of soil flooding decrease in atmospheric carbon dioxide A yes yes no B yes no yes C no yes no D no no yes",
+      "parseStatus": "ok",
+      "stem": "What are the possible effects of deforestation? loss of soil flooding decrease in atmospheric carbon dioxide",
+      "options": {
+        "A": "yes yes no",
+        "B": "yes no yes",
+        "C": "no yes no",
+        "D": "no no yes"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w19_qp_23/q40.png",
+      "rawText": "The bloodworm is an organism that is found in heavily polluted water. The diagram shows where raw sewage flows into a river. Where would there be fewest bloodworms? input of raw sewage B A C D direction of flow",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

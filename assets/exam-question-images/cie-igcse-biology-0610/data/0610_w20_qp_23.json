@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0610_w20_qp_23.pdf",
+  "markScheme": "0610_w20_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q01.png",
+      "rawText": "The diagram shows some of the processes carried out by living organisms. green plant chicken waste products waste products carbon dioxide in the atmosphere X Y Y Y X light energy Which two characteristics of living organisms are represented by arrows X and Y? A excretion and sensitivity B nutrition and excretion C respiration and growth D sensitivity and reproduction",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the processes carried out by living organisms. green plant chicken waste products waste products carbon dioxide in the atmosphere X Y Y Y X light energy Which two characteristics of living organisms are represented by arrows X and Y?",
+      "options": {
+        "A": "excretion and sensitivity",
+        "B": "nutrition and excretion",
+        "C": "respiration and growth",
+        "D": "sensitivity and reproduction"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q02.png",
+      "rawText": "What are features of the leaves of a plant that is a dicotyledon? broad leaves parallel veins A \u0016 \u0016 key B \u0016 \u001a \u0016= yes C \u001a \u0016 \u001a= no D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "What are features of the leaves of a plant that is a dicotyledon? broad leaves parallel veins",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u001a= no",
+        "D": "\u001a \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q03.png",
+      "rawText": "The photomicrograph shows a cell from a type of aquatic plant. P Q S R Which parts labelled on the photomicrograph indicate that this is a plant cell? A P and R B P and S C Q and R D Q and S",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows a cell from a type of aquatic plant. P Q S R Which parts labelled on the photomicrograph indicate that this is a plant cell?",
+      "options": {
+        "A": "P and R",
+        "B": "P and S",
+        "C": "Q and R",
+        "D": "Q and S"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q04.png",
+      "rawText": "The diagram shows an image of a chloroplast. The image is",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q05.png",
+      "rawText": "What are features of osmosis? diffusion is involved requires cell walls requires a partially permeable membrane A \u0016 \u001a \u0016 key B \u0016 \u001a \u001a \u0016= yes C \u001a \u0016 \u0016 \u001a= no D \u001a \u0016 \u001a",
+      "parseStatus": "ok",
+      "stem": "What are features of osmosis? diffusion is involved requires cell walls requires a partially permeable membrane",
+      "options": {
+        "A": "\u0016 \u001a \u0016 key",
+        "B": "\u0016 \u001a \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u0016 \u001a= no",
+        "D": "\u001a \u0016 \u001a"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q06.png",
+      "rawText": "The diagram shows apparatus which can be used to demonstrate osmosis. glass tube liquid level water partially permeable membrane very concentrated sucrose solution concentrated sucrose solution 1 2 After one hour, what would happen to the liquid levels in the glass tubes? liquid level in tube 1 liquid level in tube 2 A falls falls B falls rises C rises falls D rises rises",
+      "parseStatus": "ok",
+      "stem": "The diagram shows apparatus which can be used to demonstrate osmosis. glass tube liquid level water partially permeable membrane very concentrated sucrose solution concentrated sucrose solution 1 2 After one hour, what would happen to the liquid levels in the glass tubes? liquid level in tube 1 liquid level in tube 2",
+      "options": {
+        "A": "falls falls",
+        "B": "falls rises",
+        "C": "rises falls",
+        "D": "rises rises"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q07.png",
+      "rawText": "Which substances are made by linking together glucose molecules only? A cellulose, glycogen and starch B fats, cellulose and proteins C proteins, oils and glycogen D starch, fats and oils",
+      "parseStatus": "ok",
+      "stem": "Which substances are made by linking together glucose molecules only?",
+      "options": {
+        "A": "cellulose, glycogen and starch",
+        "B": "fats, cellulose and proteins",
+        "C": "proteins, oils and glycogen",
+        "D": "starch, fats and oils"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q08.png",
+      "rawText": "When bases pair up in the formation of DNA, what is one of the pairings? A G with A B G with C C G with G D G with T",
+      "parseStatus": "ok",
+      "stem": "When bases pair up in the formation of DNA, what is one of the pairings?",
+      "options": {
+        "A": "G with A",
+        "B": "G with",
+        "C": "C G with G",
+        "D": "G with T"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q09.png",
+      "rawText": "The graph shows the effect of pH on the rate of reaction of an enzyme. 3 4 5 6 7 8 9 rate of reaction pH What does the graph show? A The enzyme is destroyed at pH 9. B The enzyme works best at pH 6. C The rate of reaction halves as the pH changes from pH 5 to pH 7. D The rate of reaction is the same at pH 5 and pH 8.5.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of pH on the rate of reaction of an enzyme. 3 4 5 6 7 8 9 rate of reaction pH What does the graph show?",
+      "options": {
+        "A": "The enzyme is destroyed at pH 9.",
+        "B": "The enzyme works best at pH 6.",
+        "C": "The rate of reaction halves as the pH changes from pH 5 to pH 7.",
+        "D": "The rate of reaction is the same at pH 5 and pH 8.5."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q10.png",
+      "rawText": "The graph shows how enzyme activity is affected by temperature. 0 20 40 60 rate of reaction temperature / °C How can the change in activity between 40 C and 55 C be explained? A Heat has killed the enzyme. B The enzyme has been used up. C The reactants are moving faster. D The substrate is less likely to fit into the active site.",
+      "parseStatus": "ok",
+      "stem": "The graph shows how enzyme activity is affected by temperature. 0 20 40 60 rate of reaction temperature / °C How can the change in activity between 40 C and 55 C be explained?",
+      "options": {
+        "A": "Heat has killed the enzyme.",
+        "B": "The enzyme has been used up.",
+        "C": "The reactants are moving faster.",
+        "D": "The substrate is less likely to fit into the active site."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q11.png",
+      "rawText": "The graph shows how the rate of photosynthesis of a plant changes with light intensity, at three different carbon dioxide concentrations. In each case the temperature is 15 C. 0.10% carbon dioxide 0.04% carbon dioxide 0.02% carbon dioxide light intensity rate of photosynthesis X What is the limiting factor for the rate of photosynthesis at point X on the graph? A carbon dioxide concentration B light intensity C surface area of the plant D temperature",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the rate of photosynthesis of a plant changes with light intensity, at three different carbon dioxide concentrations. In each case the temperature is 15 C. 0.10% carbon dioxide 0.04% carbon dioxide 0.02% carbon dioxide light intensity rate of photosynthesis X What is the limiting factor for the rate of photosynthesis at point X on the graph?",
+      "options": {
+        "A": "carbon dioxide concentration",
+        "B": "light intensity",
+        "C": "surface area of the plant",
+        "D": "temperature"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q12.png",
+      "rawText": "The diagram shows part of a leaf. X What is layer X? A lower epidermis B palisade mesophyll C spongy mesophyll D vascular bundle",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a leaf. X What is layer X?",
+      "options": {
+        "A": "lower epidermis",
+        "B": "palisade mesophyll",
+        "C": "spongy mesophyll",
+        "D": "vascular bundle"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q13.png",
+      "rawText": "Which stage of nutrition takes place when food molecules become part of a body cell? A absorption B assimilation C digestion D ingestion",
+      "parseStatus": "ok",
+      "stem": "Which stage of nutrition takes place when food molecules become part of a body cell?",
+      "options": {
+        "A": "absorption",
+        "B": "assimilation",
+        "C": "digestion",
+        "D": "ingestion"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q14.png",
+      "rawText": "The diagram shows part of the alimentary canal and associated organs. Which labelled part stores bile? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q15.png",
+      "rawText": "In which order does water pass through these structures in a plant? A mesophyll  root hair  xylem B mesophyll  xylem  root hair C root hair  mesophyll  xylem D root hair  xylem  mesophyll",
+      "parseStatus": "ok",
+      "stem": "In which order does water pass through these structures in a plant?",
+      "options": {
+        "A": "mesophyll  root hair  xylem",
+        "B": "mesophyll  xylem  root hair",
+        "C": "root hair  mesophyll  xylem",
+        "D": "root hair  xylem  mesophyll"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q16.png",
+      "rawText": "A decrease in which factor normally causes the transpiration rate to increase? A humidity B light intensity C number of stomata D temperature",
+      "parseStatus": "ok",
+      "stem": "A decrease in which factor normally causes the transpiration rate to increase?",
+      "options": {
+        "A": "humidity",
+        "B": "light intensity",
+        "C": "number of stomata",
+        "D": "temperature"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q17.png",
+      "rawText": "In a mammal, what ensures the blood flows one-way round the circulatory system? A brain B capillaries C lungs D valves",
+      "parseStatus": "ok",
+      "stem": "In a mammal, what ensures the blood flows one-way round the circulatory system?",
+      "options": {
+        "A": "brain",
+        "B": "capillaries",
+        "C": "lungs",
+        "D": "valves"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q18.png",
+      "rawText": "Which row correctly identifies the blood vessels? largest internal space (lumen) thickest muscular wall transports blood towards the heart A pulmonary artery capillary pulmonary vein B pulmonary artery pulmonary vein capillary C pulmonary vein capillary pulmonary artery D pulmonary vein pulmonary artery pulmonary vein",
+      "parseStatus": "ok",
+      "stem": "Which row correctly identifies the blood vessels? largest internal space (lumen) thickest muscular wall transports blood towards the heart",
+      "options": {
+        "A": "pulmonary artery capillary pulmonary vein",
+        "B": "pulmonary artery pulmonary vein capillary",
+        "C": "pulmonary vein capillary pulmonary artery",
+        "D": "pulmonary vein pulmonary artery pulmonary vein"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q19.png",
+      "rawText": "A baby acquires protection from pathogens from its mother’s breast milk. What is this protection called? A active immunity B immunisation C vaccination D passive immunity",
+      "parseStatus": "ok",
+      "stem": "A baby acquires protection from pathogens from its mother’s breast milk. What is this protection called?",
+      "options": {
+        "A": "active immunity",
+        "B": "immunisation",
+        "C": "vaccination",
+        "D": "passive immunity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q20.png",
+      "rawText": "The diagram shows some of the structures in a human lung. Where is the carbon dioxide concentration highest? to pulmonary vein from pulmonary artery A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q21.png",
+      "rawText": "What is produced by anaerobic respiration in yeast? A alcohol, carbon dioxide and water B alcohol and carbon dioxide only C carbon dioxide and lactic acid D lactic acid only",
+      "parseStatus": "ok",
+      "stem": "What is produced by anaerobic respiration in yeast?",
+      "options": {
+        "A": "alcohol, carbon dioxide and water",
+        "B": "alcohol and carbon dioxide only",
+        "C": "carbon dioxide and lactic acid",
+        "D": "lactic acid only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q22.png",
+      "rawText": "What happens as a result of deamination? A Amino acids are converted to proteins. B Glycogen is stored. C Starch is produced. D Urea is produced.",
+      "parseStatus": "ok",
+      "stem": "What happens as a result of deamination?",
+      "options": {
+        "A": "Amino acids are converted to proteins.",
+        "B": "Glycogen is stored.",
+        "C": "Starch is produced.",
+        "D": "Urea is produced."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q23.png",
+      "rawText": "Sensory neurones conduct impulses from A the brain and spinal cord to muscles. B one sense organ to another sense organ. C sense organs to the brain and spinal cord. D muscles to sense organs.",
+      "parseStatus": "ok",
+      "stem": "Sensory neurones conduct impulses from",
+      "options": {
+        "A": "the brain and spinal cord to muscles.",
+        "B": "one sense organ to another sense organ.",
+        "C": "sense organs to the brain and spinal cord.",
+        "D": "muscles to sense organs."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q24.png",
+      "rawText": "What is a function of the cornea? A carries impulses to the brain B contains light-sensitive receptors C controls how much light enters the eye D refracts light",
+      "parseStatus": "ok",
+      "stem": "What is a function of the cornea?",
+      "options": {
+        "A": "carries impulses to the brain",
+        "B": "contains light-sensitive receptors",
+        "C": "controls how much light enters the eye",
+        "D": "refracts light"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q25.png",
+      "rawText": "The diagram shows some blood vessels near the surface of the skin. skin surface Y X Z direction of blood flow If vasodilation occurs at X, what happens to the blood flow at Y and Z? Y Z A decreases decreases B decreases stays constant C increases increases D increases stays constant",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some blood vessels near the surface of the skin. skin surface Y X Z direction of blood flow If vasodilation occurs at X, what happens to the blood flow at Y and Z? Y Z",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases stays constant",
+        "C": "increases increases",
+        "D": "increases stays constant"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q26.png",
+      "rawText": "Which substances can be misused to improve athletic performance? 1 alcohol 2 anabolic steroids 3 testosterone A 1, 2 and 3 B 1 and 2 only C 2 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which substances can be misused to improve athletic performance? 1 alcohol 2 anabolic steroids 3 testosterone",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "2 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q27.png",
+      "rawText": "Scientists investigated the amount of genetic variation found within different crop plants. They grew large numbers of each crop and measured the genetic variation within the species of crop. The results are shown in the table. crop percentage genetic variation banana 0 pea 65 carrot 54 Which crop or crops have been produced by sexual reproduction? A banana only B banana, pea and carrot C pea only D pea and carrot only",
+      "parseStatus": "ok",
+      "stem": "Scientists investigated the amount of genetic variation found within different crop plants. They grew large numbers of each crop and measured the genetic variation within the species of crop. The results are shown in the table. crop percentage genetic variation banana 0 pea 65 carrot 54 Which crop or crops have been produced by sexual reproduction?",
+      "options": {
+        "A": "banana only",
+        "B": "banana, pea and carrot",
+        "C": "pea only",
+        "D": "pea and carrot only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q28.png",
+      "rawText": "Which organ secretes progesterone? A ovary B pancreas C salivary gland D testis",
+      "parseStatus": "ok",
+      "stem": "Which organ secretes progesterone?",
+      "options": {
+        "A": "ovary",
+        "B": "pancreas",
+        "C": "salivary gland",
+        "D": "testis"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q29.png",
+      "rawText": "Which statement explains why the hormone FSH is used in fertility treatment? A It causes the formation of a zygote during in vitro fertilisation (IVF). B It stimulates ovulation for artificial insemination (AI). C It stimulates the production of large numbers of eggs for use in in vitro fertilisation (IVF). D It is used to maintain the uterus wall ready for artificial insemination (AI).",
+      "parseStatus": "ok",
+      "stem": "Which statement explains why the hormone FSH is used in fertility treatment?",
+      "options": {
+        "A": "It causes the formation of a zygote during in vitro fertilisation (IVF).",
+        "B": "It stimulates ovulation for artificial insemination (AI).",
+        "C": "It stimulates the production of large numbers of eggs for use in in vitro fertilisation (IVF).",
+        "D": "It is used to maintain the uterus wall ready for artificial insemination (AI)."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q30.png",
+      "rawText": "Which substance is coded for by a length of DNA? A base B glucose C glycerol D lipase",
+      "parseStatus": "ok",
+      "stem": "Which substance is coded for by a length of DNA?",
+      "options": {
+        "A": "base",
+        "B": "glucose",
+        "C": "glycerol",
+        "D": "lipase"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q31.png",
+      "rawText": "Some features of cell division are listed. 1 chromosome number is maintained 2 haploid cells are produced 3 new cells are genetically different 4 results in variation Which features are involved in meiosis? A 1, 2 and 3 only B 1, 2 and 4 only C 2, 3 and 4 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Some features of cell division are listed. 1 chromosome number is maintained 2 haploid cells are produced 3 new cells are genetically different 4 results in variation Which features are involved in meiosis?",
+      "options": {
+        "A": "1, 2 and 3 only",
+        "B": "1, 2 and 4 only",
+        "C": "2, 3 and 4 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q32.png",
+      "rawText": "Which statement about the inheritance of red-green colour blindness is correct? A The gene for red-green colour blindness is located on the X chromosome. B Females are more likely to have red-green colour blindness than males. C The allele for red-green colour blindness is the dominant allele. D The gene for red-green colour blindness is located on the Y chromosome.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the inheritance of red-green colour blindness is correct?",
+      "options": {
+        "A": "The gene for red-green colour blindness is located on the X chromosome.",
+        "B": "Females are more likely to have red-green colour blindness than males.",
+        "C": "The allele for red-green colour blindness is the dominant allele.",
+        "D": "The gene for red-green colour blindness is located on the Y chromosome."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q33.png",
+      "rawText": "A couple are both heterozygous for the sickle-cell allele. What is the probability that their first child will have sickle-cell anaemia? A 25% B 33% C 50% D 75%",
+      "parseStatus": "ok",
+      "stem": "A couple are both heterozygous for the sickle-cell allele. What is the probability that their first child will have sickle-cell anaemia?",
+      "options": {
+        "A": "25%",
+        "B": "33%",
+        "C": "50%",
+        "D": "75%"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q34.png",
+      "rawText": "How does artificial selection differ from natural selection? A Artificial selection changes the characteristics of living things. B Artificial selection is based on genetic variation. C Artificial selection does not involve competition for resources. D Artificial selection occurs over many generations.",
+      "parseStatus": "ok",
+      "stem": "How does artificial selection differ from natural selection?",
+      "options": {
+        "A": "Artificial selection changes the characteristics of living things.",
+        "B": "Artificial selection is based on genetic variation.",
+        "C": "Artificial selection does not involve competition for resources.",
+        "D": "Artificial selection occurs over many generations."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q35.png",
+      "rawText": "The diagram shows part of the nitrogen cycle. Which letter represents denitrification? atmospheric nitrogen organic nitrogen compounds ammonia nitrites nitrites nitrates nitrates plants animals C B D feeding decay A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q36.png",
+      "rawText": "A few yeast cells were placed in a container of nutrient solution. The graph shows how their population size changed over time. population size time 1 2 3 4 Which row shows when the reproduction rate was greater than the death rate for the numbered phases on the graph? reproduction rate greater than death rate 1 2 3 4 A \u0016 \u0016 \u0016 \u001a key B \u0016 \u0016 \u001a \u001a \u0016= yes C \u0016 \u001a \u001a \u001a \u001a= no D \u001a \u0016 \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "A few yeast cells were placed in a container of nutrient solution. The graph shows how their population size changed over time. population size time 1 2 3 4 Which row shows when the reproduction rate was greater than the death rate for the numbered phases on the graph? reproduction rate greater than death rate 1 2 3 4",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u001a key",
+        "B": "\u0016 \u0016 \u001a \u001a \u0016= yes",
+        "C": "\u0016 \u001a \u001a \u001a \u001a= no",
+        "D": "\u001a \u0016 \u0016 \u0016"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q37.png",
+      "rawText": "The diagram shows a fermenter used to produce penicillin. X What is the function of part X? A allow microorganisms to enter the fermenter B maintain an even temperature inside the fermenter C monitor the temperature inside the fermenter D sterilise the contents of the fermenter",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a fermenter used to produce penicillin. X What is the function of part X?",
+      "options": {
+        "A": "allow microorganisms to enter the fermenter",
+        "B": "maintain an even temperature inside the fermenter",
+        "C": "monitor the temperature inside the fermenter",
+        "D": "sterilise the contents of the fermenter"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q38.png",
+      "rawText": "Bacteria are used to make insulin. This happens in several stages. 1 bacteria synthesise insulin in fermenters 2 the insulin gene is inserted into a bacterial plasmid 3 removal of the insulin gene from a human chromosome 4 a section of a plasmid is removed In which order do these stages occur? A 1  3  2  4 B 1  4  3  2 C 4  2  3  1 D 4  3  2  1",
+      "parseStatus": "ok",
+      "stem": "Bacteria are used to make insulin. This happens in several stages. 1 bacteria synthesise insulin in fermenters 2 the insulin gene is inserted into a bacterial plasmid 3 removal of the insulin gene from a human chromosome 4 a section of a plasmid is removed In which order do these stages occur?",
+      "options": {
+        "A": "1  3  2  4",
+        "B": "1  4  3  2",
+        "C": "4  2  3  1",
+        "D": "4  3  2  1"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q39.png",
+      "rawText": "The table shows some of the processes that occur during eutrophication. Which row shows the correct increase or decrease of each process? nitrate ion availability in the water light availability in the water rate of respiration by decomposers oxygen availability in the water A increases decreases decreases increases B increases decreases increases decreases C decreases increases increases increases D decreases increases decreases decreases",
+      "parseStatus": "ok",
+      "stem": "The table shows some of the processes that occur during eutrophication. Which row shows the correct increase or decrease of each process? nitrate ion availability in the water light availability in the water rate of respiration by decomposers oxygen availability in the water",
+      "options": {
+        "A": "increases decreases decreases increases",
+        "B": "increases decreases increases decreases",
+        "C": "decreases increases increases increases",
+        "D": "decreases increases decreases decreases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w20_qp_23/q40.png",
+      "rawText": "The graph shows the effect of fishing on fish stocks over 20 years. In year 11, a fishing quota was introduced followed by a total ban on fishing in year 16. 1 6 11 16 year fish stocks fish caught mass of fish key What effects did these conservation measures have on the fish population? A The fish population became extinct. B The fish population started increasing immediately after the fishing quota was introduced. C The fish population started increasing only after a total ban on fishing was introduced. D There was no effect on the fish population.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of fishing on fish stocks over 20 years. In year 11, a fishing quota was introduced followed by a total ban on fishing in year 16. 1 6 11 16 year fish stocks fish caught mass of fish key What effects did these conservation measures have on the fish population?",
+      "options": {
+        "A": "The fish population became extinct.",
+        "B": "The fish population started increasing immediately after the fishing quota was introduced.",
+        "C": "The fish population started increasing only after a total ban on fishing was introduced.",
+        "D": "There was no effect on the fish population."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

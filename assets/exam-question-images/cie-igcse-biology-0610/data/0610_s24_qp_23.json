@@ -1,0 +1,553 @@
+{
+  "questionPaper": "0610_s24_qp_23.pdf",
+  "markScheme": "0610_s24_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q01.png",
+      "rawText": "breathing A excretion B photosynthesis C tropism D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q02.png",
+      "rawText": "dry without scales A dry with scales B moist without scales C moist with scales D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q03.png",
+      "rawText": "cell membrane 1 cell wall 2 chloroplasts 3 cytoplasm",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q04.png",
+      "rawText": "The image has a length of 60 mm. The actual length of the pollen grain is 500 μm. What is the magnification of the pollen grain? D ×30 000 ×120 C ×30 B ×0.12 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q05.png",
+      "rawText": "a decrease in the concentration gradient A a decrease in the diffusion distance B a decrease in the kinetic energy of molecules C a decrease in the surface area of the gas exchange surface D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q06.png",
+      "rawText": "Water enters the cells and they become plasmolysed. A Water enters the cells and they become turgid. B Water leaves the cells and they become plasmolysed. C Water leaves the cells and they become turgid. D [Turn over 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "Water enters the cells and they become plasmolysed.",
+      "options": {
+        "A": "Water enters the cells and they become turgid.",
+        "B": "Water leaves the cells and they become plasmolysed.",
+        "C": "Water leaves the cells and they become turgid.",
+        "D": "[Turn over 06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q07.png",
+      "rawText": "O O H C H H C H H C H C CH2OH CH2OH O HO H H OH H OH H2N C H H COOH H HO H OH H OH H CH2OH H OH O A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q08.png",
+      "rawText": "time taken to digest starch temperature X Y Which statement about the results is correct? The optimum temperature is at X and the rate of reaction decreases between X and Y. A The optimum temperature is at X and the rate of reaction increases between X and Y. B The optimum temperature is at Y and the rate of reaction decreases between X and Y. C The optimum temperature is at Y and the rate of reaction increases between X and Y. D 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "time taken to digest starch temperature X Y Which statement about the results is correct? The optimum temperature is at X and the rate of reaction decreases between X and Y.",
+      "options": {
+        "A": "The optimum temperature is at X and the rate of reaction increases between X and Y.",
+        "B": "The optimum temperature is at Y and the rate of reaction decreases between X and Y.",
+        "C": "The optimum temperature is at Y and the rate of reaction increases between X and Y.",
+        "D": "06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q09.png",
+      "rawText": "chloroplast A mitochondrion B nucleus C ribosome D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q10.png",
+      "rawText": "palisade mesophyll A spongy mesophyll B upper epidermis C vascular bundle D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q11.png",
+      "rawText": "percentage of daily recommended intake in a serving of food vitamin D vitamin C iron calcium 6 0 1 71 A 73 2 11 24 B 0 72 3 3 C 0 1 72 1 D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q12.png",
+      "rawText": "absorption, digestion, ingestion, egestion A digestion, ingestion, egestion, absorption B egestion, digestion, absorption, ingestion C ingestion, digestion, absorption, egestion D [Turn over 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "absorption, digestion, ingestion, egestion",
+      "options": {
+        "A": "digestion, ingestion, egestion, absorption",
+        "B": "egestion, digestion, absorption, ingestion",
+        "C": "ingestion, digestion, absorption, egestion",
+        "D": "[Turn over 06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q13.png",
+      "rawText": "Bacteria in the food are killed. A Food is mixed with protease. B The surface area of the food is increased. C The taste of food is improved. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q14.png",
+      "rawText": "amino acids A fatty acids and glycerol B salts C sugars D 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "amino acids",
+      "options": {
+        "A": "fatty acids and glycerol",
+        "B": "salts",
+        "C": "sugars",
+        "D": "06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q15.png",
+      "rawText": "1 2 3 key direction of blood flow Several hours after a meal, where will the highest concentrations of amino acids and of glucose be found in the villus? highest concentration of glucose highest concentration of amino acids 1 1 A 2 1 B 1 2 C 3 3 D [Turn over 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "1 2 3 key direction of blood flow Several hours after a meal, where will the highest concentrations of amino acids and of glucose be found in the villus? highest concentration of glucose highest concentration of amino acids 1 1",
+      "options": {
+        "A": "2 1",
+        "B": "1 2",
+        "C": "3 3",
+        "D": "[Turn over 06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q16.png",
+      "rawText": "Q What is a function of the part labelled Q? storage of starch A structural support B transport of amino acids C transport of glucose D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q17.png",
+      "rawText": "atrium muscle wall A atrioventricular valve B septum C ventricle muscle wall D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q18.png",
+      "rawText": "A B C D 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q19.png",
+      "rawText": "The water potential in the lumen of the small intestine decreases and water moves into the small intestine by osmosis. A The water potential in the lumen of the small intestine increases and water moves into the small intestine by osmosis. B The water potential in the lumen of the small intestine decreases and water moves out of the small intestine by osmosis. C The water potential in the lumen of the small intestine increases and water moves out of the small intestine by osmosis. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q20.png",
+      "rawText": "alveoli A diaphragm B intercostal muscle C trachea D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q21.png",
+      "rawText": "1 2 3 4 Which labels show structures that produce changes in volume and pressure during ventilation of the lungs? 2 and 4 D 2 and 3 C 1 only B 1 and 3 A [Turn over 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q22.png",
+      "rawText": "1.0 0.5 0.0 0 5 10 15 time / minutes 20 25 30 blood lactic acid concentration / mg dm–3 exercise recovery Z Which process accounts for the shape of the graph at Z? aerobic respiration of lactic acid in the kidney A aerobic respiration of lactic acid in the liver B anaerobic respiration of lactic acid in the kidney C anaerobic respiration of lactic acid in the liver D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q23.png",
+      "rawText": "Which process takes place as the filtrate from a glomerulus passes along a nephron? production of amino acids A excretion of oxygen B production of urea C reabsorption of glucose D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q24.png",
+      "rawText": "circular muscles radial muscles pupil relax contract constricts A contract relax constricts B relax contract dilates C contract relax dilates D 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "circular muscles radial muscles pupil relax contract constricts",
+      "options": {
+        "A": "contract relax constricts",
+        "B": "relax contract dilates",
+        "C": "contract relax dilates",
+        "D": "06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q25.png",
+      "rawText": "0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 time / hours blood glucose concentration A person who had not eaten for a few hours was given an injection of adrenaline. The person’s blood glucose concentration was measured for 3.5 hours. The graph shows the results. time of adrenaline injection What is the correct explanation for the change in blood glucose concentration immediately after the injection of adrenaline? Adrenaline causes less glucose to be converted to glucagon. A Adrenaline causes less glucagon to be converted to glucose. B Adrenaline causes more glucose to be converted to glycogen. C Adrenaline causes more glycogen to be converted to glucose. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q26.png",
+      "rawText": "A B C Insulin is produced by the liver when the blood glucose concentration is high. Its target cells are in the pancreas. Insulin is produced by the liver when the blood glucose concentration is low. Its target cells are in the pancreas. Insulin is produced by the pancreas when the blood glucose concentration is high. Its target cells are in the liver. Insulin is produced by the pancreas when the blood glucose concentration is low. Its target cells are in the liver. D [Turn over 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q27.png",
+      "rawText": "acts as a barrier to prevent some toxins reaching the fetus A exchanges blood between the mother and the fetus B prevents the transfer of excretory products from the fetus C protects the fetus from mechanical damage D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q28.png",
+      "rawText": "X XX XY X Y Y XY YY A X XX XY X Y X XX XY B X XX XX X X X XX XY C X XX XY X X Y XY XY D parent 1 parent 1 parent 1 parent 1 parent 2 parent 2 parent 2 parent 2",
+      "parseStatus": "ok",
+      "stem": "X XX XY X Y Y XY YY",
+      "options": {
+        "A": "X XX XY X Y X XX XY",
+        "B": "X XX XX X X X XX XY",
+        "C": "X XX XY X X Y XY XY",
+        "D": "parent 1 parent 1 parent 1 parent 1 parent 2 parent 2 parent 2 parent 2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q29.png",
+      "rawText": "The sequence of bases in the gene determines the amino acid sequence used to make a protein. 1 The mRNA molecules are made in the nucleus and they remain there. 2 The ribosomes assemble amino acids together to make a protein. 3 2 only D 2 and 3 only C 1 and 3 only B 1 and 2 only A 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q30.png",
+      "rawText": "5 6 7 10 11 12 8 9 3 4 1 2 key male with brown fur male with white fur female with brown fur female with white fur Which two individuals are heterozygous for fur colour? 7 and 10 D 6 and 7 C 2 and 8 B 1 and 4 A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q31.png",
+      "rawText": "transpiration A translocation B respiration C digestion D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q32.png",
+      "rawText": "The antibiotic kills most of the bacteria. 1 The antibiotic-resistant bacteria reproduce. 2 The antibiotic-resistant bacteria survive. 3 Some bacteria mutate and are resistant to the antibiotic. 4 Which sequence may produce a strain of antibiotic-resistant bacteria? 1 →2 →3 →4 A 2 →3 →1 →4 B 3 →1 →4 →2 C 4 →1 →3 →2 D [Turn over 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "The antibiotic kills most of the bacteria. 1 The antibiotic-resistant bacteria reproduce. 2 The antibiotic-resistant bacteria survive. 3 Some bacteria mutate and are resistant to the antibiotic. 4 Which sequence may produce a strain of antibiotic-resistant bacteria? 1 →2 →3 →4",
+      "options": {
+        "A": "2 →3 →1 →4",
+        "B": "3 →1 →4 →2",
+        "C": "4 →1 →3 →2",
+        "D": "[Turn over 06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q33.png",
+      "rawText": "number of offspring birds in 2000 beak length number of offspring birds in 2020 beak length Which change has taken place in the overall beak length of the bird population, and what type of selection has brought this about? type of selection change in the beak length of the bird population artificial decrease A natural decrease B artificial increase C natural increase D The graphs show the beak length of offspring of a wild bird population in 2000 and in 2020. The graphs are drawn to the same scale.",
+      "parseStatus": "ok",
+      "stem": "number of offspring birds in 2000 beak length number of offspring birds in 2020 beak length Which change has taken place in the overall beak length of the bird population, and what type of selection has brought this about? type of selection change in the beak length of the bird population artificial decrease",
+      "options": {
+        "A": "natural decrease",
+        "B": "artificial increase",
+        "C": "natural increase",
+        "D": "The graphs show the beak length of offspring of a wild bird population in 2000 and in 2020. The graphs are drawn to the same scale."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q34.png",
+      "rawText": "decomposers A herbivores B producers C the Sun D 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "decomposers",
+      "options": {
+        "A": "herbivores",
+        "B": "producers",
+        "C": "the Sun",
+        "D": "06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q35.png",
+      "rawText": "plant protein 2 3 1 nitrates in soil nitrogen in the air lightning death death 4 ammonium ions in soil uptake by roots Which numbers represent decomposing bacteria and nitrifying bacteria? nitrifying bacteria decomposing bacteria 3 1 A 4 1 B 3 2 C 4 2 D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q36.png",
+      "rawText": "the number of different animal species that live in an area A the number of different plant species that live in an area B the number of different species that live in an area C the number of individuals of a particular species that live in an area D [Turn over 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "the number of different animal species that live in an area",
+      "options": {
+        "A": "the number of different plant species that live in an area",
+        "B": "the number of different species that live in an area",
+        "C": "the number of individuals of a particular species that live in an area",
+        "D": "[Turn over 06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q37.png",
+      "rawText": "reduction in dissolved oxygen 1 increase in nitrate ions 2 death of organisms requiring dissolved oxygen 3 growth of producers 4 increased aerobic respiration by decomposers 5 death of producers followed by their decomposition 6 What is the correct order in which these processes occur during eutrophication? 1 →3 →5 →2 →6 →4 A 2 →4 →1 →6 →5 →3 B 2 →4 →6 →5 →1 →3 C 5 →1 →3 →6 →2 →4 D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q38.png",
+      "rawText": "Lignin can be produced as rapidly as it is removed from the environment. A Lignin is found in xylem tissue. B Lignin is strong. C Lignin is waterproof. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q39.png",
+      "rawText": "cell membrane A cell wall B cytoplasm C plasmid D 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "cell membrane",
+      "options": {
+        "A": "cell wall",
+        "B": "cytoplasm",
+        "C": "plasmid",
+        "D": "06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s24_qp_23/q40.png",
+      "rawText": "The loss of weeds reduces competition. A Some of the weeds might become resistant to the herbicide. B The crop plant is unharmed and produces a higher yield. C The new gene will appear in new generations of the crop plant. D 06_0610_23_2024_1.8 © UCLES 2024",
+      "parseStatus": "ok",
+      "stem": "The loss of weeds reduces competition.",
+      "options": {
+        "A": "Some of the weeds might become resistant to the herbicide.",
+        "B": "The crop plant is unharmed and produces a higher yield.",
+        "C": "The new gene will appear in new generations of the crop plant.",
+        "D": "06_0610_23_2024_1.8 © UCLES 2024"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

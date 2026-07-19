@@ -1,0 +1,658 @@
+{
+  "questionPaper": "0610_w23_qp_21.pdf",
+  "markScheme": "0610_w23_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q01.png",
+      "rawText": "Some processes carried out by living organisms are listed. 1 egestion",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q02.png",
+      "rawText": "The scientific name for humans is Homo sapiens. What does Homo refer to? A mammal B genus C kingdom D species",
+      "parseStatus": "ok",
+      "stem": "The scientific name for humans is Homo sapiens. What does Homo refer to?",
+      "options": {
+        "A": "mammal",
+        "B": "genus",
+        "C": "kingdom",
+        "D": "species"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q03.png",
+      "rawText": "Some structures found in cells are listed. 1 cell membrane 2 cell wall 3 mitochondria",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q04.png",
+      "rawText": "In a mesophyll cell, where are chloroplasts found? A between the cell wall and the cell membrane B in the cytoplasm C in the nucleus D in the vacuole",
+      "parseStatus": "ok",
+      "stem": "In a mesophyll cell, where are chloroplasts found?",
+      "options": {
+        "A": "between the cell wall and the cell membrane",
+        "B": "in the cytoplasm",
+        "C": "in the nucleus",
+        "D": "in the vacuole"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q05.png",
+      "rawText": "The diagram shows a flatworm. The flatworm has been magnified by 100. 50 mm What is the actual size of the flatworm? A 0.5 m B 5 m C 50 m D 500 m",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a flatworm. The flatworm has been magnified by 100. 50 mm What is the actual size of the flatworm?",
+      "options": {
+        "A": "0.5 m",
+        "B": "5 m",
+        "C": "50 m",
+        "D": "500 m"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q06.png",
+      "rawText": "The diagrams show how a cell appears under the microscope at the start of an experiment and after it has been placed in a dilute solution of salts for 5 minutes. after placing in a dilute solution of salts start of the experiment Which statement explains what happens? A Dissolved salts enter the cell by diffusion. B Dissolved salts leave the cell by diffusion. C Water enters the cell by osmosis. D Water leaves the cell by osmosis.",
+      "parseStatus": "ok",
+      "stem": "The diagrams show how a cell appears under the microscope at the start of an experiment and after it has been placed in a dilute solution of salts for 5 minutes. after placing in a dilute solution of salts start of the experiment Which statement explains what happens?",
+      "options": {
+        "A": "Dissolved salts enter the cell by diffusion.",
+        "B": "Dissolved salts leave the cell by diffusion.",
+        "C": "Water enters the cell by osmosis.",
+        "D": "Water leaves the cell by osmosis."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q07.png",
+      "rawText": "The concentration of nitrate ions is higher inside a root hair cell than in the soil. What would be required for the absorption of nitrate ions into the root hair cell? 1 mitochondria 2 oxygen 3 membrane proteins 4 cell wall A 1, 2, 3 and 4 B 1, 2 and 3 only C 1 and 2 only D 1 only",
+      "parseStatus": "ok",
+      "stem": "The concentration of nitrate ions is higher inside a root hair cell than in the soil. What would be required for the absorption of nitrate ions into the root hair cell? 1 mitochondria 2 oxygen 3 membrane proteins 4 cell wall",
+      "options": {
+        "A": "1, 2, 3 and 4",
+        "B": "1, 2 and 3 only",
+        "C": "1 and 2 only",
+        "D": "1 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q08.png",
+      "rawText": "What is the colour change shown by Benedict’s solution when heated with a reducing sugar? A blue to purple B blue to red C brown to blue-black D red to yellow",
+      "parseStatus": "ok",
+      "stem": "What is the colour change shown by Benedict’s solution when heated with a reducing sugar?",
+      "options": {
+        "A": "blue to purple",
+        "B": "blue to red",
+        "C": "brown to blue-black",
+        "D": "red to yellow"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q09.png",
+      "rawText": "The diagram shows the digestive system. Which part absorbs the most water? D C B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q10.png",
+      "rawText": "Which statement is correct? A The active site of an enzyme has the same shape as the substrate. B The active site is not affected by changes in temperature. C The shape of the active site of an enzyme is complementary to its substrate. D The substrate and product combine at the active site.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "The active site of an enzyme has the same shape as the substrate.",
+        "B": "The active site is not affected by changes in temperature.",
+        "C": "The shape of the active site of an enzyme is complementary to its substrate.",
+        "D": "The substrate and product combine at the active site."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q11.png",
+      "rawText": "The graph shows how the rate of photosynthesis of a plant changes with light intensity, at three different carbon dioxide concentrations. In each case the temperature is 15 C. 0.10% carbon dioxide 0.04% carbon dioxide 0.02% carbon dioxide light intensity rate of photosynthesis X What is the limiting factor for the rate of photosynthesis at point X on the graph? A carbon dioxide concentration B light intensity C surface area of the plant D temperature",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the rate of photosynthesis of a plant changes with light intensity, at three different carbon dioxide concentrations. In each case the temperature is 15 C. 0.10% carbon dioxide 0.04% carbon dioxide 0.02% carbon dioxide light intensity rate of photosynthesis X What is the limiting factor for the rate of photosynthesis at point X on the graph?",
+      "options": {
+        "A": "carbon dioxide concentration",
+        "B": "light intensity",
+        "C": "surface area of the plant",
+        "D": "temperature"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q12.png",
+      "rawText": "The diagram shows a test-tube at the start and at the end of an enzyme experiment. enzyme + substrate enzyme + products temperature 35 °C 10 minutes At the end of the experiment, the mixture in the test-tube contains glycerol. Which row correctly identifies the enzyme and the substrate it acts on? enzyme substrate it acts on A amylase fat B amylase glucose C lipase fat D lipase glucose",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a test-tube at the start and at the end of an enzyme experiment. enzyme + substrate enzyme + products temperature 35 °C 10 minutes At the end of the experiment, the mixture in the test-tube contains glycerol. Which row correctly identifies the enzyme and the substrate it acts on? enzyme substrate it acts on",
+      "options": {
+        "A": "amylase fat",
+        "B": "amylase glucose",
+        "C": "lipase fat",
+        "D": "lipase glucose"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q13.png",
+      "rawText": "The diagram shows the teeth in the lower jaw of a human. Which tooth is a molar? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q14.png",
+      "rawText": "What is meant by chemical digestion? A Large insoluble molecules are broken down into small soluble molecules. B Large soluble molecules are broken down into small insoluble molecules. C Small insoluble molecules are built up into large soluble molecules. D Small soluble molecules are built up into large insoluble molecules.",
+      "parseStatus": "ok",
+      "stem": "What is meant by chemical digestion?",
+      "options": {
+        "A": "Large insoluble molecules are broken down into small soluble molecules.",
+        "B": "Large soluble molecules are broken down into small insoluble molecules.",
+        "C": "Small insoluble molecules are built up into large soluble molecules.",
+        "D": "Small soluble molecules are built up into large insoluble molecules."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q15.png",
+      "rawText": "The diagram shows a villus in the small intestine. X What is absorbed at X? A fatty acids B glucose C glycogen D starch",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a villus in the small intestine. X What is absorbed at X?",
+      "options": {
+        "A": "fatty acids",
+        "B": "glucose",
+        "C": "glycogen",
+        "D": "starch"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q16.png",
+      "rawText": "What is a description of transpiration? A exchange of gases between the leaf and the atmosphere B loss of water vapour from the leaves of a plant C movement of water from the roots to the leaves D movement of water through the cells of the leaf",
+      "parseStatus": "ok",
+      "stem": "What is a description of transpiration?",
+      "options": {
+        "A": "exchange of gases between the leaf and the atmosphere",
+        "B": "loss of water vapour from the leaves of a plant",
+        "C": "movement of water from the roots to the leaves",
+        "D": "movement of water through the cells of the leaf"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q17.png",
+      "rawText": "Parts of a plant are listed. 1 mesophyll cells 2 root cortex cells 3 root hair cells 4 xylem vessels What is the pathway taken by water in the plant? A 1  4  2  3 B 1  2  3  4 C 3  1  4  2 D 3  2  4  1",
+      "parseStatus": "ok",
+      "stem": "Parts of a plant are listed. 1 mesophyll cells 2 root cortex cells 3 root hair cells 4 xylem vessels What is the pathway taken by water in the plant?",
+      "options": {
+        "A": "1  4  2  3",
+        "B": "1  2  3  4",
+        "C": "3  1  4  2",
+        "D": "3  2  4  1"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q18.png",
+      "rawText": "The diagrams show the single circulation of a fish and the double circulation of a mammal. gill capillaries body capillaries fish circulation lung capillaries body capillaries mammal circulation ventricle ventricles atrium R T S Y X Z atria Which letters represent areas with the most oxygenated blood? A R and X B S and Y C T and Y D T and Z",
+      "parseStatus": "ok",
+      "stem": "The diagrams show the single circulation of a fish and the double circulation of a mammal. gill capillaries body capillaries fish circulation lung capillaries body capillaries mammal circulation ventricle ventricles atrium R T S Y X Z atria Which letters represent areas with the most oxygenated blood?",
+      "options": {
+        "A": "R and X",
+        "B": "S and Y",
+        "C": "T and Y",
+        "D": "T and Z"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q19.png",
+      "rawText": "What is the role of lymphocytes in the blood? A antibody production B blood clotting C phagocytosis D oxygen transport",
+      "parseStatus": "ok",
+      "stem": "What is the role of lymphocytes in the blood?",
+      "options": {
+        "A": "antibody production",
+        "B": "blood clotting",
+        "C": "phagocytosis",
+        "D": "oxygen transport"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q20.png",
+      "rawText": "A patient was injected with antibodies after being bitten by a poisonous snake. The patient recovered and survived. What describes the effect of the injection in the patient’s body? active immunity passive immunity memory cells produced A \u0016 \u001a \u0016 key B \u0016 \u001a \u001a \u0016 = yes C \u001a \u0016 \u0016 \u001a = no D \u001a \u0016 \u001a",
+      "parseStatus": "ok",
+      "stem": "A patient was injected with antibodies after being bitten by a poisonous snake. The patient recovered and survived. What describes the effect of the injection in the patient’s body? active immunity passive immunity memory cells produced",
+      "options": {
+        "A": "\u0016 \u001a \u0016 key",
+        "B": "\u0016 \u001a \u001a \u0016 = yes",
+        "C": "\u001a \u0016 \u0016 \u001a = no",
+        "D": "\u001a \u0016 \u001a"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q21.png",
+      "rawText": "Which table correctly shows the difference in composition of inspired air compared with expired air? A B inspired air expired air inspired air expired air oxygen less more oxygen less more carbon dioxide less more carbon dioxide more less C D inspired air expired air inspired air expired air oxygen more less oxygen more less carbon dioxide less more carbon dioxide more less",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q22.png",
+      "rawText": "Which row shows the correct combination of muscle contractions and the pressure in the thorax when breathing out? internal intercostal muscles external intercostal muscles diaphragm pressure in thorax A contracted contracted contracted high B contracted relaxed relaxed high C relaxed contracted contracted high D relaxed relaxed relaxed low",
+      "parseStatus": "ok",
+      "stem": "Which row shows the correct combination of muscle contractions and the pressure in the thorax when breathing out? internal intercostal muscles external intercostal muscles diaphragm pressure in thorax",
+      "options": {
+        "A": "contracted contracted contracted high",
+        "B": "contracted relaxed relaxed high",
+        "C": "relaxed contracted contracted high",
+        "D": "relaxed relaxed relaxed low"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q23.png",
+      "rawText": "Three statements about anaerobic respiration are listed. 1 In humans, the product is lactic acid. 2 In yeast, the product is lactic acid. 3 It releases more energy per glucose molecule than aerobic respiration. Which statements are correct? A 1, 2 and 3 B 1 and 2 only C 1 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Three statements about anaerobic respiration are listed. 1 In humans, the product is lactic acid. 2 In yeast, the product is lactic acid. 3 It releases more energy per glucose molecule than aerobic respiration. Which statements are correct?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q24.png",
+      "rawText": "What is the balanced chemical equation for a type of respiration that occurs in yeast? A C6H12O6 + O2  CO2 + 6H2O B 6CO2 + 6H2O  C6H12O6 + 6O2 C C6H12O6  2C2H5OH + 2CO2 D 2C2H5OH + 2CO2  C6H12O6",
+      "parseStatus": "ok",
+      "stem": "What is the balanced chemical equation for a type of respiration that occurs in yeast?",
+      "options": {
+        "A": "C6H12O6 + O2  CO2 + 6H2O",
+        "B": "6CO2 + 6H2O  C6H12O6 + 6O2",
+        "C": "C6H12O6  2C2H5OH + 2CO2",
+        "D": "2C2H5OH + 2CO2  C6H12O6"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q25.png",
+      "rawText": "The diagram shows the human excretory system. Which labelled structure is the urethra? A B D C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q26.png",
+      "rawText": "The diagrams show three types of neurones. L M N NOT TO SCALE Which sequence shows the direction that impulses will travel during a reflex action? A L  M  N B M  L  N C M  N  L D N  M  L",
+      "parseStatus": "ok",
+      "stem": "The diagrams show three types of neurones. L M N NOT TO SCALE Which sequence shows the direction that impulses will travel during a reflex action?",
+      "options": {
+        "A": "L  M  N",
+        "B": "M  L  N",
+        "C": "M  N  L",
+        "D": "N  M  L"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q27.png",
+      "rawText": "Which statement about rods and cones in the eye is correct? A Both rods and cones detect different colours of light. B Only cones are present in the blind spot. C Rods are more sensitive than cones in low light intensity. D There are three types of rods but only one type of cone.",
+      "parseStatus": "ok",
+      "stem": "Which statement about rods and cones in the eye is correct?",
+      "options": {
+        "A": "Both rods and cones detect different colours of light.",
+        "B": "Only cones are present in the blind spot.",
+        "C": "Rods are more sensitive than cones in low light intensity.",
+        "D": "There are three types of rods but only one type of cone."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q28.png",
+      "rawText": "Which diseases can be successfully treated with antibiotics? diseases caused by bacteria rickets diseases caused by viruses A \u0016 \u0016 \u0016 key B \u0016 \u001a \u001a \u0016 = can be treated C \u001a \u0016 \u001a \u001a = cannot be treated D \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which diseases can be successfully treated with antibiotics? diseases caused by bacteria rickets diseases caused by viruses",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u001a \u001a \u0016 = can be treated",
+        "C": "\u001a \u0016 \u001a \u001a = cannot be treated",
+        "D": "\u001a \u001a \u0016"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q29.png",
+      "rawText": "Which statement about human sexual reproduction is correct? A All gametes are haploid. B Fertilisation occurs when two diploid nuclei fuse. C The sperm is the male zygote. D Sexual reproduction results in haploid offspring.",
+      "parseStatus": "ok",
+      "stem": "Which statement about human sexual reproduction is correct?",
+      "options": {
+        "A": "All gametes are haploid.",
+        "B": "Fertilisation occurs when two diploid nuclei fuse.",
+        "C": "The sperm is the male zygote.",
+        "D": "Sexual reproduction results in haploid offspring."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q30.png",
+      "rawText": "Where is oestrogen produced? A cervix B ovaries C oviducts D uterus",
+      "parseStatus": "ok",
+      "stem": "Where is oestrogen produced?",
+      "options": {
+        "A": "cervix",
+        "B": "ovaries",
+        "C": "oviducts",
+        "D": "uterus"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q31.png",
+      "rawText": "Which row shows correct information about mitosis? cells produced by mitosis number of chromosomes in the daughter cells compared to the parent cell A are genetically different to the parent cell half the number B are genetically different to the parent cell the same number C are genetically identical to the parent cell half the number D are genetically identical to the parent cell the same number",
+      "parseStatus": "ok",
+      "stem": "Which row shows correct information about mitosis? cells produced by mitosis number of chromosomes in the daughter cells compared to the parent cell",
+      "options": {
+        "A": "are genetically different to the parent cell half the number",
+        "B": "are genetically different to the parent cell the same number",
+        "C": "are genetically identical to the parent cell half the number",
+        "D": "are genetically identical to the parent cell the same number"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q32.png",
+      "rawText": "Polydactyly is a condition that can occur in cats and results in affected individuals having extra toes. The diagram shows the inheritance of the condition in a family of cats. polydactyl female cat polydactyl male cat non-polydactyl female cat non-polydactyl male cat key What does the family tree show about the allele for polydactyly? A It is codominant. B It could be dominant or recessive. C It is dominant. D It is recessive.",
+      "parseStatus": "ok",
+      "stem": "Polydactyly is a condition that can occur in cats and results in affected individuals having extra toes. The diagram shows the inheritance of the condition in a family of cats. polydactyl female cat polydactyl male cat non-polydactyl female cat non-polydactyl male cat key What does the family tree show about the allele for polydactyly?",
+      "options": {
+        "A": "It is codominant.",
+        "B": "It could be dominant or recessive.",
+        "C": "It is dominant.",
+        "D": "It is recessive."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q33.png",
+      "rawText": "The photomicrograph shows a cross-section through a marram grass leaf. Which feature is an adaptation of a xerophyte? A the presence of chloroplasts B the presence of fine hairs C the presence of phloem tissue D the presence of xylem vessels",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows a cross-section through a marram grass leaf. Which feature is an adaptation of a xerophyte?",
+      "options": {
+        "A": "the presence of chloroplasts",
+        "B": "the presence of fine hairs",
+        "C": "the presence of phloem tissue",
+        "D": "the presence of xylem vessels"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q34.png",
+      "rawText": "Some statements about mutations are given. 1 A random change in the amino acid sequence in DNA causes gene mutation. 2 A mutation is a genetic change. 3 Ionising radiation decreases the rate of mutation. 4 New alleles are formed by mutations. Which statements are correct? A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Some statements about mutations are given. 1",
+      "options": {
+        "A": "random change in the amino acid sequence in DNA causes gene mutation. 2 A mutation is a genetic change. 3 Ionising radiation decreases the rate of mutation. 4 New alleles are formed by mutations. Which statements are correct? A 1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q35.png",
+      "rawText": "The graph shows the growth of a population of rabbits in one area. population time X Y Which statements are correct? 1 At X, the birth rate is higher than the death rate. 2 At X, there are no deaths and the population is limited by a lack of food. 3 At Y, the birth rate and death rate are equal. A 1 and 2 B 1 and 3 C 1 only D 2 only",
+      "parseStatus": "ok",
+      "stem": "The graph shows the growth of a population of rabbits in one area. population time X Y Which statements are correct? 1 At X, the birth rate is higher than the death rate. 2 At X, there are no deaths and the population is limited by a lack of food. 3 At Y, the birth rate and death rate are equal.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "1 only",
+        "D": "2 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q36.png",
+      "rawText": "In guinea pigs, the allele for black fur is dominant and the allele for white fur is recessive. A test cross can be used to determine the genotype of a guinea pig with black fur. What would be the expected result of the test cross if the guinea pig with black fur was homozygous? A 50% black, 50% white B 25% black, 75% white C 100% black D 100% white",
+      "parseStatus": "ok",
+      "stem": "In guinea pigs, the allele for black fur is dominant and the allele for white fur is recessive.",
+      "options": {
+        "A": "test cross can be used to determine the genotype of a guinea pig with black fur. What would be the expected result of the test cross if the guinea pig with black fur was homozygous? A 50% black, 50% white",
+        "B": "25% black, 75% white",
+        "C": "100% black",
+        "D": "100% white"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q37.png",
+      "rawText": "The diagram shows part of the nitrogen cycle. nitrogen gas in the atmosphere nitrates in the soil process R by bacteria in the soil process T by bacteria in the soil animal protein ammonium ions process S by bacteria plant protein feeding digestion absorption decomposition by bacteria decomposition by bacteria Which row shows the correct processes for R, S and T? denitrification nitrogen fixation nitrification A R S T B T S R C T R S D S R T",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the nitrogen cycle. nitrogen gas in the atmosphere nitrates in the soil process R by bacteria in the soil process T by bacteria in the soil animal protein ammonium ions process S by bacteria plant protein feeding digestion absorption decomposition by bacteria decomposition by bacteria Which row shows the correct processes for R, S and T? denitrification nitrogen fixation nitrification",
+      "options": {
+        "A": "R S T",
+        "B": "T S R",
+        "C": "T R S",
+        "D": "S R T"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q38.png",
+      "rawText": "During eutrophication, what causes the death of fish? A increased growth of producers B increased photosynthesis by producers C decreased concentration of carbon dioxide in the water D decreased concentration of oxygen in the water",
+      "parseStatus": "ok",
+      "stem": "During eutrophication, what causes the death of fish?",
+      "options": {
+        "A": "increased growth of producers",
+        "B": "increased photosynthesis by producers",
+        "C": "decreased concentration of carbon dioxide in the water",
+        "D": "decreased concentration of oxygen in the water"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q39.png",
+      "rawText": "Which product is made using an enzyme rather than bacteria or fungi? A insulin B penicillin C lactose-free milk D mycoprotein",
+      "parseStatus": "ok",
+      "stem": "Which product is made using an enzyme rather than bacteria or fungi?",
+      "options": {
+        "A": "insulin",
+        "B": "penicillin",
+        "C": "lactose-free milk",
+        "D": "mycoprotein"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_w23_qp_21/q40.png",
+      "rawText": "Some ways in which humans make use of organisms are listed. 1 using yeast to produce ethanol 2 artificial selection of sheep with thick wool 3 using bacteria to produce human substances What are examples of genetic modification? A 1 and 3 B 1 only C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "Some ways in which humans make use of organisms are listed. 1 using yeast to produce ethanol 2 artificial selection of sheep with thick wool 3 using bacteria to produce human substances What are examples of genetic modification?",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 only",
+        "C": "2 and 3",
+        "D": "3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0610_m20_qp_22.pdf",
+  "markScheme": "0610_m20_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q01.png",
+      "rawText": "Which characteristic do all living organisms show? A breathing B excretion C photosynthesis D tropism",
+      "parseStatus": "ok",
+      "stem": "Which characteristic do all living organisms show?",
+      "options": {
+        "A": "breathing",
+        "B": "excretion",
+        "C": "photosynthesis",
+        "D": "tropism"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q02.png",
+      "rawText": "Using the binomial naming system, the Arctic fox is called Vulpes lagopus. Which row is correct? Vulpes lagopus A genus kingdom B genus species C species genus D species kingdom",
+      "parseStatus": "ok",
+      "stem": "Using the binomial naming system, the Arctic fox is called Vulpes lagopus. Which row is correct? Vulpes lagopus",
+      "options": {
+        "A": "genus kingdom",
+        "B": "genus species",
+        "C": "species genus",
+        "D": "species kingdom"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q03.png",
+      "rawText": "What is a characteristic of both insects and arachnids? A eight legs B exoskeleton C three pairs of legs D wings",
+      "parseStatus": "ok",
+      "stem": "What is a characteristic of both insects and arachnids?",
+      "options": {
+        "A": "eight legs",
+        "B": "exoskeleton",
+        "C": "three pairs of legs",
+        "D": "wings"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q04.png",
+      "rawText": "What structures can be found in both plant and animal cells? A cell walls and cell membranes B nuclei and cell walls C cytoplasm and chloroplasts D cell membranes and nuclei",
+      "parseStatus": "ok",
+      "stem": "What structures can be found in both plant and animal cells?",
+      "options": {
+        "A": "cell walls and cell membranes",
+        "B": "nuclei and cell walls",
+        "C": "cytoplasm and chloroplasts",
+        "D": "cell membranes and nuclei"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q05.png",
+      "rawText": "The actual thickness of the leaf shown in the diagram is 2000 µm, but its thickness in the diagram is 50 mm. What is the magnification of the diagram? A ×0.025 B ×25 C ×100 D ×100 000",
+      "parseStatus": "ok",
+      "stem": "The actual thickness of the leaf shown in the diagram is 2000 µm, but its thickness in the diagram is 50 mm. What is the magnification of the diagram?",
+      "options": {
+        "A": "×0.025",
+        "B": "×25",
+        "C": "×100",
+        "D": "×100 000"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q06.png",
+      "rawText": "What is the function of a root hair cell? A absorption B photosynthesis C reproduction D support",
+      "parseStatus": "ok",
+      "stem": "What is the function of a root hair cell?",
+      "options": {
+        "A": "absorption",
+        "B": "photosynthesis",
+        "C": "reproduction",
+        "D": "support"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q07.png",
+      "rawText": "Which row describes osmosis? movement of water energy from respiration used movement through a partially permeable membrane A \u0016 \u0016 \u001a key B \u0016 \u001a \u0016 \u0016= yes C \u001a \u0016 \u001a \u001a= no D \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which row describes osmosis? movement of water energy from respiration used movement through a partially permeable membrane",
+      "options": {
+        "A": "\u0016 \u0016 \u001a key",
+        "B": "\u0016 \u001a \u0016 \u0016= yes",
+        "C": "\u001a \u0016 \u001a \u001a= no",
+        "D": "\u001a \u001a \u0016"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q08.png",
+      "rawText": "A student made the following statements about the movement of ions by active transport. 1 It is the net movement of particles from a low concentration to a high concentration. 2 It is the net movement of particles from a high concentration to a low concentration. 3 It requires the use of energy from respiration. 4 It can only take place in living cells. Which statements are correct? A 1, 3 and 4 B 1 and 4 only C 2 and 4 only D 2 only",
+      "parseStatus": "ok",
+      "stem": "A student made the following statements about the movement of ions by active transport. 1 It is the net movement of particles from a low concentration to a high concentration. 2 It is the net movement of particles from a high concentration to a low concentration. 3 It requires the use of energy from respiration. 4 It can only take place in living cells. Which statements are correct?",
+      "options": {
+        "A": "1, 3 and 4",
+        "B": "1 and 4 only",
+        "C": "2 and 4 only",
+        "D": "2 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q09.png",
+      "rawText": "A test was performed on a food substance. A positive result was shown by a colour change to blue-black. What solution was used for the test? A biuret solution B DCPIP solution C iodine solution D Benedict’s solution",
+      "parseStatus": "ok",
+      "stem": "A test was performed on a food substance.",
+      "options": {
+        "A": "positive result was shown by a colour change to blue-black. What solution was used for the test? A biuret solution",
+        "B": "DCPIP solution",
+        "C": "iodine solution",
+        "D": "Benedict’s solution"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q10.png",
+      "rawText": "The diagram shows an experiment on the digestion of the protein in egg albumen by protease. The protease was taken from a human stomach. In which test-tube will the protein be digested most quickly? A B C D egg albumen + protease egg albumen + dilute hydrochloric acid egg albumen + dilute hydrochloric acid + protease egg albumen + dilute hydrochloric acid + boiled protease water-bath at 37 °C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q11.png",
+      "rawText": "The diagram represents enzyme action. + W + Y X What are parts W, X and Y in this chemical reaction? enzyme product substrate A W X Y B X W Y C X Y W D Y W X",
+      "parseStatus": "ok",
+      "stem": "The diagram represents enzyme action. + W + Y X What are parts W, X and Y in this chemical reaction? enzyme product substrate",
+      "options": {
+        "A": "W X Y",
+        "B": "X W Y",
+        "C": "X Y W",
+        "D": "Y W X"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q12.png",
+      "rawText": "A student drew a diagram to show the substances used and produced in photosynthesis in a leaf. 1 + 2 are used by the leaf 3 + 4 are produced by the leaf Which row shows the correct labels for the diagram? 1 2 3 4 A carbon dioxide glucose oxygen water B water carbon dioxide glucose oxygen C oxygen water carbon dioxide glucose D glucose oxygen water carbon dioxide",
+      "parseStatus": "ok",
+      "stem": "A student drew a diagram to show the substances used and produced in photosynthesis in a leaf. 1 + 2 are used by the leaf 3 + 4 are produced by the leaf Which row shows the correct labels for the diagram? 1 2 3 4",
+      "options": {
+        "A": "carbon dioxide glucose oxygen water",
+        "B": "water carbon dioxide glucose oxygen",
+        "C": "oxygen water carbon dioxide glucose",
+        "D": "glucose oxygen water carbon dioxide"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q13.png",
+      "rawText": "The diagram shows a type of plant cell. cytoplasm nucleus vacuole chloroplast In which tissue is this cell found? A leaf epidermis B palisade mesophyll C root epidermis D xylem",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a type of plant cell. cytoplasm nucleus vacuole chloroplast In which tissue is this cell found?",
+      "options": {
+        "A": "leaf epidermis",
+        "B": "palisade mesophyll",
+        "C": "root epidermis",
+        "D": "xylem"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q14.png",
+      "rawText": "The list shows some human health problems. 1 chronic obstructive pulmonary disease 2 constipation 3 coronary heart disease 4 obesity Which problems can be caused by malnutrition? A 1, 2 and 3 B 1 and 3 only C 2, 3 and 4 D 2 and 4 only",
+      "parseStatus": "ok",
+      "stem": "The list shows some human health problems. 1 chronic obstructive pulmonary disease 2 constipation 3 coronary heart disease 4 obesity Which problems can be caused by malnutrition?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 3 only",
+        "C": "2, 3 and 4",
+        "D": "2 and 4 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q15.png",
+      "rawText": "Cholera infection can cause the following events: 1 cells lining the small intestine secrete chloride ions 2 cholera bacteria produce a toxin 3 chloride ions move into the small intestine 4 water from the blood moves into the small intestine by osmosis 5 water potential of fluid in the small intestine becomes lower. Which sequence of events will cause diarrhoea? A 1 → 3 → 2 → 4 → 5 B 2 → 1 → 3 → 5 → 4 C 3 → 1 → 4 → 5 → 2 D 2 → 3 → 1 → 4 → 5",
+      "parseStatus": "ok",
+      "stem": "Cholera infection can cause the following events: 1 cells lining the small intestine secrete chloride ions 2 cholera bacteria produce a toxin 3 chloride ions move into the small intestine 4 water from the blood moves into the small intestine by osmosis 5 water potential of fluid in the small intestine becomes lower. Which sequence of events will cause diarrhoea?",
+      "options": {
+        "A": "1 → 3 → 2 → 4 → 5",
+        "B": "2 → 1 → 3 → 5 → 4",
+        "C": "3 → 1 → 4 → 5 → 2",
+        "D": "2 → 3 → 1 → 4 → 5"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q16.png",
+      "rawText": "Which food group is chemically digested in the mouth, passes through the stomach and continues to be broken down by chemical digestion in the small intestine? A carbohydrates B mineral salts C proteins D vitamins",
+      "parseStatus": "ok",
+      "stem": "Which food group is chemically digested in the mouth, passes through the stomach and continues to be broken down by chemical digestion in the small intestine?",
+      "options": {
+        "A": "carbohydrates",
+        "B": "mineral salts",
+        "C": "proteins",
+        "D": "vitamins"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q17.png",
+      "rawText": "When stems with white flowers are cut and placed in a blue stain the petals turn blue. Which tissue in the stem does the stain travel through to reach the petals? A epidermis B mesophyll C phloem D xylem",
+      "parseStatus": "ok",
+      "stem": "When stems with white flowers are cut and placed in a blue stain the petals turn blue. Which tissue in the stem does the stain travel through to reach the petals?",
+      "options": {
+        "A": "epidermis",
+        "B": "mesophyll",
+        "C": "phloem",
+        "D": "xylem"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q18.png",
+      "rawText": "Which process releases water vapour into the atmosphere from the leaves of trees? A active transport B osmosis C respiration D transpiration",
+      "parseStatus": "ok",
+      "stem": "Which process releases water vapour into the atmosphere from the leaves of trees?",
+      "options": {
+        "A": "active transport",
+        "B": "osmosis",
+        "C": "respiration",
+        "D": "transpiration"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q19.png",
+      "rawText": "Mammals have a double circulation. Which shows the correct sequence for the movement of blood in a mammal? A body → heart → lungs → heart B body → lungs → body → heart C heart → lungs → body → heart D heart → body → lungs → heart",
+      "parseStatus": "ok",
+      "stem": "Mammals have a double circulation. Which shows the correct sequence for the movement of blood in a mammal?",
+      "options": {
+        "A": "body → heart → lungs → heart",
+        "B": "body → lungs → body → heart",
+        "C": "heart → lungs → body → heart",
+        "D": "heart → body → lungs → heart"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q20.png",
+      "rawText": "The diagram shows a section through a blood vessel. P Q Which type of blood vessel is shown, and in which direction does the blood flow? type of vessel direction of flow A artery P to Q B artery Q to P C vein P to Q D vein Q to P",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through a blood vessel. P Q Which type of blood vessel is shown, and in which direction does the blood flow? type of vessel direction of flow",
+      "options": {
+        "A": "artery P to Q",
+        "B": "artery Q to P",
+        "C": "vein P to Q",
+        "D": "vein Q to P"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q21.png",
+      "rawText": "The antibodies that give immunity to a disease can be acquired in the following different ways. 1 feeding on breast milk 2 infection by disease 3 vaccination Which give active immunity? A 1 and 2 only B 1 and 3 only C 2 and 3 only D 1, 2 and 3",
+      "parseStatus": "ok",
+      "stem": "The antibodies that give immunity to a disease can be acquired in the following different ways. 1 feeding on breast milk 2 infection by disease 3 vaccination Which give active immunity?",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "2 and 3 only",
+        "D": "1, 2 and 3"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q22.png",
+      "rawText": "During physical activity, what stimulates the brain to increase the breathing rate? A decreased oxygen concentration in the blood B decreased oxygen concentration in the lungs C increased carbon dioxide concentration in the blood D increased carbon dioxide concentration in the lungs",
+      "parseStatus": "ok",
+      "stem": "During physical activity, what stimulates the brain to increase the breathing rate?",
+      "options": {
+        "A": "decreased oxygen concentration in the blood",
+        "B": "decreased oxygen concentration in the lungs",
+        "C": "increased carbon dioxide concentration in the blood",
+        "D": "increased carbon dioxide concentration in the lungs"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q23.png",
+      "rawText": "The table shows some of the changes that occur during breathing. from contracted to relaxed from relaxed to contracted diaphragm P X external intercostal muscles Q Y internal intercostal muscles R Z Which changes occur to cause inspiration? A P, Q and Z B X, Q and R C X, Y and R D X, Y and Z",
+      "parseStatus": "ok",
+      "stem": "The table shows some of the changes that occur during breathing. from contracted to relaxed from relaxed to contracted diaphragm P X external intercostal muscles Q Y internal intercostal muscles R Z Which changes occur to cause inspiration?",
+      "options": {
+        "A": "P, Q and Z",
+        "B": "X, Q and R",
+        "C": "X, Y and R",
+        "D": "X, Y and Z"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q24.png",
+      "rawText": "How many molecules of ethanol are released from the anaerobic respiration of one molecule of glucose? A 1 B 2 C 4 D 6",
+      "parseStatus": "ok",
+      "stem": "How many molecules of ethanol are released from the anaerobic respiration of one molecule of glucose?",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "4",
+        "D": "6"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q25.png",
+      "rawText": "The diagram shows a kidney and its blood vessels. artery vein ureter In a healthy person, which structure(s) transport glucose? A artery only B artery and ureter C artery and vein D ureter and vein",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a kidney and its blood vessels. artery vein ureter In a healthy person, which structure(s) transport glucose?",
+      "options": {
+        "A": "artery only",
+        "B": "artery and ureter",
+        "C": "artery and vein",
+        "D": "ureter and vein"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q26.png",
+      "rawText": "The diagram shows a synapse. Where are vesicles containing neurotransmitter molecules found? A B C D synaptic gap direction of impulse",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q27.png",
+      "rawText": "Which row shows the state of the ciliary muscles and suspensory ligaments, when the eye is focusing on a near object? ciliary muscles suspensory ligaments A contracted slack B contracted tense C relaxed slack D relaxed tense",
+      "parseStatus": "ok",
+      "stem": "Which row shows the state of the ciliary muscles and suspensory ligaments, when the eye is focusing on a near object? ciliary muscles suspensory ligaments",
+      "options": {
+        "A": "contracted slack",
+        "B": "contracted tense",
+        "C": "relaxed slack",
+        "D": "relaxed tense"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q28.png",
+      "rawText": "The diagram shows a shoot growing towards light. light Which statement about the role of auxin in phototropism is correct? A Auxin will move to the dark side of the shoot and cause cells to elongate. B Auxin will move to the dark side of the shoot and prevent cells from elongating. C Auxin will move to the light side of the shoot and cause cells to elongate. D Auxin will move to the light side of the shoot and prevent cells from elongating.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a shoot growing towards light. light Which statement about the role of auxin in phototropism is correct?",
+      "options": {
+        "A": "Auxin will move to the dark side of the shoot and cause cells to elongate.",
+        "B": "Auxin will move to the dark side of the shoot and prevent cells from elongating.",
+        "C": "Auxin will move to the light side of the shoot and cause cells to elongate.",
+        "D": "Auxin will move to the light side of the shoot and prevent cells from elongating."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q29.png",
+      "rawText": "Bacteria such as MRSA are resistant to several different antibiotics. Some suggested actions for reducing the development of antibiotic resistance in bacteria are listed. 1 Only use antibiotics when necessary. 2 Only use antibiotics on resistant bacteria. 3 Do not use antibiotics to treat viral infections. Which of the suggested actions are correct? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Bacteria such as MRSA are resistant to several different antibiotics. Some suggested actions for reducing the development of antibiotic resistance in bacteria are listed. 1 Only use antibiotics when necessary. 2 Only use antibiotics on resistant bacteria. 3 Do not use antibiotics to treat viral infections. Which of the suggested actions are correct?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q30.png",
+      "rawText": "The diagram shows a sperm cell. Which part contains mitochondria to release energy for movement? A C B D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q31.png",
+      "rawText": "What is a correct statement about lymphocytes? A Lymphocytes engulf pathogens. B Lymphocyte numbers can be reduced when a person is infected with HIV. C Lymphocytes produce antigens. D Lymphocytes transport oxygen to different parts of the body.",
+      "parseStatus": "ok",
+      "stem": "What is a correct statement about lymphocytes?",
+      "options": {
+        "A": "Lymphocytes engulf pathogens.",
+        "B": "Lymphocyte numbers can be reduced when a person is infected with HIV.",
+        "C": "Lymphocytes produce antigens.",
+        "D": "Lymphocytes transport oxygen to different parts of the body."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q32.png",
+      "rawText": "The statements describe how a protein is made. 1 mRNA passes through a ribosome. 2 mRNA molecules carry a copy of the gene to the cytoplasm. 3 The gene coding for the protein is copied in the nucleus. 4 Ribosomes assemble amino acids into proteins. What is the order of statements that correctly describes how a protein is made? A 2 → 1 → 3 → 4 B 2 → 3 → 4 → 1 C 3 → 1 → 2 → 4 D 3 → 2 → 1 → 4",
+      "parseStatus": "ok",
+      "stem": "The statements describe how a protein is made. 1 mRNA passes through a ribosome. 2 mRNA molecules carry a copy of the gene to the cytoplasm. 3 The gene coding for the protein is copied in the nucleus. 4 Ribosomes assemble amino acids into proteins. What is the order of statements that correctly describes how a protein is made?",
+      "options": {
+        "A": "2 → 1 → 3 → 4",
+        "B": "2 → 3 → 4 → 1",
+        "C": "3 → 1 → 2 → 4",
+        "D": "3 → 2 → 1 → 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q33.png",
+      "rawText": "Which row shows the features of stem cells? type of cell type of cell division involved A specialised meiosis B specialised mitosis C unspecialised meiosis D unspecialised mitosis",
+      "parseStatus": "ok",
+      "stem": "Which row shows the features of stem cells? type of cell type of cell division involved",
+      "options": {
+        "A": "specialised meiosis",
+        "B": "specialised mitosis",
+        "C": "unspecialised meiosis",
+        "D": "unspecialised mitosis"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q34.png",
+      "rawText": "Which statement is a correct description of the role of meiosis? A to create genetically identical daughter cells B to halve the chromosome number in the daughter cells C to create diploid daughter cells D to maintain the chromosome number in the daughter cells",
+      "parseStatus": "ok",
+      "stem": "Which statement is a correct description of the role of meiosis?",
+      "options": {
+        "A": "to create genetically identical daughter cells",
+        "B": "to halve the chromosome number in the daughter cells",
+        "C": "to create diploid daughter cells",
+        "D": "to maintain the chromosome number in the daughter cells"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q35.png",
+      "rawText": "The photomicrograph shows some red blood cells. sickle-shaped red blood cell What are the possible genotype combinations of this person? A HbSHbA or HbSHbS B HbSHbA or HbAHbA C HbAHbA only D HbSHbS or HbAHbA",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows some red blood cells. sickle-shaped red blood cell What are the possible genotype combinations of this person?",
+      "options": {
+        "A": "HbSHbA or HbSHbS",
+        "B": "HbSHbA or HbAHbA",
+        "C": "HbAHbA only",
+        "D": "HbSHbS or HbAHbA"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q36.png",
+      "rawText": "The events listed may happen in a population. 1 Better adapted organisms survive. 2 Mutation results in variation. 3 Survivors pass on their alleles to the next generation. 4 There is a struggle for survival. Which sequence may lead to evolution in the population? A 1 → 2 → 3 → 4 B 2 → 4 → 1 → 3 C 3 → 2 → 4 → 1 D 4 → 1 → 2 → 3",
+      "parseStatus": "ok",
+      "stem": "The events listed may happen in a population. 1 Better adapted organisms survive. 2 Mutation results in variation. 3 Survivors pass on their alleles to the next generation. 4 There is a struggle for survival. Which sequence may lead to evolution in the population?",
+      "options": {
+        "A": "1 → 2 → 3 → 4",
+        "B": "2 → 4 → 1 → 3",
+        "C": "3 → 2 → 4 → 1",
+        "D": "4 → 1 → 2 → 3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q37.png",
+      "rawText": "Which row describes how energy flows through a biological system? type of energy entering a biological system transferred between organisms in a biological system transferred from a biological system to the environment A chemical heat light B heat chemical heat C light chemical heat D light heat chemical",
+      "parseStatus": "ok",
+      "stem": "Which row describes how energy flows through a biological system? type of energy entering a biological system transferred between organisms in a biological system transferred from a biological system to the environment",
+      "options": {
+        "A": "chemical heat light",
+        "B": "heat chemical heat",
+        "C": "light chemical heat",
+        "D": "light heat chemical"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q38.png",
+      "rawText": "The diagram shows a food chain. grass → mouse → owl Which terms describe the position of the owl in this food chain? consumer trophic level A secondary second B secondary third C tertiary second D tertiary third",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food chain. grass → mouse → owl Which terms describe the position of the owl in this food chain? consumer trophic level",
+      "options": {
+        "A": "secondary second",
+        "B": "secondary third",
+        "C": "tertiary second",
+        "D": "tertiary third"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q39.png",
+      "rawText": "Which method is used to produce lactose-free milk? A filtering milk to remove lactose B heating milk to break down lactose C using lactase to break down lactose D using lipase to denature lactose",
+      "parseStatus": "ok",
+      "stem": "Which method is used to produce lactose-free milk?",
+      "options": {
+        "A": "filtering milk to remove lactose",
+        "B": "heating milk to break down lactose",
+        "C": "using lactase to break down lactose",
+        "D": "using lipase to denature lactose"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m20_qp_22/q40.png",
+      "rawText": "The diagram shows the positions of four farms and the concentrations of nitrate at different points in a river. Which farm is likely to have been using too much fertiliser on its land? farm A farm B farm D farm C 60 40 20 0 nitrate concentration / ppm direction of flow direction of flow",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

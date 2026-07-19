@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0610_s20_qp_22.pdf",
+  "markScheme": "0610_s20_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q01.png",
+      "rawText": "The diagram shows what happened in an experiment with plant seedlings. start light next day light Which characteristic of living things made the seedlings grow towards the light? A excretion B nutrition C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "The diagram shows what happened in an experiment with plant seedlings. start light next day light Which characteristic of living things made the seedlings grow towards the light?",
+      "options": {
+        "A": "excretion",
+        "B": "nutrition",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q02.png",
+      "rawText": "A rat has the scientific name Rattus rattus. What do the two parts of this name refer to? A genus and species B kingdom and genus C kingdom and species D variety and genus",
+      "parseStatus": "ok",
+      "stem": "A rat has the scientific name Rattus rattus. What do the two parts of this name refer to?",
+      "options": {
+        "A": "genus and species",
+        "B": "kingdom and genus",
+        "C": "kingdom and species",
+        "D": "variety and genus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q03.png",
+      "rawText": "The diagram shows a plant cell. A biologist wants to find out the number of chromosomes it contains. Which labelled part should be examined more closely? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q04.png",
+      "rawText": "The diagram shows a human liver cell. M The length of structure M on the diagram is 6 mm. The magnification of the diagram is x 2000. What is the actual length of M? A 0.03 µm B 3 µm C 333 µm D 12 000 mm",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a human liver cell. M The length of structure M on the diagram is 6 mm. The magnification of the diagram is x 2000. What is the actual length of M?",
+      "options": {
+        "A": "0.03 µm",
+        "B": "3 µm",
+        "C": "333 µm",
+        "D": "12 000 mm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q05.png",
+      "rawText": "Which diagram shows the appearance of a plant cell several minutes after it has been placed in a concentrated solution of sugar? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q06.png",
+      "rawText": "An uncooked piece of potato was placed in a solution. After two hours the size of the piece of potato had decreased. Which row explains why this has happened and how the potato cells have changed? water potential potato cells become potato cells external solution A higher lower flaccid B higher lower turgid C lower higher flaccid D lower higher turgid",
+      "parseStatus": "ok",
+      "stem": "An uncooked piece of potato was placed in a solution. After two hours the size of the piece of potato had decreased. Which row explains why this has happened and how the potato cells have changed? water potential potato cells become potato cells external solution",
+      "options": {
+        "A": "higher lower flaccid",
+        "B": "higher lower turgid",
+        "C": "lower higher flaccid",
+        "D": "lower higher turgid"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q07.png",
+      "rawText": "The diagram shows a section of DNA, with four bases identified on one strand. G A C T Which sequence of bases would be on the other strand, starting from the top? A AGTC B CTGA C GACT D TCAG",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q08.png",
+      "rawText": "Which food-testing solution shows a positive result when it turns from blue to purple? A Benedict’s solution B biuret solution C ethanol D iodine solution",
+      "parseStatus": "ok",
+      "stem": "Which food-testing solution shows a positive result when it turns from blue to purple?",
+      "options": {
+        "A": "Benedict’s solution",
+        "B": "biuret solution",
+        "C": "ethanol",
+        "D": "iodine solution"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q09.png",
+      "rawText": "The diagram shows the four types of human tooth. 1 2 3 4 incisor canine premolar molar Which teeth are used for grinding food? A 1 and 2 B 2 and 3 C 3 and 4 D 4 and 1",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the four types of human tooth. 1 2 3 4 incisor canine premolar molar Which teeth are used for grinding food?",
+      "options": {
+        "A": "1 and 2",
+        "B": "2 and 3",
+        "C": "3 and 4",
+        "D": "4 and 1"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q10.png",
+      "rawText": "Enzymes function best at their optimum temperature. Which statement describes the effect on an enzyme of increasing the temperature to the enzyme’s optimum temperature? A There are more frequent successful collisions. B The kinetic energy of the enzymes decreases. C The enzymes begin to lose their complementary shape. D The rate at which enzyme-substrate complexes form is reduced.",
+      "parseStatus": "ok",
+      "stem": "Enzymes function best at their optimum temperature. Which statement describes the effect on an enzyme of increasing the temperature to the enzyme’s optimum temperature?",
+      "options": {
+        "A": "There are more frequent successful collisions.",
+        "B": "The kinetic energy of the enzymes decreases.",
+        "C": "The enzymes begin to lose their complementary shape.",
+        "D": "The rate at which enzyme-substrate complexes form is reduced."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q11.png",
+      "rawText": "The diagram shows how the rate of photosynthesis varies with light intensity. The four curves show different conditions of temperature and carbon dioxide concentration. rate of photosynthesis light intensity 30 °C, 0.2% CO2 20 °C, 0.2% CO2 30 °C, 0.1% CO2 20 °C, 0.1% CO2 P What limits the rate of photosynthesis at point P? light intensity carbon dioxide concentration temperature A \u0016 \u0016 \u001a key B \u0016 \u001a \u001a \u0016= yes C \u001a \u0016 \u0016 \u001a= no D \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how the rate of photosynthesis varies with light intensity. The four curves show different conditions of temperature and carbon dioxide concentration. rate of photosynthesis light intensity 30 °C, 0.2% CO2 20 °C, 0.2% CO2 30 °C, 0.1% CO2 20 °C, 0.1% CO2 P What limits the rate of photosynthesis at point P? light intensity carbon dioxide concentration temperature",
+      "options": {
+        "A": "\u0016 \u0016 \u001a key",
+        "B": "\u0016 \u001a \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u0016 \u001a= no",
+        "D": "\u001a \u001a \u0016"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q12.png",
+      "rawText": "The diagram shows a plant cell. In which part of the cell does photosynthesis occur? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q13.png",
+      "rawText": "The graph shows the effect of pH on the activity of an enzyme. enzyme activity 1 3 5 7 pH 9 11 In which part of the alimentary canal would this enzyme be most active? A large intestine B mouth C small intestine D stomach",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of pH on the activity of an enzyme. enzyme activity 1 3 5 7 pH 9 11 In which part of the alimentary canal would this enzyme be most active?",
+      "options": {
+        "A": "large intestine",
+        "B": "mouth",
+        "C": "small intestine",
+        "D": "stomach"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q14.png",
+      "rawText": "The diagram shows the structure of a villus. The arteriole, capillary, lacteal and venule are labelled with letters. Which letter shows where nutrients are absorbed into the blood? A D B C direction of blood flow",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q15.png",
+      "rawText": "Which change increases the rate of water uptake by the roots of a plant? A decrease in evaporation of water from mesophyll cells B decrease in length of root hairs C decrease in water potential of root hair cells D decrease in water potential of soil water",
+      "parseStatus": "ok",
+      "stem": "Which change increases the rate of water uptake by the roots of a plant?",
+      "options": {
+        "A": "decrease in evaporation of water from mesophyll cells",
+        "B": "decrease in length of root hairs",
+        "C": "decrease in water potential of root hair cells",
+        "D": "decrease in water potential of soil water"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q16.png",
+      "rawText": "Dodder is a plant that grows on other plants called the hosts. The dodder plant connects to the host’s vascular bundles. The dodder plant does not have green leaves or roots. What correctly describes the regions for translocation? host leaves dodder A sink sink B sink source C source sink D source source",
+      "parseStatus": "ok",
+      "stem": "Dodder is a plant that grows on other plants called the hosts. The dodder plant connects to the host’s vascular bundles. The dodder plant does not have green leaves or roots. What correctly describes the regions for translocation? host leaves dodder",
+      "options": {
+        "A": "sink sink",
+        "B": "sink source",
+        "C": "source sink",
+        "D": "source source"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q17.png",
+      "rawText": "The diagrams show the single circulation of a fish and the double circulation of a mammal. gill capillaries body capillaries fish circulation lung capillaries body capillaries mammal circulation ventricle ventricles atrium R T S Y X Z atria Which letters represent areas of oxygenated blood? A R and X B S and Y C T and Y D T and Z",
+      "parseStatus": "ok",
+      "stem": "The diagrams show the single circulation of a fish and the double circulation of a mammal. gill capillaries body capillaries fish circulation lung capillaries body capillaries mammal circulation ventricle ventricles atrium R T S Y X Z atria Which letters represent areas of oxygenated blood?",
+      "options": {
+        "A": "R and X",
+        "B": "S and Y",
+        "C": "T and Y",
+        "D": "T and Z"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q18.png",
+      "rawText": "The diagram shows the human heart and main blood vessels. lungs rest of body X What is the blood vessel labelled X? A aorta B pulmonary artery C pulmonary vein D vena cava",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the human heart and main blood vessels. lungs rest of body X What is the blood vessel labelled X?",
+      "options": {
+        "A": "aorta",
+        "B": "pulmonary artery",
+        "C": "pulmonary vein",
+        "D": "vena cava"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q19.png",
+      "rawText": "The following are statements about immunity. 1 The transfer of antibodies from mother to baby in breast milk is an example of passive immunity. 2 Passive immunity results in long term immunity because of the production of memory cells. 3 Active immunity is gained after vaccination with antigens. Which statements are correct? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "The following are statements about immunity. 1 The transfer of antibodies from mother to baby in breast milk is an example of passive immunity. 2 Passive immunity results in long term immunity because of the production of memory cells. 3 Active immunity is gained after vaccination with antigens. Which statements are correct?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q20.png",
+      "rawText": "What is the site of gas exchange in humans? A nose B alveoli C bronchus D trachea",
+      "parseStatus": "ok",
+      "stem": "What is the site of gas exchange in humans?",
+      "options": {
+        "A": "nose",
+        "B": "alveoli",
+        "C": "bronchus",
+        "D": "trachea"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q21.png",
+      "rawText": "The substances listed are associated with aerobic respiration. 1 carbon dioxide 2 glucose 3 oxygen 4 water Which substances are the products of aerobic respiration? A 1 and 3 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The substances listed are associated with aerobic respiration. 1 carbon dioxide 2 glucose 3 oxygen 4 water Which substances are the products of aerobic respiration?",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q22.png",
+      "rawText": "The formula C2H5OH represents a chemical produced during anaerobic respiration. What is this chemical? A alcohol B glucose C glycogen D lactic acid",
+      "parseStatus": "ok",
+      "stem": "The formula C2H5OH represents a chemical produced during anaerobic respiration. What is this chemical?",
+      "options": {
+        "A": "alcohol",
+        "B": "glucose",
+        "C": "glycogen",
+        "D": "lactic acid"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q23.png",
+      "rawText": "What is filtered out of the blood in the glomerulus into the kidney tubule? glucose urea A \u0016 \u0016 key B \u0016 \u001a \u0016= yes C \u001a \u0016 \u001a= no D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "What is filtered out of the blood in the glomerulus into the kidney tubule? glucose urea",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u001a= no",
+        "D": "\u001a \u001a"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q24.png",
+      "rawText": "Which responses occur in the iris of the eye when a person walks from a brightly lit area to a dimly lit area? circular muscle radial muscle A contract contract B contract relax C relax contract D relax relax",
+      "parseStatus": "ok",
+      "stem": "Which responses occur in the iris of the eye when a person walks from a brightly lit area to a dimly lit area? circular muscle radial muscle",
+      "options": {
+        "A": "contract contract",
+        "B": "contract relax",
+        "C": "relax contract",
+        "D": "relax relax"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q25.png",
+      "rawText": "Which glands are endocrine glands? A adrenal, pancreas, testes B adrenal, ovaries, salivary C ovaries, sweat, testes D pancreas, salivary, sweat",
+      "parseStatus": "ok",
+      "stem": "Which glands are endocrine glands?",
+      "options": {
+        "A": "adrenal, pancreas, testes",
+        "B": "adrenal, ovaries, salivary",
+        "C": "ovaries, sweat, testes",
+        "D": "pancreas, salivary, sweat"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q26.png",
+      "rawText": "What are the effects of insulin and adrenaline on the concentration of blood glucose? effect of insulin on blood glucose concentration effect of adrenaline on blood glucose concentration A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "What are the effects of insulin and adrenaline on the concentration of blood glucose? effect of insulin on blood glucose concentration effect of adrenaline on blood glucose concentration",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q27.png",
+      "rawText": "Asexual reproduction can be used to produce crops. Why might a disease be likely to spread throughout the whole crop? A crop plants are genetically different B crop plants are genetically identical C many offspring are produced D offspring are produced quickly",
+      "parseStatus": "ok",
+      "stem": "Asexual reproduction can be used to produce crops. Why might a disease be likely to spread throughout the whole crop?",
+      "options": {
+        "A": "crop plants are genetically different",
+        "B": "crop plants are genetically identical",
+        "C": "many offspring are produced",
+        "D": "offspring are produced quickly"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q28.png",
+      "rawText": "In a comparison between the processes of artificial insemination (AI) and in vitro fertilisation (IVF), which statement applies to IVF only? A Human egg cells are harvested from the ovary. B Donated sperm cells are used to fertilise the egg cells. C Childless couples are given the opportunity to have a child of their own. D Fertilisation occurs inside the body of the female.",
+      "parseStatus": "ok",
+      "stem": "In a comparison between the processes of artificial insemination (AI) and in vitro fertilisation (IVF), which statement applies to IVF only?",
+      "options": {
+        "A": "Human egg cells are harvested from the ovary.",
+        "B": "Donated sperm cells are used to fertilise the egg cells.",
+        "C": "Childless couples are given the opportunity to have a child of their own.",
+        "D": "Fertilisation occurs inside the body of the female."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q29.png",
+      "rawText": "The diagram shows half a flower. There is a description of each numbered part. 1 2 3 1 the stigma which receives pollen from insects 2 the anther which produces smooth and light pollen grains 3 the ovule where fertilisation occurs when the male and female nuclei fuse Which descriptions are correct for an insect-pollinated flower? A 1 only B 1 and 3 only C 2 and 3 only D 1, 2 and 3",
+      "parseStatus": "ok",
+      "stem": "The diagram shows half a flower. There is a description of each numbered part. 1 2 3 1 the stigma which receives pollen from insects 2 the anther which produces smooth and light pollen grains 3 the ovule where fertilisation occurs when the male and female nuclei fuse Which descriptions are correct for an insect-pollinated flower?",
+      "options": {
+        "A": "1 only",
+        "B": "1 and 3 only",
+        "C": "2 and 3 only",
+        "D": "1, 2 and 3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q30.png",
+      "rawText": "What is a diploid nucleus? A a nucleus containing one set of chromosomes B a nucleus containing two sets of chromosomes C a nucleus with one double helix of DNA D a nucleus with two genes",
+      "parseStatus": "ok",
+      "stem": "What is a diploid nucleus?",
+      "options": {
+        "A": "a nucleus containing one set of chromosomes",
+        "B": "a nucleus containing two sets of chromosomes",
+        "C": "a nucleus with one double helix of DNA",
+        "D": "a nucleus with two genes"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q31.png",
+      "rawText": "Which statement about meiosis is correct? A At the end of meiosis a zygote has been produced. B During meiosis the haploid number is halved in the daughter cells. C Meiosis is reduction division in which diploid daughter cells are produced. D The parent cell contains twice as many chromosomes as each daughter cell.",
+      "parseStatus": "ok",
+      "stem": "Which statement about meiosis is correct?",
+      "options": {
+        "A": "At the end of meiosis a zygote has been produced.",
+        "B": "During meiosis the haploid number is halved in the daughter cells.",
+        "C": "Meiosis is reduction division in which diploid daughter cells are produced.",
+        "D": "The parent cell contains twice as many chromosomes as each daughter cell."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q32.png",
+      "rawText": "The diagram shows the inheritance of height in pea plants. tall parent plant TT tall offspring plant Tt tall offspring plant Tt dwarf parent plant tt Which plants have a heterozygous genotype? A both parent plants B dwarf parent plant only C both offspring plants D tall parent plant only",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the inheritance of height in pea plants. tall parent plant TT tall offspring plant Tt tall offspring plant Tt dwarf parent plant tt Which plants have a heterozygous genotype?",
+      "options": {
+        "A": "both parent plants",
+        "B": "dwarf parent plant only",
+        "C": "both offspring plants",
+        "D": "tall parent plant only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q33.png",
+      "rawText": "The graph shows the masses of two different types of tomato. 0 20 40 60 80 100 120 140 160 180 200 220 240 number of tomatoes mass / g type 1 type 2 What can be concluded from the graph? A Genes do not affect the mass of tomatoes. B Type 1 tomatoes show continuous variation. C Type 2 tomatoes are sometimes smaller than type 1 tomatoes. D Type 2 tomatoes show discontinuous variation.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the masses of two different types of tomato. 0 20 40 60 80 100 120 140 160 180 200 220 240 number of tomatoes mass / g type 1 type 2 What can be concluded from the graph?",
+      "options": {
+        "A": "Genes do not affect the mass of tomatoes.",
+        "B": "Type 1 tomatoes show continuous variation.",
+        "C": "Type 2 tomatoes are sometimes smaller than type 1 tomatoes.",
+        "D": "Type 2 tomatoes show discontinuous variation."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q34.png",
+      "rawText": "Which adaptation may be present in a xerophyte? A leaves with small surface area and large numbers of stomata B little or no xylem tissue and leaves with large surface area C stomatal hairs and rolled leaves D thin or no cuticle and deep roots",
+      "parseStatus": "ok",
+      "stem": "Which adaptation may be present in a xerophyte?",
+      "options": {
+        "A": "leaves with small surface area and large numbers of stomata",
+        "B": "little or no xylem tissue and leaves with large surface area",
+        "C": "stomatal hairs and rolled leaves",
+        "D": "thin or no cuticle and deep roots"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q35.png",
+      "rawText": "The diagram shows a food chain in a rock pool. seaweed → whelks → crabs → seagulls What will happen if the number of secondary consumers increases? There will be A fewer crabs. B fewer seagulls. C fewer whelks. D less seaweed.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food chain in a rock pool. seaweed → whelks → crabs → seagulls What will happen if the number of secondary consumers increases? There will be",
+      "options": {
+        "A": "fewer crabs.",
+        "B": "fewer seagulls.",
+        "C": "fewer whelks.",
+        "D": "less seaweed."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q36.png",
+      "rawText": "What is defined as ‘all of the populations of different species in an ecosystem’? A community B environment C habitat D trophic level",
+      "parseStatus": "ok",
+      "stem": "What is defined as ‘all of the populations of different species in an ecosystem’?",
+      "options": {
+        "A": "community",
+        "B": "environment",
+        "C": "habitat",
+        "D": "trophic level"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q37.png",
+      "rawText": "What is the role of anaerobic respiration in bread-making? A to produce alcohol to flavour the bread B to produce gas to make the bread rise C to release enough energy to bake the bread D to release enough lactic acid to kill the yeast",
+      "parseStatus": "ok",
+      "stem": "What is the role of anaerobic respiration in bread-making?",
+      "options": {
+        "A": "to produce alcohol to flavour the bread",
+        "B": "to produce gas to make the bread rise",
+        "C": "to release enough energy to bake the bread",
+        "D": "to release enough lactic acid to kill the yeast"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q38.png",
+      "rawText": "A crop plant has been genetically modified to make it resistant to herbicides. Which is a possible disadvantage of introducing this new crop plant? A Loss of weeds reduces competition. B Some weeds might become resistant to the herbicide. C The crop plant is unharmed and produces a higher yield. D The new gene will appear in new generations of the crop.",
+      "parseStatus": "ok",
+      "stem": "A crop plant has been genetically modified to make it resistant to herbicides. Which is a possible disadvantage of introducing this new crop plant?",
+      "options": {
+        "A": "Loss of weeds reduces competition.",
+        "B": "Some weeds might become resistant to the herbicide.",
+        "C": "The crop plant is unharmed and produces a higher yield.",
+        "D": "The new gene will appear in new generations of the crop."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q39.png",
+      "rawText": "Which is a reason for using bacteria in biotechnology? A Bacteria are found inside the human body. B Bacteria do not become resistant to antibiotics. C Bacteria can make complex molecules. D Bacteria reproduce slowly.",
+      "parseStatus": "ok",
+      "stem": "Which is a reason for using bacteria in biotechnology?",
+      "options": {
+        "A": "Bacteria are found inside the human body.",
+        "B": "Bacteria do not become resistant to antibiotics.",
+        "C": "Bacteria can make complex molecules.",
+        "D": "Bacteria reproduce slowly."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_22/q40.png",
+      "rawText": "When a river is polluted by fertiliser, the following processes may occur. 1 increased aerobic respiration of decomposers 2 increased growth of producers 3 decreased oxygen concentration in the water What is the correct sequence for these processes? A 1 → 2 → 3 B 1 → 3 → 2 C 2 → 1 → 3 D 2 → 3 → 1",
+      "parseStatus": "ok",
+      "stem": "When a river is polluted by fertiliser, the following processes may occur. 1 increased aerobic respiration of decomposers 2 increased growth of producers 3 decreased oxygen concentration in the water What is the correct sequence for these processes?",
+      "options": {
+        "A": "1 → 2 → 3",
+        "B": "1 → 3 → 2",
+        "C": "2 → 1 → 3",
+        "D": "2 → 3 → 1"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

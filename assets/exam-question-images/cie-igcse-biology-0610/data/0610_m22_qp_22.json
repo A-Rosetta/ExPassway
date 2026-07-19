@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0610_m22_qp_22.pdf",
+  "markScheme": "0610_m22_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q01.png",
+      "rawText": "The diagrams show a test-tube containing pond water. The green colour is caused by microorganisms that have chloroplasts. pale green pond water light off dark green area light on oxygen bubble Which characteristics of living organisms are shown? A excretion, growth and movement B movement, nutrition and sensitivity C nutrition, reproduction and respiration D reproduction, sensitivity and growth",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a test-tube containing pond water. The green colour is caused by microorganisms that have chloroplasts. pale green pond water light off dark green area light on oxygen bubble Which characteristics of living organisms are shown?",
+      "options": {
+        "A": "excretion, growth and movement",
+        "B": "movement, nutrition and sensitivity",
+        "C": "nutrition, reproduction and respiration",
+        "D": "reproduction, sensitivity and growth"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q02.png",
+      "rawText": "The key shows some features of living organisms that can be used to place them into one of three different kingdoms. living organism nucleus present no nucleus kingdom Z cell wall present no cell wall cell wall made of cellulose yes no kingdom X kingdom Y Which row correctly identifies these three kingdoms? X Y Z A fungi plant prokaryote B fungi plant protoctist C plant fungi prokaryote D plant fungi protoctist",
+      "parseStatus": "ok",
+      "stem": "The key shows some features of living organisms that can be used to place them into one of three different kingdoms. living organism nucleus present no nucleus kingdom Z cell wall present no cell wall cell wall made of cellulose yes no kingdom X kingdom Y Which row correctly identifies these three kingdoms? X Y Z",
+      "options": {
+        "A": "fungi plant prokaryote",
+        "B": "fungi plant protoctist",
+        "C": "plant fungi prokaryote",
+        "D": "plant fungi protoctist"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q03.png",
+      "rawText": "The diagram shows a mitochondrion. The scale bar shows the actual size of the mitochondrion. 1 μm The diagram is 70 mm long. What is the magnification of the diagram? A 0.0007 B 70 C 7000 D 70 000",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a mitochondrion. The scale bar shows the actual size of the mitochondrion. 1 μm The diagram is 70 mm long. What is the magnification of the diagram?",
+      "options": {
+        "A": "0.0007",
+        "B": "70",
+        "C": "7000",
+        "D": "70 000"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q04.png",
+      "rawText": "Two types of cell, one animal and one plant, were examined using a light microscope. Which row shows the correct combination of structures that would be observed in the cells? cell structure observed animal cell plant cell A chloroplast membrane vacuole cytoplasm B cytoplasm nucleus chloroplast membrane C membrane cell wall cytoplasm nucleus D nucleus chloroplast cell wall membrane",
+      "parseStatus": "ok",
+      "stem": "Two types of cell, one animal and one plant, were examined using a light microscope. Which row shows the correct combination of structures that would be observed in the cells? cell structure observed animal cell plant cell",
+      "options": {
+        "A": "chloroplast membrane vacuole cytoplasm",
+        "B": "cytoplasm nucleus chloroplast membrane",
+        "C": "membrane cell wall cytoplasm nucleus",
+        "D": "nucleus chloroplast cell wall membrane"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q05.png",
+      "rawText": "The diagram shows a cross-section through a leaf. Which arrow shows the direction of diffusion of carbon dioxide on a sunny day? D C B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q06.png",
+      "rawText": "The diagram shows a plant cell after it has been submerged in a solution, P, for 20 minutes. Which row describes the water potential of solution P at the start of the experiment and the condition of the cell after 20 minutes? water potential of solution P at the start of the experiment condition of the cell after 20 minutes A higher than the inside of the cell plasmolysed and turgid B higher than the inside of the cell under high turgor pressure C lower than the inside of the cell plasmolysed and flaccid D the same as the inside of the cell under low turgor pressure",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a plant cell after it has been submerged in a solution, P, for 20 minutes. Which row describes the water potential of solution P at the start of the experiment and the condition of the cell after 20 minutes? water potential of solution P at the start of the experiment condition of the cell after 20 minutes",
+      "options": {
+        "A": "higher than the inside of the cell plasmolysed and turgid",
+        "B": "higher than the inside of the cell under high turgor pressure",
+        "C": "lower than the inside of the cell plasmolysed and flaccid",
+        "D": "the same as the inside of the cell under low turgor pressure"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q07.png",
+      "rawText": "Which row is correct for a positive food test for vitamin C? colour of the food test reagent at the start heat required final colour of the food test reagent A colourless yes purple B blue no colourless C colourless no blue D blue yes orange",
+      "parseStatus": "ok",
+      "stem": "Which row is correct for a positive food test for vitamin C? colour of the food test reagent at the start heat required final colour of the food test reagent",
+      "options": {
+        "A": "colourless yes purple",
+        "B": "blue no colourless",
+        "C": "colourless no blue",
+        "D": "blue yes orange"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q08.png",
+      "rawText": "In which molecule are cross-links formed between bases? A carbohydrate B DNA C fat D glycogen",
+      "parseStatus": "ok",
+      "stem": "In which molecule are cross-links formed between bases?",
+      "options": {
+        "A": "carbohydrate",
+        "B": "DNA",
+        "C": "fat",
+        "D": "glycogen"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q09.png",
+      "rawText": "What controls the speed of chemical reactions in all living cells? A enzymes B hormones C ions D vitamins",
+      "parseStatus": "ok",
+      "stem": "What controls the speed of chemical reactions in all living cells?",
+      "options": {
+        "A": "enzymes",
+        "B": "hormones",
+        "C": "ions",
+        "D": "vitamins"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q10.png",
+      "rawText": "Enzymes have an optimum temperature at which they are most active. Which row explains why enzyme activity decreases if the temperature is not optimum? below optimum temperature above optimum temperature A enzymes denature enzymes denature B enzymes denature enzymes have less kinetic energy C enzymes have less kinetic energy enzymes denature D enzymes have less kinetic energy enzymes have less kinetic energy",
+      "parseStatus": "ok",
+      "stem": "Enzymes have an optimum temperature at which they are most active. Which row explains why enzyme activity decreases if the temperature is not optimum? below optimum temperature above optimum temperature",
+      "options": {
+        "A": "enzymes denature enzymes denature",
+        "B": "enzymes denature enzymes have less kinetic energy",
+        "C": "enzymes have less kinetic energy enzymes denature",
+        "D": "enzymes have less kinetic energy enzymes have less kinetic energy"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q11.png",
+      "rawText": "A piece of foil was placed over one green and white leaf on a plant. white green foil The plant was placed under a bright light for 24 hours and then tested for starch with iodine solution. Which diagram shows the areas of the leaf that would stain blue-black with iodine solution? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q12.png",
+      "rawText": "The graph shows the effect of light intensity on the rate of photosynthesis. rate of photosynthesis light intensity X Which environmental factor is limiting the rate of photosynthesis at X on the graph? A carbon dioxide concentration B light intensity C oxygen concentration D temperature",
+      "parseStatus": "ok",
+      "stem": "The graph shows the effect of light intensity on the rate of photosynthesis. rate of photosynthesis light intensity X Which environmental factor is limiting the rate of photosynthesis at X on the graph?",
+      "options": {
+        "A": "carbon dioxide concentration",
+        "B": "light intensity",
+        "C": "oxygen concentration",
+        "D": "temperature"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q13.png",
+      "rawText": "Which condition can be caused by a lack of fibre in the diet? A constipation B obesity C scurvy D starvation",
+      "parseStatus": "ok",
+      "stem": "Which condition can be caused by a lack of fibre in the diet?",
+      "options": {
+        "A": "constipation",
+        "B": "obesity",
+        "C": "scurvy",
+        "D": "starvation"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q14.png",
+      "rawText": "In which test-tube will the breakdown of fat be fastest? milk, lipase and bile A milk and lipase B milk and bile C milk, boiled lipase and bile D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q15.png",
+      "rawText": "The diagrams show stages in the passage of water through a plant. Which arrow shows water moving in the form of water vapour? B A C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q16.png",
+      "rawText": "The diagram shows some potato tubers. New shoots are beginning to grow. Sucrose is being translocated from source to sink. soil shoot tuber Which statement is correct? A The tuber is a sink. B The soil is a sink. C The shoots are sources. D The shoots are sinks.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some potato tubers. New shoots are beginning to grow. Sucrose is being translocated from source to sink. soil shoot tuber Which statement is correct?",
+      "options": {
+        "A": "The tuber is a sink.",
+        "B": "The soil is a sink.",
+        "C": "The shoots are sources.",
+        "D": "The shoots are sinks."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q17.png",
+      "rawText": "The diagram shows a section through the heart. R P Q What is the function of the structure labelled Q? A It controls the amount of blood leaving the heart. B It increases the pressure in part R. C It prevents backflow of blood into part P. D It prevents blood flowing into the vena cava.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through the heart. R P Q What is the function of the structure labelled Q?",
+      "options": {
+        "A": "It controls the amount of blood leaving the heart.",
+        "B": "It increases the pressure in part R.",
+        "C": "It prevents backflow of blood into part P.",
+        "D": "It prevents blood flowing into the vena cava."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q18.png",
+      "rawText": "During the process of blood clotting, damage to blood vessels stimulates L, and M is converted to N. What are L, M and N? L M N A fibrin platelets fibrinogen B fibrinogen platelets fibrin C platelets fibrin fibrinogen D platelets fibrinogen fibrin",
+      "parseStatus": "ok",
+      "stem": "During the process of blood clotting, damage to blood vessels stimulates L, and M is converted to N. What are L, M and N? L M N",
+      "options": {
+        "A": "fibrin platelets fibrinogen",
+        "B": "fibrinogen platelets fibrin",
+        "C": "platelets fibrin fibrinogen",
+        "D": "platelets fibrinogen fibrin"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q19.png",
+      "rawText": "Which statement about passive immunity is correct? A Antibodies are acquired. B It gives a long-term effect. C It is inherited. D Memory cells are produced.",
+      "parseStatus": "ok",
+      "stem": "Which statement about passive immunity is correct?",
+      "options": {
+        "A": "Antibodies are acquired.",
+        "B": "It gives a long-term effect.",
+        "C": "It is inherited.",
+        "D": "Memory cells are produced."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q20.png",
+      "rawText": "Compared with inspired air, which description of expired air is correct? A It has less oxygen and less carbon dioxide. B It has less oxygen and more carbon dioxide. C It has more oxygen and less carbon dioxide. D It has more oxygen and more carbon dioxide.",
+      "parseStatus": "ok",
+      "stem": "Compared with inspired air, which description of expired air is correct?",
+      "options": {
+        "A": "It has less oxygen and less carbon dioxide.",
+        "B": "It has less oxygen and more carbon dioxide.",
+        "C": "It has more oxygen and less carbon dioxide.",
+        "D": "It has more oxygen and more carbon dioxide."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q21.png",
+      "rawText": "Which row shows the features of the gas exchange surface in humans? surface area thickness A large thick B large thin C small thick D small thin",
+      "parseStatus": "ok",
+      "stem": "Which row shows the features of the gas exchange surface in humans? surface area thickness",
+      "options": {
+        "A": "large thick",
+        "B": "large thin",
+        "C": "small thick",
+        "D": "small thin"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q22.png",
+      "rawText": "Yeast is placed inside a container full of a glucose solution with no air. Which word equation summarises the process that takes place inside the container? A glucose  alcohol + carbon dioxide B glucose  lactic acid C glucose + oxygen  carbon dioxide + water D glucose + oxygen  alcohol",
+      "parseStatus": "ok",
+      "stem": "Yeast is placed inside a container full of a glucose solution with no air. Which word equation summarises the process that takes place inside the container?",
+      "options": {
+        "A": "glucose  alcohol + carbon dioxide",
+        "B": "glucose  lactic acid",
+        "C": "glucose + oxygen  carbon dioxide + water",
+        "D": "glucose + oxygen  alcohol"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q23.png",
+      "rawText": "Which process uses energy released in respiration? A diffusion B evaporation C growth D osmosis",
+      "parseStatus": "ok",
+      "stem": "Which process uses energy released in respiration?",
+      "options": {
+        "A": "diffusion",
+        "B": "evaporation",
+        "C": "growth",
+        "D": "osmosis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q24.png",
+      "rawText": "Which term describes the removal of the nitrogen-containing part of amino acids to form urea? A assimilation B deamination C denaturation D digestion",
+      "parseStatus": "ok",
+      "stem": "Which term describes the removal of the nitrogen-containing part of amino acids to form urea?",
+      "options": {
+        "A": "assimilation",
+        "B": "deamination",
+        "C": "denaturation",
+        "D": "digestion"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q25.png",
+      "rawText": "Which numbered parts form the central nervous system? 1 3 2 A 1 only B 1 and 2 C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "Which numbered parts form the central nervous system? 1 3 2",
+      "options": {
+        "A": "1 only",
+        "B": "1 and 2",
+        "C": "2 and 3",
+        "D": "3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q26.png",
+      "rawText": "The diagram shows a section through the eye of an octopus. Octopuses have eyes that are similar in structure and function to human eyes. 1 2 3 4 6 7 5 Which row identifies the structures of the octopus eye? pupil cornea lens iris A 4 6 7 3 B 5 1 2 3 C 4 1 7 5 D 5 6 2 4",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through the eye of an octopus. Octopuses have eyes that are similar in structure and function to human eyes. 1 2 3 4 6 7 5 Which row identifies the structures of the octopus eye? pupil cornea lens iris",
+      "options": {
+        "A": "4 6 7 3",
+        "B": "5 1 2 3",
+        "C": "4 1 7 5",
+        "D": "5 6 2 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q27.png",
+      "rawText": "A person eats a large bowl of rice. Rice contains starch. What happens to the amounts of insulin and glucagon in their body? insulin glucagon A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "A person eats a large bowl of rice. Rice contains starch. What happens to the amounts of insulin and glucagon in their body? insulin glucagon",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q28.png",
+      "rawText": "A study investigated the effect on arm muscle surface area of taking testosterone and doing exercise. The participants in the study were given either testosterone or a placebo. The placebo does not contain any testosterone. The bar chart shows the results of the study. 600 400 200 0 no exercise exercise placebo testosterone placebo testosterone average change in arm muscle surface area / mm2 Which conclusion about the data in the graph is correct? A Exercise has no effect on arm muscle surface area. B No exercise and not taking testosterone has the greatest effect on arm muscle surface area. C Exercise has the same effect on arm muscle surface area as no exercise. D Taking testosterone increases arm muscle surface area.",
+      "parseStatus": "ok",
+      "stem": "A study investigated the effect on arm muscle surface area of taking testosterone and doing exercise. The participants in the study were given either testosterone or a placebo. The placebo does not contain any testosterone. The bar chart shows the results of the study. 600 400 200 0 no exercise exercise placebo testosterone placebo testosterone average change in arm muscle surface area / mm2 Which conclusion about the data in the graph is correct?",
+      "options": {
+        "A": "Exercise has no effect on arm muscle surface area.",
+        "B": "No exercise and not taking testosterone has the greatest effect on arm muscle surface area.",
+        "C": "Exercise has the same effect on arm muscle surface area as no exercise.",
+        "D": "Taking testosterone increases arm muscle surface area."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q29.png",
+      "rawText": "Which statement about reproduction is correct? A All living species can reproduce asexually. B Gametes are needed for asexual reproduction. C Only organisms that are separated from other organisms of the same species can reproduce asexually. D Some organisms reproduce asexually and sexually.",
+      "parseStatus": "ok",
+      "stem": "Which statement about reproduction is correct?",
+      "options": {
+        "A": "All living species can reproduce asexually.",
+        "B": "Gametes are needed for asexual reproduction.",
+        "C": "Only organisms that are separated from other organisms of the same species can reproduce asexually.",
+        "D": "Some organisms reproduce asexually and sexually."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q30.png",
+      "rawText": "What will happen if a woman smokes during pregnancy? A Nicotine can cross the placenta and affect the fetus. B Nicotine can cause COPD in the lungs of the fetus. C The woman can become addicted to carbon monoxide. D Carbon monoxide can cause cancer in the lungs of the fetus.",
+      "parseStatus": "ok",
+      "stem": "What will happen if a woman smokes during pregnancy?",
+      "options": {
+        "A": "Nicotine can cross the placenta and affect the fetus.",
+        "B": "Nicotine can cause COPD in the lungs of the fetus.",
+        "C": "The woman can become addicted to carbon monoxide.",
+        "D": "Carbon monoxide can cause cancer in the lungs of the fetus."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q31.png",
+      "rawText": "The graph shows the four hormones that control the menstrual cycle. Which curve on the graph represents the hormone LH? concentration of hormone A B C D 0 1 2 time / weeks 3 4",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q32.png",
+      "rawText": "What happens to the mass of DNA in a nucleus before mitosis occurs? A It doubles. B It halves. C It stays the same. D It halves and then halves again.",
+      "parseStatus": "ok",
+      "stem": "What happens to the mass of DNA in a nucleus before mitosis occurs?",
+      "options": {
+        "A": "It doubles.",
+        "B": "It halves.",
+        "C": "It stays the same.",
+        "D": "It halves and then halves again."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q33.png",
+      "rawText": "In a species of pea plant, height is controlled by one gene. The allele for tall is dominant to the allele for short. A test cross is done to identify the genotype of a tall pea plant. The table shows the possible phenotypes of the offspring and a description of the genotypes of the tall parent pea plant. phenotypes of the offspring description of the genotype of the tall parent pea plant 1 all tall heterozygous 2 all tall homozygous dominant 3 all short homozygous dominant 4 tall and short heterozygous If a large number of offspring are produced, which rows are possible? A 1 and 3 B 1 only C 2 and 4 D 2 only",
+      "parseStatus": "ok",
+      "stem": "In a species of pea plant, height is controlled by one gene. The allele for tall is dominant to the allele for short.",
+      "options": {
+        "A": "test cross is done to identify the genotype of a tall pea plant. The table shows the possible phenotypes of the offspring and a description of the genotypes of the tall parent pea plant. phenotypes of the offspring description of the genotype of the tall parent pea plant 1 all tall heterozygous 2 all tall homozygous dominant 3 all short homozygous dominant 4 tall and short heterozygous If a large number of offspring are produced, which rows are possible? A 1 and 3",
+        "B": "1 only",
+        "C": "2 and 4",
+        "D": "2 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q34.png",
+      "rawText": "Which statement about variation is correct? A Continuous variation results in few phenotypes with no intermediates. B Discontinuous variation results in few phenotypes with no intermediates. C Phenotypic variation is caused by environmental factors only. D Phenotypic variation is caused by genetic factors only.",
+      "parseStatus": "ok",
+      "stem": "Which statement about variation is correct?",
+      "options": {
+        "A": "Continuous variation results in few phenotypes with no intermediates.",
+        "B": "Discontinuous variation results in few phenotypes with no intermediates.",
+        "C": "Phenotypic variation is caused by environmental factors only.",
+        "D": "Phenotypic variation is caused by genetic factors only."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q35.png",
+      "rawText": "Some plants have small leaves with thick waxy cuticles. Which row describes the effect of these features on water loss and the type of plant that has these features? effect on water loss type of plant A decreases hydrophyte B decreases xerophyte C increases hydrophyte D increases xerophyte",
+      "parseStatus": "ok",
+      "stem": "Some plants have small leaves with thick waxy cuticles. Which row describes the effect of these features on water loss and the type of plant that has these features? effect on water loss type of plant",
+      "options": {
+        "A": "decreases hydrophyte",
+        "B": "decreases xerophyte",
+        "C": "increases hydrophyte",
+        "D": "increases xerophyte"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q36.png",
+      "rawText": "Some plants of different species can be crossed with each other to form hybrids that have a diploid number different from either of the two parent species. The diagram shows a cross between plants with different diploid numbers. species 1 diploid number 70 hybrid zygote diploid number 64 species 2 diploid number X What is the diploid number of species 2? A 29 B 32 C 35 D 58",
+      "parseStatus": "ok",
+      "stem": "Some plants of different species can be crossed with each other to form hybrids that have a diploid number different from either of the two parent species. The diagram shows a cross between plants with different diploid numbers. species 1 diploid number 70 hybrid zygote diploid number 64 species 2 diploid number X What is the diploid number of species 2?",
+      "options": {
+        "A": "29",
+        "B": "32",
+        "C": "35",
+        "D": "58"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q37.png",
+      "rawText": "The diagram shows some of the stages involved in the nitrogen cycle. atmospheric nitrogen ammonium compounds plant protein nitrate 5 1 4 2 3 Which processes are carried out at each stage? absorption decomposition denitrification nitrification nitrogen fixation A 2 4 5 1 3 B 2 3 1 4 5 C 1 5 2 3 4 D 1 2 3 5 4",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the stages involved in the nitrogen cycle. atmospheric nitrogen ammonium compounds plant protein nitrate 5 1 4 2 3 Which processes are carried out at each stage? absorption decomposition denitrification nitrification nitrogen fixation",
+      "options": {
+        "A": "2 4 5 1 3",
+        "B": "2 3 1 4 5",
+        "C": "1 5 2 3 4",
+        "D": "1 2 3 5 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q38.png",
+      "rawText": "Genetically engineered bacteria are used to produce human proteins. Into which component of the bacterial cell is human DNA inserted to produce human proteins? A cell wall B nucleus C plasmid D rough endoplasmic reticulum",
+      "parseStatus": "ok",
+      "stem": "Genetically engineered bacteria are used to produce human proteins. Into which component of the bacterial cell is human DNA inserted to produce human proteins?",
+      "options": {
+        "A": "cell wall",
+        "B": "nucleus",
+        "C": "plasmid",
+        "D": "rough endoplasmic reticulum"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q39.png",
+      "rawText": "The sugar in milk is digested by an enzyme. Which row matches the name of the enzyme with the sugar it digests? enzyme sugar in milk A lactase glucose B lactose lactase C lactase lactose D lactose sucrose",
+      "parseStatus": "ok",
+      "stem": "The sugar in milk is digested by an enzyme. Which row matches the name of the enzyme with the sugar it digests? enzyme sugar in milk",
+      "options": {
+        "A": "lactase glucose",
+        "B": "lactose lactase",
+        "C": "lactase lactose",
+        "D": "lactose sucrose"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m22_qp_22/q40.png",
+      "rawText": "The list shows activities that happen in a forest. 1 cutting down only selected trees 2 educating people about forests 3 replanting trees 4 cutting down trees to grow crop plants Which activities are likely to ensure the forest is used sustainably? A 1, 2 and 3 B 1, 2 and 4 C 1, 3 and 4 D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "The list shows activities that happen in a forest. 1 cutting down only selected trees 2 educating people about forests 3 replanting trees 4 cutting down trees to grow crop plants Which activities are likely to ensure the forest is used sustainably?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1, 2 and 4",
+        "C": "1, 3 and 4",
+        "D": "2 and 3 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

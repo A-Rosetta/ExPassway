@@ -1,0 +1,678 @@
+{
+  "questionPaper": "0610_s21_qp_22.pdf",
+  "markScheme": "0610_s21_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q01.png",
+      "rawText": "What is a characteristic of all living organisms? A breathing B circulation C egestion D sensitivity",
+      "parseStatus": "ok",
+      "stem": "What is a characteristic of all living organisms?",
+      "options": {
+        "A": "breathing",
+        "B": "circulation",
+        "C": "egestion",
+        "D": "sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q02.png",
+      "rawText": "The bonobo and the chimpanzee are two closely related species. What is the most accurate method of deciding how closely related species are? A compare evolutionary relationships of other species B compare the base sequences of their DNA C compare their anatomy D compare their morphology",
+      "parseStatus": "ok",
+      "stem": "The bonobo and the chimpanzee are two closely related species. What is the most accurate method of deciding how closely related species are?",
+      "options": {
+        "A": "compare evolutionary relationships of other species",
+        "B": "compare the base sequences of their DNA",
+        "C": "compare their anatomy",
+        "D": "compare their morphology"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q03.png",
+      "rawText": "Scientists discover a new species of animal. It has a segmented body with two pairs of legs on each segment. To which group of animals does this new species belong? A arachnids B crustaceans C insects D myriapods",
+      "parseStatus": "ok",
+      "stem": "Scientists discover a new species of animal. It has a segmented body with two pairs of legs on each segment. To which group of animals does this new species belong?",
+      "options": {
+        "A": "arachnids",
+        "B": "crustaceans",
+        "C": "insects",
+        "D": "myriapods"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q04.png",
+      "rawText": "Which part of a cell makes glucose? A cell membrane B chloroplast C nucleus D vacuole",
+      "parseStatus": "ok",
+      "stem": "Which part of a cell makes glucose?",
+      "options": {
+        "A": "cell membrane",
+        "B": "chloroplast",
+        "C": "nucleus",
+        "D": "vacuole"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q05.png",
+      "rawText": "The diagram shows some of the blood vessels and other structures in the human body. The blood vessels shown are all parts of the same A cell. B organ. C organ system. D tissue.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the blood vessels and other structures in the human body. The blood vessels shown are all parts of the same",
+      "options": {
+        "A": "cell.",
+        "B": "organ.",
+        "C": "organ system.",
+        "D": "tissue."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q06.png",
+      "rawText": "A photograph shows a plant cell nucleus measuring 2 mm across. If the magnification of the cell is 500, what is the actual size of the nucleus? A 0.00002 mm B 0.004 mm C 0.04 mm D 250 mm",
+      "parseStatus": "ok",
+      "stem": "A photograph shows a plant cell nucleus measuring 2 mm across. If the magnification of the cell is 500, what is the actual size of the nucleus?",
+      "options": {
+        "A": "0.00002 mm",
+        "B": "0.004 mm",
+        "C": "0.04 mm",
+        "D": "250 mm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q07.png",
+      "rawText": "By which process do oxygen and carbon dioxide move between cells and capillaries? A breathing B diffusion C excretion D respiration",
+      "parseStatus": "ok",
+      "stem": "By which process do oxygen and carbon dioxide move between cells and capillaries?",
+      "options": {
+        "A": "breathing",
+        "B": "diffusion",
+        "C": "excretion",
+        "D": "respiration"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q08.png",
+      "rawText": "Which process is involved in the uptake of glucose by the epithelial cells of kidney tubules? A active transport B osmosis C translocation D transpiration",
+      "parseStatus": "ok",
+      "stem": "Which process is involved in the uptake of glucose by the epithelial cells of kidney tubules?",
+      "options": {
+        "A": "active transport",
+        "B": "osmosis",
+        "C": "translocation",
+        "D": "transpiration"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q09.png",
+      "rawText": "Which element is found in proteins but not carbohydrates? A carbon B hydrogen C nitrogen D oxygen",
+      "parseStatus": "ok",
+      "stem": "Which element is found in proteins but not carbohydrates?",
+      "options": {
+        "A": "carbon",
+        "B": "hydrogen",
+        "C": "nitrogen",
+        "D": "oxygen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q10.png",
+      "rawText": "The sequence of the bases present on one strand of a DNA molecule is shown. ATTGGACGGT Which sequence shows the bases present on the opposite strand? A CGGTTCATTG B TCCAATGAAC C TAACCTGCCA D ATTGGACGGT",
+      "parseStatus": "ok",
+      "stem": "The sequence of the bases present on one strand of a DNA molecule is shown. ATTGGACGGT Which sequence shows the bases present on the opposite strand?",
+      "options": {
+        "A": "CGGTTCATTG",
+        "B": "TCCAATGAAC",
+        "C": "TAACCTGCCA",
+        "D": "ATTGGACGGT"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q11.png",
+      "rawText": "Starch is digested by amylase in the mouth, but it is not digested in the stomach. What is the reason for this? A All starch digestion is completed in the mouth. B The pH in the stomach is not suitable for the amylase to work. C The starch does not stay in the stomach long enough to be digested. D The temperature in the stomach is not suitable for the amylase to work.",
+      "parseStatus": "ok",
+      "stem": "Starch is digested by amylase in the mouth, but it is not digested in the stomach. What is the reason for this?",
+      "options": {
+        "A": "All starch digestion is completed in the mouth.",
+        "B": "The pH in the stomach is not suitable for the amylase to work.",
+        "C": "The starch does not stay in the stomach long enough to be digested.",
+        "D": "The temperature in the stomach is not suitable for the amylase to work."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q12.png",
+      "rawText": "Which statement about an enzyme-controlled reaction is correct? A During the reaction, the substrate changes into products. B The enzyme is gradually used up during the reaction. C The enzyme is slowly broken down during the reaction. D The higher the temperature, the slower the reaction.",
+      "parseStatus": "ok",
+      "stem": "Which statement about an enzyme-controlled reaction is correct?",
+      "options": {
+        "A": "During the reaction, the substrate changes into products.",
+        "B": "The enzyme is gradually used up during the reaction.",
+        "C": "The enzyme is slowly broken down during the reaction.",
+        "D": "The higher the temperature, the slower the reaction."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q13.png",
+      "rawText": "A plant with striped leaves was kept in bright light for six hours. white stripe green stripe A leaf was taken from the plant and the chlorophyll was removed. The leaf was then tested for starch using iodine solution. Which diagram shows the result of the test? yellow-brown blue-black A white blue-black B blue-black green C yellow-brown green D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q14.png",
+      "rawText": "The graph shows daily carbon dioxide uptake and transpiration by the plant Agave americana. The plant is adapted to live in very dry conditions. 10 8 6 4 2 0 0.6 0.4 0.2 0 0 4 8 12 16 20 24 time of day / hours CO2 uptake / mg per dm2 per hour transpiration / g H2O per dm2 per hour transpiration CO2 uptake What can be concluded from this graph? A More stomata are closed during dark periods. B More stomata are closed during light periods. C There is no carbon dioxide uptake during dark periods. D There is no water uptake during light periods.",
+      "parseStatus": "ok",
+      "stem": "The graph shows daily carbon dioxide uptake and transpiration by the plant Agave americana. The plant is adapted to live in very dry conditions. 10 8 6 4 2 0 0.6 0.4 0.2 0 0 4 8 12 16 20 24 time of day / hours CO2 uptake / mg per dm2 per hour transpiration / g H2O per dm2 per hour transpiration CO2 uptake What can be concluded from this graph?",
+      "options": {
+        "A": "More stomata are closed during dark periods.",
+        "B": "More stomata are closed during light periods.",
+        "C": "There is no carbon dioxide uptake during dark periods.",
+        "D": "There is no water uptake during light periods."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q15.png",
+      "rawText": "Statements 1 to 4 describe stages in the development of cholera. 1 Chloride ions are secreted into the gut. 2 Osmosis causes water to move into the gut. 3 The infected person becomes dehydrated. 4 Toxins are produced by the pathogenic bacteria. What is the correct sequence of the four stages? A 1  2  3  4 B 1  4  3  2 C 4  1  2  3 D 4  1  3  2",
+      "parseStatus": "ok",
+      "stem": "Statements 1 to 4 describe stages in the development of cholera. 1 Chloride ions are secreted into the gut. 2 Osmosis causes water to move into the gut. 3 The infected person becomes dehydrated. 4 Toxins are produced by the pathogenic bacteria. What is the correct sequence of the four stages?",
+      "options": {
+        "A": "1  2  3  4",
+        "B": "1  4  3  2",
+        "C": "4  1  2  3",
+        "D": "4  1  3  2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q16.png",
+      "rawText": "The diagram shows part of the human body. Y X Which statement about organs X and Y is correct? A X absorbs more water from food than Y. B X does not absorb water from food. C Y absorbs more water from food than X. D Y does not absorb water from food.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the human body. Y X Which statement about organs X and Y is correct?",
+      "options": {
+        "A": "X absorbs more water from food than Y.",
+        "B": "X does not absorb water from food.",
+        "C": "Y absorbs more water from food than X.",
+        "D": "Y does not absorb water from food."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q17.png",
+      "rawText": "Which sequence describes the pathway taken by water as it moves through a plant? A root hair cell  xylem  root cortex cell  mesophyll B mesophyll  xylem  root cortex cell  root hair cell C root cortex cell  root hair cell  xylem  mesophyll D root hair cell  root cortex cell  xylem  mesophyll",
+      "parseStatus": "ok",
+      "stem": "Which sequence describes the pathway taken by water as it moves through a plant?",
+      "options": {
+        "A": "root hair cell  xylem  root cortex cell  mesophyll",
+        "B": "mesophyll  xylem  root cortex cell  root hair cell",
+        "C": "root cortex cell  root hair cell  xylem  mesophyll",
+        "D": "root hair cell  root cortex cell  xylem  mesophyll"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q18.png",
+      "rawText": "The diagram shows a plant at different times of year. stage 1 At the start of the growing season, the plant uses the food reserves stored in the bulb for the growth of shoots and leaves. stage 2 Later in the season, the leaves of the plant photosynthesise and the food reserves in the bulb are replaced. stage 1 new growth of shoots and leaves bulb containing food reserves stage 2 food reserves in the bulb being replaced photosynthesising leaves What is the role of the bulb during stage 1 and stage 2? stage 1 stage 2 A sink sink B sink source C source sink D source source",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a plant at different times of year. stage 1 At the start of the growing season, the plant uses the food reserves stored in the bulb for the growth of shoots and leaves. stage 2 Later in the season, the leaves of the plant photosynthesise and the food reserves in the bulb are replaced. stage 1 new growth of shoots and leaves bulb containing food reserves stage 2 food reserves in the bulb being replaced photosynthesising leaves What is the role of the bulb during stage 1 and stage 2? stage 1 stage 2",
+      "options": {
+        "A": "sink sink",
+        "B": "sink source",
+        "C": "source sink",
+        "D": "source source"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q19.png",
+      "rawText": "How does blood enter the heart? A through arteries into the atria B through arteries into the ventricles C through veins into the atria D through veins into the ventricles",
+      "parseStatus": "ok",
+      "stem": "How does blood enter the heart?",
+      "options": {
+        "A": "through arteries into the atria",
+        "B": "through arteries into the ventricles",
+        "C": "through veins into the atria",
+        "D": "through veins into the ventricles"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q20.png",
+      "rawText": "What is the sequence of organs that blood passes through during one circulation of the body of a fish? A muscle  heart  gill  muscle B muscle  gill  heart  muscle C muscle  heart  gill  heart  muscle D muscle  gill  heart  gill  muscle",
+      "parseStatus": "ok",
+      "stem": "What is the sequence of organs that blood passes through during one circulation of the body of a fish?",
+      "options": {
+        "A": "muscle  heart  gill  muscle",
+        "B": "muscle  gill  heart  muscle",
+        "C": "muscle  heart  gill  heart  muscle",
+        "D": "muscle  gill  heart  gill  muscle"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q21.png",
+      "rawText": "A child is vaccinated against measles. After a period of time the child is infected with the measles virus. The graph shows the concentration of measles antibodies in the child’s bloodstream during this time. antibody concentration in the blood time Which statement is consistent with the information in the graph? A After the vaccination, the child produced memory cells. B The child had passive immunity against measles. C The measles virus contains antibodies. D The vaccination failed to protect the child against measles.",
+      "parseStatus": "ok",
+      "stem": "A child is vaccinated against measles. After a period of time the child is infected with the measles virus. The graph shows the concentration of measles antibodies in the child’s bloodstream during this time. antibody concentration in the blood time Which statement is consistent with the information in the graph?",
+      "options": {
+        "A": "After the vaccination, the child produced memory cells.",
+        "B": "The child had passive immunity against measles.",
+        "C": "The measles virus contains antibodies.",
+        "D": "The vaccination failed to protect the child against measles."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q22.png",
+      "rawText": "Which sequence of changes takes place when we breathe in? A diaphragm contracts  volume of thorax increases  pressure in lungs decreases B diaphragm contracts  volume of thorax increases  pressure in lungs increases C diaphragm relaxes  volume of thorax increases  pressure in lungs decreases D diaphragm relaxes  volume of thorax increases  pressure in lungs increases",
+      "parseStatus": "ok",
+      "stem": "Which sequence of changes takes place when we breathe in?",
+      "options": {
+        "A": "diaphragm contracts  volume of thorax increases  pressure in lungs decreases",
+        "B": "diaphragm contracts  volume of thorax increases  pressure in lungs increases",
+        "C": "diaphragm relaxes  volume of thorax increases  pressure in lungs decreases",
+        "D": "diaphragm relaxes  volume of thorax increases  pressure in lungs increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q23.png",
+      "rawText": "What is the link between muscle contraction, protein synthesis and the maintenance of a constant body temperature? A They are controlled by hormones. B They are examples of homeostasis. C They require energy. D They require carbon dioxide.",
+      "parseStatus": "ok",
+      "stem": "What is the link between muscle contraction, protein synthesis and the maintenance of a constant body temperature?",
+      "options": {
+        "A": "They are controlled by hormones.",
+        "B": "They are examples of homeostasis.",
+        "C": "They require energy.",
+        "D": "They require carbon dioxide."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q24.png",
+      "rawText": "After vigorous exercise, an athlete continues to breathe deeply during the recovery period. During this recovery period the oxygen debt is removed. Which reaction is used to remove the oxygen debt? A aerobic respiration of lactic acid in the liver B aerobic respiration of lactic acid in the muscles C anaerobic respiration of lactic acid in the liver D anaerobic respiration of lactic acid in the muscles",
+      "parseStatus": "ok",
+      "stem": "After vigorous exercise, an athlete continues to breathe deeply during the recovery period. During this recovery period the oxygen debt is removed. Which reaction is used to remove the oxygen debt?",
+      "options": {
+        "A": "aerobic respiration of lactic acid in the liver",
+        "B": "aerobic respiration of lactic acid in the muscles",
+        "C": "anaerobic respiration of lactic acid in the liver",
+        "D": "anaerobic respiration of lactic acid in the muscles"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q25.png",
+      "rawText": "The diagram shows some of the organs in the human body. 1 2 3 Which row matches the function to the correct organ? excretes carbon dioxide excretes urea produces urea A 1 2 3 B 1 3 2 C 2 3 1 D 2 1 3",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the organs in the human body. 1 2 3 Which row matches the function to the correct organ? excretes carbon dioxide excretes urea produces urea",
+      "options": {
+        "A": "1 2 3",
+        "B": "1 3 2",
+        "C": "2 3 1",
+        "D": "2 1 3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q26.png",
+      "rawText": "What is the result of the release of adrenaline? blood glucose concentration breathing rate A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "What is the result of the release of adrenaline? blood glucose concentration breathing rate",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q27.png",
+      "rawText": "A person's skin looks more red in a warm environment than it does in a cool environment. Which explanation is correct? A The arterioles supplying capillaries in the skin vasodilate and less blood flows to the skin surface. B The arterioles supplying capillaries in the skin vasodilate and more blood flows to the skin surface. C The arterioles supplying capillaries in the skin vasoconstrict and more blood flows to the skin surface. D The arterioles supplying capillaries in the skin vasoconstrict and less blood flows to the skin surface.",
+      "parseStatus": "ok",
+      "stem": "A person's skin looks more red in a warm environment than it does in a cool environment. Which explanation is correct?",
+      "options": {
+        "A": "The arterioles supplying capillaries in the skin vasodilate and less blood flows to the skin surface.",
+        "B": "The arterioles supplying capillaries in the skin vasodilate and more blood flows to the skin surface.",
+        "C": "The arterioles supplying capillaries in the skin vasoconstrict and more blood flows to the skin surface.",
+        "D": "The arterioles supplying capillaries in the skin vasoconstrict and less blood flows to the skin surface."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q28.png",
+      "rawText": "The diagram shows a plant next to a window. light Which statement explains the plant shoot’s growth? A There is a higher concentration of auxin in the cells on the shaded side of the shoot. This prevents cell elongation. B There is a higher concentration of auxin in the cells on the shaded side of the shoot. This stimulates cell elongation. C There is a lower concentration of auxin in the cells on the shaded side of the shoot. This prevents cell elongation. D There is a lower concentration of auxin in the cells on the shaded side of the shoot. This stimulates cell elongation.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a plant next to a window. light Which statement explains the plant shoot’s growth?",
+      "options": {
+        "A": "There is a higher concentration of auxin in the cells on the shaded side of the shoot. This prevents cell elongation.",
+        "B": "There is a higher concentration of auxin in the cells on the shaded side of the shoot. This stimulates cell elongation.",
+        "C": "There is a lower concentration of auxin in the cells on the shaded side of the shoot. This prevents cell elongation.",
+        "D": "There is a lower concentration of auxin in the cells on the shaded side of the shoot. This stimulates cell elongation."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q29.png",
+      "rawText": "The graph shows how smoking different numbers of cigarettes for different lengths of time affects the risk of lung cancer. < 20 20–29 30–39 number of years smoking 40–49 > 50 45 40 35",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q30.png",
+      "rawText": "The life cycle of aphids includes both sexual and asexual reproduction. offspring parent fertilised egg offspring reproduction X reproduction Y female parent male parent Which statement is correct? A X shows asexual reproduction, which produces genetic variation in the offspring. B Y shows asexual reproduction, which produces genetic variation in the offspring. C X shows asexual reproduction, which produces genetically identical offspring. D Y shows asexual reproduction, which produces genetically identical offspring.",
+      "parseStatus": "ok",
+      "stem": "The life cycle of aphids includes both sexual and asexual reproduction. offspring parent fertilised egg offspring reproduction X reproduction Y female parent male parent Which statement is correct?",
+      "options": {
+        "A": "X shows asexual reproduction, which produces genetic variation in the offspring.",
+        "B": "Y shows asexual reproduction, which produces genetic variation in the offspring.",
+        "C": "X shows asexual reproduction, which produces genetically identical offspring.",
+        "D": "Y shows asexual reproduction, which produces genetically identical offspring."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q31.png",
+      "rawText": "Modern agricultural methods often use artificial insemination (AI) to breed dairy cattle. Which statement describes the process of artificial insemination? A Sperm is collected from a bull and frozen. The sperm is later inserted into the vagina of a cow. B Eggs are removed from a cow and fertilised using sperm from a bull. The fertilised eggs are reinserted into the uterus of the cow. C Male and female cows with desired characteristics are chosen to mate. D Embryos are removed from the uterus of the cow. The embryos are frozen and stored for future use.",
+      "parseStatus": "ok",
+      "stem": "Modern agricultural methods often use artificial insemination (AI) to breed dairy cattle. Which statement describes the process of artificial insemination?",
+      "options": {
+        "A": "Sperm is collected from a bull and frozen. The sperm is later inserted into the vagina of a cow.",
+        "B": "Eggs are removed from a cow and fertilised using sperm from a bull. The fertilised eggs are reinserted into the uterus of the cow.",
+        "C": "Male and female cows with desired characteristics are chosen to mate.",
+        "D": "Embryos are removed from the uterus of the cow. The embryos are frozen and stored for future use."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q32.png",
+      "rawText": "The Tasmanian devil is an animal with seven pairs of chromosomes in each body cell. The diagram shows the chromosomes in a cell from a Tasmanian devil. Which statement is correct? A The cell is a haploid cell containing pairs of chromosomes. B The cell is a diploid cell with no pairs of chromosomes. C The cell is a haploid cell with no pairs of chromosomes. D The cell is a diploid cell containing pairs of chromosomes.",
+      "parseStatus": "ok",
+      "stem": "The Tasmanian devil is an animal with seven pairs of chromosomes in each body cell. The diagram shows the chromosomes in a cell from a Tasmanian devil. Which statement is correct?",
+      "options": {
+        "A": "The cell is a haploid cell containing pairs of chromosomes.",
+        "B": "The cell is a diploid cell with no pairs of chromosomes.",
+        "C": "The cell is a haploid cell with no pairs of chromosomes.",
+        "D": "The cell is a diploid cell containing pairs of chromosomes."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q33.png",
+      "rawText": "Some statements about mitosis are listed. 1 Cells divide and produce new cells to repair damaged tissues. 2 Chromosomes are duplicated and the cell separates to form gametes. 3 Chromosomes are duplicated and the cell separates to form genetically identical cells. 4 Mitosis is used in asexual reproduction. Which statements are correct? A 1, 2 and 3 B 1, 3 and 4 C 2 and 4 D 3 and 4 only",
+      "parseStatus": "ok",
+      "stem": "Some statements about mitosis are listed. 1 Cells divide and produce new cells to repair damaged tissues. 2 Chromosomes are duplicated and the cell separates to form gametes. 3 Chromosomes are duplicated and the cell separates to form genetically identical cells. 4 Mitosis is used in asexual reproduction. Which statements are correct?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1, 3 and 4",
+        "C": "2 and 4",
+        "D": "3 and 4 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q34.png",
+      "rawText": "Coat colour in cattle is controlled by two codominant alleles. The genotype CRCR results in cattle with a red coloured coat. The genotype CWCW results in cattle with a white coloured coat. The genotype CRCW results in a roan coat; these cattle have a mixture of red hairs and white hairs in their coat. A mating occurs between a red cow and a roan bull. What is the expected ratio of coat colour in the offspring? A 50% red, 50% white B 100% red C 50% red, 50% roan D 100% roan",
+      "parseStatus": "ok",
+      "stem": "Coat colour in cattle is controlled by two codominant alleles. The genotype CRCR results in cattle with a red coloured coat. The genotype CWCW results in cattle with a white coloured coat. The genotype CRCW results in a roan coat; these cattle have a mixture of red hairs and white hairs in their coat.",
+      "options": {
+        "A": "mating occurs between a red cow and a roan bull. What is the expected ratio of coat colour in the offspring? A 50% red, 50% white",
+        "B": "100% red",
+        "C": "50% red, 50% roan",
+        "D": "100% roan"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q35.png",
+      "rawText": "Which feature would help a plant to survive in a dry environment? A large leaves B many stomata C small roots D thick waxy cuticle",
+      "parseStatus": "ok",
+      "stem": "Which feature would help a plant to survive in a dry environment?",
+      "options": {
+        "A": "large leaves",
+        "B": "many stomata",
+        "C": "small roots",
+        "D": "thick waxy cuticle"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q36.png",
+      "rawText": "What occurs as a result of artificial selection? A antibiotic resistance in bacteria B disease resistant crops C presence of roots in cactus plants D sickle cell anaemia",
+      "parseStatus": "ok",
+      "stem": "What occurs as a result of artificial selection?",
+      "options": {
+        "A": "antibiotic resistance in bacteria",
+        "B": "disease resistant crops",
+        "C": "presence of roots in cactus plants",
+        "D": "sickle cell anaemia"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q37.png",
+      "rawText": "Which type of energy is passed from organism to organism in a food chain? A light B chemical C heat D kinetic",
+      "parseStatus": "ok",
+      "stem": "Which type of energy is passed from organism to organism in a food chain?",
+      "options": {
+        "A": "light",
+        "B": "chemical",
+        "C": "heat",
+        "D": "kinetic"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q38.png",
+      "rawText": "The diagram shows a food web. brown trout dragonfly nymph freshwater shrimp mayfly nymph pondweed microscopic alga How many organisms feed at more than one trophic level? A 0 B 1 C 2 D 3",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food web. brown trout dragonfly nymph freshwater shrimp mayfly nymph pondweed microscopic alga How many organisms feed at more than one trophic level?",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "2",
+        "D": "3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q39.png",
+      "rawText": "Bacteria can be used to make human proteins. Which statement explains why this is possible when a human gene is placed in a bacterial cell? A Bacteria are able to reproduce rapidly. B Bacteria are very small organisms. C Bacteria contain genetic material in plasmids. D Bacteria have the same genetic code as humans.",
+      "parseStatus": "ok",
+      "stem": "Bacteria can be used to make human proteins. Which statement explains why this is possible when a human gene is placed in a bacterial cell?",
+      "options": {
+        "A": "Bacteria are able to reproduce rapidly.",
+        "B": "Bacteria are very small organisms.",
+        "C": "Bacteria contain genetic material in plasmids.",
+        "D": "Bacteria have the same genetic code as humans."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s21_qp_22/q40.png",
+      "rawText": "The process of eutrophication begins with the increased availability of nitrate ions and other ions in water. The processes involved in eutrophication are listed. 1 increased aerobic respiration by decomposers 2 increased death of producers due to lack of light 3 rapid growth of producers 4 oxygen concentration in the water decreases and more organisms die What is the correct sequence? A 3  2  1  4 B 3  4  2  1 C 4  1  2  3 D 4  1  3  2",
+      "parseStatus": "ok",
+      "stem": "The process of eutrophication begins with the increased availability of nitrate ions and other ions in water. The processes involved in eutrophication are listed. 1 increased aerobic respiration by decomposers 2 increased death of producers due to lack of light 3 rapid growth of producers 4 oxygen concentration in the water decreases and more organisms die What is the correct sequence?",
+      "options": {
+        "A": "3  2  1  4",
+        "B": "3  4  2  1",
+        "C": "4  1  2  3",
+        "D": "4  1  3  2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

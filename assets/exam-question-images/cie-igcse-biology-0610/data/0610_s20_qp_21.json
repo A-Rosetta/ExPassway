@@ -1,0 +1,658 @@
+{
+  "questionPaper": "0610_s20_qp_21.pdf",
+  "markScheme": "0610_s20_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q01.png",
+      "rawText": "The diagram shows what happened in an experiment with plant seedlings. start light next day light Which characteristic of living things made the seedlings grow towards the light? A excretion B nutrition C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "The diagram shows what happened in an experiment with plant seedlings. start light next day light Which characteristic of living things made the seedlings grow towards the light?",
+      "options": {
+        "A": "excretion",
+        "B": "nutrition",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q02.png",
+      "rawText": "A rat has the scientific name Rattus rattus. What do the two parts of this name refer to? A genus and species B kingdom and genus C kingdom and species D variety and genus",
+      "parseStatus": "ok",
+      "stem": "A rat has the scientific name Rattus rattus. What do the two parts of this name refer to?",
+      "options": {
+        "A": "genus and species",
+        "B": "kingdom and genus",
+        "C": "kingdom and species",
+        "D": "variety and genus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q03.png",
+      "rawText": "The diagram shows two guard cells. Which label shows the cell wall? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q04.png",
+      "rawText": "The diagrams show different levels of organisation in a plant. (Not drawn to scale.) 1 2 3 4 Which sequence shows the levels of organisation in order from smallest to largest? A 4 → 2 → 3 → 1 B 4 → 3 → 1 → 2 C 3 → 4 → 2 → 1 D 3 → 2 → 1 → 4",
+      "parseStatus": "ok",
+      "stem": "The diagrams show different levels of organisation in a plant. (Not drawn to scale.) 1 2 3 4 Which sequence shows the levels of organisation in order from smallest to largest?",
+      "options": {
+        "A": "4 → 2 → 3 → 1",
+        "B": "4 → 3 → 1 → 2",
+        "C": "3 → 4 → 2 → 1",
+        "D": "3 → 2 → 1 → 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q05.png",
+      "rawText": "Which diagram shows the appearance of a plant cell several minutes after it has been placed in a concentrated solution of sugar? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q06.png",
+      "rawText": "Plant cells are placed in a solution with a higher water potential than the plant cell contents. What will happen? direction of water movement volume of vacuole A enters cells decreases B enters cells increases C leaves cells decreases D leaves cells increases",
+      "parseStatus": "ok",
+      "stem": "Plant cells are placed in a solution with a higher water potential than the plant cell contents. What will happen? direction of water movement volume of vacuole",
+      "options": {
+        "A": "enters cells decreases",
+        "B": "enters cells increases",
+        "C": "leaves cells decreases",
+        "D": "leaves cells increases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q07.png",
+      "rawText": "The diagram shows a section of DNA, with four bases identified on one strand. G A C T Which sequence of bases would be on the other strand, starting from the top? A AGTC B CTGA C GACT D TCAG",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q08.png",
+      "rawText": "Which food-testing solution shows a positive result when it turns from blue to purple? A Benedict’s solution B biuret solution C ethanol D iodine solution",
+      "parseStatus": "ok",
+      "stem": "Which food-testing solution shows a positive result when it turns from blue to purple?",
+      "options": {
+        "A": "Benedict’s solution",
+        "B": "biuret solution",
+        "C": "ethanol",
+        "D": "iodine solution"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q09.png",
+      "rawText": "What is the definition of an enzyme? A a carbohydrate that acts as a catalyst B a DNA molecule that acts as a catalyst C a fat that acts as a catalyst D a protein that acts as a catalyst",
+      "parseStatus": "ok",
+      "stem": "What is the definition of an enzyme?",
+      "options": {
+        "A": "a carbohydrate that acts as a catalyst",
+        "B": "a DNA molecule that acts as a catalyst",
+        "C": "a fat that acts as a catalyst",
+        "D": "a protein that acts as a catalyst"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q10.png",
+      "rawText": "An experiment is set up to investigate gas exchange in aquatic plants. aquatic plant hydrogencarbonate indicator solution light The hydrogencarbonate indicator solution is orange at the start. Which colour is it after three hours? A blue-black B orange C purple D yellow",
+      "parseStatus": "ok",
+      "stem": "An experiment is set up to investigate gas exchange in aquatic plants. aquatic plant hydrogencarbonate indicator solution light The hydrogencarbonate indicator solution is orange at the start. Which colour is it after three hours?",
+      "options": {
+        "A": "blue-black",
+        "B": "orange",
+        "C": "purple",
+        "D": "yellow"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q11.png",
+      "rawText": "The diagram shows how the rate of photosynthesis varies with light intensity. The four curves show different conditions of temperature and carbon dioxide concentration. rate of photosynthesis light intensity 30 °C, 0.2% CO2 20 °C, 0.2% CO2 30 °C, 0.1% CO2 20 °C, 0.1% CO2 P What limits the rate of photosynthesis at point P? light intensity carbon dioxide concentration temperature A \u0016 \u0016 \u001a key B \u0016 \u001a \u001a \u0016= yes C \u001a \u0016 \u0016 \u001a= no D \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how the rate of photosynthesis varies with light intensity. The four curves show different conditions of temperature and carbon dioxide concentration. rate of photosynthesis light intensity 30 °C, 0.2% CO2 20 °C, 0.2% CO2 30 °C, 0.1% CO2 20 °C, 0.1% CO2 P What limits the rate of photosynthesis at point P? light intensity carbon dioxide concentration temperature",
+      "options": {
+        "A": "\u0016 \u0016 \u001a key",
+        "B": "\u0016 \u001a \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u0016 \u001a= no",
+        "D": "\u001a \u001a \u0016"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q12.png",
+      "rawText": "Four test-tubes are set up as shown. Which test-tube contains the least carbon dioxide after one hour? A B C D black polythene to keep out light water aquatic animal aquatic plant light light light",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q13.png",
+      "rawText": "The activity of amylase is measured in four parts of the alimentary canal. Which two parts have the most amylase activity? A colon and duodenum B colon and stomach C mouth and duodenum D stomach and mouth",
+      "parseStatus": "ok",
+      "stem": "The activity of amylase is measured in four parts of the alimentary canal. Which two parts have the most amylase activity?",
+      "options": {
+        "A": "colon and duodenum",
+        "B": "colon and stomach",
+        "C": "mouth and duodenum",
+        "D": "stomach and mouth"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q14.png",
+      "rawText": "Biological washing powder can be used to remove stains on clothing. Which enzymes will remove stains caused by starch, fat and protein? amylase lipase trypsin A \u0016 \u001a \u001a key B \u0016 \u0016 \u0016 \u0016= removes stain C \u001a \u001a \u0016 \u001a= does not remove stain D \u001a \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "Biological washing powder can be used to remove stains on clothing. Which enzymes will remove stains caused by starch, fat and protein? amylase lipase trypsin",
+      "options": {
+        "A": "\u0016 \u001a \u001a key",
+        "B": "\u0016 \u0016 \u0016 \u0016= removes stain",
+        "C": "\u001a \u001a \u0016 \u001a= does not remove stain",
+        "D": "\u001a \u0016 \u0016"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q15.png",
+      "rawText": "The graph shows the rate of uptake of magnesium ions by two similar plants, X and Y. The roots of each plant were placed in a range of solutions. Each solution contained a different concentration of magnesium ions. All other conditions were kept constant. rate of uptake of ions concentration of magnesium ions in external solution plant X plant Y What is a possible explanation for the difference in the results for the two plants? A Plant Y has fewer protein molecules for magnesium ion transport in its cell membranes. B Plant Y has a higher rate of respiration. C Plant Y has more root hair cells. D The root hair cells in plant Y have a lower water potential.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the rate of uptake of magnesium ions by two similar plants, X and Y. The roots of each plant were placed in a range of solutions. Each solution contained a different concentration of magnesium ions. All other conditions were kept constant. rate of uptake of ions concentration of magnesium ions in external solution plant X plant Y What is a possible explanation for the difference in the results for the two plants?",
+      "options": {
+        "A": "Plant Y has fewer protein molecules for magnesium ion transport in its cell membranes.",
+        "B": "Plant Y has a higher rate of respiration.",
+        "C": "Plant Y has more root hair cells.",
+        "D": "The root hair cells in plant Y have a lower water potential."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q16.png",
+      "rawText": "What will increase the rate of transpiration in a plant? A an increase in the humidity of the atmosphere surrounding the leaf B an increase in the surface area of the cell surfaces inside the leaf C a decrease in the number of stomata present on the surface of the leaf D a decrease in the temperature of the atmosphere surrounding the leaf",
+      "parseStatus": "ok",
+      "stem": "What will increase the rate of transpiration in a plant?",
+      "options": {
+        "A": "an increase in the humidity of the atmosphere surrounding the leaf",
+        "B": "an increase in the surface area of the cell surfaces inside the leaf",
+        "C": "a decrease in the number of stomata present on the surface of the leaf",
+        "D": "a decrease in the temperature of the atmosphere surrounding the leaf"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q17.png",
+      "rawText": "Which pathway is taken by blood in a fish? A gills → heart → body → gills B body → gills → heart → body C heart → gills → body → heart D heart → body → gills → body",
+      "parseStatus": "ok",
+      "stem": "Which pathway is taken by blood in a fish?",
+      "options": {
+        "A": "gills → heart → body → gills",
+        "B": "body → gills → heart → body",
+        "C": "heart → gills → body → heart",
+        "D": "heart → body → gills → body"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q18.png",
+      "rawText": "The diagram shows a section through the heart and its blood vessels. X Which row gives the vessel name and the direction of blood flow in vessel X? vessel name direction of blood flow A aorta towards the lungs B pulmonary artery towards the lungs C pulmonary artery away from the lungs D vena cava away from the lungs",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a section through the heart and its blood vessels. X Which row gives the vessel name and the direction of blood flow in vessel X? vessel name direction of blood flow",
+      "options": {
+        "A": "aorta towards the lungs",
+        "B": "pulmonary artery towards the lungs",
+        "C": "pulmonary artery away from the lungs",
+        "D": "vena cava away from the lungs"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q19.png",
+      "rawText": "When a pathogen enters the blood, the immune system uses different mechanisms to destroy the pathogen. The diagram shows one of these mechanisms. X Y pathogen Which row describes the structures involved? structure X X is made by structure Y A antigen lymphocytes antibody B antigen phagocytes antibody C antibody lymphocytes antigen D antibody phagocytes antigen",
+      "parseStatus": "ok",
+      "stem": "When a pathogen enters the blood, the immune system uses different mechanisms to destroy the pathogen. The diagram shows one of these mechanisms. X Y pathogen Which row describes the structures involved? structure X X is made by structure Y",
+      "options": {
+        "A": "antigen lymphocytes antibody",
+        "B": "antigen phagocytes antibody",
+        "C": "antibody lymphocytes antigen",
+        "D": "antibody phagocytes antigen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q20.png",
+      "rawText": "What is the approximate percentage of oxygen contained in the air breathed out of the lungs? A 0% B 4% C 16% D 20%",
+      "parseStatus": "ok",
+      "stem": "What is the approximate percentage of oxygen contained in the air breathed out of the lungs?",
+      "options": {
+        "A": "0%",
+        "B": "4%",
+        "C": "16%",
+        "D": "20%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q21.png",
+      "rawText": "The diagram shows an experiment to investigate the respiration of yeast. Oil prevents oxygen entering the glucose and yeast suspension. delivery tube limewater bubble of gas thin layer of oil glucose and yeast suspension If no oxygen is present in the glucose and yeast suspension, what will occur? A Ethanol will be produced and the limewater will stay clear. B Ethanol will be produced and the limewater will go cloudy. C Lactic acid will be produced and the limewater will stay clear. D Lactic acid will be produced and the limewater will go cloudy.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment to investigate the respiration of yeast. Oil prevents oxygen entering the glucose and yeast suspension. delivery tube limewater bubble of gas thin layer of oil glucose and yeast suspension If no oxygen is present in the glucose and yeast suspension, what will occur?",
+      "options": {
+        "A": "Ethanol will be produced and the limewater will stay clear.",
+        "B": "Ethanol will be produced and the limewater will go cloudy.",
+        "C": "Lactic acid will be produced and the limewater will stay clear.",
+        "D": "Lactic acid will be produced and the limewater will go cloudy."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q22.png",
+      "rawText": "Which row correctly completes the balanced equation for aerobic respiration? X + 6O2 → 6CO2 + Y X Y A 6C6H12O6 H2O B C6H12O6 6H2O C 6H2O C6H12O6 D C6H10O6 6H2O",
+      "parseStatus": "ok",
+      "stem": "Which row correctly completes the balanced equation for aerobic respiration? X + 6O2 → 6CO2 + Y X Y",
+      "options": {
+        "A": "6C6H12O6 H2O",
+        "B": "C6H12O6 6H2O",
+        "C": "6H2O C6H12O6",
+        "D": "C6H10O6 6H2O"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q23.png",
+      "rawText": "In healthy people, which substance is completely reabsorbed into the blood from the kidney tubules? A glucose B salts C urea D water",
+      "parseStatus": "ok",
+      "stem": "In healthy people, which substance is completely reabsorbed into the blood from the kidney tubules?",
+      "options": {
+        "A": "glucose",
+        "B": "salts",
+        "C": "urea",
+        "D": "water"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q24.png",
+      "rawText": "The diagram shows a synapse. W X Y Z nerve ending of neurone 1 membrane of neurone 2 What are the labelled parts? W X Y Z A synaptic cleft neurotransmitter vesicle receptor B synaptic cleft receptor vesicle neurotransmitter C vesicle neurotransmitter synaptic cleft receptor D vesicle receptor synaptic cleft neurotransmitter",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a synapse. W X Y Z nerve ending of neurone 1 membrane of neurone 2 What are the labelled parts? W X Y Z",
+      "options": {
+        "A": "synaptic cleft neurotransmitter vesicle receptor",
+        "B": "synaptic cleft receptor vesicle neurotransmitter",
+        "C": "vesicle neurotransmitter synaptic cleft receptor",
+        "D": "vesicle receptor synaptic cleft neurotransmitter"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q25.png",
+      "rawText": "Which row shows the actions needed for the eye to focus on a distant object? ciliary muscles suspensory ligaments lens becomes A contract slacken thicker B relax slacken thicker C contract tighten thinner D relax tighten thinner",
+      "parseStatus": "ok",
+      "stem": "Which row shows the actions needed for the eye to focus on a distant object? ciliary muscles suspensory ligaments lens becomes",
+      "options": {
+        "A": "contract slacken thicker",
+        "B": "relax slacken thicker",
+        "C": "contract tighten thinner",
+        "D": "relax tighten thinner"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q26.png",
+      "rawText": "The liver and the pancreas work together to control the concentration of glucose in the blood. Which statement is correct? A The liver converts the small molecule glucose to the large molecule glucagon. B The liver releases the hormone insulin when blood glucose levels are too high. C The pancreas does not respond to an increase in blood glucose levels. D The pancreas responds to a fall in blood glucose by increasing the release of the hormone glucagon.",
+      "parseStatus": "ok",
+      "stem": "The liver and the pancreas work together to control the concentration of glucose in the blood. Which statement is correct?",
+      "options": {
+        "A": "The liver converts the small molecule glucose to the large molecule glucagon.",
+        "B": "The liver releases the hormone insulin when blood glucose levels are too high.",
+        "C": "The pancreas does not respond to an increase in blood glucose levels.",
+        "D": "The pancreas responds to a fall in blood glucose by increasing the release of the hormone glucagon."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q27.png",
+      "rawText": "The statements are about the use of antibiotics. 1 using an antibiotic to prevent infection 2 using an antibiotic known to kill the bacteria causing an infection 3 using an antibiotic only when essential 4 using an antibiotic to treat a viral infection Which practices will increase the chance of the development of antibiotic resistance in bacteria? A 1, 2, 3 and 4 B 1 and 4 only C 2 and 3 only D 2 and 4 only",
+      "parseStatus": "ok",
+      "stem": "The statements are about the use of antibiotics. 1 using an antibiotic to prevent infection 2 using an antibiotic known to kill the bacteria causing an infection 3 using an antibiotic only when essential 4 using an antibiotic to treat a viral infection Which practices will increase the chance of the development of antibiotic resistance in bacteria?",
+      "options": {
+        "A": "1, 2, 3 and 4",
+        "B": "1 and 4 only",
+        "C": "2 and 3 only",
+        "D": "2 and 4 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q28.png",
+      "rawText": "Which description of cross-pollination is correct? A the transfer of pollen grains from the anther of one plant to the stigma on a different plant B the transfer of pollen grains from the anther to the stigma on the same plant C the transfer of pollen grains from the stigma of one plant to the anther on a different plant D the transfer of pollen grains from the stigma to the anther on the same plant",
+      "parseStatus": "ok",
+      "stem": "Which description of cross-pollination is correct?",
+      "options": {
+        "A": "the transfer of pollen grains from the anther of one plant to the stigma on a different plant",
+        "B": "the transfer of pollen grains from the anther to the stigma on the same plant",
+        "C": "the transfer of pollen grains from the stigma of one plant to the anther on a different plant",
+        "D": "the transfer of pollen grains from the stigma to the anther on the same plant"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q29.png",
+      "rawText": "The diagram shows a sperm cell. Which part contains enzymes that digest the jelly coat of an egg cell? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q30.png",
+      "rawText": "Which cell contains a haploid nucleus? A neurone B sperm cell C skin cell D red blood cell",
+      "parseStatus": "ok",
+      "stem": "Which cell contains a haploid nucleus?",
+      "options": {
+        "A": "neurone",
+        "B": "sperm cell",
+        "C": "skin cell",
+        "D": "red blood cell"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q31.png",
+      "rawText": "The diagram shows the chromosomes of four daughter cells produced by meiosis. Which parent cell produced these cells? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q32.png",
+      "rawText": "When damaged tissues are repaired cells undergo division by A meiosis to produce genetically identical cells. B meiosis to produce genetically different cells. C mitosis to produce genetically identical cells. D mitosis to produce genetically different cells.",
+      "parseStatus": "ok",
+      "stem": "When damaged tissues are repaired cells undergo division by",
+      "options": {
+        "A": "meiosis to produce genetically identical cells.",
+        "B": "meiosis to produce genetically different cells.",
+        "C": "mitosis to produce genetically identical cells.",
+        "D": "mitosis to produce genetically different cells."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q33.png",
+      "rawText": "The graph shows the masses of two different types of tomato. 0 20 40 60 80 100 120 140 160 180 200 220 240 number of tomatoes mass / g type 1 type 2 What can be concluded from the graph? A Genes do not affect the mass of tomatoes. B Type 1 tomatoes show continuous variation. C Type 2 tomatoes are sometimes smaller than type 1 tomatoes. D Type 2 tomatoes show discontinuous variation.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the masses of two different types of tomato. 0 20 40 60 80 100 120 140 160 180 200 220 240 number of tomatoes mass / g type 1 type 2 What can be concluded from the graph?",
+      "options": {
+        "A": "Genes do not affect the mass of tomatoes.",
+        "B": "Type 1 tomatoes show continuous variation.",
+        "C": "Type 2 tomatoes are sometimes smaller than type 1 tomatoes.",
+        "D": "Type 2 tomatoes show discontinuous variation."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q34.png",
+      "rawText": "Which adaptation may be present in a xerophyte? A leaves with small surface area and large numbers of stomata B little or no xylem tissue and leaves with large surface area C stomatal hairs and rolled leaves D thin or no cuticle and deep roots",
+      "parseStatus": "ok",
+      "stem": "Which adaptation may be present in a xerophyte?",
+      "options": {
+        "A": "leaves with small surface area and large numbers of stomata",
+        "B": "little or no xylem tissue and leaves with large surface area",
+        "C": "stomatal hairs and rolled leaves",
+        "D": "thin or no cuticle and deep roots"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q35.png",
+      "rawText": "The diagram shows a food chain in a rock pool. seaweed → whelks → crabs → seagulls What will happen if the number of secondary consumers increases? There will be A fewer crabs. B fewer seagulls. C fewer whelks. D less seaweed.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a food chain in a rock pool. seaweed → whelks → crabs → seagulls What will happen if the number of secondary consumers increases? There will be",
+      "options": {
+        "A": "fewer crabs.",
+        "B": "fewer seagulls.",
+        "C": "fewer whelks.",
+        "D": "less seaweed."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q36.png",
+      "rawText": "What is defined as ‘all of the populations of different species in an ecosystem’? A community B environment C habitat D trophic level",
+      "parseStatus": "ok",
+      "stem": "What is defined as ‘all of the populations of different species in an ecosystem’?",
+      "options": {
+        "A": "community",
+        "B": "environment",
+        "C": "habitat",
+        "D": "trophic level"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q37.png",
+      "rawText": "What is the role of anaerobic respiration in bread-making? A to produce alcohol to flavour the bread B to produce gas to make the bread rise C to release enough energy to bake the bread D to release enough lactic acid to kill the yeast",
+      "parseStatus": "ok",
+      "stem": "What is the role of anaerobic respiration in bread-making?",
+      "options": {
+        "A": "to produce alcohol to flavour the bread",
+        "B": "to produce gas to make the bread rise",
+        "C": "to release enough energy to bake the bread",
+        "D": "to release enough lactic acid to kill the yeast"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q38.png",
+      "rawText": "A crop plant has been genetically modified to make it resistant to herbicides. Which is a possible disadvantage of introducing this new crop plant? A Loss of weeds reduces competition. B Some weeds might become resistant to the herbicide. C The crop plant is unharmed and produces a higher yield. D The new gene will appear in new generations of the crop.",
+      "parseStatus": "ok",
+      "stem": "A crop plant has been genetically modified to make it resistant to herbicides. Which is a possible disadvantage of introducing this new crop plant?",
+      "options": {
+        "A": "Loss of weeds reduces competition.",
+        "B": "Some weeds might become resistant to the herbicide.",
+        "C": "The crop plant is unharmed and produces a higher yield.",
+        "D": "The new gene will appear in new generations of the crop."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q39.png",
+      "rawText": "Which process in the nitrogen cycle is involved in the breakdown of amino acids in living organisms? A deamination B decomposition C denitrification D digestion",
+      "parseStatus": "ok",
+      "stem": "Which process in the nitrogen cycle is involved in the breakdown of amino acids in living organisms?",
+      "options": {
+        "A": "deamination",
+        "B": "decomposition",
+        "C": "denitrification",
+        "D": "digestion"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s20_qp_21/q40.png",
+      "rawText": "When a river is polluted by fertiliser, the following processes may occur. 1 increased aerobic respiration of decomposers 2 increased growth of producers 3 decreased oxygen concentration in the water What is the correct sequence for these processes? A 1 → 2 → 3 B 1 → 3 → 2 C 2 → 1 → 3 D 2 → 3 → 1",
+      "parseStatus": "ok",
+      "stem": "When a river is polluted by fertiliser, the following processes may occur. 1 increased aerobic respiration of decomposers 2 increased growth of producers 3 decreased oxygen concentration in the water What is the correct sequence for these processes?",
+      "options": {
+        "A": "1 → 2 → 3",
+        "B": "1 → 3 → 2",
+        "C": "2 → 1 → 3",
+        "D": "2 → 3 → 1"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

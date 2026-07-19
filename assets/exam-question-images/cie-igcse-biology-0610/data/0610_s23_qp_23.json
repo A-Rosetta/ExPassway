@@ -1,0 +1,653 @@
+{
+  "questionPaper": "0610_s23_qp_23.pdf",
+  "markScheme": "0610_s23_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q01.png",
+      "rawText": "What are two characteristics of all living organisms? A breathing and reproduction B photosynthesis and excretion C reproduction and respiration D respiration and photosynthesis",
+      "parseStatus": "ok",
+      "stem": "What are two characteristics of all living organisms?",
+      "options": {
+        "A": "breathing and reproduction",
+        "B": "photosynthesis and excretion",
+        "C": "reproduction and respiration",
+        "D": "respiration and photosynthesis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q02.png",
+      "rawText": "The photograph shows an organism. Which visible feature can be used to classify this organism as a bird? A feathers B lays eggs C two legs D wings",
+      "parseStatus": "ok",
+      "stem": "The photograph shows an organism. Which visible feature can be used to classify this organism as a bird?",
+      "options": {
+        "A": "feathers",
+        "B": "lays eggs",
+        "C": "two legs",
+        "D": "wings"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q03.png",
+      "rawText": "Which statement about cell structure is correct? A An animal cell has a cell wall. B A bacterium has a cell wall. C An animal cell has chloroplasts. D A bacterium has chloroplasts.",
+      "parseStatus": "ok",
+      "stem": "Which statement about cell structure is correct?",
+      "options": {
+        "A": "An animal cell has a cell wall.",
+        "B": "A bacterium has a cell wall.",
+        "C": "An animal cell has chloroplasts.",
+        "D": "A bacterium has chloroplasts."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q04.png",
+      "rawText": "The diameter of an egg cell from a frog is 2.5 mm. The diameter of an egg cell from a human is 120 m. Which value shows approximately how many times larger an egg cell from a frog is than an egg cell from a human? A 2 B 21 C 48 D 300",
+      "parseStatus": "ok",
+      "stem": "The diameter of an egg cell from a frog is 2.5 mm. The diameter of an egg cell from a human is 120 m. Which value shows approximately how many times larger an egg cell from a frog is than an egg cell from a human?",
+      "options": {
+        "A": "2",
+        "B": "21",
+        "C": "48",
+        "D": "300"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q05.png",
+      "rawText": "When a plant cell is put into pure water it ......1...... water by osmosis and becomes ......2...... . Which words should be used to fill gaps 1 and 2 to complete the sentence? 1 2 A gains plasmolysed B gains turgid C loses plasmolysed D loses turgid",
+      "parseStatus": "ok",
+      "stem": "When a plant cell is put into pure water it ......1...... water by osmosis and becomes ......2...... . Which words should be used to fill gaps 1 and 2 to complete the sentence? 1 2",
+      "options": {
+        "A": "gains plasmolysed",
+        "B": "gains turgid",
+        "C": "loses plasmolysed",
+        "D": "loses turgid"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q06.png",
+      "rawText": "The graph shows the results of an investigation into the effect of oxygen on the uptake of glucose by cells. mass of glucose taken into cells time with oxygen no oxygen Which conclusion can be made about these data? A Glucose only enters the cells by active transport. B Glucose only enters the cells by diffusion. C Glucose enters the cells by both active transport and diffusion. D Glucose enters the cells by osmosis.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the results of an investigation into the effect of oxygen on the uptake of glucose by cells. mass of glucose taken into cells time with oxygen no oxygen Which conclusion can be made about these data?",
+      "options": {
+        "A": "Glucose only enters the cells by active transport.",
+        "B": "Glucose only enters the cells by diffusion.",
+        "C": "Glucose enters the cells by both active transport and diffusion.",
+        "D": "Glucose enters the cells by osmosis."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q07.png",
+      "rawText": "The table shows the results of food tests carried out on a fruit. test Benedict’s solution biuret ethanol emulsion iodine solution result positive positive negative negative What did the fruit contain? A fat and reducing sugar B fat and starch C protein and reducing sugar D protein and starch",
+      "parseStatus": "ok",
+      "stem": "The table shows the results of food tests carried out on a fruit. test Benedict’s solution biuret ethanol emulsion iodine solution result positive positive negative negative What did the fruit contain?",
+      "options": {
+        "A": "fat and reducing sugar",
+        "B": "fat and starch",
+        "C": "protein and reducing sugar",
+        "D": "protein and starch"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q08.png",
+      "rawText": "What describes the structure of DNA? A Each strand contains chemicals called fatty acids. B Each strand contains a sequence of amino acids. C Each strand contains mRNA. D Two strands coil to form a double helix.",
+      "parseStatus": "ok",
+      "stem": "What describes the structure of DNA?",
+      "options": {
+        "A": "Each strand contains chemicals called fatty acids.",
+        "B": "Each strand contains a sequence of amino acids.",
+        "C": "Each strand contains mRNA.",
+        "D": "Two strands coil to form a double helix."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q09.png",
+      "rawText": "The statements are about enzymes. 1 Enzymes are catalysts. 2 Enzymes are proteins. 3 Enzymes are used up during chemical reactions. Which statements are correct? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "The statements are about enzymes. 1 Enzymes are catalysts. 2 Enzymes are proteins. 3 Enzymes are used up during chemical reactions. Which statements are correct?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q10.png",
+      "rawText": "When the temperature increases, the rate of an enzyme-catalysed reaction increases until the optimum temperature is reached. Which statement explains why the rate increases? A The enzyme and substrate have more kinetic energy and collide less frequently. B The enzyme and substrate have less kinetic energy and collide more frequently. C The enzyme and substrate have more kinetic energy and collide more frequently. D The enzyme and substrate have less kinetic energy and collide less frequently.",
+      "parseStatus": "ok",
+      "stem": "When the temperature increases, the rate of an enzyme-catalysed reaction increases until the optimum temperature is reached. Which statement explains why the rate increases?",
+      "options": {
+        "A": "The enzyme and substrate have more kinetic energy and collide less frequently.",
+        "B": "The enzyme and substrate have less kinetic energy and collide more frequently.",
+        "C": "The enzyme and substrate have more kinetic energy and collide more frequently.",
+        "D": "The enzyme and substrate have less kinetic energy and collide less frequently."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q11.png",
+      "rawText": "A plant with variegated leaves was placed in a dark cupboard for 48 hours so that all the starch was removed from the leaves. The variegated leaves have green parts and white parts. Black paper was then fixed on one leaf and the plant was exposed to the light. After 24 hours, which region of the leaf contained starch? green central region white outer region black paper is attached to both sides of the leaf A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q12.png",
+      "rawText": "The graph shows the rate of photosynthesis with increasing light intensity. rate of photosynthesis light intensity 1 2 3 4 Where is light intensity a limiting factor for photosynthesis? A between 1 and 2 B between 1 and 3 C between 2 and 4 D between 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The graph shows the rate of photosynthesis with increasing light intensity. rate of photosynthesis light intensity 1 2 3 4 Where is light intensity a limiting factor for photosynthesis?",
+      "options": {
+        "A": "between 1 and 2",
+        "B": "between 1 and 3",
+        "C": "between 2 and 4",
+        "D": "between 3 and 4"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q13.png",
+      "rawText": "In humans, which two components of the diet can be broken down to release energy? A carbohydrate and fat B carbohydrate and mineral ions C protein and water D vitamins and protein",
+      "parseStatus": "ok",
+      "stem": "In humans, which two components of the diet can be broken down to release energy?",
+      "options": {
+        "A": "carbohydrate and fat",
+        "B": "carbohydrate and mineral ions",
+        "C": "protein and water",
+        "D": "vitamins and protein"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q14.png",
+      "rawText": "Which is a part of the small intestine? A colon B ileum C oesophagus D rectum",
+      "parseStatus": "ok",
+      "stem": "Which is a part of the small intestine?",
+      "options": {
+        "A": "colon",
+        "B": "ileum",
+        "C": "oesophagus",
+        "D": "rectum"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q15.png",
+      "rawText": "Which combination of environmental factors will cause the largest increase in the transpiration rate in a plant? wind speed humidity temperature light intensity A high high low low B high low high high C low high low high D low low high low",
+      "parseStatus": "ok",
+      "stem": "Which combination of environmental factors will cause the largest increase in the transpiration rate in a plant? wind speed humidity temperature light intensity",
+      "options": {
+        "A": "high high low low",
+        "B": "high low high high",
+        "C": "low high low high",
+        "D": "low low high low"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q16.png",
+      "rawText": "The diagrams represent the movement of substances between plant cells. The arrows indicate the direction the substance is moving in. Which diagram of translocation is correctly labelled? phloem sink glucose source A phloem source glucose sink B phloem sink sucrose source C phloem source sucrose sink D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q17.png",
+      "rawText": "The diagram shows a section of the human heart. Which label identifies the right ventricle? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q18.png",
+      "rawText": "The diagrams show sections through three types of blood vessel. They are not drawn to the same scale. 1 2 3 In which order will red blood cells flow through these vessels in the human body when travelling from the aorta to the right atrium of the heart? A 1  2  3 B 1  3  2 C 2  3  1 D 3  1  2",
+      "parseStatus": "ok",
+      "stem": "The diagrams show sections through three types of blood vessel. They are not drawn to the same scale. 1 2 3 In which order will red blood cells flow through these vessels in the human body when travelling from the aorta to the right atrium of the heart?",
+      "options": {
+        "A": "1  2  3",
+        "B": "1  3  2",
+        "C": "2  3  1",
+        "D": "3  1  2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q19.png",
+      "rawText": "When a person is given a vaccine, a harmless pathogen is injected. The pathogen has ......1...... which cause lymphocytes to produce ......2...... . This is an example of ......3...... immunity. Which words should be used to fill gaps 1, 2 and 3 to complete the sentences? 1 2 3 A antigens antibodies active B antigens antibodies passive C antibodies antigens active D antibodies antigens passive",
+      "parseStatus": "ok",
+      "stem": "When a person is given a vaccine, a harmless pathogen is injected. The pathogen has ......1...... which cause lymphocytes to produce ......2...... . This is an example of ......3...... immunity. Which words should be used to fill gaps 1, 2 and 3 to complete the sentences? 1 2 3",
+      "options": {
+        "A": "antigens antibodies active",
+        "B": "antigens antibodies passive",
+        "C": "antibodies antigens active",
+        "D": "antibodies antigens passive"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q20.png",
+      "rawText": "What happens when a person breathes in? A The external intercostal muscles and the internal intercostal muscles contract. B The external intercostal muscles and the internal intercostal muscles relax. C The external intercostal muscles relax and the internal intercostal muscles contract. D The external intercostal muscles contract and the internal intercostal muscles relax.",
+      "parseStatus": "ok",
+      "stem": "What happens when a person breathes in?",
+      "options": {
+        "A": "The external intercostal muscles and the internal intercostal muscles contract.",
+        "B": "The external intercostal muscles and the internal intercostal muscles relax.",
+        "C": "The external intercostal muscles relax and the internal intercostal muscles contract.",
+        "D": "The external intercostal muscles contract and the internal intercostal muscles relax."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q21.png",
+      "rawText": "Which graph shows the effect of temperature on enzyme activity? enzyme activity temperature A enzyme activity temperature B enzyme activity temperature C enzyme activity temperature D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q22.png",
+      "rawText": "After running a fast race, some students have pains in their leg muscles due to a build up of lactic acid. A student wrote this explanation. 1 During the race, the cells did not have enough oxygen for aerobic respiration. 2 Anaerobic respiration occurs so some energy is released from glucose. 3 The lactic acid is produced by aerobic respiration. Which statements explain why the lactic acid built up in the muscles? A 1 and 2 B 1 only C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "After running a fast race, some students have pains in their leg muscles due to a build up of lactic acid.",
+      "options": {
+        "A": "student wrote this explanation. 1 During the race, the cells did not have enough oxygen for aerobic respiration. 2 Anaerobic respiration occurs so some energy is released from glucose. 3 The lactic acid is produced by aerobic respiration. Which statements explain why the lactic acid built up in the muscles? A 1 and 2",
+        "B": "1 only",
+        "C": "2 and 3",
+        "D": "3 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q23.png",
+      "rawText": "What is the name of the process that produces urea and the organ where urea is formed? process producing urea organ where urea is formed A deamination kidney B denitrification kidney C deamination liver D denitrification liver",
+      "parseStatus": "ok",
+      "stem": "What is the name of the process that produces urea and the organ where urea is formed? process producing urea organ where urea is formed",
+      "options": {
+        "A": "deamination kidney",
+        "B": "denitrification kidney",
+        "C": "deamination liver",
+        "D": "denitrification liver"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q24.png",
+      "rawText": "The diagram shows the gap between two neurones. X What is the name of X? A neurotransmitter B receptor C synapse D vesicle",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the gap between two neurones. X What is the name of X?",
+      "options": {
+        "A": "neurotransmitter",
+        "B": "receptor",
+        "C": "synapse",
+        "D": "vesicle"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q25.png",
+      "rawText": "Which statements are correct for cone cells in the eye? 1 Cone cells are located in the fovea of the retina. 2 Cone cells detect colour. 3 Cone cells are more sensitive to light than rod cells. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which statements are correct for cone cells in the eye? 1 Cone cells are located in the fovea of the retina. 2 Cone cells detect colour. 3 Cone cells are more sensitive to light than rod cells.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q26.png",
+      "rawText": "The diagram shows the structure of the human skin. Which structure constricts to reduce heat loss? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q27.png",
+      "rawText": "Where are the hormones oestrogen and progesterone produced during pregnancy? A amniotic sac B oviducts C placenta D umbilical cord",
+      "parseStatus": "ok",
+      "stem": "Where are the hormones oestrogen and progesterone produced during pregnancy?",
+      "options": {
+        "A": "amniotic sac",
+        "B": "oviducts",
+        "C": "placenta",
+        "D": "umbilical cord"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q28.png",
+      "rawText": "The umbilical artery takes blood from the fetus to the placenta. The umbilical vein carries blood from the placenta to the fetus. How do the contents of the umbilical artery differ from those of the umbilical vein? carbon dioxide oxygen urea A less more less B less less more C more more less D more less more",
+      "parseStatus": "ok",
+      "stem": "The umbilical artery takes blood from the fetus to the placenta. The umbilical vein carries blood from the placenta to the fetus. How do the contents of the umbilical artery differ from those of the umbilical vein? carbon dioxide oxygen urea",
+      "options": {
+        "A": "less more less",
+        "B": "less less more",
+        "C": "more more less",
+        "D": "more less more"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q29.png",
+      "rawText": "Which row shows some of the features involved in natural selection? many offspring are produced humans choose desirable features alleles are passed onto offspring A \u0016 \u001a \u001a key B \u001a \u0016 \u001a \u0016 = yes C \u001a \u0016 \u0016 \u001a = no D \u0016 \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which row shows some of the features involved in natural selection? many offspring are produced humans choose desirable features alleles are passed onto offspring",
+      "options": {
+        "A": "\u0016 \u001a \u001a key",
+        "B": "\u001a \u0016 \u001a \u0016 = yes",
+        "C": "\u001a \u0016 \u0016 \u001a = no",
+        "D": "\u0016 \u001a \u0016"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q30.png",
+      "rawText": "Which substance is coded for by a length of DNA? A base B glucose C glycerol D lipase",
+      "parseStatus": "ok",
+      "stem": "Which substance is coded for by a length of DNA?",
+      "options": {
+        "A": "base",
+        "B": "glucose",
+        "C": "glycerol",
+        "D": "lipase"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q31.png",
+      "rawText": "The diagram shows the sex chromosomes of a woman and of a man. Their genotypes for a recessive sex-linked condition are also shown. A a a key A is dominant a is recessive What are the chances that their daughter will show the sex-linked condition? A 0% B 25% C 50% D 75%",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the sex chromosomes of a woman and of a man. Their genotypes for a recessive sex-linked condition are also shown.",
+      "options": {
+        "A": "a a key A is dominant a is recessive What are the chances that their daughter will show the sex-linked condition? A 0%",
+        "B": "25%",
+        "C": "50%",
+        "D": "75%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q32.png",
+      "rawText": "Which Punnett square shows a test cross that identifies a heterozygous parent? TT Tt T t Tt T t tt A TT TT T T Tt T t Tt B Tt tt T t Tt t t tt C Tt Tt T T Tt t t Tt D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q33.png",
+      "rawText": "What is a definition of variation? A having two identical alleles of a particular gene B individuals of the same species in one area C differences between individuals of the same species D the way in which new alleles are formed",
+      "parseStatus": "ok",
+      "stem": "What is a definition of variation?",
+      "options": {
+        "A": "having two identical alleles of a particular gene",
+        "B": "individuals of the same species in one area",
+        "C": "differences between individuals of the same species",
+        "D": "the way in which new alleles are formed"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q34.png",
+      "rawText": "What is a feature of some xerophytes? A large air spaces in the tissues B leaves rolled up and covered with hairs C leaves with stomata on the upper surface D thin cuticle",
+      "parseStatus": "ok",
+      "stem": "What is a feature of some xerophytes?",
+      "options": {
+        "A": "large air spaces in the tissues",
+        "B": "leaves rolled up and covered with hairs",
+        "C": "leaves with stomata on the upper surface",
+        "D": "thin cuticle"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q35.png",
+      "rawText": "Where does the energy being transferred along a food chain originally come from? A producer B photosynthesis C carbon dioxide D the Sun",
+      "parseStatus": "ok",
+      "stem": "Where does the energy being transferred along a food chain originally come from?",
+      "options": {
+        "A": "producer",
+        "B": "photosynthesis",
+        "C": "carbon dioxide",
+        "D": "the Sun"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q36.png",
+      "rawText": "Which diagram shows a pyramid of biomass for a forest? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q37.png",
+      "rawText": "Which substance is an enzyme used in fruit juice production? A lactase B maltose C pectinase D pepsin",
+      "parseStatus": "ok",
+      "stem": "Which substance is an enzyme used in fruit juice production?",
+      "options": {
+        "A": "lactase",
+        "B": "maltose",
+        "C": "pectinase",
+        "D": "pepsin"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q38.png",
+      "rawText": "The diagram shows some of the effects of human activity on a river. bacteria use up dissolved oxygen aquatic plants grow quickly fish die from lack of oxygen What could have caused these effects? A air pollution B deforestation C over-use of fertilisers D presence of herbicides",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the effects of human activity on a river. bacteria use up dissolved oxygen aquatic plants grow quickly fish die from lack of oxygen What could have caused these effects?",
+      "options": {
+        "A": "air pollution",
+        "B": "deforestation",
+        "C": "over-use of fertilisers",
+        "D": "presence of herbicides"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q39.png",
+      "rawText": "Genetic modification has been used to produce human insulin in bacterial cells. What is inserted into the bacterial cells to produce human insulin? A a human nucleus B human plasmids C recombinant insulin D recombinant plasmids",
+      "parseStatus": "ok",
+      "stem": "Genetic modification has been used to produce human insulin in bacterial cells. What is inserted into the bacterial cells to produce human insulin?",
+      "options": {
+        "A": "a human nucleus",
+        "B": "human plasmids",
+        "C": "recombinant insulin",
+        "D": "recombinant plasmids"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_23/q40.png",
+      "rawText": "Penicillin is made in a fermenter by growing organisms. Which type of organism is used in the production of penicillin? A bacterium B fungus C protoctist D virus",
+      "parseStatus": "ok",
+      "stem": "Penicillin is made in a fermenter by growing organisms. Which type of organism is used in the production of penicillin?",
+      "options": {
+        "A": "bacterium",
+        "B": "fungus",
+        "C": "protoctist",
+        "D": "virus"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

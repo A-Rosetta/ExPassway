@@ -1,0 +1,648 @@
+{
+  "questionPaper": "0610_s19_qp_21.pdf",
+  "markScheme": "0610_s19_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q01.png",
+      "rawText": "The diagram shows a leaf on a plant. Sun water from the soil carbon dioxide from the air simple sugars made in the leaf Which characteristic of life is represented by this diagram? A excretion B nutrition C respiration D sensitivity",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a leaf on a plant. Sun water from the soil carbon dioxide from the air simple sugars made in the leaf Which characteristic of life is represented by this diagram?",
+      "options": {
+        "A": "excretion",
+        "B": "nutrition",
+        "C": "respiration",
+        "D": "sensitivity"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q02.png",
+      "rawText": "The diagram shows how Homo sapiens (modern people) could have evolved from earlier ancestors. Homo habilis Homo erectus Homo heidelbergensis Homo sapiens (modern people) Which statement about modern people and their ancestors is correct? A They are in the same species and the same genus. B They are in the same species but not the same genus. C They are in the same genus but not the same species. D They are neither the same species nor the same genus.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how Homo sapiens (modern people) could have evolved from earlier ancestors. Homo habilis Homo erectus Homo heidelbergensis Homo sapiens (modern people) Which statement about modern people and their ancestors is correct?",
+      "options": {
+        "A": "They are in the same species and the same genus.",
+        "B": "They are in the same species but not the same genus.",
+        "C": "They are in the same genus but not the same species.",
+        "D": "They are neither the same species nor the same genus."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q03.png",
+      "rawText": "The photomicrograph shows part of an animal cell. X What is the structure labelled X? A chloroplast B mitochondrion C ribosome D vacuole",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows part of an animal cell. X What is the structure labelled X?",
+      "options": {
+        "A": "chloroplast",
+        "B": "mitochondrion",
+        "C": "ribosome",
+        "D": "vacuole"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q04.png",
+      "rawText": "Which features are possessed by all plant cells? a cell wall chloroplasts A \u0016 \u0016 key B \u0016 \u001a \u0016= present C \u001a \u0016 \u001a= absent D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which features are possessed by all plant cells? a cell wall chloroplasts",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= present",
+        "C": "\u001a \u0016 \u001a= absent",
+        "D": "\u001a \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q05.png",
+      "rawText": "The diagram shows part of the skin. What is the correct level of organisation for the skin? A cell B organ C organ system D tissue",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the skin. What is the correct level of organisation for the skin?",
+      "options": {
+        "A": "cell",
+        "B": "organ",
+        "C": "organ system",
+        "D": "tissue"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q06.png",
+      "rawText": "The diagram shows a test-tube containing clear jelly. A drop of blue ink is injected into the middle of the jelly. clear jelly drop of blue ink The blue colour of the ink spreads throughout the jelly. By which process does the blue ink spread through the jelly? A active transport B catalysis C diffusion D osmosis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a test-tube containing clear jelly.",
+      "options": {
+        "A": "drop of blue ink is injected into the middle of the jelly. clear jelly drop of blue ink The blue colour of the ink spreads throughout the jelly. By which process does the blue ink spread through the jelly? A active transport",
+        "B": "catalysis",
+        "C": "diffusion",
+        "D": "osmosis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q07.png",
+      "rawText": "The apparatus shown was set up. pure water glass tube sugar solution and blue ink partially permeable membrane Some hours later, the water in the beaker had turned blue, and the liquid in the glass tube had moved upwards. Which processes caused these changes? water turned blue liquid in glass tube moved upwards A osmosis diffusion B active transport osmosis C diffusion active transport D diffusion osmosis",
+      "parseStatus": "ok",
+      "stem": "The apparatus shown was set up. pure water glass tube sugar solution and blue ink partially permeable membrane Some hours later, the water in the beaker had turned blue, and the liquid in the glass tube had moved upwards. Which processes caused these changes? water turned blue liquid in glass tube moved upwards",
+      "options": {
+        "A": "osmosis diffusion",
+        "B": "active transport osmosis",
+        "C": "diffusion active transport",
+        "D": "diffusion osmosis"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q08.png",
+      "rawText": "Four solutions were tested to see whether they contained protein, starch or glucose. The colours of the solutions after the tests are recorded in the table. Which solution contained protein and glucose but not starch? biuret test iodine test Benedict’s test A blue brown orange B blue blue-black blue C purple brown orange D purple blue-black blue",
+      "parseStatus": "ok",
+      "stem": "Four solutions were tested to see whether they contained protein, starch or glucose. The colours of the solutions after the tests are recorded in the table. Which solution contained protein and glucose but not starch? biuret test iodine test Benedict’s test",
+      "options": {
+        "A": "blue brown orange",
+        "B": "blue blue-black blue",
+        "C": "purple brown orange",
+        "D": "purple blue-black blue"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q09.png",
+      "rawText": "Small molecules are used as the basic units in the synthesis of large food molecules. Which statement is correct? A Amino acids are basic units of carbohydrates. B Fatty acids are basic units of glycogen. C Glycerol is a basic unit of oils. D Simple sugar is a basic unit of protein.",
+      "parseStatus": "ok",
+      "stem": "Small molecules are used as the basic units in the synthesis of large food molecules. Which statement is correct?",
+      "options": {
+        "A": "Amino acids are basic units of carbohydrates.",
+        "B": "Fatty acids are basic units of glycogen.",
+        "C": "Glycerol is a basic unit of oils.",
+        "D": "Simple sugar is a basic unit of protein."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q10.png",
+      "rawText": "The diagrams show a protease enzyme catalysing the breaking of part of a protein molecule into smaller pieces. Which diagram has three correct labels? A substrate product enzyme B active site active site product enzyme C substrate enzyme D active site product substrate",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a protease enzyme catalysing the breaking of part of a protein molecule into smaller pieces. Which diagram has three correct labels?",
+      "options": {
+        "A": "substrate product enzyme",
+        "B": "active site active site product enzyme",
+        "C": "substrate enzyme",
+        "D": "active site product substrate"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q11.png",
+      "rawText": "The diagram shows an experiment to investigate the balance between respiration and photosynthesis. In which tube are photosynthesis and respiration taking place at the same time? A B C D black polythene to keep out light water snail pond weed light light light",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q12.png",
+      "rawText": "The diagram shows a cross-section of a leaf as seen under a microscope. Which structure is a palisade mesophyll cell? A D B C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q13.png",
+      "rawText": "The chart is used to find a person’s recommended mass. 1.85 1.80 1.75 1.70 1.65 1.60 1.55 1.50 30 40 50 60 70 80 90 100 mass / kg height / m 110 120 130 140 150 160 low low mass mass ideal ideal mass mass slightly slightly obese obese moderately moderately obese obese low mass ideal mass slightly obese moderately obese For the data provided about body mass and height, which person would benefit most from the introduction of a calorie-controlled diet and regular exercise? body mass / kg height / m A 40 1.55 B 50 1.75 C 70 1.80 D 90 1.75",
+      "parseStatus": "ok",
+      "stem": "The chart is used to find a person’s recommended mass. 1.85 1.80 1.75 1.70 1.65 1.60 1.55 1.50 30 40 50 60 70 80 90 100 mass / kg height / m 110 120 130 140 150 160 low low mass mass ideal ideal mass mass slightly slightly obese obese moderately moderately obese obese low mass ideal mass slightly obese moderately obese For the data provided about body mass and height, which person would benefit most from the introduction of a calorie-controlled diet and regular exercise? body mass / kg height / m",
+      "options": {
+        "A": "40 1.55",
+        "B": "50 1.75",
+        "C": "70 1.80",
+        "D": "90 1.75"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q14.png",
+      "rawText": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. How does this affect the water potential of blood in the intestinal capillaries and the intestinal contents? water potential blood in capillaries contents of small intestine A lowered lowered B lowered raised C raised lowered D raised raised",
+      "parseStatus": "ok",
+      "stem": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. How does this affect the water potential of blood in the intestinal capillaries and the intestinal contents? water potential blood in capillaries contents of small intestine",
+      "options": {
+        "A": "lowered lowered",
+        "B": "lowered raised",
+        "C": "raised lowered",
+        "D": "raised raised"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q15.png",
+      "rawText": "A student investigates the breakdown of fats in milk by lipase. Four test-tubes labelled A to D are set up. The table shows the contents of each test-tube. In which test-tube will the contents become acidic most quickly? milk bile boiled lipase lipase A \u0016 \u0016 \u001a \u0016 key B \u0016 \u0016 \u0016 \u001a \u0016= present C \u0016 \u001a \u0016 \u001a \u001a= absent D \u0016 \u001a \u001a \u0016",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q16.png",
+      "rawText": "A celery stalk was placed into a beaker of blue dye. When the dye reached the leaves, the stalk was taken out and a section was cut, as shown in the diagram. celery stalk blue dye cut Which diagram shows the appearance of the cut end of the stalk? A B C D blue dye blue dye blue dye",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q17.png",
+      "rawText": "The table shows the rate of water flow through a tree over a 12 hour period. time of day rate of flow / cm per hour 17:00 100 19:00 120 11:00 140 13:00 250 15:00 300 17:00 260 19:00 180 What conclusion can be drawn from the table? A Between 7:00 and 17:00 hours the rate of flow continuously increases. B The greatest increase in rate of flow in a two-hour period is between 11:00 and 13:00 hours. C Water does not flow up through a tree at night. D Water flow is affected by humidity.",
+      "parseStatus": "ok",
+      "stem": "The table shows the rate of water flow through a tree over a 12 hour period. time of day rate of flow / cm per hour 17:00 100 19:00 120 11:00 140 13:00 250 15:00 300 17:00 260 19:00 180 What conclusion can be drawn from the table?",
+      "options": {
+        "A": "Between 7:00 and 17:00 hours the rate of flow continuously increases.",
+        "B": "The greatest increase in rate of flow in a two-hour period is between 11:00 and 13:00 hours.",
+        "C": "Water does not flow up through a tree at night.",
+        "D": "Water flow is affected by humidity."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q18.png",
+      "rawText": "The diagram shows some of the transport tissues in a plant root. Y Z Which row about tissues Y and Z in the diagram is correct? tissue Y tissue Z name transports name transports A phloem mineral ions & water xylem sucrose B phloem sucrose xylem mineral ions & water C xylem mineral ions & water phloem sucrose D xylem sucrose phloem mineral ions & water",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some of the transport tissues in a plant root. Y Z Which row about tissues Y and Z in the diagram is correct? tissue Y tissue Z name transports name transports",
+      "options": {
+        "A": "phloem mineral ions & water xylem sucrose",
+        "B": "phloem sucrose xylem mineral ions & water",
+        "C": "xylem mineral ions & water phloem sucrose",
+        "D": "xylem sucrose phloem mineral ions & water"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q19.png",
+      "rawText": "The diagram shows cross-sections through three types of blood vessel, not drawn to the same scale. W V X Which section is from a vein and which is from a capillary? vein capillary A V W B W V C W X D X W",
+      "parseStatus": "ok",
+      "stem": "The diagram shows cross-sections through three types of blood vessel, not drawn to the same scale. W V X Which section is from a vein and which is from a capillary? vein capillary",
+      "options": {
+        "A": "V W",
+        "B": "W V",
+        "C": "W X",
+        "D": "X W"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q20.png",
+      "rawText": "The diagram shows one way the body defends itself against pathogens. white blood cell bacteria What is the name of this defence mechanism? A antibody production B egestion C phagocytosis D vaccination",
+      "parseStatus": "ok",
+      "stem": "The diagram shows one way the body defends itself against pathogens. white blood cell bacteria What is the name of this defence mechanism?",
+      "options": {
+        "A": "antibody production",
+        "B": "egestion",
+        "C": "phagocytosis",
+        "D": "vaccination"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q21.png",
+      "rawText": "The diagram illustrates changes in air pressure taking place inside the lungs during a complete cycle of breathing. Atmospheric pressure is 101 kPa. At which point on the diagram are the ribs beginning to be lowered? A B C D 102 101 100 time pressure in lungs / kPa",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q22.png",
+      "rawText": "Potted plants are left for a week in a tank of water as shown. soil tank water permeable plant pot Why do the plants die? A The roots do not have enough oxygen. B The roots do not have enough water. C The roots have too much oxygen. D The roots have too much carbon dioxide.",
+      "parseStatus": "ok",
+      "stem": "Potted plants are left for a week in a tank of water as shown. soil tank water permeable plant pot Why do the plants die?",
+      "options": {
+        "A": "The roots do not have enough oxygen.",
+        "B": "The roots do not have enough water.",
+        "C": "The roots have too much oxygen.",
+        "D": "The roots have too much carbon dioxide."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q23.png",
+      "rawText": "Which statement about both aerobic and anaerobic respiration is correct? A They break down C6H12O6. B They produce an oxygen debt. C They use CO2. D They use O2.",
+      "parseStatus": "ok",
+      "stem": "Which statement about both aerobic and anaerobic respiration is correct?",
+      "options": {
+        "A": "They break down C6H12O6.",
+        "B": "They produce an oxygen debt.",
+        "C": "They use CO2.",
+        "D": "They use O2."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q24.png",
+      "rawText": "The components of a reflex arc are shown in the flow diagram. receptor → sensory neurone → synapse → relay neurone → synapse → motor neurone → effector Which component is responsible for ensuring that the nerve impulses travel in one direction only? A motor neurone B receptor C sensory neurone D synapse",
+      "parseStatus": "ok",
+      "stem": "The components of a reflex arc are shown in the flow diagram. receptor → sensory neurone → synapse → relay neurone → synapse → motor neurone → effector Which component is responsible for ensuring that the nerve impulses travel in one direction only?",
+      "options": {
+        "A": "motor neurone",
+        "B": "receptor",
+        "C": "sensory neurone",
+        "D": "synapse"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q25.png",
+      "rawText": "What is a function of the liver? A converting bile to urea B converting urea to amino acids C deamination of amino acids D deamination of carbon dioxide",
+      "parseStatus": "ok",
+      "stem": "What is a function of the liver?",
+      "options": {
+        "A": "converting bile to urea",
+        "B": "converting urea to amino acids",
+        "C": "deamination of amino acids",
+        "D": "deamination of carbon dioxide"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q26.png",
+      "rawText": "Which statement about light receptors in the retina of a normal human eye is correct? A The cones only work in dim light. B The rods are found in the fovea. C There are three types of cone. D There are three types of rod.",
+      "parseStatus": "ok",
+      "stem": "Which statement about light receptors in the retina of a normal human eye is correct?",
+      "options": {
+        "A": "The cones only work in dim light.",
+        "B": "The rods are found in the fovea.",
+        "C": "There are three types of cone.",
+        "D": "There are three types of rod."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q27.png",
+      "rawText": "A patient is injected with adrenaline. Which graph shows the expected changes to pulse rate and blood glucose concentration? pulse rate blood glucose concentration A 0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration B 0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration C 0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration D 0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration key",
+      "parseStatus": "ok",
+      "stem": "A patient is injected with adrenaline. Which graph shows the expected changes to pulse rate and blood glucose concentration? pulse rate blood glucose concentration",
+      "options": {
+        "A": "0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration",
+        "B": "0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration",
+        "C": "0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration",
+        "D": "0 0.5 1 time after injection / minutes 1.5 2 pulse rate blood glucose concentration key"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q28.png",
+      "rawText": "The diagram represents a synapse in the brain involved in the perception of pain. Which labelled molecule represents heroin? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q29.png",
+      "rawText": "A human zygote is a diploid cell. Which statement about human diploid cells is correct? A They do not have a nucleus. B They fuse to form gametes. C The nucleus contains a single set of chromosomes. D The nucleus contains two sets of chromosomes.",
+      "parseStatus": "ok",
+      "stem": "A human zygote is a diploid cell. Which statement about human diploid cells is correct?",
+      "options": {
+        "A": "They do not have a nucleus.",
+        "B": "They fuse to form gametes.",
+        "C": "The nucleus contains a single set of chromosomes.",
+        "D": "The nucleus contains two sets of chromosomes."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q30.png",
+      "rawText": "Which feature allows the sperm to dissolve the jelly coating of the egg cell? A acrosome B flagellum C mitochondria D nucleus",
+      "parseStatus": "ok",
+      "stem": "Which feature allows the sperm to dissolve the jelly coating of the egg cell?",
+      "options": {
+        "A": "acrosome",
+        "B": "flagellum",
+        "C": "mitochondria",
+        "D": "nucleus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q31.png",
+      "rawText": "Which statement about HIV is correct? A It causes an increase in the number of lymphocytes. B It is caused by bacteria. C It increases the ability to produce antibodies. D It is transmitted through sexual contact.",
+      "parseStatus": "ok",
+      "stem": "Which statement about HIV is correct?",
+      "options": {
+        "A": "It causes an increase in the number of lymphocytes.",
+        "B": "It is caused by bacteria.",
+        "C": "It increases the ability to produce antibodies.",
+        "D": "It is transmitted through sexual contact."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q32.png",
+      "rawText": "The diagram shows the chromosomes in the nucleus of a cell that divides by mitosis. Which diagram shows the chromosomes in the nucleus of one of the daughter cells produced? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q33.png",
+      "rawText": "What happens as a result of meiosis? A Diploid cells are produced. B Diploid and haploid cells are produced. C Genetically identical cells are produced. D Haploid cells are produced.",
+      "parseStatus": "ok",
+      "stem": "What happens as a result of meiosis?",
+      "options": {
+        "A": "Diploid cells are produced.",
+        "B": "Diploid and haploid cells are produced.",
+        "C": "Genetically identical cells are produced.",
+        "D": "Haploid cells are produced."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q34.png",
+      "rawText": "Why is the allele for sickle-cell anaemia common in some parts of the world? A Malaria protects against sickle-cell anaemia. B Sickle-cell anaemia is caused by malaria. C Sickle-cell anaemia is transmitted by mosquitoes. D The sickle-cell anaemia allele protects against malaria.",
+      "parseStatus": "ok",
+      "stem": "Why is the allele for sickle-cell anaemia common in some parts of the world?",
+      "options": {
+        "A": "Malaria protects against sickle-cell anaemia.",
+        "B": "Sickle-cell anaemia is caused by malaria.",
+        "C": "Sickle-cell anaemia is transmitted by mosquitoes.",
+        "D": "The sickle-cell anaemia allele protects against malaria."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q35.png",
+      "rawText": "Which statement describes how a species becomes adapted to its environment? A Genetic similarities give rise to different genotypes which may have a reproductive advantage. B Genetic variation gives rise to different phenotypes which may have a reproductive advantage. C Phenotypic similarities give rise to different genotypes which may have a reproductive advantage. D Phenotypic variation gives rise to different phenotypes which may have a reproductive advantage.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes how a species becomes adapted to its environment?",
+      "options": {
+        "A": "Genetic similarities give rise to different genotypes which may have a reproductive advantage.",
+        "B": "Genetic variation gives rise to different phenotypes which may have a reproductive advantage.",
+        "C": "Phenotypic similarities give rise to different genotypes which may have a reproductive advantage.",
+        "D": "Phenotypic variation gives rise to different phenotypes which may have a reproductive advantage."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q36.png",
+      "rawText": "Decomposers play an important role in the carbon cycle. They release carbon dioxide. Which process is responsible for this? A feeding B fossilisation C photosynthesis D respiration",
+      "parseStatus": "ok",
+      "stem": "Decomposers play an important role in the carbon cycle. They release carbon dioxide. Which process is responsible for this?",
+      "options": {
+        "A": "feeding",
+        "B": "fossilisation",
+        "C": "photosynthesis",
+        "D": "respiration"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q37.png",
+      "rawText": "Which term describes a group of organisms of one species, living in the same area, at the same time? A community B ecosystem C genus D population",
+      "parseStatus": "ok",
+      "stem": "Which term describes a group of organisms of one species, living in the same area, at the same time?",
+      "options": {
+        "A": "community",
+        "B": "ecosystem",
+        "C": "genus",
+        "D": "population"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q38.png",
+      "rawText": "The diagram shows a bacterial cell. Which part of its structure is particularly useful in genetic engineering? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q39.png",
+      "rawText": "What can be managed sustainably? A taking coal from a coalfield B taking gas from under the earth’s surface C taking oil from an oilfield D taking wood from a woodland",
+      "parseStatus": "ok",
+      "stem": "What can be managed sustainably?",
+      "options": {
+        "A": "taking coal from a coalfield",
+        "B": "taking gas from under the earth’s surface",
+        "C": "taking oil from an oilfield",
+        "D": "taking wood from a woodland"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_21/q40.png",
+      "rawText": "Large areas of tropical forests have been cleared to grow monocultures of palm oil plants. Which effect will this have on the ecosystem? A The use of fossil fuels in the area will decrease. B The use of pesticides in the area will decrease. C The variety of species in the area will decrease. D The variety of species in the area will increase.",
+      "parseStatus": "ok",
+      "stem": "Large areas of tropical forests have been cleared to grow monocultures of palm oil plants. Which effect will this have on the ecosystem?",
+      "options": {
+        "A": "The use of fossil fuels in the area will decrease.",
+        "B": "The use of pesticides in the area will decrease.",
+        "C": "The variety of species in the area will decrease.",
+        "D": "The variety of species in the area will increase."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

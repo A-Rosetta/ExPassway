@@ -1,0 +1,653 @@
+{
+  "questionPaper": "0610_s19_qp_23.pdf",
+  "markScheme": "0610_s19_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q01.png",
+      "rawText": "Students find a small organism in a pond. They catch it and put it into a large jar of water. They see that the organism swims away from light. It lays some eggs before they put it back into the pond. Which characteristics of living things did the students see in this organism? A excretion, growth and respiration B growth, nutrition and sensitivity C movement, reproduction and sensitivity D movement, reproduction and respiration",
+      "parseStatus": "ok",
+      "stem": "Students find a small organism in a pond. They catch it and put it into a large jar of water. They see that the organism swims away from light. It lays some eggs before they put it back into the pond. Which characteristics of living things did the students see in this organism?",
+      "options": {
+        "A": "excretion, growth and respiration",
+        "B": "growth, nutrition and sensitivity",
+        "C": "movement, reproduction and sensitivity",
+        "D": "movement, reproduction and respiration"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q02.png",
+      "rawText": "The diagram shows how Homo sapiens (modern people) could have evolved from earlier ancestors. Homo habilis Homo erectus Homo heidelbergensis Homo sapiens (modern people) Which statement about modern people and their ancestors is correct? A They are in the same species and the same genus. B They are in the same species but not the same genus. C They are in the same genus but not the same species. D They are neither the same species nor the same genus.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how Homo sapiens (modern people) could have evolved from earlier ancestors. Homo habilis Homo erectus Homo heidelbergensis Homo sapiens (modern people) Which statement about modern people and their ancestors is correct?",
+      "options": {
+        "A": "They are in the same species and the same genus.",
+        "B": "They are in the same species but not the same genus.",
+        "C": "They are in the same genus but not the same species.",
+        "D": "They are neither the same species nor the same genus."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q03.png",
+      "rawText": "In cells with a high respiration rate, what would be found in the cytoplasm in increased numbers? A mitochondria B ribosomes C rough endoplasmic reticulum D vesicles",
+      "parseStatus": "ok",
+      "stem": "In cells with a high respiration rate, what would be found in the cytoplasm in increased numbers?",
+      "options": {
+        "A": "mitochondria",
+        "B": "ribosomes",
+        "C": "rough endoplasmic reticulum",
+        "D": "vesicles"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q04.png",
+      "rawText": "Which features are possessed by all plant cells? a cell wall chloroplasts A \u0016 \u0016 key B \u0016 \u001a \u0016= present C \u001a \u0016 \u001a= absent D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "Which features are possessed by all plant cells? a cell wall chloroplasts",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= present",
+        "C": "\u001a \u0016 \u001a= absent",
+        "D": "\u001a \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q05.png",
+      "rawText": "The diagram shows a mitochondrion. 1 μm The diagram is 70 mm long. What is the magnification of the diagram? A ×0.0007 B ×70 C ×7000 D ×70 000",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a mitochondrion. 1 μm The diagram is 70 mm long. What is the magnification of the diagram?",
+      "options": {
+        "A": "×0.0007",
+        "B": "×70",
+        "C": "×7000",
+        "D": "×70 000"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q06.png",
+      "rawText": "The diagram shows a test-tube containing clear jelly. A drop of blue ink is injected into the middle of the jelly. clear jelly drop of blue ink The blue colour of the ink spreads throughout the jelly. By which process does the blue ink spread through the jelly? A active transport B catalysis C diffusion D osmosis",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a test-tube containing clear jelly.",
+      "options": {
+        "A": "drop of blue ink is injected into the middle of the jelly. clear jelly drop of blue ink The blue colour of the ink spreads throughout the jelly. By which process does the blue ink spread through the jelly? A active transport",
+        "B": "catalysis",
+        "C": "diffusion",
+        "D": "osmosis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q07.png",
+      "rawText": "Which row describes active transport? movement of water uses energy from respiration through a cell membrane A yes no no B yes no yes C no yes no D no yes yes",
+      "parseStatus": "ok",
+      "stem": "Which row describes active transport? movement of water uses energy from respiration through a cell membrane",
+      "options": {
+        "A": "yes no no",
+        "B": "yes no yes",
+        "C": "no yes no",
+        "D": "no yes yes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q08.png",
+      "rawText": "Which reagent is used when testing a food for vitamin C? A Benedict’s solution B DCPIP C ethanol D iodine solution",
+      "parseStatus": "ok",
+      "stem": "Which reagent is used when testing a food for vitamin C?",
+      "options": {
+        "A": "Benedict’s solution",
+        "B": "DCPIP",
+        "C": "ethanol",
+        "D": "iodine solution"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q09.png",
+      "rawText": "Small molecules are used as the basic units in the synthesis of large food molecules. Which statement is correct? A Amino acids are basic units of carbohydrates. B Fatty acids are basic units of glycogen. C Glycerol is a basic unit of oils. D Simple sugar is a basic unit of protein.",
+      "parseStatus": "ok",
+      "stem": "Small molecules are used as the basic units in the synthesis of large food molecules. Which statement is correct?",
+      "options": {
+        "A": "Amino acids are basic units of carbohydrates.",
+        "B": "Fatty acids are basic units of glycogen.",
+        "C": "Glycerol is a basic unit of oils.",
+        "D": "Simple sugar is a basic unit of protein."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q10.png",
+      "rawText": "The diagrams show a protease enzyme catalysing the breaking of part of a protein molecule into smaller pieces. Which diagram has three correct labels? A substrate product enzyme B active site active site product enzyme C substrate enzyme D active site product substrate",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a protease enzyme catalysing the breaking of part of a protein molecule into smaller pieces. Which diagram has three correct labels?",
+      "options": {
+        "A": "substrate product enzyme",
+        "B": "active site active site product enzyme",
+        "C": "substrate enzyme",
+        "D": "active site product substrate"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q11.png",
+      "rawText": "The diagram shows an experiment to investigate the balance between respiration and photosynthesis. In which tube are photosynthesis and respiration taking place at the same time? A B C D black polythene to keep out light water snail pond weed light light light",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q12.png",
+      "rawText": "The diagrams show the structure of four different cells from a plant. Which cell is from the upper epidermis of a leaf? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q13.png",
+      "rawText": "The diagram shows the human alimentary canal. 1 3 4 5 2 Which pair of structures both produce digestive enzymes? A 1 and 2 B 1 and 3 C 2 and 4 D 3 and 5",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the human alimentary canal. 1 3 4 5 2 Which pair of structures both produce digestive enzymes?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 4",
+        "D": "3 and 5"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q14.png",
+      "rawText": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. How does this affect the water potential of blood in the intestinal capillaries and the intestinal contents? water potential blood in capillaries contents of small intestine A lowered lowered B lowered raised C raised lowered D raised raised",
+      "parseStatus": "ok",
+      "stem": "The cholera bacterium produces toxins that cause chloride ions to be secreted into the small intestine. How does this affect the water potential of blood in the intestinal capillaries and the intestinal contents? water potential blood in capillaries contents of small intestine",
+      "options": {
+        "A": "lowered lowered",
+        "B": "lowered raised",
+        "C": "raised lowered",
+        "D": "raised raised"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q15.png",
+      "rawText": "Starch in food is digested in two stages. In which parts of the alimentary canal do the two stages occur? starch into maltose maltose into glucose A duodenum stomach B lining of small intestine mouth C mouth lining of small intestine D stomach duodenum",
+      "parseStatus": "ok",
+      "stem": "Starch in food is digested in two stages. In which parts of the alimentary canal do the two stages occur? starch into maltose maltose into glucose",
+      "options": {
+        "A": "duodenum stomach",
+        "B": "lining of small intestine mouth",
+        "C": "mouth lining of small intestine",
+        "D": "stomach duodenum"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q16.png",
+      "rawText": "A celery stalk was placed into a beaker of blue dye. When the dye reached the leaves, the stalk was taken out and a section was cut, as shown in the diagram. celery stalk blue dye cut Which diagram shows the appearance of the cut end of the stalk? A B C D blue dye blue dye blue dye",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q17.png",
+      "rawText": "The table shows the rate of water flow through a tree over a 12 hour period. time of day rate of flow / cm per hour 17:00 100 19:00 120 11:00 140 13:00 250 15:00 300 17:00 260 19:00 180 What conclusion can be drawn from the table? A Between 7:00 and 17:00 hours the rate of flow continuously increases. B The greatest increase in rate of flow in a two-hour period is between 11:00 and 13:00 hours. C Water does not flow up through a tree at night. D Water flow is affected by humidity.",
+      "parseStatus": "ok",
+      "stem": "The table shows the rate of water flow through a tree over a 12 hour period. time of day rate of flow / cm per hour 17:00 100 19:00 120 11:00 140 13:00 250 15:00 300 17:00 260 19:00 180 What conclusion can be drawn from the table?",
+      "options": {
+        "A": "Between 7:00 and 17:00 hours the rate of flow continuously increases.",
+        "B": "The greatest increase in rate of flow in a two-hour period is between 11:00 and 13:00 hours.",
+        "C": "Water does not flow up through a tree at night.",
+        "D": "Water flow is affected by humidity."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q18.png",
+      "rawText": "Scientists investigate the movement of substances in a plant. They cut a ring of tissue from the stem. Removing the tissue removes some of the transport vessels found around the edge of the stem. A few days later they notice swelling above the area where the tissue has been removed. tissue removed time swelling leaves roots What causes the swelling? A Phloem vessels have been removed and sucrose cannot move to the sink. B Phloem vessels have been removed and sucrose cannot move to the source. C Xylem vessels have been removed and minerals cannot move to the sink. D Xylem vessels have been removed and minerals cannot move to the source.",
+      "parseStatus": "ok",
+      "stem": "Scientists investigate the movement of substances in a plant. They cut a ring of tissue from the stem. Removing the tissue removes some of the transport vessels found around the edge of the stem.",
+      "options": {
+        "A": "few days later they notice swelling above the area where the tissue has been removed. tissue removed time swelling leaves roots What causes the swelling? A Phloem vessels have been removed and sucrose cannot move to the sink.",
+        "B": "Phloem vessels have been removed and sucrose cannot move to the source.",
+        "C": "Xylem vessels have been removed and minerals cannot move to the sink.",
+        "D": "Xylem vessels have been removed and minerals cannot move to the source."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q19.png",
+      "rawText": "The diagram shows cross-sections through three types of blood vessel, not drawn to the same scale. W V X Which section is from a vein and which is from a capillary? vein capillary A V W B W V C W X D X W",
+      "parseStatus": "ok",
+      "stem": "The diagram shows cross-sections through three types of blood vessel, not drawn to the same scale. W V X Which section is from a vein and which is from a capillary? vein capillary",
+      "options": {
+        "A": "V W",
+        "B": "W V",
+        "C": "W X",
+        "D": "X W"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q20.png",
+      "rawText": "By which route would an HIV infection not be transmissible? A blood B saliva C sharing needles for injections D semen",
+      "parseStatus": "ok",
+      "stem": "By which route would an HIV infection not be transmissible?",
+      "options": {
+        "A": "blood",
+        "B": "saliva",
+        "C": "sharing needles for injections",
+        "D": "semen"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q21.png",
+      "rawText": "The diagram illustrates changes in air pressure taking place inside the lungs during a complete cycle of breathing. Atmospheric pressure is 101 kPa. At which point on the diagram are the ribs beginning to be lowered? A B C D 102 101 100 time pressure in lungs / kPa",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q22.png",
+      "rawText": "Which process uses energy released by respiration? A diffusion B evaporation C growth D osmosis",
+      "parseStatus": "ok",
+      "stem": "Which process uses energy released by respiration?",
+      "options": {
+        "A": "diffusion",
+        "B": "evaporation",
+        "C": "growth",
+        "D": "osmosis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q23.png",
+      "rawText": "The volume of oxygen taken up by germinating seeds was measured. The graph shows the results. 2.0 1.8 1.6 1.4 1.2 1.0 0.8 0.6 0.4 0.2 0 0 5 10 time / minutes volume of oxygen taken up / cm3 15 20 What is the rate of oxygen uptake? A 0.08 cm3 per minute B 8.00 cm3 per minute C 10.8 cm3 per minute D 12.50 cm3 per minute",
+      "parseStatus": "ok",
+      "stem": "The volume of oxygen taken up by germinating seeds was measured. The graph shows the results. 2.0 1.8 1.6 1.4 1.2 1.0 0.8 0.6 0.4 0.2 0 0 5 10 time / minutes volume of oxygen taken up / cm3 15 20 What is the rate of oxygen uptake?",
+      "options": {
+        "A": "0.08 cm3 per minute",
+        "B": "8.00 cm3 per minute",
+        "C": "10.8 cm3 per minute",
+        "D": "12.50 cm3 per minute"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q24.png",
+      "rawText": "The diagrams show the structures on each side of a synaptic cleft. Which diagram is correctly labelled? direction of impulse released neurotransmitter neurotransmitter receptor molecules A synaptic cleft released neurotransmitter direction of impulse neurotransmitter receptor molecules B synaptic cleft direction of impulse released neurotransmitter neurotransmitter receptor molecules C synaptic cleft released neurotransmitter direction of impulse neurotransmitter receptor molecules D synaptic cleft",
+      "parseStatus": "ok",
+      "stem": "The diagrams show the structures on each side of a synaptic cleft. Which diagram is correctly labelled? direction of impulse released neurotransmitter neurotransmitter receptor molecules",
+      "options": {
+        "A": "synaptic cleft released neurotransmitter direction of impulse neurotransmitter receptor molecules",
+        "B": "synaptic cleft direction of impulse released neurotransmitter neurotransmitter receptor molecules",
+        "C": "synaptic cleft released neurotransmitter direction of impulse neurotransmitter receptor molecules",
+        "D": "synaptic cleft"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q25.png",
+      "rawText": "Dialysis is a method of regulating the composition of blood when the kidneys are not working properly. Which substance is absent from fresh dialysis fluid? A bile B glucose C salt D water",
+      "parseStatus": "ok",
+      "stem": "Dialysis is a method of regulating the composition of blood when the kidneys are not working properly. Which substance is absent from fresh dialysis fluid?",
+      "options": {
+        "A": "bile",
+        "B": "glucose",
+        "C": "salt",
+        "D": "water"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q26.png",
+      "rawText": "The diagram shows a vertical section through part of a human eye. A fly is coming nearer to the eye. The eye begins to focus the image of the fly on its retina. Q R S fly How do the labelled parts of the diagram change? Q R S A contracts thinner tighter B relaxes fatter slacker C contracts fatter slacker D relaxes thinner tighter",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a vertical section through part of a human eye.",
+      "options": {
+        "A": "fly is coming nearer to the eye. The eye begins to focus the image of the fly on its retina. Q R S fly How do the labelled parts of the diagram change? Q R S A contracts thinner tighter",
+        "B": "relaxes fatter slacker",
+        "C": "contracts fatter slacker",
+        "D": "relaxes thinner tighter"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q27.png",
+      "rawText": "Where is glucagon secreted, and what is its effect on blood glucose concentration? secreted by effect on blood glucose concentration A liver increases B liver decreases C pancreas increases D pancreas decreases",
+      "parseStatus": "ok",
+      "stem": "Where is glucagon secreted, and what is its effect on blood glucose concentration? secreted by effect on blood glucose concentration",
+      "options": {
+        "A": "liver increases",
+        "B": "liver decreases",
+        "C": "pancreas increases",
+        "D": "pancreas decreases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q28.png",
+      "rawText": "Which statement about antibiotics is correct? A Antibiotics are effective against viral diseases. B Antibiotics are produced by white blood cells. C Antibiotics can provide pain relief. D Antibiotics can stop bacteria making new cell walls.",
+      "parseStatus": "ok",
+      "stem": "Which statement about antibiotics is correct?",
+      "options": {
+        "A": "Antibiotics are effective against viral diseases.",
+        "B": "Antibiotics are produced by white blood cells.",
+        "C": "Antibiotics can provide pain relief.",
+        "D": "Antibiotics can stop bacteria making new cell walls."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q29.png",
+      "rawText": "Where is progesterone produced? A ovary B pituitary gland C prostate gland D uterus",
+      "parseStatus": "ok",
+      "stem": "Where is progesterone produced?",
+      "options": {
+        "A": "ovary",
+        "B": "pituitary gland",
+        "C": "prostate gland",
+        "D": "uterus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q30.png",
+      "rawText": "Which feature allows the sperm to dissolve the jelly coating of the egg cell? A acrosome B flagellum C mitochondria D nucleus",
+      "parseStatus": "ok",
+      "stem": "Which feature allows the sperm to dissolve the jelly coating of the egg cell?",
+      "options": {
+        "A": "acrosome",
+        "B": "flagellum",
+        "C": "mitochondria",
+        "D": "nucleus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q31.png",
+      "rawText": "Parents with alleles IAIB and IoIo can produce children with which blood groups? A A and B B AB C A and O D B and O",
+      "parseStatus": "ok",
+      "stem": "Parents with alleles IAIB and IoIo can produce children with which blood groups?",
+      "options": {
+        "A": "A and",
+        "B": "B AB",
+        "C": "A and O",
+        "D": "B and O"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q32.png",
+      "rawText": "The diagram shows the chromosomes in the nucleus of a cell that divides by mitosis. Which diagram shows the chromosomes in the nucleus of one of the daughter cells produced? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q33.png",
+      "rawText": "During protein synthesis, what is the function of the ribosome? A assemble amino acids in a chain B carry a copy of a gene to the cytoplasm C contain the code for the synthesis of a protein D determine the order of bases in the protein",
+      "parseStatus": "ok",
+      "stem": "During protein synthesis, what is the function of the ribosome?",
+      "options": {
+        "A": "assemble amino acids in a chain",
+        "B": "carry a copy of a gene to the cytoplasm",
+        "C": "contain the code for the synthesis of a protein",
+        "D": "determine the order of bases in the protein"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q34.png",
+      "rawText": "The table shows some inherited features. Which features show co-dominance? blood group colour blindness sex A \u0016 \u0016 \u001a key B \u0016 \u001a \u001a \u0016= co-dominant C \u001a \u0016 \u0016 \u001a= not co-dominant D \u001a \u0016 \u001a",
+      "parseStatus": "ok",
+      "stem": "The table shows some inherited features. Which features show co-dominance? blood group colour blindness sex",
+      "options": {
+        "A": "\u0016 \u0016 \u001a key",
+        "B": "\u0016 \u001a \u001a \u0016= co-dominant",
+        "C": "\u001a \u0016 \u0016 \u001a= not co-dominant",
+        "D": "\u001a \u0016 \u001a"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q35.png",
+      "rawText": "These events may happen when an antibiotic is used to treat a bacterial infection. 1 The antibiotic kills most of the bacteria. 2 The antibiotic resistant bacteria reproduce. 3 The antibiotic resistant bacteria survive. 4 Some bacteria mutate and are resistant to the antibiotic. Which sequence may produce a strain of antibiotic resistant bacteria? A 1 → 2 → 3 → 4 B 2 → 3 → 1 → 4 C 3 → 1 → 4 → 2 D 4 → 1 → 3 → 2",
+      "parseStatus": "ok",
+      "stem": "These events may happen when an antibiotic is used to treat a bacterial infection. 1 The antibiotic kills most of the bacteria. 2 The antibiotic resistant bacteria reproduce. 3 The antibiotic resistant bacteria survive. 4 Some bacteria mutate and are resistant to the antibiotic. Which sequence may produce a strain of antibiotic resistant bacteria?",
+      "options": {
+        "A": "1 → 2 → 3 → 4",
+        "B": "2 → 3 → 1 → 4",
+        "C": "3 → 1 → 4 → 2",
+        "D": "4 → 1 → 3 → 2"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q36.png",
+      "rawText": "The diagram shows the energy within the producers in an ecosystem and how much is transferred to primary consumers and eventually lost to the environment. producers 50 000 kJ 45 000 kJ primary consumers 5000 kJ secondary consumers 4500 kJ Sun How much energy is transferred from primary consumers to secondary consumers? A 5 kJ B 50 kJ C 500 kJ D 5000 kJ",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the energy within the producers in an ecosystem and how much is transferred to primary consumers and eventually lost to the environment. producers 50 000 kJ 45 000 kJ primary consumers 5000 kJ secondary consumers 4500 kJ Sun How much energy is transferred from primary consumers to secondary consumers?",
+      "options": {
+        "A": "5 kJ",
+        "B": "50 kJ",
+        "C": "500 kJ",
+        "D": "5000 kJ"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q37.png",
+      "rawText": "Which is the tertiary consumer in this food chain? A B C D aquatic plant → pond snails → small fish → large fish → fish eagles",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q38.png",
+      "rawText": "Scientists in one country are using bacteria to break down crude oil in abandoned oil fields. This produces natural gas which is used as a fuel. Why are bacteria useful in this example of biotechnology? A Bacteria are involved in the nitrogen cycle. B Bacteria are microorganisms. C Bacteria can be pathogens. D Bacteria can reproduce very quickly.",
+      "parseStatus": "ok",
+      "stem": "Scientists in one country are using bacteria to break down crude oil in abandoned oil fields. This produces natural gas which is used as a fuel. Why are bacteria useful in this example of biotechnology?",
+      "options": {
+        "A": "Bacteria are involved in the nitrogen cycle.",
+        "B": "Bacteria are microorganisms.",
+        "C": "Bacteria can be pathogens.",
+        "D": "Bacteria can reproduce very quickly."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q39.png",
+      "rawText": "The diagrams show the stages in the production of human insulin. Which stage uses the enzyme DNA ligase? C the gene for insulin is inserted into the plasmid D the plasmid is inserted into a bacterium which reproduces and insulin is produced A gene for insulin identified and removed from a human cell B plasmid is removed from a bacterium and cut open",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s19_qp_23/q40.png",
+      "rawText": "What is an undesirable effect of deforestation? A habitat creation B loss of soil C more species D reduced carbon dioxide in the atmosphere",
+      "parseStatus": "ok",
+      "stem": "What is an undesirable effect of deforestation?",
+      "options": {
+        "A": "habitat creation",
+        "B": "loss of soil",
+        "C": "more species",
+        "D": "reduced carbon dioxide in the atmosphere"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

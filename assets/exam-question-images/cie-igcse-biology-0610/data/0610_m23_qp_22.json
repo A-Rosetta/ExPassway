@@ -1,0 +1,658 @@
+{
+  "questionPaper": "0610_m23_qp_22.pdf",
+  "markScheme": "0610_m23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q01.png",
+      "rawText": "What is used as a means of classification? A the number of strands of mRNA B the shape of DNA molecules C the sequence of bases in DNA D the types of bases in DNA",
+      "parseStatus": "ok",
+      "stem": "What is used as a means of classification?",
+      "options": {
+        "A": "the number of strands of mRNA",
+        "B": "the shape of DNA molecules",
+        "C": "the sequence of bases in DNA",
+        "D": "the types of bases in DNA"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q02.png",
+      "rawText": "How many jointed legs does an insect have? A two pairs B three pairs C four pairs D more than six pairs",
+      "parseStatus": "ok",
+      "stem": "How many jointed legs does an insect have?",
+      "options": {
+        "A": "two pairs",
+        "B": "three pairs",
+        "C": "four pairs",
+        "D": "more than six pairs"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q03.png",
+      "rawText": "The photomicrograph shows a cell from a type of aquatic plant. P Q S R Which labelled parts indicate that this is a plant cell? A P and R B P and S C Q and R D Q and S",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows a cell from a type of aquatic plant. P Q S R Which labelled parts indicate that this is a plant cell?",
+      "options": {
+        "A": "P and R",
+        "B": "P and S",
+        "C": "Q and R",
+        "D": "Q and S"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q04.png",
+      "rawText": "The diagram shows a red blood cell. 49 mm The actual diameter of the cell is 7.0 micrometres. What is the magnification of this cell? A ×70 B ×700 C ×7000 D ×70 000",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a red blood cell. 49 mm The actual diameter of the cell is 7.0 micrometres. What is the magnification of this cell?",
+      "options": {
+        "A": "×70",
+        "B": "×700",
+        "C": "×7000",
+        "D": "×70 000"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q05.png",
+      "rawText": "Which molecule crosses a partially permeable membrane during osmosis? A carbon dioxide B oxygen C urea D water",
+      "parseStatus": "ok",
+      "stem": "Which molecule crosses a partially permeable membrane during osmosis?",
+      "options": {
+        "A": "carbon dioxide",
+        "B": "oxygen",
+        "C": "urea",
+        "D": "water"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q06.png",
+      "rawText": "The graph shows the rate of uptake of magnesium ions by two similar plants, X and Y. The roots of each plant were placed in a range of solutions. Each solution contained a different concentration of magnesium ions. All other conditions were kept constant. rate of uptake of magnesium ions concentration of magnesium ions in external solution plant X plant Y What is a possible explanation for the difference in the results for the two plants? A Plant Y has fewer protein carriers for magnesium ions in its cell membranes. B Plant Y has a higher rate of respiration. C Plant Y has more root hair cells. D The root hair cells in plant Y have a lower water potential.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the rate of uptake of magnesium ions by two similar plants, X and Y. The roots of each plant were placed in a range of solutions. Each solution contained a different concentration of magnesium ions. All other conditions were kept constant. rate of uptake of magnesium ions concentration of magnesium ions in external solution plant X plant Y What is a possible explanation for the difference in the results for the two plants?",
+      "options": {
+        "A": "Plant Y has fewer protein carriers for magnesium ions in its cell membranes.",
+        "B": "Plant Y has a higher rate of respiration.",
+        "C": "Plant Y has more root hair cells.",
+        "D": "The root hair cells in plant Y have a lower water potential."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q07.png",
+      "rawText": "Which substance is used to test a food for vitamin C? A Benedict’s solution B DCPIP C ethanol D iodine solution",
+      "parseStatus": "ok",
+      "stem": "Which substance is used to test a food for vitamin C?",
+      "options": {
+        "A": "Benedict’s solution",
+        "B": "DCPIP",
+        "C": "ethanol",
+        "D": "iodine solution"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q08.png",
+      "rawText": "In DNA, what is the correct base pairing? A T with C B T with T C T with G D T with A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q09.png",
+      "rawText": "What remains at the end of an enzyme-controlled reaction? A enzymes and products B enzymes and substrates C enzymes only D products only",
+      "parseStatus": "ok",
+      "stem": "What remains at the end of an enzyme-controlled reaction?",
+      "options": {
+        "A": "enzymes and products",
+        "B": "enzymes and substrates",
+        "C": "enzymes only",
+        "D": "products only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q10.png",
+      "rawText": "Which feature explains the specificity of an enzyme? A complementary shape of active site and substrate B denaturation at certain pH values C temperature change leading to change in enzyme activity D varying frequency of effective collisions between enzyme and substrate",
+      "parseStatus": "ok",
+      "stem": "Which feature explains the specificity of an enzyme?",
+      "options": {
+        "A": "complementary shape of active site and substrate",
+        "B": "denaturation at certain pH values",
+        "C": "temperature change leading to change in enzyme activity",
+        "D": "varying frequency of effective collisions between enzyme and substrate"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q11.png",
+      "rawText": "A plant is placed in the dark until all its stored starch is used up. The plant is placed in light with black paper over part of one green leaf. black paper over both sides of the leaf hole cut in the paper After eight hours, the leaf is tested for starch. Which diagram shows the appearance of the leaf after this test? A B C D key = starch present = starch not present",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q12.png",
+      "rawText": "The diagram shows part of a cross-section of a leaf. R S T Which row shows the correct labels? R S T A cuticle palisade mesophyll spongy mesophyll B cuticle spongy mesophyll palisade mesophyll C epidermis palisade mesophyll spongy mesophyll D epidermis spongy mesophyll palisade mesophyll",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a cross-section of a leaf. R S T Which row shows the correct labels? R S T",
+      "options": {
+        "A": "cuticle palisade mesophyll spongy mesophyll",
+        "B": "cuticle spongy mesophyll palisade mesophyll",
+        "C": "epidermis palisade mesophyll spongy mesophyll",
+        "D": "epidermis spongy mesophyll palisade mesophyll"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q13.png",
+      "rawText": "The diagrams show the different types of human teeth. 3 4 2 1 Which teeth are used for grinding food? 1 2 3 4 A \u0016 \u001a \u0016 \u001a key B \u0016 \u0016 \u001a \u001a \u0016= yes C \u001a \u001a \u0016 \u0016 \u001a= no D \u001a \u0016 \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "The diagrams show the different types of human teeth. 3 4 2 1 Which teeth are used for grinding food? 1 2 3 4",
+      "options": {
+        "A": "\u0016 \u001a \u0016 \u001a key",
+        "B": "\u0016 \u0016 \u001a \u001a \u0016= yes",
+        "C": "\u001a \u001a \u0016 \u0016 \u001a= no",
+        "D": "\u001a \u0016 \u001a \u0016"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q14.png",
+      "rawText": "The diagram shows a villus. Structures P and Q absorb different products of digestion. P Q Which row identifies the products absorbed by P and Q? P Q A amino acids glucose B fatty acids maltose C glucose fatty acids D maltose amino acids",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a villus. Structures P and Q absorb different products of digestion. P Q Which row identifies the products absorbed by P and Q? P Q",
+      "options": {
+        "A": "amino acids glucose",
+        "B": "fatty acids maltose",
+        "C": "glucose fatty acids",
+        "D": "maltose amino acids"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q15.png",
+      "rawText": "The arrows show the movement of substances from the soil into a root hair cell. Which substances move from the soil into the root hair cell? A carbon dioxide and oxygen B glucose and water C mineral ions and glucose D water and mineral ions",
+      "parseStatus": "ok",
+      "stem": "The arrows show the movement of substances from the soil into a root hair cell. Which substances move from the soil into the root hair cell?",
+      "options": {
+        "A": "carbon dioxide and oxygen",
+        "B": "glucose and water",
+        "C": "mineral ions and glucose",
+        "D": "water and mineral ions"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q16.png",
+      "rawText": "By which process does water escape from stomata in the leaves? A active transport B diffusion C evaporation D osmosis",
+      "parseStatus": "ok",
+      "stem": "By which process does water escape from stomata in the leaves?",
+      "options": {
+        "A": "active transport",
+        "B": "diffusion",
+        "C": "evaporation",
+        "D": "osmosis"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q17.png",
+      "rawText": "Which row about the circulatory system is correct? part that pumps blood part with valves A heart heart and veins B heart and blood vessels all blood vessels C capillaries heart D heart capillaries and arteries",
+      "parseStatus": "ok",
+      "stem": "Which row about the circulatory system is correct? part that pumps blood part with valves",
+      "options": {
+        "A": "heart heart and veins",
+        "B": "heart and blood vessels all blood vessels",
+        "C": "capillaries heart",
+        "D": "heart capillaries and arteries"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q18.png",
+      "rawText": "The graph shows pressure changes that take place in the right atrium, right ventricle and left ventricle of a human heart when the muscle walls contract and relax. 0.0 0.2 0.4 0.6 16 14 12 10 8 6 4 2 0 pressure / kPa time / s What is the pressure in the right ventricle when the left ventricle is at its maximum pressure? A 0.4 kPa B 2.0 kPa C 3.0 kPa D 15.0 kPa",
+      "parseStatus": "ok",
+      "stem": "The graph shows pressure changes that take place in the right atrium, right ventricle and left ventricle of a human heart when the muscle walls contract and relax. 0.0 0.2 0.4 0.6 16 14 12 10 8 6 4 2 0 pressure / kPa time / s What is the pressure in the right ventricle when the left ventricle is at its maximum pressure?",
+      "options": {
+        "A": "0.4 kPa",
+        "B": "2.0 kPa",
+        "C": "3.0 kPa",
+        "D": "15.0 kPa"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q19.png",
+      "rawText": "The sequence of amino acids in antibodies enables them to complete which function? A bind to a specific antigen B bind to all pathogens C perform phagocytosis D confer passive immunity for all diseases",
+      "parseStatus": "ok",
+      "stem": "The sequence of amino acids in antibodies enables them to complete which function?",
+      "options": {
+        "A": "bind to a specific antigen",
+        "B": "bind to all pathogens",
+        "C": "perform phagocytosis",
+        "D": "confer passive immunity for all diseases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q20.png",
+      "rawText": "The table shows some of the changes that occur during breathing. from contracted to relaxed from relaxed to contracted diaphragm P X external intercostal muscles Q Y internal intercostal muscles R Z Which changes occur to cause inspiration? A P, Q and Z B X, Q and R C X, Y and R D X, Y and Z",
+      "parseStatus": "ok",
+      "stem": "The table shows some of the changes that occur during breathing. from contracted to relaxed from relaxed to contracted diaphragm P X external intercostal muscles Q Y internal intercostal muscles R Z Which changes occur to cause inspiration?",
+      "options": {
+        "A": "P, Q and Z",
+        "B": "X, Q and R",
+        "C": "X, Y and R",
+        "D": "X, Y and Z"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q21.png",
+      "rawText": "The apparatus shown was used to investigate aerobic respiration in seeds. The apparatus was placed in a dark room. ruler wire mesh seeds soaked in water coloured liquid chemical which absorbs the gas produced by the seeds All environmental conditions were kept constant. What will happen in the apparatus? gas taken in by the seeds gas absorbed by the chemical in the wire mesh direction of movement of the coloured liquid A carbon dioxide oxygen towards the seeds B carbon dioxide oxygen away from the seeds C oxygen carbon dioxide towards the seeds D oxygen carbon dioxide away from the seeds",
+      "parseStatus": "ok",
+      "stem": "The apparatus shown was used to investigate aerobic respiration in seeds. The apparatus was placed in a dark room. ruler wire mesh seeds soaked in water coloured liquid chemical which absorbs the gas produced by the seeds All environmental conditions were kept constant. What will happen in the apparatus? gas taken in by the seeds gas absorbed by the chemical in the wire mesh direction of movement of the coloured liquid",
+      "options": {
+        "A": "carbon dioxide oxygen towards the seeds",
+        "B": "carbon dioxide oxygen away from the seeds",
+        "C": "oxygen carbon dioxide towards the seeds",
+        "D": "oxygen carbon dioxide away from the seeds"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q22.png",
+      "rawText": "Why is yeast used in bread-making? A Aerobic respiration produces alcohol. B Aerobic respiration produces lactic acid. C Anaerobic respiration produces alcohol. D Anaerobic respiration produces carbon dioxide.",
+      "parseStatus": "ok",
+      "stem": "Why is yeast used in bread-making?",
+      "options": {
+        "A": "Aerobic respiration produces alcohol.",
+        "B": "Aerobic respiration produces lactic acid.",
+        "C": "Anaerobic respiration produces alcohol.",
+        "D": "Anaerobic respiration produces carbon dioxide."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q23.png",
+      "rawText": "In the diagram, which label identifies the urethra? A D C B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q24.png",
+      "rawText": "The diagram shows a reflex arc. Which label identifies the motor neurone? finger pricked by pin D B C A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q25.png",
+      "rawText": "Which structures contain neurotransmitter molecules in neurones? A chloroplasts B mitochondria C ribosomes D vesicles",
+      "parseStatus": "ok",
+      "stem": "Which structures contain neurotransmitter molecules in neurones?",
+      "options": {
+        "A": "chloroplasts",
+        "B": "mitochondria",
+        "C": "ribosomes",
+        "D": "vesicles"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q26.png",
+      "rawText": "The diagram shows a seedling growing inside a dark box. shoot root dark box Which type of responses affect the direction of growth of the root and the shoot inside the box? response by the root response by the shoot A gravitropism gravitropism B gravitropism phototropism C phototropism gravitropism D phototropism phototropism",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a seedling growing inside a dark box. shoot root dark box Which type of responses affect the direction of growth of the root and the shoot inside the box? response by the root response by the shoot",
+      "options": {
+        "A": "gravitropism gravitropism",
+        "B": "gravitropism phototropism",
+        "C": "phototropism gravitropism",
+        "D": "phototropism phototropism"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q27.png",
+      "rawText": "Why is an MRSA infection difficult to treat? A MRSA is a bacterium. B MRSA is a virus. C MRSA is resistant to some antibiotics. D MRSA is resistant to some antibodies.",
+      "parseStatus": "ok",
+      "stem": "Why is an MRSA infection difficult to treat?",
+      "options": {
+        "A": "MRSA is a bacterium.",
+        "B": "MRSA is a virus.",
+        "C": "MRSA is resistant to some antibiotics.",
+        "D": "MRSA is resistant to some antibodies."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q28.png",
+      "rawText": "What is the order of flower parts through which the pollen tube must grow to reach the egg cell nucleus during fertilisation? A stigma → style → ovule → ovary B stigma → style → ovary → ovule C style → stigma → ovule → ovary D style → stigma → ovary → ovule",
+      "parseStatus": "ok",
+      "stem": "What is the order of flower parts through which the pollen tube must grow to reach the egg cell nucleus during fertilisation?",
+      "options": {
+        "A": "stigma → style → ovule → ovary",
+        "B": "stigma → style → ovary → ovule",
+        "C": "style → stigma → ovule → ovary",
+        "D": "style → stigma → ovary → ovule"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q29.png",
+      "rawText": "Which diagram, showing the exchange of products between mother and fetus, is correctly labelled? placenta umbilical cord nutrients waste products A umbilical cord placenta nutrients waste products B umbilical cord placenta waste products nutrients C umbilical cord placenta nutrients waste products D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q30.png",
+      "rawText": "Which statement about the synthesis of a protein molecule in a cell is correct? A The gene coding for the protein moves from nucleus to cytoplasm. B Ribosomes assemble amino acids into DNA molecules. C mRNA remains in the nucleus. D The sequence of amino acids is determined by the sequence of bases in the mRNA.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the synthesis of a protein molecule in a cell is correct?",
+      "options": {
+        "A": "The gene coding for the protein moves from nucleus to cytoplasm.",
+        "B": "Ribosomes assemble amino acids into DNA molecules.",
+        "C": "mRNA remains in the nucleus.",
+        "D": "The sequence of amino acids is determined by the sequence of bases in the mRNA."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q31.png",
+      "rawText": "Each statement describes cell division by mitosis or meiosis in humans. 1 It produces cells that show variation. 2 It produces cells that are diploid. 3 It produces cells that are haploid. 4 It involves reduction division. Which statements describe meiosis? 1 2 3 4 A \u001a \u0016 \u001a \u001a key B \u0016 \u001a \u001a \u0016 \u0016= yes C \u001a \u0016 \u0016 \u001a \u001a= no D \u0016 \u001a \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "Each statement describes cell division by mitosis or meiosis in humans. 1 It produces cells that show variation. 2 It produces cells that are diploid. 3 It produces cells that are haploid. 4 It involves reduction division. Which statements describe meiosis? 1 2 3 4",
+      "options": {
+        "A": "\u001a \u0016 \u001a \u001a key",
+        "B": "\u0016 \u001a \u001a \u0016 \u0016= yes",
+        "C": "\u001a \u0016 \u0016 \u001a \u001a= no",
+        "D": "\u0016 \u001a \u0016 \u0016"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q32.png",
+      "rawText": "In humans, what is the genotype of a red-green colour-blind male? A XRXR B XrXr C XRY D XrY",
+      "parseStatus": "ok",
+      "stem": "In humans, what is the genotype of a red-green colour-blind male?",
+      "options": {
+        "A": "XRXR",
+        "B": "XrXr",
+        "C": "XRY",
+        "D": "XrY"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q33.png",
+      "rawText": "Which feature is found in a hydrophytic plant? A Leaves are curled with stomata on the inside. B Leaves are reduced to spines. C Stomata are sunk in pits in the epidermis. D There is no waxy cuticle.",
+      "parseStatus": "ok",
+      "stem": "Which feature is found in a hydrophytic plant?",
+      "options": {
+        "A": "Leaves are curled with stomata on the inside.",
+        "B": "Leaves are reduced to spines.",
+        "C": "Stomata are sunk in pits in the epidermis.",
+        "D": "There is no waxy cuticle."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q34.png",
+      "rawText": "Which statements are correct during both natural selection and artificial selection? 1 Only certain individuals reproduce. 2 Alleles are passed on to the offspring. 3 Organisms do not compete with each other for survival. A 1 and 2 B 1 and 3 C 2 only D 2 and 3",
+      "parseStatus": "ok",
+      "stem": "Which statements are correct during both natural selection and artificial selection? 1 Only certain individuals reproduce. 2 Alleles are passed on to the offspring. 3 Organisms do not compete with each other for survival.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 only",
+        "D": "2 and 3"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q35.png",
+      "rawText": "The diagram shows a food chain. phytoplankton → zooplankton → herring → sea lion Which diagram shows a pyramid of energy for this food chain? phytoplankton zooplankton herring sea lion A sea lion herring zooplankton phytoplankton B phytoplankton zooplankton herring sea lion C sea lion herring zooplankton phytoplankton D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q36.png",
+      "rawText": "In the nitrogen cycle, what are processes 1 and 2? nitrogen in atmosphere nitrates in soil animal protein plant protein 1 2 process 1 process 2 A decomposition nitrification B denitrification nitrogen fixation C nitrification evaporation D nitrogen fixation denitrification",
+      "parseStatus": "ok",
+      "stem": "In the nitrogen cycle, what are processes 1 and 2? nitrogen in atmosphere nitrates in soil animal protein plant protein 1 2 process 1 process 2",
+      "options": {
+        "A": "decomposition nitrification",
+        "B": "denitrification nitrogen fixation",
+        "C": "nitrification evaporation",
+        "D": "nitrogen fixation denitrification"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q37.png",
+      "rawText": "Untreated sewage is accidently released into a river for several weeks. How will this affect the number of bacteria, the oxygen concentration of the water and the number of fish? number of bacteria oxygen concentration number of fish A decrease decrease increase B increase decrease decrease C decrease increase decrease D no change no change no change",
+      "parseStatus": "ok",
+      "stem": "Untreated sewage is accidently released into a river for several weeks. How will this affect the number of bacteria, the oxygen concentration of the water and the number of fish? number of bacteria oxygen concentration number of fish",
+      "options": {
+        "A": "decrease decrease increase",
+        "B": "increase decrease decrease",
+        "C": "decrease increase decrease",
+        "D": "no change no change no change"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q38.png",
+      "rawText": "Fish stocks can be conserved in various ways. Which method of conservation ensures that mainly large fish are caught? A having closed seasons B having protected areas C having a minimum mesh size for nets D setting legal fishing quotas",
+      "parseStatus": "ok",
+      "stem": "Fish stocks can be conserved in various ways. Which method of conservation ensures that mainly large fish are caught?",
+      "options": {
+        "A": "having closed seasons",
+        "B": "having protected areas",
+        "C": "having a minimum mesh size for nets",
+        "D": "setting legal fishing quotas"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q39.png",
+      "rawText": "Which component of bacteria is genetically modified to produce human insulin? A cell membrane B cell wall C plasmids D single circular DNA strand",
+      "parseStatus": "ok",
+      "stem": "Which component of bacteria is genetically modified to produce human insulin?",
+      "options": {
+        "A": "cell membrane",
+        "B": "cell wall",
+        "C": "plasmids",
+        "D": "single circular DNA strand"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_m23_qp_22/q40.png",
+      "rawText": "Fermenters must have carefully controlled conditions. Which condition has the correct reason for controlling it? condition to be controlled reason for controlling condition A supply of amino acids for carbohydrate synthesis B supply of glucose waste product to be removed C supply of oxygen for anaerobic respiration D pH to be optimum for enzyme activity",
+      "parseStatus": "ok",
+      "stem": "Fermenters must have carefully controlled conditions. Which condition has the correct reason for controlling it? condition to be controlled reason for controlling condition",
+      "options": {
+        "A": "supply of amino acids for carbohydrate synthesis",
+        "B": "supply of glucose waste product to be removed",
+        "C": "supply of oxygen for anaerobic respiration",
+        "D": "pH to be optimum for enzyme activity"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

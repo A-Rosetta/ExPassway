@@ -1,0 +1,673 @@
+{
+  "questionPaper": "0610_s23_qp_21.pdf",
+  "markScheme": "0610_s23_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q01.png",
+      "rawText": "What are characteristics of all organisms? A egestion and excretion B egestion and nutrition C excretion and nutrition D excretion and photosynthesis",
+      "parseStatus": "ok",
+      "stem": "What are characteristics of all organisms?",
+      "options": {
+        "A": "egestion and excretion",
+        "B": "egestion and nutrition",
+        "C": "excretion and nutrition",
+        "D": "excretion and photosynthesis"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q02.png",
+      "rawText": "The scientific name for the golden eagle is Aquila chrysaetos. What is the genus of the golden eagle? A Aquila B chrysaetos C eagle D golden",
+      "parseStatus": "ok",
+      "stem": "The scientific name for the golden eagle is Aquila chrysaetos. What is the genus of the golden eagle?",
+      "options": {
+        "A": "Aquila",
+        "B": "chrysaetos",
+        "C": "eagle",
+        "D": "golden"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q03.png",
+      "rawText": "Which row shows structures that are present in both root hair cells and palisade mesophyll cells? cell wall chloroplasts cytoplasm vacuole A \u0016 \u0016 \u0016 \u001a key B \u001a \u0016 \u0016 \u0016 \u0016= present C \u0016 \u001a \u0016 \u0016 \u001a= absent D \u0016 \u0016 \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Which row shows structures that are present in both root hair cells and palisade mesophyll cells? cell wall chloroplasts cytoplasm vacuole",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u001a key",
+        "B": "\u001a \u0016 \u0016 \u0016 \u0016= present",
+        "C": "\u0016 \u001a \u0016 \u0016 \u001a= absent",
+        "D": "\u0016 \u0016 \u001a \u0016"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q04.png",
+      "rawText": "The photomicrograph shows a plant cell. The length of line XY is 90 mm. The actual length of the cell is 30 µm. X Y What is the magnification of the photomicrograph? A ×300 B ×3000 C ×33 000 D ×330 000",
+      "parseStatus": "ok",
+      "stem": "The photomicrograph shows a plant cell. The length of line XY is 90 mm. The actual length of the cell is 30 µm. X Y What is the magnification of the photomicrograph?",
+      "options": {
+        "A": "×300",
+        "B": "×3000",
+        "C": "×33 000",
+        "D": "×330 000"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q05.png",
+      "rawText": "The diagram shows an experiment demonstrating osmosis using a dialysis tubing bag. glass tube sugar solution water dialysis tubing bag After 30 minutes, the level of the liquid in the glass tube goes ......1...... because the water had a ......2...... water potential than the sugar solution. Which words correctly complete the statement? 1 2 A down lower B down higher C up lower D up higher",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an experiment demonstrating osmosis using a dialysis tubing bag. glass tube sugar solution water dialysis tubing bag After 30 minutes, the level of the liquid in the glass tube goes ......1...... because the water had a ......2...... water potential than the sugar solution. Which words correctly complete the statement? 1 2",
+      "options": {
+        "A": "down lower",
+        "B": "down higher",
+        "C": "up lower",
+        "D": "up higher"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q06.png",
+      "rawText": "The diagram shows the movement of glucose molecules across a cell membrane. energy glucose T low concentration high concentration cell membrane Which statement describes molecule T? A It is a fat molecule used to transport glucose down a concentration gradient. B It is a fat molecule used to transport glucose against a concentration gradient. C It is a protein molecule used to transport glucose down a concentration gradient. D It is a protein molecule used to transport glucose against a concentration gradient.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the movement of glucose molecules across a cell membrane. energy glucose T low concentration high concentration cell membrane Which statement describes molecule T?",
+      "options": {
+        "A": "It is a fat molecule used to transport glucose down a concentration gradient.",
+        "B": "It is a fat molecule used to transport glucose against a concentration gradient.",
+        "C": "It is a protein molecule used to transport glucose down a concentration gradient.",
+        "D": "It is a protein molecule used to transport glucose against a concentration gradient."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q07.png",
+      "rawText": "The diagram shows part of a protein molecule. X What does X represent? A amino acid B fatty acid C glycerol D sugar",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a protein molecule. X What does X represent?",
+      "options": {
+        "A": "amino acid",
+        "B": "fatty acid",
+        "C": "glycerol",
+        "D": "sugar"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q08.png",
+      "rawText": "The structure of DNA involves two strands coiled together to form a double helix. Which pairing of bases between the two strands is correct? A A and G B A and T C C and A D C and T",
+      "parseStatus": "ok",
+      "stem": "The structure of DNA involves two strands coiled together to form a double helix. Which pairing of bases between the two strands is correct?",
+      "options": {
+        "A": "A and G",
+        "B": "A and T",
+        "C": "C and A",
+        "D": "C and T"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q09.png",
+      "rawText": "What is true of all enzymes? they are sugars they are most effective at pH 7 A \u0016 \u0016 key B \u0016 \u001a \u0016= yes C \u001a \u0016 \u001a= no D \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "What is true of all enzymes? they are sugars they are most effective at pH 7",
+      "options": {
+        "A": "\u0016 \u0016 key",
+        "B": "\u0016 \u001a \u0016= yes",
+        "C": "\u001a \u0016 \u001a= no",
+        "D": "\u001a \u001a"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q10.png",
+      "rawText": "Which statement about human enzymes is correct when they are at temperatures above 80 °C? A The enzyme molecules are denatured. B The shape of the active site is stable. C More enzyme-substrate complexes form. D More product is formed by the enzyme.",
+      "parseStatus": "ok",
+      "stem": "Which statement about human enzymes is correct when they are at temperatures above 80 °C?",
+      "options": {
+        "A": "The enzyme molecules are denatured.",
+        "B": "The shape of the active site is stable.",
+        "C": "More enzyme-substrate complexes form.",
+        "D": "More product is formed by the enzyme."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q11.png",
+      "rawText": "An experiment is set up to investigate gas exchange in aquatic plants. aquatic plant hydrogencarbonate indicator solution light The hydrogencarbonate indicator solution is orange at the start. Which colour is it after three hours? A blue-black B orange C purple D yellow",
+      "parseStatus": "ok",
+      "stem": "An experiment is set up to investigate gas exchange in aquatic plants. aquatic plant hydrogencarbonate indicator solution light The hydrogencarbonate indicator solution is orange at the start. Which colour is it after three hours?",
+      "options": {
+        "A": "blue-black",
+        "B": "orange",
+        "C": "purple",
+        "D": "yellow"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q12.png",
+      "rawText": "Certain factors are needed for photosynthesis. If a factor is in short supply, it limits the rate of photosynthesis. Which of these could be limiting factors? 1 carbon dioxide 2 oxygen 3 light intensity A 1 and 2 B 1 and 3 C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "Certain factors are needed for photosynthesis. If a factor is in short supply, it limits the rate of photosynthesis. Which of these could be limiting factors? 1 carbon dioxide 2 oxygen 3 light intensity",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 3",
+        "D": "3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q13.png",
+      "rawText": "The haemoglobin concentration in the blood of a person is 80 g / dm3. The accepted normal concentration is 120 g / dm3 or above. Which substance may be lacking in their diet? A calcium B fats C fibre D iron",
+      "parseStatus": "ok",
+      "stem": "The haemoglobin concentration in the blood of a person is 80 g / dm3. The accepted normal concentration is 120 g / dm3 or above. Which substance may be lacking in their diet?",
+      "options": {
+        "A": "calcium",
+        "B": "fats",
+        "C": "fibre",
+        "D": "iron"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q14.png",
+      "rawText": "Which statement about physical digestion is correct? A It increases the surface area of food. B It involves enzymes. C It takes place in the mouth only. D It produces smaller molecules.",
+      "parseStatus": "ok",
+      "stem": "Which statement about physical digestion is correct?",
+      "options": {
+        "A": "It increases the surface area of food.",
+        "B": "It involves enzymes.",
+        "C": "It takes place in the mouth only.",
+        "D": "It produces smaller molecules."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q15.png",
+      "rawText": "Which statement describes the effect of atmospheric humidity on the rate of transpiration? A In high humidity, the transpiration rate is high because there is slow diffusion of water vapour through stomata. B In high humidity, the transpiration rate is low because there is rapid diffusion of water vapour through stomata. C In low humidity, the transpiration rate is high because there is rapid diffusion of water vapour through stomata. D In low humidity, the transpiration rate is low because there is slow diffusion of water vapour through stomata.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes the effect of atmospheric humidity on the rate of transpiration?",
+      "options": {
+        "A": "In high humidity, the transpiration rate is high because there is slow diffusion of water vapour through stomata.",
+        "B": "In high humidity, the transpiration rate is low because there is rapid diffusion of water vapour through stomata.",
+        "C": "In low humidity, the transpiration rate is high because there is rapid diffusion of water vapour through stomata.",
+        "D": "In low humidity, the transpiration rate is low because there is slow diffusion of water vapour through stomata."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q16.png",
+      "rawText": "Sucrose and amino acids move around a plant from sources to sinks. Which row shows the sources and sinks? root cortex cells xylem vessels palisade mesophyll cells A source and sink neither source B sink sink source and sink C neither source and sink sink D source and sink source neither",
+      "parseStatus": "ok",
+      "stem": "Sucrose and amino acids move around a plant from sources to sinks. Which row shows the sources and sinks? root cortex cells xylem vessels palisade mesophyll cells",
+      "options": {
+        "A": "source and sink neither source",
+        "B": "sink sink source and sink",
+        "C": "neither source and sink sink",
+        "D": "source and sink source neither"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q17.png",
+      "rawText": "Which statements describe how the structures in the circulatory system function? 1 a muscular pump to push blood into vessels 2 valves to ensure one-way blood flow 3 veins to take blood away from the heart 4 vessels to return blood to the heart A 1, 2 and 3 B 1, 2 and 4 C 1, 3 and 4 D 2, 3 and 4",
+      "parseStatus": "ok",
+      "stem": "Which statements describe how the structures in the circulatory system function? 1 a muscular pump to push blood into vessels 2 valves to ensure one-way blood flow 3 veins to take blood away from the heart 4 vessels to return blood to the heart",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1, 2 and 4",
+        "C": "1, 3 and 4",
+        "D": "2, 3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q18.png",
+      "rawText": "The diagram shows a section through the heart. Which part is the septum? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q19.png",
+      "rawText": "The cholera bacterium toxin causes dehydration and loss of salts from the blood in humans. Which statement explains the reason for this? A Chloride ions are secreted into the small intestine where they increase the water potential. B Chloride ions are secreted into the small intestine which causes water to move into the intestine by osmosis. C Chloride ions are secreted into the small intestine which causes water to move out of the intestine by osmosis. D Chloride ions are secreted into the small intestine which causes the water potential of the blood to decrease.",
+      "parseStatus": "ok",
+      "stem": "The cholera bacterium toxin causes dehydration and loss of salts from the blood in humans. Which statement explains the reason for this?",
+      "options": {
+        "A": "Chloride ions are secreted into the small intestine where they increase the water potential.",
+        "B": "Chloride ions are secreted into the small intestine which causes water to move into the intestine by osmosis.",
+        "C": "Chloride ions are secreted into the small intestine which causes water to move out of the intestine by osmosis.",
+        "D": "Chloride ions are secreted into the small intestine which causes the water potential of the blood to decrease."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q20.png",
+      "rawText": "During inspiration, the processes listed take place. P volume of the thorax increases Q air rushes into the lungs R pressure in the thorax decreases S external intercostal muscles contract T diaphragm moves down, ribs move upwards and outwards What is the correct sequence for these processes? A Q → P → S → R → T B S → T → P → R → Q C Q → P → S → T → R D S → Q → R → P → T",
+      "parseStatus": "ok",
+      "stem": "During inspiration, the processes listed take place. P volume of the thorax increases Q air rushes into the lungs R pressure in the thorax decreases S external intercostal muscles contract T diaphragm moves down, ribs move upwards and outwards What is the correct sequence for these processes?",
+      "options": {
+        "A": "Q → P → S → R → T",
+        "B": "S → T → P → R → Q",
+        "C": "Q → P → S → T → R",
+        "D": "S → Q → R → P → T"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q21.png",
+      "rawText": "In the chemical equation for anaerobic respiration in yeast, the numbers have been replaced by the letters W, X, Y and Z. CWHXOW → YCYHZOH + YCOY Which number is Z? A 2 B 5 C 6 D 12",
+      "parseStatus": "ok",
+      "stem": "In the chemical equation for anaerobic respiration in yeast, the numbers have been replaced by the letters W, X, Y and Z. CWHXOW → YCYHZOH + YCOY Which number is Z?",
+      "options": {
+        "A": "2",
+        "B": "5",
+        "C": "6",
+        "D": "12"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q22.png",
+      "rawText": "A student measured their oxygen consumption before, during and after exercise. The results are shown in the graph. 3.0 2.5 2.0 1.5 1.0 0.5 0.0 0 5 10 15 20 25 oxygen consumption / dm3 per minute time / minutes at rest during exercise after exercise At which time is the oxygen debt being removed? A 5–10 minutes B 5–15 minutes C 15–20 minutes D 20–25 minutes",
+      "parseStatus": "ok",
+      "stem": "A student measured their oxygen consumption before, during and after exercise. The results are shown in the graph. 3.0 2.5 2.0 1.5 1.0 0.5 0.0 0 5 10 15 20 25 oxygen consumption / dm3 per minute time / minutes at rest during exercise after exercise At which time is the oxygen debt being removed?",
+      "options": {
+        "A": "5–10 minutes",
+        "B": "5–15 minutes",
+        "C": "15–20 minutes",
+        "D": "20–25 minutes"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q23.png",
+      "rawText": "Which row shows where glucose will be found in the body of a healthy human after eating a meal? renal artery renal vein glomerulus nephron ureter A yes no yes yes yes B yes yes no no no C yes yes yes yes no D no yes no no yes",
+      "parseStatus": "ok",
+      "stem": "Which row shows where glucose will be found in the body of a healthy human after eating a meal? renal artery renal vein glomerulus nephron ureter",
+      "options": {
+        "A": "yes no yes yes yes",
+        "B": "yes yes no no no",
+        "C": "yes yes yes yes no",
+        "D": "no yes no no yes"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q24.png",
+      "rawText": "The events listed involve neurotransmitter molecules at a synapse. 1 They bind with receptor proteins. 2 They diffuse across the synaptic gap. 3 They enter the synaptic gap. 4 They are released from vesicles. What is the sequence of events that occur when an impulse arrives at the synapse? A 3 → 2 → 1 → 4 B 4 → 3 → 1 → 2 C 3 → 4 → 1 → 2 D 4 → 3 → 2 → 1",
+      "parseStatus": "ok",
+      "stem": "The events listed involve neurotransmitter molecules at a synapse. 1 They bind with receptor proteins. 2 They diffuse across the synaptic gap. 3 They enter the synaptic gap. 4 They are released from vesicles. What is the sequence of events that occur when an impulse arrives at the synapse?",
+      "options": {
+        "A": "3 → 2 → 1 → 4",
+        "B": "4 → 3 → 1 → 2",
+        "C": "3 → 4 → 1 → 2",
+        "D": "4 → 3 → 2 → 1"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q25.png",
+      "rawText": "What occurs during accommodation to focus on distant objects? ciliary muscle lens shape suspensory ligaments A contracts fat slack B relaxes thin tight C contracts fat tight D relaxes thin slack",
+      "parseStatus": "ok",
+      "stem": "What occurs during accommodation to focus on distant objects? ciliary muscle lens shape suspensory ligaments",
+      "options": {
+        "A": "contracts fat slack",
+        "B": "relaxes thin tight",
+        "C": "contracts fat tight",
+        "D": "relaxes thin slack"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q26.png",
+      "rawText": "What is a correct statement about auxin in shoots? A It is made only on the shaded side of the shoot. B It is more concentrated on the side of the shoot that receives the most light. C It moves through the shoot by osmosis. D It stimulates cell elongation.",
+      "parseStatus": "ok",
+      "stem": "What is a correct statement about auxin in shoots?",
+      "options": {
+        "A": "It is made only on the shaded side of the shoot.",
+        "B": "It is more concentrated on the side of the shoot that receives the most light.",
+        "C": "It moves through the shoot by osmosis.",
+        "D": "It stimulates cell elongation."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q27.png",
+      "rawText": "What is a correct statement about antibiotics? A Bacteria may become resistant to antibiotics as a result of artificial selection. B Bacteria may become resistant to antibiotics as a result of natural selection. C Viruses may become resistant to antibiotics as a result of artificial selection. D Viruses may become resistant to antibiotics as a result of natural selection.",
+      "parseStatus": "ok",
+      "stem": "What is a correct statement about antibiotics?",
+      "options": {
+        "A": "Bacteria may become resistant to antibiotics as a result of artificial selection.",
+        "B": "Bacteria may become resistant to antibiotics as a result of natural selection.",
+        "C": "Viruses may become resistant to antibiotics as a result of artificial selection.",
+        "D": "Viruses may become resistant to antibiotics as a result of natural selection."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q28.png",
+      "rawText": "Potatoes are stem tubers. A tuber can be placed in the ground to grow into another plant, which can grow many more tubers. 4 months The diploid number of the potato plant is 24. How many chromosomes will there be in the cells of the stem, the leaf and the pollen? stem leaf pollen A 24 24 12 B 24 12 48 C 48 12 24 D 48 48 12",
+      "parseStatus": "ok",
+      "stem": "Potatoes are stem tubers.",
+      "options": {
+        "A": "tuber can be placed in the ground to grow into another plant, which can grow many more tubers. 4 months The diploid number of the potato plant is 24. How many chromosomes will there be in the cells of the stem, the leaf and the pollen? stem leaf pollen A 24 24 12",
+        "B": "24 12 48",
+        "C": "48 12 24",
+        "D": "48 48 12"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q29.png",
+      "rawText": "Which row about asexual reproduction is correct? number of parents offspring identical to parents offspring identical to each other A one no yes B one yes yes C two no no D two yes no",
+      "parseStatus": "ok",
+      "stem": "Which row about asexual reproduction is correct? number of parents offspring identical to parents offspring identical to each other",
+      "options": {
+        "A": "one no yes",
+        "B": "one yes yes",
+        "C": "two no no",
+        "D": "two yes no"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q30.png",
+      "rawText": "The statements describe how a protein is made. 1 mRNA passes through a ribosome. 2 mRNA molecules carry a copy of the gene to the cytoplasm. 3 The gene coding for the protein is copied in the nucleus. 4 Ribosomes assemble amino acids into proteins. What is the order of statements that describes how a protein is made? A 2 → 1 → 3 → 4 B 2 → 3 → 4 → 1 C 3 → 1 → 2 → 4 D 3 → 2 → 1 → 4",
+      "parseStatus": "ok",
+      "stem": "The statements describe how a protein is made. 1 mRNA passes through a ribosome. 2 mRNA molecules carry a copy of the gene to the cytoplasm. 3 The gene coding for the protein is copied in the nucleus. 4 Ribosomes assemble amino acids into proteins. What is the order of statements that describes how a protein is made?",
+      "options": {
+        "A": "2 → 1 → 3 → 4",
+        "B": "2 → 3 → 4 → 1",
+        "C": "3 → 1 → 2 → 4",
+        "D": "3 → 2 → 1 → 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q31.png",
+      "rawText": "Which parents could produce offspring with blood group O? A heterozygous father with blood group A and heterozygous mother with blood group B B heterozygous father with blood group A and homozygous mother with blood group B C homozygous father with blood group A and heterozygous mother with blood group B D homozygous father with blood group A and homozygous mother with blood group O",
+      "parseStatus": "ok",
+      "stem": "Which parents could produce offspring with blood group O?",
+      "options": {
+        "A": "heterozygous father with blood group A and heterozygous mother with blood group",
+        "B": "B heterozygous father with blood group A and homozygous mother with blood group B",
+        "C": "homozygous father with blood group A and heterozygous mother with blood group B",
+        "D": "homozygous father with blood group A and homozygous mother with blood group O"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q32.png",
+      "rawText": "The diagram shows the inheritance of albinism in one family. Albinism is an inherited condition caused by a recessive allele. 1 2 4 3 5 6 7 8 unaffected male unaffected female male with albinism female with albinism key Which individuals must be heterozygous for this condition? A 1 and 2 B 4 and 7 C 5, 6 and 7 D 5 and 6 only",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the inheritance of albinism in one family. Albinism is an inherited condition caused by a recessive allele. 1 2 4 3 5 6 7 8 unaffected male unaffected female male with albinism female with albinism key Which individuals must be heterozygous for this condition?",
+      "options": {
+        "A": "1 and 2",
+        "B": "4 and 7",
+        "C": "5, 6 and 7",
+        "D": "5 and 6 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q33.png",
+      "rawText": "Which term is a genetic change? A allele B genotype C mutation D phenotype",
+      "parseStatus": "ok",
+      "stem": "Which term is a genetic change?",
+      "options": {
+        "A": "allele",
+        "B": "genotype",
+        "C": "mutation",
+        "D": "phenotype"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q34.png",
+      "rawText": "Which adaptation may be present in a xerophyte? A leaves with small surface area and large numbers of stomata B little or no xylem tissue and leaves with large surface area C stomatal hairs and rolled leaves D thin or no cuticle and deep roots",
+      "parseStatus": "ok",
+      "stem": "Which adaptation may be present in a xerophyte?",
+      "options": {
+        "A": "leaves with small surface area and large numbers of stomata",
+        "B": "little or no xylem tissue and leaves with large surface area",
+        "C": "stomatal hairs and rolled leaves",
+        "D": "thin or no cuticle and deep roots"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q35.png",
+      "rawText": "The diagram shows energy flow from the Sun, through a food chain and into the environment. Sun plant animal animal 1 2 What is the form of energy for each numbered arrow? stage 1 stage 2 A heat chemical B heat kinetic C light chemical D light kinetic",
+      "parseStatus": "ok",
+      "stem": "The diagram shows energy flow from the Sun, through a food chain and into the environment. Sun plant animal animal 1 2 What is the form of energy for each numbered arrow? stage 1 stage 2",
+      "options": {
+        "A": "heat chemical",
+        "B": "heat kinetic",
+        "C": "light chemical",
+        "D": "light kinetic"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q36.png",
+      "rawText": "A few yeast cells were placed in a container of nutrient solution. The graph shows how their population size changed over time. population size time 1 2 3 4 Which row shows when the reproduction rate was greater than the death rate for the numbered phases on the graph? reproduction rate greater than death rate 1 2 3 4 A \u0016 \u0016 \u0016 \u001a key B \u0016 \u0016 \u001a \u001a \u0016= yes C \u0016 \u001a \u001a \u001a \u001a= no D \u001a \u0016 \u0016 \u0016",
+      "parseStatus": "ok",
+      "stem": "A few yeast cells were placed in a container of nutrient solution. The graph shows how their population size changed over time. population size time 1 2 3 4 Which row shows when the reproduction rate was greater than the death rate for the numbered phases on the graph? reproduction rate greater than death rate 1 2 3 4",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u001a key",
+        "B": "\u0016 \u0016 \u001a \u001a \u0016= yes",
+        "C": "\u0016 \u001a \u001a \u001a \u001a= no",
+        "D": "\u001a \u0016 \u0016 \u0016"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q37.png",
+      "rawText": "The number of Atlantic bluefin tuna fish found in the Atlantic Ocean has significantly decreased in the last 50 years. Which method would make the biggest improvement in the conservation of tuna fish stocks? A decreasing the size of holes in fishing nets B genetic modification of tuna C introducing fishing quotas D selective breeding of tuna",
+      "parseStatus": "ok",
+      "stem": "The number of Atlantic bluefin tuna fish found in the Atlantic Ocean has significantly decreased in the last 50 years. Which method would make the biggest improvement in the conservation of tuna fish stocks?",
+      "options": {
+        "A": "decreasing the size of holes in fishing nets",
+        "B": "genetic modification of tuna",
+        "C": "introducing fishing quotas",
+        "D": "selective breeding of tuna"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q38.png",
+      "rawText": "The bloodworm is an organism that is found in heavily polluted water. The diagram shows where raw sewage flows into a river. Where would there be fewest bloodworms? input of raw sewage B A C D direction of flow",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q39.png",
+      "rawText": "The diagram shows a bacterial cell. Which part is useful in genetic modification? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-biology-0610/0610_s23_qp_21/q40.png",
+      "rawText": "Which statement about genetic modification is correct? A It involves choosing which individual organisms are used for breeding. B It is always done using genes from the same species. C It produces a new combination of genes. D It produces exact copies of individual organisms.",
+      "parseStatus": "ok",
+      "stem": "Which statement about genetic modification is correct?",
+      "options": {
+        "A": "It involves choosing which individual organisms are used for breeding.",
+        "B": "It is always done using genes from the same species.",
+        "C": "It produces a new combination of genes.",
+        "D": "It produces exact copies of individual organisms."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}
