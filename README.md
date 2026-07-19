@@ -21,6 +21,7 @@ A lightweight full-stack scaffold for international high school students studyin
 - `CIE IGCSE Biology 0610`, Paper 2 MCQ: 41 papers / 1640 questions
 - `CIE IGCSE Chemistry 0620`, Paper 2 MCQ: 6 papers / 240 questions
 - `CIE IGCSE Co-ordinated Sciences 0654`, Paper 2 MCQ: 21 papers / 839 valid questions
+- `CIE IGCSE Economics 0455`, Paper 1 MCQ: 1 paper / 30 questions
 
 Question images are stored by subject under `assets/exam-question-images/`. The official
 discounted question 17 in `0654_s23_qp_22` is retained in the source audit data but is not
@@ -30,7 +31,7 @@ The homepage, paper picker, practice page, and discussion filters now read their
 paper lists from PostgreSQL. New published subjects therefore appear without editing frontend
 catalogue arrays.
 
-## Import More CIE Paper 2 PDFs
+## Import More CIE MCQ PDFs
 
 1. Sign in through the normal login page with an administrator account, then open the admin
    dashboard.
@@ -44,10 +45,13 @@ Accepted official filenames use this exact pattern:
 ```text
 0654_s25_qp_22.pdf
 0654_s25_ms_22.pdf
+0455_s25_qp_12.pdf
+0455_s25_ms_12.pdf
 ```
 
-The importer currently supports CIE IGCSE Paper 2 MCQ only. Each PDF is limited to 12 MB. It
-requires 40 question anchors and a Mark Scheme entry for every question; official `Question
+The importer supports CIE IGCSE science Paper 2 MCQ with 40 questions and Economics 0455
+Paper 1 MCQ with 30 questions. Each PDF is limited to 12 MB. It requires ordered question
+anchors and a Mark Scheme entry for every question; official `Question
 Discounted` entries are excluded, while a missing or conflicting answer rejects that paper.
 Re-importing the same paper reuses existing question IDs, so practice history, stars, wrong-answer
 records, and discussions remain linked.

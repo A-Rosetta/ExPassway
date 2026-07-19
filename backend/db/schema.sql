@@ -187,7 +187,7 @@ create table if not exists exam_papers (
   subject_code text not null references exam_subjects(code) on delete restrict,
   year integer not null check (year between 2000 and 2099),
   season text not null check (season in ('m', 's', 'w')),
-  paper_number integer not null check (paper_number = 2),
+  paper_number integer not null check (paper_number in (1, 2)),
   variant integer not null check (variant between 1 and 9),
   paper_type text not null default 'MCQ',
   duration_minutes integer not null default 45 check (duration_minutes > 0),
@@ -204,6 +204,10 @@ create table if not exists exam_papers (
   updated_at timestamptz not null default now(),
   unique (subject_code, year, season, paper_number, variant)
 );
+
+alter table exam_papers drop constraint if exists exam_papers_paper_number_check;
+alter table exam_papers add constraint exam_papers_paper_number_check
+check (paper_number in (1, 2));
 
 create index if not exists idx_exam_papers_subject_status
 on exam_papers(subject_code, status, year, season, paper_number, variant);

@@ -26,7 +26,7 @@ const IMPORT_ROOT = path.join(BACKEND_ROOT, "imports");
 const PYTHON = path.join(PROJECT_ROOT, ".venv-pdf", "bin", "python");
 const PROCESSOR = path.join(BACKEND_ROOT, "scripts", "cie-mcq-import.py");
 const MAX_PDF_BYTES = 12 * 1024 * 1024;
-const FILE_PATTERN = /^(\d{4})_([msw])(\d{2})_(qp|ms)_(2)([1-9])\.pdf$/i;
+const FILE_PATTERN = /^(\d{4})_([msw])(\d{2})_(qp|ms)_([12])([1-9])\.pdf$/i;
 
 function safeAssetKey(value) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)) {
@@ -41,10 +41,10 @@ function parsePdfFileName(fileName, subjectCode) {
     throw new ApiError(400, "File name must not contain a path.", "INVALID_FILE_NAME");
   }
   const match = safeName.match(FILE_PATTERN);
-  if (!match || match[1] !== subjectCode) {
+  if (!match || match[1] !== subjectCode || (match[5] === "1" && subjectCode !== "0455")) {
     throw new ApiError(
       400,
-      `Use an official Paper 2 file name for subject ${subjectCode}, such as ${subjectCode}_s25_qp_22.pdf.`,
+      `Use a supported official MCQ file name for subject ${subjectCode}.`,
       "INVALID_FILE_NAME"
     );
   }
@@ -320,10 +320,10 @@ async function publishPaper(job, subject, paper) {
         duration_minutes, source_question_count, valid_question_count,
         discounted_questions, qp_file_name, ms_file_name, data_url,
         status, metadata, published_at
-      ) values ($1,$2,$3,$4,2,$5,'MCQ',45,$6,$7,$8,$9,$10,$11,'published',$12::jsonb,now())
+      ) values ($1,$2,$3,$4,$5,$6,'MCQ',45,$7,$8,$9,$10,$11,$12,'published',$13::jsonb,now())
       on conflict (slug) do update set
         subject_code = excluded.subject_code, year = excluded.year,
-        season = excluded.season, paper_number = 2, variant = excluded.variant,
+        season = excluded.season, paper_number = excluded.paper_number, variant = excluded.variant,
         source_question_count = excluded.source_question_count,
         valid_question_count = excluded.valid_question_count,
         discounted_questions = excluded.discounted_questions,
@@ -335,6 +335,7 @@ async function publishPaper(job, subject, paper) {
       subject.code,
       paper.year,
       paper.season,
+      paper.paperNumber,
       paper.variant,
       paper.sourceQuestionCount,
       paper.validQuestionCount,

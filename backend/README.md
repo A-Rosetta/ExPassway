@@ -47,7 +47,7 @@ npm run catalog:migrate
 The migration is idempotent and only fills missing catalogue data. It does not overwrite papers
 that were later published through the administrator importer.
 
-## Generic CIE Paper 2 Import
+## Generic CIE MCQ Import
 
 Use the import section of `pages/admin.html`; all import endpoints require an authenticated admin.
 The workflow is:
@@ -58,10 +58,13 @@ uploading -> processing -> validated -> published
 ```
 
 - Register unknown four-digit subject codes before creating a job.
-- Upload official QP/MS pairs such as `0654_s25_qp_22.pdf` and `0654_s25_ms_22.pdf`.
-- Only Paper 2 MCQ is accepted; each PDF must be no larger than 12 MB.
+- Upload official QP/MS pairs such as `0654_s25_qp_22.pdf` / `0654_s25_ms_22.pdf` or
+  `0455_s25_qp_12.pdf` / `0455_s25_ms_12.pdf`.
+- Science Paper 2 MCQ and Economics 0455 Paper 1 MCQ are accepted; each PDF must be no larger
+  than 12 MB.
 - Processing happens under `backend/imports/<job-id>/` and does not change live assets or rows.
-- A paper must contain 40 ordered question anchors and complete A-D Mark Scheme entries.
+- A paper must contain the expected 30 or 40 ordered question anchors and complete A-D Mark
+  Scheme entries.
 - Official `Question Discounted` entries are allowed and remain absent from active practice.
 - Publishing uses a database transaction and temporary asset swap. Re-import keeps IDs by
   `(paper_slug, question_no)` and marks questions no longer valid as inactive.
@@ -103,7 +106,7 @@ The command uses an idempotent upsert. It excludes the official discounted quest
 11. `GET /api/users/:userId/practices`: list user practice records (DB mode)
 12. `GET /api/admin/records`: dashboard-like latest users and practices (DB mode)
 13. `GET /api/catalog/subjects`: published subjects
-14. `GET /api/catalog/subjects/:subjectCode/papers`: published Paper 2 catalogue
+14. `GET /api/catalog/subjects/:subjectCode/papers`: published MCQ catalogue
 15. `GET /api/catalog/papers/:paperSlug/questions`: active questions in original number order
 16. `GET/POST /api/admin/subjects`: administrator subject registry
 17. `GET/POST /api/admin/imports` and `POST /api/admin/imports/:jobId/{files,process,publish}`

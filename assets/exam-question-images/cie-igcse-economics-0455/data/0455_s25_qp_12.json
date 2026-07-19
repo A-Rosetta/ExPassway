@@ -1,0 +1,408 @@
+{
+  "questionPaper": "0455_s25_qp_12.pdf",
+  "markScheme": "0455_s25_ms_12.pdf",
+  "questionCount": 30,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q01.png",
+      "rawText": "infinite quantity of capital A scarcity of labour B surplus of land C unlimited supply of enterprise D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q02.png",
+      "rawText": "a desire to live near family and friends A no relevant skills B the cost of travelling for work C unaffordable housing D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q03.png",
+      "rawText": "output of capital goods O output of consumer goods X Y Which change in the economy’s labour market will allow it to reach point Y? employed workers become more productive A unemployed workers find new jobs B workers emigrate for higher wages C workers retire at younger ages D 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "ok",
+      "stem": "output of capital goods O output of consumer goods X Y Which change in the economy’s labour market will allow it to reach point Y? employed workers become more productive",
+      "options": {
+        "A": "unemployed workers find new jobs",
+        "B": "workers emigrate for higher wages",
+        "C": "workers retire at younger ages",
+        "D": "06_0455_12_2025_1.17 © UCLES 2025"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q04.png",
+      "rawText": "decision 2 decision 1 a firm sets the prices for its products a school recruits more teachers A a government spends more on defence a central bank reduces money supply B a farmer decides which crops to grow a government increases tax rates C a worker accepts an offer of overtime a household cuts its energy use D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q05.png",
+      "rawText": "supply (kilos) demand (kilos) price ($) per kilo 26 16 12 23 18 11 20 20 10 17 22 9 14 24 8 11 26 7 At the equilibrium price, what will be the total expenditure on coffee? $400 D $200 C $20 B $10 A [Turn over 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q06.png",
+      "rawText": "price quantity price quantity O O What will be the shape of the market demand curve for the good? A price quantity B price quantity C price quantity D price quantity O O O O 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "ok",
+      "stem": "price quantity price quantity O O What will be the shape of the market demand curve for the good?",
+      "options": {
+        "A": "price quantity",
+        "B": "price quantity",
+        "C": "price quantity",
+        "D": "price quantity O O O O 06_0455_12_2025_1.17 © UCLES 2025"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q07.png",
+      "rawText": "O price quantity S1 D1 D2 P2 P1 If prices had remained at P1 even during the hot weather, what was likely to have happened in the market for ice cream? equilibrium A excess supply B rising profits C shortage D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q08.png",
+      "rawText": "time taken to produce the good the good is easily stored one day no A one year no B one day yes C one year yes D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q09.png",
+      "rawText": "it is more beneficial to the consumer than they realise A it is overconsumed in the free market B it is underproduced in the free market C it provides external benefits D [Turn over 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "ok",
+      "stem": "it is more beneficial to the consumer than they realise",
+      "options": {
+        "A": "it is overconsumed in the free market",
+        "B": "it is underproduced in the free market",
+        "C": "it provides external benefits",
+        "D": "[Turn over 06_0455_12_2025_1.17 © UCLES 2025"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q10.png",
+      "rawText": "female $ male $ 80 100 A 60 120 B 100 140 C 200 300 D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q11.png",
+      "rawText": "costs output O ATC X Y Why is the movement from X to Y likely to result from this merger? Consumer demand is rising. A Marketing economies of scale occur at higher levels of output. B The firm faces problems of co-ordination between departments. C The firm is negotiating discounts through bulk buying. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q12.png",
+      "rawText": "a decrease in the number of customers in the restaurant A a decrease in the chefs’ pay B an increase in the quality of the food C an increase in training for the chefs D 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "ok",
+      "stem": "a decrease in the number of customers in the restaurant",
+      "options": {
+        "A": "a decrease in the chefs’ pay",
+        "B": "an increase in the quality of the food",
+        "C": "an increase in training for the chefs",
+        "D": "06_0455_12_2025_1.17 © UCLES 2025"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q13.png",
+      "rawText": "costs that are divided by the amount produced A costs that are present when output is zero B costs that change according to the level of output C costs that decrease when output increases D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q14.png",
+      "rawText": "variable costs ($) fixed costs ($) output (units) 140 100 6 A 150 30 9 B 160 200 12 C 330 120",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q15.png",
+      "rawText": "its average cost and profit A its average cost and total revenue B its average revenue and profit C its average revenue and total revenue D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q16.png",
+      "rawText": "decrease increase economies of scale barriers to entry A prices consumer choice B competition long-run profits C market share output D [Turn over 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "ok",
+      "stem": "decrease increase economies of scale barriers to entry",
+      "options": {
+        "A": "prices consumer choice",
+        "B": "competition long-run profits",
+        "C": "market share output",
+        "D": "[Turn over 06_0455_12_2025_1.17 © UCLES 2025"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q17.png",
+      "rawText": "economic growth A increase in the current account surplus B low inflation C redistribution of income D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q18.png",
+      "rawText": "% paid in tax income tax O Which term is used to describe the tax? indirect A progressive B proportional C regressive D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q19.png",
+      "rawText": "a rise in government borrowing A a rise in the level of exports B a rise in the national debt C a rise in the rate of inflation D 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "ok",
+      "stem": "a rise in government borrowing",
+      "options": {
+        "A": "a rise in the level of exports",
+        "B": "a rise in the national debt",
+        "C": "a rise in the rate of inflation",
+        "D": "06_0455_12_2025_1.17 © UCLES 2025"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q20.png",
+      "rawText": "increasing the money supply A lowering interest rates B reducing indirect taxation C retraining unemployed workers D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q21.png",
+      "rawText": "the rate of absolute poverty A the government budget deficit B the level of unemployment C the rate of inflation D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q22.png",
+      "rawText": "number of people 10000000 of working age 7000000 employed 1000000 unemployed 2000000 not seeking work Which percentage of working-age people are in the labour force? 90% D 80% C 70% B 30% A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q23.png",
+      "rawText": "cyclical A frictional B regional C structural D [Turn over 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "ok",
+      "stem": "cyclical",
+      "options": {
+        "A": "frictional",
+        "B": "regional",
+        "C": "structural",
+        "D": "[Turn over 06_0455_12_2025_1.17 © UCLES 2025"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q24.png",
+      "rawText": "supply of goods and services in country X demand for goods and services in country X 5% decrease 5% decrease A 5% increase 5% decrease B 5% decrease 5% increase C 5% increase 5% increase D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q25.png",
+      "rawText": "The food grown is not exported. A The GDP does not include agricultural production. B The GDP only refers to the public sector. C The value of the food is unknown. D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q26.png",
+      "rawText": "increased government budget deficit A increased rate of economic growth B increased rate of emigration C increased use of labour-intensive methods of production D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q27.png",
+      "rawText": "$500 D $100 C $25 B $5 A 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q28.png",
+      "rawText": "developing courses for training in mining A investing in infrastructure to export minerals B repatriating profits and dividends C using new technology D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q29.png",
+      "rawText": "local currency price in local currency country Australian dollars $14.99 Australia Canadian dollars $11.99 Canada New Zealand dollars $20.95 New Zealand GB pound £6.99 United Kingdom What additional information is required to make a meaningful comparison of the price of the book between the countries? direct tax rates A exchange rates B inflation rates C level of import tariffs D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-economics-0455/0455_s25_qp_12/q30.png",
+      "rawText": "a decrease in GDP A a decrease in unemployment B a depreciation of the foreign exchange rate C deflation D 06_0455_12_2025_1.17 © UCLES 2025",
+      "parseStatus": "ok",
+      "stem": "a decrease in GDP",
+      "options": {
+        "A": "a decrease in unemployment",
+        "B": "a depreciation of the foreign exchange rate",
+        "C": "deflation",
+        "D": "06_0455_12_2025_1.17 © UCLES 2025"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

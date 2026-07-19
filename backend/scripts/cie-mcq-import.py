@@ -7,11 +7,10 @@ from pathlib import Path
 
 import fitz
 
-EXPECTED_QUESTIONS = tuple(range(1, 41))
 LETTER_TO_INDEX = {"A": 0, "B": 1, "C": 2, "D": 3}
 FILE_PATTERN = re.compile(
     r"^(?P<subject>\d{4})_(?P<season>[msw])(?P<year>\d{2})_"
-    r"(?P<kind>qp|ms)_(?P<paper>2)(?P<variant>[1-9])\.pdf$",
+    r"(?P<kind>qp|ms)_(?P<paper>[12])(?P<variant>[1-9])\.pdf$",
     re.IGNORECASE,
 )
 
@@ -33,6 +32,8 @@ def parse_file_name(path, subject_code):
     if not match or match.group("subject") != subject_code:
         return None
     data = match.groupdict()
+    if data["paper"] == "1" and subject_code != "0455":
+        return None
     data["paper_slug"] = (
         f"{data['subject']}_{data['season'].lower()}{data['year']}_"
         f"qp_{data['paper']}{data['variant']}"
@@ -40,11 +41,11 @@ def parse_file_name(path, subject_code):
     return data
 
 
-def collect_question_anchors(doc):
+def collect_question_anchors(doc, expected_questions):
     anchors = []
     for page_index, page in enumerate(doc):
         page_text = normalize_text(page.get_text("text"))
-        if "Paper 2 Multiple Choice" in page_text and "INSTRUCTIONS" in page_text:
+        if re.search(r"Paper [12] Multiple Choice", page_text) and "INSTRUCTIONS" in page_text:
             continue
         for word in page.get_text("words"):
             x0, y0, x1, y1, token = word[:5]
@@ -52,7 +53,7 @@ def collect_question_anchors(doc):
             if not token.isdigit():
                 continue
             question_no = int(token)
-            if question_no not in EXPECTED_QUESTIONS or x0 > 60 or (y1 - y0) < 6:
+            if question_no not in expected_questions or x0 > 60 or (y1 - y0) < 6:
                 continue
             anchors.append(
                 (question_no, page_index, float(y0), float(y1), float(x0), float(x1))
@@ -60,15 +61,15 @@ def collect_question_anchors(doc):
     first_seen = {}
     for anchor in sorted(anchors, key=lambda item: (item[0], item[1], item[2])):
         first_seen.setdefault(anchor[0], anchor)
-    return [first_seen[number] for number in EXPECTED_QUESTIONS if number in first_seen]
+    return [first_seen[number] for number in expected_questions if number in first_seen]
 
 
-def trim_to_single_question(text, question_no):
+def trim_to_single_question(text, question_no, last_question):
     value = normalize_text(text)
     start = re.search(rf"(^|\s){question_no}\s+", value)
     if start:
         value = value[start.end():].strip()
-    if question_no < 40:
+    if question_no < last_question:
         end = re.search(rf"(^|\s){question_no + 1}\s+", value)
         if end:
             value = value[:end.start()].strip()
@@ -94,14 +95,16 @@ def split_stem_and_options(text):
     return {"stem": stem, "options": options}
 
 
-def extract_mark_scheme(mark_scheme_path):
+def extract_mark_scheme(mark_scheme_path, expected_questions):
     with fitz.open(mark_scheme_path) as doc:
         text = " ".join(page.get_text("text") for page in doc)
     answers = {}
     for match in re.finditer(
-        r"(?:^|\s)([1-9]|[12]\d|3\d|40)\s+([ABCD])\s+1(?=\s|$)", text
+        r"(?:^|\s)([1-9]|[1-9]\d)\s+([ABCD])\s+1(?=\s|$)", text
     ):
         question_no = int(match.group(1))
+        if question_no not in expected_questions:
+            continue
         answer = match.group(2)
         previous = answers.get(question_no)
         if previous is not None and previous != answer:
@@ -110,7 +113,7 @@ def extract_mark_scheme(mark_scheme_path):
     discounted = {
         int(match.group(1))
         for match in re.finditer(
-            r"(?:^|\s)([1-9]|[12]\d|3\d|40)\s+Question\s+Discounted(?=\s|$)",
+            r"(?:^|\s)([1-9]|[1-9]\d)\s+Question\s+Discounted(?=\s|$)",
             text,
             re.IGNORECASE,
         )
@@ -118,22 +121,26 @@ def extract_mark_scheme(mark_scheme_path):
     overlap = set(answers) & discounted
     if overlap:
         raise ValueError(f"Questions have answers and discounted status: {sorted(overlap)}")
-    missing = [number for number in EXPECTED_QUESTIONS if number not in answers and number not in discounted]
+    discounted &= set(expected_questions)
+    missing = [number for number in expected_questions if number not in answers and number not in discounted]
     if missing:
         raise ValueError(f"Missing mark scheme entries: {missing}")
     return answers, discounted
 
 
-def cut_questions(qp_path, paper_slug, answers, discounted, output_root, public_root):
+def cut_questions(qp_path, paper_slug, answers, discounted, output_root, public_root, expected_questions):
     image_dir = output_root / "papers" / paper_slug
     image_dir.mkdir(parents=True, exist_ok=True)
     rows = []
     with fitz.open(qp_path) as doc:
-        anchors = collect_question_anchors(doc)
+        anchors = collect_question_anchors(doc, expected_questions)
         found = {anchor[0] for anchor in anchors}
-        missing = [number for number in EXPECTED_QUESTIONS if number not in found]
-        if len(anchors) != 40 or missing:
-            raise ValueError(f"Expected 40 question anchors; found {len(anchors)}, missing {missing}")
+        missing = [number for number in expected_questions if number not in found]
+        if len(anchors) != len(expected_questions) or missing:
+            raise ValueError(
+                f"Expected {len(expected_questions)} question anchors; "
+                f"found {len(anchors)}, missing {missing}"
+            )
         locations = [(anchor[1], anchor[2]) for anchor in anchors]
         if locations != sorted(locations):
             raise ValueError("Question anchors are not in document order")
@@ -146,7 +153,9 @@ def cut_questions(qp_path, paper_slug, answers, discounted, output_root, public_
                 bottom = float(page.rect.height) - 24
             top = max(0, y0 - 6)
             clip = fitz.Rect(20, top, page.rect.width - 20, bottom)
-            raw_text = trim_to_single_question(page.get_text("text", clip=clip), question_no)
+            raw_text = trim_to_single_question(
+                page.get_text("text", clip=clip), question_no, expected_questions[-1]
+            )
             parsed = split_stem_and_options(raw_text)
             image_name = f"q{question_no:02d}.png"
             image_path = image_dir / image_name
@@ -181,7 +190,7 @@ def issue(code, message, paper_slug=None, details=None):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Validate and cut CIE Paper 2 MCQ PDFs")
+    parser = argparse.ArgumentParser(description="Validate and cut supported CIE MCQ PDFs")
     parser.add_argument("--input", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--subject-code", required=True)
@@ -217,17 +226,20 @@ def main():
             manifests.append({"slug": paper_slug, "status": "rejected", "issues": ["MISSING_PAIR"]})
             continue
         try:
-            answers, discounted = extract_mark_scheme(entry["ms"])
-            rows = cut_questions(
-                entry["qp"], paper_slug, answers, discounted, output_root, public_root
-            )
             meta = entry["meta"]
+            question_count = 30 if meta["paper"] == "1" else 40
+            expected_questions = tuple(range(1, question_count + 1))
+            answers, discounted = extract_mark_scheme(entry["ms"], expected_questions)
+            rows = cut_questions(
+                entry["qp"], paper_slug, answers, discounted, output_root, public_root,
+                expected_questions
+            )
             data_path = output_root / "data" / f"{paper_slug}.json"
             data_path.parent.mkdir(parents=True, exist_ok=True)
             payload = {
                 "questionPaper": entry["qp"].name,
                 "markScheme": entry["ms"].name,
-                "questionCount": 40,
+                "questionCount": question_count,
                 "discountedQuestions": sorted(discounted),
                 "rows": rows,
             }
@@ -238,9 +250,9 @@ def main():
                 "subjectCode": subject_code,
                 "year": 2000 + int(meta["year"]),
                 "season": meta["season"].lower(),
-                "paperNumber": 2,
+                "paperNumber": int(meta["paper"]),
                 "variant": int(meta["variant"]),
-                "sourceQuestionCount": 40,
+                "sourceQuestionCount": question_count,
                 "validQuestionCount": len(answers),
                 "discountedQuestions": sorted(discounted),
                 "qpFileName": entry["qp"].name,
