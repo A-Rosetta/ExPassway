@@ -1120,6 +1120,33 @@ button {
   flex-wrap: wrap;
 }
 
+.paper-filter-bar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.35rem 1rem;
+  border-top: 1px solid #e3e8f2;
+  background: #f7f9fc;
+}
+
+.paper-filter-bar label {
+  width: min(220px, 100%);
+  color: #34445f;
+  font-weight: 700;
+}
+
+.paper-filter-bar select {
+  min-height: 42px;
+  background: #fff;
+}
+
+.paper-filter-count {
+  margin: 0 0 0.65rem;
+  color: #5d6c80;
+  font-size: 0.9rem;
+}
+
 .paper-set-list {
   display: grid;
 }
@@ -1229,6 +1256,17 @@ button {
 
   .paper-picker-head {
     flex-direction: column;
+  }
+
+  .paper-filter-bar {
+    align-items: stretch;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .paper-filter-count {
+    margin: 0;
   }
 
   .paper-set-item {

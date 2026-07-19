@@ -9,6 +9,7 @@
     || (selection.subjectCode === "0620" ? window.EXAM_CATALOG?.["IGCSE Chemistry"] : null);
   let catalogSubject = null;
   let PAPER_SETS = readPaperSets();
+  let selectedPaperYear = "";
 
   function readRequestedTarget() {
     const params = new URLSearchParams(location.search);
@@ -1033,10 +1034,39 @@
     if (countValue) countValue.textContent = String(state.selectedPaperSet?.questions || 40);
   }
 
+  function renderPaperYearFilter() {
+    const select = byId("paperYearFilter");
+    if (!select) return;
+    const years = [...new Set(PAPER_SETS.map((paper) => String(paper.year || "")).filter(Boolean))]
+      .sort((a, b) => Number(b) - Number(a));
+    if (selectedPaperYear && !years.includes(selectedPaperYear)) selectedPaperYear = "";
+
+    select.replaceChildren();
+    const allYears = document.createElement("option");
+    allYears.value = "";
+    allYears.textContent = t("allPaperYears");
+    select.appendChild(allYears);
+    years.forEach((year) => {
+      const option = document.createElement("option");
+      option.value = year;
+      option.textContent = year;
+      select.appendChild(option);
+    });
+    select.value = selectedPaperYear;
+  }
+
   function renderPaperSetList() {
     const wrap = byId("paperSetList");
     if (!wrap) return;
-    wrap.innerHTML = PAPER_SETS.map((paper) => {
+    renderPaperYearFilter();
+    const visiblePapers = selectedPaperYear
+      ? PAPER_SETS.filter((paper) => String(paper.year) === selectedPaperYear)
+      : PAPER_SETS;
+    const resultCount = byId("paperYearResultCount");
+    if (resultCount) {
+      resultCount.textContent = t("paperYearResultCount", { count: visiblePapers.length });
+    }
+    wrap.innerHTML = visiblePapers.map((paper) => {
       const completed = hasCompletedPaper(paper);
       return `
         <div class="paper-set-item">
@@ -1201,6 +1231,14 @@
     goHistoryBtn.addEventListener("click", () => {
       const slug = latestCompletedPaperSlug();
       if (slug) location.href = `./review.html?paper=${encodeURIComponent(slug)}`;
+    });
+  }
+
+  const paperYearFilter = byId("paperYearFilter");
+  if (paperYearFilter) {
+    paperYearFilter.addEventListener("change", () => {
+      selectedPaperYear = paperYearFilter.value;
+      renderPaperSetList();
     });
   }
 
