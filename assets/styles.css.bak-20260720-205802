@@ -233,68 +233,6 @@ button {
   font-size: 0.96rem;
 }
 
-.notebook-question {
-  padding: 0;
-  overflow: hidden;
-}
-
-.notebook-question > summary {
-  min-height: 52px;
-  padding: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  cursor: pointer;
-  list-style: none;
-  color: #244779;
-  font-weight: 700;
-}
-
-.notebook-question > summary::-webkit-details-marker {
-  display: none;
-}
-
-.notebook-question > summary::after {
-  content: "\203A";
-  flex: 0 0 auto;
-  color: #2f5ea8;
-  font-size: 1.4rem;
-  line-height: 1;
-  transition: transform 0.15s ease;
-}
-
-.notebook-question[open] > summary {
-  border-bottom: 1px solid var(--line);
-}
-
-.notebook-question[open] > summary::after {
-  transform: rotate(90deg);
-}
-
-.notebook-question > summary:focus-visible {
-  outline: 3px solid rgba(47, 94, 168, 0.25);
-  outline-offset: -3px;
-}
-
-.notebook-question-content {
-  padding: 0.8rem;
-}
-
-.notebook-question-content > :first-child {
-  margin-top: 0;
-}
-
-.notebook-pagination {
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.notebook-page-progress {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
 .question-title-row,
 .review-question-head {
   display: flex;
@@ -2203,6 +2141,12 @@ body.home-dashboard {
   padding: 3rem 0 4rem;
 }
 
+.home-overview-section {
+  margin-top: 3.5rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid #d9dde3;
+}
+
 .home-section-heading {
   margin-bottom: 1.75rem;
   display: flex;
@@ -2211,7 +2155,12 @@ body.home-dashboard {
   gap: 1.5rem;
 }
 
-.home-section-heading h1 {
+.home-section-heading--compact {
+  margin-bottom: 1.2rem;
+}
+
+.home-section-heading h1,
+.home-section-heading h2 {
   margin: 0;
   letter-spacing: 0;
 }
@@ -2219,6 +2168,10 @@ body.home-dashboard {
 .home-section-heading h1 {
   font-size: 3rem;
   line-height: 1.08;
+}
+
+.home-section-heading h2 {
+  font-size: 1.55rem;
 }
 
 .home-eyebrow {
@@ -2233,23 +2186,6 @@ body.home-dashboard {
 .home-admin-button {
   flex: 0 0 auto;
   border-radius: 6px;
-}
-
-.home-heading-actions {
-  display: flex;
-  flex: 0 0 auto;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.65rem;
-}
-
-.home-pdf-download-button {
-  border-radius: 6px;
-}
-
-.home-pdf-download-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
 }
 
 .course-grid {
@@ -2470,6 +2406,11 @@ body.home-dashboard {
   font-size: 0.82rem;
 }
 
+.home-overview-section .stat-card {
+  border-radius: 8px;
+  box-shadow: none;
+}
+
 .profile-dialog {
   width: min(720px, calc(100% - 32px));
   max-height: min(780px, calc(100vh - 32px));
@@ -2525,73 +2466,6 @@ body.home-dashboard {
   border-radius: 6px;
 }
 
-.pdf-download-dialog {
-  width: min(560px, calc(100% - 32px));
-}
-
-.pdf-download-fields {
-  display: grid;
-  gap: 1rem;
-}
-
-.pdf-download-fields select {
-  width: 100%;
-  min-width: 0;
-  border-radius: 6px;
-  background: #fff;
-}
-
-.pdf-download-status {
-  min-height: 1.35rem;
-  margin: 0.85rem 0 0;
-  color: #657181;
-  font-size: 0.86rem;
-}
-
-.pdf-download-status[hidden] {
-  display: none;
-}
-
-.pdf-download-actions {
-  margin-top: 1.25rem;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-
-.pdf-download-action {
-  min-height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  padding: 0.65rem 0.9rem;
-  background: #1f7a5a;
-  color: #fff;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: none;
-}
-
-.pdf-download-action--answer {
-  background: #2f5ea8;
-}
-
-.pdf-download-action:hover,
-.pdf-download-action:focus-visible {
-  filter: brightness(0.92);
-}
-
-.pdf-download-action:focus-visible {
-  outline: 3px solid rgba(31, 122, 90, 0.28);
-  outline-offset: 2px;
-}
-
-.pdf-download-action.is-disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
-
 @media (max-width: 960px) {
   .course-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2609,7 +2483,7 @@ body.home-dashboard {
   .home-nav-actions {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     border-top: 1px solid #e5e8ec;
     padding-top: 0.45rem;
   }
@@ -2633,15 +2507,6 @@ body.home-dashboard {
 
   .home-section-heading h1 {
     font-size: 2rem;
-  }
-
-  .home-heading-actions {
-    width: 100%;
-    display: flex;
-  }
-
-  .home-heading-actions button {
-    flex: 1 1 12rem;
   }
 
   .course-grid {
@@ -2724,108 +2589,4 @@ body.home-dashboard {
   .profile-dialog .grid-2 {
     grid-template-columns: 1fr;
   }
-
-  .pdf-download-actions {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Timer display — make it stand out on the exam page */
-#timerDisplay {
-  display: inline-block;
-  margin: 0.6rem 0;
-  padding: 0.5rem 1rem;
-  font-size: 1.7rem;
-  font-weight: 800;
-  color: #d94141;
-  background: #fff4f4;
-  border: 2px solid #f2b3b3;
-  border-radius: 10px;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.03em;
-  box-shadow: 0 2px 6px rgba(217, 65, 65, 0.12);
-}
-
-/* Timer pinned to top-right, always visible on scroll */
-#timerDisplay {
-  position: fixed;
-  top: 16px;
-  right: 20px;
-  z-index: 1000;
-  margin: 0;
-}
-@media (max-width: 640px) {
-  #timerDisplay {
-    top: 10px;
-    right: 10px;
-    font-size: 1.2rem;
-    padding: 0.35rem 0.7rem;
-  }
-}
-
-/* ===== Timer polish: navy pill with pulse dot ===== */
-#timerDisplay {
-  position: fixed;
-  top: 20px;
-  right: 24px;
-  z-index: 1000;
-  margin: 0;
-  padding: 0.55rem 1.15rem 0.55rem 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-
-  font-family: "SF Mono", "JetBrains Mono", "Cascadia Code", "Consolas", ui-monospace, monospace;
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  font-variant-numeric: tabular-nums;
-  color: #ffffff;
-  background: linear-gradient(135deg, #1e3a5f 0%, #2c5b96 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-  box-shadow:
-    0 10px 24px -8px rgba(30, 58, 95, 0.45),
-    0 2px 4px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-#timerDisplay:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 14px 28px -8px rgba(30, 58, 95, 0.5),
-    0 3px 6px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
-
-/* Pulsing red dot before the text — signals "timer running" */
-#timerDisplay::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #ff6b6b;
-  box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.55);
-  animation: timerPulse 1.4s ease-in-out infinite;
-  flex-shrink: 0;
-}
-
-@keyframes timerPulse {
-  0%   { box-shadow: 0 0 0 0   rgba(255, 107, 107, 0.55); transform: scale(1);    }
-  70%  { box-shadow: 0 0 0 9px rgba(255, 107, 107, 0);    transform: scale(1.05); }
-  100% { box-shadow: 0 0 0 0   rgba(255, 107, 107, 0);    transform: scale(1);    }
-}
-
-@media (max-width: 640px) {
-  #timerDisplay {
-    top: 12px;
-    right: 12px;
-    font-size: 1.05rem;
-    padding: 0.4rem 0.85rem 0.4rem 0.75rem;
-    gap: 0.5rem;
-  }
-  #timerDisplay::before { width: 7px; height: 7px; }
 }

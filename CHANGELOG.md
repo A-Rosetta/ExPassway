@@ -2,6 +2,47 @@
 
 All notable changes to this project are recorded in this file.
 
+## 2026-07-24 22:35 CST
+
+### Summary
+- Added a dedicated wrong-notebook entry to the signed-in homepage and moved the notebook overview into the notebook page.
+- Changed wrong-notebook records to a compact title-first, answered-only, paginated list.
+- Added homepage downloads for published question-paper and mark-scheme PDFs.
+
+### Added
+- Added a bilingual `错题本 / Notebook` control to the homepage navigation and linked it to the existing notebook page.
+- Added previous and next pagination controls for wrong-notebook records, with 10 answered questions per page.
+- Added a homepage `下载试卷 PDF / Download Paper PDFs` dialog with subject and published-paper selectors.
+- Added separate downloads for the question paper (`QP`) and mark scheme (`MS`).
+- Added the controlled catalogue endpoint:
+  - `GET /api/catalog/papers/:paperSlug/download/:documentType`
+- Added a PDF resolver that prefers registered `exam_import_files` paths and supports the approved legacy Chemistry and Co-ordinated Sciences PDF directories.
+
+### Changed
+- Moved the wrong-notebook overview from the homepage into `pages/notebook.html` while retaining the notebook item, total wrong-attempt, mastered, and latest-record summaries.
+- Removed the duplicate notebook item card from the notebook page.
+- Changed each wrong-notebook record to show its subject, paper, and question number before opening its details.
+- Changed the notebook overview, filters, and record list to include only questions the user has answered.
+- Preserved the existing notebook grouping, sorting, subject filter, mastery filter, mastery updates, and discussion links.
+- Adjusted the mobile homepage navigation to four equal columns.
+- Preserved the existing subject-book navigation while adding the PDF download entry beside the homepage subject heading.
+
+### Security
+- Restricted catalogue downloads to published papers and the `qp` or `ms` document types.
+- Rejected arbitrary paths and filenames from requests.
+- Validated that resolved files are regular `.pdf` files inside approved roots before serving them.
+- Returned structured `400` and `404` responses for invalid document types, unknown papers, and missing PDF source files without exposing server paths.
+
+### Verification
+- Verified JavaScript syntax and Git whitespace checks for the completed changes.
+- Verified all four published subjects, 69 published papers, and all 138 QP/MS download endpoints.
+- Verified that every PDF response begins with `%PDF-` and uses the official database filename in `Content-Disposition`.
+- Verified registered Biology and Economics files plus legacy Chemistry summer/winter and Co-ordinated Sciences files.
+- Verified a real browser download of `0620_w23_qp_21.pdf`.
+- Verified that subject-book navigation still opens the existing paper-selection page.
+- Verified the homepage download dialog at `1280x900` and `390x844` with no horizontal overflow, clipped controls, or overlapping content.
+- Restarted and verified `alevel-backend-3002.service` through the live Nginx `/api/` path.
+
 ## 2026-07-19 13:08 CST
 
 ### Summary

@@ -2,24 +2,18 @@
   const USER_PROFILE_KEY = "alevel.userProfile";
   const USER_ID_KEY = "alevel.userId";
   const AUTH_TOKEN_KEY = "alevel.authToken";
-  const NOTEBOOK_KEY = "alevel.wrongNotebook";
   const SELECTION_KEY = "alevel.selection";
   const { getLanguage, setLanguage, normalizeLanguage, t, applyPage } = window.ALevelI18n;
   let currentLanguage = getLanguage();
   let backendStatusState = null;
   let accountStatusState = null;
   let catalogSubjects = [];
+  let pdfDownloadPapers = [];
+  let pdfPaperLoadId = 0;
+  let pdfDownloadStatusKey = "";
 
   function getEl(id) {
     return document.getElementById(id);
-  }
-
-  function currentUserScope() {
-    return localStorage.getItem(USER_ID_KEY) || "guest";
-  }
-
-  function scopedKey(base) {
-    return `${base}:${currentUserScope()}`;
   }
 
   function applyStatus(elementId, state) {
@@ -50,7 +44,8 @@
     if (languageSelect) languageSelect.value = currentLanguage;
 
     renderSubjectCourses(catalogSubjects);
-    renderNotebookOverview();
+    renderPdfDownloadOptions();
+    setPdfDownloadStatus(pdfDownloadStatusKey);
     applyStatus("backendStatus", backendStatusState);
     if (accountStatusState) {
       setAccountStatus(accountStatusState.key, accountStatusState.isBad, accountStatusState.vars);
@@ -68,58 +63,6 @@
     } catch (_err) {
       return null;
     }
-  }
-
-  function readNotebookRows() {
-    try {
-      const raw = localStorage.getItem(scopedKey(NOTEBOOK_KEY));
-      const rows = raw ? JSON.parse(raw) : [];
-      return Array.isArray(rows) ? rows : [];
-    } catch (_err) {
-      return [];
-    }
-  }
-
-  async function syncNotebookRowsFromApi() {
-    const userId = localStorage.getItem(USER_ID_KEY) || "";
-    if (!userId || !window.ALevelApi?.getUserNotebook) return readNotebookRows();
-    try {
-      const rows = await window.ALevelApi.getUserNotebook(userId);
-      localStorage.setItem(scopedKey(NOTEBOOK_KEY), JSON.stringify(Array.isArray(rows) ? rows : []));
-      return Array.isArray(rows) ? rows : [];
-    } catch (_err) {
-      return readNotebookRows();
-    }
-  }
-
-  function renderNotebookOverview(rowsInput) {
-    const box = getEl("notebookOverview");
-    if (!box) return;
-    const rows = (Array.isArray(rowsInput) ? rowsInput : readNotebookRows())
-      .sort((a, b) => new Date(b.lastWrongAt || 0) - new Date(a.lastWrongAt || 0));
-    const totalWrongCount = rows.reduce((sum, row) => sum + Number(row.wrongCount || 0), 0);
-    const masteredCount = rows.filter((row) => row.mastered).length;
-    const latest = rows[0];
-    const time = latest?.lastWrongAt
-      ? new Date(latest.lastWrongAt).toLocaleString(currentLanguage === "en" ? "en-US" : "zh-CN")
-      : "";
-
-    box.innerHTML = `
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-label">${t("notebookItems")}</div><div class="stat-value">${rows.length}</div></div>
-        <div class="stat-card"><div class="stat-label">${t("totalWrongAttempts")}</div><div class="stat-value">${totalWrongCount}</div></div>
-        <div class="stat-card"><div class="stat-label">${t("mastered")}</div><div class="stat-value">${masteredCount}</div></div>
-      </div>
-      <p class="tip">${
-        latest
-          ? t("latestWrongRecord", {
-            subject: latest.subject || "-",
-            paper: latest.paper || "-",
-            time,
-          })
-          : t("noWrongRecords")
-      }</p>
-    `;
   }
 
   function subjectTheme(code) {
@@ -209,6 +152,105 @@
     });
   }
 
+  function subjectDisplayName(subject) {
+    return currentLanguage === "en" ? subject.name : (subject.nameZh || subject.name);
+  }
+
+  function setPdfDownloadStatus(key) {
+    pdfDownloadStatusKey = key;
+    const status = getEl("pdfDownloadStatus");
+    if (!status) return;
+    status.hidden = !key;
+    status.textContent = key ? t(key) : "";
+  }
+
+  function setPdfDownloadLinks(paperSlug) {
+    [
+      [getEl("downloadQuestionPdf"), "qp"],
+      [getEl("downloadAnswerPdf"), "ms"],
+    ].forEach(([link, documentType]) => {
+      if (!link) return;
+      if (!paperSlug) {
+        link.removeAttribute("href");
+        link.classList.add("is-disabled");
+        link.setAttribute("aria-disabled", "true");
+        return;
+      }
+      const baseUrl = window.ALevelApi?.getBaseUrl?.() || "";
+      link.href = `${baseUrl}/api/catalog/papers/${encodeURIComponent(paperSlug)}/download/${documentType}`;
+      link.classList.remove("is-disabled");
+      link.removeAttribute("aria-disabled");
+    });
+  }
+
+  function renderPdfDownloadOptions() {
+    const subjectSelect = getEl("pdfDownloadSubject");
+    const paperSelect = getEl("pdfDownloadPaper");
+    if (!subjectSelect || !paperSelect) return;
+
+    const selectedSubject = subjectSelect.value;
+    subjectSelect.replaceChildren(...catalogSubjects.map((subject) => {
+      const option = document.createElement("option");
+      option.value = subject.code;
+      option.textContent = `${subject.code} · ${subjectDisplayName(subject)}`;
+      return option;
+    }));
+    if (catalogSubjects.some((subject) => subject.code === selectedSubject)) {
+      subjectSelect.value = selectedSubject;
+    }
+
+    const selectedPaper = paperSelect.value;
+    paperSelect.replaceChildren(...pdfDownloadPapers.map((paper) => {
+      const option = document.createElement("option");
+      option.value = paper.slug;
+      option.textContent = paper.slug;
+      return option;
+    }));
+    if (pdfDownloadPapers.some((paper) => paper.slug === selectedPaper)) {
+      paperSelect.value = selectedPaper;
+    }
+    paperSelect.disabled = pdfDownloadPapers.length === 0;
+    setPdfDownloadLinks(paperSelect.value);
+  }
+
+  async function loadPdfDownloadPapers(subjectCode) {
+    const loadId = ++pdfPaperLoadId;
+    pdfDownloadPapers = [];
+    renderPdfDownloadOptions();
+    setPdfDownloadStatus("pdfDownloadLoading");
+    try {
+      const papers = await window.ALevelApi.getCatalogPapers(subjectCode);
+      if (loadId !== pdfPaperLoadId) return;
+      pdfDownloadPapers = Array.isArray(papers) ? papers : [];
+      renderPdfDownloadOptions();
+      setPdfDownloadStatus(pdfDownloadPapers.length ? "" : "pdfDownloadUnavailable");
+    } catch (_err) {
+      if (loadId !== pdfPaperLoadId) return;
+      setPdfDownloadStatus("pdfDownloadUnavailable");
+    }
+  }
+
+  function setupPdfDownloads() {
+    const dialog = getEl("pdfDownloadDialog");
+    const openButton = getEl("openPdfDownload");
+    const subjectSelect = getEl("pdfDownloadSubject");
+    const paperSelect = getEl("pdfDownloadPaper");
+    if (!dialog || !openButton || !subjectSelect || !paperSelect) return;
+
+    openButton.disabled = catalogSubjects.length === 0;
+    renderPdfDownloadOptions();
+    openButton.addEventListener("click", () => {
+      dialog.showModal();
+      if (subjectSelect.value) loadPdfDownloadPapers(subjectSelect.value);
+    });
+    getEl("closePdfDownload")?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    subjectSelect.addEventListener("change", () => loadPdfDownloadPapers(subjectSelect.value));
+    paperSelect.addEventListener("change", () => setPdfDownloadLinks(paperSelect.value));
+  }
+
   async function loadSubjectCourses() {
     if (!window.ALevelApi?.getCatalogSubjects) {
       setBackendStatus("apiMissing", true);
@@ -264,6 +306,9 @@
       });
     }
 
+    getEl("goNotebook")?.addEventListener("click", () => {
+      location.href = "pages/notebook.html";
+    });
     getEl("goCommunity")?.addEventListener("click", () => {
       location.href = "pages/community.html";
     });
@@ -303,9 +348,7 @@
 
     catalogSubjects = await loadSubjectCourses();
     renderSubjectCourses(catalogSubjects);
-
-    const notebookRows = await syncNotebookRowsFromApi();
-    renderNotebookOverview(notebookRows);
+    setupPdfDownloads();
 
     const updateProfileBtn = getEl("updateProfileBtn");
     updateProfileBtn?.addEventListener("click", async () => {

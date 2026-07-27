@@ -110,6 +110,20 @@ export async function listImportFiles(jobId) {
   return result.rows.map(mapFile);
 }
 
+export async function getPublishedImportFile(paperSlug, documentType) {
+  const result = await query(`
+    select f.stored_path
+    from exam_import_files f
+    join exam_import_jobs j on j.id = f.job_id
+    where f.paper_slug = $1
+      and f.document_type = $2
+      and j.status = 'published'
+    order by f.created_at desc
+    limit 1
+  `, [paperSlug, documentType]);
+  return result.rows[0]?.stored_path || "";
+}
+
 export async function listImportIssues(jobId) {
   const result = await query(`
     select * from exam_import_issues where job_id = $1 order by created_at, paper_slug

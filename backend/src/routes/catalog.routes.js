@@ -8,6 +8,7 @@ import {
   listPublishedSubjects,
 } from "../db/repositories/examCatalog.repository.js";
 import { listQuestionBankByPaperSlug } from "../db/repositories/questionBank.repository.js";
+import { resolvePublishedPaperPdf } from "../services/examPdf.service.js";
 
 const router = Router();
 
@@ -36,6 +37,23 @@ router.get("/papers/:paperSlug", asyncHandler(async (req, res) => {
   const paper = await getPublishedPaper(String(req.params.paperSlug || "").toLowerCase());
   if (!paper) throw new ApiError(404, "Published paper not found.", "PAPER_NOT_FOUND");
   res.json({ ok: true, data: paper });
+}));
+
+router.get("/papers/:paperSlug/download/:documentType", asyncHandler(async (req, res) => {
+  assertCatalogEnabled();
+  const documentType = String(req.params.documentType || "").toLowerCase();
+  if (!["qp", "ms"].includes(documentType)) {
+    throw new ApiError(400, "Document type must be qp or ms.", "INVALID_DOCUMENT_TYPE");
+  }
+
+  const paper = await getPublishedPaper(String(req.params.paperSlug || "").toLowerCase());
+  if (!paper) throw new ApiError(404, "Published paper not found.", "PAPER_NOT_FOUND");
+
+  const pdf = await resolvePublishedPaperPdf(paper, documentType);
+  if (!pdf) throw new ApiError(404, "PDF source file not found.", "PDF_NOT_FOUND");
+
+  res.type("application/pdf");
+  res.download(pdf.filePath, pdf.fileName);
 }));
 
 router.get("/papers/:paperSlug/questions", asyncHandler(async (req, res) => {

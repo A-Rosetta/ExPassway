@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="notebookPageTitle">错题本</title>
-  <link rel="stylesheet" href="../assets/styles.css" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260724-4" />
 </head>
 <body>
   <main class="container">
@@ -14,7 +14,8 @@
     </section>
 
     <section class="card panel">
-      <h2 data-i18n="notebookStatsTitle">错题统计</h2>
+      <p class="home-eyebrow" data-i18n="learningOverview">学习概览</p>
+      <h2 data-i18n="notebookTitle">错题本概览</h2>
       <div id="notebookStats"></div>
       <div class="actions">
         <label><span data-i18n="subjectFilterLabel">科目筛选</span>
@@ -43,7 +44,8 @@
       </div>
     </section>
   </main>
-  <script src="../scripts/i18n.js"></script>
-  <script src="../scripts/notebook.js"></script>
+  <script src="../scripts/i18n.js?v=20260724-2"></script>
+  <script src="../scripts/api.js?v=20260718-2"></script>
+  <script src="../scripts/notebook.js?v=20260724-4"></script>
 </body>
 </html>

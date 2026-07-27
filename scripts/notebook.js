@@ -1,7 +1,9 @@
 (function () {
   const NOTEBOOK_KEY = "alevel.wrongNotebook";
   const USER_ID_KEY = "alevel.userId";
+  const PAGE_SIZE = 10;
   const { t, getLanguage, applyPage } = window.ALevelI18n;
+  let currentPage = 1;
   const USER_RECORD_KEYS = [
     "alevel.wrongNotebook",
     "alevel.lastResult",
@@ -95,14 +97,25 @@
   function renderStats(rows) {
     const totalWrongCount = rows.reduce((sum, r) => sum + Number(r.wrongCount || 0), 0);
     const masteredCount = rows.filter((r) => r.mastered).length;
+    const latest = rows[0];
+    const time = latest?.lastWrongAt
+      ? new Date(latest.lastWrongAt).toLocaleString(getLanguage() === "en" ? "en-US" : "zh-CN")
+      : "";
     byId("notebookStats").innerHTML = `
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-label">累计错题条目 / Items</div><div class="stat-value">${rows.length}</div></div>
         <div class="stat-card"><div class="stat-label">${t("notebookItems")}</div><div class="stat-value">${rows.length}</div></div>
         <div class="stat-card"><div class="stat-label">${t("totalWrongAttempts")}</div><div class="stat-value">${totalWrongCount}</div></div>
         <div class="stat-card"><div class="stat-label">${t("mastered")}</div><div class="stat-value">${masteredCount}</div></div>
       </div>
-      <p class="tip">${t("latestWrongTime", { time: rows[0]?.lastWrongAt ? new Date(rows[0].lastWrongAt).toLocaleString(getLanguage() === "en" ? "en-US" : "zh-CN") : "-" })}</p>
+      <p class="tip">${
+        latest
+          ? t("latestWrongRecord", {
+            subject: latest.subject || "-",
+            paper: latest.paper || "-",
+            time,
+          })
+          : t("noWrongRecords")
+      }</p>
     `;
   }
 
@@ -132,6 +145,21 @@
     return `./community.html?${params.toString()}`;
   }
 
+  function getQuestionNumber(row, fallback) {
+    const questionKey = String(row.questionKey || "");
+    const legacyId = String(row.id || "");
+    const source = questionKey || (/^[0-9a-f-]{36}$/i.test(legacyId) ? "" : legacyId);
+    const match = source.match(/-(\d{1,3})$/);
+    const number = match ? Number(match[1]) : 0;
+    return Number.isInteger(number) && number > 0 ? number : fallback;
+  }
+
+  function isAnswered(row) {
+    if (row.lastSelected === null || row.lastSelected === "") return false;
+    const selected = Number(row.lastSelected);
+    return Number.isInteger(selected) && selected >= 0 && selected <= 3;
+  }
+
   function renderList(rows, state) {
     const wrap = byId("notebookList");
     let filtered = state.subject ? rows.filter((r) => r.subject === state.subject) : rows;
@@ -139,16 +167,21 @@
       filtered = filtered.filter((r) => !r.mastered);
     }
     filtered = sortRows(filtered, state.sortBy);
+    const fallbackNumbers = new Map(filtered.map((row, idx) => [row, idx + 1]));
 
     if (!filtered.length) {
       wrap.innerHTML = `<p class='tip'>${t("noNotebookRecords")}</p>`;
       return;
     }
 
-    const groups = buildGroups(filtered);
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    currentPage = Math.min(Math.max(currentPage, 1), totalPages);
+    const pageStart = (currentPage - 1) * PAGE_SIZE;
+    const pageRows = filtered.slice(pageStart, pageStart + PAGE_SIZE);
+    const groups = buildGroups(pageRows);
     const order = ["today", "last7Days", "earlier"];
 
-    wrap.innerHTML = order
+    const questionGroups = order
       .map((name) => {
         const list = groups[name] || [];
         if (!list.length) return "";
@@ -157,28 +190,48 @@
             <h3 class="notebook-group-title">${t(name)}（${list.length}）</h3>
             ${list
               .map((r, idx) => `
-                <article class="question ${r.mastered ? "mastered" : ""}">
-                  <h4>#${idx + 1} ${r.subject || "-"} / ${r.paper || "-"}</h4>
-                  <p class="chem-text">${r.stem || t("stemMissing")}</p>
-                  <div class="tag-row">
-                    <span class="tag">${r.topic || "-"}</span>
-                    <span class="tag">${t("wrongCountLabel")} ${r.wrongCount || 1}</span>
-                    <span class="tag">${t("latestLabel")} ${r.lastWrongAt ? new Date(r.lastWrongAt).toLocaleString(getLanguage() === "en" ? "en-US" : "zh-CN") : "-"}</span>
-                    ${r.mastered ? `<span class='tag'>${t("mastered")}</span>` : ""}
+                <details class="question notebook-question ${r.mastered ? "mastered" : ""}">
+                  <summary>
+                    <span>${r.subject || "-"} / ${r.paper || "-"} / ${t("questionNumber", { number: getQuestionNumber(r, fallbackNumbers.get(r) || idx + 1) })}</span>
+                  </summary>
+                  <div class="notebook-question-content">
+                    <p class="chem-text">${r.stem || t("stemMissing")}</p>
+                    <div class="tag-row">
+                      <span class="tag">${r.topic || "-"}</span>
+                      <span class="tag">${t("wrongCountLabel")} ${r.wrongCount || 1}</span>
+                      <span class="tag">${t("latestLabel")} ${r.lastWrongAt ? new Date(r.lastWrongAt).toLocaleString(getLanguage() === "en" ? "en-US" : "zh-CN") : "-"}</span>
+                      ${r.mastered ? `<span class='tag'>${t("mastered")}</span>` : ""}
+                    </div>
+                    <p class="bad">${t("yourAnswer", { answer: r.lastSelectedText || t("unanswered") })}</p>
+                    <p class="good">${t("correctAnswer", { answer: r.answerText || "-" })}</p>
+                    <div class="actions">
+                      <button class="btn-secondary" data-mastered-id="${r.id}">${r.mastered ? t("unmarkMastered") : t("markMastered")}</button>
+                      <a class="btn-link" href="${buildCommunityUrl(r)}">${t("discussQuestion")}</a>
+                    </div>
                   </div>
-                  <p class="bad">${t("yourAnswer", { answer: r.lastSelectedText || t("unanswered") })}</p>
-                  <p class="good">${t("correctAnswer", { answer: r.answerText || "-" })}</p>
-                  <div class="actions">
-                    <button class="btn-secondary" data-mastered-id="${r.id}">${r.mastered ? t("unmarkMastered") : t("markMastered")}</button>
-                    <a class="btn-link" href="${buildCommunityUrl(r)}">${t("discussQuestion")}</a>
-                  </div>
-                </article>
+                </details>
               `)
               .join("")}
           </section>
         `;
       })
       .join("");
+    wrap.innerHTML = `
+      ${questionGroups}
+      <div class="actions notebook-pagination" aria-label="${t("reviewPageProgress", { page: currentPage, total: totalPages, size: PAGE_SIZE })}">
+        <button id="notebookPrevPage" class="btn-secondary" type="button" ${currentPage === 1 ? "disabled" : ""}>${t("prevPage")}</button>
+        <span class="notebook-page-progress">${t("reviewPageProgress", { page: currentPage, total: totalPages, size: PAGE_SIZE })}</span>
+        <button id="notebookNextPage" class="btn-secondary" type="button" ${currentPage === totalPages ? "disabled" : ""}>${t("nextPage")}</button>
+      </div>
+    `;
+
+    const changePage = (nextPage) => {
+      currentPage = nextPage;
+      renderList(rows, state);
+      byId("notebookList").scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    byId("notebookPrevPage")?.addEventListener("click", () => changePage(currentPage - 1));
+    byId("notebookNextPage")?.addEventListener("click", () => changePage(currentPage + 1));
 
     const btns = wrap.querySelectorAll("[data-mastered-id]");
     btns.forEach((btn) => {
@@ -205,13 +258,14 @@
 
   async function init() {
     const allRows = await loadNotebookRows();
+    const answeredRows = allRows.filter(isAnswered);
     const state = {
       subject: byId("subjectFilter")?.value || "",
       sortBy: byId("sortBy")?.value || "time_desc",
       hideMastered: Boolean(byId("hideMastered")?.checked),
     };
 
-    const sortedForStats = sortRows(allRows, "time_desc");
+    const sortedForStats = sortRows(answeredRows, "time_desc");
     renderStats(sortedForStats);
     renderFilter(sortedForStats);
 
@@ -221,9 +275,9 @@
     renderList(sortedForStats, state);
   }
 
-  byId("subjectFilter").addEventListener("change", () => { init(); });
-  byId("sortBy").addEventListener("change", () => { init(); });
-  byId("hideMastered").addEventListener("change", () => { init(); });
+  byId("subjectFilter").addEventListener("change", () => { currentPage = 1; init(); });
+  byId("sortBy").addEventListener("change", () => { currentPage = 1; init(); });
+  byId("hideMastered").addEventListener("change", () => { currentPage = 1; init(); });
 
   byId("clearNotebook").addEventListener("click", async function () {
     await clearUserRecords();
