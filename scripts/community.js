@@ -71,6 +71,8 @@
     activeMathField: null,
     formattingRange: null,
     formattingEditorId: "",
+    listScrollY: 0,
+    toastTimer: null,
   };
 
   const MATH_KEY_GROUPS = [
@@ -255,7 +257,10 @@
     mathField.addEventListener("click", activate);
     mathField.addEventListener("input", () => {
       const editor = mathField.closest(".rich-text-editor");
-      if (editor) syncEditor(editor);
+      if (editor) {
+        syncEditor(editor);
+        clearEditorFeedback(editor, "math");
+      }
     });
   }
 
@@ -329,6 +334,7 @@
     state.activeMathField = null;
     setMathKeyboardOpen(false);
     restoreCaretAfterFormula(wrapper, editor);
+    clearEditorFeedback(editor, "math");
   }
 
   function setFormulaDisplayMode(wrapper, displayMode) {
@@ -338,7 +344,10 @@
     updateFormulaModeMenu(wrapper);
     wrapper.querySelector("details")?.removeAttribute("open");
     const editor = wrapper.closest(".rich-text-editor");
-    if (editor) syncEditor(editor);
+    if (editor) {
+      syncEditor(editor);
+      clearEditorFeedback(editor, "math");
+    }
     wrapper.querySelector("math-field")?.focus();
   }
 
@@ -360,7 +369,8 @@
       });
       positionFormulaMenu(details);
     });
-    wrapper.addEventListener("mousedown", () => {
+    wrapper.addEventListener("mousedown", (event) => {
+      if (event.target.closest(".rich-editor-math-actions")) return;
       const mathField = wrapper.querySelector("math-field");
       if (mathField) activateMathField(mathField);
     });
@@ -656,21 +666,21 @@
         input.value = "";
         if (!file) return;
         if (!/^image\/(jpeg|png|gif|webp)$/.test(file.type) || file.size > 5 * 1024 * 1024) {
-          setStatus(t("communityPhotoInvalid"), true);
+          setEditorFeedback(editor, t("communityPhotoInvalid"));
           return;
         }
 
         button.disabled = true;
-        setStatus(t("communityPhotoUploading"), false);
+        setEditorFeedback(editor, t("communityPhotoUploading"), { isBad: false });
         try {
           const dataUrl = await readFileAsDataUrl(file);
           const uploaded = await window.ALevelApi.uploadDiscussionImage(state.token, dataUrl);
           insertImageAtSavedRange(editor, uploaded.url);
-          setStatus(t("communityPhotoAdded"), false);
+          setEditorFeedback(editor, t("communityPhotoAdded"), { isBad: false });
         } catch (err) {
-          setStatus(t("communityPhotoUploadFailed", {
+          setEditorFeedback(editor, t("communityPhotoUploadFailed", {
             message: err?.message || t("unknownError"),
-          }), true);
+          }));
         } finally {
           button.disabled = editor.contentEditable === "false";
         }
@@ -765,14 +775,14 @@
     });
   }
 
-  function setMathKeyboardOpen(open) {
+  function setMathKeyboardOpen(open, { preserveActive = false } = {}) {
     const panel = byId("communityMathKeyboard");
     if (!panel) return;
     panel.hidden = !open;
     if (open) {
       renderMathKeyboard();
       panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    } else {
+    } else if (!preserveActive) {
       state.activeMathField = null;
       document.querySelectorAll(".rich-editor-math.is-active").forEach((wrapper) => {
         wrapper.classList.remove("is-active");
@@ -781,11 +791,11 @@
     }
   }
 
-  function editorHasIncompleteMath(editor) {
-    return Array.from(editor.querySelectorAll("math-field")).some((mathField) => {
+  function firstIncompleteMath(editor) {
+    return Array.from(editor.querySelectorAll("math-field")).find((mathField) => {
       const rawLatex = mathField.getValue("latex").trim();
       return !rawLatex || /\\placeholder\b/.test(rawLatex);
-    });
+    })?.closest(".rich-editor-math") || null;
   }
 
   function initMathInput() {
@@ -807,8 +817,7 @@
     });
     byId("communityMathKeyboardClose").addEventListener("click", () => {
       state.activeMathField?.blur();
-      state.activeMathField = null;
-      setMathKeyboardOpen(false);
+      setMathKeyboardOpen(false, { preserveActive: true });
     });
     byId("communityMathClear").addEventListener("click", () => {
       const mathField = activeMathField();
@@ -1020,7 +1029,8 @@
           hideFormattingToolbar();
           return;
         }
-        setStatus(t("communityFormatLinkInvalid"), true);
+        if (savedEditor) setEditorFeedback(savedEditor, t("communityFormatLinkInvalid"));
+        else showToast(t("communityFormatLinkInvalid"));
         return;
       }
       const editor = restoreFormattingSelection();
@@ -1050,7 +1060,10 @@
     ].forEach(([editorId, placeholderKey]) => {
       const editor = byId(editorId);
       editor.dataset.placeholder = t(placeholderKey);
-      editor.addEventListener("input", () => syncEditor(editor));
+      editor.addEventListener("input", () => {
+        syncEditor(editor);
+        clearEditorFeedback(editor, "editor");
+      });
       editor.addEventListener("focus", () => {
         state.activeEditorId = editor.id;
         state.activeMathField = null;
@@ -1112,6 +1125,100 @@
     if (!el) return;
     el.textContent = message || "";
     el.className = isBad ? "tip bad" : "tip good";
+  }
+
+  function hideToast() {
+    if (state.toastTimer) window.clearTimeout(state.toastTimer);
+    state.toastTimer = null;
+    const toast = byId("communityToast");
+    if (toast) toast.hidden = true;
+  }
+
+  function showToast(message, isBad = true) {
+    const toast = byId("communityToast");
+    const text = byId("communityToastMessage");
+    if (!toast || !text || !message) return;
+    hideToast();
+    text.textContent = message;
+    toast.classList.toggle("is-success", !isBad);
+    toast.hidden = false;
+    if (!isBad) {
+      state.toastTimer = window.setTimeout(hideToast, 3500);
+    }
+  }
+
+  function errorIdForEditor(editor) {
+    return editor?.id === "communityReplyEditor"
+      ? "communityReplyError"
+      : "communityComposerError";
+  }
+
+  function clearEditorFeedback(editor, changedTarget = "") {
+    if (!editor) return;
+    const feedback = byId(errorIdForEditor(editor));
+    if (changedTarget && feedback?.dataset.targetKind && feedback.dataset.targetKind !== changedTarget) {
+      return;
+    }
+    if (feedback) {
+      feedback.textContent = "";
+      feedback.hidden = true;
+      feedback.classList.remove("is-success");
+      delete feedback.dataset.targetKind;
+    }
+    editor.classList.remove("is-invalid");
+    editor.removeAttribute("aria-invalid");
+    editor.removeAttribute("aria-describedby");
+    editor.querySelectorAll(".rich-editor-math.is-invalid").forEach((wrapper) => {
+      wrapper.classList.remove("is-invalid");
+      const mathField = wrapper.querySelector("math-field");
+      mathField?.removeAttribute("aria-invalid");
+      mathField?.removeAttribute("aria-describedby");
+    });
+    if (editor.id === "communityBodyEditor") {
+      byId("communityTitle")?.classList.remove("is-invalid");
+      byId("communityTitle")?.removeAttribute("aria-invalid");
+      byId("communityTitle")?.removeAttribute("aria-describedby");
+    }
+  }
+
+  function setEditorFeedback(editor, message, { target = editor, isBad = true } = {}) {
+    const feedback = byId(errorIdForEditor(editor));
+    if (!feedback) return;
+    clearEditorFeedback(editor);
+    feedback.textContent = message;
+    feedback.hidden = false;
+    feedback.classList.toggle("is-success", !isBad);
+    feedback.dataset.targetKind = target?.id === "communityTitle"
+      ? "title"
+      : target?.matches?.(".rich-editor-math") ? "math" : "editor";
+    if (!isBad) return;
+    target?.classList?.add("is-invalid");
+    target?.setAttribute?.("aria-invalid", "true");
+    target?.setAttribute?.("aria-describedby", feedback.id);
+    const mathField = target?.matches?.(".rich-editor-math")
+      ? target.querySelector("math-field")
+      : null;
+    mathField?.setAttribute("aria-invalid", "true");
+    mathField?.setAttribute("aria-describedby", feedback.id);
+    window.requestAnimationFrame(() => {
+      if (feedback.hidden || target?.getAttribute?.("aria-invalid") !== "true") return;
+      target?.scrollIntoView?.({ behavior: "smooth", block: "nearest" });
+      if (mathField) mathField.focus();
+      else target?.focus?.();
+    });
+  }
+
+  function showCommunityView(view, { restoreScroll = false } = {}) {
+    const listPanel = byId("communityListPanel");
+    const composerPanel = byId("communityComposerPanel");
+    const detailPanel = byId("communityDetailPanel");
+    if (view !== "list" && !listPanel.hidden) state.listScrollY = window.scrollY;
+    listPanel.hidden = view !== "list";
+    composerPanel.hidden = view !== "composer";
+    detailPanel.hidden = view !== "detail";
+    if (view === "list" && restoreScroll) {
+      window.requestAnimationFrame(() => window.scrollTo({ top: state.listScrollY }));
+    }
   }
 
   function authHeaderMissing() {
@@ -1245,7 +1352,7 @@
       paper: state.context.paper || "MCQ",
       status: byId("communityStatusFilter").value,
       followedOnly: state.followedOnly ? "1" : "",
-      limit: 50,
+      limit: 30,
     };
   }
 
@@ -1290,7 +1397,7 @@
         </div>
         <p class="tip">${t("communityThreadMeta", {
           author: thread.authorName || t("unknownUser"),
-          posts: thread.postCount,
+          answers: Math.max(0, Number(thread.postCount || 0) - 1),
           likes: thread.likeCount,
           time: thread.lastPostAt ? new Date(thread.lastPostAt).toLocaleString() : "-",
         })}</p>
@@ -1313,7 +1420,9 @@
       renderThreads();
       setStatus(t("communityLoaded", { count: state.threads.length }), false);
     } catch (err) {
-      setStatus(t("communityLoadFailed", { message: err.message || t("unknownError") }), true);
+      const message = t("communityLoadFailed", { message: err.message || t("unknownError") });
+      setStatus(message, true);
+      showToast(message);
     }
   }
 
@@ -1362,6 +1471,9 @@
             <div class="discussion-post-meta">
               <strong>${escapeHtml(post.authorName || t("unknownUser"))}</strong>
               <span>${post.createdAt ? new Date(post.createdAt).toLocaleString() : "-"}</span>
+              <span class="discussion-post-kind">${postIndex === 0
+                ? t("communityQuestionPost")
+                : t("communityAnswerNumber", { number: postIndex })}</span>
             </div>
             <div class="markdown-body">${renderMarkdown(post.body)}</div>
             <div class="actions compact-actions">
@@ -1382,10 +1494,17 @@
     const followToggle = byId("communityFollowToggle");
     if (followToggle) {
       followToggle.addEventListener("click", async () => {
-        if (thread.followed) await window.ALevelApi.unfollowDiscussion(state.token, thread.id);
-        else await window.ALevelApi.followDiscussion(state.token, thread.id);
-        await openThread(thread.id);
-        await loadThreads();
+        followToggle.disabled = true;
+        try {
+          if (thread.followed) await window.ALevelApi.unfollowDiscussion(state.token, thread.id);
+          else await window.ALevelApi.followDiscussion(state.token, thread.id);
+          await openThread(thread.id);
+          await loadThreads();
+        } catch (err) {
+          showToast(t("communityActionFailed", { message: err.message || t("unknownError") }));
+        } finally {
+          if (followToggle.isConnected) followToggle.disabled = false;
+        }
       });
     }
 
@@ -1393,10 +1512,16 @@
       button.addEventListener("click", async () => {
         const postId = button.getAttribute("data-like-post");
         const liked = button.getAttribute("data-liked") === "1";
-        if (liked) await window.ALevelApi.unlikeDiscussionPost(state.token, postId);
-        else await window.ALevelApi.likeDiscussionPost(state.token, postId);
-        await openThread(thread.id);
-        await loadThreads();
+        button.disabled = true;
+        try {
+          if (liked) await window.ALevelApi.unlikeDiscussionPost(state.token, postId);
+          else await window.ALevelApi.likeDiscussionPost(state.token, postId);
+          await openThread(thread.id);
+          await loadThreads();
+        } catch (err) {
+          showToast(t("communityActionFailed", { message: err.message || t("unknownError") }));
+          if (button.isConnected) button.disabled = false;
+        }
       });
     });
 
@@ -1404,9 +1529,15 @@
       button.addEventListener("click", async () => {
         const reason = window.prompt(t("communityFlagReason")) || "";
         if (!reason.trim()) return;
-        await window.ALevelApi.flagDiscussionPost(state.token, button.getAttribute("data-flag-post"), { reason });
-        setStatus(t("communityFlagged"), false);
-        await openThread(thread.id);
+        button.disabled = true;
+        try {
+          await window.ALevelApi.flagDiscussionPost(state.token, button.getAttribute("data-flag-post"), { reason });
+          showToast(t("communityFlagged"), false);
+          await openThread(thread.id);
+        } catch (err) {
+          showToast(t("communityActionFailed", { message: err.message || t("unknownError") }));
+          if (button.isConnected) button.disabled = false;
+        }
       });
     });
 
@@ -1419,12 +1550,14 @@
             state.token,
             button.getAttribute("data-delete-post")
           );
-          window.location.reload();
+          showToast(t("communityReplyDeleted"), false);
+          await openThread(thread.id);
+          await loadThreads();
         } catch (err) {
           button.disabled = false;
-          setStatus(t("communityDeleteReplyFailed", {
+          showToast(t("communityDeleteReplyFailed", {
             message: err.message || t("unknownError"),
-          }), true);
+          }));
         }
       });
     });
@@ -1433,12 +1566,20 @@
       byId("communityModerationStatus").value = thread.status;
       byId("communityModerationSticky").checked = Boolean(thread.sticky);
       byId("communitySaveModeration").addEventListener("click", async () => {
-        await window.ALevelApi.moderateDiscussion(state.token, thread.id, {
-          status: byId("communityModerationStatus").value,
-          sticky: byId("communityModerationSticky").checked,
-        });
-        await openThread(thread.id);
-        await loadThreads();
+        const button = byId("communitySaveModeration");
+        button.disabled = true;
+        try {
+          await window.ALevelApi.moderateDiscussion(state.token, thread.id, {
+            status: byId("communityModerationStatus").value,
+            sticky: byId("communityModerationSticky").checked,
+          });
+          showToast(t("communityModerationSaved"), false);
+          await openThread(thread.id);
+          await loadThreads();
+        } catch (err) {
+          showToast(t("communityActionFailed", { message: err.message || t("unknownError") }));
+          if (button.isConnected) button.disabled = false;
+        }
       });
     }
   }
@@ -1450,23 +1591,21 @@
       const questionReference = await getQuestionReference(payload.thread?.questionKey);
       renderPosts(payload, questionReference);
       setMathKeyboardOpen(false);
-      const detailPanel = byId("communityDetailPanel");
-      detailPanel.hidden = false;
-      byId("communityComposerPanel").hidden = true;
+      clearEditorFeedback(byId("communityReplyEditor"));
+      showCommunityView("detail");
       if (scrollIntoView) {
         window.requestAnimationFrame(() => {
-          detailPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+          byId("communityDetailPanel").scrollIntoView({ behavior: "smooth", block: "start" });
         });
       }
     } catch (err) {
-      setStatus(t("communityLoadFailed", { message: err.message || t("unknownError") }), true);
+      showToast(t("communityLoadFailed", { message: err.message || t("unknownError") }));
     }
   }
 
   function openComposer() {
     setMathKeyboardOpen(false);
-    byId("communityComposerPanel").hidden = false;
-    byId("communityDetailPanel").hidden = true;
+    showCommunityView("composer");
     byId("communityTitle").value = state.context.questionKey
       ? t("communityDefaultQuestionTitle", { key: state.context.questionKey })
       : "";
@@ -1477,25 +1616,33 @@
     state.activeEditorId = "communityBodyEditor";
     state.activeMathField = null;
     byId("communityTagSelect").value = state.context.questionKey ? "question" : "topic";
+    clearEditorFeedback(byId("communityBodyEditor"));
     byId("communityTitle").focus();
   }
 
   async function submitThread() {
-    const title = byId("communityTitle").value.trim();
+    const titleInput = byId("communityTitle");
+    const title = titleInput.value.trim();
     const editor = byId("communityBodyEditor");
     const body = syncEditor(editor).trim();
-    if (!title || !body) {
-      setStatus(t("communityRequiredFields"), true);
+    const incompleteMath = firstIncompleteMath(editor);
+    if (incompleteMath) {
+      setEditorFeedback(editor, t("communityMathIncomplete"), { target: incompleteMath });
       return;
     }
-    if (editorHasIncompleteMath(editor)) {
-      setStatus(t("communityMathIncomplete"), true);
+    if (!title) {
+      setEditorFeedback(editor, t("communityTitleRequired"), { target: titleInput });
+      return;
+    }
+    if (!body) {
+      setEditorFeedback(editor, t("communityBodyRequired"));
       return;
     }
     if (body.length > Number(byId("communityBody").maxLength || 4000)) {
-      setStatus(t("communityMathTooLong"), true);
+      setEditorFeedback(editor, t("communityMathTooLong"));
       return;
     }
+    clearEditorFeedback(editor);
     byId("communitySubmitThread").disabled = true;
     try {
       const thread = await window.ALevelApi.createDiscussion(state.token, {
@@ -1509,12 +1656,13 @@
         topic: state.context.topic || null,
         tags: [byId("communityTagSelect").value],
       });
-      byId("communityComposerPanel").hidden = true;
       await loadThreads();
       await openThread(thread.id);
-      setStatus(t("communityCreated"), false);
+      showToast(t("communityCreated"), false);
     } catch (err) {
-      setStatus(t("communityCreateFailed", { message: err.message || t("unknownError") }), true);
+      setEditorFeedback(editor, t("communityCreateFailed", {
+        message: err.message || t("unknownError"),
+      }));
     } finally {
       byId("communitySubmitThread").disabled = false;
     }
@@ -1523,27 +1671,31 @@
   async function submitReply() {
     const editor = byId("communityReplyEditor");
     const body = syncEditor(editor).trim();
-    if (!state.currentThreadId || !body) {
-      setStatus(t("communityReplyRequired"), true);
+    const incompleteMath = firstIncompleteMath(editor);
+    if (incompleteMath) {
+      setEditorFeedback(editor, t("communityMathIncomplete"), { target: incompleteMath });
       return;
     }
-    if (editorHasIncompleteMath(editor)) {
-      setStatus(t("communityMathIncomplete"), true);
+    if (!state.currentThreadId || !body) {
+      setEditorFeedback(editor, t("communityReplyRequired"));
       return;
     }
     if (body.length > Number(byId("communityReplyBody").maxLength || 4000)) {
-      setStatus(t("communityMathTooLong"), true);
+      setEditorFeedback(editor, t("communityMathTooLong"));
       return;
     }
+    clearEditorFeedback(editor);
     byId("communitySubmitReply").disabled = true;
     try {
       await window.ALevelApi.replyDiscussion(state.token, state.currentThreadId, { body });
       setEditorValue("communityReplyEditor", "");
       await openThread(state.currentThreadId);
       await loadThreads();
-      setStatus(t("communityReplyCreated"), false);
+      showToast(t("communityReplyCreated"), false);
     } catch (err) {
-      setStatus(t("communityReplyFailed", { message: err.message || t("unknownError") }), true);
+      setEditorFeedback(editor, t("communityReplyFailed", {
+        message: err.message || t("unknownError"),
+      }));
     } finally {
       byId("communitySubmitReply").disabled = false;
     }
@@ -1567,6 +1719,9 @@
         setStatus(t("communityLoadFailed", {
           message: err?.message || t("unknownError"),
         }), true);
+        showToast(t("communityLoadFailed", {
+          message: err?.message || t("unknownError"),
+        }));
       }
     }
     return true;
@@ -1574,6 +1729,9 @@
 
   async function init() {
     applyPage();
+    byId("communityToastClose").addEventListener("click", hideToast);
+    const filterCard = document.querySelector(".community-filter-card");
+    filterCard.open = !window.matchMedia("(max-width: 900px)").matches;
     if (authHeaderMissing()) return;
     if (!await initUser()) return;
     await loadCatalogFilters();
@@ -1585,7 +1743,13 @@
         renderPaperReferencePreview();
       });
     });
-    byId("communityApplyFilters").addEventListener("click", loadThreads);
+    byId("communityApplyFilters").addEventListener("click", async () => {
+      await loadThreads();
+      showCommunityView("list");
+      if (window.matchMedia("(max-width: 900px)").matches) {
+        byId("communityApplyFilters").closest("details")?.removeAttribute("open");
+      }
+    });
     byId("communityResetFilters").addEventListener("click", async () => {
       byId("communitySyllabusCode").value = state.context.subjectCode
         || state.catalogSubjects.find((subject) => `${subject.qualification} ${subject.name}` === state.context.subject)?.code
@@ -1599,26 +1763,33 @@
       byId("communityStatusFilter").value = "";
       renderPaperReferencePreview();
       await loadThreads();
+      showCommunityView("list");
     });
     byId("communityFollowedToggle").addEventListener("click", async () => {
       state.followedOnly = !state.followedOnly;
       renderFollowedToggle();
       await loadThreads();
+      showCommunityView("list");
     });
     byId("communityNewThread").addEventListener("click", openComposer);
     byId("communityCancelComposer").addEventListener("click", () => {
       setMathKeyboardOpen(false);
-      byId("communityComposerPanel").hidden = true;
+      clearEditorFeedback(byId("communityBodyEditor"));
+      showCommunityView("list", { restoreScroll: true });
     });
     byId("communitySubmitThread").addEventListener("click", submitThread);
     byId("communitySubmitReply").addEventListener("click", submitReply);
     initRichEditors();
+    byId("communityTitle").addEventListener("input", () => {
+      clearEditorFeedback(byId("communityBodyEditor"), "title");
+    });
     initMathInput();
     initImageUploads();
     byId("communityCloseDetail").addEventListener("click", () => {
       setMathKeyboardOpen(false);
-      byId("communityDetailPanel").hidden = true;
+      clearEditorFeedback(byId("communityReplyEditor"));
       state.currentThreadId = "";
+      showCommunityView("list", { restoreScroll: true });
     });
     byId("communityBackHome").addEventListener("click", () => {
       location.href = "../index.html";
@@ -1636,6 +1807,8 @@
   }
 
   init().catch((err) => {
-    setStatus(t("communityLoadFailed", { message: err.message || t("unknownError") }), true);
+    const message = t("communityLoadFailed", { message: err.message || t("unknownError") });
+    setStatus(message, true);
+    showToast(message);
   });
 })();

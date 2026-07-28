@@ -226,7 +226,7 @@ export async function submitChapterPracticeSession(input) {
 }
 
 export async function listQuestionMappingsForReview(input) {
-  const result = await query(`
+  const [result, countResult] = await Promise.all([query(`
     select
       mapping.*,
       question.stem,
@@ -246,10 +246,25 @@ export async function listQuestionMappingsForReview(input) {
     left join coursebook_sections book_section on book_section.id = mapping.coursebook_section_id
     where ($1 = '' or mapping.status = $1)
       and syllabus_section.curriculum_version_id = $3
+      and ($4 = '' or question.year = $4)
+      and ($5 = 0 or book_section.section_code like $5::text || '.%')
     order by mapping.created_at, question.year desc, question.paper_slug, question.question_no
     limit $2
-  `, [input.status, input.limit, input.versionId]);
-  return result.rows.map((row) => ({
+    offset $6
+  `, [input.status, input.limit, input.versionId, input.year, input.chapterNo, input.offset]), query(`
+    select count(*)::int as count
+    from question_section_mappings mapping
+    join question_bank question on question.id = mapping.question_id
+    join curriculum_sections syllabus_section on syllabus_section.id = mapping.curriculum_section_id
+    left join coursebook_sections book_section on book_section.id = mapping.coursebook_section_id
+    where ($1 = '' or mapping.status = $1)
+      and syllabus_section.curriculum_version_id = $2
+      and ($3 = '' or question.year = $3)
+      and ($4 = 0 or book_section.section_code like $4::text || '.%')
+  `, [input.status, input.versionId, input.year, input.chapterNo])]);
+  return {
+    total: Number(countResult.rows[0]?.count || 0),
+    mappings: result.rows.map((row) => ({
     questionId: row.question_id,
     curriculumSectionId: row.curriculum_section_id,
     coursebookSectionId: row.coursebook_section_id,
@@ -269,7 +284,8 @@ export async function listQuestionMappingsForReview(input) {
     bookSectionCode: row.book_section_code,
     bookTitleEn: row.book_title_en,
     bookTitleZh: row.book_title_zh,
-  }));
+    })),
+  };
 }
 
 export async function reviewQuestionMapping(input) {

@@ -202,17 +202,30 @@ router.get("/curriculum/mappings", asyncHandler(async (req, res) => {
     throw new ApiError(400, "Invalid mapping status.", "INVALID_INPUT");
   }
   const limit = toClampedInteger(req.query.limit, 100, 1, 300);
-  const [mappings, options] = await Promise.all([
-    listQuestionMappingsForReview({ status, limit, versionId: "0610-2026-2028-v2" }),
+  const offset = toClampedInteger(req.query.offset, 0, 0, 100000);
+  const year = String(req.query.year || "").trim();
+  if (year && !/^20(?:19|20|21|22|23|24)$/.test(year)) {
+    throw new ApiError(400, "Invalid Biology paper year.", "INVALID_INPUT");
+  }
+  const chapterNo = toClampedInteger(req.query.chapter, 0, 0, 20);
+  const [mappingPage, options] = await Promise.all([
+    listQuestionMappingsForReview({
+      status,
+      limit,
+      offset,
+      year,
+      chapterNo,
+      versionId: "0610-2026-2028-v2",
+    }),
     listCurriculumReviewOptions("0610-2026-2028-v2"),
   ]);
-  res.json({ ok: true, data: { mappings, ...options } });
+  res.json({ ok: true, data: { ...mappingPage, limit, offset, ...options } });
 }));
 
 router.post("/curriculum/mappings/suggest", asyncHandler(async (req, res) => {
   assertAdminApiEnabled();
   await requireAdmin(req);
-  const limit = toClampedInteger(req.body?.limit, 300, 1, 300);
+  const limit = toClampedInteger(req.body?.limit, 2000, 1, 2000);
   res.status(201).json({
     ok: true,
     data: await generateBiologyMappingSuggestions(limit),

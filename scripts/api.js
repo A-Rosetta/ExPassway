@@ -213,9 +213,12 @@
       const params = new URLSearchParams();
       params.set("status", input.status || "suggested");
       params.set("limit", String(input.limit || 100));
+      params.set("offset", String(input.offset || 0));
+      if (input.year) params.set("year", input.year);
+      if (input.chapter) params.set("chapter", String(input.chapter));
       return request(`/api/admin/curriculum/mappings?${params}`, { token });
     },
-    async suggestAdminCurriculumMappings(token, limit = 300) {
+    async suggestAdminCurriculumMappings(token, limit = 2000) {
       return request("/api/admin/curriculum/mappings/suggest", {
         method: "POST",
         token,

@@ -4,86 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="communityPageTitle">学习讨论</title>
-  <link rel="stylesheet" href="../assets/styles.css?v=20260718-2" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260728-3" />
   <link rel="stylesheet" href="../assets/vendor/katex/katex-0.17.0.min.css" />
   <link rel="stylesheet" href="../assets/vendor/mathlive/mathlive-fonts-0.110.0.css" />
 </head>
-<body>
-  <main class="container community-shell">
-    <section class="card hero community-page-head">
-      <div>
-        <h1 data-i18n="communityHeroTitle">学习讨论</h1>
-        <p class="tip" data-i18n="communityHeroSubtitle">围绕真题、错题和知识点提问，沉淀可复用的解题讨论。</p>
+<body class="student-ui community-page">
+  <header class="community-topbar">
+    <div class="community-topbar__inner">
+      <a class="home-brand" href="../index.html" aria-label="A-Level Smart Practice">
+        <span class="home-brand__mark" aria-hidden="true">A</span>
+        <span data-i18n="homeBrand">A-Level 智能练习</span>
+      </a>
+      <div class="community-topbar__title">
+        <strong data-i18n="communityHeroTitle">学习讨论</strong>
+        <span data-i18n="communityHeroSubtitle">围绕真题、错题和知识点提问，沉淀可复用的解题讨论。</span>
       </div>
-      <button id="communityLogout" class="btn-secondary" type="button" data-i18n="communityLogout">退出登录</button>
-    </section>
-
-    <section class="card panel community-layout">
-      <div class="community-sidebar">
-        <h2 data-i18n="communityFiltersTitle">筛选</h2>
-        <label><span data-i18n="communitySyllabusCodeLabel">科目代码</span>
-          <select id="communitySyllabusCode">
-          </select>
-        </label>
-        <label><span data-i18n="communityExamSeasonLabel">考试季</span>
-          <select id="communityExamSeason">
-            <option value="" data-i18n="communityAllExamSeasons">全部考试季</option>
-          </select>
-        </label>
-        <label><span data-i18n="communityExamYearLabel">年份</span>
-          <select id="communityExamYear">
-            <option value="" data-i18n="communityAllExamYears">全部年份</option>
-          </select>
-        </label>
-        <label><span data-i18n="communityQuestionPaperTypeLabel">试卷类型</span>
-          <select id="communityQuestionPaperType" disabled>
-            <option value="qp" data-i18n="communityQuestionPaperType">qp · Question Paper</option>
-          </select>
-        </label>
-        <label><span data-i18n="communityPaperNumberLabel">试卷</span>
-          <select id="communityPaperNumber">
-            <option value="" data-i18n="communityAllPaperNumbers">全部试卷</option>
-          </select>
-        </label>
-        <label><span data-i18n="communityVariantLabel">变体版本</span>
-          <select id="communityVariant">
-            <option value="" data-i18n="communityAllVariants">全部变体</option>
-          </select>
-        </label>
-        <p id="communityPaperReferencePreview" class="paper-reference-preview"></p>
-        <label><span data-i18n="communityStatusLabel">状态</span>
-          <select id="communityStatusFilter">
-            <option value="" data-i18n="communityAllStatuses">全部状态</option>
-            <option value="open" data-i18n="communityStatusOpen">开放</option>
-            <option value="solved" data-i18n="communityStatusSolved">已解决</option>
-            <option value="locked" data-i18n="communityStatusLocked">已锁定</option>
-          </select>
-        </label>
-        <div class="actions compact-actions">
-          <button id="communityApplyFilters" class="btn-primary" data-i18n="communityApplyFilters">应用筛选</button>
-          <button id="communityResetFilters" class="btn-secondary" type="button" data-i18n="communityResetFilters">重置筛选</button>
-          <button id="communityBackHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
-        </div>
+      <div class="community-topbar__actions">
+        <button id="communityBackHome" class="btn-secondary" type="button" data-i18n="backHome">返回首页</button>
+        <button id="communityLogout" class="btn-secondary" type="button" data-i18n="communityLogout">退出登录</button>
       </div>
+    </div>
+  </header>
 
+  <main class="community-shell">
+    <div class="community-layout">
       <div class="community-main">
-        <div class="community-toolbar">
-          <div>
-            <h2 data-i18n="communityThreadsTitle">讨论列表</h2>
-            <p id="communityStatus" class="tip"></p>
+        <section id="communityListPanel" class="community-surface community-list-panel">
+          <div class="community-toolbar">
+            <div>
+              <p class="home-eyebrow" data-i18n="communityHeroTitle">学习讨论</p>
+              <h1 data-i18n="communityThreadsTitle">讨论列表</h1>
+              <p id="communityStatus" class="tip" role="status" aria-live="polite"></p>
+            </div>
           </div>
-          <div class="actions compact-actions">
-            <button id="communityFollowedToggle" class="btn-secondary" type="button" aria-pressed="false" data-i18n="communityShowFollowed">我的关注</button>
-            <button id="communityNewThread" class="btn-primary" data-i18n="communityNewThread">发起讨论</button>
-          </div>
-        </div>
-        <div id="communityQuestionContext" class="question-context"></div>
-        <div id="communityThreadList" class="discussion-list"></div>
-      </div>
-    </section>
+          <div id="communityQuestionContext" class="question-context"></div>
+          <div id="communityThreadList" class="discussion-list"></div>
+        </section>
 
-    <section id="communityComposerPanel" class="card panel" hidden>
-      <h2 id="communityComposerTitle" data-i18n="communityComposerTitle">发起讨论</h2>
+        <section id="communityComposerPanel" class="community-surface community-editor-panel" hidden>
+          <div class="community-view-heading">
+            <div>
+              <p class="home-eyebrow" data-i18n="communityNewThread">发起讨论</p>
+              <h2 id="communityComposerTitle" data-i18n="communityComposerTitle">发起讨论</h2>
+            </div>
+            <button id="communityCancelComposer" class="btn-secondary" type="button" data-i18n="communityBackToList">返回讨论列表</button>
+          </div>
+          <p id="communityComposerError" class="editor-feedback" role="alert" aria-live="assertive" hidden></p>
       <div class="grid-2">
         <label><span data-i18n="communityTitleLabel">标题</span>
           <input id="communityTitle" type="text" maxlength="140" data-i18n-placeholder="communityTitlePlaceholder" placeholder="用一句话说明你卡住的地方" />
@@ -111,12 +77,15 @@
       </div>
       <div class="actions">
         <button id="communitySubmitThread" class="btn-primary" data-i18n="communitySubmitThread">发布讨论</button>
-        <button id="communityCancelComposer" class="btn-secondary" data-i18n="communityCancel">取消</button>
       </div>
-    </section>
+        </section>
 
-    <section id="communityDetailPanel" class="card panel" hidden>
-      <div id="communityThreadDetail"></div>
+        <section id="communityDetailPanel" class="community-surface community-detail-panel" hidden>
+          <div class="community-view-heading">
+            <p class="home-eyebrow" data-i18n="communityQuestionDetail">问题与回答</p>
+            <button id="communityCloseDetail" class="btn-secondary" type="button" data-i18n="communityBackToList">返回讨论列表</button>
+          </div>
+          <div id="communityThreadDetail"></div>
       <div class="markdown-editor-head">
         <span data-i18n="communityReplyLabel">回复</span>
         <div class="actions compact-actions">
@@ -125,17 +94,17 @@
           <input id="communityReplyPhotoInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp" hidden />
         </div>
       </div>
+          <p id="communityReplyError" class="editor-feedback" role="alert" aria-live="assertive" hidden></p>
       <div class="markdown-editor-field">
         <textarea id="communityReplyBody" class="rich-editor-source" maxlength="4000" hidden></textarea>
         <div id="communityReplyEditor" class="rich-text-editor markdown-body is-empty" contenteditable="true" role="textbox" aria-multiline="true" data-source-id="communityReplyBody" data-i18n-aria-label="communityReplyLabel"></div>
       </div>
       <div class="actions">
         <button id="communitySubmitReply" class="btn-primary" data-i18n="communitySubmitReply">发布回复</button>
-        <button id="communityCloseDetail" class="btn-secondary" data-i18n="communityCloseDetail">关闭详情</button>
       </div>
-    </section>
+        </section>
 
-    <section id="communityMathKeyboard" class="card panel math-input-panel" hidden aria-labelledby="communityMathKeyboardTitle">
+        <section id="communityMathKeyboard" class="community-surface math-input-panel" hidden aria-labelledby="communityMathKeyboardTitle">
       <div class="math-input-head">
         <div>
           <h3 id="communityMathKeyboardTitle" data-i18n="communityMathKeyboardTitle">数学键盘</h3>
@@ -153,8 +122,73 @@
           <button id="communityMathClear" type="button" class="btn-secondary math-icon-btn" aria-label="清空公式" data-i18n-aria-label="communityMathClear" title="清空公式" data-i18n-title="communityMathClear">C</button>
         </div>
       </div>
-    </section>
+        </section>
+      </div>
+
+      <aside class="community-rail" aria-label="讨论工具" data-i18n-aria-label="communityToolsLabel">
+        <div class="community-rail-actions">
+          <button id="communityNewThread" class="btn-primary" type="button" data-i18n="communityNewThread">发起讨论</button>
+          <button id="communityFollowedToggle" class="btn-secondary" type="button" aria-pressed="false" data-i18n="communityShowFollowed">我的关注</button>
+        </div>
+
+        <details class="community-filter-card" open>
+          <summary data-i18n="communityMobileFilters">筛选讨论</summary>
+          <div class="community-filter-body">
+            <h2 data-i18n="communityFiltersTitle">筛选</h2>
+            <label><span data-i18n="communitySyllabusCodeLabel">科目代码</span>
+              <select id="communitySyllabusCode"></select>
+            </label>
+            <label><span data-i18n="communityExamSeasonLabel">考试季</span>
+              <select id="communityExamSeason">
+                <option value="" data-i18n="communityAllExamSeasons">全部考试季</option>
+              </select>
+            </label>
+            <label><span data-i18n="communityExamYearLabel">年份</span>
+              <select id="communityExamYear">
+                <option value="" data-i18n="communityAllExamYears">全部年份</option>
+              </select>
+            </label>
+            <label><span data-i18n="communityQuestionPaperTypeLabel">试卷类型</span>
+              <select id="communityQuestionPaperType" disabled>
+                <option value="qp" data-i18n="communityQuestionPaperType">qp · Question Paper</option>
+              </select>
+            </label>
+            <label><span data-i18n="communityPaperNumberLabel">试卷</span>
+              <select id="communityPaperNumber">
+                <option value="" data-i18n="communityAllPaperNumbers">全部试卷</option>
+              </select>
+            </label>
+            <label><span data-i18n="communityVariantLabel">变体版本</span>
+              <select id="communityVariant">
+                <option value="" data-i18n="communityAllVariants">全部变体</option>
+              </select>
+            </label>
+            <p id="communityPaperReferencePreview" class="paper-reference-preview"></p>
+            <label><span data-i18n="communityStatusLabel">状态</span>
+              <select id="communityStatusFilter">
+                <option value="" data-i18n="communityAllStatuses">全部状态</option>
+                <option value="open" data-i18n="communityStatusOpen">开放</option>
+                <option value="solved" data-i18n="communityStatusSolved">已解决</option>
+                <option value="locked" data-i18n="communityStatusLocked">已锁定</option>
+              </select>
+            </label>
+            <div class="actions compact-actions">
+              <button id="communityApplyFilters" class="btn-primary" type="button" data-i18n="communityApplyFilters">应用筛选</button>
+              <button id="communityResetFilters" class="btn-secondary" type="button" data-i18n="communityResetFilters">重置筛选</button>
+            </div>
+          </div>
+        </details>
+        <a class="btn-link community-rail-home" href="../index.html" data-i18n="backHome">返回首页</a>
+      </aside>
+    </div>
   </main>
+
+  <div id="communityToastRegion" class="community-toast-region" aria-live="assertive" aria-atomic="true">
+    <div id="communityToast" class="community-toast" role="alert" hidden>
+      <span id="communityToastMessage"></span>
+      <button id="communityToastClose" type="button" aria-label="关闭通知" data-i18n-aria-label="communityToastClose">×</button>
+    </div>
+  </div>
 
   <div id="communityFormattingToolbar" class="formatting-toolbar" role="toolbar" aria-label="文本格式" data-i18n-aria-label="communityFormattingToolbar" hidden>
     <button type="button" data-format-command="bold" aria-pressed="false" aria-label="粗体" data-i18n-aria-label="communityFormatBold" title="粗体" data-i18n-title="communityFormatBold"><strong>B</strong></button>
@@ -164,7 +198,7 @@
     <button type="button" class="formatting-link-button" data-format-command="link" aria-pressed="false" data-i18n="communityFormatLink">链接</button>
   </div>
 
-  <script src="../scripts/i18n.js?v=20260719-1"></script>
+  <script src="../scripts/i18n.js?v=20260728-2"></script>
   <script src="../scripts/data.js"></script>
   <script src="../assets/vendor/marked-15.0.12.min.js"></script>
   <script src="../assets/vendor/katex/katex-0.17.0.min.js"></script>
@@ -173,6 +207,6 @@
   <script src="../assets/vendor/dompurify-3.2.6.min.js"></script>
   <script src="../assets/vendor/mathlive/mathlive-0.110.0.min.js"></script>
   <script src="../scripts/api.js?v=20260718-2"></script>
-  <script src="../scripts/community.js?v=20260718-2"></script>
+  <script src="../scripts/community.js?v=20260728-3"></script>
 </body>
 </html>

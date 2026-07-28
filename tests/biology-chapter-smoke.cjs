@@ -15,8 +15,8 @@ async function runViewport(browser, viewport) {
   page.on("pageerror", (error) => pageErrors.push(error.message));
 
   await page.goto(`${baseUrl}/pages/biology.html`, { waitUntil: "networkidle" });
-  assert.equal(await page.locator(".chapter-band").count(), 3);
-  assert.equal(await page.locator(".chapter-section-row").count(), 13);
+  assert.equal(await page.locator(".chapter-band").count(), 20);
+  assert.equal(await page.locator(".chapter-section-row").count(), 58);
 
   const documentWidth = await page.evaluate(() => ({
     scroll: document.documentElement.scrollWidth,
@@ -68,7 +68,8 @@ async function runHomepageEntry(browser) {
   assert.equal(await biologyCard.count(), 1);
   await biologyCard.click();
   await page.waitForURL(/\/pages\/biology\.html$/);
-  assert.equal(await page.locator(".chapter-band").count(), 3);
+  await page.locator(".chapter-band").first().waitFor({ state: "visible" });
+  assert.equal(await page.locator(".chapter-band").count(), 20);
   await page.locator("#paperMode").click();
   await page.waitForURL(/\/pages\/generate\.html$/);
   const selection = await page.evaluate(() => JSON.parse(localStorage.getItem("alevel.selection") || "{}"));
@@ -91,6 +92,17 @@ async function runAdminViewport(browser, viewport) {
   assert.equal(await page.locator(".curriculum-mapping-item").count(), 100);
   assert.equal(await page.locator(".curriculum-mapping-item").first().locator("[data-book-section]").count(), 1);
   assert.equal(await page.locator(".curriculum-mapping-item").first().locator("[data-curriculum-section]").count(), 1);
+  assert.equal(await page.locator("#mappingYear option").count(), 7);
+  assert.equal(await page.locator("#mappingChapter option").count(), 21);
+  assert.match(await page.locator("#mappingPageSummary").textContent(), /1556|1,556/);
+  await page.locator("#nextMappings").click();
+  await page.locator("#mappingPageSummary").filter({ hasText: /101/ }).waitFor();
+  await page.locator("#mappingYear").selectOption("2024");
+  await page.locator("#mappingChapter").selectOption("20");
+  await page.locator("#mappingPageSummary").filter({ hasText: /6/ }).waitFor();
+  assert.equal(await page.locator(".curriculum-mapping-item").count(), 6);
+  const filteredMeta = await page.locator(".curriculum-mapping-id span").allTextContents();
+  assert.ok(filteredMeta.every((text) => text.includes("2024")), JSON.stringify(filteredMeta));
   const documentWidth = await page.evaluate(() => ({
     scroll: document.documentElement.scrollWidth,
     client: document.documentElement.clientWidth,

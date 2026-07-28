@@ -1,8 +1,11 @@
 (function () {
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const { t, applyPage, getLanguage } = window.ALevelI18n;
+  const PAGE_SIZE = 100;
   let authToken = "";
-  let data = { mappings: [], curriculumSections: [], coursebookSections: [] };
+  let currentOffset = 0;
+  let mappingRequestId = 0;
+  let data = { mappings: [], curriculumSections: [], coursebookSections: [], total: 0 };
 
   function byId(id) {
     return document.getElementById(id);
@@ -51,9 +54,8 @@
     const list = byId("mappingList");
     if (!data.mappings.length) {
       list.innerHTML = `<section class="card panel"><p class="tip">${safeText(t("noCurriculumMappings"))}</p></section>`;
-      return;
-    }
-    list.innerHTML = data.mappings.map((mapping, index) => {
+    } else {
+      list.innerHTML = data.mappings.map((mapping, index) => {
       const image = (mapping.images || []).map(imageSource).find(Boolean);
       const bookOptions = data.coursebookSections.map((section) => `
         <option value="${safeText(section.id)}" ${section.id === mapping.coursebookSectionId ? "selected" : ""}>
@@ -89,19 +91,45 @@
           </div>
         </article>
       `;
-    }).join("");
+      }).join("");
 
-    list.querySelectorAll("[data-mapping-index]").forEach((item) => {
-      const index = Number(item.dataset.mappingIndex);
-      const mapping = data.mappings[index];
-      const bookSelect = item.querySelector("[data-book-section]");
-      const curriculumSelect = item.querySelector("[data-curriculum-section]");
-      bookSelect.addEventListener("change", () => {
-        curriculumSelect.innerHTML = syllabusOptions(bookSelect.value, "");
+      list.querySelectorAll("[data-mapping-index]").forEach((item) => {
+        const index = Number(item.dataset.mappingIndex);
+        const mapping = data.mappings[index];
+        const bookSelect = item.querySelector("[data-book-section]");
+        const curriculumSelect = item.querySelector("[data-curriculum-section]");
+        bookSelect.addEventListener("change", () => {
+          curriculumSelect.innerHTML = syllabusOptions(bookSelect.value, "");
+        });
+        item.querySelector("[data-review]").addEventListener("click", () => updateMapping(item, mapping, "reviewed"));
+        item.querySelector("[data-reject]").addEventListener("click", () => updateMapping(item, mapping, "rejected"));
       });
-      item.querySelector("[data-review]").addEventListener("click", () => updateMapping(item, mapping, "reviewed"));
-      item.querySelector("[data-reject]").addEventListener("click", () => updateMapping(item, mapping, "rejected"));
+    }
+    const start = data.total ? currentOffset + 1 : 0;
+    const end = Math.min(currentOffset + data.mappings.length, data.total);
+    byId("mappingPageSummary").textContent = t("mappingPageSummary", {
+      start,
+      end,
+      total: data.total,
     });
+    byId("previousMappings").disabled = currentOffset === 0;
+    byId("nextMappings").disabled = currentOffset + data.mappings.length >= data.total;
+  }
+
+  function renderChapterFilter() {
+    const select = byId("mappingChapter");
+    const chapters = new Map();
+    data.coursebookSections.forEach((section) => {
+      if (!chapters.has(section.chapterNo)) {
+        chapters.set(section.chapterNo, section.chapterTitleZh || section.chapterTitleEn || "");
+      }
+    });
+    const current = select.value;
+    select.innerHTML = `<option value="0">${safeText(t("allChapters"))}</option>`
+      + [...chapters.entries()].map(([chapterNo, title]) => `
+        <option value="${chapterNo}">${safeText(t("chapterFilterOption", { number: chapterNo, title }))}</option>
+      `).join("");
+    select.value = current || "0";
   }
 
   async function updateMapping(item, mapping, status) {
@@ -120,7 +148,10 @@
         }
       );
       item.remove();
-      setStatus(t(status === "reviewed" ? "mappingApproved" : "mappingRejectedMessage"));
+      const messageKey = status === "reviewed"
+        ? mapping.year === "2024" ? "mappingApprovedReserved" : "mappingApproved"
+        : "mappingRejectedMessage";
+      setStatus(t(messageKey));
       if (!byId("mappingList").children.length) await loadMappings();
     } catch (error) {
       setStatus(t("mappingUpdateFailed", { message: error.message }), true);
@@ -129,15 +160,23 @@
   }
 
   async function loadMappings() {
+    const requestId = ++mappingRequestId;
     setStatus(t("loadingMappings"));
     try {
-      data = await window.ALevelApi.getAdminCurriculumMappings(authToken, {
+      const nextData = await window.ALevelApi.getAdminCurriculumMappings(authToken, {
         status: byId("mappingStatus").value,
-        limit: 100,
+        year: byId("mappingYear").value,
+        chapter: Number(byId("mappingChapter").value || 0),
+        limit: PAGE_SIZE,
+        offset: currentOffset,
       });
+      if (requestId !== mappingRequestId) return;
+      data = nextData;
+      renderChapterFilter();
       renderMappings();
-      setStatus(t("mappingsLoaded", { count: data.mappings.length }));
+      setStatus(t("mappingsLoaded", { count: data.total }));
     } catch (error) {
+      if (requestId !== mappingRequestId) return;
       setStatus(t("mappingLoadFailed", { message: error.message }), true);
     }
   }
@@ -147,8 +186,9 @@
     button.disabled = true;
     setStatus(t("generatingMappings"));
     try {
-      const result = await window.ALevelApi.suggestAdminCurriculumMappings(authToken, 300);
+      const result = await window.ALevelApi.suggestAdminCurriculumMappings(authToken, 2000);
       byId("mappingStatus").value = "suggested";
+      currentOffset = 0;
       setStatus(t("mappingSuggestionsGenerated", {
         created: result.created,
         matched: result.matched,
@@ -179,7 +219,20 @@
       return;
     }
     byId("refreshMappings").addEventListener("click", loadMappings);
-    byId("mappingStatus").addEventListener("change", loadMappings);
+    ["mappingStatus", "mappingYear", "mappingChapter"].forEach((id) => {
+      byId(id).addEventListener("change", () => {
+        currentOffset = 0;
+        loadMappings();
+      });
+    });
+    byId("previousMappings").addEventListener("click", () => {
+      currentOffset = Math.max(0, currentOffset - PAGE_SIZE);
+      loadMappings();
+    });
+    byId("nextMappings").addEventListener("click", () => {
+      currentOffset += PAGE_SIZE;
+      loadMappings();
+    });
     byId("generateSuggestions").addEventListener("click", generateSuggestions);
     byId("backAdmin").addEventListener("click", () => { location.href = "./admin.html"; });
     await loadMappings();

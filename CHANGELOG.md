@@ -2,6 +2,61 @@
 
 All notable changes to this project are recorded in this file.
 
+## 2026-07-29 00:27 CST
+
+### Summary
+- Refreshed the eight student-facing flows with a scoped, clear light liquid-glass design while preserving subject identity, readable solid question surfaces, existing assets, and all current functionality.
+- Reworked the existing Express/PostgreSQL community into a denser Zhihu-inspired central feed, detail, and composer experience with a desktop action rail and a mobile single-column layout.
+- Kept administrator, curriculum review, image mapping, and PDF preview layouts intact; these tools inherit only shared colors, controls, focus states, and readability fixes.
+
+### Student Interface
+- Added system-font design tokens, translucent materials with opaque fallbacks, `28px` glass blur, restrained `8px` surface radii, safe-area spacing, stable responsive sizing, visible keyboard focus, and reduced-motion behavior.
+- Unified the homepage, login, paper picker and timed answering, Biology chapter practice, wrong notebook, practice review, analysis, and community toolbars, filters, data surfaces, option states, and actions.
+- Preserved high-contrast question and editor content, subject-specific book colors, the fixed timer, and existing KaTeX, MathLive, question-image, PDF, notebook, profile, forum, logout, and administrator entry flows.
+- Updated shared style and community script cache versions to `20260728-3` so the Nginx path loads the refreshed assets.
+
+### Community And Validation
+- Changed discussions to switch the central column between list, composer, and question detail while restoring list scroll position; retained pinned/recent ordering, the 30-item limit, paper and status filters, followed-only mode, deep links, and bilingual behavior.
+- Presented opening posts as question bodies and replies as an answer stream while retaining question images and references, Markdown, formulas, uploads, follows, likes, reports, reply deletion, moderation, and teacher review state.
+- Added separate accessible composer and reply alerts for empty titles, empty bodies, empty or incomplete formulas, excessive content, invalid images and links, upload failures, and publish failures; field-specific errors focus and mark the relevant control and clear as that issue is corrected.
+- Routed non-field load and action failures to a persistent dismissible upper-right notification, moved below the navigation and safe area on mobile, while successful notifications dismiss after approximately 3.5 seconds.
+- Kept the mobile formula controls usable after closing the bottom keyboard and prevented stale validation callbacks from refocusing formulas after correction.
+- Made no discussion API, request, response, permission, schema, table, migration, or database changes.
+
+### Verification
+- Added a no-write browser smoke test that serves the real Nginx `/alevel/` frontend and intercepts `/api/**` with in-memory user, question, and community data.
+- Passed Chromium desktop at `1440x900` and WebKit mobile at `390x844` across all eight student flows, including an active timed paper and community list, filters, composer, details, replies, actions, images, Markdown, formulas, validation, and notifications.
+- Verified no page errors, failed requests, horizontal overflow, clipped controls, content/timer overlap, broken keyboard focus, or reduced-motion regressions; also verified decoded nonblank question images and responsive formula-keyboard behavior.
+- Passed JavaScript syntax and Git whitespace checks; confirmed all eight student pages return `200` through Nginx, anonymous `/api/discussions` returns `401 Missing bearer token.`, and the live community page references cache version `20260728-3`.
+
+## 2026-07-28 13:29 CST
+
+### Summary
+- Expanded Cambridge IGCSE Biology `0610` chapter practice from the Chapters 1-3 pilot to the complete 20-chapter, 58-section coursebook structure.
+- Added the complete official 2026-2028 syllabus hierarchy with 21 topics, 61 syllabus sections, and 389 numbered statements.
+- Created one private primary mapping candidate for every one of the 1640 Biology questions while preserving administrator review as the publication boundary.
+
+### Mapping And Review
+- Generated 1278 higher-confidence question-text matches and 362 low-confidence question-position fallbacks; all 1556 new mappings remain `suggested` until reviewed.
+- Preserved the existing 84 reviewed primary mappings and 2 rejected decisions during repeat generation.
+- Added administrator filters for mapping status, paper year, and all 20 coursebook chapters, plus 100-record pagination and stale-request protection.
+- Kept every suggested or reviewed primary mapping within a valid coursebook-section-to-syllabus-statement relationship.
+- Made repeat suggestion generation idempotent so unchanged suggestions retain their timestamps.
+
+### Assessment Boundary
+- Classified all 280 questions from 2024 but continued to exclude them from chapter availability counts and chapter session generation, including after a simulated review inside a rolled-back transaction.
+- Kept chapter practice restricted to reviewed questions from 2019-2023.
+- Preserved question IDs, `question_bank.topic`, question images, wrong-notebook rows, discussion links, and existing attempts.
+- Stored only coursebook directory metadata; no coursebook scans, prose, images, or end-of-chapter exercises were published.
+
+### Verification
+- Verified 1640 of 1640 Biology questions have exactly one suggested or reviewed primary mapping and no invalid coursebook/syllabus pairs.
+- Verified unchanged hashes for Biology question IDs, topics, and image JSON before and after the expansion.
+- Verified the authenticated catalogue returns 20 chapters and 58 sections without answer fields.
+- Verified administrator totals and year/chapter filters, including the six `2024 + Chapter 20` suggestions.
+- Verified desktop and mobile student/admin browser flows, pagination, rapid filter changes, loaded question images, no runtime errors, no horizontal overflow, and cleanup of temporary sessions.
+- Restarted and verified `alevel-backend-3002.service`; health and both pages return `200`, while anonymous curriculum access returns `401`.
+
 ## 2026-07-27 22:08 CST
 
 ### Summary

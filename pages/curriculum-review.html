@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="curriculumReviewPageTitle">生物章节映射审核</title>
-  <link rel="stylesheet" href="../assets/styles.css?v=20260727-1" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260728-3" />
 </head>
 <body class="curriculum-review-page">
   <main class="container">
     <section class="card hero">
       <h1 data-i18n="curriculumReviewTitle">Biology 0610 章节映射审核</h1>
-      <p data-i18n="curriculumReviewSubtitle">自动建议不会公开；审核通过后题目才会进入章节练习。</p>
+      <p data-i18n="curriculumReviewSubtitle">自动建议不会公开；审核通过后题目才会进入章节练习。2024 题目即使完成分类也保留给未见套卷。</p>
       <p id="reviewStatus" class="tip" role="status"></p>
     </section>
 
@@ -23,6 +23,22 @@
             <option value="rejected" data-i18n="mappingRejected">已拒绝</option>
           </select>
         </label>
+        <label><span data-i18n="mappingYearLabel">试卷年份</span>
+          <select id="mappingYear">
+            <option value="" data-i18n="allYears">全部年份</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+          </select>
+        </label>
+        <label><span data-i18n="mappingChapterLabel">课本章节</span>
+          <select id="mappingChapter">
+            <option value="0" data-i18n="allChapters">全部章节</option>
+          </select>
+        </label>
         <button id="refreshMappings" class="btn-secondary" type="button" data-i18n="refreshBtn">刷新数据</button>
         <button id="generateSuggestions" class="btn-primary" type="button" data-i18n="generateMappingSuggestions">生成规则建议</button>
         <button id="backAdmin" class="btn-secondary" type="button" data-i18n="backAdmin">返回后台</button>
@@ -30,10 +46,15 @@
     </section>
 
     <section id="mappingList" class="curriculum-mapping-list" aria-live="polite"></section>
+    <nav class="curriculum-review-pagination" aria-label="Mapping pages">
+      <button id="previousMappings" class="btn-secondary" type="button" data-i18n="previousPage">上一页</button>
+      <span id="mappingPageSummary"></span>
+      <button id="nextMappings" class="btn-secondary" type="button" data-i18n="nextPage">下一页</button>
+    </nav>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260727-1"></script>
-  <script src="../scripts/api.js?v=20260727-1"></script>
-  <script src="../scripts/curriculum-review.js?v=20260727-1"></script>
+  <script src="../scripts/i18n.js?v=20260728-1"></script>
+  <script src="../scripts/api.js?v=20260728-1"></script>
+  <script src="../scripts/curriculum-review.js?v=20260728-1"></script>
 </body>
 </html>

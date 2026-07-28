@@ -116,10 +116,15 @@ export async function listChapterCatalog(subjectCode, versionId, userId) {
         count(distinct coalesce(nullif(mapping.similar_question_group, ''), mapping.question_id))::int as available_questions
       from question_section_mappings mapping
       join curriculum_sections syllabus_section on syllabus_section.id = mapping.curriculum_section_id
+      join question_bank question on question.id = mapping.question_id
       where mapping.status = 'reviewed'
         and mapping.is_primary = true
         and mapping.coursebook_section_id is not null
         and syllabus_section.curriculum_version_id = $1
+        and question.active = true
+        and question.subject_code = '0610'
+        and question.year ~ '^\\d{4}$'
+        and question.year::integer between 2019 and 2023
       group by mapping.coursebook_section_id
     `, [version.id]),
     query(`
@@ -249,13 +254,15 @@ export async function listCurriculumReviewOptions(versionId) {
         book_section.title_en,
         book_section.title_zh,
         chapter.chapter_no,
+        chapter.title_en as chapter_title_en,
+        chapter.title_zh as chapter_title_zh,
         array_agg(book_mapping.curriculum_section_id order by syllabus_section.sort_order) as curriculum_section_ids
       from coursebook_sections book_section
       join coursebook_chapters chapter on chapter.id = book_section.coursebook_chapter_id
       join coursebook_section_mappings book_mapping on book_mapping.coursebook_section_id = book_section.id
       join curriculum_sections syllabus_section on syllabus_section.id = book_mapping.curriculum_section_id
       where syllabus_section.curriculum_version_id = $1
-      group by book_section.id, chapter.chapter_no
+      group by book_section.id, chapter.chapter_no, chapter.title_en, chapter.title_zh
       order by book_section.sort_order
     `, [versionId]),
   ]);
@@ -270,6 +277,8 @@ export async function listCurriculumReviewOptions(versionId) {
     coursebookSections: bookSections.rows.map((row) => ({
       id: row.id,
       chapterNo: Number(row.chapter_no),
+      chapterTitleEn: row.chapter_title_en,
+      chapterTitleZh: row.chapter_title_zh,
       sectionCode: row.section_code,
       titleEn: row.title_en,
       titleZh: row.title_zh,
