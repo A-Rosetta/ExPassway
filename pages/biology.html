@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="biologyPageTitle">IGCSE Biology 章节练习</title>
+  <link rel="stylesheet" href="../assets/styles.css?v=20260727-1" />
+</head>
+<body class="chapter-practice-page">
+  <header class="chapter-topbar">
+    <a class="home-brand" href="../index.html">
+      <span class="home-brand__mark" aria-hidden="true">A</span>
+      <span data-i18n="homeBrand">A-Level 智能练习</span>
+    </a>
+    <button id="backHome" class="btn-secondary" type="button" data-i18n="backHome">返回首页</button>
+  </header>
+
+  <main class="chapter-shell">
+    <section class="chapter-heading">
+      <div>
+        <p class="home-eyebrow">Cambridge IGCSE · 0610</p>
+        <h1 data-i18n="biologyChapterHeading">Biology</h1>
+        <p id="curriculumVersion" class="tip"></p>
+      </div>
+      <div class="chapter-mode-switch" role="tablist" aria-label="练习模式" data-i18n-aria-label="biologyModeLabel">
+        <button id="chapterMode" class="is-active" type="button" role="tab" aria-selected="true" data-i18n="chapterPracticeMode">章节练习</button>
+        <button id="paperMode" type="button" role="tab" aria-selected="false" data-i18n="paperPracticeMode">真题套卷</button>
+      </div>
+    </section>
+
+    <p id="chapterStatus" class="chapter-status" role="status"></p>
+    <section id="chapterList" class="chapter-list" aria-live="polite"></section>
+
+    <section id="practicePanel" class="chapter-practice-workspace" hidden>
+      <div class="chapter-practice-toolbar">
+        <div>
+          <p id="practiceBreadcrumb" class="home-eyebrow"></p>
+          <h2 id="practiceTitle"></h2>
+        </div>
+        <button id="closePractice" class="btn-secondary" type="button" data-i18n="backToChapters">返回章节</button>
+      </div>
+      <div id="questionProgress" class="chapter-question-progress"></div>
+      <article id="chapterQuestion" class="chapter-question"></article>
+      <div class="chapter-question-actions">
+        <button id="previousQuestion" class="btn-secondary" type="button" data-i18n="previousQuestion">上一题</button>
+        <button id="nextQuestion" class="btn-secondary" type="button" data-i18n="nextQuestion">下一题</button>
+        <button id="submitChapterPractice" class="btn-primary" type="button" data-i18n="submitChapterPractice">提交练习</button>
+      </div>
+      <section id="chapterResult" class="chapter-result" hidden></section>
+    </section>
+  </main>
+
+  <script src="../scripts/i18n.js?v=20260727-1"></script>
+  <script src="../scripts/api.js?v=20260727-1"></script>
+  <script src="../scripts/biology.js?v=20260727-1"></script>
+</body>
+</html>

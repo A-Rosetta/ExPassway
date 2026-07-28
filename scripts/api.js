@@ -188,6 +188,50 @@
         timeoutMs: 10 * 60 * 1000,
       });
     },
+    async getCurriculumVersions(token, subjectCode) {
+      return request(`/api/curriculum/${encodeURIComponent(subjectCode)}/versions`, { token });
+    },
+    async getChapterCatalog(token, subjectCode, version = "") {
+      const query = version ? `?version=${encodeURIComponent(version)}` : "";
+      return request(`/api/curriculum/${encodeURIComponent(subjectCode)}/chapters${query}`, { token });
+    },
+    async createChapterPractice(token, input) {
+      return request("/api/chapter-practice/sessions", {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async submitChapterPractice(token, sessionId, answers) {
+      return request(`/api/chapter-practice/sessions/${encodeURIComponent(sessionId)}/submit`, {
+        method: "POST",
+        token,
+        body: JSON.stringify({ answers }),
+      });
+    },
+    async getAdminCurriculumMappings(token, input = {}) {
+      const params = new URLSearchParams();
+      params.set("status", input.status || "suggested");
+      params.set("limit", String(input.limit || 100));
+      return request(`/api/admin/curriculum/mappings?${params}`, { token });
+    },
+    async suggestAdminCurriculumMappings(token, limit = 300) {
+      return request("/api/admin/curriculum/mappings/suggest", {
+        method: "POST",
+        token,
+        body: JSON.stringify({ limit }),
+      });
+    },
+    async reviewAdminCurriculumMapping(token, questionId, currentSectionId, input) {
+      return request(
+        `/api/admin/curriculum/mappings/${encodeURIComponent(questionId)}/${encodeURIComponent(currentSectionId)}`,
+        {
+          method: "PATCH",
+          token,
+          body: JSON.stringify(input || {}),
+        }
+      );
+    },
     async createUser(input) {
       return request("/api/users", {
         method: "POST",

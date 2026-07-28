@@ -331,3 +331,156 @@ create table if not exists question_review_queue (
 
 create index if not exists idx_qreview_job on question_review_queue(job_id);
 create index if not exists idx_qreview_file_qno on question_review_queue(source_file, question_no);
+
+-- Versioned curriculum and coursebook navigation for chapter practice.
+create table if not exists curriculum_versions (
+  id text primary key,
+  subject_code text not null references exam_subjects(code) on delete restrict,
+  qualification text not null,
+  exam_year_start integer not null check (exam_year_start between 2000 and 2099),
+  exam_year_end integer not null check (exam_year_end between exam_year_start and 2099),
+  version text not null,
+  active boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (subject_code, exam_year_start, exam_year_end, version)
+);
+
+create unique index if not exists idx_curriculum_one_active_version
+on curriculum_versions(subject_code)
+where active = true;
+
+create table if not exists curriculum_sections (
+  id text primary key,
+  curriculum_version_id text not null references curriculum_versions(id) on delete cascade,
+  syllabus_code text not null,
+  title_en text not null,
+  title_zh text,
+  level text not null check (level in ('topic', 'section', 'statement')),
+  parent_id text references curriculum_sections(id) on delete cascade,
+  core_level text check (core_level in ('core', 'supplement')),
+  sort_order integer not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (curriculum_version_id, syllabus_code)
+);
+
+create index if not exists idx_curriculum_sections_tree
+on curriculum_sections(curriculum_version_id, parent_id, sort_order);
+
+create table if not exists coursebook_chapters (
+  id text primary key,
+  book_key text not null,
+  chapter_no integer not null check (chapter_no > 0),
+  title_en text not null,
+  title_zh text,
+  pdf_start_page integer,
+  pdf_end_page integer,
+  printed_start_page integer,
+  printed_end_page integer,
+  sort_order integer not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (book_key, chapter_no)
+);
+
+create table if not exists coursebook_sections (
+  id text primary key,
+  coursebook_chapter_id text not null references coursebook_chapters(id) on delete cascade,
+  section_code text not null,
+  title_en text not null,
+  title_zh text,
+  pdf_start_page integer,
+  pdf_end_page integer,
+  printed_start_page integer,
+  printed_end_page integer,
+  sort_order integer not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (coursebook_chapter_id, section_code)
+);
+
+create index if not exists idx_coursebook_sections_chapter
+on coursebook_sections(coursebook_chapter_id, sort_order);
+
+create table if not exists coursebook_section_mappings (
+  coursebook_section_id text not null references coursebook_sections(id) on delete cascade,
+  curriculum_section_id text not null references curriculum_sections(id) on delete cascade,
+  primary key (coursebook_section_id, curriculum_section_id)
+);
+
+create table if not exists question_section_mappings (
+  question_id text not null references question_bank(id) on delete cascade,
+  curriculum_section_id text not null references curriculum_sections(id) on delete cascade,
+  coursebook_section_id text references coursebook_sections(id) on delete set null,
+  is_primary boolean not null default false,
+  confidence numeric(4, 3) check (confidence between 0 and 1),
+  status text not null default 'suggested' check (status in ('suggested', 'reviewed', 'rejected')),
+  reviewed_by uuid references users(id) on delete set null,
+  reviewed_at timestamptz,
+  source text not null default 'manual' check (source in ('model', 'rule', 'manual')),
+  similar_question_group text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  primary key (question_id, curriculum_section_id)
+);
+
+create unique index if not exists idx_question_one_reviewed_primary
+on question_section_mappings(question_id)
+where is_primary = true and status = 'reviewed';
+
+create index if not exists idx_question_section_public_pool
+on question_section_mappings(coursebook_section_id, status, is_primary);
+
+alter table practice_sessions
+add column if not exists practice_mode text not null default 'paper';
+
+alter table practice_sessions drop constraint if exists practice_sessions_practice_mode_check;
+alter table practice_sessions add constraint practice_sessions_practice_mode_check
+check (practice_mode in ('paper', 'chapter', 'review'));
+
+create table if not exists question_attempts (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  question_id text not null references question_bank(id) on delete restrict,
+  practice_session_id uuid references practice_sessions(id) on delete set null,
+  curriculum_section_id text not null references curriculum_sections(id) on delete restrict,
+  coursebook_section_id text not null references coursebook_sections(id) on delete restrict,
+  mode text not null check (mode in ('chapter', 'paper', 'review')),
+  selected_index integer not null check (selected_index between -1 and 20),
+  correct boolean not null,
+  first_exposure boolean not null,
+  elapsed_seconds integer not null default 0 check (elapsed_seconds >= 0),
+  hints_used integer not null default 0 check (hints_used >= 0),
+  similar_question_group text,
+  attempted_at timestamptz not null default now(),
+  unique (practice_session_id, question_id)
+);
+
+alter table question_attempts
+add column if not exists similar_question_group text;
+
+alter table question_attempts
+alter column practice_session_id drop not null;
+
+alter table question_attempts
+drop constraint if exists question_attempts_practice_session_id_fkey;
+
+alter table question_attempts
+add constraint question_attempts_practice_session_id_fkey
+foreign key (practice_session_id) references practice_sessions(id) on delete set null;
+
+create index if not exists idx_question_attempts_user_question
+on question_attempts(user_id, question_id, attempted_at);
+
+drop index if exists idx_question_one_first_exposure;
+create unique index idx_question_one_first_exposure
+on question_attempts(user_id, question_id)
+where first_exposure = true and similar_question_group is null;
+
+create unique index if not exists idx_question_group_one_first_exposure
+on question_attempts(user_id, similar_question_group)
+where first_exposure = true and similar_question_group is not null;
+
+create index if not exists idx_question_attempts_user_coursebook
+on question_attempts(user_id, coursebook_section_id, attempted_at);

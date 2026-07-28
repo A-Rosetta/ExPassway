@@ -82,7 +82,7 @@
       subjectCode: subject.code,
       paper: "MCQ",
     }));
-    location.href = "pages/generate.html";
+    location.href = subject.code === "0610" ? "pages/biology.html" : "pages/generate.html";
   }
 
   function renderSubjectCourses(subjects) {

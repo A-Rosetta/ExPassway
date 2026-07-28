@@ -317,6 +317,10 @@
     location.href = "./image-mapper.html";
   });
 
+  byId("openCurriculumReview").addEventListener("click", () => {
+    location.href = "./curriculum-review.html";
+  });
+
   byId("backHome").addEventListener("click", () => {
     location.href = "../index.html";
   });

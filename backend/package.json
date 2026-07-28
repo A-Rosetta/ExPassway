@@ -8,6 +8,8 @@
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
     "db:schema": "psql \"$DATABASE_URL\" -f db/schema.sql",
+    "db:biology-pilot": "psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f db/biology-chapter-pilot.sql",
+    "db:biology-pilot-reviewed": "psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f db/biology-chapter-pilot-reviewed.sql",
     "catalog:migrate": "node scripts/migrate-exam-catalog.mjs",
     "import:pdf-bank": "node scripts/import-pdf-bank.mjs",
     "import:chemis-all": "node scripts/import-all-chemis-pdfs.mjs",

@@ -18,6 +18,12 @@ import {
   publishCieImportJob,
   uploadCieImportFile,
 } from "../services/cieImport.service.js";
+import {
+  listQuestionMappingsForReview,
+  reviewQuestionMapping,
+} from "../db/repositories/chapterPractice.repository.js";
+import { listCurriculumReviewOptions } from "../db/repositories/curriculum.repository.js";
+import { generateBiologyMappingSuggestions } from "../services/chapterMapping.service.js";
 
 const router = Router();
 
@@ -186,6 +192,67 @@ router.post("/imports/:jobId/publish", asyncHandler(async (req, res) => {
   assertAdminApiEnabled();
   await requireAdmin(req);
   res.json({ ok: true, data: await publishCieImportJob(String(req.params.jobId || "")) });
+}));
+
+router.get("/curriculum/mappings", asyncHandler(async (req, res) => {
+  assertAdminApiEnabled();
+  await requireAdmin(req);
+  const status = String(req.query.status || "suggested").trim();
+  if (status && !["suggested", "reviewed", "rejected"].includes(status)) {
+    throw new ApiError(400, "Invalid mapping status.", "INVALID_INPUT");
+  }
+  const limit = toClampedInteger(req.query.limit, 100, 1, 300);
+  const [mappings, options] = await Promise.all([
+    listQuestionMappingsForReview({ status, limit, versionId: "0610-2026-2028-v2" }),
+    listCurriculumReviewOptions("0610-2026-2028-v2"),
+  ]);
+  res.json({ ok: true, data: { mappings, ...options } });
+}));
+
+router.post("/curriculum/mappings/suggest", asyncHandler(async (req, res) => {
+  assertAdminApiEnabled();
+  await requireAdmin(req);
+  const limit = toClampedInteger(req.body?.limit, 300, 1, 300);
+  res.status(201).json({
+    ok: true,
+    data: await generateBiologyMappingSuggestions(limit),
+  });
+}));
+
+router.patch("/curriculum/mappings/:questionId/:currentCurriculumSectionId", asyncHandler(async (req, res) => {
+  assertAdminApiEnabled();
+  const admin = await requireAdmin(req);
+  const questionId = String(req.params.questionId || "").trim();
+  const currentCurriculumSectionId = String(req.params.currentCurriculumSectionId || "").trim();
+  const curriculumSectionId = String(req.body?.curriculumSectionId || "").trim();
+  const coursebookSectionId = String(req.body?.coursebookSectionId || "").trim();
+  const status = String(req.body?.status || "").trim();
+  if (!questionId || !currentCurriculumSectionId || !curriculumSectionId || !coursebookSectionId) {
+    throw new ApiError(400, "Question, syllabus statement and coursebook section are required.", "INVALID_INPUT");
+  }
+  if (!["reviewed", "rejected"].includes(status)) {
+    throw new ApiError(400, "Mapping status must be reviewed or rejected.", "INVALID_INPUT");
+  }
+  const updated = await reviewQuestionMapping({
+    questionId,
+    currentCurriculumSectionId,
+    curriculumSectionId,
+    coursebookSectionId,
+    isPrimary: status === "reviewed" && req.body?.isPrimary !== false,
+    status,
+    adminId: admin.id,
+  });
+  if (updated.status === "not_found") {
+    throw new ApiError(404, "Question mapping not found.", "MAPPING_NOT_FOUND");
+  }
+  if (updated.status === "invalid_mapping") {
+    throw new ApiError(
+      400,
+      "The selected syllabus statement is not mapped to the selected coursebook section.",
+      "INVALID_MAPPING"
+    );
+  }
+  res.json({ ok: true, data: updated.mapping });
 }));
 
 export default router;

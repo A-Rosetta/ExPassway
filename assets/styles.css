@@ -468,6 +468,127 @@ button {
   .grid-2 { grid-template-columns: 1fr; }
 }
 
+/* Curriculum mapping review */
+.curriculum-review-page {
+  background: #f4f5f7;
+}
+
+.curriculum-review-toolbar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.curriculum-review-toolbar label {
+  min-width: 180px;
+}
+
+.curriculum-mapping-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.curriculum-mapping-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.8fr);
+  gap: 1rem;
+  border: 1px solid #d7dddf;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.curriculum-mapping-source,
+.curriculum-mapping-controls {
+  min-width: 0;
+}
+
+.curriculum-mapping-id {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid #e2e6e7;
+  padding-bottom: 0.55rem;
+}
+
+.curriculum-mapping-id span {
+  color: #667276;
+  font-size: 0.82rem;
+}
+
+.curriculum-mapping-source > p {
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.curriculum-mapping-image {
+  min-height: 240px;
+  margin: 0.75rem 0 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e0e4e5;
+  background: #f8faf9;
+}
+
+.curriculum-mapping-image img {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+}
+
+.curriculum-mapping-controls {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  border-left: 1px solid #e0e5e5;
+  padding-left: 1rem;
+}
+
+.curriculum-mapping-controls label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.curriculum-mapping-controls select {
+  width: 100%;
+}
+
+.curriculum-mapping-controls .mapping-primary-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.mapping-primary-toggle input {
+  width: auto;
+  margin: 0;
+}
+
+@media (max-width: 820px) {
+  .curriculum-mapping-item {
+    grid-template-columns: 1fr;
+  }
+
+  .curriculum-mapping-controls {
+    border-top: 1px solid #e0e5e5;
+    border-left: 0;
+    padding-top: 1rem;
+    padding-left: 0;
+  }
+
+  .curriculum-mapping-id {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .curriculum-review-toolbar > * {
+    flex: 1 1 180px;
+  }
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(140px, 1fr));
@@ -2309,6 +2430,397 @@ body.home-dashboard {
   --book: #586579;
   --book-dark: #394456;
   --book-accent: #bec6d1;
+}
+
+/* Biology chapter practice pilot */
+body.chapter-practice-page {
+  min-height: 100vh;
+  background: #f3f5f6;
+  color: #17202d;
+}
+
+.chapter-practice-page [hidden] {
+  display: none !important;
+}
+
+.chapter-topbar {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #d9dde3;
+  padding: 0 24px;
+  background: #fff;
+}
+
+.chapter-topbar > .btn-secondary {
+  border-radius: 6px;
+}
+
+.chapter-shell {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem;
+}
+
+.chapter-heading,
+.chapter-practice-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.chapter-heading h1 {
+  margin: 0;
+  font-size: 2.65rem;
+  letter-spacing: 0;
+}
+
+.chapter-mode-switch {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(112px, 1fr));
+  border: 1px solid #bdc7cc;
+  border-radius: 6px;
+  padding: 3px;
+  background: #fff;
+}
+
+.chapter-mode-switch button {
+  min-height: 42px;
+  border-radius: 4px;
+  background: transparent;
+  color: #4e5a65;
+}
+
+.chapter-mode-switch button.is-active {
+  background: #176e52;
+  color: #fff;
+}
+
+.chapter-status {
+  min-height: 1.5rem;
+  margin: 1rem 0;
+  color: #36554a;
+}
+
+.chapter-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.chapter-band {
+  border-top: 1px solid #cfd7d9;
+  background: #fff;
+}
+
+.chapter-band__heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  background: #e9f3ee;
+}
+
+.chapter-band__heading h2,
+.chapter-band__heading p {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.chapter-band__heading h2 {
+  font-size: 1.25rem;
+}
+
+.chapter-band__heading p {
+  margin-top: 0.15rem;
+  color: #5e6d69;
+  font-size: 0.88rem;
+}
+
+.chapter-number {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  flex: 0 0 42px;
+  place-items: center;
+  border-radius: 6px;
+  background: #176e52;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.chapter-section-list {
+  display: grid;
+}
+
+.chapter-section-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(230px, 1.35fr) minmax(460px, 2fr) minmax(130px, auto);
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #e1e5e6;
+  padding: 1rem 1.25rem;
+}
+
+.chapter-section-row:last-child {
+  border-bottom: 0;
+}
+
+.chapter-section-main {
+  min-width: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.chapter-section-main strong,
+.chapter-section-main span {
+  overflow-wrap: anywhere;
+}
+
+.chapter-section-main span {
+  color: #68747a;
+  font-size: 0.84rem;
+}
+
+.chapter-metrics {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(72px, 1fr));
+  gap: 0.35rem;
+  margin: 0;
+}
+
+.chapter-metrics div {
+  min-width: 0;
+  border-left: 1px solid #dfe5e3;
+  padding-left: 0.65rem;
+}
+
+.chapter-metrics dt {
+  min-height: 2.25rem;
+  color: #6b777c;
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.chapter-metrics dd {
+  margin: 0.25rem 0 0;
+  color: #203c33;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.chapter-start {
+  width: 100%;
+  min-width: 130px;
+  border-radius: 6px;
+}
+
+.chapter-start:disabled {
+  cursor: not-allowed;
+  background: #c9cfcd;
+  color: #58615e;
+}
+
+.chapter-practice-workspace {
+  border-top: 1px solid #ccd4d5;
+  background: #fff;
+  padding: 1.35rem;
+}
+
+.chapter-practice-toolbar {
+  padding-bottom: 1rem;
+}
+
+.chapter-practice-toolbar h2,
+.chapter-practice-toolbar p {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.chapter-question-progress {
+  border-top: 1px solid #e0e5e5;
+  border-bottom: 1px solid #e0e5e5;
+  padding: 0.7rem 0;
+  color: #596769;
+  font-weight: 700;
+}
+
+.chapter-question {
+  min-height: 460px;
+  padding: 1.25rem 0;
+}
+
+.chapter-question h3 {
+  margin: 0.9rem 0;
+  max-width: 900px;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+
+.chapter-question-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chapter-question-meta span {
+  border: 1px solid #d4ddda;
+  border-radius: 4px;
+  padding: 0.25rem 0.45rem;
+  background: #eef5f2;
+  color: #35564a;
+  font-size: 0.78rem;
+}
+
+.chapter-question .options-wrap {
+  max-width: 900px;
+}
+
+.chapter-question .option-item {
+  min-height: 48px;
+  border-radius: 6px;
+}
+
+.chapter-question .option-item.is-correct {
+  border-color: #2f8c69;
+  background: #e9f6f0;
+}
+
+.chapter-question .option-item.is-wrong {
+  border-color: #c55c53;
+  background: #fff0ee;
+}
+
+.chapter-hint-button {
+  margin-top: 0.85rem;
+}
+
+.chapter-question-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  border-top: 1px solid #e0e5e5;
+  padding-top: 1rem;
+}
+
+.chapter-question-actions #submitChapterPractice {
+  margin-left: auto;
+}
+
+.chapter-result {
+  margin-top: 1.25rem;
+  border-top: 2px solid #176e52;
+  padding-top: 1rem;
+}
+
+.chapter-result h3 {
+  margin: 0 0 0.8rem;
+}
+
+.chapter-result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.chapter-result-grid div {
+  display: grid;
+  gap: 0.25rem;
+  border-left: 3px solid #71ab94;
+  padding: 0.65rem 0.8rem;
+  background: #f1f7f4;
+}
+
+.chapter-result-grid span {
+  color: #68746f;
+  font-size: 0.82rem;
+}
+
+.chapter-result-grid strong {
+  font-size: 1.35rem;
+}
+
+@media (max-width: 1040px) {
+  .chapter-section-row {
+    grid-template-columns: minmax(220px, 1fr) minmax(400px, 1.6fr);
+  }
+
+  .chapter-section-row .chapter-start {
+    grid-column: 1 / -1;
+    width: max-content;
+  }
+}
+
+@media (max-width: 760px) {
+  .chapter-topbar {
+    padding: 0 14px;
+  }
+
+  .chapter-shell {
+    width: min(100% - 24px, 1180px);
+    padding-top: 1.5rem;
+  }
+
+  .chapter-heading,
+  .chapter-practice-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .chapter-heading h1 {
+    font-size: 2.1rem;
+  }
+
+  .chapter-mode-switch {
+    width: 100%;
+  }
+
+  .chapter-band__heading {
+    padding: 1rem;
+  }
+
+  .chapter-section-row {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .chapter-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chapter-metrics div {
+    min-height: 58px;
+  }
+
+  .chapter-section-row .chapter-start {
+    width: 100%;
+  }
+
+  .chapter-practice-workspace {
+    padding: 1rem;
+  }
+
+  .chapter-question {
+    min-height: 360px;
+  }
+
+  .chapter-question-actions > button {
+    flex: 1 1 120px;
+  }
+
+  .chapter-question-actions #submitChapterPractice {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+
+  .chapter-result-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .subject-book {

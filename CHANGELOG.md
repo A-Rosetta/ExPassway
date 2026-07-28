@@ -2,6 +2,37 @@
 
 All notable changes to this project are recorded in this file.
 
+## 2026-07-27 22:08 CST
+
+### Summary
+- Added the Cambridge IGCSE Biology `0610` chapter-practice pilot for coursebook Chapters 1-3.
+- Kept coursebook navigation, official 2026-2028 syllabus statements, and question mappings as separate versioned structures.
+- Added administrator review so generated mapping suggestions remain private until explicitly reviewed.
+
+### Added
+- Added 3 coursebook chapters, 13 coursebook sections, 53 syllabus nodes, and 45 coursebook-to-syllabus statement mappings.
+- Added normalized per-question attempts with separate first-exposure and review results.
+- Added authenticated curriculum, chapter-session generation, and server-side chapter submission APIs.
+- Added a Biology mode page with `Chapter Practice / Past Papers`, unseen-first selection, progress metrics, and one-question-at-a-time practice.
+- Added an administrator curriculum-mapping review page with question images, coursebook section selection, syllabus statement selection, review, and rejection controls.
+- Added explicit seed and reviewed-mapping SQL plus a desktop/mobile Playwright smoke script.
+
+### Data And Security
+- Preserved all 2749 existing question rows, including all 1640 Biology questions, without changing `question_bank.topic` or question IDs.
+- Reserved 2024 Biology papers from chapter practice; chapter pools use reviewed 2019-2023 questions only.
+- Published 84 manually checked mappings across 12 of 13 pilot sections; left `1.3 Keys` unavailable instead of publishing uncertain matches.
+- Kept 234 rule suggestions private for administrator review and retained 2 rejected conflicts for audit history.
+- Omitted correct answers from chapter-generation responses and scored submissions against server-side question records.
+- Required authenticated users for chapter progress and administrator role for mapping review.
+
+### Verification
+- Applied the schema and pilot seeds to PostgreSQL and restarted `alevel-backend-3002.service`.
+- Verified anonymous chapter access returns `401`, generated questions do not expose `answer`, and submissions write first/review attempts and wrong-notebook entries.
+- Verified unseen questions are selected before repeated questions and near-duplicate groups count as one exposure.
+- Verified deleting a practice session preserves normalized attempts; deleting the user still removes their learning data.
+- Verified JavaScript syntax, Git whitespace, live database counts, and desktop/mobile browser flows.
+- Verified student and administrator pages at `1440x900` and `390x844` with loaded question images, no script errors, no horizontal overflow, and no overlapping controls.
+
 ## 2026-07-24 22:35 CST
 
 ### Summary

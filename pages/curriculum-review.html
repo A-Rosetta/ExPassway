@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="curriculumReviewPageTitle">生物章节映射审核</title>
+  <link rel="stylesheet" href="../assets/styles.css?v=20260727-1" />
+</head>
+<body class="curriculum-review-page">
+  <main class="container">
+    <section class="card hero">
+      <h1 data-i18n="curriculumReviewTitle">Biology 0610 章节映射审核</h1>
+      <p data-i18n="curriculumReviewSubtitle">自动建议不会公开；审核通过后题目才会进入章节练习。</p>
+      <p id="reviewStatus" class="tip" role="status"></p>
+    </section>
+
+    <section class="card panel">
+      <div class="curriculum-review-toolbar">
+        <label><span data-i18n="mappingStatusLabel">映射状态</span>
+          <select id="mappingStatus">
+            <option value="suggested" data-i18n="mappingSuggested">待审核</option>
+            <option value="reviewed" data-i18n="mappingReviewed">已审核</option>
+            <option value="rejected" data-i18n="mappingRejected">已拒绝</option>
+          </select>
+        </label>
+        <button id="refreshMappings" class="btn-secondary" type="button" data-i18n="refreshBtn">刷新数据</button>
+        <button id="generateSuggestions" class="btn-primary" type="button" data-i18n="generateMappingSuggestions">生成规则建议</button>
+        <button id="backAdmin" class="btn-secondary" type="button" data-i18n="backAdmin">返回后台</button>
+      </div>
+    </section>
+
+    <section id="mappingList" class="curriculum-mapping-list" aria-live="polite"></section>
+  </main>
+
+  <script src="../scripts/i18n.js?v=20260727-1"></script>
+  <script src="../scripts/api.js?v=20260727-1"></script>
+  <script src="../scripts/curriculum-review.js?v=20260727-1"></script>
+</body>
+</html>
