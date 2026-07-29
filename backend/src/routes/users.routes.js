@@ -29,7 +29,7 @@ async function ensureUserColumns() {
   if (userColumnsReady) return;
   await query(`
     alter table users
-    add column if not exists language text not null default 'zh-CN'
+    add column if not exists language text not null default 'en'
   `);
   userColumnsReady = true;
 }
@@ -59,7 +59,7 @@ router.post("/", asyncHandler(async (req, res) => {
     role,
     grade: typeof body.grade === "string" ? body.grade.trim() : null,
     targetScore: toOptionalInteger(body.targetScore, "targetScore", 0, 100),
-    language: body.language === "en" ? "en" : "zh-CN",
+    language: body.language === "zh-CN" ? "zh-CN" : "en",
   });
 
   res.status(201).json({

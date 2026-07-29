@@ -105,7 +105,7 @@ router.post("/submit", asyncHandler(async (req, res) => {
     return sum;
   }, 0);
   const wrongLog = buildWrongLog(result.details);
-  const analysis = buildAnalysis({ wrongLog, lastResult: result });
+  const analysis = buildAnalysis({ wrongLog, lastResult: result, language: body.language });
   await markPaperSubmitted({
     paperId,
     answers: normalizedAnswers,
@@ -177,7 +177,7 @@ router.post("/submit-local", asyncHandler(async (req, res) => {
     return sum;
   }, 0);
   const wrongLog = buildWrongLog(result.details);
-  const analysis = buildAnalysis({ wrongLog, lastResult: result });
+  const analysis = buildAnalysis({ wrongLog, lastResult: result, language: body.language });
 
   await markPaperSubmitted({
     paperId,

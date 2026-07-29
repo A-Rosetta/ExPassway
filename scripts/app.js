@@ -3,7 +3,7 @@
   const USER_ID_KEY = "alevel.userId";
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const SELECTION_KEY = "alevel.selection";
-  const { getLanguage, setLanguage, normalizeLanguage, t, applyPage } = window.ALevelI18n;
+  const { getLanguage, setLanguage, t, applyPage } = window.ALevelI18n;
   let currentLanguage = getLanguage();
   let backendStatusState = null;
   let accountStatusState = null;
@@ -296,7 +296,7 @@
       setBackendStatus("backendUnavailable", true);
     }
 
-    applyLanguage(currentUser?.language || getLanguage());
+    applyLanguage(getLanguage());
 
     const goAdmin = getEl("goAdmin");
     if (goAdmin) {
@@ -324,28 +324,21 @@
       if (event.target === profileDialog) profileDialog.close();
     });
 
-    const preferredLanguageEl = getEl("preferredLanguage");
-
     function fillAccountForm(user) {
       getEl("newDisplayName").value = user?.displayName || "";
       getEl("newGrade").value = user?.grade || "";
       getEl("newTargetScore").value = user?.targetScore == null ? "" : String(user.targetScore);
       getEl("oldPassword").value = "";
       getEl("newPassword").value = "";
-      if (preferredLanguageEl) {
-        preferredLanguageEl.value = normalizeLanguage(user?.language || currentLanguage);
-      }
       const petEnabled = getEl("petEnabled");
       const petSkin = getEl("petSkin");
       if (petEnabled) petEnabled.checked = user?.pet?.enabled !== false;
       if (petSkin) petSkin.value = user?.pet?.skin || "codex-glass";
     }
 
-    preferredLanguageEl?.addEventListener("change", () => {
-      applyLanguage(preferredLanguageEl.value);
-    });
-
     fillAccountForm(currentUser);
+    const passwordSettings = getEl("passwordSettings");
+    if (passwordSettings) passwordSettings.hidden = currentUser?.hasPassword === false;
     setAccountStatus("signedInAs", false, {
       name: currentUser?.displayName || t("unknownUser"),
     });
@@ -400,7 +393,7 @@
       const grade = getEl("newGrade").value.trim();
       const targetScoreRaw = getEl("newTargetScore").value.trim();
       const targetScore = targetScoreRaw === "" ? null : Number.parseInt(targetScoreRaw, 10);
-      const language = normalizeLanguage(preferredLanguageEl?.value);
+      const language = currentLanguage;
 
       if (!displayName) {
         setAccountStatus("displayNameRequired", true);

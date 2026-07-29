@@ -3,8 +3,8 @@
 
   const messages = {
     "zh-CN": {
-      homePageTitle: "A-Level 智能练习",
-      homeBrand: "A-Level 智能练习",
+      homePageTitle: "ExPassway",
+      homeBrand: "ExPassway",
       homeNotebook: "错题本",
       homeForum: "论坛",
       homeProfile: "个人资料",
@@ -86,7 +86,7 @@
       openSubjectPicker: "打开选题",
       openSubjectAria: "打开 {subject} 选题页面",
       noPublishedSubjects: "当前没有已发布的选择题学科。",
-      homeHeroTitle: "A-Level 智能练习",
+      homeHeroTitle: "ExPassway",
       homeHeroSubtitle: "练习已发布的 CIE IGCSE 选择题真题，并查看错题诊断。",
       studyPathTitle: "学习路径配置",
       gradeLabel: "年级",
@@ -248,6 +248,7 @@
       profilePetSaved: "宠物设置已同步。",
       profilePetSaveFailed: "宠物设置保存失败：{message}",
       petClose: "关闭宠物",
+      petDismissMessage: "关闭提示",
       petHintInvite: "需要一点线索吗？点击我获取提示。",
       petHintLoading: "正在查看这道题...",
       petHintUnavailable: "这道题的提示暂时不可用，请稍后再试。",
@@ -255,6 +256,9 @@
       petTipNotebook: "记得去错题本复习最近做错的题。",
       petTipForum: "论坛里可以看看大家正在讨论哪些题。",
       petTipProfile: "你可以在主页的个人资料与设置中管理我。",
+      petTipReview: "完成练习后，可以在总结页逐题复盘。",
+      petTipStar: "不确定的题目可以先标星，提交后集中查看。",
+      petTipTimed: "想模拟真实考试时，可以在套卷页选择计时模式。",
       oldPasswordLabel: "旧密码",
       newPasswordLabel: "新密码",
       updateProfileBtn: "保存资料修改",
@@ -286,9 +290,36 @@
       passwordChangeFailed: "密码修改失败：{message}",
       storageMode: "（存储模式：{mode}）",
       initFailed: "初始化失败，请刷新页面后重试。",
-      loginPageTitle: "登录 / 注册",
-      loginHeroTitle: "账号登录 / 注册",
-      loginHeroSubtitle: "登录后会自动长期保持，下次打开可自动识别。",
+      loginPageTitle: "登录或注册",
+      loginHeroTitle: "登录或注册",
+      loginHeroSubtitle: "更聪明地备考，以理想成绩迈向世界一流大学。",
+      continueWithGoogle: "使用 Google 继续",
+      orLabel: "或",
+      emailAddressLabel: "邮箱地址",
+      emailAddressPlaceholder: "邮箱地址",
+      continueBtn: "继续",
+      invalidEmailAddress: "请输入有效的邮箱地址。",
+      passwordLabel: "密码",
+      passwordPlaceholder: "密码",
+      passwordRequired: "请输入密码。",
+      backToEmail: "返回邮箱输入",
+      backToLogin: "返回登录",
+      newAccountPrompt: "第一次使用 ExPassway？",
+      createAccountLink: "创建账号",
+      newAccountPasswordPlaceholder: "创建密码（至少 6 位）",
+      createAccountBtn: "创建账号",
+      connectingToGoogle: "正在连接 Google...",
+      googleLoginFinishing: "正在完成 Google 登录...",
+      googleLoginNotConfigured: "Google 登录尚未配置。",
+      googleLoginFailed: "Google 登录失败：{message}",
+      googleLoginUnexpectedCallback: "无法验证这次 Google 登录请求，请从本页重新开始。",
+      checkingLogin: "正在检查登录状态...",
+      adminLoginPageTitle: "管理员登录",
+      adminLoginHeroTitle: "管理员登录",
+      adminLoginHeroSubtitle: "使用现有管理员凭据进入后台。",
+      adminIdentifierLabel: "管理员邮箱或用户名",
+      adminIdentifierPlaceholder: "管理员邮箱或用户名",
+      adminCredentialsRequired: "请输入管理员邮箱或用户名及密码。",
       loginSectionTitle: "账号信息",
       userNameLabel: "姓名",
       userEmailLabel: "邮箱或管理员用户名",
@@ -332,6 +363,19 @@
       adminSummaryTitle: "总览统计",
       latestUsersTitle: "最近用户",
       latestPracticesTitle: "最近练习记录",
+      adminUserId: "用户 ID",
+      adminUserName: "姓名",
+      adminUserEmail: "邮箱",
+      adminUserRole: "角色",
+      adminUserGrade: "年级",
+      adminUserTargetScore: "目标分",
+      adminCreatedAt: "创建时间",
+      adminPracticeId: "练习 ID",
+      adminPracticeUser: "用户",
+      adminSubjectPath: "科目路径",
+      adminPracticeStatus: "状态",
+      adminPracticeAccuracy: "正确率",
+      adminSubmittedAt: "提交时间",
       totalUsers: "用户总数",
       totalPractices: "练习总数",
       submittedPractices: "已提交练习",
@@ -361,6 +405,7 @@
       adminSubjectCodeLabel: "科目代码",
       adminSubjectNameLabel: "英文名称",
       adminSubjectNameZhLabel: "中文名称",
+      adminSubjectNameZhPlaceholder: "例如：协调科学",
       adminSubjectAssetKeyLabel: "资源目录名称",
       adminRegisterSubject: "注册或更新科目",
       adminSubjectSaved: "科目 {code} 已保存。",
@@ -604,8 +649,8 @@
       previewLoadFailed: "预览加载失败：{message}",
     },
     en: {
-      homePageTitle: "A-Level Smart Practice",
-      homeBrand: "A-Level Smart Practice",
+      homePageTitle: "ExPassway",
+      homeBrand: "ExPassway",
       homeNotebook: "Notebook",
       homeForum: "Forum",
       homeProfile: "Profile",
@@ -687,7 +732,7 @@
       openSubjectPicker: "Open paper picker",
       openSubjectAria: "Open the {subject} paper picker",
       noPublishedSubjects: "There are no published multiple-choice subjects yet.",
-      homeHeroTitle: "A-Level Smart Practice",
+      homeHeroTitle: "ExPassway",
       homeHeroSubtitle: "Practise published CIE IGCSE multiple-choice papers with wrong-answer analysis.",
       studyPathTitle: "Study Path Settings",
       gradeLabel: "Grade",
@@ -849,6 +894,7 @@
       profilePetSaved: "Pet settings synced.",
       profilePetSaveFailed: "Could not save pet settings: {message}",
       petClose: "Close pet",
+      petDismissMessage: "Dismiss message",
       petHintInvite: "Need a clue? Select me to get a hint.",
       petHintLoading: "Looking at this question...",
       petHintUnavailable: "Hints for this question are temporarily unavailable.",
@@ -856,6 +902,9 @@
       petTipNotebook: "Remember to revisit recent mistakes in your Notebook.",
       petTipForum: "See what other students are discussing in the Forum.",
       petTipProfile: "Manage me from Profile & Settings on the Home page.",
+      petTipReview: "Review each question on the summary page after a practice session.",
+      petTipStar: "Star questions you are unsure about and revisit them after submitting.",
+      petTipTimed: "Choose Timed mode from a paper set to simulate the real exam.",
       oldPasswordLabel: "Old Password",
       newPasswordLabel: "New Password",
       updateProfileBtn: "Save Profile",
@@ -887,9 +936,36 @@
       passwordChangeFailed: "Password change failed: {message}",
       storageMode: " (storage mode: {mode})",
       initFailed: "Initialization failed. Refresh the page and try again.",
-      loginPageTitle: "Login / Register",
-      loginHeroTitle: "Account Login / Register",
-      loginHeroSubtitle: "Your login stays signed in, so reopening the site can restore it automatically.",
+      loginPageTitle: "Log in or sign up",
+      loginHeroTitle: "Log in or sign up",
+      loginHeroSubtitle: "Practice smarter for the grades that open doors to leading universities.",
+      continueWithGoogle: "Continue with Google",
+      orLabel: "OR",
+      emailAddressLabel: "Email address",
+      emailAddressPlaceholder: "Email address",
+      continueBtn: "Continue",
+      invalidEmailAddress: "Enter a valid email address.",
+      passwordLabel: "Password",
+      passwordPlaceholder: "Password",
+      passwordRequired: "Enter your password.",
+      backToEmail: "Back to email",
+      backToLogin: "Back to login",
+      newAccountPrompt: "New to ExPassway?",
+      createAccountLink: "Create an account",
+      newAccountPasswordPlaceholder: "Create a password (6+ characters)",
+      createAccountBtn: "Create account",
+      connectingToGoogle: "Connecting to Google...",
+      googleLoginFinishing: "Finishing Google login...",
+      googleLoginNotConfigured: "Google login has not been configured yet.",
+      googleLoginFailed: "Google login failed: {message}",
+      googleLoginUnexpectedCallback: "This Google login request could not be verified. Start again from this page.",
+      checkingLogin: "Checking your login...",
+      adminLoginPageTitle: "Administrator login",
+      adminLoginHeroTitle: "Administrator login",
+      adminLoginHeroSubtitle: "Use your existing administrator credentials to continue.",
+      adminIdentifierLabel: "Administrator email or username",
+      adminIdentifierPlaceholder: "Administrator email or username",
+      adminCredentialsRequired: "Enter your administrator email or username and password.",
       loginSectionTitle: "Account Details",
       userNameLabel: "Name",
       userEmailLabel: "Email or Admin Username",
@@ -933,6 +1009,19 @@
       adminSummaryTitle: "Summary",
       latestUsersTitle: "Recent Users",
       latestPracticesTitle: "Recent Practices",
+      adminUserId: "User ID",
+      adminUserName: "Name",
+      adminUserEmail: "Email",
+      adminUserRole: "Role",
+      adminUserGrade: "Grade",
+      adminUserTargetScore: "Target Score",
+      adminCreatedAt: "Created At",
+      adminPracticeId: "Practice ID",
+      adminPracticeUser: "User",
+      adminSubjectPath: "Subject Path",
+      adminPracticeStatus: "Status",
+      adminPracticeAccuracy: "Accuracy",
+      adminSubmittedAt: "Submitted At",
       totalUsers: "Total Users",
       totalPractices: "Total Practices",
       submittedPractices: "Submitted Practices",
@@ -962,6 +1051,7 @@
       adminSubjectCodeLabel: "Subject Code",
       adminSubjectNameLabel: "English Name",
       adminSubjectNameZhLabel: "Chinese Name",
+      adminSubjectNameZhPlaceholder: "e.g. Co-ordinated Sciences",
       adminSubjectAssetKeyLabel: "Asset Directory Key",
       adminRegisterSubject: "Register or Update Subject",
       adminSubjectSaved: "Subject {code} has been saved.",
@@ -1207,11 +1297,23 @@
   };
 
   function normalizeLanguage(value) {
-    return value === "en" ? "en" : "zh-CN";
+    const language = String(value || "").toLowerCase();
+    if (language.startsWith("zh")) return "zh-CN";
+    return "en";
+  }
+
+  function getSystemLanguage() {
+    const languages = Array.isArray(navigator.languages) && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language];
+    return languages.some((language) => String(language || "").toLowerCase().startsWith("zh"))
+      ? "zh-CN"
+      : "en";
   }
 
   function getLanguage() {
-    return normalizeLanguage(localStorage.getItem(USER_LANGUAGE_KEY));
+    const saved = localStorage.getItem(USER_LANGUAGE_KEY);
+    return saved ? normalizeLanguage(saved) : getSystemLanguage();
   }
 
   function setLanguage(value) {
@@ -1224,7 +1326,7 @@
 
   function t(key, vars = {}) {
     const language = getLanguage();
-    const template = messages[language]?.[key] || messages["zh-CN"]?.[key] || key;
+    const template = messages[language]?.[key] || messages.en?.[key] || key;
     return String(template).replace(/\{(\w+)\}/g, (_match, name) => String(vars[name] ?? ""));
   }
 
@@ -1252,6 +1354,24 @@
     if (titleEl) {
       titleEl.textContent = t(titleEl.getAttribute("data-i18n"));
     }
+    document.documentElement.dataset.i18nReady = "";
+  }
+
+  function mountLanguageToggle() {
+    if (document.querySelector("[data-language-toggle]")) return;
+    const button = document.createElement("button");
+    const current = getLanguage();
+    button.type = "button";
+    button.className = "language-toggle";
+    button.dataset.languageToggle = "";
+    button.textContent = current === "en" ? "中文" : "EN";
+    button.setAttribute("aria-label", current === "en" ? "Switch to Chinese" : "切换到英文");
+    button.title = button.getAttribute("aria-label");
+    button.addEventListener("click", () => {
+      setLanguage(getLanguage() === "en" ? "zh-CN" : "en");
+      location.reload();
+    });
+    document.body.appendChild(button);
   }
 
   window.ALevelI18n = {
@@ -1264,8 +1384,12 @@
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => applyPage());
+    document.addEventListener("DOMContentLoaded", () => {
+      applyPage();
+      mountLanguageToggle();
+    });
   } else {
     applyPage();
+    mountLanguageToggle();
   }
 })();

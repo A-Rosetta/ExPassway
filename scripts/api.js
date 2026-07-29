@@ -288,6 +288,21 @@
         body: JSON.stringify(input || {}),
       });
     },
+    async adminLogin(input) {
+      return request("/api/auth/admin/login", {
+        method: "POST",
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async getGoogleAuthStart() {
+      return request("/api/auth/google/start");
+    },
+    async loginWithGoogle(accessToken, language) {
+      return request("/api/auth/google", {
+        method: "POST",
+        body: JSON.stringify({ accessToken, language }),
+      });
+    },
     async getCurrentUser(token) {
       return request("/api/auth/me", { token });
     },

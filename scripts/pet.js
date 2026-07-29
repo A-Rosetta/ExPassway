@@ -6,7 +6,15 @@
     skin: "codex-glass",
     position: { x: 0.92, y: 0.84 },
   };
-  const TIP_KEYS = ["petTipDownload", "petTipNotebook", "petTipForum", "petTipProfile"];
+  const TIP_KEYS = [
+    "petTipDownload",
+    "petTipNotebook",
+    "petTipForum",
+    "petTipProfile",
+    "petTipReview",
+    "petTipStar",
+    "petTipTimed",
+  ];
   const FIRST_TIP_DELAY = 45 * 1000;
   const TIP_INTERVAL = 8 * 60 * 1000;
   const QUESTION_HINT_DELAY = 60 * 1000;
@@ -17,6 +25,8 @@
     preferences: DEFAULTS,
     root: null,
     bubble: null,
+    bubbleMessage: null,
+    bubbleText: null,
     hintProvider: null,
     hintQuestionKey: "",
     hintTimer: 0,
@@ -124,7 +134,7 @@
 
   function showBubble(message, action = "") {
     if (!state.bubble || !state.preferences.enabled) return;
-    state.bubble.textContent = message;
+    state.bubbleText.textContent = message;
     state.bubble.hidden = false;
     state.bubbleAction = action;
     state.root.classList.toggle("has-action", Boolean(action));
@@ -160,16 +170,23 @@
     return { key, value };
   }
 
+  function showNextAmbientTip(countAgainstLimit = false) {
+    const { key, value } = dailyTipState();
+    const nextIndex = Number.isInteger(value.nextIndex) ? value.nextIndex : 0;
+    showBubble(t(TIP_KEYS[nextIndex % TIP_KEYS.length]));
+    value.nextIndex = (nextIndex + 1) % TIP_KEYS.length;
+    if (countAgainstLimit) {
+      value.count = Number(value.count || 0) + 1;
+      value.lastAt = Date.now();
+    }
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
   function tryAmbientTip() {
     if (!state.preferences.enabled || state.dragging || document.hidden || activeInput() || intrusiveUiOpen()) return false;
     const { key, value } = dailyTipState();
     if (value.count >= DAILY_TIP_LIMIT || Date.now() - value.lastAt < TIP_INTERVAL) return false;
-    const tipKey = TIP_KEYS[value.nextIndex % TIP_KEYS.length];
-    showBubble(t(tipKey));
-    value.count += 1;
-    value.lastAt = Date.now();
-    value.nextIndex = (value.nextIndex + 1) % TIP_KEYS.length;
-    localStorage.setItem(key, JSON.stringify(value));
+    showNextAmbientTip(true);
     window.setTimeout(() => {
       if (!state.bubbleAction) hideBubble();
     }, 9000);
@@ -202,8 +219,7 @@
   async function activatePet() {
     if (state.dragging || state.moved) return;
     if (state.bubbleAction !== "hint") {
-      const { value } = dailyTipState();
-      showBubble(t(TIP_KEYS[value.nextIndex % TIP_KEYS.length]));
+      showNextAmbientTip();
       return;
     }
     showBubble(t("petHintLoading"));
@@ -295,7 +311,12 @@
     root.dataset.petSkin = "codex-glass";
     root.innerHTML = `
       <button class="site-pet__close" type="button" aria-label="${t("petClose")}" title="${t("petClose")}">×</button>
-      <div class="site-pet__bubble" role="status" aria-live="polite" hidden></div>
+      <div class="site-pet__bubble" hidden>
+        <button class="site-pet__bubble-message" type="button">
+          <span class="site-pet__bubble-text" role="status" aria-live="polite"></span>
+        </button>
+        <button class="site-pet__bubble-close" type="button" aria-label="${t("petDismissMessage")}" title="${t("petDismissMessage")}">×</button>
+      </div>
       <button class="site-pet__character" type="button" aria-label="Codex" title="Codex">
         <span class="site-pet__antenna" aria-hidden="true"><i></i></span>
         <span class="site-pet__head" aria-hidden="true"><i></i><i></i><b>&lt;/&gt;</b></span>
@@ -306,8 +327,18 @@
     document.body.appendChild(root);
     state.root = root;
     state.bubble = root.querySelector(".site-pet__bubble");
+    state.bubbleMessage = root.querySelector(".site-pet__bubble-message");
+    state.bubbleText = root.querySelector(".site-pet__bubble-text");
     const character = root.querySelector(".site-pet__character");
     root.querySelector(".site-pet__close").addEventListener("click", closePet);
+    state.bubbleMessage.addEventListener("click", () => {
+      if (state.bubbleAction === "hint") activatePet();
+      else hideBubble();
+    });
+    root.querySelector(".site-pet__bubble-close").addEventListener("click", (event) => {
+      event.stopPropagation();
+      hideBubble();
+    });
     character.addEventListener("click", activatePet);
     character.addEventListener("pointerdown", beginDrag);
     character.addEventListener("pointermove", moveDrag);
@@ -359,6 +390,9 @@
     window.addEventListener("resize", placeFromPreferences);
     window.addEventListener("alevel:languagechange", () => {
       state.root.querySelector(".site-pet__close").setAttribute("aria-label", t("petClose"));
+      const bubbleClose = state.root.querySelector(".site-pet__bubble-close");
+      bubbleClose.setAttribute("aria-label", t("petDismissMessage"));
+      bubbleClose.setAttribute("title", t("petDismissMessage"));
       hideBubble();
     });
   }

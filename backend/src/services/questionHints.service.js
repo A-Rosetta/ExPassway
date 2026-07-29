@@ -26,7 +26,7 @@ async function loadSampleDefinition() {
 }
 
 function normalizeLanguage(value) {
-  return value === "en" ? "en" : "zh-CN";
+  return value === "zh-CN" ? "zh-CN" : "en";
 }
 
 function normalizedText(value) {

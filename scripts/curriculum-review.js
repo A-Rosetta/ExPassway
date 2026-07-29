@@ -205,17 +205,17 @@
     applyPage();
     authToken = localStorage.getItem(AUTH_TOKEN_KEY) || "";
     if (!authToken) {
-      location.href = "./login.html";
+      location.href = "./admin-login.html";
       return;
     }
     try {
       const currentUser = await window.ALevelApi.getCurrentUser(authToken);
       if (currentUser.role !== "admin") {
-        location.href = "./login.html";
+        location.href = "./admin-login.html";
         return;
       }
     } catch (_error) {
-      location.href = "./login.html";
+      location.href = "./admin-login.html";
       return;
     }
     byId("refreshMappings").addEventListener("click", loadMappings);

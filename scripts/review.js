@@ -1,6 +1,6 @@
 (function () {
   const USER_ID_KEY = "alevel.userId";
-  const { t, applyPage } = window.ALevelI18n;
+  const { t, applyPage, getLanguage } = window.ALevelI18n;
   const state = {
     pageSize: 8,
     pageIndex: 0,
@@ -516,6 +516,7 @@
             selection,
             questions,
             answers: buildSubmitPayload(answers, hintUsageMap, starredQuestions),
+            language: getLanguage(),
           });
           const result = data.result;
           const wrongLog = data.wrongLog || buildWrongLog(result.details || []);
@@ -548,6 +549,7 @@
       const data = await window.ALevelApi.submitPaper({
         paperId: pending.paperId,
         answers: buildSubmitPayload(answers, hintUsageMap, starredQuestions),
+        language: getLanguage(),
       });
       const result = data.result;
       const wrongLog = data.wrongLog || buildWrongLog(result.details || []);

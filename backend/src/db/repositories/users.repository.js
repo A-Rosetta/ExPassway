@@ -8,7 +8,8 @@ function mapUser(row) {
     role: row.role,
     grade: row.grade,
     targetScore: row.target_score,
-    language: row.language || "zh-CN",
+    language: row.language || "en",
+    hasPassword: Boolean(row.password_hash),
     pet: {
       enabled: row.pet_enabled !== false,
       skin: row.pet_skin || "codex-glass",
@@ -43,7 +44,7 @@ export async function createUser(input) {
     input.role || "student",
     input.grade || null,
     input.targetScore ?? null,
-    input.language || "zh-CN",
+    input.language || "en",
   ];
   const result = await query(sql, params);
   return mapUser(result.rows[0]);
@@ -95,7 +96,7 @@ export async function createUserWithPassword(input) {
     input.grade || null,
     input.targetScore ?? null,
     input.passwordHash,
-    input.language || "zh-CN",
+    input.language || "en",
   ];
   const result = await query(sql, params);
   return mapUser(result.rows[0]);
@@ -118,7 +119,7 @@ export async function updateUserProfile(userId, input) {
     input.displayName,
     input.grade || null,
     input.targetScore ?? null,
-    input.language || "zh-CN",
+    input.language || "en",
   ];
   const result = await query(sql, params);
   return result.rows[0] ? mapUser(result.rows[0]) : null;

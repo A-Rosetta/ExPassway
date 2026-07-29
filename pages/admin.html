@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -72,7 +72,7 @@
             <input id="adminSubjectName" type="text" maxlength="120" placeholder="Co-ordinated Sciences" />
           </label>
           <label><span data-i18n="adminSubjectNameZhLabel">中文名称</span>
-            <input id="adminSubjectNameZh" type="text" maxlength="120" placeholder="协调科学" />
+            <input id="adminSubjectNameZh" type="text" maxlength="120" data-i18n-placeholder="adminSubjectNameZhPlaceholder" placeholder="Co-ordinated Sciences" />
           </label>
           <label><span data-i18n="adminSubjectAssetKeyLabel">资源目录名称</span>
             <input id="adminSubjectAssetKey" type="text" maxlength="80" placeholder="coordinated-sciences-0654" />
@@ -150,14 +150,14 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>用户ID</th>
-              <th>姓名</th>
-              <th>邮箱</th>
-              <th>角色</th>
-              <th>年级</th>
-              <th>目标分</th>
+              <th data-i18n="adminUserId">User ID</th>
+              <th data-i18n="adminUserName">Name</th>
+              <th data-i18n="adminUserEmail">Email</th>
+              <th data-i18n="adminUserRole">Role</th>
+              <th data-i18n="adminUserGrade">Grade</th>
+              <th data-i18n="adminUserTargetScore">Target Score</th>
               <th data-i18n="adminUserStatus">账号状态</th>
-              <th>创建时间</th>
+              <th data-i18n="adminCreatedAt">Created At</th>
               <th data-i18n="adminUserActions">账号操作</th>
             </tr>
           </thead>
@@ -172,13 +172,13 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>练习ID</th>
-              <th>用户</th>
-              <th>科目路径</th>
-              <th>状态</th>
-              <th>正确率</th>
-              <th>创建时间</th>
-              <th>提交时间</th>
+              <th data-i18n="adminPracticeId">Practice ID</th>
+              <th data-i18n="adminPracticeUser">User</th>
+              <th data-i18n="adminSubjectPath">Subject Path</th>
+              <th data-i18n="adminPracticeStatus">Status</th>
+              <th data-i18n="adminPracticeAccuracy">Accuracy</th>
+              <th data-i18n="adminCreatedAt">Created At</th>
+              <th data-i18n="adminSubmittedAt">Submitted At</th>
             </tr>
           </thead>
           <tbody id="practicesBody"></tbody>
@@ -187,8 +187,8 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260729-1"></script>
+  <script src="../scripts/i18n.js?v=20260729-4"></script>
   <script src="../scripts/api.js?v=20260729-1"></script>
-  <script src="../scripts/admin.js?v=20260729-1"></script>
+  <script src="../scripts/admin.js?v=20260729-2"></script>
 </body>
 </html>

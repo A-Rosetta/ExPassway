@@ -10,7 +10,7 @@ create table if not exists users (
   role text not null default 'student' check (role in ('student', 'teacher', 'parent', 'admin')),
   grade text,
   target_score integer check (target_score between 0 and 100),
-  language text not null default 'zh-CN',
+  language text not null default 'en',
   pet_enabled boolean not null default true,
   pet_skin text not null default 'codex-glass',
   pet_position_x numeric(6, 5) not null default 0.92 check (pet_position_x between 0 and 1),
@@ -24,7 +24,10 @@ alter table users
 add column if not exists password_hash text;
 
 alter table users
-add column if not exists language text not null default 'zh-CN';
+add column if not exists language text not null default 'en';
+
+alter table users
+alter column language set default 'en';
 
 alter table users
 add column if not exists disabled_at timestamptz;

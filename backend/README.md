@@ -37,6 +37,36 @@ npm run db:schema
 When `DATABASE_URL` is set, backend uses PostgreSQL for paper/session persistence.
 If `DATABASE_URL` is not set, backend falls back to in-memory storage.
 
+## Google Login With Supabase
+
+The login page can use Supabase Auth as the Google identity provider while the application keeps its existing local users, roles, practices, notebook, and community data. Supabase verifies Google; the backend verifies the returned Supabase access token, matches the verified email to `users.email`, and issues the existing application token.
+
+1. In Google Cloud Console, create or select a project, configure the OAuth consent screen, and create an OAuth 2.0 Web application client.
+2. In Supabase Dashboard, open Authentication > Providers > Google and copy the Supabase callback URL shown there. It normally has this form:
+
+```text
+https://<project-ref>.supabase.co/auth/v1/callback
+```
+
+3. Add that exact Supabase callback URL to the Google client's Authorized redirect URIs. Put the Google Client ID and Client Secret into the Supabase Google provider settings; do not put the Google Client Secret in this repository or in the browser.
+4. In Supabase Authentication > URL Configuration, set the Site URL and add the deployed login page to Redirect URLs, for example:
+
+```text
+https://<your-domain>/alevel/pages/login.html
+```
+
+5. Set these server environment variables:
+
+```bash
+SUPABASE_URL=https://<project-ref>.supabase.co
+SUPABASE_ANON_KEY=<Supabase publishable or legacy anon key>
+SUPABASE_AUTH_REDIRECT_URL=https://<your-domain>/alevel/pages/login.html
+```
+
+6. Restart `alevel-backend-3002.service`, open the login page, and test with a Google account. The public Supabase publishable/anon key is used only by the backend in this implementation. Never use the Supabase service-role key here.
+
+Supabase may return OAuth tokens in the login-page URL fragment. The page exchanges the access token with the backend and immediately removes the fragment from browser history. Google login does not create a second local account when the verified email already exists. A Google-only account has no local password, so local password-change controls remain hidden. Email captcha or OTP is not implemented yet; the current Email Continue step opens password login and registration.
+
 For an existing database that already contains the legacy Chemistry 0620 or Co-ordinated Sciences
 0654 rows, register them in the dynamic catalogue once:
 

@@ -2,6 +2,51 @@
 
 All notable changes to this project are recorded in this file.
 
+## 2026-07-29 17:58 CST
+
+### Summary
+- Renamed the user-visible web product brand from `A-Level Smart Practice` / `A-Level 智能练习` to `ExPassway` across the homepage, login, administrator login, Biology navigation, community navigation, bilingual strings, browser title, accessibility labels, and static fallback text.
+- Updated the square navigation brand mark from `A` to `E`, preserved the official `ExPassway` casing on login surfaces, and changed the bilingual new-account prompt to reference `ExPassway`.
+- Refreshed every page that loads the shared translation bundle to cache version `20260729-4` so Nginx and browsers do not retain the previous brand.
+- Preserved curriculum references to A-Level, internal `alevel.*` storage keys, JavaScript globals, API paths, Nginx `/alevel/` deployment path, database identifiers, repository paths, and service names for compatibility.
+
+### Verification
+- Confirmed the exact previous product names no longer occur in web HTML, JavaScript, or CSS source while curriculum and internal compatibility identifiers remain unchanged.
+- Passed JavaScript syntax and Git whitespace checks, the focused English/Chinese login and language suite, and the complete no-write student UI suite in desktop Chromium `1440x900` and mobile WebKit `390x844`.
+- Visually inspected the renamed desktop/mobile login and homepage screenshots and confirmed Nginx serves the `ExPassway` markup and `20260729-4` translation asset.
+
+## 2026-07-29 17:11 CST
+
+### Summary
+- Rebuilt the login page as a focused, responsive flow with Google first, an email-format-checked Continue step, and separate password login and account-creation steps.
+- Added a Supabase-backed Google OAuth bridge that verifies the Supabase access token on the server, reuses an existing local user by normalized email, and creates a student account only when that email is new.
+- Required a recent, same-tab Google-login initiation marker before accepting the OAuth fragment callback, then removed the callback fragment immediately.
+- Preserved the existing unique-email constraint and added matching frontend and backend email format validation. Email captcha remains intentionally out of scope for the later verified-email step.
+- Kept standard student login email-only while restoring a separate administrator login route for the existing non-email administrator identifier; no account data was migrated.
+- Made English the default for unsupported systems and new server-side records while preserving first-visit browser-language detection and saved user language choices.
+- Added one global language toggle to every i18n-enabled page, prevented pre-translation Chinese flashes, completed the remaining administrator/PDF-preview language keys, and made analysis advice language-aware.
+- Hid local password-change controls for Google-only accounts while leaving existing email/password accounts unchanged.
+
+### Verification
+- Passed JavaScript syntax checks for all changed frontend/backend/test modules and `git diff --check`.
+- Passed focused login/i18n checks for English and Chinese browser locales, saved-language override, invalid email, duplicate email feedback, two-step login/registration, unconfigured Google state, unsolicited callback rejection, and the administrator login page.
+- Passed the complete student UI suite in desktop Chromium `1440x900` and mobile WebKit `390x844`, covering login, home, paper picker, Biology, notebook, review, analysis, generated paper, community, pet controls, and administrator hint review.
+- Restarted `alevel-backend-3002.service`; verified backend health `200`, unconfigured Google `503 GOOGLE_AUTH_NOT_CONFIGURED`, standard non-email login `400 INVALID_EMAIL`, administrator invalid credentials `401`, and protected current-user route `401` without creating test users or writing practice data.
+- Created pre-change save point `snapshot-pre-login-redesign-2026-07-29-155637`. Supabase/Google credentials and live schema defaults were not applied.
+
+## 2026-07-29 15:21 CST
+
+### Summary
+- Expanded the bilingual pet tip rotation from four to seven messages, retaining the existing PDF download, wrong-notebook, forum, and profile guidance while adding practice review, starred-question, and timed-mode reminders.
+- Fixed repeated manual pet tips by advancing the saved rotation after every display without increasing the three-per-day automatic interruption limit.
+- Made ordinary tip text dismiss the bubble, and added an accessible message close button that only hides the bubble; question-hint invitations still fetch the next hint when their text is selected.
+- Refreshed the affected student-page CSS, i18n, and pet-script cache versions to `20260729-2`; no backend, API, database, pet preference, or existing practice behavior changed.
+
+### Verification
+- Passed `node --check` for the pet script, bilingual strings, and student UI smoke suite, plus `git diff --check`.
+- Passed the no-write student UI browser suite in desktop Chromium `1440x900` and mobile WebKit `390x844`, including three distinct rotating messages, ordinary bubble dismissal, question-hint action, close-without-consuming-hint behavior, page geometry, and failed-request checks.
+- Confirmed Nginx serves the `20260729-2` student assets and inspected the updated desktop and mobile pet-tip screenshots in `/var/tmp`.
+
 ## 2026-07-29 14:47 CST
 
 ### Summary

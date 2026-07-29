@@ -25,7 +25,7 @@
 
       list.innerHTML = rows.map((row) => `
         <article class="question">
-          <h4>第 ${row.questionNo} 题</h4>
+          <h4>${t("questionNumber", { number: row.questionNo })}</h4>
           <div class="tag-row">
             <span class="tag">page ${Number(row.pageIndex || 0) + 1}</span>
             <span class="tag">top ${row.top}</span>

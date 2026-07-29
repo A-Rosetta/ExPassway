@@ -9,7 +9,8 @@ const user = {
   email: "ui-test@example.test",
   grade: "IGCSE",
   targetScore: 90,
-  language: "zh-CN",
+  language: "en",
+  hasPassword: true,
   role: "admin",
   pet: {
     enabled: true,
@@ -337,7 +338,7 @@ async function mockApi(page) {
 async function seedStorage(page, pathname) {
   await page.addInitScript(({ path, currentUser, result, questions }) => {
     localStorage.clear();
-    localStorage.setItem("alevel.language", "zh-CN");
+    localStorage.setItem("alevel.language", "en");
     localStorage.setItem("alevel.userProfile", JSON.stringify(currentUser));
     localStorage.setItem("alevel.selection", JSON.stringify({
       grade: "IGCSE",
@@ -478,7 +479,7 @@ async function verifyStandardPage(browser, config, pageSpec) {
     }
     if (pageSpec.verify) await pageSpec.verify(run.page);
     await assertPageGeometry(run.page, `${config.name}-${pageSpec.name}`);
-    await assertGlass(run.page, `${config.name}-${pageSpec.name}`);
+    if (pageSpec.glass !== false) await assertGlass(run.page, `${config.name}-${pageSpec.name}`);
     await assertAccessibleMotion(run.page, `${config.name}-${pageSpec.name}`);
     assert.deepEqual(run.errors, [], `${config.name}-${pageSpec.name}: page errors`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-${pageSpec.name}: failed requests`);
@@ -514,7 +515,14 @@ async function verifyGeneratedPaper(browser, config) {
     await page.locator(".site-pet__bubble").waitFor({ state: "visible" });
     assert.match(await page.locator(".site-pet__bubble").textContent(), /线索|clue/i);
     await page.clock.resume();
-    await page.locator(".site-pet__character").evaluate((button) => button.click());
+    if (config.mobile) {
+      await page.locator(".site-pet__bubble-close").click();
+      await page.locator(".site-pet__bubble").waitFor({ state: "hidden" });
+      assert.match(await page.locator("[id^='hint_']").first().textContent(), /提示 1\/3|Hint 1\/3/);
+      await page.locator("[id^='hintBtn_']").first().click();
+    } else {
+      await page.locator(".site-pet__bubble-message").click();
+    }
     await page.waitForFunction(() => /提示 2\/3|Hint 2\/3/.test(
       document.querySelector("[id^='hint_']")?.textContent || ""
     ));
@@ -588,15 +596,38 @@ async function verifyPetControls(browser, config) {
     await character.hover();
     assert.equal(await page.locator(".site-pet__close").evaluate((button) => getComputedStyle(button).pointerEvents), "auto");
 
-    const beforeLeft = Number.parseFloat(await pet.evaluate((element) => element.style.left));
+    await character.evaluate((button) => button.click());
+    const firstTip = await page.locator(".site-pet__bubble-message").textContent();
+    assert.match(firstTip, /PDF|question papers/i);
+    await character.evaluate((button) => button.click());
+    const secondTip = await page.locator(".site-pet__bubble-message").textContent();
+    assert.match(secondTip, /错题本|Notebook/i);
+    assert.notEqual(secondTip, firstTip, `${config.name}: pet tips did not rotate`);
+    await character.evaluate((button) => button.click());
+    assert.match(await page.locator(".site-pet__bubble-message").textContent(), /论坛|Forum/i);
+    if (config.mobile) {
+      const [bubbleRect, topbarRect] = await Promise.all([
+        page.locator(".site-pet__bubble").boundingBox(),
+        page.locator(".home-topbar").boundingBox(),
+      ]);
+      assert.ok(
+        bubbleRect && topbarRect && bubbleRect.y >= topbarRect.y + topbarRect.height,
+        `${config.name}: pet tip overlaps the home navigation`
+      );
+    }
+    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-pet-tip.png` });
+    await page.locator(".site-pet__bubble-message").click();
+    await page.locator(".site-pet__bubble").waitFor({ state: "hidden" });
+
+    const beforeTop = Number.parseFloat(await pet.evaluate((element) => element.style.top));
     const keyboardResponse = page.waitForResponse((response) => (
       response.url().endsWith("/api/auth/me/pet")
       && response.request().method() === "PATCH"
     ));
-    await character.press("ArrowLeft");
-    await page.waitForFunction((left) => (
-      Number.parseFloat(document.querySelector(".site-pet")?.style.left || "0") < left
-    ), beforeLeft);
+    await character.press("ArrowUp");
+    await page.waitForFunction((top) => (
+      Number.parseFloat(document.querySelector(".site-pet")?.style.top || "0") < top
+    ), beforeTop);
     await keyboardResponse;
 
     if (!config.mobile) {
@@ -839,8 +870,28 @@ async function verifyCommunity(browser, config) {
 }
 
 const pageSpecs = [
-  { name: "login", path: "/pages/login.html", ready: "#loginBtn", pet: false },
-  { name: "home", path: "/index.html", ready: ".course-card--biology", verify: async (page) => assert.equal(await page.locator(".course-card").count(), 4) },
+  {
+    name: "login",
+    path: "/pages/login.html",
+    ready: "#emailContinueBtn",
+    pet: false,
+    glass: false,
+    verify: async (page) => {
+      await page.locator("#userEmail").fill("ui-test@example.test");
+      await page.locator("#emailContinueBtn").click();
+      await page.locator("#loginBtn").waitFor({ state: "visible" });
+    },
+  },
+  {
+    name: "home",
+    path: "/index.html",
+    ready: ".course-card--biology",
+    verify: async (page) => {
+      assert.equal(await page.locator(".home-brand__mark").textContent(), "E");
+      assert.equal(await page.locator("[data-i18n='homeBrand']").textContent(), "ExPassway");
+      assert.equal(await page.locator(".course-card").count(), 4);
+    },
+  },
   { name: "generate", path: "/pages/generate.html", ready: ".paper-set-item", verify: async (page) => assert.equal(await page.locator(".paper-set-item").count(), 2) },
   { name: "biology", path: "/pages/biology.html", ready: ".chapter-band", verify: async (page) => assert.equal(await page.locator(".chapter-band").count(), 20) },
   { name: "notebook", path: "/pages/notebook.html", ready: ".notebook-question", verify: async (page) => assert.equal(await page.locator(".notebook-question").count(), 10) },
@@ -849,7 +900,10 @@ const pageSpecs = [
 ];
 
 async function runConfig(config) {
-  const browser = await config.browser.launch({ headless: true });
+  const browser = await config.browser.launch({
+    headless: true,
+    ...(config.executablePath ? { executablePath: config.executablePath } : {}),
+  });
   try {
     for (const pageSpec of pageSpecs) {
       await verifyStandardPage(browser, config, pageSpec);
@@ -870,7 +924,13 @@ async function runConfig(config) {
 
 (async () => {
   await runConfig({ name: "desktop-chromium", browser: chromium, viewport: { width: 1440, height: 900 }, mobile: false });
-  await runConfig({ name: "mobile-webkit", browser: webkit, viewport: { width: 390, height: 844 }, mobile: true });
+  await runConfig({
+    name: "mobile-webkit",
+    browser: webkit,
+    viewport: { width: 390, height: 844 },
+    mobile: true,
+    executablePath: process.env.WEBKIT_EXECUTABLE_PATH,
+  });
 })().catch((error) => {
   console.error(error);
   process.exitCode = 1;

@@ -1,6 +1,6 @@
 (function () {
   const USER_ID_KEY = "alevel.userId";
-  const { t, applyPage } = window.ALevelI18n;
+  const { t, applyPage, getLanguage } = window.ALevelI18n;
 
   function byId(id) {
     return document.getElementById(id);
@@ -174,6 +174,7 @@
       const analysis = await window.ALevelApi.buildAnalysis({
         wrongLog: logs,
         lastResult,
+        language: getLanguage(),
       });
       renderBars(analysis.bars || []);
       renderAdvices(analysis.advices || []);

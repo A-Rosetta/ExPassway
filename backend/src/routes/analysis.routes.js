@@ -8,6 +8,7 @@ router.post("/", (req, res) => {
   const analysis = buildAnalysis({
     wrongLog: body.wrongLog,
     lastResult: body.lastResult,
+    language: body.language,
   });
 
   res.json({

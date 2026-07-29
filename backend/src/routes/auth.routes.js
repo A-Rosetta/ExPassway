@@ -4,6 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/http.js";
 import { requireString, toOptionalInteger } from "../utils/validate.js";
 import {
+  createUser,
   createUserWithPassword,
   findUserByEmail,
   getUserById,
@@ -18,6 +19,7 @@ import {
   verifyPassword,
   verifyToken,
 } from "../services/auth.service.js";
+import { env } from "../config/env.js";
 
 const router = Router();
 
@@ -31,7 +33,7 @@ async function ensureAuthColumns() {
   `);
   await query(`
     alter table users
-    add column if not exists language text not null default 'zh-CN'
+    add column if not exists language text not null default 'en'
   `);
   await query(`
     alter table users
@@ -48,7 +50,43 @@ async function ensureAuthColumns() {
 }
 
 function normalizeLanguage(value) {
-  return value === "en" ? "en" : "zh-CN";
+  return value === "zh-CN" ? "zh-CN" : "en";
+}
+
+function isValidEmail(email) {
+  const parts = email.split("@");
+  const [local = "", domain = ""] = parts;
+  const labels = domain.split(".");
+  return email.length <= 254
+    && !/\s/.test(email)
+    && parts.length === 2
+    && local.length > 0
+    && local.length <= 64
+    && !local.startsWith(".")
+    && !local.endsWith(".")
+    && !local.includes("..")
+    && labels.length >= 2
+    && labels.every((label) => (
+      label.length > 0
+      && label.length <= 63
+      && !label.startsWith("-")
+      && !label.endsWith("-")
+      && /^[a-z0-9-]+$/i.test(label)
+    ));
+}
+
+function normalizeEmail(value) {
+  const email = requireString(value, "email").trim().toLowerCase();
+  if (!isValidEmail(email)) {
+    throw new ApiError(400, "Enter a valid email address.", "INVALID_EMAIL");
+  }
+  return email;
+}
+
+function assertGoogleAuthConfigured() {
+  if (!env.supabaseUrl || !env.supabaseAnonKey || !env.supabaseAuthRedirectUrl) {
+    throw new ApiError(503, "Google login is not configured yet.", "GOOGLE_AUTH_NOT_CONFIGURED");
+  }
 }
 
 function assertUsersApiEnabled() {
@@ -67,7 +105,7 @@ router.post("/register", asyncHandler(async (req, res) => {
 
   const body = req.body || {};
   const displayName = requireString(body.displayName, "displayName");
-  const email = requireString(body.email, "email").toLowerCase();
+  const email = normalizeEmail(body.email);
   const password = requireString(body.password, "password");
   if (password.length < 6) {
     throw new ApiError(400, "Password must be at least 6 characters.", "INVALID_INPUT");
@@ -91,16 +129,94 @@ router.post("/register", asyncHandler(async (req, res) => {
   res.status(201).json({ ok: true, data: { user, token } });
 }));
 
+router.get("/google/start", asyncHandler(async (_req, res) => {
+  assertGoogleAuthConfigured();
+  const url = new URL(`${env.supabaseUrl}/auth/v1/authorize`);
+  url.searchParams.set("provider", "google");
+  url.searchParams.set("redirect_to", env.supabaseAuthRedirectUrl);
+  res.json({ ok: true, data: { url: url.toString() } });
+}));
+
+router.post("/google", asyncHandler(async (req, res) => {
+  assertUsersApiEnabled();
+  assertGoogleAuthConfigured();
+  await ensureAuthColumns();
+
+  const accessToken = requireString(req.body?.accessToken, "accessToken");
+  const authResponse = await fetch(`${env.supabaseUrl}/auth/v1/user`, {
+    headers: {
+      apikey: env.supabaseAnonKey,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  if (!authResponse.ok) {
+    throw new ApiError(401, "Google login could not be verified.", "UNAUTHORIZED");
+  }
+
+  const identity = await authResponse.json();
+  const providers = Array.isArray(identity?.app_metadata?.providers)
+    ? identity.app_metadata.providers
+    : [identity?.app_metadata?.provider];
+  if (!providers.includes("google")) {
+    throw new ApiError(401, "A Google identity is required.", "UNAUTHORIZED");
+  }
+  if (!identity?.email_confirmed_at && !identity?.confirmed_at) {
+    throw new ApiError(401, "Google email is not verified.", "UNVERIFIED_EMAIL");
+  }
+  const email = normalizeEmail(identity.email);
+  let user = await findUserByEmail(email);
+  if (!user) {
+    const metadata = identity.user_metadata || {};
+    const displayName = String(metadata.full_name || metadata.name || email.split("@")[0]).trim();
+    user = await createUser({
+      displayName,
+      email,
+      role: "student",
+      grade: null,
+      targetScore: null,
+      language: normalizeLanguage(req.body?.language),
+    });
+  }
+  if (user.isDisabled) {
+    throw new ApiError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
+  }
+
+  const token = issueToken(user);
+  const { passwordHash: _ignore, ...safeUser } = user;
+  res.json({ ok: true, data: { user: safeUser, token } });
+}));
+
 router.post("/login", asyncHandler(async (req, res) => {
   assertUsersApiEnabled();
   await ensureAuthColumns();
 
   const body = req.body || {};
-  const email = requireString(body.identifier ?? body.email, "identifier").toLowerCase();
+  const email = normalizeEmail(body.identifier ?? body.email);
   const password = requireString(body.password, "password");
   const user = await findUserByEmail(email);
 
   if (!user?.passwordHash || !verifyPassword(password, user.passwordHash)) {
+    throw new ApiError(401, "Account or password is incorrect.", "UNAUTHORIZED");
+  }
+  if (user.isDisabled) {
+    throw new ApiError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
+  }
+
+  const token = issueToken(user);
+  const { passwordHash: _ignore, ...safeUser } = user;
+  res.json({ ok: true, data: { user: safeUser, token } });
+}));
+
+router.post("/admin/login", asyncHandler(async (req, res) => {
+  assertUsersApiEnabled();
+  await ensureAuthColumns();
+
+  const body = req.body || {};
+  const identifier = requireString(body.identifier, "identifier").trim().toLowerCase();
+  const password = requireString(body.password, "password");
+  const user = await findUserByEmail(identifier);
+
+  if (user?.role !== "admin" || !user.passwordHash || !verifyPassword(password, user.passwordHash)) {
     throw new ApiError(401, "Account or password is incorrect.", "UNAUTHORIZED");
   }
   if (user.isDisabled) {

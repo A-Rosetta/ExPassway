@@ -1,6 +1,6 @@
 (function () {
   const AUTH_TOKEN_KEY = "alevel.authToken";
-  const { t, applyPage } = window.ALevelI18n;
+  const { t, applyPage, getLanguage } = window.ALevelI18n;
   let authToken = "";
   let currentImportJob = null;
 
@@ -210,7 +210,7 @@
     if (!select) return;
     const selected = select.value;
     select.innerHTML = (subjects || []).map((subject) => `
-      <option value="${safeText(subject.code)}">${safeText(`${subject.code} - ${subject.nameZh || subject.name}`)}</option>
+      <option value="${safeText(subject.code)}">${safeText(`${subject.code} - ${getLanguage() === "en" ? subject.name : subject.nameZh || subject.name}`)}</option>
     `).join("");
     if ([...select.options].some((option) => option.value === selected)) select.value = selected;
   }
@@ -517,7 +517,7 @@
     if (!authToken) {
       setStatus(t("adminLoginRequired"), true);
       setTimeout(() => {
-        location.href = "./login.html";
+        location.href = "./admin-login.html";
       }, 350);
       return;
     }
@@ -527,14 +527,14 @@
       if (currentUser?.role !== "admin") {
         setStatus(t("notAdmin"), true);
         setTimeout(() => {
-          location.href = "./login.html";
+          location.href = "./admin-login.html";
         }, 500);
         return;
       }
     } catch (_err) {
       setStatus(t("adminSessionInvalid"), true);
       setTimeout(() => {
-        location.href = "./login.html";
+        location.href = "./admin-login.html";
       }, 500);
       return;
     }

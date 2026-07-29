@@ -1,12 +1,50 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="refresh" content="0; url=./login.html" />
-  <title>登录</title>
+  <title data-i18n="adminLoginPageTitle">Administrator login</title>
+  <link rel="stylesheet" href="../assets/styles.css?v=20260729-4" />
 </head>
-<body>
-  <script>location.replace("./login.html");</script>
+<body class="student-ui auth-page">
+  <main class="auth-layout">
+    <section class="auth-box" aria-labelledby="adminLoginTitle">
+      <a class="auth-brand" href="../index.html" data-i18n="homeBrand">ExPassway</a>
+      <div class="auth-heading">
+        <h1 id="adminLoginTitle" data-i18n="adminLoginHeroTitle">Administrator login</h1>
+        <p data-i18n="adminLoginHeroSubtitle">Use your existing administrator credentials to continue.</p>
+      </div>
+      <div class="auth-step">
+        <form id="adminLoginForm" novalidate>
+          <label class="sr-only" for="adminIdentifier" data-i18n="adminIdentifierLabel">Administrator email or username</label>
+          <input
+            id="adminIdentifier"
+            class="auth-input"
+            type="text"
+            autocomplete="username"
+            required
+            data-i18n-placeholder="adminIdentifierPlaceholder"
+            placeholder="Administrator email or username"
+          />
+          <label class="sr-only" for="adminPassword" data-i18n="passwordLabel">Password</label>
+          <input
+            id="adminPassword"
+            class="auth-input"
+            type="password"
+            autocomplete="current-password"
+            required
+            data-i18n-placeholder="passwordPlaceholder"
+            placeholder="Password"
+          />
+          <button id="adminLoginBtn" class="auth-submit-button" type="submit" data-i18n="loginBtn">Log in</button>
+        </form>
+      </div>
+      <p id="authStatus" class="auth-status" role="status" aria-live="polite" hidden></p>
+    </section>
+  </main>
+
+  <script src="../scripts/i18n.js?v=20260729-4"></script>
+  <script src="../scripts/api.js?v=20260729-3"></script>
+  <script src="../scripts/admin-login.js?v=20260729-1"></script>
 </body>
 </html>
