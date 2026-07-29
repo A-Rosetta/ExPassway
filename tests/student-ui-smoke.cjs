@@ -168,7 +168,7 @@ const threads = [
   {
     id: "thread-1",
     questionKey: "CIE-IGCHEM-2023-S-22-01",
-    title: "为什么这个反应的限量试剂是 B？",
+    title: "关于题目 CIE-IGCHEM-2023-S-22-01 的疑问",
     subject: "IGCSE Chemistry",
     subjectCode: "0620",
     paper: "MCQ",
@@ -335,10 +335,10 @@ async function mockApi(page) {
   });
 }
 
-async function seedStorage(page, pathname) {
-  await page.addInitScript(({ path, currentUser, result, questions }) => {
+async function seedStorage(page, pathname, language = "en") {
+  await page.addInitScript(({ path, currentUser, result, questions, selectedLanguage }) => {
     localStorage.clear();
-    localStorage.setItem("alevel.language", "en");
+    localStorage.setItem("alevel.language", selectedLanguage);
     localStorage.setItem("alevel.userProfile", JSON.stringify(currentUser));
     localStorage.setItem("alevel.selection", JSON.stringify({
       grade: "IGCSE",
@@ -357,7 +357,13 @@ async function seedStorage(page, pathname) {
       { topic: "Stoichiometry", mistake: "concept", correct: 1, wrong: 3 },
       { topic: "Bonding", mistake: "calculation", correct: 2, wrong: 1 },
     ]));
-  }, { path: pathname, currentUser: user, result: practiceResult, questions: reviewQuestions });
+  }, {
+    path: pathname,
+    currentUser: user,
+    result: practiceResult,
+    questions: reviewQuestions,
+    selectedLanguage: language,
+  });
 }
 
 async function assertPageGeometry(page, label) {
@@ -455,7 +461,7 @@ async function openPage(browser, config, pathname, options = {}) {
   const failedRequests = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("requestfailed", (request) => failedRequests.push(`${request.method()} ${request.url()}`));
-  await seedStorage(page, pathname);
+  await seedStorage(page, pathname, options.language);
   await mockApi(page);
   await page.goto(`${baseUrl}${pathname}`, { waitUntil: "networkidle" });
   return { context, page, errors, failedRequests };
@@ -703,6 +709,39 @@ async function verifyCommunity(browser, config) {
     await page.locator(".discussion-thread").first().waitFor({ state: "visible" });
     assert.equal(await page.locator(".discussion-thread").count(), 2);
     assert.equal(await page.locator(".community-filter-card").getAttribute("open"), config.mobile ? null : "");
+    assert.equal(
+      await page.locator("#communitySyllabusCode option[value='0654']").textContent(),
+      "0654 - Co-ordinated Sciences"
+    );
+    assert.equal(
+      await page.locator(".discussion-thread").first().locator(".thread-title-button span").last().textContent(),
+      "Question about CIE-IGCHEM-2023-S-22-01"
+    );
+    assert.equal(
+      await page.locator(".discussion-thread").nth(1).locator(".thread-title-button span").last().textContent(),
+      "离子方程式中旁观离子如何快速判断？"
+    );
+
+    const zhRun = await openPage(browser, config, "/pages/community.html", { language: "zh-CN" });
+    try {
+      await zhRun.page.locator(".discussion-thread").first().waitFor({ state: "visible" });
+      assert.equal(
+        await zhRun.page.locator("#communitySyllabusCode option[value='0654']").textContent(),
+        "0654 - 协调科学"
+      );
+      assert.equal(
+        await zhRun.page.locator(".discussion-thread").first().locator(".thread-title-button span").last().textContent(),
+        "关于题目 CIE-IGCHEM-2023-S-22-01 的疑问"
+      );
+      assert.equal(
+        await zhRun.page.locator(".discussion-thread").nth(1).locator(".thread-title-button span").last().textContent(),
+        "离子方程式中旁观离子如何快速判断？"
+      );
+      assert.deepEqual(zhRun.errors, [], `${config.name}-community-zh: page errors`);
+      assert.deepEqual(zhRun.failedRequests, [], `${config.name}-community-zh: failed requests`);
+    } finally {
+      await zhRun.context.close();
+    }
 
     await page.locator("#communityFollowedToggle").click();
     await page.waitForFunction(() => document.querySelectorAll(".discussion-thread").length === 1);

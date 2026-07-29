@@ -2,6 +2,19 @@
 
 All notable changes to this project are recorded in this file.
 
+## 2026-07-29 21:14 CST
+
+### Summary
+- Fixed the community syllabus filter to use English catalog subject names in English mode and Chinese catalog names in Chinese mode instead of always preferring `nameZh`.
+- Localized only recognizable system-generated discussion titles between `Question about {key}` and `关于题目 {key} 的疑问` at render time without rewriting stored discussion records.
+- Preserved user-authored discussion titles, posts, replies, tags, question text, and other content in their original language.
+- Updated the community script cache version to `20260729-2` so existing browsers load the corrected dynamic localization.
+
+### Verification
+- Passed JavaScript syntax and Git whitespace checks plus the complete no-write student UI suite in desktop Chromium `1440x900` and mobile WebKit `390x844`.
+- Verified independent English and Chinese community contexts: catalog subject names and system title templates follow the interface language while a user-authored Chinese title remains unchanged.
+- Inspected the English desktop/mobile community screenshots and confirmed Nginx serves the updated community script reference.
+
 ## 2026-07-29 17:58 CST
 
 ### Summary

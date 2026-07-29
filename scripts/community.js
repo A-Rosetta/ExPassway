@@ -2,7 +2,7 @@
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const USER_PROFILE_KEY = "alevel.userProfile";
   const USER_ID_KEY = "alevel.userId";
-  const { t, applyPage } = window.ALevelI18n;
+  const { t, applyPage, getLanguage } = window.ALevelI18n;
   if (window.marked?.use && window.markedKatex) {
     window.marked.use(window.markedKatex({
       nonStandard: true,
@@ -1285,6 +1285,21 @@
     return state.catalogPapers.filter((paper) => paper.subjectCode === code);
   }
 
+  function localizedSubjectName(subject) {
+    return getLanguage() === "zh-CN" ? (subject.nameZh || subject.name) : subject.name;
+  }
+
+  function localizedThreadTitle(thread) {
+    const title = String(thread.title || "");
+    const questionKey = String(thread.questionKey || "");
+    const chineseMatch = title.match(/^关于题目\s+(.+?)\s+的疑问$/);
+    const englishMatch = title.match(/^Question about\s+(.+)$/);
+    const templateKey = chineseMatch?.[1] || englishMatch?.[1] || "";
+    return questionKey && templateKey === questionKey
+      ? t("communityDefaultQuestionTitle", { key: questionKey })
+      : title;
+  }
+
   function refreshCatalogFilterOptions() {
     const papers = papersForSelectedSubject();
     const unique = (items) => [...new Set(items)].sort((a, b) => String(a).localeCompare(String(b)));
@@ -1302,7 +1317,7 @@
     const subjects = await window.ALevelApi.getCatalogSubjects();
     state.catalogSubjects = Array.isArray(subjects) ? subjects : [];
     byId("communitySyllabusCode").innerHTML = state.catalogSubjects.map((subject) => `
-      <option value="${escapeHtml(subject.code)}">${escapeHtml(`${subject.code} - ${subject.nameZh || subject.name}`)}</option>
+      <option value="${escapeHtml(subject.code)}">${escapeHtml(`${subject.code} - ${localizedSubjectName(subject)}`)}</option>
     `).join("");
     const paperLists = await Promise.all(state.catalogSubjects.map((subject) => (
       window.ALevelApi.getCatalogPapers(subject.code)
@@ -1386,7 +1401,7 @@
         <div class="discussion-thread-head">
           <button class="thread-title-button" data-open-thread="${escapeHtml(thread.id)}">
             ${thread.sticky ? `<span class="status-pill">${t("communitySticky")}</span>` : ""}
-            <span>${escapeHtml(thread.title)}</span>
+            <span>${escapeHtml(localizedThreadTitle(thread))}</span>
           </button>
           <span class="status-pill status-${escapeHtml(thread.status)}">${statusLabel(thread.status)}</span>
         </div>
@@ -1441,7 +1456,7 @@
     detail.innerHTML = `
       <div class="discussion-detail-head">
         <div>
-          <h2>${escapeHtml(thread.title)}</h2>
+          <h2>${escapeHtml(localizedThreadTitle(thread))}</h2>
           <div class="tag-row">
             <span class="status-pill status-${escapeHtml(thread.status)}">${statusLabel(thread.status)}</span>
             ${(thread.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
