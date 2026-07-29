@@ -2,7 +2,8 @@
   const PRACTICE_MODE_KEY = "alevel.practiceMode";
   const PAPER_SET_KEY = "alevel.selectedPaperSet";
   const USER_ID_KEY = "alevel.userId";
-  const { t, applyPage } = window.ALevelI18n;
+  const AUTH_TOKEN_KEY = "alevel.authToken";
+  const { t, applyPage, getLanguage } = window.ALevelI18n;
   const requestedTarget = readRequestedTarget();
   const selection = getPracticeSelection();
   let subjectConfig = window.EXAM_CATALOG?.[selection.subject]
@@ -888,6 +889,7 @@
     if (pageQuestions.length) {
       prefetchAdjacentQuestionImages(picked, start);
     }
+    window.ALevelPet?.notifyQuestionChanged?.();
   }
 
   function bindQuestionInteractions() {
@@ -898,22 +900,7 @@
       const hintBtn = byId(`hintBtn_${idx}`);
       const hintEl = byId(`hint_${idx}`);
       if (hintBtn && hintEl && q) {
-        hintBtn.onclick = () => {
-          const hints = Array.isArray(q.hints) ? q.hints : [];
-          if (!hints.length) {
-            hintEl.textContent = t("noHintAvailable");
-            return;
-          }
-          const row = state.hintUsageMap[idx];
-          const nextIndex = Math.min(row.used, hints.length - 1);
-          hintEl.textContent = t("hintProgress", {
-            index: nextIndex + 1,
-            total: hints.length,
-            hint: hints[nextIndex],
-          });
-          row.used += 1;
-          hintBtn.textContent = row.used >= hints.length ? t("allHintsShown") : t("nextHint");
-        };
+        hintBtn.onclick = () => showNextQuestionHint(idx).catch(() => {});
       }
     }
 
@@ -980,6 +967,51 @@
     timerElapsedSeconds: 0,
     timerIntervalId: null,
   };
+
+  async function ensureQuestionHints(index) {
+    const question = state.questions[index];
+    if (!question) return [];
+    const language = getLanguage();
+    if (Array.isArray(question.hints) && question.hints.length
+      && (!question.aiHintLanguage || question.aiHintLanguage === language)) return question.hints;
+    const authToken = localStorage.getItem(AUTH_TOKEN_KEY) || "";
+    if (!authToken || !window.ALevelApi?.getQuestionHints) return [];
+    const result = await window.ALevelApi.getQuestionHints(authToken, question.id, language);
+    question.hints = Array.isArray(result?.hints) ? result.hints : [];
+    question.aiHintLanguage = language;
+    if (state.hintUsageMap[index]) state.hintUsageMap[index].total = question.hints.length;
+    return question.hints;
+  }
+
+  async function showNextQuestionHint(index) {
+    const question = state.questions[index];
+    const hintEl = byId(`hint_${index}`);
+    const hintBtn = byId(`hintBtn_${index}`);
+    if (!question || !hintEl) return;
+    if (hintBtn) hintBtn.disabled = true;
+    hintEl.textContent = t("petHintLoading");
+    try {
+      const hints = await ensureQuestionHints(index);
+      if (!hints.length) {
+        hintEl.textContent = t("noHintAvailable");
+        return;
+      }
+      const row = state.hintUsageMap[index];
+      const nextIndex = Math.min(row.used, hints.length - 1);
+      hintEl.textContent = t("hintProgress", {
+        index: nextIndex + 1,
+        total: hints.length,
+        hint: hints[nextIndex],
+      });
+      row.used = Math.min(hints.length, row.used + 1);
+      if (hintBtn) hintBtn.textContent = row.used >= hints.length ? t("allHintsShown") : t("nextHint");
+    } catch (error) {
+      hintEl.textContent = t("hintLoadFailed", { message: error.message || t("retryLater") });
+      throw error;
+    } finally {
+      if (hintBtn) hintBtn.disabled = false;
+    }
+  }
 
   function updateTimerDisplay() {
     const timerEl = byId("timerDisplay");
@@ -1350,6 +1382,21 @@
       location.href = "analysis.html";
     };
   }
+
+  window.ALevelPet?.registerHintProvider?.({
+    getQuestionKey() {
+      return state.questions[state.currentPageIndex * state.pageSize]?.id || "";
+    },
+    hasUnseenHint() {
+      const index = state.currentPageIndex * state.pageSize;
+      const question = state.questions[index];
+      const row = state.hintUsageMap[index];
+      return Boolean(question && row && (!question.hints?.length || row.used < question.hints.length));
+    },
+    showNextHint() {
+      return showNextQuestionHint(state.currentPageIndex * state.pageSize);
+    },
+  });
 
   applyPage();
 })();

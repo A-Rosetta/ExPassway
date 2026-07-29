@@ -11,6 +11,11 @@ const user = {
   targetScore: 90,
   language: "zh-CN",
   role: "admin",
+  pet: {
+    enabled: true,
+    skin: "codex-glass",
+    position: { x: 0.9, y: 0.82 },
+  },
 };
 const subjects = [
   { code: "0610", name: "Biology", nameZh: "生物", qualification: "IGCSE", board: "CIE", paperCount: 2, questionCount: 80, active: true },
@@ -137,9 +142,26 @@ const generatedQuestions = Array.from({ length: 4 }, (_, index) => ({
   answer: index % 4,
   topic: index % 2 ? "Bonding" : "Stoichiometry",
   difficulty: "medium",
-  hints: ["Compare the quantities before choosing."],
+  hints: [],
   images: [{ url: `/assets/question-images/0620_s23_qp_21/q${String(index + 1).padStart(2, "0")}_full.png` }],
 }));
+const adminHintSet = {
+  id: "00000000-0000-4000-8000-000000000001",
+  questionId: generatedQuestions[0].id,
+  language: "zh-CN",
+  promptVersion: "igcse-progressive-v1",
+  hints: ["先找出图中的关键变化。", "比较变化前后的粒子分布。", "用扩散概念判断每一项。"],
+  status: "pending_review",
+  model: "test-vision-model",
+  question: {
+    paperSlug: generatedQuestions[0].paperSlug,
+    questionNo: 1,
+    subjectCode: "0610",
+    stem: generatedQuestions[0].stem,
+    options: generatedQuestions[0].options,
+    images: generatedQuestions[0].images,
+  },
+};
 
 const threads = [
   {
@@ -203,14 +225,62 @@ function json(route, data, status = 200) {
 }
 
 async function mockApi(page) {
+  let petPreferences = structuredClone(user.pet);
+  let hintReviewStatus = "pending_review";
   await page.route("**/api/**", async (route) => {
     const request = route.request();
     const url = new URL(request.url());
     const path = url.pathname;
     const method = request.method();
 
-    if (path === "/api/auth/me") return json(route, user);
+    if (path === "/api/auth/me") return json(route, { ...user, pet: petPreferences });
+    if (path === "/api/auth/me/pet" && method === "PATCH") {
+      const body = request.postDataJSON();
+      petPreferences = body;
+      return json(route, body);
+    }
+    if (/^\/api\/question-hints\//.test(path) && method === "POST") {
+      const language = request.postDataJSON()?.language;
+      return json(route, {
+        questionKey: decodeURIComponent(path.split("/").at(-1)),
+        language,
+        hints: language === "en"
+          ? ["Find the relevant evidence.", "Compare each case.", "Apply the concept once more."]
+          : ["先找出题图中的关键证据。", "逐项比较题目给出的情况。", "再应用一次相关概念。"],
+        source: "cache",
+        promptVersion: "igcse-progressive-v1",
+      });
+    }
     if (path === "/api/meta/storage") return json(route, { mode: "postgresql" });
+    if (path === "/api/admin/records") {
+      return json(route, {
+        summary: { usersCount: 1, practiceCount: 1, submittedCount: 1 },
+        latestUsers: [user],
+        latestPractices: [],
+      });
+    }
+    if (path === "/api/admin/subjects") return json(route, subjects);
+    if (path === "/api/admin/imports") return json(route, []);
+    if (path === "/api/admin/question-hints/sample-status") {
+      return json(route, {
+        version: "biology-hint-sample-v1",
+        expected: 24,
+        approved: hintReviewStatus === "approved" ? 1 : 0,
+        pendingReview: hintReviewStatus === "pending_review" ? 1 : 0,
+        rejected: hintReviewStatus === "rejected" ? 1 : 0,
+        missing: 23,
+        ready: false,
+      });
+    }
+    if (path === "/api/admin/question-hints" && method === "GET") {
+      return json(route, url.searchParams.get("status") === hintReviewStatus
+        ? [{ ...adminHintSet, status: hintReviewStatus }]
+        : []);
+    }
+    if (/^\/api\/admin\/question-hints\/[^/]+$/.test(path) && method === "PATCH") {
+      hintReviewStatus = request.postDataJSON().status;
+      return json(route, { ...adminHintSet, status: hintReviewStatus });
+    }
     if (path === "/api/catalog/subjects") return json(route, subjects);
     if (/^\/api\/catalog\/subjects\/\d{4}\/papers$/.test(path)) {
       return json(route, papersFor(path.split("/")[4]));
@@ -373,12 +443,13 @@ async function assertGlass(page, label) {
   assert.ok(blur && Number(blur[1]) >= 24, `${label}: glass blur is missing ${JSON.stringify(glass)}`);
 }
 
-async function openPage(browser, config, pathname) {
+async function openPage(browser, config, pathname, options = {}) {
   const context = await browser.newContext({
     viewport: config.viewport,
     reducedMotion: "reduce",
   });
   const page = await context.newPage();
+  if (options.clock) await page.clock.install();
   const errors = [];
   const failedRequests = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -393,6 +464,18 @@ async function verifyStandardPage(browser, config, pageSpec) {
   const run = await openPage(browser, config, pageSpec.path);
   try {
     await run.page.locator(pageSpec.ready).first().waitFor({ state: "visible" });
+    if (pageSpec.pet === false) {
+      assert.equal(await run.page.locator(".site-pet").count(), 0, `${config.name}-${pageSpec.name}: pet must be absent`);
+    } else {
+      await run.page.locator(".site-pet").waitFor({ state: "visible" });
+      const petRect = await run.page.locator(".site-pet").boundingBox();
+      assert.ok(
+        petRect && petRect.x >= 0 && petRect.y >= 0
+          && petRect.x + petRect.width <= config.viewport.width
+          && petRect.y + petRect.height <= config.viewport.height,
+        `${config.name}-${pageSpec.name}: pet is outside the viewport ${JSON.stringify(petRect)}`
+      );
+    }
     if (pageSpec.verify) await pageSpec.verify(run.page);
     await assertPageGeometry(run.page, `${config.name}-${pageSpec.name}`);
     await assertGlass(run.page, `${config.name}-${pageSpec.name}`);
@@ -409,7 +492,7 @@ async function verifyStandardPage(browser, config, pageSpec) {
 }
 
 async function verifyGeneratedPaper(browser, config) {
-  const run = await openPage(browser, config, "/pages/generate.html");
+  const run = await openPage(browser, config, "/pages/generate.html", { clock: true });
   const { page } = run;
   try {
     await page.locator(".paper-set-btn.start").click();
@@ -421,6 +504,21 @@ async function verifyGeneratedPaper(browser, config) {
     const questionImage = page.locator(".question-image img").first();
     await questionImage.waitFor({ state: "visible" });
     assert.equal(await page.locator(".option-item").count(), 4);
+    await page.locator("[id^='hintBtn_']").first().click();
+    await page.waitForFunction(() => /提示 1\/3|Hint 1\/3/.test(
+      document.querySelector("[id^='hint_']")?.textContent || ""
+    ));
+    assert.match(await page.locator("[id^='hint_']").first().textContent(), /提示 1\/3|Hint 1\/3/);
+
+    await page.clock.fastForward(60000);
+    await page.locator(".site-pet__bubble").waitFor({ state: "visible" });
+    assert.match(await page.locator(".site-pet__bubble").textContent(), /线索|clue/i);
+    await page.clock.resume();
+    await page.locator(".site-pet__character").evaluate((button) => button.click());
+    await page.waitForFunction(() => /提示 2\/3|Hint 2\/3/.test(
+      document.querySelector("[id^='hint_']")?.textContent || ""
+    ));
+    assert.match(await page.locator("[id^='hint_']").first().textContent(), /提示 2\/3|Hint 2\/3/);
     const imagePixels = await questionImage.evaluate(async (image) => {
       await image.decode();
       const canvas = document.createElement("canvas");
@@ -480,6 +578,80 @@ async function verifyGeneratedPaper(browser, config) {
   }
 }
 
+async function verifyPetControls(browser, config) {
+  const run = await openPage(browser, config, "/index.html");
+  const { page } = run;
+  try {
+    const pet = page.locator(".site-pet");
+    const character = page.locator(".site-pet__character");
+    await pet.waitFor({ state: "visible" });
+    await character.hover();
+    assert.equal(await page.locator(".site-pet__close").evaluate((button) => getComputedStyle(button).pointerEvents), "auto");
+
+    const beforeLeft = Number.parseFloat(await pet.evaluate((element) => element.style.left));
+    const keyboardResponse = page.waitForResponse((response) => (
+      response.url().endsWith("/api/auth/me/pet")
+      && response.request().method() === "PATCH"
+    ));
+    await character.press("ArrowLeft");
+    await page.waitForFunction((left) => (
+      Number.parseFloat(document.querySelector(".site-pet")?.style.left || "0") < left
+    ), beforeLeft);
+    await keyboardResponse;
+
+    if (!config.mobile) {
+      const dragStart = await character.boundingBox();
+      await page.mouse.move(dragStart.x + dragStart.width / 2, dragStart.y + dragStart.height / 2);
+      await page.mouse.down();
+      await page.mouse.move(120, 180, { steps: 8 });
+      await page.mouse.up();
+      await page.waitForFunction(() => window.ALevelPet.getPreferences().position.x < 0.2);
+      const afterDrag = await pet.boundingBox();
+      assert.ok(
+        afterDrag.x >= 0 && afterDrag.y >= 0 && afterDrag.x < 180,
+        `${config.name}: pet drag did not persist in the viewport ${JSON.stringify(afterDrag)}`
+      );
+    }
+
+    await character.hover();
+    const closeResponse = page.waitForResponse((response) => (
+      response.url().endsWith("/api/auth/me/pet")
+      && response.request().method() === "PATCH"
+    ));
+    await page.locator(".site-pet__close").click();
+    await closeResponse;
+    await pet.waitFor({ state: "hidden" });
+    await page.locator("#openProfile").click();
+    await page.locator(".setting-toggle").click();
+    await pet.waitFor({ state: "visible" });
+    assert.equal(await page.locator("#petSkin").inputValue(), "codex-glass");
+    assert.deepEqual(run.errors, [], `${config.name}-pet-controls: page errors ${JSON.stringify(run.errors)}`);
+    assert.deepEqual(run.failedRequests, [], `${config.name}-pet-controls: failed requests`);
+    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-pet-controls.png` });
+  } finally {
+    await run.context.close();
+  }
+}
+
+async function verifyAdminHintReview(browser, config) {
+  const run = await openPage(browser, config, "/pages/admin.html");
+  const { page } = run;
+  try {
+    await page.locator(".admin-hint-card").waitFor({ state: "visible" });
+    assert.equal(await page.locator(".site-pet").count(), 0, `${config.name}: pet must be absent from admin`);
+    await page.locator(".admin-hint-question img").waitFor({ state: "visible" });
+    assert.equal(await page.locator(".admin-hint-steps li").count(), 3);
+    await page.locator("[data-hint-review='approved']").click();
+    await page.locator(".admin-hint-card").waitFor({ state: "detached" });
+    assert.match(await page.locator("#adminHintReviewStatus").textContent(), /1\/24/);
+    assert.deepEqual(run.errors, [], `${config.name}-admin-hints: page errors ${JSON.stringify(run.errors)}`);
+    assert.deepEqual(run.failedRequests, [], `${config.name}-admin-hints: failed requests`);
+    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-admin-hints.png`, fullPage: true });
+  } finally {
+    await run.context.close();
+  }
+}
+
 async function closeMathKeyboard(page) {
   await page.waitForTimeout(50);
   const close = page.locator("#communityMathKeyboardClose");
@@ -516,6 +688,7 @@ async function verifyCommunity(browser, config) {
     assert.equal(await page.locator("#communityComposerError").isHidden(), true);
     await page.locator("#communitySubmitThread").click();
     assert.equal(await page.locator("#communityBodyEditor").getAttribute("aria-invalid"), "true");
+    await page.locator("#communityComposerError").waitFor({ state: "visible" });
     await page.locator("#communityTitle").fill("正文错误不应被标题输入清除");
     assert.equal(await page.locator("#communityComposerError").isVisible(), true);
 
@@ -666,7 +839,7 @@ async function verifyCommunity(browser, config) {
 }
 
 const pageSpecs = [
-  { name: "login", path: "/pages/login.html", ready: "#loginBtn" },
+  { name: "login", path: "/pages/login.html", ready: "#loginBtn", pet: false },
   { name: "home", path: "/index.html", ready: ".course-card--biology", verify: async (page) => assert.equal(await page.locator(".course-card").count(), 4) },
   { name: "generate", path: "/pages/generate.html", ready: ".paper-set-item", verify: async (page) => assert.equal(await page.locator(".paper-set-item").count(), 2) },
   { name: "biology", path: "/pages/biology.html", ready: ".chapter-band", verify: async (page) => assert.equal(await page.locator(".chapter-band").count(), 20) },
@@ -686,6 +859,10 @@ async function runConfig(config) {
     console.log(JSON.stringify({ viewport: config.name, page: "generated-paper", ok: true }));
     await verifyCommunity(browser, config);
     console.log(JSON.stringify({ viewport: config.name, page: "community", ok: true }));
+    await verifyPetControls(browser, config);
+    console.log(JSON.stringify({ viewport: config.name, page: "pet-controls", ok: true }));
+    await verifyAdminHintReview(browser, config);
+    console.log(JSON.stringify({ viewport: config.name, page: "admin-hints", ok: true }));
   } finally {
     await browser.close();
   }

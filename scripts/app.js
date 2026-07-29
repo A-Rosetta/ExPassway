@@ -335,6 +335,10 @@
       if (preferredLanguageEl) {
         preferredLanguageEl.value = normalizeLanguage(user?.language || currentLanguage);
       }
+      const petEnabled = getEl("petEnabled");
+      const petSkin = getEl("petSkin");
+      if (petEnabled) petEnabled.checked = user?.pet?.enabled !== false;
+      if (petSkin) petSkin.value = user?.pet?.skin || "codex-glass";
     }
 
     preferredLanguageEl?.addEventListener("change", () => {
@@ -349,6 +353,46 @@
     catalogSubjects = await loadSubjectCourses();
     renderSubjectCourses(catalogSubjects);
     setupPdfDownloads();
+
+    const savePetSettings = async () => {
+      const petEnabled = getEl("petEnabled");
+      const petSkin = getEl("petSkin");
+      const status = getEl("petSettingsStatus");
+      const previous = window.ALevelPet?.getPreferences?.() || currentUser?.pet;
+      const position = previous?.position || { x: 0.92, y: 0.84 };
+      petEnabled.disabled = true;
+      petSkin.disabled = true;
+      if (status) status.textContent = t("profilePetSaving");
+      try {
+        const pet = await window.ALevelApi.updatePetPreferences(token, {
+          enabled: petEnabled.checked,
+          skin: petSkin.value,
+          position,
+        });
+        currentUser = { ...currentUser, pet };
+        localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(currentUser));
+        window.ALevelPet?.applyPreferences?.(pet);
+        if (status) status.textContent = t("profilePetSaved");
+      } catch (error) {
+        petEnabled.checked = previous?.enabled !== false;
+        petSkin.value = previous?.skin || "codex-glass";
+        if (status) status.textContent = t("profilePetSaveFailed", {
+          message: error.message || t("retryLater"),
+        });
+      } finally {
+        petEnabled.disabled = false;
+        petSkin.disabled = false;
+      }
+    };
+    getEl("petEnabled")?.addEventListener("change", savePetSettings);
+    getEl("petSkin")?.addEventListener("change", savePetSettings);
+    window.addEventListener("alevel:petpreferences", (event) => {
+      const pet = event.detail;
+      if (!pet) return;
+      currentUser = { ...currentUser, pet };
+      getEl("petEnabled").checked = pet.enabled !== false;
+      getEl("petSkin").value = pet.skin || "codex-glass";
+    });
 
     const updateProfileBtn = getEl("updateProfileBtn");
     updateProfileBtn?.addEventListener("click", async () => {

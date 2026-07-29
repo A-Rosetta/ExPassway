@@ -2,6 +2,40 @@
 
 All notable changes to this project are recorded in this file.
 
+## 2026-07-29 14:47 CST
+
+### Summary
+- Added an account-synced Codex glass desktop pet to authenticated student pages, enabled by default, while keeping login and administrator/tool pages pet-free.
+- Added bilingual progressive OpenAI question hints with a fixed 12-question, 24-set Biology review gate; live generation remains disabled until every current sample fingerprint is approved.
+- Kept all existing practice, Biology chapter, notebook, review, analysis, community, profile, and administrator functionality.
+
+### Desktop Pet
+- Added the `codex-glass` CSS/DOM robot skin with a stable skin ID for a future raster replacement; the current environment did not provide built-in image generation or an approved native-transparency CLI path.
+- Added hover and keyboard-focus close control, pointer dragging, keyboard arrow movement, viewport clamping, normalized cross-device position, and ordered preference writes to prevent stale network responses from overwriting newer positions.
+- Added the pet switch and skin selector to Profile & Settings; enabled state, selected skin, and position persist through `PATCH /api/auth/me/pet` and four constrained `users` columns.
+- Added bilingual ambient site tips after 45 seconds, with at least 8 minutes between tips, no more than three per local day, and suppression while typing, dragging, hidden, or using dialogs and math keyboards.
+- Added one 60-second hint invitation per question context; the pet and existing question hint buttons share the same hint index and submitted `hintsUsed` count.
+
+### AI Hints And Review
+- Added `POST /api/question-hints/:questionKey`, sending the server-only question image, extracted stem, options, and correct-option reference to the configured OpenAI Responses API model with strict JSON Schema output.
+- Added versioned, language-specific `question_hint_sets` cache records with question/image fingerprints, prompt version, model and response provenance, review status, and administrator reviewer metadata; no answer or API credential is returned to the browser or stored in hint records.
+- Added output validation, one safety retry, answer-text and option-letter leakage checks, a 45-second timeout, two-generation concurrency limit, per-user hourly generation limit, and in-flight request deduplication.
+- Added `npm run hints:biology-sample`, which only runs in `AI_HINT_MODE=review` and creates 12 Chinese plus 12 English `pending_review` candidates.
+- Added an administrator review panel with question image, stem, options, three hints, approve/reject actions, and `approved/24` readiness status.
+- Enforced the complete 24-set review gate for both approved cache reads and new live generation. `AI_HINT_MODE` remains `disabled`; no real OpenAI sample was generated because `OPENAI_API_KEY` and `OPENAI_HINT_MODEL` are not configured.
+
+### Database And Runtime
+- Backed up the live PostgreSQL database to `/var/tmp/alevel-smart-practice-before-pet-hints-20260729.dump` before applying the scoped migration.
+- Added four pet preference columns and the independent hint cache table/indexes in one transaction; existing users received the default enabled `codex-glass` preference, and the hint table remains empty.
+- Restarted `alevel-backend-3002.service`; health and database connectivity are active, anonymous hint requests return `401`, and Nginx serves the new `20260729-1` CSS, API, pet, and page scripts.
+
+### Verification
+- Passed JavaScript syntax and Git whitespace checks for all changed frontend, backend, script, and test files.
+- Passed an isolated PostgreSQL and local mock-OpenAI test covering schema application, image input, JSON Schema requests, unsafe-output retry, caching, language separation, concurrent deduplication, review gating of approved cache records, and API-key non-persistence; the temporary database was deleted.
+- Passed the no-write Nginx browser suite in Chromium `1440x900` and WebKit `390x844` across login, home, paper picker, active practice, Biology chapters, notebook, review, analysis, community, pet controls, and administrator hint review.
+- Verified the pet is absent on login and administrator pages, visible and within the viewport on every authenticated student page, draggable by real desktop pointer input, keyboard movable, closeable and re-enabled through settings, and connected to the same progressive hint sequence as the existing button.
+- Inspected representative desktop/mobile screenshots in `/var/tmp`; question images were nonblank and the pet did not cover the timer, community notification, math keyboard, or primary controls.
+
 ## 2026-07-29 00:27 CST
 
 ### Summary

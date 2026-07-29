@@ -12,6 +12,8 @@
     "db:biology-pilot-reviewed": "psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f db/biology-chapter-pilot-reviewed.sql",
     "db:biology-full-curriculum": "node scripts/seed-biology-full-curriculum.mjs",
     "db:biology-full-mappings": "node scripts/generate-biology-full-mappings.mjs",
+    "hints:biology-sample": "node scripts/generate-biology-hint-sample.mjs",
+    "test:hints": "node ../tests/question-hints-smoke.mjs",
     "catalog:migrate": "node scripts/migrate-exam-catalog.mjs",
     "import:pdf-bank": "node scripts/import-pdf-bank.mjs",
     "import:chemis-all": "node scripts/import-all-chemis-pdfs.mjs",

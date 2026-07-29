@@ -8,6 +8,7 @@ import {
   findUserByEmail,
   getUserById,
   updateUserPasswordHash,
+  updateUserPetPreferences,
   updateUserProfile,
 } from "../db/repositories/users.repository.js";
 import {
@@ -35,6 +36,13 @@ async function ensureAuthColumns() {
   await query(`
     alter table users
     add column if not exists disabled_at timestamptz
+  `);
+  await query(`
+    alter table users
+    add column if not exists pet_enabled boolean not null default true,
+    add column if not exists pet_skin text not null default 'codex-glass',
+    add column if not exists pet_position_x numeric(6, 5) not null default 0.92,
+    add column if not exists pet_position_y numeric(6, 5) not null default 0.84
   `);
   authColumnsReady = true;
 }
@@ -147,6 +155,38 @@ router.patch("/me", asyncHandler(async (req, res) => {
     throw new ApiError(404, "User not found.", "USER_NOT_FOUND");
   }
   res.json({ ok: true, data: updated });
+}));
+
+router.patch("/me/pet", asyncHandler(async (req, res) => {
+  assertUsersApiEnabled();
+  await ensureAuthColumns();
+  const payload = verifyToken(readAuthToken(req));
+  const currentUser = await getUserById(payload.sub);
+  if (!currentUser) throw new ApiError(401, "User no longer exists.", "UNAUTHORIZED");
+  if (currentUser.isDisabled) {
+    throw new ApiError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
+  }
+
+  const body = req.body || {};
+  if (typeof body.enabled !== "boolean") {
+    throw new ApiError(400, "Pet enabled state must be a boolean.", "INVALID_PET_ENABLED");
+  }
+  const skin = typeof body.skin === "string" ? body.skin.trim() : "";
+  if (skin !== "codex-glass") {
+    throw new ApiError(400, "Unknown pet skin.", "INVALID_PET_SKIN");
+  }
+  const x = Number(body.position?.x);
+  const y = Number(body.position?.y);
+  if (!Number.isFinite(x) || x < 0 || x > 1 || !Number.isFinite(y) || y < 0 || y > 1) {
+    throw new ApiError(400, "Pet position must use x and y values from 0 to 1.", "INVALID_PET_POSITION");
+  }
+
+  const updated = await updateUserPetPreferences(payload.sub, {
+    enabled: body.enabled,
+    skin,
+    position: { x, y },
+  });
+  res.json({ ok: true, data: updated.pet });
 }));
 
 router.post("/change-password", asyncHandler(async (req, res) => {

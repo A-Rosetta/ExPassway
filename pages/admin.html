@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="adminPageTitle">后台数据面板</title>
-  <link rel="stylesheet" href="../assets/styles.css?v=20260728-3" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260729-1" />
 </head>
 <body>
   <main class="container">
@@ -12,6 +12,27 @@
       <h1 data-i18n="adminHeroTitle">后台数据面板</h1>
       <p data-i18n="adminHeroSubtitle">管理用户账号、社区内容、练习记录与整体统计。</p>
       <p id="adminStatus" class="tip"></p>
+    </section>
+
+    <section class="card panel" id="adminHintReviewPanel">
+      <div class="admin-section-heading">
+        <div>
+          <h2 data-i18n="adminHintReviewTitle">AI 提示样本审核</h2>
+          <p class="tip" data-i18n="adminHintReviewHint">审核 12 道 Biology 题目的中英文三步提示。24 份全部通过前，实时生成保持锁定。</p>
+        </div>
+        <button id="adminRefreshHints" class="btn-secondary" type="button" data-i18n="adminRefreshHints">刷新样本</button>
+      </div>
+      <p id="adminHintReviewStatus" class="tip" role="status"></p>
+      <div class="admin-hint-filters">
+        <label><span data-i18n="adminHintStatusLabel">审核状态</span>
+          <select id="adminHintStatus">
+            <option value="pending_review" data-i18n="adminHintPending">待审核</option>
+            <option value="approved" data-i18n="adminHintApproved">已通过</option>
+            <option value="rejected" data-i18n="adminHintRejected">已拒绝</option>
+          </select>
+        </label>
+      </div>
+      <div id="adminHintList" class="admin-hint-list"></div>
     </section>
 
     <section class="card panel">
@@ -166,8 +187,8 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260727-1"></script>
-  <script src="../scripts/api.js?v=20260727-1"></script>
-  <script src="../scripts/admin.js?v=20260727-1"></script>
+  <script src="../scripts/i18n.js?v=20260729-1"></script>
+  <script src="../scripts/api.js?v=20260729-1"></script>
+  <script src="../scripts/admin.js?v=20260729-1"></script>
 </body>
 </html>

@@ -188,6 +188,20 @@
         timeoutMs: 10 * 60 * 1000,
       });
     },
+    async getAdminQuestionHints(token, status = "pending_review") {
+      const params = new URLSearchParams({ status, subjectCode: "0610", limit: "100" });
+      return request(`/api/admin/question-hints?${params}`, { token, timeoutMs: 30000 });
+    },
+    async getAdminQuestionHintSampleStatus(token) {
+      return request("/api/admin/question-hints/sample-status", { token, timeoutMs: 30000 });
+    },
+    async reviewAdminQuestionHint(token, hintSetId, status) {
+      return request(`/api/admin/question-hints/${encodeURIComponent(hintSetId)}`, {
+        method: "PATCH",
+        token,
+        body: JSON.stringify({ status }),
+      });
+    },
     async getCurriculumVersions(token, subjectCode) {
       return request(`/api/curriculum/${encodeURIComponent(subjectCode)}/versions`, { token });
     },
@@ -282,6 +296,21 @@
         method: "PATCH",
         token,
         body: JSON.stringify(input || {}),
+      });
+    },
+    async updatePetPreferences(token, input) {
+      return request("/api/auth/me/pet", {
+        method: "PATCH",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async getQuestionHints(token, questionKey, language) {
+      return request(`/api/question-hints/${encodeURIComponent(questionKey)}`, {
+        method: "POST",
+        token,
+        body: JSON.stringify({ language }),
+        timeoutMs: 50000,
       });
     },
     async changePassword(token, input) {

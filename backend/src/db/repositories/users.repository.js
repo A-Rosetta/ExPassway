@@ -9,6 +9,14 @@ function mapUser(row) {
     grade: row.grade,
     targetScore: row.target_score,
     language: row.language || "zh-CN",
+    pet: {
+      enabled: row.pet_enabled !== false,
+      skin: row.pet_skin || "codex-glass",
+      position: {
+        x: Number(row.pet_position_x ?? 0.92),
+        y: Number(row.pet_position_y ?? 0.84),
+      },
+    },
     isDisabled: Boolean(row.disabled_at),
     disabledAt: row.disabled_at || null,
     createdAt: row.created_at,
@@ -127,6 +135,27 @@ export async function updateUserPasswordHash(userId, passwordHash) {
   `;
   const result = await query(sql, [userId, passwordHash]);
   return Boolean(result.rows[0]);
+}
+
+export async function updateUserPetPreferences(userId, input) {
+  const result = await query(`
+    update users
+    set
+      pet_enabled = $2,
+      pet_skin = $3,
+      pet_position_x = $4,
+      pet_position_y = $5,
+      updated_at = now()
+    where id = $1
+    returning *
+  `, [
+    userId,
+    input.enabled,
+    input.skin,
+    input.position.x,
+    input.position.y,
+  ]);
+  return result.rows[0] ? mapUser(result.rows[0]) : null;
 }
 
 export async function setUserDisabled(userId, disabled) {

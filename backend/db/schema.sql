@@ -11,6 +11,10 @@ create table if not exists users (
   grade text,
   target_score integer check (target_score between 0 and 100),
   language text not null default 'zh-CN',
+  pet_enabled boolean not null default true,
+  pet_skin text not null default 'codex-glass',
+  pet_position_x numeric(6, 5) not null default 0.92 check (pet_position_x between 0 and 1),
+  pet_position_y numeric(6, 5) not null default 0.84 check (pet_position_y between 0 and 1),
   disabled_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -24,6 +28,30 @@ add column if not exists language text not null default 'zh-CN';
 
 alter table users
 add column if not exists disabled_at timestamptz;
+
+alter table users
+add column if not exists pet_enabled boolean not null default true;
+
+alter table users
+add column if not exists pet_skin text not null default 'codex-glass';
+
+alter table users
+add column if not exists pet_position_x numeric(6, 5) not null default 0.92;
+
+alter table users
+add column if not exists pet_position_y numeric(6, 5) not null default 0.84;
+
+alter table users
+drop constraint if exists users_pet_position_x_check;
+
+alter table users
+add constraint users_pet_position_x_check check (pet_position_x between 0 and 1);
+
+alter table users
+drop constraint if exists users_pet_position_y_check;
+
+alter table users
+add constraint users_pet_position_y_check check (pet_position_y between 0 and 1);
 
 alter table users
 drop constraint if exists users_role_check;
@@ -242,6 +270,31 @@ create index if not exists idx_qbank_year on question_bank(year);
 create index if not exists idx_qbank_paper_question on question_bank(paper_slug, question_no);
 create index if not exists idx_qbank_active_selection
 on question_bank(active, board, subject, paper);
+
+-- Versioned AI hints are kept separate from imported question data.
+create table if not exists question_hint_sets (
+  id uuid primary key default gen_random_uuid(),
+  question_id text not null references question_bank(id) on delete cascade,
+  language text not null check (language in ('zh-CN', 'en')),
+  prompt_version text not null,
+  question_fingerprint text not null,
+  hints jsonb not null,
+  status text not null default 'pending_review'
+    check (status in ('pending_review', 'approved', 'rejected')),
+  model text not null,
+  response_id text,
+  reviewed_by uuid references users(id) on delete set null,
+  reviewed_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (question_id, language, prompt_version, question_fingerprint)
+);
+
+create index if not exists idx_question_hint_sets_lookup
+on question_hint_sets(question_id, language, prompt_version, question_fingerprint, status);
+
+create index if not exists idx_question_hint_sets_review
+on question_hint_sets(status, created_at desc);
 
 alter table discussion_threads add column if not exists subject_code text;
 alter table discussion_threads add column if not exists paper_slug text;

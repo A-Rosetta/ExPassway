@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="homePageTitle">A-Level 智能练习</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260728-3" />
+  <link rel="stylesheet" href="assets/styles.css?v=20260729-1" />
 </head>
 <body class="student-ui home-dashboard">
   <header class="home-topbar">
@@ -101,6 +101,25 @@
       </div>
 
       <div class="profile-dialog__divider"></div>
+      <section class="profile-pet-settings" aria-labelledby="profilePetTitle">
+        <div>
+          <h3 id="profilePetTitle" data-i18n="profilePetTitle">桌面宠物</h3>
+          <p class="tip" data-i18n="profilePetDescription">宠物会提供网页使用建议，并在做题时帮你获取分步提示。</p>
+        </div>
+        <label class="setting-toggle">
+          <input id="petEnabled" type="checkbox" checked />
+          <span aria-hidden="true"></span>
+          <strong data-i18n="profilePetEnabled">显示宠物</strong>
+        </label>
+        <label><span data-i18n="profilePetSkin">宠物皮肤</span>
+          <select id="petSkin">
+            <option value="codex-glass" data-i18n="profilePetCodexGlass">Codex 通透机器人</option>
+          </select>
+        </label>
+        <p id="petSettingsStatus" class="tip" role="status"></p>
+      </section>
+
+      <div class="profile-dialog__divider"></div>
       <div class="grid-2">
         <label><span data-i18n="oldPasswordLabel">旧密码</span>
           <input id="oldPassword" type="password" data-i18n-placeholder="oldPasswordPlaceholder" placeholder="请输入旧密码" />
@@ -115,9 +134,10 @@
     </div>
   </dialog>
 
-  <script src="scripts/i18n.js?v=20260728-2"></script>
+  <script src="scripts/i18n.js?v=20260729-1"></script>
   <script src="scripts/data.js?v=20260718-1"></script>
-  <script src="scripts/api.js?v=20260718-2"></script>
-  <script src="scripts/app.js?v=20260727-1"></script>
+  <script src="scripts/api.js?v=20260729-1"></script>
+  <script src="scripts/pet.js?v=20260729-1"></script>
+  <script src="scripts/app.js?v=20260729-1"></script>
 </body>
 </html>

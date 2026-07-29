@@ -155,10 +155,7 @@
         });
       });
       byId("showChapterHint")?.addEventListener("click", () => {
-        const hints = question.hints || [];
-        const index = state.hintsUsed[state.currentIndex];
-        byId("chapterHint").textContent = hints[index] || t("noHintAvailable");
-        state.hintsUsed[state.currentIndex] = Math.min(hints.length, index + 1);
+        showNextChapterHint().catch(() => {});
       });
       state.questionOpenedAt[state.currentIndex] = Date.now();
     }
@@ -169,6 +166,52 @@
     byId("previousQuestion").disabled = state.currentIndex === 0;
     byId("nextQuestion").disabled = state.currentIndex === state.questions.length - 1;
     byId("submitChapterPractice").hidden = Boolean(state.result);
+    window.ALevelPet?.notifyQuestionChanged?.();
+  }
+
+  async function ensureChapterHints() {
+    const question = state.questions[state.currentIndex];
+    if (!question) return [];
+    const language = getLanguage();
+    if (Array.isArray(question.hints) && question.hints.length
+      && (!question.aiHintLanguage || question.aiHintLanguage === language)) return question.hints;
+    const result = await window.ALevelApi.getQuestionHints(state.token, question.id, language);
+    question.hints = Array.isArray(result?.hints) ? result.hints : [];
+    question.aiHintLanguage = language;
+    return question.hints;
+  }
+
+  async function showNextChapterHint() {
+    const button = byId("showChapterHint");
+    const output = byId("chapterHint");
+    if (!output || state.result) return;
+    if (button) button.disabled = true;
+    output.textContent = t("petHintLoading");
+    try {
+      const hints = await ensureChapterHints();
+      if (!hints.length) {
+        output.textContent = t("noHintAvailable");
+        return;
+      }
+      const index = state.hintsUsed[state.currentIndex];
+      const nextIndex = Math.min(index, hints.length - 1);
+      output.textContent = t("hintProgress", {
+        index: nextIndex + 1,
+        total: hints.length,
+        hint: hints[nextIndex],
+      });
+      state.hintsUsed[state.currentIndex] = Math.min(hints.length, index + 1);
+      if (button) {
+        button.textContent = state.hintsUsed[state.currentIndex] >= hints.length
+          ? t("allHintsShown")
+          : t("nextHint");
+      }
+    } catch (error) {
+      output.textContent = t("hintLoadFailed", { message: error.message || t("retryLater") });
+      throw error;
+    } finally {
+      if (button) button.disabled = false;
+    }
   }
 
   async function startPractice(bookSection) {
@@ -303,6 +346,18 @@
       setStatus(t("chapterCatalogLoadFailed", { message: error.message }), true);
     }
   }
+
+  window.ALevelPet?.registerHintProvider?.({
+    getQuestionKey() {
+      return state.result ? "" : state.questions[state.currentIndex]?.id || "";
+    },
+    hasUnseenHint() {
+      const question = state.questions[state.currentIndex];
+      const used = state.hintsUsed[state.currentIndex] || 0;
+      return Boolean(!state.result && question && (!question.hints?.length || used < question.hints.length));
+    },
+    showNextHint: showNextChapterHint,
+  });
 
   init();
 })();

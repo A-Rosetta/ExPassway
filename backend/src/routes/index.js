@@ -9,6 +9,7 @@ import questionsRoutes from "./questions.routes.js";
 import catalogRoutes from "./catalog.routes.js";
 import curriculumRoutes from "./curriculum.routes.js";
 import chapterPracticeRoutes from "./chapterPractice.routes.js";
+import questionHintsRoutes from "./questionHints.routes.js";
 
 export function registerRoutes(app) {
   app.use("/api/meta", metaRoutes);
@@ -19,6 +20,7 @@ export function registerRoutes(app) {
   app.use("/api/auth", authRoutes);
   app.use("/api/discussions", discussionsRoutes);
   app.use("/api/questions", questionsRoutes);
+  app.use("/api/question-hints", questionHintsRoutes);
   app.use("/api/catalog", catalogRoutes);
   app.use("/api/curriculum", curriculumRoutes);
   app.use("/api/chapter-practice", chapterPracticeRoutes);

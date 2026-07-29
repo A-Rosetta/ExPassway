@@ -24,6 +24,11 @@ import {
 } from "../db/repositories/chapterPractice.repository.js";
 import { listCurriculumReviewOptions } from "../db/repositories/curriculum.repository.js";
 import { generateBiologyMappingSuggestions } from "../services/chapterMapping.service.js";
+import {
+  listQuestionHintSetsForReview,
+  reviewQuestionHintSet,
+} from "../db/repositories/questionHints.repository.js";
+import { getBiologyHintSampleReviewStatus } from "../services/questionHints.service.js";
 
 const router = Router();
 
@@ -266,6 +271,49 @@ router.patch("/curriculum/mappings/:questionId/:currentCurriculumSectionId", asy
     );
   }
   res.json({ ok: true, data: updated.mapping });
+}));
+
+router.get("/question-hints", asyncHandler(async (req, res) => {
+  assertAdminApiEnabled();
+  await requireAdmin(req);
+  const status = String(req.query.status || "pending_review");
+  if (!['pending_review', 'approved', 'rejected'].includes(status)) {
+    throw new ApiError(400, "Invalid question hint status.", "INVALID_INPUT");
+  }
+  const subjectCode = String(req.query.subjectCode || "").trim();
+  if (subjectCode && !/^\d{4}$/.test(subjectCode)) {
+    throw new ApiError(400, "Invalid subject code.", "INVALID_INPUT");
+  }
+  res.json({
+    ok: true,
+    data: await listQuestionHintSetsForReview({
+      status,
+      subjectCode,
+      limit: toClampedInteger(req.query.limit, 50, 1, 100),
+    }),
+  });
+}));
+
+router.get("/question-hints/sample-status", asyncHandler(async (req, res) => {
+  assertAdminApiEnabled();
+  await requireAdmin(req);
+  res.json({ ok: true, data: await getBiologyHintSampleReviewStatus() });
+}));
+
+router.patch("/question-hints/:hintSetId", asyncHandler(async (req, res) => {
+  assertAdminApiEnabled();
+  const admin = await requireAdmin(req);
+  const status = String(req.body?.status || "");
+  if (!['approved', 'rejected'].includes(status)) {
+    throw new ApiError(400, "Hint status must be approved or rejected.", "INVALID_INPUT");
+  }
+  const updated = await reviewQuestionHintSet({
+    id: String(req.params.hintSetId || ""),
+    status,
+    reviewerId: admin.id,
+  });
+  if (!updated) throw new ApiError(404, "Question hint set not found.", "HINT_SET_NOT_FOUND");
+  res.json({ ok: true, data: updated });
 }));
 
 export default router;
