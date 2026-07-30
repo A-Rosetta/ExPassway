@@ -228,6 +228,7 @@ function json(route, data, status = 200) {
 async function mockApi(page) {
   let petPreferences = structuredClone(user.pet);
   let hintReviewStatus = "pending_review";
+  const controls = { failNextPetSave: false };
   await page.route("**/api/**", async (route) => {
     const request = route.request();
     const url = new URL(request.url());
@@ -237,6 +238,10 @@ async function mockApi(page) {
     if (path === "/api/auth/me") return json(route, { ...user, pet: petPreferences });
     if (path === "/api/auth/me/pet" && method === "PATCH") {
       const body = request.postDataJSON();
+      if (controls.failNextPetSave) {
+        controls.failNextPetSave = false;
+        return json(route, { ok: false, error: { message: "Simulated pet save failure" } }, 500);
+      }
       petPreferences = body;
       return json(route, body);
     }
@@ -333,11 +338,14 @@ async function mockApi(page) {
 
     return json(route, { ok: false, error: { message: `Unhandled mock route: ${method} ${path}` } }, 501);
   });
+  return controls;
 }
 
 async function seedStorage(page, pathname, language = "en") {
   await page.addInitScript(({ path, currentUser, result, questions, selectedLanguage }) => {
+    const theme = localStorage.getItem("app-theme");
     localStorage.clear();
+    if (theme) localStorage.setItem("app-theme", theme);
     localStorage.setItem("alevel.language", selectedLanguage);
     localStorage.setItem("alevel.userProfile", JSON.stringify(currentUser));
     localStorage.setItem("alevel.selection", JSON.stringify({
@@ -369,23 +377,51 @@ async function seedStorage(page, pathname, language = "en") {
 async function assertPageGeometry(page, label) {
   const geometry = await page.evaluate(() => {
     const root = document.documentElement;
-    const clippedButtons = [...document.querySelectorAll("button, .btn-link")]
+    const visibleElements = [...document.querySelectorAll("button, .btn-link, h1, h2, h3, h4, p, label")]
       .filter((element) => {
         const style = getComputedStyle(element);
         return style.display !== "none" && style.visibility !== "hidden" && element.getClientRects().length;
-      })
-      .filter((element) => element.scrollWidth > element.clientWidth + 2 || element.scrollHeight > element.clientHeight + 2)
-      .map((element) => element.id || element.textContent.trim().slice(0, 40));
+      });
+    const clippedText = visibleElements
+      .filter((element) => (
+        element.scrollWidth > element.clientWidth + 2
+        || (element.matches("button, .btn-link") && element.scrollHeight > element.clientHeight + 2)
+      ))
+      .map((element) => ({
+        name: element.id || element.textContent.trim().slice(0, 40),
+        scrollWidth: element.scrollWidth,
+        clientWidth: element.clientWidth,
+        scrollHeight: element.scrollHeight,
+        clientHeight: element.clientHeight,
+        overflow: getComputedStyle(element).overflow,
+        lineHeight: getComputedStyle(element).lineHeight,
+      }));
+    const header = document.querySelector(".home-topbar, .site-topbar, .chapter-topbar, .community-topbar");
+    const headerInner = document.querySelector(".home-topbar__inner, .site-topbar__inner, .chapter-topbar__inner, .community-topbar__inner");
+    const homeCommand = document.querySelector("#goHomeFromPickerBtn, #backHome, #communityBackHome");
+    const headerRect = header?.getBoundingClientRect();
+    const headerInnerRect = headerInner?.getBoundingClientRect();
     return {
       scrollWidth: root.scrollWidth,
       clientWidth: root.clientWidth,
-      clippedButtons,
-      studentUi: document.body.classList.contains("student-ui"),
+      clippedText,
+      siteUi: document.body.classList.contains("site-ui"),
+      header: headerRect ? { width: headerRect.width, height: headerRect.height } : null,
+      headerInner: headerInnerRect ? { width: headerInnerRect.width, height: headerInnerRect.height } : null,
+      homeCommandInHeader: !homeCommand || Boolean(homeCommand.closest("header")),
     };
   });
-  assert.equal(geometry.studentUi, true, `${label}: student UI scope missing`);
+  assert.equal(geometry.siteUi, true, `${label}: site UI scope missing`);
   assert.ok(geometry.scrollWidth <= geometry.clientWidth + 1, `${label}: horizontal overflow ${JSON.stringify(geometry)}`);
-  assert.deepEqual(geometry.clippedButtons, [], `${label}: clipped controls`);
+  assert.deepEqual(geometry.clippedText, [], `${label}: clipped visible text ${JSON.stringify(geometry.clippedText)}`);
+  assert.equal(geometry.homeCommandInHeader, true, `${label}: home command is outside the title bar`);
+  assert.ok(geometry.header, `${label}: title bar missing`);
+  assert.ok(Math.abs(geometry.header.width - geometry.clientWidth) <= 1, `${label}: title bar width is inconsistent`);
+  const compact = geometry.clientWidth <= 767;
+  assert.ok(Math.abs(geometry.header.height - (compact ? 64 : 72)) <= 1, `${label}: title bar height is inconsistent ${JSON.stringify(geometry.header)}`);
+  assert.ok(geometry.headerInner, `${label}: title bar inner container missing`);
+  assert.ok(Math.abs(geometry.headerInner.height - (compact ? 64 : 72)) <= 1, `${label}: title bar inner height is inconsistent`);
+  assert.ok(Math.abs(geometry.headerInner.width - (compact ? geometry.clientWidth - 24 : Math.min(1180, geometry.clientWidth - 48))) <= 1, `${label}: title bar inner width is inconsistent`);
 }
 
 async function assertAccessibleMotion(page, label) {
@@ -409,7 +445,7 @@ async function assertAccessibleMotion(page, label) {
       focusRules: [...document.styleSheets].flatMap((sheet) => {
         try {
           return [...sheet.cssRules]
-            .filter((rule) => rule.selectorText?.includes(".student-ui input:focus-visible"))
+            .filter((rule) => rule.selectorText?.includes(".site-ui input:focus-visible"))
             .map((rule) => `${sheet.href || "inline"}: ${rule.cssText}`);
         } catch (_error) {
           return [];
@@ -420,40 +456,57 @@ async function assertAccessibleMotion(page, label) {
   assert.ok(focus.tagName, `${label}: no keyboard-focusable control`);
   assert.equal(focus.focusVisible, true, `${label}: keyboard focus is not visible ${JSON.stringify(focus)}`);
   assert.ok(
-    focus.focusRules.some((rule) => /solid 3px/.test(rule)),
+    focus.focusRules.some((rule) => /(?:solid 2px|2px solid)/.test(rule) && /box-shadow/.test(rule)),
     `${label}: project focus indicator rule is missing ${JSON.stringify(focus)}`
   );
   const durations = focus.transitionDuration.split(",").map((value) => Number.parseFloat(value) || 0);
   assert.ok(durations.every((value) => value <= 0.01), `${label}: reduced motion was not applied ${JSON.stringify(focus)}`);
 }
 
-async function assertGlass(page, label) {
-  const glass = await page.locator(".card, .community-surface, .course-card, .chapter-band").first().evaluate((element) => {
+async function assertThemeSurface(page, label, theme) {
+  const surface = await page.locator(".card, .community-surface, .course-card, .chapter-band").first().evaluate((element) => {
     const style = getComputedStyle(element);
     return {
-      radii: [
-        style.borderTopLeftRadius,
-        style.borderTopRightRadius,
-        style.borderBottomRightRadius,
-        style.borderBottomLeftRadius,
-      ],
       background: style.backgroundColor,
+      border: style.borderTopColor,
+      radius: style.borderTopLeftRadius,
+      shadow: style.boxShadow,
       backdrop: style.backdropFilter || style.webkitBackdropFilter || "none",
     };
   });
-  assert.ok(
-    glass.radii.every((radius) => Number.parseFloat(radius) <= 8),
-    `${label}: surface radius exceeds 8px ${JSON.stringify(glass)}`
-  );
-  assert.notEqual(glass.background, "rgba(0, 0, 0, 0)", `${label}: transparent surface has no fallback`);
-  const blur = glass.backdrop.match(/blur\((\d+(?:\.\d+)?)px\)/);
-  assert.ok(blur && Number(blur[1]) >= 24, `${label}: glass blur is missing ${JSON.stringify(glass)}`);
+  assert.ok(Number.parseFloat(surface.radius) > 0, `${label}: surface radius is missing ${JSON.stringify(surface)}`);
+  if (theme === "light") {
+    assert.equal(surface.background, "rgb(230, 234, 227)", `${label}: light surface is not sage ${JSON.stringify(surface)}`);
+    assert.equal(surface.border, "rgba(0, 0, 0, 0)", `${label}: light surface has a visible border ${JSON.stringify(surface)}`);
+    assert.match(surface.shadow, /9px 9px 16px/);
+    assert.match(surface.shadow, /-9px -9px 16px/);
+    assert.equal(surface.backdrop, "none", `${label}: light surface must not use backdrop blur`);
+    return;
+  }
+  assert.equal(surface.background, "rgba(255, 255, 255, 0.07)", `${label}: dark surface is not transparent glass ${JSON.stringify(surface)}`);
+  assert.equal(surface.border, "rgba(255, 255, 255, 0.14)", `${label}: dark glass edge is missing ${JSON.stringify(surface)}`);
+  assert.match(surface.backdrop, /blur\(20px\)/, `${label}: dark glass blur is missing ${JSON.stringify(surface)}`);
+  assert.doesNotMatch(surface.shadow, /-9px -9px/, `${label}: dark surface contains light neumorphic shadow`);
+}
+
+async function assertElevatedSurface(page, selector, label) {
+  const surface = await page.locator(selector).evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      shadow: style.boxShadow,
+      overflowX: style.overflowX,
+    };
+  });
+  assert.notEqual(surface.shadow, "none", `${label}: secondary surface has no independent shadow`);
+  assert.notEqual(surface.overflowX, "auto", `${label}: secondary surface allows horizontal scrolling`);
+  assert.notEqual(surface.overflowX, "scroll", `${label}: secondary surface allows horizontal scrolling`);
 }
 
 async function openPage(browser, config, pathname, options = {}) {
   const context = await browser.newContext({
     viewport: config.viewport,
     reducedMotion: "reduce",
+    ...(options.colorScheme ? { colorScheme: options.colorScheme } : {}),
   });
   const page = await context.newPage();
   if (options.clock) await page.clock.install();
@@ -462,15 +515,160 @@ async function openPage(browser, config, pathname, options = {}) {
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("requestfailed", (request) => failedRequests.push(`${request.method()} ${request.url()}`));
   await seedStorage(page, pathname, options.language);
-  await mockApi(page);
+  const apiMock = await mockApi(page);
   await page.goto(`${baseUrl}${pathname}`, { waitUntil: "networkidle" });
-  return { context, page, errors, failedRequests };
+  return { context, page, errors, failedRequests, apiMock };
+}
+
+async function homeSurfaceState(page) {
+  return page.evaluate(() => {
+    const root = document.documentElement;
+    const body = getComputedStyle(document.body);
+    const card = getComputedStyle(document.querySelector(".course-card"));
+    const pet = getComputedStyle(document.querySelector(".site-pet__head"));
+    return {
+      theme: root.getAttribute("data-theme") || "light",
+      storedTheme: localStorage.getItem("app-theme"),
+      bodyBackground: body.backgroundColor,
+      cardBackground: card.backgroundColor,
+      cardBorder: card.borderTopColor,
+      cardRadius: card.borderTopLeftRadius,
+      cardShadow: card.boxShadow,
+      cardBackdrop: card.backdropFilter || card.webkitBackdropFilter || "none",
+      petBackground: pet.backgroundColor,
+      petBackdrop: pet.backdropFilter || pet.webkitBackdropFilter || "none",
+    };
+  });
+}
+
+async function verifyHomeThemes(browser, config) {
+  const systemRun = await openPage(browser, config, "/index.html", { colorScheme: "dark" });
+  try {
+    await systemRun.page.locator(".course-card--biology").waitFor({ state: "visible" });
+    assert.equal(
+      await systemRun.page.locator("html").getAttribute("data-theme"),
+      "dark",
+      `${config.name}-home: system dark preference was not applied`
+    );
+    assert.equal(
+      await systemRun.page.evaluate(() => localStorage.getItem("app-theme")),
+      null,
+      `${config.name}-home: system preference must not create a manual theme setting`
+    );
+  } finally {
+    await systemRun.context.close();
+  }
+
+  const run = await openPage(browser, config, "/index.html", { colorScheme: "light" });
+  const { page } = run;
+  try {
+    await page.locator(".course-card--biology").waitFor({ state: "visible" });
+    const light = await homeSurfaceState(page);
+    assert.equal(light.theme, "light");
+    assert.equal(light.storedTheme, null);
+    assert.equal(light.bodyBackground, "rgb(230, 234, 227)");
+    assert.equal(light.cardBackground, "rgb(230, 234, 227)");
+    assert.equal(light.cardBorder, "rgba(0, 0, 0, 0)");
+    assert.equal(light.cardRadius, "32px");
+    assert.match(light.cardShadow, /9px 9px 16px/);
+    assert.match(light.cardShadow, /-9px -9px 16px/);
+    assert.equal(light.cardBackdrop, "none");
+    assert.equal(light.petBackdrop, "none");
+    assert.match(await page.locator("#themeToggle").getAttribute("aria-label"), /dark mode/i);
+
+    if (config.mobile) {
+      const menu = page.locator("#homeMenuToggle");
+      await menu.click();
+      assert.equal(await menu.getAttribute("aria-expanded"), "true");
+      await page.waitForFunction(() => {
+        const style = getComputedStyle(document.querySelector("#homeNav"));
+        return style.visibility === "visible" && Number.parseFloat(style.opacity) === 1;
+      });
+      assert.equal(await page.locator("#homeNav").isVisible(), true);
+      assert.match(await menu.getAttribute("aria-label"), /close home menu/i);
+      await page.keyboard.press("Escape");
+      assert.equal(await menu.getAttribute("aria-expanded"), "false");
+      assert.equal(await menu.evaluate((element) => document.activeElement === element), true);
+    } else {
+      assert.equal(await page.locator("#homeMenuToggle").isVisible(), false);
+      assert.equal(await page.locator("#homeNav").isVisible(), true);
+    }
+
+    await assertPageGeometry(page, `${config.name}-home-light`);
+    await page.screenshot({
+      path: `/var/tmp/student-ui-${config.name}-home-light.png`,
+      fullPage: true,
+    });
+
+    await page.locator("#themeToggle").click();
+    await page.waitForFunction(() => (
+      getComputedStyle(document.body).backgroundColor === "rgb(20, 23, 28)"
+      && getComputedStyle(document.querySelector(".course-card")).backgroundColor === "rgba(255, 255, 255, 0.07)"
+    ));
+    const dark = await homeSurfaceState(page);
+    assert.equal(dark.theme, "dark");
+    assert.equal(dark.storedTheme, "dark");
+    assert.equal(dark.bodyBackground, "rgb(20, 23, 28)");
+    assert.equal(dark.cardBackground, "rgba(255, 255, 255, 0.07)");
+    assert.equal(dark.cardBorder, "rgba(255, 255, 255, 0.14)");
+    assert.equal(dark.cardRadius, "32px");
+    assert.match(dark.cardBackdrop, /blur\(20px\)/);
+    assert.doesNotMatch(dark.cardShadow, /-9px -9px/);
+    assert.match(dark.petBackdrop, /blur\(20px\)/);
+    assert.match(await page.locator("#themeToggle").getAttribute("aria-label"), /light mode/i);
+
+    await page.reload({ waitUntil: "networkidle" });
+    await page.locator(".course-card--biology").waitFor({ state: "visible" });
+    assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+    assert.equal(await page.evaluate(() => localStorage.getItem("app-theme")), "dark");
+
+    if (config.mobile) {
+      await page.locator("#homeMenuToggle").click();
+      await page.locator("#homeNav").waitFor({ state: "visible" });
+    }
+    await page.locator("#openProfile").click();
+    await page.locator("#profileDialog").waitFor({ state: "visible" });
+    const profileSurface = await page.locator("#profileDialog").evaluate((dialog) => {
+      const style = getComputedStyle(dialog);
+      return {
+        radius: style.borderTopLeftRadius,
+        background: style.backgroundColor,
+        backdrop: style.backdropFilter || style.webkitBackdropFilter || "none",
+      };
+    });
+    assert.equal(profileSurface.radius, "32px");
+    assert.equal(profileSurface.background, "rgba(255, 255, 255, 0.13)");
+    assert.match(profileSurface.backdrop, /blur\(20px\)/);
+    await page.locator("#closeProfile").click();
+
+    await page.locator("#openPdfDownload").click();
+    await page.locator("#pdfDownloadDialog").waitFor({ state: "visible" });
+    assert.equal(await page.locator("#pdfDownloadSubject option").count(), 4);
+    await page.locator("#closePdfDownload").click();
+
+    await assertPageGeometry(page, `${config.name}-home-dark`);
+    assert.deepEqual(run.errors, [], `${config.name}-home-themes: page errors`);
+    assert.deepEqual(run.failedRequests, [], `${config.name}-home-themes: failed requests`);
+    await page.screenshot({
+      path: `/var/tmp/student-ui-${config.name}-home-dark.png`,
+      fullPage: true,
+    });
+  } finally {
+    await run.context.close();
+  }
 }
 
 async function verifyStandardPage(browser, config, pageSpec) {
-  const run = await openPage(browser, config, pageSpec.path);
+  const run = await openPage(browser, config, pageSpec.path, { colorScheme: "light" });
   try {
     await run.page.locator(pageSpec.ready).first().waitFor({ state: "visible" });
+    await run.page.locator("#themeToggle").waitFor({ state: "visible" });
+    await run.page.locator("[data-language-toggle]").waitFor({ state: "visible" });
+    assert.match(await run.page.locator("#themeToggle").getAttribute("aria-label"), /dark mode/i);
+    const languageParent = await run.page.locator("[data-language-toggle]").evaluate((element) => (
+      element.parentElement?.className || ""
+    ));
+    assert.match(languageParent, /header-controls|topbar__actions|chapter-topbar/);
     if (pageSpec.pet === false) {
       assert.equal(await run.page.locator(".site-pet").count(), 0, `${config.name}-${pageSpec.name}: pet must be absent`);
     } else {
@@ -484,13 +682,30 @@ async function verifyStandardPage(browser, config, pageSpec) {
       );
     }
     if (pageSpec.verify) await pageSpec.verify(run.page);
-    await assertPageGeometry(run.page, `${config.name}-${pageSpec.name}`);
-    if (pageSpec.glass !== false) await assertGlass(run.page, `${config.name}-${pageSpec.name}`);
+    await assertPageGeometry(run.page, `${config.name}-${pageSpec.name}-light`);
+    await assertThemeSurface(run.page, `${config.name}-${pageSpec.name}-light`, "light");
+    await run.page.screenshot({
+      path: `/var/tmp/student-ui-${config.name}-${pageSpec.name}-light.png`,
+      fullPage: true,
+    });
+
+    await run.page.locator("#themeToggle").click();
+    await run.page.waitForFunction(() => {
+      if (document.documentElement.dataset.theme !== "dark") return false;
+      const surface = document.querySelector(".card, .community-surface, .course-card, .chapter-band");
+      const style = getComputedStyle(surface);
+      const backdrop = style.backdropFilter || style.webkitBackdropFilter || "none";
+      return style.backgroundColor === "rgba(255, 255, 255, 0.07)" && backdrop.includes("blur(20px)");
+    });
+    assert.equal(await run.page.evaluate(() => localStorage.getItem("app-theme")), "dark");
+    assert.match(await run.page.locator("#themeToggle").getAttribute("aria-label"), /light mode/i);
+    await assertThemeSurface(run.page, `${config.name}-${pageSpec.name}-dark`, "dark");
+    await assertPageGeometry(run.page, `${config.name}-${pageSpec.name}-dark`);
     await assertAccessibleMotion(run.page, `${config.name}-${pageSpec.name}`);
     assert.deepEqual(run.errors, [], `${config.name}-${pageSpec.name}: page errors`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-${pageSpec.name}: failed requests`);
     await run.page.screenshot({
-      path: `/var/tmp/student-ui-${config.name}-${pageSpec.name}.png`,
+      path: `/var/tmp/student-ui-${config.name}-${pageSpec.name}-dark.png`,
       fullPage: true,
     });
   } finally {
@@ -594,13 +809,29 @@ async function verifyGeneratedPaper(browser, config) {
 
 async function verifyPetControls(browser, config) {
   const run = await openPage(browser, config, "/index.html");
-  const { page } = run;
+  const { page, apiMock } = run;
   try {
     const pet = page.locator(".site-pet");
     const character = page.locator(".site-pet__character");
     await pet.waitFor({ state: "visible" });
-    await character.hover();
-    assert.equal(await page.locator(".site-pet__close").evaluate((button) => getComputedStyle(button).pointerEvents), "auto");
+    assert.equal(await page.locator(".site-pet__close").count(), 0);
+    const bubbleCloseStyle = await page.locator(".site-pet__bubble-close").evaluate((button) => {
+      const style = getComputedStyle(button);
+      return {
+        width: style.width,
+        height: style.height,
+        borderTopLeftRadius: style.borderTopLeftRadius,
+        borderTopRightRadius: style.borderTopRightRadius,
+        borderBottomRightRadius: style.borderBottomRightRadius,
+        borderBottomLeftRadius: style.borderBottomLeftRadius,
+      };
+    });
+    assert.equal(bubbleCloseStyle.width, "44px");
+    assert.equal(bubbleCloseStyle.height, "44px");
+    assert.deepEqual(
+      Object.values(bubbleCloseStyle).slice(2),
+      ["0px", "18px", "0px", "44px"]
+    );
 
     await character.evaluate((button) => button.click());
     const firstTip = await page.locator(".site-pet__bubble-message").textContent();
@@ -636,32 +867,111 @@ async function verifyPetControls(browser, config) {
     ), beforeTop);
     await keyboardResponse;
 
-    if (!config.mobile) {
+    async function dragPet(targetX, targetY, expectSave = true) {
       const dragStart = await character.boundingBox();
+      assert.ok(dragStart, `${config.name}: pet character has no drag bounds`);
+      const response = expectSave ? page.waitForResponse((candidate) => (
+        candidate.url().endsWith("/api/auth/me/pet")
+        && candidate.request().method() === "PATCH"
+      )) : null;
       await page.mouse.move(dragStart.x + dragStart.width / 2, dragStart.y + dragStart.height / 2);
       await page.mouse.down();
-      await page.mouse.move(120, 180, { steps: 8 });
+      await page.mouse.move(targetX, targetY, { steps: 32 });
       await page.mouse.up();
-      await page.waitForFunction(() => window.ALevelPet.getPreferences().position.x < 0.2);
-      const afterDrag = await pet.boundingBox();
-      assert.ok(
-        afterDrag.x >= 0 && afterDrag.y >= 0 && afterDrag.x < 180,
-        `${config.name}: pet drag did not persist in the viewport ${JSON.stringify(afterDrag)}`
-      );
+      if (response) await response;
     }
 
-    await character.hover();
-    const closeResponse = page.waitForResponse((response) => (
-      response.url().endsWith("/api/auth/me/pet")
-      && response.request().method() === "PATCH"
-    ));
-    await page.locator(".site-pet__close").click();
-    await closeResponse;
+    async function waitForDock(side) {
+      await page.waitForFunction(({ dockSide, viewportWidth }) => {
+        const element = document.querySelector(".site-pet");
+        if (element?.dataset.dockSide !== dockSide) return false;
+        const bounds = element.getBoundingClientRect();
+        return dockSide === "left"
+          ? Math.round(bounds.left) === 0
+          : Math.round(bounds.right) === viewportWidth;
+      }, { dockSide: side, viewportWidth: config.viewport.width });
+    }
+
+    const freeStart = await character.boundingBox();
+    await dragPet(2, freeStart.y + freeStart.height / 2);
+    await waitForDock("left");
+    const firstDockState = await page.evaluate(() => {
+      const element = document.querySelector(".site-pet");
+      const bounds = element.getBoundingClientRect();
+      return {
+        dockSide: element.dataset.dockSide || "",
+        inlineLeft: element.style.left,
+        left: bounds.left,
+        right: bounds.right,
+        preferences: window.ALevelPet.getPreferences(),
+      };
+    });
+    assert.equal(firstDockState.dockSide, "left", `${config.name}: first dock failed ${JSON.stringify(firstDockState)}`);
+    assert.equal((await pet.boundingBox()).x, 0);
+    assert.equal((await page.evaluate(() => window.ALevelPet.getPreferences())).position.x, 0);
+    await page.locator(".site-pet__bubble").waitFor({ state: "visible" });
+    assert.match(await page.locator(".site-pet__bubble-message").textContent(), /向外拖出屏幕|outward again/i);
+
+    const shortOutward = await character.boundingBox();
+    await dragPet(20, shortOutward.y + shortOutward.height / 2, false);
+    await waitForDock("left");
+    assert.equal((await pet.boundingBox()).x, 0, `${config.name}: short outward drag did not rebound`);
+    assert.equal(await pet.getAttribute("data-dock-side"), "left");
+
+    const releaseLeft = await character.boundingBox();
+    await dragPet(90, releaseLeft.y + releaseLeft.height / 2);
+    await page.waitForFunction(() => !document.querySelector(".site-pet")?.dataset.dockSide);
+    assert.equal(await pet.getAttribute("data-dock-side"), null);
+    assert.ok((await pet.boundingBox()).x >= 12, `${config.name}: inward drag did not release left dock`);
+
+    const crossToRight = await character.boundingBox();
+    await dragPet(config.viewport.width - 2, crossToRight.y + crossToRight.height / 2);
+    await waitForDock("right");
+    assert.equal((await page.evaluate(() => window.ALevelPet.getPreferences())).position.x, 1);
+    const rightRect = await pet.boundingBox();
+    assert.equal(Math.round(rightRect.x + rightRect.width), config.viewport.width);
+
+    const releaseRight = await character.boundingBox();
+    await dragPet(config.viewport.width - 100, releaseRight.y + releaseRight.height / 2);
+    await page.waitForFunction(() => !document.querySelector(".site-pet")?.dataset.dockSide);
+    assert.equal(await pet.getAttribute("data-dock-side"), null);
+
+    const redockLeft = await character.boundingBox();
+    await dragPet(2, redockLeft.y + redockLeft.height / 2);
+    await waitForDock("left");
+    assert.equal(await pet.getAttribute("data-dock-side"), "left");
+
+    apiMock.failNextPetSave = true;
+    const failedClose = await character.boundingBox();
+    await dragPet(-70, failedClose.y + failedClose.height / 2);
+    await pet.waitFor({ state: "visible" });
+    await waitForDock("left");
+    assert.equal(await pet.getAttribute("data-dock-side"), "left");
+    assert.equal((await pet.boundingBox()).x, 0);
+    await page.locator(".site-pet__bubble").waitFor({ state: "visible" });
+    assert.match(await page.locator(".site-pet__bubble-message").textContent(), /向外拖出屏幕|outward again/i);
+
+    const successfulClose = await character.boundingBox();
+    await dragPet(-70, successfulClose.y + successfulClose.height / 2);
     await pet.waitFor({ state: "hidden" });
+    if (config.mobile) {
+      await page.locator("#homeMenuToggle").click();
+      await page.locator("#homeNav").waitFor({ state: "visible" });
+    }
     await page.locator("#openProfile").click();
     await page.locator(".setting-toggle").click();
     await pet.waitFor({ state: "visible" });
     assert.equal(await page.locator("#petSkin").inputValue(), "codex-glass");
+    const profileOverflow = await page.locator("#profileDialog").evaluate((dialog) => ({
+      scrollWidth: dialog.scrollWidth,
+      clientWidth: dialog.clientWidth,
+      overflowX: getComputedStyle(dialog).overflowX,
+    }));
+    assert.ok(
+      profileOverflow.scrollWidth <= profileOverflow.clientWidth,
+      `${config.name}: profile dialog has horizontal overflow ${JSON.stringify(profileOverflow)}`
+    );
+    assert.equal(profileOverflow.overflowX, "hidden");
     assert.deepEqual(run.errors, [], `${config.name}-pet-controls: page errors ${JSON.stringify(run.errors)}`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-pet-controls: failed requests`);
     await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-pet-controls.png` });
@@ -773,6 +1083,7 @@ async function verifyCommunity(browser, config) {
       document.dispatchEvent(new Event("selectionchange"));
     });
     await page.locator("#communityFormattingToolbar").waitFor({ state: "visible" });
+    await assertElevatedSurface(page, "#communityFormattingToolbar", `${config.name}-formatting-toolbar`);
     await page.locator("[data-format-command='link']").click();
     await page.locator("#communityComposerError").waitFor({ state: "visible" });
     assert.match(await page.locator("#communityComposerError").textContent(), /链接|link|URL/i);
@@ -780,11 +1091,28 @@ async function verifyCommunity(browser, config) {
 
     await page.locator("#communityInsertFormula").click();
     await page.locator(".rich-editor-math").waitFor({ state: "visible" });
+    await assertElevatedSurface(page, "#communityMathKeyboard", `${config.name}-math-keyboard`);
     const mathCloseRect = await page.locator("#communityMathKeyboardClose").boundingBox();
     assert.ok(
       mathCloseRect && mathCloseRect.y >= 0 && mathCloseRect.y < config.viewport.height,
       `${config.name}: math keyboard close control is outside viewport`
     );
+    const closeStylesMatch = await page.evaluate(() => {
+      const profileClose = document.createElement("button");
+      profileClose.className = "profile-dialog__close";
+      profileClose.textContent = "x";
+      document.body.appendChild(profileClose);
+      const mathClose = document.querySelector("#communityMathKeyboardClose");
+      const properties = ["width", "height", "borderRadius", "padding", "fontSize", "fontWeight", "lineHeight", "backgroundColor", "boxShadow"];
+      const read = (element) => {
+        const style = getComputedStyle(element);
+        return Object.fromEntries(properties.map((property) => [property, style[property]]));
+      };
+      const result = { profile: read(profileClose), math: read(mathClose) };
+      profileClose.remove();
+      return result;
+    });
+    assert.deepEqual(closeStylesMatch.math, closeStylesMatch.profile, `${config.name}: math and profile close controls differ`);
     await closeMathKeyboard(page);
     await page.locator("#communitySubmitThread").click();
     assert.equal(await page.locator(".rich-editor-math").getAttribute("aria-invalid"), "true");
@@ -891,6 +1219,7 @@ async function verifyCommunity(browser, config) {
     assert.match(await page.locator("#communityToastMessage").textContent(), /Simulated follow failure/);
     const toastRect = await page.locator("#communityToast").boundingBox();
     assert.ok(toastRect && toastRect.y >= 0 && toastRect.y < config.viewport.height, `${config.name}: toast is outside viewport`);
+    await assertElevatedSurface(page, "#communityToast", `${config.name}-toast`);
     await page.locator("#communityToastClose").click();
     assert.equal(await page.locator("#communityToast").isHidden(), true);
     assert.ok(dialogs.some((dialog) => dialog.type === "prompt"), `${config.name}: flag prompt was not shown`);
@@ -898,11 +1227,21 @@ async function verifyCommunity(browser, config) {
 
     await page.locator("#communityCloseDetail").click();
     await page.locator("#communityListPanel").waitFor({ state: "visible" });
-    await assertPageGeometry(page, `${config.name}-community`);
-    await assertGlass(page, `${config.name}-community`);
+    await assertPageGeometry(page, `${config.name}-community-light`);
+    await assertThemeSurface(page, `${config.name}-community-light`, "light");
+    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-community-light.png`, fullPage: true });
+    await page.locator("#themeToggle").click();
+    await page.waitForFunction(() => {
+      if (document.documentElement.dataset.theme !== "dark") return false;
+      const style = getComputedStyle(document.querySelector(".community-surface"));
+      const backdrop = style.backdropFilter || style.webkitBackdropFilter || "none";
+      return style.backgroundColor === "rgba(255, 255, 255, 0.07)" && backdrop.includes("blur(20px)");
+    });
+    await assertThemeSurface(page, `${config.name}-community-dark`, "dark");
+    await assertPageGeometry(page, `${config.name}-community-dark`);
     assert.deepEqual(run.errors, [], `${config.name}-community: page errors`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-community: failed requests`);
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-community.png`, fullPage: true });
+    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-community-dark.png`, fullPage: true });
   } finally {
     await run.context.close();
   }
@@ -910,21 +1249,10 @@ async function verifyCommunity(browser, config) {
 
 const pageSpecs = [
   {
-    name: "login",
-    path: "/pages/login.html",
-    ready: "#emailContinueBtn",
-    pet: false,
-    glass: false,
-    verify: async (page) => {
-      await page.locator("#userEmail").fill("ui-test@example.test");
-      await page.locator("#emailContinueBtn").click();
-      await page.locator("#loginBtn").waitFor({ state: "visible" });
-    },
-  },
-  {
     name: "home",
     path: "/index.html",
     ready: ".course-card--biology",
+    glass: false,
     verify: async (page) => {
       assert.equal(await page.locator(".home-brand__mark").textContent(), "E");
       assert.equal(await page.locator("[data-i18n='homeBrand']").textContent(), "ExPassway");
@@ -936,6 +1264,10 @@ const pageSpecs = [
   { name: "notebook", path: "/pages/notebook.html", ready: ".notebook-question", verify: async (page) => assert.equal(await page.locator(".notebook-question").count(), 10) },
   { name: "review", path: "/pages/review.html", ready: ".review-answer-overview", verify: async (page) => assert.equal(await page.locator(".review-question-card").count(), 2) },
   { name: "analysis", path: "/pages/analysis.html", ready: ".bar", verify: async (page) => assert.equal(await page.locator(".bar").count(), 2) },
+  { name: "admin", path: "/pages/admin.html", ready: "#adminHintReviewPanel", pet: false },
+  { name: "curriculum-review", path: "/pages/curriculum-review.html", ready: "#refreshMappings", pet: false },
+  { name: "image-mapper", path: "/pages/image-mapper.html", ready: "#mappingInput", pet: false },
+  { name: "pdf-cut-preview", path: "/pages/pdf-cut-preview.html", ready: ".hero h1", pet: false },
 ];
 
 async function runConfig(config) {
@@ -948,6 +1280,8 @@ async function runConfig(config) {
       await verifyStandardPage(browser, config, pageSpec);
       console.log(JSON.stringify({ viewport: config.name, page: pageSpec.name, ok: true }));
     }
+    await verifyHomeThemes(browser, config);
+    console.log(JSON.stringify({ viewport: config.name, page: "home-themes", ok: true }));
     await verifyGeneratedPaper(browser, config);
     console.log(JSON.stringify({ viewport: config.name, page: "generated-paper", ok: true }));
     await verifyCommunity(browser, config);

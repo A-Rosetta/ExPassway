@@ -4,11 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="communityPageTitle">学习讨论</title>
+  <script src="../scripts/theme-init.js?v=20260730-1"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
   <link rel="stylesheet" href="../assets/styles.css?v=20260729-2" />
+  <link rel="stylesheet" href="../assets/site-design.css?v=20260730-1" />
   <link rel="stylesheet" href="../assets/vendor/katex/katex-0.17.0.min.css" />
   <link rel="stylesheet" href="../assets/vendor/mathlive/mathlive-fonts-0.110.0.css" />
 </head>
-<body class="student-ui community-page">
+<body class="student-ui site-ui community-page">
   <header class="community-topbar">
     <div class="community-topbar__inner">
       <a class="home-brand" href="../index.html" aria-label="ExPassway">
@@ -110,7 +113,7 @@
           <h3 id="communityMathKeyboardTitle" data-i18n="communityMathKeyboardTitle">数学键盘</h3>
           <p class="tip" data-i18n="communityMathKeyboardHint">键盘会直接编辑内容框中的公式。</p>
         </div>
-        <button id="communityMathKeyboardClose" class="btn-secondary math-icon-btn" type="button" aria-label="关闭数学键盘" data-i18n-aria-label="communityMathKeyboardClose" title="关闭数学键盘" data-i18n-title="communityMathKeyboardClose">×</button>
+        <button id="communityMathKeyboardClose" class="profile-dialog__close math-keyboard-close" type="button" aria-label="关闭数学键盘" data-i18n-aria-label="communityMathKeyboardClose" title="关闭数学键盘" data-i18n-title="communityMathKeyboardClose">×</button>
       </div>
       <div id="communityMathKeyboardTabs" class="math-keyboard-tabs" role="tablist" aria-label="数学键盘分类" data-i18n-aria-label="communityMathKeyboardCategories"></div>
       <div id="communityMathKeyboardKeys" class="math-keyboard-keys" role="tabpanel"></div>
@@ -178,7 +181,6 @@
             </div>
           </div>
         </details>
-        <a class="btn-link community-rail-home" href="../index.html" data-i18n="backHome">返回首页</a>
       </aside>
     </div>
   </main>
@@ -199,6 +201,7 @@
   </div>
 
   <script src="../scripts/i18n.js?v=20260729-4"></script>
+  <script src="../scripts/site-ui.js?v=20260730-1"></script>
   <script src="../assets/vendor/marked-15.0.12.min.js"></script>
   <script src="../assets/vendor/katex/katex-0.17.0.min.js"></script>
   <script src="../assets/vendor/katex/mhchem-0.17.0.min.js"></script>
