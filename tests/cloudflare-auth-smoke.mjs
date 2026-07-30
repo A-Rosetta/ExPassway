@@ -148,6 +148,7 @@ try {
     assert.equal(url.pathname, "/auth/v1/authorize");
     assert.equal(url.searchParams.get("provider"), "google");
     assert.equal(url.searchParams.get("redirect_to"), BASE_ENV.SUPABASE_AUTH_REDIRECT_URL);
+    assert.equal(url.searchParams.get("prompt"), "select_account");
   }
 
   {

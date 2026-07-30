@@ -376,6 +376,7 @@ export async function handleAuthApiRequest(request, env) {
       const authorizeUrl = new URL(`${config.supabaseUrl}/auth/v1/authorize`);
       authorizeUrl.searchParams.set("provider", "google");
       authorizeUrl.searchParams.set("redirect_to", config.redirectUrl);
+      authorizeUrl.searchParams.set("prompt", "select_account");
       return success({ url: authorizeUrl.toString() }, request.method);
     }
 
