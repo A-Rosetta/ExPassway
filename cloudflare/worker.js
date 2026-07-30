@@ -1,6 +1,17 @@
+import { handleAuthApiRequest } from "./auth-api.js";
+import { handleReadApiRequest } from "./read-api.js";
+
 export default {
-  fetch(request, env) {
+  async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/api/auth/")) {
+      return handleAuthApiRequest(request, env);
+    }
+
+    if (url.pathname.startsWith("/api/")) {
+      return handleReadApiRequest(request, env);
+    }
 
     if (url.pathname === "/") {
       url.pathname = "/index.html";

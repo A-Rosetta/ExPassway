@@ -4,11 +4,15 @@
 	"main": "cloudflare/worker.js",
 	"compatibility_date": "2026-07-30",
 	"workers_dev": true,
+	"vars": {
+		"SUPABASE_AUTH_REDIRECT_URL": "https://expassway.rosettaclient.workers.dev/pages/login.html"
+	},
 	"assets": {
 		"directory": "./.cloudflare-dist",
 		"binding": "ASSETS",
 		"run_worker_first": [
-			"/"
+			"/",
+			"/api/*"
 		],
 		"html_handling": "none"
 	},

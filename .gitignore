@@ -8,6 +8,7 @@ backend/scripts/__pycache__/
 # generated Cloudflare static assets
 .cloudflare-dist/
 .wrangler/
+.d1-export/
 
 # environment files
 .env
