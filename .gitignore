@@ -5,6 +5,10 @@ backend/node_modules/
 backend/imports/
 backend/scripts/__pycache__/
 
+# generated Cloudflare static assets
+.cloudflare-dist/
+.wrangler/
+
 # environment files
 .env
 *.env

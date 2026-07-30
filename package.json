@@ -1,0 +1,12 @@
+{
+  "name": "expassway",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "cloudflare:build": "node tools/build-cloudflare-assets.mjs",
+    "cloudflare:deploy": "npm run cloudflare:build && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.115.0"
+  }
+}
