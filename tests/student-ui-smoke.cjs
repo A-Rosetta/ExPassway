@@ -337,7 +337,9 @@ async function mockApi(page) {
 
 async function seedStorage(page, pathname, language = "en") {
   await page.addInitScript(({ path, currentUser, result, questions, selectedLanguage }) => {
+    const theme = localStorage.getItem("app-theme");
     localStorage.clear();
+    if (theme) localStorage.setItem("app-theme", theme);
     localStorage.setItem("alevel.language", selectedLanguage);
     localStorage.setItem("alevel.userProfile", JSON.stringify(currentUser));
     localStorage.setItem("alevel.selection", JSON.stringify({
@@ -454,6 +456,7 @@ async function openPage(browser, config, pathname, options = {}) {
   const context = await browser.newContext({
     viewport: config.viewport,
     reducedMotion: "reduce",
+    ...(options.colorScheme ? { colorScheme: options.colorScheme } : {}),
   });
   const page = await context.newPage();
   if (options.clock) await page.clock.install();
@@ -465,6 +468,144 @@ async function openPage(browser, config, pathname, options = {}) {
   await mockApi(page);
   await page.goto(`${baseUrl}${pathname}`, { waitUntil: "networkidle" });
   return { context, page, errors, failedRequests };
+}
+
+async function homeSurfaceState(page) {
+  return page.evaluate(() => {
+    const root = document.documentElement;
+    const body = getComputedStyle(document.body);
+    const card = getComputedStyle(document.querySelector(".course-card"));
+    const pet = getComputedStyle(document.querySelector(".site-pet__head"));
+    return {
+      theme: root.getAttribute("data-theme") || "light",
+      storedTheme: localStorage.getItem("app-theme"),
+      bodyBackground: body.backgroundColor,
+      cardBackground: card.backgroundColor,
+      cardBorder: card.borderTopColor,
+      cardRadius: card.borderTopLeftRadius,
+      cardShadow: card.boxShadow,
+      cardBackdrop: card.backdropFilter || card.webkitBackdropFilter || "none",
+      petBackground: pet.backgroundColor,
+      petBackdrop: pet.backdropFilter || pet.webkitBackdropFilter || "none",
+    };
+  });
+}
+
+async function verifyHomeThemes(browser, config) {
+  const systemRun = await openPage(browser, config, "/index.html", { colorScheme: "dark" });
+  try {
+    await systemRun.page.locator(".course-card--biology").waitFor({ state: "visible" });
+    assert.equal(
+      await systemRun.page.locator("html").getAttribute("data-theme"),
+      "dark",
+      `${config.name}-home: system dark preference was not applied`
+    );
+    assert.equal(
+      await systemRun.page.evaluate(() => localStorage.getItem("app-theme")),
+      null,
+      `${config.name}-home: system preference must not create a manual theme setting`
+    );
+  } finally {
+    await systemRun.context.close();
+  }
+
+  const run = await openPage(browser, config, "/index.html", { colorScheme: "light" });
+  const { page } = run;
+  try {
+    await page.locator(".course-card--biology").waitFor({ state: "visible" });
+    const light = await homeSurfaceState(page);
+    assert.equal(light.theme, "light");
+    assert.equal(light.storedTheme, null);
+    assert.equal(light.bodyBackground, "rgb(230, 234, 227)");
+    assert.equal(light.cardBackground, "rgb(230, 234, 227)");
+    assert.equal(light.cardBorder, "rgba(0, 0, 0, 0)");
+    assert.equal(light.cardRadius, "32px");
+    assert.match(light.cardShadow, /9px 9px 16px/);
+    assert.match(light.cardShadow, /-9px -9px 16px/);
+    assert.equal(light.cardBackdrop, "none");
+    assert.equal(light.petBackdrop, "none");
+    assert.match(await page.locator("#themeToggle").getAttribute("aria-label"), /dark mode/i);
+
+    if (config.mobile) {
+      const menu = page.locator("#homeMenuToggle");
+      await menu.click();
+      assert.equal(await menu.getAttribute("aria-expanded"), "true");
+      await page.waitForFunction(() => {
+        const style = getComputedStyle(document.querySelector("#homeNav"));
+        return style.visibility === "visible" && Number.parseFloat(style.opacity) === 1;
+      });
+      assert.equal(await page.locator("#homeNav").isVisible(), true);
+      assert.match(await menu.getAttribute("aria-label"), /close home menu/i);
+      await page.keyboard.press("Escape");
+      assert.equal(await menu.getAttribute("aria-expanded"), "false");
+      assert.equal(await menu.evaluate((element) => document.activeElement === element), true);
+    } else {
+      assert.equal(await page.locator("#homeMenuToggle").isVisible(), false);
+      assert.equal(await page.locator("#homeNav").isVisible(), true);
+    }
+
+    await assertPageGeometry(page, `${config.name}-home-light`);
+    await page.screenshot({
+      path: `/var/tmp/student-ui-${config.name}-home-light.png`,
+      fullPage: true,
+    });
+
+    await page.locator("#themeToggle").click();
+    await page.waitForFunction(() => (
+      getComputedStyle(document.body).backgroundColor === "rgb(20, 23, 28)"
+      && getComputedStyle(document.querySelector(".course-card")).backgroundColor === "rgba(255, 255, 255, 0.07)"
+    ));
+    const dark = await homeSurfaceState(page);
+    assert.equal(dark.theme, "dark");
+    assert.equal(dark.storedTheme, "dark");
+    assert.equal(dark.bodyBackground, "rgb(20, 23, 28)");
+    assert.equal(dark.cardBackground, "rgba(255, 255, 255, 0.07)");
+    assert.equal(dark.cardBorder, "rgba(255, 255, 255, 0.14)");
+    assert.equal(dark.cardRadius, "32px");
+    assert.match(dark.cardBackdrop, /blur\(20px\)/);
+    assert.doesNotMatch(dark.cardShadow, /-9px -9px/);
+    assert.match(dark.petBackdrop, /blur\(20px\)/);
+    assert.match(await page.locator("#themeToggle").getAttribute("aria-label"), /light mode/i);
+
+    await page.reload({ waitUntil: "networkidle" });
+    await page.locator(".course-card--biology").waitFor({ state: "visible" });
+    assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+    assert.equal(await page.evaluate(() => localStorage.getItem("app-theme")), "dark");
+
+    if (config.mobile) {
+      await page.locator("#homeMenuToggle").click();
+      await page.locator("#homeNav").waitFor({ state: "visible" });
+    }
+    await page.locator("#openProfile").click();
+    await page.locator("#profileDialog").waitFor({ state: "visible" });
+    const profileSurface = await page.locator("#profileDialog").evaluate((dialog) => {
+      const style = getComputedStyle(dialog);
+      return {
+        radius: style.borderTopLeftRadius,
+        background: style.backgroundColor,
+        backdrop: style.backdropFilter || style.webkitBackdropFilter || "none",
+      };
+    });
+    assert.equal(profileSurface.radius, "32px");
+    assert.equal(profileSurface.background, "rgba(255, 255, 255, 0.13)");
+    assert.match(profileSurface.backdrop, /blur\(20px\)/);
+    await page.locator("#closeProfile").click();
+
+    await page.locator("#openPdfDownload").click();
+    await page.locator("#pdfDownloadDialog").waitFor({ state: "visible" });
+    assert.equal(await page.locator("#pdfDownloadSubject option").count(), 4);
+    await page.locator("#closePdfDownload").click();
+
+    await assertPageGeometry(page, `${config.name}-home-dark`);
+    assert.deepEqual(run.errors, [], `${config.name}-home-themes: page errors`);
+    assert.deepEqual(run.failedRequests, [], `${config.name}-home-themes: failed requests`);
+    await page.screenshot({
+      path: `/var/tmp/student-ui-${config.name}-home-dark.png`,
+      fullPage: true,
+    });
+  } finally {
+    await run.context.close();
+  }
 }
 
 async function verifyStandardPage(browser, config, pageSpec) {
@@ -638,15 +779,45 @@ async function verifyPetControls(browser, config) {
 
     if (!config.mobile) {
       const dragStart = await character.boundingBox();
+      const dragResponse = page.waitForResponse((response) => (
+        response.url().endsWith("/api/auth/me/pet")
+        && response.request().method() === "PATCH"
+      ));
       await page.mouse.move(dragStart.x + dragStart.width / 2, dragStart.y + dragStart.height / 2);
       await page.mouse.down();
       await page.mouse.move(120, 180, { steps: 8 });
       await page.mouse.up();
-      await page.waitForFunction(() => window.ALevelPet.getPreferences().position.x < 0.2);
-      const afterDrag = await pet.boundingBox();
+      await dragResponse;
+      await page.waitForFunction(({ width, height }) => {
+        const element = document.querySelector(".site-pet");
+        const preferences = window.ALevelPet.getPreferences();
+        const bounds = element.getBoundingClientRect();
+        const renderedX = (bounds.left + bounds.width / 2) / width;
+        const renderedY = (bounds.top + bounds.height / 2) / height;
+        return preferences.position.x < 0.2
+          && Math.abs(renderedX - preferences.position.x) < 0.01
+          && Math.abs(renderedY - preferences.position.y) < 0.01;
+      }, config.viewport);
+      const [afterDrag, afterPreferences] = await Promise.all([
+        pet.boundingBox(),
+        page.evaluate(() => window.ALevelPet.getPreferences()),
+      ]);
+      const renderedPosition = {
+        x: (afterDrag.x + afterDrag.width / 2) / config.viewport.width,
+        y: (afterDrag.y + afterDrag.height / 2) / config.viewport.height,
+      };
       assert.ok(
-        afterDrag.x >= 0 && afterDrag.y >= 0 && afterDrag.x < 180,
-        `${config.name}: pet drag did not persist in the viewport ${JSON.stringify(afterDrag)}`
+        afterDrag.x >= 0
+          && afterDrag.y >= 0
+          && afterDrag.x + afterDrag.width <= config.viewport.width
+          && afterDrag.y + afterDrag.height <= config.viewport.height
+          && Math.abs(renderedPosition.x - afterPreferences.position.x) < 0.01
+          && Math.abs(renderedPosition.y - afterPreferences.position.y) < 0.01,
+        `${config.name}: pet drag did not persist in the viewport ${JSON.stringify({
+          afterDrag,
+          afterPreferences,
+          renderedPosition,
+        })}`
       );
     }
 
@@ -658,6 +829,10 @@ async function verifyPetControls(browser, config) {
     await page.locator(".site-pet__close").click();
     await closeResponse;
     await pet.waitFor({ state: "hidden" });
+    if (config.mobile) {
+      await page.locator("#homeMenuToggle").click();
+      await page.locator("#homeNav").waitFor({ state: "visible" });
+    }
     await page.locator("#openProfile").click();
     await page.locator(".setting-toggle").click();
     await pet.waitFor({ state: "visible" });
@@ -925,6 +1100,7 @@ const pageSpecs = [
     name: "home",
     path: "/index.html",
     ready: ".course-card--biology",
+    glass: false,
     verify: async (page) => {
       assert.equal(await page.locator(".home-brand__mark").textContent(), "E");
       assert.equal(await page.locator("[data-i18n='homeBrand']").textContent(), "ExPassway");
@@ -948,6 +1124,8 @@ async function runConfig(config) {
       await verifyStandardPage(browser, config, pageSpec);
       console.log(JSON.stringify({ viewport: config.name, page: pageSpec.name, ok: true }));
     }
+    await verifyHomeThemes(browser, config);
+    console.log(JSON.stringify({ viewport: config.name, page: "home-themes", ok: true }));
     await verifyGeneratedPaper(browser, config);
     console.log(JSON.stringify({ viewport: config.name, page: "generated-paper", ok: true }));
     await verifyCommunity(browser, config);

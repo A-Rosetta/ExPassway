@@ -4,7 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="homePageTitle">ExPassway</title>
+  <script>
+    (function () {
+      var theme = "";
+      try {
+        theme = localStorage.getItem("app-theme") || "";
+      } catch (_error) {
+        theme = "";
+      }
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      if (theme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      document.documentElement.style.colorScheme = theme;
+    })();
+  </script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
   <link rel="stylesheet" href="assets/styles.css?v=20260729-2" />
+  <link rel="stylesheet" href="assets/home-design.css?v=20260730-1" />
 </head>
 <body class="student-ui home-dashboard">
   <header class="home-topbar">
@@ -13,12 +34,28 @@
         <span class="home-brand__mark" aria-hidden="true">E</span>
         <span data-i18n="homeBrand">ExPassway</span>
       </a>
-      <nav class="home-nav-actions" aria-label="主页功能" data-i18n-aria-label="homeNavLabel">
+      <nav id="homeNav" class="home-nav-actions" aria-label="主页功能" data-i18n-aria-label="homeNavLabel">
         <button id="goNotebook" class="home-nav-button" type="button" data-i18n="homeNotebook">错题本</button>
         <button id="goCommunity" class="home-nav-button" type="button" data-i18n="homeForum">论坛</button>
         <button id="openProfile" class="home-nav-button" type="button" data-i18n="homeProfile">个人资料</button>
         <button id="logoutHome" class="home-nav-button home-nav-button--logout" type="button" data-i18n="homeLogout">退出登录</button>
       </nav>
+      <div class="home-header-controls">
+        <button id="themeToggle" class="home-header-control home-theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
+          <svg class="home-theme-icon home-theme-icon--sun" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+          <svg class="home-theme-icon home-theme-icon--moon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <button id="homeMenuToggle" class="home-header-control home-menu-toggle" type="button" aria-controls="homeNav" aria-expanded="false" aria-label="打开主页菜单" title="打开主页菜单">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -134,5 +171,6 @@
   <script src="scripts/api.js?v=20260729-1"></script>
   <script src="scripts/pet.js?v=20260729-2"></script>
   <script src="scripts/app.js?v=20260729-1"></script>
+  <script src="scripts/home-ui.js?v=20260730-1"></script>
 </body>
 </html>
