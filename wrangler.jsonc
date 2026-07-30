@@ -18,5 +18,15 @@
 			"database_name": "expassway-db",
 			"database_id": "a6122247-fef0-4da3-9d35-f2cdd43423cf"
 		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "CONTENT_BUCKET",
+			"bucket_name": "expassway-content"
+		},
+		{
+			"binding": "PRIVATE_IMPORTS_BUCKET",
+			"bucket_name": "expassway-private-imports"
+		}
 	]
 }
