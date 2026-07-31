@@ -6,8 +6,14 @@
   "scripts": {
     "cloudflare:build": "node tools/build-cloudflare-assets.mjs",
     "cloudflare:deploy": "npm run cloudflare:build && wrangler deploy",
+    "cloudflare:import": "node tools/run-cloudflare-import.mjs --action auto",
+    "cloudflare:migrate-pdfs": "node tools/migrate-legacy-pdfs-to-r2.mjs",
     "d1:export": "node tools/export-postgres-to-d1.mjs",
+    "test:cloudflare-admin-api": "node tests/cloudflare-admin-api-smoke.mjs",
     "test:cloudflare-auth": "node tests/cloudflare-auth-smoke.mjs",
+    "test:cloudflare-community-api": "node tests/cloudflare-community-api-smoke.mjs",
+    "test:cloudflare-content-api": "node tests/cloudflare-content-api-smoke.mjs",
+    "test:cloudflare-learning-api": "node tests/cloudflare-learning-api-smoke.mjs",
     "test:cloudflare-read-api": "node tests/cloudflare-read-api-smoke.mjs"
   },
   "devDependencies": {

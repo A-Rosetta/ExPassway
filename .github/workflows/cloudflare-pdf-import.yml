@@ -1,0 +1,53 @@
+name: Cloudflare PDF import
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: Optional D1 import job UUID
+        required: false
+        type: string
+      action:
+        description: Import action
+        required: true
+        default: auto
+        type: choice
+        options:
+          - auto
+          - process
+          - publish
+permissions:
+  contents: read
+
+concurrency:
+  group: expassway-cloudflare-pdf-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: python -m pip install --disable-pip-version-check PyMuPDF==1.26.3
+      - name: Process queued import
+        env:
+          IMPORT_ACTION: ${{ inputs.action || 'auto' }}
+          IMPORT_JOB_ID: ${{ inputs.job_id || '' }}
+        run: |
+          args=(--action "$IMPORT_ACTION")
+          if [[ -n "$IMPORT_JOB_ID" ]]; then
+            args+=(--job-id "$IMPORT_JOB_ID")
+          fi
+          node tools/run-cloudflare-import.mjs "${args[@]}"

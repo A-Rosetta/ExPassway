@@ -41,6 +41,10 @@
 
   let apiBaseUrl = resolveBaseUrl();
 
+  function currentToken() {
+    return localStorage.getItem("alevel.authToken") || "";
+  }
+
   async function request(path, options = {}) {
     const timeoutMs = options.timeoutMs || DEFAULT_TIMEOUT_MS;
     const controller = new AbortController();
@@ -109,18 +113,21 @@
     async generatePaper(input) {
       return request("/api/papers/generate", {
         method: "POST",
+        token: currentToken(),
         body: JSON.stringify(input),
       });
     },
     async submitPaper(input) {
       return request("/api/papers/submit", {
         method: "POST",
+        token: currentToken(),
         body: JSON.stringify(input),
       });
     },
     async submitLocalPaper(input) {
       return request("/api/papers/submit-local", {
         method: "POST",
+        token: currentToken(),
         body: JSON.stringify(input),
       });
     },
@@ -232,7 +239,7 @@
       if (input.chapter) params.set("chapter", String(input.chapter));
       return request(`/api/admin/curriculum/mappings?${params}`, { token });
     },
-    async suggestAdminCurriculumMappings(token, limit = 2000) {
+    async suggestAdminCurriculumMappings(token, limit = 100) {
       return request("/api/admin/curriculum/mappings/suggest", {
         method: "POST",
         token,
@@ -260,38 +267,26 @@
     },
     async getUserPractices(userId, input = {}) {
       const limit = Number(input.limit || 20);
-      return request(`/api/users/${encodeURIComponent(userId)}/practices?limit=${limit}`);
+      return request(`/api/users/${encodeURIComponent(userId)}/practices?limit=${limit}`, {
+        token: currentToken(),
+      });
     },
     async getUserNotebook(userId) {
-      return request(`/api/users/${encodeURIComponent(userId)}/notebook`);
+      return request(`/api/users/${encodeURIComponent(userId)}/notebook`, {
+        token: currentToken(),
+      });
     },
     async updateNotebookEntry(userId, entryId, input) {
       return request(`/api/users/${encodeURIComponent(userId)}/notebook/${encodeURIComponent(entryId)}`, {
         method: "PATCH",
+        token: currentToken(),
         body: JSON.stringify(input || {}),
       });
     },
     async clearUserPractices(userId) {
       return request(`/api/users/${encodeURIComponent(userId)}/practices`, {
         method: "DELETE",
-      });
-    },
-    async register(input) {
-      return request("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(input || {}),
-      });
-    },
-    async login(input) {
-      return request("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify(input || {}),
-      });
-    },
-    async adminLogin(input) {
-      return request("/api/auth/admin/login", {
-        method: "POST",
-        body: JSON.stringify(input || {}),
+        token: currentToken(),
       });
     },
     async getGoogleAuthStart() {

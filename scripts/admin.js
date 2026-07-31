@@ -3,6 +3,7 @@
   const { t, applyPage, getLanguage } = window.ALevelI18n;
   let authToken = "";
   let currentImportJob = null;
+  let importPollTimer = 0;
 
   function byId(id) {
     return document.getElementById(id);
@@ -155,6 +156,25 @@
     return key ? t(key) : status || "-";
   }
 
+  function importStatusLabel(job) {
+    if (job?.summary?.requestedAction === "publish") return t("adminImportStatusPublishQueued");
+    return statusLabel(job?.status);
+  }
+
+  function scheduleImportPoll(job) {
+    clearTimeout(importPollTimer);
+    const queued = job?.status === "processing" || job?.summary?.requestedAction === "publish";
+    if (!queued) return;
+    importPollTimer = setTimeout(async () => {
+      try {
+        renderImportJob(await window.ALevelApi.getAdminImport(authToken, job.id));
+        await loadImportAdminData();
+      } catch (_error) {
+        scheduleImportPoll(job);
+      }
+    }, 10000);
+  }
+
   function summaryValue(summary, key) {
     return Number(summary?.[key] || 0);
   }
@@ -170,7 +190,7 @@
 
     const summary = job.summary || {};
     const summaryRows = [
-      [t("adminImportStatusLabel"), statusLabel(job.status)],
+      [t("adminImportStatusLabel"), importStatusLabel(job)],
       [t("adminImportValidatedPapers"), summaryValue(summary, "validatedPaperCount")],
       [t("adminImportRejectedPapers"), summaryValue(summary, "rejectedPaperCount")],
       [t("adminImportValidQuestions"), summaryValue(summary, "validQuestionCount")],
@@ -203,6 +223,7 @@
           ...failures.map((failure) => `${failure.paperSlug}: ${failure.message}`),
         ].map((message) => `<li>${safeText(message)}</li>`).join("")}</ul>`
       : `<p class="tip">${safeText(t("adminImportNoIssues"))}</p>`;
+    scheduleImportPoll(job);
   }
 
   function renderSubjects(subjects) {
@@ -223,7 +244,7 @@
           <tr>
             <td>${safeText(fmtDate(job.createdAt))}</td>
             <td>${safeText(`${job.subjectCode} - ${job.subjectName}`)}</td>
-            <td><span class="status-pill admin-import-status-${safeText(job.status)}">${safeText(statusLabel(job.status))}</span></td>
+            <td><span class="status-pill admin-import-status-${safeText(job.status)}">${safeText(importStatusLabel(job))}</span></td>
             <td>${safeText(job.fileCount)}</td>
             <td><button type="button" class="btn-secondary" data-import-id="${safeText(job.id)}">${safeText(t("adminImportView"))}</button></td>
           </tr>
@@ -478,10 +499,10 @@
     if (!currentImportJob?.id) return;
     const button = byId("adminProcessImport");
     button.disabled = true;
-    setImportStatus(t("adminImportProcessing"), false);
+    setImportStatus(t("adminImportQueueingValidation"), false);
     try {
       renderImportJob(await window.ALevelApi.processAdminImport(authToken, currentImportJob.id));
-      setImportStatus(t("adminImportProcessed"), false);
+      setImportStatus(t("adminImportValidationQueued"), false);
       await loadImportAdminData();
     } catch (err) {
       const job = await window.ALevelApi.getAdminImport(authToken, currentImportJob.id).catch(() => null);
@@ -496,10 +517,10 @@
     if (!currentImportJob?.id || !window.confirm(t("adminImportPublishConfirm"))) return;
     const button = byId("adminPublishImport");
     button.disabled = true;
-    setImportStatus(t("adminImportPublishing"), false);
+    setImportStatus(t("adminImportQueueingPublish"), false);
     try {
       renderImportJob(await window.ALevelApi.publishAdminImport(authToken, currentImportJob.id));
-      setImportStatus(t("adminImportPublished"), false);
+      setImportStatus(t("adminImportPublishQueued"), false);
       await loadImportAdminData();
     } catch (err) {
       const job = await window.ALevelApi.getAdminImport(authToken, currentImportJob.id).catch(() => null);

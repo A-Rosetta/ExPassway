@@ -195,6 +195,7 @@ def main():
     parser.add_argument("--output", required=True)
     parser.add_argument("--subject-code", required=True)
     parser.add_argument("--asset-key", required=True)
+    parser.add_argument("--public-root")
     args = parser.parse_args()
     input_root = Path(args.input).resolve()
     output_root = Path(args.output).resolve()
@@ -202,7 +203,7 @@ def main():
     if not re.fullmatch(r"\d{4}", subject_code):
         raise ValueError("Subject code must contain four digits")
     output_root.mkdir(parents=True, exist_ok=True)
-    public_root = f"/assets/exam-question-images/cie-igcse-{args.asset_key}"
+    public_root = args.public_root or f"/assets/exam-question-images/cie-igcse-{args.asset_key}"
 
     papers = {}
     issues = []

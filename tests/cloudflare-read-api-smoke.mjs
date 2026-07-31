@@ -53,8 +53,8 @@ assert.equal(storage.response.status, 200);
 assert.deepEqual(storage.payload, { ok: true, data: { mode: "d1" } });
 
 const unavailable = await request(workerBaseUrl, "/api/curriculum/0610/chapters");
-assert.equal(unavailable.response.status, 404);
-assert.equal(unavailable.payload?.error?.code, "NOT_FOUND");
+assert.equal(unavailable.response.status, 401);
+assert.equal(unavailable.payload?.error?.code, "UNAUTHORIZED");
 
 const wrongMethod = await request(workerBaseUrl, "/api/catalog/subjects", { method: "POST" });
 assert.equal(wrongMethod.response.status, 404);
