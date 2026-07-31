@@ -13,6 +13,7 @@
     "test:cloudflare-auth": "node tests/cloudflare-auth-smoke.mjs",
     "test:cloudflare-community-api": "node tests/cloudflare-community-api-smoke.mjs",
     "test:cloudflare-content-api": "node tests/cloudflare-content-api-smoke.mjs",
+    "test:cloudflare-import-runner": "node tests/cloudflare-import-runner-smoke.mjs",
     "test:cloudflare-learning-api": "node tests/cloudflare-learning-api-smoke.mjs",
     "test:cloudflare-read-api": "node tests/cloudflare-read-api-smoke.mjs"
   },

@@ -3,9 +3,10 @@
 	"name": "expassway",
 	"main": "cloudflare/worker.js",
 	"compatibility_date": "2026-07-30",
-	"workers_dev": true,
+	"workers_dev": false,
+	"preview_urls": false,
 	"vars": {
-		"SUPABASE_AUTH_REDIRECT_URL": "https://expassway.rosettaclient.workers.dev/pages/login.html"
+		"SUPABASE_AUTH_REDIRECT_URL": "https://expassway.com/pages/login.html"
 	},
 	"assets": {
 		"directory": "./.cloudflare-dist",

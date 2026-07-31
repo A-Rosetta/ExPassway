@@ -7,10 +7,12 @@ import {
   routeNotFound,
   success,
 } from "./auth-api.js";
+import { dispatchImportWorkflow, writeAudit } from "./admin-support.js";
+import { handleAdminPlatformRoute } from "./admin-platform-api.js";
 
 const CORS_PREFLIGHT_HEADERS = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
-  "Access-Control-Allow-Methods": "GET, POST, PATCH, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE, OPTIONS",
   "Access-Control-Allow-Origin": "*",
 };
 const MAX_PDF_BYTES = 12 * 1024 * 1024;
@@ -148,7 +150,7 @@ function mapImportJob(row) {
     subjectName: row.subject_name || "",
     createdBy: row.created_by,
     createdByName: row.created_by_name || "",
-    status: row.status,
+    status: row.cancelled_at ? "cancelled" : row.status,
     inputDir: row.input_dir,
     stagingDir: row.staging_dir,
     manifestPath: row.manifest_path || "",
@@ -159,6 +161,8 @@ function mapImportJob(row) {
     startedAt: row.started_at,
     completedAt: row.completed_at,
     publishedAt: row.published_at,
+    cancelledAt: row.cancelled_at || null,
+    hiddenAt: row.hidden_at || null,
   };
 }
 
@@ -526,6 +530,8 @@ export async function handleAdminApiRequest(request, env) {
   }
   try {
     const admin = await requireAdmin(request, env);
+    const platformResponse = await handleAdminPlatformRoute(request, env, admin);
+    if (platformResponse) return platformResponse;
     if (request.method === "GET" && url.pathname === "/api/admin/records") {
       const usersLimit = toInteger(url.searchParams.get("usersLimit"), 20, 1, 100, "usersLimit");
       const practicesLimit = toInteger(url.searchParams.get("practicesLimit"), 20, 1, 100, "practicesLimit");
@@ -566,6 +572,7 @@ export async function handleAdminApiRequest(request, env) {
       if (target.role === "admin") throw new AuthError(403, "Administrator accounts cannot be disabled here.", "FORBIDDEN");
       await env.DB.prepare("UPDATE users SET disabled_at = ?, updated_at = ? WHERE id = ?")
         .bind(body.disabled ? new Date().toISOString() : null, new Date().toISOString(), userId).run();
+      await writeAudit(env.DB, admin.id, body.disabled ? "user.disable" : "user.enable", "user", userId);
       return success(mapUser(await env.DB.prepare("SELECT * FROM users WHERE id = ?").bind(userId).first()), request.method);
     }
 
@@ -596,12 +603,14 @@ export async function handleAdminApiRequest(request, env) {
           name = excluded.name, name_zh = excluded.name_zh, asset_key = excluded.asset_key,
           active = excluded.active, updated_at = excluded.updated_at
       `).bind(code, name, nameZh, assetKey, body.active === false ? 0 : 1, now, now).run();
+      await writeAudit(env.DB, admin.id, "subject.save", "subject", code, { name, assetKey });
       return success(mapSubject(await env.DB.prepare("SELECT * FROM exam_subjects WHERE code = ?").bind(code).first()), request.method, 201);
     }
 
     if (request.method === "GET" && url.pathname === "/api/admin/imports") {
       const limit = toInteger(url.searchParams.get("limit"), 30, 1, 100, "limit");
-      const rows = await env.DB.prepare(`${IMPORT_SELECT} ORDER BY j.created_at DESC LIMIT ?`).bind(limit).all();
+      const includeHidden = new Set(["1", "true"]).has(url.searchParams.get("includeHidden"));
+      const rows = await env.DB.prepare(`${IMPORT_SELECT} ${includeHidden ? "" : "WHERE j.hidden_at IS NULL"} ORDER BY j.created_at DESC LIMIT ?`).bind(limit).all();
       return success(rows.results.map(mapImportJob), request.method);
     }
     if (request.method === "POST" && url.pathname === "/api/admin/imports") {
@@ -615,6 +624,7 @@ export async function handleAdminApiRequest(request, env) {
         INSERT INTO exam_import_jobs (id, subject_code, created_by, input_dir, staging_dir)
         VALUES (?, ?, ?, ?, ?)
       `).bind(id, subjectCode, admin.id, `r2://private-imports/imports/${id}/input`, `r2://private-imports/imports/${id}/output`).run();
+      await writeAudit(env.DB, admin.id, "import.create", "import_job", id, { subjectCode });
       return success(await getImportJob(env.DB, id, true), request.method, 201);
     }
 
@@ -681,6 +691,17 @@ export async function handleAdminApiRequest(request, env) {
           WHERE id = ?
         `).bind(now, jobId).run();
       }
+      try {
+        await dispatchImportWorkflow(env, { action: importAction[2], jobId });
+      } catch (error) {
+        await env.DB.prepare(`
+          UPDATE exam_import_jobs SET status = ?, started_at = ?, completed_at = ?, summary = ?
+          WHERE id = ? AND cancelled_at IS NULL
+            AND json_extract(summary, '$.requestedAction') = ?
+        `).bind(job.status, job.startedAt, job.completedAt, JSON.stringify(job.summary), jobId, importAction[2]).run();
+        throw error;
+      }
+      await writeAudit(env.DB, admin.id, `import.${importAction[2]}`, "import_job", jobId);
       return success(await getImportJob(env.DB, jobId, true), request.method);
     }
 
@@ -743,6 +764,7 @@ export async function handleAdminApiRequest(request, env) {
       `).bind(status, admin.id, now, now, id).run();
       const row = await env.DB.prepare("SELECT * FROM question_hint_sets WHERE id = ? LIMIT 1").bind(id).first();
       if (!row) throw new AuthError(404, "Question hint set not found.", "HINT_SET_NOT_FOUND");
+      await writeAudit(env.DB, admin.id, `ai_hints.${status}`, "question_hint_set", id);
       return success({ ...mapHintSet({ ...row, paper_slug: null, question_no: null, subject_code: null, stem: null, options: "[]", images: "[]" }), question: undefined }, request.method);
     }
     return routeNotFound(request, url);

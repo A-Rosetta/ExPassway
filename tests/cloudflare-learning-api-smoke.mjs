@@ -54,7 +54,11 @@ const mf = new Miniflare({
 
 try {
   const db = await mf.getD1Database("DB");
-  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql"]) {
+  for (const file of [
+    "../migrations/0001_initial.sql",
+    "../migrations/0002_supabase_auth.sql",
+    "../migrations/0003_admin_platform.sql",
+  ]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) {
       await db.prepare(statement).run();

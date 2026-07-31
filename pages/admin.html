@@ -3,35 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="adminPageTitle">后台数据面板</title>
+  <title data-i18n="adminPageTitle">Admin Data Panel</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260729-1" />
-  <link rel="stylesheet" href="../assets/site-design.css?v=20260730-1" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260731-1" />
+  <link rel="stylesheet" href="../assets/site-design.css?v=20260731-1" />
 </head>
 <body class="site-ui utility-ui">
   <main id="adminContent" class="container" hidden style="display:none;">
     <section class="card hero">
-      <h1 data-i18n="adminHeroTitle">后台数据面板</h1>
-      <p data-i18n="adminHeroSubtitle">管理用户账号、社区内容、练习记录与整体统计。</p>
+      <h1 data-i18n="adminHeroTitle">Admin Data Panel</h1>
+      <p data-i18n="adminHeroSubtitle">Manage user accounts, community content, practice records, and platform statistics.</p>
       <p id="adminStatus" class="tip"></p>
     </section>
 
     <section class="card panel" id="adminHintReviewPanel">
       <div class="admin-section-heading">
         <div>
-          <h2 data-i18n="adminHintReviewTitle">AI 提示样本审核</h2>
-          <p class="tip" data-i18n="adminHintReviewHint">审核 12 道 Biology 题目的中英文三步提示。24 份全部通过前，实时生成保持锁定。</p>
+          <h2 data-i18n="adminHintReviewTitle">AI Hint Sample Review</h2>
+          <p class="tip" data-i18n="adminHintReviewHint">Review English and Chinese three-step hints for 12 Biology questions. Live generation remains locked until all 24 sets are approved.</p>
         </div>
-        <button id="adminRefreshHints" class="btn-secondary" type="button" data-i18n="adminRefreshHints">刷新样本</button>
+        <button id="adminRefreshHints" class="btn-secondary" type="button" data-i18n="adminRefreshHints">Refresh Samples</button>
       </div>
       <p id="adminHintReviewStatus" class="tip" role="status"></p>
+      <div class="admin-setting-row">
+        <div>
+          <strong data-i18n="adminHintLiveTitle">Live AI Hint Generation</strong>
+          <p class="tip" data-i18n="adminHintLiveHint">Generates and caches hints only when no approved or static hints exist.</p>
+        </div>
+        <label class="admin-switch">
+          <input id="adminHintLiveToggle" type="checkbox" />
+          <span data-i18n="adminHintLiveToggle">Enable live generation</span>
+        </label>
+      </div>
       <div class="admin-hint-filters">
-        <label><span data-i18n="adminHintStatusLabel">审核状态</span>
+        <label><span data-i18n="adminHintStatusLabel">Review Status</span>
           <select id="adminHintStatus">
-            <option value="pending_review" data-i18n="adminHintPending">待审核</option>
-            <option value="approved" data-i18n="adminHintApproved">已通过</option>
-            <option value="rejected" data-i18n="adminHintRejected">已拒绝</option>
+            <option value="pending_review" data-i18n="adminHintPending">Pending Review</option>
+            <option value="approved" data-i18n="adminHintApproved">Approved</option>
+            <option value="rejected" data-i18n="adminHintRejected">Rejected</option>
           </select>
         </label>
       </div>
@@ -39,84 +49,105 @@
     </section>
 
     <section class="card panel">
-      <h2 data-i18n="adminFilterTitle">筛选设置</h2>
+      <h2 data-i18n="adminFilterTitle">Filters</h2>
       <div class="grid-2">
-        <label><span data-i18n="recentUsersLabel">最近用户数量</span>
+        <label><span data-i18n="recentUsersLabel">Recent Users</span>
           <input id="usersLimit" type="number" min="1" max="100" value="10" />
         </label>
-        <label><span data-i18n="recentPracticesLabel">最近练习数量</span>
+        <label><span data-i18n="recentPracticesLabel">Recent Practice Sessions</span>
           <input id="practicesLimit" type="number" min="1" max="100" value="20" />
         </label>
       </div>
       <div class="actions">
-        <button id="refreshBtn" class="btn-primary" data-i18n="refreshBtn">刷新数据</button>
-        <button id="openMapper" class="btn-secondary" data-i18n="openMapper">题图绑定工具</button>
-        <button id="openCurriculumReview" class="btn-secondary" type="button" data-i18n="openCurriculumReview">生物章节映射审核</button>
-        <button id="backHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
+        <button id="refreshBtn" class="btn-primary" data-i18n="refreshBtn">Refresh Data</button>
+        <button id="openMapper" class="btn-secondary" data-i18n="openMapper">Question Image Mapper</button>
+        <button id="openCurriculumReview" class="btn-secondary" type="button" data-i18n="openCurriculumReview">Biology Chapter Mapping Review</button>
+        <button id="backHome" class="btn-secondary" data-i18n="backHome">Back to Home</button>
       </div>
     </section>
 
     <section class="card panel">
-      <h2 data-i18n="adminSummaryTitle">总览统计</h2>
+      <h2 data-i18n="adminSummaryTitle">Overview</h2>
       <div id="summaryCards" class="stats-grid"></div>
     </section>
 
     <section class="card panel" id="adminImportPanel">
-      <h2 data-i18n="adminExamImportTitle">真题导入</h2>
-      <p class="tip" data-i18n="adminExamImportHint">支持 CIE IGCSE 科学 Paper 2 MCQ 和 Economics 0455 Paper 1 MCQ，文件名须使用官方格式。</p>
+      <h2 data-i18n="adminExamImportTitle">Past Paper Import</h2>
+      <p class="tip" data-i18n="adminExamImportHint">Supports CIE IGCSE Science Paper 2 MCQ and Economics 0455 Paper 1 MCQ using official file names.</p>
 
       <div class="admin-import-section">
-        <h3 data-i18n="adminSubjectRegisterTitle">注册科目</h3>
+        <h3 data-i18n="adminSubjectRegisterTitle">Register Subject</h3>
         <div class="grid-2">
-          <label><span data-i18n="adminSubjectCodeLabel">科目代码</span>
+          <label><span data-i18n="adminSubjectCodeLabel">Subject Code</span>
             <input id="adminSubjectCode" type="text" inputmode="numeric" maxlength="4" placeholder="0654" />
           </label>
-          <label><span data-i18n="adminSubjectNameLabel">英文名称</span>
+          <label><span data-i18n="adminSubjectNameLabel">English Name</span>
             <input id="adminSubjectName" type="text" maxlength="120" placeholder="Co-ordinated Sciences" />
           </label>
-          <label><span data-i18n="adminSubjectNameZhLabel">中文名称</span>
+          <label><span data-i18n="adminSubjectNameZhLabel">Chinese Name</span>
             <input id="adminSubjectNameZh" type="text" maxlength="120" data-i18n-placeholder="adminSubjectNameZhPlaceholder" placeholder="Co-ordinated Sciences" />
           </label>
-          <label><span data-i18n="adminSubjectAssetKeyLabel">资源目录名称</span>
+          <label><span data-i18n="adminSubjectAssetKeyLabel">Asset Directory Key</span>
             <input id="adminSubjectAssetKey" type="text" maxlength="80" placeholder="coordinated-sciences-0654" />
           </label>
         </div>
         <div class="actions">
-          <button id="adminRegisterSubject" class="btn-secondary" type="button" data-i18n="adminRegisterSubject">注册或更新科目</button>
+          <button id="adminRegisterSubject" class="btn-secondary" type="button" data-i18n="adminRegisterSubject">Register or Update Subject</button>
         </div>
         <p id="adminSubjectStatus" class="tip"></p>
+        <div class="table-wrap">
+          <table class="data-table admin-action-table">
+            <thead><tr>
+              <th data-i18n="adminSubjectCodeLabel">Subject Code</th>
+              <th data-i18n="adminSubjectNameLabel">English Name</th>
+              <th data-i18n="adminUserStatus">Status</th>
+              <th data-i18n="adminImportFileCount">Questions</th>
+              <th data-i18n="adminUserActions">Actions</th>
+            </tr></thead>
+            <tbody id="adminSubjectsBody"></tbody>
+          </table>
+        </div>
       </div>
 
       <div class="admin-import-section">
-        <h3 data-i18n="adminUploadPapersTitle">上传 Question Paper 与 Mark Scheme</h3>
+        <h3 data-i18n="adminUploadPapersTitle">Upload Question Papers and Mark Schemes</h3>
         <div class="grid-2">
-          <label><span data-i18n="adminImportSubjectLabel">导入科目</span>
+          <label><span data-i18n="adminImportSubjectLabel">Import Subject</span>
             <select id="adminImportSubject"></select>
           </label>
-          <label><span data-i18n="adminImportFilesLabel">PDF 文件</span>
+          <label><span data-i18n="adminImportFilesLabel">PDF Files</span>
             <input id="adminImportFiles" type="file" accept="application/pdf,.pdf" multiple />
           </label>
         </div>
         <div class="actions">
-          <button id="adminUploadImport" class="btn-primary" type="button" data-i18n="adminUploadImport">创建任务并上传</button>
-          <button id="adminProcessImport" class="btn-secondary" type="button" data-i18n="adminProcessImport" disabled>校验并切题</button>
-          <button id="adminPublishImport" class="btn-primary" type="button" data-i18n="adminPublishImport" disabled>发布到题库</button>
+          <button id="adminUploadImport" class="btn-primary" type="button" data-i18n="adminUploadImport">Create Job and Upload</button>
+          <button id="adminProcessImport" class="btn-secondary" type="button" data-i18n="adminProcessImport" disabled>Validate and Cut</button>
+          <button id="adminPublishImport" class="btn-primary" type="button" data-i18n="adminPublishImport" disabled>Publish to Question Bank</button>
+          <button id="adminRunImportWorker" class="btn-secondary" type="button" data-i18n="adminRunImportWorker">Run Import Worker</button>
         </div>
         <progress id="adminImportProgress" class="admin-import-progress" max="100" value="0" hidden></progress>
         <p id="adminImportStatus" class="tip"></p>
       </div>
 
       <div id="adminImportDetail" class="admin-import-section" hidden>
-        <h3 data-i18n="adminImportDetailTitle">当前导入任务</h3>
+        <div class="admin-section-heading">
+          <h3 data-i18n="adminImportDetailTitle">Current Import Job</h3>
+          <div class="admin-action-grid">
+            <button id="adminCancelImport" class="btn-secondary" type="button" data-i18n="adminCancelImport">Cancel Job</button>
+            <button id="adminHideImportRecord" class="btn-secondary" type="button" data-i18n="adminHideImportRecord">Hide from History</button>
+            <button id="adminDeleteImport" class="btn-danger" type="button" data-i18n="adminDeleteImport">Delete Job</button>
+            <button id="adminHideImportDetail" class="btn-secondary" type="button" data-i18n="adminHideImportDetail">Hide Details</button>
+          </div>
+        </div>
         <div id="adminImportSummary" class="stats-grid admin-import-summary"></div>
         <div class="table-wrap">
           <table class="data-table admin-import-table">
             <thead>
               <tr>
-                <th data-i18n="adminImportFileName">文件</th>
-                <th data-i18n="adminImportPaperSlug">试卷编号</th>
-                <th data-i18n="adminImportFileType">类型</th>
-                <th data-i18n="adminImportFileSize">大小</th>
+                <th data-i18n="adminImportFileName">File</th>
+                <th data-i18n="adminImportPaperSlug">Paper Slug</th>
+                <th data-i18n="adminImportFileType">Type</th>
+                <th data-i18n="adminImportFileSize">Size</th>
               </tr>
             </thead>
             <tbody id="adminImportFilesBody"></tbody>
@@ -127,18 +158,21 @@
 
       <div class="admin-import-section">
         <div class="admin-section-heading">
-          <h3 data-i18n="adminImportHistoryTitle">导入历史</h3>
-          <button id="adminRefreshImports" class="btn-secondary" type="button" data-i18n="adminRefreshImports">刷新历史</button>
+          <h3 data-i18n="adminImportHistoryTitle">Import History</h3>
+          <div class="admin-action-grid">
+            <label class="admin-inline-check"><input id="adminShowHiddenImports" type="checkbox" /> <span data-i18n="adminShowHiddenImports">Show Hidden Jobs</span></label>
+            <button id="adminRefreshImports" class="btn-secondary" type="button" data-i18n="adminRefreshImports">Refresh History</button>
+          </div>
         </div>
         <div class="table-wrap">
           <table class="data-table admin-import-table">
             <thead>
               <tr>
-                <th data-i18n="adminImportCreatedAt">创建时间</th>
-                <th data-i18n="adminImportSubjectLabel">导入科目</th>
-                <th data-i18n="adminImportStatusLabel">状态</th>
-                <th data-i18n="adminImportFileCount">文件数</th>
-                <th data-i18n="adminImportHistoryAction">操作</th>
+                <th data-i18n="adminImportCreatedAt">Created At</th>
+                <th data-i18n="adminImportSubjectLabel">Import Subject</th>
+                <th data-i18n="adminImportStatusLabel">Status</th>
+                <th data-i18n="adminImportFileCount">Files</th>
+                <th data-i18n="adminImportHistoryAction">Action</th>
               </tr>
             </thead>
             <tbody id="adminImportsBody"></tbody>
@@ -147,8 +181,110 @@
       </div>
     </section>
 
+    <section class="card panel" id="adminCommunityPanel">
+      <div class="admin-section-heading">
+        <div>
+          <h2 data-i18n="adminCommunityTitle">Community Moderation</h2>
+          <p class="tip" data-i18n="adminCommunitySubtitle">Manage community content</p>
+        </div>
+        <button id="adminRefreshCommunity" class="btn-secondary" type="button" data-i18n="adminRefreshCommunity">Refresh Community</button>
+      </div>
+      <p id="adminCommunityStatus" class="tip" role="status"></p>
+      <div class="admin-import-section">
+        <div class="admin-section-heading">
+          <h3 data-i18n="adminDiscussionsTitle">Discussions</h3>
+          <label><span data-i18n="adminDiscussionStatus">Discussion Status</span>
+            <select id="adminDiscussionStatus">
+              <option value="all" data-i18n="adminReportAll">All</option>
+              <option value="open" data-i18n="adminThreadOpen">Open</option>
+              <option value="solved" data-i18n="adminThreadSolved">Solved</option>
+              <option value="locked" data-i18n="adminThreadLocked">Locked</option>
+              <option value="hidden" data-i18n="adminThreadHidden">Hidden</option>
+            </select>
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table admin-action-table">
+            <thead><tr>
+              <th data-i18n="adminReportDiscussion">Discussion</th>
+              <th data-i18n="adminThreadAuthor">Author</th>
+              <th data-i18n="adminUserStatus">Status</th>
+              <th data-i18n="adminThreadActivity">Activity</th>
+              <th data-i18n="adminUserActions">Actions</th>
+            </tr></thead>
+            <tbody id="adminThreadsBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="admin-import-section">
+        <div class="admin-section-heading">
+          <h3 data-i18n="adminReportsTitle">Report Queue</h3>
+          <label><span data-i18n="adminReportStatus">Report Status</span>
+            <select id="adminReportStatus">
+              <option value="pending" data-i18n="adminReportPending">Pending</option>
+              <option value="resolved" data-i18n="adminReportResolved">Resolved</option>
+              <option value="dismissed" data-i18n="adminReportDismissed">Dismissed</option>
+              <option value="all" data-i18n="adminReportAll">All</option>
+            </select>
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table admin-action-table">
+            <thead><tr>
+              <th data-i18n="adminReportCreated">Reported</th>
+              <th data-i18n="adminReportDiscussion">Discussion</th>
+              <th data-i18n="adminReportPost">Post</th>
+              <th data-i18n="adminReportReason">Reason</th>
+              <th data-i18n="adminUserActions">Actions</th>
+            </tr></thead>
+            <tbody id="adminReportsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card panel" id="adminDataPanel">
+      <div class="admin-section-heading">
+        <div>
+          <h2 data-i18n="adminDataToolsTitle">Data and Audit</h2>
+          <p class="tip" data-i18n="adminDataToolsHint">Export scoped operational data and review administrator actions.</p>
+        </div>
+        <button id="adminRefreshAudit" class="btn-secondary" type="button" data-i18n="adminRefreshAudit">Refresh Audit Log</button>
+      </div>
+      <div class="admin-data-toolbar">
+        <label><span data-i18n="adminExportDataset">Dataset</span>
+          <select id="adminExportDataset">
+            <option value="users" data-i18n="adminExportUsers">Users</option>
+            <option value="practices" data-i18n="adminExportPractices">Practice Sessions</option>
+            <option value="attempts" data-i18n="adminExportAttempts">Question Attempts</option>
+            <option value="notebook" data-i18n="adminExportNotebook">Wrong Notebook</option>
+            <option value="community" data-i18n="adminExportCommunity">Community</option>
+            <option value="imports" data-i18n="adminExportImports">Import Jobs</option>
+            <option value="audit" data-i18n="adminExportAudit">Audit Log</option>
+          </select>
+        </label>
+        <div class="admin-action-grid">
+          <button id="adminExportJson" class="btn-secondary" type="button" data-i18n="adminExportJson">Export JSON</button>
+          <button id="adminExportCsv" class="btn-secondary" type="button" data-i18n="adminExportCsv">Export CSV</button>
+        </div>
+      </div>
+      <p id="adminDataStatus" class="tip" role="status"></p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th data-i18n="adminCreatedAt">Created At</th>
+            <th data-i18n="adminAuditActor">Actor</th>
+            <th data-i18n="adminAuditAction">Action</th>
+            <th data-i18n="adminAuditTarget">Target</th>
+            <th data-i18n="adminAuditDetails">Details</th>
+          </tr></thead>
+          <tbody id="adminAuditBody"></tbody>
+        </table>
+      </div>
+    </section>
+
     <section class="card panel">
-      <h2 data-i18n="latestUsersTitle">最近用户</h2>
+      <h2 data-i18n="latestUsersTitle">Recent Users</h2>
       <div class="table-wrap">
         <table class="data-table">
           <thead>
@@ -159,9 +295,9 @@
               <th data-i18n="adminUserRole">Role</th>
               <th data-i18n="adminUserGrade">Grade</th>
               <th data-i18n="adminUserTargetScore">Target Score</th>
-              <th data-i18n="adminUserStatus">账号状态</th>
+              <th data-i18n="adminUserStatus">Account Status</th>
               <th data-i18n="adminCreatedAt">Created At</th>
-              <th data-i18n="adminUserActions">账号操作</th>
+              <th data-i18n="adminUserActions">Account Actions</th>
             </tr>
           </thead>
           <tbody id="usersBody"></tbody>
@@ -170,7 +306,7 @@
     </section>
 
     <section class="card panel">
-      <h2 data-i18n="latestPracticesTitle">最近练习记录</h2>
+      <h2 data-i18n="latestPracticesTitle">Recent Practice Sessions</h2>
       <div class="table-wrap">
         <table class="data-table">
           <thead>
@@ -190,9 +326,17 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260731-1"></script>
+  <dialog id="adminDetailDialog" class="admin-detail-dialog">
+    <div class="admin-section-heading">
+      <h2 id="adminDetailTitle">Details</h2>
+      <button id="adminCloseDetail" class="btn-secondary" type="button" data-i18n="close">Close</button>
+    </div>
+    <div id="adminDetailBody"></div>
+  </dialog>
+
+  <script src="../scripts/i18n.js?v=20260731-2"></script>
   <script src="../scripts/site-ui.js?v=20260730-1"></script>
-  <script src="../scripts/api.js?v=20260731-1"></script>
-  <script src="../scripts/admin.js?v=20260731-2"></script>
+  <script src="../scripts/api.js?v=20260731-2"></script>
+  <script src="../scripts/admin.js?v=20260731-4"></script>
 </body>
 </html>

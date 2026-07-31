@@ -4,6 +4,7 @@ import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import { promisify } from "node:util";
+import { pathToFileURL } from "node:url";
 
 const execFileAsync = promisify(execFile);
 const DATABASE = "expassway-db";
@@ -25,6 +26,19 @@ function sqlValue(value) {
 
 function jsonValue(value) {
   return sqlValue(JSON.stringify(value));
+}
+
+function jobGuard(jobId, action, status) {
+  return `EXISTS (
+    SELECT 1 FROM exam_import_jobs
+    WHERE id = ${sqlValue(jobId)} AND status = ${sqlValue(status)}
+      AND cancelled_at IS NULL
+      AND json_extract(summary, '$.requestedAction') = ${sqlValue(action)}
+  )`;
+}
+
+function releasePrefix(jobId) {
+  return `releases/${jobId}`;
 }
 
 async function wrangler(args, options = {}) {
@@ -78,7 +92,7 @@ async function selectJob(requestedJobId, requestedAction) {
     const rows = await query(`
       SELECT j.*, s.name AS subject_name, s.asset_key, s.board, s.qualification
       FROM exam_import_jobs j JOIN exam_subjects s ON s.code = j.subject_code
-      WHERE j.id = ${sqlValue(requestedJobId)} LIMIT 1
+      WHERE j.id = ${sqlValue(requestedJobId)} AND j.cancelled_at IS NULL LIMIT 1
     `);
     if (!rows[0]) throw new Error("Import job not found");
     const action = requestedAction === "auto"
@@ -97,7 +111,7 @@ async function selectJob(requestedJobId, requestedAction) {
   const rows = await query(`
     SELECT j.*, s.name AS subject_name, s.asset_key, s.board, s.qualification
     FROM exam_import_jobs j JOIN exam_subjects s ON s.code = j.subject_code
-    WHERE ${actionFilter}
+    WHERE j.cancelled_at IS NULL AND ${actionFilter}
     ORDER BY COALESCE(json_extract(j.summary, '$.requestedAt'), j.created_at)
     LIMIT 1
   `);
@@ -108,32 +122,69 @@ async function selectJob(requestedJobId, requestedAction) {
   };
 }
 
-async function recordFailure(job, error, workDirectory) {
-  const now = new Date().toISOString();
-  const message = String(error?.stderr || error?.message || error).slice(0, 2000);
+async function assertNotCancelled(jobId) {
+  const rows = await query(`SELECT cancelled_at FROM exam_import_jobs WHERE id = ${sqlValue(jobId)} LIMIT 1`);
+  if (!rows[0]) throw new Error("Import job no longer exists");
+  if (rows[0].cancelled_at) {
+    const error = new Error("Import job was cancelled");
+    error.code = "IMPORT_CANCELLED";
+    throw error;
+  }
+}
+
+async function assertCompletedState(jobId, expectedStatus) {
+  const rows = await query(`SELECT status, cancelled_at FROM exam_import_jobs WHERE id = ${sqlValue(jobId)} LIMIT 1`);
+  if (!rows[0]) throw new Error("Import job no longer exists");
+  if (rows[0].cancelled_at) {
+    const error = new Error("Import job was cancelled");
+    error.code = "IMPORT_CANCELLED";
+    throw error;
+  }
+  if (rows[0].status !== expectedStatus) {
+    throw new Error(`Import job did not reach ${expectedStatus} status`);
+  }
+}
+
+export function failureSql(job, message, now) {
+  const status = job.action === "publish" ? "validated" : "failed";
+  const expectedStatus = job.action === "publish" ? "validated" : "processing";
   const summary = {
     ...JSON.parse(job.summary || "{}"),
     requestedAction: null,
     failedAt: now,
     failure: message,
   };
-  const status = job.action === "publish" ? "validated" : "failed";
-  const sql = `
-    UPDATE exam_import_jobs
-    SET status = ${sqlValue(status)}, summary = ${jsonValue(summary)}, completed_at = ${sqlValue(now)}
-    WHERE id = ${sqlValue(job.id)};
+  const guard = jobGuard(job.id, job.action, expectedStatus);
+  return `
     INSERT INTO exam_import_issues (id, job_id, severity, code, message, details)
-    VALUES (
+    SELECT
       lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-' || lower(hex(randomblob(6))),
       ${sqlValue(job.id)}, 'error', 'ACTION_FAILED', ${sqlValue(message)}, '{}'
-    );
+    WHERE ${guard};
+    UPDATE exam_import_jobs
+    SET status = ${sqlValue(status)}, summary = ${jsonValue(summary)}, completed_at = ${sqlValue(now)}
+    WHERE id = ${sqlValue(job.id)} AND status = ${sqlValue(expectedStatus)}
+      AND cancelled_at IS NULL
+      AND json_extract(summary, '$.requestedAction') = ${sqlValue(job.action)};
   `;
+}
+
+async function recordFailure(job, error, workDirectory) {
+  if (error?.code === "IMPORT_CANCELLED") return;
+  const current = await query(`SELECT status, cancelled_at, summary FROM exam_import_jobs WHERE id = ${sqlValue(job.id)} LIMIT 1`);
+  if (!current[0] || current[0].cancelled_at) return;
+  const currentAction = JSON.parse(current[0].summary || "{}").requestedAction;
+  const expectedStatus = job.action === "publish" ? "validated" : "processing";
+  if (current[0].status !== expectedStatus || currentAction !== job.action) return;
+  const now = new Date().toISOString();
+  const message = String(error?.stderr || error?.message || error).slice(0, 2000);
   const file = join(workDirectory, "failure.sql");
-  await writeFile(file, sql);
+  await writeFile(file, failureSql(job, message, now));
   await executeSqlFile(file);
 }
 
 async function processJob(job, workDirectory) {
+  await assertNotCancelled(job.id);
   const inputDirectory = join(workDirectory, "input");
   const outputDirectory = join(workDirectory, "output");
   await mkdir(inputDirectory, { recursive: true });
@@ -157,6 +208,7 @@ async function processJob(job, workDirectory) {
   } catch (error) {
     processorError = error;
   }
+  await assertNotCancelled(job.id);
   const manifestPath = join(outputDirectory, "manifest.json");
   let manifest;
   try {
@@ -165,6 +217,7 @@ async function processJob(job, workDirectory) {
     throw processorError || new Error("Importer did not create a manifest");
   }
   for (const file of await listFiles(outputDirectory)) {
+    await assertNotCancelled(job.id);
     const key = `imports/${job.id}/output/${file.slice(outputDirectory.length + 1)}`;
     const contentType = file.endsWith(".json") ? "application/json" : "image/png";
     await r2Put(PRIVATE_BUCKET, key, file, contentType);
@@ -173,26 +226,30 @@ async function processJob(job, workDirectory) {
   const issues = Array.isArray(manifest.issues) ? manifest.issues : [];
   const status = Number(manifest.validatedPaperCount || 0) > 0 ? "validated" : "failed";
   const summary = { ...manifest, requestedAction: null, processedAt: now };
+  const guard = jobGuard(job.id, "process", "processing");
   const issueSql = issues.map((issue) => `
     INSERT INTO exam_import_issues (id, job_id, paper_slug, severity, code, message, details)
-    VALUES (
+    SELECT
       lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))), 2) || '-a' || substr(lower(hex(randomblob(2))), 2) || '-' || lower(hex(randomblob(6))),
       ${sqlValue(job.id)}, ${sqlValue(issue.paperSlug || null)},
       ${sqlValue(issue.severity || "error")}, ${sqlValue(issue.code || "IMPORT_ERROR")},
       ${sqlValue(issue.message || "Import failed")}, ${jsonValue(issue.details || {})}
-    );
+    WHERE ${guard};
   `).join("\n");
   const sql = `
-    DELETE FROM exam_import_issues WHERE job_id = ${sqlValue(job.id)};
+    DELETE FROM exam_import_issues
+    WHERE job_id = ${sqlValue(job.id)} AND ${guard};
+    ${issueSql}
     UPDATE exam_import_jobs
     SET status = ${sqlValue(status)}, manifest_path = ${sqlValue(`r2://imports/${job.id}/output/manifest.json`)},
       summary = ${jsonValue(summary)}, completed_at = ${sqlValue(now)}
-    WHERE id = ${sqlValue(job.id)};
-    ${issueSql}
+    WHERE id = ${sqlValue(job.id)} AND status = 'processing' AND cancelled_at IS NULL
+      AND json_extract(summary, '$.requestedAction') = 'process';
   `;
   const file = join(workDirectory, "processed.sql");
   await writeFile(file, sql);
   await executeSqlFile(file);
+  await assertCompletedState(job.id, status);
   if (processorError && status === "failed") throw processorError;
 }
 
@@ -200,13 +257,15 @@ function questionId(job, paper, questionNo) {
   return `CIE-${job.qualification}-${job.subject_code}-${paper.slug}-${String(questionNo).padStart(2, "0")}`;
 }
 
-function paperSql(job, paper, payload) {
+export function paperSql(job, paper, payload, now) {
   const validRows = (payload.rows || []).filter((row) => Number.isInteger(row.answer) && row.answer >= 0 && row.answer <= 3);
   if (validRows.length !== Number(paper.validQuestionCount)) {
     throw new Error(`${paper.slug}: manifest and data question counts differ`);
   }
   const subject = `${job.qualification} ${job.subject_name}`;
   const seasons = { m: "March", s: "Summer", w: "Winter" };
+  const guard = jobGuard(job.id, "publish", "validated");
+  const prefix = releasePrefix(job.id);
   const questionStatements = validRows.map((row) => {
     const number = Number(row.questionNo);
     const parsed = row.options?.A && row.options?.B && row.options?.C && row.options?.D;
@@ -219,21 +278,23 @@ function paperSql(job, paper, payload) {
       questionNo: number,
       answerStatus: row.answerStatus || "valid",
     };
+    const imageUrl = `/api/content/question-images/cie-igcse-${job.asset_key}/${prefix}/${paper.slug}/q${String(number).padStart(2, "0")}.png`;
     return `
       INSERT INTO question_bank (
         id, board, subject, paper, difficulty, topic, year, stem, options,
         answer, mistake_type, template_id, skills, hints, images, source,
         subject_code, paper_slug, question_no, active
-      ) VALUES (
+      ) SELECT
         ${sqlValue(questionId(job, paper, number))}, ${sqlValue(job.board)}, ${sqlValue(subject)}, 'MCQ',
         ${sqlValue(number <= 14 ? "基础" : number <= 28 ? "中等" : "冲刺")},
         ${sqlValue(`Past Paper ${seasons[paper.season]}`)}, ${sqlValue(String(paper.year))},
         ${sqlValue(row.stem || row.rawText || `Question ${number}`)}, ${jsonValue(options)},
         ${Number(row.answer)}, 'unknown', ${sqlValue(`${paper.slug}-${number}`)},
         ${jsonValue([job.asset_key, "mcq", "past-paper"])}, '[]',
-        ${jsonValue([{ url: row.imageUrl, position: "stem", order: 1 }])}, ${jsonValue(source)},
+        ${jsonValue([{ url: imageUrl, position: "stem", order: 1 }])}, ${jsonValue(source)},
         ${sqlValue(job.subject_code)}, ${sqlValue(paper.slug)}, ${number}, 1
-      ) ON CONFLICT (id) DO UPDATE SET
+      WHERE ${guard}
+      ON CONFLICT (id) DO UPDATE SET
         board = excluded.board, subject = excluded.subject, paper = excluded.paper,
         difficulty = excluded.difficulty, topic = excluded.topic, year = excluded.year,
         stem = excluded.stem, options = excluded.options, answer = excluded.answer,
@@ -242,24 +303,26 @@ function paperSql(job, paper, payload) {
         paper_slug = excluded.paper_slug, question_no = excluded.question_no, active = 1;
     `;
   }).join("\n");
-  const dataUrl = `/api/content/question-data/cie-igcse-${job.asset_key}/data/${paper.slug}.json`;
+  const dataUrl = `/api/content/question-data/cie-igcse-${job.asset_key}/${prefix}/data/${paper.slug}.json`;
   return `
-    UPDATE question_bank SET active = 0 WHERE paper_slug = ${sqlValue(paper.slug)};
+    UPDATE question_bank SET active = 0
+    WHERE paper_slug = ${sqlValue(paper.slug)} AND ${guard};
     ${questionStatements}
     INSERT INTO exam_papers (
       slug, subject_code, year, season, paper_number, variant, paper_type,
       duration_minutes, source_question_count, valid_question_count,
       discounted_questions, qp_file_name, ms_file_name, data_url,
       status, metadata, published_at
-    ) VALUES (
+    ) SELECT
       ${sqlValue(paper.slug)}, ${sqlValue(job.subject_code)}, ${Number(paper.year)}, ${sqlValue(paper.season)},
       ${Number(paper.paperNumber)}, ${Number(paper.variant)}, 'MCQ', 45,
       ${Number(paper.sourceQuestionCount)}, ${Number(paper.validQuestionCount)},
       ${jsonValue(paper.discountedQuestions || [])}, ${sqlValue(paper.qpFileName)}, ${sqlValue(paper.msFileName)},
       ${sqlValue(dataUrl)}, 'published',
-      ${jsonValue({ importJobId: job.id, qpSha256: paper.qpSha256, msSha256: paper.msSha256 })},
-      ${sqlValue(new Date().toISOString())}
-    ) ON CONFLICT (slug) DO UPDATE SET
+      ${jsonValue({ importJobId: job.id, contentPrefix: prefix, qpSha256: paper.qpSha256, msSha256: paper.msSha256 })},
+      ${sqlValue(now)}
+    WHERE ${guard}
+    ON CONFLICT (slug) DO UPDATE SET
       subject_code = excluded.subject_code, year = excluded.year, season = excluded.season,
       paper_number = excluded.paper_number, variant = excluded.variant,
       source_question_count = excluded.source_question_count,
@@ -272,6 +335,7 @@ function paperSql(job, paper, payload) {
 }
 
 async function publishJob(job, workDirectory) {
+  await assertNotCancelled(job.id);
   const outputDirectory = join(workDirectory, "output");
   const manifestPath = join(outputDirectory, "manifest.json");
   await r2Get(PRIVATE_BUCKET, `imports/${job.id}/output/manifest.json`, manifestPath);
@@ -283,18 +347,23 @@ async function publishJob(job, workDirectory) {
   `);
   const sqlParts = [];
   let questionCount = 0;
+  const prefix = releasePrefix(job.id);
+  const now = new Date().toISOString();
   for (const paper of papers) {
+    await assertNotCancelled(job.id);
     const dataPath = join(outputDirectory, "data", `${paper.slug}.json`);
     await r2Get(PRIVATE_BUCKET, `imports/${job.id}/output/data/${paper.slug}.json`, dataPath);
     const payload = JSON.parse(await readFile(dataPath, "utf8"));
-    await r2Put(CONTENT_BUCKET, `question-data/cie-igcse-${job.asset_key}/data/${paper.slug}.json`, dataPath, "application/json");
+    await r2Put(CONTENT_BUCKET, `${prefix}/question-data/cie-igcse-${job.asset_key}/data/${paper.slug}.json`, dataPath, "application/json");
     for (let number = 1; number <= Number(paper.sourceQuestionCount); number += 1) {
+      await assertNotCancelled(job.id);
       const imageName = `q${String(number).padStart(2, "0")}.png`;
       const imagePath = join(outputDirectory, "papers", paper.slug, imageName);
       await r2Get(PRIVATE_BUCKET, `imports/${job.id}/output/papers/${paper.slug}/${imageName}`, imagePath);
-      await r2Put(CONTENT_BUCKET, `question-images/cie-igcse-${job.asset_key}/${paper.slug}/${imageName}`, imagePath, "image/png");
+      await r2Put(CONTENT_BUCKET, `${prefix}/question-images/cie-igcse-${job.asset_key}/${paper.slug}/${imageName}`, imagePath, "image/png");
     }
     for (const type of ["qp", "ms"]) {
+      await assertNotCancelled(job.id);
       const source = inputFiles.find((file) => file.paper_slug === paper.slug && file.document_type === type);
       if (!source) throw new Error(`${paper.slug}: missing ${type} source PDF`);
       const pdfPath = join(workDirectory, "pdf", source.file_name);
@@ -308,12 +377,12 @@ async function publishJob(job, workDirectory) {
       if (actualHash !== source.sha256 || actualHash !== manifestHash) {
         throw new Error(`${paper.slug}: ${type} source hash does not match validation records`);
       }
-      await r2Put(CONTENT_BUCKET, `papers/${paper.slug}/${type}.pdf`, pdfPath, "application/pdf");
+      await r2Put(CONTENT_BUCKET, `${prefix}/papers/${paper.slug}/${type}.pdf`, pdfPath, "application/pdf");
     }
-    sqlParts.push(paperSql(job, paper, payload));
+    sqlParts.push(paperSql(job, paper, payload, now));
     questionCount += Number(paper.validQuestionCount);
   }
-  const now = new Date().toISOString();
+  await assertNotCancelled(job.id);
   const summary = {
     ...manifest,
     requestedAction: null,
@@ -326,40 +395,49 @@ async function publishJob(job, workDirectory) {
   sqlParts.push(`
     UPDATE exam_import_jobs
     SET status = 'published', summary = ${jsonValue(summary)}, published_at = ${sqlValue(now)}
-    WHERE id = ${sqlValue(job.id)};
+    WHERE id = ${sqlValue(job.id)} AND status = 'validated' AND cancelled_at IS NULL
+      AND json_extract(summary, '$.requestedAction') = 'publish';
   `);
   const file = join(workDirectory, "publish.sql");
   await writeFile(file, sqlParts.join("\n"));
   await executeSqlFile(file);
+  await assertCompletedState(job.id, "published");
 }
 
-const requestedAction = argument("--action", "auto");
-const requestedJobId = argument("--job-id");
-if (!VALID_ACTIONS.has(requestedAction)) throw new Error("action must be auto, process, or publish");
-const job = await selectJob(requestedJobId, requestedAction);
-if (!job) {
-  console.log("No queued Cloudflare import job found.");
-  process.exit(0);
-}
-if (!new Set(["process", "publish"]).has(job.action)) throw new Error("Import job has no supported requested action");
-if (job.action === "process" && job.status !== "processing") {
-  throw new Error("Process action requires a queued processing job");
-}
-if (job.action === "publish" && job.status !== "validated") {
-  throw new Error("Publish action requires a validated job");
+async function main() {
+  const requestedAction = argument("--action", "auto");
+  const requestedJobId = argument("--job-id");
+  if (!VALID_ACTIONS.has(requestedAction)) throw new Error("action must be auto, process, or publish");
+  const job = await selectJob(requestedJobId, requestedAction);
+  if (!job) {
+    console.log("No queued Cloudflare import job found.");
+    return;
+  }
+  if (!new Set(["process", "publish"]).has(job.action)) throw new Error("Import job has no supported requested action");
+  if (job.action === "process" && job.status !== "processing") {
+    throw new Error("Process action requires a queued processing job");
+  }
+  if (job.action === "publish" && job.status !== "validated") {
+    throw new Error("Publish action requires a validated job");
+  }
+
+  const workDirectory = await mkdtemp(join(tmpdir(), `expassway-import-${basename(job.id)}-`));
+  try {
+    console.log(`${job.action} import job ${job.id}`);
+    await assertNotCancelled(job.id);
+    if (job.action === "process") await processJob(job, workDirectory);
+    else await publishJob(job, workDirectory);
+    console.log(`Completed ${job.action} for import job ${job.id}.`);
+  } catch (error) {
+    await recordFailure(job, error, workDirectory).catch((recordError) => {
+      console.error("Could not record import failure", recordError);
+    });
+    throw error;
+  } finally {
+    await rm(workDirectory, { recursive: true, force: true });
+  }
 }
 
-const workDirectory = await mkdtemp(join(tmpdir(), `expassway-import-${basename(job.id)}-`));
-try {
-  console.log(`${job.action} import job ${job.id}`);
-  if (job.action === "process") await processJob(job, workDirectory);
-  else await publishJob(job, workDirectory);
-  console.log(`Completed ${job.action} for import job ${job.id}.`);
-} catch (error) {
-  await recordFailure(job, error, workDirectory).catch((recordError) => {
-    console.error("Could not record import failure", recordError);
-  });
-  throw error;
-} finally {
-  await rm(workDirectory, { recursive: true, force: true });
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  await main();
 }
