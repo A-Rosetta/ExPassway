@@ -3,6 +3,7 @@
   const USER_ID_KEY = "alevel.userId";
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const GOOGLE_AUTH_PENDING_KEY = "alevel.googleAuthPending";
+  const VISITOR_MODE_KEY = "alevel.visitorMode";
   const GOOGLE_AUTH_MAX_AGE_MS = 10 * 60 * 1000;
   const { t, getLanguage, applyPage } = window.ALevelI18n;
 
@@ -29,6 +30,7 @@
   }
 
   function applyAuthSuccess(payload, messageKey) {
+    localStorage.removeItem(VISITOR_MODE_KEY);
     writeUserProfile(payload.user);
     localStorage.setItem(AUTH_TOKEN_KEY, payload.token);
     setAuthStatus(t(messageKey, { name: payload.user.displayName }));
@@ -98,6 +100,11 @@
   }
 
   async function init() {
+    byId("visitorModeBtn").addEventListener("click", () => {
+      clearAuth();
+      localStorage.setItem(VISITOR_MODE_KEY, "1");
+      location.href = "../index.html";
+    });
     byId("googleLoginBtn").addEventListener("click", async () => {
       const button = byId("googleLoginBtn");
       setButtonBusy(button, true, "connectingToGoogle");

@@ -2,6 +2,7 @@
   const USER_PROFILE_KEY = "alevel.userProfile";
   const USER_ID_KEY = "alevel.userId";
   const AUTH_TOKEN_KEY = "alevel.authToken";
+  const VISITOR_MODE_KEY = "alevel.visitorMode";
   const SELECTION_KEY = "alevel.selection";
   const { getLanguage, setLanguage, t, applyPage } = window.ALevelI18n;
   let currentLanguage = getLanguage();
@@ -75,6 +76,10 @@
   }
 
   function selectSubject(subject) {
+    if (localStorage.getItem(VISITOR_MODE_KEY) === "1" && !readAuthToken()) {
+      location.href = "pages/login.html";
+      return;
+    }
     localStorage.setItem(SELECTION_KEY, JSON.stringify({
       grade: subject.qualification,
       board: subject.board,
@@ -274,26 +279,30 @@
     localStorage.removeItem(USER_PROFILE_KEY);
     localStorage.removeItem(USER_ID_KEY);
     localStorage.removeItem(AUTH_TOKEN_KEY);
+    localStorage.removeItem(VISITOR_MODE_KEY);
   }
 
   async function buildHome() {
     const token = readAuthToken();
-    if (!token || !window.ALevelApi?.getCurrentUser) {
+    const visitorMode = !token && localStorage.getItem(VISITOR_MODE_KEY) === "1";
+    if ((!token && !visitorMode) || (!visitorMode && !window.ALevelApi?.getCurrentUser)) {
       location.href = "pages/login.html";
       return;
     }
 
-    let currentUser = null;
-    try {
-      currentUser = await window.ALevelApi.getCurrentUser(token);
-    } catch (err) {
-      if (err?.status === 401 || err?.status === 403) {
-        clearSession();
-        location.href = "pages/login.html";
-        return;
+    let currentUser = visitorMode ? { role: "visitor", displayName: t("visitorMode") } : null;
+    if (!visitorMode) {
+      try {
+        currentUser = await window.ALevelApi.getCurrentUser(token);
+      } catch (err) {
+        if (err?.status === 401 || err?.status === 403) {
+          clearSession();
+          location.href = "pages/login.html";
+          return;
+        }
+        currentUser = readUserProfile() || {};
+        setBackendStatus("backendUnavailable", true);
       }
-      currentUser = readUserProfile() || {};
-      setBackendStatus("backendUnavailable", true);
     }
 
     applyLanguage(getLanguage());
@@ -305,6 +314,12 @@
         location.href = "pages/admin.html";
       });
     }
+    if (visitorMode) {
+      getEl("goNotebook").hidden = true;
+      getEl("openProfile").hidden = true;
+      getEl("logoutHome").dataset.i18n = "visitorLogIn";
+      getEl("logoutHome").textContent = t("visitorLogIn");
+    }
 
     getEl("goNotebook")?.addEventListener("click", () => {
       location.href = "pages/notebook.html";
@@ -314,6 +329,7 @@
     });
     getEl("logoutHome")?.addEventListener("click", () => {
       clearSession();
+      localStorage.removeItem(VISITOR_MODE_KEY);
       location.href = "pages/login.html";
     });
 
@@ -336,12 +352,14 @@
       if (petSkin) petSkin.value = user?.pet?.skin || "codex-glass";
     }
 
-    fillAccountForm(currentUser);
+    if (!visitorMode) fillAccountForm(currentUser);
     const passwordSettings = getEl("passwordSettings");
     if (passwordSettings) passwordSettings.hidden = currentUser?.hasPassword === false;
-    setAccountStatus("signedInAs", false, {
-      name: currentUser?.displayName || t("unknownUser"),
-    });
+    if (!visitorMode) {
+      setAccountStatus("signedInAs", false, {
+        name: currentUser?.displayName || t("unknownUser"),
+      });
+    }
 
     catalogSubjects = await loadSubjectCourses();
     renderSubjectCourses(catalogSubjects);
@@ -377,8 +395,8 @@
         petSkin.disabled = false;
       }
     };
-    getEl("petEnabled")?.addEventListener("change", savePetSettings);
-    getEl("petSkin")?.addEventListener("change", savePetSettings);
+    if (!visitorMode) getEl("petEnabled")?.addEventListener("change", savePetSettings);
+    if (!visitorMode) getEl("petSkin")?.addEventListener("change", savePetSettings);
     window.addEventListener("alevel:petpreferences", (event) => {
       const pet = event.detail;
       if (!pet) return;

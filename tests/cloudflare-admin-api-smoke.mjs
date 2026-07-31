@@ -44,7 +44,10 @@ async function api(env, token, path, options = {}) {
 const mf = new Miniflare({
   compatibilityDate: "2026-07-29",
   d1Databases: { DB: "admin-api-test" },
-  r2Buckets: { PRIVATE_IMPORTS_BUCKET: "private-imports-test" },
+  r2Buckets: {
+    PRIVATE_IMPORTS_BUCKET: "private-imports-test",
+    CONTENT_BUCKET: "content-test",
+  },
   modules: true,
   script: "export default { fetch() { return new Response('ok'); } };",
 });
@@ -52,7 +55,12 @@ const mf = new Miniflare({
 try {
   const db = await mf.getD1Database("DB");
   const bucket = await mf.getR2Bucket("PRIVATE_IMPORTS_BUCKET");
-  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql"]) {
+  const contentBucket = await mf.getR2Bucket("CONTENT_BUCKET");
+  for (const file of [
+    "../migrations/0001_initial.sql",
+    "../migrations/0002_supabase_auth.sql",
+    "../migrations/0003_admin_platform.sql",
+  ]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) await db.prepare(statement).run();
   }
@@ -89,7 +97,31 @@ try {
       )
     `).bind(student.id),
   ]);
-  const env = { DB: db, PRIVATE_IMPORTS_BUCKET: bucket, AUTH_SECRET };
+  const originalFetch = globalThis.fetch;
+  const dispatched = [];
+  const supabaseDeletes = [];
+  let githubStatus = 204;
+  globalThis.fetch = async (input, options) => {
+    const url = String(input);
+    if (url.startsWith("https://api.github.com/")) {
+      dispatched.push({ url, options });
+      return new Response(null, { status: githubStatus });
+    }
+    if (url.startsWith("https://supabase.test/auth/v1/admin/users/")) {
+      supabaseDeletes.push({ url, options });
+      return new Response(null, { status: 204 });
+    }
+    return originalFetch(input, options);
+  };
+  const env = {
+    DB: db,
+    PRIVATE_IMPORTS_BUCKET: bucket,
+    CONTENT_BUCKET: contentBucket,
+    AUTH_SECRET,
+    GITHUB_ACTIONS_TOKEN: "test-github-token",
+    SUPABASE_URL: "https://supabase.test",
+    SUPABASE_SERVICE_ROLE_KEY: "test-service-role-key",
+  };
   const adminToken = await issueToken(admin);
   const studentToken = await issueToken(student);
 
@@ -179,9 +211,36 @@ try {
     assert.equal(queued.response.status, 200);
     assert.equal(queued.payload.data.status, "processing");
     assert.equal(queued.payload.data.summary.requestedAction, "process");
+    assert.equal(dispatched.length, 1);
+    assert.match(dispatched[0].url, /cloudflare-pdf-import\.yml\/dispatches$/);
 
     const listed = await api(env, adminToken, "/api/admin/imports");
     assert.equal(listed.payload.data[0].fileCount, 2);
+  }
+
+  {
+    const rollbackJob = await api(env, adminToken, "/api/admin/imports", {
+      method: "POST",
+      body: JSON.stringify({ subjectCode: "0610" }),
+    });
+    const rollbackJobId = rollbackJob.payload.data.id;
+    const pdf = Buffer.from("%PDF-1.4\n%%EOF\n");
+    for (const fileName of ["0610_w23_qp_22.pdf", "0610_w23_ms_22.pdf"]) {
+      await api(env, adminToken, `/api/admin/imports/${rollbackJobId}/files`, {
+        method: "POST",
+        body: JSON.stringify({ fileName, dataUrl: `data:application/pdf;base64,${pdf.toString("base64")}` }),
+      });
+    }
+    githubStatus = 500;
+    const rejected = await api(env, adminToken, `/api/admin/imports/${rollbackJobId}/process`, { method: "POST" });
+    assert.equal(rejected.response.status, 502);
+    assert.equal(rejected.payload.error.code, "GITHUB_ACTIONS_REJECTED");
+    const rolledBack = await api(env, adminToken, `/api/admin/imports/${rollbackJobId}`);
+    assert.equal(rolledBack.payload.data.status, "uploading");
+    assert.equal(rolledBack.payload.data.summary.requestedAction, undefined);
+    githubStatus = 204;
+    await api(env, adminToken, `/api/admin/imports/${rollbackJobId}/cancel`, { method: "POST" });
+    await api(env, adminToken, `/api/admin/imports/${rollbackJobId}`, { method: "DELETE" });
   }
 
   await db.batch([
@@ -244,6 +303,91 @@ try {
   }
 
   {
+    const settings = await api(env, adminToken, "/api/admin/settings/ai-hints");
+    assert.equal(settings.response.status, 200);
+    assert.equal(settings.payload.data.enabled, false);
+    assert.equal(settings.payload.data.configured, false);
+
+    const history = await api(env, adminToken, `/api/admin/users/${student.id}/history`);
+    assert.equal(history.response.status, 200);
+    assert.equal(history.payload.data.summary.practiceCount, 1);
+
+    const questions = await api(env, adminToken, "/api/admin/subjects/0610/questions");
+    assert.equal(questions.response.status, 200);
+    assert.equal(questions.payload.data.total, 1);
+
+    const disabledSubject = await api(env, adminToken, "/api/admin/subjects/0610/status", {
+      method: "PATCH",
+      body: JSON.stringify({ active: false }),
+    });
+    assert.equal(disabledSubject.payload.data.active, false);
+    await api(env, adminToken, "/api/admin/subjects/0610/status", {
+      method: "PATCH",
+      body: JSON.stringify({ active: true }),
+    });
+
+    const exported = await api(env, adminToken, "/api/admin/exports?dataset=users&format=json");
+    assert.equal(exported.response.status, 200);
+    assert.equal(exported.payload.data.rows.length, 2);
+    const audit = await api(env, adminToken, "/api/admin/audit-logs");
+    assert.equal(audit.response.status, 200);
+    assert.ok(audit.payload.data.some((event) => event.action === "data.export"));
+  }
+
+  {
+    await db.batch([
+      db.prepare(`
+        INSERT INTO discussion_threads (id, title, status, author_id)
+        VALUES ('thread-admin-test', 'Moderate this discussion', 'open', ?)
+      `).bind(student.id),
+      db.prepare(`
+        INSERT INTO discussion_posts (id, thread_id, author_id, body)
+        VALUES ('post-admin-test', 'thread-admin-test', ?, 'Opening post')
+      `).bind(student.id),
+      db.prepare(`
+        INSERT INTO discussion_flags (id, post_id, user_id, reason)
+        VALUES ('flag-admin-test', 'post-admin-test', ?, 'Needs review')
+      `).bind(admin.id),
+    ]);
+    const discussions = await api(env, adminToken, "/api/admin/community/threads?status=all");
+    assert.equal(discussions.response.status, 200);
+    assert.equal(discussions.payload.data.total, 1);
+    assert.equal(discussions.payload.data.threads[0].pending_report_count, 1);
+    const posts = await api(env, adminToken, "/api/admin/community/threads/thread-admin-test/posts");
+    assert.equal(posts.response.status, 200);
+    assert.equal(posts.payload.data.posts.length, 1);
+
+    const hiddenPost = await api(env, adminToken, "/api/admin/community/posts/post-admin-test/visibility", {
+      method: "PATCH", body: JSON.stringify({ hidden: true }),
+    });
+    assert.equal(hiddenPost.payload.data.hidden, true);
+    const restoredPost = await api(env, adminToken, "/api/admin/community/posts/post-admin-test/visibility", {
+      method: "PATCH", body: JSON.stringify({ hidden: false }),
+    });
+    assert.equal(restoredPost.payload.data.hidden, false);
+
+    const locked = await api(env, adminToken, "/api/admin/community/threads/thread-admin-test", {
+      method: "PATCH", body: JSON.stringify({ status: "locked", sticky: true }),
+    });
+    assert.equal(locked.payload.data.status, "locked");
+    assert.equal(locked.payload.data.sticky, true);
+    const muted = await api(env, adminToken, `/api/admin/community/mutes/${student.id}`, {
+      method: "PATCH", body: JSON.stringify({ days: 7 }),
+    });
+    assert.equal(muted.payload.data.muted, true);
+    const unmuted = await api(env, adminToken, `/api/admin/community/mutes/${student.id}`, {
+      method: "PATCH", body: JSON.stringify({ active: false }),
+    });
+    assert.equal(unmuted.payload.data.muted, false);
+    const resolved = await api(env, adminToken, "/api/admin/community/reports/flag-admin-test", {
+      method: "PATCH", body: JSON.stringify({ status: "resolved" }),
+    });
+    assert.equal(resolved.payload.data.status, "resolved");
+    const deleted = await api(env, adminToken, "/api/admin/community/threads/thread-admin-test", { method: "DELETE" });
+    assert.equal(deleted.payload.data.deleted, true);
+  }
+
+  {
     await db.prepare(`
       INSERT INTO question_hint_sets (
         id, question_id, language, prompt_version, question_fingerprint,
@@ -268,6 +412,57 @@ try {
     assert.equal(sample.response.status, 200);
     assert.equal(sample.payload.data.expected, 24);
     assert.equal(sample.payload.data.ready, false);
+
+    const enableWithoutSamples = await api(env, adminToken, "/api/admin/settings/ai-hints", {
+      method: "PATCH",
+      body: JSON.stringify({ enabled: true }),
+    });
+    assert.equal(enableWithoutSamples.response.status, 409);
+    assert.equal(enableWithoutSamples.payload.error.code, "AI_HINTS_NOT_CONFIGURED");
+  }
+
+  {
+    const otherAdminId = "33333333-3333-4333-8333-333333333333";
+    const deleteUserId = "44444444-4444-4444-8444-444444444444";
+    await db.batch([
+      db.prepare("INSERT INTO users (id, email, display_name, role, supabase_user_id) VALUES (?, 'other-admin@example.com', 'Other Admin', 'admin', 'supabase-other-admin')").bind(otherAdminId),
+      db.prepare("INSERT INTO users (id, email, display_name, role, supabase_user_id) VALUES (?, 'delete@example.com', 'Delete Me', 'student', 'supabase-delete')").bind(deleteUserId),
+    ]);
+    const selfDelete = await api(env, adminToken, `/api/admin/users/${admin.id}`, { method: "DELETE" });
+    assert.equal(selfDelete.response.status, 409);
+    const adminDelete = await api(env, adminToken, `/api/admin/users/${otherAdminId}`, { method: "DELETE" });
+    assert.equal(adminDelete.response.status, 403);
+    const deleted = await api(env, adminToken, `/api/admin/users/${deleteUserId}`, { method: "DELETE" });
+    assert.equal(deleted.response.status, 200);
+    assert.equal(supabaseDeletes.length, 1);
+    assert.match(supabaseDeletes[0].url, /supabase-delete$/);
+  }
+
+  {
+    const hidden = await api(env, adminToken, `/api/admin/imports/${jobId}/visibility`, {
+      method: "PATCH", body: JSON.stringify({ hidden: true }),
+    });
+    assert.equal(hidden.payload.data.hidden, true);
+    const visibleJobs = await api(env, adminToken, "/api/admin/imports");
+    assert.ok(!visibleJobs.payload.data.some((job) => job.id === jobId));
+    const hiddenJobs = await api(env, adminToken, "/api/admin/imports?includeHidden=1");
+    assert.ok(hiddenJobs.payload.data.some((job) => job.id === jobId));
+    const restored = await api(env, adminToken, `/api/admin/imports/${jobId}/visibility`, {
+      method: "PATCH", body: JSON.stringify({ hidden: false }),
+    });
+    assert.equal(restored.payload.data.hidden, false);
+
+    const cancelled = await api(env, adminToken, `/api/admin/imports/${jobId}/cancel`, { method: "POST" });
+    assert.equal(cancelled.payload.data.status, "cancelled");
+    const processCancelled = await api(env, adminToken, `/api/admin/imports/${jobId}/process`, { method: "POST" });
+    assert.equal(processCancelled.response.status, 409);
+    const publishCancelled = await api(env, adminToken, `/api/admin/imports/${jobId}/publish`, { method: "POST" });
+    assert.equal(publishCancelled.response.status, 409);
+    await contentBucket.put(`releases/${jobId}/orphan.txt`, "orphan");
+    const deleted = await api(env, adminToken, `/api/admin/imports/${jobId}`, { method: "DELETE" });
+    assert.equal(deleted.payload.data.deleted, true);
+    assert.equal(await bucket.get(`imports/${jobId}/input/0610_s23_qp_22.pdf`), null);
+    assert.equal(await contentBucket.get(`releases/${jobId}/orphan.txt`), null);
   }
 
   const foreignKeys = await db.prepare("PRAGMA foreign_key_check").all();

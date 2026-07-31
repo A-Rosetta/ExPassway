@@ -80,6 +80,20 @@ function normalizeTags(value, questionKey, topic) {
   return [...new Set(allowed)];
 }
 
+async function requireCommunityWrite(db, user) {
+  if (user.role === "admin") return;
+  const mute = await db.prepare(`
+    SELECT muted_until, reason FROM community_mutes
+    WHERE user_id = ? AND muted_until > ? LIMIT 1
+  `).bind(user.id, new Date().toISOString()).first();
+  if (mute) {
+    throw new AuthError(403, "Community interactions are disabled for this account.", "COMMUNITY_MUTED", {
+      mutedUntil: mute.muted_until,
+      reason: mute.reason || null,
+    });
+  }
+}
+
 function mapThread(row) {
   return {
     id: row.id,
@@ -325,7 +339,8 @@ function decodeImageDataUrl(value) {
 }
 
 async function uploadImage(request, env) {
-  await requireCurrentUser(request, env);
+  const { user } = await requireCurrentUser(request, env);
+  await requireCommunityWrite(env.DB, user);
   const body = await readJsonBody(request);
   const image = decodeImageDataUrl(body.dataUrl);
   const name = `${crypto.randomUUID()}.${image.extension}`;
@@ -373,11 +388,15 @@ export async function handleCommunityApiRequest(request, env) {
     if (request.method === "POST" && url.pathname === "/api/discussions/images") {
       return success(await uploadImage(request, env), request.method, 201);
     }
-    const { user } = await requireCurrentUser(request, env);
+    const anonymousRead = request.method === "GET" && !request.headers.get("Authorization");
+    const user = anonymousRead
+      ? { id: "", role: "visitor" }
+      : (await requireCurrentUser(request, env)).user;
     if (url.pathname === "/api/discussions" && request.method === "GET") {
       return success(await listThreads(env.DB, user, url), request.method);
     }
     if (url.pathname === "/api/discussions" && request.method === "POST") {
+      await requireCommunityWrite(env.DB, user);
       return success(await createThread(request, env, user), request.method, 201);
     }
 
@@ -385,6 +404,7 @@ export async function handleCommunityApiRequest(request, env) {
     if (postAction) {
       const postId = decodeURIComponent(postAction[1]);
       await requireExistingPost(env.DB, postId);
+      await requireCommunityWrite(env.DB, user);
       if (postAction[2] === "like" && request.method === "POST") {
         await env.DB.prepare(`
           INSERT INTO discussion_post_likes (post_id, user_id) VALUES (?, ?)
@@ -403,7 +423,9 @@ export async function handleCommunityApiRequest(request, env) {
         await env.DB.prepare(`
           INSERT INTO discussion_flags (id, post_id, user_id, reason)
           VALUES (?, ?, ?, ?)
-          ON CONFLICT (post_id, user_id) DO UPDATE SET reason = excluded.reason, created_at = excluded.created_at
+          ON CONFLICT (post_id, user_id) DO UPDATE SET
+            reason = excluded.reason, status = 'pending', resolved_at = NULL,
+            resolved_by = NULL, created_at = excluded.created_at
         `).bind(crypto.randomUUID(), postId, user.id, reason).run();
         return success({ flagged: true }, request.method, 201);
       }
@@ -411,6 +433,7 @@ export async function handleCommunityApiRequest(request, env) {
 
     const deletePost = url.pathname.match(/^\/api\/discussions\/posts\/([^/]+)$/);
     if (deletePost && request.method === "DELETE") {
+      await requireCommunityWrite(env.DB, user);
       const post = await requireExistingPost(env.DB, decodeURIComponent(deletePost[1]));
       if (post.is_thread_post) {
         throw new AuthError(409, "The opening post cannot be deleted as a reply.", "DISCUSSION_THREAD_POST");
@@ -435,12 +458,14 @@ export async function handleCommunityApiRequest(request, env) {
       if (!threadRow) throw new AuthError(404, "Discussion thread not found.", "DISCUSSION_NOT_FOUND");
       const thread = mapThread(threadRow);
       if (threadAction[2] === "posts" && request.method === "POST") {
+        await requireCommunityWrite(env.DB, user);
         if (thread.status === "locked" || thread.status === "hidden") {
           throw new AuthError(409, "This discussion is not accepting replies.", "DISCUSSION_LOCKED");
         }
         return success(await createPost(request, env, user, thread), request.method, 201);
       }
       if (threadAction[2] === "follow" && request.method === "POST") {
+        await requireCommunityWrite(env.DB, user);
         const now = new Date().toISOString();
         await env.DB.prepare(`
           INSERT INTO discussion_thread_follows (thread_id, user_id, last_read_at, created_at)
@@ -450,11 +475,13 @@ export async function handleCommunityApiRequest(request, env) {
         return success({ followed: true }, request.method);
       }
       if (threadAction[2] === "follow" && request.method === "DELETE") {
+        await requireCommunityWrite(env.DB, user);
         await env.DB.prepare("DELETE FROM discussion_thread_follows WHERE thread_id = ? AND user_id = ?")
           .bind(threadId, user.id).run();
         return success({ followed: false }, request.method);
       }
       if (threadAction[2] === "moderation" && request.method === "PATCH") {
+        await requireCommunityWrite(env.DB, user);
         if (user.role !== "admin" && user.role !== "teacher") {
           throw new AuthError(403, "Moderator role is required.", "FORBIDDEN");
         }

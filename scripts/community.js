@@ -2,6 +2,7 @@
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const USER_PROFILE_KEY = "alevel.userProfile";
   const USER_ID_KEY = "alevel.userId";
+  const VISITOR_MODE_KEY = "alevel.visitorMode";
   const { t, applyPage, getLanguage } = window.ALevelI18n;
   if (window.marked?.use && window.markedKatex) {
     window.marked.use(window.markedKatex({
@@ -1221,7 +1222,7 @@
   }
 
   function authHeaderMissing() {
-    if (!state.token) {
+    if (!state.token && localStorage.getItem(VISITOR_MODE_KEY) !== "1") {
       location.href = "./login.html";
       return true;
     }
@@ -1445,7 +1446,9 @@
     const posts = payload.posts || [];
     const detail = byId("communityThreadDetail");
     const canModerate = state.user?.role === "teacher" || state.user?.role === "admin";
-    const replyDisabled = thread.status === "locked" || thread.status === "hidden";
+    const visitorMode = state.user?.role === "visitor";
+    const replyDisabled = visitorMode || thread.status === "locked" || thread.status === "hidden";
+    byId("communityReplyComposer").hidden = visitorMode;
     byId("communityReplyBody").disabled = replyDisabled;
     byId("communityReplyEditor").contentEditable = replyDisabled ? "false" : "true";
     byId("communityReplyAddPhoto").disabled = replyDisabled;
@@ -1462,7 +1465,7 @@
             ${thread.followed ? `<span class="tag">${t("communityFollowing")}</span>` : ""}
           </div>
         </div>
-        <button id="communityFollowToggle" class="btn-secondary">${thread.followed ? t("communityUnfollow") : t("communityFollow")}</button>
+        ${visitorMode ? "" : `<button id="communityFollowToggle" class="btn-secondary">${thread.followed ? t("communityUnfollow") : t("communityFollow")}</button>`}
       </div>
       ${canModerate ? `
         <div class="moderation-row">
@@ -1490,7 +1493,7 @@
                 : t("communityAnswerNumber", { number: postIndex })}</span>
             </div>
             <div class="markdown-body">${renderMarkdown(post.body)}</div>
-            <div class="actions compact-actions">
+            ${visitorMode ? "" : `<div class="actions compact-actions">
               <button type="button" class="btn-secondary" data-like-post="${escapeHtml(post.id)}" data-liked="${post.liked ? "1" : "0"}">${post.liked ? t("communityLiked") : t("communityHelpful")} (${post.likeCount})</button>
               ${String(post.authorId) !== String(state.user?.id)
                 ? `<button type="button" class="btn-secondary" data-flag-post="${escapeHtml(post.id)}">${t("communityFlag")}</button>`
@@ -1499,7 +1502,7 @@
                 ? `<button type="button" class="btn-danger" data-delete-post="${escapeHtml(post.id)}">${t("communityDeleteReply")}</button>`
                 : ""}
               ${canModerate ? `<span class="tip">${t("communityFlagCount", { count: post.flagCount })}</span>` : ""}
-            </div>
+            </div>`}
           </article>
         `).join("")}
       </div>
@@ -1716,6 +1719,10 @@
   }
 
   async function initUser() {
+    if (!state.token && localStorage.getItem(VISITOR_MODE_KEY) === "1") {
+      state.user = { id: "", role: "visitor", displayName: t("visitorMode") };
+      return true;
+    }
     const saved = readJson(USER_PROFILE_KEY, null);
     state.user = saved || null;
     if (state.token && window.ALevelApi?.getCurrentUser) {
@@ -1748,6 +1755,14 @@
     filterCard.open = !window.matchMedia("(max-width: 900px)").matches;
     if (authHeaderMissing()) return;
     if (!await initUser()) return;
+    const visitorMode = state.user?.role === "visitor";
+    if (visitorMode) {
+      byId("communityNewThread").hidden = true;
+      byId("communityFollowedToggle").hidden = true;
+      byId("communityLogout").dataset.i18n = "visitorLogIn";
+      byId("communityLogout").textContent = t("visitorLogIn");
+      setStatus(t("communityVisitorNotice"), false);
+    }
     await loadCatalogFilters();
     await fillFilters();
     await renderContext();
@@ -1785,20 +1800,20 @@
       await loadThreads();
       showCommunityView("list");
     });
-    byId("communityNewThread").addEventListener("click", openComposer);
+    if (!visitorMode) byId("communityNewThread").addEventListener("click", openComposer);
     byId("communityCancelComposer").addEventListener("click", () => {
       setMathKeyboardOpen(false);
       clearEditorFeedback(byId("communityBodyEditor"));
       showCommunityView("list", { restoreScroll: true });
     });
-    byId("communitySubmitThread").addEventListener("click", submitThread);
-    byId("communitySubmitReply").addEventListener("click", submitReply);
-    initRichEditors();
+    if (!visitorMode) byId("communitySubmitThread").addEventListener("click", submitThread);
+    if (!visitorMode) byId("communitySubmitReply").addEventListener("click", submitReply);
+    if (!visitorMode) initRichEditors();
     byId("communityTitle").addEventListener("input", () => {
       clearEditorFeedback(byId("communityBodyEditor"), "title");
     });
-    initMathInput();
-    initImageUploads();
+    if (!visitorMode) initMathInput();
+    if (!visitorMode) initImageUploads();
     byId("communityCloseDetail").addEventListener("click", () => {
       setMathKeyboardOpen(false);
       clearEditorFeedback(byId("communityReplyEditor"));
@@ -1812,10 +1827,11 @@
       localStorage.removeItem(USER_PROFILE_KEY);
       localStorage.removeItem(USER_ID_KEY);
       localStorage.removeItem(AUTH_TOKEN_KEY);
+      localStorage.removeItem(VISITOR_MODE_KEY);
       location.replace("./login.html");
     });
     await loadThreads();
-    if (state.context.questionKey && !state.threads.length) {
+    if (!visitorMode && state.context.questionKey && !state.threads.length) {
       openComposer();
     }
   }

@@ -151,7 +151,7 @@ async function listPublishedSubjects(db) {
 async function listPublishedPapers(db, subjectCode) {
   const result = await db.prepare(`
     ${PAPER_SELECT}
-    WHERE p.subject_code = ? AND p.status = 'published'
+    WHERE p.subject_code = ? AND p.status = 'published' AND s.active = 1
     ORDER BY
       p.year,
       CASE p.season WHEN 'm' THEN 1 WHEN 's' THEN 2 WHEN 'w' THEN 3 ELSE 4 END,
@@ -164,7 +164,7 @@ async function listPublishedPapers(db, subjectCode) {
 async function getPublishedPaper(db, paperSlug) {
   const row = await db.prepare(`
     ${PAPER_SELECT}
-    WHERE p.slug = ? AND p.status = 'published'
+    WHERE p.slug = ? AND p.status = 'published' AND s.active = 1
     LIMIT 1
   `).bind(paperSlug).first();
   return row ? mapPaper(row) : null;
@@ -216,7 +216,11 @@ function legacyQuestionParts(questionKey) {
 
 async function getQuestionReference(db, questionKey) {
   let row = await db.prepare(`
-    SELECT * FROM question_bank WHERE id = ? LIMIT 1
+    SELECT question.* FROM question_bank question
+    JOIN exam_papers paper ON paper.slug = question.paper_slug
+    JOIN exam_subjects subject ON subject.code = paper.subject_code
+    WHERE question.id = ? AND question.active = 1
+      AND paper.status = 'published' AND subject.active = 1 LIMIT 1
   `).bind(questionKey).first();
   let legacy = null;
 
@@ -224,9 +228,12 @@ async function getQuestionReference(db, questionKey) {
     legacy = legacyQuestionParts(questionKey);
     if (!legacy || !Number.isInteger(legacy.questionNo) || legacy.questionNo < 1) return null;
     row = await db.prepare(`
-      SELECT *
-      FROM question_bank
-      WHERE paper_slug = ? AND question_no = ?
+      SELECT question.*
+      FROM question_bank question
+      JOIN exam_papers paper ON paper.slug = question.paper_slug
+      JOIN exam_subjects subject ON subject.code = paper.subject_code
+      WHERE question.paper_slug = ? AND question.question_no = ? AND question.active = 1
+        AND paper.status = 'published' AND subject.active = 1
       LIMIT 1
     `).bind(legacy.paperSlug, legacy.questionNo).first();
   }

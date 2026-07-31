@@ -82,6 +82,17 @@
     }
   }
 
+  async function download(path, token) {
+    const response = await fetch(`${apiBaseUrl}${path}`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    if (!response.ok) {
+      const payload = await response.json().catch(() => ({}));
+      throw new Error(payload?.error?.message || `Request failed with status ${response.status}`);
+    }
+    return response.blob();
+  }
+
   window.ALevelApi = {
     getBaseUrl() {
       return apiBaseUrl;
@@ -150,6 +161,12 @@
         body: JSON.stringify({ disabled: Boolean(disabled) }),
       });
     },
+    async getAdminUserHistory(token, userId) {
+      return request(`/api/admin/users/${encodeURIComponent(userId)}/history`, { token, timeoutMs: 30000 });
+    },
+    async deleteAdminUser(token, userId) {
+      return request(`/api/admin/users/${encodeURIComponent(userId)}`, { method: "DELETE", token });
+    },
     async getAdminSubjects(token) {
       return request("/api/admin/subjects", { token });
     },
@@ -160,8 +177,20 @@
         body: JSON.stringify(input || {}),
       });
     },
-    async getAdminImports(token) {
-      return request("/api/admin/imports", { token, timeoutMs: 30000 });
+    async setAdminSubjectActive(token, subjectCode, active) {
+      return request(`/api/admin/subjects/${encodeURIComponent(subjectCode)}/status`, {
+        method: "PATCH", token, body: JSON.stringify({ active: Boolean(active) }),
+      });
+    },
+    async deleteAdminSubject(token, subjectCode) {
+      return request(`/api/admin/subjects/${encodeURIComponent(subjectCode)}`, { method: "DELETE", token });
+    },
+    async getAdminSubjectQuestions(token, subjectCode, input = {}) {
+      const params = new URLSearchParams({ limit: String(input.limit || 100), offset: String(input.offset || 0) });
+      return request(`/api/admin/subjects/${encodeURIComponent(subjectCode)}/questions?${params}`, { token });
+    },
+    async getAdminImports(token, includeHidden = false) {
+      return request(`/api/admin/imports${includeHidden ? "?includeHidden=1" : ""}`, { token, timeoutMs: 30000 });
     },
     async getAdminImport(token, jobId) {
       return request(`/api/admin/imports/${encodeURIComponent(jobId)}`, { token, timeoutMs: 30000 });
@@ -193,6 +222,72 @@
         method: "POST",
         token,
         timeoutMs: 10 * 60 * 1000,
+      });
+    },
+    async dispatchAdminImports(token, jobId = "") {
+      return request("/api/admin/imports/dispatch", {
+        method: "POST", token, body: JSON.stringify({ jobId }),
+      });
+    },
+    async cancelAdminImport(token, jobId) {
+      return request(`/api/admin/imports/${encodeURIComponent(jobId)}/cancel`, { method: "POST", token });
+    },
+    async setAdminImportHidden(token, jobId, hidden) {
+      return request(`/api/admin/imports/${encodeURIComponent(jobId)}/visibility`, {
+        method: "PATCH", token, body: JSON.stringify({ hidden: Boolean(hidden) }),
+      });
+    },
+    async deleteAdminImport(token, jobId) {
+      return request(`/api/admin/imports/${encodeURIComponent(jobId)}`, { method: "DELETE", token });
+    },
+    async getAdminAiHintSettings(token) {
+      return request("/api/admin/settings/ai-hints", { token });
+    },
+    async setAdminAiHintSettings(token, enabled) {
+      return request("/api/admin/settings/ai-hints", {
+        method: "PATCH", token, body: JSON.stringify({ enabled: Boolean(enabled) }),
+      });
+    },
+    async getAdminAuditLogs(token, input = {}) {
+      const params = new URLSearchParams({ limit: String(input.limit || 100), offset: String(input.offset || 0) });
+      if (input.action) params.set("action", input.action);
+      if (input.targetType) params.set("targetType", input.targetType);
+      return request(`/api/admin/audit-logs?${params}`, { token });
+    },
+    async exportAdminData(token, dataset, format) {
+      const path = `/api/admin/exports?dataset=${encodeURIComponent(dataset)}&format=${encodeURIComponent(format)}`;
+      return format === "csv" ? download(path, token) : request(path, { token });
+    },
+    async getAdminCommunityReports(token, status = "pending") {
+      return request(`/api/admin/community/reports?status=${encodeURIComponent(status)}`, { token });
+    },
+    async getAdminCommunityThreads(token, status = "all") {
+      return request(`/api/admin/community/threads?status=${encodeURIComponent(status)}&limit=200`, { token });
+    },
+    async getAdminCommunityThreadPosts(token, threadId) {
+      return request(`/api/admin/community/threads/${encodeURIComponent(threadId)}/posts`, { token });
+    },
+    async resolveAdminCommunityReport(token, reportId, status) {
+      return request(`/api/admin/community/reports/${encodeURIComponent(reportId)}`, {
+        method: "PATCH", token, body: JSON.stringify({ status }),
+      });
+    },
+    async setAdminCommunityPostHidden(token, postId, hidden) {
+      return request(`/api/admin/community/posts/${encodeURIComponent(postId)}/visibility`, {
+        method: "PATCH", token, body: JSON.stringify({ hidden: Boolean(hidden) }),
+      });
+    },
+    async updateAdminCommunityThread(token, threadId, input) {
+      return request(`/api/admin/community/threads/${encodeURIComponent(threadId)}`, {
+        method: "PATCH", token, body: JSON.stringify(input || {}),
+      });
+    },
+    async deleteAdminCommunityThread(token, threadId) {
+      return request(`/api/admin/community/threads/${encodeURIComponent(threadId)}`, { method: "DELETE", token });
+    },
+    async setAdminCommunityMute(token, userId, input) {
+      return request(`/api/admin/community/mutes/${encodeURIComponent(userId)}`, {
+        method: "PATCH", token, body: JSON.stringify(input || {}),
       });
     },
     async getAdminQuestionHints(token, status = "pending_review") {

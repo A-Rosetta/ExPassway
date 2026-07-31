@@ -55,7 +55,11 @@ const mf = new Miniflare({
 try {
   const db = await mf.getD1Database("DB");
   const bucket = await mf.getR2Bucket("CONTENT_BUCKET");
-  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql"]) {
+  for (const file of [
+    "../migrations/0001_initial.sql",
+    "../migrations/0002_supabase_auth.sql",
+    "../migrations/0003_admin_platform.sql",
+  ]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) {
       await db.prepare(statement).run();
@@ -96,9 +100,15 @@ try {
   ));
 
   {
-    const missing = await api(env, "", "/api/discussions");
-    assert.equal(missing.response.status, 401);
-    assert.equal(missing.payload.error.code, "UNAUTHORIZED");
+    const anonymous = await api(env, "", "/api/discussions");
+    assert.equal(anonymous.response.status, 200);
+    assert.deepEqual(anonymous.payload.data, []);
+    const anonymousWrite = await api(env, "", "/api/discussions", {
+      method: "POST",
+      body: JSON.stringify({ title: "Blocked", body: "Visitors cannot publish." }),
+    });
+    assert.equal(anonymousWrite.response.status, 401);
+    assert.equal(anonymousWrite.payload.error.code, "UNAUTHORIZED");
   }
 
   let threadId;
@@ -136,6 +146,22 @@ try {
     assert.equal(detail.response.status, 200);
     assert.equal(detail.payload.data.posts.length, 1);
     openingPostId = detail.payload.data.posts[0].id;
+
+    const anonymousDetail = await api(env, "", `/api/discussions/${threadId}`);
+    assert.equal(anonymousDetail.response.status, 200);
+    assert.equal(anonymousDetail.payload.data.posts.length, 1);
+    for (const [path, options] of [
+      [`/api/discussions/${threadId}/posts`, { method: "POST", body: JSON.stringify({ body: "Blocked reply" }) }],
+      [`/api/discussions/posts/${openingPostId}/like`, { method: "POST" }],
+      [`/api/discussions/${threadId}/follow`, { method: "POST" }],
+      [`/api/discussions/posts/${openingPostId}/flag`, { method: "POST", body: JSON.stringify({ reason: "Blocked flag" }) }],
+      [`/api/discussions/posts/${openingPostId}`, { method: "DELETE" }],
+      ["/api/discussions/images", { method: "POST", body: JSON.stringify({ dataUrl: "data:image/png;base64,AA==" }) }],
+    ]) {
+      const blocked = await api(env, "", path, options);
+      assert.equal(blocked.response.status, 401, path);
+      assert.equal(blocked.payload.error.code, "UNAUTHORIZED", path);
+    }
   }
 
   let replyId;
@@ -157,6 +183,19 @@ try {
     });
     assert.equal(openingDelete.response.status, 409);
     assert.equal(openingDelete.payload.error.code, "DISCUSSION_THREAD_POST");
+  }
+
+  {
+    await db.prepare(`
+      INSERT INTO community_mutes (user_id, muted_until, reason, created_by)
+      VALUES (?, ?, 'Test mute', ?)
+    `).bind(users.other.id, new Date(Date.now() + 86400000).toISOString(), users.admin.id).run();
+    const mutedLike = await api(env, tokens.other, `/api/discussions/posts/${openingPostId}/like`, {
+      method: "POST",
+    });
+    assert.equal(mutedLike.response.status, 403);
+    assert.equal(mutedLike.payload.error.code, "COMMUNITY_MUTED");
+    await db.prepare("DELETE FROM community_mutes WHERE user_id = ?").bind(users.other.id).run();
   }
 
   {
@@ -213,6 +252,8 @@ try {
     });
     const hiddenStudent = await api(env, tokens.student, `/api/discussions/${threadId}`);
     assert.equal(hiddenStudent.response.status, 404);
+    const hiddenVisitor = await api(env, "", `/api/discussions/${threadId}`);
+    assert.equal(hiddenVisitor.response.status, 404);
     const hiddenAdmin = await api(env, tokens.admin, `/api/discussions/${threadId}`);
     assert.equal(hiddenAdmin.response.status, 200);
   }

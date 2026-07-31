@@ -270,6 +270,14 @@ async function mockApi(page, currentUser = user, authDelayMs = 0) {
     }
     if (path === "/api/admin/subjects") return json(route, subjects);
     if (path === "/api/admin/imports") return json(route, []);
+    if (path === "/api/admin/settings/ai-hints") {
+      return json(route, { enabled: false, configured: false, modelConfigured: false });
+    }
+    if (path === "/api/admin/community/threads") {
+      return json(route, { threads: [], total: 0, limit: 200, offset: 0 });
+    }
+    if (path === "/api/admin/community/reports") return json(route, []);
+    if (path === "/api/admin/audit-logs") return json(route, []);
     if (path === "/api/admin/question-hints/sample-status") {
       return json(route, {
         version: "biology-hint-sample-v1",
@@ -1322,14 +1330,19 @@ async function runConfig(config) {
 }
 
 (async () => {
-  await runConfig({ name: "desktop-chromium", browser: chromium, viewport: { width: 1440, height: 900 }, mobile: false });
-  await runConfig({
-    name: "mobile-webkit",
-    browser: webkit,
-    viewport: { width: 390, height: 844 },
-    mobile: true,
-    executablePath: process.env.WEBKIT_EXECUTABLE_PATH,
-  });
+  const only = process.env.STUDENT_UI_ONLY || "";
+  if (!only || only === "desktop") {
+    await runConfig({ name: "desktop-chromium", browser: chromium, viewport: { width: 1440, height: 900 }, mobile: false });
+  }
+  if (!only || only === "mobile") {
+    await runConfig({
+      name: "mobile-webkit",
+      browser: webkit,
+      viewport: { width: 390, height: 844 },
+      mobile: true,
+      executablePath: process.env.WEBKIT_EXECUTABLE_PATH,
+    });
+  }
 })().catch((error) => {
   console.error(error);
   process.exitCode = 1;

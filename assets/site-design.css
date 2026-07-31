@@ -79,6 +79,10 @@
   --floating-shadow: 0 10px 0 rgba(126, 143, 124, 0.32), 18px 22px 38px var(--shadow-dark-heavy), -10px -10px 24px var(--shadow-light);
 }
 
+.site-ui [hidden] {
+  display: none !important;
+}
+
 [data-theme="dark"] .site-ui {
   --bg: #14171C;
   --text: #E8ECEF;
