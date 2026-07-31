@@ -560,6 +560,8 @@
       return;
     }
 
+    byId("adminContent").removeAttribute("style");
+    byId("adminContent").hidden = false;
     await Promise.all([loadRecords(), loadImportAdminData(), loadHintReviewData()]);
   }
 
