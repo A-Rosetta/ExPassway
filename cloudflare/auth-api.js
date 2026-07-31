@@ -5,7 +5,7 @@ const JSON_HEADERS = {
 
 const CORS_PREFLIGHT_HEADERS = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
-  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, PATCH, OPTIONS",
   "Access-Control-Allow-Origin": "*",
 };
 
@@ -13,7 +13,7 @@ const TOKEN_TTL_SECONDS = 60 * 60 * 24 * 30;
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
-class AuthError extends Error {
+export class AuthError extends Error {
   constructor(status, message, code, details = null) {
     super(message);
     this.status = status;
@@ -27,18 +27,18 @@ function jsonResponse(status, payload, requestMethod = "GET") {
   return new Response(body, { status, headers: JSON_HEADERS });
 }
 
-function success(data, requestMethod) {
-  return jsonResponse(200, { ok: true, data }, requestMethod);
+export function success(data, requestMethod, status = 200) {
+  return jsonResponse(status, { ok: true, data }, requestMethod);
 }
 
-function failure(status, code, message, requestMethod, details = null) {
+export function failure(status, code, message, requestMethod, details = null) {
   return jsonResponse(status, {
     ok: false,
     error: { code, message, details },
   }, requestMethod);
 }
 
-function routeNotFound(request, url) {
+export function routeNotFound(request, url) {
   return failure(
     404,
     "NOT_FOUND",
@@ -47,7 +47,7 @@ function routeNotFound(request, url) {
   );
 }
 
-function requireString(value, field) {
+export function requireString(value, field) {
   if (typeof value !== "string" || !value.trim()) {
     throw new AuthError(400, `Field "${field}" is required.`, "INVALID_INPUT");
   }
@@ -211,7 +211,7 @@ function readBearerToken(request) {
   return authorization.slice("Bearer ".length).trim();
 }
 
-function mapUser(row) {
+export function mapUser(row) {
   return {
     id: row.id,
     email: row.email,
@@ -356,12 +356,25 @@ async function verifyGoogleIdentity(accessToken, config) {
   return identity;
 }
 
-async function readJsonBody(request) {
+export async function readJsonBody(request) {
   try {
     return await request.json();
   } catch (_error) {
     throw new AuthError(400, "Request body must be valid JSON.", "INVALID_INPUT");
   }
+}
+
+export async function requireCurrentUser(request, env) {
+  const payload = await verifyToken(readBearerToken(request), getSessionSecret(env));
+  const row = await getUserById(env.DB, payload.sub);
+  if (!row) {
+    throw new AuthError(401, "User no longer exists.", "UNAUTHORIZED");
+  }
+  const user = mapUser(row);
+  if (user.isDisabled) {
+    throw new AuthError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
+  }
+  return { row, user };
 }
 
 export async function handleAuthApiRequest(request, env) {
@@ -397,16 +410,60 @@ export async function handleAuthApiRequest(request, env) {
     }
 
     if (request.method === "GET" && url.pathname === "/api/auth/me") {
-      const payload = await verifyToken(readBearerToken(request), getSessionSecret(env));
-      const row = await getUserById(env.DB, payload.sub);
-      if (!row) {
-        throw new AuthError(401, "User no longer exists.", "UNAUTHORIZED");
-      }
-      const user = mapUser(row);
-      if (user.isDisabled) {
-        throw new AuthError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
-      }
+      const { user } = await requireCurrentUser(request, env);
       return success(user, request.method);
+    }
+
+    if (request.method === "PATCH" && url.pathname === "/api/auth/me") {
+      const { user } = await requireCurrentUser(request, env);
+      const body = await readJsonBody(request);
+      const displayName = requireString(body.displayName, "displayName");
+      const grade = typeof body.grade === "string" && body.grade.trim() ? body.grade.trim() : null;
+      const targetScore = body.targetScore === null || body.targetScore === ""
+        ? null
+        : Number(body.targetScore);
+      if (targetScore !== null && (!Number.isInteger(targetScore) || targetScore < 0 || targetScore > 100)) {
+        throw new AuthError(400, "Target score must be an integer from 0 to 100.", "INVALID_INPUT");
+      }
+      const now = new Date().toISOString();
+      await env.DB.prepare(`
+        UPDATE users
+        SET display_name = ?, grade = ?, target_score = ?, language = ?, updated_at = ?
+        WHERE id = ?
+      `).bind(
+        displayName,
+        grade,
+        targetScore,
+        normalizeLanguage(body.language),
+        now,
+        user.id
+      ).run();
+      const row = await getUserById(env.DB, user.id);
+      return success(mapUser(row), request.method);
+    }
+
+    if (request.method === "PATCH" && url.pathname === "/api/auth/me/pet") {
+      const { user } = await requireCurrentUser(request, env);
+      const body = await readJsonBody(request);
+      if (typeof body.enabled !== "boolean") {
+        throw new AuthError(400, "Pet enabled state must be a boolean.", "INVALID_PET_ENABLED");
+      }
+      const skin = typeof body.skin === "string" ? body.skin.trim() : "";
+      if (skin !== "codex-glass") {
+        throw new AuthError(400, "Unknown pet skin.", "INVALID_PET_SKIN");
+      }
+      const x = Number(body.position?.x);
+      const y = Number(body.position?.y);
+      if (!Number.isFinite(x) || x < 0 || x > 1 || !Number.isFinite(y) || y < 0 || y > 1) {
+        throw new AuthError(400, "Pet position must use x and y values from 0 to 1.", "INVALID_PET_POSITION");
+      }
+      await env.DB.prepare(`
+        UPDATE users
+        SET pet_enabled = ?, pet_skin = ?, pet_position_x = ?, pet_position_y = ?, updated_at = ?
+        WHERE id = ?
+      `).bind(body.enabled ? 1 : 0, skin, x, y, new Date().toISOString(), user.id).run();
+      const row = await getUserById(env.DB, user.id);
+      return success(mapUser(row).pet, request.method);
     }
 
     return routeNotFound(request, url);

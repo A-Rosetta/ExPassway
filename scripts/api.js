@@ -41,6 +41,10 @@
 
   let apiBaseUrl = resolveBaseUrl();
 
+  function currentToken() {
+    return localStorage.getItem("alevel.authToken") || "";
+  }
+
   async function request(path, options = {}) {
     const timeoutMs = options.timeoutMs || DEFAULT_TIMEOUT_MS;
     const controller = new AbortController();
@@ -109,18 +113,21 @@
     async generatePaper(input) {
       return request("/api/papers/generate", {
         method: "POST",
+        token: currentToken(),
         body: JSON.stringify(input),
       });
     },
     async submitPaper(input) {
       return request("/api/papers/submit", {
         method: "POST",
+        token: currentToken(),
         body: JSON.stringify(input),
       });
     },
     async submitLocalPaper(input) {
       return request("/api/papers/submit-local", {
         method: "POST",
+        token: currentToken(),
         body: JSON.stringify(input),
       });
     },
@@ -260,20 +267,26 @@
     },
     async getUserPractices(userId, input = {}) {
       const limit = Number(input.limit || 20);
-      return request(`/api/users/${encodeURIComponent(userId)}/practices?limit=${limit}`);
+      return request(`/api/users/${encodeURIComponent(userId)}/practices?limit=${limit}`, {
+        token: currentToken(),
+      });
     },
     async getUserNotebook(userId) {
-      return request(`/api/users/${encodeURIComponent(userId)}/notebook`);
+      return request(`/api/users/${encodeURIComponent(userId)}/notebook`, {
+        token: currentToken(),
+      });
     },
     async updateNotebookEntry(userId, entryId, input) {
       return request(`/api/users/${encodeURIComponent(userId)}/notebook/${encodeURIComponent(entryId)}`, {
         method: "PATCH",
+        token: currentToken(),
         body: JSON.stringify(input || {}),
       });
     },
     async clearUserPractices(userId) {
       return request(`/api/users/${encodeURIComponent(userId)}/practices`, {
         method: "DELETE",
+        token: currentToken(),
       });
     },
     async register(input) {
