@@ -1,4 +1,5 @@
 import { handleAuthApiRequest } from "./auth-api.js";
+import { handleCommunityApiRequest, handleCommunityImageRequest } from "./community-api.js";
 import { handleLearningApiRequest } from "./learning-api.js";
 import { handleReadApiRequest } from "./read-api.js";
 
@@ -8,6 +9,14 @@ export default {
 
     if (url.pathname.startsWith("/api/auth/")) {
       return handleAuthApiRequest(request, env);
+    }
+
+    if (url.pathname.startsWith("/api/community-images/")) {
+      return handleCommunityImageRequest(request, env);
+    }
+
+    if (url.pathname.startsWith("/api/discussions")) {
+      return handleCommunityApiRequest(request, env);
     }
 
     if (
