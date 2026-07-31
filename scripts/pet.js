@@ -450,9 +450,9 @@
     });
     character.addEventListener("click", activatePet);
     character.addEventListener("pointerdown", beginDrag);
-    character.addEventListener("pointermove", moveDrag);
-    character.addEventListener("pointerup", endDrag);
-    character.addEventListener("pointercancel", endDrag);
+    window.addEventListener("pointermove", moveDrag);
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
     character.addEventListener("keydown", moveWithKeyboard);
   }
 
