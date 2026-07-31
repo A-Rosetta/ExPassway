@@ -225,7 +225,7 @@ function json(route, data, status = 200) {
   });
 }
 
-async function mockApi(page) {
+async function mockApi(page, currentUser = user, authDelayMs = 0) {
   let petPreferences = structuredClone(user.pet);
   let hintReviewStatus = "pending_review";
   const controls = { failNextPetSave: false };
@@ -235,7 +235,10 @@ async function mockApi(page) {
     const path = url.pathname;
     const method = request.method();
 
-    if (path === "/api/auth/me") return json(route, { ...user, pet: petPreferences });
+    if (path === "/api/auth/me") {
+      if (authDelayMs) await new Promise((resolve) => setTimeout(resolve, authDelayMs));
+      return json(route, { ...currentUser, pet: petPreferences });
+    }
     if (path === "/api/auth/me/pet" && method === "PATCH") {
       const body = request.postDataJSON();
       if (controls.failNextPetSave) {
@@ -261,7 +264,7 @@ async function mockApi(page) {
     if (path === "/api/admin/records") {
       return json(route, {
         summary: { usersCount: 1, practiceCount: 1, submittedCount: 1 },
-        latestUsers: [user],
+        latestUsers: [currentUser],
         latestPractices: [],
       });
     }
@@ -341,7 +344,7 @@ async function mockApi(page) {
   return controls;
 }
 
-async function seedStorage(page, pathname, language = "en") {
+async function seedStorage(page, pathname, language = "en", currentUser = user) {
   await page.addInitScript(({ path, currentUser, result, questions, selectedLanguage }) => {
     const theme = localStorage.getItem("app-theme");
     localStorage.clear();
@@ -367,7 +370,7 @@ async function seedStorage(page, pathname, language = "en") {
     ]));
   }, {
     path: pathname,
-    currentUser: user,
+    currentUser,
     result: practiceResult,
     questions: reviewQuestions,
     selectedLanguage: language,
@@ -999,6 +1002,27 @@ async function verifyAdminHintReview(browser, config) {
   }
 }
 
+async function verifyStudentAdminBoundary(browser, config) {
+  const context = await browser.newContext({ viewport: config.viewport });
+  const page = await context.newPage();
+  const student = { ...user, role: "student" };
+  const adminRequests = [];
+  page.on("request", (request) => {
+    if (new URL(request.url()).pathname.startsWith("/api/admin/")) adminRequests.push(request.url());
+  });
+  try {
+    await seedStorage(page, "/pages/admin.html", "en", student);
+    await mockApi(page, student, 300);
+    await page.goto(`${baseUrl}/pages/admin.html`, { waitUntil: "domcontentloaded" });
+    assert.equal(await page.locator("#adminContent").isHidden(), true, `${config.name}: admin content was visible before role verification`);
+    await page.waitForURL(/\/pages\/admin-login\.html$/);
+    await page.locator("#adminLoginTitle").waitFor({ state: "visible" });
+    assert.deepEqual(adminRequests, [], `${config.name}: student session called an admin API`);
+  } finally {
+    await context.close();
+  }
+}
+
 async function closeMathKeyboard(page) {
   await page.waitForTimeout(50);
   const close = page.locator("#communityMathKeyboardClose");
@@ -1290,6 +1314,8 @@ async function runConfig(config) {
     console.log(JSON.stringify({ viewport: config.name, page: "pet-controls", ok: true }));
     await verifyAdminHintReview(browser, config);
     console.log(JSON.stringify({ viewport: config.name, page: "admin-hints", ok: true }));
+    await verifyStudentAdminBoundary(browser, config);
+    console.log(JSON.stringify({ viewport: config.name, page: "admin-student-boundary", ok: true }));
   } finally {
     await browser.close();
   }
