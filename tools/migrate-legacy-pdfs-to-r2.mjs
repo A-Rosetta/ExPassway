@@ -10,6 +10,7 @@ const DATABASE = "expassway-db";
 const CONTENT_BUCKET = "expassway-content";
 const EXPECTED_PAPER_COUNT = 69;
 const LEGACY_BASE_URL = String(process.env.LEGACY_API_BASE_URL || "http://127.0.0.1:3002").replace(/\/+$/, "");
+const VERIFY_BASE_URL = String(process.env.R2_VERIFY_BASE_URL || "").replace(/\/+$/, "");
 const execute = process.argv.includes("--execute");
 
 function sha256(bytes) {
@@ -71,12 +72,21 @@ async function uploadAndVerify(workDirectory, item) {
     "r2", "object", "put", `${CONTENT_BUCKET}/${item.r2Key}`,
     "--remote", "--force", "--file", item.file, "--content-type", "application/pdf",
   ]);
-  const verifiedFile = join(workDirectory, `verified-${item.slug}-${item.type}.pdf`);
-  await wrangler([
-    "r2", "object", "get", `${CONTENT_BUCKET}/${item.r2Key}`,
-    "--remote", "--file", verifiedFile,
-  ]);
-  const verifiedBytes = await readFile(verifiedFile);
+  let verifiedBytes;
+  if (VERIFY_BASE_URL) {
+    const response = await fetch(
+      `${VERIFY_BASE_URL}/api/catalog/papers/${encodeURIComponent(item.slug)}/download/${item.type}`
+    );
+    if (!response.ok) throw new Error(`${item.r2Key}: Worker verification returned ${response.status}`);
+    verifiedBytes = Buffer.from(await response.arrayBuffer());
+  } else {
+    const verifiedFile = join(workDirectory, `verified-${item.slug}-${item.type}.pdf`);
+    await wrangler([
+      "r2", "object", "get", `${CONTENT_BUCKET}/${item.r2Key}`,
+      "--remote", "--file", verifiedFile,
+    ]);
+    verifiedBytes = await readFile(verifiedFile);
+  }
   const verifiedSha256 = sha256(verifiedBytes);
   if (verifiedSha256 !== item.sha256) {
     throw new Error(`${item.r2Key}: uploaded R2 hash does not match the legacy source`);
@@ -109,6 +119,7 @@ try {
     mode: execute ? "uploaded-and-verified" : "validated-only",
     database: DATABASE,
     bucket: CONTENT_BUCKET,
+    verifyBaseUrl: VERIFY_BASE_URL || null,
     legacyBaseUrl: LEGACY_BASE_URL,
     paperCount: papers.length,
     documentCount: verified.length,
