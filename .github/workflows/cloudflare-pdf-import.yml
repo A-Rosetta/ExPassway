@@ -16,9 +16,6 @@ on:
           - auto
           - process
           - publish
-  schedule:
-    - cron: "*/5 * * * *"
-
 permissions:
   contents: read
 

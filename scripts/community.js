@@ -1203,8 +1203,7 @@
     window.requestAnimationFrame(() => {
       if (feedback.hidden || target?.getAttribute?.("aria-invalid") !== "true") return;
       target?.scrollIntoView?.({ behavior: "smooth", block: "nearest" });
-      if (mathField) mathField.focus();
-      else target?.focus?.();
+      if (!mathField) target?.focus?.();
     });
   }
 
