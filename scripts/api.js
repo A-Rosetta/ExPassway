@@ -239,7 +239,7 @@
       if (input.chapter) params.set("chapter", String(input.chapter));
       return request(`/api/admin/curriculum/mappings?${params}`, { token });
     },
-    async suggestAdminCurriculumMappings(token, limit = 2000) {
+    async suggestAdminCurriculumMappings(token, limit = 100) {
       return request("/api/admin/curriculum/mappings/suggest", {
         method: "POST",
         token,
@@ -287,24 +287,6 @@
       return request(`/api/users/${encodeURIComponent(userId)}/practices`, {
         method: "DELETE",
         token: currentToken(),
-      });
-    },
-    async register(input) {
-      return request("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(input || {}),
-      });
-    },
-    async login(input) {
-      return request("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify(input || {}),
-      });
-    },
-    async adminLogin(input) {
-      return request("/api/auth/admin/login", {
-        method: "POST",
-        body: JSON.stringify(input || {}),
       });
     },
     async getGoogleAuthStart() {

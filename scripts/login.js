@@ -5,7 +5,6 @@
   const GOOGLE_AUTH_PENDING_KEY = "alevel.googleAuthPending";
   const GOOGLE_AUTH_MAX_AGE_MS = 10 * 60 * 1000;
   const { t, getLanguage, applyPage } = window.ALevelI18n;
-  let selectedEmail = "";
 
   function byId(id) {
     return document.getElementById(id);
@@ -16,32 +15,6 @@
     status.textContent = text || "";
     status.className = isBad ? "auth-status bad" : "auth-status good";
     status.hidden = !text;
-  }
-
-  function setEmailError(text) {
-    const error = byId("emailError");
-    byId("userEmail").setAttribute("aria-invalid", text ? "true" : "false");
-    error.textContent = text || "";
-    error.hidden = !text;
-  }
-
-  function isValidEmail(value) {
-    const email = String(value || "").trim();
-    if (email.length > 254 || /\s/.test(email)) return false;
-    const parts = email.split("@");
-    if (parts.length !== 2) return false;
-    const [local, domain] = parts;
-    if (!local || local.length > 64 || local.startsWith(".") || local.endsWith(".") || local.includes("..")) {
-      return false;
-    }
-    const labels = domain.split(".");
-    return labels.length >= 2 && labels.every((label) => (
-      label.length > 0
-      && label.length <= 63
-      && !label.startsWith("-")
-      && !label.endsWith("-")
-      && /^[a-z0-9-]+$/i.test(label)
-    ));
   }
 
   function writeUserProfile(profile) {
@@ -62,23 +35,6 @@
     setTimeout(() => {
       location.href = payload.user?.role === "admin" ? "./admin.html" : "../index.html";
     }, 300);
-  }
-
-  function setStep(step) {
-    byId("emailStep").hidden = step !== "email";
-    byId("passwordStep").hidden = step !== "password";
-    byId("registerStep").hidden = step !== "register";
-    document.querySelectorAll("[data-auth-email]").forEach((node) => {
-      node.textContent = selectedEmail;
-    });
-    setAuthStatus("");
-
-    const focusTarget = {
-      email: byId("userEmail"),
-      password: byId("loginPassword"),
-      register: byId("userDisplayName"),
-    }[step];
-    requestAnimationFrame(() => focusTarget?.focus());
   }
 
   function setButtonBusy(button, busy, busyKey) {
@@ -142,79 +98,6 @@
   }
 
   async function init() {
-    byId("emailForm").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const email = byId("userEmail").value.trim().toLowerCase();
-      if (!isValidEmail(email)) {
-        setEmailError(t("invalidEmailAddress"));
-        return;
-      }
-      setEmailError("");
-      selectedEmail = email;
-      setStep("password");
-    });
-
-    byId("userEmail").addEventListener("input", () => setEmailError(""));
-    document.querySelectorAll("[data-auth-back]").forEach((button) => {
-      button.addEventListener("click", () => setStep(button.dataset.authBack));
-    });
-    byId("showRegisterBtn").addEventListener("click", () => setStep("register"));
-
-    byId("loginForm").addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const password = byId("loginPassword").value;
-      if (!password) {
-        setAuthStatus(t("passwordRequired"), true);
-        return;
-      }
-      const button = byId("loginBtn");
-      setButtonBusy(button, true, "loggingIn");
-      try {
-        const data = await window.ALevelApi.login({ identifier: selectedEmail, password });
-        applyAuthSuccess(data, "loginSuccess");
-      } catch (err) {
-        setAuthStatus(
-          err?.status === 403
-            ? t("accountDisabled")
-            : t("loginFailed", { message: err.message || t("invalidCredentials") }),
-          true
-        );
-      } finally {
-        setButtonBusy(button, false, "loggingIn");
-      }
-    });
-
-    byId("registerForm").addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const displayName = byId("userDisplayName").value.trim();
-      const password = byId("registerPassword").value;
-      if (!displayName) {
-        setAuthStatus(t("displayNameRequired"), true);
-        return;
-      }
-      if (password.length < 6) {
-        setAuthStatus(t("passwordTooShort"), true);
-        return;
-      }
-      const button = byId("registerBtn");
-      setButtonBusy(button, true, "registering");
-      try {
-        const data = await window.ALevelApi.register({
-          displayName,
-          email: selectedEmail,
-          password,
-          grade: null,
-          targetScore: null,
-          language: getLanguage(),
-        });
-        applyAuthSuccess(data, "registerSuccess");
-      } catch (err) {
-        setAuthStatus(t("registerFailed", { message: err.message || t("retryLater") }), true);
-      } finally {
-        setButtonBusy(button, false, "registering");
-      }
-    });
-
     byId("googleLoginBtn").addEventListener("click", async () => {
       const button = byId("googleLoginBtn");
       setButtonBusy(button, true, "connectingToGoogle");

@@ -1,5 +1,7 @@
+import { handleAdminApiRequest } from "./admin-api.js";
 import { handleAuthApiRequest } from "./auth-api.js";
 import { handleCommunityApiRequest, handleCommunityImageRequest } from "./community-api.js";
+import { handleContentRequest, handleQuestionHintRequest } from "./content-api.js";
 import { handleLearningApiRequest } from "./learning-api.js";
 import { handleReadApiRequest } from "./read-api.js";
 
@@ -11,8 +13,23 @@ export default {
       return handleAuthApiRequest(request, env);
     }
 
+    if (url.pathname.startsWith("/api/admin/")) {
+      return handleAdminApiRequest(request, env);
+    }
+
     if (url.pathname.startsWith("/api/community-images/")) {
       return handleCommunityImageRequest(request, env);
+    }
+
+    if (
+      url.pathname.startsWith("/api/content/")
+      || /^\/api\/catalog\/papers\/[^/]+\/download\/[^/]+$/.test(url.pathname)
+    ) {
+      return handleContentRequest(request, env);
+    }
+
+    if (url.pathname.startsWith("/api/question-hints/")) {
+      return handleQuestionHintRequest(request, env);
     }
 
     if (url.pathname.startsWith("/api/discussions")) {

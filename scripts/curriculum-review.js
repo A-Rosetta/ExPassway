@@ -186,7 +186,7 @@
     button.disabled = true;
     setStatus(t("generatingMappings"));
     try {
-      const result = await window.ALevelApi.suggestAdminCurriculumMappings(authToken, 2000);
+      const result = await window.ALevelApi.suggestAdminCurriculumMappings(authToken, 100);
       byId("mappingStatus").value = "suggested";
       currentOffset = 0;
       setStatus(t("mappingSuggestionsGenerated", {
