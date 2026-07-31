@@ -40,6 +40,24 @@ jobs:
         with:
           python-version: "3.12"
       - run: npm ci
+      - name: Verify Cloudflare D1 and R2 access
+        run: |
+          set -euo pipefail
+          probe_key=".github-access-check/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.txt"
+          probe_file="$(mktemp)"
+          cleanup() {
+            rm -f "$probe_file"
+            for bucket in expassway-content expassway-private-imports; do
+              npx wrangler r2 object delete "$bucket/$probe_key" --remote --force >/dev/null 2>&1 || true
+            done
+          }
+          trap cleanup EXIT
+          printf 'ExPassway GitHub Actions access check\n' > "$probe_file"
+          npx wrangler d1 execute expassway-db --remote --command "SELECT 1 AS ok"
+          for bucket in expassway-content expassway-private-imports; do
+            npx wrangler r2 object put "$bucket/$probe_key" --remote --force --file "$probe_file" --content-type text/plain
+            npx wrangler r2 object delete "$bucket/$probe_key" --remote --force
+          done
       - run: python -m pip install --disable-pip-version-check PyMuPDF==1.26.3
       - name: Process queued import
         env:
