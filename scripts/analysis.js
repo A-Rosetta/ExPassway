@@ -26,7 +26,6 @@
           const result = latestSubmitted.result || null;
           const wrongLog = latestSubmitted.wrongLog || [];
           localStorage.setItem(scopedKey("alevel.lastResult"), JSON.stringify(result));
-          localStorage.setItem(scopedKey("alevel.wrongLog"), JSON.stringify(wrongLog));
           return {
             logs: wrongLog,
             lastResult: result,

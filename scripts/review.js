@@ -522,7 +522,6 @@
           const wrongLog = data.wrongLog || buildWrongLog(result.details || []);
           result.elapsedSeconds = elapsedSeconds;
           writeJson("alevel.lastResult", result);
-          writeJson("alevel.wrongLog", wrongLog);
           persistPaperResult(result, questions, paperSlug);
           persistWrongNotebook(questions, result.details || [], selection);
           localStorage.removeItem(scopedKey("alevel.pendingSubmit"));
@@ -535,7 +534,6 @@
       result.elapsedSeconds = elapsedSeconds;
       const wrongLog = buildWrongLog(result.details || []);
       writeJson("alevel.lastResult", result);
-      writeJson("alevel.wrongLog", wrongLog);
       persistPaperResult(result, questions, paperSlug);
       persistWrongNotebook(questions, result.details || [], selection);
       localStorage.removeItem(scopedKey("alevel.pendingSubmit"));
@@ -557,7 +555,6 @@
       result.totalHintClicks = Object.values(hintUsageMap).reduce((sum, x) => sum + (x.used || 0), 0);
       result.elapsedSeconds = elapsedSeconds;
       writeJson("alevel.lastResult", result);
-      writeJson("alevel.wrongLog", wrongLog);
       persistPaperResult(result, questions, paperSlug);
       persistWrongNotebook(questions, result.details || [], selection);
       localStorage.removeItem(scopedKey("alevel.pendingSubmit"));
@@ -567,7 +564,6 @@
       result.elapsedSeconds = elapsedSeconds;
       const wrongLog = buildWrongLog(result.details || []);
       writeJson("alevel.lastResult", result);
-      writeJson("alevel.wrongLog", wrongLog);
       persistPaperResult(result, questions, paperSlug);
       persistWrongNotebook(questions, result.details || [], selection);
       localStorage.removeItem(scopedKey("alevel.pendingSubmit"));

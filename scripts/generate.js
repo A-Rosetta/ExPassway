@@ -432,7 +432,6 @@
 
   function persistResult(result, wrongLog) {
     writeScopedJson("alevel.lastResult", result);
-    writeScopedJson("alevel.wrongLog", wrongLog);
   }
 
   function persistWrongNotebook(questions, details, selection) {
