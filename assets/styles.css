@@ -4193,3 +4193,22 @@ body.chapter-practice-page {
 .notebook-mastered-filter span {
   white-space: nowrap;
 }
+
+/* Fix: force notebook-star-filter to horizontal layout with normal checkbox */
+.notebook-star-filter {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+.notebook-star-filter > input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0 !important;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.notebook-star-filter > span {
+  line-height: 1;
+}
+
