@@ -429,10 +429,10 @@ async function assertPageGeometry(page, label) {
   assert.ok(geometry.header, `${label}: title bar missing`);
   assert.ok(Math.abs(geometry.header.width - geometry.clientWidth) <= 1, `${label}: title bar width is inconsistent`);
   const compact = geometry.clientWidth <= 767;
-  assert.ok(Math.abs(geometry.header.height - (compact ? 64 : 72)) <= 1, `${label}: title bar height is inconsistent ${JSON.stringify(geometry.header)}`);
+  assert.ok(Math.abs(geometry.header.height - (compact ? 72 : 82)) <= 1, `${label}: title bar height is inconsistent ${JSON.stringify(geometry.header)}`);
   assert.ok(geometry.headerInner, `${label}: title bar inner container missing`);
-  assert.ok(Math.abs(geometry.headerInner.height - (compact ? 64 : 72)) <= 1, `${label}: title bar inner height is inconsistent`);
-  assert.ok(Math.abs(geometry.headerInner.width - (compact ? geometry.clientWidth - 24 : Math.min(1180, geometry.clientWidth - 48))) <= 1, `${label}: title bar inner width is inconsistent`);
+  assert.ok(Math.abs(geometry.headerInner.height - (compact ? 58 : 64)) <= 1, `${label}: title bar inner height is inconsistent`);
+  assert.ok(Math.abs(geometry.headerInner.width - (compact ? geometry.clientWidth - 16 : Math.min(1180, geometry.clientWidth - 32))) <= 1, `${label}: title bar inner width is inconsistent`);
 }
 
 async function assertAccessibleMotion(page, label) {

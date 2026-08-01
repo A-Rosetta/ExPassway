@@ -72,6 +72,40 @@ async function newPage(browser, locale, savedLanguage) {
     {
       const context = await browser.newContext({ locale: "en-US" });
       const page = await context.newPage();
+      await page.addInitScript(() => {
+        if (sessionStorage.getItem("loginCallbackSmokeSeeded")) return;
+        localStorage.clear();
+        sessionStorage.setItem("loginCallbackSmokeSeeded", "1");
+        sessionStorage.setItem("alevel.googleAuthPending", String(Date.now()));
+      });
+      await page.route("**/api/auth/google", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          data: {
+            token: "admin-test-token",
+            user: { id: "admin-1", displayName: "Admin User", role: "admin" },
+          },
+        }),
+      }));
+      await page.route("**/api/auth/me", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          data: { id: "admin-1", displayName: "Admin User", role: "admin" },
+        }),
+      }));
+      await page.goto(`${baseUrl}/pages/login.html#access_token=verified-admin-token`, { waitUntil: "domcontentloaded" });
+      await page.waitForURL(`${baseUrl}/index.html`);
+      assert.equal(await page.evaluate(() => localStorage.getItem("alevel.authToken")), "admin-test-token");
+      await context.close();
+    }
+
+    {
+      const context = await browser.newContext({ locale: "en-US" });
+      const page = await context.newPage();
       await page.addInitScript(() => localStorage.clear());
       await page.route("**/api/auth/google/start", (route) => route.fulfill({
         status: 503,
@@ -86,6 +120,46 @@ async function newPage(browser, locale, savedLanguage) {
       await page.locator("#adminGoogleLoginBtn").click();
       await page.locator("#authStatus").waitFor({ state: "visible" });
       assert.equal(await page.locator("#authStatus").textContent(), "Google login has not been configured yet.");
+      await context.close();
+    }
+
+    {
+      const context = await browser.newContext({ locale: "en-US" });
+      const page = await context.newPage();
+      await page.addInitScript(() => {
+        localStorage.clear();
+        localStorage.setItem("alevel.authToken", "admin-test-token");
+      });
+      await page.route("**/api/auth/me", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          data: { id: "admin-1", displayName: "Admin User", role: "admin" },
+        }),
+      }));
+      await page.goto(`${baseUrl}/pages/login.html`, { waitUntil: "domcontentloaded" });
+      await page.waitForURL(`${baseUrl}/index.html`);
+      await context.close();
+    }
+
+    {
+      const context = await browser.newContext({ locale: "en-US" });
+      const page = await context.newPage();
+      await page.addInitScript(() => {
+        localStorage.clear();
+        localStorage.setItem("alevel.authToken", "admin-test-token");
+      });
+      await page.route("**/api/auth/me", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          data: { id: "admin-1", displayName: "Admin User", role: "admin" },
+        }),
+      }));
+      await page.goto(`${baseUrl}/pages/admin-login.html`, { waitUntil: "domcontentloaded" });
+      await page.waitForURL(`${baseUrl}/index.html`);
       await context.close();
     }
 
