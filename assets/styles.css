@@ -4183,3 +4183,13 @@ body.chapter-practice-page {
   color: #f5a623;
   margin-right: 0.4rem;
 }
+
+/* Fix: notebook filter labels wrapping character-by-character */
+.notebook-star-filter,
+.notebook-mastered-filter {
+  white-space: nowrap;
+}
+.notebook-star-filter span,
+.notebook-mastered-filter span {
+  white-space: nowrap;
+}
