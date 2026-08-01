@@ -35,7 +35,7 @@
     localStorage.setItem(AUTH_TOKEN_KEY, payload.token);
     setAuthStatus(t(messageKey, { name: payload.user.displayName }));
     setTimeout(() => {
-      location.href = payload.user?.role === "admin" ? "./admin.html" : "../index.html";
+      location.href = "../index.html";
     }, 300);
   }
 
@@ -87,7 +87,7 @@
       writeUserProfile(user);
       setAuthStatus(t("autoLoginSuccess", { name: user.displayName }));
       setTimeout(() => {
-        location.href = user?.role === "admin" ? "./admin.html" : "../index.html";
+        location.href = "../index.html";
       }, 300);
     } catch (err) {
       if (err?.status === 401 || err?.status === 403) {

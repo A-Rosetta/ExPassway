@@ -53,7 +53,7 @@
         setStatus(t("notAdmin"), true);
         return;
       }
-      location.href = "./admin.html";
+      location.href = "../index.html";
     } catch (error) {
       if (error?.status === 401 || error?.status === 403) {
         localStorage.removeItem(USER_PROFILE_KEY);

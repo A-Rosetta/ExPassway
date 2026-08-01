@@ -58,13 +58,21 @@
     return `<div class="admin-action-grid">${buttons.join("")}</div>`;
   }
 
-  function openDetail(title, content) {
-    byId("adminDetailTitle").textContent = title;
-    byId("adminDetailBody").innerHTML = content;
+  function showDetailDialog() {
     const dialog = byId("adminDetailDialog");
     if (dialog.open) return;
     if (typeof dialog.showModal === "function") dialog.showModal();
     else dialog.setAttribute("open", "");
+  }
+
+  function openDetail(title, content) {
+    byId("adminDetailTitle").textContent = title;
+    const detailBody = byId("adminDetailBody");
+    detailBody.innerHTML = content;
+    detailBody.hidden = false;
+    byId("adminImportDetail").hidden = true;
+    byId("adminDetailDialog").dataset.mode = "detail";
+    showDetailDialog();
   }
 
   function detailTable(columns, rows) {
@@ -218,13 +226,17 @@
     currentImportJob = job || null;
     const detail = byId("adminImportDetail");
     if (!detail) return;
-    detail.hidden = !job;
     byId("adminProcessImport").disabled = !job || !["uploading", "failed"].includes(job.status);
     byId("adminPublishImport").disabled = !job || job.status !== "validated";
     byId("adminCancelImport").disabled = !job || ["published", "cancelled"].includes(job.status);
     byId("adminDeleteImport").disabled = !job || !["uploading", "failed", "cancelled"].includes(job.status);
     byId("adminHideImportRecord").textContent = t(job?.hiddenAt ? "adminRestoreImportRecord" : "adminHideImportRecord");
-    if (!job) return;
+    if (!job) {
+      detail.hidden = true;
+      const dialog = byId("adminDetailDialog");
+      if (dialog.open && dialog.dataset.mode === "import") dialog.close();
+      return;
+    }
 
     const summary = job.summary || {};
     const summaryRows = [
@@ -262,6 +274,15 @@
         ].map((message) => `<li>${safeText(message)}</li>`).join("")}</ul>`
       : `<p class="tip">${safeText(t("adminImportNoIssues"))}</p>`;
     scheduleImportPoll(job);
+  }
+
+  function openImportDetail(job) {
+    renderImportJob(job);
+    byId("adminDetailTitle").textContent = t("adminImportDetailTitle");
+    byId("adminDetailBody").hidden = true;
+    byId("adminImportDetail").hidden = false;
+    byId("adminDetailDialog").dataset.mode = "import";
+    showDetailDialog();
   }
 
   function renderSubjects(subjects) {
@@ -353,8 +374,7 @@
       button.addEventListener("click", async () => {
         button.disabled = true;
         try {
-          renderImportJob(await window.ALevelApi.getAdminImport(authToken, button.dataset.importId));
-          byId("adminImportDetail").scrollIntoView({ behavior: "smooth", block: "start" });
+          openImportDetail(await window.ALevelApi.getAdminImport(authToken, button.dataset.importId));
         } catch (err) {
           setImportStatus(t("adminImportLoadFailed", { message: err.message }), true);
         } finally {
@@ -876,7 +896,7 @@
           total: files.length,
         }), false);
       }
-      renderImportJob(await window.ALevelApi.getAdminImport(authToken, job.id));
+      openImportDetail(await window.ALevelApi.getAdminImport(authToken, job.id));
       setImportStatus(t("adminImportUploaded"), false);
       await loadImportAdminData();
     } catch (err) {
@@ -897,7 +917,7 @@
     button.disabled = true;
     setImportStatus(t("adminImportQueueingValidation"), false);
     try {
-      renderImportJob(await window.ALevelApi.processAdminImport(authToken, currentImportJob.id));
+      openImportDetail(await window.ALevelApi.processAdminImport(authToken, currentImportJob.id));
       setImportStatus(t("adminImportValidationQueued"), false);
       await loadImportAdminData();
     } catch (err) {
@@ -915,7 +935,7 @@
     button.disabled = true;
     setImportStatus(t("adminImportQueueingPublish"), false);
     try {
-      renderImportJob(await window.ALevelApi.publishAdminImport(authToken, currentImportJob.id));
+      openImportDetail(await window.ALevelApi.publishAdminImport(authToken, currentImportJob.id));
       setImportStatus(t("adminImportPublishQueued"), false);
       await loadImportAdminData();
     } catch (err) {
@@ -984,7 +1004,7 @@
     }
   });
   byId("adminHideImportDetail").addEventListener("click", () => {
-    byId("adminImportDetail").hidden = true;
+    byId("adminDetailDialog").close();
   });
   byId("adminShowHiddenImports").addEventListener("change", loadImportAdminData);
   byId("adminRefreshCommunity").addEventListener("click", refreshCommunity);

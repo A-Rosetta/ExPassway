@@ -172,6 +172,26 @@ async function routeAdminApi(context, actions) {
     });
     if (path === "/api/admin/subjects") return json(route, [fixture.subject]);
     if (path === "/api/admin/imports") return json(route, [fixture.importJob]);
+    if (path === `/api/admin/imports/${fixture.importJob.id}`) return json(route, fixture.importJob);
+    if (path === `/api/admin/subjects/${fixture.subject.code}/questions`) return json(route, {
+      questions: [{
+        id: "question-1",
+        paper_slug: "0610_s23_qp_22",
+        question_no: 1,
+        year: 2023,
+        topic: "Cells",
+        active: true,
+      }],
+      total: 1,
+    });
+    if (path === `/api/admin/users/${fixture.user.id}/history`) return json(route, {
+      user: fixture.user,
+      summary: { practiceCount: 1, attemptCount: 1, correctCount: 1, notebookCount: 0 },
+      practices: [{ id: "practice-1", subject: "Biology", status: "submitted", created_at: now, submitted_at: now }],
+      attempts: [{ question_id: "question-1", paper_slug: "0610_s23_qp_22", selected_index: 0, correct: true, hints_used: 0, attempted_at: now }],
+      notebook: [],
+      discussions: { threads: [] },
+    });
     if (path === "/api/admin/settings/ai-hints") return json(route, {
       enabled: false, configured: false, modelConfigured: false,
     });
@@ -275,6 +295,52 @@ async function verifyAdmin(browser, viewport, name) {
     assert.equal(await page.locator("#adminHintLiveToggle").isChecked(), false);
     assert.equal(await page.locator("#adminProcessImport").isDisabled(), true);
     assert.equal(await page.locator("#adminPublishImport").isDisabled(), true);
+
+    const headerMaterial = await page.locator(".site-topbar").evaluate((header) => {
+      const inner = header.querySelector(".site-topbar__inner");
+      const headerStyle = getComputedStyle(header);
+      const innerStyle = getComputedStyle(inner);
+      return {
+        position: headerStyle.position,
+        top: headerStyle.top,
+        radius: parseFloat(innerStyle.borderTopLeftRadius),
+        background: innerStyle.backgroundColor,
+        backdrop: innerStyle.backdropFilter || innerStyle.webkitBackdropFilter || "none",
+        titleVisible: Boolean(inner.querySelector(".home-brand > span:last-child")?.getClientRects().length),
+      };
+    });
+    assert.equal(headerMaterial.position, "sticky");
+    assert.equal(headerMaterial.top, "0px");
+    assert.ok(headerMaterial.radius >= 24, `${name}: header is not rounded ${JSON.stringify(headerMaterial)}`);
+    assert.match(headerMaterial.backdrop, /blur\(26px\)/);
+    assert.equal(headerMaterial.titleVisible, true, `${name}: ExPassway title is hidden`);
+
+    async function verifyDetailModal(buttonSelector, visibleBodySelector) {
+      await page.locator(buttonSelector).click();
+      await page.locator("#adminDetailDialog").waitFor({ state: "visible" });
+      assert.equal(await page.locator(visibleBodySelector).isVisible(), true);
+      const material = await page.locator("#adminDetailDialog").evaluate((dialog) => {
+        const style = getComputedStyle(dialog);
+        const match = style.backgroundColor.match(/[\d.]+/g) || [];
+        return {
+          alpha: match.length > 3 ? Number(match[3]) : 1,
+          backdrop: style.backdropFilter || style.webkitBackdropFilter || "none",
+        };
+      });
+      assert.ok(material.alpha >= 0.9, `${name}: modal is too transparent ${JSON.stringify(material)}`);
+      assert.match(material.backdrop, /blur\(32px\)/);
+      await page.locator("#adminCloseDetail").click();
+      await page.locator("#adminDetailDialog").waitFor({ state: "hidden" });
+    }
+
+    await verifyDetailModal("#adminSubjectsBody [data-subject-questions]", "#adminDetailBody");
+    await verifyDetailModal("#usersBody [data-user-history]", "#adminDetailBody");
+    await verifyDetailModal("#adminImportsBody [data-import-id]", "#adminImportDetail");
+    assert.equal(await page.locator("#adminImportDetail").evaluate((detail) => detail.closest("#adminDetailDialog") !== null), true);
+    await page.locator("#adminImportsBody [data-import-id]").click();
+    await page.locator("#adminDetailDialog").waitFor({ state: "visible" });
+    await page.screenshot({ path: `/var/tmp/expassway-admin-import-modal-${name}.png` });
+    await page.locator("#adminCloseDetail").click();
 
     await page.locator("#adminThreadsBody [data-report-lock]").click();
     await page.waitForFunction(() => document.querySelector("#adminThreadsBody tr"));
