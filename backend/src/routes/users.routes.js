@@ -8,6 +8,7 @@ import { deletePracticeSessionsByUserId } from "../db/repositories/practice.repo
 import {
   deleteWrongNotebookEntriesByUserId,
   listWrongNotebookEntriesByUserId,
+  updateWrongNotebookEntry,
   updateWrongNotebookEntryMastered,
 } from "../db/repositories/wrongNotebook.repository.js";
 import { listUserPracticeRecords } from "../services/paperStore.service.js";
@@ -108,15 +109,17 @@ router.patch("/:userId/notebook/:entryId", asyncHandler(async (req, res) => {
   assertUsersApiEnabled();
   const userId = requireString(req.params.userId, "userId");
   const entryId = requireString(req.params.entryId, "entryId");
-  const mastered = Boolean(req.body?.mastered);
-  const row = await updateWrongNotebookEntryMastered(userId, entryId, mastered);
-  if (!row) {
-    throw new ApiError(404, "Wrong notebook entry not found.", "NOTEBOOK_ENTRY_NOT_FOUND");
+  const body = req.body || {};
+  const allowedKeys = ["mastered", "starred", "note", "mistakeType", "mistakeReasons", "lastRedoneAt"];
+  const patch = {};
+  for (const key of allowedKeys) {
+    if (key in body) patch[key] = body[key];
   }
-  res.json({
-    ok: true,
-    data: row,
-  });
+  const row = await updateWrongNotebookEntry(userId, entryId, patch);
+  if (!row) {
+    throw new ApiError(404, "Wrong notebook entry not found or no valid fields.", "NOTEBOOK_ENTRY_NOT_FOUND");
+  }
+  res.json({ ok: true, data: row });
 }));
 
 router.delete("/:userId/practices", asyncHandler(async (req, res) => {

@@ -19,6 +19,11 @@ function mapEntry(row) {
     firstWrongAt: row.first_wrong_at,
     lastWrongAt: row.last_wrong_at,
     mastered: Boolean(row.mastered),
+    starred: Boolean(row.starred),
+    mistakeType: row.mistake_type || "unknown",
+    mistakeReasons: Array.isArray(row.mistake_reasons) ? row.mistake_reasons : [],
+    note: row.note || "",
+    lastRedoneAt: row.last_redone_at,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -37,27 +42,11 @@ export async function upsertWrongNotebookEntries(userId, questions, details, sel
 
   const sql = `
     insert into wrong_notebook_entries (
-      user_id,
-      question_key,
-      board,
-      subject,
-      paper,
-      topic,
-      year,
-      stem,
-      answer,
-      answer_text,
-      last_selected,
-      last_selected_text,
-      wrong_count,
-      first_wrong_at,
-      last_wrong_at,
-      mastered,
-      updated_at
+      user_id, question_key, board, subject, paper, topic, year,
+      stem, answer, answer_text, last_selected, last_selected_text,
+      wrong_count, first_wrong_at, last_wrong_at, mastered, updated_at
     )
-    values (
-      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, 1, now(), now(), false, now()
-    )
+    values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,1,now(),now(),false,now())
     on conflict (user_id, question_key)
     do update set
       board = excluded.board,
@@ -80,7 +69,6 @@ export async function upsertWrongNotebookEntries(userId, questions, details, sel
   for (let idx = 0; idx < details.length; idx += 1) {
     const detail = details[idx];
     if (detail?.correct) continue;
-
     const question = questions[idx] || {};
     const questionKey = question.id || `${selection?.subject || "unknown"}-${idx + 1}`;
     const params = [
@@ -98,43 +86,62 @@ export async function upsertWrongNotebookEntries(userId, questions, details, sel
       buildOptionText(question, detail.selectedIndex),
     ];
     const result = await query(sql, params);
-    if (result.rows[0]) {
-      saved.push(mapEntry(result.rows[0]));
-    }
+    if (result.rows[0]) saved.push(mapEntry(result.rows[0]));
   }
 
   return saved;
 }
 
 export async function listWrongNotebookEntriesByUserId(userId) {
-  const sql = `
-    select *
-    from wrong_notebook_entries
-    where user_id = $1
-    order by last_wrong_at desc
-  `;
+  const sql = `select * from wrong_notebook_entries where user_id = $1 order by last_wrong_at desc`;
   const result = await query(sql, [userId]);
   return result.rows.map(mapEntry);
 }
 
-export async function updateWrongNotebookEntryMastered(userId, entryId, mastered) {
+const PATCHABLE_FIELDS = {
+  mastered: (v) => ({ col: "mastered", val: Boolean(v) }),
+  starred: (v) => ({ col: "starred", val: Boolean(v) }),
+  note: (v) => ({ col: "note", val: typeof v === "string" ? v : "" }),
+  mistakeType: (v) => {
+    const allowed = ["concept", "calculation", "question_reading", "careless", "time_pressure", "unknown"];
+    return { col: "mistake_type", val: allowed.includes(v) ? v : "unknown" };
+  },
+  mistakeReasons: (v) => ({
+    col: "mistake_reasons",
+    val: Array.isArray(v) ? v.filter((x) => typeof x === "string") : [],
+  }),
+  lastRedoneAt: (v) => ({ col: "last_redone_at", val: v ? new Date(v) : new Date() }),
+};
+
+export async function updateWrongNotebookEntry(userId, entryId, patch) {
+  if (!patch || typeof patch !== "object") return null;
+  const sets = [];
+  const params = [userId, entryId];
+  for (const [key, value] of Object.entries(patch)) {
+    const mapper = PATCHABLE_FIELDS[key];
+    if (!mapper) continue;
+    const { col, val } = mapper(value);
+    params.push(val);
+    sets.push(`${col} = $${params.length}`);
+  }
+  if (sets.length === 0) return null;
+  sets.push("updated_at = now()");
   const sql = `
     update wrong_notebook_entries
-    set
-      mastered = $3,
-      updated_at = now()
+    set ${sets.join(", ")}
     where user_id = $1 and id = $2
     returning *
   `;
-  const result = await query(sql, [userId, entryId, Boolean(mastered)]);
+  const result = await query(sql, params);
   return result.rows[0] ? mapEntry(result.rows[0]) : null;
 }
 
+export async function updateWrongNotebookEntryMastered(userId, entryId, mastered) {
+  return updateWrongNotebookEntry(userId, entryId, { mastered });
+}
+
 export async function deleteWrongNotebookEntriesByUserId(userId) {
-  const sql = `
-    delete from wrong_notebook_entries
-    where user_id = $1
-  `;
+  const sql = `delete from wrong_notebook_entries where user_id = $1`;
   const result = await query(sql, [userId]);
   return Number(result.rowCount || 0);
 }
