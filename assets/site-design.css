@@ -984,7 +984,8 @@
   margin-top: 20px;
 }
 
-.site-ui .notebook-mastered-filter {
+.site-ui .notebook-mastered-filter,
+.site-ui .notebook-star-filter {
   grid-template-columns: 22px minmax(0, 1fr);
   align-items: center;
   align-self: flex-end;
@@ -992,7 +993,8 @@
   min-height: 48px;
 }
 
-.site-ui .notebook-mastered-filter input[type="checkbox"] {
+.site-ui .notebook-mastered-filter input[type="checkbox"],
+.site-ui .notebook-star-filter input[type="checkbox"] {
   width: 22px;
   min-width: 22px;
   height: 22px;
