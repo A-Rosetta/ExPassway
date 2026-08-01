@@ -132,6 +132,16 @@ function mapNotebookEntry(row) {
     firstWrongAt: row.first_wrong_at,
     lastWrongAt: row.last_wrong_at,
     mastered: Boolean(row.mastered),
+    starred: Boolean(row.starred),
+    mistakeType: row.mistake_type || "unknown",
+    mistakeReasons: (() => {
+      try {
+        const parsed = JSON.parse(row.mistake_reasons || "[]");
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (_e) { return []; }
+    })(),
+    note: row.note || "",
+    lastRedoneAt: row.last_redone_at || null,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -865,10 +875,47 @@ export async function handleLearningApiRequest(request, env) {
       const entryId = decodeURIComponent(notebookEntry[2]);
       await assertOwnUser(request, env, userId);
       const body = await readJsonBody(request);
-      const mastered = Boolean(body.mastered);
+      const allowedKeysNotebook = ["mastered", "starred", "note", "mistakeType", "mistakeReasons", "lastRedoneAt"];
+      const sets = [];
+      const params = [];
+      const allowedMistakeTypes = new Set([
+        "concept", "calculation", "question_reading", "careless", "time_pressure", "unknown",
+      ]);
+      for (const key of allowedKeysNotebook) {
+        if (!(key in body)) continue;
+        const value = body[key];
+        if (key === "mastered") {
+          sets.push("mastered = ?");
+          params.push(value ? 1 : 0);
+        } else if (key === "starred") {
+          sets.push("starred = ?");
+          params.push(value ? 1 : 0);
+        } else if (key === "note") {
+          sets.push("note = ?");
+          params.push(typeof value === "string" ? value : "");
+        } else if (key === "mistakeType") {
+          sets.push("mistake_type = ?");
+          params.push(allowedMistakeTypes.has(value) ? value : "unknown");
+        } else if (key === "mistakeReasons") {
+          const arr = Array.isArray(value) ? value.filter((x) => typeof x === "string") : [];
+          sets.push("mistake_reasons = ?");
+          params.push(JSON.stringify(arr));
+        } else if (key === "lastRedoneAt") {
+          sets.push("last_redone_at = ?");
+          const iso = value ? new Date(value).toISOString() : new Date().toISOString();
+          params.push(iso);
+        }
+      }
+      if (sets.length === 0) {
+        throw new AuthError(400, "No valid fields to update.", "NO_VALID_FIELDS");
+      }
+      sets.push("updated_at = ?");
+      params.push(new Date().toISOString());
+      params.push(entryId);
+      params.push(userId);
       await env.DB.prepare(`
-        UPDATE wrong_notebook_entries SET mastered = ?, updated_at = ? WHERE id = ? AND user_id = ?
-      `).bind(mastered ? 1 : 0, new Date().toISOString(), entryId, userId).run();
+        UPDATE wrong_notebook_entries SET ${sets.join(", ")} WHERE id = ? AND user_id = ?
+      `).bind(...params).run();
       const row = await env.DB.prepare(`
         SELECT * FROM wrong_notebook_entries WHERE id = ? AND user_id = ? LIMIT 1
       `).bind(entryId, userId).first();
