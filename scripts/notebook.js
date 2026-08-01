@@ -66,6 +66,19 @@
     return readNotebook();
   }
 
+  async function persistPatch(entryId, patch) {
+    const userId = localStorage.getItem(USER_ID_KEY) || "";
+    if (userId && window.ALevelApi?.updateNotebookEntry) {
+      try {
+        await window.ALevelApi.updateNotebookEntry(userId, entryId, patch);
+      } catch (_err) {
+      }
+    }
+    const all = readNotebook();
+    const next = all.map((r) => (r.id === entryId ? { ...r, ...patch } : r));
+    writeNotebook(next);
+  }
+
   function toTime(v) {
     return new Date(v || 0).getTime() || 0;
   }
@@ -97,6 +110,7 @@
   function renderStats(rows) {
     const totalWrongCount = rows.reduce((sum, r) => sum + Number(r.wrongCount || 0), 0);
     const masteredCount = rows.filter((r) => r.mastered).length;
+    const starredCount = rows.filter((r) => r.starred).length;
     const latest = rows[0];
     const time = latest?.lastWrongAt
       ? new Date(latest.lastWrongAt).toLocaleString(getLanguage() === "en" ? "en-US" : "zh-CN")
@@ -106,6 +120,7 @@
         <div class="stat-card"><div class="stat-label">${t("notebookItems")}</div><div class="stat-value">${rows.length}</div></div>
         <div class="stat-card"><div class="stat-label">${t("totalWrongAttempts")}</div><div class="stat-value">${totalWrongCount}</div></div>
         <div class="stat-card"><div class="stat-label">${t("mastered")}</div><div class="stat-value">${masteredCount}</div></div>
+        <div class="stat-card"><div class="stat-label">${t("starEntry")}</div><div class="stat-value">${starredCount}</div></div>
       </div>
       <p class="tip">${
         latest
@@ -160,11 +175,34 @@
     return Number.isInteger(selected) && selected >= 0 && selected <= 3;
   }
 
+  function escapeHtml(s) {
+    return String(s || "").replace(/[&<>"']/g, (c) => (
+      { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+    ));
+  }
+
+  function renderReasonsTags(reasons) {
+    if (!Array.isArray(reasons) || reasons.length === 0) return "";
+    const tags = reasons.map((r) => `<span class="tag notebook-reason-tag">${escapeHtml(r)}</span>`).join("");
+    return `<span class="tag notebook-reason-label">${t("mistakeReasonsLabel")}</span>${tags}`;
+  }
+
+  function renderNoteBlock(note) {
+    const clean = String(note || "").trim();
+    if (!clean) {
+      return `<p class="notebook-note-empty tip">${t("noteEmpty")}</p>`;
+    }
+    return `<p class="notebook-note">${escapeHtml(clean)}</p>`;
+  }
+
   function renderList(rows, state) {
     const wrap = byId("notebookList");
     let filtered = state.subject ? rows.filter((r) => r.subject === state.subject) : rows;
     if (state.hideMastered) {
       filtered = filtered.filter((r) => !r.mastered);
+    }
+    if (state.onlyStarred) {
+      filtered = filtered.filter((r) => r.starred);
     }
     filtered = sortRows(filtered, state.sortBy);
     const fallbackNumbers = new Map(filtered.map((row, idx) => [row, idx + 1]));
@@ -190,9 +228,10 @@
             <h3 class="notebook-group-title">${t(name)}（${list.length}）</h3>
             ${list
               .map((r, idx) => `
-                <details class="question notebook-question ${r.mastered ? "mastered" : ""}">
+                <details class="question notebook-question ${r.mastered ? "mastered" : ""} ${r.starred ? "starred" : ""}">
                   <summary>
                     <span>${r.subject || "-"} / ${r.paper || "-"} / ${t("questionNumber", { number: getQuestionNumber(r, fallbackNumbers.get(r) || idx + 1) })}</span>
+                    ${r.starred ? `<span class="notebook-star-marker" aria-hidden="true">★</span>` : ""}
                   </summary>
                   <div class="notebook-question-content">
                     <p class="chem-text">${r.stem || t("stemMissing")}</p>
@@ -201,11 +240,16 @@
                       <span class="tag">${t("wrongCountLabel")} ${r.wrongCount || 1}</span>
                       <span class="tag">${t("latestLabel")} ${r.lastWrongAt ? new Date(r.lastWrongAt).toLocaleString(getLanguage() === "en" ? "en-US" : "zh-CN") : "-"}</span>
                       ${r.mastered ? `<span class='tag'>${t("mastered")}</span>` : ""}
+                      ${r.starred ? `<span class='tag notebook-tag-starred'>${t("starEntry")}</span>` : ""}
                     </div>
+                    ${renderReasonsTags(r.mistakeReasons)}
                     <p class="bad">${t("yourAnswer", { answer: r.lastSelectedText || t("unanswered") })}</p>
                     <p class="good">${t("correctAnswer", { answer: r.answerText || "-" })}</p>
+                    ${renderNoteBlock(r.note)}
                     <div class="actions">
                       <button class="btn-secondary" data-mastered-id="${r.id}">${r.mastered ? t("unmarkMastered") : t("markMastered")}</button>
+                      <button class="btn-secondary notebook-star-btn ${r.starred ? "is-active" : ""}" data-star-id="${r.id}">${r.starred ? t("unstarEntry") : t("starEntry")}</button>
+                      <button class="btn-secondary" data-note-id="${r.id}">${t("editNoteLabel")}</button>
                       <a class="btn-link" href="${buildCommunityUrl(r)}">${t("discussQuestion")}</a>
                     </div>
                   </div>
@@ -233,24 +277,41 @@
     byId("notebookPrevPage")?.addEventListener("click", () => changePage(currentPage - 1));
     byId("notebookNextPage")?.addEventListener("click", () => changePage(currentPage + 1));
 
-    const btns = wrap.querySelectorAll("[data-mastered-id]");
-    btns.forEach((btn) => {
+    wrap.querySelectorAll("[data-mastered-id]").forEach((btn) => {
       btn.addEventListener("click", async function () {
         const id = this.getAttribute("data-mastered-id");
         if (!id) return;
         const all = readNotebook();
         const target = all.find((r) => r.id === id);
         if (!target) return;
-        const nextMastered = !target.mastered;
-        const userId = localStorage.getItem(USER_ID_KEY) || "";
-        if (userId && window.ALevelApi?.updateNotebookEntry) {
-          try {
-            await window.ALevelApi.updateNotebookEntry(userId, id, { mastered: nextMastered });
-          } catch (_err) {
-          }
-        }
-        const next = all.map((r) => (r.id === id ? { ...r, mastered: nextMastered } : r));
-        writeNotebook(next);
+        await persistPatch(id, { mastered: !target.mastered });
+        await init();
+      });
+    });
+
+    wrap.querySelectorAll("[data-star-id]").forEach((btn) => {
+      btn.addEventListener("click", async function () {
+        const id = this.getAttribute("data-star-id");
+        if (!id) return;
+        const all = readNotebook();
+        const target = all.find((r) => r.id === id);
+        if (!target) return;
+        await persistPatch(id, { starred: !target.starred });
+        await init();
+      });
+    });
+
+    wrap.querySelectorAll("[data-note-id]").forEach((btn) => {
+      btn.addEventListener("click", async function () {
+        const id = this.getAttribute("data-note-id");
+        if (!id) return;
+        const all = readNotebook();
+        const target = all.find((r) => r.id === id);
+        if (!target) return;
+        const prev = String(target.note || "");
+        const next = window.prompt(t("notePrompt"), prev);
+        if (next === null) return;
+        await persistPatch(id, { note: next });
         await init();
       });
     });
@@ -263,6 +324,7 @@
       subject: byId("subjectFilter")?.value || "",
       sortBy: byId("sortBy")?.value || "time_desc",
       hideMastered: Boolean(byId("hideMastered")?.checked),
+      onlyStarred: Boolean(byId("onlyStarred")?.checked),
     };
 
     const sortedForStats = sortRows(answeredRows, "time_desc");
@@ -278,6 +340,7 @@
   byId("subjectFilter").addEventListener("change", () => { currentPage = 1; init(); });
   byId("sortBy").addEventListener("change", () => { currentPage = 1; init(); });
   byId("hideMastered").addEventListener("change", () => { currentPage = 1; init(); });
+  byId("onlyStarred")?.addEventListener("change", () => { currentPage = 1; init(); });
 
   byId("clearNotebook").addEventListener("click", async function () {
     await clearUserRecords();

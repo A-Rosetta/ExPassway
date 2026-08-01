@@ -4119,3 +4119,67 @@ body.chapter-practice-page {
   0%, 100% { opacity: 0.65; }
   50% { opacity: 1; }
 }
+/* ===== Notebook: star/note UI additions (2026-08-01) ===== */
+
+.notebook-star-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.notebook-star-marker {
+  color: #f5a623;
+  font-size: 1rem;
+  margin-left: 0.4rem;
+}
+
+.notebook-tag-starred {
+  background: #fff7e6;
+  color: #b7791f;
+  border-color: #f6d18a;
+}
+
+.notebook-star-btn.is-active {
+  background: #fff4d3;
+  color: #b7791f;
+  border-color: #f2c469;
+}
+
+.notebook-star-btn.is-active::before {
+  content: "★ ";
+  color: #f5a623;
+}
+
+.notebook-note {
+  margin: 0.5rem 0 0.2rem;
+  padding: 0.55rem 0.8rem;
+  background: #f6f8fb;
+  border-left: 3px solid #6b90d6;
+  border-radius: 6px;
+  color: #34435a;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.notebook-note-empty {
+  margin: 0.5rem 0 0.2rem;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.notebook-reason-label {
+  background: #eef2fa;
+  color: #4a5b7a;
+  font-weight: 600;
+}
+
+.notebook-reason-tag {
+  background: #f0e6fb;
+  color: #6a3fb0;
+}
+
+.notebook-question.starred > summary::before {
+  content: "★";
+  color: #f5a623;
+  margin-right: 0.4rem;
+}
