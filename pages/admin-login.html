@@ -6,7 +6,7 @@
   <title data-i18n="adminLoginPageTitle">Administrator login</title>
   <script src="../scripts/theme-init.js?v=20260802-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260802-4" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260802-5" />
 </head>
 <body class="student-ui auth-page admin-auth-page">
   <div class="site-header-controls auth-page-controls"></div>
@@ -37,7 +37,10 @@
         <p id="adminOtpAccountEmail" class="auth-account-email"></p>
         <form id="adminEmailOtpVerifyForm" novalidate>
           <label class="sr-only" for="adminEmailOtpCode" data-i18n="emailOtpCodeLabel">Verification code</label>
-          <input id="adminEmailOtpCode" class="auth-input auth-otp-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required data-i18n-placeholder="emailOtpCodePlaceholder" placeholder="6-digit code" />
+          <div class="auth-otp-field">
+            <input id="adminEmailOtpCode" class="auth-input auth-otp-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required data-i18n-placeholder="emailOtpCodePlaceholder" placeholder="6-digit code" />
+            <button id="adminEmailOtpResendBtn" class="auth-otp-resend" type="button" disabled data-i18n="resendEmailOtp">Resend code</button>
+          </div>
           <p id="adminEmailOtpCodeError" class="auth-field-error" role="alert" hidden></p>
           <button id="adminEmailOtpVerifyBtn" class="auth-submit-button" type="submit" data-i18n="verifyEmailOtp">Verify and continue</button>
         </form>
@@ -47,9 +50,9 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260802-2"></script>
+  <script src="../scripts/i18n.js?v=20260802-3"></script>
   <script src="../scripts/site-ui.js?v=20260802-1"></script>
   <script src="../scripts/api.js?v=20260802-1"></script>
-  <script src="../scripts/admin-login.js?v=20260802-1"></script>
+  <script src="../scripts/admin-login.js?v=20260802-2"></script>
 </body>
 </html>

@@ -41,18 +41,18 @@ async function newPage(browser, locale, savedLanguage) {
     {
       const context = await browser.newContext({ locale: "en-US" });
       const page = await context.newPage();
-      let otpRequested = false;
+      let otpRequestCount = 0;
       await page.addInitScript(() => {
         if (sessionStorage.getItem("emailOtpSmokeSeeded")) return;
         localStorage.clear();
         sessionStorage.setItem("emailOtpSmokeSeeded", "1");
       });
       await page.route("**/api/auth/email/otp", (route) => {
-        otpRequested = true;
+        otpRequestCount += 1;
         return route.fulfill({
           status: 200,
           contentType: "application/json",
-          body: JSON.stringify({ ok: true, data: { sent: true } }),
+          body: JSON.stringify({ ok: true, data: { sent: true, retryAfterSeconds: 60 } }),
         });
       });
       await page.route("**/api/auth/email/verify", (route) => route.fulfill({
@@ -78,15 +78,18 @@ async function newPage(browser, locale, savedLanguage) {
 
       await page.locator("#emailOtpAddress").fill("not-an-email");
       await page.locator("#emailOtpRequestBtn").click();
-      assert.equal(otpRequested, false);
+      assert.equal(otpRequestCount, 0);
       assert.equal(await page.locator("#emailOtpAddressError").textContent(), "Enter a valid email address.");
 
       await page.locator("#emailOtpAddress").fill("Student@Example.com");
       await page.locator("#emailOtpRequestBtn").click();
       await page.locator("#otpStep").waitFor({ state: "visible" });
-      assert.equal(otpRequested, true);
+      assert.equal(otpRequestCount, 1);
       assert.equal(await page.locator("#otpAccountEmail").textContent(), "student@example.com");
       assert.equal(await page.locator("#authStatus").textContent(), "Verification code sent. Check your email.");
+      assert.equal(await page.locator(".auth-otp-field > #emailOtpResendBtn").count(), 1);
+      assert.equal(await page.locator("#emailOtpResendBtn").isDisabled(), true);
+      assert.equal(await page.locator("#emailOtpResendBtn").textContent(), "Resend in 60s");
 
       await page.locator("#emailOtpCode").fill("123456");
       await page.locator("#emailOtpVerifyBtn").click();
@@ -196,11 +199,15 @@ async function newPage(browser, locale, savedLanguage) {
         localStorage.clear();
         sessionStorage.setItem("adminEmailOtpRoleSmokeSeeded", "1");
       });
-      await page.route("**/api/auth/email/otp", (route) => route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({ ok: true, data: { sent: true } }),
-      }));
+      let otpRequestCount = 0;
+      await page.route("**/api/auth/email/otp", (route) => {
+        otpRequestCount += 1;
+        return route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ ok: true, data: { sent: true, retryAfterSeconds: 60 } }),
+        });
+      });
       await page.route("**/api/auth/email/verify", (route) => route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -224,6 +231,10 @@ async function newPage(browser, locale, savedLanguage) {
       await page.locator("#adminEmailOtpAddress").fill(`${role}@example.com`);
       await page.locator("#adminEmailOtpRequestBtn").click();
       await page.locator("#adminOtpStep").waitFor({ state: "visible" });
+      assert.equal(otpRequestCount, 1);
+      assert.equal(await page.locator(".auth-otp-field > #adminEmailOtpResendBtn").count(), 1);
+      assert.equal(await page.locator("#adminEmailOtpResendBtn").isDisabled(), true);
+      assert.equal(await page.locator("#adminEmailOtpResendBtn").textContent(), "Resend in 60s");
       await page.locator("#adminEmailOtpCode").fill("123456");
       await page.locator("#adminEmailOtpVerifyBtn").click();
       if (role === "admin") {

@@ -6,7 +6,7 @@
   <title data-i18n="loginPageTitle">Log in or sign up</title>
   <script src="../scripts/theme-init.js?v=20260802-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260802-4" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260802-5" />
 </head>
 <body class="student-ui auth-page">
   <div class="site-header-controls auth-page-controls"></div>
@@ -39,7 +39,10 @@
         <p id="otpAccountEmail" class="auth-account-email"></p>
         <form id="emailOtpVerifyForm" novalidate>
           <label class="sr-only" for="emailOtpCode" data-i18n="emailOtpCodeLabel">Verification code</label>
-          <input id="emailOtpCode" class="auth-input auth-otp-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required data-i18n-placeholder="emailOtpCodePlaceholder" placeholder="6-digit code" />
+          <div class="auth-otp-field">
+            <input id="emailOtpCode" class="auth-input auth-otp-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required data-i18n-placeholder="emailOtpCodePlaceholder" placeholder="6-digit code" />
+            <button id="emailOtpResendBtn" class="auth-otp-resend" type="button" disabled data-i18n="resendEmailOtp">Resend code</button>
+          </div>
           <p id="emailOtpCodeError" class="auth-field-error" role="alert" hidden></p>
           <button id="emailOtpVerifyBtn" class="auth-submit-button" type="submit" data-i18n="verifyEmailOtp">Verify and continue</button>
         </form>
@@ -54,9 +57,9 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260802-1"></script>
+  <script src="../scripts/i18n.js?v=20260802-3"></script>
   <script src="../scripts/site-ui.js?v=20260802-1"></script>
   <script src="../scripts/api.js?v=20260802-1"></script>
-  <script src="../scripts/login.js?v=20260802-1"></script>
+  <script src="../scripts/login.js?v=20260802-2"></script>
 </body>
 </html>
