@@ -4277,3 +4277,46 @@ body.chapter-practice-page {
 .notebook-star-filter > span {
   line-height: 1;
 }
+/* ===== Mistake reasons multi-select on review page (2026-08-01) ===== */
+
+.mistake-reasons {
+  margin: 0.5rem 0 0.4rem;
+  padding: 0.5rem 0.8rem 0.6rem;
+  border: 1px solid #d7ddea;
+  border-radius: 10px;
+  background: #f9fafd;
+  display: block;
+}
+
+.mistake-reasons > legend {
+  padding: 0 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #4a5b7a;
+}
+
+.mistake-reason-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.2rem 0.9rem 0.2rem 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #2a3648;
+  user-select: none;
+}
+
+.mistake-reason-option input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  accent-color: #2c5b96;
+}
+
+.mistake-reason-option:hover span {
+  color: #1e3a5f;
+}
