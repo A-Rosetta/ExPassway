@@ -50,6 +50,32 @@
     applyPage(button);
   }
 
+  function setFieldError(input, errorElement, message) {
+    input.setAttribute("aria-invalid", message ? "true" : "false");
+    errorElement.textContent = message || "";
+    errorElement.hidden = !message;
+  }
+
+  function normalizedEmail() {
+    return byId("emailOtpAddress").value.trim().toLowerCase();
+  }
+
+  function showOtpStep(email) {
+    byId("emailStep").hidden = true;
+    byId("otpStep").hidden = false;
+    byId("otpAccountEmail").textContent = email;
+    byId("emailOtpCode").value = "";
+    byId("emailOtpCode").focus();
+  }
+
+  function showEmailStep() {
+    byId("otpStep").hidden = true;
+    byId("emailStep").hidden = false;
+    setFieldError(byId("emailOtpCode"), byId("emailOtpCodeError"), "");
+    setAuthStatus("");
+    byId("emailOtpAddress").focus();
+  }
+
   async function handleGoogleCallback() {
     const params = new URLSearchParams(location.hash.replace(/^#/, ""));
     const accessToken = params.get("access_token");
@@ -100,6 +126,49 @@
   }
 
   async function init() {
+    byId("emailOtpRequestForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const input = byId("emailOtpAddress");
+      const errorElement = byId("emailOtpAddressError");
+      const email = normalizedEmail();
+      if (!input.checkValidity() || !email) {
+        setFieldError(input, errorElement, t("invalidEmailAddress"));
+        return;
+      }
+      setFieldError(input, errorElement, "");
+      const button = byId("emailOtpRequestBtn");
+      setButtonBusy(button, true, "sendingEmailOtp");
+      try {
+        await window.ALevelApi.requestEmailOtp(email);
+        showOtpStep(email);
+        setAuthStatus(t("emailOtpSent"));
+      } catch (err) {
+        setAuthStatus(t("emailOtpSendFailed", { message: err.message || t("retryLater") }), true);
+      } finally {
+        setButtonBusy(button, false, "sendingEmailOtp");
+      }
+    });
+    byId("emailOtpVerifyForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const input = byId("emailOtpCode");
+      const errorElement = byId("emailOtpCodeError");
+      const code = input.value.trim();
+      if (!/^\d{6}$/.test(code)) {
+        setFieldError(input, errorElement, t("invalidEmailOtpCode"));
+        return;
+      }
+      setFieldError(input, errorElement, "");
+      const button = byId("emailOtpVerifyBtn");
+      setButtonBusy(button, true, "verifyingEmailOtp");
+      try {
+        const data = await window.ALevelApi.verifyEmailOtp(normalizedEmail(), code, getLanguage());
+        applyAuthSuccess(data, "loginSuccess");
+      } catch (_err) {
+        setAuthStatus(t("emailOtpVerifyFailed"), true);
+        setButtonBusy(button, false, "verifyingEmailOtp");
+      }
+    });
+    byId("emailOtpBackBtn").addEventListener("click", showEmailStep);
     byId("visitorModeBtn").addEventListener("click", () => {
       clearAuth();
       localStorage.setItem(VISITOR_MODE_KEY, "1");
