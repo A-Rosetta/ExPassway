@@ -4360,12 +4360,14 @@ body.chapter-practice-page {
 }
 
 /* Notebook practice: build-a-paper dialog on the notebook page */
+/* Blend into the panel it sits in rather than sitting on it as a lighter card.
+   Uses the shared surface token so light and dark themes both stay correct. */
 .notebook-practice-dialog {
   margin-top: 1rem;
   padding: 1rem 1.1rem;
-  border: 1px solid #d8e0ec;
+  border: 1px solid var(--surface-border-soft, transparent);
   border-radius: 10px;
-  background: #f8fafc;
+  background: transparent;
 }
 
 .notebook-practice-dialog[hidden] {
