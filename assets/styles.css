@@ -4320,3 +4320,58 @@ body.chapter-practice-page {
 .mistake-reason-option:hover span {
   color: #1e3a5f;
 }
+
+/* ===== Mistake reasons: restyle to match site's green theme ===== */
+.mistake-reasons {
+  margin: 0.6rem 0 0.3rem;
+  padding: 0.7rem 1rem 0.8rem;
+  border: none;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow:
+    0 1px 4px rgba(30, 80, 50, 0.06),
+    inset 0 0 0 1px rgba(30, 90, 60, 0.08);
+  display: block;
+}
+.mistake-reasons > legend {
+  padding: 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #3f5c48;
+  letter-spacing: 0.01em;
+}
+.mistake-reason-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.25rem 0.5rem 0.25rem 0;
+  padding: 0.28rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.86rem;
+  color: #3a4d40;
+  border-radius: 999px;
+  background: #eef5f0;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  user-select: none;
+}
+.mistake-reason-option:hover {
+  background: #dfeae2;
+}
+.mistake-reason-option:has(input:checked) {
+  background: #cfe2d5;
+  color: #22452c;
+  font-weight: 600;
+}
+.mistake-reason-option:active {
+  transform: scale(0.97);
+}
+.mistake-reason-option input[type="checkbox"] {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  cursor: pointer;
+  accent-color: #4d8b5a;
+}
