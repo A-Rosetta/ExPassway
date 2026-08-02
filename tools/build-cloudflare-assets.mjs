@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { spawnSync } from "node:child_process";
 
 const outputDirectory = ".cloudflare-dist";
-const allowedPaths = ["index.html", "pages/", "scripts/", "assets/"];
+const allowedPaths = ["_headers", "index.html", "pages/", "scripts/", "assets/"];
 const trackedFiles = spawnSync(
   "git",
   ["ls-files", "-z", "--", ...allowedPaths],
