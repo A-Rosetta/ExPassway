@@ -521,6 +521,11 @@ async function openPage(browser, config, pathname, options = {}) {
   });
   const page = await context.newPage();
   if (options.clock) await page.clock.install();
+  if (options.theme) {
+    await page.addInitScript((theme) => {
+      if (!localStorage.getItem("app-theme")) localStorage.setItem("app-theme", theme);
+    }, options.theme);
+  }
   const errors = [];
   const failedRequests = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -553,30 +558,30 @@ async function homeSurfaceState(page) {
 }
 
 async function verifyHomeThemes(browser, config) {
-  const systemRun = await openPage(browser, config, "/index.html", { colorScheme: "dark" });
+  const systemRun = await openPage(browser, config, "/index.html", { colorScheme: "light" });
   try {
     await systemRun.page.locator(".course-card--biology").waitFor({ state: "visible" });
     assert.equal(
       await systemRun.page.locator("html").getAttribute("data-theme"),
       "dark",
-      `${config.name}-home: system dark preference was not applied`
+      `${config.name}-home: dark default was not applied`
     );
     assert.equal(
       await systemRun.page.evaluate(() => localStorage.getItem("app-theme")),
       null,
-      `${config.name}-home: system preference must not create a manual theme setting`
+      `${config.name}-home: default theme must not create a manual theme setting`
     );
   } finally {
     await systemRun.context.close();
   }
 
-  const run = await openPage(browser, config, "/index.html", { colorScheme: "light" });
+  const run = await openPage(browser, config, "/index.html", { colorScheme: "light", theme: "light" });
   const { page } = run;
   try {
     await page.locator(".course-card--biology").waitFor({ state: "visible" });
     const light = await homeSurfaceState(page);
     assert.equal(light.theme, "light");
-    assert.equal(light.storedTheme, null);
+    assert.equal(light.storedTheme, "light");
     assert.equal(light.bodyBackground, "rgb(230, 234, 227)");
     assert.equal(light.cardBackground, "rgb(230, 234, 227)");
     assert.equal(light.cardBorder, "rgba(0, 0, 0, 0)");
@@ -670,7 +675,7 @@ async function verifyHomeThemes(browser, config) {
 }
 
 async function verifyStandardPage(browser, config, pageSpec) {
-  const run = await openPage(browser, config, pageSpec.path, { colorScheme: "light" });
+  const run = await openPage(browser, config, pageSpec.path, { colorScheme: "light", theme: "light" });
   try {
     await run.page.locator(pageSpec.ready).first().waitFor({ state: "visible" });
     await run.page.locator("#themeToggle").waitFor({ state: "visible" });
@@ -1039,7 +1044,7 @@ async function closeMathKeyboard(page) {
 }
 
 async function verifyCommunity(browser, config) {
-  const run = await openPage(browser, config, "/pages/community.html");
+  const run = await openPage(browser, config, "/pages/community.html", { theme: "light" });
   const { page } = run;
   const dialogs = [];
   page.on("dialog", async (dialog) => {
