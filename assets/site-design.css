@@ -3114,22 +3114,11 @@
 }
 
 /*
- * 首页科目选择
- * ============
- * 科目卡是可点击选项：未操作时平，hover 或键盘焦点时沿用前面的凸起规则，
- * 按住时沿用凹下规则。这里只改默认面，不重写书本造型。
+ * 首页科目选择保持原来的 raised / inset 交互
+ * ==========================================
+ * 默认凸起、鼠标悬停时加强外阴影、按住时使用内阴影。这里不再把科目卡
+ * 改成 flat，因此文件前面原有的 course-card 规则重新成为最终外观。
  */
-.site-ui .course-card {
-  background: transparent;
-  box-shadow: none;
-}
-
-[data-theme="dark"] .site-ui .course-card {
-  border-color: transparent;
-  background: transparent;
-  box-shadow: none;
-}
-
 /*
  * 试卷与做题模式选择
  * ==================
@@ -3337,14 +3326,13 @@
 }
 
 /*
- * 所有学生页面使用与首页相同的标题栏结构
+ * 其他学生页面单向复用首页标题栏结构
  * ======================================
- * 四种标题栏的外观早已共用同一组玻璃表面变量；这里再统一内部三列的位置：
+ * 首页保持原有规则不动；这里只让其他三种标题栏复用首页内部三列的位置：
  * 品牌在左、页面标题或导航在中、命令按钮在右。普通页面只有品牌和按钮时，
  * 右侧按钮直接放到第三列，中间列留作弹性空间，因此位置与首页完全一致。
  */
 .site-ui :is(
-  .home-topbar__inner,
   .site-topbar__inner,
   .chapter-topbar__inner,
   .community-topbar__inner
@@ -3354,7 +3342,7 @@
   align-items: center;
 }
 
-.site-ui :is(.site-header-controls, .home-header-controls, .community-topbar__actions) {
+.site-ui :is(.site-header-controls, .community-topbar__actions) {
   grid-column: 3;
   justify-self: end;
 }
@@ -3432,7 +3420,7 @@
   margin: 0;
   padding: 24px;
   border-color: transparent;
-  border-radius: 8px;
+  border-radius: 18px;
   background: var(--surface-raised);
   box-shadow: var(--surface-shadow);
 }
@@ -3454,7 +3442,7 @@
   min-height: 52px;
   padding: 10px 12px;
   border-color: var(--surface-border-soft);
-  border-radius: 6px;
+  border-radius: 16px;
   background: var(--bg);
   box-shadow: var(--surface-shadow-deep);
   color: var(--text);
@@ -3475,7 +3463,7 @@
   top: calc(92px + env(safe-area-inset-top));
   padding: 14px;
   border-color: var(--surface-border-soft);
-  border-radius: 8px;
+  border-radius: 18px;
   background: var(--surface-raised);
   box-shadow: var(--surface-shadow-small);
 }
@@ -3495,7 +3483,7 @@
   aspect-ratio: 1;
   padding: 0;
   border-color: transparent;
-  border-radius: 6px;
+  border-radius: 12px;
   background: transparent;
   box-shadow: none;
   color: var(--text);
@@ -3548,7 +3536,7 @@
   justify-content: center;
   gap: 8px;
   border: 1px solid var(--surface-border-soft);
-  border-radius: 6px;
+  border-radius: 16px;
   background: var(--bg);
   box-shadow: var(--surface-shadow-inset-small);
   color: var(--text);
