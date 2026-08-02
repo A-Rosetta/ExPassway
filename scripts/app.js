@@ -316,6 +316,10 @@
     }
     if (visitorMode) {
       getEl("goNotebook").hidden = true;
+      // The analysis page reads the signed-in user's notebook, so it has
+      // nothing to show a visitor - same reason the notebook entry is hidden.
+      const analysisEntry = getEl("goAnalysis");
+      if (analysisEntry) analysisEntry.hidden = true;
       getEl("openProfile").hidden = true;
       getEl("logoutHome").dataset.i18n = "visitorLogIn";
       getEl("logoutHome").textContent = t("visitorLogIn");
@@ -323,6 +327,9 @@
 
     getEl("goNotebook")?.addEventListener("click", () => {
       location.href = "pages/notebook.html";
+    });
+    getEl("goAnalysis")?.addEventListener("click", () => {
+      location.href = "pages/analysis.html";
     });
     getEl("goCommunity")?.addEventListener("click", () => {
       location.href = "pages/community.html";
