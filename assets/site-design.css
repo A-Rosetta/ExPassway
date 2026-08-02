@@ -3594,3 +3594,51 @@
     font-size: 0.76rem;
   }
 }
+
+/*
+ * 标题栏按钮的最终三态
+ * ====================
+ * 这组规则放在文件最后，统一覆盖前面的历史标题栏样式：
+ *   默认和普通 hover：flat，只用底色提示可以点击；
+ *   focus-visible：raised，用外阴影表示键盘焦点；
+ *   active / 菜单展开：inset，用内阴影表示正在按下或保持打开。
+ */
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link):not(.control-raised):not(.control-inset) {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button:not(:disabled), .btn-link):not(.control-raised):not(.control-inset):hover {
+  border-color: transparent;
+  background: var(--surface-hover);
+  box-shadow: none;
+  color: var(--text);
+  transform: none;
+}
+
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link):not(.control-raised):not(.control-inset):focus-visible {
+  border-color: transparent;
+  background: var(--surface-raised);
+  outline: 2px solid var(--focus-inner);
+  outline-offset: 2px;
+  box-shadow: var(--surface-shadow-small), 0 0 0 4px var(--accent);
+  transform: translateY(-1px);
+}
+
+/* 按下和展开必须写在焦点之后，保证点击时最终显示为 inset。 */
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button:not(:disabled), .btn-link):active,
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link).is-open,
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link)[aria-expanded="true"] {
+  border-color: transparent;
+  background: var(--surface-pressed);
+  box-shadow: var(--surface-shadow-inset-small);
+  transform: none;
+}
