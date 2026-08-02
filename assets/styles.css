@@ -4555,18 +4555,26 @@ body.chapter-practice-page {
   font-size: 0.8rem;
 }
 
-/* Same global .site-ui input trap as the option radios: pin the size or these
-   render as full-width 48px pills. */
-.weekly-plan-check {
-  width: 20px;
-  min-width: 20px;
-  height: 20px;
-  min-height: 20px;
+/* Same global .site-ui input trap as the option radios. Note the selector has
+   to out-specify .site-ui input (0,1,1) - a lone .weekly-plan-check class is
+   (0,1,0) and loses, which is why these still rendered as big input boxes.
+   Only the sizing is overridden so these match the notebook page's own
+   checkboxes instead of inventing a second look. */
+.weekly-plan-table input[type="checkbox"] {
+  width: 22px;
+  min-width: 22px;
+  height: 22px;
+  min-height: 22px;
   margin: 0;
   padding: 0;
-  box-shadow: none;
-  background: none;
   cursor: pointer;
+}
+
+.weekly-plan-table th:last-child,
+.weekly-plan-table td:last-child {
+  width: 1%;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .notebook-practice-result {
