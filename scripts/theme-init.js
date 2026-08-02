@@ -6,7 +6,7 @@
     theme = "";
   }
   if (theme !== "light" && theme !== "dark") {
-    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    theme = "dark";
   }
   if (theme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");

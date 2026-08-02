@@ -7,7 +7,6 @@
   const menuToggle = document.getElementById("homeMenuToggle");
   const navigation = document.getElementById("homeNav");
   const desktopQuery = window.matchMedia("(min-width: 768px)");
-  const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
   function readStoredTheme() {
     try {
@@ -145,14 +144,11 @@
   });
 
   desktopQuery.addEventListener("change", () => setMenu(false, false));
-  systemThemeQuery.addEventListener("change", (event) => {
-    if (!readStoredTheme()) applyTheme(event.matches ? DARK : LIGHT);
-  });
   window.addEventListener("storage", (event) => {
     if (event.key === STORAGE_KEY) {
       const next = event.newValue === DARK || event.newValue === LIGHT
         ? event.newValue
-        : (systemThemeQuery.matches ? DARK : LIGHT);
+        : DARK;
       applyTheme(next);
     }
   });
@@ -161,7 +157,7 @@
     setMenu(menuIsOpen(), false);
   });
 
-  applyTheme(readStoredTheme() || (systemThemeQuery.matches ? DARK : LIGHT));
+  applyTheme(readStoredTheme() || DARK);
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => window.setTimeout(initializeControls, 0));
   } else {

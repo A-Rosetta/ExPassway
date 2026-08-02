@@ -165,7 +165,11 @@ async function newPage(browser, locale, savedLanguage) {
     {
       const context = await browser.newContext({ locale: "en-US" });
       const page = await context.newPage();
-      await page.addInitScript(() => localStorage.clear());
+      await page.addInitScript(() => {
+        if (sessionStorage.getItem("adminEmailOtpSmokeSeeded")) return;
+        localStorage.clear();
+        sessionStorage.setItem("adminEmailOtpSmokeSeeded", "1");
+      });
       await page.route("**/api/auth/google/start", (route) => route.fulfill({
         status: 503,
         contentType: "application/json",
@@ -175,10 +179,84 @@ async function newPage(browser, locale, savedLanguage) {
       assert.equal(await page.locator("html").getAttribute("lang"), "en");
       assert.equal(await page.locator(".auth-brand").textContent(), "ExPassway");
       assert.equal(await page.locator("#adminLoginTitle").textContent(), "Administrator login");
+      assert.equal(await page.locator("#adminLoginTitle").evaluate((element) => element.scrollWidth <= element.clientWidth + 1), true);
       assert.equal(await page.locator("#adminGoogleLoginBtn img").count(), 1);
+      assert.equal(await page.locator("#adminEmailOtpRequestBtn").textContent(), "Continue with email as administrator");
       await page.locator("#adminGoogleLoginBtn").click();
       await page.locator("#authStatus").waitFor({ state: "visible" });
       assert.equal(await page.locator("#authStatus").textContent(), "Google login has not been configured yet.");
+      await context.close();
+    }
+
+    for (const role of ["admin", "student"]) {
+      const context = await browser.newContext({ locale: "en-US" });
+      const page = await context.newPage();
+      await page.addInitScript(() => {
+        if (sessionStorage.getItem("adminEmailOtpRoleSmokeSeeded")) return;
+        localStorage.clear();
+        sessionStorage.setItem("adminEmailOtpRoleSmokeSeeded", "1");
+      });
+      await page.route("**/api/auth/email/otp", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ ok: true, data: { sent: true } }),
+      }));
+      await page.route("**/api/auth/email/verify", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          data: {
+            token: `${role}-email-token`,
+            user: { id: `${role}-1`, email: `${role}@example.com`, displayName: role, role },
+          },
+        }),
+      }));
+      await page.route("**/api/auth/me", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          data: { id: `${role}-1`, email: `${role}@example.com`, displayName: role, role },
+        }),
+      }));
+      await page.goto(`${baseUrl}/pages/admin-login.html`, { waitUntil: "networkidle" });
+      await page.locator("#adminEmailOtpAddress").fill(`${role}@example.com`);
+      await page.locator("#adminEmailOtpRequestBtn").click();
+      await page.locator("#adminOtpStep").waitFor({ state: "visible" });
+      await page.locator("#adminEmailOtpCode").fill("123456");
+      await page.locator("#adminEmailOtpVerifyBtn").click();
+      if (role === "admin") {
+        await page.waitForURL(`${baseUrl}/index.html`);
+        assert.equal(await page.evaluate(() => localStorage.getItem("alevel.authToken")), "admin-email-token");
+      } else {
+        await page.waitForFunction(() => (
+          document.querySelector("#authStatus")?.textContent === "The current account is not an administrator."
+        ));
+        assert.equal(await page.locator("#authStatus").textContent(), "The current account is not an administrator.");
+        assert.equal(await page.evaluate(() => localStorage.getItem("alevel.authToken")), null);
+      }
+      await context.close();
+    }
+
+    {
+      const context = await browser.newContext({ locale: "en-US", colorScheme: "light" });
+      const page = await context.newPage();
+      await page.addInitScript(() => {
+        if (sessionStorage.getItem("authThemeSmokeSeeded")) return;
+        localStorage.clear();
+        sessionStorage.setItem("authThemeSmokeSeeded", "1");
+      });
+      await page.goto(`${baseUrl}/pages/login.html`, { waitUntil: "networkidle" });
+      assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+      assert.equal(await page.evaluate(() => localStorage.getItem("app-theme")), null);
+      assert.match(await page.locator("#themeToggle").getAttribute("aria-label"), /light mode/i);
+      await page.locator("#themeToggle").click();
+      assert.equal(await page.locator("html").getAttribute("data-theme"), null);
+      assert.equal(await page.evaluate(() => localStorage.getItem("app-theme")), "light");
+      assert.match(await page.locator("#themeToggle").getAttribute("aria-label"), /dark mode/i);
+      await page.reload({ waitUntil: "networkidle" });
+      assert.equal(await page.locator("html").getAttribute("data-theme"), null);
       await context.close();
     }
 

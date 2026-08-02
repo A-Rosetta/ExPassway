@@ -70,6 +70,111 @@ html:not([data-i18n-ready]) body {
   background: #252b28;
 }
 
+.auth-page-controls {
+  position: fixed;
+  z-index: 1190;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(74px, calc(env(safe-area-inset-right) + 74px));
+  display: flex;
+  align-items: center;
+}
+
+.auth-page-controls .home-theme-toggle {
+  display: inline-grid;
+  width: 44px;
+  min-height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0;
+  background: #1d2220;
+  color: #f4f6f5;
+  cursor: pointer;
+}
+
+.auth-page-controls .home-theme-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.auth-page-controls .home-theme-icon--sun,
+[data-theme="dark"] .auth-page-controls .home-theme-icon--moon {
+  display: none;
+}
+
+[data-theme="dark"] .auth-page-controls .home-theme-icon--sun,
+.auth-page-controls .home-theme-icon--moon {
+  display: block;
+}
+
+.auth-page-controls .home-theme-toggle:hover,
+.auth-page-controls .home-theme-toggle:focus-visible {
+  border-color: rgba(112, 203, 159, 0.6);
+  background: #252b28;
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page {
+  background:
+    radial-gradient(640px 420px at 12% 8%, rgba(109, 181, 129, 0.25), transparent 60%),
+    radial-gradient(520px 520px at 88% 18%, rgba(207, 151, 194, 0.2), transparent 60%),
+    radial-gradient(720px 520px at 70% 95%, rgba(124, 190, 218, 0.22), transparent 60%),
+    radial-gradient(480px 380px at 30% 80%, rgba(234, 141, 157, 0.2), transparent 60%),
+    #edf2ef;
+  color: #18221d;
+}
+
+html:not([data-theme="dark"]) .auth-box {
+  border-color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.45));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.4),
+    0 28px 72px rgba(35, 55, 45, 0.16);
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page .auth-heading h1 {
+  color: #16221c;
+}
+
+html:not([data-theme="dark"]) .auth-heading p,
+html:not([data-theme="dark"]) .auth-account-email {
+  color: #52625a;
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page .auth-provider-button {
+  border-color: rgba(31, 73, 51, 0.14);
+  background: rgba(255, 255, 255, 0.76);
+  color: #17231d;
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page .auth-input {
+  border-color: rgba(31, 73, 51, 0.18);
+  background: rgba(255, 255, 255, 0.82);
+  color: #17231d;
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page .auth-input::placeholder {
+  color: #718079;
+}
+
+html:not([data-theme="dark"]) .auth-divider {
+  color: #65756d;
+}
+
+html:not([data-theme="dark"]) .auth-divider::before,
+html:not([data-theme="dark"]) .auth-divider::after {
+  background: rgba(31, 73, 51, 0.16);
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page .language-toggle,
+html:not([data-theme="dark"]) .auth-page-controls .home-theme-toggle {
+  border-color: rgba(31, 73, 51, 0.2);
+  background: rgba(255, 255, 255, 0.76);
+  color: #1f343f;
+}
+
 .auth-layout {
   display: grid;
   min-height: 100vh;
@@ -347,6 +452,10 @@ html:not([data-i18n-ready]) body {
 
   .auth-heading h1 {
     font-size: 2.35rem;
+  }
+
+  .student-ui.auth-page.admin-auth-page .auth-heading h1 {
+    font-size: 2rem;
   }
 
   .auth-heading p {

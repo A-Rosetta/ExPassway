@@ -4,28 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="adminLoginPageTitle">Administrator login</title>
-  <link rel="stylesheet" href="../assets/styles.css?v=20260729-4" />
+  <script src="../scripts/theme-init.js?v=20260802-1"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260802-4" />
 </head>
-<body class="student-ui auth-page">
+<body class="student-ui auth-page admin-auth-page">
+  <div class="site-header-controls auth-page-controls"></div>
   <main class="auth-layout">
     <section class="auth-box" aria-labelledby="adminLoginTitle">
       <a class="auth-brand" href="../index.html" data-i18n="homeBrand">ExPassway</a>
       <div class="auth-heading">
         <h1 id="adminLoginTitle" data-i18n="adminLoginHeroTitle">Administrator login</h1>
-        <p data-i18n="adminLoginHeroSubtitle">Continue with the Google account assigned the ExPassway administrator role.</p>
+        <p data-i18n="adminLoginHeroSubtitle">Continue with an email or Google account assigned the ExPassway administrator role.</p>
       </div>
-      <div class="auth-step">
+      <div id="adminEmailStep" class="auth-step">
         <button id="adminGoogleLoginBtn" class="auth-provider-button" type="button">
           <img src="../assets/google-g.svg" alt="" width="20" height="20" />
           <span data-i18n="adminContinueWithGoogle">Continue with Google as administrator</span>
         </button>
+
+        <div class="auth-divider" data-i18n="orDivider">OR</div>
+
+        <form id="adminEmailOtpRequestForm" novalidate>
+          <label class="sr-only" for="adminEmailOtpAddress" data-i18n="emailAddressLabel">Email address</label>
+          <input id="adminEmailOtpAddress" class="auth-input" type="email" autocomplete="email" maxlength="254" required data-i18n-placeholder="emailAddressPlaceholder" placeholder="Email address" />
+          <p id="adminEmailOtpAddressError" class="auth-field-error" role="alert" hidden></p>
+          <button id="adminEmailOtpRequestBtn" class="auth-submit-button" type="submit" data-i18n="adminContinueWithEmail">Continue with email as administrator</button>
+        </form>
+      </div>
+
+      <div id="adminOtpStep" class="auth-step" hidden>
+        <p id="adminOtpAccountEmail" class="auth-account-email"></p>
+        <form id="adminEmailOtpVerifyForm" novalidate>
+          <label class="sr-only" for="adminEmailOtpCode" data-i18n="emailOtpCodeLabel">Verification code</label>
+          <input id="adminEmailOtpCode" class="auth-input auth-otp-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required data-i18n-placeholder="emailOtpCodePlaceholder" placeholder="6-digit code" />
+          <p id="adminEmailOtpCodeError" class="auth-field-error" role="alert" hidden></p>
+          <button id="adminEmailOtpVerifyBtn" class="auth-submit-button" type="submit" data-i18n="verifyEmailOtp">Verify and continue</button>
+        </form>
+        <button id="adminEmailOtpBackBtn" class="auth-back-link" type="button" data-i18n="useDifferentEmail">Use a different email</button>
       </div>
       <p id="authStatus" class="auth-status" role="status" aria-live="polite" hidden></p>
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260731-1"></script>
-  <script src="../scripts/api.js?v=20260731-1"></script>
-  <script src="../scripts/admin-login.js?v=20260801-1"></script>
+  <script src="../scripts/i18n.js?v=20260802-2"></script>
+  <script src="../scripts/site-ui.js?v=20260802-1"></script>
+  <script src="../scripts/api.js?v=20260802-1"></script>
+  <script src="../scripts/admin-login.js?v=20260802-1"></script>
 </body>
 </html>
