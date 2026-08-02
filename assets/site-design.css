@@ -583,7 +583,7 @@
   pointer-events: none;
 }
 
-.site-ui .course-card:hover,
+.site-ui .course-card:not(:disabled):hover,
 .site-ui .course-card:focus-visible {
   border-color: transparent;
   background: var(--surface-hover);
@@ -591,12 +591,12 @@
   transform: translateY(-3px);
 }
 
-[data-theme="dark"] .site-ui .course-card:hover,
+[data-theme="dark"] .site-ui .course-card:not(:disabled):hover,
 [data-theme="dark"] .site-ui .course-card:focus-visible {
   border-color: var(--surface-border);
 }
 
-.site-ui .course-card:active {
+.site-ui .course-card:not(:disabled):active {
   background: var(--surface-pressed);
   box-shadow: var(--surface-shadow-pressed);
   transform: translateY(0.5px);
@@ -2976,4 +2976,362 @@
   [data-theme="dark"] .site-ui .home-nav-actions.is-open {
     background: #20252a;
   }
+}
+
+/*
+ * 通用控件表面状态
+ * =================
+ * 给控件增加下面三个 class 之一，就能指定它的默认层级：
+ *   control-flat   平：标题栏命令、未选中的切换项。
+ *   control-raised 凸：普通操作按钮，表示可以按下。
+ *   control-inset  凹：输入区域、按下或已经选中的项目。
+ *
+ * 这里使用 --surface-* 变量，不写死阴影颜色。文件开头已经分别为亮色和
+ * 暗色主题定义变量，所以切换主题时，同一个 class 会自动适配。
+ */
+
+/* 平：透明背景且没有阴影，与所在标题栏或面板处于同一平面。 */
+.site-ui .control-flat {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+/* 凸：使用向外的短阴影，适合“点击后执行操作”的普通按钮。 */
+.site-ui .control-raised {
+  border-color: transparent;
+  background: var(--surface-raised);
+  box-shadow: var(--surface-shadow-small);
+  transform: none;
+}
+
+/* 凹：使用内阴影，适合输入框、按下状态和已经选中的项目。 */
+.site-ui .control-inset {
+  border-color: transparent;
+  background: var(--bg);
+  box-shadow: var(--surface-shadow-deep);
+  transform: none;
+}
+
+/* 暗色主题使用玻璃变量，而不是亮色主题的实体背景。 */
+[data-theme="dark"] .site-ui .control-raised {
+  border-color: var(--surface-border);
+  background: var(--surface-raised);
+}
+
+[data-theme="dark"] .site-ui .control-inset {
+  border-color: var(--surface-border-soft);
+  background: var(--glass-well);
+}
+
+/*
+ * 显式状态 class 的 hover 和按下反馈。状态 class 写在普通按钮 class 后面
+ * 也没关系，因为这些规则位于文件末尾，会覆盖前面较早的按钮外观。
+ */
+.site-ui :is(button:not(:disabled), .btn-link).control-flat:hover {
+  background: var(--surface-hover);
+  box-shadow: none;
+}
+
+.site-ui :is(button:not(:disabled), .btn-link).control-raised:hover {
+  background: var(--surface-hover);
+  box-shadow: var(--surface-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.site-ui :is(button:not(:disabled), .btn-link).control-inset:hover {
+  background: var(--surface-pressed);
+  box-shadow: var(--surface-shadow-deep);
+}
+
+.site-ui :is(button:not(:disabled), .btn-link).control-flat:active,
+.site-ui :is(button:not(:disabled), .btn-link).control-raised:active {
+  background: var(--surface-pressed);
+  box-shadow: var(--surface-shadow-pressed);
+  transform: none;
+}
+
+/*
+ * 标题栏按钮：默认 flat
+ * =====================
+ * :is(...) 把四种标题栏合并写在一条规则里。这里只选择标题栏内的按钮，
+ * 不会改变页面正文里的主要或次要按钮。:not(...) 表示“没有显式指定凸或
+ * 凹”；所以标题栏默认是平的，但仍可加 control-raised/control-inset 改写。
+ */
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link):not(.control-raised):not(.control-inset) {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+/* hover 只增加轻微底色，不增加外阴影，所以仍然是 flat。 */
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button:not(:disabled), .btn-link):not(.control-raised):not(.control-inset):hover {
+  border-color: transparent;
+  background: var(--surface-hover);
+  box-shadow: none;
+  color: var(--text);
+  transform: none;
+}
+
+/*
+ * :active 是手指或鼠标正在按住；.is-open 和 aria-expanded=true 表示菜单
+ * 已展开。这些短暂状态使用内阴影，松开或关闭后会自动恢复 flat。
+ */
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button:not(:disabled), .btn-link):active,
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link).is-open,
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link)[aria-expanded="true"] {
+  background: var(--surface-pressed);
+  box-shadow: var(--surface-shadow-inset-small);
+  transform: none;
+}
+
+/* 键盘焦点是位置提示，不是凸起状态，因此只画清晰焦点环。 */
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link):not(.control-raised):not(.control-inset):focus-visible {
+  outline: 2px solid var(--focus-inner);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--accent);
+}
+
+/* 显式状态在键盘聚焦时保留原来的层级，并在外侧增加焦点环。 */
+.site-ui :is(button, .btn-link).control-raised:focus-visible {
+  outline: 2px solid var(--focus-inner);
+  outline-offset: 2px;
+  box-shadow: var(--surface-shadow-small), 0 0 0 4px var(--accent);
+}
+
+.site-ui :is(button, .btn-link).control-inset:focus-visible {
+  outline: 2px solid var(--focus-inner);
+  outline-offset: 2px;
+  box-shadow: var(--surface-shadow-deep), 0 0 0 4px var(--accent);
+}
+
+/*
+ * 首页科目选择
+ * ============
+ * 科目卡是可点击选项：未操作时平，hover 或键盘焦点时沿用前面的凸起规则，
+ * 按住时沿用凹下规则。这里只改默认面，不重写书本造型。
+ */
+.site-ui .course-card {
+  background: transparent;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .site-ui .course-card {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+/*
+ * 试卷与做题模式选择
+ * ==================
+ * paper-set-item 只展示资料，真正操作在行内按钮上，所以整行保持 flat，
+ * 避免让用户误以为整行都可以点击。
+ */
+.site-ui .paper-set-item,
+[data-theme="dark"] .site-ui .paper-set-item {
+  border: 0;
+  border-top: 1px solid var(--surface-border-soft);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+/* 模式卡：未选中为 flat，hover 为凸，带 .selected 的当前项为凹。 */
+.site-ui .mode-option-card,
+[data-theme="dark"] .site-ui .mode-option-card {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.site-ui .mode-option-card:not(.selected):hover {
+  background: var(--surface-raised);
+  box-shadow: var(--surface-shadow-small);
+}
+
+[data-theme="dark"] .site-ui .mode-option-card:not(.selected):hover {
+  border-color: var(--surface-border);
+}
+
+.site-ui .mode-option-card.selected {
+  border-color: var(--accent);
+  background: var(--bg);
+  box-shadow: var(--surface-shadow-deep);
+}
+
+[data-theme="dark"] .site-ui .mode-option-card.selected {
+  background: var(--glass-well);
+}
+
+/* 隐藏的 radio 获得键盘焦点时，在整张模式卡外画出轮廓。 */
+.site-ui .mode-option-card:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 旧基础样式写死了浅色文字；改用变量后，暗色主题也能正确显示。 */
+.site-ui .paper-picker-head h1,
+.site-ui .mode-choice-title,
+.site-ui .mode-option-copy strong,
+.site-ui .paper-set-title {
+  color: var(--text);
+}
+
+.site-ui .mode-option-copy small,
+.site-ui .paper-set-meta,
+.site-ui .paper-filter-count {
+  color: var(--muted);
+}
+
+/* 筛选栏本身为 flat；里面真正可以输入的 select 仍然显示为凹。 */
+.site-ui .paper-filter-bar,
+[data-theme="dark"] .site-ui .paper-filter-bar {
+  border-color: var(--surface-border-soft);
+  background: transparent;
+  box-shadow: none;
+}
+
+/*
+ * Biology 章节模式选择
+ * ===================
+ * 外层只是分组容器。里面两个按钮与模式卡相同：未选 flat、hover raised、
+ * 带 .is-active 的当前模式 inset。
+ */
+.site-ui .chapter-mode-switch {
+  border-color: var(--surface-border-soft);
+  background: transparent;
+  box-shadow: none;
+}
+
+.site-ui .chapter-mode-switch button {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--muted);
+  transform: none;
+}
+
+.site-ui .chapter-mode-switch button:not(.is-active):hover {
+  background: var(--surface-raised);
+  box-shadow: var(--surface-shadow-small);
+  color: var(--text);
+}
+
+[data-theme="dark"] .site-ui .chapter-mode-switch button:not(.is-active):hover {
+  border-color: var(--surface-border);
+}
+
+.site-ui .chapter-mode-switch button.is-active {
+  border-color: var(--accent);
+  background: var(--bg);
+  box-shadow: var(--surface-shadow-deep);
+  color: var(--accent);
+}
+
+[data-theme="dark"] .site-ui .chapter-mode-switch button.is-active {
+  background: var(--glass-well);
+}
+
+/* 章节卡是信息分组；内部保持平整，避免“卡片里面再套卡片”。 */
+.site-ui .chapter-band__heading,
+.site-ui .chapter-section-row {
+  background: transparent;
+  color: var(--text);
+}
+
+.site-ui .chapter-band__heading {
+  border-bottom: 1px solid var(--surface-border-soft);
+}
+
+.site-ui .chapter-section-row {
+  border-bottom-color: var(--surface-border-soft);
+}
+
+.site-ui .chapter-band__heading p,
+.site-ui .chapter-section-main span,
+.site-ui .chapter-metrics dt {
+  color: var(--muted);
+}
+
+.site-ui .chapter-metrics div {
+  border-left-color: var(--surface-border-soft);
+}
+
+.site-ui .chapter-metrics dd {
+  color: var(--text);
+}
+
+/* 章节编号是信息标签而不是按钮，使用强调色，但不添加立体阴影。 */
+.site-ui .chapter-number {
+  background: var(--accent);
+  box-shadow: none;
+  color: var(--primary-text);
+}
+
+/*
+ * 文本框、下拉框和多行文本框
+ * ==========================
+ * 默认凹槽已经在本文件前面的表单规则中定义。这里补充键盘焦点态：保留
+ * 内阴影，再加焦点环。人工指定 control-flat 或 control-raised 时不套用。
+ */
+.site-ui :is(
+  input:not([type="radio"]):not([type="checkbox"]):not([type="range"]):not([type="file"]),
+  select,
+  textarea,
+  .rich-text-editor
+):not(.control-flat):not(.control-raised):focus-visible {
+  outline: 2px solid var(--focus-inner);
+  outline-offset: 2px;
+  box-shadow: var(--surface-shadow-deep), 0 0 0 4px var(--accent);
+}
+
+/*
+ * 文本框也可以人工改成平或凸
+ * --------------------------
+ * 前面旧的 input:hover/input:focus 规则会默认维持“凹槽”。这里位于文件末尾，
+ * 因此当你明确写了 control-flat 或 control-raised 时，人工状态拥有优先级。
+ */
+.site-ui :is(input, select, textarea).control-flat:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+.site-ui :is(input, select, textarea).control-raised:hover {
+  background: var(--surface-hover);
+  box-shadow: var(--surface-shadow-hover);
+}
+
+.site-ui :is(input, select, textarea).control-flat:focus-visible {
+  outline: 2px solid var(--focus-inner);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--accent);
+}
+
+.site-ui :is(input, select, textarea).control-raised:focus-visible {
+  outline: 2px solid var(--focus-inner);
+  outline-offset: 2px;
+  box-shadow: var(--surface-shadow-small), 0 0 0 4px var(--accent);
+}
+
+/*
+ * disabled 是“不能操作”，不是 flat/raised/inset 中的任一种。无论原来使用
+ * 哪个视觉 class，禁用后都取消阴影并降低透明度，而且 hover 不会恢复阴影。
+ */
+.site-ui :is(button, input, select, textarea):disabled,
+.site-ui :is(button, input, select, textarea):disabled:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.45;
+  transform: none;
 }

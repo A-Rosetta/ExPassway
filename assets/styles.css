@@ -1879,6 +1879,17 @@ button {
   color: #2c3042;
 }
 
+/*
+ * 试卷模式选择区的基础布局
+ * ----------------------
+ * 这个文件只负责“控件放在哪里、占多大空间”，例如两列排列、内部间距和
+ * 单选圆点的位置。flat（平）、raised（凸）、inset（凹）的最终外观放在
+ * site-design.css 中，因为那里会同时处理亮色和暗色主题。
+ *
+ * 页面加载顺序是 styles.css -> site-design.css。这里保留的颜色是未加载
+ * 主题时的回退值；正常的 .site-ui 页面会被 site-design.css 覆盖。以后
+ * 如果只想调整阴影或选中状态，请去修改 site-design.css。
+ */
 .mode-option-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1899,6 +1910,7 @@ button {
   transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
+/* hover 的最终“凸起”效果由 site-design.css 覆盖；这里是无主题时的回退。 */
 .mode-option-card:hover {
   transform: translateY(-1px);
   box-shadow: 0 14px 30px rgba(47, 94, 168, 0.08);
@@ -1935,6 +1947,10 @@ button {
   color: #4c556a;
 }
 
+/*
+ * JavaScript 会给当前模式添加 .selected。site-design.css 再利用这个类
+ * 把当前选项显示为“凹”，不需要额外编写 JavaScript 来控制阴影。
+ */
 .mode-option-card.selected {
   border-color: #2d57de;
   box-shadow: 0 0 0 3px rgba(45, 87, 222, 0.07);
@@ -1978,6 +1994,13 @@ button {
   color: #2a2f3d;
 }
 
+/*
+ * 试卷选择列表的基础布局
+ * --------------------
+ * .paper-set-item 是一行静态资料，真正执行操作的是行内的开始或重做按钮。
+ * 因此列表行本身不应伪装成可点击的凸按钮；它的 flat 外观由
+ * site-design.css 统一设置。这里仅保留网格列、间距和移动端换行规则。
+ */
 .paper-picker {
   padding: 0;
   overflow: hidden;
@@ -3150,7 +3173,13 @@ body.home-dashboard {
   --book-accent: #bec6d1;
 }
 
-/* Biology chapter practice pilot */
+/*
+ * Biology 章节选择页的基础布局
+ * --------------------------
+ * 这里负责章节、统计数据和开始按钮的排列。视觉状态遵循同一规则：
+ * 模式切换按钮未选时为平、鼠标经过时为凸、当前模式为凹；这些主题化
+ * 规则写在 site-design.css。章节内容行本身只展示资料，不作为整行按钮。
+ */
 body.chapter-practice-page {
   min-height: 100vh;
   background: #f3f5f6;
