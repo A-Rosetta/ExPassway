@@ -1045,8 +1045,33 @@ button {
   color: #32445f;
 }
 
+/* No stylesheet targets input[type="radio"], so without this the option radios
+   inherit the generic .site-ui input sizing (width:100%, min-height:48px,
+   padding, rounded background) and paint as full-width pills with the option
+   letter pushed to the far right. Specificity here is (0,2,1) against that
+   rule's (0,1,1), so no !important is needed. */
 .option-item input {
   margin: 0;
+}
+
+.option-item input[type="radio"] {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  min-height: 20px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  box-shadow: none;
+  background: none;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.option-item > span {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
 }
 
 .bad {
@@ -4439,35 +4464,10 @@ body.chapter-practice-page {
   max-width: 100%;
 }
 
-/* Nothing in the stylesheets targets input[type="radio"], so the option radios
-   fall into the generic .site-ui input sizing and render as full-width 48px
-   pills with the option letter pushed out to the right edge. Pin them to a real
-   radio-sized control and let the label sit next to it. */
+/* Radio sizing and label layout now come from the shared .option-item rules. */
 .notebook-practice-question .option-item {
-  display: flex !important;
-  align-items: center;
   gap: 0.6rem;
-  min-height: 0 !important;
   padding: 0.5rem 0.75rem;
-}
-
-.notebook-practice-question .option-item > input[type="radio"] {
-  width: 20px !important;
-  min-width: 20px !important;
-  height: 20px !important;
-  min-height: 20px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border-radius: 50%;
-  box-shadow: none;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.notebook-practice-question .option-item > .chem-text {
-  flex: 1;
-  min-width: 0;
-  text-align: left;
 }
 
 .notebook-practice-question .option-item.option-correct {
