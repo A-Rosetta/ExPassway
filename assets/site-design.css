@@ -2875,3 +2875,105 @@
     padding: 14px 12px;
   }
 }
+
+/* Mobile home shortcuts and dark practice surfaces. */
+.site-ui .home-mobile-shortcuts {
+  display: none;
+}
+
+[data-theme="dark"] .site-ui .paper-set-btn.start,
+[data-theme="dark"] .site-ui .mode-btn-primary {
+  background: #78ad7f;
+  color: #0f1f15;
+}
+
+[data-theme="dark"] .site-ui .paper-filter-bar {
+  border-color: var(--surface-border-soft);
+  background: var(--glass-well);
+}
+
+[data-theme="dark"] .site-ui .paper-filter-bar label,
+[data-theme="dark"] .site-ui .paper-filter-count,
+[data-theme="dark"] .site-ui .paper-set-title,
+[data-theme="dark"] .site-ui .paper-set-meta {
+  color: var(--text);
+}
+
+[data-theme="dark"] .site-ui .paper-set-icon.idle,
+[data-theme="dark"] .site-ui .paper-set-icon.done {
+  border: 1px solid var(--surface-border-soft);
+  background: var(--surface-strong);
+  color: var(--accent);
+}
+
+[data-theme="dark"] .site-ui .question-side,
+[data-theme="dark"] .site-ui .jump-btn,
+[data-theme="dark"] .site-ui .question-star-btn,
+[data-theme="dark"] .site-ui .tag {
+  border-color: var(--surface-border-soft);
+  background: var(--glass-well);
+  color: var(--text);
+}
+
+[data-theme="dark"] .site-ui .question-side-title {
+  color: var(--accent);
+}
+
+[data-theme="dark"] .site-ui .jump-btn.active {
+  border-color: var(--accent);
+  background: #315d43;
+  color: #f4f7f5;
+}
+
+[data-theme="dark"] .site-ui .question-star-btn.is-starred {
+  border-color: #d7b65d;
+  background: rgba(215, 182, 93, 0.16);
+  color: #f0cf78;
+}
+
+@media (max-width: 767px) {
+  .site-ui .home-mobile-shortcuts {
+    position: relative;
+    z-index: 20;
+    width: calc(100% - 24px);
+    min-height: 48px;
+    margin: 10px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    border: 1px solid transparent;
+    border-radius: 18px;
+    padding: 5px;
+    background: var(--bg);
+    box-shadow: var(--surface-shadow-small);
+  }
+
+  [data-theme="dark"] .site-ui .home-mobile-shortcuts {
+    border-color: var(--surface-border);
+    background: #20252a;
+  }
+
+  .site-ui .home-mobile-shortcuts a {
+    min-width: 0;
+    min-height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    color: var(--text);
+    font: 700 0.86rem/1.2 "DM Sans", sans-serif;
+    text-decoration: none;
+  }
+
+  .site-ui .home-mobile-shortcuts a:hover,
+  .site-ui .home-mobile-shortcuts a:focus-visible {
+    background: var(--surface-hover);
+  }
+
+  .site-ui .home-mobile-shortcuts a[hidden] + a {
+    grid-column: 1 / -1;
+  }
+
+  [data-theme="dark"] .site-ui .home-nav-actions.is-open {
+    background: #20252a;
+  }
+}

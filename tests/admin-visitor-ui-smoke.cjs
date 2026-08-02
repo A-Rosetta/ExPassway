@@ -76,7 +76,7 @@ async function routeVisitorApi(context) {
 }
 
 async function verifyVisitor(browser) {
-  const context = await browser.newContext({ locale: "en-US", viewport: { width: 1280, height: 900 } });
+  const context = await browser.newContext({ locale: "en-US", viewport: { width: 390, height: 844 } });
   await context.addInitScript(() => {
     if (sessionStorage.getItem("adminVisitorSmokeSeeded")) return;
     localStorage.clear();
@@ -104,6 +104,9 @@ async function verifyVisitor(browser) {
     }
     assert.equal(await page.evaluate(() => localStorage.getItem("alevel.visitorMode")), "1");
     assert.equal(await page.locator("#goNotebook").isHidden(), true);
+    assert.equal(await page.locator(".home-mobile-shortcuts").isVisible(), true);
+    assert.equal(await page.locator("#mobileNotebookShortcut").isHidden(), true);
+    assert.equal(await page.locator("#mobileForumShortcut").isVisible(), true);
     assert.equal(await page.locator("#openProfile").isHidden(), true);
     assert.equal(await page.locator("#goAdmin").isHidden(), true);
     assert.equal(await page.locator("#logoutHome").textContent(), "Log In");

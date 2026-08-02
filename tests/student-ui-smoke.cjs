@@ -593,6 +593,14 @@ async function verifyHomeThemes(browser, config) {
     assert.match(await page.locator("#themeToggle").getAttribute("aria-label"), /dark mode/i);
 
     if (config.mobile) {
+      assert.equal(await page.locator(".home-mobile-shortcuts").isVisible(), true);
+      assert.equal(await page.locator("#mobileNotebookShortcut").isVisible(), true);
+      assert.equal(await page.locator("#mobileForumShortcut").isVisible(), true);
+      const shortcutGeometry = await page.locator(".home-mobile-shortcuts").evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return { left: rect.left, right: rect.right, viewportWidth: document.documentElement.clientWidth };
+      });
+      assert.ok(shortcutGeometry.left >= 0 && shortcutGeometry.right <= shortcutGeometry.viewportWidth);
       const menu = page.locator("#homeMenuToggle");
       await menu.click();
       assert.equal(await menu.getAttribute("aria-expanded"), "true");
@@ -606,6 +614,7 @@ async function verifyHomeThemes(browser, config) {
       assert.equal(await menu.getAttribute("aria-expanded"), "false");
       assert.equal(await menu.evaluate((element) => document.activeElement === element), true);
     } else {
+      assert.equal(await page.locator(".home-mobile-shortcuts").isVisible(), false);
       assert.equal(await page.locator("#homeMenuToggle").isVisible(), false);
       assert.equal(await page.locator("#homeNav").isVisible(), true);
     }
@@ -730,7 +739,7 @@ async function verifyStandardPage(browser, config, pageSpec) {
 }
 
 async function verifyGeneratedPaper(browser, config) {
-  const run = await openPage(browser, config, "/pages/generate.html", { clock: true });
+  const run = await openPage(browser, config, "/pages/generate.html", { clock: true, theme: "dark" });
   const { page } = run;
   try {
     await page.locator(".paper-set-btn.start").click();
@@ -739,6 +748,15 @@ async function verifyGeneratedPaper(browser, config) {
     await page.locator("#startModePageBtn").click();
     await page.locator(".question").first().waitFor({ state: "visible" });
     await page.locator("#timerDisplay").waitFor({ state: "visible" });
+    const darkSurfaces = await page.evaluate(() => Object.fromEntries(
+      [".question-side", ".jump-btn", ".question-star-btn", ".tag"].map((selector) => (
+        [selector, getComputedStyle(document.querySelector(selector)).backgroundColor]
+      ))
+    ));
+    assert.notEqual(darkSurfaces[".question-side"], "rgb(255, 255, 255)");
+    assert.notEqual(darkSurfaces[".jump-btn"], "rgb(243, 247, 255)");
+    assert.notEqual(darkSurfaces[".question-star-btn"], "rgb(255, 255, 255)");
+    assert.notEqual(darkSurfaces[".tag"], "rgb(237, 243, 255)");
     const questionImage = page.locator(".question-image img").first();
     await questionImage.waitFor({ state: "visible" });
     assert.equal(await page.locator(".option-item").count(), 4);
@@ -1313,6 +1331,11 @@ async function runConfig(config) {
     ...(config.executablePath ? { executablePath: config.executablePath } : {}),
   });
   try {
+    if (process.env.STUDENT_UI_FOCUS === "practice") {
+      await verifyHomeThemes(browser, config);
+      await verifyGeneratedPaper(browser, config);
+      return;
+    }
     for (const pageSpec of pageSpecs) {
       await verifyStandardPage(browser, config, pageSpec);
       console.log(JSON.stringify({ viewport: config.name, page: pageSpec.name, ok: true }));

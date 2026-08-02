@@ -7,7 +7,7 @@
   <script src="scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
   <link rel="stylesheet" href="assets/styles.css?v=20260729-2" />
-  <link rel="stylesheet" href="assets/site-design.css?v=20260802-1" />
+  <link rel="stylesheet" href="assets/site-design.css?v=20260802-2" />
 </head>
 <body class="student-ui site-ui home-dashboard">
   <header class="home-topbar">
@@ -41,6 +41,11 @@
       </div>
     </div>
   </header>
+
+  <nav class="home-mobile-shortcuts" aria-label="主页快捷入口" data-i18n-aria-label="homeNavLabel">
+    <a id="mobileNotebookShortcut" href="pages/notebook.html" data-i18n="homeNotebook">错题本</a>
+    <a id="mobileForumShortcut" href="pages/community.html" data-i18n="homeForum">论坛</a>
+  </nav>
 
   <main class="home-main">
     <section class="home-course-section" aria-labelledby="mySubjectsTitle">
