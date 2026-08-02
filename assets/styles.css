@@ -50,7 +50,7 @@ html:not([data-i18n-ready]) body {
     #141716;
   background-attachment: fixed;
   color: #f4f6f5;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 .student-ui.auth-page .language-toggle {
@@ -108,6 +108,7 @@ html:not([data-i18n-ready]) body {
   display: inline-block;
   margin-bottom: 42px;
   color: #80d0a6 !important;
+  font-family: "Plus Jakarta Sans", "DM Sans", sans-serif;
   font-size: 0.82rem;
   font-weight: 800;
   text-decoration: none;
@@ -121,8 +122,9 @@ html:not([data-i18n-ready]) body {
 .student-ui.auth-page .auth-heading h1 {
   margin: 0;
   color: #f7f8f7;
+  font-family: "Plus Jakarta Sans", "DM Sans", sans-serif;
   font-size: 3.4rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -150,7 +152,7 @@ html:not([data-i18n-ready]) body {
 .student-ui.auth-page .auth-input {
   width: 100%;
   min-height: 54px;
-  border-radius: 8px;
+  border-radius: 16px;
   font-size: 1rem;
 }
 
@@ -271,14 +273,22 @@ html:not([data-i18n-ready]) body {
 
 .student-ui.auth-page .auth-secondary-action button {
   min-height: 0;
-  padding: 4px;
-  background: transparent;
+  border: 1px solid rgba(128, 208, 166, 0.22);
+  border-radius: 999px;
+  padding: 9px 16px;
+  background: rgba(128, 208, 166, 0.06);
   color: #80d0a6;
+}
+
+.student-ui.auth-page .auth-secondary-action button:hover,
+.student-ui.auth-page .auth-secondary-action button:focus-visible {
+  border-color: rgba(128, 208, 166, 0.48);
+  background: rgba(128, 208, 166, 0.12);
 }
 
 .student-ui.auth-page button {
   min-height: 42px;
-  border-radius: 8px;
+  border-radius: 12px;
   font: inherit;
   font-weight: 700;
 }
