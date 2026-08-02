@@ -4502,14 +4502,21 @@ body.chapter-practice-page {
   padding: 0.5rem 0.75rem;
 }
 
+/* Tints are built from --accent-rgb / --error, which both themes redefine, so
+   these stay legible in dark mode. An opaque light fill here would leave light
+   theme text on a light background once the theme flips. */
 .notebook-practice-question .option-item.option-correct {
-  background: #eef5f0;
-  border-color: #9ec7ae;
+  background: rgba(var(--accent-rgb), 0.14);
+  border-color: var(--accent);
 }
 
 .notebook-practice-question .option-item.option-wrong {
-  background: #fdeeee;
-  border-color: #e0a2a2;
+  background: rgba(176, 72, 94, 0.12);
+  border-color: var(--error);
+}
+
+[data-theme="dark"] .notebook-practice-question .option-item.option-wrong {
+  background: rgba(246, 166, 179, 0.16);
 }
 
 /* ===== Weekly study plan on the analysis page (2026-08-02) ===== */
@@ -4529,7 +4536,7 @@ body.chapter-practice-page {
 }
 
 .weekly-plan-table th {
-  color: #5a6a80;
+  color: var(--muted);
   font-size: 0.84rem;
   font-weight: 600;
 }
@@ -4538,8 +4545,10 @@ body.chapter-practice-page {
   white-space: nowrap;
 }
 
+/* The row inherits the theme's text colour, so this fill has to be a
+   translucent tint. A fixed light green left the text invisible in dark mode. */
 .weekly-plan-table tr.is-today td {
-  background: #eef5f0;
+  background: rgba(var(--accent-rgb), 0.14);
 }
 
 .weekly-plan-table tr.is-done td {
@@ -4581,9 +4590,9 @@ body.chapter-practice-page {
   margin: 0.8rem 0 0.2rem;
   padding: 0.7rem 0.9rem;
   border-radius: 10px;
-  border-left: 4px solid #2f6b46;
-  background: #eef5f0;
-  color: #2f6b46;
+  border-left: 4px solid var(--accent);
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--text);
   font-size: 1rem;
 }
 
@@ -4592,15 +4601,19 @@ body.chapter-practice-page {
 }
 
 .notebook-tag-correct {
-  background: #eef5f0;
-  color: #2f6b46;
-  border-color: #9ec7ae;
+  background: rgba(var(--accent-rgb), 0.16);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .notebook-tag-wrong {
-  background: #fdeeee;
-  color: #9b3b3b;
-  border-color: #e0a2a2;
+  background: rgba(176, 72, 94, 0.14);
+  color: var(--error);
+  border-color: var(--error);
+}
+
+[data-theme="dark"] .notebook-tag-wrong {
+  background: rgba(246, 166, 179, 0.18);
 }
 
 /* Fix: notebook filter labels wrapping character-by-character */
