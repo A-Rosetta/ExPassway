@@ -4250,6 +4250,62 @@ body.chapter-practice-page {
   margin-right: 0.4rem;
 }
 
+/* Notebook practice: build-a-paper dialog on the notebook page */
+.notebook-practice-dialog {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #d8e0ec;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.notebook-practice-dialog[hidden] {
+  display: none;
+}
+
+.notebook-practice-dialog h3 {
+  margin: 0 0 0.6rem;
+}
+
+.notebook-practice-reasons {
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+}
+
+.notebook-practice-reason {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+/* Notebook practice: the retry paper page */
+.notebook-practice-question {
+  margin-bottom: 1.2rem;
+}
+
+.notebook-practice-question .option-item.option-correct {
+  background: #eef5f0;
+  border-color: #9ec7ae;
+}
+
+.notebook-practice-question .option-item.option-wrong {
+  background: #fdeeee;
+  border-color: #e0a2a2;
+}
+
+.notebook-tag-correct {
+  background: #eef5f0;
+  color: #2f6b46;
+  border-color: #9ec7ae;
+}
+
+.notebook-tag-wrong {
+  background: #fdeeee;
+  color: #9b3b3b;
+  border-color: #e0a2a2;
+}
+
 /* Fix: notebook filter labels wrapping character-by-character */
 .notebook-star-filter,
 .notebook-mastered-filter {

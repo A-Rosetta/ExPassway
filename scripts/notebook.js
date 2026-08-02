@@ -355,6 +355,90 @@
     location.href = "./generate.html";
   });
 
+  const PRACTICE_KEY = "alevel.notebookPractice";
+  const PRACTICE_REASONS = [
+    { key: "concept", label: "reasonConcept" },
+    { key: "calculation", label: "reasonCalculation" },
+    { key: "question_reading", label: "reasonReading" },
+    { key: "careless", label: "reasonCareless" },
+    { key: "time_pressure", label: "reasonTime" },
+  ];
+
+  function renderPracticeReasons() {
+    const wrap = byId("practiceReasons");
+    if (!wrap || wrap.dataset.built) return;
+    wrap.dataset.built = "1";
+    wrap.innerHTML = PRACTICE_REASONS
+      .map((reason) => `
+        <label class="notebook-practice-reason">
+          <input type="checkbox" value="${reason.key}" />
+          <span>${t(reason.label)}</span>
+        </label>
+      `)
+      .join("");
+  }
+
+  function syncPracticeSubjects() {
+    const source = byId("subjectFilter");
+    const target = byId("practiceSubject");
+    if (!source || !target) return;
+    target.innerHTML = source.innerHTML;
+    target.value = source.value || "";
+  }
+
+  function togglePracticeDialog(open) {
+    const dialog = byId("notebookPracticeDialog");
+    if (!dialog) return;
+    if (open) {
+      renderPracticeReasons();
+      syncPracticeSubjects();
+      byId("practiceDialogStatus").textContent = "";
+    }
+    dialog.hidden = !open;
+  }
+
+  byId("openNotebookPractice")?.addEventListener("click", () => togglePracticeDialog(true));
+  byId("cancelNotebookPractice")?.addEventListener("click", () => togglePracticeDialog(false));
+
+  byId("startNotebookPractice")?.addEventListener("click", async function () {
+    const userId = localStorage.getItem(USER_ID_KEY) || "";
+    const status = byId("practiceDialogStatus");
+    if (!userId || !window.ALevelApi?.createNotebookPractice) {
+      status.textContent = t("notebookPracticeFailed");
+      return;
+    }
+    const reasons = Array.from(
+      byId("practiceReasons").querySelectorAll('input[type="checkbox"]:checked')
+    ).map((input) => input.value);
+
+    this.disabled = true;
+    status.textContent = t("notebookPracticeGenerating");
+    try {
+      const payload = await window.ALevelApi.createNotebookPractice(userId, {
+        count: Number(byId("practiceCount").value) || 10,
+        subject: byId("practiceSubject").value || "",
+        onlyUnmastered: Boolean(byId("practiceOnlyUnmastered").checked),
+        onlyStarred: Boolean(byId("practiceOnlyStarred").checked),
+        mistakeReasons: reasons,
+      });
+      if (!payload?.paperId || !payload.questions?.length) {
+        status.textContent = t("notebookPracticeEmpty");
+        this.disabled = false;
+        return;
+      }
+      sessionStorage.setItem(scopedKey(PRACTICE_KEY), JSON.stringify({
+        paperId: payload.paperId,
+        questions: payload.questions,
+      }));
+      location.href = "./notebook-practice.html";
+    } catch (err) {
+      status.textContent = err?.payload?.error?.code === "NOTEBOOK_PRACTICE_EMPTY"
+        ? t("notebookPracticeEmpty")
+        : t("notebookPracticeFailed");
+      this.disabled = false;
+    }
+  });
+
   applyPage();
   init();
 })();

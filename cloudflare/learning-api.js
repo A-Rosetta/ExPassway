@@ -313,6 +313,23 @@ async function saveWrongNotebook(db, userId, questions, details, selection) {
   if (statements.length) await db.batch(statements);
 }
 
+async function markNotebookRedone(db, userId, questions, details) {
+  const now = new Date().toISOString();
+  const statements = [];
+  details.forEach((detail, index) => {
+    const question = questions[index];
+    if (!question) return;
+    // Correct on the retry clears the entry; getting it wrong again reopens it,
+    // and saveWrongNotebook has already bumped wrong_count for that case.
+    statements.push(db.prepare(`
+      UPDATE wrong_notebook_entries
+      SET mastered = ?, last_redone_at = ?, updated_at = ?
+      WHERE user_id = ? AND question_key = ?
+    `).bind(detail.correct ? 1 : 0, now, now, userId, question.id));
+  });
+  if (statements.length) await db.batch(statements);
+}
+
 async function submitStoredSession(db, userId, session, rawAnswers) {
   if (session.status === "submitted") {
     throw new AuthError(409, "This paper has already been submitted.", "PAPER_ALREADY_SUBMITTED");
@@ -338,6 +355,9 @@ async function submitStoredSession(db, userId, session, rawAnswers) {
     subject: session.subject,
     paper: session.paper,
   });
+  if (session.practice_mode === "review") {
+    await markNotebookRedone(db, userId, questions, result.details);
+  }
   return { paperId: session.id, result, wrongLog };
 }
 
@@ -412,6 +432,87 @@ async function generatePaper(request, env) {
     totalCandidates: questions.length,
     fallbackApplied,
     source: "db-bank",
+    questions,
+  };
+}
+
+const NOTEBOOK_MISTAKE_REASONS = new Set([
+  "concept", "calculation", "question_reading", "careless", "time_pressure", "unknown",
+]);
+
+async function createNotebookPractice(request, env, userId) {
+  await assertOwnUser(request, env, userId);
+  const body = await readJsonBody(request);
+  const count = toInteger(body.count, 10, 1, 40, "count");
+  const subject = typeof body.subject === "string" ? body.subject.trim() : "";
+  const onlyUnmastered = body.onlyUnmastered !== false;
+  const onlyStarred = body.onlyStarred === true;
+  const reasons = (Array.isArray(body.mistakeReasons) ? body.mistakeReasons : [])
+    .filter((reason) => typeof reason === "string" && NOTEBOOK_MISTAKE_REASONS.has(reason));
+
+  const clauses = ["entry.user_id = ?", "question.active = 1"];
+  const bindings = [userId];
+  if (subject) {
+    clauses.push("entry.subject = ?");
+    bindings.push(subject);
+  }
+  if (onlyUnmastered) clauses.push("entry.mastered = 0");
+  if (onlyStarred) clauses.push("entry.starred = 1");
+  if (reasons.length) {
+    // Values are whitelisted above, so the LIKE patterns carry no user-controlled wildcards.
+    clauses.push(`(${reasons.map(() => "entry.mistake_reasons LIKE ?").join(" OR ")})`);
+    bindings.push(...reasons.map((reason) => `%"${reason}"%`));
+  }
+
+  const rows = await env.DB.prepare(`
+    SELECT question.* FROM wrong_notebook_entries entry
+    JOIN question_bank question ON question.id = entry.question_key
+    WHERE ${clauses.join(" AND ")}
+    ORDER BY random()
+    LIMIT ?
+  `).bind(...bindings, count).all();
+
+  const questions = rows.results.map((row) => mapQuestion(row));
+  if (!questions.length) {
+    throw new AuthError(
+      404,
+      "No wrong-notebook questions match these filters.",
+      "NOTEBOOK_PRACTICE_EMPTY"
+    );
+  }
+
+  // practice_sessions.board/subject/paper are NOT NULL; a notebook paper can span
+  // several of them, so anchor the row on the first drawn question.
+  const anchor = rows.results[0];
+  const paperId = crypto.randomUUID();
+  await env.DB.prepare(`
+    INSERT INTO practice_sessions (
+      id, user_id, grade, board, subject, paper, difficulty, topics,
+      requested_count, generated_questions, fallback_applied, status, practice_mode
+    ) VALUES (?, ?, NULL, ?, ?, ?, NULL, '[]', ?, ?, 0, 'generated', 'review')
+  `).bind(
+    paperId,
+    userId,
+    anchor.board,
+    anchor.subject,
+    anchor.paper,
+    count,
+    JSON.stringify(questions)
+  ).run();
+
+  return {
+    paperId,
+    userId,
+    selection: {
+      grade: "",
+      board: anchor.board,
+      subject: anchor.subject,
+      paper: anchor.paper,
+    },
+    requestedCount: count,
+    totalCandidates: questions.length,
+    fallbackApplied: false,
+    source: "wrong-notebook",
     questions,
   };
 }
@@ -868,6 +969,11 @@ export async function handleLearningApiRequest(request, env) {
         SELECT * FROM wrong_notebook_entries WHERE user_id = ? ORDER BY last_wrong_at DESC
       `).bind(userId).all();
       return success(rows.results.map(mapNotebookEntry), request.method);
+    }
+    const notebookPractice = url.pathname.match(/^\/api\/users\/([^/]+)\/notebook\/practice$/);
+    if (notebookPractice && request.method === "POST") {
+      const userId = decodeURIComponent(notebookPractice[1]);
+      return success(await createNotebookPractice(request, env, userId), request.method);
     }
     const notebookEntry = url.pathname.match(/^\/api\/users\/([^/]+)\/notebook\/([^/]+)$/);
     if (notebookEntry && request.method === "PATCH") {

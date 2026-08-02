@@ -371,6 +371,13 @@
         token: currentToken(),
       });
     },
+    async createNotebookPractice(userId, input) {
+      return request(`/api/users/${encodeURIComponent(userId)}/notebook/practice`, {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
     async updateNotebookEntry(userId, entryId, input) {
       return request(`/api/users/${encodeURIComponent(userId)}/notebook/${encodeURIComponent(entryId)}`, {
         method: "PATCH",

@@ -6,7 +6,7 @@
   <title data-i18n="notebookPageTitle">错题本</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260801-1" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260802-2" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260802-1" />
 </head>
 <body class="student-ui site-ui notebook-page">
@@ -39,6 +39,39 @@
           <span data-i18n="onlyStarredLabel">只看收藏</span>
         </label>
         <button id="clearNotebook" class="btn-secondary" data-i18n="clearNotebook">重置当前用户记录</button>
+        <button id="openNotebookPractice" class="btn-primary" data-i18n="notebookPracticeCta">从错题本组卷</button>
+      </div>
+
+      <div id="notebookPracticeDialog" class="notebook-practice-dialog" hidden>
+        <h3 data-i18n="notebookPracticeDialogTitle">从错题本组卷</h3>
+        <div class="actions">
+          <label><span data-i18n="notebookPracticeCountLabel">题数</span>
+            <select id="practiceCount">
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
+          </label>
+          <label><span data-i18n="subjectFilterLabel">科目筛选</span>
+            <select id="practiceSubject"></select>
+          </label>
+          <label class="notebook-mastered-filter">
+            <input id="practiceOnlyUnmastered" type="checkbox" checked />
+            <span data-i18n="notebookPracticeOnlyUnmastered">只选未掌握</span>
+          </label>
+          <label class="notebook-star-filter">
+            <input id="practiceOnlyStarred" type="checkbox" />
+            <span data-i18n="notebookPracticeOnlyStarredLabel">只选收藏</span>
+          </label>
+        </div>
+        <p class="tip" data-i18n="notebookPracticeReasonsHint">按错因筛选（不选则不限）</p>
+        <div id="practiceReasons" class="actions notebook-practice-reasons"></div>
+        <p id="practiceDialogStatus" class="tip"></p>
+        <div class="actions">
+          <button id="cancelNotebookPractice" class="btn-secondary" data-i18n="notebookPracticeCancel">取消</button>
+          <button id="startNotebookPractice" class="btn-primary" data-i18n="notebookPracticeStart">生成练习卷</button>
+        </div>
       </div>
     </section>
 
@@ -51,10 +84,10 @@
       </div>
     </section>
   </main>
-  <script src="../scripts/i18n.js?v=20260801-1"></script>
+  <script src="../scripts/i18n.js?v=20260802-2"></script>
   <script src="../scripts/site-ui.js?v=20260730-1"></script>
-  <script src="../scripts/api.js?v=20260729-1"></script>
+  <script src="../scripts/api.js?v=20260802-2"></script>
   <script src="../scripts/pet.js?v=20260731-1"></script>
-  <script src="../scripts/notebook.js?v=20260801-1"></script>
+  <script src="../scripts/notebook.js?v=20260802-2"></script>
 </body>
 </html>
