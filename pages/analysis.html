@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,7 +6,7 @@
   <title data-i18n="analysisPageTitle">错题分析</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260729-2" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260802-8" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260802-1" />
 </head>
 <body class="student-ui site-ui analysis-page">
@@ -15,6 +15,12 @@
       <h1 data-i18n="analysisHeroTitle">错题分析与学习建议</h1>
       <p id="selectionSummary"></p>
       <p id="analysisMode" class="tip"></p>
+    </section>
+
+    <section class="card panel">
+      <h2 data-i18n="weeklyPlanTitle">本周学习计划</h2>
+      <p class="tip" data-i18n="weeklyPlanSubtitle">根据错题本自动排定：错得越多、越近期的知识点排得越靠前。</p>
+      <div id="weeklyPlan"></div>
     </section>
 
     <section class="card panel">
@@ -31,10 +37,10 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260729-4"></script>
+  <script src="../scripts/i18n.js?v=20260802-8"></script>
   <script src="../scripts/site-ui.js?v=20260730-1"></script>
-  <script src="../scripts/api.js?v=20260729-1"></script>
+  <script src="../scripts/api.js?v=20260802-8"></script>
   <script src="../scripts/pet.js?v=20260731-1"></script>
-  <script src="../scripts/analysis.js"></script>
+  <script src="../scripts/analysis.js?v=20260802-8"></script>
 </body>
 </html>

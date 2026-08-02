@@ -4480,6 +4480,63 @@ body.chapter-practice-page {
   border-color: #e0a2a2;
 }
 
+/* ===== Weekly study plan on the analysis page (2026-08-02) ===== */
+
+.weekly-plan-table {
+  width: 100%;
+  margin-top: 0.6rem;
+  border-collapse: collapse;
+}
+
+.weekly-plan-table th,
+.weekly-plan-table td {
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.weekly-plan-table th {
+  color: #5a6a80;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.weekly-plan-table td:first-child {
+  white-space: nowrap;
+}
+
+.weekly-plan-table tr.is-today td {
+  background: #eef5f0;
+}
+
+.weekly-plan-table tr.is-done td {
+  opacity: 0.55;
+}
+
+.weekly-plan-table tr.is-done strong {
+  text-decoration: line-through;
+}
+
+.weekly-plan-meta {
+  display: block;
+  font-size: 0.8rem;
+}
+
+/* Same global .site-ui input trap as the option radios: pin the size or these
+   render as full-width 48px pills. */
+.weekly-plan-check {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  min-height: 20px;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  background: none;
+  cursor: pointer;
+}
+
 .notebook-practice-result {
   margin: 0.8rem 0 0.2rem;
   padding: 0.7rem 0.9rem;
