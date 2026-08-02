@@ -2608,6 +2608,17 @@
   backdrop-filter: none;
 }
 
+[data-theme="dark"] .site-ui .home-topbar,
+[data-theme="dark"] .site-ui .site-topbar,
+[data-theme="dark"] .site-ui .chapter-topbar,
+[data-theme="dark"] .site-ui .community-topbar {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 .site-ui .home-topbar__inner,
 .site-ui .site-topbar__inner,
 .site-ui .chapter-topbar__inner,
