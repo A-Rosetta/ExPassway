@@ -4424,6 +4424,21 @@ body.chapter-practice-page {
   margin-bottom: 1.2rem;
 }
 
+/* The image is the question here - the stem text is suppressed for image
+   questions - so let it use the full card width instead of the 560px cap
+   that applies when it sits beside stem prose. */
+.notebook-practice-question .question-images-wrap {
+  margin-top: 0.4rem;
+}
+
+.notebook-practice-question .question-image {
+  padding: 0.6rem;
+}
+
+.notebook-practice-question .question-image img {
+  max-width: 100%;
+}
+
 .notebook-practice-question .option-item.option-correct {
   background: #eef5f0;
   border-color: #9ec7ae;
