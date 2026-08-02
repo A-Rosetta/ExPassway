@@ -4382,20 +4382,28 @@ body.chapter-practice-page {
   margin-top: 0.2rem;
 }
 
-/* Checkboxes are stretched by the global input sizing, so pin them the same
-   way .notebook-star-filter does. */
+/* Checkboxes are stretched by the global .site-ui input sizing, so pin them the
+   same way site-design.css does for the mastered/star filters. min-height and
+   padding both have to be reset: min-height always beats height, which is what
+   left these rendering as tall narrow bars. */
 .notebook-practice-reason {
   display: inline-flex !important;
   flex-direction: row !important;
   align-items: center !important;
   gap: 0.45rem !important;
+  min-height: 0 !important;
   white-space: nowrap;
 }
 
 .notebook-practice-reason > input[type="checkbox"] {
-  width: 16px !important;
-  height: 16px !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
   margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 4px;
+  box-shadow: none;
   flex-shrink: 0;
   cursor: pointer;
 }
