@@ -4378,14 +4378,35 @@ body.chapter-practice-page {
 
 .notebook-practice-reasons {
   flex-wrap: wrap;
-  gap: 0.6rem 1rem;
+  gap: 0.5rem 1.1rem;
+  margin-top: 0.2rem;
 }
 
+/* Checkboxes are stretched by the global input sizing, so pin them the same
+   way .notebook-star-filter does. */
 .notebook-practice-reason {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
   white-space: nowrap;
+}
+
+.notebook-practice-reason > input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0 !important;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.notebook-practice-reason > span {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.notebook-practice-cta-row {
+  margin-top: 0.6rem;
 }
 
 /* Notebook practice: the retry paper page */
@@ -4401,6 +4422,20 @@ body.chapter-practice-page {
 .notebook-practice-question .option-item.option-wrong {
   background: #fdeeee;
   border-color: #e0a2a2;
+}
+
+.notebook-practice-result {
+  margin: 0.8rem 0 0.2rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  border-left: 4px solid #2f6b46;
+  background: #eef5f0;
+  color: #2f6b46;
+  font-size: 1rem;
+}
+
+.notebook-practice-result[hidden] {
+  display: none;
 }
 
 .notebook-tag-correct {
