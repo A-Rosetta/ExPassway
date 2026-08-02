@@ -6,6 +6,8 @@
   const VISITOR_MODE_KEY = "alevel.visitorMode";
   const GOOGLE_AUTH_MAX_AGE_MS = 10 * 60 * 1000;
   const { t, getLanguage, applyPage } = window.ALevelI18n;
+  let resendAvailableAt = 0;
+  let resendTimer = 0;
 
   function byId(id) {
     return document.getElementById(id);
@@ -60,6 +62,28 @@
     return byId("emailOtpAddress").value.trim().toLowerCase();
   }
 
+  function retryAfterSeconds(error) {
+    return Number(error?.payload?.error?.details?.retryAfterSeconds) || 0;
+  }
+
+  function updateResendButton() {
+    const button = byId("emailOtpResendBtn");
+    const seconds = Math.max(0, Math.ceil((resendAvailableAt - Date.now()) / 1000));
+    button.disabled = seconds > 0;
+    button.textContent = seconds > 0 ? t("resendEmailOtpIn", { seconds }) : t("resendEmailOtp");
+    if (seconds === 0 && resendTimer) {
+      clearInterval(resendTimer);
+      resendTimer = 0;
+    }
+  }
+
+  function startResendCooldown(seconds) {
+    resendAvailableAt = Date.now() + (Math.max(1, Number(seconds) || 60) * 1000);
+    if (resendTimer) clearInterval(resendTimer);
+    updateResendButton();
+    resendTimer = window.setInterval(updateResendButton, 250);
+  }
+
   function showOtpStep(email) {
     byId("emailStep").hidden = true;
     byId("otpStep").hidden = false;
@@ -73,6 +97,10 @@
     byId("emailStep").hidden = false;
     setFieldError(byId("emailOtpCode"), byId("emailOtpCodeError"), "");
     setAuthStatus("");
+    resendAvailableAt = 0;
+    if (resendTimer) clearInterval(resendTimer);
+    resendTimer = 0;
+    updateResendButton();
     byId("emailOtpAddress").focus();
   }
 
@@ -139,13 +167,30 @@
       const button = byId("emailOtpRequestBtn");
       setButtonBusy(button, true, "sendingEmailOtp");
       try {
-        await window.ALevelApi.requestEmailOtp(email);
+        const result = await window.ALevelApi.requestEmailOtp(email);
         showOtpStep(email);
+        startResendCooldown(result.retryAfterSeconds);
         setAuthStatus(t("emailOtpSent"));
       } catch (err) {
         setAuthStatus(t("emailOtpSendFailed", { message: err.message || t("retryLater") }), true);
       } finally {
         setButtonBusy(button, false, "sendingEmailOtp");
+      }
+    });
+    byId("emailOtpResendBtn").addEventListener("click", async () => {
+      if (Date.now() < resendAvailableAt) return;
+      const button = byId("emailOtpResendBtn");
+      button.disabled = true;
+      button.textContent = t("sendingEmailOtp");
+      try {
+        const result = await window.ALevelApi.requestEmailOtp(normalizedEmail());
+        startResendCooldown(result.retryAfterSeconds);
+        setAuthStatus(t("emailOtpSent"));
+      } catch (error) {
+        const seconds = retryAfterSeconds(error);
+        if (seconds) startResendCooldown(seconds);
+        else updateResendButton();
+        setAuthStatus(t("emailOtpSendFailed", { message: error.message || t("retryLater") }), true);
       }
     });
     byId("emailOtpVerifyForm").addEventListener("submit", async (event) => {
@@ -193,6 +238,7 @@
     });
 
     applyPage();
+    window.addEventListener("alevel:languagechange", updateResendButton);
     const handledCallback = await handleGoogleCallback();
     if (!handledCallback) await restoreSession();
   }

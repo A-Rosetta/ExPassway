@@ -39,6 +39,7 @@ function makeUser(overrides = {}) {
 class FakeDatabase {
   constructor(users = []) {
     this.users = users.map((user) => ({ ...user }));
+    this.emailOtpCooldowns = new Map();
   }
 
   prepare(sql) {
@@ -46,6 +47,10 @@ class FakeDatabase {
     return {
       bind: (...values) => ({
         first: async () => {
+          if (statement.includes("FROM email_otp_cooldowns")) {
+            const availableAt = this.emailOtpCooldowns.get(values[0]);
+            return availableAt ? { available_at: availableAt } : null;
+          }
           if (statement.includes("WHERE supabase_user_id = ?")) {
             return this.users.find((user) => user.supabase_user_id === values[0]) || null;
           }
@@ -59,6 +64,13 @@ class FakeDatabase {
           throw new Error(`Unexpected first() SQL: ${statement}`);
         },
         run: async () => {
+          if (statement.startsWith("INSERT INTO email_otp_cooldowns")) {
+            const [hash, availableAt, _updatedAt, nowSeconds] = values;
+            const current = this.emailOtpCooldowns.get(hash);
+            if (current && current > nowSeconds) return { meta: { changes: 0 } };
+            this.emailOtpCooldowns.set(hash, availableAt);
+            return { meta: { changes: 1 } };
+          }
           if (statement.startsWith("UPDATE users SET supabase_user_id")) {
             const [supabaseUserId, updatedAt, userId] = values;
             if (this.users.some((user) => user.supabase_user_id === supabaseUserId)) {
@@ -236,13 +248,25 @@ try {
   }
 
   {
-    const { response, payload } = await request("/api/auth/email/otp", {
+    const database = new FakeDatabase();
+    const otpRequest = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: "Student@Example.com" }),
-    });
+    };
+    const { response, payload } = await request("/api/auth/email/otp", otpRequest, {}, database);
     assert.equal(response.status, 200);
-    assert.deepEqual(payload.data, { sent: true });
+    assert.deepEqual(payload.data, { sent: true, retryAfterSeconds: 60 });
+
+    const limited = await request("/api/auth/email/otp", otpRequest, {}, database);
+    assert.equal(limited.response.status, 429);
+    assert.equal(limited.payload.error.code, "OTP_RATE_LIMITED");
+    assert.equal(limited.payload.error.details.retryAfterSeconds, 60);
+
+    Date.now = () => originalDateNow() + 60_000;
+    const allowedAgain = await request("/api/auth/email/otp", otpRequest, {}, database);
+    assert.equal(allowedAgain.response.status, 200);
+    Date.now = originalDateNow;
   }
 
   {

@@ -10,6 +10,7 @@ const CORS_PREFLIGHT_HEADERS = {
 };
 
 const TOKEN_TTL_SECONDS = 60 * 60 * 24 * 30;
+const EMAIL_OTP_COOLDOWN_SECONDS = 60;
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
@@ -86,6 +87,39 @@ function normalizeEmail(value) {
 
 function normalizeLanguage(value) {
   return value === "zh-CN" ? "zh-CN" : "en";
+}
+
+async function emailHash(email) {
+  const digest = await crypto.subtle.digest("SHA-256", encoder.encode(email));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function reserveEmailOtpSend(db, email) {
+  const nowSeconds = Math.floor(Date.now() / 1000);
+  const availableAt = nowSeconds + EMAIL_OTP_COOLDOWN_SECONDS;
+  const hash = await emailHash(email);
+  const result = await db.prepare(`
+    INSERT INTO email_otp_cooldowns (email_hash, available_at, updated_at)
+    VALUES (?, ?, ?)
+    ON CONFLICT(email_hash) DO UPDATE SET
+      available_at = excluded.available_at,
+      updated_at = excluded.updated_at
+    WHERE email_otp_cooldowns.available_at <= ?
+  `).bind(hash, availableAt, new Date().toISOString(), nowSeconds).run();
+  if (Number(result?.meta?.changes ?? result?.changes ?? 0) > 0) return;
+
+  const row = await db.prepare(`
+    SELECT available_at
+    FROM email_otp_cooldowns
+    WHERE email_hash = ?
+  `).bind(hash).first();
+  const retryAfterSeconds = Math.max(1, Number(row?.available_at || availableAt) - nowSeconds);
+  throw new AuthError(
+    429,
+    `Wait ${retryAfterSeconds} seconds before requesting another code.`,
+    "OTP_RATE_LIMITED",
+    { retryAfterSeconds }
+  );
 }
 
 function getConfig(
@@ -473,8 +507,9 @@ export async function handleAuthApiRequest(request, env) {
       );
       const body = await readJsonBody(request);
       const email = normalizeEmail(body.email);
+      await reserveEmailOtpSend(env.DB, email);
       await requestEmailOtp(email, config);
-      return success({ sent: true }, request.method);
+      return success({ sent: true, retryAfterSeconds: EMAIL_OTP_COOLDOWN_SECONDS }, request.method);
     }
 
     if (request.method === "POST" && url.pathname === "/api/auth/email/verify") {
