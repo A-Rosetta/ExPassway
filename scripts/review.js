@@ -1,6 +1,90 @@
 (function () {
   const USER_ID_KEY = "alevel.userId";
   const { t, applyPage, getLanguage } = window.ALevelI18n;
+
+  let notebookMapPromise = null;
+  const MISTAKE_REASONS = [
+    { key: "concept", label: "reasonConcept" },
+    { key: "calculation", label: "reasonCalculation" },
+    { key: "question_reading", label: "reasonReading" },
+    { key: "careless", label: "reasonCareless" },
+    { key: "time_pressure", label: "reasonTime" },
+  ];
+
+  async function ensureNotebookMap() {
+    if (notebookMapPromise) return notebookMapPromise;
+    notebookMapPromise = (async () => {
+      const userId = localStorage.getItem(USER_ID_KEY) || "";
+      if (!userId || !window.ALevelApi?.getUserNotebook) return new Map();
+      try {
+        const rows = await window.ALevelApi.getUserNotebook(userId);
+        return new Map(
+          (Array.isArray(rows) ? rows : []).map((r) => [r.questionKey, r])
+        );
+      } catch (_e) {
+        return new Map();
+      }
+    })();
+    return notebookMapPromise;
+  }
+
+  function invalidateNotebookMap() {
+    notebookMapPromise = null;
+  }
+
+  async function augmentReviewCards() {
+    const wrap = document.getElementById("wrongQuestions");
+    if (!wrap) return;
+    const map = await ensureNotebookMap();
+
+    if (!wrap.dataset.mistakeReasonsBound) {
+      wrap.dataset.mistakeReasonsBound = "1";
+      wrap.addEventListener("change", async (evt) => {
+        const input = evt.target;
+        if (!input || input.type !== "checkbox") return;
+        const fieldset = input.closest(".mistake-reasons");
+        if (!fieldset) return;
+        const entryId = fieldset.getAttribute("data-entry-id");
+        const userId = localStorage.getItem(USER_ID_KEY) || "";
+        if (!entryId || !userId || !window.ALevelApi?.updateNotebookEntry) return;
+        const values = Array.from(
+          fieldset.querySelectorAll("input[type=checkbox]:checked")
+        ).map((el) => el.value);
+        try {
+          await window.ALevelApi.updateNotebookEntry(userId, entryId, {
+            mistakeReasons: values,
+          });
+          // Update cached entry so re-renders don't regress.
+          const cached = map.get(fieldset.getAttribute("data-question-key") || "");
+          if (cached) cached.mistakeReasons = values;
+        } catch (_err) {}
+      });
+    }
+
+    wrap.querySelectorAll(".review-question-card[data-is-wrong='true']").forEach((card) => {
+      if (card.querySelector(".mistake-reasons")) return;
+      const key = card.getAttribute("data-question-key") || "";
+      const entry = map.get(key);
+      if (!entry || !entry.id) return;
+      const current = new Set(Array.isArray(entry.mistakeReasons) ? entry.mistakeReasons : []);
+      const options = MISTAKE_REASONS.map((r) => `
+        <label class="mistake-reason-option">
+          <input type="checkbox" value="${r.key}"${current.has(r.key) ? " checked" : ""} />
+          <span>${t(r.label)}</span>
+        </label>
+      `).join("");
+      const html = `
+        <fieldset class="mistake-reasons" data-entry-id="${entry.id}" data-question-key="${key}">
+          <legend>${t("chooseMistakeReason")}</legend>
+          ${options}
+        </fieldset>
+      `;
+      const answersDiv = card.querySelector(".review-question-answers");
+      if (answersDiv) answersDiv.insertAdjacentHTML("afterend", html);
+      else card.insertAdjacentHTML("beforeend", html);
+    });
+  }
+
   const state = {
     pageSize: 8,
     pageIndex: 0,
@@ -363,7 +447,7 @@
         const correctAnswer = optLabel(d.answer);
         const questionNo = Number(q.questionNo || idx + 1);
         return `
-          <article class="question review-question-card">
+          <article class="question review-question-card" data-question-key="${escapeHtml(q.id || q.questionKey || "")}" data-is-wrong="${!d.correct}">
             <div class="review-question-head">
               <h4>${t("questionNumber", { number: questionNo })}</h4>
               ${d.starred ? `<span class="review-star" title="${t("starredQuestion")}" aria-label="${t("starredQuestion")}">★</span>` : ""}
@@ -382,6 +466,8 @@
         `;
       })
       .join("");
+
+    void augmentReviewCards();
 
     renderPager();
   }
