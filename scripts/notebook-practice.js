@@ -8,6 +8,7 @@
     questions: [],
     answers: [],
     submitted: false,
+    confirmedUnanswered: false,
     details: [],
   };
 
@@ -137,7 +138,12 @@
   async function submitPractice() {
     if (state.submitted) return;
     const unanswered = state.answers.filter((a) => !Number.isInteger(a)).length;
-    if (unanswered > 0 && !window.confirm(t("notebookPracticeUnansweredConfirm", { count: unanswered }))) {
+    // Deliberately not window.confirm: if the browser has dialogs suppressed it
+    // returns false, and the click becomes a silent no-op with no request and no
+    // feedback. An in-page two-step confirmation can't fail that way.
+    if (unanswered > 0 && !state.confirmedUnanswered) {
+      state.confirmedUnanswered = true;
+      setFeedback(escapeHtml(t("notebookPracticeUnansweredConfirm", { count: unanswered })));
       return;
     }
     const button = byId("submitPractice");
@@ -162,8 +168,15 @@
       sessionStorage.removeItem(scopedKey(PRACTICE_KEY));
       renderQuestions();
       byId("practiceResult").scrollIntoView({ behavior: "smooth", block: "center" });
-    } catch (_err) {
-      setFeedback(escapeHtml(t("notebookPracticeSubmitFailed")));
+    } catch (err) {
+      // Show the real reason instead of a generic string - a silent failure here
+      // is exactly what made this look like a dead button.
+      console.error("notebook practice submit failed", err);
+      const detail = err?.payload?.error?.message || err?.message || "";
+      setFeedback(
+        escapeHtml(t("notebookPracticeSubmitFailed"))
+        + (detail ? `<br /><small>${escapeHtml(detail)}</small>` : "")
+      );
       button.disabled = false;
     }
   }
@@ -181,10 +194,18 @@
     renderQuestions();
   }
 
-  byId("backToNotebook").addEventListener("click", function () {
+  byId("backToNotebook")?.addEventListener("click", function () {
     location.href = "./notebook.html";
   });
-  byId("submitPractice").addEventListener("click", submitPractice);
+  // Any throw inside the handler must reach the user; an unhandled one leaves the
+  // button looking dead.
+  byId("submitPractice")?.addEventListener("click", function () {
+    submitPractice().catch((err) => {
+      console.error("notebook practice submit crashed", err);
+      setFeedback(escapeHtml(t("notebookPracticeSubmitFailed")));
+      byId("submitPractice").disabled = false;
+    });
+  });
 
   applyPage();
   init();
