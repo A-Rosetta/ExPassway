@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="notebookPracticePageTitle">错题重做</title>
+  <script src="../scripts/theme-init.js?v=20260730-1"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260802-2" />
+  <link rel="stylesheet" href="../assets/site-design.css?v=20260802-1" />
+</head>
+<body class="student-ui site-ui notebook-practice-page">
+  <main class="container">
+    <section class="card hero">
+      <h1 data-i18n="notebookPracticeHeroTitle">错题重做</h1>
+      <p class="tip" data-i18n="notebookPracticeHeroSubtitle">从错题本抽取的题目。答对的会自动标记为已掌握，答错的错误次数加一。</p>
+    </section>
+
+    <section class="card panel">
+      <div id="practiceStatus" class="tip"></div>
+      <div id="practiceList"></div>
+      <div class="actions">
+        <button id="backToNotebook" class="btn-secondary" data-i18n="notebookPracticeBackToNotebook">返回错题本</button>
+        <button id="submitPractice" class="btn-primary" data-i18n="notebookPracticeSubmit">提交并批改</button>
+      </div>
+    </section>
+  </main>
+  <script src="../scripts/i18n.js?v=20260802-2"></script>
+  <script src="../scripts/site-ui.js?v=20260730-1"></script>
+  <script src="../scripts/api.js?v=20260802-2"></script>
+  <script src="../scripts/pet.js?v=20260731-1"></script>
+  <script src="../scripts/notebook-practice.js?v=20260802-1"></script>
+</body>
+</html>
