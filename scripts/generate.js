@@ -483,7 +483,7 @@
   }
 
   function goReviewPage() {
-    const target = `${window.location.origin}/alevel/pages/review.html`;
+    const target = new URL("./review.html", window.location.href).href;
     window.location.assign(target);
     // Fallback in case assign is blocked/interrupted by browser state.
     setTimeout(() => {
