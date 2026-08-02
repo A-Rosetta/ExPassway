@@ -29,6 +29,7 @@ async function newPage(browser, locale, savedLanguage) {
       assert.equal(await page.locator(".auth-brand").evaluate((element) => getComputedStyle(element).textTransform), "none");
       assert.equal(await page.locator("#loginTitle").textContent(), "Log in or sign up");
       assert.equal(await page.locator("[data-language-toggle]").textContent(), "中文");
+      assert.equal(await page.locator("#emailOtpRequestBtn").textContent(), "Continue with email");
 
       await page.locator("#googleLoginBtn").click();
       await page.locator("#authStatus").waitFor({ state: "visible" });
@@ -38,11 +39,69 @@ async function newPage(browser, locale, savedLanguage) {
     }
 
     {
+      const context = await browser.newContext({ locale: "en-US" });
+      const page = await context.newPage();
+      let otpRequested = false;
+      await page.addInitScript(() => {
+        if (sessionStorage.getItem("emailOtpSmokeSeeded")) return;
+        localStorage.clear();
+        sessionStorage.setItem("emailOtpSmokeSeeded", "1");
+      });
+      await page.route("**/api/auth/email/otp", (route) => {
+        otpRequested = true;
+        return route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ ok: true, data: { sent: true } }),
+        });
+      });
+      await page.route("**/api/auth/email/verify", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          data: {
+            token: "email-test-token",
+            user: { id: "student-1", email: "student@example.com", displayName: "Student", role: "student" },
+          },
+        }),
+      }));
+      await page.route("**/api/auth/me", (route) => route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          data: { id: "student-1", email: "student@example.com", displayName: "Student", role: "student" },
+        }),
+      }));
+      await page.goto(`${baseUrl}/pages/login.html`, { waitUntil: "networkidle" });
+
+      await page.locator("#emailOtpAddress").fill("not-an-email");
+      await page.locator("#emailOtpRequestBtn").click();
+      assert.equal(otpRequested, false);
+      assert.equal(await page.locator("#emailOtpAddressError").textContent(), "Enter a valid email address.");
+
+      await page.locator("#emailOtpAddress").fill("Student@Example.com");
+      await page.locator("#emailOtpRequestBtn").click();
+      await page.locator("#otpStep").waitFor({ state: "visible" });
+      assert.equal(otpRequested, true);
+      assert.equal(await page.locator("#otpAccountEmail").textContent(), "student@example.com");
+      assert.equal(await page.locator("#authStatus").textContent(), "Verification code sent. Check your email.");
+
+      await page.locator("#emailOtpCode").fill("123456");
+      await page.locator("#emailOtpVerifyBtn").click();
+      await page.waitForURL(`${baseUrl}/index.html`);
+      assert.equal(await page.evaluate(() => localStorage.getItem("alevel.authToken")), "email-test-token");
+      await context.close();
+    }
+
+    {
       const { context, page } = await newPage(browser, "zh-CN");
       assert.equal(await page.locator("html").getAttribute("lang"), "zh-CN");
       assert.equal(await page.locator(".auth-brand").textContent(), "ExPassway");
       assert.equal(await page.locator("#loginTitle").textContent(), "登录或注册");
       assert.equal(await page.locator("[data-language-toggle]").textContent(), "EN");
+      assert.equal(await page.locator("#emailOtpRequestBtn").textContent(), "使用邮箱继续");
       await context.close();
     }
 

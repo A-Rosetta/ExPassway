@@ -88,7 +88,11 @@ function normalizeLanguage(value) {
   return value === "zh-CN" ? "zh-CN" : "en";
 }
 
-function getConfig(env) {
+function getConfig(
+  env,
+  unavailableMessage = "Authentication is not configured yet.",
+  unavailableCode = "AUTH_NOT_CONFIGURED"
+) {
   const supabaseUrl = String(env.SUPABASE_URL || "").replace(/\/+$/, "");
   const supabaseAnonKey = String(env.SUPABASE_ANON_KEY || "");
   const redirectUrl = String(env.SUPABASE_AUTH_REDIRECT_URL || "");
@@ -108,8 +112,8 @@ function getConfig(env) {
   ) {
     throw new AuthError(
       503,
-      "Google login is not configured yet.",
-      "GOOGLE_AUTH_NOT_CONFIGURED"
+      unavailableMessage,
+      unavailableCode
     );
   }
   return { supabaseUrl, supabaseAnonKey, redirectUrl, authSecret };
@@ -356,6 +360,50 @@ async function verifyGoogleIdentity(accessToken, config) {
   return identity;
 }
 
+async function requestEmailOtp(email, config) {
+  let response;
+  try {
+    response = await fetch(`${config.supabaseUrl}/auth/v1/otp`, {
+      method: "POST",
+      headers: {
+        apikey: config.supabaseAnonKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, create_user: true }),
+    });
+  } catch (_error) {
+    throw new AuthError(502, "Email login provider is unavailable.", "AUTH_PROVIDER_UNAVAILABLE");
+  }
+  if (!response.ok) {
+    throw new AuthError(502, "Verification code could not be sent.", "AUTH_PROVIDER_UNAVAILABLE");
+  }
+}
+
+async function verifyEmailOtp(email, code, config) {
+  let response;
+  try {
+    response = await fetch(`${config.supabaseUrl}/auth/v1/verify`, {
+      method: "POST",
+      headers: {
+        apikey: config.supabaseAnonKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, token: code, type: "email" }),
+    });
+  } catch (_error) {
+    throw new AuthError(502, "Email login provider is unavailable.", "AUTH_PROVIDER_UNAVAILABLE");
+  }
+  if (!response.ok) {
+    throw new AuthError(401, "Verification code is invalid or expired.", "INVALID_OTP");
+  }
+  const payload = await response.json();
+  const identity = payload?.user;
+  if (!identity?.email_confirmed_at && !identity?.confirmed_at) {
+    throw new AuthError(401, "Email address is not verified.", "UNVERIFIED_EMAIL");
+  }
+  return identity;
+}
+
 export async function readJsonBody(request) {
   try {
     return await request.json();
@@ -385,7 +433,11 @@ export async function handleAuthApiRequest(request, env) {
 
   try {
     if (request.method === "GET" && url.pathname === "/api/auth/google/start") {
-      const config = getConfig(env);
+      const config = getConfig(
+        env,
+        "Google login is not configured yet.",
+        "GOOGLE_AUTH_NOT_CONFIGURED"
+      );
       const authorizeUrl = new URL(`${config.supabaseUrl}/auth/v1/authorize`);
       authorizeUrl.searchParams.set("provider", "google");
       authorizeUrl.searchParams.set("redirect_to", config.redirectUrl);
@@ -394,10 +446,53 @@ export async function handleAuthApiRequest(request, env) {
     }
 
     if (request.method === "POST" && url.pathname === "/api/auth/google") {
-      const config = getConfig(env);
+      const config = getConfig(
+        env,
+        "Google login is not configured yet.",
+        "GOOGLE_AUTH_NOT_CONFIGURED"
+      );
       const body = await readJsonBody(request);
       const accessToken = requireString(body.accessToken, "accessToken");
       const identity = await verifyGoogleIdentity(accessToken, config);
+      const row = await resolveUser(env.DB, identity, body.language);
+      if (!row) {
+        throw new AuthError(500, "User account could not be created.", "INTERNAL_SERVER_ERROR");
+      }
+      const user = mapUser(row);
+      if (user.isDisabled) {
+        throw new AuthError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
+      }
+      return success({ user, token: await issueToken(user, config.authSecret) }, request.method);
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/auth/email/otp") {
+      const config = getConfig(
+        env,
+        "Email login is not configured yet.",
+        "EMAIL_AUTH_NOT_CONFIGURED"
+      );
+      const body = await readJsonBody(request);
+      const email = normalizeEmail(body.email);
+      await requestEmailOtp(email, config);
+      return success({ sent: true }, request.method);
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/auth/email/verify") {
+      const config = getConfig(
+        env,
+        "Email login is not configured yet.",
+        "EMAIL_AUTH_NOT_CONFIGURED"
+      );
+      const body = await readJsonBody(request);
+      const email = normalizeEmail(body.email);
+      const code = requireString(body.code, "code");
+      if (!/^\d{6}$/.test(code)) {
+        throw new AuthError(400, "Verification code must contain 6 digits.", "INVALID_OTP");
+      }
+      const identity = await verifyEmailOtp(email, code, config);
+      if (normalizeEmail(identity.email) !== email) {
+        throw new AuthError(401, "Verified email does not match.", "UNAUTHORIZED");
+      }
       const row = await resolveUser(env.DB, identity, body.language);
       if (!row) {
         throw new AuthError(500, "User account could not be created.", "INTERNAL_SERVER_ERROR");

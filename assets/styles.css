@@ -252,6 +252,28 @@ html:not([data-i18n-ready]) body {
   overflow-wrap: anywhere;
 }
 
+.student-ui.auth-page .auth-otp-input {
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.student-ui.auth-page .auth-back-link {
+  display: block;
+  width: fit-content;
+  min-height: 0;
+  margin: 18px auto 0;
+  border: 0;
+  padding: 4px;
+  background: transparent;
+  color: #80d0a6;
+}
+
+.student-ui.auth-page .auth-back-link:hover,
+.student-ui.auth-page .auth-back-link:focus-visible {
+  color: #a3e2c2;
+  text-decoration: underline;
+}
+
 .student-ui.auth-page .auth-back-button {
   width: 40px;
   min-height: 40px;

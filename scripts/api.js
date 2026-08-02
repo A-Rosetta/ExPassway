@@ -393,6 +393,18 @@
         body: JSON.stringify({ accessToken, language }),
       });
     },
+    async requestEmailOtp(email) {
+      return request("/api/auth/email/otp", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
+    },
+    async verifyEmailOtp(email, code, language) {
+      return request("/api/auth/email/verify", {
+        method: "POST",
+        body: JSON.stringify({ email, code, language }),
+      });
+    },
     async getCurrentUser(token) {
       return request("/api/auth/me", { token });
     },

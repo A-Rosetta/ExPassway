@@ -112,10 +112,30 @@ function googleIdentity(overrides = {}) {
 let identityResponse = googleIdentity();
 let identityStatus = 200;
 globalThis.fetch = async (url, options = {}) => {
-  assert.equal(String(url), "https://supabase.test/auth/v1/user");
+  const requestUrl = String(url);
   assert.equal(options.headers.apikey, BASE_ENV.SUPABASE_ANON_KEY);
-  assert.match(options.headers.Authorization, /^Bearer /);
-  return Response.json(identityResponse, { status: identityStatus });
+  if (requestUrl === "https://supabase.test/auth/v1/user") {
+    assert.match(options.headers.Authorization, /^Bearer /);
+    return Response.json(identityResponse, { status: identityStatus });
+  }
+  if (requestUrl === "https://supabase.test/auth/v1/otp") {
+    assert.equal(options.method, "POST");
+    assert.deepEqual(JSON.parse(options.body), {
+      email: "student@example.com",
+      create_user: true,
+    });
+    return Response.json({});
+  }
+  if (requestUrl === "https://supabase.test/auth/v1/verify") {
+    assert.equal(options.method, "POST");
+    assert.deepEqual(JSON.parse(options.body), {
+      email: "student@example.com",
+      token: "123456",
+      type: "email",
+    });
+    return Response.json({ user: identityResponse }, { status: identityStatus });
+  }
+  throw new Error(`Unexpected Supabase URL: ${requestUrl}`);
 };
 
 async function request(path, options = {}, envOverrides = {}, database = new FakeDatabase()) {
@@ -213,6 +233,66 @@ try {
     assert.equal(payload.data.user.displayName, "New Student");
     assert.equal(payload.data.user.language, "zh-CN");
     assert.equal(payload.data.user.role, "student");
+  }
+
+  {
+    const { response, payload } = await request("/api/auth/email/otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "Student@Example.com" }),
+    });
+    assert.equal(response.status, 200);
+    assert.deepEqual(payload.data, { sent: true });
+  }
+
+  {
+    identityResponse = googleIdentity({
+      app_metadata: { provider: "email", providers: ["email", "google"] },
+      identities: [{ provider: "email" }, { provider: "google" }],
+    });
+    identityStatus = 200;
+    const database = new FakeDatabase([makeUser({
+      supabase_user_id: identityResponse.id,
+    })]);
+    const { response, payload } = await request("/api/auth/email/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "student@example.com", code: "123456", language: "en" }),
+    }, {}, database);
+    assert.equal(response.status, 200);
+    assert.equal(database.users.length, 1);
+    assert.equal(payload.data.user.id, "11111111-1111-4111-8111-111111111111");
+    assert.match(payload.data.token, /^[^.]+\.[^.]+$/);
+  }
+
+  {
+    identityResponse = googleIdentity({
+      id: "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+      email: "student@example.com",
+      app_metadata: { provider: "email", providers: ["email"] },
+      identities: [{ provider: "email" }],
+    });
+    identityStatus = 401;
+    const database = new FakeDatabase();
+    const { response, payload } = await request("/api/auth/email/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "student@example.com", code: "123456" }),
+    }, {}, database);
+    assert.equal(response.status, 401);
+    assert.equal(payload.error.code, "INVALID_OTP");
+    assert.equal(database.users.length, 0);
+    identityStatus = 200;
+  }
+
+  {
+    const { response, payload } = await request("/api/auth/email/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "student@example.com", code: "12ab" }),
+    });
+    assert.equal(response.status, 400);
+    assert.equal(payload.error.code, "INVALID_OTP");
   }
 
   {
