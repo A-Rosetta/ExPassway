@@ -4687,12 +4687,16 @@ body.chapter-practice-page {
 }
 /* ===== Mistake reasons multi-select on review page (2026-08-01) ===== */
 
+/* This block predates the green-theme pass below, which overrides most of it.
+   The hover rule is the one declaration that survives, so it also has to be
+   theme-aware; the rest is kept token-based so a future reorder can't
+   resurrect light-only colours. */
 .mistake-reasons {
   margin: 0.5rem 0 0.4rem;
   padding: 0.5rem 0.8rem 0.6rem;
-  border: 1px solid #d7ddea;
+  border: 1px solid var(--line);
   border-radius: 10px;
-  background: #f9fafd;
+  background: rgba(var(--accent-rgb), 0.07);
   display: block;
 }
 
@@ -4700,7 +4704,7 @@ body.chapter-practice-page {
   padding: 0 0.4rem;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #4a5b7a;
+  color: var(--muted);
 }
 
 .mistake-reason-option {
@@ -4710,7 +4714,7 @@ body.chapter-practice-page {
   margin: 0.2rem 0.9rem 0.2rem 0;
   cursor: pointer;
   font-size: 0.9rem;
-  color: #2a3648;
+  color: var(--text);
   user-select: none;
 }
 
@@ -4722,30 +4726,32 @@ body.chapter-practice-page {
   margin: 0;
   padding: 0;
   cursor: pointer;
-  accent-color: #2c5b96;
+  accent-color: var(--accent);
 }
 
 .mistake-reason-option:hover span {
-  color: #1e3a5f;
+  color: var(--text);
 }
 
-/* ===== Mistake reasons: restyle to match site's green theme ===== */
+/* ===== Mistake reasons: restyle to match site's green theme =====
+   Fills are built from --accent-rgb and text from --text/--muted, both of
+   which each theme redefines. The original pass pinned these to light-theme
+   values (a #ffffff fieldset, dark green legend), which turned into a white
+   slab with unreadable text once the dark theme was applied. */
 .mistake-reasons {
   margin: 0.6rem 0 0.3rem;
   padding: 0.7rem 1rem 0.8rem;
   border: none;
   border-radius: 14px;
-  background: #ffffff;
-  box-shadow:
-    0 1px 4px rgba(30, 80, 50, 0.06),
-    inset 0 0 0 1px rgba(30, 90, 60, 0.08);
+  background: rgba(var(--accent-rgb), 0.07);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.16);
   display: block;
 }
 .mistake-reasons > legend {
   padding: 0 0.5rem;
   font-size: 0.82rem;
   font-weight: 700;
-  color: #3f5c48;
+  color: var(--muted);
   letter-spacing: 0.01em;
 }
 .mistake-reason-option {
@@ -4756,18 +4762,18 @@ body.chapter-practice-page {
   padding: 0.28rem 0.75rem;
   cursor: pointer;
   font-size: 0.86rem;
-  color: #3a4d40;
+  color: var(--text);
   border-radius: 999px;
-  background: #eef5f0;
+  background: rgba(var(--accent-rgb), 0.13);
   transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
   user-select: none;
 }
 .mistake-reason-option:hover {
-  background: #dfeae2;
+  background: rgba(var(--accent-rgb), 0.22);
 }
 .mistake-reason-option:has(input:checked) {
-  background: #cfe2d5;
-  color: #22452c;
+  background: rgba(var(--accent-rgb), 0.32);
+  color: var(--text);
   font-weight: 600;
 }
 .mistake-reason-option:active {
@@ -4781,5 +4787,5 @@ body.chapter-practice-page {
   margin: 0 !important;
   padding: 0 !important;
   cursor: pointer;
-  accent-color: #4d8b5a;
+  accent-color: var(--accent);
 }
