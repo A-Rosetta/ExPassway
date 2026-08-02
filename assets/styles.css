@@ -4439,6 +4439,37 @@ body.chapter-practice-page {
   max-width: 100%;
 }
 
+/* Nothing in the stylesheets targets input[type="radio"], so the option radios
+   fall into the generic .site-ui input sizing and render as full-width 48px
+   pills with the option letter pushed out to the right edge. Pin them to a real
+   radio-sized control and let the label sit next to it. */
+.notebook-practice-question .option-item {
+  display: flex !important;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 0 !important;
+  padding: 0.5rem 0.75rem;
+}
+
+.notebook-practice-question .option-item > input[type="radio"] {
+  width: 20px !important;
+  min-width: 20px !important;
+  height: 20px !important;
+  min-height: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50%;
+  box-shadow: none;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.notebook-practice-question .option-item > .chem-text {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
 .notebook-practice-question .option-item.option-correct {
   background: #eef5f0;
   border-color: #9ec7ae;
