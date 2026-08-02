@@ -9,6 +9,11 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === "/alevel" || url.pathname.startsWith("/alevel/")) {
+      url.pathname = url.pathname.slice("/alevel".length) || "/";
+      return Response.redirect(url.toString(), 308);
+    }
+
     if (url.pathname.startsWith("/api/auth/")) {
       return handleAuthApiRequest(request, env);
     }
