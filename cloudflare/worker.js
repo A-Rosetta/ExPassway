@@ -8,11 +8,13 @@ import { handleReadApiRequest } from "./read-api.js";
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
   "script-src 'self'",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "style-src 'self' https://fonts.googleapis.com",
+  "style-src-elem 'self' https://fonts.googleapis.com",
+  "style-src-attr 'unsafe-inline'",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https:",
-  "connect-src 'self' https:",
-  "media-src 'self' data: blob: https:",
+  "connect-src 'self'",
+  "media-src 'self' data: blob:",
   "worker-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'none'",
@@ -21,10 +23,37 @@ const CONTENT_SECURITY_POLICY = [
   "upgrade-insecure-requests",
 ].join("; ");
 
-function addSecurityHeaders(response) {
+function defaultCacheControl(request, response) {
+  const url = new URL(request.url);
+  if (
+    url.pathname.startsWith("/api/community-images/")
+    || url.pathname.startsWith("/api/content/")
+    || /^\/api\/catalog\/papers\/[^/]+\/download\/[^/]+$/.test(url.pathname)
+  ) {
+    return response.headers.get("Cache-Control") || "public, max-age=86400";
+  }
+  if (
+    url.pathname.startsWith("/api/")
+    || response.headers.get("Content-Type")?.includes("text/html")
+    || response.status >= 300 && response.status < 400
+  ) {
+    return "no-store";
+  }
+  if (url.searchParams.has("v") && /\.(?:css|js)$/i.test(url.pathname)) {
+    return "public, max-age=31536000, immutable";
+  }
+  return "public, max-age=3600, must-revalidate";
+}
+
+function addSecurityHeaders(request, response) {
   const secured = new Response(response.body, response);
+  const cacheControl = defaultCacheControl(request, secured);
+  if (cacheControl) secured.headers.set("Cache-Control", cacheControl);
   secured.headers.set("Content-Security-Policy", CONTENT_SECURITY_POLICY);
   secured.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+  secured.headers.set("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+  secured.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+  secured.headers.set("Origin-Agent-Cluster", "?1");
   secured.headers.set("X-Content-Type-Options", "nosniff");
   secured.headers.set("X-Frame-Options", "DENY");
   secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
@@ -92,6 +121,6 @@ async function routeRequest(request, env) {
 
 export default {
   async fetch(request, env) {
-    return addSecurityHeaders(await routeRequest(request, env));
+    return addSecurityHeaders(request, await routeRequest(request, env));
   },
 };
