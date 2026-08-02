@@ -3335,3 +3335,274 @@
   opacity: 0.45;
   transform: none;
 }
+
+/*
+ * 所有学生页面使用与首页相同的标题栏结构
+ * ======================================
+ * 四种标题栏的外观早已共用同一组玻璃表面变量；这里再统一内部三列的位置：
+ * 品牌在左、页面标题或导航在中、命令按钮在右。普通页面只有品牌和按钮时，
+ * 右侧按钮直接放到第三列，中间列留作弹性空间，因此位置与首页完全一致。
+ */
+.site-ui :is(
+  .home-topbar__inner,
+  .site-topbar__inner,
+  .chapter-topbar__inner,
+  .community-topbar__inner
+) {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.site-ui :is(.site-header-controls, .home-header-controls, .community-topbar__actions) {
+  grid-column: 3;
+  justify-self: end;
+}
+
+.site-ui .community-topbar__title {
+  grid-column: 2;
+}
+
+/*
+ * 章节练习的作答框使用 inset
+ * ==========================
+ * 每个 .option-item 都是一个答案输入区域。内阴影表示内容在这里被选择或输入，
+ * 与普通文本框的凹面语义一致；选对、选错的边框颜色仍由原有规则负责。
+ */
+.site-ui .chapter-question .option-item,
+[data-theme="dark"] .site-ui .chapter-question .option-item {
+  border-color: var(--surface-border-soft);
+  background: var(--bg);
+  box-shadow: var(--surface-shadow-deep);
+}
+
+[data-theme="dark"] .site-ui .chapter-question .option-item {
+  background: var(--glass-well);
+}
+
+/*
+ * 真题做题页
+ * ==========
+ * 只在 generate.html 的 .practice-page 下生效，不影响错题本、复习页或社区。
+ * 外层结果区保持平整，题目是主要 raised 表面，答案是 inset 输入区域，题号
+ * 导航则使用 flat / inset 两级状态，避免旧蓝色卡片与当前全站主题混用。
+ */
+.site-ui.practice-page .container {
+  width: min(1180px, calc(100% - 32px));
+  margin: 24px auto 48px;
+  gap: 16px;
+}
+
+.site-ui.practice-page[data-paper-open="true"] #generateHero,
+.site-ui.practice-page[data-paper-open="true"] #resultPanel {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.site-ui.practice-page[data-paper-open="true"] #generateHero {
+  padding: 8px 0 16px;
+  border-bottom: 1px solid var(--surface-border-soft);
+}
+
+.site-ui.practice-page[data-paper-open="true"] #generateHero h1 {
+  color: var(--text);
+  font-size: 1.55rem;
+  letter-spacing: 0;
+}
+
+.site-ui.practice-page[data-paper-open="true"] #resultPanel {
+  margin: 0;
+  padding: 0;
+}
+
+.site-ui.practice-page[data-paper-open="true"] #resultPanel > h2 {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 1.05rem;
+  letter-spacing: 0;
+}
+
+.site-ui.practice-page .question-body-layout {
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 18px;
+}
+
+.site-ui.practice-page .question {
+  margin: 0;
+  padding: 24px;
+  border-color: transparent;
+  border-radius: 8px;
+  background: var(--surface-raised);
+  box-shadow: var(--surface-shadow);
+}
+
+[data-theme="dark"] .site-ui.practice-page .question {
+  border-color: var(--surface-border);
+  background: var(--surface-raised);
+}
+
+.site-ui.practice-page .question h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.site-ui.practice-page .question .option-item {
+  min-height: 52px;
+  padding: 10px 12px;
+  border-color: var(--surface-border-soft);
+  border-radius: 6px;
+  background: var(--bg);
+  box-shadow: var(--surface-shadow-deep);
+  color: var(--text);
+  cursor: pointer;
+}
+
+[data-theme="dark"] .site-ui.practice-page .question .option-item {
+  background: var(--glass-well);
+}
+
+.site-ui.practice-page .question .option-item:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--surface-pressed);
+}
+
+.site-ui.practice-page .question-side {
+  position: sticky;
+  top: calc(92px + env(safe-area-inset-top));
+  padding: 14px;
+  border-color: var(--surface-border-soft);
+  border-radius: 8px;
+  background: var(--surface-raised);
+  box-shadow: var(--surface-shadow-small);
+}
+
+[data-theme="dark"] .site-ui.practice-page .question-side {
+  border-color: var(--surface-border);
+  background: var(--surface-raised);
+}
+
+.site-ui.practice-page .question-side-title {
+  margin-bottom: 10px;
+  color: var(--text);
+  font-size: 0.82rem;
+}
+
+.site-ui.practice-page .jump-btn {
+  aspect-ratio: 1;
+  padding: 0;
+  border-color: transparent;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text);
+}
+
+.site-ui.practice-page .jump-btn:hover {
+  background: var(--surface-hover);
+  box-shadow: var(--surface-shadow-small);
+}
+
+.site-ui.practice-page .jump-btn.active {
+  border-color: var(--accent);
+  background: var(--surface-pressed);
+  box-shadow: var(--surface-shadow-inset-small);
+  color: var(--accent);
+}
+
+.site-ui.practice-page .tag,
+.site-ui.practice-page .text-view-box {
+  border-color: var(--surface-border-soft);
+  background: transparent;
+  box-shadow: none;
+  color: var(--muted);
+}
+
+.site-ui.practice-page #paperResult > .actions {
+  align-items: center;
+  padding-block: 10px;
+  border-bottom: 1px solid var(--surface-border-soft);
+}
+
+/*
+ * 限时测试计时器
+ * ==============
+ * JavaScript 会把 #timerDisplay 移到标题栏右侧。标题栏本身是 sticky，所以
+ * 页面滚动时计时器不会离开标题栏。练习模式和未打开试卷时使用 hidden，
+ * 本文件开头的 [hidden] 规则会确保它完全不占位置。
+ */
+.site-ui.practice-page #timerDisplay {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: auto;
+  min-width: 150px;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--surface-border-soft);
+  border-radius: 6px;
+  background: var(--bg);
+  box-shadow: var(--surface-shadow-inset-small);
+  color: var(--text);
+  font-family: "Share Tech Mono", ui-monospace, monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transform: none;
+  animation: none;
+}
+
+[data-theme="dark"] .site-ui.practice-page #timerDisplay {
+  background: var(--glass-well);
+}
+
+.site-ui.practice-page #timerDisplay:hover {
+  background: var(--bg);
+  box-shadow: var(--surface-shadow-inset-small);
+  transform: none;
+}
+
+.site-ui.practice-page #timerDisplay::before {
+  width: 7px;
+  height: 7px;
+  background: var(--error);
+  box-shadow: none;
+  animation: none;
+}
+
+@media (max-width: 767px) {
+  .site-ui.practice-page .container {
+    width: calc(100% - 20px);
+    margin-top: 14px;
+  }
+
+  .site-ui.practice-page .question-body-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .site-ui.practice-page .question {
+    padding: 16px 14px;
+  }
+
+  .site-ui.practice-page .question-side {
+    position: static;
+  }
+
+  .site-ui.practice-page #timerDisplay {
+    position: static;
+    min-width: 116px;
+    min-height: 40px;
+    padding: 6px 8px;
+    font-size: 0.76rem;
+  }
+}

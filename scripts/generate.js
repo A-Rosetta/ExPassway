@@ -1015,13 +1015,24 @@
   function updateTimerDisplay() {
     const timerEl = byId("timerDisplay");
     if (!timerEl) return;
-    if (state.practiceMode === "timed") {
+    const paperIsOpen = document.body.dataset.paperOpen === "true";
+    const timerIsVisible = paperIsOpen && state.practiceMode === "timed";
+    document.body.dataset.practiceMode = state.practiceMode;
+    timerEl.hidden = !timerIsVisible;
+    if (timerIsVisible) {
       timerEl.textContent = t("timedTestLabel", { time: formatElapsed(state.timerElapsedSeconds) });
-      timerEl.style.display = "";
-      return;
     }
-    timerEl.textContent = t("practiceUntimed");
-    timerEl.style.display = "";
+  }
+
+  function moveTimerToHeader() {
+    const timerEl = byId("timerDisplay");
+    const controlHost = document.querySelector(
+      ".site-header-controls, .home-header-controls, .community-topbar__actions"
+    );
+    if (!timerEl || !controlHost) return false;
+    if (timerEl.parentElement !== controlHost) controlHost.appendChild(timerEl);
+    updateTimerDisplay();
+    return true;
   }
 
   function stopTimer() {
@@ -1140,6 +1151,8 @@
     if (landing) landing.style.display = "none";
     if (hero) hero.style.display = "none";
     if (result) result.style.display = "none";
+    document.body.dataset.paperOpen = "false";
+    updateTimerDisplay();
     renderPaperSetList();
   }
 
@@ -1152,6 +1165,8 @@
     if (landing) landing.style.display = "block";
     if (hero) hero.style.display = "none";
     if (result) result.style.display = "none";
+    document.body.dataset.paperOpen = "false";
+    updateTimerDisplay();
     updateModeCardSelection(state.practiceMode);
     syncModeSummary();
   }
@@ -1165,6 +1180,7 @@
     if (landing) landing.style.display = "none";
     if (hero) hero.style.display = "block";
     if (result) result.style.display = "block";
+    document.body.dataset.paperOpen = "true";
     updateTimerDisplay();
   }
 
@@ -1206,6 +1222,9 @@
     summaryEl.textContent = t("fixedPathChemistry", selection);
   }
   updateTimerDisplay();
+  window.setTimeout(() => {
+    if (!moveTimerToHeader()) window.setTimeout(moveTimerToHeader, 50);
+  }, 0);
   setRunMode(t("chemistryOnlyGenerate"), false);
   (async function initHistoryState() {
     state.userPracticeHistory = await loadUserPracticeHistory();
