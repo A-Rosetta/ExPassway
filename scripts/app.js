@@ -316,6 +316,7 @@
     }
     if (visitorMode) {
       getEl("goNotebook").hidden = true;
+      getEl("mobileNotebookShortcut").hidden = true;
       // The analysis page reads the signed-in user's notebook, so it has
       // nothing to show a visitor - same reason the notebook entry is hidden.
       const analysisEntry = getEl("goAnalysis");
