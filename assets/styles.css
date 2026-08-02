@@ -2915,6 +2915,19 @@ textarea {
   resize: vertical;
 }
 
+#mappingInput {
+  width: 100%;
+}
+
+#jsonOutput {
+  margin: 0;
+  padding: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f8fbff;
+  white-space: pre-wrap;
+}
+
 @media (max-width: 860px) {
   .community-layout {
     grid-template-columns: 1fr;

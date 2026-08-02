@@ -6,7 +6,7 @@
   <title data-i18n="imageMapperPageTitle">题图绑定工具</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260728-3" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260803-1" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260802-1" />
 </head>
 <body class="site-ui utility-ui">
@@ -23,7 +23,7 @@
         <input id="basePrefix" type="text" data-i18n-placeholder="basePrefixPlaceholder" placeholder="例如 /assets/question-images/0620_s23_qp_21" />
       </label>
       <label><span data-i18n="mappingInputLabel">绑定内容（每行一题）</span>
-        <textarea id="mappingInput" rows="14" style="width:100%;border:1px solid var(--line);border-radius:10px;padding:0.7rem;" data-i18n-placeholder="mappingInputPlaceholder" placeholder="示例：\n1 q01_fig1.png\n2 q02_fig1.png,q02_fig2.png\n3 /assets/question-images/0620_s23_qp_21/q03_fig1.png"></textarea>
+        <textarea id="mappingInput" rows="14" data-i18n-placeholder="mappingInputPlaceholder" placeholder="示例：\n1 q01_fig1.png\n2 q02_fig1.png,q02_fig2.png\n3 /assets/question-images/0620_s23_qp_21/q03_fig1.png"></textarea>
       </label>
       <div class="actions">
         <button id="previewBtn" class="btn-primary" data-i18n="previewBtn">生成预览</button>
@@ -35,7 +35,7 @@
 
     <section class="card panel">
       <h2 data-i18n="jsonOutputTitle">JSON 输出</h2>
-      <pre id="jsonOutput" style="margin:0;white-space:pre-wrap;background:#f8fbff;border:1px solid var(--line);border-radius:10px;padding:0.8rem;"></pre>
+      <pre id="jsonOutput"></pre>
     </section>
 
     <section class="card panel">
