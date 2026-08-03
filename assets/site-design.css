@@ -3699,3 +3699,50 @@ html:not([data-theme="dark"]) .site-ui :is(
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
+
+/*
+ * 标题栏与模式按钮的按下状态修正
+ * ==================================
+ * :active 只在鼠标或触摸按住期间生效；菜单按钮展开后由 .is-open 或
+ * aria-expanded="true" 保持同样的 inset 内阴影。
+ */
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button:not(:disabled), .btn-link):active,
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link).is-open,
+.site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link)[aria-expanded="true"] {
+  border-color: transparent;
+  background: var(--surface-pressed);
+  box-shadow: var(--surface-shadow-inset-small);
+  color: var(--text);
+  transform: none;
+}
+
+/* 当前章节模式只显示内凹选中态，不再绘制外围凸起高光。 */
+.site-ui .chapter-mode-switch button.is-active,
+[data-theme="dark"] .site-ui .chapter-mode-switch button.is-active {
+  border-color: var(--accent);
+  background: var(--surface-pressed);
+  box-shadow: var(--surface-shadow-inset-small);
+  color: var(--accent);
+}
+
+/* 只把真正的退出操作设为危险色；访客状态的登录按钮不会匹配。 */
+.site-ui :is(#logoutHome, #communityLogout):is(
+  [data-i18n="homeLogout"],
+  [data-i18n="communityLogout"]
+),
+.site-ui :is(#logoutHome, #communityLogout):is(
+  [data-i18n="homeLogout"],
+  [data-i18n="communityLogout"]
+):is(:hover, :focus-visible, :active) {
+  color: var(--error);
+}
+
+/* 暗色模式下，套卷摘要的标签和值统一使用规范中的亮色正文。 */
+[data-theme="dark"] .site-ui .mode-summary-row,
+[data-theme="dark"] .site-ui .mode-summary-row > span,
+[data-theme="dark"] .site-ui .mode-summary-label {
+  color: var(--text);
+}
