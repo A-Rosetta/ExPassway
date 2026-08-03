@@ -3642,3 +3642,27 @@
   box-shadow: var(--surface-shadow-inset-small);
   transform: none;
 }
+
+/* ===== Dark theme: review and curriculum surfaces (2026-08-03) =====
+   Light fallbacks stay in styles.css per the convention noted there; the
+   theming lives here. Each of these sets a fill but no text colour, so under
+   the dark theme the inherited light text landed on a light fill and became
+   unreadable. */
+
+[data-theme="dark"] .site-ui .review-question-image {
+  border-color: var(--surface-border-soft);
+  background: var(--glass-fill);
+}
+
+[data-theme="dark"] .site-ui .review-question-answers > div {
+  border-color: var(--surface-border-soft);
+  background: var(--glass-fill);
+}
+
+[data-theme="dark"] .site-ui.curriculum-review-page {
+  background: var(--bg);
+}
+
+[data-theme="dark"] .site-ui .review-legend-dot.is-unanswered {
+  background: var(--glass-fill-strong);
+}
