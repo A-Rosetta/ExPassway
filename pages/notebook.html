@@ -6,7 +6,7 @@
   <title data-i18n="notebookPageTitle">错题本</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260802-11" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260803-6" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260803-4" />
 </head>
 <body class="student-ui site-ui notebook-page">
@@ -28,6 +28,14 @@
           <select id="sortBy">
             <option value="time_desc" data-i18n="sortLatest">按最近时间</option>
             <option value="count_desc" data-i18n="sortWrongCount">按错误次数</option>
+          </select>
+        </label>
+        <label><span data-i18n="difficultyFilterLabel">难度</span>
+          <select id="difficultyFilter">
+            <option value="" data-i18n="difficultyAll">全部难度</option>
+            <option value="basic" data-i18n="difficultyBasic">基础</option>
+            <option value="medium" data-i18n="difficultyMedium">中等</option>
+            <option value="challenge" data-i18n="difficultyChallenge">冲刺</option>
           </select>
         </label>
         <label class="notebook-mastered-filter">
@@ -59,6 +67,14 @@
           <label><span data-i18n="subjectFilterLabel">科目筛选</span>
             <select id="practiceSubject"></select>
           </label>
+          <label><span data-i18n="difficultyFilterLabel">难度</span>
+            <select id="practiceDifficulty">
+              <option value="" data-i18n="difficultyAll">全部难度</option>
+              <option value="basic" data-i18n="difficultyBasic">基础</option>
+              <option value="medium" data-i18n="difficultyMedium">中等</option>
+              <option value="challenge" data-i18n="difficultyChallenge">冲刺</option>
+            </select>
+          </label>
           <label class="notebook-mastered-filter">
             <input id="practiceOnlyUnmastered" type="checkbox" checked />
             <span data-i18n="notebookPracticeOnlyUnmastered">只选未掌握</span>
@@ -68,6 +84,7 @@
             <span data-i18n="notebookPracticeOnlyStarredLabel">只选收藏</span>
           </label>
         </div>
+        <p class="tip" data-i18n="difficultyHint">试卷按难度递增：第 1-14 题基础、15-28 题中等、29 题起冲刺。</p>
         <p class="tip" data-i18n="notebookPracticeReasonsHint">按错因筛选（不选则不限）</p>
         <div id="practiceReasons" class="actions notebook-practice-reasons"></div>
         <p id="practiceDialogStatus" class="tip"></p>
@@ -87,10 +104,10 @@
       </div>
     </section>
   </main>
-  <script src="../scripts/i18n.js?v=20260802-3"></script>
+  <script src="../scripts/i18n.js?v=20260803-6"></script>
   <script src="../scripts/site-ui.js?v=20260730-1"></script>
   <script src="../scripts/api.js?v=20260802-3"></script>
   <script src="../scripts/pet.js?v=20260731-1"></script>
-  <script src="../scripts/notebook.js?v=20260802-3"></script>
+  <script src="../scripts/notebook.js?v=20260803-6"></script>
 </body>
 </html>

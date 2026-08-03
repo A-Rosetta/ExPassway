@@ -169,6 +169,33 @@
     return Number.isInteger(number) && number > 0 ? number : fallback;
   }
 
+  // CIE MCQ papers are ordered by difficulty, and the question number is the
+  // trailing segment of question_key. That ordering is the only difficulty
+  // signal in the data - question_bank.difficulty holds localized strings, so
+  // it is not usable for filtering. Bands here mirror DIFFICULTY_BANDS in
+  // cloudflare/learning-api.js.
+  function difficultyOf(row) {
+    const source = String(row.questionKey || "");
+    const match = source.match(/-(\d{1,3})$/);
+    const number = match ? Number(match[1]) : 0;
+    if (!Number.isInteger(number) || number < 1) return "";
+    if (number <= 14) return "basic";
+    if (number <= 28) return "medium";
+    return "challenge";
+  }
+
+  const DIFFICULTY_LABELS = {
+    basic: "difficultyBasic",
+    medium: "difficultyMedium",
+    challenge: "difficultyChallenge",
+  };
+
+  function renderDifficultyTag(row) {
+    const level = difficultyOf(row);
+    if (!level) return "";
+    return `<span class="tag notebook-difficulty-tag is-${level}">${t(DIFFICULTY_LABELS[level])}</span>`;
+  }
+
   function isAnswered(row) {
     if (row.lastSelected === null || row.lastSelected === "") return false;
     const selected = Number(row.lastSelected);
@@ -204,6 +231,9 @@
     if (state.onlyStarred) {
       filtered = filtered.filter((r) => r.starred);
     }
+    if (state.difficulty) {
+      filtered = filtered.filter((r) => difficultyOf(r) === state.difficulty);
+    }
     filtered = sortRows(filtered, state.sortBy);
     const fallbackNumbers = new Map(filtered.map((row, idx) => [row, idx + 1]));
 
@@ -236,6 +266,7 @@
                   <div class="notebook-question-content">
                     <p class="chem-text">${r.stem || t("stemMissing")}</p>
                     <div class="tag-row">
+                      ${renderDifficultyTag(r)}
                       <span class="tag">${r.topic || "-"}</span>
                       <span class="tag">${t("wrongCountLabel")} ${r.wrongCount || 1}</span>
                       <span class="tag">${t("latestLabel")} ${r.lastWrongAt ? new Date(r.lastWrongAt).toLocaleString(getLanguage() === "en" ? "en-US" : "zh-CN") : "-"}</span>
@@ -325,6 +356,7 @@
       sortBy: byId("sortBy")?.value || "time_desc",
       hideMastered: Boolean(byId("hideMastered")?.checked),
       onlyStarred: Boolean(byId("onlyStarred")?.checked),
+      difficulty: byId("difficultyFilter")?.value || "",
     };
 
     const sortedForStats = sortRows(answeredRows, "time_desc");
@@ -341,6 +373,7 @@
   byId("sortBy").addEventListener("change", () => { currentPage = 1; init(); });
   byId("hideMastered").addEventListener("change", () => { currentPage = 1; init(); });
   byId("onlyStarred")?.addEventListener("change", () => { currentPage = 1; init(); });
+  byId("difficultyFilter")?.addEventListener("change", () => { currentPage = 1; init(); });
 
   byId("clearNotebook").addEventListener("click", async function () {
     await clearUserRecords();
@@ -419,6 +452,7 @@
         subject: byId("practiceSubject").value || "",
         onlyUnmastered: Boolean(byId("practiceOnlyUnmastered").checked),
         onlyStarred: Boolean(byId("practiceOnlyStarred").checked),
+        difficulty: byId("practiceDifficulty")?.value || "",
         mistakeReasons: reasons,
       });
       if (!payload?.paperId || !payload.questions?.length) {
