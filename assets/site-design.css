@@ -3666,3 +3666,21 @@
 [data-theme="dark"] .site-ui .review-legend-dot.is-unanswered {
   background: var(--glass-fill-strong);
 }
+
+/*
+ * 浅色标题栏使用不透明表面
+ * ========================
+ * 只在根元素没有 data-theme="dark" 时生效。保留标题栏原有尺寸、圆角、
+ * 边框和阴影，只把半透明玻璃底改成实色并关闭背景模糊。暗色标题栏不匹配
+ * 这些选择器，因此其颜色、透明度和玻璃效果保持不变。
+ */
+html:not([data-theme="dark"]) .site-ui :is(
+  .home-topbar__inner,
+  .site-topbar__inner,
+  .chapter-topbar__inner,
+  .community-topbar__inner
+) {
+  background: #EEF5F0;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
