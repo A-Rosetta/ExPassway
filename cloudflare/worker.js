@@ -12,7 +12,7 @@ const CONTENT_SECURITY_POLICY = [
   "style-src-elem 'self' https://fonts.googleapis.com",
   "style-src-attr 'unsafe-inline'",
   "font-src 'self' https://fonts.gstatic.com data:",
-  "img-src 'self' data: blob: https:",
+  "img-src 'self' data: blob:",
   "connect-src 'self'",
   "media-src 'self' data: blob:",
   "worker-src 'self' blob:",

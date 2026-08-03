@@ -9,7 +9,9 @@
     return String(value || "")
       .replaceAll("&", "&amp;")
       .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;");
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
   }
 
   function setStatus(text, isBad) {
@@ -22,12 +24,22 @@
   function normalizeUrl(url, basePrefix) {
     const raw = String(url || "").trim();
     if (!raw) return "";
-    if (raw.startsWith("/") || raw.startsWith("http://") || raw.startsWith("https://")) {
-      return raw;
-    }
     const prefix = String(basePrefix || "").trim().replace(/\/+$/, "");
-    if (!prefix) return raw;
-    return `${prefix}/${raw}`;
+    const combined = raw.startsWith("/") || /^https?:\/\//i.test(raw)
+      ? raw
+      : prefix
+        ? `${prefix}/${raw}`
+        : raw;
+    let parsed;
+    try {
+      parsed = new URL(combined, location.href);
+    } catch (_err) {
+      throw new Error(t("imageMapperRejectedUrl", { url: combined }));
+    }
+    if (!/^https?:$/.test(parsed.protocol) || parsed.origin !== location.origin) {
+      throw new Error(t("imageMapperRejectedUrl", { url: combined }));
+    }
+    return combined;
   }
 
   function parseInput(input, basePrefix) {
@@ -36,7 +48,8 @@
       .map((line) => line.trim())
       .filter(Boolean);
 
-    const out = {};
+    const map = {};
+    const rejected = [];
     rows.forEach((line) => {
       const firstSpace = line.indexOf(" ");
       if (firstSpace <= 0) return;
@@ -47,15 +60,23 @@
 
       const urls = rest
         .split(",")
-        .map((x) => normalizeUrl(x.trim(), basePrefix))
+        .map((x) => {
+          const candidate = x.trim();
+          try {
+            return normalizeUrl(candidate, basePrefix);
+          } catch (_err) {
+            rejected.push(candidate);
+            return "";
+          }
+        })
         .filter(Boolean);
 
       if (urls.length) {
-        out[qNo] = urls;
+        map[qNo] = urls;
       }
     });
 
-    return out;
+    return { map, rejected };
   }
 
   function renderPreview(map) {
@@ -96,11 +117,19 @@
   function update() {
     const basePrefix = byId("basePrefix").value || "";
     const input = byId("mappingInput").value || "";
-    const map = parseInput(input, basePrefix);
+    const result = parseInput(input, basePrefix);
+    const { map, rejected } = result;
     byId("jsonOutput").textContent = JSON.stringify(map, null, 2);
     renderPreview(map);
-    setStatus(t("parsedImageMappings", { count: Object.keys(map).length }), false);
-    return map;
+    if (rejected.length) {
+      setStatus(t("imageMapperRejectedUrls", {
+        count: rejected.length,
+        url: rejected[0],
+      }), true);
+    } else {
+      setStatus(t("parsedImageMappings", { count: Object.keys(map).length }), false);
+    }
+    return result;
   }
 
   byId("previewBtn").addEventListener("click", () => {
@@ -112,7 +141,7 @@
   });
 
   byId("downloadBtn").addEventListener("click", () => {
-    const map = update();
+    const { map } = update();
     const blob = new Blob([JSON.stringify(map, null, 2)], { type: "application/json;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -122,10 +151,10 @@
   });
 
   byId("copyBtn").addEventListener("click", async () => {
-    const map = update();
+    const { map, rejected } = update();
     try {
       await navigator.clipboard.writeText(JSON.stringify(map, null, 2));
-      setStatus(t("jsonCopied"), false);
+      if (!rejected.length) setStatus(t("jsonCopied"), false);
     } catch (_err) {
       setStatus(t("copyFailed"), true);
     }
