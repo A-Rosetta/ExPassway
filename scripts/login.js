@@ -85,6 +85,7 @@
   }
 
   function showOtpStep(email) {
+    document.body.classList.add("is-otp-step");
     byId("emailStep").hidden = true;
     byId("otpStep").hidden = false;
     byId("otpAccountEmail").textContent = email;
@@ -93,6 +94,7 @@
   }
 
   function showEmailStep() {
+    document.body.classList.remove("is-otp-step");
     byId("otpStep").hidden = true;
     byId("emailStep").hidden = false;
     setFieldError(byId("emailOtpCode"), byId("emailOtpCodeError"), "");

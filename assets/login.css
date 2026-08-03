@@ -1,0 +1,334 @@
+.student-ui.auth-page.login-page {
+  --login-bg: #e8ebed;
+  --login-surface: #e8ebed;
+  --login-text: #1c2529;
+  --login-muted: #667176;
+  --login-accent: #1f7a5a;
+  --login-accent-hover: #176548;
+  --login-light: #ffffff;
+  --login-shadow: #bec5c9;
+  overflow-y: auto;
+  background: var(--login-bg);
+  color: var(--login-text);
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page.login-page {
+  background: var(--login-bg);
+  color: var(--login-text);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page {
+  --login-bg: #171a1b;
+  --login-surface: #1f2425;
+  --login-text: #f2f4f5;
+  --login-muted: #b1b8bb;
+  --login-accent: #72cda0;
+  --login-accent-hover: #89dbb2;
+  --login-light: #2e3436;
+  --login-shadow: #0c0f10;
+}
+
+.login-page .auth-layout {
+  min-height: 100svh;
+  padding: 76px 24px 36px;
+}
+
+.login-page .login-shell {
+  display: grid;
+  width: min(100%, 1000px);
+  min-height: 600px;
+  grid-template-columns: minmax(320px, 40%) minmax(0, 60%);
+  overflow: hidden;
+  border: 0;
+  border-radius: 8px;
+  padding: 0;
+  background: var(--login-surface);
+  box-shadow: 12px 12px 28px var(--login-shadow), -12px -12px 28px var(--login-light);
+  color: var(--login-text);
+  isolation: isolate;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page.login-page .login-shell {
+  border-color: transparent;
+  background: var(--login-surface);
+  box-shadow: 12px 12px 28px var(--login-shadow), -12px -12px 28px var(--login-light);
+}
+
+.login-page .login-shell::before {
+  display: none;
+}
+
+.login-page .login-welcome {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  place-items: center;
+  padding: 64px 44px;
+  background: var(--login-surface);
+  box-shadow: 6px 0 18px rgba(58, 76, 66, 0.2);
+}
+
+[data-theme="dark"] .login-page .login-welcome {
+  box-shadow: 6px 0 18px rgba(0, 0, 0, 0.28);
+}
+
+.login-page .login-welcome-content {
+  width: 100%;
+  text-align: center;
+}
+
+.login-page .auth-brand {
+  display: block;
+  margin: 0;
+  color: var(--login-text) !important;
+  font-size: 3.2rem;
+  line-height: 1.05;
+}
+
+.login-page .login-welcome p {
+  max-width: 280px;
+  margin: 24px auto 0;
+  color: var(--login-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.student-ui.auth-page.login-page .login-visitor-button {
+  width: min(100%, 250px);
+  min-height: 48px;
+  margin-top: 38px;
+  border: 0;
+  border-radius: 24px;
+  padding: 0 22px;
+  background: var(--login-accent);
+  box-shadow: 7px 7px 14px var(--login-shadow), -7px -7px 14px var(--login-light);
+  color: #fff;
+  cursor: pointer;
+  transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button {
+  color: #102018;
+}
+
+.login-page .login-form-panel {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 52px 70px;
+}
+
+.login-page .auth-heading {
+  width: 100%;
+  margin: 0 0 34px;
+}
+
+.student-ui.auth-page.login-page .auth-heading h1 {
+  color: var(--login-text);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.login-page .auth-heading p {
+  display: none;
+  color: var(--login-muted);
+}
+
+.login-page .auth-step,
+.login-page .auth-status {
+  width: 100%;
+}
+
+.student-ui.auth-page.login-page .auth-provider-button,
+.student-ui.auth-page.login-page .auth-submit-button,
+.student-ui.auth-page.login-page .auth-input {
+  min-height: 52px;
+  border: 0;
+  border-radius: 8px;
+}
+
+.student-ui.auth-page.login-page .auth-provider-button,
+.student-ui.auth-page.login-page .auth-input {
+  background: var(--login-surface);
+  color: var(--login-text);
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-provider-button,
+html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input {
+  border-color: transparent;
+  background: var(--login-surface);
+  color: var(--login-text);
+}
+
+.student-ui.auth-page.login-page .auth-provider-button {
+  box-shadow: 6px 6px 12px var(--login-shadow), -6px -6px 12px var(--login-light);
+  cursor: pointer;
+}
+
+.student-ui.auth-page.login-page .auth-input {
+  padding: 0 20px;
+  outline: 0;
+  box-shadow: inset 3px 3px 6px var(--login-shadow), inset -3px -3px 6px var(--login-light);
+}
+
+.student-ui.auth-page.login-page .auth-input::placeholder {
+  color: var(--login-muted);
+}
+
+.student-ui.auth-page.login-page .auth-input:hover,
+.student-ui.auth-page.login-page .auth-input:focus {
+  border: 0;
+  box-shadow: inset 5px 5px 8px var(--login-shadow), inset -5px -5px 8px var(--login-light), 0 0 0 2px rgba(31, 122, 90, 0.38);
+}
+
+.student-ui.auth-page.login-page .auth-input[aria-invalid="true"] {
+  box-shadow: inset 3px 3px 6px var(--login-shadow), inset -3px -3px 6px var(--login-light), 0 0 0 2px #c94f49;
+}
+
+.student-ui.auth-page.login-page .auth-submit-button {
+  margin-top: 20px;
+  border-radius: 26px;
+  background: var(--login-accent);
+  box-shadow: 7px 7px 14px var(--login-shadow), -7px -7px 14px var(--login-light);
+  color: #fff;
+  cursor: pointer;
+  transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.student-ui.auth-page.login-page .auth-provider-button:hover,
+.student-ui.auth-page.login-page .auth-provider-button:focus-visible {
+  border: 0;
+  background: var(--login-surface);
+  color: var(--login-text);
+  box-shadow: 4px 4px 9px var(--login-shadow), -4px -4px 9px var(--login-light);
+  transform: translateY(1px);
+}
+
+.student-ui.auth-page.login-page .auth-submit-button:hover,
+.student-ui.auth-page.login-page .auth-submit-button:focus-visible,
+.student-ui.auth-page.login-page .login-visitor-button:hover,
+.student-ui.auth-page.login-page .login-visitor-button:focus-visible {
+  border: 0;
+  background: var(--login-accent-hover);
+  box-shadow: 4px 4px 9px var(--login-shadow), -4px -4px 9px var(--login-light);
+  transform: translateY(1px);
+}
+
+.student-ui.auth-page.login-page button:active {
+  box-shadow: inset 3px 3px 6px var(--login-shadow), inset -3px -3px 6px var(--login-light);
+  transform: translateY(2px);
+}
+
+.login-page .auth-divider {
+  margin: 26px 0;
+  color: var(--login-muted);
+}
+
+.login-page .auth-divider::before,
+.login-page .auth-divider::after {
+  background: rgba(98, 112, 105, 0.28);
+}
+
+.login-page .auth-account-email {
+  color: var(--login-muted);
+}
+
+.student-ui.auth-page.login-page .auth-otp-resend,
+.student-ui.auth-page.login-page .auth-back-link,
+.student-ui.auth-page.login-page .auth-status.good {
+  color: var(--login-accent);
+}
+
+.student-ui.auth-page.login-page .auth-otp-resend {
+  background: rgba(31, 122, 90, 0.12);
+}
+
+.student-ui.auth-page.login-page .auth-field-error,
+.student-ui.auth-page.login-page .auth-status.bad {
+  color: #c94f49;
+}
+
+.login-page .auth-status {
+  margin: 18px 0 0;
+}
+
+.login-page.is-otp-step .login-form-panel {
+  animation: login-step-in 260ms ease both;
+}
+
+@keyframes login-step-in {
+  from {
+    opacity: 0.3;
+    transform: translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 760px) {
+  .login-page .auth-layout {
+    place-items: start center;
+    padding: 78px 16px 24px;
+  }
+
+  .login-page .login-shell {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .login-page .login-welcome {
+    min-height: 210px;
+    padding: 34px 26px;
+    box-shadow: 0 5px 16px rgba(58, 76, 66, 0.2);
+  }
+
+  .login-page .auth-brand {
+    font-size: 2.35rem;
+  }
+
+  .login-page .login-welcome p {
+    display: none;
+  }
+
+  .student-ui.auth-page.login-page .login-visitor-button {
+    margin-top: 24px;
+  }
+
+  .login-page .login-form-panel {
+    padding: 40px 24px 34px;
+  }
+
+  .login-page .auth-heading {
+    margin-bottom: 30px;
+  }
+
+  .student-ui.auth-page.login-page .auth-heading h1 {
+    font-size: 2.15rem;
+  }
+
+  .login-page .auth-heading p {
+    display: block;
+    margin-top: 16px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-page .login-form-panel,
+  .login-page .auth-provider-button,
+  .login-page .auth-submit-button,
+  .login-page .login-visitor-button {
+    animation: none;
+    transition: none;
+  }
+}
