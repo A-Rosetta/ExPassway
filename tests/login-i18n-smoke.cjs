@@ -30,6 +30,9 @@ async function newPage(browser, locale, savedLanguage) {
       assert.equal(await page.locator("#loginTitle").textContent(), "Log in or sign up");
       assert.equal(await page.locator("[data-language-toggle]").textContent(), "中文");
       assert.equal(await page.locator("#emailOtpRequestBtn").textContent(), "Continue with email");
+      assert.equal(await page.locator(".login-shell > .login-welcome").count(), 1);
+      assert.equal(await page.locator(".login-shell > .login-form-panel").count(), 1);
+      assert.equal(await page.locator(".login-welcome #visitorModeBtn").count(), 1);
 
       await page.locator("#googleLoginBtn").click();
       await page.locator("#authStatus").waitFor({ state: "visible" });
@@ -84,17 +87,37 @@ async function newPage(browser, locale, savedLanguage) {
       await page.locator("#emailOtpAddress").fill("Student@Example.com");
       await page.locator("#emailOtpRequestBtn").click();
       await page.locator("#otpStep").waitFor({ state: "visible" });
+      assert.equal(await page.locator("body").evaluate((element) => element.classList.contains("is-otp-step")), true);
       assert.equal(otpRequestCount, 1);
       assert.equal(await page.locator("#otpAccountEmail").textContent(), "student@example.com");
       assert.equal(await page.locator("#authStatus").textContent(), "Verification code sent. Check your email.");
       assert.equal(await page.locator(".auth-otp-field > #emailOtpResendBtn").count(), 1);
       assert.equal(await page.locator("#emailOtpResendBtn").isDisabled(), true);
       assert.equal(await page.locator("#emailOtpResendBtn").textContent(), "Resend in 60s");
+      await page.locator("#emailOtpBackBtn").click();
+      assert.equal(await page.locator("body").evaluate((element) => element.classList.contains("is-otp-step")), false);
+      assert.equal(await page.locator("#emailStep").isVisible(), true);
+      await page.locator("#emailOtpRequestBtn").click();
+      await page.locator("#otpStep").waitFor({ state: "visible" });
+      assert.equal(otpRequestCount, 2);
 
       await page.locator("#emailOtpCode").fill("123456");
       await page.locator("#emailOtpVerifyBtn").click();
       await page.waitForURL(`${baseUrl}/index.html`);
       assert.equal(await page.evaluate(() => localStorage.getItem("alevel.authToken")), "email-test-token");
+      await context.close();
+    }
+
+    {
+      const context = await browser.newContext({ locale: "zh-CN", viewport: { width: 390, height: 844 } });
+      const page = await context.newPage();
+      await page.addInitScript(() => localStorage.clear());
+      await page.goto(`${baseUrl}/pages/login.html`, { waitUntil: "networkidle" });
+      assert.equal(await page.locator("#loginTitle").evaluate((element) => element.scrollWidth <= element.clientWidth + 1), true);
+      assert.equal(await page.locator("body").evaluate(() => document.body.scrollWidth <= document.documentElement.clientWidth + 1), true);
+      assert.equal(await page.locator("#googleLoginBtn").isVisible(), true);
+      assert.equal(await page.locator("#emailOtpRequestBtn").isVisible(), true);
+      assert.equal(await page.locator("#visitorModeBtn").isVisible(), true);
       await context.close();
     }
 
