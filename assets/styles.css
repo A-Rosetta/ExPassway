@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --bg: #f5f7fb;
   --surface: #ffffff;
   --text: #152238;
@@ -4788,4 +4788,32 @@ body.chapter-practice-page {
   padding: 0 !important;
   cursor: pointer;
   accent-color: var(--accent);
+}
+
+/* ===== Question difficulty tags on the notebook (2026-08-03) =====
+   Tints come from theme tokens so the tags stay legible in both themes. */
+.notebook-difficulty-tag {
+  font-weight: 600;
+}
+
+.notebook-difficulty-tag.is-basic {
+  background: rgba(var(--accent-rgb), 0.16);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.notebook-difficulty-tag.is-medium {
+  background: rgba(var(--accent-rgb), 0.1);
+  color: var(--muted);
+  border-color: var(--line);
+}
+
+.notebook-difficulty-tag.is-challenge {
+  background: rgba(176, 72, 94, 0.14);
+  color: var(--error);
+  border-color: var(--error);
+}
+
+[data-theme="dark"] .notebook-difficulty-tag.is-challenge {
+  background: rgba(246, 166, 179, 0.18);
 }

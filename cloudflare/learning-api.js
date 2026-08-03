@@ -227,18 +227,18 @@ function buildAnalysis(input = {}) {
     ? [
       `未来 7 天：优先复习 ${weakTopics}，每天进行 20 分钟概念回顾和 4 道定向练习。`,
       "未来 30 天：每周完成一次限时测验，并按概念、计算和审题错误复盘。",
-      "策略：先确保基础题正确率，再逐步将挑战题比例提高到 40%。",
+      "策略：MCQ 试卷按难度递增，第 1-14 题为基础、15-28 题为中等、29 题之后为冲刺。先把基础段正确率稳定在 80% 以上，再逐步把冲刺题比例提高到 40%。",
     ]
     : [
       `Next 7 days: prioritize ${weakTopics} with 20 minutes of concept review and 4 targeted questions each day.`,
       "Next 30 days: take one timed quiz each week and review mistakes by concept, calculation, and question-reading errors.",
-      "Strategy: secure accuracy on basic questions first, then gradually raise the share of challenge questions to 40%.",
+      "Strategy: MCQ papers get harder as they go - questions 1-14 are basic, 15-28 medium, 29 onwards challenge. Hold basic accuracy above 80% first, then raise the share of challenge questions to 40%.",
     ];
   const lastResult = input.lastResult || null;
   if (typeof lastResult?.accuracy === "number" && lastResult.accuracy < 60) {
     advices.unshift(language === "zh-CN"
-      ? "本周先练习基础和中等题，将正确率稳定在 70% 以上后再回到难题。"
-      : "This week, use basic and medium questions until your accuracy is consistently above 70%, then return to harder questions.");
+      ? "本周先只做每份卷的第 1-28 题（基础与中等段），正确率稳定到 70% 以上后再往后推进；错题本可按难度筛选，也可只组基础题练习卷。"
+      : "This week, stick to questions 1-28 of each paper (basic and medium) until your accuracy is consistently above 70%. The notebook can filter by difficulty, and you can build a basic-only practice paper from it.");
   }
   const total = Number(lastResult?.total || 0);
   const hintRate = total ? (Number(lastResult?.hintUsedQuestions || 0) / total) * 100 : 0;
@@ -440,6 +440,16 @@ const NOTEBOOK_MISTAKE_REASONS = new Set([
   "concept", "calculation", "question_reading", "careless", "time_pressure", "unknown",
 ]);
 
+// CIE MCQ papers are ordered by difficulty, which is the only difficulty signal
+// the data actually carries. question_bank.difficulty exists but the importer
+// writes localized Chinese strings into it, so filtering on question_no keeps
+// this language-neutral and matches what the front end shows.
+const DIFFICULTY_BANDS = {
+  basic: { min: 1, max: 14 },
+  medium: { min: 15, max: 28 },
+  challenge: { min: 29, max: 999 },
+};
+
 async function createNotebookPractice(request, env, userId) {
   await assertOwnUser(request, env, userId);
   const body = await readJsonBody(request);
@@ -458,6 +468,11 @@ async function createNotebookPractice(request, env, userId) {
   }
   if (onlyUnmastered) clauses.push("entry.mastered = 0");
   if (onlyStarred) clauses.push("entry.starred = 1");
+  const band = DIFFICULTY_BANDS[typeof body.difficulty === "string" ? body.difficulty : ""];
+  if (band) {
+    clauses.push("question.question_no BETWEEN ? AND ?");
+    bindings.push(band.min, band.max);
+  }
   if (reasons.length) {
     // Values are whitelisted above, so the LIKE patterns carry no user-controlled wildcards.
     clauses.push(`(${reasons.map(() => "entry.mistake_reasons LIKE ?").join(" OR ")})`);
