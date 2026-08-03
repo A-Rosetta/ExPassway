@@ -190,9 +190,26 @@
       breaks: true,
       gfm: true,
     });
-    return window.DOMPurify.sanitize(html, {
+    const fragment = window.DOMPurify.sanitize(html, {
       USE_PROFILES: { html: true, mathMl: true, svg: true },
+      RETURN_DOM_FRAGMENT: true,
     });
+    fragment.querySelectorAll("img").forEach((image) => {
+      const src = image.getAttribute("src") || "";
+      if (!src) {
+        image.remove();
+        return;
+      }
+      try {
+        const url = new URL(src, location.href);
+        if (!/^https?:$/.test(url.protocol) || url.origin !== location.origin) image.remove();
+      } catch (_err) {
+        image.remove();
+      }
+    });
+    const template = document.createElement("template");
+    template.content.append(fragment);
+    return template.innerHTML;
   }
 
   function resolveImageUrl(value) {

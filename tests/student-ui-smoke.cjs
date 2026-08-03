@@ -1,4 +1,5 @@
 const assert = require("node:assert/strict");
+const path = require("node:path");
 const { chromium, webkit } = require("playwright");
 
 const baseUrl = process.env.STUDENT_UI_BASE_URL || "http://127.0.0.1/alevel";
@@ -210,7 +211,7 @@ function discussionPayload(threadId = "thread-1") {
   return {
     thread,
     posts: [
-      { id: "post-1", threadId: thread.id, authorId: "author-1", authorName: "Alice", body: "我先列出了 $n=m/M_r$，但不确定下一步。", liked: false, likeCount: 2, flagCount: 0, createdAt: now },
+      { id: "post-1", threadId: thread.id, authorId: "author-1", authorName: "Alice", body: "我先列出了 $n=m/M_r$，但不确定下一步。\n\n![站内上传](/api/community-images/00000000-0000-4000-8000-000000000001.png)\n\n![外链图片](https://external.invalid/tracker.png)\n\n[External reference](https://example.com/reference)", liked: false, likeCount: 2, flagCount: 0, createdAt: now },
       { id: "post-2", threadId: thread.id, authorId: "user-1", authorName: "UI Test Student", body: "比较各反应物的物质的量与系数之比即可。", liked: true, likeCount: 5, flagCount: 0, createdAt: now },
       { id: "post-3", threadId: thread.id, authorId: "author-3", authorName: "Chen", body: "也可以先假设其中一种完全反应，再检查另一种是否过量。", liked: false, likeCount: 1, flagCount: 0, createdAt: now },
     ],
@@ -342,7 +343,14 @@ async function mockApi(page, currentUser = user, authDelayMs = 0) {
       return json(route, { id: "post-new" }, 201);
     }
     if (path === "/api/discussions/images" && method === "POST") {
-      return json(route, { url: "../assets/question-images/0620_s23_qp_21/q01_full.png" }, 201);
+      return json(route, { url: "/api/community-images/00000000-0000-4000-8000-000000000001.png" }, 201);
+    }
+    if (path === "/api/community-images/00000000-0000-4000-8000-000000000001.png") {
+      return route.fulfill({
+        status: 200,
+        contentType: "image/png",
+        path: path.resolve(__dirname, "../assets/question-images/0620_s23_qp_21/q01_full.png"),
+      });
     }
     if (/^\/api\/discussions\//.test(path) && method !== "GET") return json(route, { ok: true });
     if (/^\/api\/users\//.test(path)) return json(route, []);
@@ -513,10 +521,24 @@ async function assertElevatedSurface(page, selector, label) {
   assert.notEqual(surface.overflowX, "scroll", `${label}: secondary surface allows horizontal scrolling`);
 }
 
+async function waitForPageCondition(page, predicate, argument, timeoutMs = 5000) {
+  const deadline = Date.now() + timeoutMs;
+  while (!(await page.evaluate(predicate, argument))) {
+    if (Date.now() >= deadline) throw new Error("Timed out waiting for page condition");
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+}
+
+async function captureScreenshot(page, options) {
+  if (process.env.STUDENT_UI_SKIP_SCREENSHOTS === "1") return;
+  await page.screenshot(options);
+}
+
 async function openPage(browser, config, pathname, options = {}) {
   const context = await browser.newContext({
     viewport: config.viewport,
     reducedMotion: "reduce",
+    ignoreHTTPSErrors: /^https:\/\/(?:127\.0\.0\.1|localhost)(?::\d+)?$/.test(new URL(baseUrl).origin),
     ...(options.colorScheme ? { colorScheme: options.colorScheme } : {}),
   });
   const page = await context.newPage();
@@ -528,6 +550,18 @@ async function openPage(browser, config, pathname, options = {}) {
   }
   const errors = [];
   const failedRequests = [];
+  await page.addInitScript(() => {
+    document.addEventListener("securitypolicyviolation", (event) => {
+      console.error([
+        `[CSP] ${event.effectiveDirective} blocked ${event.blockedURI}`,
+        event.sourceFile ? `at ${event.sourceFile}:${event.lineNumber}:${event.columnNumber}` : "",
+        event.sample ? `sample ${event.sample}` : "",
+      ].filter(Boolean).join(" "));
+    });
+  });
+  page.on("console", (message) => {
+    if (message.type() === "error" && message.text().startsWith("[CSP]")) errors.push(message.text());
+  });
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("requestfailed", (request) => failedRequests.push(`${request.method()} ${request.url()}`));
   await seedStorage(page, pathname, options.language);
@@ -604,7 +638,7 @@ async function verifyHomeThemes(browser, config) {
       const menu = page.locator("#homeMenuToggle");
       await menu.click();
       assert.equal(await menu.getAttribute("aria-expanded"), "true");
-      await page.waitForFunction(() => {
+      await waitForPageCondition(page, () => {
         const style = getComputedStyle(document.querySelector("#homeNav"));
         return style.visibility === "visible" && Number.parseFloat(style.opacity) === 1;
       });
@@ -620,13 +654,13 @@ async function verifyHomeThemes(browser, config) {
     }
 
     await assertPageGeometry(page, `${config.name}-home-light`);
-    await page.screenshot({
+    await captureScreenshot(page, {
       path: `/var/tmp/student-ui-${config.name}-home-light.png`,
       fullPage: true,
     });
 
     await page.locator("#themeToggle").click();
-    await page.waitForFunction(() => (
+    await waitForPageCondition(page, () => (
       getComputedStyle(document.body).backgroundColor === "rgb(20, 23, 28)"
       && getComputedStyle(document.querySelector(".course-card")).backgroundColor === "rgba(255, 255, 255, 0.07)"
     ));
@@ -674,7 +708,7 @@ async function verifyHomeThemes(browser, config) {
     await assertPageGeometry(page, `${config.name}-home-dark`);
     assert.deepEqual(run.errors, [], `${config.name}-home-themes: page errors`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-home-themes: failed requests`);
-    await page.screenshot({
+    await captureScreenshot(page, {
       path: `/var/tmp/student-ui-${config.name}-home-dark.png`,
       fullPage: true,
     });
@@ -709,13 +743,13 @@ async function verifyStandardPage(browser, config, pageSpec) {
     if (pageSpec.verify) await pageSpec.verify(run.page);
     await assertPageGeometry(run.page, `${config.name}-${pageSpec.name}-light`);
     await assertThemeSurface(run.page, `${config.name}-${pageSpec.name}-light`, "light");
-    await run.page.screenshot({
+    await captureScreenshot(run.page, {
       path: `/var/tmp/student-ui-${config.name}-${pageSpec.name}-light.png`,
       fullPage: true,
     });
 
     await run.page.locator("#themeToggle").click();
-    await run.page.waitForFunction(() => {
+    await waitForPageCondition(run.page, () => {
       if (document.documentElement.dataset.theme !== "dark") return false;
       const surface = document.querySelector(".card, .community-surface, .course-card, .chapter-band");
       const style = getComputedStyle(surface);
@@ -729,7 +763,7 @@ async function verifyStandardPage(browser, config, pageSpec) {
     await assertAccessibleMotion(run.page, `${config.name}-${pageSpec.name}`);
     assert.deepEqual(run.errors, [], `${config.name}-${pageSpec.name}: page errors`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-${pageSpec.name}: failed requests`);
-    await run.page.screenshot({
+    await captureScreenshot(run.page, {
       path: `/var/tmp/student-ui-${config.name}-${pageSpec.name}-dark.png`,
       fullPage: true,
     });
@@ -738,7 +772,7 @@ async function verifyStandardPage(browser, config, pageSpec) {
   }
 }
 
-async function verifyGeneratedPaper(browser, config) {
+async function verifyGeneratedPaper(browser, config, { layoutChecks = true } = {}) {
   const run = await openPage(browser, config, "/pages/generate.html", { clock: true, theme: "dark" });
   const { page } = run;
   try {
@@ -761,7 +795,7 @@ async function verifyGeneratedPaper(browser, config) {
     await questionImage.waitFor({ state: "visible" });
     assert.equal(await page.locator(".option-item").count(), 4);
     await page.locator("[id^='hintBtn_']").first().click();
-    await page.waitForFunction(() => /提示 1\/3|Hint 1\/3/.test(
+    await waitForPageCondition(page, () => /提示 1\/3|Hint 1\/3/.test(
       document.querySelector("[id^='hint_']")?.textContent || ""
     ));
     assert.match(await page.locator("[id^='hint_']").first().textContent(), /提示 1\/3|Hint 1\/3/);
@@ -778,7 +812,7 @@ async function verifyGeneratedPaper(browser, config) {
     } else {
       await page.locator(".site-pet__bubble-message").click();
     }
-    await page.waitForFunction(() => /提示 2\/3|Hint 2\/3/.test(
+    await waitForPageCondition(page, () => /提示 2\/3|Hint 2\/3/.test(
       document.querySelector("[id^='hint_']")?.textContent || ""
     ));
     assert.match(await page.locator("[id^='hint_']").first().textContent(), /提示 2\/3|Hint 2\/3/);
@@ -798,7 +832,7 @@ async function verifyGeneratedPaper(browser, config) {
     });
     assert.ok(imagePixels.naturalWidth > 0 && imagePixels.naturalHeight > 0, `${config.name}: question image is not decoded`);
     assert.ok(imagePixels.nonWhite > 100, `${config.name}: question image is visually blank ${JSON.stringify(imagePixels)}`);
-    const overlaps = await page.evaluate(() => {
+    const overlaps = layoutChecks ? await page.evaluate(() => {
       const timer = document.querySelector("#timerDisplay")?.getBoundingClientRect();
       if (!timer) return null;
       const intersects = (element) => {
@@ -826,16 +860,18 @@ async function verifyGeneratedPaper(browser, config) {
       )].filter(intersects);
       return [...textOverlaps, ...elementOverlaps]
         .map((element) => element.id || element.className || element.tagName);
-    });
-    assert.deepEqual(overlaps, [], `${config.name}: timer overlaps page content ${JSON.stringify(overlaps)}`);
-    await assertPageGeometry(page, `${config.name}-generated-paper`);
+    }) : [];
+    if (layoutChecks) {
+      assert.deepEqual(overlaps, [], `${config.name}: timer overlaps page content ${JSON.stringify(overlaps)}`);
+      await assertPageGeometry(page, `${config.name}-generated-paper`);
+    }
     await assertAccessibleMotion(page, `${config.name}-generated-paper`);
     assert.deepEqual(run.errors, [], `${config.name}-generated-paper: page errors`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-generated-paper: failed requests`);
     await questionImage.scrollIntoViewIfNeeded();
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-generated-question.png` });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-generated-question.png` });
     await page.evaluate(() => window.scrollTo(0, 0));
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-generated-paper.png`, fullPage: true });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-generated-paper.png`, fullPage: true });
   } finally {
     await run.context.close();
   }
@@ -886,7 +922,7 @@ async function verifyPetControls(browser, config) {
         `${config.name}: pet tip overlaps the home navigation`
       );
     }
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-pet-tip.png` });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-pet-tip.png` });
     await page.locator(".site-pet__bubble-message").click();
     await page.locator(".site-pet__bubble").waitFor({ state: "hidden" });
 
@@ -896,7 +932,7 @@ async function verifyPetControls(browser, config) {
       && response.request().method() === "PATCH"
     ));
     await character.press("ArrowUp");
-    await page.waitForFunction((top) => (
+    await waitForPageCondition(page, (top) => (
       Number.parseFloat(document.querySelector(".site-pet")?.style.top || "0") < top
     ), beforeTop);
     await keyboardResponse;
@@ -916,7 +952,7 @@ async function verifyPetControls(browser, config) {
     }
 
     async function waitForDock(side) {
-      await page.waitForFunction(({ dockSide, viewportWidth }) => {
+      await waitForPageCondition(page, ({ dockSide, viewportWidth }) => {
         const element = document.querySelector(".site-pet");
         if (element?.dataset.dockSide !== dockSide) return false;
         const bounds = element.getBoundingClientRect();
@@ -954,7 +990,7 @@ async function verifyPetControls(browser, config) {
 
     const releaseLeft = await character.boundingBox();
     await dragPet(90, releaseLeft.y + releaseLeft.height / 2);
-    await page.waitForFunction(() => !document.querySelector(".site-pet")?.dataset.dockSide);
+    await waitForPageCondition(page, () => !document.querySelector(".site-pet")?.dataset.dockSide);
     assert.equal(await pet.getAttribute("data-dock-side"), null);
     assert.ok((await pet.boundingBox()).x >= 12, `${config.name}: inward drag did not release left dock`);
 
@@ -967,7 +1003,7 @@ async function verifyPetControls(browser, config) {
 
     const releaseRight = await character.boundingBox();
     await dragPet(config.viewport.width - 100, releaseRight.y + releaseRight.height / 2);
-    await page.waitForFunction(() => !document.querySelector(".site-pet")?.dataset.dockSide);
+    await waitForPageCondition(page, () => !document.querySelector(".site-pet")?.dataset.dockSide);
     assert.equal(await pet.getAttribute("data-dock-side"), null);
 
     const redockLeft = await character.boundingBox();
@@ -1008,7 +1044,7 @@ async function verifyPetControls(browser, config) {
     assert.equal(profileOverflow.overflowX, "hidden");
     assert.deepEqual(run.errors, [], `${config.name}-pet-controls: page errors ${JSON.stringify(run.errors)}`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-pet-controls: failed requests`);
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-pet-controls.png` });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-pet-controls.png` });
   } finally {
     await run.context.close();
   }
@@ -1027,14 +1063,17 @@ async function verifyAdminHintReview(browser, config) {
     assert.match(await page.locator("#adminHintReviewStatus").textContent(), /1\/24/);
     assert.deepEqual(run.errors, [], `${config.name}-admin-hints: page errors ${JSON.stringify(run.errors)}`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-admin-hints: failed requests`);
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-admin-hints.png`, fullPage: true });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-admin-hints.png`, fullPage: true });
   } finally {
     await run.context.close();
   }
 }
 
 async function verifyStudentAdminBoundary(browser, config) {
-  const context = await browser.newContext({ viewport: config.viewport });
+  const context = await browser.newContext({
+    viewport: config.viewport,
+    ignoreHTTPSErrors: /^https:\/\/(?:127\.0\.0\.1|localhost)(?::\d+)?$/.test(new URL(baseUrl).origin),
+  });
   const page = await context.newPage();
   const student = { ...user, role: "student" };
   const adminRequests = [];
@@ -1065,6 +1104,10 @@ async function verifyCommunity(browser, config) {
   const run = await openPage(browser, config, "/pages/community.html", { theme: "light" });
   const { page } = run;
   const dialogs = [];
+  const externalImageRequests = [];
+  page.on("request", (request) => {
+    if (request.url().startsWith("https://external.invalid/")) externalImageRequests.push(request.url());
+  });
   page.on("dialog", async (dialog) => {
     dialogs.push({ type: dialog.type(), message: dialog.message() });
     if (dialog.type() === "prompt") await dialog.accept("UI smoke report");
@@ -1109,10 +1152,10 @@ async function verifyCommunity(browser, config) {
     }
 
     await page.locator("#communityFollowedToggle").click();
-    await page.waitForFunction(() => document.querySelectorAll(".discussion-thread").length === 1);
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 1);
     assert.equal(await page.locator(".discussion-thread").count(), 1);
     await page.locator("#communityFollowedToggle").click();
-    await page.waitForFunction(() => document.querySelectorAll(".discussion-thread").length === 2);
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 2);
 
     await page.locator("#communityNewThread").click();
     await page.locator("#communitySubmitThread").click();
@@ -1189,7 +1232,7 @@ async function verifyCommunity(browser, config) {
     });
     assert.equal(await page.locator("#communityComposerError").isHidden(), true);
     await closeMathKeyboard(page);
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-community-composer.png`, fullPage: true });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-community-composer.png`, fullPage: true });
 
     await page.locator("math-field").click();
     await closeMathKeyboard(page);
@@ -1222,9 +1265,21 @@ async function verifyCommunity(browser, config) {
     await page.locator("#communitySubmitThread").click();
     await page.locator("#communityDetailPanel").waitFor({ state: "visible" });
     await page.locator("#communityToast").waitFor({ state: "visible" });
-    await page.waitForFunction(() => document.querySelector(".discussion-question-reference img")?.naturalWidth > 0);
+    await waitForPageCondition(page, () => document.querySelector(".discussion-question-reference img")?.naturalWidth > 0);
+    await waitForPageCondition(page, () => document.querySelector(".discussion-post .markdown-body img")?.naturalWidth > 0);
+    assert.equal(await page.locator(".discussion-post .markdown-body img").count(), 1);
+    assert.deepEqual(externalImageRequests, []);
+    const externalLink = page.locator('.discussion-post .markdown-body a[href="https://example.com/reference"]');
+    await externalLink.evaluate((element) => {
+      element.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.__externalLinkClicked = true;
+      }, { once: true });
+    });
+    await externalLink.click();
+    assert.equal(await page.evaluate(() => window.__externalLinkClicked), true);
     assert.ok(await page.locator(".discussion-post .katex").count() > 0);
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-community-detail.png`, fullPage: true });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-community-detail.png`, fullPage: true });
 
     await page.locator("#communitySubmitReply").click();
     await page.locator("#communityReplyError").waitFor({ state: "visible" });
@@ -1268,7 +1323,7 @@ async function verifyCommunity(browser, config) {
 
     await page.locator("#communityFollowToggle").click();
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-    await page.waitForFunction(() => (
+    await waitForPageCondition(page, () => (
       document.querySelector("#communityToastMessage")?.textContent.includes("Simulated follow failure")
     ));
     assert.match(await page.locator("#communityToastMessage").textContent(), /Simulated follow failure/);
@@ -1284,9 +1339,9 @@ async function verifyCommunity(browser, config) {
     await page.locator("#communityListPanel").waitFor({ state: "visible" });
     await assertPageGeometry(page, `${config.name}-community-light`);
     await assertThemeSurface(page, `${config.name}-community-light`, "light");
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-community-light.png`, fullPage: true });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-community-light.png`, fullPage: true });
     await page.locator("#themeToggle").click();
-    await page.waitForFunction(() => {
+    await waitForPageCondition(page, () => {
       if (document.documentElement.dataset.theme !== "dark") return false;
       const style = getComputedStyle(document.querySelector(".community-surface"));
       const backdrop = style.backdropFilter || style.webkitBackdropFilter || "none";
@@ -1296,7 +1351,7 @@ async function verifyCommunity(browser, config) {
     await assertPageGeometry(page, `${config.name}-community-dark`);
     assert.deepEqual(run.errors, [], `${config.name}-community: page errors`);
     assert.deepEqual(run.failedRequests, [], `${config.name}-community: failed requests`);
-    await page.screenshot({ path: `/var/tmp/student-ui-${config.name}-community-dark.png`, fullPage: true });
+    await captureScreenshot(page, { path: `/var/tmp/student-ui-${config.name}-community-dark.png`, fullPage: true });
   } finally {
     await run.context.close();
   }
@@ -1321,7 +1376,38 @@ const pageSpecs = [
   { name: "analysis", path: "/pages/analysis.html", ready: ".bar", verify: async (page) => assert.equal(await page.locator(".bar").count(), 2) },
   { name: "admin", path: "/pages/admin.html", ready: "#adminHintReviewPanel", pet: false },
   { name: "curriculum-review", path: "/pages/curriculum-review.html", ready: "#refreshMappings", pet: false },
-  { name: "image-mapper", path: "/pages/image-mapper.html", ready: "#mappingInput", pet: false },
+  {
+    name: "image-mapper",
+    path: "/pages/image-mapper.html",
+    ready: "#mappingInput",
+    pet: false,
+    verify: async (page) => {
+      const externalRequests = [];
+      page.on("request", (request) => {
+        if (request.url().startsWith("https://external.invalid/")) externalRequests.push(request.url());
+      });
+      const sameOriginAbsolute = await page.evaluate(() => `${location.origin}/assets/question-images/0620_s23_qp_21/q01_full.png`);
+      await page.locator("#basePrefix").fill("");
+      await page.locator("#mappingInput").fill([
+        "1 /assets/question-images/0620_s23_qp_21/q01_full.png",
+        `2 ${sameOriginAbsolute}`,
+        "3 https://external.invalid/tracker.png",
+      ].join("\n"));
+      await page.locator("#previewBtn").click();
+      const output = JSON.parse(await page.locator("#jsonOutput").textContent());
+      assert.deepEqual(Object.keys(output), ["1", "2"]);
+      assert.equal(await page.locator("#previewWrap img").count(), 2);
+      await page.locator("#previewWrap").scrollIntoViewIfNeeded();
+      await waitForPageCondition(
+        page,
+        () => Array.from(document.querySelectorAll("#previewWrap img")).every((image) => image.naturalWidth > 0),
+        undefined,
+        15000,
+      );
+      assert.match(await page.locator("#mapperStatus").textContent(), /same origin|同源|站内/i);
+      assert.deepEqual(externalRequests, []);
+    },
+  },
   { name: "pdf-cut-preview", path: "/pages/pdf-cut-preview.html", ready: ".hero h1", pet: false },
 ];
 
@@ -1334,6 +1420,21 @@ async function runConfig(config) {
     if (process.env.STUDENT_UI_FOCUS === "practice") {
       await verifyHomeThemes(browser, config);
       await verifyGeneratedPaper(browser, config);
+      return;
+    }
+    if (process.env.STUDENT_UI_FOCUS === "security") {
+      for (const pageSpec of pageSpecs.filter(({ name }) => ["home", "generate", "review", "image-mapper"].includes(name))) {
+        await verifyStandardPage(browser, config, pageSpec);
+        console.log(JSON.stringify({ viewport: config.name, page: pageSpec.name, ok: true }));
+      }
+      await verifyHomeThemes(browser, config);
+      console.log(JSON.stringify({ viewport: config.name, page: "home-themes", ok: true }));
+      await verifyGeneratedPaper(browser, config, { layoutChecks: false });
+      console.log(JSON.stringify({ viewport: config.name, page: "generated-paper", ok: true }));
+      await verifyCommunity(browser, config);
+      console.log(JSON.stringify({ viewport: config.name, page: "community", ok: true }));
+      await verifyPetControls(browser, config);
+      console.log(JSON.stringify({ viewport: config.name, page: "pet-controls", ok: true }));
       return;
     }
     for (const pageSpec of pageSpecs) {

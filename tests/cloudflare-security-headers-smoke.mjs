@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import worker from "../cloudflare/worker.js";
 
 const env = {
@@ -20,6 +21,7 @@ const env = {
   },
 };
 
+let workerCsp = "";
 for (const path of ["/", "/pages/login.html"]) {
   const response = await worker.fetch(new Request(`https://expassway.test${path}`), env);
   assert.equal(response.status, 200);
@@ -28,16 +30,36 @@ for (const path of ["/", "/pages/login.html"]) {
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
   assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
   assert.match(response.headers.get("permissions-policy") || "", /camera=\(\)/);
-  assert.match(response.headers.get("content-security-policy") || "", /frame-ancestors 'none'/);
-  assert.match(response.headers.get("content-security-policy") || "", /script-src 'self'/);
-  assert.match(response.headers.get("content-security-policy") || "", /connect-src 'self'(?:;|$)/);
-  assert.doesNotMatch(response.headers.get("content-security-policy") || "", /connect-src[^;]*https:/);
-  assert.match(response.headers.get("content-security-policy") || "", /style-src-elem 'self' https:\/\/fonts\.googleapis\.com/);
+  workerCsp = response.headers.get("content-security-policy") || "";
+  assert.match(workerCsp, /frame-ancestors 'none'/);
+  assert.match(workerCsp, /script-src 'self'/);
+  assert.match(workerCsp, /connect-src 'self'(?:;|$)/);
+  assert.doesNotMatch(workerCsp, /connect-src[^;]*https:/);
+  assert.match(workerCsp, /style-src-elem 'self' https:\/\/fonts\.googleapis\.com/);
   assert.equal(response.headers.get("cross-origin-opener-policy"), "same-origin-allow-popups");
   assert.equal(response.headers.get("cross-origin-resource-policy"), "same-origin");
   assert.equal(response.headers.get("origin-agent-cluster"), "?1");
   assert.equal(response.headers.get("cache-control"), "no-store");
 }
+
+const staticHeaders = await readFile(new URL("../_headers", import.meta.url), "utf8");
+const staticCsp = staticHeaders.match(/^\s*Content-Security-Policy:\s*(.+)$/m)?.[1].trim() || "";
+assert.equal(staticCsp, workerCsp, "Worker and _headers CSP policies must remain identical");
+
+function directiveSources(policy, directive) {
+  const value = policy.match(new RegExp(`(?:^|;\\s*)${directive}\\s+([^;]+)`))?.[1] || "";
+  return value.split(/\s+/).filter(Boolean);
+}
+
+const imageSources = directiveSources(workerCsp, "img-src");
+assert.deepEqual(imageSources, ["'self'", "data:", "blob:"]);
+assert.equal(imageSources.includes("https:"), false);
+assert.equal(imageSources.includes("http:"), false);
+assert.equal(imageSources.includes("*"), false);
+assert.deepEqual(directiveSources(workerCsp, "script-src"), ["'self'"]);
+assert.deepEqual(directiveSources(workerCsp, "object-src"), ["'none'"]);
+assert.deepEqual(directiveSources(workerCsp, "base-uri"), ["'none'"]);
+assert.deepEqual(directiveSources(workerCsp, "frame-ancestors"), ["'none'"]);
 
 const unversionedAsset = await worker.fetch(
   new Request("https://expassway.test/assets/styles.css"),
