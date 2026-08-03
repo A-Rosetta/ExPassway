@@ -3599,9 +3599,9 @@
  * 标题栏按钮的最终三态
  * ====================
  * 这组规则放在文件最后，统一覆盖前面的历史标题栏样式：
- *   默认和普通 hover：flat，只用底色提示可以点击；
- *   focus-visible：raised，用外阴影表示键盘焦点；
- *   active / 菜单展开：inset，用内阴影表示正在按下或保持打开。
+ *   默认：flat；hover：与“章节练习 / 真题套卷”切换按钮一样 raised；
+ *   focus-visible：保留焦点轮廓，底层 raised 效果与套卷切换按钮一致；
+ *   active / 菜单展开：与套卷切换按钮的当前项一样显示强调表面。
  */
 .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
   :is(button, .btn-link):not(.control-raised):not(.control-inset) {
@@ -3614,10 +3614,15 @@
 .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
   :is(button:not(:disabled), .btn-link):not(.control-raised):not(.control-inset):hover {
   border-color: transparent;
-  background: var(--surface-hover);
-  box-shadow: none;
+  background: var(--surface-raised);
+  box-shadow: var(--surface-shadow-small);
   color: var(--text);
   transform: none;
+}
+
+[data-theme="dark"] .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button:not(:disabled), .btn-link):not(.control-raised):not(.control-inset):hover {
+  border-color: var(--surface-border);
 }
 
 .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
@@ -3630,18 +3635,28 @@
   transform: translateY(-1px);
 }
 
-/* 按下和展开必须写在焦点之后，保证点击时最终显示为 inset。 */
+/* 按下和展开写在焦点之后，保证它与套卷切换按钮的当前项一致。 */
 .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
   :is(button:not(:disabled), .btn-link):active,
 .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
   :is(button, .btn-link).is-open,
 .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
   :is(button, .btn-link)[aria-expanded="true"] {
-  border-color: transparent;
-  background: var(--surface-pressed);
-  box-shadow: var(--surface-shadow-inset-small);
+  border-color: var(--accent);
+  background: var(--bg);
+  box-shadow: var(--surface-shadow-deep);
+  color: var(--accent);
   transform: none;
 }
+[data-theme="dark"] .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button:not(:disabled), .btn-link):active,
+[data-theme="dark"] .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link).is-open,
+[data-theme="dark"] .site-ui :is(.home-topbar, .site-topbar, .chapter-topbar, .community-topbar)
+  :is(button, .btn-link)[aria-expanded="true"] {
+  background: var(--glass-well);
+}
+
 
 /* ===== Dark theme: review and curriculum surfaces (2026-08-03) =====
    Light fallbacks stay in styles.css per the convention noted there; the
