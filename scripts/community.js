@@ -522,7 +522,7 @@
     if (tag === "em" || tag === "i") return `*${content}*`;
     if (tag === "del" || tag === "s" || tag === "strike") return `~~${content}~~`;
     if (tag === "code" && element.parentElement?.tagName.toLowerCase() !== "pre") {
-      return `\`${String(element.textContent || "").replace(/\`/g, "\\`")}\``;
+      return `\`${String(element.textContent || "").replace(/`/g, "\\`")}\``;
     }
     if (tag === "a") {
       const href = element.getAttribute("href") || "";

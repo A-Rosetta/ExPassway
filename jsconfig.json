@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "types": ["@cloudflare/workers-types"]
+  },
+  "include": ["cloudflare/**/*.js"],
+  "exclude": [".cloudflare-dist", ".wrangler", "node_modules"]
+}

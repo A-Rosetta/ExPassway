@@ -57,6 +57,13 @@ PyMuPDF, runs `backend/scripts/cie-mcq-import.py`, and publishes validated data 
 ## Commands
 
 ```bash
+npm run check
+npm run lint
+npm run lint:fix
+npm run format
+npm run format:check
+npm run typecheck
+npm run test:unit
 npm run cloudflare:build
 npm run cloudflare:deploy
 npm run cloudflare:import
@@ -68,6 +75,12 @@ npm run test:cloudflare-import-runner
 npm run test:cloudflare-learning-api
 npm run test:cloudflare-read-api
 ```
+
+`check` runs linting, JavaScript project validation, all smoke tests, and the Cloudflare build.
+ESLint caches results under `node_modules/.cache` for faster repeat runs. Prettier is available
+separately because the existing source tree has not yet been normalized to a single format.
+The JavaScript project configuration supplies Cloudflare Workers types to editors without
+requiring an immediate strict TypeScript conversion of the existing JavaScript code.
 
 ## Repository Map
 

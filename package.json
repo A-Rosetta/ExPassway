@@ -4,20 +4,33 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "check": "npm run lint && npm run typecheck && npm run test:unit && npm run cloudflare:build",
     "cloudflare:build": "node tools/build-cloudflare-assets.mjs",
     "cloudflare:deploy": "npm run cloudflare:build && wrangler deploy",
     "cloudflare:import": "node tools/run-cloudflare-import.mjs --action auto",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --cache --cache-location node_modules/.cache/eslint/.eslintcache",
+    "lint:fix": "npm run lint -- --fix",
     "test:cloudflare-admin-api": "node tests/cloudflare-admin-api-smoke.mjs",
     "test:cloudflare-auth": "node tests/cloudflare-auth-smoke.mjs",
     "test:cloudflare-community-api": "node tests/cloudflare-community-api-smoke.mjs",
     "test:cloudflare-content-api": "node tests/cloudflare-content-api-smoke.mjs",
     "test:cloudflare-import-runner": "node tests/cloudflare-import-runner-smoke.mjs",
     "test:cloudflare-learning-api": "node tests/cloudflare-learning-api-smoke.mjs",
-    "test:cloudflare-read-api": "node tests/cloudflare-read-api-smoke.mjs"
+    "test:cloudflare-read-api": "node tests/cloudflare-read-api-smoke.mjs",
+    "test:unit": "node tests/cloudflare-admin-api-smoke.mjs && node tests/cloudflare-auth-smoke.mjs && node tests/cloudflare-community-api-smoke.mjs && node tests/cloudflare-content-api-smoke.mjs && node tests/cloudflare-import-runner-smoke.mjs && node tests/cloudflare-learning-api-smoke.mjs && node tests/cloudflare-legacy-route-smoke.mjs && node tests/cloudflare-security-headers-smoke.mjs",
+    "typecheck": "tsc --project jsconfig.json"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "5.20260804.1",
+    "@eslint/js": "10.0.1",
+    "eslint": "10.8.0",
+    "globals": "17.9.0",
     "miniflare": "4.20260730.0",
     "playwright": "1.62.0",
+    "prettier": "3.9.6",
+    "typescript": "7.0.2",
     "wrangler": "4.118.0"
   }
 }
