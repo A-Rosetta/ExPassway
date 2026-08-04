@@ -1,49 +1,49 @@
 .student-ui.auth-page.login-page {
-  --login-bg: #e8ebed;
-  --login-surface: #e8ebed;
-  --login-text: #1c2529;
-  --login-muted: #667176;
-  --login-accent: #1f7a5a;
-  --login-accent-hover: #176548;
-  --login-light: #ffffff;
-  --login-shadow: #bec5c9;
+  --login-bg: #E6EAE3;
+  --login-surface: #E6EAE3;
+  --login-text: #37423B;
+  --login-muted: #5F6C62;
+  --login-accent: #276846;
+  --login-accent-hover: #3B8A5E;
+  --login-error: #B0485E;
+  --login-shadow-light: rgba(255, 255, 255, 0.6);
+  --login-shadow-dark: rgba(146, 163, 143, 0.55);
+  --login-shadow-dark-heavy: rgba(146, 163, 143, 0.7);
+  --login-raised: 9px 9px 16px var(--login-shadow-dark), -9px -9px 16px var(--login-shadow-light);
+  --login-raised-hover: 13px 13px 22px var(--login-shadow-dark-heavy), -13px -13px 22px var(--login-shadow-light);
+  --login-raised-small: 5px 5px 10px var(--login-shadow-dark), -5px -5px 10px var(--login-shadow-light);
+  --login-inset: inset 6px 6px 10px var(--login-shadow-dark), inset -6px -6px 10px var(--login-shadow-light);
+  --login-inset-small: inset 3px 3px 6px var(--login-shadow-dark), inset -3px -3px 6px var(--login-shadow-light);
+  min-height: 100svh;
+  overflow-x: clip;
   overflow-y: auto;
   background: var(--login-bg);
   color: var(--login-text);
 }
 
+/* Light mode is pure sage-clay Neumorphism, without the legacy glow background. */
 html:not([data-theme="dark"]) .student-ui.auth-page.login-page {
   background: var(--login-bg);
   color: var(--login-text);
 }
 
-[data-theme="dark"] .student-ui.auth-page.login-page {
-  --login-bg: #171a1b;
-  --login-surface: #1f2425;
-  --login-text: #f2f4f5;
-  --login-muted: #b1b8bb;
-  --login-accent: #72cda0;
-  --login-accent-hover: #89dbb2;
-  --login-light: #2e3436;
-  --login-shadow: #0c0f10;
-}
-
+/* The public login page owns this material system; the administrator page keeps the shared auth styles. */
 .login-page .auth-layout {
   min-height: 100svh;
-  padding: 76px 24px 36px;
+  padding: 84px 32px 40px;
 }
 
 .login-page .login-shell {
   display: grid;
   width: min(100%, 1000px);
   min-height: 600px;
-  grid-template-columns: minmax(320px, 40%) minmax(0, 60%);
+  grid-template-columns: minmax(300px, 40%) minmax(0, 60%);
   overflow: hidden;
   border: 0;
-  border-radius: 8px;
+  border-radius: 32px;
   padding: 0;
   background: var(--login-surface);
-  box-shadow: 12px 12px 28px var(--login-shadow), -12px -12px 28px var(--login-light);
+  box-shadow: 14px 14px 30px var(--login-shadow-dark), -14px -14px 30px var(--login-shadow-light);
   color: var(--login-text);
   isolation: isolate;
   -webkit-backdrop-filter: none;
@@ -51,9 +51,9 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page {
 }
 
 html:not([data-theme="dark"]) .student-ui.auth-page.login-page .login-shell {
-  border-color: transparent;
+  border: 0;
   background: var(--login-surface);
-  box-shadow: 12px 12px 28px var(--login-shadow), -12px -12px 28px var(--login-light);
+  box-shadow: 14px 14px 30px var(--login-shadow-dark), -14px -14px 30px var(--login-shadow-light);
 }
 
 .login-page .login-shell::before {
@@ -66,13 +66,10 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .login-shell {
   min-width: 0;
   overflow: hidden;
   place-items: center;
+  border-radius: 0 32px 32px 0;
   padding: 64px 44px;
   background: var(--login-surface);
-  box-shadow: 6px 0 18px rgba(58, 76, 66, 0.2);
-}
-
-[data-theme="dark"] .login-page .login-welcome {
-  box-shadow: 6px 0 18px rgba(0, 0, 0, 0.28);
+  box-shadow: 8px 0 20px rgba(126, 143, 124, 0.34);
 }
 
 .login-page .login-welcome-content {
@@ -84,7 +81,7 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .login-shell {
   display: block;
   margin: 0;
   color: var(--login-text) !important;
-  font-size: 3.2rem;
+  font-size: 3.15rem;
   line-height: 1.05;
 }
 
@@ -94,25 +91,6 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .login-shell {
   color: var(--login-muted);
   font-size: 0.98rem;
   line-height: 1.65;
-}
-
-.student-ui.auth-page.login-page .login-visitor-button {
-  width: min(100%, 250px);
-  min-height: 48px;
-  margin-top: 38px;
-  border: 0;
-  border-radius: 24px;
-  padding: 0 22px;
-  background: var(--login-accent);
-  box-shadow: 7px 7px 14px var(--login-shadow), -7px -7px 14px var(--login-light);
-  color: #fff;
-  cursor: pointer;
-  transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
-}
-
-[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button,
-[data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button {
-  color: #102018;
 }
 
 .login-page .login-form-panel {
@@ -136,6 +114,10 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .login-shell {
   line-height: 1.1;
 }
 
+html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-heading h1 {
+  color: var(--login-text);
+}
+
 .login-page .auth-heading p {
   display: none;
   color: var(--login-muted);
@@ -150,80 +132,120 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .login-shell {
 .student-ui.auth-page.login-page .auth-submit-button,
 .student-ui.auth-page.login-page .auth-input {
   min-height: 52px;
-  border: 0;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 .student-ui.auth-page.login-page .auth-provider-button,
 .student-ui.auth-page.login-page .auth-input {
+  border: 0;
   background: var(--login-surface);
   color: var(--login-text);
 }
 
 html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-provider-button,
 html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input {
-  border-color: transparent;
+  border: 0;
   background: var(--login-surface);
   color: var(--login-text);
 }
 
 .student-ui.auth-page.login-page .auth-provider-button {
-  box-shadow: 6px 6px 12px var(--login-shadow), -6px -6px 12px var(--login-light);
+  box-shadow: var(--login-raised-small);
   cursor: pointer;
 }
 
 .student-ui.auth-page.login-page .auth-input {
   padding: 0 20px;
   outline: 0;
-  box-shadow: inset 3px 3px 6px var(--login-shadow), inset -3px -3px 6px var(--login-light);
+  box-shadow: var(--login-inset);
 }
 
 .student-ui.auth-page.login-page .auth-input::placeholder {
   color: var(--login-muted);
 }
 
+html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input::placeholder {
+  color: var(--login-muted);
+}
+
 .student-ui.auth-page.login-page .auth-input:hover,
 .student-ui.auth-page.login-page .auth-input:focus {
   border: 0;
-  box-shadow: inset 5px 5px 8px var(--login-shadow), inset -5px -5px 8px var(--login-light), 0 0 0 2px rgba(31, 122, 90, 0.38);
+  box-shadow: var(--login-inset), 0 0 0 3px rgba(39, 104, 70, 0.24);
 }
 
 .student-ui.auth-page.login-page .auth-input[aria-invalid="true"] {
-  box-shadow: inset 3px 3px 6px var(--login-shadow), inset -3px -3px 6px var(--login-light), 0 0 0 2px #c94f49;
+  box-shadow: var(--login-inset), 0 0 0 3px rgba(176, 72, 94, 0.32);
 }
 
-.student-ui.auth-page.login-page .auth-submit-button {
-  margin-top: 20px;
-  border-radius: 26px;
+.student-ui.auth-page.login-page .auth-submit-button,
+.student-ui.auth-page.login-page .login-visitor-button {
+  border: 0;
+  border-radius: 16px;
   background: var(--login-accent);
-  box-shadow: 7px 7px 14px var(--login-shadow), -7px -7px 14px var(--login-light);
-  color: #fff;
+  box-shadow: var(--login-raised-small);
+  color: #FFFFFF;
   cursor: pointer;
   transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
 }
 
-.student-ui.auth-page.login-page .auth-provider-button:hover,
+.student-ui.auth-page.login-page .auth-submit-button {
+  margin-top: 20px;
+}
+
+.student-ui.auth-page.login-page .login-visitor-button {
+  width: min(100%, 250px);
+  min-height: 48px;
+  margin-top: 38px;
+  padding: 0 22px;
+}
+
+.student-ui.auth-page.login-page .auth-provider-button:hover:not(:disabled),
 .student-ui.auth-page.login-page .auth-provider-button:focus-visible {
   border: 0;
   background: var(--login-surface);
   color: var(--login-text);
-  box-shadow: 4px 4px 9px var(--login-shadow), -4px -4px 9px var(--login-light);
-  transform: translateY(1px);
+  box-shadow: var(--login-raised-hover);
+  transform: translateY(-1px);
 }
 
-.student-ui.auth-page.login-page .auth-submit-button:hover,
+.student-ui.auth-page.login-page .auth-submit-button:hover:not(:disabled),
 .student-ui.auth-page.login-page .auth-submit-button:focus-visible,
-.student-ui.auth-page.login-page .login-visitor-button:hover,
+.student-ui.auth-page.login-page .login-visitor-button:hover:not(:disabled),
 .student-ui.auth-page.login-page .login-visitor-button:focus-visible {
   border: 0;
   background: var(--login-accent-hover);
-  box-shadow: 4px 4px 9px var(--login-shadow), -4px -4px 9px var(--login-light);
+  box-shadow: var(--login-raised-hover);
+  transform: translateY(-1px);
+}
+
+.student-ui.auth-page.login-page .auth-provider-button:disabled,
+.student-ui.auth-page.login-page .auth-submit-button:disabled,
+.student-ui.auth-page.login-page .login-visitor-button:disabled {
+  opacity: 0.62;
+  box-shadow: none;
+  cursor: wait;
+  transform: none;
+}
+
+.student-ui.auth-page.login-page .auth-provider-button:active,
+.student-ui.auth-page.login-page .auth-submit-button:active,
+.student-ui.auth-page.login-page .login-visitor-button:active,
+.student-ui.auth-page.login-page .language-toggle:active,
+.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:active {
+  box-shadow: var(--login-inset-small);
   transform: translateY(1px);
 }
 
-.student-ui.auth-page.login-page button:active {
-  box-shadow: inset 3px 3px 6px var(--login-shadow), inset -3px -3px 6px var(--login-light);
-  transform: translateY(2px);
+.student-ui.auth-page.login-page .auth-provider-button:focus-visible,
+.student-ui.auth-page.login-page .auth-submit-button:focus-visible,
+.student-ui.auth-page.login-page .login-visitor-button:focus-visible,
+.student-ui.auth-page.login-page .auth-otp-resend:focus-visible,
+.student-ui.auth-page.login-page .auth-back-link:focus-visible,
+.student-ui.auth-page.login-page .language-toggle:focus-visible,
+.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:focus-visible {
+  outline: 2px solid var(--login-accent);
+  outline-offset: 3px;
 }
 
 .login-page .auth-divider {
@@ -233,7 +255,7 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input {
 
 .login-page .auth-divider::before,
 .login-page .auth-divider::after {
-  background: rgba(98, 112, 105, 0.28);
+  background: rgba(95, 108, 98, 0.3);
 }
 
 .login-page .auth-account-email {
@@ -247,16 +269,44 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input {
 }
 
 .student-ui.auth-page.login-page .auth-otp-resend {
-  background: rgba(31, 122, 90, 0.12);
+  background: rgba(39, 104, 70, 0.12);
 }
 
 .student-ui.auth-page.login-page .auth-field-error,
 .student-ui.auth-page.login-page .auth-status.bad {
-  color: #c94f49;
+  color: var(--login-error);
 }
 
 .login-page .auth-status {
   margin: 18px 0 0;
+}
+
+/* Language and theme commands stay flat until hover/focus, then press into the surface. */
+.student-ui.auth-page.login-page .language-toggle,
+.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle {
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--login-text);
+}
+
+html:not([data-theme="dark"]) .student-ui.auth-page.login-page .language-toggle,
+html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--login-text);
+}
+
+.student-ui.auth-page.login-page .language-toggle:hover,
+.student-ui.auth-page.login-page .language-toggle:focus-visible,
+.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:hover,
+.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:focus-visible {
+  border: 0;
+  background: var(--login-surface);
+  box-shadow: var(--login-raised-small);
+  color: var(--login-accent);
 }
 
 .login-page.is-otp-step .login-form-panel {
@@ -275,21 +325,172 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input {
   }
 }
 
+/* Dark mode switches physics completely: translucent glass, edge highlights, and refraction blur. */
+[data-theme="dark"] .student-ui.auth-page.login-page {
+  --login-bg: #14171C;
+  --login-surface: rgba(255, 255, 255, 0.07);
+  --login-text: #E8ECEF;
+  --login-muted: #9AA4AD;
+  --login-accent: #A0CDA2;
+  --login-accent-hover: #C4E4C6;
+  --login-error: #F6A6B3;
+  --login-glass-border: rgba(255, 255, 255, 0.14);
+  --login-glass-border-soft: rgba(255, 255, 255, 0.08);
+  --login-glass-highlight: rgba(255, 255, 255, 0.22);
+  --login-glass-well: rgba(0, 0, 0, 0.3);
+  --login-raised: inset 0 1px 0 var(--login-glass-highlight), 0 18px 40px rgba(0, 0, 0, 0.45);
+  --login-raised-hover: inset 0 1px 0 var(--login-glass-highlight), 0 24px 48px rgba(0, 0, 0, 0.5);
+  --login-raised-small: inset 0 1px 0 var(--login-glass-highlight), 0 10px 24px rgba(0, 0, 0, 0.45);
+  --login-inset: inset 0 2px 10px rgba(0, 0, 0, 0.45), inset 0 -1px 0 var(--login-glass-border-soft);
+  --login-inset-small: inset 0 2px 8px rgba(0, 0, 0, 0.45);
+  background:
+    linear-gradient(145deg, rgba(160, 205, 162, 0.16), transparent 32%),
+    linear-gradient(325deg, rgba(169, 212, 229, 0.14), transparent 36%),
+    linear-gradient(25deg, rgba(246, 166, 179, 0.08), transparent 28%),
+    var(--login-bg);
+  background-attachment: fixed;
+}
+
+[data-theme="dark"] .login-page .login-shell {
+  border: 1px solid var(--login-glass-border);
+  background: var(--login-surface);
+  box-shadow: var(--login-raised);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+[data-theme="dark"] .login-page .login-welcome {
+  border-right: 1px solid var(--login-glass-border-soft);
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.06), 12px 0 36px rgba(0, 0, 0, 0.16);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button {
+  border: 1px solid var(--login-glass-border);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--login-raised-small);
+  color: var(--login-text);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .language-toggle,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle {
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--login-text);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-input {
+  border: 1px solid var(--login-glass-border-soft);
+  background: var(--login-glass-well);
+  box-shadow: var(--login-inset);
+  color: var(--login-text);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-input:hover,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-input:focus {
+  border: 1px solid rgba(160, 205, 162, 0.58);
+  box-shadow: var(--login-inset), 0 0 0 3px rgba(160, 205, 162, 0.14);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-input[aria-invalid="true"] {
+  border-color: rgba(246, 166, 179, 0.74);
+  box-shadow: var(--login-inset), 0 0 0 3px rgba(246, 166, 179, 0.14);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button,
+[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button {
+  border: 1px solid rgba(160, 205, 162, 0.6);
+  background: rgba(160, 205, 162, 0.92);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42), 0 12px 28px rgba(0, 0, 0, 0.38);
+  color: #0F1F15;
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button:hover:not(:disabled),
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button:focus-visible,
+[data-theme="dark"] .student-ui.auth-page.login-page .language-toggle:hover,
+[data-theme="dark"] .student-ui.auth-page.login-page .language-toggle:focus-visible,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:hover,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:focus-visible {
+  border: 1px solid rgba(160, 205, 162, 0.52);
+  background: rgba(255, 255, 255, 0.11);
+  box-shadow: var(--login-raised-small);
+  color: var(--login-accent);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button:hover:not(:disabled),
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button:focus-visible,
+[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button:hover:not(:disabled),
+[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button:focus-visible {
+  border: 1px solid rgba(196, 228, 198, 0.76);
+  background: rgba(196, 228, 198, 0.96);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 18px 36px rgba(0, 0, 0, 0.42);
+  color: #0F1F15;
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button:disabled,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button:disabled,
+[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button:disabled {
+  box-shadow: none;
+  opacity: 0.62;
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button:active,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button:active,
+[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button:active,
+[data-theme="dark"] .student-ui.auth-page.login-page .language-toggle:active,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:active {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: var(--login-inset-small);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button:active,
+[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button:active {
+  color: var(--login-accent);
+}
+
+[data-theme="dark"] .login-page .auth-divider::before,
+[data-theme="dark"] .login-page .auth-divider::after {
+  background: var(--login-glass-border);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-otp-resend {
+  background: rgba(160, 205, 162, 0.1);
+}
+
 @media (max-width: 760px) {
   .login-page .auth-layout {
     place-items: start center;
-    padding: 78px 16px 24px;
+    padding: 82px 16px 24px;
   }
 
   .login-page .login-shell {
     min-height: 0;
     grid-template-columns: 1fr;
+    border-radius: 24px;
   }
 
   .login-page .login-welcome {
     min-height: 210px;
+    border-radius: 0 0 24px 24px;
     padding: 34px 26px;
-    box-shadow: 0 5px 16px rgba(58, 76, 66, 0.2);
+    box-shadow: 0 7px 18px rgba(126, 143, 124, 0.3);
+  }
+
+  [data-theme="dark"] .login-page .login-welcome {
+    border-right: 0;
+    border-bottom: 1px solid var(--login-glass-border-soft);
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06), 0 12px 30px rgba(0, 0, 0, 0.18);
   }
 
   .login-page .auth-brand {
@@ -320,6 +521,31 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input {
     display: block;
     margin-top: 16px;
     font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .login-page .auth-layout {
+    padding-inline: 12px;
+  }
+
+  .login-page .login-welcome {
+    min-height: 196px;
+    padding-inline: 20px;
+  }
+
+  .login-page .login-form-panel {
+    padding: 34px 18px 30px;
+  }
+
+  .student-ui.auth-page.login-page .auth-heading h1 {
+    font-size: 1.95rem;
+  }
+
+  .student-ui.auth-page.login-page .auth-provider-button,
+  .student-ui.auth-page.login-page .auth-submit-button,
+  .student-ui.auth-page.login-page .auth-input {
+    font-size: 0.94rem;
   }
 }
 
