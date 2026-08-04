@@ -34,6 +34,57 @@ async function newPage(browser, locale, savedLanguage) {
       assert.equal(await page.locator(".login-shell > .login-form-panel").count(), 1);
       assert.equal(await page.locator(".login-welcome #visitorModeBtn").count(), 1);
 
+      const lightMaterial = await page.evaluate(() => {
+        document.documentElement.removeAttribute("data-theme");
+        const body = getComputedStyle(document.body);
+        const shell = getComputedStyle(document.querySelector(".login-shell"));
+        const input = getComputedStyle(document.querySelector("#emailOtpAddress"));
+        const themeToggle = getComputedStyle(document.querySelector("#themeToggle"));
+        return {
+          bodyBackground: body.backgroundColor,
+          shellRadius: shell.borderRadius,
+          shellBlur: shell.backdropFilter || shell.webkitBackdropFilter,
+          shellShadow: shell.boxShadow,
+          inputRadius: input.borderRadius,
+          inputShadow: input.boxShadow,
+          themeToggleShadow: themeToggle.boxShadow,
+        };
+      });
+      assert.equal(lightMaterial.bodyBackground, "rgb(230, 234, 227)");
+      assert.equal(lightMaterial.shellRadius, "32px");
+      assert.equal(lightMaterial.shellBlur, "none");
+      assert.match(lightMaterial.shellShadow, /-14px -14px 30px/);
+      assert.equal(lightMaterial.inputRadius, "16px");
+      assert.match(lightMaterial.inputShadow, /inset/);
+      assert.equal(lightMaterial.themeToggleShadow, "none");
+
+      await page.locator("#emailOtpRequestBtn").evaluate((button) => {
+        document.documentElement.setAttribute("data-theme", "dark");
+        button.disabled = true;
+      });
+      await page.waitForTimeout(350);
+      const darkMaterial = await page.evaluate(() => {
+        const body = getComputedStyle(document.body);
+        const shell = getComputedStyle(document.querySelector(".login-shell"));
+        const input = getComputedStyle(document.querySelector("#emailOtpAddress"));
+        const submit = document.querySelector("#emailOtpRequestBtn");
+        const disabledSubmit = getComputedStyle(submit);
+        return {
+          bodyBackground: body.backgroundColor,
+          shellBorder: shell.borderTopWidth,
+          shellBlur: shell.backdropFilter || shell.webkitBackdropFilter,
+          shellBackground: shell.backgroundColor,
+          inputBackground: input.backgroundColor,
+          disabledSubmitShadow: disabledSubmit.boxShadow,
+        };
+      });
+      assert.equal(darkMaterial.bodyBackground, "rgb(20, 23, 28)");
+      assert.equal(darkMaterial.shellBorder, "1px");
+      assert.match(darkMaterial.shellBlur, /blur\(20px\).*saturate\(1\.6\)/);
+      assert.equal(darkMaterial.shellBackground, "rgba(255, 255, 255, 0.07)");
+      assert.equal(darkMaterial.inputBackground, "rgba(0, 0, 0, 0.3)");
+      assert.equal(darkMaterial.disabledSubmitShadow, "none");
+
       await page.locator("#googleLoginBtn").click();
       await page.locator("#authStatus").waitFor({ state: "visible" });
       assert.equal(await page.locator("#authStatus").textContent(), "Google login has not been configured yet.");
@@ -118,6 +169,8 @@ async function newPage(browser, locale, savedLanguage) {
       assert.equal(await page.locator("#googleLoginBtn").isVisible(), true);
       assert.equal(await page.locator("#emailOtpRequestBtn").isVisible(), true);
       assert.equal(await page.locator("#visitorModeBtn").isVisible(), true);
+      assert.equal(await page.locator(".login-shell").evaluate((element) => getComputedStyle(element).borderRadius), "24px");
+      assert.equal(await page.locator(".login-shell").evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(" ").length), 1);
       await context.close();
     }
 
