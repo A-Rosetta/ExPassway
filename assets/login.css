@@ -230,9 +230,7 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input::plac
 
 .student-ui.auth-page.login-page .auth-provider-button:active,
 .student-ui.auth-page.login-page .auth-submit-button:active,
-.student-ui.auth-page.login-page .login-visitor-button:active,
-.student-ui.auth-page.login-page .language-toggle:active,
-.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:active {
+.student-ui.auth-page.login-page .login-visitor-button:active {
   box-shadow: var(--login-inset-small);
   transform: translateY(1px);
 }
@@ -241,9 +239,7 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input::plac
 .student-ui.auth-page.login-page .auth-submit-button:focus-visible,
 .student-ui.auth-page.login-page .login-visitor-button:focus-visible,
 .student-ui.auth-page.login-page .auth-otp-resend:focus-visible,
-.student-ui.auth-page.login-page .auth-back-link:focus-visible,
-.student-ui.auth-page.login-page .language-toggle:focus-visible,
-.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:focus-visible {
+.student-ui.auth-page.login-page .auth-back-link:focus-visible {
   outline: 2px solid var(--login-accent);
   outline-offset: 3px;
 }
@@ -281,32 +277,68 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-input::plac
   margin: 18px 0 0;
 }
 
-/* Language and theme commands stay flat until hover/focus, then press into the surface. */
-.student-ui.auth-page.login-page .language-toggle,
-.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle {
-  border: 0;
+/* Match the homepage title-bar controls: flat, raised on hover, and inset while pressed. */
+.student-ui.auth-page.login-page .auth-page-controls {
+  right: max(16px, env(safe-area-inset-right));
+  gap: 6px;
+}
+
+.student-ui.auth-page.login-page .auth-page-controls .site-header-control {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  width: auto;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
   border-radius: 16px;
+  padding: 0 12px;
   background: transparent;
   box-shadow: none;
-  color: var(--login-text);
+  color: var(--login-muted);
+  font: 700 0.78rem/1 "DM Sans", sans-serif;
+  cursor: pointer;
 }
 
-html:not([data-theme="dark"]) .student-ui.auth-page.login-page .language-toggle,
-html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle {
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--login-text);
+.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle {
+  width: 44px;
+  flex-basis: 44px;
+  padding: 0;
 }
 
-.student-ui.auth-page.login-page .language-toggle:hover,
-.student-ui.auth-page.login-page .language-toggle:focus-visible,
-.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:hover,
-.student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:focus-visible {
-  border: 0;
+.student-ui.auth-page.login-page .auth-page-controls .home-theme-icon {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.student-ui.auth-page.login-page .auth-page-controls .site-header-control:hover,
+.student-ui.auth-page.login-page .auth-page-controls .site-header-control:focus-visible {
+  border-color: transparent;
   background: var(--login-surface);
   box-shadow: var(--login-raised-small);
-  color: var(--login-accent);
+  color: var(--login-text);
+  transform: translateY(-1px);
+}
+
+.student-ui.auth-page.login-page .auth-page-controls .site-header-control:focus-visible {
+  outline: 2px solid var(--login-bg);
+  outline-offset: 2px;
+  box-shadow: var(--login-raised-small), 0 0 0 4px var(--login-accent);
+}
+
+.student-ui.auth-page.login-page .auth-page-controls .site-header-control:active {
+  border-color: transparent;
+  background: var(--login-surface);
+  box-shadow: var(--login-inset-small);
+  color: var(--login-text);
+  transform: none;
 }
 
 .login-page.is-otp-step .login-form-panel {
@@ -342,11 +374,12 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-page-contro
   --login-raised-hover: inset 0 1px 0 var(--login-glass-highlight), 0 24px 48px rgba(0, 0, 0, 0.5);
   --login-raised-small: inset 0 1px 0 var(--login-glass-highlight), 0 10px 24px rgba(0, 0, 0, 0.45);
   --login-inset: inset 0 2px 10px rgba(0, 0, 0, 0.45), inset 0 -1px 0 var(--login-glass-border-soft);
-  --login-inset-small: inset 0 2px 8px rgba(0, 0, 0, 0.45);
+  --login-inset-small: inset 0 2px 10px rgba(0, 0, 0, 0.45), inset 0 -1px 0 rgba(255, 255, 255, 0.08);
   background:
-    linear-gradient(145deg, rgba(160, 205, 162, 0.16), transparent 32%),
-    linear-gradient(325deg, rgba(169, 212, 229, 0.14), transparent 36%),
-    linear-gradient(25deg, rgba(246, 166, 179, 0.08), transparent 28%),
+    radial-gradient(640px 420px at 12% 8%, rgba(160, 205, 162, 0.35), transparent 60%),
+    radial-gradient(520px 520px at 88% 18%, rgba(222, 183, 213, 0.3), transparent 60%),
+    radial-gradient(720px 520px at 70% 95%, rgba(169, 212, 229, 0.32), transparent 60%),
+    radial-gradient(480px 380px at 30% 80%, rgba(246, 166, 179, 0.32), transparent 60%),
     var(--login-bg);
   background-attachment: fixed;
 }
@@ -374,14 +407,6 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-page-contro
   color: var(--login-text);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   backdrop-filter: blur(20px) saturate(160%);
-}
-
-[data-theme="dark"] .student-ui.auth-page.login-page .language-toggle,
-[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle {
-  border: 1px solid transparent;
-  background: transparent;
-  box-shadow: none;
-  color: var(--login-text);
 }
 
 [data-theme="dark"] .student-ui.auth-page.login-page .auth-input {
@@ -415,17 +440,19 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-page-contro
 }
 
 [data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button:hover:not(:disabled),
-[data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button:focus-visible,
-[data-theme="dark"] .student-ui.auth-page.login-page .language-toggle:hover,
-[data-theme="dark"] .student-ui.auth-page.login-page .language-toggle:focus-visible,
-[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:hover,
-[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:focus-visible {
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button:focus-visible {
   border: 1px solid rgba(160, 205, 162, 0.52);
   background: rgba(255, 255, 255, 0.11);
   box-shadow: var(--login-raised-small);
   color: var(--login-accent);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   backdrop-filter: blur(20px) saturate(160%);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .site-header-control:hover,
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .site-header-control:focus-visible {
+  border-color: var(--login-glass-border);
+  background: var(--login-surface);
 }
 
 [data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button:hover:not(:disabled),
@@ -447,11 +474,14 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-page-contro
 
 [data-theme="dark"] .student-ui.auth-page.login-page .auth-provider-button:active,
 [data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button:active,
-[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button:active,
-[data-theme="dark"] .student-ui.auth-page.login-page .language-toggle:active,
-[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle:active {
+[data-theme="dark"] .student-ui.auth-page.login-page .login-visitor-button:active {
   background: rgba(255, 255, 255, 0.05);
   box-shadow: var(--login-inset-small);
+}
+
+[data-theme="dark"] .student-ui.auth-page.login-page .auth-page-controls .site-header-control:active {
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .student-ui.auth-page.login-page .auth-submit-button:active,
@@ -469,6 +499,18 @@ html:not([data-theme="dark"]) .student-ui.auth-page.login-page .auth-page-contro
 }
 
 @media (max-width: 760px) {
+  .student-ui.auth-page.login-page .auth-page-controls {
+    gap: 2px;
+  }
+
+  .student-ui.auth-page.login-page .auth-page-controls .home-theme-toggle {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    flex-basis: 40px;
+  }
+
   .login-page .auth-layout {
     place-items: start center;
     padding: 82px 16px 24px;
