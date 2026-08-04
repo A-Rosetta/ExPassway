@@ -4817,3 +4817,169 @@ body.chapter-practice-page {
 [data-theme="dark"] .notebook-difficulty-tag.is-challenge {
   background: rgba(246, 166, 179, 0.18);
 }
+/* ===== Notebook: single-screen layout (2026-08-03) =====
+   Fits the page into one viewport: only the entry list scrolls. Every control
+   that used to sit in the overview panel keeps its id and behaviour - this is
+   purely where things are placed. Sizing is written for the longer English
+   strings, which run up to 4x the Chinese (e.g. "从错题本组卷" -> "Build paper
+   from notebook"), so nothing is pinned to a single line. */
+.notebook-page .notebook-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-width: 1440px;
+}
+
+.notebook-page .notebook-layout {
+  display: grid;
+  /* Sidebar flexes because the English labels do not fit a fixed 290px. */
+  grid-template-columns: minmax(0, 1fr) clamp(260px, 23vw, 330px);
+  gap: 1rem;
+  align-items: start;
+  min-height: 0;
+}
+
+.notebook-page .notebook-col-main,
+.notebook-page .notebook-col-side {
+  display: grid;
+  gap: 0.75rem;
+  min-height: 0;
+}
+
+.notebook-page .notebook-col-main {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+.notebook-page .notebook-col-side {
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.notebook-page .notebook-heading h1 {
+  margin: 0;
+  font-size: 1.55rem;
+}
+
+.notebook-page .notebook-heading .tip {
+  margin: 0.25rem 0 0;
+  /* The English subtitle is ~88 characters; clamping keeps it from pushing the
+     list off the fold. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Stats: one row of four, rendered by renderStats() into #notebookStats. */
+.notebook-page #notebookStats .stats-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.notebook-page #notebookStats .stat-card {
+  padding: 0.6rem 0.8rem;
+}
+
+.notebook-page #notebookStats .stat-label {
+  line-height: 1.25;
+  /* Reserve two lines so the four cards stay level once the labels are in
+     English ("Total wrong attempts" wraps, "Mastered" does not). */
+  min-height: 2.5em;
+}
+
+.notebook-page #notebookStats .tip {
+  margin: 0.45rem 0 0;
+  font-size: 0.8rem;
+}
+
+/* Records card: the card itself never scrolls, the list inside it does. */
+.notebook-page .notebook-records-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.5rem;
+  min-height: 0;
+  padding: 0.9rem 1rem;
+}
+
+.notebook-page .notebook-records-card > h2 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.notebook-page #notebookList {
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+/* Pagination is rendered inside #notebookList, so pin it to the bottom of the
+   scroll area instead of letting it scroll away. */
+.notebook-page .notebook-pagination {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  margin: 0.5rem 0 0;
+  padding: 0.5rem 0 0.1rem;
+  background: var(--card-bg, var(--bg));
+}
+
+/* Sidebar */
+.notebook-page .notebook-side-cta,
+.notebook-page .notebook-side-foot {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.notebook-page .notebook-side-cta button,
+.notebook-page .notebook-side-foot button {
+  width: 100%;
+  min-height: 42px;
+  /* English labels wrap to two lines; a fixed height would clip them. */
+  white-space: normal;
+  line-height: 1.25;
+}
+
+.notebook-page .notebook-filters-card {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  padding: 0.85rem 0.9rem;
+}
+
+.notebook-page .notebook-filters-card > h2 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.notebook-page .notebook-filters-card label {
+  display: grid;
+  gap: 0.2rem;
+  min-height: 0;
+}
+
+.notebook-page .notebook-filters-card select {
+  min-height: 40px;
+  max-width: 100%;
+}
+
+.notebook-page .notebook-filters-card .notebook-mastered-filter,
+.notebook-page .notebook-filters-card .notebook-star-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 0;
+  align-self: start;
+}
+
+/* One screen on a laptop: cap the shell to the viewport so only the entry list
+   scrolls. max-height rather than height, and no overflow:hidden on the page -
+   if a translation or a zoom level makes something taller than expected the
+   page can still scroll, instead of clipping content out of reach. */
+@media (min-width: 900px) and (min-height: 640px) {
+  .notebook-page .notebook-shell {
+    max-height: calc(100vh - 6.5rem);
+  }
+
+  .notebook-page .notebook-layout {
+    height: 100%;
+  }
+}

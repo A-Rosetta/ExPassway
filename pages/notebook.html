@@ -6,54 +6,70 @@
   <title data-i18n="notebookPageTitle">错题本</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260803-6" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260803-8" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260803-7" />
 </head>
 <body class="student-ui site-ui notebook-page">
-  <main class="container">
-    <section class="card hero">
-      <h1 data-i18n="notebookHeroTitle">历史错题本</h1>
-      <p class="tip" data-i18n="notebookHeroSubtitle">记录历次练习中的错题，支持按科目筛选与错题次数追踪。</p>
-    </section>
+  <main class="container notebook-shell">
+    <div class="notebook-layout">
 
-    <section class="card panel">
-      <p class="home-eyebrow" data-i18n="learningOverview">学习概览</p>
-      <h2 data-i18n="notebookTitle">错题本概览</h2>
-      <div id="notebookStats"></div>
-      <div class="actions">
-        <label><span data-i18n="subjectFilterLabel">科目筛选</span>
-          <select id="subjectFilter"></select>
-        </label>
-        <label><span data-i18n="sortByLabel">排序</span>
-          <select id="sortBy">
-            <option value="time_desc" data-i18n="sortLatest">按最近时间</option>
-            <option value="count_desc" data-i18n="sortWrongCount">按错误次数</option>
-          </select>
-        </label>
-        <label><span data-i18n="difficultyFilterLabel">难度</span>
-          <select id="difficultyFilter">
-            <option value="" data-i18n="difficultyAll">全部难度</option>
-            <option value="basic" data-i18n="difficultyBasic">基础</option>
-            <option value="medium" data-i18n="difficultyMedium">中等</option>
-            <option value="challenge" data-i18n="difficultyChallenge">冲刺</option>
-          </select>
-        </label>
-        <label class="notebook-mastered-filter">
-          <input id="hideMastered" type="checkbox" />
-          <span data-i18n="hideMasteredLabel">隐藏已掌握</span>
-        </label>
-        <label class="notebook-star-filter">
-          <input id="onlyStarred" type="checkbox" />
-          <span data-i18n="onlyStarredLabel">只看收藏</span>
-        </label>
-        <button id="clearNotebook" class="btn-secondary" data-i18n="clearNotebook">重置当前用户记录</button>
+      <div class="notebook-col-main">
+        <div class="notebook-heading">
+          <h1 data-i18n="notebookHeroTitle">历史错题本</h1>
+          <p class="tip" data-i18n="notebookHeroSubtitle">记录历次练习中的错题，支持按科目筛选与错题次数追踪。</p>
+        </div>
+
+        <div id="notebookStats"></div>
+
+        <section class="card panel notebook-records-card">
+          <h2 data-i18n="notebookRecordsTitle">错题记录</h2>
+          <div id="notebookList"></div>
+        </section>
       </div>
 
-      <div class="actions notebook-practice-cta-row">
-        <button id="openNotebookPractice" class="btn-primary" data-i18n="notebookPracticeCta">从错题本组卷</button>
-      </div>
+      <aside class="notebook-col-side">
+        <div class="notebook-side-cta">
+          <button id="openNotebookPractice" class="btn-primary" data-i18n="notebookPracticeCta">从错题本组卷</button>
+          <button id="goGenerate" class="btn-primary" data-i18n="startPractice">去刷题</button>
+        </div>
 
-      <div id="notebookPracticeDialog" class="notebook-practice-dialog" hidden>
+        <section class="card panel notebook-filters-card">
+          <h2 data-i18n="notebookFiltersTitle">筛选</h2>
+          <label><span data-i18n="subjectFilterLabel">科目筛选</span>
+            <select id="subjectFilter"></select>
+          </label>
+          <label><span data-i18n="difficultyFilterLabel">难度</span>
+            <select id="difficultyFilter">
+              <option value="" data-i18n="difficultyAll">全部难度</option>
+              <option value="basic" data-i18n="difficultyBasic">基础</option>
+              <option value="medium" data-i18n="difficultyMedium">中等</option>
+              <option value="challenge" data-i18n="difficultyChallenge">冲刺</option>
+            </select>
+          </label>
+          <label><span data-i18n="sortByLabel">排序</span>
+            <select id="sortBy">
+              <option value="time_desc" data-i18n="sortLatest">按最近时间</option>
+              <option value="count_desc" data-i18n="sortWrongCount">按错误次数</option>
+            </select>
+          </label>
+          <label class="notebook-mastered-filter">
+            <input id="hideMastered" type="checkbox" />
+            <span data-i18n="hideMasteredLabel">隐藏已掌握</span>
+          </label>
+          <label class="notebook-star-filter">
+            <input id="onlyStarred" type="checkbox" />
+            <span data-i18n="onlyStarredLabel">只看收藏</span>
+          </label>
+        </section>
+
+        <div class="notebook-side-foot">
+          <button id="backHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
+          <button id="clearNotebook" class="btn-secondary" data-i18n="clearNotebook">重置当前用户记录</button>
+        </div>
+      </aside>
+    </div>
+
+    <div id="notebookPracticeDialog" class="notebook-practice-dialog" hidden>
         <h3 data-i18n="notebookPracticeDialogTitle">从错题本组卷</h3>
         <div class="actions">
           <label><span data-i18n="notebookPracticeCountLabel">题数</span>
@@ -93,18 +109,8 @@
           <button id="startNotebookPractice" class="btn-primary" data-i18n="notebookPracticeStart">生成练习卷</button>
         </div>
       </div>
-    </section>
-
-    <section class="card panel">
-      <h2 data-i18n="notebookRecordsTitle">错题记录</h2>
-      <div id="notebookList"></div>
-      <div class="actions">
-        <button id="backHome" class="btn-secondary" data-i18n="backHome">返回首页</button>
-        <button id="goGenerate" class="btn-primary" data-i18n="startPractice">去刷题</button>
-      </div>
-    </section>
   </main>
-  <script src="../scripts/i18n.js?v=20260803-6"></script>
+  <script src="../scripts/i18n.js?v=20260803-8"></script>
   <script src="../scripts/site-ui.js?v=20260730-1"></script>
   <script src="../scripts/api.js?v=20260802-3"></script>
   <script src="../scripts/pet.js?v=20260731-1"></script>
