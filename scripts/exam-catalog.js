@@ -38,9 +38,9 @@
       idPrefix: "CIE-IGCHEM-SET",
       displayName: "Chemistry (0620)",
       paperLabel: "Chemistry",
-      dataRoot: "backend/src/data/pymupdf-batch",
+      dataRoot: "assets/exam-question-images/cie-igcse-chemistry-0620/data",
       dataSuffix: ".structured.json",
-      answerKeys: "backend/src/data/pymupdf-batch/answer-keys.json",
+      answerKeys: "assets/exam-question-images/cie-igcse-chemistry-0620/data/answer-keys.json",
       papers: chemistryPapers.map((slug) => ({ slug, questions: 40 })),
     },
     "IGCSE Co-ordinated Sciences": {

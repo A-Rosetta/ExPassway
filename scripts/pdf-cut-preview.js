@@ -11,7 +11,9 @@
 
     try {
       const base = window.location.pathname.startsWith("/alevel/") ? "/alevel" : "..";
-      const res = await fetch(`${base}/backend/src/data/pymupdf-cut-0620_s23_qp_21.json`);
+      const res = await fetch(
+        `${base}/assets/exam-question-images/cie-igcse-chemistry-0620/data/0620_s23_qp_21.cut.json`
+      );
       const data = await res.json();
       const rows = Array.isArray(data.rows) ? data.rows : [];
 
