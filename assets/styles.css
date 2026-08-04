@@ -4460,7 +4460,9 @@ body.chapter-practice-page {
 
 /* Notebook practice: build-a-paper dialog on the notebook page */
 /* Blend into the panel it sits in rather than sitting on it as a lighter card.
-   Uses the shared surface token so light and dark themes both stay correct. */
+   Uses the shared surface token so light and dark themes both stay correct.
+   Note: on .notebook-page this is overridden into a centred modal, because
+   there the dialog floats over the list instead of sitting inside a panel. */
 .notebook-practice-dialog {
   margin-top: 1rem;
   padding: 1rem 1.1rem;
@@ -4970,16 +4972,64 @@ body.chapter-practice-page {
   align-self: start;
 }
 
-/* One screen on a laptop: cap the shell to the viewport so only the entry list
-   scrolls. max-height rather than height, and no overflow:hidden on the page -
-   if a translation or a zoom level makes something taller than expected the
-   page can still scroll, instead of clipping content out of reach. */
+/* One screen on a laptop: only the entry list scrolls.
+   The height has to be definite, not max-height. A percentage height on the
+   grid resolves against its parent, and a max-height parent still computes to
+   auto - so the constraint silently did nothing and the page scrolled anyway.
+   68px is .site-topbar's min-height; the site container's own 40px/64px
+   padding is replaced here because it alone eats 104px of the fold. */
 @media (min-width: 900px) and (min-height: 640px) {
   .notebook-page .notebook-shell {
-    max-height: calc(100vh - 6.5rem);
+    box-sizing: border-box;
+    height: calc(100vh - 68px);
+    padding-top: 18px;
+    padding-bottom: 18px;
   }
 
   .notebook-page .notebook-layout {
     height: 100%;
+    min-height: 0;
   }
+}
+/* ===== Notebook: the build-paper dialog as a real modal (2026-08-04) =====
+   In the single-screen layout the dialog is a child of the shell and floats
+   over the entry list, so the transparent fill it used while sitting inside a
+   panel left text overlapping text. --bg is used rather than --card-bg because
+   --card-bg resolves to a translucent glass fill under the dark theme, which
+   would let the list show through again. */
+.notebook-page .notebook-practice-dialog {
+  position: fixed;
+  z-index: 60;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(640px, calc(100vw - 2.5rem));
+  max-height: min(82vh, 660px);
+  overflow-y: auto;
+  margin: 0;
+  padding: 1.1rem 1.25rem 1.2rem;
+  border: 1px solid var(--surface-border, rgba(var(--accent-rgb), 0.22));
+  border-radius: 16px;
+  background: var(--bg);
+  box-shadow: var(--dialog-shadow);
+}
+
+.notebook-page .notebook-practice-dialog > h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.05rem;
+}
+
+/* The dialog is narrower than the old panel, so let the controls wrap instead
+   of squeezing four of them onto one line. */
+.notebook-page .notebook-practice-dialog .actions {
+  flex-wrap: wrap;
+  gap: 0.6rem 0.9rem;
+}
+
+.notebook-page .notebook-practice-dialog .actions > label {
+  min-width: 148px;
+}
+
+.notebook-page .notebook-practice-reasons {
+  gap: 0.5rem 1rem;
 }
