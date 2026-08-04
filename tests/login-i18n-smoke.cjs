@@ -40,6 +40,8 @@ async function newPage(browser, locale, savedLanguage) {
         const shell = getComputedStyle(document.querySelector(".login-shell"));
         const input = getComputedStyle(document.querySelector("#emailOtpAddress"));
         const themeToggle = getComputedStyle(document.querySelector("#themeToggle"));
+        const languageToggle = getComputedStyle(document.querySelector("[data-language-toggle]"));
+        const controls = getComputedStyle(document.querySelector(".auth-page-controls"));
         return {
           bodyBackground: body.backgroundColor,
           shellRadius: shell.borderRadius,
@@ -47,7 +49,12 @@ async function newPage(browser, locale, savedLanguage) {
           shellShadow: shell.boxShadow,
           inputRadius: input.borderRadius,
           inputShadow: input.boxShadow,
+          controlsGap: controls.gap,
+          themeToggleHeight: themeToggle.height,
+          themeToggleRadius: themeToggle.borderRadius,
           themeToggleShadow: themeToggle.boxShadow,
+          languageToggleHeight: languageToggle.height,
+          languageToggleRadius: languageToggle.borderRadius,
         };
       });
       assert.equal(lightMaterial.bodyBackground, "rgb(230, 234, 227)");
@@ -56,7 +63,12 @@ async function newPage(browser, locale, savedLanguage) {
       assert.match(lightMaterial.shellShadow, /-14px -14px 30px/);
       assert.equal(lightMaterial.inputRadius, "16px");
       assert.match(lightMaterial.inputShadow, /inset/);
+      assert.equal(lightMaterial.controlsGap, "6px");
+      assert.equal(lightMaterial.themeToggleHeight, "44px");
+      assert.equal(lightMaterial.themeToggleRadius, "16px");
       assert.equal(lightMaterial.themeToggleShadow, "none");
+      assert.equal(lightMaterial.languageToggleHeight, "44px");
+      assert.equal(lightMaterial.languageToggleRadius, "16px");
 
       await page.locator("#emailOtpRequestBtn").evaluate((button) => {
         document.documentElement.setAttribute("data-theme", "dark");
@@ -71,6 +83,7 @@ async function newPage(browser, locale, savedLanguage) {
         const disabledSubmit = getComputedStyle(submit);
         return {
           bodyBackground: body.backgroundColor,
+          bodyBackgroundImage: body.backgroundImage,
           shellBorder: shell.borderTopWidth,
           shellBlur: shell.backdropFilter || shell.webkitBackdropFilter,
           shellBackground: shell.backgroundColor,
@@ -79,6 +92,8 @@ async function newPage(browser, locale, savedLanguage) {
         };
       });
       assert.equal(darkMaterial.bodyBackground, "rgb(20, 23, 28)");
+      assert.match(darkMaterial.bodyBackgroundImage, /radial-gradient/);
+      assert.doesNotMatch(darkMaterial.bodyBackgroundImage, /linear-gradient/);
       assert.equal(darkMaterial.shellBorder, "1px");
       assert.match(darkMaterial.shellBlur, /blur\(20px\).*saturate\(1\.6\)/);
       assert.equal(darkMaterial.shellBackground, "rgba(255, 255, 255, 0.07)");
@@ -170,6 +185,10 @@ async function newPage(browser, locale, savedLanguage) {
       assert.equal(await page.locator("#emailOtpRequestBtn").isVisible(), true);
       assert.equal(await page.locator("#visitorModeBtn").isVisible(), true);
       assert.equal(await page.locator(".login-shell").evaluate((element) => getComputedStyle(element).borderRadius), "24px");
+      assert.equal(await page.locator(".auth-page-controls").evaluate((element) => getComputedStyle(element).gap), "2px");
+      assert.equal(await page.locator("#themeToggle").evaluate((element) => getComputedStyle(element).width), "40px");
+      assert.equal(await page.locator("#themeToggle").evaluate((element) => getComputedStyle(element).height), "40px");
+      assert.equal(await page.locator(".home-theme-icon--sun").evaluate((element) => getComputedStyle(element).width), "22px");
       assert.equal(await page.locator(".login-shell").evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(" ").length), 1);
       await context.close();
     }
