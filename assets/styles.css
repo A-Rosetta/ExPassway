@@ -5055,3 +5055,50 @@ body.chapter-practice-page {
 .notebook-page .notebook-practice-reasons {
   gap: 0.5rem 1rem;
 }
+/* ===== Notebook records: tighten the header and the pager (2026-08-04) ===== */
+
+/* Reclaim the space above the first group: the card's own padding, the heading
+   and the group <h3>'s default ~1em margin stacked up to roughly 50px of empty
+   space before the first entry. */
+.notebook-page .notebook-records-card {
+  gap: 0.3rem;
+  padding: 0.65rem 0.85rem 0.6rem;
+}
+
+.notebook-page .notebook-records-card > h2 {
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+
+.notebook-page .notebook-group-title {
+  margin: 0.5rem 0 0.28rem;
+  font-size: 0.8rem;
+}
+
+.notebook-page .notebook-group:first-child .notebook-group-title {
+  margin-top: 0;
+}
+
+/* Opaque, or the entries scroll through it. --card-bg resolves to a
+   translucent glass fill under the dark theme, which is exactly what let the
+   rows show through; --bg is solid in both themes. */
+.notebook-page .notebook-pagination {
+  margin: 0.35rem 0 0;
+  padding: 0.4rem 0 0.15rem;
+  background: var(--bg);
+  border-top: 1px solid var(--surface-border-soft, rgba(var(--accent-rgb), 0.14));
+  font-size: 0.78rem;
+}
+
+/* A full-size button pair here reads as heavier than the rows it pages
+   through, so scale it back to a control strip. */
+.notebook-page .notebook-pagination button {
+  min-height: 0;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.78rem;
+  border-radius: 9px;
+}
+
+.notebook-page .notebook-page-progress {
+  font-size: 0.76rem;
+}
