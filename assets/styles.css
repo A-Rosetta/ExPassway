@@ -4837,7 +4837,10 @@ body.chapter-practice-page {
   /* Sidebar flexes because the English labels do not fit a fixed 290px. */
   grid-template-columns: minmax(0, 1fr) clamp(260px, 23vw, 330px);
   gap: 1rem;
-  align-items: start;
+  /* Must stretch, not start: with align-items:start the columns size to their
+     content, the list's minmax(0,1fr) row is never capped, and it grows past
+     the fold instead of scrolling inside. */
+  align-items: stretch;
   min-height: 0;
 }
 
@@ -4973,22 +4976,41 @@ body.chapter-practice-page {
 }
 
 /* One screen on a laptop: only the entry list scrolls.
-   The height has to be definite, not max-height. A percentage height on the
-   grid resolves against its parent, and a max-height parent still computes to
-   auto - so the constraint silently did nothing and the page scrolled anyway.
-   68px is .site-topbar's min-height; the site container's own 40px/64px
-   padding is replaced here because it alone eats 104px of the fold. */
+   Done as a flex chain from the body down rather than by subtracting the
+   header height. Two earlier attempts failed for reasons worth recording:
+   a max-height parent leaves percentage heights unresolved, and
+   calc(100vh - 68px) relied on .site-topbar's min-height, which is a floor
+   rather than its real height. Flex needs no such number.
+   Selectors are element+class so they out-specify .site-ui .container, which
+   is (0,2,0), loads later from site-design.css, and would otherwise keep its
+   40px/64px padding - 104px of the fold on its own. */
 @media (min-width: 900px) and (min-height: 640px) {
-  .notebook-page .notebook-shell {
-    box-sizing: border-box;
-    height: calc(100vh - 68px);
-    padding-top: 18px;
-    padding-bottom: 18px;
+  body.notebook-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 0;
+    overflow: hidden;
   }
 
-  .notebook-page .notebook-layout {
-    height: 100%;
+  /* Injected by site-ui.js on load; whatever height it ends up, flex absorbs. */
+  body.notebook-page > .site-topbar {
+    flex: 0 0 auto;
+  }
+
+  body.notebook-page > .notebook-shell {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
     min-height: 0;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  body.notebook-page .notebook-layout {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
   }
 }
 /* ===== Notebook: the build-paper dialog as a real modal (2026-08-04) =====
