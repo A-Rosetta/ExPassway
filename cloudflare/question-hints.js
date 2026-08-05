@@ -122,9 +122,17 @@ function validateHints(value, question) {
   return "";
 }
 
+export async function generateQuestionHintsForAdmin(env, question, language) {
+  const image = await readQuestionImage(env, question);
+  const fingerprint = await fingerprintQuestion(question, image);
+  const generated = await requestOpenAI(env, question, language, image);
+  return { ...generated, fingerprint };
+}
+
 async function requestOpenAI(env, question, language, image) {
   const apiKey = String(env.OPENAI_API_KEY || "");
   const model = String(env.OPENAI_HINT_MODEL || "");
+  const baseUrl = String(env.OPENAI_API_BASE_URL || "https://api.openai.com").replace(/\/+$/, "");
   if (!apiKey || !model) throw new AuthError(503, "OpenAI hint generation is not configured.", "AI_HINTS_NOT_CONFIGURED");
   let retryFeedback = "";
   for (let attempt = 0; attempt < 2; attempt += 1) {
@@ -132,7 +140,7 @@ async function requestOpenAI(env, question, language, image) {
     const timeout = setTimeout(() => controller.abort(), 45000);
     let response;
     try {
-      response = await fetch("https://api.openai.com/v1/responses", {
+      response = await fetch(`${baseUrl}/v1/responses`, {
         method: "POST",
         headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({

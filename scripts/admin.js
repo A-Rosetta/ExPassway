@@ -172,6 +172,23 @@
     }
   }
 
+  const initializeHintsButton = byId("adminInitializeHints");
+  initializeHintsButton?.addEventListener("click", async () => {
+    initializeHintsButton.disabled = true;
+    const statusEl = byId("adminHintReviewStatus");
+    statusEl.textContent = "Generating and approving 24 AI hint samples...";
+    try {
+      const result = await window.ALevelApi.initializeAdminQuestionHints(authToken);
+      statusEl.textContent = `Generated and approved ${result.approved || result.generated || 0} hint sets.`;
+      await loadHintReviewData();
+    } catch (err) {
+      statusEl.textContent = `Sample generation failed: ${err.message || "unknown error"}`;
+      statusEl.className = "tip bad";
+    } finally {
+      initializeHintsButton.disabled = false;
+    }
+  });
+
   function formatBytes(value) {
     const bytes = Number(value || 0);
     if (bytes < 1024) return `${bytes} B`;

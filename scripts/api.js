@@ -297,6 +297,9 @@
     async getAdminQuestionHintSampleStatus(token) {
       return request("/api/admin/question-hints/sample-status", { token, timeoutMs: 30000 });
     },
+    async initializeAdminQuestionHints(token) {
+      return request("/api/admin/question-hints/initialize", { method: "POST", token, timeoutMs: 180000 });
+    },
     async reviewAdminQuestionHint(token, hintSetId, status) {
       return request(`/api/admin/question-hints/${encodeURIComponent(hintSetId)}`, {
         method: "PATCH",

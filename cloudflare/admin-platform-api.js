@@ -1,5 +1,8 @@
 import { AuthError, mapUser, readJsonBody, success } from "./auth-api.js";
 import { dispatchImportWorkflow, writeAudit } from "./admin-support.js";
+import { generateQuestionHintsForAdmin } from "./question-hints.js";
+
+const HINT_PROMPT_VERSION = "igcse-progressive-v1";
 
 function parseJson(value, fallback) {
   if (value === null || value === undefined || value === "") return fallback;
@@ -158,6 +161,42 @@ async function aiSettings(request, env, admin) {
   return success({ enabled: body.enabled, configured: true, modelConfigured: true, updatedBy: admin.id, updatedAt: now }, request.method);
 }
 
+async function initializeHintSamples(request, env, admin) {
+  if (request.method !== "POST") return null;
+  if (!env.OPENAI_API_KEY || !env.OPENAI_HINT_MODEL) {
+    throw new AuthError(409, "Configure the AI key and hint model first.", "AI_HINTS_NOT_CONFIGURED");
+  }
+  const ids = [
+    "CIE-IGCSE-0610-0610_m21_qp_22-01", "CIE-IGCSE-0610-0610_m22_qp_22-02",
+    "CIE-IGCSE-0610-0610_w19_qp_21-03", "CIE-IGCSE-0610-0610_w23_qp_22-03",
+    "CIE-IGCSE-0610-0610_s20_qp_21-03", "CIE-IGCSE-0610-0610_m21_qp_22-38",
+    "CIE-IGCSE-0610-0610_m21_qp_22-05", "CIE-IGCSE-0610-0610_s23_qp_21-04",
+    "CIE-IGCSE-0610-0610_w21_qp_22-06", "CIE-IGCSE-0610-0610_w20_qp_21-06",
+    "CIE-IGCSE-0610-0610_w22_qp_21-06", "CIE-IGCSE-0610-0610_m20_qp_22-08",
+  ];
+  const placeholders = ids.map(() => "?").join(",");
+  const rows = (await env.DB.prepare(`SELECT id, stem, options, answer, images FROM question_bank WHERE id IN (${placeholders}) AND active = 1`).bind(...ids).all()).results;
+  if (rows.length !== ids.length) throw new AuthError(409, "The Biology sample questions are not all published.", "AI_HINT_SAMPLE_QUESTIONS_MISSING");
+  const results = [];
+  for (const question of rows) {
+    for (const language of ["zh-CN", "en"]) {
+      const generated = await generateQuestionHintsForAdmin(env, question, language);
+      const now = new Date().toISOString();
+      await env.DB.prepare(`
+        INSERT INTO question_hint_sets (id, question_id, language, prompt_version, question_fingerprint, hints, status, model, response_id, reviewed_by, reviewed_at, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, 'approved', ?, ?, ?, ?, ?, ?)
+        ON CONFLICT (question_id, language, prompt_version, question_fingerprint) DO UPDATE SET
+          hints = excluded.hints, status = 'approved', model = excluded.model, response_id = excluded.response_id,
+          reviewed_by = excluded.reviewed_by, reviewed_at = excluded.reviewed_at, updated_at = excluded.updated_at
+      `).bind(crypto.randomUUID(), question.id, language, HINT_PROMPT_VERSION, generated.fingerprint,
+        JSON.stringify(generated.hints), generated.model, generated.responseId, admin.id, now, now, now).run();
+      results.push({ questionId: question.id, language });
+    }
+  }
+  await writeAudit(env.DB, admin.id, "ai_hints.initialize_samples", "question_hint_sets", "biology-hint-sample-v1");
+  return success({ generated: results.length, approved: results.length }, request.method);
+}
+
 async function exportRows(db, dataset) {
   const queries = {
     users: "SELECT id, email, display_name, role, grade, target_score, language, disabled_at, created_at, updated_at FROM users ORDER BY created_at DESC LIMIT 5000",
@@ -177,6 +216,10 @@ async function exportRows(db, dataset) {
 
 export async function handleAdminPlatformRoute(request, env, admin) {
   const url = new URL(request.url);
+
+  if (url.pathname === "/api/admin/question-hints/initialize" && request.method === "POST") {
+    return initializeHintSamples(request, env, admin);
+  }
 
   if (url.pathname === "/api/admin/settings/ai-hints" && new Set(["GET", "PATCH"]).has(request.method)) {
     return aiSettings(request, env, admin);
