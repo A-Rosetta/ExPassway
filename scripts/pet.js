@@ -18,6 +18,8 @@
   const FIRST_TIP_DELAY = 45 * 1000;
   const TIP_INTERVAL = 8 * 60 * 1000;
   const QUESTION_HINT_DELAY = 60 * 1000;
+  const QUESTION_HINT_INITIAL_DELAY = 0;
+  const QUESTION_HINT_RETRY_DELAY = 5 * 1000;
   const DAILY_TIP_LIMIT = 3;
   const DOCK_DISTANCE = 24;
   const DOCK_CLOSE_DISTANCE = 48;
@@ -41,6 +43,7 @@
     dockHintTimer: 0,
     bubbleAction: "",
     invitedQuestions: new Set(),
+    hasShownPracticeHint: false,
     dockSide: "",
     dragging: false,
     moved: false,
@@ -282,24 +285,31 @@
     }, delay);
   }
 
-  function scheduleQuestionHint() {
+  function scheduleQuestionHint(delay = QUESTION_HINT_DELAY) {
     window.clearTimeout(state.hintTimer);
     if (!state.hintProvider || !state.preferences.enabled) return;
     const questionKey = String(state.hintProvider.getQuestionKey?.() || "");
     state.hintQuestionKey = questionKey;
     if (!questionKey || state.invitedQuestions.has(questionKey) || !state.hintProvider.hasUnseenHint?.()) return;
     state.hintTimer = window.setTimeout(() => {
-      if (document.hidden || activeInput() || intrusiveUiOpen()) return scheduleQuestionHint();
+      if (document.hidden || activeInput() || intrusiveUiOpen()) {
+        return scheduleQuestionHint(QUESTION_HINT_RETRY_DELAY);
+      }
       if (questionKey !== String(state.hintProvider.getQuestionKey?.() || "")) return;
       if (!state.hintProvider.hasUnseenHint?.()) return;
       state.invitedQuestions.add(questionKey);
+      state.hasShownPracticeHint = true;
       showBubble(t("petHintInvite"), "hint");
-    }, QUESTION_HINT_DELAY);
+    }, delay);
   }
 
   async function activatePet() {
     if (state.dragging || state.moved) return;
     if (state.bubbleAction === "hint-navigation") {
+      await navigateHint(1);
+      return;
+    }
+    if (state.bubbleAction === "hint" || state.hintProvider?.getQuestionKey?.()) {
       await navigateHint(1);
       return;
     }
@@ -539,12 +549,13 @@
 
   function registerHintProvider(provider) {
     state.hintProvider = provider;
-    scheduleQuestionHint();
+    state.hasShownPracticeHint = false;
+    scheduleQuestionHint(QUESTION_HINT_INITIAL_DELAY);
   }
 
   function notifyQuestionChanged() {
     hideBubble();
-    scheduleQuestionHint();
+    scheduleQuestionHint(state.hasShownPracticeHint ? QUESTION_HINT_DELAY : QUESTION_HINT_INITIAL_DELAY);
   }
 
   async function init() {
