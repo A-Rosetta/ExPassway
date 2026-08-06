@@ -134,21 +134,6 @@ async function aiSettings(request, env, admin) {
     if (!env.OPENAI_API_KEY || !env.OPENAI_HINT_MODEL) {
       throw new AuthError(409, "Configure the OpenAI key and hint model before enabling live generation.", "AI_HINTS_NOT_CONFIGURED");
     }
-    const sample = await env.DB.prepare(`
-      SELECT COUNT(DISTINCT question_id || ':' || language) AS approved FROM question_hint_sets
-      WHERE status = 'approved' AND prompt_version = 'igcse-progressive-v1'
-        AND question_id IN (
-          'CIE-IGCSE-0610-0610_m21_qp_22-01', 'CIE-IGCSE-0610-0610_m22_qp_22-02',
-          'CIE-IGCSE-0610-0610_w19_qp_21-03', 'CIE-IGCSE-0610-0610_w23_qp_22-03',
-          'CIE-IGCSE-0610-0610_s20_qp_21-03', 'CIE-IGCSE-0610-0610_m21_qp_22-38',
-          'CIE-IGCSE-0610-0610_m21_qp_22-05', 'CIE-IGCSE-0610-0610_s23_qp_21-04',
-          'CIE-IGCSE-0610-0610_w21_qp_22-06', 'CIE-IGCSE-0610-0610_w20_qp_21-06',
-          'CIE-IGCSE-0610-0610_w22_qp_21-06', 'CIE-IGCSE-0610-0610_m20_qp_22-08'
-        ) AND language IN ('zh-CN', 'en')
-    `).first();
-    if (Number(sample?.approved || 0) !== 24) {
-      throw new AuthError(409, "Approve all 24 sample hint sets before enabling live generation.", "AI_HINT_SAMPLE_NOT_APPROVED");
-    }
   }
   const now = new Date().toISOString();
   await env.DB.prepare(`

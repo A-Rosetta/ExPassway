@@ -153,7 +153,7 @@
         window.ALevelApi.getAdminAiHintSettings(authToken),
       ]);
       byId("adminHintLiveToggle").checked = setting.enabled;
-      byId("adminHintLiveToggle").disabled = !setting.configured || (!sample.ready && !setting.enabled);
+      byId("adminHintLiveToggle").disabled = !setting.configured;
       statusEl.textContent = t("adminHintProgress", {
         version: sample.version,
         approved: sample.approved,
@@ -161,9 +161,9 @@
         pending: sample.pendingReview,
         rejected: sample.rejected,
         missing: sample.missing,
-        state: t(sample.ready ? "adminHintLiveReady" : "adminHintLiveLocked"),
+        state: t(setting.enabled ? "adminHintLiveEnabled" : "adminHintLiveDisabled"),
       });
-      statusEl.className = sample.ready ? "tip good" : "tip";
+      statusEl.className = setting.enabled ? "tip good" : "tip";
       renderHintSets(rows);
     } catch (err) {
       renderHintSets([]);

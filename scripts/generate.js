@@ -371,6 +371,7 @@
     (questions || []).forEach((q, idx) => {
       map[idx] = {
         used: 0,
+        index: -1,
         total: Array.isArray(q.hints) ? q.hints.length : 0,
       };
     });
@@ -856,7 +857,8 @@
             ${imagesHtml ? `<div class="question-images-wrap">${imagesHtml}</div>` : ""}
             <div class="options-wrap">${optionsHtml}</div>
             <div class="actions">
-              <button class='btn-secondary' id='hintBtn_${idx}'>${t("showHint")}</button>
+              <button class='btn-secondary' id='hintPrevBtn_${idx}' type='button'>${t("previousHint")}</button>
+              <button class='btn-secondary' id='hintNextBtn_${idx}' type='button'>${t("nextHint")}</button>
             </div>
             <div id="hint_${idx}" class="tip"></div>
             <div id="feedback_${idx}" class="tip"></div>
@@ -896,10 +898,13 @@
     const end = Math.min(state.questions.length, start + state.pageSize);
     for (let idx = start; idx < end; idx += 1) {
       const q = state.questions[idx];
-      const hintBtn = byId(`hintBtn_${idx}`);
+      const hintPrevBtn = byId(`hintPrevBtn_${idx}`);
+      const hintNextBtn = byId(`hintNextBtn_${idx}`);
       const hintEl = byId(`hint_${idx}`);
-      if (hintBtn && hintEl && q) {
-        hintBtn.onclick = () => showNextQuestionHint(idx).catch(() => {});
+      if (hintPrevBtn && hintNextBtn && hintEl && q) {
+        hintPrevBtn.onclick = () => showQuestionHint(idx, -1).catch(() => {});
+        hintNextBtn.onclick = () => showQuestionHint(idx, 1).catch(() => {});
+        updateHintControls(idx);
       }
     }
 
@@ -982,33 +987,42 @@
     return question.hints;
   }
 
-  async function showNextQuestionHint(index) {
+  function updateHintControls(index) {
+    const row = state.hintUsageMap[index];
+    const hints = state.questions[index]?.hints || [];
+    const prev = byId(`hintPrevBtn_${index}`);
+    const next = byId(`hintNextBtn_${index}`);
+    if (!row || !prev || !next) return;
+    prev.disabled = row.used <= 0;
+    next.disabled = hints.length > 0 && row.index >= hints.length - 1;
+    next.textContent = hints.length && row.used >= hints.length ? t("allHintsShown") : t("nextHint");
+  }
+
+  async function showQuestionHint(index, direction) {
     const question = state.questions[index];
     const hintEl = byId(`hint_${index}`);
-    const hintBtn = byId(`hintBtn_${index}`);
     if (!question || !hintEl) return;
-    if (hintBtn) hintBtn.disabled = true;
-    hintEl.textContent = t("petHintLoading");
+    const row = state.hintUsageMap[index];
+    if (!row) return;
     try {
       const hints = await ensureQuestionHints(index);
       if (!hints.length) {
         hintEl.textContent = t("noHintAvailable");
+        updateHintControls(index);
         return;
       }
-      const row = state.hintUsageMap[index];
-      const nextIndex = Math.min(row.used, hints.length - 1);
+      const nextIndex = Math.max(0, Math.min(hints.length - 1, (row.index ?? -1) + direction));
+      row.index = nextIndex;
+      row.used = Math.max(row.used, nextIndex + 1);
       hintEl.textContent = t("hintProgress", {
         index: nextIndex + 1,
         total: hints.length,
         hint: hints[nextIndex],
       });
-      row.used = Math.min(hints.length, row.used + 1);
-      if (hintBtn) hintBtn.textContent = row.used >= hints.length ? t("allHintsShown") : t("nextHint");
+      updateHintControls(index);
     } catch (error) {
       hintEl.textContent = t("hintLoadFailed", { message: error.message || t("retryLater") });
       throw error;
-    } finally {
-      if (hintBtn) hintBtn.disabled = false;
     }
   }
 
@@ -1412,7 +1426,7 @@
       return Boolean(question && row && (!question.hints?.length || row.used < question.hints.length));
     },
     showNextHint() {
-      return showNextQuestionHint(state.currentPageIndex * state.pageSize);
+      return showQuestionHint(state.currentPageIndex * state.pageSize, 1);
     },
   });
 
