@@ -240,25 +240,25 @@ try {
     }
 
     await db.prepare("DELETE FROM ai_hint_generation_events WHERE user_id = ?").bind(user.id).run();
-    for (let index = 0; index < 9; index += 1) {
+    for (let index = 0; index < 19; index += 1) {
       await db.prepare(`
         INSERT INTO ai_hint_generation_events (id, user_id, question_id, language)
         VALUES (?, ?, 'missing-question', 'en')
       `).bind(`rate-event-${index}`, user.id).run();
     }
-    const tenthAttempt = await hint("missing-question");
-    assert.equal(tenthAttempt.response.status, 422);
-    assert.equal(tenthAttempt.payload.error.code, "QUESTION_IMAGE_UNAVAILABLE");
+    const twentiethAttempt = await hint("missing-question");
+    assert.equal(twentiethAttempt.response.status, 422);
+    assert.equal(twentiethAttempt.payload.error.code, "QUESTION_IMAGE_UNAVAILABLE");
     const eventsAfterFailure = await db.prepare("SELECT COUNT(*) AS count FROM ai_hint_generation_events WHERE user_id = ?")
       .bind(user.id).first();
-    assert.equal(eventsAfterFailure.count, 9);
+    assert.equal(eventsAfterFailure.count, 19);
     await db.prepare(`
       INSERT INTO ai_hint_generation_events (id, user_id, question_id, language)
-      VALUES ('rate-event-9', ?, 'missing-question', 'en')
+      VALUES ('rate-event-19', ?, 'missing-question', 'en')
     `).bind(user.id).run();
-    const eleventhAttempt = await hint("missing-question");
-    assert.equal(eleventhAttempt.response.status, 429);
-    assert.equal(eleventhAttempt.payload.error.code, "AI_HINT_RATE_LIMITED");
+    const twentyFirstAttempt = await hint("missing-question");
+    assert.equal(twentyFirstAttempt.response.status, 429);
+    assert.equal(twentyFirstAttempt.payload.error.code, "AI_HINT_RATE_LIMITED");
 
     await db.prepare("UPDATE exam_subjects SET active = 0 WHERE code = '0610'").run();
     const disabledSubjects = await handleReadApiRequest(new Request(

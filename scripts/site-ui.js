@@ -2,8 +2,10 @@
   const STORAGE_KEY = "app-theme";
   const DARK = "dark";
   const LIGHT = "light";
+  const MOBILE_NOTICE_STORAGE_KEY = "expassway.mobileExperienceNoticeDismissed.v1";
   const root = document.documentElement;
   let themeToggle = document.getElementById("themeToggle");
+  let mobileExperienceNotice = null;
   const menuToggle = document.getElementById("homeMenuToggle");
   const navigation = document.getElementById("homeNav");
   const desktopQuery = window.matchMedia("(min-width: 768px)");
@@ -19,6 +21,98 @@
 
   function translate(key, fallback) {
     return window.ALevelI18n?.t?.(key) || fallback;
+  }
+
+  function isMobileDevice() {
+    const narrowViewport = window.matchMedia("(max-width: 767px)").matches;
+    if (!narrowViewport) return false;
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const mobileUserAgent = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini|Mobile/i.test(
+      navigator.userAgent || ""
+    );
+    return coarsePointer || mobileUserAgent;
+  }
+
+  function isStudentSurface() {
+    return document.body?.classList.contains("student-ui")
+      && document.body.classList.contains("site-ui")
+      && !document.body.classList.contains("admin-auth-page");
+  }
+
+  function mobileNoticeWasDismissed() {
+    try {
+      return localStorage.getItem(MOBILE_NOTICE_STORAGE_KEY) === "1";
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function rememberMobileNoticeDismissal() {
+    try {
+      localStorage.setItem(MOBILE_NOTICE_STORAGE_KEY, "1");
+    } catch (_error) {
+      // The notice can still be dismissed for this page when storage is restricted.
+    }
+  }
+
+  function updateMobileExperienceNotice() {
+    if (!mobileExperienceNotice) return;
+    const title = mobileExperienceNotice.querySelector("[data-mobile-experience-title]");
+    const message = mobileExperienceNotice.querySelector("[data-mobile-experience-message]");
+    const close = mobileExperienceNotice.querySelector("[data-mobile-experience-dismiss]");
+    if (title) title.textContent = translate("mobileExperienceTitle", "Best on desktop");
+    if (message) {
+      message.textContent = translate(
+        "mobileExperienceMessage",
+        "You are using a phone. Use a computer for the most complete practice experience."
+      );
+    }
+    if (close) {
+      const label = translate("mobileExperienceDismiss", "Dismiss");
+      close.setAttribute("aria-label", label);
+      close.title = label;
+    }
+  }
+
+  function dismissMobileExperienceNotice() {
+    if (!mobileExperienceNotice) return;
+    rememberMobileNoticeDismissal();
+    if (mobileExperienceNotice.open) mobileExperienceNotice.close();
+    mobileExperienceNotice.remove();
+    mobileExperienceNotice = null;
+  }
+
+  function showMobileExperienceNotice() {
+    if (!isStudentSurface() || !isMobileDevice() || mobileNoticeWasDismissed()) return;
+    const dialog = document.createElement("dialog");
+    dialog.className = "mobile-experience-notice";
+    dialog.setAttribute("aria-labelledby", "mobileExperienceNoticeTitle");
+    dialog.innerHTML = `
+      <div class="mobile-experience-notice__shell">
+        <div class="mobile-experience-notice__header">
+          <h2 id="mobileExperienceNoticeTitle" data-mobile-experience-title></h2>
+          <button class="mobile-experience-notice__close" type="button" data-mobile-experience-dismiss>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <p data-mobile-experience-message></p>
+      </div>`;
+    document.body.appendChild(dialog);
+    mobileExperienceNotice = dialog;
+    updateMobileExperienceNotice();
+    dialog.querySelector("[data-mobile-experience-dismiss]")?.addEventListener(
+      "click",
+      dismissMobileExperienceNotice
+    );
+    dialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      dismissMobileExperienceNotice();
+    });
+    try {
+      dialog.showModal();
+    } catch (_error) {
+      dialog.setAttribute("open", "");
+    }
   }
 
   function currentTheme() {
@@ -137,6 +231,7 @@
     });
     updateThemeLabel();
     setMenu(false, false);
+    showMobileExperienceNotice();
   }
 
   document.addEventListener("keydown", (event) => {
@@ -155,6 +250,7 @@
   window.addEventListener("alevel:languagechange", () => {
     updateThemeLabel();
     setMenu(menuIsOpen(), false);
+    updateMobileExperienceNotice();
   });
 
   applyTheme(readStoredTheme() || DARK);

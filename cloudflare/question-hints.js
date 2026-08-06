@@ -209,7 +209,7 @@ export async function getOrGenerateQuestionHints(env, question, userId, requeste
       SELECT COUNT(*) FROM ai_hint_generation_events
       WHERE user_id = ?
         AND created_at >= strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-1 hour')
-    ) < 10
+    ) < 20
   `).bind(reservationId, userId, question.id, language, reservedAt, userId).run();
   if (!reservation.meta.changes) {
     throw new AuthError(429, "AI hint generation limit reached. Try again later.", "AI_HINT_RATE_LIMITED");
