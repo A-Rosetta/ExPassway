@@ -10,6 +10,7 @@
     currentIndex: 0,
     selectedAnswers: [],
     hintsUsed: [],
+    hintIndexes: [],
     questionOpenedAt: [],
     elapsedSeconds: [],
     result: null,
@@ -144,8 +145,6 @@
       <h3>${hasImages ? safeText(t("questionNumber", { number: state.currentIndex + 1 })) : safeText(question.stem)}</h3>
       ${imageHtml ? `<div class="question-images-wrap">${imageHtml}</div>` : ""}
       <div class="options-wrap">${options}</div>
-      ${state.result ? "" : `<button id="showChapterHint" class="btn-secondary chapter-hint-button" type="button">${safeText(t("showHint"))}</button>`}
-      <p id="chapterHint" class="tip"></p>
       ${feedback}
     `;
     if (!state.result) {
@@ -153,9 +152,6 @@
         radio.addEventListener("change", () => {
           state.selectedAnswers[state.currentIndex] = Number(radio.value);
         });
-      });
-      byId("showChapterHint")?.addEventListener("click", () => {
-        showNextChapterHint().catch(() => {});
       });
       state.questionOpenedAt[state.currentIndex] = Date.now();
     }
@@ -181,37 +177,23 @@
     return question.hints;
   }
 
-  async function showNextChapterHint() {
-    const button = byId("showChapterHint");
-    const output = byId("chapterHint");
-    if (!output || state.result) return;
-    if (button) button.disabled = true;
-    output.textContent = t("petHintLoading");
-    try {
-      const hints = await ensureChapterHints();
-      if (!hints.length) {
-        output.textContent = t("noHintAvailable");
-        return;
-      }
-      const index = state.hintsUsed[state.currentIndex];
-      const nextIndex = Math.min(index, hints.length - 1);
-      output.textContent = t("hintProgress", {
-        index: nextIndex + 1,
-        total: hints.length,
-        hint: hints[nextIndex],
-      });
-      state.hintsUsed[state.currentIndex] = Math.min(hints.length, index + 1);
-      if (button) {
-        button.textContent = state.hintsUsed[state.currentIndex] >= hints.length
-          ? t("allHintsShown")
-          : t("nextHint");
-      }
-    } catch (error) {
-      output.textContent = t("hintLoadFailed", { message: error.message || t("retryLater") });
-      throw error;
-    } finally {
-      if (button) button.disabled = false;
-    }
+  async function showChapterHint(direction) {
+    if (state.result) return null;
+    const hints = await ensureChapterHints();
+    if (!hints.length) return null;
+    const currentIndex = Number.isInteger(state.hintIndexes[state.currentIndex])
+      ? state.hintIndexes[state.currentIndex]
+      : -1;
+    const nextIndex = Math.max(0, Math.min(hints.length - 1, currentIndex + direction));
+    state.hintIndexes[state.currentIndex] = nextIndex;
+    state.hintsUsed[state.currentIndex] = Math.max(state.hintsUsed[state.currentIndex] || 0, nextIndex + 1);
+    return {
+      index: nextIndex,
+      total: hints.length,
+      hint: hints[nextIndex],
+      hasPrevious: nextIndex > 0,
+      hasNext: nextIndex < hints.length - 1,
+    };
   }
 
   async function startPractice(bookSection) {
@@ -228,6 +210,7 @@
       state.currentIndex = 0;
       state.selectedAnswers = data.questions.map(() => -1);
       state.hintsUsed = data.questions.map(() => 0);
+      state.hintIndexes = data.questions.map(() => -1);
       state.questionOpenedAt = data.questions.map(() => 0);
       state.elapsedSeconds = data.questions.map(() => 0);
       state.result = null;
@@ -353,10 +336,11 @@
     },
     hasUnseenHint() {
       const question = state.questions[state.currentIndex];
-      const used = state.hintsUsed[state.currentIndex] || 0;
-      return Boolean(!state.result && question && (!question.hints?.length || used < question.hints.length));
+      const index = state.hintIndexes[state.currentIndex] ?? -1;
+      return Boolean(!state.result && question && (!question.hints?.length || index < question.hints.length - 1));
     },
-    showNextHint: showNextChapterHint,
+    showNextHint: () => showChapterHint(1),
+    showPreviousHint: () => showChapterHint(-1),
   });
 
   init();
