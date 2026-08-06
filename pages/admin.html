@@ -20,12 +20,8 @@
     <section class="card panel" id="adminHintReviewPanel">
       <div class="admin-section-heading">
         <div>
-          <h2 data-i18n="adminHintReviewTitle">AI Hint Sample Review</h2>
-          <p class="tip" data-i18n="adminHintReviewHint">Review optional three-step hints in Chinese and English. Live generation can be enabled independently and caches new hints on request.</p>
-        </div>
-        <div class="actions">
-          <button id="adminRefreshHints" class="btn-secondary" type="button" data-i18n="adminRefreshHints">Refresh Samples</button>
-          <button id="adminInitializeHints" class="btn-primary" type="button">Generate and approve samples</button>
+          <h2 data-i18n="adminHintLiveTitle">Live AI Hint Generation</h2>
+          <p class="tip" data-i18n="adminHintLiveHint">Generate hints on demand and cache them per question and language.</p>
         </div>
       </div>
       <p id="adminHintReviewStatus" class="tip" role="status"></p>
@@ -39,16 +35,6 @@
           <span data-i18n="adminHintLiveToggle">Enable live generation</span>
         </label>
       </div>
-      <div class="admin-hint-filters">
-        <label><span data-i18n="adminHintStatusLabel">Review Status</span>
-          <select id="adminHintStatus">
-            <option value="pending_review" data-i18n="adminHintPending">Pending Review</option>
-            <option value="approved" data-i18n="adminHintApproved">Approved</option>
-            <option value="rejected" data-i18n="adminHintRejected">Rejected</option>
-          </select>
-        </label>
-      </div>
-      <div id="adminHintList" class="admin-hint-list"></div>
     </section>
 
     <section class="card panel">

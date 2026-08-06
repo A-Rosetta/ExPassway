@@ -856,11 +856,6 @@
             }
             ${imagesHtml ? `<div class="question-images-wrap">${imagesHtml}</div>` : ""}
             <div class="options-wrap">${optionsHtml}</div>
-            <div class="actions">
-              <button class='btn-secondary' id='hintPrevBtn_${idx}' type='button'>${t("previousHint")}</button>
-              <button class='btn-secondary' id='hintNextBtn_${idx}' type='button'>${t("nextHint")}</button>
-            </div>
-            <div id="hint_${idx}" class="tip"></div>
             <div id="feedback_${idx}" class="tip"></div>
           </div>
         `;
@@ -898,14 +893,7 @@
     const end = Math.min(state.questions.length, start + state.pageSize);
     for (let idx = start; idx < end; idx += 1) {
       const q = state.questions[idx];
-      const hintPrevBtn = byId(`hintPrevBtn_${idx}`);
-      const hintNextBtn = byId(`hintNextBtn_${idx}`);
-      const hintEl = byId(`hint_${idx}`);
-      if (hintPrevBtn && hintNextBtn && hintEl && q) {
-        hintPrevBtn.onclick = () => showQuestionHint(idx, -1).catch(() => {});
-        hintNextBtn.onclick = () => showQuestionHint(idx, 1).catch(() => {});
-        updateHintControls(idx);
-      }
+      if (q) updateHintControls(idx);
     }
 
     const toggleButtons = document.querySelectorAll("[data-toggle-text]");
@@ -990,40 +978,27 @@
   function updateHintControls(index) {
     const row = state.hintUsageMap[index];
     const hints = state.questions[index]?.hints || [];
-    const prev = byId(`hintPrevBtn_${index}`);
-    const next = byId(`hintNextBtn_${index}`);
-    if (!row || !prev || !next) return;
-    prev.disabled = row.used <= 0;
-    next.disabled = hints.length > 0 && row.index >= hints.length - 1;
-    next.textContent = hints.length && row.used >= hints.length ? t("allHintsShown") : t("nextHint");
+    if (!row) return;
+    return { hasPrevious: row.index > 0, hasNext: hints.length === 0 || row.index < hints.length - 1 };
   }
 
   async function showQuestionHint(index, direction) {
     const question = state.questions[index];
-    const hintEl = byId(`hint_${index}`);
-    if (!question || !hintEl) return;
+    if (!question) return null;
     const row = state.hintUsageMap[index];
-    if (!row) return;
-    try {
-      const hints = await ensureQuestionHints(index);
-      if (!hints.length) {
-        hintEl.textContent = t("noHintAvailable");
-        updateHintControls(index);
-        return;
-      }
-      const nextIndex = Math.max(0, Math.min(hints.length - 1, (row.index ?? -1) + direction));
-      row.index = nextIndex;
-      row.used = Math.max(row.used, nextIndex + 1);
-      hintEl.textContent = t("hintProgress", {
-        index: nextIndex + 1,
-        total: hints.length,
-        hint: hints[nextIndex],
-      });
-      updateHintControls(index);
-    } catch (error) {
-      hintEl.textContent = t("hintLoadFailed", { message: error.message || t("retryLater") });
-      throw error;
-    }
+    if (!row) return null;
+    const hints = await ensureQuestionHints(index);
+    if (!hints.length) return null;
+    const nextIndex = Math.max(0, Math.min(hints.length - 1, (row.index ?? -1) + direction));
+    row.index = nextIndex;
+    row.used = Math.max(row.used, nextIndex + 1);
+    return {
+      index: nextIndex,
+      total: hints.length,
+      hint: hints[nextIndex],
+      hasPrevious: nextIndex > 0,
+      hasNext: nextIndex < hints.length - 1,
+    };
   }
 
   function updateTimerDisplay() {
@@ -1427,6 +1402,9 @@
     },
     showNextHint() {
       return showQuestionHint(state.currentPageIndex * state.pageSize, 1);
+    },
+    showPreviousHint() {
+      return showQuestionHint(state.currentPageIndex * state.pageSize, -1);
     },
   });
 

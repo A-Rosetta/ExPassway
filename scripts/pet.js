@@ -31,6 +31,9 @@
     bubble: null,
     bubbleMessage: null,
     bubbleText: null,
+    hintActions: null,
+    hintPrevious: null,
+    hintNext: null,
     hintProvider: null,
     hintQuestionKey: "",
     hintTimer: 0,
@@ -158,6 +161,11 @@
     state.bubbleText.textContent = message;
     state.bubble.hidden = false;
     state.bubbleAction = action;
+    if (state.hintActions && action !== "hint-navigation") {
+      state.hintActions.hidden = true;
+      state.hintPrevious.hidden = true;
+      state.hintNext.hidden = true;
+    }
     state.root.classList.toggle("has-action", Boolean(action));
   }
 
@@ -175,10 +183,48 @@
     }, DOCK_HINT_DURATION);
   }
 
+  function renderHintResult(result) {
+    if (!result) {
+      showBubble(t("noHintAvailable"), "hint-navigation");
+      state.hintActions.hidden = false;
+      state.hintPrevious.hidden = true;
+      state.hintNext.hidden = true;
+      return;
+    }
+    showBubble(t("hintProgress", {
+      index: result.index + 1,
+      total: result.total,
+      hint: result.hint,
+    }), "hint-navigation");
+    state.hintActions.hidden = false;
+    state.hintPrevious.hidden = !result.hasPrevious;
+    state.hintNext.hidden = !result.hasNext;
+    state.hintPrevious.disabled = !result.hasPrevious;
+    state.hintNext.disabled = !result.hasNext;
+  }
+
+  async function navigateHint(direction) {
+    showBubble(t("petHintLoading"), "hint-navigation");
+    try {
+      const result = direction < 0
+        ? await state.hintProvider?.showPreviousHint?.()
+        : await state.hintProvider?.showNextHint?.();
+      renderHintResult(result);
+    } catch (error) {
+      showBubble(t("hintLoadFailed", { message: error.message || t("retryLater") }), "hint-navigation");
+      state.hintActions.hidden = false;
+      state.hintPrevious.hidden = true;
+      state.hintNext.hidden = true;
+    }
+  }
+
   function hideBubble() {
     if (!state.bubble) return;
     state.bubble.hidden = true;
     state.bubbleAction = "";
+    if (state.hintActions) state.hintActions.hidden = true;
+    if (state.hintPrevious) state.hintPrevious.hidden = true;
+    if (state.hintNext) state.hintNext.hidden = true;
     state.root.classList.remove("has-action");
   }
 
@@ -253,18 +299,15 @@
 
   async function activatePet() {
     if (state.dragging || state.moved) return;
-    if (state.bubbleAction !== "hint") {
+    if (state.bubbleAction === "hint-navigation") {
+      await navigateHint(1);
+      return;
+    }
+    if (!state.bubbleAction || state.bubbleAction === "dock") {
       showNextAmbientTip();
       return;
     }
-    showBubble(t("petHintLoading"));
-    try {
-      await state.hintProvider?.showNextHint?.();
-      hideBubble();
-    } catch (_error) {
-      showBubble(t("petHintUnavailable"));
-      window.setTimeout(hideBubble, 8000);
-    }
+    await navigateHint(1);
   }
 
   async function closePet(event, rollbackDockSide = state.dockSide) {
@@ -425,6 +468,10 @@
         <button class="site-pet__bubble-message" type="button">
           <span class="site-pet__bubble-text" role="status" aria-live="polite"></span>
         </button>
+        <div class="site-pet__hint-actions" hidden>
+          <button class="site-pet__hint-previous" type="button">${t("previousHint")}</button>
+          <button class="site-pet__hint-next" type="button">${t("nextHint")}</button>
+        </div>
         <button class="site-pet__bubble-close" type="button" aria-label="${t("petDismissMessage")}" title="${t("petDismissMessage")}">×</button>
       </div>
       <button class="site-pet__character" type="button" aria-label="Codex" title="Codex">
@@ -439,14 +486,25 @@
     state.bubble = root.querySelector(".site-pet__bubble");
     state.bubbleMessage = root.querySelector(".site-pet__bubble-message");
     state.bubbleText = root.querySelector(".site-pet__bubble-text");
+    state.hintActions = root.querySelector(".site-pet__hint-actions");
+    state.hintPrevious = root.querySelector(".site-pet__hint-previous");
+    state.hintNext = root.querySelector(".site-pet__hint-next");
     const character = root.querySelector(".site-pet__character");
     state.bubbleMessage.addEventListener("click", () => {
-      if (state.bubbleAction === "hint") activatePet();
+      if (state.bubbleAction === "hint" || state.bubbleAction === "hint-navigation") activatePet();
       else hideBubble();
     });
     root.querySelector(".site-pet__bubble-close").addEventListener("click", (event) => {
       event.stopPropagation();
       hideBubble();
+    });
+    state.hintPrevious.addEventListener("click", (event) => {
+      event.stopPropagation();
+      navigateHint(-1);
+    });
+    state.hintNext.addEventListener("click", (event) => {
+      event.stopPropagation();
+      navigateHint(1);
     });
     character.addEventListener("click", activatePet);
     character.addEventListener("pointerdown", beginDrag);
@@ -506,6 +564,8 @@
       const bubbleClose = state.root.querySelector(".site-pet__bubble-close");
       bubbleClose.setAttribute("aria-label", t("petDismissMessage"));
       bubbleClose.setAttribute("title", t("petDismissMessage"));
+      state.hintPrevious.textContent = t("previousHint");
+      state.hintNext.textContent = t("nextHint");
       hideBubble();
     });
   }

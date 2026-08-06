@@ -86,108 +86,20 @@
     `;
   }
 
-  function hintImageUrl(hintSet) {
-    const image = hintSet?.question?.images?.[0];
-    const url = typeof image === "string" ? image : image?.url || image?.detailUrl || "";
-    return url.startsWith("/assets/") && location.pathname.startsWith("/alevel/") ? `/alevel${url}` : url;
-  }
-
-  function renderHintSets(rows) {
-    const list = byId("adminHintList");
-    if (!list) return;
-    list.innerHTML = rows?.length ? rows.map((hintSet) => {
-      const question = hintSet.question || {};
-      const imageUrl = hintImageUrl(hintSet);
-      return `
-        <article class="admin-hint-card">
-          <header>
-            <div>
-              <strong>${safeText(`${question.paperSlug || hintSet.questionId} · Q${question.questionNo || "-"}`)}</strong>
-              <span class="status-pill">${safeText(hintSet.language === "en" ? t("adminHintLanguageEn") : t("adminHintLanguageZh"))}</span>
-            </div>
-            <small class="mono">${safeText(hintSet.model)}</small>
-          </header>
-          <div class="admin-hint-question">
-            ${imageUrl ? `<img src="${safeText(imageUrl)}" alt="${safeText(question.stem || hintSet.questionId)}" />` : ""}
-            <div>
-              <p>${safeText(question.stem || "-")}</p>
-              <ol type="A">${(question.options || []).map((option) => `<li>${safeText(option)}</li>`).join("")}</ol>
-            </div>
-          </div>
-          <ol class="admin-hint-steps">${(hintSet.hints || []).map((hint) => `<li>${safeText(hint)}</li>`).join("")}</ol>
-          ${hintSet.status === "pending_review" ? `
-            <div class="actions">
-              <button class="btn-primary" type="button" data-hint-review="approved" data-hint-id="${safeText(hintSet.id)}">${safeText(t("adminHintApprove"))}</button>
-              <button class="btn-danger" type="button" data-hint-review="rejected" data-hint-id="${safeText(hintSet.id)}">${safeText(t("adminHintReject"))}</button>
-            </div>
-          ` : ""}
-        </article>
-      `;
-    }).join("") : `<p class="tip">${safeText(t("adminHintNoRows"))}</p>`;
-
-    list.querySelectorAll("[data-hint-review]").forEach((button) => {
-      button.addEventListener("click", async () => {
-        button.disabled = true;
-        try {
-          await window.ALevelApi.reviewAdminQuestionHint(
-            authToken,
-            button.dataset.hintId,
-            button.dataset.hintReview
-          );
-          await loadHintReviewData();
-        } catch (err) {
-          button.disabled = false;
-          byId("adminHintReviewStatus").textContent = t("adminHintReviewFailed", { message: err.message });
-          byId("adminHintReviewStatus").className = "tip bad";
-        }
-      });
-    });
-  }
-
   async function loadHintReviewData() {
     const statusEl = byId("adminHintReviewStatus");
     try {
-      const [rows, sample, setting] = await Promise.all([
-        window.ALevelApi.getAdminQuestionHints(authToken, byId("adminHintStatus").value),
-        window.ALevelApi.getAdminQuestionHintSampleStatus(authToken),
-        window.ALevelApi.getAdminAiHintSettings(authToken),
-      ]);
+      const setting = await window.ALevelApi.getAdminAiHintSettings(authToken);
       byId("adminHintLiveToggle").checked = setting.enabled;
       byId("adminHintLiveToggle").disabled = !setting.configured;
-      statusEl.textContent = t("adminHintProgress", {
-        version: sample.version,
-        approved: sample.approved,
-        expected: sample.expected,
-        pending: sample.pendingReview,
-        rejected: sample.rejected,
-        missing: sample.missing,
-        state: t(setting.enabled ? "adminHintLiveEnabled" : "adminHintLiveDisabled"),
-      });
+      statusEl.textContent = t(setting.enabled ? "adminHintLiveEnabled" : "adminHintLiveDisabled");
       statusEl.className = setting.enabled ? "tip good" : "tip";
-      renderHintSets(rows);
     } catch (err) {
-      renderHintSets([]);
       statusEl.textContent = t("adminHintLoadFailed", { message: err.message || t("checkBackendDb") });
       statusEl.className = "tip bad";
     }
   }
 
-  const initializeHintsButton = byId("adminInitializeHints");
-  initializeHintsButton?.addEventListener("click", async () => {
-    initializeHintsButton.disabled = true;
-    const statusEl = byId("adminHintReviewStatus");
-    statusEl.textContent = "Generating and approving 24 AI hint samples...";
-    try {
-      const result = await window.ALevelApi.initializeAdminQuestionHints(authToken);
-      statusEl.textContent = `Generated and approved ${result.approved || result.generated || 0} hint sets.`;
-      await loadHintReviewData();
-    } catch (err) {
-      statusEl.textContent = `Sample generation failed: ${err.message || "unknown error"}`;
-      statusEl.className = "tip bad";
-    } finally {
-      initializeHintsButton.disabled = false;
-    }
-  });
 
   function formatBytes(value) {
     const bytes = Number(value || 0);
@@ -963,8 +875,6 @@
   });
 
   byId("adminRefreshImports").addEventListener("click", loadImportAdminData);
-  byId("adminRefreshHints").addEventListener("click", loadHintReviewData);
-  byId("adminHintStatus").addEventListener("change", loadHintReviewData);
   byId("adminHintLiveToggle").addEventListener("change", async (event) => {
     const toggle = event.currentTarget;
     toggle.disabled = true;
