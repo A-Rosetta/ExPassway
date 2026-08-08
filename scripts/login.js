@@ -20,6 +20,12 @@
     status.hidden = !text;
   }
 
+  function redirectAfterAuth() {
+    const next = new URLSearchParams(location.search).get("next");
+    const destination = next === "chat.html" ? "chat.html" : "../index.html";
+    location.href = destination;
+  }
+
   function writeUserProfile(profile) {
     localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(profile));
     if (profile?.id) localStorage.setItem(USER_ID_KEY, profile.id);
@@ -36,9 +42,7 @@
     writeUserProfile(payload.user);
     localStorage.setItem(AUTH_TOKEN_KEY, payload.token);
     setAuthStatus(t(messageKey, { name: payload.user.displayName }));
-    setTimeout(() => {
-      location.href = "../index.html";
-    }, 300);
+    setTimeout(redirectAfterAuth, 300);
   }
 
   function setButtonBusy(button, busy, busyKey) {
@@ -142,9 +146,7 @@
       const user = await window.ALevelApi.getCurrentUser(token);
       writeUserProfile(user);
       setAuthStatus(t("autoLoginSuccess", { name: user.displayName }));
-      setTimeout(() => {
-        location.href = "../index.html";
-      }, 300);
+      setTimeout(redirectAfterAuth, 300);
     } catch (err) {
       if (err?.status === 401 || err?.status === 403) {
         clearAuth();

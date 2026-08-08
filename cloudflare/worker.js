@@ -2,6 +2,8 @@ import { handleAdminApiRequest } from "./admin-api.js";
 import { handleAuthApiRequest } from "./auth-api.js";
 import { handleCommunityApiRequest, handleCommunityImageRequest } from "./community-api.js";
 import { handleContentRequest, handleQuestionHintRequest } from "./content-api.js";
+import { cleanupChatData, handleChatApiRequest, handleChatWebSocketRequest } from "./chat-api.js";
+import { ChatRoom } from "./chat-room.js";
 import { handleLearningApiRequest } from "./learning-api.js";
 import { handleReadApiRequest } from "./read-api.js";
 
@@ -13,7 +15,7 @@ const CONTENT_SECURITY_POLICY = [
   "style-src-attr 'unsafe-inline'",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob:",
-  "connect-src 'self'",
+  "connect-src 'self' wss:",
   "media-src 'self' data: blob:",
   "worker-src 'self' blob:",
   "object-src 'none'",
@@ -74,6 +76,14 @@ async function routeRequest(request, env) {
     return handleAuthApiRequest(request, env);
   }
 
+  if (url.pathname.startsWith("/api/chat/ws/")) {
+    return handleChatWebSocketRequest(request, env);
+  }
+
+  if (url.pathname.startsWith("/api/chat/")) {
+    return handleChatApiRequest(request, env);
+  }
+
   if (url.pathname.startsWith("/api/admin/")) {
     return handleAdminApiRequest(request, env);
   }
@@ -123,4 +133,9 @@ export default {
   async fetch(request, env) {
     return addSecurityHeaders(request, await routeRequest(request, env));
   },
+  async scheduled(_controller, env, _ctx) {
+    await cleanupChatData(env);
+  },
 };
+
+export { ChatRoom };

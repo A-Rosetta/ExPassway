@@ -232,6 +232,15 @@
     updateThemeLabel();
     setMenu(false, false);
     showMobileExperienceNotice();
+    loadChatNotifications();
+  }
+
+  function loadChatNotifications() {
+    if (!isStudentSurface() || document.querySelector("script[data-chat-notifications-loader]")) return;
+    const script = document.createElement("script");
+    script.src = `${location.pathname.includes("/pages/") ? "../" : ""}scripts/chat-notifications.js?v=20260808-1`;
+    script.dataset.chatNotificationsLoader = "true";
+    document.body.appendChild(script);
   }
 
   document.addEventListener("keydown", (event) => {

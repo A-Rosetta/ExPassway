@@ -34,6 +34,7 @@ export default [
       sourceType: "module",
       globals: {
         ...globals.serviceworker,
+        WebSocketPair: "readonly",
       },
     },
     rules: commonRules,
@@ -48,6 +49,12 @@ export default [
       },
     },
     rules: commonRules,
+  },
+  {
+    files: ["scripts/chat-crypto-worker.js"],
+    languageOptions: {
+      sourceType: "module",
+    },
   },
   {
     files: ["tools/**/*.{js,mjs,cjs}", "tests/**/*.{js,mjs,cjs}", "eslint.config.js"],

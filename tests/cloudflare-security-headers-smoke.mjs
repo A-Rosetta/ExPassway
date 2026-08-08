@@ -33,7 +33,7 @@ for (const path of ["/", "/pages/login.html"]) {
   workerCsp = response.headers.get("content-security-policy") || "";
   assert.match(workerCsp, /frame-ancestors 'none'/);
   assert.match(workerCsp, /script-src 'self'/);
-  assert.match(workerCsp, /connect-src 'self'(?:;|$)/);
+  assert.match(workerCsp, /connect-src 'self'(?:\s+wss:)?(?:;|$)/);
   assert.doesNotMatch(workerCsp, /connect-src[^;]*https:/);
   assert.match(workerCsp, /style-src-elem 'self' https:\/\/fonts\.googleapis\.com/);
   assert.equal(response.headers.get("cross-origin-opener-policy"), "same-origin-allow-popups");

@@ -527,5 +527,151 @@
         body: JSON.stringify(input || {}),
       });
     },
+    async getChatProfile() {
+      return request("/api/chat/profile", { token: currentToken() });
+    },
+    async updateChatProfile(input) {
+      return request("/api/chat/profile", {
+        method: "PATCH",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async listChatInvites() {
+      return request("/api/chat/invites", { token: currentToken() });
+    },
+    async createChatInvite() {
+      return request("/api/chat/invites", { method: "POST", token: currentToken() });
+    },
+    async revokeChatInvite(inviteId) {
+      return request(`/api/chat/invites/${encodeURIComponent(inviteId)}`, {
+        method: "DELETE",
+        token: currentToken(),
+      });
+    },
+    async acceptChatInvite(token) {
+      return request(`/api/chat/invites/${encodeURIComponent(token)}/accept`, {
+        method: "POST",
+        token: currentToken(),
+      });
+    },
+    async listChatContacts() {
+      return request("/api/chat/contacts", { token: currentToken() });
+    },
+    async getChatContactBundle(contactId) {
+      return request(`/api/chat/contacts/${encodeURIComponent(contactId)}/bundle`, { token: currentToken() });
+    },
+    async listChatDevices() {
+      return request("/api/chat/devices", { token: currentToken() });
+    },
+    async getChatOwnDeviceBundle(excludeDeviceId) {
+      const params = excludeDeviceId ? `?excludeDeviceId=${encodeURIComponent(excludeDeviceId)}` : "";
+      return request(`/api/chat/devices/bundle${params}`, { token: currentToken() });
+    },
+    async registerChatDevice(input) {
+      return request("/api/chat/devices", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async createChatDeviceApproval(deviceId) {
+      return request("/api/chat/devices/approval", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({ deviceId }),
+      });
+    },
+    async revokeChatDevice(deviceId) {
+      return request(`/api/chat/devices/${encodeURIComponent(deviceId)}`, {
+        method: "DELETE",
+        token: currentToken(),
+      });
+    },
+    async listChatConversations() {
+      return request("/api/chat/conversations", { token: currentToken() });
+    },
+    async createChatConversation(contactId) {
+      return request("/api/chat/conversations", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({ contactId }),
+      });
+    },
+    async updateChatConversationSettings(conversationId, retentionSeconds) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/settings`, {
+        method: "PATCH",
+        token: currentToken(),
+        body: JSON.stringify({ retentionSeconds }),
+      });
+    },
+    async syncChatMessages(conversationId, cursor = "") {
+      const params = new URLSearchParams({ conversationId });
+      if (cursor) params.set("cursor", cursor);
+      return request(`/api/chat/sync?${params}`, { token: currentToken(), timeoutMs: 30000 });
+    },
+    async sendChatMessage(input) {
+      return request("/api/chat/messages", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+        timeoutMs: 30000,
+      });
+    },
+    async deleteChatMessage(messageId) {
+      return request(`/api/chat/messages/${encodeURIComponent(messageId)}/delete`, {
+        method: "POST",
+        token: currentToken(),
+      });
+    },
+    async initChatAttachment(input) {
+      return request("/api/chat/attachments/init", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async uploadChatAttachment(attachmentId, bytes) {
+      return request(`/api/chat/attachments/${encodeURIComponent(attachmentId)}`, {
+        method: "PUT",
+        token: currentToken(),
+        headers: { "Content-Type": "application/octet-stream" },
+        body: bytes,
+        timeoutMs: 120000,
+      });
+    },
+    async completeChatAttachment(attachmentId) {
+      return request(`/api/chat/attachments/${encodeURIComponent(attachmentId)}/complete`, {
+        method: "POST",
+        token: currentToken(),
+      });
+    },
+    async downloadChatAttachment(attachmentId) {
+      return download(`/api/chat/attachments/${encodeURIComponent(attachmentId)}`, currentToken());
+    },
+    async createChatWebSocketTicket(conversationId, deviceId) {
+      return request("/api/chat/ws-ticket", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({ conversationId, deviceId }),
+      });
+    },
+    async getChatKeyBackup() {
+      return request("/api/chat/key-backup", { token: currentToken() });
+    },
+    async saveChatKeyBackup(input) {
+      return request("/api/chat/key-backup", {
+        method: "PUT",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async reportChatMessage(input) {
+      return request("/api/chat/reports", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
   };
 })();
