@@ -1099,6 +1099,13 @@
   gap: 12px;
 }
 
+.site-ui .chat-device-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
 .site-ui .chat-invite-panel > label {
   display: grid;
   gap: 7px;

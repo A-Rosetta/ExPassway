@@ -21,6 +21,7 @@
     localPlaintexts: {},
     peerBundles: new Map(),
     ownBundle: null,
+    devices: [],
     socket: null,
   };
   const $ = (selector) => document.querySelector(selector);
@@ -128,16 +129,44 @@
     const host = $("#deviceList");
     if (!host) return;
     host.replaceChildren();
-    state.device && ( $("#deviceFingerprint").textContent = t("chatDeviceReady", "Device ready. Safety number: {fingerprint}", { fingerprint: state.device.identityFingerprint }) );
-    state.device && [state.device].forEach((device) => {
+    state.device && ($("#deviceFingerprint").textContent = t("chatDeviceReady", "Device ready. Safety number: {fingerprint}", { fingerprint: state.device.identityFingerprint }));
+    const devices = state.devices.length ? state.devices : (state.device ? [state.device] : []);
+    devices.forEach((device) => {
       const item = document.createElement("div");
       item.className = "chat-device-item";
-      item.innerHTML = `<span></span><button type="button" class="btn-secondary"></button>`;
+      item.innerHTML = `<span></span><div class="chat-device-item__actions"><button type="button" class="btn-secondary chat-device-approve"></button><button type="button" class="btn-secondary chat-device-revoke"></button></div>`;
       item.querySelector("span").textContent = device.label || `Device ${device.deviceNumber || ""}`;
-      item.querySelector("button").textContent = t("chatRevokeDevice", "Revoke device");
-      item.querySelector("button").disabled = true;
+      const approve = item.querySelector(".chat-device-approve");
+      const revoke = item.querySelector(".chat-device-revoke");
+      approve.textContent = t("chatApproveDevice", "Create device approval token");
+      revoke.textContent = t("chatRevokeDevice", "Revoke device");
+      approve.hidden = device.id !== state.device?.id || Boolean(device.revokedAt);
+      revoke.hidden = device.id === state.device?.id || Boolean(device.revokedAt);
+      approve.addEventListener("click", () => createDeviceApproval(device.id));
+      revoke.addEventListener("click", () => revokeDevice(device.id));
       host.appendChild(item);
     });
+  }
+
+  async function createDeviceApproval(deviceId) {
+    try {
+      const result = await window.ALevelApi.createChatDeviceApproval(deviceId);
+      await navigator.clipboard?.writeText(result.token);
+      setStatus(t("chatApprovalCopied", "Approval token copied. It is single-use and valid for 5 minutes."));
+    } catch (error) {
+      setStatus(t("chatApprovalFailed", "Could not create approval token: {message}", { message: error.message }), true);
+    }
+  }
+
+  async function revokeDevice(deviceId) {
+    try {
+      await window.ALevelApi.revokeChatDevice(deviceId);
+      state.devices = state.devices.filter((device) => device.id !== deviceId);
+      renderDevices();
+      setStatus("");
+    } catch (error) {
+      setStatus(error.message, true);
+    }
   }
 
   function renderMessages() {
@@ -277,6 +306,7 @@
     const existing = savedDevice();
     if (existing) {
       const serverDevices = await window.ALevelApi.listChatDevices();
+      state.devices = serverDevices;
       const current = serverDevices.find((device) => device.id === existing.id && !device.revokedAt);
       if (!current) {
         localStorage.removeItem(DEVICE_KEY);
@@ -326,6 +356,7 @@
     state.profile = profile;
     state.contacts = contacts;
     state.conversations = conversations;
+    state.devices = await window.ALevelApi.listChatDevices();
     renderInvites(invites);
     renderContacts();
     renderDevices();
