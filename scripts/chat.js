@@ -1,6 +1,7 @@
 (function () {
   const TOKEN_KEY = "alevel.authToken";
   const DEVICE_KEY = "expassway.chat.device.v1";
+  const PENDING_INVITE_KEY = "expassway.chat.pendingInvite.v1";
   const t = (key, fallback, vars = {}) => {
     let value = window.ALevelI18n?.t?.(key) || fallback;
     Object.entries(vars).forEach(([name, replacement]) => {
@@ -81,11 +82,16 @@
     const raw = String(value || "").trim();
     if (!raw) return "";
     try {
-      const url = new URL(raw);
+      const url = new URL(raw, location.href);
       return url.searchParams.get("invite") || url.pathname.split("/").at(-1) || raw;
     } catch (_error) {
       return raw;
     }
+  }
+
+  function pendingInviteToken() {
+    const fromUrl = new URL(location.href).searchParams.get("invite");
+    return extractInviteToken(fromUrl || sessionStorage.getItem(PENDING_INVITE_KEY) || "");
   }
 
   function renderInvites(invites) {
@@ -337,6 +343,7 @@
       state.device = { ...registered.device, identityFingerprint: bundle.identityFingerprint };
       saveDevice(state.device);
       $("#chatSetupPanel").hidden = true;
+      $("#chatApp").hidden = false;
       renderDevices();
       setStatus("");
       await refreshData();
@@ -369,7 +376,11 @@
       url.search = `?invite=${encodeURIComponent(invite.token)}`;
       await navigator.clipboard?.writeText(url.toString());
       setStatus(t("chatInviteCreated", "Invite created. It expires in 7 days and can be used once."));
-      await refreshData();
+      try {
+        await refreshData();
+      } catch (error) {
+        setStatus(t("chatInviteRefreshFailed", "Invite processed, but the chat list could not refresh: {message}", { message: error.message }), true);
+      }
     } catch (error) {
       setStatus(t("chatInviteFailed", "Invite action failed: {message}", { message: error.message }), true);
     }
@@ -381,10 +392,18 @@
     try {
       await window.ALevelApi.acceptChatInvite(token);
       $("#inviteToken").value = "";
+      sessionStorage.removeItem(PENDING_INVITE_KEY);
       setStatus(t("chatInviteAccepted", "Friend paired."));
-      await refreshData();
+      try {
+        await refreshData();
+      } catch (error) {
+        setStatus(t("chatInviteRefreshFailed", "Friend paired, but the chat list could not refresh: {message}", { message: error.message }), true);
+      }
     } catch (error) {
-      setStatus(t("chatInviteFailed", "Invite action failed: {message}", { message: error.message }), true);
+      const detail = error.code && error.code !== "HTTP_ERROR"
+        ? `${error.message} (${error.code})`
+        : error.message;
+      setStatus(t("chatInviteFailed", "Invite action failed: {message}", { message: detail }), true);
     }
   }
 
@@ -527,19 +546,22 @@
   }
 
   async function initialize() {
+    const invite = pendingInviteToken();
     if (!currentToken()) {
-      location.href = `login.html?next=${encodeURIComponent("chat.html")}`;
+      if (invite) sessionStorage.setItem(PENDING_INVITE_KEY, invite);
+      const next = `chat.html${invite ? `?invite=${encodeURIComponent(invite)}` : ""}`;
+      location.href = `login.html?next=${encodeURIComponent(next)}`;
       return;
     }
     try {
       wireEvents();
+      if (invite) $("#inviteToken").value = invite;
       state.profile = await window.ALevelApi.getChatProfile();
       await ensureDevice();
       const existing = savedDevice();
       if (!existing) return;
       $("#chatApp").hidden = false;
       await refreshData();
-      const invite = new URL(location.href).searchParams.get("invite");
       if (invite) $("#inviteToken").value = invite;
     } catch (error) {
       if (error?.code === "CHAT_NOT_ENABLED" || error?.status === 503) {

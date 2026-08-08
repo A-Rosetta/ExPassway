@@ -22,7 +22,9 @@
 
   function redirectAfterAuth() {
     const next = new URLSearchParams(location.search).get("next");
-    const destination = next === "chat.html" ? "chat.html" : "../index.html";
+    const destination = next && /^chat\.html(?:\?|$)/.test(next)
+      ? next
+      : "../index.html";
     location.href = destination;
   }
 

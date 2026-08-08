@@ -72,6 +72,7 @@
           payload?.error?.message || `Request failed with status ${res.status}`;
         const err = new Error(message);
         err.status = res.status;
+        err.code = payload?.error?.code || "HTTP_ERROR";
         err.payload = payload;
         throw err;
       }
