@@ -49,7 +49,7 @@
 	"migrations": [
 		{
 			"tag": "chat-room-v1",
-			"new_classes": ["ChatRoom"]
+			"new_sqlite_classes": ["ChatRoom"]
 		}
 	],
 	"triggers": {
