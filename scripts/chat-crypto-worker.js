@@ -204,9 +204,9 @@ async function generateDeviceBundle({ deviceId = crypto.randomUUID(), label = ""
   const oneTimePreKeys = [];
   const preKeys = {};
   for (let id = 1; id <= 20; id += 1) {
-    const keyPair = await KeyHelper.generatePreKey(id);
-    oneTimePreKeys.push({ id, keyPair });
-    preKeys[String(id)] = cloneKeyPair(keyPair);
+    const generated = await KeyHelper.generatePreKey(id);
+    oneTimePreKeys.push({ id: generated.keyId, keyPair: generated.keyPair });
+    preKeys[String(generated.keyId)] = cloneKeyPair(generated.keyPair);
   }
   state.devices[deviceId] = {
     label,
