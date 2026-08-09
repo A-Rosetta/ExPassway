@@ -374,8 +374,23 @@
       const invite = await window.ALevelApi.createChatInvite();
       const url = new URL(location.href);
       url.search = `?invite=${encodeURIComponent(invite.token)}`;
-      await navigator.clipboard?.writeText(url.toString());
-      setStatus(t("chatInviteCreated", "Invite created. It expires in 7 days and can be used once."));
+      const inviteUrl = url.toString();
+      $("#inviteToken").value = inviteUrl;
+      let copied = false;
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(inviteUrl);
+          copied = true;
+        }
+      } catch (_error) {
+        // Private browsing may deny clipboard access; the URL remains visible for manual copying.
+      }
+      setStatus(t(
+        copied ? "chatInviteCreated" : "chatInviteCreatedManualCopy",
+        copied
+          ? "Invite created. It expires in 7 days and can be used once."
+          : "Invite created. Copy the URL from the invite field; it expires in 7 days and can be used once."
+      ));
       try {
         await refreshData();
       } catch (error) {
@@ -400,6 +415,10 @@
         setStatus(t("chatInviteRefreshFailed", "Friend paired, but the chat list could not refresh: {message}", { message: error.message }), true);
       }
     } catch (error) {
+      if (error.code === "INVITE_SELF") {
+        setStatus(t("chatInviteSelf", error.message), true);
+        return;
+      }
       const detail = error.code && error.code !== "HTTP_ERROR"
         ? `${error.message} (${error.code})`
         : error.message;

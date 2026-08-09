@@ -351,7 +351,10 @@ async function acceptInvite(db, token, userId) {
     SELECT id, creator_user_id, expires_at, used_at, revoked_at
     FROM chat_invites WHERE token_hash = ?
   `).bind(tokenHash).first();
-  if (!invite || invite.creator_user_id === userId) {
+  if (invite?.creator_user_id === userId) {
+    throw new AuthError(409, "You cannot accept an invite created by this account. Sign in with the other account.", "INVITE_SELF");
+  }
+  if (!invite) {
     throw new AuthError(404, "This invite is invalid.", "INVITE_INVALID");
   }
   if (invite.used_at || invite.revoked_at || invite.expires_at <= nowIso()) {
