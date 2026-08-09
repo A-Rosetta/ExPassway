@@ -56,14 +56,23 @@
     localStorage.setItem(DEVICE_KEY, JSON.stringify(device));
   }
 
-  async function storeLocalPlaintext(clientMessageId, plaintext) {
+  async function cacheLocalPlaintext(clientMessageId, plaintext) {
     state.localPlaintexts[clientMessageId] = plaintext;
-    await cryptoCall("storeSentPlaintext", { clientMessageId, plaintext });
+    await cryptoCall("storeLocalPlaintext", { clientMessageId, plaintext });
+  }
+
+  async function getCachedLocalPlaintext(clientMessageId) {
+    if (Object.prototype.hasOwnProperty.call(state.localPlaintexts, clientMessageId)) {
+      return state.localPlaintexts[clientMessageId];
+    }
+    const plaintext = await cryptoCall("getLocalPlaintext", { clientMessageId });
+    if (plaintext != null) state.localPlaintexts[clientMessageId] = plaintext;
+    return plaintext;
   }
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260809-3", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260809-4", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
       const error = new Error(event.message || "The chat encryption worker stopped unexpectedly.");
       for (const pending of state.pendingCrypto.values()) pending.reject(error);
@@ -244,13 +253,14 @@
         result.push({ ...message, deleted: true });
         continue;
       }
-      if (message.senderDeviceId === state.device.id) {
-        const localPlaintext = state.localPlaintexts[message.clientMessageId]
-          || await cryptoCall("getSentPlaintext", { clientMessageId: message.clientMessageId });
-        if (localPlaintext) {
-          result.push({ ...message, plaintext: localPlaintext });
+      try {
+        const cachedPlaintext = await getCachedLocalPlaintext(message.clientMessageId);
+        if (cachedPlaintext != null) {
+          result.push({ ...message, plaintext: cachedPlaintext });
           continue;
         }
+      } catch (_error) {
+        // A cache read failure should not prevent a normal decrypt attempt.
       }
       try {
         const outer = JSON.parse(atob(message.ciphertext.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - message.ciphertext.length % 4) % 4)));
@@ -263,6 +273,11 @@
           ciphertext: selected,
         });
         result.push({ ...message, plaintext });
+        try {
+          await cacheLocalPlaintext(message.clientMessageId, plaintext);
+        } catch (_error) {
+          // The message is still usable in this render if local caching fails.
+        }
       } catch (_error) {
         result.push({ ...message, plaintext: null });
       }
@@ -493,7 +508,7 @@
         ciphertext: envelope,
         sizeBucket: "small",
       });
-      await storeLocalPlaintext(clientMessageId, plaintext);
+      await cacheLocalPlaintext(clientMessageId, plaintext);
       input.value = "";
       await syncConversation();
       setStatus("");
@@ -557,7 +572,7 @@
       ciphertext: envelope,
       attachmentRefs: [reservation.attachmentId],
     });
-    await storeLocalPlaintext(clientMessageId, metadata);
+    await cacheLocalPlaintext(clientMessageId, metadata);
     $("#imageInput").value = "";
     await syncConversation();
     setStatus("");

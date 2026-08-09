@@ -300,7 +300,7 @@ async function decryptAttachment({ bytes, key: keyValue, nonce: nonceValue }) {
   return new Uint8Array(decrypted);
 }
 
-async function storeSentPlaintext({ clientMessageId, plaintext }) {
+async function storeLocalPlaintext({ clientMessageId, plaintext }) {
   await loadVault();
   const keyBytes = crypto.getRandomValues(new Uint8Array(32));
   const nonce = crypto.getRandomValues(new Uint8Array(12));
@@ -319,7 +319,7 @@ async function storeSentPlaintext({ clientMessageId, plaintext }) {
   return { stored: true };
 }
 
-async function getSentPlaintext({ clientMessageId }) {
+async function getLocalPlaintext({ clientMessageId }) {
   await loadVault();
   const stored = state.sentPlaintexts[String(clientMessageId)];
   if (!stored) return null;
@@ -342,8 +342,8 @@ self.onmessage = async (event) => {
     else if (action === "decryptMessage") result = await decryptMessage(payload);
     else if (action === "encryptAttachment") result = await encryptAttachment(payload);
     else if (action === "decryptAttachment") result = await decryptAttachment(payload);
-    else if (action === "storeSentPlaintext") result = await storeSentPlaintext(payload);
-    else if (action === "getSentPlaintext") result = await getSentPlaintext(payload);
+    else if (action === "storeLocalPlaintext" || action === "storeSentPlaintext") result = await storeLocalPlaintext(payload);
+    else if (action === "getLocalPlaintext" || action === "getSentPlaintext") result = await getLocalPlaintext(payload);
     else throw new Error(`Unknown chat crypto action: ${action}`);
     self.postMessage({ id, ok: true, result });
   } catch (error) {
