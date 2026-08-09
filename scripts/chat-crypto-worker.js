@@ -150,7 +150,9 @@ class VaultStore {
     device.signedPreKeys[String(keyId)] = cloneKeyPair(keyPair);
     await saveVault();
   }
-  async loadSession(identifier) { return state.sessions[identifier] || null; }
+  // libsignal distinguishes an absent session (undefined) from an invalid record (null).
+  // Returning null here makes the first X3DH session look like a corrupt serialized record.
+  async loadSession(identifier) { return state.sessions[identifier] || undefined; }
   async storeSession(identifier, record) { state.sessions[identifier] = record; await saveVault(); }
   async deleteSession(identifier) { delete state.sessions[identifier]; await saveVault(); }
   async deleteAllSessions(identifier) {

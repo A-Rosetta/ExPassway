@@ -34,6 +34,12 @@
     status.classList.toggle("is-error", isError);
   }
 
+  function formatActionError(error) {
+    const message = error?.message || String(error || "Unknown error");
+    const code = error?.code && error.code !== "HTTP_ERROR" ? ` (${error.code})` : "";
+    return `${message}${code}`;
+  }
+
   function currentToken() {
     return localStorage.getItem(TOKEN_KEY) || "";
   }
@@ -57,7 +63,13 @@
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260809-3", { name: "expassway-chat-crypto" });
+    worker.onerror = (event) => {
+      const error = new Error(event.message || "The chat encryption worker stopped unexpectedly.");
+      for (const pending of state.pendingCrypto.values()) pending.reject(error);
+      state.pendingCrypto.clear();
+      state.cryptoWorker = null;
+    };
     worker.onmessage = (event) => {
       const { id, ok, result, error } = event.data || {};
       const pending = state.pendingCrypto.get(id);
@@ -486,7 +498,7 @@
       await syncConversation();
       setStatus("");
     } catch (error) {
-      setStatus(t("chatMessageFailed", "Message failed: {message}", { message: error.message }), true);
+      setStatus(t("chatMessageFailed", "Message failed: {message}", { message: formatActionError(error) }), true);
     } finally {
       button.disabled = false;
     }
