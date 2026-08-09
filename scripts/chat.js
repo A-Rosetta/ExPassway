@@ -101,7 +101,10 @@
     invites.filter((invite) => invite.active).slice(0, 5).forEach((invite) => {
       const item = document.createElement("div");
       item.className = "chat-invite-item";
-      item.innerHTML = `<code>${invite.id}</code><span>${new Date(invite.expiresAt).toLocaleDateString()}</span>`;
+      item.innerHTML = `<div><code></code><small></small></div><span></span>`;
+      item.querySelector("code").textContent = invite.id;
+      item.querySelector("small").textContent = t("chatInviteIdOnly", "Internal ID only");
+      item.querySelector("span").textContent = new Date(invite.expiresAt).toLocaleDateString();
       host.appendChild(item);
     });
   }
@@ -402,8 +405,16 @@
   }
 
   async function acceptInvite() {
-    const token = extractInviteToken($("#inviteToken").value);
-    if (!token) return;
+    const raw = $("#inviteToken").value.trim();
+    const token = extractInviteToken(raw);
+    if (!token) {
+      setStatus(t("chatInviteTokenMissing", "Paste the full invite URL or the invite token first."), true);
+      return;
+    }
+    if (/^[A-Za-z0-9_-]{20,32}$/.test(token)) {
+      setStatus(t("chatInviteIdNotToken", "This looks like an internal invite ID, not the invite token. Ask the creator to create a new invite and copy the full URL."), true);
+      return;
+    }
     try {
       await window.ALevelApi.acceptChatInvite(token);
       $("#inviteToken").value = "";
@@ -420,8 +431,8 @@
         return;
       }
       const detail = error.code && error.code !== "HTTP_ERROR"
-        ? `${error.message} (${error.code})`
-        : error.message;
+        ? `${error.message || "Request failed"} (${error.code})`
+        : error.message || t("chatInviteUnknownError", "No error details were returned. Check the browser console and network response.");
       setStatus(t("chatInviteFailed", "Invite action failed: {message}", { message: detail }), true);
     }
   }
