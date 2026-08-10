@@ -158,34 +158,88 @@
     return Math.pow(0.5, days / PLAN_HALF_LIFE_DAYS);
   }
 
-  function scoreTopics(rows) {
-    const byTopic = new Map();
-    rows.forEach((row) => {
-      if (row.mastered) return;
-      const topic = String(row.topic || "").trim();
-      if (!topic) return;
-      const entry = byTopic.get(topic) || { topic, score: 0, questions: 0 };
-      entry.score += Number(row.wrongCount || 1) * decayFactor(row.lastWrongAt);
-      entry.questions += 1;
-      byTopic.set(topic, entry);
-    });
-    return [...byTopic.values()].sort((a, b) => b.score - a.score || b.questions - a.questions);
+  // Grouping deliberately does NOT use the notebook's own `topic` column: the
+  // importer writes the exam season into it ("Past Paper Summer"), so the whole
+  // notebook collapses into two or three rows and the plan repeats one label all
+  // week. The API now resolves a real syllabus topic where a reviewed mapping
+  // exists; everything else falls back here.
+  //
+  // The fallback is per entry, not per subject, so a subject that is only
+  // partly mapped degrades one question at a time instead of all at once. Once
+  // mappings are uploaded for another subject its rows start resolving with no
+  // change to this file.
+  const PLAN_BANDS = [
+    { max: 14, key: "basic", label: "difficultyBasic" },
+    { max: 28, key: "medium", label: "difficultyMedium" },
+    { max: Infinity, key: "challenge", label: "difficultyChallenge" },
+  ];
+
+  function questionNoOf(row) {
+    if (Number.isInteger(row.questionNo) && row.questionNo > 0) return row.questionNo;
+    // Legacy entries predate the question_bank join, so fall back to the
+    // trailing number of question_key the way notebook.js does.
+    const match = String(row.questionKey || "").match(/-(\d{1,3})$/);
+    const number = match ? Number(match[1]) : 0;
+    return Number.isInteger(number) && number > 0 ? number : 0;
   }
 
-  function buildPlan(topics) {
-    if (!topics.length) return [];
-    const topScore = topics[0].score || 1;
+  // `key` is what the done-checkboxes are stored under, so it must stay stable
+  // across a language switch - only `label` is localized.
+  function planGroupOf(row) {
+    const syllabus = row.syllabus;
+    if (syllabus && syllabus.code) {
+      const title = (getLanguage() === "en" ? syllabus.titleEn : syllabus.titleZh)
+        || syllabus.titleEn || syllabus.titleZh || "";
+      return {
+        key: `syllabus:${syllabus.code}`,
+        label: title ? `${syllabus.code} ${title}` : syllabus.code,
+        mapped: true,
+      };
+    }
+    // "Paper 2 · Basic" is not a knowledge point, but unlike the exam season it
+    // maps onto filters the user actually has in the notebook.
+    const paper = String(row.paper || "").trim();
+    const number = questionNoOf(row);
+    const band = number ? PLAN_BANDS.find((entry) => number <= entry.max) : null;
+    if (paper && band) {
+      return { key: `paper:${paper}|${band.key}`, label: `${paper} · ${t(band.label)}`, mapped: false };
+    }
+    if (paper) return { key: `paper:${paper}`, label: paper, mapped: false };
+    const subject = String(row.subject || "").trim();
+    if (subject) return { key: `subject:${subject}`, label: subject, mapped: false };
+    return { key: "unknown", label: t("weeklyPlanGroupUnknown"), mapped: false };
+  }
+
+  function scoreTopics(rows) {
+    const byGroup = new Map();
+    rows.forEach((row) => {
+      if (row.mastered) return;
+      const group = planGroupOf(row);
+      // Unlike the old version this keeps entries it cannot classify instead of
+      // dropping them - silently losing wrong questions from the plan is worse
+      // than showing an "unclassified" row.
+      const entry = byGroup.get(group.key) || { ...group, score: 0, questions: 0 };
+      entry.score += Number(row.wrongCount || 1) * decayFactor(row.lastWrongAt);
+      entry.questions += 1;
+      byGroup.set(group.key, entry);
+    });
+    return [...byGroup.values()].sort((a, b) => b.score - a.score || b.questions - a.questions);
+  }
+
+  function buildPlan(groups) {
+    if (!groups.length) return [];
+    const topScore = groups[0].score || 1;
     const plan = [];
     for (let i = 0; i < PLAN_DAYS; i += 1) {
-      // Fewer topics than days is normal early on; wrapping round turns the
+      // Fewer groups than days is normal early on; wrapping round turns the
       // tail of the week into spaced repetition instead of padding it out.
-      const topic = topics[i % topics.length];
-      const ratio = topScore ? topic.score / topScore : 0;
+      const group = groups[i % groups.length];
+      const ratio = topScore ? group.score / topScore : 0;
       plan.push({
         offset: i,
-        topic,
+        group,
         count: Math.max(3, Math.min(10, Math.round(3 + ratio * 7))),
-        repeat: i >= topics.length,
+        repeat: i >= groups.length,
       });
     }
     return plan;
@@ -218,7 +272,8 @@
 
   function planRowKey(row) {
     const date = new Date(Date.now() + row.offset * DAY_MS);
-    return `${date.toISOString().slice(0, 10)}|${row.topic.topic}`;
+    // group.key, not the label: switching language must not wipe the ticks.
+    return `${date.toISOString().slice(0, 10)}|${row.group.key}`;
   }
 
   function renderPlan(plan, topicCount) {
@@ -245,9 +300,9 @@
               <tr class="${isDone ? "is-done" : ""} ${row.offset === 0 ? "is-today" : ""}">
                 <td>${escapeHtml(planDayLabel(row.offset))}</td>
                 <td>
-                  <strong>${escapeHtml(row.topic.topic)}</strong>
+                  <strong>${escapeHtml(row.group.label)}</strong>
                   <span class="tip weekly-plan-meta">${escapeHtml(
-                    t("weeklyPlanWrongCount", { count: row.topic.questions })
+                    t("weeklyPlanWrongCount", { count: row.group.questions })
                   )}${row.repeat ? " · ↻" : ""}</span>
                 </td>
                 <td>${escapeHtml(t("weeklyPlanAmount", { count: row.count }))}</td>
@@ -259,6 +314,10 @@
       </table>
       <p class="tip">${escapeHtml(t("weeklyPlanProgress", { done: doneCount, total: plan.length }))}${
         topicCount < PLAN_DAYS ? ` · ${escapeHtml(t("weeklyPlanReviewNote"))}` : ""
+      }${
+        // Explain the "Paper 2 · Basic" style rows rather than leaving the user
+        // to wonder why some days name a syllabus topic and others a paper.
+        plan.some((row) => !row.group.mapped) ? ` · ${escapeHtml(t("weeklyPlanFallbackNote"))}` : ""
       }</p>
       <div class="actions">
         <a class="btn-secondary" href="./notebook.html">${escapeHtml(t("weeklyPlanGoPractice"))}</a>

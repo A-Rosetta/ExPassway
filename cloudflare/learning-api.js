@@ -113,11 +113,66 @@ function mapSession(row) {
   };
 }
 
+// Notebook rows carry a `topic` column, but the importer writes the exam season
+// into it ("Past Paper Summer"), so it is useless for grouping - a whole
+// notebook collapses into two or three buckets. The real syllabus topic lives in
+// question_section_mappings -> curriculum_sections.
+//
+// Deliberately NOT filtered by subject_code: today only Biology 0610 has
+// mappings, but any subject that gets them uploaded later starts resolving
+// through this same query with no code change. Entries with no reviewed mapping
+// come back with syllabus = null and the front end falls back on its own.
+//
+// `is_primary = 1 AND status = 'reviewed'` is unique per question
+// (idx_question_one_reviewed_primary), so the join stays deterministic. The
+// 'suggested' rows are an unreviewed model/rule queue and would show wrong
+// topics, so they are excluded.
+//
+// Mappings point at 'statement' level, which is far too granular for a 7-day
+// plan (one statement per question). Walking up at most two parents rolls them
+// up to the 'topic' level; `level` only has three values, so two hops covers the
+// whole tree. A curriculum without a 'topic' level falls back to the coarsest
+// ancestor that does exist.
+const NOTEBOOK_SELECT = `
+  SELECT entry.*,
+    question.question_no AS qb_question_no,
+    rolled.syllabus_code AS syllabus_code,
+    rolled.title_en AS syllabus_title_en,
+    rolled.title_zh AS syllabus_title_zh
+  FROM wrong_notebook_entries entry
+  LEFT JOIN question_bank question ON question.id = entry.question_key
+  LEFT JOIN question_section_mappings mapping
+    ON mapping.question_id = entry.question_key
+   AND mapping.is_primary = 1
+   AND mapping.status = 'reviewed'
+  LEFT JOIN curriculum_sections leaf ON leaf.id = mapping.curriculum_section_id
+  LEFT JOIN curriculum_sections mid ON mid.id = leaf.parent_id
+  LEFT JOIN curriculum_sections root ON root.id = mid.parent_id
+  LEFT JOIN curriculum_sections rolled ON rolled.id = CASE
+    WHEN root.level = 'topic' THEN root.id
+    WHEN mid.level = 'topic' THEN mid.id
+    WHEN leaf.level = 'topic' THEN leaf.id
+    ELSE COALESCE(mid.id, leaf.id)
+  END
+`;
+
 function mapNotebookEntry(row) {
   return {
     id: row.id,
     userId: row.user_id,
     questionKey: row.question_key,
+    // Authoritative question number for difficulty banding. The front end can
+    // also parse it off the tail of questionKey, but that fails on legacy keys.
+    questionNo: row.qb_question_no == null ? null : Number(row.qb_question_no),
+    // null whenever the question has no reviewed syllabus mapping - which is
+    // every non-Biology subject today. Callers must handle null, not assume it.
+    syllabus: row.syllabus_code
+      ? {
+        code: row.syllabus_code,
+        titleEn: row.syllabus_title_en || "",
+        titleZh: row.syllabus_title_zh || "",
+      }
+      : null,
     board: row.board,
     subject: row.subject,
     paper: row.paper,
@@ -981,7 +1036,7 @@ export async function handleLearningApiRequest(request, env) {
       const userId = decodeURIComponent(notebookList[1]);
       await assertOwnUser(request, env, userId);
       const rows = await env.DB.prepare(`
-        SELECT * FROM wrong_notebook_entries WHERE user_id = ? ORDER BY last_wrong_at DESC
+        ${NOTEBOOK_SELECT} WHERE entry.user_id = ? ORDER BY entry.last_wrong_at DESC
       `).bind(userId).all();
       return success(rows.results.map(mapNotebookEntry), request.method);
     }
@@ -1037,8 +1092,10 @@ export async function handleLearningApiRequest(request, env) {
       await env.DB.prepare(`
         UPDATE wrong_notebook_entries SET ${sets.join(", ")} WHERE id = ? AND user_id = ?
       `).bind(...params).run();
+      // Same select as the list route, so a PATCH response carries the syllabus
+      // and questionNo fields too and the front end never sees two shapes.
       const row = await env.DB.prepare(`
-        SELECT * FROM wrong_notebook_entries WHERE id = ? AND user_id = ? LIMIT 1
+        ${NOTEBOOK_SELECT} WHERE entry.id = ? AND entry.user_id = ? LIMIT 1
       `).bind(entryId, userId).first();
       if (!row) throw new AuthError(404, "Wrong notebook entry not found.", "NOTEBOOK_ENTRY_NOT_FOUND");
       return success(mapNotebookEntry(row), request.method);

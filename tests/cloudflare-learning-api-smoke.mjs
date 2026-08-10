@@ -197,6 +197,11 @@ try {
     assert.equal(notebook.response.status, 200);
     assert.equal(notebook.payload.data.length, 1);
     assert.equal(notebook.payload.data[0].wrongCount, 1);
+    // No syllabus mapping exists yet at this point, so the entry must come back
+    // with syllabus = null rather than a partly-filled object - the front end
+    // switches to its paper/difficulty fallback on exactly this.
+    assert.equal(notebook.payload.data[0].syllabus, null);
+    assert.equal(notebook.payload.data[0].questionNo, 1);
     notebookEntryId = notebook.payload.data[0].id;
 
     const mastered = await api(
@@ -354,6 +359,89 @@ try {
         (SELECT COUNT(*) FROM question_attempts WHERE user_id = ?) AS attempts
     `).bind(userId, userId, userId).first();
     assert.deepEqual(counts, { practices: 0, notebook: 0, attempts: 0 });
+  }
+
+  // The notebook select resolves a real syllabus topic and rolls statement-level
+  // mappings up to the topic level. Nothing above covers the walk itself: the
+  // questions mapped earlier point at a parentless statement, which only
+  // exercises the rollup's fallback branch.
+  {
+    await db.batch([
+      db.prepare(`
+        INSERT INTO curriculum_sections (
+          id, curriculum_version_id, syllabus_code, title_en, title_zh, level, sort_order
+        ) VALUES ('sec-topic', 'bio-version', 'B4', 'Respiration', '呼吸作用', 'topic', 10)
+      `),
+      db.prepare(`
+        INSERT INTO curriculum_sections (
+          id, curriculum_version_id, syllabus_code, title_en, title_zh, level, parent_id, sort_order
+        ) VALUES ('sec-section', 'bio-version', 'B4.1', 'Aerobic respiration', '有氧呼吸', 'section', 'sec-topic', 11)
+      `),
+      db.prepare(`
+        INSERT INTO curriculum_sections (
+          id, curriculum_version_id, syllabus_code, title_en, title_zh, level, parent_id, sort_order
+        ) VALUES ('sec-statement', 'bio-version', 'B4.1.2', 'State the equation', '写出方程式', 'statement', 'sec-section', 12)
+      `),
+      db.prepare(`
+        INSERT INTO question_bank (
+          id, board, subject, paper, topic, year, stem, options, answer,
+          mistake_type, skills, hints, images, subject_code, paper_slug, question_no, active
+        ) VALUES (
+          'question-mapped', 'CIE', 'IGCSE Biology', 'MCQ', 'Past Paper Summer', '2023',
+          'Respiration question.', '["A","B","C","D"]', 0, 'concept', '[]', '[]', '[]',
+          '0610', '0610_s23_qp_21', 20, 1
+        )
+      `),
+      db.prepare(`
+        INSERT INTO question_bank (
+          id, board, subject, paper, topic, year, stem, options, answer,
+          mistake_type, skills, hints, images, subject_code, paper_slug, question_no, active
+        ) VALUES (
+          'question-suggested', 'CIE', 'IGCSE Chemistry', 'MCQ', 'Past Paper March', '2023',
+          'Unreviewed mapping question.', '["A","B","C","D"]', 0, 'concept', '[]', '[]', '[]',
+          '0620', '0620_m23_qp_21', 7, 1
+        )
+      `),
+      db.prepare(`
+        INSERT INTO question_section_mappings (
+          question_id, curriculum_section_id, is_primary, confidence, status, source
+        ) VALUES ('question-mapped', 'sec-statement', 1, 1, 'reviewed', 'manual')
+      `),
+      // 'suggested' is the unreviewed model/rule queue behind the admin review
+      // page. Surfacing it would label questions with topics nobody checked.
+      db.prepare(`
+        INSERT INTO question_section_mappings (
+          question_id, curriculum_section_id, is_primary, confidence, status, source
+        ) VALUES ('question-suggested', 'sec-statement', 1, 0.9, 'suggested', 'model')
+      `),
+      db.prepare(`
+        INSERT INTO wrong_notebook_entries (id, user_id, question_key, paper, topic)
+        VALUES ('entry-mapped', ?, 'question-mapped', 'MCQ', 'Past Paper Summer')
+      `).bind(userId),
+      db.prepare(`
+        INSERT INTO wrong_notebook_entries (id, user_id, question_key, paper, topic)
+        VALUES ('entry-suggested', ?, 'question-suggested', 'MCQ', 'Past Paper March')
+      `).bind(userId),
+    ]);
+
+    const notebook = await api(handleLearningApiRequest, db, token, `/api/users/${userId}/notebook`);
+    assert.equal(notebook.response.status, 200);
+    const entries = Object.fromEntries(notebook.payload.data.map((row) => [row.id, row]));
+
+    // Walked up two parents: the answer is the topic B4, not the statement
+    // B4.1.2 the mapping actually points at. One statement per question would
+    // put every question in its own group and break the plan just as badly as
+    // the exam season did.
+    assert.deepEqual(entries["entry-mapped"].syllabus, {
+      code: "B4",
+      titleEn: "Respiration",
+      titleZh: "呼吸作用",
+    });
+    assert.equal(entries["entry-mapped"].questionNo, 20);
+
+    // Same statement, but an unreviewed mapping, so it must not resolve.
+    assert.equal(entries["entry-suggested"].syllabus, null);
+    assert.equal(entries["entry-suggested"].questionNo, 7);
   }
 
   const foreignKeys = await db.prepare("PRAGMA foreign_key_check").all();
