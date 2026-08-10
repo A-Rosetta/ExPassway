@@ -166,9 +166,8 @@
   // the dark one. There is no lit/unlit variant to swap between - the same
   // drawing is restyled by [data-theme] in styles.css, so the lit state holds
   // for as long as dark mode is on rather than following :hover.
-  function themeControlMarkup() {
+  function lampMarkup() {
     return `
-      <button id="themeToggle" class="site-header-control home-header-control home-theme-toggle" type="button">
         <svg class="home-theme-lamp" aria-hidden="true" viewBox="0 0 32 32" fill="none">
           <ellipse class="lamp-glow" cx="16" cy="17" rx="11" ry="5"></ellipse>
           <path class="lamp-shade" d="M4.2 13.2a11.8 8.8 0 0 1 23.6 0z"></path>
@@ -176,7 +175,12 @@
           <rect class="lamp-base" x="9.4" y="24.2" width="13.2" height="2.8" rx="1.4"></rect>
           <path class="lamp-cord" d="M21.6 13.4v5.2"></path>
           <circle class="lamp-bead" cx="21.6" cy="20.1" r="1.55"></circle>
-        </svg>
+        </svg>`;
+  }
+
+  function themeControlMarkup() {
+    return `
+      <button id="themeToggle" class="site-header-control home-header-control home-theme-toggle" type="button">${lampMarkup()}
       </button>`;
   }
 
@@ -219,6 +223,14 @@
     if (!themeToggle) {
       controlHost.insertAdjacentHTML("beforeend", themeControlMarkup());
       themeToggle = document.getElementById("themeToggle");
+    }
+    // index.html and chat.html ship their own #themeToggle in the page source,
+    // so the branch above never runs for them and they kept the old sun/moon
+    // pair (and, on chat.html, an empty button). Filling the contents here keeps
+    // the lamp defined in one place instead of pasted into every page header.
+    if (themeToggle) {
+      themeToggle.classList.add("home-theme-toggle");
+      themeToggle.innerHTML = lampMarkup();
     }
     const languageToggle = document.querySelector("[data-language-toggle]");
     if (languageToggle && controlHost) {
