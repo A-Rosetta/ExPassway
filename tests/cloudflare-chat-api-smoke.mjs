@@ -17,7 +17,7 @@ async function issueToken(user) {
 const mf = new Miniflare({ compatibilityDate: "2026-07-29", d1Databases: { DB: "chat-api-test" }, r2Buckets: { CHAT_MEDIA_BUCKET: "chat-media-test" }, modules: true, script: "export default { fetch() { return new Response('ok'); } };" });
 const userA = { id: "11111111-1111-4111-8111-111111111111", email: "a@example.com", role: "student" };
 const userB = { id: "22222222-2222-4222-8222-222222222222", email: "b@example.com", role: "student" };
-const envBase = { AUTH_SECRET, CHAT_ENABLED: "true", DB: await mf.getD1Database("DB"), CHAT_MEDIA_BUCKET: await mf.getR2Bucket("CHAT_MEDIA_BUCKET") };
+const envBase = { AUTH_SECRET, CHAT_ENABLED: "true", CHAT_RECOVERY_BACKUP_ENABLED: "true", DB: await mf.getD1Database("DB"), CHAT_MEDIA_BUCKET: await mf.getR2Bucket("CHAT_MEDIA_BUCKET") };
 
 async function call(user, path, options = {}) {
   const headers = new Headers(options.headers || {});
@@ -29,7 +29,7 @@ async function call(user, path, options = {}) {
 
 try {
   const db = envBase.DB;
-  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql", "../migrations/0003_admin_platform.sql", "../migrations/0006_chat_foundation.sql"]) {
+  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql", "../migrations/0003_admin_platform.sql", "../migrations/0006_chat_foundation.sql", "../migrations/0007_chat_crypto_hardening.sql"]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) await db.prepare(statement).run();
   }
@@ -63,7 +63,41 @@ try {
   assert.equal(sync.payload.data.messages[0].ciphertext, ciphertext);
   assert.equal(sync.payload.data.messages[0].ciphertext.includes("secret"), false);
   const backup = await call(userA, "/api/chat/key-backup", { method: "PUT", body: JSON.stringify({ kdfVersion: "argon2id-v1", salt: "salt", nonce: "nonce", ciphertext: "encrypted-key-package" }) });
-  assert.equal(backup.response.status, 200);
+  assert.equal(backup.response.status, 400);
+  const validBackup = await call(userA, "/api/chat/key-backup", { method: "PUT", body: JSON.stringify({
+    kdfVersion: "argon2id-v1", backupVersion: "1", sourceDeviceId: deviceA.payload.data.device.id,
+    salt: "c2FsdA", nonce: "bm9uY2U", ciphertext: "ZW5jcnlwdGVkLWtleS1wYWNrYWdl",
+  }) });
+  assert.equal(validBackup.response.status, 200);
+  const devices = await call(userA, "/api/chat/devices");
+  assert.equal(typeof devices.payload.data[0].oneTimePreKeyCount, "number");
+  const refill = await call(userA, `/api/chat/devices/${deviceA.payload.data.device.id}/prekeys`, {
+    method: "POST", body: JSON.stringify({ oneTimePreKeys: [{ id: 101, publicKey: "cHJla2V5" }] }),
+  });
+  assert.equal(refill.response.status, 201);
+  const storedBackup = await call(userA, "/api/chat/key-backup");
+  const restoreOperationId = storedBackup.payload.data.restoreOperationId;
+  const restoreInput = {
+    deviceId: restoreOperationId,
+    restoreOperationId,
+    sourceDeviceId: deviceA.payload.data.device.id,
+    identityPublicKey: "aIdentity",
+    registrationId: 123,
+    signedPreKey: { id: 2, publicKey: "aSigned2", signature: "aSignature2" },
+    oneTimePreKeys: [{ id: 1, publicKey: "aPre" }],
+    label: "Restored test device",
+  };
+  const restored = await call(userA, "/api/chat/key-backup/restore", { method: "POST", body: JSON.stringify(restoreInput) });
+  assert.equal(restored.response.status, 201);
+  assert.equal(restored.payload.data.idempotent, false);
+  assert.equal(restored.payload.data.previousDeviceId, deviceA.payload.data.device.id);
+  assert.equal((await call(userA, `/api/chat/devices/${deviceA.payload.data.device.id}/prekeys`, {
+    method: "POST", body: JSON.stringify({ oneTimePreKeys: [{ id: 102, publicKey: "cHJla2V5" }] }),
+  })).response.status, 404);
+  const repeated = await call(userA, "/api/chat/key-backup/restore", { method: "POST", body: JSON.stringify(restoreInput) });
+  assert.equal(repeated.response.status, 201);
+  assert.equal(repeated.payload.data.idempotent, true);
+  assert.equal(repeated.payload.data.device.id, restored.payload.data.device.id);
   console.log("Cloudflare chat API smoke checks passed.");
 } finally {
   await mf.dispose();

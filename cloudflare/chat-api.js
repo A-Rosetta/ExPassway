@@ -75,6 +75,16 @@ function ensureEnabled(env) {
   }
 }
 
+function recoveryEnabled(env) {
+  return ["1", "true", "yes", "on"].includes(String(env.CHAT_RECOVERY_BACKUP_ENABLED || "").toLowerCase());
+}
+
+function ensureRecoveryEnabled(env) {
+  if (!recoveryEnabled(env)) {
+    throw new AuthError(503, "Encrypted chat recovery is not enabled for this deployment yet.", "CHAT_RECOVERY_DISABLED");
+  }
+}
+
 function corsHeaders(request) {
   const requestUrl = new URL(request.url);
   const origin = request.headers.get("Origin");
@@ -192,6 +202,7 @@ function mapDevice(row) {
       publicKey: row.signed_prekey_public,
       signature: row.signed_prekey_signature,
     },
+    oneTimePreKeyCount: Number(row.one_time_prekey_count || 0),
     revokedAt: row.revoked_at || null,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -426,10 +437,40 @@ async function listContacts(db, userId) {
 async function listDevices(db, userId) {
   const rows = await db.prepare(`
     SELECT id, label, identity_public_key, device_number, registration_id, signed_prekey_id,
-      signed_prekey_public, signed_prekey_signature, revoked_at, created_at, updated_at
+      signed_prekey_public, signed_prekey_signature, revoked_at, created_at, updated_at,
+      (SELECT COUNT(*) FROM chat_device_prekeys p WHERE p.device_id = chat_devices.id AND p.consumed_at IS NULL)
+        AS one_time_prekey_count
     FROM chat_devices WHERE user_id = ? ORDER BY created_at ASC
   `).bind(userId).all();
   return (rows.results || []).map(mapDevice);
+}
+
+async function refillDevicePrekeys(db, userId, deviceId, body) {
+  await requireOwnedDevice(db, deviceId, userId);
+  const preKeys = Array.isArray(body?.oneTimePreKeys) ? body.oneTimePreKeys : [];
+  if (!preKeys.length || preKeys.length > 100) {
+    throw new AuthError(400, "Provide between 1 and 100 one-time pre-keys.", "INVALID_PREKEY_BATCH");
+  }
+  const timestamp = nowIso();
+  const statements = [];
+  for (const item of preKeys) {
+    const keyId = Number(item?.id);
+    const publicKey = typeof item?.publicKey === "string" ? item.publicKey.trim() : "";
+    if (!Number.isInteger(keyId) || keyId < 1 || !isBase64Url(publicKey, 1024)) {
+      throw new AuthError(400, "One-time pre-key values are invalid.", "INVALID_DEVICE_KEYS");
+    }
+    statements.push(db.prepare(`
+      INSERT INTO chat_device_prekeys (id, device_id, key_id, public_key, created_at)
+      VALUES (?, ?, ?, ?, ?)
+      ON CONFLICT(device_id, key_id) DO NOTHING
+    `).bind(randomId(), deviceId, keyId, publicKey, timestamp));
+  }
+  await db.batch(statements);
+  const row = await db.prepare(`
+    SELECT COUNT(*) AS count FROM chat_device_prekeys
+    WHERE device_id = ? AND consumed_at IS NULL
+  `).bind(deviceId).first();
+  return { deviceId, oneTimePreKeyCount: Number(row?.count || 0) };
 }
 
 async function registerDevice(db, userId, body) {
@@ -513,6 +554,104 @@ async function createDeviceApprovalTicket(db, userId, deviceId) {
     VALUES (?, ?, ?, ?, ?, ?)
   `).bind(randomId(), await sha256Base64Url(token), userId, deviceId, expiresAt, new Date(timestamp).toISOString()).run();
   return { token, expiresAt };
+}
+
+async function restoreKeyBackup(db, env, userId, body) {
+  ensureRecoveryEnabled(env);
+  const operationId = boundedString(body.restoreOperationId, "restoreOperationId", 100);
+  const sourceDeviceId = boundedString(body.sourceDeviceId, "sourceDeviceId", 100);
+  const requestedDeviceId = typeof body.deviceId === "string"
+    && body.deviceId.length <= 100 && /^[A-Za-z0-9_-]+$/.test(body.deviceId)
+    ? body.deviceId : "";
+  if (!/^[A-Za-z0-9_-]{16,100}$/.test(operationId)) {
+    throw new AuthError(400, "The restore operation identifier is invalid.", "INVALID_RESTORE_OPERATION");
+  }
+  const identityPublicKey = boundedString(body.identityPublicKey, "identityPublicKey", 1024);
+  const signedPreKey = body.signedPreKey || {};
+  const signedPreKeyPublic = boundedString(signedPreKey.publicKey, "signedPreKey.publicKey", 1024);
+  const signedPreKeySignature = boundedString(signedPreKey.signature, "signedPreKey.signature", 2048);
+  const registrationId = Number(body.registrationId);
+  const signedPreKeyId = Number(signedPreKey.id);
+  const preKeys = Array.isArray(body.oneTimePreKeys) ? body.oneTimePreKeys : [];
+  const existingOperation = await db.prepare(`
+    SELECT restored_device_id FROM chat_key_backups
+    WHERE user_id = ? AND restore_operation_id = ?
+  `).bind(userId, operationId).first();
+  if (existingOperation?.restored_device_id) {
+    const restored = await db.prepare(`
+      SELECT d.id, d.label, d.identity_public_key, d.device_number, d.registration_id,
+        d.signed_prekey_id, d.signed_prekey_public, d.signed_prekey_signature,
+        d.revoked_at, d.created_at, d.updated_at,
+        (SELECT COUNT(*) FROM chat_device_prekeys p WHERE p.device_id = d.id AND p.consumed_at IS NULL)
+          AS one_time_prekey_count
+      FROM chat_devices d WHERE d.id = ? AND d.user_id = ?
+    `).bind(existingOperation.restored_device_id, userId).first();
+    if (restored) return { restored: true, idempotent: true, device: mapDevice(restored) };
+  }
+  if (!isBase64Url(identityPublicKey, 1024) || !isBase64Url(signedPreKeyPublic, 1024)
+    || !isBase64Url(signedPreKeySignature, 2048)
+    || !Number.isInteger(registrationId) || registrationId < 1 || registrationId > 0x3fff
+    || !Number.isInteger(signedPreKeyId) || signedPreKeyId < 1
+    || preKeys.length < 1 || preKeys.length > 100) {
+    throw new AuthError(400, "The restored device bundle is invalid.", "INVALID_RESTORE_BUNDLE");
+  }
+  const backup = await db.prepare(`
+    SELECT source_device_id, consumed_at FROM chat_key_backups
+    WHERE user_id = ? AND source_device_id = ?
+  `).bind(userId, sourceDeviceId).first();
+  if (!backup) {
+    throw new AuthError(404, "Encrypted recovery backup not found for this device.", "BACKUP_NOT_FOUND");
+  }
+  if (backup.consumed_at) throw new AuthError(409, "This recovery backup has already been consumed.", "BACKUP_ALREADY_USED");
+  const source = await requireOwnedDevice(db, sourceDeviceId, userId);
+  const activeCount = await db.prepare("SELECT COUNT(*) AS count FROM chat_devices WHERE user_id = ? AND revoked_at IS NULL")
+    .bind(userId).first();
+  if (Number(activeCount?.count || 0) > 3) throw new AuthError(409, "Too many active devices for recovery.", "DEVICE_LIMIT");
+  const timestamp = nowIso();
+  const newDeviceId = requestedDeviceId || randomId();
+  const existingDevice = await db.prepare("SELECT id FROM chat_devices WHERE id = ?").bind(newDeviceId).first();
+  if (existingDevice) throw new AuthError(409, "The restored device identifier is already in use.", "DEVICE_ALREADY_REGISTERED");
+  const deviceNumber = randomDeviceNumber();
+  const statements = [
+    db.prepare("UPDATE chat_devices SET revoked_at = ?, updated_at = ? WHERE id = ? AND user_id = ? AND revoked_at IS NULL")
+      .bind(timestamp, timestamp, sourceDeviceId, userId),
+    db.prepare(`
+      INSERT INTO chat_devices
+        (id, user_id, label, identity_public_key, device_number, registration_id, signed_prekey_id,
+         signed_prekey_public, signed_prekey_signature, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).bind(newDeviceId, userId, boundedString(body.label || "Restored browser", "label", 80), identityPublicKey,
+      deviceNumber, registrationId, signedPreKeyId, signedPreKeyPublic, signedPreKeySignature, timestamp, timestamp),
+    db.prepare(`
+      UPDATE chat_key_backups SET restore_operation_id = ?, restored_device_id = ?, consumed_at = ?, updated_at = ?
+      WHERE user_id = ? AND source_device_id = ? AND consumed_at IS NULL
+    `).bind(operationId, newDeviceId, timestamp, timestamp, userId, sourceDeviceId),
+  ];
+  for (const item of preKeys) {
+    const keyId = Number(item?.id);
+    const publicKey = typeof item?.publicKey === "string" ? item.publicKey.trim() : "";
+    if (!Number.isInteger(keyId) || keyId < 1 || !isBase64Url(publicKey, 1024)) {
+      throw new AuthError(400, "One-time pre-key values are invalid.", "INVALID_RESTORE_BUNDLE");
+    }
+    statements.push(db.prepare(`
+      INSERT INTO chat_device_prekeys (id, device_id, key_id, public_key, created_at)
+      VALUES (?, ?, ?, ?, ?)
+    `).bind(randomId(), newDeviceId, keyId, publicKey, timestamp));
+  }
+  const results = await db.batch(statements);
+  if (Number(results[0]?.meta?.changes ?? results[0]?.changes ?? 0) !== 1
+    || Number(results[2]?.meta?.changes ?? results[2]?.changes ?? 0) !== 1) {
+    throw new AuthError(409, "The recovery backup is no longer available.", "BACKUP_ALREADY_USED");
+  }
+  const restored = await db.prepare(`
+    SELECT d.id, d.label, d.identity_public_key, d.device_number, d.registration_id,
+      d.signed_prekey_id, d.signed_prekey_public, d.signed_prekey_signature,
+      d.revoked_at, d.created_at, d.updated_at,
+      (SELECT COUNT(*) FROM chat_device_prekeys p WHERE p.device_id = d.id AND p.consumed_at IS NULL)
+        AS one_time_prekey_count
+    FROM chat_devices d WHERE d.id = ? AND d.user_id = ?
+  `).bind(newDeviceId, userId).first();
+  return { restored: true, idempotent: false, previousDeviceId: source.id, device: mapDevice(restored) };
 }
 
 async function getPrekeyBundle(db, contactId, userId) {
@@ -850,6 +989,11 @@ async function handleRoute(request, env, user) {
   }
 
   if (method === "GET" && url.pathname === "/api/chat/devices") return success(await listDevices(db, user.id), method);
+  if (method === "POST" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "devices"
+    && parts[3] && parts[4] === "prekeys") {
+    const body = await readJsonBody(request);
+    return success(await refillDevicePrekeys(db, user.id, parts[3], body), method, 201);
+  }
   if (method === "POST" && url.pathname === "/api/chat/devices/approval") {
     const body = await readJsonBody(request);
     return success(await createDeviceApprovalTicket(db, user.id, boundedString(body.deviceId, "deviceId", 100)), method, 201);
@@ -944,25 +1088,51 @@ async function handleRoute(request, env, user) {
   if (method === "POST" && url.pathname === "/api/chat/ws-ticket") return success(await issueWebSocketTicket(db, user.id, await readJsonBody(request)), method, 201);
 
   if (method === "GET" && url.pathname === "/api/chat/key-backup") {
-    const row = await db.prepare(`SELECT kdf_version, salt, nonce, ciphertext, created_at, updated_at
+    ensureRecoveryEnabled(env);
+    const row = await db.prepare(`SELECT kdf_version, salt, nonce, ciphertext, source_device_id,
+        backup_version, restore_operation_id, restored_device_id, consumed_at, created_at, updated_at
       FROM chat_key_backups WHERE user_id = ?`).bind(user.id).first();
-    return success(row ? { kdfVersion: row.kdf_version, salt: row.salt, nonce: row.nonce, ciphertext: row.ciphertext, createdAt: row.created_at, updatedAt: row.updated_at } : null, method);
+    return success(row ? {
+      kdfVersion: row.kdf_version,
+      salt: row.salt,
+      nonce: row.nonce,
+      ciphertext: row.ciphertext,
+      sourceDeviceId: row.source_device_id,
+      backupVersion: row.backup_version,
+      restoreOperationId: row.restore_operation_id,
+      restoredDeviceId: row.restored_device_id,
+      consumedAt: row.consumed_at,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    } : null, method);
   }
   if (method === "PUT" && url.pathname === "/api/chat/key-backup") {
+    ensureRecoveryEnabled(env);
     const body = await readJsonBody(request);
     const kdfVersion = boundedString(body.kdfVersion, "kdfVersion", 32);
     const salt = boundedString(body.salt, "salt", 256);
     const nonce = boundedString(body.nonce, "nonce", 256);
     const ciphertext = boundedString(body.ciphertext, "ciphertext", 512 * 1024);
+    const sourceDeviceId = boundedString(body.sourceDeviceId, "sourceDeviceId", 100);
+    await requireOwnedDevice(db, sourceDeviceId, user.id);
+    const backupVersion = boundedString(body.backupVersion || "1", "backupVersion", 32);
+    const restoreOperationId = boundedString(body.restoreOperationId || randomId(), "restoreOperationId", 100);
     if (![salt, nonce, ciphertext].every((value) => isBase64Url(value, 512 * 1024))) throw new AuthError(400, "Encrypted backup fields are invalid.", "INVALID_BACKUP");
     const timestamp = nowIso();
     await db.prepare(`
-      INSERT INTO chat_key_backups (user_id, kdf_version, salt, nonce, ciphertext, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO chat_key_backups
+        (user_id, kdf_version, salt, nonce, ciphertext, source_device_id, backup_version, restore_operation_id, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON CONFLICT(user_id) DO UPDATE SET kdf_version = excluded.kdf_version, salt = excluded.salt,
-        nonce = excluded.nonce, ciphertext = excluded.ciphertext, updated_at = excluded.updated_at
-    `).bind(user.id, kdfVersion, salt, nonce, ciphertext, timestamp, timestamp).run();
+        nonce = excluded.nonce, ciphertext = excluded.ciphertext, source_device_id = excluded.source_device_id,
+        backup_version = excluded.backup_version, restore_operation_id = excluded.restore_operation_id, restored_device_id = NULL,
+        consumed_at = NULL, updated_at = excluded.updated_at
+    `).bind(user.id, kdfVersion, salt, nonce, ciphertext, sourceDeviceId, backupVersion, restoreOperationId, timestamp, timestamp).run();
     return success({ saved: true, updatedAt: timestamp }, method);
+  }
+  if (method === "POST" && url.pathname === "/api/chat/key-backup/restore") {
+    const body = await readJsonBody(request);
+    return success(await restoreKeyBackup(db, env, user.id, body), method, 201);
   }
 
   if (method === "POST" && url.pathname === "/api/chat/reports") {

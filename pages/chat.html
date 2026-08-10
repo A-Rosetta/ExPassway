@@ -40,7 +40,10 @@
     <section id="chatSetupPanel" class="chat-panel chat-setup-panel" hidden>
       <h2 data-i18n="chatSetupTitle">Set up this device</h2>
       <p data-i18n="chatSetupDescription">Keys stay on this device.</p>
-      <button id="generateDeviceKeys" class="btn-primary" type="button" data-i18n="chatSetupButton">Generate device keys</button>
+      <div class="chat-setup-actions">
+        <button id="generateDeviceKeys" class="btn-primary" type="button" data-i18n="chatSetupButton">Generate device keys</button>
+        <button id="restoreRecoveryBackupSetup" class="btn-secondary" type="button" data-i18n="chatRestoreBackup">Restore device from backup</button>
+      </div>
     </section>
 
     <section id="chatApp" class="chat-layout" hidden>
@@ -67,6 +70,10 @@
         <section class="chat-panel chat-device-panel">
           <h2 data-i18n="chatDevices">Devices</h2>
           <p id="deviceFingerprint" class="chat-fingerprint"></p>
+          <div class="chat-recovery-actions">
+            <button id="createRecoveryBackup" class="btn-secondary chat-small-action" type="button" data-i18n="chatCreateBackup">Create encrypted recovery backup</button>
+            <button id="restoreRecoveryBackup" class="btn-secondary chat-small-action" type="button" data-i18n="chatRestoreBackup">Restore device from backup</button>
+          </div>
           <div id="deviceList" class="chat-device-list"></div>
         </section>
       </aside>
@@ -116,6 +123,6 @@
   <script src="../scripts/site-ui.js?v=20260806-1"></script>
   <script src="../scripts/api.js?v=20260809-2"></script>
   <script data-chat-notifications-loader="true" src="../scripts/chat-notifications.js?v=20260809-4"></script>
-  <script src="../scripts/chat.js?v=20260809-4"></script>
+  <script src="../scripts/chat.js?v=20260810-1"></script>
 </body>
 </html>

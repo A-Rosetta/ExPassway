@@ -23,6 +23,7 @@
     peerBundles: new Map(),
     ownBundle: null,
     devices: [],
+    recoveryEnabled: false,
     socket: null,
   };
   const $ = (selector) => document.querySelector(selector);
@@ -38,6 +39,16 @@
     const message = error?.message || String(error || "Unknown error");
     const code = error?.code && error.code !== "HTTP_ERROR" ? ` (${error.code})` : "";
     return `${message}${code}`;
+  }
+
+  async function shortIdentityFingerprint(identityKey) {
+    const normalized = String(identityKey || "").replace(/-/g, "+").replace(/_/g, "/");
+    if (!normalized) return "?";
+    const binary = atob(normalized + "=".repeat((4 - normalized.length % 4) % 4));
+    const digest = await crypto.subtle.digest("SHA-256", Uint8Array.from(binary, (character) => character.charCodeAt(0)));
+    let encoded = "";
+    for (const byte of new Uint8Array(digest)) encoded += String.fromCharCode(byte);
+    return btoa(encoded).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "").slice(0, 12);
   }
 
   function currentToken() {
@@ -72,7 +83,7 @@
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260809-4", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260810-1", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
       const error = new Error(event.message || "The chat encryption worker stopped unexpectedly.");
       for (const pending of state.pendingCrypto.values()) pending.reject(error);
@@ -80,12 +91,16 @@
       state.cryptoWorker = null;
     };
     worker.onmessage = (event) => {
-      const { id, ok, result, error } = event.data || {};
+      const { id, ok, result, error, code } = event.data || {};
       const pending = state.pendingCrypto.get(id);
       if (!pending) return;
       state.pendingCrypto.delete(id);
       if (ok) pending.resolve(result);
-      else pending.reject(new Error(error || "Chat crypto operation failed."));
+      else {
+        const failure = new Error(error || "Chat crypto operation failed.");
+        failure.code = code || "CRYPTO_ERROR";
+        pending.reject(failure);
+      }
     };
     state.cryptoWorker = worker;
     return worker;
@@ -164,18 +179,89 @@
     devices.forEach((device) => {
       const item = document.createElement("div");
       item.className = "chat-device-item";
-      item.innerHTML = `<span></span><div class="chat-device-item__actions"><button type="button" class="btn-secondary chat-device-approve"></button><button type="button" class="btn-secondary chat-device-revoke"></button></div>`;
-      item.querySelector("span").textContent = device.label || `Device ${device.deviceNumber || ""}`;
+      item.innerHTML = `<div class="chat-device-item__details"><strong></strong><small></small></div><div class="chat-device-item__actions"><button type="button" class="btn-secondary chat-device-approve"></button><button type="button" class="btn-secondary chat-device-backup"></button><button type="button" class="btn-secondary chat-device-revoke"></button></div>`;
+      item.querySelector("strong").textContent = device.label || `Device ${device.deviceNumber || ""}`;
+      item.querySelector("small").textContent = t("chatPrekeyCount", "Pre-keys: {count}", { count: device.oneTimePreKeyCount ?? "?" });
       const approve = item.querySelector(".chat-device-approve");
+      const backup = item.querySelector(".chat-device-backup");
       const revoke = item.querySelector(".chat-device-revoke");
       approve.textContent = t("chatApproveDevice", "Create device approval token");
+      backup.textContent = t("chatCreateBackup", "Create encrypted recovery backup");
       revoke.textContent = t("chatRevokeDevice", "Revoke device");
       approve.hidden = device.id !== state.device?.id || Boolean(device.revokedAt);
+      backup.hidden = !state.recoveryEnabled || device.id !== state.device?.id || Boolean(device.revokedAt);
       revoke.hidden = device.id === state.device?.id || Boolean(device.revokedAt);
       approve.addEventListener("click", () => createDeviceApproval(device.id));
+      backup.addEventListener("click", () => createRecoveryBackup(device.id));
       revoke.addEventListener("click", () => revokeDevice(device.id));
       host.appendChild(item);
     });
+  }
+
+  async function updateRecoveryAvailability() {
+    const actions = [$("#createRecoveryBackup"), $("#restoreRecoveryBackup"), $("#restoreRecoveryBackupSetup")].filter(Boolean);
+    if (!actions.length) return;
+    try {
+      await window.ALevelApi.getChatKeyBackup();
+      state.recoveryEnabled = true;
+      actions.forEach((button) => { button.hidden = false; });
+    } catch (_error) {
+      state.recoveryEnabled = false;
+      actions.forEach((button) => { button.hidden = true; });
+    }
+  }
+
+  async function createRecoveryBackup(deviceId) {
+    if (!window.confirm(t("chatBackupWarning", "The backup excludes message plaintext but includes secure session state. Anyone with this recovery password may decrypt messages near the backup time."))) return;
+    const password = window.prompt(t("chatRecoveryPasswordPrompt", "Enter a separate recovery password:"))?.trim() || "";
+    if (!password) return;
+    try {
+      const backup = await cryptoCall("createRecoveryBackup", { userId: state.profile?.id, sourceDeviceId: deviceId, password });
+      await window.ALevelApi.saveChatKeyBackup(backup);
+      setStatus(t("chatBackupCreated", "Encrypted recovery backup saved. Keep the recovery password safe."));
+      await refreshData();
+    } catch (error) {
+      setStatus(`${t("chatBackupFailed", "Could not save recovery backup: {message}", { message: error.message })}${error.code ? ` (${error.code})` : ""}`, true);
+    }
+  }
+
+  async function restoreRecoveryBackup() {
+    const source = window.prompt(t("chatRecoverySourcePrompt", "Enter the source device ID shown in the backup:"))?.trim() || "";
+    const password = window.prompt(t("chatRecoveryPasswordPrompt", "Enter the separate recovery password:"))?.trim() || "";
+    if (!source || !password) return;
+    try {
+      const backup = await window.ALevelApi.getChatKeyBackup();
+      if (!backup || backup.sourceDeviceId !== source) throw new Error(t("chatBackupNotFound", "No recovery backup matches that source device."));
+      const validation = await cryptoCall("restoreRecoveryBackup", { userId: state.profile?.id, backup, password });
+      const backupDate = validation.createdAt ? new Date(validation.createdAt).toLocaleString() : "unknown";
+      if (!window.confirm(t(
+        "chatRecoveryConfirm",
+        "Restore encrypted device state from {source}, created at {date}? The source device will be revoked after confirmation.",
+        { source, date: backupDate },
+      ))) {
+        await cryptoCall("clearRestoredDeviceState", {});
+        return;
+      }
+      const bundle = await cryptoCall("createRestoredDeviceBundle", { label: navigator.userAgent.includes("Mobile") ? "Restored mobile browser" : "Restored browser" });
+      const restored = await window.ALevelApi.restoreChatKeyBackup({
+        deviceId: bundle.deviceId,
+        restoreOperationId: bundle.restoreOperationId,
+        sourceDeviceId: bundle.sourceDeviceId,
+        identityPublicKey: bundle.identityPublicKey,
+        registrationId: bundle.registrationId,
+        signedPreKey: bundle.signedPreKey,
+        oneTimePreKeys: bundle.oneTimePreKeys,
+        label: bundle.label,
+      });
+      await cryptoCall("commitRestoredDeviceState", { deviceId: bundle.deviceId });
+      state.device = { ...restored.device, identityFingerprint: bundle.identityFingerprint };
+      saveDevice(state.device);
+      setStatus(t("chatRecoveryComplete", "Device recovery complete. The previous device was revoked."));
+      await refreshData();
+    } catch (error) {
+      await cryptoCall("clearRestoredDeviceState", {}).catch(() => {});
+      setStatus(t("chatRecoveryFailed", "Device recovery failed: {message}", { message: formatActionError(error) }), true);
+    }
   }
 
   async function createDeviceApproval(deviceId) {
@@ -184,7 +270,7 @@
       await navigator.clipboard?.writeText(result.token);
       setStatus(t("chatApprovalCopied", "Approval token copied. It is single-use and valid for 5 minutes."));
     } catch (error) {
-      setStatus(t("chatApprovalFailed", "Could not create approval token: {message}", { message: error.message }), true);
+      setStatus(t("chatApprovalFailed", "Could not create approval token: {message}", { message: formatActionError(error) }), true);
     }
   }
 
@@ -195,7 +281,7 @@
       renderDevices();
       setStatus("");
     } catch (error) {
-      setStatus(error.message, true);
+      setStatus(formatActionError(error), true);
     }
   }
 
@@ -206,7 +292,10 @@
     state.messages.forEach((message) => {
       const item = document.createElement("article");
       item.className = `chat-message${message.senderDeviceId === state.device?.id ? " is-mine" : ""}`;
-      const text = message.deleted ? "[deleted]" : message.plaintext || t("chatDecryptFailed", "Could not decrypt this message.");
+      const decryptCode = message.decryptCode ? ` (${message.decryptCode})` : "";
+      const text = message.deleted
+        ? "[deleted]"
+        : message.plaintext || `${t("chatDecryptFailed", "Could not decrypt this message.")}${decryptCode}`;
       item.innerHTML = `<p></p><div class="chat-message__attachment" hidden></div><time></time>`;
       let structured = null;
       try { structured = JSON.parse(text); } catch (_error) { }
@@ -229,6 +318,45 @@
     host.scrollTop = host.scrollHeight;
   }
 
+  async function resetActiveSession() {
+    const conversation = state.activeConversation;
+    const peer = conversation?.peer;
+    if (!conversation || !peer?.deviceId) return;
+    if (!window.confirm(t("chatResetSessionConfirm", "Reset this secure session? You should compare the safety number with your friend first."))) return;
+    try {
+      await cryptoCall("resetSession", { deviceId: state.device.id, peerDeviceId: peer.deviceId, peerDeviceNumber: peer.deviceNumber });
+      state.peerBundles.delete(peer.contactId);
+      await renderSafetyNumber(conversation);
+      setStatus(t("chatSessionReset", "Secure session reset. Send a new message to establish it again."));
+    } catch (error) {
+      setStatus(formatActionError(error), true);
+    }
+  }
+
+  async function assertSafetyStable(conversation) {
+    const contactId = conversation?.peer?.contactId;
+    if (!contactId || !state.device) return;
+    const bundle = state.peerBundles.get(contactId) || await window.ALevelApi.getChatContactBundle(contactId);
+    state.peerBundles.set(contactId, bundle);
+    const safety = await cryptoCall("safetyNumber", {
+      localDeviceId: state.device.id,
+      localDevices: state.devices.filter((item) => !item.revokedAt).map((item) => ({
+        deviceId: item.id,
+        deviceNumber: item.deviceNumber,
+        identityKey: item.identityPublicKey,
+      })),
+      peerDevices: bundle?.devices || [],
+    });
+    const verified = await cryptoCall("getSafetyNumberVerification", { key: conversation.id });
+    const changed = await cryptoCall("getSafetyNumberChange", { key: conversation.id });
+    if (changed || (verified && verified !== safety)) {
+      const error = new Error(t("chatSafetyChangedBlock", "The safety number changed. Verify it again before sending."));
+      error.code = "SAFETY_NUMBER_CHANGED";
+      throw error;
+    }
+    return bundle;
+  }
+
   async function downloadImage(metadata) {
     try {
       const blob = await window.ALevelApi.downloadChatAttachment(metadata.attachmentId);
@@ -242,7 +370,7 @@
       anchor.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     } catch (error) {
-      setStatus(t("chatAttachmentFailed", "Image upload failed: {message}", { message: error.message }), true);
+      setStatus(t("chatAttachmentFailed", "Image upload failed: {message}", { message: formatActionError(error) }), true);
     }
   }
 
@@ -278,8 +406,8 @@
         } catch (_error) {
           // The message is still usable in this render if local caching fails.
         }
-      } catch (_error) {
-        result.push({ ...message, plaintext: null });
+      } catch (error) {
+        result.push({ ...message, plaintext: null, decryptCode: error?.code || "DECRYPT_FAILED" });
       }
     }
     return result;
@@ -327,14 +455,83 @@
     $("#conversationEmpty").hidden = true;
     $("#conversationActive").hidden = false;
     $("#conversationTitle").textContent = conversation.peer?.alias || "Conversation";
-    $("#conversationSafety").textContent = conversation.peer?.identityFingerprint || "";
+    await renderSafetyNumber(conversation);
     $("#retentionSelect").value = String(conversation.retentionSeconds);
     renderContacts();
     try {
       await syncConversation();
       await openRealtime();
     } catch (error) {
-      setStatus(error.message, true);
+      setStatus(formatActionError(error), true);
+    }
+  }
+
+  async function renderSafetyNumber(conversation) {
+    const host = $("#conversationSafety");
+    if (!host) return;
+    const contactId = conversation.peer?.contactId;
+    try {
+      const bundle = contactId
+        ? (state.peerBundles.get(contactId) || await window.ALevelApi.getChatContactBundle(contactId))
+        : null;
+      if (contactId && bundle && !state.peerBundles.has(contactId)) state.peerBundles.set(contactId, bundle);
+      const safety = await cryptoCall("safetyNumber", {
+        localDeviceId: state.device.id,
+        localDevices: state.devices.filter((item) => !item.revokedAt).map((item) => ({
+          deviceId: item.id,
+          deviceNumber: item.deviceNumber,
+          identityKey: item.identityPublicKey,
+        })),
+        peerDevices: bundle?.devices || [],
+      });
+      const verificationKey = conversation.id;
+      const verified = await cryptoCall("getSafetyNumberVerification", { key: verificationKey });
+      const safetyChanged = Boolean(verified && verified !== safety);
+      const safetyChange = await cryptoCall("getSafetyNumberChange", { key: verificationKey });
+      if (safetyChanged && safetyChange !== safety) {
+        await cryptoCall("clearSafetyNumberVerification", { key: verificationKey });
+        await cryptoCall("markSafetyNumberChanged", { key: verificationKey, safety });
+      }
+      const safetyNeedsVerification = safetyChanged || Boolean(safetyChange);
+      host.replaceChildren();
+      const label = document.createElement("span");
+      const safetyStatus = safetyNeedsVerification
+        ? t("chatSafetyChanged", "Safety number changed; verify again")
+        : verified
+          ? t("chatSafetyVerified", "Verified")
+          : t("chatSafetyUnverified", "Not verified");
+      label.textContent = `${t("chatSafetyNumber", "Safety number")}: ${safety} · ${safetyStatus}`;
+      host.appendChild(label);
+      const deviceFingerprints = document.createElement("small");
+      deviceFingerprints.className = "chat-device-fingerprints";
+      const fingerprints = await Promise.all((bundle?.devices || []).map(async (device) =>
+        `${device.deviceNumber}: ${await shortIdentityFingerprint(device.identityKey)}`));
+      deviceFingerprints.textContent = t(
+        "chatPeerDeviceFingerprints",
+        "Peer device fingerprints: {devices}",
+        { devices: fingerprints.join(" · ") || "-" },
+      );
+      host.appendChild(deviceFingerprints);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "btn-secondary chat-small-action";
+      button.textContent = verified === safety && !safetyNeedsVerification
+        ? t("chatSafetyVerified", "Verified")
+        : t("chatSafetyVerify", "Mark verified");
+      button.addEventListener("click", async () => {
+        await cryptoCall("setSafetyNumberVerification", { key: verificationKey, safety });
+        await renderSafetyNumber(conversation);
+      });
+      host.appendChild(button);
+      const reset = document.createElement("button");
+      reset.type = "button";
+      reset.className = "btn-secondary chat-small-action";
+      reset.textContent = t("chatResetSession", "Reset secure session");
+      reset.addEventListener("click", resetActiveSession);
+      host.appendChild(reset);
+    } catch (error) {
+      host.textContent = conversation.peer?.identityFingerprint || "";
+      if (error?.code) setStatus(`${error.message} (${error.code})`, true);
     }
   }
 
@@ -378,7 +575,7 @@
       setStatus("");
       await refreshData();
     } catch (error) {
-      setStatus(t("chatSetupFailed", "Device setup failed: {message}", { message: error.message }), true);
+      setStatus(t("chatSetupFailed", "Device setup failed: {message}", { message: formatActionError(error) }), true);
       button.disabled = false;
     }
   }
@@ -393,10 +590,26 @@
     state.profile = profile;
     state.contacts = contacts;
     state.conversations = conversations;
+    state.peerBundles.clear();
+    state.ownBundle = null;
     state.devices = await window.ALevelApi.listChatDevices();
+    await ensurePrekeys();
+    await updateRecoveryAvailability();
     renderInvites(invites);
     renderContacts();
     renderDevices();
+  }
+
+  async function ensurePrekeys() {
+    const current = state.devices.find((device) => device.id === state.device?.id && !device.revokedAt);
+    if (!current || Number(current.oneTimePreKeyCount) >= 5) return;
+    try {
+      const refill = await cryptoCall("generatePreKeyRefill", { deviceId: state.device.id, count: 20 });
+      await window.ALevelApi.refillChatDevicePreKeys(state.device.id, refill.oneTimePreKeys);
+      state.devices = await window.ALevelApi.listChatDevices();
+    } catch (error) {
+      setStatus(t("chatPrekeyRefillFailed", "Could not replenish one-time pre-keys: {message}", { message: formatActionError(error) }), true);
+    }
   }
 
   async function createInvite() {
@@ -474,6 +687,7 @@
     button.disabled = true;
     setStatus(t("chatSending", "Encrypting and sending..."));
     try {
+      await assertSafetyStable(state.activeConversation);
       const contactId = state.activeConversation.peer?.contactId;
       const bundle = contactId
         ? (state.peerBundles.get(contactId) || await window.ALevelApi.getChatContactBundle(contactId))
@@ -523,6 +737,7 @@
     if (!file || !state.activeConversation || !state.device) return;
     if (file.size > 10 * 1024 * 1024) throw new Error("Encrypted images must be 10 MB or smaller.");
     setStatus(t("chatSending", "Encrypting and sending..."));
+    await assertSafetyStable(state.activeConversation);
     const encryptedFile = await cryptoCall("encryptAttachment", { bytes: await file.arrayBuffer() });
     const reservation = await window.ALevelApi.initChatAttachment({
       conversationId: state.activeConversation.id,
@@ -582,9 +797,12 @@
     $("#generateDeviceKeys")?.addEventListener("click", setupDevice);
     $("#createInvite")?.addEventListener("click", createInvite);
     $("#acceptInvite")?.addEventListener("click", acceptInvite);
-    $("#refreshChat")?.addEventListener("click", () => refreshData().catch((error) => setStatus(error.message, true)));
+    $("#createRecoveryBackup")?.addEventListener("click", () => createRecoveryBackup(state.device?.id));
+    $("#restoreRecoveryBackup")?.addEventListener("click", restoreRecoveryBackup);
+    $("#restoreRecoveryBackupSetup")?.addEventListener("click", restoreRecoveryBackup);
+    $("#refreshChat")?.addEventListener("click", () => refreshData().catch((error) => setStatus(formatActionError(error), true)));
     $("#messageForm")?.addEventListener("submit", sendMessage);
-    $("#imageInput")?.addEventListener("change", (event) => sendImage(event.target.files?.[0]).catch((error) => setStatus(t("chatAttachmentFailed", "Image upload failed: {message}", { message: error.message }), true)));
+    $("#imageInput")?.addEventListener("change", (event) => sendImage(event.target.files?.[0]).catch((error) => setStatus(t("chatAttachmentFailed", "Image upload failed: {message}", { message: formatActionError(error) }), true)));
     $("#emojiButton")?.addEventListener("click", () => { $("#emojiTray").hidden = !$("#emojiTray").hidden; });
     $("#emojiTray")?.addEventListener("click", (event) => {
       if (event.target.tagName !== "BUTTON") return;
@@ -616,7 +834,10 @@
       state.profile = await window.ALevelApi.getChatProfile();
       await ensureDevice();
       const existing = savedDevice();
-      if (!existing) return;
+      if (!existing) {
+        await updateRecoveryAvailability();
+        return;
+      }
       $("#chatApp").hidden = false;
       await refreshData();
       if (invite) $("#inviteToken").value = invite;

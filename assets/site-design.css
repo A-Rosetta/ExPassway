@@ -1106,6 +1106,29 @@
   gap: 6px;
 }
 
+.site-ui .chat-device-item__details {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.site-ui .chat-device-item__details strong,
+.site-ui .chat-device-item__details small {
+  overflow-wrap: anywhere;
+}
+
+.site-ui .chat-recovery-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.site-ui .chat-setup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .site-ui .chat-invite-panel > label {
   display: grid;
   gap: 7px;
@@ -1188,6 +1211,14 @@
 .site-ui .chat-device-item,
 .site-ui .chat-retention-control span {
   color: var(--muted);
+}
+
+.site-ui .chat-device-fingerprints {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
 }
 
 .site-ui .chat-conversation-panel {

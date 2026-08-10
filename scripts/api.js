@@ -576,6 +576,13 @@
         body: JSON.stringify(input || {}),
       });
     },
+    async refillChatDevicePreKeys(deviceId, oneTimePreKeys) {
+      return request(`/api/chat/devices/${encodeURIComponent(deviceId)}/prekeys`, {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({ oneTimePreKeys }),
+      });
+    },
     async createChatDeviceApproval(deviceId) {
       return request("/api/chat/devices/approval", {
         method: "POST",
@@ -663,6 +670,13 @@
     async saveChatKeyBackup(input) {
       return request("/api/chat/key-backup", {
         method: "PUT",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async restoreChatKeyBackup(input) {
+      return request("/api/chat/key-backup/restore", {
+        method: "POST",
         token: currentToken(),
         body: JSON.stringify(input || {}),
       });

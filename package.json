@@ -36,6 +36,7 @@
     "wrangler": "4.118.0"
   },
   "dependencies": {
-    "@privacyresearch/libsignal-protocol-typescript": "^0.0.16"
+    "@privacyresearch/libsignal-protocol-typescript": "^0.0.16",
+    "libsodium-wrappers-sumo": "0.8.4"
   }
 }
