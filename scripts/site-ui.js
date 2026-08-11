@@ -162,16 +162,25 @@
     if (!expanded && restoreFocus) menuToggle.focus();
   }
 
+  // A desk lamp instead of the sun/moon pair: unlit on the light theme, lit on
+  // the dark one. There is no lit/unlit variant to swap between - the same
+  // drawing is restyled by [data-theme] in styles.css, so the lit state holds
+  // for as long as dark mode is on rather than following :hover.
+  function lampMarkup() {
+    return `
+        <svg class="home-theme-lamp" aria-hidden="true" viewBox="0 0 32 32" fill="none">
+          <ellipse class="lamp-glow" cx="16" cy="17" rx="11" ry="5"></ellipse>
+          <path class="lamp-shade" d="M4.2 13.2a11.8 8.8 0 0 1 23.6 0z"></path>
+          <rect class="lamp-post" x="14.7" y="13.2" width="2.6" height="11.4" rx="1.1"></rect>
+          <rect class="lamp-base" x="9.4" y="24.2" width="13.2" height="2.8" rx="1.4"></rect>
+          <path class="lamp-cord" d="M21.6 13.4v5.2"></path>
+          <circle class="lamp-bead" cx="21.6" cy="20.1" r="1.55"></circle>
+        </svg>`;
+  }
+
   function themeControlMarkup() {
     return `
-      <button id="themeToggle" class="site-header-control home-header-control home-theme-toggle" type="button">
-        <svg class="home-theme-icon home-theme-icon--sun" aria-hidden="true" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="5"></circle>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-        </svg>
-        <svg class="home-theme-icon home-theme-icon--moon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
+      <button id="themeToggle" class="site-header-control home-header-control home-theme-toggle" type="button">${lampMarkup()}
       </button>`;
   }
 
@@ -214,6 +223,14 @@
     if (!themeToggle) {
       controlHost.insertAdjacentHTML("beforeend", themeControlMarkup());
       themeToggle = document.getElementById("themeToggle");
+    }
+    // index.html and chat.html ship their own #themeToggle in the page source,
+    // so the branch above never runs for them and they kept the old sun/moon
+    // pair (and, on chat.html, an empty button). Filling the contents here keeps
+    // the lamp defined in one place instead of pasted into every page header.
+    if (themeToggle) {
+      themeToggle.classList.add("home-theme-toggle");
+      themeToggle.innerHTML = lampMarkup();
     }
     const languageToggle = document.querySelector("[data-language-toggle]");
     if (languageToggle && controlHost) {

@@ -5102,3 +5102,90 @@ body.chapter-practice-page {
 .notebook-page .notebook-page-progress {
   font-size: 0.76rem;
 }
+
+/* ===== Theme toggle: desk lamp (2026-08-08) =============================
+ * Replaces the sun/moon icon pair. One drawing, restyled by [data-theme]:
+ * unlit on the light theme, lit on the dark one. Because the lit state keys
+ * off the theme attribute and not :hover, it holds for as long as dark mode
+ * is on instead of flickering with the pointer.
+ *
+ * The dark rules live here rather than in site-design.css, against the usual
+ * split, because login.html and admin-login.html load only styles.css and
+ * login.css. Putting the lit state in site-design.css would leave the lamp
+ * permanently unlit on both login pages.
+ */
+.home-theme-lamp {
+  width: 26px;
+  height: 26px;
+  /* The outer <svg> clips at its viewport by default, which would cut the
+     glow blur and the shade's drop-shadow off at the edges. */
+  overflow: visible;
+}
+
+.home-theme-lamp .lamp-shade,
+.home-theme-lamp .lamp-post,
+.home-theme-lamp .lamp-base {
+  fill: currentColor;
+  transition: fill 0.35s ease, filter 0.35s ease;
+}
+
+.home-theme-lamp .lamp-cord {
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.home-theme-lamp .lamp-bead {
+  fill: #c9962f;
+  transition: fill 0.35s ease, filter 0.35s ease;
+}
+
+.home-theme-lamp .lamp-cord,
+.home-theme-lamp .lamp-bead {
+  transition: transform 0.18s ease, opacity 0.35s ease;
+}
+
+/* Unlit: no pool of light under the shade at all. */
+.home-theme-lamp .lamp-glow {
+  fill: #ffc46e;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+[data-theme="dark"] .home-theme-lamp .lamp-shade {
+  fill: #f6f1e4;
+  filter: drop-shadow(0 3px 7px rgba(255, 186, 94, 0.75));
+}
+
+[data-theme="dark"] .home-theme-lamp .lamp-post,
+[data-theme="dark"] .home-theme-lamp .lamp-base {
+  fill: #efe9dc;
+}
+
+[data-theme="dark"] .home-theme-lamp .lamp-glow {
+  opacity: 0.5;
+  filter: blur(3px);
+}
+
+[data-theme="dark"] .home-theme-lamp .lamp-bead {
+  fill: #ffcb73;
+  filter: drop-shadow(0 0 3px rgba(255, 190, 100, 0.9));
+}
+
+/* A short tug on the cord acknowledges the click in both directions. */
+.home-theme-toggle:active .lamp-cord,
+.home-theme-toggle:active .lamp-bead {
+  transform: translateY(1.4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-theme-lamp .lamp-shade,
+  .home-theme-lamp .lamp-post,
+  .home-theme-lamp .lamp-base,
+  .home-theme-lamp .lamp-cord,
+  .home-theme-lamp .lamp-bead,
+  .home-theme-lamp .lamp-glow {
+    transition: none;
+  }
+}
