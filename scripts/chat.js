@@ -628,7 +628,7 @@
         memberNames.textContent = t(
           "chatGroupMembers",
           "Members: {members}",
-          { members: (conversation.group?.members || []).map((member) => member.alias).join(", ") || "-" },
+          { members: (conversation.group?.members || []).map((member) => member.isSelf ? t("chatYou", "You") : member.alias).join(", ") || "-" },
         );
         host.appendChild(memberNames);
       }

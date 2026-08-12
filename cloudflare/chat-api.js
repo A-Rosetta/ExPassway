@@ -315,7 +315,7 @@ async function mapConversation(db, row, userId) {
           .bind(userId, member.user_id).first();
       members.push({
         contactId: contact?.id || null,
-        alias: member.user_id === userId ? "You" : member.chat_alias || "Paired contact",
+        alias: member.user_id === userId ? null : member.chat_alias || "Paired contact",
         role: member.role,
         deviceCount: Number(member.device_count || 0),
         identityFingerprint: member.identity_fingerprint || null,
