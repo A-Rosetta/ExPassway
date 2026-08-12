@@ -443,6 +443,58 @@
     });
   }
 
+  function canRecoverSession(error) {
+    return ["SESSION_MISSING", "DUPLICATE_OR_REPLAY", "MESSAGE_GAP_TOO_LARGE", "DECRYPT_FAILED"]
+      .includes(error?.code);
+  }
+
+  async function refreshRecipient(device, conversation) {
+    if (device.deviceId === state.device?.id) {
+      state.ownBundle = null;
+      const ownBundle = await window.ALevelApi.getChatOwnDeviceBundle(state.device.id);
+      state.ownBundle = ownBundle;
+      return (ownBundle?.devices || []).find((item) => item.deviceId === device.deviceId) || device;
+    }
+    if (conversation.kind === "group") {
+      state.conversationBundles.delete(conversation.id);
+    } else if (conversation.peer?.contactId) {
+      state.peerBundles.delete(conversation.peer.contactId);
+    }
+    const fresh = await getPeerDevices(conversation);
+    return fresh.find((item) => item.deviceId === device.deviceId) || device;
+  }
+
+  async function encryptForRecipient(conversation, device, plaintext) {
+    let current = device;
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      try {
+        await cryptoCall("processPreKeyBundle", {
+          deviceId: state.device.id,
+          peerDeviceId: current.deviceId,
+          peerDeviceNumber: current.deviceNumber,
+          bundle: current,
+        });
+        return await cryptoCall("encryptMessage", {
+          deviceId: state.device.id,
+          peerDeviceId: current.deviceId,
+          peerDeviceNumber: current.deviceNumber,
+          plaintext,
+        });
+      } catch (error) {
+        if (attempt || !canRecoverSession(error)) throw error;
+        // A stale local session can survive a device replacement. Rebuild only this
+        // device pair, then retry with a freshly fetched public bundle.
+        await cryptoCall("resetSession", {
+          deviceId: state.device.id,
+          peerDeviceId: current.deviceId,
+          peerDeviceNumber: current.deviceNumber,
+        });
+        current = await refreshRecipient(current, conversation);
+      }
+    }
+    throw new Error("The encrypted message could not be processed.");
+  }
+
   async function downloadImage(metadata) {
     try {
       const blob = await window.ALevelApi.downloadChatAttachment(metadata.attachmentId);
@@ -840,18 +892,7 @@
       if (!peers.length) throw new Error("The contact has no active device.");
       const recipients = {};
       for (const peer of peers) {
-        await cryptoCall("processPreKeyBundle", {
-          deviceId: state.device.id,
-          peerDeviceId: peer.deviceId,
-          peerDeviceNumber: peer.deviceNumber,
-          bundle: peer,
-        });
-        recipients[peer.deviceId] = await cryptoCall("encryptMessage", {
-          deviceId: state.device.id,
-          peerDeviceId: peer.deviceId,
-          peerDeviceNumber: peer.deviceNumber,
-          plaintext,
-        });
+        recipients[peer.deviceId] = await encryptForRecipient(state.activeConversation, peer, plaintext);
       }
       const envelope = btoa(JSON.stringify({ version: 1, recipients })).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
       const clientMessageId = crypto.randomUUID();
@@ -898,18 +939,7 @@
     });
     const recipients = {};
     for (const peer of peers) {
-      await cryptoCall("processPreKeyBundle", {
-        deviceId: state.device.id,
-        peerDeviceId: peer.deviceId,
-        peerDeviceNumber: peer.deviceNumber,
-        bundle: peer,
-      });
-      recipients[peer.deviceId] = await cryptoCall("encryptMessage", {
-        deviceId: state.device.id,
-        peerDeviceId: peer.deviceId,
-        peerDeviceNumber: peer.deviceNumber,
-        plaintext: metadata,
-      });
+      recipients[peer.deviceId] = await encryptForRecipient(state.activeConversation, peer, metadata);
     }
     const envelope = btoa(JSON.stringify({ version: 1, recipients })).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
     const clientMessageId = crypto.randomUUID();
