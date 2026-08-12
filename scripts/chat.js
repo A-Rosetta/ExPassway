@@ -22,9 +22,13 @@
     localPlaintexts: {},
     peerBundles: new Map(),
     ownBundle: null,
+    conversationBundles: new Map(),
     devices: [],
     recoveryEnabled: false,
     socket: null,
+    pollTimer: null,
+    syncInFlight: null,
+    syncGeneration: 0,
   };
   const $ = (selector) => document.querySelector(selector);
   const status = $("#chatStatus");
@@ -161,13 +165,54 @@
       button.type = "button";
       button.className = `chat-conversation-item${state.activeConversation?.id === conversation.id ? " is-active" : ""}`;
       button.innerHTML = `<strong></strong><small></small>`;
-      button.querySelector("strong").textContent = conversation.peer?.alias || t("chatNoConversation", "Conversation");
-      button.querySelector("small").textContent = conversation.peer?.identityFingerprint
-        ? conversation.peer.identityFingerprint.slice(0, 12)
-        : "";
+      if (conversation.kind === "group") {
+        button.querySelector("strong").textContent = t("chatGroupTitle", "Group ({count} members)", {
+          count: conversation.group?.memberCount || 0,
+        });
+        button.querySelector("small").textContent = t("chatGroupMemberCount", "{count} members", {
+          count: conversation.group?.memberCount || 0,
+        });
+      } else {
+        button.querySelector("strong").textContent = conversation.peer?.alias || t("chatNoConversation", "Conversation");
+        button.querySelector("small").textContent = conversation.peer?.identityFingerprint
+          ? conversation.peer.identityFingerprint.slice(0, 12)
+          : "";
+      }
       button.addEventListener("click", () => selectConversation(conversation));
       host.appendChild(button);
     });
+    renderGroupContactPicker();
+  }
+
+  function renderGroupContactPicker() {
+    const host = $("#groupContactList");
+    if (!host) return;
+    host.replaceChildren();
+    if (!state.contacts.length) {
+      const empty = document.createElement("p");
+      empty.className = "chat-muted";
+      empty.textContent = t("chatGroupNeedsContacts", "Pair at least one friend before creating a group.");
+      host.appendChild(empty);
+      return;
+    }
+    state.contacts.forEach((contact) => {
+      const label = document.createElement("label");
+      label.className = "chat-group-contact-option";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = contact.id;
+      const text = document.createElement("span");
+      text.textContent = contact.profile?.alias || t("chatNoConversation", "Conversation");
+      label.append(checkbox, text);
+      host.appendChild(label);
+    });
+  }
+
+  function setGroupFormVisible(visible) {
+    const form = $("#groupCreatePanel");
+    if (!form) return;
+    form.hidden = !visible;
+    if (visible) renderGroupContactPicker();
   }
 
   function renderDevices() {
@@ -296,7 +341,14 @@
       const text = message.deleted
         ? "[deleted]"
         : message.plaintext || `${t("chatDecryptFailed", "Could not decrypt this message.")}${decryptCode}`;
-      item.innerHTML = `<p></p><div class="chat-message__attachment" hidden></div><time></time>`;
+      item.innerHTML = `<small class="chat-message__sender" hidden></small><p></p><div class="chat-message__attachment" hidden></div><time></time>`;
+      if (state.activeConversation?.kind === "group" && message.senderAlias) {
+        const sender = item.querySelector(".chat-message__sender");
+        sender.hidden = false;
+        sender.textContent = message.senderDeviceId === state.device?.id
+          ? t("chatYou", "You")
+          : message.senderAlias;
+      }
       let structured = null;
       try { structured = JSON.parse(text); } catch (_error) { }
       if (structured?.kind === "image" && structured.attachmentId) {
@@ -334,10 +386,9 @@
   }
 
   async function assertSafetyStable(conversation) {
-    const contactId = conversation?.peer?.contactId;
-    if (!contactId || !state.device) return;
-    const bundle = state.peerBundles.get(contactId) || await window.ALevelApi.getChatContactBundle(contactId);
-    state.peerBundles.set(contactId, bundle);
+    if (!conversation || !state.device) return;
+    const peerDevices = await getPeerDevices(conversation);
+    if (!peerDevices.length) return;
     const safety = await cryptoCall("safetyNumber", {
       localDeviceId: state.device.id,
       localDevices: state.devices.filter((item) => !item.revokedAt).map((item) => ({
@@ -345,7 +396,7 @@
         deviceNumber: item.deviceNumber,
         identityKey: item.identityPublicKey,
       })),
-      peerDevices: bundle?.devices || [],
+      peerDevices,
     });
     const verified = await cryptoCall("getSafetyNumberVerification", { key: conversation.id });
     const changed = await cryptoCall("getSafetyNumberChange", { key: conversation.id });
@@ -354,7 +405,40 @@
       error.code = "SAFETY_NUMBER_CHANGED";
       throw error;
     }
-    return bundle;
+    return peerDevices;
+  }
+
+  async function getPeerDevices(conversation) {
+    if (conversation?.kind === "group") {
+      const bundle = state.conversationBundles.get(conversation.id)
+        || await window.ALevelApi.getChatConversationBundle(conversation.id);
+      state.conversationBundles.set(conversation.id, bundle);
+      return (bundle?.members || []).flatMap((member) => member.devices || []);
+    }
+    const contactId = conversation?.peer?.contactId;
+    if (!contactId) return [];
+    const bundle = state.peerBundles.get(contactId) || await window.ALevelApi.getChatContactBundle(contactId);
+    state.peerBundles.set(contactId, bundle);
+    return bundle?.devices || [];
+  }
+
+  async function getEncryptionRecipients(conversation) {
+    const peerDevices = await getPeerDevices(conversation);
+    if (!peerDevices.length) {
+      const error = new Error(t("chatNoActiveGroupDevices", "No active recipient devices are available."));
+      error.code = "NO_ACTIVE_RECIPIENT_DEVICES";
+      throw error;
+    }
+    const ownBundle = state.ownBundle || await window.ALevelApi.getChatOwnDeviceBundle(state.device.id);
+    state.ownBundle = ownBundle;
+    const ownDevices = ownBundle?.devices || [];
+    const recipients = [...peerDevices, ...ownDevices];
+    const seen = new Set();
+    return recipients.filter((device) => {
+      if (!device?.deviceId || seen.has(device.deviceId)) return false;
+      seen.add(device.deviceId);
+      return true;
+    });
   }
 
   async function downloadImage(metadata) {
@@ -415,12 +499,34 @@
 
   async function syncConversation() {
     if (!state.activeConversation || !state.device) return;
-    const payload = await window.ALevelApi.syncChatMessages(state.activeConversation.id, state.cursor);
-    const fresh = await decryptMessages(payload.messages || []);
-    const known = new Set(state.messages.map((message) => message.id));
-    state.messages = [...state.messages, ...fresh.filter((message) => !known.has(message.id))];
-    state.cursor = payload.nextCursor || state.cursor;
-    renderMessages();
+    if (state.syncInFlight) return state.syncInFlight;
+    const generation = state.syncGeneration;
+    state.syncInFlight = (async () => {
+      const conversationId = state.activeConversation.id;
+      const payload = await window.ALevelApi.syncChatMessages(conversationId, state.cursor);
+      if (state.syncGeneration !== generation || state.activeConversation?.id !== conversationId) return;
+      const fresh = await decryptMessages(payload.messages || []);
+      const known = new Set(state.messages.map((message) => message.id));
+      state.messages = [...state.messages, ...fresh.filter((message) => !known.has(message.id))];
+      state.cursor = payload.nextCursor || state.cursor;
+      renderMessages();
+    })().finally(() => {
+      if (state.syncGeneration === generation) state.syncInFlight = null;
+    });
+    return state.syncInFlight;
+  }
+
+  function stopPolling() {
+    if (state.pollTimer) window.clearInterval(state.pollTimer);
+    state.pollTimer = null;
+  }
+
+  function startPolling() {
+    stopPolling();
+    state.pollTimer = window.setInterval(() => {
+      if (document.hidden || !state.activeConversation) return;
+      syncConversation().catch((error) => setStatus(formatActionError(error), true));
+    }, 5000);
   }
 
   async function openRealtime() {
@@ -449,18 +555,26 @@
   }
 
   async function selectConversation(conversation) {
+    stopPolling();
+    const previousSync = state.syncInFlight;
+    state.syncGeneration += 1;
+    state.syncInFlight = null;
+    await previousSync?.catch(() => {});
     state.activeConversation = conversation;
     state.messages = [];
     state.cursor = "";
     $("#conversationEmpty").hidden = true;
     $("#conversationActive").hidden = false;
-    $("#conversationTitle").textContent = conversation.peer?.alias || "Conversation";
+    $("#conversationTitle").textContent = conversation.kind === "group"
+      ? t("chatGroupTitle", "Group ({count} members)", { count: conversation.group?.memberCount || 0 })
+      : conversation.peer?.alias || "Conversation";
     await renderSafetyNumber(conversation);
     $("#retentionSelect").value = String(conversation.retentionSeconds);
     renderContacts();
     try {
       await syncConversation();
       await openRealtime();
+      startPolling();
     } catch (error) {
       setStatus(formatActionError(error), true);
     }
@@ -469,12 +583,8 @@
   async function renderSafetyNumber(conversation) {
     const host = $("#conversationSafety");
     if (!host) return;
-    const contactId = conversation.peer?.contactId;
     try {
-      const bundle = contactId
-        ? (state.peerBundles.get(contactId) || await window.ALevelApi.getChatContactBundle(contactId))
-        : null;
-      if (contactId && bundle && !state.peerBundles.has(contactId)) state.peerBundles.set(contactId, bundle);
+      const peerDevices = await getPeerDevices(conversation);
       const safety = await cryptoCall("safetyNumber", {
         localDeviceId: state.device.id,
         localDevices: state.devices.filter((item) => !item.revokedAt).map((item) => ({
@@ -482,7 +592,7 @@
           deviceNumber: item.deviceNumber,
           identityKey: item.identityPublicKey,
         })),
-        peerDevices: bundle?.devices || [],
+        peerDevices,
       });
       const verificationKey = conversation.id;
       const verified = await cryptoCall("getSafetyNumberVerification", { key: verificationKey });
@@ -504,7 +614,7 @@
       host.appendChild(label);
       const deviceFingerprints = document.createElement("small");
       deviceFingerprints.className = "chat-device-fingerprints";
-      const fingerprints = await Promise.all((bundle?.devices || []).map(async (device) =>
+      const fingerprints = await Promise.all(peerDevices.map(async (device) =>
         `${device.deviceNumber}: ${await shortIdentityFingerprint(device.identityKey)}`));
       deviceFingerprints.textContent = t(
         "chatPeerDeviceFingerprints",
@@ -512,6 +622,16 @@
         { devices: fingerprints.join(" · ") || "-" },
       );
       host.appendChild(deviceFingerprints);
+      if (conversation.kind === "group") {
+        const memberNames = document.createElement("small");
+        memberNames.className = "chat-device-fingerprints";
+        memberNames.textContent = t(
+          "chatGroupMembers",
+          "Members: {members}",
+          { members: (conversation.group?.members || []).map((member) => member.alias).join(", ") || "-" },
+        );
+        host.appendChild(memberNames);
+      }
       const button = document.createElement("button");
       button.type = "button";
       button.className = "btn-secondary chat-small-action";
@@ -523,12 +643,14 @@
         await renderSafetyNumber(conversation);
       });
       host.appendChild(button);
-      const reset = document.createElement("button");
-      reset.type = "button";
-      reset.className = "btn-secondary chat-small-action";
-      reset.textContent = t("chatResetSession", "Reset secure session");
-      reset.addEventListener("click", resetActiveSession);
-      host.appendChild(reset);
+      if (conversation.kind !== "group") {
+        const reset = document.createElement("button");
+        reset.type = "button";
+        reset.className = "btn-secondary chat-small-action";
+        reset.textContent = t("chatResetSession", "Reset secure session");
+        reset.addEventListener("click", resetActiveSession);
+        host.appendChild(reset);
+      }
     } catch (error) {
       host.textContent = conversation.peer?.identityFingerprint || "";
       if (error?.code) setStatus(`${error.message} (${error.code})`, true);
@@ -591,6 +713,7 @@
     state.contacts = contacts;
     state.conversations = conversations;
     state.peerBundles.clear();
+    state.conversationBundles.clear();
     state.ownBundle = null;
     state.devices = await window.ALevelApi.listChatDevices();
     await ensurePrekeys();
@@ -609,6 +732,29 @@
       state.devices = await window.ALevelApi.listChatDevices();
     } catch (error) {
       setStatus(t("chatPrekeyRefillFailed", "Could not replenish one-time pre-keys: {message}", { message: formatActionError(error) }), true);
+    }
+  }
+
+  async function createGroup() {
+    const selected = [...document.querySelectorAll("#groupContactList input[type=checkbox]:checked")]
+      .map((input) => input.value);
+    if (!selected.length) {
+      setStatus(t("chatGroupSelectMembers", "Select at least one friend."), true);
+      return;
+    }
+    if (selected.length > 49) {
+      setStatus(t("chatGroupTooManyMembers", "A group can contain at most 50 people including you."), true);
+      return;
+    }
+    try {
+      const conversation = await window.ALevelApi.createChatGroup(selected);
+      state.conversations = [conversation, ...state.conversations.filter((item) => item.id !== conversation.id)];
+      setGroupFormVisible(false);
+      renderContacts();
+      await selectConversation(conversation);
+      setStatus(t("chatGroupCreated", "Encrypted group created."));
+    } catch (error) {
+      setStatus(t("chatGroupCreateFailed", "Could not create group: {message}", { message: formatActionError(error) }), true);
     }
   }
 
@@ -688,15 +834,8 @@
     setStatus(t("chatSending", "Encrypting and sending..."));
     try {
       await assertSafetyStable(state.activeConversation);
-      const contactId = state.activeConversation.peer?.contactId;
-      const bundle = contactId
-        ? (state.peerBundles.get(contactId) || await window.ALevelApi.getChatContactBundle(contactId))
-        : null;
-      const ownBundle = state.ownBundle || await window.ALevelApi.getChatOwnDeviceBundle(state.device.id);
-      state.ownBundle = ownBundle;
-      const peers = [...(bundle?.devices || []), ...(ownBundle?.devices || [])];
+      const peers = await getEncryptionRecipients(state.activeConversation);
       if (!peers.length) throw new Error("The contact has no active device.");
-      if (contactId && !state.peerBundles.has(contactId)) state.peerBundles.set(contactId, bundle);
       const recipients = {};
       for (const peer of peers) {
         await cryptoCall("processPreKeyBundle", {
@@ -745,15 +884,8 @@
     });
     await window.ALevelApi.uploadChatAttachment(reservation.attachmentId, encryptedFile.bytes);
     await window.ALevelApi.completeChatAttachment(reservation.attachmentId);
-    const contactId = state.activeConversation.peer?.contactId;
-    const bundle = contactId
-      ? (state.peerBundles.get(contactId) || await window.ALevelApi.getChatContactBundle(contactId))
-      : null;
-    const ownBundle = state.ownBundle || await window.ALevelApi.getChatOwnDeviceBundle(state.device.id);
-    state.ownBundle = ownBundle;
-    const peers = [...(bundle?.devices || []), ...(ownBundle?.devices || [])];
+    const peers = await getEncryptionRecipients(state.activeConversation);
     if (!peers.length) throw new Error("The contact has no active device.");
-    if (contactId && !state.peerBundles.has(contactId)) state.peerBundles.set(contactId, bundle);
     const metadata = JSON.stringify({
       kind: "image",
       attachmentId: reservation.attachmentId,
@@ -795,6 +927,9 @@
 
   function wireEvents() {
     $("#generateDeviceKeys")?.addEventListener("click", setupDevice);
+    $("#createGroup")?.addEventListener("click", () => setGroupFormVisible(true));
+    $("#confirmCreateGroup")?.addEventListener("click", createGroup);
+    $("#cancelCreateGroup")?.addEventListener("click", () => setGroupFormVisible(false));
     $("#createInvite")?.addEventListener("click", createInvite);
     $("#acceptInvite")?.addEventListener("click", acceptInvite);
     $("#createRecoveryBackup")?.addEventListener("click", () => createRecoveryBackup(state.device?.id));
@@ -853,4 +988,8 @@
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialize);
   else initialize();
+  window.addEventListener("beforeunload", () => {
+    stopPolling();
+    state.socket?.close();
+  });
 })();

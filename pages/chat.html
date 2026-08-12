@@ -7,7 +7,7 @@
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
   <link rel="stylesheet" href="../assets/styles.css?v=20260808-2" />
-  <link rel="stylesheet" href="../assets/site-design.css?v=20260806-2" />
+  <link rel="stylesheet" href="../assets/site-design.css?v=20260811-1" />
 </head>
 <body class="student-ui site-ui chat-page">
   <header class="site-topbar chat-topbar">
@@ -65,6 +65,15 @@
             <h2 data-i18n="chatConversationsTitle">Conversations</h2>
             <button id="refreshChat" class="btn-secondary chat-icon-action" type="button" aria-label="Refresh" title="Refresh">↻</button>
           </div>
+          <button id="createGroup" class="btn-secondary chat-small-action" type="button" data-i18n="chatCreateGroup">Create group</button>
+          <section id="groupCreatePanel" class="chat-group-create" hidden>
+            <p class="chat-muted" data-i18n="chatGroupCreateDescription">Choose paired friends. Messages are encrypted separately for each active member device.</p>
+            <div id="groupContactList" class="chat-group-contact-list"></div>
+            <div class="chat-compose__actions">
+              <button id="confirmCreateGroup" class="btn-primary chat-small-action" type="button" data-i18n="chatConfirmCreateGroup">Create</button>
+              <button id="cancelCreateGroup" class="btn-secondary chat-small-action" type="button" data-i18n="chatCancelCreateGroup">Cancel</button>
+            </div>
+          </section>
           <div id="conversationList" class="chat-conversation-list" aria-live="polite"></div>
         </section>
         <section class="chat-panel chat-device-panel">
@@ -81,7 +90,7 @@
       <section class="chat-panel chat-conversation-panel">
         <div id="conversationEmpty" class="chat-empty-state">
           <p data-i18n="chatNoConversation">Choose a friend to start chatting.</p>
-          <p class="chat-muted" data-i18n="chatComingLater">Group chat and calls will arrive later.</p>
+          <p class="chat-muted" data-i18n="chatComingLater">Calls and MLS group key rotation will arrive later.</p>
         </div>
         <div id="conversationActive" hidden>
           <header class="chat-conversation-header">
@@ -119,10 +128,10 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260809-2"></script>
+  <script src="../scripts/i18n.js?v=20260811-1"></script>
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
-  <script src="../scripts/api.js?v=20260809-2"></script>
+  <script src="../scripts/api.js?v=20260811-1"></script>
   <script data-chat-notifications-loader="true" src="../scripts/chat-notifications.js?v=20260809-4"></script>
-  <script src="../scripts/chat.js?v=20260810-1"></script>
+  <script src="../scripts/chat.js?v=20260811-1"></script>
 </body>
 </html>

@@ -606,6 +606,16 @@
         body: JSON.stringify({ contactId }),
       });
     },
+    async createChatGroup(contactIds) {
+      return request("/api/chat/conversations", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({ kind: "group", contactIds: Array.isArray(contactIds) ? contactIds : [] }),
+      });
+    },
+    async getChatConversationBundle(conversationId) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/bundle`, { token: currentToken() });
+    },
     async updateChatConversationSettings(conversationId, retentionSeconds) {
       return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/settings`, {
         method: "PATCH",

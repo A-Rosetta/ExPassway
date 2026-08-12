@@ -51,6 +51,19 @@ try {
   assert.equal(accepted.response.status, 201);
   assert.equal((await call(userB, `/api/chat/invites/${invite.payload.data.token}/accept`, { method: "POST" })).response.status, 409);
   const conversationId = accepted.payload.data.conversationId;
+  const contactsA = await call(userA, "/api/chat/contacts");
+  assert.equal(contactsA.response.status, 200);
+  const group = await call(userA, "/api/chat/conversations", {
+    method: "POST",
+    body: JSON.stringify({ kind: "group", contactIds: [contactsA.payload.data[0].id] }),
+  });
+  assert.equal(group.response.status, 201);
+  assert.equal(group.payload.data.kind, "group");
+  assert.equal(group.payload.data.group.memberCount, 2);
+  const groupBundle = await call(userA, `/api/chat/conversations/${group.payload.data.id}/bundle`);
+  assert.equal(groupBundle.response.status, 200);
+  assert.equal(groupBundle.payload.data.members.length, 1);
+  assert.equal(groupBundle.payload.data.members[0].devices.length, 1);
   const ciphertext = Buffer.from(JSON.stringify({ type: 3, body: "secret-ciphertext" })).toString("base64url");
   const messageInput = { conversationId, senderDeviceId: deviceB.payload.data.device.id, clientMessageId: "client-1", ciphertext, protocolVersion: "signal-v1" };
   const message = await call(userB, "/api/chat/messages", { method: "POST", body: JSON.stringify(messageInput) });
@@ -62,6 +75,19 @@ try {
   assert.equal(sync.response.status, 200);
   assert.equal(sync.payload.data.messages[0].ciphertext, ciphertext);
   assert.equal(sync.payload.data.messages[0].ciphertext.includes("secret"), false);
+  const groupMessageInput = {
+    conversationId: group.payload.data.id,
+    senderDeviceId: deviceA.payload.data.device.id,
+    clientMessageId: "group-client-1",
+    ciphertext,
+    protocolVersion: "signal-v1",
+  };
+  const groupMessage = await call(userA, "/api/chat/messages", { method: "POST", body: JSON.stringify(groupMessageInput) });
+  assert.equal(groupMessage.response.status, 201);
+  const groupSync = await call(userB, `/api/chat/sync?conversationId=${encodeURIComponent(group.payload.data.id)}`);
+  assert.equal(groupSync.response.status, 200);
+  assert.equal(groupSync.payload.data.messages.length, 1);
+  assert.equal(groupSync.payload.data.messages[0].ciphertext, ciphertext);
   const backup = await call(userA, "/api/chat/key-backup", { method: "PUT", body: JSON.stringify({ kdfVersion: "argon2id-v1", salt: "salt", nonce: "nonce", ciphertext: "encrypted-key-package" }) });
   assert.equal(backup.response.status, 400);
   const validBackup = await call(userA, "/api/chat/key-backup", { method: "PUT", body: JSON.stringify({

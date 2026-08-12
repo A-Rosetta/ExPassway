@@ -13,6 +13,7 @@ const MAX_CIPHERTEXT_LENGTH = 512 * 1024;
 const MAX_PROFILE_CIPHERTEXT_LENGTH = 64 * 1024;
 const MAX_EVIDENCE_LENGTH = 2 * 1024 * 1024;
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+const MAX_GROUP_MEMBERS = 50;
 const RETENTION_OPTIONS = new Set([86400, 604800, 2592000, 0]);
 
 function nowIso() {
@@ -297,6 +298,44 @@ async function existingDirectConversation(db, userId, peerUserId) {
 }
 
 async function mapConversation(db, row, userId) {
+  if (row.kind === "group") {
+    const memberRows = await db.prepare(`
+      SELECT m.user_id, m.role, m.joined_at, p.chat_alias, p.identity_fingerprint,
+        (SELECT COUNT(*) FROM chat_devices d WHERE d.user_id = m.user_id AND d.revoked_at IS NULL) AS device_count
+      FROM chat_conversation_members m
+      LEFT JOIN chat_profiles p ON p.user_id = m.user_id
+      WHERE m.conversation_id = ? AND m.left_at IS NULL
+      ORDER BY m.joined_at, m.user_id
+    `).bind(row.id).all();
+    const members = [];
+    for (const member of memberRows.results || []) {
+      const contact = member.user_id === userId
+        ? null
+        : await db.prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ?")
+          .bind(userId, member.user_id).first();
+      members.push({
+        contactId: contact?.id || null,
+        alias: member.user_id === userId ? "You" : member.chat_alias || "Paired contact",
+        role: member.role,
+        deviceCount: Number(member.device_count || 0),
+        identityFingerprint: member.identity_fingerprint || null,
+        isSelf: member.user_id === userId,
+      });
+    }
+    const last = await db.prepare(`
+      SELECT created_at FROM chat_messages WHERE conversation_id = ? ORDER BY created_at DESC, id DESC LIMIT 1
+    `).bind(row.id).first();
+    return {
+      id: row.id,
+      kind: row.kind,
+      retentionSeconds: Number(row.retention_seconds),
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+      lastMessageAt: last?.created_at || null,
+      group: { memberCount: members.length, members },
+      peer: null,
+    };
+  }
   const peer = await db.prepare(`
     SELECT m.user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext,
       d.id AS device_id, d.device_number
@@ -327,6 +366,53 @@ async function mapConversation(db, row, userId) {
       profileCiphertext: peer.profile_ciphertext || "",
     } : null,
   };
+}
+
+async function createGroupConversation(db, userId, body) {
+  const rawContactIds = Array.isArray(body?.contactIds) ? body.contactIds : [];
+  const contactIds = [...new Set(rawContactIds.map((value) => String(value || "").trim()).filter(Boolean))];
+  if (!contactIds.length || contactIds.length >= MAX_GROUP_MEMBERS) {
+    throw new AuthError(400, `Choose between 1 and ${MAX_GROUP_MEMBERS - 1} paired friends.`, "INVALID_GROUP_MEMBERS");
+  }
+  if (contactIds.some((value) => value.length > 100 || !/^[A-Za-z0-9_-]+$/.test(value))) {
+    throw new AuthError(400, "Group member references are invalid.", "INVALID_GROUP_MEMBERS");
+  }
+  const placeholders = contactIds.map(() => "?").join(", ");
+  const contacts = await db.prepare(`
+    SELECT id, peer_user_id FROM chat_contacts
+    WHERE user_id = ? AND id IN (${placeholders})
+  `).bind(userId, ...contactIds).all();
+  if ((contacts.results || []).length !== contactIds.length) {
+    throw new AuthError(404, "One or more selected friends could not be found.", "CONTACT_NOT_FOUND");
+  }
+  const memberUserIds = [...new Set((contacts.results || []).map((row) => row.peer_user_id))];
+  if (memberUserIds.length !== contactIds.length) {
+    throw new AuthError(400, "A friend can only appear once in a group.", "INVALID_GROUP_MEMBERS");
+  }
+  const timestamp = nowIso();
+  const conversationId = randomId();
+  const statements = [
+    db.prepare(`
+      INSERT INTO chat_conversations (id, kind, created_by, retention_seconds, created_at, updated_at)
+      VALUES (?, 'group', ?, 2592000, ?, ?)
+    `).bind(conversationId, userId, timestamp, timestamp),
+    db.prepare(`
+      INSERT INTO chat_conversation_members (conversation_id, user_id, role, joined_at)
+      VALUES (?, ?, 'owner', ?)
+    `).bind(conversationId, userId, timestamp),
+  ];
+  for (const memberUserId of memberUserIds) {
+    statements.push(db.prepare(`
+      INSERT INTO chat_conversation_members (conversation_id, user_id, role, joined_at)
+      VALUES (?, ?, 'member', ?)
+    `).bind(conversationId, memberUserId, timestamp));
+  }
+  await db.batch(statements);
+  const row = await db.prepare(`
+    SELECT id, kind, created_by, retention_seconds, created_at, updated_at
+    FROM chat_conversations WHERE id = ?
+  `).bind(conversationId).first();
+  return mapConversation(db, row, userId);
 }
 
 async function createInvite(db, userId) {
@@ -725,6 +811,47 @@ async function getOwnPrekeyBundle(db, userId, excludeDeviceId = "") {
   return { devices: bundle };
 }
 
+async function getConversationPrekeyBundle(db, conversationId, userId) {
+  await requireConversationMember(db, conversationId, userId);
+  const members = await db.prepare(`
+    SELECT m.user_id, p.chat_alias
+    FROM chat_conversation_members m
+    LEFT JOIN chat_profiles p ON p.user_id = m.user_id
+    WHERE m.conversation_id = ? AND m.user_id <> ? AND m.left_at IS NULL
+    ORDER BY m.joined_at, m.user_id
+  `).bind(conversationId, userId).all();
+  const result = [];
+  const timestamp = nowIso();
+  for (const member of members.results || []) {
+    const devices = await db.prepare(`
+      SELECT d.id, d.device_number, d.identity_public_key, d.registration_id,
+        d.signed_prekey_id, d.signed_prekey_public, d.signed_prekey_signature,
+        (SELECT p.key_id FROM chat_device_prekeys p WHERE p.device_id = d.id AND p.consumed_at IS NULL
+         ORDER BY p.created_at LIMIT 1) AS one_time_prekey_id,
+        (SELECT p.public_key FROM chat_device_prekeys p WHERE p.device_id = d.id AND p.consumed_at IS NULL
+         ORDER BY p.created_at LIMIT 1) AS one_time_prekey_public
+      FROM chat_devices d WHERE d.user_id = ? AND d.revoked_at IS NULL
+    `).bind(member.user_id).all();
+    const deviceBundle = [];
+    for (const row of devices.results || []) {
+      if (row.one_time_prekey_id != null) {
+        await db.prepare("UPDATE chat_device_prekeys SET consumed_at = ? WHERE device_id = ? AND key_id = ? AND consumed_at IS NULL")
+          .bind(timestamp, row.id, row.one_time_prekey_id).run();
+      }
+      deviceBundle.push({
+        deviceId: row.id,
+        deviceNumber: row.device_number,
+        identityKey: row.identity_public_key,
+        registrationId: row.registration_id,
+        signedPreKey: { keyId: row.signed_prekey_id, publicKey: row.signed_prekey_public, signature: row.signed_prekey_signature },
+        oneTimePreKey: row.one_time_prekey_id == null ? null : { keyId: row.one_time_prekey_id, publicKey: row.one_time_prekey_public },
+      });
+    }
+    result.push({ userId: member.user_id, alias: member.chat_alias || "Paired contact", devices: deviceBundle });
+  }
+  return { conversationId, members: result };
+}
+
 async function syncMessages(db, userId, url) {
   const conversationId = boundedString(url.searchParams.get("conversationId"), "conversationId", 100);
   await requireConversationMember(db, conversationId, userId);
@@ -733,17 +860,21 @@ async function syncMessages(db, userId, url) {
   const rows = cursor
     ? await db.prepare(`
       SELECT m.id, m.conversation_id, m.sender_device_id, d.device_number AS sender_device_number,
+        p.chat_alias AS sender_alias,
         m.client_message_id, m.protocol_version, m.ciphertext, m.attachment_refs, m.size_bucket,
         m.created_at, m.expires_at, m.deleted_at
       FROM chat_messages m JOIN chat_devices d ON d.id = m.sender_device_id
+        LEFT JOIN chat_profiles p ON p.user_id = d.user_id
       WHERE m.conversation_id = ? AND (m.created_at > ? OR (m.created_at = ? AND m.id > ?))
       ORDER BY m.created_at ASC, m.id ASC LIMIT ?
     `).bind(conversationId, cursor.createdAt, cursor.createdAt, cursor.id, limit).all()
     : await db.prepare(`
       SELECT m.id, m.conversation_id, m.sender_device_id, d.device_number AS sender_device_number,
+        p.chat_alias AS sender_alias,
         m.client_message_id, m.protocol_version, m.ciphertext, m.attachment_refs, m.size_bucket,
         m.created_at, m.expires_at, m.deleted_at
       FROM chat_messages m JOIN chat_devices d ON d.id = m.sender_device_id
+        LEFT JOIN chat_profiles p ON p.user_id = d.user_id
       WHERE m.conversation_id = ? ORDER BY m.created_at ASC, m.id ASC LIMIT ?
     `).bind(conversationId, limit).all();
   const messages = (rows.results || []).map((row) => ({
@@ -751,6 +882,7 @@ async function syncMessages(db, userId, url) {
     conversationId: row.conversation_id,
     senderDeviceId: row.sender_device_id,
     senderDeviceNumber: row.sender_device_number,
+    senderAlias: row.sender_alias || "Paired contact",
     clientMessageId: row.client_message_id,
     protocolVersion: row.protocol_version,
     ciphertext: row.deleted_at ? "" : row.ciphertext,
@@ -800,10 +932,14 @@ async function postMessage(db, env, userId, body) {
   `).bind(device.id, clientMessageId).first();
   if (existing) {
     if (existing.ciphertext !== ciphertext) throw new AuthError(409, "Message id was already used.", "MESSAGE_ID_REUSED");
+    const existingSender = await db.prepare(`
+      SELECT d.device_number, p.chat_alias AS sender_alias
+      FROM chat_devices d LEFT JOIN chat_profiles p ON p.user_id = d.user_id WHERE d.id = ?
+    `).bind(existing.sender_device_id).first();
     return { message: {
       id: existing.id, conversationId: existing.conversation_id, senderDeviceId: existing.sender_device_id,
-      senderDeviceNumber: (await db.prepare("SELECT device_number FROM chat_devices WHERE id = ?")
-        .bind(existing.sender_device_id).first())?.device_number || null,
+      senderDeviceNumber: existingSender?.device_number || null,
+      senderAlias: existingSender?.sender_alias || "Paired contact",
       clientMessageId: existing.client_message_id, protocolVersion: existing.protocol_version,
       ciphertext: existing.deleted_at ? "" : existing.ciphertext,
       attachmentRefs: existing.deleted_at ? [] : JSON.parse(existing.attachment_refs || "[]"),
@@ -836,6 +972,7 @@ async function postMessage(db, env, userId, body) {
   await db.batch(statements);
   const message = {
     id, conversationId, senderDeviceId: device.id, senderDeviceNumber: device.device_number,
+    senderAlias: (await db.prepare("SELECT chat_alias FROM chat_profiles WHERE user_id = ?").bind(userId).first())?.chat_alias || "You",
     clientMessageId, protocolVersion, ciphertext,
     attachmentRefs, sizeBucket: bucketForSize(ciphertext.length), createdAt: timestamp, expiresAt, deleted: false,
   };
@@ -982,6 +1119,10 @@ async function handleRoute(request, env, user) {
   if (method === "GET" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "contacts" && parts[4] === "bundle") {
     return success(await getPrekeyBundle(db, contactIdFromParts(parts), user.id), method);
   }
+  if (method === "GET" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "conversations"
+    && parts[3] && parts[4] === "bundle") {
+    return success(await getConversationPrekeyBundle(db, parts[3], user.id), method);
+  }
   if (method === "GET" && url.pathname === "/api/chat/devices/bundle") {
     const excludeDeviceId = url.searchParams.get("excludeDeviceId") || "";
     await requireOwnedDevice(db, excludeDeviceId, user.id);
@@ -1041,6 +1182,9 @@ async function handleRoute(request, env, user) {
   }
   if (method === "POST" && url.pathname === "/api/chat/conversations") {
     const body = await readJsonBody(request);
+    if (body?.kind === "group") {
+      return success(await createGroupConversation(db, user.id, body), method, 201);
+    }
     const contact = await requireContact(db, boundedString(body.contactId, "contactId", 100), user.id);
     const existing = await existingDirectConversation(db, user.id, contact.peer_user_id);
     if (existing) return success(await mapConversation(db, existing, user.id), method);
