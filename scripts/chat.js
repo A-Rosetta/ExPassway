@@ -41,8 +41,10 @@
 
   function formatActionError(error) {
     const message = error?.message || String(error || "Unknown error");
-    const code = error?.code && error.code !== "HTTP_ERROR" ? ` (${error.code})` : "";
-    return `${message}${code}`;
+    const details = [];
+    if (error?.code && error.code !== "HTTP_ERROR") details.push(error.code);
+    if (error?.status) details.push(`HTTP ${error.status}`);
+    return `${message}${details.length ? ` (${details.join(", ")})` : ""}`;
   }
 
   async function shortIdentityFingerprint(identityKey) {
@@ -87,7 +89,7 @@
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260810-1", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260812-1", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
       const error = new Error(event.message || "The chat encryption worker stopped unexpectedly.");
       for (const pending of state.pendingCrypto.values()) pending.reject(error);
@@ -981,7 +983,7 @@
         $("#chatSetupPanel").hidden = true;
         $("#chatDisabledPanel").hidden = false;
       } else {
-        setStatus(error.message, true);
+        setStatus(formatActionError(error), true);
       }
     }
   }

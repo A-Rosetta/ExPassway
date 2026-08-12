@@ -71,8 +71,18 @@ function withSessionLock(deviceId, peerDeviceId, peerDeviceNumber, fn) {
   return withDeviceLock(key, fn);
 }
 
+function toByteArray(value) {
+  // Vault snapshots store key material as base64 strings; runtime libsignal keys are buffers.
+  // Normalize both forms before encoding so a persisted pre-key is never encoded as an empty buffer.
+  if (typeof value === "string") return base64ToBytes(value);
+  if (value instanceof Uint8Array) return value;
+  if (ArrayBuffer.isView(value)) return new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+  if (value instanceof ArrayBuffer) return new Uint8Array(value);
+  return new Uint8Array(value || []);
+}
+
 function bytesToBase64(bytes) {
-  const array = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+  const array = toByteArray(bytes);
   let binary = "";
   for (const byte of array) binary += String.fromCharCode(byte);
   return btoa(binary);
@@ -350,6 +360,10 @@ function deviceBundle(deviceId, device) {
     id: Number(id),
     publicKey: bytesToBase64Url(keyPair.pubKey),
   }));
+  if (!device.identityKeyPair?.pubKey || !device.signedPreKey?.publicKey || !device.signedPreKey?.signature
+    || availablePreKeys.some((item) => !item.publicKey)) {
+    throw cryptoError("INVALID_DEVICE_KEYS", "The browser generated an incomplete chat device bundle.");
+  }
   return {
     deviceId,
     identityPublicKey: bytesToBase64Url(device.identityKeyPair.pubKey),
