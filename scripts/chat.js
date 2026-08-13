@@ -449,7 +449,9 @@
   }
 
   async function refreshRecipient(device, conversation) {
-    if (device.deviceId === state.device?.id) {
+    const isOwnDevice = state.ownBundle?.devices?.some((item) => item.deviceId === device.deviceId)
+      || device.deviceId === state.device?.id;
+    if (isOwnDevice) {
       state.ownBundle = null;
       const ownBundle = await window.ALevelApi.getChatOwnDeviceBundle(state.device.id);
       state.ownBundle = ownBundle;
