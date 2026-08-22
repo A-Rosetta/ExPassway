@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0625_w24_qp_21.pdf",
+  "markScheme": "0625_w24_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q01.png",
+      "rawText": "A student uses a metre ruler to measure the length of a sheet of paper. Which measurement is shown to the nearest millimetre? A 0.2932 m B 0.293 m C 0.29 m D 0.3 m",
+      "parseStatus": "ok",
+      "stem": "A student uses a metre ruler to measure the length of a sheet of paper. Which measurement is shown to the nearest millimetre?",
+      "options": {
+        "A": "0.2932 m",
+        "B": "0.293 m",
+        "C": "0.29 m",
+        "D": "0.3 m"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q02.png",
+      "rawText": "A rocket travels with an average speed of 6 km / s for 2 minutes. What is the distance travelled by the rocket? A 12 km B 50 km C 720 km D 12 000 km",
+      "parseStatus": "ok",
+      "stem": "A rocket travels with an average speed of 6 km / s for 2 minutes. What is the distance travelled by the rocket?",
+      "options": {
+        "A": "12 km",
+        "B": "50 km",
+        "C": "720 km",
+        "D": "12 000 km"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q03.png",
+      "rawText": "The diagram shows the vertical forces acting on a ball as it falls vertically through the air. The ball does not reach terminal velocity. air resistance weight Which row describes what happens to the resultant force on the ball and what happens to the acceleration of the ball as it falls through the air? resultant force acceleration A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the vertical forces acting on a ball as it falls vertically through the air. The ball does not reach terminal velocity. air resistance weight Which row describes what happens to the resultant force on the ball and what happens to the acceleration of the ball as it falls through the air? resultant force acceleration",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q04.png",
+      "rawText": "A coconut falls from a palm tree. At X, it has just started falling. Y is the point just before it hits the ground. X Y What is the acceleration of the coconut at X? (Air resistance can be ignored.) A zero B less than that at Y C the same as that at Y D more than that at Y",
+      "parseStatus": "ok",
+      "stem": "A coconut falls from a palm tree. At X, it has just started falling. Y is the point just before it hits the ground. X Y What is the acceleration of the coconut at X? (Air resistance can be ignored.)",
+      "options": {
+        "A": "zero",
+        "B": "less than that at Y",
+        "C": "the same as that at Y",
+        "D": "more than that at Y"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q05.png",
+      "rawText": "A car is driven round a bend in the road at a constant speed. car direction of the motion of the car What is the direction of the resultant force on the car when it is going round the bend? A parallel to the motion and in the same direction as the motion B parallel to the motion and in the opposite direction to the motion C perpendicular to the motion and towards the inside of the bend D perpendicular to the motion and towards the outside of the bend",
+      "parseStatus": "ok",
+      "stem": "A car is driven round a bend in the road at a constant speed. car direction of the motion of the car What is the direction of the resultant force on the car when it is going round the bend?",
+      "options": {
+        "A": "parallel to the motion and in the same direction as the motion",
+        "B": "parallel to the motion and in the opposite direction to the motion",
+        "C": "perpendicular to the motion and towards the inside of the bend",
+        "D": "perpendicular to the motion and towards the outside of the bend"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q06.png",
+      "rawText": "The diagram shows a drawbridge that is attached to a wall by a hinge at one end and a cable at the other. wall hinge weight cable tension drawbridge The weight of the drawbridge and the tension in the cable are represented by the labelled arrows in the diagram. There is a third force at the hinge, which is not shown. The drawbridge is in equilibrium. Which arrow shows a possible direction for the force at the hinge? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q07.png",
+      "rawText": "Which equation gives the momentum change of an object? A momentum change = area force B momentum change = force  distance C momentum change = force  time distance D momentum change = force  time",
+      "parseStatus": "ok",
+      "stem": "Which equation gives the momentum change of an object?",
+      "options": {
+        "A": "momentum change = area force",
+        "B": "momentum change = force  distance",
+        "C": "momentum change = force  time distance",
+        "D": "momentum change = force  time"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q08.png",
+      "rawText": "Which statement about the use of nuclear fuel as an energy resource is correct? A It obtains its energy from the Sun. B It has no environmental impact. C Nuclear power stations do not need turbines. D The energy is released by nuclear fission.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the use of nuclear fuel as an energy resource is correct?",
+      "options": {
+        "A": "It obtains its energy from the Sun.",
+        "B": "It has no environmental impact.",
+        "C": "Nuclear power stations do not need turbines.",
+        "D": "The energy is released by nuclear fission."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q09.png",
+      "rawText": "The diagram shows an object of mass m being projected with speed v from a point P to a point Q on top of a cliff height h. The object does work W against air resistance as it travels from P to Q. Q P h m v What is the kinetic energy of the object when it reaches point Q? A 2 1 mv2 + mgh + W B 2 1 mv2 + mgh – W C 2 1 mv2 – mgh + W D 2 1 mv2 – mgh – W",
+      "parseStatus": "ok",
+      "stem": "The diagram shows an object of mass m being projected with speed v from a point P to a point Q on top of a cliff height h. The object does work W against air resistance as it travels from P to Q. Q P h m v What is the kinetic energy of the object when it reaches point Q?",
+      "options": {
+        "A": "2 1 mv2 + mgh + W",
+        "B": "2 1 mv2 + mgh – W",
+        "C": "2 1 mv2 – mgh + W",
+        "D": "2 1 mv2 – mgh – W"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q10.png",
+      "rawText": "The diagram shows a Sankey diagram for an electric drill. scale: distance between two lines = 40 J energy input sound thermal energy kinetic energy What is the total wasted energy shown by the diagram? A 120 J B 200 J C 360 J D 560 J",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a Sankey diagram for an electric drill. scale: distance between two lines = 40 J energy input sound thermal energy kinetic energy What is the total wasted energy shown by the diagram?",
+      "options": {
+        "A": "120 J",
+        "B": "200 J",
+        "C": "360 J",
+        "D": "560 J"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q11.png",
+      "rawText": "An elephant of weight 45 000 N stands with all four feet on the floor. The average pressure on the floor due to the elephant foot in contact with it is 34 000 Pa. What is the area of each foot of the elephant? A 0.19 m2 B 0.33 m2 C 0.76 m2 D 1.3 m2",
+      "parseStatus": "ok",
+      "stem": "An elephant of weight 45 000 N stands with all four feet on the floor. The average pressure on the floor due to the elephant foot in contact with it is 34 000 Pa. What is the area of each foot of the elephant?",
+      "options": {
+        "A": "0.19 m2",
+        "B": "0.33 m2",
+        "C": "0.76 m2",
+        "D": "1.3 m2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q12.png",
+      "rawText": "Some air is trapped inside a metal container with a tightly fitting lid. air heat tightly fitting lid metal container The container is heated strongly behind a safety screen. The lid is blown off by the increased pressure of the air inside the container. What causes the increase in pressure of the air inside the container? A Each air particle expands and takes up more room. B The air particles move more quickly. C The number of particles inside the container increases. D The volume occupied by the air decreases.",
+      "parseStatus": "ok",
+      "stem": "Some air is trapped inside a metal container with a tightly fitting lid. air heat tightly fitting lid metal container The container is heated strongly behind a safety screen. The lid is blown off by the increased pressure of the air inside the container. What causes the increase in pressure of the air inside the container?",
+      "options": {
+        "A": "Each air particle expands and takes up more room.",
+        "B": "The air particles move more quickly.",
+        "C": "The number of particles inside the container increases.",
+        "D": "The volume occupied by the air decreases."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q13.png",
+      "rawText": "A very hot mug of coffee is near a large unheated swimming pool holding 2.0  106 kg of water. Which statement is correct? A If the mug of coffee is tipped in the pool, the coffee will lose much more internal energy than the water in the pool gains. B The internal energy of a substance depends only on its temperature. C The internal energy of the water in the pool is lower than the internal energy of the mug of coffee. D When the temperature of the mug of coffee falls, its internal energy will decrease.",
+      "parseStatus": "ok",
+      "stem": "A very hot mug of coffee is near a large unheated swimming pool holding 2.0  106 kg of water. Which statement is correct?",
+      "options": {
+        "A": "If the mug of coffee is tipped in the pool, the coffee will lose much more internal energy than the water in the pool gains.",
+        "B": "The internal energy of a substance depends only on its temperature.",
+        "C": "The internal energy of the water in the pool is lower than the internal energy of the mug of coffee.",
+        "D": "When the temperature of the mug of coffee falls, its internal energy will decrease."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q14.png",
+      "rawText": "A student measures the mass of water in an open container over two hours. The container is kept in a warm room. The results are in the table. time / hours mass of water / g 0.0 33.9 0.5 30.6 1.0 27.6 1.5 24.9 2.0 22.5 Why does the mass of the water change? A The water evaporates. B The water freezes. C The water condenses. D The water boils.",
+      "parseStatus": "ok",
+      "stem": "A student measures the mass of water in an open container over two hours. The container is kept in a warm room. The results are in the table. time / hours mass of water / g 0.0 33.9 0.5 30.6 1.0 27.6 1.5 24.9 2.0 22.5 Why does the mass of the water change?",
+      "options": {
+        "A": "The water evaporates.",
+        "B": "The water freezes.",
+        "C": "The water condenses.",
+        "D": "The water boils."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q15.png",
+      "rawText": "A 1 kg block of aluminium requires more thermal energy to raise its temperature by 1 C than a 1 kg block of copper requires. Why is this? A Aluminium is a better conductor of thermal energy than copper. B Aluminium is a poorer conductor of thermal energy than copper. C Aluminium has a higher specific heat capacity than copper. D Aluminium has a lower specific heat capacity than copper.",
+      "parseStatus": "ok",
+      "stem": "A 1 kg block of aluminium requires more thermal energy to raise its temperature by 1 C than a 1 kg block of copper requires. Why is this?",
+      "options": {
+        "A": "Aluminium is a better conductor of thermal energy than copper.",
+        "B": "Aluminium is a poorer conductor of thermal energy than copper.",
+        "C": "Aluminium has a higher specific heat capacity than copper.",
+        "D": "Aluminium has a lower specific heat capacity than copper."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q16.png",
+      "rawText": "A block of ice is at a temperature of –100 C. Energy is supplied at a constant rate. The graph shows how its temperature changes. time 200 100 0 –100 temperature / \u0001C 1 2 3 4 At which points have the ice completely changed state to water and all the water completely changed state to steam? completely changed to water completely changed to steam A 1 3 B 1 4 C 2 3 D 2 4",
+      "parseStatus": "ok",
+      "stem": "A block of ice is at a temperature of –100 C. Energy is supplied at a constant rate. The graph shows how its temperature changes. time 200 100 0 –100 temperature / \u0001C 1 2 3 4 At which points have the ice completely changed state to water and all the water completely changed state to steam? completely changed to water completely changed to steam",
+      "options": {
+        "A": "1 3",
+        "B": "1 4",
+        "C": "2 3",
+        "D": "2 4"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q17.png",
+      "rawText": "Water waves are reflected at a plane surface. Which property of the waves is changed by the reflection? A direction of propagation B frequency C speed D wavelength",
+      "parseStatus": "ok",
+      "stem": "Water waves are reflected at a plane surface. Which property of the waves is changed by the reflection?",
+      "options": {
+        "A": "direction of propagation",
+        "B": "frequency",
+        "C": "speed",
+        "D": "wavelength"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q18.png",
+      "rawText": "A light ray is passed through air, glass and water. water glass 28\u0001 32\u0001 45\u0001 45\u0001 X Y W Z air air At which points does the light speed decrease? A W and X B W and Y C X and Z D Y and Z",
+      "parseStatus": "ok",
+      "stem": "A light ray is passed through air, glass and water. water glass 28\u0001 32\u0001 45\u0001 45\u0001 X Y W Z air air At which points does the light speed decrease?",
+      "options": {
+        "A": "W and X",
+        "B": "W and Y",
+        "C": "X and Z",
+        "D": "Y and Z"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q19.png",
+      "rawText": "Plane water waves approach a narrow gap in a barrier. Which diagram shows the diffraction pattern that would occur? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q20.png",
+      "rawText": "A ray of light enters a transparent plastic wedge from air and is incident on the lower surface at the critical angle, as shown. air transparent plastic wedge The angle of incidence is i, the angle of refraction is r, and the critical angle is c. In which ray diagram are the angles labelled correctly? A i r c B i r i c C r c D air air air air r c i",
+      "parseStatus": "ok",
+      "stem": "A ray of light enters a transparent plastic wedge from air and is incident on the lower surface at the critical angle, as shown. air transparent plastic wedge The angle of incidence is i, the angle of refraction is r, and the critical angle is c. In which ray diagram are the angles labelled correctly?",
+      "options": {
+        "A": "i r c",
+        "B": "i r i c",
+        "C": "r c",
+        "D": "air air air air r c i"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q21.png",
+      "rawText": "An object is placed 20 cm in front of a thin converging lens. The scale diagram shows how the lens forms a real, inverted image. object scale 5.0 cm image Which row gives the focal length of the lens and the distance of the image from the lens? focal length of lens / cm distance of image from lens / cm A 4.0 5.0 B 5.0 4.0 C 8.0 10.0 D 10.0 8.0",
+      "parseStatus": "ok",
+      "stem": "An object is placed 20 cm in front of a thin converging lens. The scale diagram shows how the lens forms a real, inverted image. object scale 5.0 cm image Which row gives the focal length of the lens and the distance of the image from the lens? focal length of lens / cm distance of image from lens / cm",
+      "options": {
+        "A": "4.0 5.0",
+        "B": "5.0 4.0",
+        "C": "8.0 10.0",
+        "D": "10.0 8.0"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q22.png",
+      "rawText": "Radio waves are electromagnetic waves. What is the wavelength of a radio wave of frequency 2.0  105 Hz? A 0.00067 m B 0.0015 m C 670 m D 1500 m",
+      "parseStatus": "ok",
+      "stem": "Radio waves are electromagnetic waves. What is the wavelength of a radio wave of frequency 2.0  105 Hz?",
+      "options": {
+        "A": "0.00067 m",
+        "B": "0.0015 m",
+        "C": "670 m",
+        "D": "1500 m"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q23.png",
+      "rawText": "A candle flame is placed in front of a loudspeaker. The loudspeaker produces a sound wave that causes air particles to vibrate. The vibrating air particles make the candle flame vibrate in the same direction as the air particles. candle flame loudspeaker Which row shows the direction of vibration of the candle flame and the nature of sound waves? direction of vibration nature of sound waves A longitudinal B transverse C longitudinal D transverse",
+      "parseStatus": "ok",
+      "stem": "A candle flame is placed in front of a loudspeaker. The loudspeaker produces a sound wave that causes air particles to vibrate. The vibrating air particles make the candle flame vibrate in the same direction as the air particles. candle flame loudspeaker Which row shows the direction of vibration of the candle flame and the nature of sound waves? direction of vibration nature of sound waves",
+      "options": {
+        "A": "longitudinal",
+        "B": "transverse",
+        "C": "longitudinal",
+        "D": "transverse"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q24.png",
+      "rawText": "The diagram shows part of the magnetic field around a strong magnet. In which position does a magnetic pole experience the strongest force? D B C A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q25.png",
+      "rawText": "There is a current of 0.60 A in a closed circuit. How much charge passes a point in the circuit in 2.5 min? A 0.24 C B 1.5 C C 90 C D 5400 C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q26.png",
+      "rawText": "Which two physical quantities have the unit J / C? A charge and energy B charge and potential difference (p.d.) C electromotive force (e.m.f.) and p.d. D e.m.f. and charge",
+      "parseStatus": "ok",
+      "stem": "Which two physical quantities have the unit J / C?",
+      "options": {
+        "A": "charge and energy",
+        "B": "charge and potential difference (p.d.)",
+        "C": "electromotive force (e.m.f.) and p.d.",
+        "D": "e.m.f. and charge"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q27.png",
+      "rawText": "A copper wire is placed in an electrical circuit and its resistance is measured. The wire is then replaced with a second copper wire with twice the length and a quarter of the diameter. What is the ratio of the resistance for the two wires? A 1 : 2 B 1 : 4 C 1 : 8 D 1 : 32",
+      "parseStatus": "ok",
+      "stem": "A copper wire is placed in an electrical circuit and its resistance is measured. The wire is then replaced with a second copper wire with twice the length and a quarter of the diameter. What is the ratio of the resistance for the two wires?",
+      "options": {
+        "A": "1 : 2",
+        "B": "1 : 4",
+        "C": "1 : 8",
+        "D": "1 : 32"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q28.png",
+      "rawText": "Which circuit contains a diode connected in series with a fixed resistor? D C B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q29.png",
+      "rawText": "In the circuit shown, resistor X has twice the resistance of resistor Y. X Y Which statement about the circuit is correct? A The current in the cell is greater than the current in X. B The current in X is greater than the current in Y. C The potential difference (p.d.) across the cell is greater than the p.d. across X. D The p.d. across X is greater than the p.d. across Y.",
+      "parseStatus": "ok",
+      "stem": "In the circuit shown, resistor X has twice the resistance of resistor Y. X Y Which statement about the circuit is correct?",
+      "options": {
+        "A": "The current in the cell is greater than the current in X.",
+        "B": "The current in X is greater than the current in Y.",
+        "C": "The potential difference (p.d.) across the cell is greater than the p.d. across X.",
+        "D": "The p.d. across X is greater than the p.d. across Y."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q30.png",
+      "rawText": "A 4  resistor and an 8  resistor are connected in series with a power supply. A voltmeter connected across the 8  resistor reads 36 V. What is the voltmeter reading when it is connected across the 4  resistor? A 12 V B 18 V C 72 V D 108 V",
+      "parseStatus": "ok",
+      "stem": "A 4  resistor and an 8  resistor are connected in series with a power supply.",
+      "options": {
+        "A": "voltmeter connected across the 8  resistor reads 36 V. What is the voltmeter reading when it is connected across the 4  resistor? A 12 V",
+        "B": "18 V",
+        "C": "72 V",
+        "D": "108 V"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q31.png",
+      "rawText": "A metal rod, XY, is placed in a magnetic field so that it is perpendicular to the field, as shown. X Y In which direction is the rod moved so that there is an induced current from Y to X? A left to right B right to left C into the paper, away from the observer D out of the paper, towards the observer",
+      "parseStatus": "ok",
+      "stem": "A metal rod, XY, is placed in a magnetic field so that it is perpendicular to the field, as shown. X Y In which direction is the rod moved so that there is an induced current from Y to X?",
+      "options": {
+        "A": "left to right",
+        "B": "right to left",
+        "C": "into the paper, away from the observer",
+        "D": "out of the paper, towards the observer"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q32.png",
+      "rawText": "The diagram shows a basic electric motor. N S X Y Z What are the names of the features? X Y Z A axle battery brushes B coil brushes commutator C generator wires transformer D solenoid connectors switch",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a basic electric motor. N S X Y Z What are the names of the features? X Y Z",
+      "options": {
+        "A": "axle battery brushes",
+        "B": "coil brushes commutator",
+        "C": "generator wires transformer",
+        "D": "solenoid connectors switch"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q33.png",
+      "rawText": "Two transformers, P and Q, each have 2000 turns on their primary coils and 1000 turns on their secondary coils. Both transformers are 100% efficient. The secondary of transformer P is connected to the primary of transformer Q. Q provides a motor with a current of 0.2 A. What is the current being supplied to the primary of transformer P? A 0.8 A B 0.4 A C 0.1 A D 0.05 A",
+      "parseStatus": "ok",
+      "stem": "Two transformers, P and Q, each have 2000 turns on their primary coils and 1000 turns on their secondary coils. Both transformers are 100% efficient. The secondary of transformer P is connected to the primary of transformer Q. Q provides a motor with a current of 0.2 A. What is the current being supplied to the primary of transformer P?",
+      "options": {
+        "A": "0.8 A",
+        "B": "0.4 A",
+        "C": "0.1 A",
+        "D": "0.05 A"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q34.png",
+      "rawText": "-particles are directed at a metal foil. Most of the particles pass through the foil with little change in direction. A small proportion of the particles are scattered back through large angles. What does this evidence suggest about the structure of an atom? A It consists of a charged centre much smaller than the size of the atom and with little of the mass of the atom. B It consists of a negative charge the size of the atom containing small positive charges scattered through it. C It consists of a charged centre much smaller than the size of the atom but with most of the mass of the atom. D It consists of a positive charge the size of the atom containing small negative charges scattered through it.",
+      "parseStatus": "ok",
+      "stem": "-particles are directed at a metal foil. Most of the particles pass through the foil with little change in direction.",
+      "options": {
+        "A": "small proportion of the particles are scattered back through large angles. What does this evidence suggest about the structure of an atom? A It consists of a charged centre much smaller than the size of the atom and with little of the mass of the atom.",
+        "B": "It consists of a negative charge the size of the atom containing small positive charges scattered through it.",
+        "C": "It consists of a charged centre much smaller than the size of the atom but with most of the mass of the atom.",
+        "D": "It consists of a positive charge the size of the atom containing small negative charges scattered through it."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q35.png",
+      "rawText": "Which statement correctly compares the properties of alpha-particles and beta-particles? A Alpha-particles are less penetrating than beta-particles because alpha-particles are less ionising. B Alpha-particles are less penetrating than beta-particles because alpha-particles are more ionising. C Alpha-particles are more penetrating than beta-particles because alpha-particles are less ionising. D Alpha-particles are more penetrating than beta-particles because alpha-particles are more ionising.",
+      "parseStatus": "ok",
+      "stem": "Which statement correctly compares the properties of alpha-particles and beta-particles?",
+      "options": {
+        "A": "Alpha-particles are less penetrating than beta-particles because alpha-particles are less ionising.",
+        "B": "Alpha-particles are less penetrating than beta-particles because alpha-particles are more ionising.",
+        "C": "Alpha-particles are more penetrating than beta-particles because alpha-particles are less ionising.",
+        "D": "Alpha-particles are more penetrating than beta-particles because alpha-particles are more ionising."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q36.png",
+      "rawText": "Which statement about alpha decay is correct? A The nucleus loses electrons. B The nucleus changes to that of a different element. C The nucleus does not decay until after one half-life. D After two half-lives, alpha decay always stops.",
+      "parseStatus": "ok",
+      "stem": "Which statement about alpha decay is correct?",
+      "options": {
+        "A": "The nucleus loses electrons.",
+        "B": "The nucleus changes to that of a different element.",
+        "C": "The nucleus does not decay until after one half-life.",
+        "D": "After two half-lives, alpha decay always stops."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q37.png",
+      "rawText": "An explosion in a nuclear reactor spreads the isotope caesium-137, Cs, 137 55 across a large area. After 90.0 years have passed, the quantity of caesium-137 present is 12.5% of its original level. What is the half-life of caesium-137? A 11.3 years B 22.5 years C 30.0 years D 45.0 years",
+      "parseStatus": "ok",
+      "stem": "An explosion in a nuclear reactor spreads the isotope caesium-137, Cs, 137 55 across a large area. After 90.0 years have passed, the quantity of caesium-137 present is 12.5% of its original level. What is the half-life of caesium-137?",
+      "options": {
+        "A": "11.3 years",
+        "B": "22.5 years",
+        "C": "30.0 years",
+        "D": "45.0 years"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q38.png",
+      "rawText": "Which type of object rotates around the Sun with an elliptical orbit? A planet B galaxy C red giant D moon",
+      "parseStatus": "ok",
+      "stem": "Which type of object rotates around the Sun with an elliptical orbit?",
+      "options": {
+        "A": "planet",
+        "B": "galaxy",
+        "C": "red giant",
+        "D": "moon"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q39.png",
+      "rawText": "Which statement about the Sun is correct? A The nuclear reactions in the Sun create mainly radio waves and microwaves. B The Sun is powered by fission reactions in which hydrogen is converted into helium. C The Sun is powered by fission reactions in which lithium is converted into helium. D The Sun is powered by fusion reactions and electromagnetic radiation is produced.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Sun is correct?",
+      "options": {
+        "A": "The nuclear reactions in the Sun create mainly radio waves and microwaves.",
+        "B": "The Sun is powered by fission reactions in which hydrogen is converted into helium.",
+        "C": "The Sun is powered by fission reactions in which lithium is converted into helium.",
+        "D": "The Sun is powered by fusion reactions and electromagnetic radiation is produced."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_21/q40.png",
+      "rawText": "To determine the value of the Hubble constant, an astronomer measures the distance of a galaxy from the Earth as 2.5  1021 km. She also measures the speed of recession of the galaxy from the Earth as 5.2  103 km / s. From these data, what is the value of the Hubble constant? A 7.7  10–26 s–1 B 2.1  10–18 s–1 C 4.8  1017 s–1 D 1.3  1025 s–1",
+      "parseStatus": "ok",
+      "stem": "To determine the value of the Hubble constant, an astronomer measures the distance of a galaxy from the Earth as 2.5  1021 km. She also measures the speed of recession of the galaxy from the Earth as 5.2  103 km / s. From these data, what is the value of the Hubble constant?",
+      "options": {
+        "A": "7.7  10–26 s–1",
+        "B": "2.1  10–18 s–1",
+        "C": "4.8  1017 s–1",
+        "D": "1.3  1025 s–1"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

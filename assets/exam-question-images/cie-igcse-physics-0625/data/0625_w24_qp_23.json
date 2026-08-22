@@ -1,0 +1,658 @@
+{
+  "questionPaper": "0625_w24_qp_23.pdf",
+  "markScheme": "0625_w24_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q01.png",
+      "rawText": "Which list contains only vector quantities? A acceleration, distance, speed B electric field strength, momentum, weight C energy, mass, temperature D force, time, velocity",
+      "parseStatus": "ok",
+      "stem": "Which list contains only vector quantities?",
+      "options": {
+        "A": "acceleration, distance, speed",
+        "B": "electric field strength, momentum, weight",
+        "C": "energy, mass, temperature",
+        "D": "force, time, velocity"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q02.png",
+      "rawText": "The graph shows how the velocity of an elevator varies with time. The elevator starts from the third floor of a tall building. Point P indicates the start of the elevator’s journey. 10 5 0 –5 –10 5 P Q R S T 10 15 20 25 30 0 velocity m / s time / s When is the elevator on the third floor again? A Q to R and S to T B Q to R only C S to T only D The lift does not return to the third floor.",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the velocity of an elevator varies with time. The elevator starts from the third floor of a tall building. Point P indicates the start of the elevator’s journey. 10 5 0 –5 –10 5 P Q R S T 10 15 20 25 30 0 velocity m / s time / s When is the elevator on the third floor again?",
+      "options": {
+        "A": "Q to R and S to T",
+        "B": "Q to R only",
+        "C": "S to T only",
+        "D": "The lift does not return to the third floor."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q03.png",
+      "rawText": "An object of mass 1.0 kg is at rest on the Earth. An identical object is at rest on a planet with a gravitational field strength of twice that on the Earth. Which row correctly compares the object on the planet to the object on the Earth? its weight its acceleration when the same horizontal resultant force is applied A double equal to that on the Earth B double half that on the Earth C half equal to that on the Earth D half half that on the Earth",
+      "parseStatus": "ok",
+      "stem": "An object of mass 1.0 kg is at rest on the Earth. An identical object is at rest on a planet with a gravitational field strength of twice that on the Earth. Which row correctly compares the object on the planet to the object on the Earth? its weight its acceleration when the same horizontal resultant force is applied",
+      "options": {
+        "A": "double equal to that on the Earth",
+        "B": "double half that on the Earth",
+        "C": "half equal to that on the Earth",
+        "D": "half half that on the Earth"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q04.png",
+      "rawText": "An engineer researched the density of different liquids being used as coolants. liquid 3 m / kg density X 785 Y 1020 Z 1250 None of the liquids mix with water. Each liquid is poured, in turn, into a container of water. The density of water is 1000 kg / m3. Which liquids rise to the surface? A X only B Y and Z C Y only D Z only",
+      "parseStatus": "ok",
+      "stem": "An engineer researched the density of different liquids being used as coolants. liquid 3 m / kg density X 785 Y 1020 Z 1250 None of the liquids mix with water. Each liquid is poured, in turn, into a container of water. The density of water is 1000 kg / m3. Which liquids rise to the surface?",
+      "options": {
+        "A": "X only",
+        "B": "Y and Z",
+        "C": "Y only",
+        "D": "Z only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q05.png",
+      "rawText": "The diagram shows a car moving along a road. The force due to the engine is 1500 N and the total drag force is 200 N. drag force 200 N engine force 1500 N road What is the motion of the car? A decreasing speed forward B increasing speed forward C reversing D constant speed",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a car moving along a road. The force due to the engine is 1500 N and the total drag force is 200 N. drag force 200 N engine force 1500 N road What is the motion of the car?",
+      "options": {
+        "A": "decreasing speed forward",
+        "B": "increasing speed forward",
+        "C": "reversing",
+        "D": "constant speed"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q06.png",
+      "rawText": "A pair of cutters is used to cut a rope. R S Q P blade blade handle handle Where should the rope be positioned and at which labelled points should the hands be positioned to produce the greatest cutting force? rope positioned hands positioned A P R B P S C Q R D Q S",
+      "parseStatus": "ok",
+      "stem": "A pair of cutters is used to cut a rope. R S Q P blade blade handle handle Where should the rope be positioned and at which labelled points should the hands be positioned to produce the greatest cutting force? rope positioned hands positioned",
+      "options": {
+        "A": "P R",
+        "B": "P S",
+        "C": "Q R",
+        "D": "Q S"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q07.png",
+      "rawText": "An object has a mass of 20 kg. Its velocity changes from 6 m / s to 10 m / s. Which impulse has acted on the object? A 80 N s B 120 N s C 200 N s D 320 N s",
+      "parseStatus": "ok",
+      "stem": "An object has a mass of 20 kg. Its velocity changes from 6 m / s to 10 m / s. Which impulse has acted on the object?",
+      "options": {
+        "A": "80 N s",
+        "B": "120 N s",
+        "C": "200 N s",
+        "D": "320 N s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q08.png",
+      "rawText": "Useful energy is obtained from different energy resources. Four examples of energy resources are listed. ● water waves ● geothermal ● wind ● water behind hydroelectric dams How many of these energy resources depend on radiation from the Sun? A 1 B 2 C 3 D 4",
+      "parseStatus": "ok",
+      "stem": "Useful energy is obtained from different energy resources. Four examples of energy resources are listed. ● water waves ● geothermal ● wind ● water behind hydroelectric dams How many of these energy resources depend on radiation from the Sun?",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q09.png",
+      "rawText": "A box of mass 2.0 kg slides down a slope. The gravitational field strength is 9.8 N / kg. 13 m 12 m 5 m P Q box What is the decrease in the gravitational potential energy stored as the box moves from P to Q? A 9.8 J B 98 J C 240 J D 250 J",
+      "parseStatus": "ok",
+      "stem": "A box of mass 2.0 kg slides down a slope. The gravitational field strength is 9.8 N / kg. 13 m 12 m 5 m P Q box What is the decrease in the gravitational potential energy stored as the box moves from P to Q?",
+      "options": {
+        "A": "9.8 J",
+        "B": "98 J",
+        "C": "240 J",
+        "D": "250 J"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q10.png",
+      "rawText": "The diagram shows the path of a long-jumper. Point R, where she lands, is on the same horizontal level as point P, from where she takes off. The long-jumper experiences air resistance as she runs and jumps. P R Q Which graph shows how the store of kinetic energy and the store of gravitational potential energy of the long-jumper vary with time between points P and R? time A energy time B energy time C energy time D energy key kinetic energy gravitational potential energy",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the path of a long-jumper. Point R, where she lands, is on the same horizontal level as point P, from where she takes off. The long-jumper experiences air resistance as she runs and jumps. P R Q Which graph shows how the store of kinetic energy and the store of gravitational potential energy of the long-jumper vary with time between points P and R? time",
+      "options": {
+        "A": "energy time",
+        "B": "energy time",
+        "C": "energy time",
+        "D": "energy key kinetic energy gravitational potential energy"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q11.png",
+      "rawText": "Four tanks contain water to the depths shown. At the bottom of which tank is the pressure due to the water greatest? 10 cm A B C D 7 cm 9 cm 8 cm",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q12.png",
+      "rawText": "A gas is heated in a sealed container. The volume of the container does not change. What happens to the particles of the gas? A The average distance between particles increases. B The average kinetic energy of the particles increases. C The mass of each particle increases. D The volume of each particle increases.",
+      "parseStatus": "ok",
+      "stem": "A gas is heated in a sealed container. The volume of the container does not change. What happens to the particles of the gas?",
+      "options": {
+        "A": "The average distance between particles increases.",
+        "B": "The average kinetic energy of the particles increases.",
+        "C": "The mass of each particle increases.",
+        "D": "The volume of each particle increases."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q13.png",
+      "rawText": "Air in a sealed syringe is slowly compressed by moving the piston. The temperature of the air stays the same. syringe air piston Which statement about the air is correct? A The pressure of the air decreases because its particles now travel more slowly. B The pressure of the air decreases because the area of the syringe walls is now smaller. C The pressure of the air increases because its particles now hit the syringe walls more frequently. D The pressure of the air increases because its particles now travel more quickly.",
+      "parseStatus": "ok",
+      "stem": "Air in a sealed syringe is slowly compressed by moving the piston. The temperature of the air stays the same. syringe air piston Which statement about the air is correct?",
+      "options": {
+        "A": "The pressure of the air decreases because its particles now travel more slowly.",
+        "B": "The pressure of the air decreases because the area of the syringe walls is now smaller.",
+        "C": "The pressure of the air increases because its particles now hit the syringe walls more frequently.",
+        "D": "The pressure of the air increases because its particles now travel more quickly."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q14.png",
+      "rawText": "Which statement about the evaporation of a liquid is correct? A The least energetic particles escape from the surface and the temperature of the liquid decreases. B The least energetic particles escape from the surface and the temperature of the liquid increases. C The most energetic particles escape from the surface and the temperature of the liquid decreases. D The most energetic particles escape from the surface and the temperature of the liquid increases.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the evaporation of a liquid is correct?",
+      "options": {
+        "A": "The least energetic particles escape from the surface and the temperature of the liquid decreases.",
+        "B": "The least energetic particles escape from the surface and the temperature of the liquid increases.",
+        "C": "The most energetic particles escape from the surface and the temperature of the liquid decreases.",
+        "D": "The most energetic particles escape from the surface and the temperature of the liquid increases."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q15.png",
+      "rawText": "A solid is heated causing it to expand. Which effect does this have on its mass and on its density? mass density A decreases decreases B decreases stays constant C stays constant decreases D stays constant stays constant",
+      "parseStatus": "ok",
+      "stem": "A solid is heated causing it to expand. Which effect does this have on its mass and on its density? mass density",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases stays constant",
+        "C": "stays constant decreases",
+        "D": "stays constant stays constant"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q16.png",
+      "rawText": "A glass test-tube containing water is heated at the top. The water at the top boils, but the water at the bottom remains cold. water test-tube heat Which row explains why the water at the bottom of the test-tube remains cold? glass water A good thermal conductor good thermal conductor B good thermal conductor poor thermal conductor C poor thermal conductor good thermal conductor D poor thermal conductor poor thermal conductor",
+      "parseStatus": "ok",
+      "stem": "A glass test-tube containing water is heated at the top. The water at the top boils, but the water at the bottom remains cold. water test-tube heat Which row explains why the water at the bottom of the test-tube remains cold? glass water",
+      "options": {
+        "A": "good thermal conductor good thermal conductor",
+        "B": "good thermal conductor poor thermal conductor",
+        "C": "poor thermal conductor good thermal conductor",
+        "D": "poor thermal conductor poor thermal conductor"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q17.png",
+      "rawText": "A vertical stick is dipped up and down in water at P. In two seconds, three wave crests spread out on the surface of the water. P X Y wave crests Which statement is correct? A Distance X is the amplitude of the waves. B Distance Y is the wavelength of the waves. C Each circle represents a wavefront. D The frequency of the waves is 3 Hz.",
+      "parseStatus": "ok",
+      "stem": "A vertical stick is dipped up and down in water at P. In two seconds, three wave crests spread out on the surface of the water. P X Y wave crests Which statement is correct?",
+      "options": {
+        "A": "Distance X is the amplitude of the waves.",
+        "B": "Distance Y is the wavelength of the waves.",
+        "C": "Each circle represents a wavefront.",
+        "D": "The frequency of the waves is 3 Hz."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q18.png",
+      "rawText": "Seismic waves from the epicentre of an earthquake take 100 s to reach a point 300 km away. When they arrive, they cause the ground to vibrate with a frequency of 2.0 Hz. What is the wavelength of these seismic waves? A 0.67 km B 1.5 km C 3.0 km D 6.0 km",
+      "parseStatus": "ok",
+      "stem": "Seismic waves from the epicentre of an earthquake take 100 s to reach a point 300 km away. When they arrive, they cause the ground to vibrate with a frequency of 2.0 Hz. What is the wavelength of these seismic waves?",
+      "options": {
+        "A": "0.67 km",
+        "B": "1.5 km",
+        "C": "3.0 km",
+        "D": "6.0 km"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q19.png",
+      "rawText": "Which diagram illustrates diffraction of water waves? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q20.png",
+      "rawText": "A single ray of light is reflected by two mirrors. The diagram shows the ray of light incident on mirror 1. mirror 1 ray of light mirror 2 50° 60° What is the angle of reflection in mirror 2? A 50 B 60 C 70 D 80",
+      "parseStatus": "ok",
+      "stem": "A single ray of light is reflected by two mirrors. The diagram shows the ray of light incident on mirror 1. mirror 1 ray of light mirror 2 50° 60° What is the angle of reflection in mirror 2?",
+      "options": {
+        "A": "50",
+        "B": "60",
+        "C": "70",
+        "D": "80"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q21.png",
+      "rawText": "Which diagram shows the effect of a converging lens on a parallel beam of light? A B D C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q22.png",
+      "rawText": "Which three regions of the electromagnetic spectrum are used in the applications listed? ● sterilising water ● optical fibres ● satellite television signals ● mobile (cell) phones A radio, infrared, visible B ultraviolet, infrared, microwaves C visible, radio, ultraviolet D X-rays, visible, infrared",
+      "parseStatus": "ok",
+      "stem": "Which three regions of the electromagnetic spectrum are used in the applications listed? ● sterilising water ● optical fibres ● satellite television signals ● mobile (cell) phones",
+      "options": {
+        "A": "radio, infrared, visible",
+        "B": "ultraviolet, infrared, microwaves",
+        "C": "visible, radio, ultraviolet",
+        "D": "X-rays, visible, infrared"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q23.png",
+      "rawText": "A man stands 110 m from a high wall. He makes a short, sharp sound and then hears an echo from the wall. The speed of sound in air is 330 m / s. How long after making the sound does the man hear the echo? A 0.33 s B 0.67 s C 1.5 s D 3.0 s",
+      "parseStatus": "ok",
+      "stem": "A man stands 110 m from a high wall. He makes a short, sharp sound and then hears an echo from the wall. The speed of sound in air is 330 m / s. How long after making the sound does the man hear the echo?",
+      "options": {
+        "A": "0.33 s",
+        "B": "0.67 s",
+        "C": "1.5 s",
+        "D": "3.0 s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q24.png",
+      "rawText": "The diagram shows the magnetic field of a bar magnet. S N Q P R How does the strength of the magnetic field vary with position along the dotted path PRQ? A It is constant along the path PRQ. B It is strong at P and reduces in strength along the path PRQ. C It is weak at P and increases in strength along the path PRQ. D It is strong at P, decreases to a minimum at R and then increases towards Q.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the magnetic field of a bar magnet. S N Q P R How does the strength of the magnetic field vary with position along the dotted path PRQ?",
+      "options": {
+        "A": "It is constant along the path PRQ.",
+        "B": "It is strong at P and reduces in strength along the path PRQ.",
+        "C": "It is weak at P and increases in strength along the path PRQ.",
+        "D": "It is strong at P, decreases to a minimum at R and then increases towards Q."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q25.png",
+      "rawText": "The diagram shows a charged sphere and the direction of the electric field at point X due to the sphere. X Y charged sphere An electron is placed at point Y. Which diagram shows the direction of the force acting on the electron due to the charged sphere? Y A Y B Y C Y D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q26.png",
+      "rawText": "A battery moves 3.0 C of charge round a complete circuit. The battery transfers 12 J of energy during this process. What is the electromotive force (e.m.f.) of the cell? A 0.25 V B 4.0 V C 12 V D 36 V",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q27.png",
+      "rawText": "A cylinder of conducting putty has length l, diameter d and resistance R. The putty is now moulded into a cylinder of diameter 2d that has the same volume. R l d By which factor does the resistance of the putty cylinder decrease? A 2 B 4 C 8 D 16",
+      "parseStatus": "ok",
+      "stem": "A cylinder of conducting putty has length l, diameter d and resistance R. The putty is now moulded into a cylinder of diameter 2d that has the same volume. R l d By which factor does the resistance of the putty cylinder decrease?",
+      "options": {
+        "A": "2",
+        "B": "4",
+        "C": "8",
+        "D": "16"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q28.png",
+      "rawText": "Which statement describes how a diode operates in an electrical circuit? A When the temperature increases, its resistance increases. B When the current becomes too high, it melts and cuts off the current. C It only allows current in one direction. D It uses a low-current circuit to switch on a circuit carrying a much larger current.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes how a diode operates in an electrical circuit?",
+      "options": {
+        "A": "When the temperature increases, its resistance increases.",
+        "B": "When the current becomes too high, it melts and cuts off the current.",
+        "C": "It only allows current in one direction.",
+        "D": "It uses a low-current circuit to switch on a circuit carrying a much larger current."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q29.png",
+      "rawText": "A number of identical resistors of resistance 10  are arranged in circuits. Which arrangement of resistors will give an overall resistance of 25 ? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q30.png",
+      "rawText": "The circuit diagram shows a thermistor in a potential divider. Two voltmeters X and Y are connected in the circuit. V Y V X When the temperature of the thermistor increases, its resistance decreases. As the thermistor becomes warmer, what happens to the reading on each voltmeter? reading on voltmeter X reading on voltmeter Y A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The circuit diagram shows a thermistor in a potential divider. Two voltmeters X and Y are connected in the circuit. V Y V X When the temperature of the thermistor increases, its resistance decreases. As the thermistor becomes warmer, what happens to the reading on each voltmeter? reading on voltmeter X reading on voltmeter Y",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q31.png",
+      "rawText": "In an experiment, strong magnetic fields provide a force that keeps charged particles moving with a horizontal circular motion. Positive particles are accelerated clockwise when viewed from above as shown. + In which direction is the magnetic field? A vertically into the page B vertically out of the page C pointing away from the centre of the circular motion D pointing towards the centre of the circular motion",
+      "parseStatus": "ok",
+      "stem": "In an experiment, strong magnetic fields provide a force that keeps charged particles moving with a horizontal circular motion. Positive particles are accelerated clockwise when viewed from above as shown. + In which direction is the magnetic field?",
+      "options": {
+        "A": "vertically into the page",
+        "B": "vertically out of the page",
+        "C": "pointing away from the centre of the circular motion",
+        "D": "pointing towards the centre of the circular motion"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q32.png",
+      "rawText": "When there is a current in a solenoid, a magnetic field is formed around it. How does the magnetic field change if the current is increased? spacing of field lines strength of field A closer together stronger B closer together weaker C further apart stronger D further apart weaker",
+      "parseStatus": "ok",
+      "stem": "When there is a current in a solenoid, a magnetic field is formed around it. How does the magnetic field change if the current is increased? spacing of field lines strength of field",
+      "options": {
+        "A": "closer together stronger",
+        "B": "closer together weaker",
+        "C": "further apart stronger",
+        "D": "further apart weaker"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q33.png",
+      "rawText": "The diagram shows the structure of a simple transformer. primary coil secondary coil core Which row shows the correct conditions for the efficiency of the transformer to be as high as possible? primary and secondary coils core A thick copper wire soft iron B thin copper wire soft iron C thick iron wire copper D thin iron wire copper",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the structure of a simple transformer. primary coil secondary coil core Which row shows the correct conditions for the efficiency of the transformer to be as high as possible? primary and secondary coils core",
+      "options": {
+        "A": "thick copper wire soft iron",
+        "B": "thin copper wire soft iron",
+        "C": "thick iron wire copper",
+        "D": "thin iron wire copper"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q34.png",
+      "rawText": "The products of the decay of a nucleus of a radioactive isotope are a nucleus and radiation which is emitted. What is the nature of the products? A a nucleus of an element different from the isotope is formed and both an -particle and -radiation are emitted B a nucleus of an element different from the isotope is formed and just -radiation is emitted C a nucleus of the same element as the isotope is formed and both a -particle and -radiation are emitted D a nucleus of the same element as the isotope is formed and just an -particle is emitted",
+      "parseStatus": "ok",
+      "stem": "The products of the decay of a nucleus of a radioactive isotope are a nucleus and radiation which is emitted. What is the nature of the products?",
+      "options": {
+        "A": "a nucleus of an element different from the isotope is formed and both an -particle and -radiation are emitted",
+        "B": "a nucleus of an element different from the isotope is formed and just -radiation is emitted",
+        "C": "a nucleus of the same element as the isotope is formed and both a -particle and -radiation are emitted",
+        "D": "a nucleus of the same element as the isotope is formed and just an -particle is emitted"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q35.png",
+      "rawText": "An atomic nucleus decays by one or more radioactive decay processes. What causes the proton number to decrease by 1? A -decay followed by -decay B -decay only C -decay followed by -decay D -decay only",
+      "parseStatus": "ok",
+      "stem": "An atomic nucleus decays by one or more radioactive decay processes. What causes the proton number to decrease by 1?",
+      "options": {
+        "A": "-decay followed by -decay",
+        "B": "-decay only",
+        "C": "-decay followed by -decay",
+        "D": "-decay only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q36.png",
+      "rawText": "Which definition of half-life is not correct? A the time it takes for the count rate from a radioactive sample to fall to half its original value B the time it takes for half of the unstable nuclei in a radioactive sample to decay C the time it takes for the mass of radioactive material in a sample to halve D the time it takes for half of the neutrons in a radioactive sample to decay",
+      "parseStatus": "ok",
+      "stem": "Which definition of half-life is not correct?",
+      "options": {
+        "A": "the time it takes for the count rate from a radioactive sample to fall to half its original value",
+        "B": "the time it takes for half of the unstable nuclei in a radioactive sample to decay",
+        "C": "the time it takes for the mass of radioactive material in a sample to halve",
+        "D": "the time it takes for half of the neutrons in a radioactive sample to decay"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q37.png",
+      "rawText": "The diagram shows a system to control the thickness of paper produced by a machine. The graph shows how the count rate at the detector varies with the thickness of the paper. The rollers squeeze the paper when the count rate at the detector drops below 12 counts per second and then stop squeezing when the count rate rises above 13 counts per second. paper roller \u0001-particle detector \u0001-particle source 0.0 0.5 1.0 1.5 2.0 25 20 15 10 5 0 paper thickness / mm count rate counts / s What is the thickness of the paper coming out of the machine? A between 0.40 mm and 0.50 mm B between 0.50 mm and 0.60 mm C between 0.60 mm and 0.70 mm D between 0.70 mm and 0.80 mm",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a system to control the thickness of paper produced by a machine. The graph shows how the count rate at the detector varies with the thickness of the paper. The rollers squeeze the paper when the count rate at the detector drops below 12 counts per second and then stop squeezing when the count rate rises above 13 counts per second. paper roller \u0001-particle detector \u0001-particle source 0.0 0.5 1.0 1.5 2.0 25 20 15 10 5 0 paper thickness / mm count rate counts / s What is the thickness of the paper coming out of the machine?",
+      "options": {
+        "A": "between 0.40 mm and 0.50 mm",
+        "B": "between 0.50 mm and 0.60 mm",
+        "C": "between 0.60 mm and 0.70 mm",
+        "D": "between 0.70 mm and 0.80 mm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 16,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q38.png",
+      "rawText": "The table gives the orbital durations of planets in the Solar System. planet Mercury Venus Earth Jupiter Saturn Uranus Neptune orbital duration / days 88 225 365 4330 10 700 30 600 59 800 What is the orbital duration of Mars? A 295 days B 690 days C 7100 days D 20 600 days",
+      "parseStatus": "ok",
+      "stem": "The table gives the orbital durations of planets in the Solar System. planet Mercury Venus Earth Jupiter Saturn Uranus Neptune orbital duration / days 88 225 365 4330 10 700 30 600 59 800 What is the orbital duration of Mars?",
+      "options": {
+        "A": "295 days",
+        "B": "690 days",
+        "C": "7100 days",
+        "D": "20 600 days"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q39.png",
+      "rawText": "Which reaction produces the energy that powers the Sun? A fission of hydrogen B fission of uranium C fusion of hydrogen D fusion of uranium",
+      "parseStatus": "ok",
+      "stem": "Which reaction produces the energy that powers the Sun?",
+      "options": {
+        "A": "fission of hydrogen",
+        "B": "fission of uranium",
+        "C": "fusion of hydrogen",
+        "D": "fusion of uranium"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 17,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_23/q40.png",
+      "rawText": "The diameter of the Milky Way is approximately 100 000 light years. What is this distance in metres? A 9.5  109 m B 9.5  1015 m C 9.5  1017 m D 9.5  1020 m",
+      "parseStatus": "ok",
+      "stem": "The diameter of the Milky Way is approximately 100 000 light years. What is this distance in metres?",
+      "options": {
+        "A": "9.5  109 m",
+        "B": "9.5  1015 m",
+        "C": "9.5  1017 m",
+        "D": "9.5  1020 m"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

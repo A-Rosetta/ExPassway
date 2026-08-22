@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0625_w23_qp_21.pdf",
+  "markScheme": "0625_w23_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q01.png",
+      "rawText": "Which is a vector quantity? A density B mass C pressure D weight",
+      "parseStatus": "ok",
+      "stem": "Which is a vector quantity?",
+      "options": {
+        "A": "density",
+        "B": "mass",
+        "C": "pressure",
+        "D": "weight"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q02.png",
+      "rawText": "The graph shows the speed of a car travelling through a town. Which section of the graph represents a period when the car is decelerating? 0 0 speed m / s time / s A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q03.png",
+      "rawText": "An object reaches terminal velocity after being dropped and falling through air. Which graph shows how its speed varies with time? speed time A 0 0 speed time B 0 0 speed time C 0 0 speed time D 0 0",
+      "parseStatus": "ok",
+      "stem": "An object reaches terminal velocity after being dropped and falling through air. Which graph shows how its speed varies with time? speed time",
+      "options": {
+        "A": "0 0 speed time",
+        "B": "0 0 speed time",
+        "C": "0 0 speed time",
+        "D": "0 0"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q04.png",
+      "rawText": "The table shows the mass and volume of three different liquids, X, Y and Z. liquid mass / g volume / cm3 X 120 200 Y 80 67 Z 100 120 The liquids are placed in the same container. The liquids do not mix. Which liquid is at the top of the container and which liquid is at the bottom? liquid at top liquid at bottom A X Y B X Z C Y X D Y Z",
+      "parseStatus": "ok",
+      "stem": "The table shows the mass and volume of three different liquids, X, Y and Z. liquid mass / g volume / cm3 X 120 200 Y 80 67 Z 100 120 The liquids are placed in the same container. The liquids do not mix. Which liquid is at the top of the container and which liquid is at the bottom? liquid at top liquid at bottom",
+      "options": {
+        "A": "X Y",
+        "B": "X Z",
+        "C": "Y X",
+        "D": "Y Z"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q05.png",
+      "rawText": "Which moving object has a resultant force acting on it? A a diver rising vertically through water at constant speed B an aircraft circling an airport at constant speed C a train going up a straight incline at constant speed D a parachutist descending vertically at terminal velocity",
+      "parseStatus": "ok",
+      "stem": "Which moving object has a resultant force acting on it?",
+      "options": {
+        "A": "a diver rising vertically through water at constant speed",
+        "B": "an aircraft circling an airport at constant speed",
+        "C": "a train going up a straight incline at constant speed",
+        "D": "a parachutist descending vertically at terminal velocity"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q06.png",
+      "rawText": "Forces are applied to four identical objects. The length of each arrow indicates the magnitude of the force. Which object is in equilibrium? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q07.png",
+      "rawText": "A sphere X collides head on with a second identical sphere Y which is stationary. The mass of each sphere is 0.15 kg. Sphere X is travelling at a velocity of 2.0 m / s before the collision and produces an impulse of 0.21 N s on sphere Y. What is the velocity of sphere X after collision? A 0.60 m / s in the opposite direction to Y B 0.60 m / s in the same direction as Y C 1.4 m / s in the opposite direction to Y D 1.4 m / s in the same direction as Y",
+      "parseStatus": "ok",
+      "stem": "A sphere X collides head on with a second identical sphere Y which is stationary. The mass of each sphere is 0.15 kg. Sphere X is travelling at a velocity of 2.0 m / s before the collision and produces an impulse of 0.21 N s on sphere Y. What is the velocity of sphere X after collision?",
+      "options": {
+        "A": "0.60 m / s in the opposite direction to Y",
+        "B": "0.60 m / s in the same direction as Y",
+        "C": "1.4 m / s in the opposite direction to Y",
+        "D": "1.4 m / s in the same direction as Y"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q08.png",
+      "rawText": "A cyclist travels down a hill from rest at point X without pedalling. The cyclist applies his brakes and the cycle stops at point Y. X Y hill Which energy transfers have taken place between X and Y? A gravitational potential  kinetic  internal (thermal) B gravitational potential  internal (thermal)  kinetic C kinetic  gravitational potential  internal (thermal) D kinetic  internal (thermal)  gravitational potential",
+      "parseStatus": "ok",
+      "stem": "A cyclist travels down a hill from rest at point X without pedalling. The cyclist applies his brakes and the cycle stops at point Y. X Y hill Which energy transfers have taken place between X and Y?",
+      "options": {
+        "A": "gravitational potential  kinetic  internal (thermal)",
+        "B": "gravitational potential  internal (thermal)  kinetic",
+        "C": "kinetic  gravitational potential  internal (thermal)",
+        "D": "kinetic  internal (thermal)  gravitational potential"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q09.png",
+      "rawText": "An object of mass m falls from a higher shelf to a lower shelf. h2 h1 How much gravitational potential energy does the object lose? A mgh2 B       g m h2 C       g m (h1 – h2) D mg(h1 – h2)",
+      "parseStatus": "ok",
+      "stem": "An object of mass m falls from a higher shelf to a lower shelf. h2 h1 How much gravitational potential energy does the object lose?",
+      "options": {
+        "A": "mgh2",
+        "B": "      g m h2",
+        "C": "      g m (h1 – h2)",
+        "D": "mg(h1 – h2)"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q10.png",
+      "rawText": "A pump does 460 000 J of work to raise water to fill a tank. It takes 7 minutes to fill the tank. What is the power of the pump? A 1.1 kW B 66 kW C 3200 kW D 190 000 kW",
+      "parseStatus": "ok",
+      "stem": "A pump does 460 000 J of work to raise water to fill a tank. It takes 7 minutes to fill the tank. What is the power of the pump?",
+      "options": {
+        "A": "1.1 kW",
+        "B": "66 kW",
+        "C": "3200 kW",
+        "D": "190 000 kW"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q11.png",
+      "rawText": "The water in a swimming pool exerts a pressure at the bottom of the pool. Which graph shows the relationship between the pressure exerted by the water and the depth of water in the pool? (Assume the density of water is constant.) pressure depth 0 0 A pressure depth 0 0 B pressure depth 0 0 C pressure depth 0 0 D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q12.png",
+      "rawText": "Why can a gas be compressed easily into a smaller volume? A The particles are far apart. B The particles do not attract each other. C The particles move randomly. D The volume of each particle can be reduced.",
+      "parseStatus": "ok",
+      "stem": "Why can a gas be compressed easily into a smaller volume?",
+      "options": {
+        "A": "The particles are far apart.",
+        "B": "The particles do not attract each other.",
+        "C": "The particles move randomly.",
+        "D": "The volume of each particle can be reduced."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q13.png",
+      "rawText": "A gas is contained in a cylinder by a movable piston. piston cylinder gas The gas is heated so that it expands at constant pressure. How is the force of each collision of a gas particle with the piston affected and how does the frequency of collisions between the gas particles and the piston change? force frequency A increases decreases B increases increases C stays the same decreases D stays the same increases",
+      "parseStatus": "ok",
+      "stem": "A gas is contained in a cylinder by a movable piston. piston cylinder gas The gas is heated so that it expands at constant pressure. How is the force of each collision of a gas particle with the piston affected and how does the frequency of collisions between the gas particles and the piston change? force frequency",
+      "options": {
+        "A": "increases decreases",
+        "B": "increases increases",
+        "C": "stays the same decreases",
+        "D": "stays the same increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q14.png",
+      "rawText": "On a warm day, a carton of fresh milk is covered with a wet cloth. Why does this help to reduce the temperature of the milk? A Some water evaporates from the cloth so the remaining water becomes cooler. B The water has a very high specific heat capacity. C The water insulates the milk from the warm air around it. D Water is always colder than the air around it.",
+      "parseStatus": "ok",
+      "stem": "On a warm day, a carton of fresh milk is covered with a wet cloth. Why does this help to reduce the temperature of the milk?",
+      "options": {
+        "A": "Some water evaporates from the cloth so the remaining water becomes cooler.",
+        "B": "The water has a very high specific heat capacity.",
+        "C": "The water insulates the milk from the warm air around it.",
+        "D": "Water is always colder than the air around it."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q15.png",
+      "rawText": "A chef heats some water in a pan on a hotplate. The temperature of the water rises by 10 C in time t. She then puts the same volume of oil in an identical pan on the same hotplate. The specific heat capacity of water is 2.5 times that of oil and water is 1.1 times denser than oil. What is the time for the temperature of the oil to rise by 10 C? A 0.36t B 0.44t C 2.3t D 2.8t",
+      "parseStatus": "ok",
+      "stem": "A chef heats some water in a pan on a hotplate. The temperature of the water rises by 10 C in time t. She then puts the same volume of oil in an identical pan on the same hotplate. The specific heat capacity of water is 2.5 times that of oil and water is 1.1 times denser than oil. What is the time for the temperature of the oil to rise by 10 C?",
+      "options": {
+        "A": "0.36t",
+        "B": "0.44t",
+        "C": "2.3t",
+        "D": "2.8t"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q16.png",
+      "rawText": "The diagram shows the view of a room heated by a radiator. The arrowed line from X to Y is the path of the convection current in the air. X Y radiator ceiling floor Which row about the air temperature and the air density at X and at Y is correct? air temperature air density A higher at X higher at X B higher at X higher at Y C higher at Y higher at Y D higher at Y higher at X",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the view of a room heated by a radiator. The arrowed line from X to Y is the path of the convection current in the air. X Y radiator ceiling floor Which row about the air temperature and the air density at X and at Y is correct? air temperature air density",
+      "options": {
+        "A": "higher at X higher at X",
+        "B": "higher at X higher at Y",
+        "C": "higher at Y higher at Y",
+        "D": "higher at Y higher at X"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q17.png",
+      "rawText": "Two men, P and Q, stand close to a gap in a wall, as shown. Man P cannot see man Q but man P can hear man Q speaking. P Q gap Which statement explains this? A Light waves do not diffract at all because they are electromagnetic waves. B Light waves have a range of frequencies but sound has just one frequency. C Sound waves are of a higher frequency than light waves. D Sound waves diffract a lot because their wavelength is a similar size to the width of the gap.",
+      "parseStatus": "ok",
+      "stem": "Two men, P and Q, stand close to a gap in a wall, as shown. Man P cannot see man Q but man P can hear man Q speaking. P Q gap Which statement explains this?",
+      "options": {
+        "A": "Light waves do not diffract at all because they are electromagnetic waves.",
+        "B": "Light waves have a range of frequencies but sound has just one frequency.",
+        "C": "Sound waves are of a higher frequency than light waves.",
+        "D": "Sound waves diffract a lot because their wavelength is a similar size to the width of the gap."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q18.png",
+      "rawText": "Which quantities relating to a wave on the surface of water can both be measured in metres? A amplitude and frequency B amplitude and wavelength C amplitude and wave speed D frequency and wavelength",
+      "parseStatus": "ok",
+      "stem": "Which quantities relating to a wave on the surface of water can both be measured in metres?",
+      "options": {
+        "A": "amplitude and frequency",
+        "B": "amplitude and wavelength",
+        "C": "amplitude and wave speed",
+        "D": "frequency and wavelength"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q19.png",
+      "rawText": "The diagram shows part of a ray diagram that demonstrates the formation of a virtual image Y of object X by a converging lens. X Y lens ray One ray of light from X is shown approaching the lens. Which arrow shows the direction of this ray as it leaves the lens? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q20.png",
+      "rawText": "A ray of light is reflected by a plane mirror. P S Q R Which row shows the angle of incidence and the angle of reflection? angle of incidence angle of reflection A P Q B P S C Q R D R S",
+      "parseStatus": "ok",
+      "stem": "A ray of light is reflected by a plane mirror. P S Q R Which row shows the angle of incidence and the angle of reflection? angle of incidence angle of reflection",
+      "options": {
+        "A": "P Q",
+        "B": "P S",
+        "C": "Q R",
+        "D": "R S"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q21.png",
+      "rawText": "A thin converging lens is used to produce a real image of an object. Which statement about the real image is always correct? A It is nearer to the lens than the object. B It is on the opposite side of the lens to the object. C It is the same size as the object. D It is upright.",
+      "parseStatus": "ok",
+      "stem": "A thin converging lens is used to produce a real image of an object. Which statement about the real image is always correct?",
+      "options": {
+        "A": "It is nearer to the lens than the object.",
+        "B": "It is on the opposite side of the lens to the object.",
+        "C": "It is the same size as the object.",
+        "D": "It is upright."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q22.png",
+      "rawText": "A radio transmitter broadcasts at a frequency of 200 kHz. What is the wavelength of these radio waves? A 6.7  10– 4 m B 1.5 m C 1.5  103 m D 1.5  106 m",
+      "parseStatus": "ok",
+      "stem": "A radio transmitter broadcasts at a frequency of 200 kHz. What is the wavelength of these radio waves?",
+      "options": {
+        "A": "6.7  10– 4 m",
+        "B": "1.5 m",
+        "C": "1.5  103 m",
+        "D": "1.5  106 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q23.png",
+      "rawText": "The element mercury exists as a solid, a liquid or a gas. Which row gives a possible set of values of the speeds of sound through mercury? speed of sound in frozen mercury m / s speed of sound in liquid mercury m / s speed of sound in mercury vapour m / s A 250 1500 2500 B 250 2500 1500 C 1500 250 2500 D 2500 1500 250",
+      "parseStatus": "ok",
+      "stem": "The element mercury exists as a solid, a liquid or a gas. Which row gives a possible set of values of the speeds of sound through mercury? speed of sound in frozen mercury m / s speed of sound in liquid mercury m / s speed of sound in mercury vapour m / s",
+      "options": {
+        "A": "250 1500 2500",
+        "B": "250 2500 1500",
+        "C": "1500 250 2500",
+        "D": "2500 1500 250"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q24.png",
+      "rawText": "Which metal could be used for a permanent magnet and which metal could be used for the core of an electromagnet? permanent magnet core of electromagnet A iron copper B iron steel C steel copper D steel iron",
+      "parseStatus": "ok",
+      "stem": "Which metal could be used for a permanent magnet and which metal could be used for the core of an electromagnet? permanent magnet core of electromagnet",
+      "options": {
+        "A": "iron copper",
+        "B": "iron steel",
+        "C": "steel copper",
+        "D": "steel iron"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q25.png",
+      "rawText": "Which statement describes the direction of an electric field at a point? A the direction of the force on a negative charge B the direction of the force on an N pole C the direction of the force on a positive charge D the direction of the force on an S pole",
+      "parseStatus": "ok",
+      "stem": "Which statement describes the direction of an electric field at a point?",
+      "options": {
+        "A": "the direction of the force on a negative charge",
+        "B": "the direction of the force on an N pole",
+        "C": "the direction of the force on a positive charge",
+        "D": "the direction of the force on an S pole"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q26.png",
+      "rawText": "Which statement about a voltmeter is correct? A It has a scale which is marked in amperes (A). B It must be connected in series in a circuit. C It measures potential difference (p.d.). D It must have three terminals.",
+      "parseStatus": "ok",
+      "stem": "Which statement about a voltmeter is correct?",
+      "options": {
+        "A": "It has a scale which is marked in amperes (A).",
+        "B": "It must be connected in series in a circuit.",
+        "C": "It measures potential difference (p.d.).",
+        "D": "It must have three terminals."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q27.png",
+      "rawText": "A wire has a resistance of 8.0 . A second wire of the same material has twice the length and twice the cross-sectional area. What is the resistance of the second wire? A 4.0  B 8.0  C 16  D 32 ",
+      "parseStatus": "ok",
+      "stem": "A wire has a resistance of 8.0 .",
+      "options": {
+        "A": "second wire of the same material has twice the length and twice the cross-sectional area. What is the resistance of the second wire? A 4.0 ",
+        "B": "8.0 ",
+        "C": "16 ",
+        "D": "32 "
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q28.png",
+      "rawText": "A plastic rod is rubbed with a cloth. The rod becomes positively charged because of the movement of charged particles. Which row gives the name of these charged particles and the direction in which they move? charged particles direction of movement A electrons from cloth to rod B electrons from rod to cloth C protons from cloth to rod D protons from rod to cloth",
+      "parseStatus": "ok",
+      "stem": "A plastic rod is rubbed with a cloth. The rod becomes positively charged because of the movement of charged particles. Which row gives the name of these charged particles and the direction in which they move? charged particles direction of movement",
+      "options": {
+        "A": "electrons from cloth to rod",
+        "B": "electrons from rod to cloth",
+        "C": "protons from cloth to rod",
+        "D": "protons from rod to cloth"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q29.png",
+      "rawText": "An alternating (a.c.) supply is connected to a diode and a resistor in series. 0 a.c. supply a.c. supply 0 V t V Which graph shows how the potential difference V across the resistor varies with time t ? 0 A 0 V t 0 B 0 V t 0 C 0 V t 0 D 0 V t",
+      "parseStatus": "ok",
+      "stem": "An alternating (a.c.) supply is connected to a diode and a resistor in series. 0 a.c. supply a.c. supply 0 V t V Which graph shows how the potential difference V across the resistor varies with time t ? 0",
+      "options": {
+        "A": "0 V t 0",
+        "B": "0 V t 0",
+        "C": "0 V t 0",
+        "D": "0 V t"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q30.png",
+      "rawText": "The diagram shows a circuit used to switch on a heater when the temperature drops below a certain value. X Y Which row shows the components that should be connected at X and at Y? X Y A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q31.png",
+      "rawText": "A current in a solenoid produces a uniform magnetic field inside the solenoid. The magnetic field direction is due east. Which changes will produce a stronger magnetic field with a direction due west? A Use a smaller current and turn the solenoid through 180. B Use a smaller current and reverse the current. C Use a larger current and turn the solenoid through 90. D Use a larger current and reverse the current.",
+      "parseStatus": "ok",
+      "stem": "A current in a solenoid produces a uniform magnetic field inside the solenoid. The magnetic field direction is due east. Which changes will produce a stronger magnetic field with a direction due west?",
+      "options": {
+        "A": "Use a smaller current and turn the solenoid through 180.",
+        "B": "Use a smaller current and reverse the current.",
+        "C": "Use a larger current and turn the solenoid through 90.",
+        "D": "Use a larger current and reverse the current."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q32.png",
+      "rawText": "A metal rod PQ rests on two horizontal metal wires that are attached to a battery. The rod lies between the poles of a magnet. P Q N S metal rod magnet magnet When the switch is closed, the rod moves to the right. What could be changed so that the rod moves to the left? A Open the switch. B Reverse the battery terminals and exchange the poles of the magnet. C Reverse the battery terminals but without exchanging the poles of the magnet. D Turn the metal rod around (P and Q exchanged).",
+      "parseStatus": "ok",
+      "stem": "A metal rod PQ rests on two horizontal metal wires that are attached to a battery. The rod lies between the poles of a magnet. P Q N S metal rod magnet magnet When the switch is closed, the rod moves to the right. What could be changed so that the rod moves to the left?",
+      "options": {
+        "A": "Open the switch.",
+        "B": "Reverse the battery terminals and exchange the poles of the magnet.",
+        "C": "Reverse the battery terminals but without exchanging the poles of the magnet.",
+        "D": "Turn the metal rod around (P and Q exchanged)."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q33.png",
+      "rawText": "A transformer in a computer is used to transform the mains voltage of 240 V to 12 V. The number of turns on the secondary coil is 2000. Which statement about the transformer is correct? A It is a step-down transformer and has 100 turns on its primary coil. B It is a step-down transformer and has 40 000 turns on its primary coil. C It is a step-up transformer and has 100 turns on its primary coil. D It is a step-up transformer and has 40 000 turns on its primary coil.",
+      "parseStatus": "ok",
+      "stem": "A transformer in a computer is used to transform the mains voltage of 240 V to 12 V. The number of turns on the secondary coil is 2000. Which statement about the transformer is correct?",
+      "options": {
+        "A": "It is a step-down transformer and has 100 turns on its primary coil.",
+        "B": "It is a step-down transformer and has 40 000 turns on its primary coil.",
+        "C": "It is a step-up transformer and has 100 turns on its primary coil.",
+        "D": "It is a step-up transformer and has 40 000 turns on its primary coil."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q34.png",
+      "rawText": "In -particle scattering, -particles are incident on a thin metal foil. Which row describes results from the experiment and a conclusion that the results lead to? results conclusion A most of the -particles pass straight through the foil most of the atom is empty space B most of the -particles pass straight through the foil the nucleus is very large C very few of the -particles pass straight through the foil most of the atom is empty space D very few of the -particles pass straight through the foil the nucleus is very large",
+      "parseStatus": "ok",
+      "stem": "In -particle scattering, -particles are incident on a thin metal foil. Which row describes results from the experiment and a conclusion that the results lead to? results conclusion",
+      "options": {
+        "A": "most of the -particles pass straight through the foil most of the atom is empty space",
+        "B": "most of the -particles pass straight through the foil the nucleus is very large",
+        "C": "very few of the -particles pass straight through the foil most of the atom is empty space",
+        "D": "very few of the -particles pass straight through the foil the nucleus is very large"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q35.png",
+      "rawText": "-particles, -particles and -rays are emitted by radioactive nuclei when they decay. Which emissions can be deflected by an electric field? A -particles, -particles and -rays B -particles and -particles only C -particles and -rays only D -rays and -particles only",
+      "parseStatus": "ok",
+      "stem": "-particles, -particles and -rays are emitted by radioactive nuclei when they decay. Which emissions can be deflected by an electric field?",
+      "options": {
+        "A": "-particles, -particles and -rays",
+        "B": "-particles and -particles only",
+        "C": "-particles and -rays only",
+        "D": "-rays and -particles only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q36.png",
+      "rawText": "Radioisotope X decays to the stable isotope Y. The graph shows how the mass of Y present in a sample varies with time. mass of Y time M 0 0 M 2 M 4 t1 t2 t3 Which time interval gives the half-life of X? A t2 – t1 B t3 – t2 C t2 D 1 2 t3",
+      "parseStatus": "ok",
+      "stem": "Radioisotope X decays to the stable isotope Y. The graph shows how the mass of Y present in a sample varies with time. mass of Y time M 0 0 M 2 M 4 t1 t2 t3 Which time interval gives the half-life of X?",
+      "options": {
+        "A": "t2 – t1",
+        "B": "t3 – t2",
+        "C": "t2",
+        "D": "1 2 t3"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q37.png",
+      "rawText": "Which particle is absorbed by a nucleus to cause nuclear fission? A a neutron B a proton C an -particle D a -particle",
+      "parseStatus": "ok",
+      "stem": "Which particle is absorbed by a nucleus to cause nuclear fission?",
+      "options": {
+        "A": "a neutron",
+        "B": "a proton",
+        "C": "an -particle",
+        "D": "a -particle"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q38.png",
+      "rawText": "It is summer in the northern hemisphere of the Earth in June. Which statement explains why? A The Earth is closer to the Sun in June. B The Earth spins on its axis in the opposite direction to that in which it rotates around the Sun. C The Moon is full in June. D The north pole of the axis of the Earth’s rotation is tilted towards the Sun in June.",
+      "parseStatus": "ok",
+      "stem": "It is summer in the northern hemisphere of the Earth in June. Which statement explains why?",
+      "options": {
+        "A": "The Earth is closer to the Sun in June.",
+        "B": "The Earth spins on its axis in the opposite direction to that in which it rotates around the Sun.",
+        "C": "The Moon is full in June.",
+        "D": "The north pole of the axis of the Earth’s rotation is tilted towards the Sun in June."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q39.png",
+      "rawText": "Which statement about the Sun is correct? A The Sun is a dwarf star consisting mostly of hydrogen and oxygen. B The Sun is a giant star consisting mostly of helium and carbon dioxide. C The Sun is a medium-sized star consisting mostly of hydrogen and helium. D The Sun is a medium-sized star consisting mostly of nitrogen and oxygen.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Sun is correct?",
+      "options": {
+        "A": "The Sun is a dwarf star consisting mostly of hydrogen and oxygen.",
+        "B": "The Sun is a giant star consisting mostly of helium and carbon dioxide.",
+        "C": "The Sun is a medium-sized star consisting mostly of hydrogen and helium.",
+        "D": "The Sun is a medium-sized star consisting mostly of nitrogen and oxygen."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_21/q40.png",
+      "rawText": "The table lists some information about some stars. Which star will eventually explode as a supernova? name of star type of star temperature / C A Aldebaran red giant 3 700 B Betelgeuse red supergiant 3 300 C Geminga neutron star 520 000 D Sirius B white dwarf 25 000",
+      "parseStatus": "ok",
+      "stem": "The table lists some information about some stars. Which star will eventually explode as a supernova? name of star type of star temperature / C",
+      "options": {
+        "A": "Aldebaran red giant 3 700",
+        "B": "Betelgeuse red supergiant 3 300",
+        "C": "Geminga neutron star 520 000",
+        "D": "Sirius B white dwarf 25 000"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -3167,10 +3167,36 @@ body.home-dashboard {
   --book-accent: #f1aaa0;
 }
 
+.course-card--physics {
+  --book: #3f6f9f;
+  --book-dark: #274c72;
+  --book-accent: #a8c9e8;
+}
+
 .course-card--default {
   --book: #586579;
   --book-dark: #394456;
   --book-accent: #bec6d1;
+}
+
+.home-more-subjects {
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid #d9dde3;
+}
+
+.home-more-subjects__heading h2 {
+  margin: 0 0 1.15rem;
+  color: #273446;
+  font-size: 1.25rem;
+}
+
+[data-theme="dark"] .home-more-subjects {
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="dark"] .home-more-subjects__heading h2 {
+  color: #e8ecef;
 }
 
 /*

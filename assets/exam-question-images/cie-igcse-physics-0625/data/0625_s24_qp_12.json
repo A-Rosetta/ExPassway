@@ -1,0 +1,678 @@
+{
+  "questionPaper": "0625_s24_qp_12.pdf",
+  "markScheme": "0625_s24_ms_12.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q01.png",
+      "rawText": "Four athletes run twice around a track. The table shows their times at the end of each lap. Which athlete runs the second lap the fastest? time at end of first lap / s time at end of second lap / s A 22.99 47.04 B 23.04 47.00 C 23.16 47.18 D 23.39 47.24",
+      "parseStatus": "ok",
+      "stem": "Four athletes run twice around a track. The table shows their times at the end of each lap. Which athlete runs the second lap the fastest? time at end of first lap / s time at end of second lap / s",
+      "options": {
+        "A": "22.99 47.04",
+        "B": "23.04 47.00",
+        "C": "23.16 47.18",
+        "D": "23.39 47.24"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q02.png",
+      "rawText": "A racing car is fitted with an on-board computer. Every time the car passes the starting line, the computer records the distance travelled in the following two seconds. Which set of data shows that the car is increasing in speed during the two seconds? A B time / s distance travelled / m time / s distance travelled / m 0 0 0 0 1 100 1 90 2 200 2 180 C D time / s distance travelled / m time / s distance travelled / m 0 0 0 0 1 80 1 100 2 190 2 180",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q03.png",
+      "rawText": "Which row shows the gravitational field strength on the Earth and the definition of velocity? gravitational field strength on the Earth definition of velocity A 9.8 kg / N the change in the speed B 9.8 N / kg the change in the speed C 9.8 kg / N the speed in a given direction D 9.8 N / kg the speed in a given direction",
+      "parseStatus": "ok",
+      "stem": "Which row shows the gravitational field strength on the Earth and the definition of velocity? gravitational field strength on the Earth definition of velocity",
+      "options": {
+        "A": "9.8 kg / N the change in the speed",
+        "B": "9.8 N / kg the change in the speed",
+        "C": "9.8 kg / N the speed in a given direction",
+        "D": "9.8 N / kg the speed in a given direction"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q04.png",
+      "rawText": "Which statement about the weight of an object is correct? A The weight of an object is the gravitational force per unit mass. B The weight of an object is the gravitational force on an object. C The weight is zero when the object is falling at constant speed in the Earth’s atmosphere. D The weight is zero when the object is in orbit around the Earth.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the weight of an object is correct?",
+      "options": {
+        "A": "The weight of an object is the gravitational force per unit mass.",
+        "B": "The weight of an object is the gravitational force on an object.",
+        "C": "The weight is zero when the object is falling at constant speed in the Earth’s atmosphere.",
+        "D": "The weight is zero when the object is in orbit around the Earth."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q05.png",
+      "rawText": "The diagram shows a load–extension graph for a steel spring. The length of the spring with no load attached is 2.0 cm. 0 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 2.0 1.8 1.6 1.4 1.2 1.0 0.8 0.6 0.4 0.2 0 load / N extension / cm Which load increases the length of the spring to 6.0 cm? A 0.5 N B 1.0 N C 1.5 N D 2.0 N",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a load–extension graph for a steel spring. The length of the spring with no load attached is 2.0 cm. 0 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 2.0 1.8 1.6 1.4 1.2 1.0 0.8 0.6 0.4 0.2 0 load / N extension / cm Which load increases the length of the spring to 6.0 cm?",
+      "options": {
+        "A": "0.5 N",
+        "B": "1.0 N",
+        "C": "1.5 N",
+        "D": "2.0 N"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q06.png",
+      "rawText": "Which force between two solid surfaces opposes motion? A friction B gravity C kinetic D weight",
+      "parseStatus": "ok",
+      "stem": "Which force between two solid surfaces opposes motion?",
+      "options": {
+        "A": "friction",
+        "B": "gravity",
+        "C": "kinetic",
+        "D": "weight"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q07.png",
+      "rawText": "A box of mass 2.0 kg and weight 20 N is carried to the top of some stairs. 1.8 m 1.2 m box How is the work done against gravity on the box calculated? A 2.0  1.8 B 20  1.2 C 2.0  1.2 D 20  1.2  1.8",
+      "parseStatus": "ok",
+      "stem": "A box of mass 2.0 kg and weight 20 N is carried to the top of some stairs. 1.8 m 1.2 m box How is the work done against gravity on the box calculated?",
+      "options": {
+        "A": "2.0  1.8",
+        "B": "20  1.2",
+        "C": "2.0  1.2",
+        "D": "20  1.2  1.8"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q08.png",
+      "rawText": "Four submarines are submerged. The density of fresh water is 1000 kg / m3 and the density of sea water is 1020 kg / m3. Which submarine experiences the greatest pressure due to the water? water surface fresh water 100 m A fresh water 120 m B submarine submarine sea water 100 m C sea water 120 m D submarine submarine water surface water surface water surface",
+      "parseStatus": "ok",
+      "stem": "Four submarines are submerged. The density of fresh water is 1000 kg / m3 and the density of sea water is 1020 kg / m3. Which submarine experiences the greatest pressure due to the water? water surface fresh water 100 m",
+      "options": {
+        "A": "fresh water 120 m",
+        "B": "submarine submarine sea water 100 m",
+        "C": "sea water 120 m",
+        "D": "submarine submarine water surface water surface water surface"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q09.png",
+      "rawText": "The diagram shows the changes in state, 1, 2, 3 and 4, between solids, liquids and gases. liquid gas 2 4 solid 1 3 What are processes 2 and 3? 2 3 A condensation melting B condensation freezing C evaporation melting D evaporation freezing",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the changes in state, 1, 2, 3 and 4, between solids, liquids and gases. liquid gas 2 4 solid 1 3 What are processes 2 and 3? 2 3",
+      "options": {
+        "A": "condensation melting",
+        "B": "condensation freezing",
+        "C": "evaporation melting",
+        "D": "evaporation freezing"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q10.png",
+      "rawText": "Copper has a melting point of 1100 C. What is the melting point in kelvin? A 727 K B 827 K C 1373 K D 1473 K",
+      "parseStatus": "ok",
+      "stem": "Copper has a melting point of 1100 C. What is the melting point in kelvin?",
+      "options": {
+        "A": "727 K",
+        "B": "827 K",
+        "C": "1373 K",
+        "D": "1473 K"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q11.png",
+      "rawText": "A liquid at room temperature fills a flask and a glass tube to level X. X Y liquid The flask is placed in ice and the liquid level in the tube changes to level Y. Why does the level change to level Y? A The flask contracts. B The flask expands. C The liquid contracts. D The liquid expands.",
+      "parseStatus": "ok",
+      "stem": "A liquid at room temperature fills a flask and a glass tube to level X. X Y liquid The flask is placed in ice and the liquid level in the tube changes to level Y. Why does the level change to level Y?",
+      "options": {
+        "A": "The flask contracts.",
+        "B": "The flask expands.",
+        "C": "The liquid contracts.",
+        "D": "The liquid expands."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q12.png",
+      "rawText": "Which row correctly describes the state of water at the temperatures shown? 250 K 300 K 350 K 400 K A liquid liquid gas gas B solid solid liquid liquid C solid liquid liquid gas D solid liquid gas gas",
+      "parseStatus": "ok",
+      "stem": "Which row correctly describes the state of water at the temperatures shown? 250 K 300 K 350 K 400 K",
+      "options": {
+        "A": "liquid liquid gas gas",
+        "B": "solid solid liquid liquid",
+        "C": "solid liquid liquid gas",
+        "D": "solid liquid gas gas"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q13.png",
+      "rawText": "A liquid is evaporating. The liquid is not boiling. Which statement about the liquid at an instant in time is correct? A Any molecule can escape and from any part of the liquid. B Any molecule can escape, but only from the liquid’s surface. C Only molecules with enough energy can escape and only from the liquid’s surface. D Only molecules with enough energy can escape, but from any part of the liquid.",
+      "parseStatus": "ok",
+      "stem": "A liquid is evaporating. The liquid is not boiling. Which statement about the liquid at an instant in time is correct?",
+      "options": {
+        "A": "Any molecule can escape and from any part of the liquid.",
+        "B": "Any molecule can escape, but only from the liquid’s surface.",
+        "C": "Only molecules with enough energy can escape and only from the liquid’s surface.",
+        "D": "Only molecules with enough energy can escape, but from any part of the liquid."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q14.png",
+      "rawText": "A student stirs a hot liquid in a pan with a spoon. Which row explains which material the spoon should be made from so that the student does not burn their hand? material of spoon explanation A metal it is a good conductor B metal it is a good insulator C wood it is a good conductor D wood it is a good insulator",
+      "parseStatus": "ok",
+      "stem": "A student stirs a hot liquid in a pan with a spoon. Which row explains which material the spoon should be made from so that the student does not burn their hand? material of spoon explanation",
+      "options": {
+        "A": "metal it is a good conductor",
+        "B": "metal it is a good insulator",
+        "C": "wood it is a good conductor",
+        "D": "wood it is a good insulator"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q15.png",
+      "rawText": "Thermal radiation is emitted from all objects. Which mediums can thermal radiation travel through? glass water air vacuum A \u0016 \u0016 \u0016 \u0016 key B \u0016 \u0016 \u0016 \u001a \u0016 = can travel through this medium C \u001a \u0016 \u0016 \u0016 \u001a = cannot travel through this medium D \u001a \u001a \u001a \u0016",
+      "parseStatus": "ok",
+      "stem": "Thermal radiation is emitted from all objects. Which mediums can thermal radiation travel through? glass water air vacuum",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u0016 \u0016 \u001a \u0016 = can travel through this medium",
+        "C": "\u001a \u0016 \u0016 \u0016 \u001a = cannot travel through this medium",
+        "D": "\u001a \u001a \u001a \u0016"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q16.png",
+      "rawText": "The radius of a circular pond is 3.0 m. Circular waves are made at the centre of the pond. There are 10 whole waves between the centre and the edge of the pond and it takes 5.0 s for all 10 waves to reach the edge. What is the wavelength and the frequency of the waves? wavelength / m frequency / Hz A 0.30 0.50 B 0.30 2.0 C 0.60 0.50 D 0.60 2.0",
+      "parseStatus": "ok",
+      "stem": "The radius of a circular pond is 3.0 m. Circular waves are made at the centre of the pond. There are 10 whole waves between the centre and the edge of the pond and it takes 5.0 s for all 10 waves to reach the edge. What is the wavelength and the frequency of the waves? wavelength / m frequency / Hz",
+      "options": {
+        "A": "0.30 0.50",
+        "B": "0.30 2.0",
+        "C": "0.60 0.50",
+        "D": "0.60 2.0"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q17.png",
+      "rawText": "How does the direction of vibration of a longitudinal wave compare to its direction of propagation and which wave example is longitudinal? direction of vibration compared to direction of propagation wave example A at right angles ultrasound waves B at right angles ultraviolet waves C parallel ultrasound waves D parallel ultraviolet waves",
+      "parseStatus": "ok",
+      "stem": "How does the direction of vibration of a longitudinal wave compare to its direction of propagation and which wave example is longitudinal? direction of vibration compared to direction of propagation wave example",
+      "options": {
+        "A": "at right angles ultrasound waves",
+        "B": "at right angles ultraviolet waves",
+        "C": "parallel ultrasound waves",
+        "D": "parallel ultraviolet waves"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q18.png",
+      "rawText": "The diagram shows a ray of light reflecting from a mirror. mirror x y Z Which row shows the correct names for x, y and Z? x y Z A angle of incidence angle of reflection normal B angle of incidence angle of reflection principal focus C angle of reflection angle of refraction normal D angle of reflection angle of refraction principal focus",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light reflecting from a mirror. mirror x y Z Which row shows the correct names for x, y and Z? x y Z",
+      "options": {
+        "A": "angle of incidence angle of reflection normal",
+        "B": "angle of incidence angle of reflection principal focus",
+        "C": "angle of reflection angle of refraction normal",
+        "D": "angle of reflection angle of refraction principal focus"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q19.png",
+      "rawText": "A converging lens forms an image of an object placed in front of it. object image F F What are the characteristics of the image? A real, inverted, diminished B real, upright, enlarged C virtual, inverted, diminished D virtual, upright, enlarged",
+      "parseStatus": "ok",
+      "stem": "A converging lens forms an image of an object placed in front of it. object image F F What are the characteristics of the image?",
+      "options": {
+        "A": "real, inverted, diminished",
+        "B": "real, upright, enlarged",
+        "C": "virtual, inverted, diminished",
+        "D": "virtual, upright, enlarged"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q20.png",
+      "rawText": "White light can be split into different colours by passing it through a prism. What is the name of this process? A diffraction B dispersion C reflection D refraction",
+      "parseStatus": "ok",
+      "stem": "White light can be split into different colours by passing it through a prism. What is the name of this process?",
+      "options": {
+        "A": "diffraction",
+        "B": "dispersion",
+        "C": "reflection",
+        "D": "refraction"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q21.png",
+      "rawText": "Excessive exposure to some regions of the electromagnetic spectrum can cause harmful effects to people. Which regions cause mutation of cells in the body, skin burns and internal heating of body cells? mutation of cells skin burns internal heating of body cells A radio waves infrared visible light B radio waves ultraviolet microwaves C X-rays infrared microwaves D X-rays ultraviolet visible light",
+      "parseStatus": "ok",
+      "stem": "Excessive exposure to some regions of the electromagnetic spectrum can cause harmful effects to people. Which regions cause mutation of cells in the body, skin burns and internal heating of body cells? mutation of cells skin burns internal heating of body cells",
+      "options": {
+        "A": "radio waves infrared visible light",
+        "B": "radio waves ultraviolet microwaves",
+        "C": "X-rays infrared microwaves",
+        "D": "X-rays ultraviolet visible light"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q22.png",
+      "rawText": "A pulse of sound is produced at the bottom of a boat. The sound travels through the water and is reflected from a shoal of fish. The sound reaches the boat again 1.2 s after it is produced. The speed of sound in the water is 1500 m / s. shoal of fish boat How far below the bottom of the boat is the shoal of fish? A 450 m B 900 m C 1800 m D 3600 m",
+      "parseStatus": "ok",
+      "stem": "A pulse of sound is produced at the bottom of a boat. The sound travels through the water and is reflected from a shoal of fish. The sound reaches the boat again 1.2 s after it is produced. The speed of sound in the water is 1500 m / s. shoal of fish boat How far below the bottom of the boat is the shoal of fish?",
+      "options": {
+        "A": "450 m",
+        "B": "900 m",
+        "C": "1800 m",
+        "D": "3600 m"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q23.png",
+      "rawText": "The frequency of a sound wave increases from 31 000 Hz to 32 000 Hz. What is the nature of the wave and how does it sound to a human with normal hearing? A It is a longitudinal wave with a decreasing pitch. B It is a transverse wave with an increasing pitch. C It is a longitudinal wave that cannot be heard by a human with normal hearing. D It is a transverse wave that cannot be heard by a human with normal hearing.",
+      "parseStatus": "ok",
+      "stem": "The frequency of a sound wave increases from 31 000 Hz to 32 000 Hz. What is the nature of the wave and how does it sound to a human with normal hearing?",
+      "options": {
+        "A": "It is a longitudinal wave with a decreasing pitch.",
+        "B": "It is a transverse wave with an increasing pitch.",
+        "C": "It is a longitudinal wave that cannot be heard by a human with normal hearing.",
+        "D": "It is a transverse wave that cannot be heard by a human with normal hearing."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q24.png",
+      "rawText": "Small compasses are used to determine the direction of a magnetic field. Which diagram shows the direction that the compass needles point when placed near the N and S poles of a bar magnet? S N A S N B S N C S N D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q25.png",
+      "rawText": "A metal bar is placed inside a current-carrying coil, as shown in diagram 1. There is a small current in the coil. The bar holds a few nails, as shown in diagram 2. diagram 1 diagram 2 nails When there is no current in the coil, the nails drop off. Which row is correct? metal from which the bar is made effect of a larger current in the coil A soft iron it makes no difference B soft iron the bar holds more nails C steel it makes no difference D steel the bar holds more nails",
+      "parseStatus": "ok",
+      "stem": "A metal bar is placed inside a current-carrying coil, as shown in diagram 1. There is a small current in the coil. The bar holds a few nails, as shown in diagram 2. diagram 1 diagram 2 nails When there is no current in the coil, the nails drop off. Which row is correct? metal from which the bar is made effect of a larger current in the coil",
+      "options": {
+        "A": "soft iron it makes no difference",
+        "B": "soft iron the bar holds more nails",
+        "C": "steel it makes no difference",
+        "D": "steel the bar holds more nails"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q26.png",
+      "rawText": "There is a current I in a resistor of resistance R. The potential difference (p.d.) across the resistor is V. Which equation gives the power P dissipated by the resistor? A P = IR B P = IV C P = R I D P = V I",
+      "parseStatus": "ok",
+      "stem": "There is a current I in a resistor of resistance R. The potential difference (p.d.) across the resistor is V. Which equation gives the power P dissipated by the resistor?",
+      "options": {
+        "A": "P = IR",
+        "B": "P = IV",
+        "C": "P = R I",
+        "D": "P = V I"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q27.png",
+      "rawText": "A student tests the electrical conduction of four materials. ● aluminium ● iron ● plastic ● silver Which materials are good conductors of electricity? A aluminium, iron and silver B aluminium and silver only C iron, silver and plastic D plastic only",
+      "parseStatus": "ok",
+      "stem": "A student tests the electrical conduction of four materials. ● aluminium ● iron ● plastic ● silver Which materials are good conductors of electricity?",
+      "options": {
+        "A": "aluminium, iron and silver",
+        "B": "aluminium and silver only",
+        "C": "iron, silver and plastic",
+        "D": "plastic only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q28.png",
+      "rawText": "This question is about the potential difference (p.d.) across, and the current in, a variable resistor. p.d. variable resistor current The resistance of the variable resistor is increased. Which statement is correct? A The current can remain constant if the p.d. is decreased. B The current can remain constant if the p.d. is increased. C The p.d. can remain constant if the current is kept constant. D The p.d. can remain constant if the current is increased.",
+      "parseStatus": "ok",
+      "stem": "This question is about the potential difference (p.d.) across, and the current in, a variable resistor. p.d. variable resistor current The resistance of the variable resistor is increased. Which statement is correct?",
+      "options": {
+        "A": "The current can remain constant if the p.d. is decreased.",
+        "B": "The current can remain constant if the p.d. is increased.",
+        "C": "The p.d. can remain constant if the current is kept constant.",
+        "D": "The p.d. can remain constant if the current is increased."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q29.png",
+      "rawText": "Diagram 1 shows a resistor connected in a circuit. Diagram 2 shows an identical resistor connected in parallel with the first resistor. diagram 1 diagram 2 What is the combined resistance of the two resistors in diagram 2? A greater than in the circuit of diagram 1 B less than in the circuit of diagram 1, but greater than zero C the same as in the circuit of diagram 1 D zero",
+      "parseStatus": "ok",
+      "stem": "Diagram 1 shows a resistor connected in a circuit. Diagram 2 shows an identical resistor connected in parallel with the first resistor. diagram 1 diagram 2 What is the combined resistance of the two resistors in diagram 2?",
+      "options": {
+        "A": "greater than in the circuit of diagram 1",
+        "B": "less than in the circuit of diagram 1, but greater than zero",
+        "C": "the same as in the circuit of diagram 1",
+        "D": "zero"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q30.png",
+      "rawText": "Where must a fuse be connected in a mains electric circuit? A the earth wire only B the live wire only C the neutral wire only D the live wire and the earth wire",
+      "parseStatus": "ok",
+      "stem": "Where must a fuse be connected in a mains electric circuit?",
+      "options": {
+        "A": "the earth wire only",
+        "B": "the live wire only",
+        "C": "the neutral wire only",
+        "D": "the live wire and the earth wire"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q31.png",
+      "rawText": "Which graph does not show the correct trend for the force F causing the turning effect on the coil in a d.c. motor? A F 0 0 number of turns on the coil B F 0 0 current C F 0 0 strength of the magnetic field D F 0 0 weight of the motor",
+      "parseStatus": "ok",
+      "stem": "Which graph does not show the correct trend for the force F causing the turning effect on the coil in a d.c. motor?",
+      "options": {
+        "A": "F 0 0 number of turns on the coil",
+        "B": "F 0 0 current",
+        "C": "F 0 0 strength of the magnetic field",
+        "D": "F 0 0 weight of the motor"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q32.png",
+      "rawText": "Which statement about the structure of an atom is correct? A Negative electrons surround a neutral nucleus. B Negative electrons surround a positive nucleus. C Positive electrons surround a neutral nucleus. D Positive electrons surround a negative nucleus.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the structure of an atom is correct?",
+      "options": {
+        "A": "Negative electrons surround a neutral nucleus.",
+        "B": "Negative electrons surround a positive nucleus.",
+        "C": "Positive electrons surround a neutral nucleus.",
+        "D": "Positive electrons surround a negative nucleus."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q33.png",
+      "rawText": "Four statements about isotopes of a certain element are listed. Which statement about the isotopes must be correct? A They are radioactive. B They are unstable. C They have the same number of neutrons. D They have the same number of protons.",
+      "parseStatus": "ok",
+      "stem": "Four statements about isotopes of a certain element are listed. Which statement about the isotopes must be correct?",
+      "options": {
+        "A": "They are radioactive.",
+        "B": "They are unstable.",
+        "C": "They have the same number of neutrons.",
+        "D": "They have the same number of protons."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q34.png",
+      "rawText": "What makes a contribution to a person’s annual dose of ionising radiation? A food and drink B greenhouse gases C mobile phone masts D radio and TV transmissions",
+      "parseStatus": "ok",
+      "stem": "What makes a contribution to a person’s annual dose of ionising radiation?",
+      "options": {
+        "A": "food and drink",
+        "B": "greenhouse gases",
+        "C": "mobile phone masts",
+        "D": "radio and TV transmissions"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q35.png",
+      "rawText": "The emissions from a radioactive source pass through a sheet of lead that is 10 mm thick. Which type of radiation is emitted from the source and how is the radiation affected by an electric field? type of radiation effect of electric field on radiation A  radiation deflected B  radiation not deflected C  radiation deflected D  radiation not deflected",
+      "parseStatus": "ok",
+      "stem": "The emissions from a radioactive source pass through a sheet of lead that is 10 mm thick. Which type of radiation is emitted from the source and how is the radiation affected by an electric field? type of radiation effect of electric field on radiation",
+      "options": {
+        "A": " radiation deflected",
+        "B": " radiation not deflected",
+        "C": " radiation deflected",
+        "D": " radiation not deflected"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q36.png",
+      "rawText": "Radioactive waste is often mixed with liquid glass. This mixture solidifies and is stored in steel drums. Why is this process used to store radioactive waste? A It reduces the decay rate. B It reduces the half-life of the waste. C The waste is contained in a solid block so it cannot leak out. D The glass is transparent so the waste can be seen.",
+      "parseStatus": "ok",
+      "stem": "Radioactive waste is often mixed with liquid glass. This mixture solidifies and is stored in steel drums. Why is this process used to store radioactive waste?",
+      "options": {
+        "A": "It reduces the decay rate.",
+        "B": "It reduces the half-life of the waste.",
+        "C": "The waste is contained in a solid block so it cannot leak out.",
+        "D": "The glass is transparent so the waste can be seen."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q37.png",
+      "rawText": "Which planet is classed as a rocky planet? A Jupiter B Saturn C Uranus D Venus",
+      "parseStatus": "ok",
+      "stem": "Which planet is classed as a rocky planet?",
+      "options": {
+        "A": "Jupiter",
+        "B": "Saturn",
+        "C": "Uranus",
+        "D": "Venus"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q38.png",
+      "rawText": "What is the cause of the phases of the Moon? A the movement of the Earth around the Sun B the movement of the Moon around the Sun C the movement of the Moon around the Earth D the movement of the Sun around the Moon",
+      "parseStatus": "ok",
+      "stem": "What is the cause of the phases of the Moon?",
+      "options": {
+        "A": "the movement of the Earth around the Sun",
+        "B": "the movement of the Moon around the Sun",
+        "C": "the movement of the Moon around the Earth",
+        "D": "the movement of the Sun around the Moon"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q39.png",
+      "rawText": "What makes up the Universe? A many billions of galaxies B Mercury, Venus, the Earth, Mars, Jupiter, Saturn, Uranus and Neptune only C the Sun, the Earth and the Moon only D the Solar System only",
+      "parseStatus": "ok",
+      "stem": "What makes up the Universe?",
+      "options": {
+        "A": "many billions of galaxies",
+        "B": "Mercury, Venus, the Earth, Mars, Jupiter, Saturn, Uranus and Neptune only",
+        "C": "the Sun, the Earth and the Moon only",
+        "D": "the Solar System only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_12/q40.png",
+      "rawText": "The Sun mostly consists of which gases? A helium and hydrogen B helium and nitrogen C hydrogen and oxygen D oxygen and nitrogen",
+      "parseStatus": "ok",
+      "stem": "The Sun mostly consists of which gases?",
+      "options": {
+        "A": "helium and hydrogen",
+        "B": "helium and nitrogen",
+        "C": "hydrogen and oxygen",
+        "D": "oxygen and nitrogen"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

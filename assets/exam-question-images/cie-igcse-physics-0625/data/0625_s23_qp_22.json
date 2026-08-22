@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0625_s23_qp_22.pdf",
+  "markScheme": "0625_s23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q01.png",
+      "rawText": "Forces of 3 N and 4 N act at right angles, as shown. O X Z Y 3 N 4 N What is the resultant force? A 1 N along XZ B 5 N along XZ C 5 N along OY D 7 N along OY",
+      "parseStatus": "ok",
+      "stem": "Forces of 3 N and 4 N act at right angles, as shown. O X Z Y 3 N 4 N What is the resultant force?",
+      "options": {
+        "A": "1 N along XZ",
+        "B": "5 N along XZ",
+        "C": "5 N along OY",
+        "D": "7 N along OY"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q02.png",
+      "rawText": "A light ball is held at rest at the top of a tall cliff. It is released and falls through the air, eventually reaching its terminal velocity. Which row describes the behaviour of the ball as it descends? the initial acceleration of the ball the final acceleration of the ball A 0 0 B 0 g C g 0 D g g",
+      "parseStatus": "ok",
+      "stem": "A light ball is held at rest at the top of a tall cliff. It is released and falls through the air, eventually reaching its terminal velocity. Which row describes the behaviour of the ball as it descends? the initial acceleration of the ball the final acceleration of the ball",
+      "options": {
+        "A": "0 0",
+        "B": "0 g",
+        "C": "g 0",
+        "D": "g g"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q03.png",
+      "rawText": "The graph represents the motion of a car. 1 0 2 3",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q04.png",
+      "rawText": "Which statement about mass or weight is not correct? A Masses can be compared using a balance. B Mass is a force. C Weights can be compared using a balance. D Weight is a force.",
+      "parseStatus": "ok",
+      "stem": "Which statement about mass or weight is not correct?",
+      "options": {
+        "A": "Masses can be compared using a balance.",
+        "B": "Mass is a force.",
+        "C": "Weights can be compared using a balance.",
+        "D": "Weight is a force."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q05.png",
+      "rawText": "A sphere P, made of steel, has a weight of 10 N on Earth. Another sphere Q, also made of steel, has a weight of 10 N on Mars. The gravitational field strength on Earth is greater than the gravitational field strength on Mars. Which statement is correct? A The mass of sphere P is the same as the mass of sphere Q. B The mass of sphere P is less than the mass of sphere Q. C On Mars, the weight of sphere P is the same as the weight of sphere Q. D On Earth, the weight of sphere Q is less than 10 N.",
+      "parseStatus": "ok",
+      "stem": "A sphere P, made of steel, has a weight of 10 N on Earth. Another sphere Q, also made of steel, has a weight of 10 N on Mars. The gravitational field strength on Earth is greater than the gravitational field strength on Mars. Which statement is correct?",
+      "options": {
+        "A": "The mass of sphere P is the same as the mass of sphere Q.",
+        "B": "The mass of sphere P is less than the mass of sphere Q.",
+        "C": "On Mars, the weight of sphere P is the same as the weight of sphere Q.",
+        "D": "On Earth, the weight of sphere Q is less than 10 N."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q06.png",
+      "rawText": "Which two quantities must be known to determine the density of a material? A mass and area B mass and volume C weight and area D weight and volume",
+      "parseStatus": "ok",
+      "stem": "Which two quantities must be known to determine the density of a material?",
+      "options": {
+        "A": "mass and area",
+        "B": "mass and volume",
+        "C": "weight and area",
+        "D": "weight and volume"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q07.png",
+      "rawText": "A truck is towing a car along a straight horizontal road at a constant speed. rope car truck The rope breaks. Which row gives the direction of the initial acceleration of the truck after the rope breaks and the reason for the acceleration? direction of acceleration of the truck reason A left the driving force is greater than the resistive forces on the truck B left the driving force is smaller than the resistive forces on the truck C right the driving force is greater than the resistive forces on the truck D right the driving force is smaller than the resistive forces on the truck",
+      "parseStatus": "ok",
+      "stem": "A truck is towing a car along a straight horizontal road at a constant speed. rope car truck The rope breaks. Which row gives the direction of the initial acceleration of the truck after the rope breaks and the reason for the acceleration? direction of acceleration of the truck reason",
+      "options": {
+        "A": "left the driving force is greater than the resistive forces on the truck",
+        "B": "left the driving force is smaller than the resistive forces on the truck",
+        "C": "right the driving force is greater than the resistive forces on the truck",
+        "D": "right the driving force is smaller than the resistive forces on the truck"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q08.png",
+      "rawText": "A uniform beam is pivoted at the centre and two identical masses, X and Y, are placed so that the beam balances. A smaller mass is then added at the position shown. pivot X Y position of small mass How can the masses be positioned so the beam balances again? A Move X away from the pivot. B Move X towards the pivot. C Move Y towards the pivot. D Move the small mass away from the pivot.",
+      "parseStatus": "ok",
+      "stem": "A uniform beam is pivoted at the centre and two identical masses, X and Y, are placed so that the beam balances.",
+      "options": {
+        "A": "smaller mass is then added at the position shown. pivot X Y position of small mass How can the masses be positioned so the beam balances again? A Move X away from the pivot.",
+        "B": "Move X towards the pivot.",
+        "C": "Move Y towards the pivot.",
+        "D": "Move the small mass away from the pivot."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q09.png",
+      "rawText": "A resultant force of 2.0 N acts on an object of mass 3.0 kg for 6.0 s. What is the change in velocity of the object? A 0.25 m / s B 1.0 m / s C 4.0 m / s D 36 m / s",
+      "parseStatus": "ok",
+      "stem": "A resultant force of 2.0 N acts on an object of mass 3.0 kg for 6.0 s. What is the change in velocity of the object?",
+      "options": {
+        "A": "0.25 m / s",
+        "B": "1.0 m / s",
+        "C": "4.0 m / s",
+        "D": "36 m / s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q10.png",
+      "rawText": "The diagram shows the energy stores for a mobile (cell) phone and how the energy is transferred between stores. chemical energy internal energy kinetic energy ? sound heating What describes how the chemical energy is transferred? A electrical work done B mechanical work done C electromagnetic waves D sound waves",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the energy stores for a mobile (cell) phone and how the energy is transferred between stores. chemical energy internal energy kinetic energy ? sound heating What describes how the chemical energy is transferred?",
+      "options": {
+        "A": "electrical work done",
+        "B": "mechanical work done",
+        "C": "electromagnetic waves",
+        "D": "sound waves"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q11.png",
+      "rawText": "A wind turbine is 30% efficient and has an output of 2.5 MW of electrical power. What is the power input to the turbine? A 0.75 MW B 8.3 MW C 75 MW D 83 MW",
+      "parseStatus": "ok",
+      "stem": "A wind turbine is 30% efficient and has an output of 2.5 MW of electrical power. What is the power input to the turbine?",
+      "options": {
+        "A": "0.75 MW",
+        "B": "8.3 MW",
+        "C": "75 MW",
+        "D": "83 MW"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q12.png",
+      "rawText": "Which two physical quantities must be used to calculate the power developed by a student running up a flight of steps? A force exerted and the vertical height of the steps only B force exerted and the time taken only C work done and the vertical height of the steps only D work done and the time taken only",
+      "parseStatus": "ok",
+      "stem": "Which two physical quantities must be used to calculate the power developed by a student running up a flight of steps?",
+      "options": {
+        "A": "force exerted and the vertical height of the steps only",
+        "B": "force exerted and the time taken only",
+        "C": "work done and the vertical height of the steps only",
+        "D": "work done and the time taken only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q13.png",
+      "rawText": "The density of sea water is 1030 kg / m3. The gravitational field strength on the Earth is 9.8 N / kg. Atmospheric pressure is 101 000 Pa. At which depth in sea water is the total pressure due to the atmosphere and the water equal to 513 000 Pa? A 40.8 m B 50.8 m C 400 m D 498 m",
+      "parseStatus": "ok",
+      "stem": "The density of sea water is 1030 kg / m3. The gravitational field strength on the Earth is 9.8 N / kg. Atmospheric pressure is 101 000 Pa. At which depth in sea water is the total pressure due to the atmosphere and the water equal to 513 000 Pa?",
+      "options": {
+        "A": "40.8 m",
+        "B": "50.8 m",
+        "C": "400 m",
+        "D": "498 m"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q14.png",
+      "rawText": "Four students describe the phrase ‘absolute zero’ during a lesson on the particle model. Which student is correct? A This is the lowest possible temperature. B Particles in a solid start vibrating. C Particles do not have any weight. D Particles have the least gravitational potential energy.",
+      "parseStatus": "ok",
+      "stem": "Four students describe the phrase ‘absolute zero’ during a lesson on the particle model. Which student is correct?",
+      "options": {
+        "A": "This is the lowest possible temperature.",
+        "B": "Particles in a solid start vibrating.",
+        "C": "Particles do not have any weight.",
+        "D": "Particles have the least gravitational potential energy."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q15.png",
+      "rawText": "Four students are asked to state and explain the relative magnitudes of the thermal expansion of solids and gases. Which student is correct? A Gases expand more than solids because the molecules in a gas are in random motion. B Gases expand more than solids because the attractive forces between molecules are much weaker in gases. C Solids expand more than gases because the molecules are closer together in solids. D Solids expand more than gases because the molecules in a solid are in a regular pattern.",
+      "parseStatus": "ok",
+      "stem": "Four students are asked to state and explain the relative magnitudes of the thermal expansion of solids and gases. Which student is correct?",
+      "options": {
+        "A": "Gases expand more than solids because the molecules in a gas are in random motion.",
+        "B": "Gases expand more than solids because the attractive forces between molecules are much weaker in gases.",
+        "C": "Solids expand more than gases because the molecules are closer together in solids.",
+        "D": "Solids expand more than gases because the molecules in a solid are in a regular pattern."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q16.png",
+      "rawText": "Four cups A, B, C and D contain hot coffee. Which cup keeps the coffee warm the longest? the outside surface of the cup the top of the cup A black covered with a lid B black no lid C white covered with a lid D white no lid",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q17.png",
+      "rawText": "The diagram shows a wave. 8 cm 4 cm 3 cm 6 cm What are the amplitude and the wavelength of this wave? amplitude / cm wavelength / cm A 3 4 B 3 8 C 6 4 D 6 8",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a wave. 8 cm 4 cm 3 cm 6 cm What are the amplitude and the wavelength of this wave? amplitude / cm wavelength / cm",
+      "options": {
+        "A": "3 4",
+        "B": "3 8",
+        "C": "6 4",
+        "D": "6 8"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q18.png",
+      "rawText": "Optical fibres are used to transmit digital signals using infrared radiation. The average refractive index of the fibres is 1.50. Which row describes a digital signal and gives the speed of infrared radiation in the fibres? digital signal speed of infrared radiation in the fibres m / s A a signal that consists of only two values 2.0 × 108 B a signal that consists of only two values 4.5 × 108 C a signal that consists of a continuous range of values 2.0 × 108 D a signal that consists of a continuous range of values 4.5 × 108",
+      "parseStatus": "ok",
+      "stem": "Optical fibres are used to transmit digital signals using infrared radiation. The average refractive index of the fibres is 1.50. Which row describes a digital signal and gives the speed of infrared radiation in the fibres? digital signal speed of infrared radiation in the fibres m / s",
+      "options": {
+        "A": "a signal that consists of only two values 2.0 × 108",
+        "B": "a signal that consists of only two values 4.5 × 108",
+        "C": "a signal that consists of a continuous range of values 2.0 × 108",
+        "D": "a signal that consists of a continuous range of values 4.5 × 108"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q19.png",
+      "rawText": "Which statement describes monochromatic light? A light of a single frequency B light transmitted by a transparent prism C visible light D white light",
+      "parseStatus": "ok",
+      "stem": "Which statement describes monochromatic light?",
+      "options": {
+        "A": "light of a single frequency",
+        "B": "light transmitted by a transparent prism",
+        "C": "visible light",
+        "D": "white light"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q20.png",
+      "rawText": "A beam of light consists of yellow and blue light. The beam of light is incident on a glass prism. Which diagram is correct? blue yellow blue glass prism C yellow glass prism D blue yellow yellow blue glass prism A glass prism B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q21.png",
+      "rawText": "A radio station broadcasts a signal with a frequency of 89 MHz. What is the wavelength of this signal? A 3.7 µm B 3.4 m C 3.7 km D 3.4 Mm",
+      "parseStatus": "ok",
+      "stem": "A radio station broadcasts a signal with a frequency of 89 MHz. What is the wavelength of this signal?",
+      "options": {
+        "A": "3.7 µm",
+        "B": "3.4 m",
+        "C": "3.7 km",
+        "D": "3.4 Mm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q22.png",
+      "rawText": "A boy shouts and hears the echo from a tall building 2.2 s later. The speed of sound in air is 330 m / s. How far away from the boy is the building? A 150 m B 300 m C 360 m D 730 m",
+      "parseStatus": "ok",
+      "stem": "A boy shouts and hears the echo from a tall building 2.2 s later. The speed of sound in air is 330 m / s. How far away from the boy is the building?",
+      "options": {
+        "A": "150 m",
+        "B": "300 m",
+        "C": "360 m",
+        "D": "730 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q23.png",
+      "rawText": "The magnetic field of a bar magnet can be represented by magnetic field lines. Which diagram shows two magnetic field lines correctly? N S A N S B N S C N S D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q24.png",
+      "rawText": "A plastic rod is rubbed with a dry cloth. The rod becomes positively charged. Why has the rod become positively charged? A It has gained electrons. B It has gained neutrons. C It has lost electrons. D It has lost neutrons.",
+      "parseStatus": "ok",
+      "stem": "A plastic rod is rubbed with a dry cloth. The rod becomes positively charged. Why has the rod become positively charged?",
+      "options": {
+        "A": "It has gained electrons.",
+        "B": "It has gained neutrons.",
+        "C": "It has lost electrons.",
+        "D": "It has lost neutrons."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q25.png",
+      "rawText": "Which statement about electric current in a conductor is correct? A In a d.c. circuit, the electric current gradually decreases along the conductor. B In a d.c. circuit, the free electrons flow back and forth. C In an a.c. circuit, the electric current remains exactly the same all the time. D In an a.c. circuit, the flow of charge changes direction continually.",
+      "parseStatus": "ok",
+      "stem": "Which statement about electric current in a conductor is correct?",
+      "options": {
+        "A": "In a d.c. circuit, the electric current gradually decreases along the conductor.",
+        "B": "In a d.c. circuit, the free electrons flow back and forth.",
+        "C": "In an a.c. circuit, the electric current remains exactly the same all the time.",
+        "D": "In an a.c. circuit, the flow of charge changes direction continually."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q26.png",
+      "rawText": "A piece of metal wire X with a uniform diameter has resistance R. X A second piece of wire Y is made of the same metal and has a uniform diameter. Y has double the cross-sectional area of X and half the length of X. Y What is the resistance of Y? A 4 R B 2 R C R D 4R",
+      "parseStatus": "ok",
+      "stem": "A piece of metal wire X with a uniform diameter has resistance R. X",
+      "options": {
+        "A": "second piece of wire Y is made of the same metal and has a uniform diameter. Y has double the cross-sectional area of X and half the length of X. Y What is the resistance of Y? A 4 R",
+        "B": "2 R",
+        "C": "R",
+        "D": "4R"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q27.png",
+      "rawText": "An electric fire is connected to a 240 V supply and transfers energy at a rate of 1.0 kW. How much charge passes through the fire in 1.0 h? A 42 C B 250 C C 1.5 × 104 C D 2.4 × 105 C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q28.png",
+      "rawText": "Two lamps are connected in parallel. S1 S2 S3 Which switches must be closed so that both lamps light? A S1 and S2 only B S1 and S3 only C S2 and S3 only D S1, S2 and S3",
+      "parseStatus": "ok",
+      "stem": "Two lamps are connected in parallel. S1 S2 S3 Which switches must be closed so that both lamps light?",
+      "options": {
+        "A": "S1 and S2 only",
+        "B": "S1 and S3 only",
+        "C": "S2 and S3 only",
+        "D": "S1, S2 and S3"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q29.png",
+      "rawText": "The diagram shows a circuit that switches on a lamp when there is a change in the environment. Which change in the environment causes the lamp to be switched on? A a decrease in light intensity B a decrease in temperature C an increase in light intensity D an increase in temperature",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a circuit that switches on a lamp when there is a change in the environment. Which change in the environment causes the lamp to be switched on?",
+      "options": {
+        "A": "a decrease in light intensity",
+        "B": "a decrease in temperature",
+        "C": "an increase in light intensity",
+        "D": "an increase in temperature"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q30.png",
+      "rawText": "A step-down transformer is 100% efficient. It has an input voltage of 240 V a.c. and an output voltage of 60 V a.c. The current in the primary coil is 0.50 A. What is the current in the secondary coil? A 0.13 A B 0.50 A C 2.0 A D 8.0 A",
+      "parseStatus": "ok",
+      "stem": "A step-down transformer is 100% efficient. It has an input voltage of 240 V a.c. and an output voltage of 60 V a.c. The current in the primary coil is 0.50 A. What is the current in the secondary coil?",
+      "options": {
+        "A": "0.13 A",
+        "B": "0.50 A",
+        "C": "2.0 A",
+        "D": "8.0 A"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q31.png",
+      "rawText": "The diagram shows the pattern of the magnetic field due to the current I in a straight wire. I Q P X Y Which row is correct? direction of field relative strength of field A X greater at P than Q B Y greater at P than Q C X greater at Q than P D Y greater at Q than P",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the pattern of the magnetic field due to the current I in a straight wire. I Q P X Y Which row is correct? direction of field relative strength of field",
+      "options": {
+        "A": "X greater at P than Q",
+        "B": "Y greater at P than Q",
+        "C": "X greater at Q than P",
+        "D": "Y greater at Q than P"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q32.png",
+      "rawText": "In which device is the magnetic effect of a current not used? A electromagnet B loudspeaker C potential divider D relay",
+      "parseStatus": "ok",
+      "stem": "In which device is the magnetic effect of a current not used?",
+      "options": {
+        "A": "electromagnet",
+        "B": "loudspeaker",
+        "C": "potential divider",
+        "D": "relay"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q33.png",
+      "rawText": "Fission and fusion are two types of nuclear process. How does the total mass of the nuclides produced compare with the total mass of the original nuclide or nuclides in these nuclear processes? total mass of fission products compared to original nuclide total mass of fusion products compared to original nuclides A same same B more less C less more D less less",
+      "parseStatus": "ok",
+      "stem": "Fission and fusion are two types of nuclear process. How does the total mass of the nuclides produced compare with the total mass of the original nuclide or nuclides in these nuclear processes? total mass of fission products compared to original nuclide total mass of fusion products compared to original nuclides",
+      "options": {
+        "A": "same same",
+        "B": "more less",
+        "C": "less more",
+        "D": "less less"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q34.png",
+      "rawText": "The table shows the composition of three different nuclei. nucleus number of protons number of neutrons X 3 3 Y 3 4 Z 4 3 Which nuclei are isotopes of the same element? A X, Y and Z B X and Y only C X and Z only D Y and Z only",
+      "parseStatus": "ok",
+      "stem": "The table shows the composition of three different nuclei. nucleus number of protons number of neutrons X 3 3 Y 3 4 Z 4 3 Which nuclei are isotopes of the same element?",
+      "options": {
+        "A": "X, Y and Z",
+        "B": "X and Y only",
+        "C": "X and Z only",
+        "D": "Y and Z only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q35.png",
+      "rawText": "Which change occurs in the nucleus of a radioactive atom during β-emission? A A neutron transforms into a proton and an electron. B A neutron transforms into a proton only. C A proton transforms into a neutron and an electron. D A proton transforms into a neutron only.",
+      "parseStatus": "ok",
+      "stem": "Which change occurs in the nucleus of a radioactive atom during β-emission?",
+      "options": {
+        "A": "A neutron transforms into a proton and an electron.",
+        "B": "A neutron transforms into a proton only.",
+        "C": "A proton transforms into a neutron and an electron.",
+        "D": "A proton transforms into a neutron only."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q36.png",
+      "rawText": "A radioactive isotope has a half-life of 8 days. A detector close to a sample of this isotope gives a count rate of 200 counts per minute. Without the source, the background count is 20 counts per minute. What is the count rate due to the source after 8 days? A 80 counts per minute B 90 counts per minute C 100 counts per minute D 110 counts per minute",
+      "parseStatus": "ok",
+      "stem": "A radioactive isotope has a half-life of 8 days.",
+      "options": {
+        "A": "detector close to a sample of this isotope gives a count rate of 200 counts per minute. Without the source, the background count is 20 counts per minute. What is the count rate due to the source after 8 days? A 80 counts per minute",
+        "B": "90 counts per minute",
+        "C": "100 counts per minute",
+        "D": "110 counts per minute"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q37.png",
+      "rawText": "Which statement about the Solar System is correct? A All the planets are rocky. B Only the Earth has a moon. C Pluto is a dwarf planet. D There are many stars in the Solar System.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Solar System is correct?",
+      "options": {
+        "A": "All the planets are rocky.",
+        "B": "Only the Earth has a moon.",
+        "C": "Pluto is a dwarf planet.",
+        "D": "There are many stars in the Solar System."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q38.png",
+      "rawText": "Comets are bodies which orbit the Sun in the Solar System. What is the shape of the orbit and how is the Sun positioned within the orbit? shape of orbit position of the Sun A circular centre of orbit B circular not at centre of orbit C elliptical centre of orbit D elliptical not at centre of orbit",
+      "parseStatus": "ok",
+      "stem": "Comets are bodies which orbit the Sun in the Solar System. What is the shape of the orbit and how is the Sun positioned within the orbit? shape of orbit position of the Sun",
+      "options": {
+        "A": "circular centre of orbit",
+        "B": "circular not at centre of orbit",
+        "C": "elliptical centre of orbit",
+        "D": "elliptical not at centre of orbit"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q39.png",
+      "rawText": "Which nuclear reaction produces the release of energy to power a star? A nuclear fission of helium into hydrogen B nuclear fission of hydrogen into helium C nuclear fusion of helium into hydrogen D nuclear fusion of hydrogen into helium",
+      "parseStatus": "ok",
+      "stem": "Which nuclear reaction produces the release of energy to power a star?",
+      "options": {
+        "A": "nuclear fission of helium into hydrogen",
+        "B": "nuclear fission of hydrogen into helium",
+        "C": "nuclear fusion of helium into hydrogen",
+        "D": "nuclear fusion of hydrogen into helium"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_22/q40.png",
+      "rawText": "What is the definition of the Hubble constant? A the ratio of the speed at which a galaxy is receding from the Earth to its distance from the Earth B the value of the change in wavelength of the galaxy’s starlight due to redshift C the constant used to represent the rate of expansion of the Universe in all directions D the estimated constant equal to the age of the Universe",
+      "parseStatus": "ok",
+      "stem": "What is the definition of the Hubble constant?",
+      "options": {
+        "A": "the ratio of the speed at which a galaxy is receding from the Earth to its distance from the Earth",
+        "B": "the value of the change in wavelength of the galaxy’s starlight due to redshift",
+        "C": "the constant used to represent the rate of expansion of the Universe in all directions",
+        "D": "the estimated constant equal to the age of the Universe"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

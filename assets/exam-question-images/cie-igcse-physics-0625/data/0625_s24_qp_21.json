@@ -1,0 +1,675 @@
+{
+  "questionPaper": "0625_s24_qp_21.pdf",
+  "markScheme": "0625_s24_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [
+    14
+  ],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q01.png",
+      "rawText": "In which row are quantities correctly categorised into scalar quantities and vector quantities? scalar quantities vector quantities A mass and energy weight and acceleration B gravitational field strength and time force and electric field strength C speed and momentum distance and force D distance and energy velocity and temperature",
+      "parseStatus": "ok",
+      "stem": "In which row are quantities correctly categorised into scalar quantities and vector quantities? scalar quantities vector quantities",
+      "options": {
+        "A": "mass and energy weight and acceleration",
+        "B": "gravitational field strength and time force and electric field strength",
+        "C": "speed and momentum distance and force",
+        "D": "distance and energy velocity and temperature"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q02.png",
+      "rawText": "Which name is given to the quantity of matter in an object? A density B mass C volume D weight",
+      "parseStatus": "ok",
+      "stem": "Which name is given to the quantity of matter in an object?",
+      "options": {
+        "A": "density",
+        "B": "mass",
+        "C": "volume",
+        "D": "weight"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q03.png",
+      "rawText": "A body is moved from place X to place Y where the gravitational field strength is different. What happens to its mass and to its weight due to the move? mass weight A changes changes B changes stays the same C stays the same changes D stays the same stays the same",
+      "parseStatus": "ok",
+      "stem": "A body is moved from place X to place Y where the gravitational field strength is different. What happens to its mass and to its weight due to the move? mass weight",
+      "options": {
+        "A": "changes changes",
+        "B": "changes stays the same",
+        "C": "stays the same changes",
+        "D": "stays the same stays the same"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q04.png",
+      "rawText": "The mass of an object is 2.5 kg. The volume of the object is 480 cm3. What is the density of the object? A 5.2  10–3 g / cm3 B 5.2 g / cm3 C 190 g / cm3 D 1.2  103 g / cm3",
+      "parseStatus": "ok",
+      "stem": "The mass of an object is 2.5 kg. The volume of the object is 480 cm3. What is the density of the object?",
+      "options": {
+        "A": "5.2  10–3 g / cm3",
+        "B": "5.2 g / cm3",
+        "C": "190 g / cm3",
+        "D": "1.2  103 g / cm3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q05.png",
+      "rawText": "Four objects each have two forces acting on them. Which object is in equilibrium? 1.0 N 1.0 N A 1.0 N 1.0 N B 1.0 N 1.0 N C 1.0 N 1.0 N D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q06.png",
+      "rawText": "A ball of mass m falls vertically and hits a hard surface. Its speed on hitting the surface is v1. It rebounds vertically upwards with speed v2. What is the change in momentum of the ball? A mv1 B mv2 C m(v1 + v2) D m(v2 – v1)",
+      "parseStatus": "ok",
+      "stem": "A ball of mass m falls vertically and hits a hard surface. Its speed on hitting the surface is v1. It rebounds vertically upwards with speed v2. What is the change in momentum of the ball?",
+      "options": {
+        "A": "mv1",
+        "B": "mv2",
+        "C": "m(v1 + v2)",
+        "D": "m(v2 – v1)"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q07.png",
+      "rawText": "A stone is dropped from a tall tower and falls a distance of 50 m to the ground. The stone has a mass of 3.0 kg. At which speed does the stone hit the ground? A 17 m / s B 31 m / s C 54 m / s D 150 m / s",
+      "parseStatus": "ok",
+      "stem": "A stone is dropped from a tall tower and falls a distance of 50 m to the ground. The stone has a mass of 3.0 kg. At which speed does the stone hit the ground?",
+      "options": {
+        "A": "17 m / s",
+        "B": "31 m / s",
+        "C": "54 m / s",
+        "D": "150 m / s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q08.png",
+      "rawText": "A coal-fired power station generates electricity. Coal is burned and the energy released is used to boil water. The steam from the water makes the generator move and this produces electricity. Which row gives the name of the energy store in the coal and the energy store of the moving generator? coal generator A chemical hydroelectric B chemical kinetic C geothermal hydroelectric D geothermal kinetic",
+      "parseStatus": "ok",
+      "stem": "A coal-fired power station generates electricity. Coal is burned and the energy released is used to boil water. The steam from the water makes the generator move and this produces electricity. Which row gives the name of the energy store in the coal and the energy store of the moving generator? coal generator",
+      "options": {
+        "A": "chemical hydroelectric",
+        "B": "chemical kinetic",
+        "C": "geothermal hydroelectric",
+        "D": "geothermal kinetic"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q09.png",
+      "rawText": "A man puts some ice into a glass of water on a warm day. After a short time, he notices that the ice disappears and that water droplets appear on the outside of the glass. ice droplets of water Which two changes of state are taking place? A condensation and freezing B condensation and melting C boiling and melting D freezing and evaporation",
+      "parseStatus": "ok",
+      "stem": "A man puts some ice into a glass of water on a warm day. After a short time, he notices that the ice disappears and that water droplets appear on the outside of the glass. ice droplets of water Which two changes of state are taking place?",
+      "options": {
+        "A": "condensation and freezing",
+        "B": "condensation and melting",
+        "C": "boiling and melting",
+        "D": "freezing and evaporation"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q10.png",
+      "rawText": "Gas of volume 200 cm3 is trapped inside a container by a piston. The piston is pushed to the right and the volume of the gas decreases to 100 cm3. The temperature of the gas remains constant. piston container trapped gas Which row states the effect that this has on the kinetic energy of the gas particles and the force per unit area exerted by the particles colliding with the inside walls of the container? kinetic energy force per unit area A doubles doubles B doubles stays the same C stays the same doubles D stays the same stays the same",
+      "parseStatus": "ok",
+      "stem": "Gas of volume 200 cm3 is trapped inside a container by a piston. The piston is pushed to the right and the volume of the gas decreases to 100 cm3. The temperature of the gas remains constant. piston container trapped gas Which row states the effect that this has on the kinetic energy of the gas particles and the force per unit area exerted by the particles colliding with the inside walls of the container? kinetic energy force per unit area",
+      "options": {
+        "A": "doubles doubles",
+        "B": "doubles stays the same",
+        "C": "stays the same doubles",
+        "D": "stays the same stays the same"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q11.png",
+      "rawText": "Which graph shows the relationship between the pressure and volume of a fixed mass of gas at constant temperature? pressure volume 0 A 0 pressure volume 0 B 0 pressure volume 0 C 0 pressure volume 0 D 0",
+      "parseStatus": "ok",
+      "stem": "Which graph shows the relationship between the pressure and volume of a fixed mass of gas at constant temperature? pressure volume 0",
+      "options": {
+        "A": "0 pressure volume 0",
+        "B": "0 pressure volume 0",
+        "C": "0 pressure volume 0",
+        "D": "0"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q12.png",
+      "rawText": "During evaporation of a liquid, the most energetic particles escape. The temperature of the remaining liquid changes. Which row identifies where these particles escape from and describes the temperature change? place from which the particles escape temperature of remaining liquid A body of the liquid decreases B body of the liquid increases C surface of the liquid decreases D surface of the liquid increases",
+      "parseStatus": "ok",
+      "stem": "During evaporation of a liquid, the most energetic particles escape. The temperature of the remaining liquid changes. Which row identifies where these particles escape from and describes the temperature change? place from which the particles escape temperature of remaining liquid",
+      "options": {
+        "A": "body of the liquid decreases",
+        "B": "body of the liquid increases",
+        "C": "surface of the liquid decreases",
+        "D": "surface of the liquid increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q13.png",
+      "rawText": "Wet clothes are put out on a line to allow the water in the clothes to evaporate. Which type of weather would cause the water to evaporate most quickly? A a cold day with no wind B a cold day with wind C a hot day with no wind D a hot day with wind",
+      "parseStatus": "ok",
+      "stem": "Wet clothes are put out on a line to allow the water in the clothes to evaporate. Which type of weather would cause the water to evaporate most quickly?",
+      "options": {
+        "A": "a cold day with no wind",
+        "B": "a cold day with wind",
+        "C": "a hot day with no wind",
+        "D": "a hot day with wind"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q14.png",
+      "rawText": "Due to an issue with question 14, the question has been removed from the question paper.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": null,
+      "answerLetter": null,
+      "answerStatus": "discounted"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q15.png",
+      "rawText": "A solar water heater is designed to absorb energy from sunlight. Which surface texture and colour would be best for the solar water heater? A dull black B shiny black C dull white D shiny white",
+      "parseStatus": "ok",
+      "stem": "A solar water heater is designed to absorb energy from sunlight. Which surface texture and colour would be best for the solar water heater?",
+      "options": {
+        "A": "dull black",
+        "B": "shiny black",
+        "C": "dull white",
+        "D": "shiny white"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q16.png",
+      "rawText": "Which statement about waves is correct? A Waves do not transfer either energy or matter. B Waves transfer both energy and matter. C Waves transfer energy without transferring matter. D Waves transfer matter without transferring energy.",
+      "parseStatus": "ok",
+      "stem": "Which statement about waves is correct?",
+      "options": {
+        "A": "Waves do not transfer either energy or matter.",
+        "B": "Waves transfer both energy and matter.",
+        "C": "Waves transfer energy without transferring matter.",
+        "D": "Waves transfer matter without transferring energy."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q17.png",
+      "rawText": "The angle of incidence of a ray of light incident on a plane mirror is gradually increased. To the nearest degree, what is the maximum possible angle between the incident and reflected rays? A 0 B 45 C 90 D 180",
+      "parseStatus": "ok",
+      "stem": "The angle of incidence of a ray of light incident on a plane mirror is gradually increased. To the nearest degree, what is the maximum possible angle between the incident and reflected rays?",
+      "options": {
+        "A": "0",
+        "B": "45",
+        "C": "90",
+        "D": "180"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q18.png",
+      "rawText": "Which conditions are necessary for light to be totally internally reflected? incident light angle of incidence A is in the less dense medium less than the critical angle B is in the less dense medium greater than the critical angle C is in the more dense medium less than the critical angle D is in the more dense medium greater than the critical angle",
+      "parseStatus": "ok",
+      "stem": "Which conditions are necessary for light to be totally internally reflected? incident light angle of incidence",
+      "options": {
+        "A": "is in the less dense medium less than the critical angle",
+        "B": "is in the less dense medium greater than the critical angle",
+        "C": "is in the more dense medium less than the critical angle",
+        "D": "is in the more dense medium greater than the critical angle"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q19.png",
+      "rawText": "The diagram shows a ray of light passing from air into a transparent substance. 30.0\u0001 40.0\u0001 air transparent substance What is the refractive index of the transparent substance? A 1.33 B 1.29 C 0.778 D 0.750",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light passing from air into a transparent substance. 30.0\u0001 40.0\u0001 air transparent substance What is the refractive index of the transparent substance?",
+      "options": {
+        "A": "1.33",
+        "B": "1.29",
+        "C": "0.778",
+        "D": "0.750"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q20.png",
+      "rawText": "The diagram shows a ray of light in an optical fibre. Which statement correctly explains the condition for the maximum transmission of light by the optical fibre? A The glass must slow the light as little as possible to make the critical angle for the fibre as large as possible. B The glass must slow the light as little as possible to make the critical angle for the fibre as small as possible. C The glass must slow the light as much as possible to make the critical angle for the fibre as large as possible. D The glass must slow the light as much as possible to make the critical angle for the fibre as small as possible.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light in an optical fibre. Which statement correctly explains the condition for the maximum transmission of light by the optical fibre?",
+      "options": {
+        "A": "The glass must slow the light as little as possible to make the critical angle for the fibre as large as possible.",
+        "B": "The glass must slow the light as little as possible to make the critical angle for the fibre as small as possible.",
+        "C": "The glass must slow the light as much as possible to make the critical angle for the fibre as large as possible.",
+        "D": "The glass must slow the light as much as possible to make the critical angle for the fibre as small as possible."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q21.png",
+      "rawText": "Which region of the electromagnetic spectrum is used for detecting fake bank notes? A radio B microwaves C ultraviolet D X-rays",
+      "parseStatus": "ok",
+      "stem": "Which region of the electromagnetic spectrum is used for detecting fake bank notes?",
+      "options": {
+        "A": "radio",
+        "B": "microwaves",
+        "C": "ultraviolet",
+        "D": "X-rays"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q22.png",
+      "rawText": "A sound wave travels at 330 m / s. The distance between the centre of a compression and the centre of the nearest rarefaction in the sound wave is 2.5 cm. What is the frequency of the sound wave? A 66 Hz B 130 Hz C 6600 Hz D 13 000 Hz",
+      "parseStatus": "ok",
+      "stem": "A sound wave travels at 330 m / s. The distance between the centre of a compression and the centre of the nearest rarefaction in the sound wave is 2.5 cm. What is the frequency of the sound wave?",
+      "options": {
+        "A": "66 Hz",
+        "B": "130 Hz",
+        "C": "6600 Hz",
+        "D": "13 000 Hz"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q23.png",
+      "rawText": "Which waves are used in the medical scanning of soft tissue? A gamma rays B infrared C microwaves D ultrasound",
+      "parseStatus": "ok",
+      "stem": "Which waves are used in the medical scanning of soft tissue?",
+      "options": {
+        "A": "gamma rays",
+        "B": "infrared",
+        "C": "microwaves",
+        "D": "ultrasound"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q24.png",
+      "rawText": "Which row describes suitable materials for use in a temporary magnet and in a permanent magnet? temporary magnet permanent magnet A soft iron soft iron B soft iron steel C steel soft iron D steel steel",
+      "parseStatus": "ok",
+      "stem": "Which row describes suitable materials for use in a temporary magnet and in a permanent magnet? temporary magnet permanent magnet",
+      "options": {
+        "A": "soft iron soft iron",
+        "B": "soft iron steel",
+        "C": "steel soft iron",
+        "D": "steel steel"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q25.png",
+      "rawText": "A magnetic field is represented in the diagram by magnetic field lines. At which point is the magnetic field strongest? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q26.png",
+      "rawText": "A student determines the resistance of resistor R. She uses a circuit including a voltmeter and an ammeter. Which circuit does she use? A A V R B R A V C R A V D R V A",
+      "parseStatus": "ok",
+      "stem": "A student determines the resistance of resistor R. She uses a circuit including a voltmeter and an ammeter. Which circuit does she use?",
+      "options": {
+        "A": "A V R",
+        "B": "R A V",
+        "C": "R A V",
+        "D": "R V A"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q27.png",
+      "rawText": "A diode and a resistor are connected across a variable d.c. supply. Terminal X is initially positive and at a maximum value. The potential difference (p.d.) across XY is adjusted so that it changes, as shown by the graph. X Y 0 0 p.d. across XY time Which graph shows how the current in the circuit (from X to Y) varies during the same time interval? 0 A 0 current time 0 B 0 current time 0 C 0 current time 0 D 0 current time",
+      "parseStatus": "ok",
+      "stem": "A diode and a resistor are connected across a variable d.c. supply. Terminal X is initially positive and at a maximum value. The potential difference (p.d.) across XY is adjusted so that it changes, as shown by the graph. X Y 0 0 p.d. across XY time Which graph shows how the current in the circuit (from X to Y) varies during the same time interval? 0",
+      "options": {
+        "A": "0 current time 0",
+        "B": "0 current time 0",
+        "C": "0 current time 0",
+        "D": "0 current time"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q28.png",
+      "rawText": "When a conductor in a complete circuit cuts across a magnetic field, a current is induced in the conductor. Which statement about the induced current is correct? A The induced current is in the same direction as the motion of the conductor. B The induced current is in the opposite direction to the motion of the conductor. C The direction of the induced current is in the same direction as the magnetic field. D The direction of the induced current opposes the change causing it.",
+      "parseStatus": "ok",
+      "stem": "When a conductor in a complete circuit cuts across a magnetic field, a current is induced in the conductor. Which statement about the induced current is correct?",
+      "options": {
+        "A": "The induced current is in the same direction as the motion of the conductor.",
+        "B": "The induced current is in the opposite direction to the motion of the conductor.",
+        "C": "The direction of the induced current is in the same direction as the magnetic field.",
+        "D": "The direction of the induced current opposes the change causing it."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q29.png",
+      "rawText": "The diagram shows a solenoid carrying an electric current. X Y Z X Y Z Which row compares the strength of the magnetic field due to the solenoid at points Y and Z with the strength of the magnetic field at point X? magnetic field strength at Y magnetic field strength at Z A equal to X less than X B equal to X greater than X C greater than X less than X D greater than X greater than X",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a solenoid carrying an electric current. X Y Z X Y Z Which row compares the strength of the magnetic field due to the solenoid at points Y and Z with the strength of the magnetic field at point X? magnetic field strength at Y magnetic field strength at Z",
+      "options": {
+        "A": "equal to X less than X",
+        "B": "equal to X greater than X",
+        "C": "greater than X less than X",
+        "D": "greater than X greater than X"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q30.png",
+      "rawText": "A conducting wire is placed between the poles of a magnet. When an electric current in the wire is in the direction shown, then the force on the wire acts out of the page. N S wire Three statements of different conditions and how the wire is affected are given. 1 When the current is towards the top of the page and the direction of the magnetic field is unchanged, the force produced acts into the page. 2 When the current is towards the bottom of the page and the magnetic field is reversed, the force produced acts into the page. 3 When the current in the wire is alternating, the wire vibrates into and out of the page. Which statements are correct? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "A conducting wire is placed between the poles of a magnet. When an electric current in the wire is in the direction shown, then the force on the wire acts out of the page. N S wire Three statements of different conditions and how the wire is affected are given. 1 When the current is towards the top of the page and the direction of the magnetic field is unchanged, the force produced acts into the page. 2 When the current is towards the bottom of the page and the magnetic field is reversed, the force produced acts into the page. 3 When the current in the wire is alternating, the wire vibrates into and out of the page. Which statements are correct?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q31.png",
+      "rawText": "Which types of electric current are in the primary coil and the secondary coil of a step-up transformer? primary coil secondary coil A a.c. a.c. B a.c. d.c. C d.c. a.c. D d.c. d.c.",
+      "parseStatus": "ok",
+      "stem": "Which types of electric current are in the primary coil and the secondary coil of a step-up transformer? primary coil secondary coil",
+      "options": {
+        "A": "a.c. a.c.",
+        "B": "a.c. d.c.",
+        "C": "d.c. a.c.",
+        "D": "d.c. d.c."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q32.png",
+      "rawText": "A scientist fires alpha-particles at a very thin sheet of gold and detects the particles that pass through. Which statement about the results of the scattering experiment is correct? A Alpha-particles are attracted to the nucleus of the atoms in the metal sheet. B Half the mass of the atom is concentrated in the nucleus. C Most of the alpha-particles are deflected, showing that the nucleus is very dense. D Only a small number of alpha-particles are deflected, but some of these are deflected through large angles.",
+      "parseStatus": "ok",
+      "stem": "A scientist fires alpha-particles at a very thin sheet of gold and detects the particles that pass through. Which statement about the results of the scattering experiment is correct?",
+      "options": {
+        "A": "Alpha-particles are attracted to the nucleus of the atoms in the metal sheet.",
+        "B": "Half the mass of the atom is concentrated in the nucleus.",
+        "C": "Most of the alpha-particles are deflected, showing that the nucleus is very dense.",
+        "D": "Only a small number of alpha-particles are deflected, but some of these are deflected through large angles."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q33.png",
+      "rawText": "The notation represents the nucleus of a gold atom. 197Au 79 The relative charge on a proton is +1. What is the relative charge on the gold nucleus? A +79 B +118 C +197 D +276",
+      "parseStatus": "ok",
+      "stem": "The notation represents the nucleus of a gold atom. 197Au 79 The relative charge on a proton is +1. What is the relative charge on the gold nucleus?",
+      "options": {
+        "A": "+79",
+        "B": "+118",
+        "C": "+197",
+        "D": "+276"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q34.png",
+      "rawText": "An isotope of hydrogen has the nuclide notation H. 2 1 How many neutrons are in the nucleus of this isotope and what is the relative charge on the nucleus? number of neutrons relative charge A 1 +1 B 1 +2 C 2 +1 D 2 +2",
+      "parseStatus": "ok",
+      "stem": "An isotope of hydrogen has the nuclide notation H. 2 1 How many neutrons are in the nucleus of this isotope and what is the relative charge on the nucleus? number of neutrons relative charge",
+      "options": {
+        "A": "1 +1",
+        "B": "1 +2",
+        "C": "2 +1",
+        "D": "2 +2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q35.png",
+      "rawText": "A radioactive source is placed near a detector. The radiation arriving at the detector from the source is measured for 10 minutes with different materials placed between the source and the detector. materials placed here detector radioactive source material between source and detector radiation detected / counts none 5626 sheet of paper 5629 thick sheet of aluminium 2226 thick sheet of lead 255 Which types of radiation are emitted by the source? A -particles and -rays B -particles only C -particles and -rays D -particles only",
+      "parseStatus": "ok",
+      "stem": "A radioactive source is placed near a detector. The radiation arriving at the detector from the source is measured for 10 minutes with different materials placed between the source and the detector. materials placed here detector radioactive source material between source and detector radiation detected / counts none 5626 sheet of paper 5629 thick sheet of aluminium 2226 thick sheet of lead 255 Which types of radiation are emitted by the source?",
+      "options": {
+        "A": "-particles and -rays",
+        "B": "-particles only",
+        "C": "-particles and -rays",
+        "D": "-particles only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q36.png",
+      "rawText": "The reading on a detector placed near a radioactive material is 536 counts per second. The background count rate is 44 counts per second. The half-life of the radioactive material is 34 hours. What is the reading on the detector after 68 hours? A 44 counts per second B 123 counts per second C 134 counts per second D 167 counts per second",
+      "parseStatus": "ok",
+      "stem": "The reading on a detector placed near a radioactive material is 536 counts per second. The background count rate is 44 counts per second. The half-life of the radioactive material is 34 hours. What is the reading on the detector after 68 hours?",
+      "options": {
+        "A": "44 counts per second",
+        "B": "123 counts per second",
+        "C": "134 counts per second",
+        "D": "167 counts per second"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q37.png",
+      "rawText": "A planet in the Solar System is at the point in its orbit where it is closest to the Sun. Which row is correct? orbital speed energy in gravitational potential store A at its maximum at its maximum B at its maximum at its minimum C at its minimum at its maximum D at its minimum at its minimum",
+      "parseStatus": "ok",
+      "stem": "A planet in the Solar System is at the point in its orbit where it is closest to the Sun. Which row is correct? orbital speed energy in gravitational potential store",
+      "options": {
+        "A": "at its maximum at its maximum",
+        "B": "at its maximum at its minimum",
+        "C": "at its minimum at its maximum",
+        "D": "at its minimum at its minimum"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q38.png",
+      "rawText": "What is the main process that powers the Sun? A burning of helium and oxygen B burning of hydrogen and oxygen C nuclear fusion of hydrogen to form helium D nuclear fission of helium to form hydrogen",
+      "parseStatus": "ok",
+      "stem": "What is the main process that powers the Sun?",
+      "options": {
+        "A": "burning of helium and oxygen",
+        "B": "burning of hydrogen and oxygen",
+        "C": "nuclear fusion of hydrogen to form helium",
+        "D": "nuclear fission of helium to form hydrogen"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q39.png",
+      "rawText": "A galaxy is 3.0  1020 km from the Earth. At which speed is the galaxy moving away from the Earth? A 660 km / s B 6600 km / s C 660 m / s D 6600 m / s",
+      "parseStatus": "ok",
+      "stem": "A galaxy is 3.0  1020 km from the Earth. At which speed is the galaxy moving away from the Earth?",
+      "options": {
+        "A": "660 km / s",
+        "B": "6600 km / s",
+        "C": "660 m / s",
+        "D": "6600 m / s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_21/q40.png",
+      "rawText": "An astronomer observes a distant galaxy. The table shows how the distance and the speed of recession of the galaxy are determined. Which row is correct? distance speed of recession A brightness of a supernova in the galaxy change in wavelength of starlight from the galaxy B brightness of a supernova in the galaxy brightness of the galaxy C brightness of the galaxy change in wavelength of starlight from the galaxy D brightness of the galaxy brightness of a supernova",
+      "parseStatus": "ok",
+      "stem": "An astronomer observes a distant galaxy. The table shows how the distance and the speed of recession of the galaxy are determined. Which row is correct? distance speed of recession",
+      "options": {
+        "A": "brightness of a supernova in the galaxy change in wavelength of starlight from the galaxy",
+        "B": "brightness of a supernova in the galaxy brightness of the galaxy",
+        "C": "brightness of the galaxy change in wavelength of starlight from the galaxy",
+        "D": "brightness of the galaxy brightness of a supernova"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

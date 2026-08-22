@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0625_s23_qp_21.pdf",
+  "markScheme": "0625_s23_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q01.png",
+      "rawText": "Which vector diagram correctly shows the force Z as the resultant of forces X and Y? A Z Y X B Z Y X C Z Y X Z Y X D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q02.png",
+      "rawText": "An object falls towards the surface of the Earth. The object is falling at its terminal velocity. Which statement is correct? A There is air resistance and the acceleration of the object is negative. B There is air resistance and the acceleration of the object is zero. C There is no air resistance and the acceleration of the object is negative. D There is no air resistance and the acceleration of the object is zero.",
+      "parseStatus": "ok",
+      "stem": "An object falls towards the surface of the Earth. The object is falling at its terminal velocity. Which statement is correct?",
+      "options": {
+        "A": "There is air resistance and the acceleration of the object is negative.",
+        "B": "There is air resistance and the acceleration of the object is zero.",
+        "C": "There is no air resistance and the acceleration of the object is negative.",
+        "D": "There is no air resistance and the acceleration of the object is zero."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q03.png",
+      "rawText": "The graph represents the motion of a vehicle. 20 0 0 400 time / s speed m / s What is the distance travelled by the vehicle in 400 s? A 20 m B 400 m C 4000 m D 8000 m",
+      "parseStatus": "ok",
+      "stem": "The graph represents the motion of a vehicle. 20 0 0 400 time / s speed m / s What is the distance travelled by the vehicle in 400 s?",
+      "options": {
+        "A": "20 m",
+        "B": "400 m",
+        "C": "4000 m",
+        "D": "8000 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q04.png",
+      "rawText": "On the Earth, a spring stretches by 5.0 cm when a mass of 3.0 kg is suspended from one end. The gravitational field strength on the Moon is 1 6 of that on the Earth. Which mass, on the Moon, would stretch the spring by the same extension? A 0.50 kg B 3.0 kg C 5.0 kg D 18 kg",
+      "parseStatus": "ok",
+      "stem": "On the Earth, a spring stretches by 5.0 cm when a mass of 3.0 kg is suspended from one end. The gravitational field strength on the Moon is 1 6 of that on the Earth. Which mass, on the Moon, would stretch the spring by the same extension?",
+      "options": {
+        "A": "0.50 kg",
+        "B": "3.0 kg",
+        "C": "5.0 kg",
+        "D": "18 kg"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q05.png",
+      "rawText": "A shopkeeper pours rice into a dish that hangs from a spring balance. He records the reading. 0 1 2 3 4 5",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q06.png",
+      "rawText": "A student determines the density of an irregularly shaped stone. The stone is slowly lowered into a measuring cylinder partly filled with water. measuring cylinder stone Which other apparatus does the student need to calculate the density of the irregularly shaped stone? A a balance B a thermometer C a metre rule D a stop-watch",
+      "parseStatus": "ok",
+      "stem": "A student determines the density of an irregularly shaped stone. The stone is slowly lowered into a measuring cylinder partly filled with water. measuring cylinder stone Which other apparatus does the student need to calculate the density of the irregularly shaped stone?",
+      "options": {
+        "A": "a balance",
+        "B": "a thermometer",
+        "C": "a metre rule",
+        "D": "a stop-watch"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q07.png",
+      "rawText": "A train is travelling horizontally in a straight line. A book is on a table in the train. The diagram shows all the forces acting on the book. contact force weight of book frictional force book table How is the train moving? A accelerating to the left of the diagram B accelerating to the right of the diagram C moving at uniform speed to the left of the diagram D moving at uniform speed to the right of the diagram",
+      "parseStatus": "ok",
+      "stem": "A train is travelling horizontally in a straight line.",
+      "options": {
+        "A": "book is on a table in the train. The diagram shows all the forces acting on the book. contact force weight of book frictional force book table How is the train moving? A accelerating to the left of the diagram",
+        "B": "accelerating to the right of the diagram",
+        "C": "moving at uniform speed to the left of the diagram",
+        "D": "moving at uniform speed to the right of the diagram"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q08.png",
+      "rawText": "The diagrams show four beams, each of negligible weight and freely pivoted. Which beam is not in equilibrium? A pivot 1.0 m C 3.0 N 3.0 N pivot 1.0 m 2.0 m 3.0 N 6.0 N pivot 1.0 m 1.0 m D 4.0 N 4.0 N 2.0 N pivot 2.0 m 2.0 m 2.0 m 2.0 m B 6.0 N 6.0 N",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q09.png",
+      "rawText": "An object of mass 1.2 kg is moving with a velocity of 2.0 m / s when it is acted on by a force of 4.0 N. The velocity of the object increases to 5.0 m / s in the same direction. For which period of time does the force act on the object? A 0.90 s B 1.1 s C 1.5 s D 3.6 s",
+      "parseStatus": "ok",
+      "stem": "An object of mass 1.2 kg is moving with a velocity of 2.0 m / s when it is acted on by a force of 4.0 N. The velocity of the object increases to 5.0 m / s in the same direction. For which period of time does the force act on the object?",
+      "options": {
+        "A": "0.90 s",
+        "B": "1.1 s",
+        "C": "1.5 s",
+        "D": "3.6 s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q10.png",
+      "rawText": "Which row about the change of energy in the energy store must be correct? process energy store change of energy in store A water pumped up to a high-altitude dam gravitational potential energy of water increases B water pumped up to a high-altitude dam kinetic energy of water decreases C air passes through a wind turbine gravitational potential energy of air increases D air passes through a wind turbine kinetic energy of air increases",
+      "parseStatus": "ok",
+      "stem": "Which row about the change of energy in the energy store must be correct? process energy store change of energy in store",
+      "options": {
+        "A": "water pumped up to a high-altitude dam gravitational potential energy of water increases",
+        "B": "water pumped up to a high-altitude dam kinetic energy of water decreases",
+        "C": "air passes through a wind turbine gravitational potential energy of air increases",
+        "D": "air passes through a wind turbine kinetic energy of air increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q11.png",
+      "rawText": "A woman of mass 50 kg has 81 J of kinetic energy. What is her speed? A 1.3 m / s B 1.6 m / s C 1.8 m / s D 3.2 m / s",
+      "parseStatus": "ok",
+      "stem": "A woman of mass 50 kg has 81 J of kinetic energy. What is her speed?",
+      "options": {
+        "A": "1.3 m / s",
+        "B": "1.6 m / s",
+        "C": "1.8 m / s",
+        "D": "3.2 m / s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q12.png",
+      "rawText": "A child runs up a set of stairs four times. The time taken for each run is recorded. Which time is measured when the child’s useful power is greatest? A 10 s B 20 s C 30 s D 40 s",
+      "parseStatus": "ok",
+      "stem": "A child runs up a set of stairs four times. The time taken for each run is recorded. Which time is measured when the child’s useful power is greatest?",
+      "options": {
+        "A": "10 s",
+        "B": "20 s",
+        "C": "30 s",
+        "D": "40 s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q13.png",
+      "rawText": "A dam holds water in a reservoir. The height of the water in the reservoir is 15 m. dam 15 m water in reservoir The density of water is 1000 kg / m3. What is the pressure due to the water at the bottom of the dam? A 6.8 Pa B 1500 Pa C 15 000 Pa D 150 000 Pa",
+      "parseStatus": "ok",
+      "stem": "A dam holds water in a reservoir. The height of the water in the reservoir is 15 m. dam 15 m water in reservoir The density of water is 1000 kg / m3. What is the pressure due to the water at the bottom of the dam?",
+      "options": {
+        "A": "6.8 Pa",
+        "B": "1500 Pa",
+        "C": "15 000 Pa",
+        "D": "150 000 Pa"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q14.png",
+      "rawText": "A student uses a microscope to observe pollen moving on the surface of water. Which statement describes the reason for this movement? A Water molecules are moved by microscopic pollen particles. B Water molecules are moved by pollen molecules. C Microscopic pollen particles are moved by water molecules. D Pollen molecules are moved by water molecules.",
+      "parseStatus": "ok",
+      "stem": "A student uses a microscope to observe pollen moving on the surface of water. Which statement describes the reason for this movement?",
+      "options": {
+        "A": "Water molecules are moved by microscopic pollen particles.",
+        "B": "Water molecules are moved by pollen molecules.",
+        "C": "Microscopic pollen particles are moved by water molecules.",
+        "D": "Pollen molecules are moved by water molecules."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q15.png",
+      "rawText": "Which statements about evaporation of water are correct? 1 Evaporation causes the remaining liquid to cool. 2 During evaporation, the more energetic particles escape from the surface of the liquid. 3 Evaporation only happens at 100 C. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which statements about evaporation of water are correct? 1 Evaporation causes the remaining liquid to cool. 2 During evaporation, the more energetic particles escape from the surface of the liquid. 3 Evaporation only happens at 100 C.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q16.png",
+      "rawText": "Some hot water is sealed inside a metal can. The can is in a vacuum in outer space. The hot water slowly cools down. How does the thermal energy escape into space? A by conduction then convection B by conduction then radiation C by evaporation then convection D by evaporation then radiation",
+      "parseStatus": "ok",
+      "stem": "Some hot water is sealed inside a metal can. The can is in a vacuum in outer space. The hot water slowly cools down. How does the thermal energy escape into space?",
+      "options": {
+        "A": "by conduction then convection",
+        "B": "by conduction then radiation",
+        "C": "by evaporation then convection",
+        "D": "by evaporation then radiation"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q17.png",
+      "rawText": "The diagrams show graphs of displacement against time for four waves. All the graphs are drawn to the same scale. Which wave has the largest amplitude and the highest frequency? displacement A time displacement B time displacement C time displacement D time 0 0 0 0 0 0 0 0",
+      "parseStatus": "ok",
+      "stem": "The diagrams show graphs of displacement against time for four waves. All the graphs are drawn to the same scale. Which wave has the largest amplitude and the highest frequency? displacement",
+      "options": {
+        "A": "time displacement",
+        "B": "time displacement",
+        "C": "time displacement",
+        "D": "time 0 0 0 0 0 0 0 0"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q18.png",
+      "rawText": "The diagram shows a ray of light entering a glass block. 50\u0001 25\u0001 air glass Which calculation gives the refractive index of the glass? A sin 40 sin 25   B sin 40 sin 65   C sin 50 sin 25   D sin 50 sin 65  ",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light entering a glass block. 50\u0001 25\u0001 air glass Which calculation gives the refractive index of the glass?",
+      "options": {
+        "A": "sin 40 sin 25  ",
+        "B": "sin 40 sin 65  ",
+        "C": "sin 50 sin 25  ",
+        "D": "sin 50 sin 65  "
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q19.png",
+      "rawText": "An object O is placed at point P near to a thin converging lens. The diagram shows three rays from the top of O passing through the lens. Each point F is one focal length from the centre of the lens. Each point 2F is two focal lengths from the centre of the lens. P Q O 2F 2F F F image The object O is moved to point Q on the diagram. Which type of image is produced when the object O is at point Q? A inverted and the same size as the object B inverted and enlarged C upright and the same size as the object D upright and enlarged",
+      "parseStatus": "ok",
+      "stem": "An object O is placed at point P near to a thin converging lens. The diagram shows three rays from the top of O passing through the lens. Each point F is one focal length from the centre of the lens. Each point 2F is two focal lengths from the centre of the lens. P Q O 2F 2F F F image The object O is moved to point Q on the diagram. Which type of image is produced when the object O is at point Q?",
+      "options": {
+        "A": "inverted and the same size as the object",
+        "B": "inverted and enlarged",
+        "C": "upright and the same size as the object",
+        "D": "upright and enlarged"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q20.png",
+      "rawText": "Which diagram shows the dispersion of white light by a glass prism? violet red A violet violet red red B white white violet red C violet violet red red D violet red white white",
+      "parseStatus": "ok",
+      "stem": "Which diagram shows the dispersion of white light by a glass prism? violet red",
+      "options": {
+        "A": "violet violet red red",
+        "B": "white white violet red",
+        "C": "violet violet red red",
+        "D": "violet red white white"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q21.png",
+      "rawText": "Visible light has wavelengths in the range 4.0  10–7 m to 7.0  10–7 m. What is the range of the frequencies of visible light? A 0.12 Hz to 0.21 Hz B 120 Hz to 210 Hz C 4.3  1011 Hz to 7.5  1011 Hz D 4.3  1014 Hz to 7.5  1014 Hz",
+      "parseStatus": "ok",
+      "stem": "Visible light has wavelengths in the range 4.0  10–7 m to 7.0  10–7 m. What is the range of the frequencies of visible light?",
+      "options": {
+        "A": "0.12 Hz to 0.21 Hz",
+        "B": "120 Hz to 210 Hz",
+        "C": "4.3  1011 Hz to 7.5  1011 Hz",
+        "D": "4.3  1014 Hz to 7.5  1014 Hz"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q22.png",
+      "rawText": "Student X fires a starting pistol which produces smoke and sound. Student Y is standing 100 m away and sees the smoke the instant it is produced. The speed of sound in air is 340 m / s. What is the time delay between student Y seeing the smoke and hearing the sound? A 0.29 s B 0.59 s C 1.7 s D 3.4 s",
+      "parseStatus": "ok",
+      "stem": "Student X fires a starting pistol which produces smoke and sound. Student Y is standing 100 m away and sees the smoke the instant it is produced. The speed of sound in air is 340 m / s. What is the time delay between student Y seeing the smoke and hearing the sound?",
+      "options": {
+        "A": "0.29 s",
+        "B": "0.59 s",
+        "C": "1.7 s",
+        "D": "3.4 s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q23.png",
+      "rawText": "An unmagnetised piece of soft iron is placed close to a strong permanent magnet, as shown. S X N permanent magnet soft iron What is the induced polarity of end X of the soft iron and in which direction does the magnetic force act on the soft iron? polarity of end X direction of force on the soft iron A N to the left B N to the right C S to the left D S to the right",
+      "parseStatus": "ok",
+      "stem": "An unmagnetised piece of soft iron is placed close to a strong permanent magnet, as shown. S X N permanent magnet soft iron What is the induced polarity of end X of the soft iron and in which direction does the magnetic force act on the soft iron? polarity of end X direction of force on the soft iron",
+      "options": {
+        "A": "N to the left",
+        "B": "N to the right",
+        "C": "S to the left",
+        "D": "S to the right"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q24.png",
+      "rawText": "A plastic rod is rubbed with a cloth. plastic rod cloth The rod and the cloth both become charged as electrons move between them. The rod becomes negatively charged. Which diagram shows how the rod becomes negatively charged and shows the final charge on the cloth? A + ++ + + + + + + – – – – – – – – – – – – – – – – – – – – – electron movement final charge on the cloth electron movement electron movement electron movement B + ++ + + + + + + – – – – – C – –– – – – – – – – – – – – D – –– – – – – – – – – – – – final charge on the cloth final charge on the cloth final charge on the cloth",
+      "parseStatus": "ok",
+      "stem": "A plastic rod is rubbed with a cloth. plastic rod cloth The rod and the cloth both become charged as electrons move between them. The rod becomes negatively charged. Which diagram shows how the rod becomes negatively charged and shows the final charge on the cloth?",
+      "options": {
+        "A": "+ ++ + + + + + + – – – – – – – – – – – – – – – – – – – – – electron movement final charge on the cloth electron movement electron movement electron movement",
+        "B": "+ ++ + + + + + + – – – – –",
+        "C": "– –– – – – – – – – – – – –",
+        "D": "– –– – – – – – – – – – – – final charge on the cloth final charge on the cloth final charge on the cloth"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q25.png",
+      "rawText": "A wire has a uniform circular cross-sectional area. Which statement is correct? A The resistance of the wire is directly proportional to its cross-sectional area and inversely proportional to its diameter. B The resistance of the wire is directly proportional to its cross-sectional area and inversely proportional to its length. C The resistance of the wire is directly proportional to its length and inversely proportional to its cross-sectional area. D The resistance of the wire is directly proportional to its length and inversely proportional to its diameter.",
+      "parseStatus": "ok",
+      "stem": "A wire has a uniform circular cross-sectional area. Which statement is correct?",
+      "options": {
+        "A": "The resistance of the wire is directly proportional to its cross-sectional area and inversely proportional to its diameter.",
+        "B": "The resistance of the wire is directly proportional to its cross-sectional area and inversely proportional to its length.",
+        "C": "The resistance of the wire is directly proportional to its length and inversely proportional to its cross-sectional area.",
+        "D": "The resistance of the wire is directly proportional to its length and inversely proportional to its diameter."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q26.png",
+      "rawText": "The diagram shows the current–voltage graph for a metal wire. 0 0 voltage current What can be deduced from the graph? A As voltage increases, the temperature of the wire increases. B As voltage increases, the temperature of the wire decreases. C As voltage increases, the resistance of the wire increases. D As voltage increases, the resistance of the wire remains constant.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the current–voltage graph for a metal wire. 0 0 voltage current What can be deduced from the graph?",
+      "options": {
+        "A": "As voltage increases, the temperature of the wire increases.",
+        "B": "As voltage increases, the temperature of the wire decreases.",
+        "C": "As voltage increases, the resistance of the wire increases.",
+        "D": "As voltage increases, the resistance of the wire remains constant."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q27.png",
+      "rawText": "A battery is connected to a circuit. It is switched on for 1.0 minute. During that time, there is a current of 0.40 A in the circuit and the battery supplies a total of 48 J of energy. Which row gives the charge that passes and the electromotive force (e.m.f.) of the battery? charge that passes in 1.0 minute / C e.m.f. of the battery / V A 0.40 2.0 B 0.40 120 C 24 2.0 D 24 120",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q28.png",
+      "rawText": "The circuit diagram shows two identical lamps connected in parallel to a cell. Three ammeters, X, Y and Z, are also connected in the circuit, as shown. X Y Z A A A Which statement about the current in X is correct? A It is equal to the current in Y and to the current in Z. B It is less than either the current in Y or the current in Z. C It is equal to the sum of the current in Y and the current in Z. D It is equal to the difference between the current in Y and the current in Z.",
+      "parseStatus": "ok",
+      "stem": "The circuit diagram shows two identical lamps connected in parallel to a cell. Three ammeters, X, Y and Z, are also connected in the circuit, as shown. X Y Z",
+      "options": {
+        "A": "A A Which statement about the current in X is correct? A It is equal to the current in Y and to the current in Z.",
+        "B": "It is less than either the current in Y or the current in Z.",
+        "C": "It is equal to the sum of the current in Y and the current in Z.",
+        "D": "It is equal to the difference between the current in Y and the current in Z."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q29.png",
+      "rawText": "A student connects the circuit shown. 1 2 3 4 bell Which switches must be closed for the bell to ring without lighting the lamp? A 1 and 2 only B 1 and 3 only C 1, 3 and 4 D 2, 3 and 4",
+      "parseStatus": "ok",
+      "stem": "A student connects the circuit shown. 1 2 3 4 bell Which switches must be closed for the bell to ring without lighting the lamp?",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "1, 3 and 4",
+        "D": "2, 3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q30.png",
+      "rawText": "The diagram shows an a.c. generator. N S X Y V The graph shows the potential difference (p.d.) between points X and Y plotted against time. A positive value of p.d. indicates that X is more positive than Y. p.d. between X and Y time P 0 0 Which diagram shows the position of the coil at point P on the graph? X Y X Y A C X Y B X Y D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q31.png",
+      "rawText": "An electron moves into a uniform magnetic field. The arrow shows the initial direction of motion of the electron. The direction of the magnetic field is into the plane of the page. uniform magnetic field electron In which direction does a force act on the electron when it enters the magnetic field? A into the page B out of the page C towards the bottom of the page D towards the top of the page",
+      "parseStatus": "ok",
+      "stem": "An electron moves into a uniform magnetic field. The arrow shows the initial direction of motion of the electron. The direction of the magnetic field is into the plane of the page. uniform magnetic field electron In which direction does a force act on the electron when it enters the magnetic field?",
+      "options": {
+        "A": "into the page",
+        "B": "out of the page",
+        "C": "towards the bottom of the page",
+        "D": "towards the top of the page"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q32.png",
+      "rawText": "Which statement about a transformer is correct? A There is an alternating current in the iron core from the primary coil to the secondary coil. B An alternating current in the iron core induces an alternating current in the secondary coil. C An alternating current in the primary coil induces a direct current in the secondary coil. D An alternating current in the primary coil induces an alternating voltage across the secondary coil.",
+      "parseStatus": "ok",
+      "stem": "Which statement about a transformer is correct?",
+      "options": {
+        "A": "There is an alternating current in the iron core from the primary coil to the secondary coil.",
+        "B": "An alternating current in the iron core induces an alternating current in the secondary coil.",
+        "C": "An alternating current in the primary coil induces a direct current in the secondary coil.",
+        "D": "An alternating current in the primary coil induces an alternating voltage across the secondary coil."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q33.png",
+      "rawText": "How are positive and negative ions formed from atoms? positive ion negative ion A add positive charge to the nucleus add an electron to the atom B add positive charge to the nucleus remove positive charge from the nucleus C remove an electron from the atom add an electron to the atom D remove an electron from the atom remove positive charge from the nucleus",
+      "parseStatus": "ok",
+      "stem": "How are positive and negative ions formed from atoms? positive ion negative ion",
+      "options": {
+        "A": "add positive charge to the nucleus add an electron to the atom",
+        "B": "add positive charge to the nucleus remove positive charge from the nucleus",
+        "C": "remove an electron from the atom add an electron to the atom",
+        "D": "remove an electron from the atom remove positive charge from the nucleus"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q34.png",
+      "rawText": "A nucleus of element X is represented as . 56 26X Which is an isotope of element X? A X 26 56 B X 54 26 C X 56 24 D X 54 28",
+      "parseStatus": "ok",
+      "stem": "A nucleus of element X is represented as . 56 26X Which is an isotope of element X?",
+      "options": {
+        "A": "X 26 56",
+        "B": "X 54 26",
+        "C": "X 56 24",
+        "D": "X 54 28"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q35.png",
+      "rawText": "A radioactive source is placed near a detector connected to a counter. 210 counts are recorded by the counter in 3 minutes. The background count rate is 20 counts per minute (cpm). What is the corrected count rate for the radioactive source? A 50 cpm B 70 cpm C 190 cpm D 270 cpm",
+      "parseStatus": "ok",
+      "stem": "A radioactive source is placed near a detector connected to a counter. 210 counts are recorded by the counter in 3 minutes. The background count rate is 20 counts per minute (cpm). What is the corrected count rate for the radioactive source?",
+      "options": {
+        "A": "50 cpm",
+        "B": "70 cpm",
+        "C": "190 cpm",
+        "D": "270 cpm"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q36.png",
+      "rawText": "The background count rate measured by a radiation counter is 40 counts per minute (cpm). With the counter close to a radioactive source, the counter reading is 960 cpm. The half-life of the source is 20 minutes. What is the counter reading one hour later? A 115 cpm B 120 cpm C 155 cpm D 160 cpm",
+      "parseStatus": "ok",
+      "stem": "The background count rate measured by a radiation counter is 40 counts per minute (cpm). With the counter close to a radioactive source, the counter reading is 960 cpm. The half-life of the source is 20 minutes. What is the counter reading one hour later?",
+      "options": {
+        "A": "115 cpm",
+        "B": "120 cpm",
+        "C": "155 cpm",
+        "D": "160 cpm"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q37.png",
+      "rawText": "Which planet in our Solar System is nearest to the Sun and what is the nature of the planet? planet nature A Mercury rocky B Mercury gaseous C Venus rocky D Venus gaseous",
+      "parseStatus": "ok",
+      "stem": "Which planet in our Solar System is nearest to the Sun and what is the nature of the planet? planet nature",
+      "options": {
+        "A": "Mercury rocky",
+        "B": "Mercury gaseous",
+        "C": "Venus rocky",
+        "D": "Venus gaseous"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q38.png",
+      "rawText": "A space station orbits the Earth at a distance of 7000 km from the Earth’s centre. It makes 15 orbits in every 24-hour period. What is the speed of the space station in its orbit? A 2900 km / h B 4400 km / h C 8800 km / h D 27 000 km / h",
+      "parseStatus": "ok",
+      "stem": "A space station orbits the Earth at a distance of 7000 km from the Earth’s centre. It makes 15 orbits in every 24-hour period. What is the speed of the space station in its orbit?",
+      "options": {
+        "A": "2900 km / h",
+        "B": "4400 km / h",
+        "C": "8800 km / h",
+        "D": "27 000 km / h"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q39.png",
+      "rawText": "Which nuclear reaction powers a stable star? A nuclear fission of nuclei producing hydrogen B nuclear fission of a uranium nucleus into a krypton nucleus and a barium nucleus C nuclear fusion of a krypton nucleus and a barium nucleus into a uranium nucleus D nuclear fusion of hydrogen nuclei producing helium",
+      "parseStatus": "ok",
+      "stem": "Which nuclear reaction powers a stable star?",
+      "options": {
+        "A": "nuclear fission of nuclei producing hydrogen",
+        "B": "nuclear fission of a uranium nucleus into a krypton nucleus and a barium nucleus",
+        "C": "nuclear fusion of a krypton nucleus and a barium nucleus into a uranium nucleus",
+        "D": "nuclear fusion of hydrogen nuclei producing helium"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_21/q40.png",
+      "rawText": "Which stages in the life cycle of a star are listed in the order that they occur? A interstellar dust cloud  stable star  protostar B protostar  red giant  stable star C red giant  white dwarf  protostar D stable star  red giant  white dwarf",
+      "parseStatus": "ok",
+      "stem": "Which stages in the life cycle of a star are listed in the order that they occur?",
+      "options": {
+        "A": "interstellar dust cloud  stable star  protostar",
+        "B": "protostar  red giant  stable star",
+        "C": "red giant  white dwarf  protostar",
+        "D": "stable star  red giant  white dwarf"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

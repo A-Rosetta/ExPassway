@@ -12,6 +12,15 @@
   let pdfDownloadPapers = [];
   let pdfPaperLoadId = 0;
   let pdfDownloadStatusKey = "";
+  const additionalSubjects = [{
+    qualification: "IGCSE",
+    board: "CIE",
+    code: "0625",
+    name: "Physics",
+    nameZh: "物理",
+    paperCount: 36,
+    questionCount: 1439,
+  }];
 
   function getEl(id) {
     return document.getElementById(id);
@@ -45,6 +54,7 @@
     if (languageSelect) languageSelect.value = currentLanguage;
 
     renderSubjectCourses(catalogSubjects);
+    renderAdditionalSubjects();
     renderPdfDownloadOptions();
     setPdfDownloadStatus(pdfDownloadStatusKey);
     applyStatus("backendStatus", backendStatusState);
@@ -72,6 +82,7 @@
       "0620": { className: "chemistry", emblem: "H₂O" },
       "0654": { className: "sciences", emblem: "SCI" },
       "0455": { className: "economics", emblem: "ECO" },
+      "0625": { className: "physics", emblem: "F=ma" },
     }[code] || { className: "default", emblem: code || "MCQ" };
   }
 
@@ -90,8 +101,8 @@
     location.href = subject.code === "0610" ? "pages/biology.html" : "pages/generate.html";
   }
 
-  function renderSubjectCourses(subjects) {
-    const grid = getEl("subjectCourses");
+  function renderSubjectCourses(subjects, gridId = "subjectCourses") {
+    const grid = getEl(gridId);
     if (!grid) return;
     grid.replaceChildren();
     grid.setAttribute("aria-busy", "false");
@@ -159,6 +170,14 @@
 
   function subjectDisplayName(subject) {
     return currentLanguage === "en" ? subject.name : (subject.nameZh || subject.name);
+  }
+
+  function renderAdditionalSubjects() {
+    const catalogCodes = new Set(catalogSubjects.map((subject) => subject.code));
+    const subjects = additionalSubjects.filter((subject) => !catalogCodes.has(subject.code));
+    renderSubjectCourses(subjects, "moreSubjectCourses");
+    const button = getEl("toggleMoreSubjects");
+    if (button) button.hidden = subjects.length === 0;
   }
 
   function setPdfDownloadStatus(key) {
@@ -371,6 +390,14 @@
 
     catalogSubjects = await loadSubjectCourses();
     renderSubjectCourses(catalogSubjects);
+    renderAdditionalSubjects();
+    const moreSubjectsButton = getEl("toggleMoreSubjects");
+    const moreSubjectPanel = getEl("moreSubjectPanel");
+    moreSubjectsButton?.addEventListener("click", () => {
+      const expanded = moreSubjectPanel?.hidden === true;
+      if (moreSubjectPanel) moreSubjectPanel.hidden = !expanded;
+      moreSubjectsButton.setAttribute("aria-expanded", String(expanded));
+    });
     setupPdfDownloads();
 
     const savePetSettings = async () => {

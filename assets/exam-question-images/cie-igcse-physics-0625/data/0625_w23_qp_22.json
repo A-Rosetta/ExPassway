@@ -1,0 +1,683 @@
+{
+  "questionPaper": "0625_w23_qp_22.pdf",
+  "markScheme": "0625_w23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q01.png",
+      "rawText": "Which quantity is a scalar quantity? A acceleration B force C time D velocity",
+      "parseStatus": "ok",
+      "stem": "Which quantity is a scalar quantity?",
+      "options": {
+        "A": "acceleration",
+        "B": "force",
+        "C": "time",
+        "D": "velocity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q02.png",
+      "rawText": "A student measures the average speed of a cyclist in a race. Which quantities must she measure? A the total time taken to complete the race and the time taken for the cyclist to reach her highest speed B the total time taken to complete the race and the total distance travelled by the cyclist at her highest speed C the total time taken to complete the race and the total distance travelled by the cyclist D the time taken to reach her highest speed and the total distance travelled by the cyclist",
+      "parseStatus": "ok",
+      "stem": "A student measures the average speed of a cyclist in a race. Which quantities must she measure?",
+      "options": {
+        "A": "the total time taken to complete the race and the time taken for the cyclist to reach her highest speed",
+        "B": "the total time taken to complete the race and the total distance travelled by the cyclist at her highest speed",
+        "C": "the total time taken to complete the race and the total distance travelled by the cyclist",
+        "D": "the time taken to reach her highest speed and the total distance travelled by the cyclist"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q03.png",
+      "rawText": "The diagram shows a series of images of a moving object taken at regular intervals. The object is moving from left to right. Which statement describes the motion of the object? A The object accelerates continuously. B The object decelerates continuously. C The object travels at constant speed and then accelerates. D The object travels at constant speed and then decelerates.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a series of images of a moving object taken at regular intervals. The object is moving from left to right. Which statement describes the motion of the object?",
+      "options": {
+        "A": "The object accelerates continuously.",
+        "B": "The object decelerates continuously.",
+        "C": "The object travels at constant speed and then accelerates.",
+        "D": "The object travels at constant speed and then decelerates."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q04.png",
+      "rawText": "A plastic ball has a mass of 4.0 g and a volume of 20 cm3. There is a crack in the ball’s surface. The ball is placed in a bath of water. Water leaks into the ball without changing the volume of the ball and eventually the ball sinks. The density of water = 1.0 g / cm3. Which mass of water has entered the ball when the top of the ball is first level with the water surface? A 5.0 g B 16 g C 20 g D 24 g",
+      "parseStatus": "ok",
+      "stem": "A plastic ball has a mass of 4.0 g and a volume of 20 cm3. There is a crack in the ball’s surface. The ball is placed in a bath of water. Water leaks into the ball without changing the volume of the ball and eventually the ball sinks. The density of water = 1.0 g / cm3. Which mass of water has entered the ball when the top of the ball is first level with the water surface?",
+      "options": {
+        "A": "5.0 g",
+        "B": "16 g",
+        "C": "20 g",
+        "D": "24 g"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q05.png",
+      "rawText": "A satellite orbits the Earth at constant speed in a circular orbit. Which statement is correct? A The resultant force on the satellite is zero. B The resultant force on the satellite is towards the Earth. C The resultant force on the satellite is away from the Earth. D The resultant force on the satellite is in the direction of its motion.",
+      "parseStatus": "ok",
+      "stem": "A satellite orbits the Earth at constant speed in a circular orbit. Which statement is correct?",
+      "options": {
+        "A": "The resultant force on the satellite is zero.",
+        "B": "The resultant force on the satellite is towards the Earth.",
+        "C": "The resultant force on the satellite is away from the Earth.",
+        "D": "The resultant force on the satellite is in the direction of its motion."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q06.png",
+      "rawText": "The diagrams show four identical objects. Each object is acted on by only the forces shown. Which diagram shows an object in equilibrium? A 10 N 10 N 20 N B 10 N 10 N 10 N C 10 N 10 N 10 N D 10 N 10 N 20 N",
+      "parseStatus": "ok",
+      "stem": "The diagrams show four identical objects. Each object is acted on by only the forces shown. Which diagram shows an object in equilibrium?",
+      "options": {
+        "A": "10 N 10 N 20 N",
+        "B": "10 N 10 N 10 N",
+        "C": "10 N 10 N 10 N",
+        "D": "10 N 10 N 20 N"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q07.png",
+      "rawText": "A resultant force F accelerates a car of mass m along a straight horizontal road from rest to a speed v in time t, giving it momentum p. Which pair of relationships for this situation is correct? A pt = mv and F = pt B p = mv and F = pt C p = mv and Ft = p D p = mvt and Ft = v",
+      "parseStatus": "ok",
+      "stem": "A resultant force F accelerates a car of mass m along a straight horizontal road from rest to a speed v in time t, giving it momentum p. Which pair of relationships for this situation is correct?",
+      "options": {
+        "A": "pt = mv and F = pt",
+        "B": "p = mv and F = pt",
+        "C": "p = mv and Ft = p",
+        "D": "p = mvt and Ft = v"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q08.png",
+      "rawText": "The diagram shows part of a rollercoaster ride with the car at different positions. The car runs freely down from position X to position Y and up the hill on the other side. X Y car What happens to the energy in the kinetic store and the gravitational potential store of the car as it moves from position X to position Y? energy in kinetic store energy in gravitational potential store A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a rollercoaster ride with the car at different positions. The car runs freely down from position X to position Y and up the hill on the other side. X Y car What happens to the energy in the kinetic store and the gravitational potential store of the car as it moves from position X to position Y? energy in kinetic store energy in gravitational potential store",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q09.png",
+      "rawText": "A box is initially at rest at the top of a rough slope. The box slides down the slope. The weight of the box is 20 N. The slope is 4.0 m long and 2.0 m high. 4.0 m 2.0 m The box does",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q10.png",
+      "rawText": "An electric car is charged overnight. In 8.0 hours, 180 MJ of energy is transferred. What is the power of the charger? A 6.3 kW B 380 kW C 23 MW D 1400 MW",
+      "parseStatus": "ok",
+      "stem": "An electric car is charged overnight. In 8.0 hours, 180 MJ of energy is transferred. What is the power of the charger?",
+      "options": {
+        "A": "6.3 kW",
+        "B": "380 kW",
+        "C": "23 MW",
+        "D": "1400 MW"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q11.png",
+      "rawText": "An object is a depth h below the surface of a liquid. The pressure due to the liquid at this depth is p. The gravitational field strength is g. What is the density  of the liquid? A  = pgh B  = h pg C  = g ph D  = hg p",
+      "parseStatus": "ok",
+      "stem": "An object is a depth h below the surface of a liquid. The pressure due to the liquid at this depth is p. The gravitational field strength is g. What is the density  of the liquid?",
+      "options": {
+        "A": " = pgh",
+        "B": " = h pg",
+        "C": " = g ph",
+        "D": " = hg p"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q12.png",
+      "rawText": "Brownian motion is the random motion of particles. In which states of matter is Brownian motion observed? A gases, liquids and solids B gases and liquids only C gases and solids only D liquids and solids only",
+      "parseStatus": "ok",
+      "stem": "Brownian motion is the random motion of particles. In which states of matter is Brownian motion observed?",
+      "options": {
+        "A": "gases, liquids and solids",
+        "B": "gases and liquids only",
+        "C": "gases and solids only",
+        "D": "liquids and solids only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q13.png",
+      "rawText": "The volume of a fixed mass of gas is varied. The temperature remains constant. Which graph shows how the pressure p of the gas varies with volume V ? A p V 0 0 B p V 0 0 C p 0 0 D p 0 0 1 V 1 V",
+      "parseStatus": "ok",
+      "stem": "The volume of a fixed mass of gas is varied. The temperature remains constant. Which graph shows how the pressure p of the gas varies with volume V ?",
+      "options": {
+        "A": "p V 0 0",
+        "B": "p V 0 0",
+        "C": "p 0 0",
+        "D": "p 0 0 1 V 1 V"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q14.png",
+      "rawText": "Liquid evaporates from a beaker. What happens to the temperature of the remaining liquid and how does this temperature change affect the rate of evaporation? temperature rate of evaporation A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "Liquid evaporates from a beaker. What happens to the temperature of the remaining liquid and how does this temperature change affect the rate of evaporation? temperature rate of evaporation",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q15.png",
+      "rawText": "Thermal energy E is supplied to an object of mass m which does not change its state during the heating process. The temperature of the object rises by T. What is the specific heat capacity of the object? A T m E   B E T m   C m T E  D T m E  ",
+      "parseStatus": "ok",
+      "stem": "Thermal energy E is supplied to an object of mass m which does not change its state during the heating process. The temperature of the object rises by T. What is the specific heat capacity of the object?",
+      "options": {
+        "A": "T m E  ",
+        "B": "E T m  ",
+        "C": "m T E ",
+        "D": "T m E  "
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q16.png",
+      "rawText": "A room is heated by a radiator. The diagrams X and Y show two possible circulations of hot air, which heat the room. diagram X radiator diagram Y radiator ceiling floor ceiling floor Which diagram and reason explain the heating of the room by convection? diagram reason A X air density decreases when air is heated B X air density increases when air is heated C Y air density decreases when air is heated D Y air density increases when air is heated",
+      "parseStatus": "ok",
+      "stem": "A room is heated by a radiator. The diagrams X and Y show two possible circulations of hot air, which heat the room. diagram X radiator diagram Y radiator ceiling floor ceiling floor Which diagram and reason explain the heating of the room by convection? diagram reason",
+      "options": {
+        "A": "X air density decreases when air is heated",
+        "B": "X air density increases when air is heated",
+        "C": "Y air density decreases when air is heated",
+        "D": "Y air density increases when air is heated"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q17.png",
+      "rawText": "A student writes down some facts about two transverse waves. Wave 1 has a frequency f and a velocity v. Wave 2 has four times the frequency of wave 1 and is travelling at a velocity of 2v. What is the wavelength of wave 2 in terms of f and v? A v f 2 B 8fv C f v 2 D f v 2",
+      "parseStatus": "ok",
+      "stem": "A student writes down some facts about two transverse waves. Wave 1 has a frequency f and a velocity v. Wave 2 has four times the frequency of wave 1 and is travelling at a velocity of 2v. What is the wavelength of wave 2 in terms of f and v?",
+      "options": {
+        "A": "v f 2",
+        "B": "8fv",
+        "C": "f v 2",
+        "D": "f v 2"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q18.png",
+      "rawText": "Straight wavefronts on the surface of a ripple tank approach a gap in a barrier. The diagram shows how the wavefronts change shape as they pass through the gap. straight wavefronts barrier What is the name of this effect? A diffraction B propagation C reflection D refraction",
+      "parseStatus": "ok",
+      "stem": "Straight wavefronts on the surface of a ripple tank approach a gap in a barrier. The diagram shows how the wavefronts change shape as they pass through the gap. straight wavefronts barrier What is the name of this effect?",
+      "options": {
+        "A": "diffraction",
+        "B": "propagation",
+        "C": "reflection",
+        "D": "refraction"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q19.png",
+      "rawText": "Light travels from air into glass. What is the relationship between the refractive index n of the glass, the angle of incidence i and the angle of refraction r ? A n = r i B n = i r C n = r i sin sin D n = i r sin sin",
+      "parseStatus": "ok",
+      "stem": "Light travels from air into glass. What is the relationship between the refractive index n of the glass, the angle of incidence i and the angle of refraction r ?",
+      "options": {
+        "A": "n = r i",
+        "B": "n = i r",
+        "C": "n = r i sin sin",
+        "D": "n = i r sin sin"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q20.png",
+      "rawText": "Which diagram shows the image correctly formed by reflection? A object image B object image C object image D object image mirror mirror mirror mirror",
+      "parseStatus": "ok",
+      "stem": "Which diagram shows the image correctly formed by reflection?",
+      "options": {
+        "A": "object image",
+        "B": "object image",
+        "C": "object image",
+        "D": "object image mirror mirror mirror mirror"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q21.png",
+      "rawText": "A student passes parallel rays of light through four different converging lenses. He measures the distance x and the distance y for each experiment. x y Which lens has the longest focal length? x / cm y / cm A 4.6 2.0 B 5.1 3.1 C 5.9 2.3 D 6.1 2.4",
+      "parseStatus": "ok",
+      "stem": "A student passes parallel rays of light through four different converging lenses. He measures the distance x and the distance y for each experiment. x y Which lens has the longest focal length? x / cm y / cm",
+      "options": {
+        "A": "4.6 2.0",
+        "B": "5.1 3.1",
+        "C": "5.9 2.3",
+        "D": "6.1 2.4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q22.png",
+      "rawText": "The frequency of the microwaves used in a microwave oven is 2400 MHz. What is the wavelength of these microwaves? A 0.125 m B 8.00 m C 125 m D 7200 m",
+      "parseStatus": "ok",
+      "stem": "The frequency of the microwaves used in a microwave oven is 2400 MHz. What is the wavelength of these microwaves?",
+      "options": {
+        "A": "0.125 m",
+        "B": "8.00 m",
+        "C": "125 m",
+        "D": "7200 m"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q23.png",
+      "rawText": "Which row gives typical values for the speed of sound in a solid and in a gas? speed of sound in a solid m / s speed of sound in a gas m / s A 3 30 B 30 3 C 300 3000 D 3000 300",
+      "parseStatus": "ok",
+      "stem": "Which row gives typical values for the speed of sound in a solid and in a gas? speed of sound in a solid m / s speed of sound in a gas m / s",
+      "options": {
+        "A": "3 30",
+        "B": "30 3",
+        "C": "300 3000",
+        "D": "3000 300"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q24.png",
+      "rawText": "A hard magnetic material can be used to make a permanent magnet. A soft magnetic material can be used to make a temporary magnet. Which row shows whether iron and steel are hard or soft magnetic materials? iron steel A hard hard B hard soft C soft hard D soft soft",
+      "parseStatus": "ok",
+      "stem": "A hard magnetic material can be used to make a permanent magnet.",
+      "options": {
+        "A": "soft magnetic material can be used to make a temporary magnet. Which row shows whether iron and steel are hard or soft magnetic materials? iron steel A hard hard",
+        "B": "hard soft",
+        "C": "soft hard",
+        "D": "soft soft"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q25.png",
+      "rawText": "A power source is connected to a resistor XY. X Y + – In which directions are the conventional current and the flow of free electrons through the resistor? conventional current free electron flow A X to Y X to Y B X to Y Y to X C Y to X X to Y D Y to X Y to X",
+      "parseStatus": "ok",
+      "stem": "A power source is connected to a resistor XY. X Y + – In which directions are the conventional current and the flow of free electrons through the resistor? conventional current free electron flow",
+      "options": {
+        "A": "X to Y X to Y",
+        "B": "X to Y Y to X",
+        "C": "Y to X X to Y",
+        "D": "Y to X Y to X"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q26.png",
+      "rawText": "Which unit is used to measure electromotive force (e.m.f.)? A ampere B joule C volt D watt",
+      "parseStatus": "ok",
+      "stem": "Which unit is used to measure electromotive force (e.m.f.)?",
+      "options": {
+        "A": "ampere",
+        "B": "joule",
+        "C": "volt",
+        "D": "watt"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q27.png",
+      "rawText": "The graph shows the current–voltage characteristic for a filament lamp. 0 0 voltage current Which statement describes how the resistance of the lamp changes as the voltage increases? A The resistance decreases to zero. B The resistance decreases, but not to zero. C The resistance increases. D The resistance remains constant.",
+      "parseStatus": "ok",
+      "stem": "The graph shows the current–voltage characteristic for a filament lamp. 0 0 voltage current Which statement describes how the resistance of the lamp changes as the voltage increases?",
+      "options": {
+        "A": "The resistance decreases to zero.",
+        "B": "The resistance decreases, but not to zero.",
+        "C": "The resistance increases.",
+        "D": "The resistance remains constant."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q28.png",
+      "rawText": "In the diagram, rod R is suspended from an insulating thread. + + + + + Q R moves away from rod Q insulating thread When the positively charged rod Q is brought close to rod R, rod R moves away from rod Q. Which conclusion can be made from this observation? A Rod R is charged, but it is not possible to identify the sign of the charge. B Rod R must be positively charged. C Rod R must be negatively charged. D Rod R is uncharged.",
+      "parseStatus": "ok",
+      "stem": "In the diagram, rod R is suspended from an insulating thread. + + + + + Q R moves away from rod Q insulating thread When the positively charged rod Q is brought close to rod R, rod R moves away from rod Q. Which conclusion can be made from this observation?",
+      "options": {
+        "A": "Rod R is charged, but it is not possible to identify the sign of the charge.",
+        "B": "Rod R must be positively charged.",
+        "C": "Rod R must be negatively charged.",
+        "D": "Rod R is uncharged."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q29.png",
+      "rawText": "The circuit diagram shows a circuit used to run a d.c. motor from an a.c. supply. M Which graph shows the current in the motor? current A time 0 0 current B time 0 0 current C time 0 0 current D time 0 0",
+      "parseStatus": "ok",
+      "stem": "The circuit diagram shows a circuit used to run a d.c. motor from an a.c. supply. M Which graph shows the current in the motor? current",
+      "options": {
+        "A": "time 0 0 current",
+        "B": "time 0 0 current",
+        "C": "time 0 0 current",
+        "D": "time 0 0"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q30.png",
+      "rawText": "The circuit shown can be completed by inserting components at X and at Y. The completed circuit is a potential divider in which the potential difference across component Y increases when the temperature increases. V X Y Which row shows the components X and Y? X Y A light-dependent resistor resistor B resistor light-dependent resistor C resistor thermistor D thermistor resistor",
+      "parseStatus": "ok",
+      "stem": "The circuit shown can be completed by inserting components at X and at Y. The completed circuit is a potential divider in which the potential difference across component Y increases when the temperature increases. V X Y Which row shows the components X and Y? X Y",
+      "options": {
+        "A": "light-dependent resistor resistor",
+        "B": "resistor light-dependent resistor",
+        "C": "resistor thermistor",
+        "D": "thermistor resistor"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q31.png",
+      "rawText": "A piece of soft iron XY has a coil of wire wound round it. X Y S N soft iron magnet The N pole of a bar magnet is pulled away from end X which causes an induced current in the coil. The magnet is now turned round so that the N pole is on the left. It is taken to the other end of the soft iron and the N pole is pushed towards end Y. A new current is induced in the coil. Which statement is correct? A The new induced current is in the opposite direction and causes the soft iron to attract the N pole. B The new induced current is in the opposite direction and causes the soft iron to repel the N pole. C The new induced current is in the same direction and causes the soft iron to attract the N pole. D The new induced current is in the same direction and causes the soft iron to repel the N pole.",
+      "parseStatus": "ok",
+      "stem": "A piece of soft iron XY has a coil of wire wound round it. X Y S N soft iron magnet The N pole of a bar magnet is pulled away from end X which causes an induced current in the coil. The magnet is now turned round so that the N pole is on the left. It is taken to the other end of the soft iron and the N pole is pushed towards end Y.",
+      "options": {
+        "A": "new current is induced in the coil. Which statement is correct? A The new induced current is in the opposite direction and causes the soft iron to attract the N pole.",
+        "B": "The new induced current is in the opposite direction and causes the soft iron to repel the N pole.",
+        "C": "The new induced current is in the same direction and causes the soft iron to attract the N pole.",
+        "D": "The new induced current is in the same direction and causes the soft iron to repel the N pole."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q32.png",
+      "rawText": "The diagram shows a wire in the magnetic field between two poles of a magnet. N S magnet wire The current in the wire repeatedly changes between a constant value in one direction and a constant value in the opposite direction, as shown in the graph. current time 0 0 What is the effect on the wire? A The force on the wire alternates between one direction and the opposite direction. B The force on the wire is constant in size and direction. C There is no force acting on the wire at any time. D There is only a force on the wire when the current reverses.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a wire in the magnetic field between two poles of a magnet. N S magnet wire The current in the wire repeatedly changes between a constant value in one direction and a constant value in the opposite direction, as shown in the graph. current time 0 0 What is the effect on the wire?",
+      "options": {
+        "A": "The force on the wire alternates between one direction and the opposite direction.",
+        "B": "The force on the wire is constant in size and direction.",
+        "C": "There is no force acting on the wire at any time.",
+        "D": "There is only a force on the wire when the current reverses."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q33.png",
+      "rawText": "A transformer has Np turns on its primary coil and Ns turns on its secondary coil. The voltage across the primary coil is Vp and the voltage across the secondary coil is Vs. What is the relationship between these four quantities? A Vp  Vs = Np  Ns B s p V V = s p N N C s p V V = p s N N D s p V V = Np  Ns",
+      "parseStatus": "ok",
+      "stem": "A transformer has Np turns on its primary coil and Ns turns on its secondary coil. The voltage across the primary coil is Vp and the voltage across the secondary coil is Vs. What is the relationship between these four quantities?",
+      "options": {
+        "A": "Vp  Vs = Np  Ns",
+        "B": "s p V V = s p N N",
+        "C": "s p V V = p s N N",
+        "D": "s p V V = Np  Ns"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q34.png",
+      "rawText": "A magnesium ion has a double positive charge and a chloride ion has a single negative charge. Which statement is correct? A A chlorine atom gains an electron to form the chloride ion. B A chlorine atom loses a proton to form the chloride ion. C A magnesium atom loses an electron to form the magnesium ion. D A magnesium atom gains two electrons to form the magnesium ion.",
+      "parseStatus": "ok",
+      "stem": "A magnesium ion has a double positive charge and a chloride ion has a single negative charge. Which statement is correct?",
+      "options": {
+        "A": "A chlorine atom gains an electron to form the chloride ion.",
+        "B": "A chlorine atom loses a proton to form the chloride ion.",
+        "C": "A magnesium atom loses an electron to form the magnesium ion.",
+        "D": "A magnesium atom gains two electrons to form the magnesium ion."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q35.png",
+      "rawText": "Which row correctly describes an example of radioactive decay? original nucleus emission change or no change of element A stable  change of element B unstable  change of element C unstable  no change of element D unstable  no change of element",
+      "parseStatus": "ok",
+      "stem": "Which row correctly describes an example of radioactive decay? original nucleus emission change or no change of element",
+      "options": {
+        "A": "stable  change of element",
+        "B": "unstable  change of element",
+        "C": "unstable  no change of element",
+        "D": "unstable  no change of element"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q36.png",
+      "rawText": "A radioactive isotope of sodium has a half-life of 15 h. The table gives data from an experiment to show how the rate of decay of the isotope varies with time. The background count rate has not been subtracted from these data. time / h 0 10 20 30 s / counts rate count 400 260 170 115 What is the background radiation count rate? A 12 counts / s B 15 counts / s C 20 counts / s D 30 counts / s",
+      "parseStatus": "ok",
+      "stem": "A radioactive isotope of sodium has a half-life of 15 h. The table gives data from an experiment to show how the rate of decay of the isotope varies with time. The background count rate has not been subtracted from these data. time / h 0 10 20 30 s / counts rate count 400 260 170 115 What is the background radiation count rate?",
+      "options": {
+        "A": "12 counts / s",
+        "B": "15 counts / s",
+        "C": "20 counts / s",
+        "D": "30 counts / s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q37.png",
+      "rawText": "What happens in the process of nuclear fission? A Electrons are added to a nucleus. B Electrons are removed from a nucleus. C The nucleus of an atom splits. D Two atomic nuclei join together.",
+      "parseStatus": "ok",
+      "stem": "What happens in the process of nuclear fission?",
+      "options": {
+        "A": "Electrons are added to a nucleus.",
+        "B": "Electrons are removed from a nucleus.",
+        "C": "The nucleus of an atom splits.",
+        "D": "Two atomic nuclei join together."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q38.png",
+      "rawText": "The time taken for the Earth to orbit the Sun is approximately 365 days. The average radius of the Earth’s orbit around the Sun is 1.5  108 km. What is the average orbital speed of the Earth? A 30 m / s B 4.8  103 m / s C 3.0  104 m / s D 4.1  1010 m / s",
+      "parseStatus": "ok",
+      "stem": "The time taken for the Earth to orbit the Sun is approximately 365 days. The average radius of the Earth’s orbit around the Sun is 1.5  108 km. What is the average orbital speed of the Earth?",
+      "options": {
+        "A": "30 m / s",
+        "B": "4.8  103 m / s",
+        "C": "3.0  104 m / s",
+        "D": "4.1  1010 m / s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q39.png",
+      "rawText": "The Sun transfers energy to the Earth through electromagnetic radiation. What are two of the parts of the electromagnetic spectrum to which most of the energy belongs? A gamma rays and X-rays B infrared radiation and visible light C microwaves and visible light D radio waves and microwaves",
+      "parseStatus": "ok",
+      "stem": "The Sun transfers energy to the Earth through electromagnetic radiation. What are two of the parts of the electromagnetic spectrum to which most of the energy belongs?",
+      "options": {
+        "A": "gamma rays and X-rays",
+        "B": "infrared radiation and visible light",
+        "C": "microwaves and visible light",
+        "D": "radio waves and microwaves"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_22/q40.png",
+      "rawText": "How does the Sun produce its energy? A by the fission of helium B by the fission of hydrogen C by the fusion of helium D by the fusion of hydrogen",
+      "parseStatus": "ok",
+      "stem": "How does the Sun produce its energy?",
+      "options": {
+        "A": "by the fission of helium",
+        "B": "by the fission of hydrogen",
+        "C": "by the fusion of helium",
+        "D": "by the fusion of hydrogen"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

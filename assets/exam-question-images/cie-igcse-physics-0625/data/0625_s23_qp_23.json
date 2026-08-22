@@ -1,0 +1,678 @@
+{
+  "questionPaper": "0625_s23_qp_23.pdf",
+  "markScheme": "0625_s23_ms_23.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q01.png",
+      "rawText": "The speed–time graph shows the motion of an object. 0 0 5 5 10 15 20 25 speed m / s time / s How far does the object travel at constant speed? A 25 m B 50 m C 75 m D 125 m",
+      "parseStatus": "ok",
+      "stem": "The speed–time graph shows the motion of an object. 0 0 5 5 10 15 20 25 speed m / s time / s How far does the object travel at constant speed?",
+      "options": {
+        "A": "25 m",
+        "B": "50 m",
+        "C": "75 m",
+        "D": "125 m"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q02.png",
+      "rawText": "Which statement about a falling object accelerating close to the Earth’s surface is correct? A The weight of the object is increasing and the force of air resistance on the object is decreasing. B The weight of the object and the force of air resistance on the object are of equal magnitude, but act in opposite directions. C The weight of the object is constant, but the force of air resistance on the object is increasing. D The weight of the object is less than the force of air resistance.",
+      "parseStatus": "ok",
+      "stem": "Which statement about a falling object accelerating close to the Earth’s surface is correct?",
+      "options": {
+        "A": "The weight of the object is increasing and the force of air resistance on the object is decreasing.",
+        "B": "The weight of the object and the force of air resistance on the object are of equal magnitude, but act in opposite directions.",
+        "C": "The weight of the object is constant, but the force of air resistance on the object is increasing.",
+        "D": "The weight of the object is less than the force of air resistance."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q03.png",
+      "rawText": "An aircraft is moving at 60 m / s in a northerly direction when a cross-wind from the east starts to blow. The speed of the wind is 13 m / s. What is the magnitude of the aircraft’s velocity when the wind is blowing? A 47 m / s B 59 m / s C 61 m / s D 73 m / s",
+      "parseStatus": "ok",
+      "stem": "An aircraft is moving at 60 m / s in a northerly direction when a cross-wind from the east starts to blow. The speed of the wind is 13 m / s. What is the magnitude of the aircraft’s velocity when the wind is blowing?",
+      "options": {
+        "A": "47 m / s",
+        "B": "59 m / s",
+        "C": "61 m / s",
+        "D": "73 m / s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q04.png",
+      "rawText": "Two rectangular blocks consist of different materials. Four different methods are suggested to compare the two masses. 1 Compare the accelerations with which they fall freely. 2 Compare the values of their lengths  breadths  heights. 3 Hang each in turn from the same spring. Compare the extensions. 4 Place one in the right-hand pan of a beam balance and the other in the left-hand pan. Which methods give a comparison of the two masses? A 1, 2 and 3 B 1 and 2 only C 3 and 4 only D 4 only",
+      "parseStatus": "ok",
+      "stem": "Two rectangular blocks consist of different materials. Four different methods are suggested to compare the two masses. 1 Compare the accelerations with which they fall freely. 2 Compare the values of their lengths  breadths  heights. 3 Hang each in turn from the same spring. Compare the extensions. 4 Place one in the right-hand pan of a beam balance and the other in the left-hand pan. Which methods give a comparison of the two masses?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "3 and 4 only",
+        "D": "4 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q05.png",
+      "rawText": "An object in a space probe above the Earth weighs 3.5 N. The gravitational field strength at the height of the space probe is 7.0 N / kg. The gravitational field strength on the Earth’s surface is 9.8 N / kg. What are the mass and the weight of the object on the Earth’s surface? mass / kg weight / N A 0.50 3.5 B 0.50 4.9 C 2.0 3.5 D 2.0 20",
+      "parseStatus": "ok",
+      "stem": "An object in a space probe above the Earth weighs 3.5 N. The gravitational field strength at the height of the space probe is 7.0 N / kg. The gravitational field strength on the Earth’s surface is 9.8 N / kg. What are the mass and the weight of the object on the Earth’s surface? mass / kg weight / N",
+      "options": {
+        "A": "0.50 3.5",
+        "B": "0.50 4.9",
+        "C": "2.0 3.5",
+        "D": "2.0 20"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q06.png",
+      "rawText": "A cyclist is travelling in a straight line along a horizontal road at a constant speed. A constant driving force F acts on the cyclist in the forward direction shown. F Which statement about the magnitude of the frictional forces acting on the cyclist is correct? A The magnitude is equal to F. B The magnitude is smaller than F, but greater than zero. C The magnitude is greater than F. D The magnitude is zero.",
+      "parseStatus": "ok",
+      "stem": "A cyclist is travelling in a straight line along a horizontal road at a constant speed.",
+      "options": {
+        "A": "constant driving force F acts on the cyclist in the forward direction shown. F Which statement about the magnitude of the frictional forces acting on the cyclist is correct? A The magnitude is equal to F.",
+        "B": "The magnitude is smaller than F, but greater than zero.",
+        "C": "The magnitude is greater than F.",
+        "D": "The magnitude is zero."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q07.png",
+      "rawText": "A spring has an unstretched length of 3.0 cm. When a force of 60 N is applied to the spring, its length increases to 5.0 cm. The limit of proportionality is not exceeded. What is the spring constant of the spring? A 7.5 N / cm B 12 N / cm C 20 N / cm D 30 N / cm",
+      "parseStatus": "ok",
+      "stem": "A spring has an unstretched length of 3.0 cm. When a force of 60 N is applied to the spring, its length increases to 5.0 cm. The limit of proportionality is not exceeded. What is the spring constant of the spring?",
+      "options": {
+        "A": "7.5 N / cm",
+        "B": "12 N / cm",
+        "C": "20 N / cm",
+        "D": "30 N / cm"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q08.png",
+      "rawText": "The diagram shows the minimum force F1 acting vertically on a lever required to lift a heavy log of weight W. W F1 pivot log lever The log needs to be lifted by a smaller force than F1. The diagrams show the changes tried. Each diagram has only one change from the original diagram. In each case, F2 is the minimum force required to lift the log. W P F2 pivot pivot log lever W Q F2 pivot log lever W R increasing the length of the lever to the right of the pivot applying the force perpendicular to the lever increasing the distance from the log to the pivot F2 log lever In which situations will F2 be smaller than F1? A P, Q and R B P and Q only C P only D Q and R only",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the minimum force F1 acting vertically on a lever required to lift a heavy log of weight W. W F1 pivot log lever The log needs to be lifted by a smaller force than F1. The diagrams show the changes tried. Each diagram has only one change from the original diagram. In each case, F2 is the minimum force required to lift the log. W P F2 pivot pivot log lever W Q F2 pivot log lever W R increasing the length of the lever to the right of the pivot applying the force perpendicular to the lever increasing the distance from the log to the pivot F2 log lever In which situations will F2 be smaller than F1?",
+      "options": {
+        "A": "P, Q and R",
+        "B": "P and Q only",
+        "C": "P only",
+        "D": "Q and R only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q09.png",
+      "rawText": "A ball of mass 0.25 kg hits a wall at a speed of 16 m / s. It then rebounds back along its original path at a speed of 12 m / s. What is the impulse experienced by the ball during its impact with the wall? A 1.0 N s B 3.0 N s C 4.0 N s D 7.0 N s",
+      "parseStatus": "ok",
+      "stem": "A ball of mass 0.25 kg hits a wall at a speed of 16 m / s. It then rebounds back along its original path at a speed of 12 m / s. What is the impulse experienced by the ball during its impact with the wall?",
+      "options": {
+        "A": "1.0 N s",
+        "B": "3.0 N s",
+        "C": "4.0 N s",
+        "D": "7.0 N s"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q10.png",
+      "rawText": "A bicycle braking system transfers energy from a kinetic energy store to an internal energy store. A motor converts energy from a chemical energy store (battery) to a kinetic energy store. What enables these energy transfers? braking system motor A electrical work mechanical work B electrical work electrical work C mechanical work mechanical work D mechanical work electrical work",
+      "parseStatus": "ok",
+      "stem": "A bicycle braking system transfers energy from a kinetic energy store to an internal energy store.",
+      "options": {
+        "A": "motor converts energy from a chemical energy store (battery) to a kinetic energy store. What enables these energy transfers? braking system motor A electrical work mechanical work",
+        "B": "electrical work electrical work",
+        "C": "mechanical work mechanical work",
+        "D": "mechanical work electrical work"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q11.png",
+      "rawText": "Research is being carried out to produce electrical energy from the fusion of hydrogen nuclei. Which row shows two of the problems in designing a fusion reactor? temperature needed why obtaining a high density of hydrogen nuclei is difficult A very low the nuclei are negatively charged and repel each other B very low the nuclei are positively charged and repel each other C very high the nuclei are negatively charged and repel each other D very high the nuclei are positively charged and repel each other",
+      "parseStatus": "ok",
+      "stem": "Research is being carried out to produce electrical energy from the fusion of hydrogen nuclei. Which row shows two of the problems in designing a fusion reactor? temperature needed why obtaining a high density of hydrogen nuclei is difficult",
+      "options": {
+        "A": "very low the nuclei are negatively charged and repel each other",
+        "B": "very low the nuclei are positively charged and repel each other",
+        "C": "very high the nuclei are negatively charged and repel each other",
+        "D": "very high the nuclei are positively charged and repel each other"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q12.png",
+      "rawText": "The engine of a motor vehicle develops a large power. Which statement is correct? A The driving force acting on the vehicle must be large. B The engine must have a very large volume. C The engine must transfer large amounts of energy each second. D The vehicle must be very fast.",
+      "parseStatus": "ok",
+      "stem": "The engine of a motor vehicle develops a large power. Which statement is correct?",
+      "options": {
+        "A": "The driving force acting on the vehicle must be large.",
+        "B": "The engine must have a very large volume.",
+        "C": "The engine must transfer large amounts of energy each second.",
+        "D": "The vehicle must be very fast."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q13.png",
+      "rawText": "The graph shows how the pressure due to a liquid varies with the depth beneath the liquid surface. The gravitational field strength g is 9.8 N / kg. 0.00 0.10 0.20 0.30 0.40 0.50 0.60 0.70 0.80 8000 6000 4000 2000 0 pressure due to the liquid / Pa depth beneath the liquid surface / m What is the density of the liquid? A 200 kg / m3 B 820 kg / m3 C 2000 kg / m3 D 8200 kg / m3",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the pressure due to a liquid varies with the depth beneath the liquid surface. The gravitational field strength g is 9.8 N / kg. 0.00 0.10 0.20 0.30 0.40 0.50 0.60 0.70 0.80 8000 6000 4000 2000 0 pressure due to the liquid / Pa depth beneath the liquid surface / m What is the density of the liquid?",
+      "options": {
+        "A": "200 kg / m3",
+        "B": "820 kg / m3",
+        "C": "2000 kg / m3",
+        "D": "8200 kg / m3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q14.png",
+      "rawText": "What is the lowest possible temperature (absolute zero) and what happens to the energy of particles at this temperature? lowest possible temperature / C particle energy A –273 particles have least kinetic energy B –273 particles have zero gravitational potential energy C 0 particles have least kinetic energy D 0 particles have zero gravitational potential energy",
+      "parseStatus": "ok",
+      "stem": "What is the lowest possible temperature (absolute zero) and what happens to the energy of particles at this temperature? lowest possible temperature / C particle energy",
+      "options": {
+        "A": "–273 particles have least kinetic energy",
+        "B": "–273 particles have zero gravitational potential energy",
+        "C": "0 particles have least kinetic energy",
+        "D": "0 particles have zero gravitational potential energy"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q15.png",
+      "rawText": "Which statement about the particles of a substance after condensation is correct? A They are close to each other and slide over each other. B They are close to each other and vibrate about fixed points. C They are far apart from each other and vibrate about fixed points. D They are far apart from each other and move freely within the container.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the particles of a substance after condensation is correct?",
+      "options": {
+        "A": "They are close to each other and slide over each other.",
+        "B": "They are close to each other and vibrate about fixed points.",
+        "C": "They are far apart from each other and vibrate about fixed points.",
+        "D": "They are far apart from each other and move freely within the container."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q16.png",
+      "rawText": "Two otherwise identical cars, one black and one white, are at the same initial temperature. The cars are left in bright sunshine and their temperatures increase. During the night, their temperatures decrease. Which car shows the greater rate of temperature increase and which car shows the greater rate of temperature decrease? greater rate of temperature increase greater rate of temperature decrease A black black B black white C white black D white white",
+      "parseStatus": "ok",
+      "stem": "Two otherwise identical cars, one black and one white, are at the same initial temperature. The cars are left in bright sunshine and their temperatures increase. During the night, their temperatures decrease. Which car shows the greater rate of temperature increase and which car shows the greater rate of temperature decrease? greater rate of temperature increase greater rate of temperature decrease",
+      "options": {
+        "A": "black black",
+        "B": "black white",
+        "C": "white black",
+        "D": "white white"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q17.png",
+      "rawText": "A drop of water from a tap falls onto the surface of some water of constant depth. view from above Water waves spread out on the surface of the water. Which statement is correct? A The waves are longitudinal and travel at the same speed in all directions. B The waves are longitudinal and travel more quickly in one direction than in others. C The waves are transverse and travel at the same speed in all directions. D The waves are transverse and travel more quickly in one direction than in others.",
+      "parseStatus": "ok",
+      "stem": "A drop of water from a tap falls onto the surface of some water of constant depth. view from above Water waves spread out on the surface of the water. Which statement is correct?",
+      "options": {
+        "A": "The waves are longitudinal and travel at the same speed in all directions.",
+        "B": "The waves are longitudinal and travel more quickly in one direction than in others.",
+        "C": "The waves are transverse and travel at the same speed in all directions.",
+        "D": "The waves are transverse and travel more quickly in one direction than in others."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q18.png",
+      "rawText": "Each point F is one focal length from the centre of the lens. Each point 2F is two focal lengths from the centre of the lens. Which diagram shows a converging lens being used as a magnifying glass? F A F 2F 2F object image image 2F F F C 2F object F B F 2F 2F object image image at infinity parallel rays F 2F 2F D F object",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q19.png",
+      "rawText": "A monochromatic ray of green light in air enters a block of glass. Which property of the ray of light always remains the same as it moves from air to glass? A wavelength B speed C frequency D direction",
+      "parseStatus": "ok",
+      "stem": "A monochromatic ray of green light in air enters a block of glass. Which property of the ray of light always remains the same as it moves from air to glass?",
+      "options": {
+        "A": "wavelength",
+        "B": "speed",
+        "C": "frequency",
+        "D": "direction"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q20.png",
+      "rawText": "A narrow beam of white light passes through a prism and is dispersed into a spectrum. 1 2 3 white light Which row is correct? colour 1 colour 2 colour 3 A blue yellow red B red blue yellow C red yellow blue D yellow blue red",
+      "parseStatus": "ok",
+      "stem": "A narrow beam of white light passes through a prism and is dispersed into a spectrum. 1 2 3 white light Which row is correct? colour 1 colour 2 colour 3",
+      "options": {
+        "A": "blue yellow red",
+        "B": "red blue yellow",
+        "C": "red yellow blue",
+        "D": "yellow blue red"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q21.png",
+      "rawText": "A student writes four statements matching a communication system to the region of the electromagnetic spectrum that it uses to transmit signals. Which statement is correct? A Wireless internet uses visible wavelengths. B Mobile phones use X-rays. C Cable television uses infrared wavelengths. D Bluetooth uses ultraviolet wavelengths.",
+      "parseStatus": "ok",
+      "stem": "A student writes four statements matching a communication system to the region of the electromagnetic spectrum that it uses to transmit signals. Which statement is correct?",
+      "options": {
+        "A": "Wireless internet uses visible wavelengths.",
+        "B": "Mobile phones use X-rays.",
+        "C": "Cable television uses infrared wavelengths.",
+        "D": "Bluetooth uses ultraviolet wavelengths."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q22.png",
+      "rawText": "A ship sounds its horn when it is 790 m from a cliff. A passenger on the ship hears the echo 4.8 s later. What is the speed of the sound? A 165 m / s B 330 m / s C 340 m / s D 1896 m / s",
+      "parseStatus": "ok",
+      "stem": "A ship sounds its horn when it is 790 m from a cliff.",
+      "options": {
+        "A": "passenger on the ship hears the echo 4.8 s later. What is the speed of the sound? A 165 m / s",
+        "B": "330 m / s",
+        "C": "340 m / s",
+        "D": "1896 m / s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q23.png",
+      "rawText": "Which row gives the metal used to make the core of an electromagnet and one property of the electromagnet? metal property A iron permanent magnet B iron temporary magnet C steel permanent magnet D steel temporary magnet",
+      "parseStatus": "ok",
+      "stem": "Which row gives the metal used to make the core of an electromagnet and one property of the electromagnet? metal property",
+      "options": {
+        "A": "iron permanent magnet",
+        "B": "iron temporary magnet",
+        "C": "steel permanent magnet",
+        "D": "steel temporary magnet"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q24.png",
+      "rawText": "A plastic rod and a dry cloth are uncharged. The rod is now rubbed with the cloth and they both become charged. The rod becomes negatively charged because some charged particles move from the cloth to the rod. What is the charge on the cloth and which particles moved in the charging process? charge on cloth particles that moved A negative electrons B negative neutrons C positive electrons D positive neutrons",
+      "parseStatus": "ok",
+      "stem": "A plastic rod and a dry cloth are uncharged. The rod is now rubbed with the cloth and they both become charged. The rod becomes negatively charged because some charged particles move from the cloth to the rod. What is the charge on the cloth and which particles moved in the charging process? charge on cloth particles that moved",
+      "options": {
+        "A": "negative electrons",
+        "B": "negative neutrons",
+        "C": "positive electrons",
+        "D": "positive neutrons"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q25.png",
+      "rawText": "A student does an experiment to investigate the resistance of a metal wire. The graph shows the results from the experiment. resistance x 0 0 What is plotted on the x-axis? A diameter of the wire B length of the wire C temperature of the wire D current in the wire",
+      "parseStatus": "ok",
+      "stem": "A student does an experiment to investigate the resistance of a metal wire. The graph shows the results from the experiment. resistance x 0 0 What is plotted on the x-axis?",
+      "options": {
+        "A": "diameter of the wire",
+        "B": "length of the wire",
+        "C": "temperature of the wire",
+        "D": "current in the wire"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q26.png",
+      "rawText": "The cost of electrical energy is $0.25 for each unit of 1 kW h. A 2200 W heater is switched on for 48 minutes. What is the cost of this use? A $0.44 B $0.55 C $26 D $440",
+      "parseStatus": "ok",
+      "stem": "The cost of electrical energy is $0.25 for each unit of 1 kW h.",
+      "options": {
+        "A": "2200 W heater is switched on for 48 minutes. What is the cost of this use? A $0.44",
+        "B": "$0.55",
+        "C": "$26",
+        "D": "$440"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q27.png",
+      "rawText": "The table describes four different resistance wires. They are all made from the same metal. Which wire has the smallest resistance? length of wire / m diameter of wire / mm A 2.0 1.0 B 2.0 1.5 C 3.0 1.0 D 3.0 1.5",
+      "parseStatus": "ok",
+      "stem": "The table describes four different resistance wires. They are all made from the same metal. Which wire has the smallest resistance? length of wire / m diameter of wire / mm",
+      "options": {
+        "A": "2.0 1.0",
+        "B": "2.0 1.5",
+        "C": "3.0 1.0",
+        "D": "3.0 1.5"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q28.png",
+      "rawText": "The circuit shown contains three switches and four lamps P, Q, R and S. lamp P lamp Q lamp R lamp S switch 1 switch 3 switch 2 Which switches must be closed to light only lamps P and R? A switch 1 only B switch 1 and switch 2 C switch 1 and switch 3 D switch 2 and switch 3",
+      "parseStatus": "ok",
+      "stem": "The circuit shown contains three switches and four lamps P, Q, R and S. lamp P lamp Q lamp R lamp S switch 1 switch 3 switch 2 Which switches must be closed to light only lamps P and R?",
+      "options": {
+        "A": "switch 1 only",
+        "B": "switch 1 and switch 2",
+        "C": "switch 1 and switch 3",
+        "D": "switch 2 and switch 3"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q29.png",
+      "rawText": "The diagram shows the magnetic field around a solenoid carrying an electric current. magnetic field What happens to the strength of the magnetic field and the distance between the field lines when the current is increased? strength of magnetic field distance between field lines A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the magnetic field around a solenoid carrying an electric current. magnetic field What happens to the strength of the magnetic field and the distance between the field lines when the current is increased? strength of magnetic field distance between field lines",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q30.png",
+      "rawText": "The diagram shows a wire hanging freely between the poles of a magnet. There is a current in the wire in the direction shown. S N current wire The magnet and current cause a force to act on the wire. In which direction does this force act? A into the page (away from you) B out of the page (toward you) C to the left D to the right",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a wire hanging freely between the poles of a magnet. There is a current in the wire in the direction shown. S N current wire The magnet and current cause a force to act on the wire. In which direction does this force act?",
+      "options": {
+        "A": "into the page (away from you)",
+        "B": "out of the page (toward you)",
+        "C": "to the left",
+        "D": "to the right"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q31.png",
+      "rawText": "Which component forms part of a d.c. motor but not a simple moving coil a.c. generator? A the coil B the brushes C the magnet D the split-ring commutator",
+      "parseStatus": "ok",
+      "stem": "Which component forms part of a d.c. motor but not a simple moving coil a.c. generator?",
+      "options": {
+        "A": "the coil",
+        "B": "the brushes",
+        "C": "the magnet",
+        "D": "the split-ring commutator"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q32.png",
+      "rawText": "A transformer has 5500 turns on the primary coil and 500 turns on the secondary coil. The output of the secondary coil is 110 V a.c. and is connected to a heater. The transformer is 100% efficient. The heater produces a power of 132 W. What is the current in the primary coil? A 0.11 A B 0.12 A C 11 A D 12 A",
+      "parseStatus": "ok",
+      "stem": "A transformer has 5500 turns on the primary coil and 500 turns on the secondary coil. The output of the secondary coil is 110 V a.c. and is connected to a heater. The transformer is 100% efficient. The heater produces a power of 132 W. What is the current in the primary coil?",
+      "options": {
+        "A": "0.11 A",
+        "B": "0.12 A",
+        "C": "11 A",
+        "D": "12 A"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q33.png",
+      "rawText": "The scattering of alpha-particles from a thin gold foil produces the following observations. ● Most of the alpha-particles pass through the foil. ● Most of the alpha-particles are virtually undeflected. ● A small fraction of the alpha-particles are deflected through large angles. ● A very small fraction of the alpha-particles bounce back from the foil. Which conclusion does not follow from these observations? A Most of the mass of the gold atom is in its nucleus. B Most of the atom is empty space. C The nucleus consists of protons and neutrons. D The nucleus must be charged.",
+      "parseStatus": "ok",
+      "stem": "The scattering of alpha-particles from a thin gold foil produces the following observations. ● Most of the alpha-particles pass through the foil. ● Most of the alpha-particles are virtually undeflected. ●",
+      "options": {
+        "A": "small fraction of the alpha-particles are deflected through large angles. ● A very small fraction of the alpha-particles bounce back from the foil. Which conclusion does not follow from these observations? A Most of the mass of the gold atom is in its nucleus.",
+        "B": "Most of the atom is empty space.",
+        "C": "The nucleus consists of protons and neutrons.",
+        "D": "The nucleus must be charged."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q34.png",
+      "rawText": "A nuclide of chlorine has the symbol shown. l C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q35.png",
+      "rawText": "Which change is occurring in a nucleus during -emission? A An electron and a neutron become one proton. B An electron and a proton become one neutron. C A neutron becomes one proton and one electron. D A proton becomes one neutron and one electron.",
+      "parseStatus": "ok",
+      "stem": "Which change is occurring in a nucleus during -emission?",
+      "options": {
+        "A": "An electron and a neutron become one proton.",
+        "B": "An electron and a proton become one neutron.",
+        "C": "A neutron becomes one proton and one electron.",
+        "D": "A proton becomes one neutron and one electron."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q36.png",
+      "rawText": "The graph shows how the count rate registered by a counter near to a sample of a radioactive isotope changes over a period of a few days. The background count rate is 5 counts per minute. 50 40 30 20 10 0 count rate counts / minute time / days 0 1 2 3 4 5 6 7 8 What is the half-life of the isotope? A 2.0 days B 2.5 days C 3.0 days D 4.0 days",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the count rate registered by a counter near to a sample of a radioactive isotope changes over a period of a few days. The background count rate is 5 counts per minute. 50 40 30 20 10 0 count rate counts / minute time / days 0 1 2 3 4 5 6 7 8 What is the half-life of the isotope?",
+      "options": {
+        "A": "2.0 days",
+        "B": "2.5 days",
+        "C": "3.0 days",
+        "D": "4.0 days"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q37.png",
+      "rawText": "Which row about the orbits of the Earth and the Moon is correct? approximate time for the Earth to orbit the Sun approximate time for the Moon to orbit the Earth A 1 day 30 days B 30 days 1 day C 365 days 1 day D 365 days 30 days",
+      "parseStatus": "ok",
+      "stem": "Which row about the orbits of the Earth and the Moon is correct? approximate time for the Earth to orbit the Sun approximate time for the Moon to orbit the Earth",
+      "options": {
+        "A": "1 day 30 days",
+        "B": "30 days 1 day",
+        "C": "365 days 1 day",
+        "D": "365 days 30 days"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q38.png",
+      "rawText": "Which statement about the orbits of comets is correct? A Comets have elliptical orbits and the Sun is at the centre of the orbit. B Comets have elliptical orbits and the Sun is not at the centre of the orbit. C Comets have circular orbits and the Sun is at the centre of the orbit. D Comets have circular orbits and the Sun is not at the centre of the orbit.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the orbits of comets is correct?",
+      "options": {
+        "A": "Comets have elliptical orbits and the Sun is at the centre of the orbit.",
+        "B": "Comets have elliptical orbits and the Sun is not at the centre of the orbit.",
+        "C": "Comets have circular orbits and the Sun is at the centre of the orbit.",
+        "D": "Comets have circular orbits and the Sun is not at the centre of the orbit."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q39.png",
+      "rawText": "Which row describes the power source for a stable star? type of nuclear reaction fuel A fission hydrogen B fission uranium C fusion hydrogen D fusion uranium",
+      "parseStatus": "ok",
+      "stem": "Which row describes the power source for a stable star? type of nuclear reaction fuel",
+      "options": {
+        "A": "fission hydrogen",
+        "B": "fission uranium",
+        "C": "fusion hydrogen",
+        "D": "fusion uranium"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_23/q40.png",
+      "rawText": "Which quantity can be determined using the brightness of a supernova in a distant galaxy? A the speed at which the galaxy is moving away from the Earth B the distance of the galaxy from the Earth C the Hubble constant D the age of the Universe",
+      "parseStatus": "ok",
+      "stem": "Which quantity can be determined using the brightness of a supernova in a distant galaxy?",
+      "options": {
+        "A": "the speed at which the galaxy is moving away from the Earth",
+        "B": "the distance of the galaxy from the Earth",
+        "C": "the Hubble constant",
+        "D": "the age of the Universe"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}
