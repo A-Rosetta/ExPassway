@@ -111,7 +111,7 @@ for (const paper of papers) {
   const sqlFile = `.d1-export/${paper.slug}.sql`;
   await writeFile(sqlFile, sql, "utf8");
   if (execute) {
-    await execFileAsync(process.platform === "win32" ? "npx.cmd" : "npx", ["wrangler", "d1", "execute", database, "--remote", "--yes", "--file", sqlFile], {
+    await execFileAsync(process.execPath, ["node_modules/wrangler/bin/wrangler.js", "d1", "execute", database, "--remote", "--yes", "--file", sqlFile], {
       maxBuffer: 10 * 1024 * 1024,
     });
   }
