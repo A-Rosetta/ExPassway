@@ -1060,6 +1060,63 @@ button {
   object-fit: contain;
 }
 
+.question-image-zoom {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.question-image-zoom:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.question-image-dialog {
+  width: min(1200px, calc(100% - 32px));
+  max-height: calc(100vh - 32px);
+  border: 0;
+  border-radius: 10px;
+  padding: 0;
+  background: var(--card);
+  color: var(--text);
+}
+
+.question-image-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.question-image-dialog__shell {
+  padding: 1rem;
+}
+
+.question-image-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.question-image-dialog__header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.question-image-dialog__header .profile-dialog__close {
+  flex: 0 0 auto;
+}
+
+.question-image-dialog img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 8rem);
+  margin: 0 auto;
+  object-fit: contain;
+}
+
 .options-wrap {
   margin-top: 0.65rem;
   display: grid;

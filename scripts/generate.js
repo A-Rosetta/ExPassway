@@ -815,7 +815,9 @@
             const sizingClass = image.width && image.height ? "has-ratio" : "no-ratio";
             return `
               <figure class="question-image ${sizingClass}"${ratioStyle}>
-                <img src="${image.src}" alt="${image.alt}"${widthAttr}${heightAttr}${priorityAttr} decoding="async" />
+                <button class="question-image-zoom" type="button" data-question-image-zoom title="${t("viewQuestionImage")}" aria-label="${t("viewQuestionImage")}">
+                  <img src="${image.src}" alt="${image.alt}"${widthAttr}${heightAttr}${priorityAttr} decoding="async" />
+                </button>
               </figure>
             `;
           })
@@ -908,6 +910,18 @@
       });
     });
 
+    const imageDialog = byId("questionImageDialog");
+    const imageDialogImage = byId("questionImageDialogImage");
+    document.querySelectorAll("[data-question-image-zoom]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const image = button.querySelector("img");
+        if (!imageDialog || !imageDialogImage || !image?.src) return;
+        imageDialogImage.src = image.src;
+        imageDialogImage.alt = image.alt;
+        imageDialog.showModal();
+      });
+    });
+
     const radios = document.querySelectorAll('input[name^="q_"]');
     radios.forEach((radio) => {
       radio.addEventListener("change", () => {
@@ -936,6 +950,9 @@
       });
     });
   }
+
+  const questionImageDialog = byId("questionImageDialog");
+  byId("closeQuestionImageDialog")?.addEventListener("click", () => questionImageDialog?.close());
 
   try {
     await loadPublishedPaperSets();
