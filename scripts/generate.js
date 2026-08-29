@@ -918,6 +918,9 @@
         if (!imageDialog || !imageDialogImage || !image?.src) return;
         imageDialogImage.src = image.src;
         imageDialogImage.alt = image.alt;
+        if (openQuestionImage) openQuestionImage.href = image.src;
+        questionImageZoom = 1;
+        updateQuestionImageZoom();
         imageDialog.showModal();
       });
     });
@@ -952,7 +955,36 @@
   }
 
   const questionImageDialog = byId("questionImageDialog");
+  const questionImageDialogImage = byId("questionImageDialogImage");
+  const openQuestionImage = byId("openQuestionImage");
+  let questionImageZoom = 1;
+  function updateQuestionImageZoom() {
+    if (!questionImageDialogImage) return;
+    questionImageDialogImage.style.width = `${questionImageZoom * 100}%`;
+    questionImageDialogImage.style.maxWidth = "none";
+    const resetButton = byId("questionImageZoomReset");
+    if (resetButton) resetButton.textContent = `${Math.round(questionImageZoom * 100)}%`;
+  }
+
   byId("closeQuestionImageDialog")?.addEventListener("click", () => questionImageDialog?.close());
+  byId("questionImageZoomOut")?.addEventListener("click", () => {
+    questionImageZoom = Math.max(0.5, questionImageZoom - 0.25);
+    updateQuestionImageZoom();
+  });
+  byId("questionImageZoomIn")?.addEventListener("click", () => {
+    questionImageZoom = Math.min(4, questionImageZoom + 0.25);
+    updateQuestionImageZoom();
+  });
+  byId("questionImageZoomReset")?.addEventListener("click", () => {
+    questionImageZoom = 1;
+    updateQuestionImageZoom();
+  });
+  questionImageDialog?.addEventListener("close", () => {
+    questionImageZoom = 1;
+    updateQuestionImageZoom();
+    if (questionImageDialogImage) questionImageDialogImage.removeAttribute("src");
+    if (openQuestionImage) openQuestionImage.href = "#";
+  });
 
   try {
     await loadPublishedPaperSets();

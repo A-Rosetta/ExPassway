@@ -1109,10 +1109,54 @@ button {
   flex: 0 0 auto;
 }
 
+.question-image-dialog__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.question-image-dialog__toolbar button,
+.question-image-dialog__open {
+  min-width: 2.35rem;
+  min-height: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  background: var(--surface-raised, #f5f7fa);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.question-image-dialog__toolbar button:hover,
+.question-image-dialog__open:hover {
+  background: var(--surface-pressed, #e8edf3);
+}
+
+.question-image-dialog__open {
+  margin-left: auto;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.question-image-dialog__viewport {
+  max-height: calc(100vh - 10.5rem);
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #17191d;
+  padding: 0.75rem;
+}
+
 .question-image-dialog img {
   display: block;
+  width: 100%;
   max-width: 100%;
-  max-height: calc(100vh - 8rem);
+  height: auto;
+  max-height: none;
   margin: 0 auto;
   object-fit: contain;
 }

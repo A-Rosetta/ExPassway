@@ -116,7 +116,15 @@
         <h2 id="questionImageDialogTitle" data-i18n="viewQuestionImage">View question image</h2>
         <button id="closeQuestionImageDialog" class="profile-dialog__close" type="button" data-i18n-aria-label="close" aria-label="Close">&times;</button>
       </div>
-      <img id="questionImageDialogImage" alt="" />
+      <div class="question-image-dialog__toolbar" role="toolbar" aria-label="Image controls">
+        <button id="questionImageZoomOut" type="button" aria-label="Zoom out" title="Zoom out">-</button>
+        <button id="questionImageZoomReset" type="button" aria-label="Reset zoom" title="Reset zoom">100%</button>
+        <button id="questionImageZoomIn" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+        <a id="openQuestionImage" class="question-image-dialog__open" href="#" target="_blank" rel="noopener" data-i18n="openQuestionImage">Open PNG</a>
+      </div>
+      <div class="question-image-dialog__viewport">
+        <img id="questionImageDialogImage" alt="" />
+      </div>
     </div>
   </dialog>
 
