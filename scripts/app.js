@@ -98,7 +98,9 @@
       subjectCode: subject.code,
       paper: "MCQ",
     }));
-    location.href = subject.code === "0610" ? "pages/biology.html" : "pages/generate.html";
+    location.href = ["0610", "0625"].includes(subject.code)
+      ? `pages/biology.html?subject=${encodeURIComponent(subject.code)}`
+      : "pages/generate.html";
   }
 
   function renderSubjectCourses(subjects, gridId = "subjectCourses") {

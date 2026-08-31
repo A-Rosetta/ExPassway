@@ -1,6 +1,10 @@
 (function () {
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const { t, applyPage, getLanguage } = window.ALevelI18n;
+  const subjectCode = new URLSearchParams(location.search).get("subject") || "0610";
+  const subjectInfo = subjectCode === "0625"
+    ? { nameEn: "Physics", nameZh: "物理" }
+    : { nameEn: "Biology", nameZh: "生物" };
   const state = {
     token: "",
     catalog: null,
@@ -286,7 +290,7 @@
 
   async function loadCatalog() {
     setStatus(t("loadingChapterCatalog"));
-    state.catalog = await window.ALevelApi.getChapterCatalog(state.token, "0610");
+    state.catalog = await window.ALevelApi.getChapterCatalog(state.token, subjectCode);
     byId("curriculumVersion").textContent = t("curriculumVersionLabel", {
       start: state.catalog.version.examYearStart,
       end: state.catalog.version.examYearEnd,
@@ -298,6 +302,8 @@
 
   async function init() {
     applyPage();
+    byId("chapterSubjectLabel").textContent = `Cambridge IGCSE · ${subjectCode}`;
+    byId("chapterSubjectHeading").textContent = getLanguage() === "zh-CN" ? subjectInfo.nameZh : subjectInfo.nameEn;
     state.token = localStorage.getItem(AUTH_TOKEN_KEY) || "";
     if (!state.token) {
       location.href = "./login.html";
@@ -308,8 +314,8 @@
       localStorage.setItem("alevel.selection", JSON.stringify({
         grade: "IGCSE",
         board: "CIE",
-        subject: "IGCSE Biology",
-        subjectCode: "0610",
+        subject: `IGCSE ${subjectInfo.nameEn}`,
+        subjectCode,
         paper: "MCQ",
       }));
       location.href = "./generate.html";
