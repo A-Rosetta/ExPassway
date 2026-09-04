@@ -6,6 +6,7 @@
   "scripts": {
     "check": "npm run lint && npm run typecheck && npm run test:unit && npm run cloudflare:build",
     "build:chat-crypto": "node tools/build-chat-crypto.mjs",
+    "classify:subjects": "node tools/classify-all-subjects.mjs && node tools/classify-static-physics-0625.mjs",
     "cloudflare:build": "npm run build:chat-crypto && node tools/build-cloudflare-assets.mjs",
     "cloudflare:deploy": "npm run cloudflare:build && wrangler deploy",
     "cloudflare:import": "node tools/run-cloudflare-import.mjs --action auto",

@@ -565,7 +565,7 @@ async function submitLocalPaper(request, env) {
 
 function requireCurriculumCode(value) {
   const subjectCode = String(value || "").trim();
-  if (!["0610", "0625"].includes(subjectCode)) {
+  if (!["0610", "0620", "0625", "0654", "0455"].includes(subjectCode)) {
     throw new AuthError(404, "Chapter practice is not available for this subject.", "CURRICULUM_NOT_FOUND");
   }
   return subjectCode;
@@ -794,12 +794,13 @@ async function createChapterPractice(request, env) {
   }
   const sessionId = crypto.randomUUID();
   const createdAt = new Date().toISOString();
+  const subject = await env.DB.prepare("SELECT name FROM exam_subjects WHERE code = ? LIMIT 1").bind(version.subject_code).first();
   await env.DB.prepare(`
     INSERT INTO practice_sessions (
       id, user_id, grade, board, subject, paper, difficulty, topics,
       requested_count, generated_questions, fallback_applied, status, created_at, practice_mode
     ) VALUES (?, ?, 'IGCSE', 'CIE', ?, 'MCQ', NULL, ?, ?, ?, 0, 'generated', ?, 'chapter')
-  `).bind(sessionId, user.id, `IGCSE ${version.subject_code === "0625" ? "Physics" : "Biology"}`, JSON.stringify([sectionId]), questions.length, JSON.stringify(questions), createdAt).run();
+  `).bind(sessionId, user.id, `IGCSE ${subject?.name || version.subject_code}`, JSON.stringify([sectionId]), questions.length, JSON.stringify(questions), createdAt).run();
   return {
     sessionId,
     createdAt,

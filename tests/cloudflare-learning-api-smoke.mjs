@@ -336,6 +336,68 @@ try {
     assert.equal(progress.needsReview, 0);
   }
 
+  await db.batch([
+    db.prepare(`
+      INSERT INTO exam_subjects (code, name, name_zh, asset_key)
+      VALUES ('0620', 'Chemistry', '化学', 'chemistry')
+    `),
+    db.prepare(`
+      INSERT INTO question_bank (
+        id, board, subject, paper, difficulty, topic, year, stem, options,
+        answer, mistake_type, skills, hints, images, subject_code, paper_slug,
+        question_no, active
+      ) VALUES (
+        'chemistry-question', 'CIE', 'IGCSE Chemistry', 'MCQ', 'foundation', 'Atoms', '2023',
+        'Which particle is in the nucleus?', '["Electron","Proton","Ion","Molecule"]',
+        1, 'concept', '[]', '[]', '[]', '0620', '0620_s23_qp_21', 1, 1
+      )
+    `),
+    db.prepare(`
+      INSERT INTO curriculum_versions (
+        id, subject_code, qualification, exam_year_start, exam_year_end, version, active
+      ) VALUES ('chem-version', '0620', 'IGCSE', 2023, 2025, '2023-2025', 1)
+    `),
+    db.prepare(`
+      INSERT INTO curriculum_sections (
+        id, curriculum_version_id, syllabus_code, title_en, title_zh,
+        level, core_level, sort_order
+      ) VALUES ('chem-syllabus', 'chem-version', '2', 'Atoms', '原子', 'topic', 'core', 1)
+    `),
+    db.prepare(`
+      INSERT INTO coursebook_chapters (
+        id, book_key, chapter_no, title_en, title_zh, sort_order
+      ) VALUES ('chem-chapter', 'chemistry', 1, 'Atoms', '原子', 1)
+    `),
+    db.prepare(`
+      INSERT INTO coursebook_sections (
+        id, coursebook_chapter_id, section_code, title_en, title_zh, sort_order
+      ) VALUES ('chem-section', 'chem-chapter', '2', 'Atoms', '原子', 1)
+    `),
+    db.prepare(`
+      INSERT INTO coursebook_section_mappings (coursebook_section_id, curriculum_section_id)
+      VALUES ('chem-section', 'chem-syllabus')
+    `),
+    db.prepare(`
+      INSERT INTO question_section_mappings (
+        question_id, curriculum_section_id, coursebook_section_id,
+        is_primary, confidence, status, source
+      ) VALUES ('chemistry-question', 'chem-syllabus', 'chem-section', 1, 1, 'reviewed', 'manual')
+    `),
+  ]);
+
+  {
+    const catalog = await api(handleLearningApiRequest, db, token, "/api/curriculum/0620/chapters");
+    assert.equal(catalog.response.status, 200);
+    assert.equal(catalog.payload.data.chapters[0].sections[0].progress.availableQuestions, 1);
+
+    const created = await api(handleLearningApiRequest, db, token, "/api/chapter-practice/sessions", {
+      method: "POST",
+      body: JSON.stringify({ curriculumVersion: "chem-version", coursebookSectionId: "chem-section", count: 10 }),
+    });
+    assert.equal(created.response.status, 201);
+    assert.equal(created.payload.data.questions[0].id, "chemistry-question");
+  }
+
   {
     const cleared = await api(
       handleLearningApiRequest,
@@ -345,7 +407,7 @@ try {
       { method: "DELETE" }
     );
     assert.equal(cleared.response.status, 200);
-    assert.equal(cleared.payload.data.deleted, 3);
+    assert.equal(cleared.payload.data.deleted, 4);
     assert.equal(cleared.payload.data.deletedNotebook, 1);
     const counts = await db.prepare(`
       SELECT

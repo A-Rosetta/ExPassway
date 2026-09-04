@@ -1,10 +1,16 @@
 (function () {
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const { t, applyPage, getLanguage } = window.ALevelI18n;
-  const subjectCode = new URLSearchParams(location.search).get("subject") || "0610";
-  const subjectInfo = subjectCode === "0625"
-    ? { nameEn: "Physics", nameZh: "物理" }
-    : { nameEn: "Biology", nameZh: "生物" };
+  const subjectMap = {
+    "0610": { nameEn: "Biology", nameZh: "生物" },
+    "0620": { nameEn: "Chemistry", nameZh: "化学" },
+    "0625": { nameEn: "Physics", nameZh: "物理" },
+    "0654": { nameEn: "Co-ordinated Sciences", nameZh: "协调科学" },
+    "0455": { nameEn: "Economics", nameZh: "经济" },
+  };
+  const requestedSubjectCode = new URLSearchParams(location.search).get("subject") || "0610";
+  const subjectCode = subjectMap[requestedSubjectCode] ? requestedSubjectCode : "0610";
+  const subjectInfo = subjectMap[subjectCode];
   const state = {
     token: "",
     catalog: null,
@@ -304,6 +310,7 @@
     applyPage();
     byId("chapterSubjectLabel").textContent = `Cambridge IGCSE · ${subjectCode}`;
     byId("chapterSubjectHeading").textContent = getLanguage() === "zh-CN" ? subjectInfo.nameZh : subjectInfo.nameEn;
+    document.title = `IGCSE ${subjectInfo.nameEn} Chapter Practice`;
     state.token = localStorage.getItem(AUTH_TOKEN_KEY) || "";
     if (!state.token) {
       location.href = "./login.html";
