@@ -531,6 +531,32 @@
     async getChatProfile() {
       return request("/api/chat/profile", { token: currentToken() });
     },
+    async getChatAccountKeys() {
+      return request("/api/chat/account/keys", { token: currentToken() });
+    },
+    async saveChatAccountKeys(input) {
+      return request("/api/chat/account/keys", { method: "PUT", token: currentToken(), body: JSON.stringify(input || {}) });
+    },
+    async getChatAccountVault() {
+      return request("/api/chat/account/vault", { token: currentToken() });
+    },
+    async saveChatAccountVault(input) {
+      return request("/api/chat/account/vault", { method: "PUT", token: currentToken(), body: JSON.stringify(input || {}) });
+    },
+    async getChatPasskeyOptions(kind) {
+      return request(`/api/chat/account/passkeys/${kind}/options`, { method: "POST", token: currentToken() });
+    },
+    async verifyChatPasskey(kind, input) {
+      return request(`/api/chat/account/passkeys/${kind}/verify`, { method: "POST", token: currentToken(), body: JSON.stringify(input || {}) });
+    },
+    async getChatConversationEpochs(conversationId) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/epochs`, { token: currentToken() });
+    },
+    async syncChatEvents(conversationId, cursor = "") {
+      const params = new URLSearchParams({ conversationId });
+      if (cursor) params.set("cursor", cursor);
+      return request(`/api/chat/sync-events?${params}`, { token: currentToken(), timeoutMs: 30000 });
+    },
     async updateChatProfile(input) {
       return request("/api/chat/profile", {
         method: "PATCH",
