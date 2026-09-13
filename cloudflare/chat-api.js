@@ -76,6 +76,14 @@ function ensureEnabled(env) {
   }
 }
 
+function accountV2Enabled(env) {
+  return ["1", "true", "yes", "on"].includes(String(env.CHAT_ACCOUNT_V2_ENABLED || "").toLowerCase());
+}
+
+function ensureAccountV2Enabled(env) {
+  if (!accountV2Enabled(env)) throw new AuthError(503, "Account synced E2EE is not enabled for this deployment yet.", "CHAT_ACCOUNT_V2_DISABLED");
+}
+
 function recoveryEnabled(env) {
   return ["1", "true", "yes", "on"].includes(String(env.CHAT_RECOVERY_BACKUP_ENABLED || "").toLowerCase());
 }
@@ -902,15 +910,31 @@ async function syncMessages(db, userId, url) {
 async function postMessage(db, env, userId, body) {
   const conversationId = boundedString(body.conversationId, "conversationId", 100);
   const conversation = await requireConversationMember(db, conversationId, userId);
-  const device = await requireOwnedDevice(db, boundedString(body.senderDeviceId, "senderDeviceId", 100), userId);
+  const protocolVersion = typeof body.protocolVersion === "string" && body.protocolVersion.trim()
+    ? body.protocolVersion.trim().slice(0, 40)
+    : "signal-v1";
+  const device = protocolVersion === "account-v2"
+    ? null
+    : await requireOwnedDevice(db, boundedString(body.senderDeviceId, "senderDeviceId", 100), userId);
   const clientMessageId = boundedString(body.clientMessageId, "clientMessageId", 160);
   const ciphertext = boundedString(body.ciphertext, "ciphertext", MAX_CIPHERTEXT_LENGTH);
   if (!isBase64Url(ciphertext, MAX_CIPHERTEXT_LENGTH)) {
     throw new AuthError(400, "Ciphertext must be base64url encoded.", "INVALID_CIPHERTEXT");
   }
-  const protocolVersion = typeof body.protocolVersion === "string" && body.protocolVersion.trim()
-    ? body.protocolVersion.trim().slice(0, 40)
-    : "signal-v1";
+  if (protocolVersion === "account-v2") {
+    ensureAccountV2Enabled(env);
+    const accountKey = await db.prepare("SELECT key_version FROM chat_account_keys WHERE user_id = ? AND status = 'active' ORDER BY updated_at DESC LIMIT 1").bind(userId).first();
+    if (!accountKey) throw new AuthError(409, "Set up account E2EE keys before sending account-v2 messages.", "ACCOUNT_KEYS_REQUIRED");
+    const contentEpoch = Number(body.contentEpoch);
+    const nonce = boundedString(body.nonce, "nonce", 256);
+    const signature = boundedString(body.signature, "signature", 1024);
+    if (!Number.isInteger(contentEpoch) || contentEpoch < 1 || !isBase64Url(nonce, 256) || !isBase64Url(signature, 1024)) {
+      throw new AuthError(400, "Account-v2 message metadata is invalid.", "INVALID_ACCOUNT_V2_MESSAGE");
+    }
+    const envelope = await db.prepare(`SELECT 1 FROM chat_epoch_recipients
+      WHERE conversation_id = ? AND epoch = ? AND user_id = ?`).bind(conversationId, contentEpoch, userId).first();
+    if (!envelope) throw new AuthError(409, "The requested conversation epoch is unavailable to this account.", "EPOCH_UNAVAILABLE");
+  }
   const attachmentRefs = Array.isArray(body.attachmentRefs) ? body.attachmentRefs : [];
   if (attachmentRefs.length > 8 || attachmentRefs.some((item) => !isBase64Url(String(item), 100))) {
     throw new AuthError(400, "Attachment references are invalid.", "INVALID_ATTACHMENTS");
@@ -928,14 +952,16 @@ async function postMessage(db, env, userId, body) {
   const existing = await db.prepare(`
     SELECT id, conversation_id, ciphertext, deleted_at, created_at, expires_at, sender_device_id,
       client_message_id, protocol_version, attachment_refs, size_bucket
-    FROM chat_messages WHERE sender_device_id = ? AND client_message_id = ?
-  `).bind(device.id, clientMessageId).first();
+    FROM chat_messages WHERE ((sender_device_id = ? AND ? IS NOT NULL) OR (sender_user_id = ? AND ? IS NULL)) AND client_message_id = ?
+  `).bind(device?.id || null, device?.id || null, userId, device?.id || null, clientMessageId).first();
   if (existing) {
     if (existing.ciphertext !== ciphertext) throw new AuthError(409, "Message id was already used.", "MESSAGE_ID_REUSED");
-    const existingSender = await db.prepare(`
-      SELECT d.device_number, p.chat_alias AS sender_alias
-      FROM chat_devices d LEFT JOIN chat_profiles p ON p.user_id = d.user_id WHERE d.id = ?
-    `).bind(existing.sender_device_id).first();
+    const existingSender = existing.sender_device_id
+      ? await db.prepare(`SELECT d.device_number, p.chat_alias AS sender_alias
+          FROM chat_devices d LEFT JOIN chat_profiles p ON p.user_id = d.user_id WHERE d.id = ?`)
+        .bind(existing.sender_device_id).first()
+      : await db.prepare("SELECT NULL AS device_number, chat_alias AS sender_alias FROM chat_profiles WHERE user_id = ?")
+        .bind(userId).first();
     return { message: {
       id: existing.id, conversationId: existing.conversation_id, senderDeviceId: existing.sender_device_id,
       senderDeviceNumber: existingSender?.device_number || null,
@@ -953,25 +979,31 @@ async function postMessage(db, env, userId, body) {
   const expiresAt = retentionExpiry(Number(conversation.retention_seconds));
   const statements = [db.prepare(`
     INSERT INTO chat_messages
-      (id, conversation_id, sender_device_id, client_message_id, protocol_version, ciphertext,
-       attachment_refs, size_bucket, created_at, expires_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).bind(id, conversationId, device.id, clientMessageId, protocolVersion, ciphertext,
+      (id, conversation_id, sender_device_id, sender_user_id, client_message_id, protocol_version, ciphertext,
+       content_epoch, nonce, signature, attachment_refs, size_bucket, created_at, expires_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).bind(id, conversationId, device?.id || null, userId, clientMessageId, protocolVersion, ciphertext,
+    protocolVersion === "account-v2" ? Number(body.contentEpoch) : null, protocolVersion === "account-v2" ? body.nonce : null,
+    protocolVersion === "account-v2" ? body.signature : null,
     JSON.stringify(attachmentRefs), bucketForSize(ciphertext.length), timestamp, expiresAt)];
   const memberDevices = await db.prepare(`
     SELECT d.id FROM chat_devices d
     JOIN chat_conversation_members m ON m.user_id = d.user_id
     WHERE m.conversation_id = ? AND m.left_at IS NULL AND d.revoked_at IS NULL AND d.id <> ?
-  `).bind(conversationId, device.id).all();
+  `).bind(conversationId, device?.id || "").all();
   for (const row of memberDevices.results || []) {
     statements.push(db.prepare(`
       INSERT INTO chat_message_deliveries (message_id, device_id) VALUES (?, ?)
     `).bind(id, row.id));
   }
   statements.push(db.prepare("UPDATE chat_conversations SET updated_at = ? WHERE id = ?").bind(timestamp, conversationId));
+  if (protocolVersion === "account-v2") {
+    statements.push(db.prepare("INSERT INTO chat_sync_events (conversation_id,event_type,entity_id,payload_ciphertext,created_at) VALUES (?,?,?,?,?)")
+      .bind(conversationId, "message", id, ciphertext, timestamp));
+  }
   await db.batch(statements);
   const message = {
-    id, conversationId, senderDeviceId: device.id, senderDeviceNumber: device.device_number,
+    id, conversationId, senderDeviceId: device?.id || null, senderDeviceNumber: device?.device_number || null,
     senderAlias: (await db.prepare("SELECT chat_alias FROM chat_profiles WHERE user_id = ?").bind(userId).first())?.chat_alias || "You",
     clientMessageId, protocolVersion, ciphertext,
     attachmentRefs, sizeBucket: bucketForSize(ciphertext.length), createdAt: timestamp, expiresAt, deleted: false,
@@ -1079,6 +1111,96 @@ async function issueWebSocketTicket(db, userId, body) {
   return { ticket: token, expiresAt, protocol: "expassway-chat-v1" };
 }
 
+function mapAccountKey(row) {
+  if (!row) return null;
+  return { userId: row.user_id, keyVersion: row.key_version, encryptionPublicKey: row.encryption_public_key,
+    signingPublicKey: row.signing_public_key, fingerprint: row.fingerprint, status: row.status,
+    createdAt: row.created_at, updatedAt: row.updated_at };
+}
+
+async function accountKeyBundle(db, userId) {
+  const row = await db.prepare(`SELECT user_id,key_version,encryption_public_key,signing_public_key,fingerprint,status,created_at,updated_at
+    FROM chat_account_keys WHERE user_id = ? AND status = 'active' ORDER BY updated_at DESC LIMIT 1`).bind(userId).first();
+  return { accountKey: mapAccountKey(row), enabled: Boolean(row) };
+}
+
+async function upsertAccountKey(db, userId, body) {
+  const encryptionPublicKey = boundedString(body.encryptionPublicKey, "encryptionPublicKey", 512);
+  const signingPublicKey = boundedString(body.signingPublicKey, "signingPublicKey", 512);
+  const keyVersion = boundedString(body.keyVersion || "1", "keyVersion", 64);
+  const fingerprint = boundedString(body.fingerprint || await sha256Base64Url(`${encryptionPublicKey}.${signingPublicKey}`), "fingerprint", 256);
+  if (![encryptionPublicKey, signingPublicKey, fingerprint].every((value) => isBase64Url(value, 512))) {
+    throw new AuthError(400, "Account public keys are invalid.", "INVALID_ACCOUNT_KEYS");
+  }
+  const timestamp = nowIso();
+  await db.prepare(`INSERT INTO chat_account_keys (user_id,key_version,encryption_public_key,signing_public_key,fingerprint,status,created_at,updated_at)
+    VALUES (?,?,?,?,?,'active',?,?) ON CONFLICT(user_id,key_version) DO UPDATE SET encryption_public_key=excluded.encryption_public_key,
+      signing_public_key=excluded.signing_public_key,fingerprint=excluded.fingerprint,status='active',updated_at=excluded.updated_at`)
+    .bind(userId, keyVersion, encryptionPublicKey, signingPublicKey, fingerprint, timestamp, timestamp).run();
+  return accountKeyBundle(db, userId);
+}
+
+async function passkeyOptions(db, userId, kind) {
+  const challenge = bytesToBase64Url(randomBytes(32));
+  const timestamp = Date.now();
+  await db.prepare(`INSERT INTO chat_webauthn_challenges (id,user_id,challenge,kind,expires_at,created_at) VALUES (?,?,?,?,?,?)`)
+    .bind(randomId(), userId, challenge, kind, new Date(timestamp + 5 * 60 * 1000).toISOString(), new Date(timestamp).toISOString()).run();
+  return { challenge, rpId: null, userId, expiresAt: new Date(timestamp + 5 * 60 * 1000).toISOString(), kind };
+}
+
+async function verifyPasskey(db, userId, body, kind) {
+  const challenge = boundedString(body.challenge, "challenge", 256);
+  const row = await db.prepare(`SELECT id FROM chat_webauthn_challenges WHERE user_id = ? AND challenge = ? AND kind = ? AND used_at IS NULL AND expires_at > ?`)
+    .bind(userId, challenge, kind, nowIso()).first();
+  if (!row) throw new AuthError(400, "WebAuthn challenge is invalid or expired.", "INVALID_WEBAUTHN_CHALLENGE");
+  await db.prepare("UPDATE chat_webauthn_challenges SET used_at = ? WHERE id = ? AND used_at IS NULL").bind(nowIso(), row.id).run();
+  const credentialId = boundedString(body.credentialId, "credentialId", 512);
+  const publicKey = boundedString(body.publicKey, "publicKey", 4096);
+  const prfSalt = boundedString(body.prfSalt || bytesToBase64Url(randomBytes(32)), "prfSalt", 256);
+  if (![credentialId, publicKey, prfSalt].every((value) => isBase64Url(value, 4096))) throw new AuthError(400, "WebAuthn credential is invalid.", "INVALID_WEBAUTHN_CREDENTIAL");
+  const timestamp = nowIso();
+  await db.prepare(`INSERT INTO chat_passkeys (id,user_id,credential_id,public_key,prf_salt,sign_count,transports,created_at,last_used_at)
+    VALUES (?,?,?,?,?,0,?,?,?) ON CONFLICT(credential_id) DO UPDATE SET public_key=excluded.public_key,prf_salt=excluded.prf_salt,last_used_at=excluded.last_used_at`)
+    .bind(randomId(), userId, credentialId, publicKey, prfSalt, JSON.stringify(Array.isArray(body.transports) ? body.transports : []), timestamp, timestamp).run();
+  return { verified: true, credentialId, prfSalt };
+}
+
+async function saveVault(db, userId, body) {
+  const keyVersion = boundedString(body.keyVersion || "1", "keyVersion", 64);
+  const nonce = boundedString(body.nonce, "nonce", 256);
+  const ciphertext = boundedString(body.ciphertext, "ciphertext", 512 * 1024);
+  if (![nonce, ciphertext].every((value) => isBase64Url(value, 512 * 1024))) throw new AuthError(400, "Encrypted vault is invalid.", "INVALID_VAULT");
+  const timestamp = nowIso();
+  await db.prepare(`INSERT INTO chat_vaults (user_id,key_version,kdf_version,nonce,ciphertext,updated_at) VALUES (?,?, 'hkdf-sha256-v1',?,?,?)
+    ON CONFLICT(user_id) DO UPDATE SET key_version=excluded.key_version,nonce=excluded.nonce,ciphertext=excluded.ciphertext,updated_at=excluded.updated_at`)
+    .bind(userId, keyVersion, nonce, ciphertext, timestamp).run();
+  return { saved: true, keyVersion, updatedAt: timestamp };
+}
+
+async function getVault(db, userId) {
+  const row = await db.prepare("SELECT key_version,kdf_version,nonce,ciphertext,updated_at FROM chat_vaults WHERE user_id = ?").bind(userId).first();
+  return row ? { keyVersion: row.key_version, kdfVersion: row.kdf_version, nonce: row.nonce, ciphertext: row.ciphertext, updatedAt: row.updated_at } : null;
+}
+
+async function listEpochs(db, conversationId, userId) {
+  await requireConversationMember(db, conversationId, userId);
+  const rows = await db.prepare(`SELECT e.epoch,e.created_by,e.created_at,r.user_id,r.key_version,r.ephemeral_public_key,r.nonce,r.envelope_ciphertext
+    FROM chat_conversation_epochs e JOIN chat_epoch_recipients r ON r.conversation_id=e.conversation_id AND r.epoch=e.epoch
+    WHERE e.conversation_id=? AND r.user_id=? ORDER BY e.epoch DESC`).bind(conversationId, userId).all();
+  return (rows.results || []).map((row) => ({ epoch: row.epoch, createdBy: row.created_by, createdAt: row.created_at,
+    envelope: { userId: row.user_id, keyVersion: row.key_version, ephemeralPublicKey: row.ephemeral_public_key, nonce: row.nonce, ciphertext: row.envelope_ciphertext } }));
+}
+
+async function syncEvents(db, conversationId, userId, url) {
+  await requireConversationMember(db, conversationId, userId);
+  const after = Math.max(0, Number(url.searchParams.get("after") || 0));
+  const limit = Math.min(200, Math.max(1, Number(url.searchParams.get("limit") || 100)));
+  const rows = await db.prepare(`SELECT sequence,event_type,entity_id,payload_ciphertext,created_at FROM chat_sync_events WHERE conversation_id=? AND sequence>? ORDER BY sequence LIMIT ?`)
+    .bind(conversationId, Number.isFinite(after) ? after : 0, limit).all();
+  const events = (rows.results || []).map((row) => ({ sequence: row.sequence, type: row.event_type, entityId: row.entity_id || null, payloadCiphertext: row.payload_ciphertext || null, createdAt: row.created_at }));
+  return { events, nextCursor: events.at(-1)?.sequence || after };
+}
+
 async function acceptWebSocketTicket(db, token, conversationId) {
   const hash = await sha256Base64Url(token);
   const row = await db.prepare(`
@@ -1100,6 +1222,28 @@ async function handleRoute(request, env, user) {
   const parts = getRouteParts(url);
   const method = request.method;
   const db = env.DB;
+
+  // Account-v2 lifecycle. WebAuthn assertions are verified by the edge adapter/client;
+  // the API stores only the resulting public credential metadata and encrypted vault.
+  if (url.pathname.startsWith("/api/chat/account")) ensureAccountV2Enabled(env);
+  if (method === "GET" && url.pathname === "/api/chat/account/keys") return success(await accountKeyBundle(db, user.id), method);
+  if (method === "PUT" && url.pathname === "/api/chat/account/keys") return success(await upsertAccountKey(db, user.id, await readJsonBody(request)), method);
+  if (method === "POST" && url.pathname === "/api/chat/account/passkeys/register/options") return success(await passkeyOptions(db, user.id, "registration"), method);
+  if (method === "POST" && url.pathname === "/api/chat/account/passkeys/authenticate/options") return success(await passkeyOptions(db, user.id, "authentication"), method);
+  if (method === "POST" && url.pathname === "/api/chat/account/passkeys/register/verify") return success(await verifyPasskey(db, user.id, await readJsonBody(request), "registration"), method, 201);
+  if (method === "POST" && url.pathname === "/api/chat/account/passkeys/authenticate/verify") return success(await verifyPasskey(db, user.id, await readJsonBody(request), "authentication"), method);
+  if (method === "GET" && url.pathname === "/api/chat/account/vault") return success(await getVault(db, user.id), method);
+  if (method === "PUT" && url.pathname === "/api/chat/account/vault") return success(await saveVault(db, user.id, await readJsonBody(request)), method);
+
+  if (method === "GET" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "conversations" && parts[3] && parts[4] === "epochs") {
+    ensureAccountV2Enabled(env);
+    return success(await listEpochs(db, parts[3], user.id), method);
+  }
+  if (method === "GET" && url.pathname === "/api/chat/sync-events") {
+    ensureAccountV2Enabled(env);
+    const conversationId = boundedString(url.searchParams.get("conversationId"), "conversationId", 100);
+    return success(await syncEvents(db, conversationId, user.id, url), method);
+  }
 
   if (method === "GET" && url.pathname === "/api/chat/invites") return success(await listInvites(db, user.id), method);
   if (method === "POST" && url.pathname === "/api/chat/invites") return success(await createInvite(db, user.id), method, 201);
