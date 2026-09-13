@@ -550,6 +550,9 @@
     async saveChatAccountVault(input) {
       return request("/api/chat/account/vault", { method: "PUT", token: currentToken(), body: JSON.stringify(input || {}) });
     },
+    async initializeChatAccount(input) {
+      return request("/api/chat/account/initialize", { method: "POST", token: currentToken(), body: JSON.stringify(input || {}) });
+    },
     async getChatPasskeyOptions(kind) {
       if (kind !== "register" && kind !== "authenticate") {
         throw new TypeError("Passkey options kind must be register or authenticate");
@@ -619,6 +622,9 @@
     async getChatContactBundle(contactId) {
       return request(`/api/chat/contacts/${encodeURIComponent(contactId)}/bundle`, { token: currentToken() });
     },
+    async getChatContactAccountBundle(contactId) {
+      return request(`/api/chat/contacts/${encodeURIComponent(contactId)}/account-key`, { token: currentToken() });
+    },
     async listChatDevices() {
       return request("/api/chat/devices", { token: currentToken() });
     },
@@ -670,8 +676,53 @@
         body: JSON.stringify({ kind: "group", contactIds: Array.isArray(contactIds) ? contactIds : [] }),
       });
     },
+    async createAccountChatConversation(input) {
+      return request("/api/chat/conversations", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({ ...(input || {}), protocolVersion: "account-v2" }),
+      });
+    },
     async getChatConversationBundle(conversationId) {
       return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/bundle`, { token: currentToken() });
+    },
+    async getChatConversationAccountBundle(conversationId) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/account-bundle`, { token: currentToken() });
+    },
+    async createChatConversationEpoch(conversationId, input) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/epochs`, {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async updateChatGroupMembers(conversationId, input) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/members`, {
+        method: "PATCH",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async leaveChatGroup(conversationId, input) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/leave`, {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async updateChatGroupMetadata(conversationId, input) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/metadata`, {
+        method: "PUT",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async dissolveChatGroup(conversationId, input) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/dissolve`, {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+      });
     },
     async updateChatConversationSettings(conversationId, retentionSeconds) {
       return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/settings`, {

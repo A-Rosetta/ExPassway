@@ -20,7 +20,7 @@
     "test:cloudflare-import-runner": "node tests/cloudflare-import-runner-smoke.mjs",
     "test:cloudflare-learning-api": "node tests/cloudflare-learning-api-smoke.mjs",
     "test:cloudflare-read-api": "node tests/cloudflare-read-api-smoke.mjs",
-    "test:unit": "node tests/cloudflare-admin-api-smoke.mjs && node tests/cloudflare-auth-smoke.mjs && node tests/cloudflare-community-api-smoke.mjs && node tests/cloudflare-content-api-smoke.mjs && node tests/cloudflare-import-runner-smoke.mjs && node tests/cloudflare-learning-api-smoke.mjs && node tests/cloudflare-legacy-route-smoke.mjs && node tests/cloudflare-security-headers-smoke.mjs && node tests/chat-crypto-smoke.mjs && node tests/cloudflare-chat-api-smoke.mjs",
+    "test:unit": "node tests/cloudflare-admin-api-smoke.mjs && node tests/cloudflare-auth-smoke.mjs && node tests/cloudflare-community-api-smoke.mjs && node tests/cloudflare-content-api-smoke.mjs && node tests/cloudflare-import-runner-smoke.mjs && node tests/cloudflare-learning-api-smoke.mjs && node tests/cloudflare-legacy-route-smoke.mjs && node tests/cloudflare-security-headers-smoke.mjs && node tests/chat-crypto-smoke.mjs && node tests/chat-account-v2-crypto-smoke.mjs && node tests/cloudflare-chat-api-smoke.mjs && node tests/cloudflare-chat-passkey-smoke.mjs",
     "typecheck": "tsc --project jsconfig.json"
   },
   "devDependencies": {

@@ -10,7 +10,9 @@
 		"OPENAI_HINT_MODEL": "gpt-5.6-luna",
 		"OPENAI_API_BASE_URL": "https://www.rayinai.com",
 		"CHAT_ENABLED": "true",
-		"CHAT_ACCOUNT_V2_ENABLED": "false",
+		"CHAT_ACCOUNT_V2_ENABLED": "true",
+		"CHAT_WEBAUTHN_RP_ID": "expassway.com",
+		"CHAT_WEBAUTHN_ORIGIN": "https://expassway.com",
 		"CHAT_LEGACY_V1_READ_ENABLED": "true",
 		"CHAT_LEGACY_V1_SEND_ENABLED": "true",
 		"CHAT_RECOVERY_BACKUP_ENABLED": "false"
