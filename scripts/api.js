@@ -534,8 +534,15 @@
     async getChatAccountKeys() {
       return request("/api/chat/account/keys", { token: currentToken() });
     },
+    /** Return the active account-v2 public key bundle for the signed-in user. */
+    async getChatAccountKeyBundle() {
+      return this.getChatAccountKeys();
+    },
     async saveChatAccountKeys(input) {
       return request("/api/chat/account/keys", { method: "PUT", token: currentToken(), body: JSON.stringify(input || {}) });
+    },
+    async upsertChatAccountKeyBundle(input) {
+      return this.saveChatAccountKeys(input);
     },
     async getChatAccountVault() {
       return request("/api/chat/account/vault", { token: currentToken() });
@@ -544,18 +551,42 @@
       return request("/api/chat/account/vault", { method: "PUT", token: currentToken(), body: JSON.stringify(input || {}) });
     },
     async getChatPasskeyOptions(kind) {
+      if (kind !== "register" && kind !== "authenticate") {
+        throw new TypeError("Passkey options kind must be register or authenticate");
+      }
       return request(`/api/chat/account/passkeys/${kind}/options`, { method: "POST", token: currentToken() });
     },
+    async getChatPasskeyRegistrationOptions() {
+      return this.getChatPasskeyOptions("register");
+    },
+    async getChatPasskeyAuthenticationOptions() {
+      return this.getChatPasskeyOptions("authenticate");
+    },
     async verifyChatPasskey(kind, input) {
+      if (kind !== "register" && kind !== "authenticate") {
+        throw new TypeError("Passkey verification kind must be register or authenticate");
+      }
       return request(`/api/chat/account/passkeys/${kind}/verify`, { method: "POST", token: currentToken(), body: JSON.stringify(input || {}) });
+    },
+    async verifyChatPasskeyRegistration(input) {
+      return this.verifyChatPasskey("register", input);
+    },
+    async verifyChatPasskeyAuthentication(input) {
+      return this.verifyChatPasskey("authenticate", input);
     },
     async getChatConversationEpochs(conversationId) {
       return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/epochs`, { token: currentToken() });
+    },
+    async listChatConversationEpochs(conversationId) {
+      return this.getChatConversationEpochs(conversationId);
     },
     async syncChatEvents(conversationId, cursor = "") {
       const params = new URLSearchParams({ conversationId });
       if (cursor) params.set("cursor", cursor);
       return request(`/api/chat/sync-events?${params}`, { token: currentToken(), timeoutMs: 30000 });
+    },
+    async pullChatSyncEvents(conversationId, cursor = "") {
+      return this.syncChatEvents(conversationId, cursor);
     },
     async updateChatProfile(input) {
       return request("/api/chat/profile", {
@@ -661,6 +692,10 @@
         body: JSON.stringify(input || {}),
         timeoutMs: 30000,
       });
+    },
+    async sendAccountV2Message(input) {
+      const payload = { ...(input || {}), protocolVersion: "account-v2" };
+      return this.sendChatMessage(payload);
     },
     async deleteChatMessage(messageId) {
       return request(`/api/chat/messages/${encodeURIComponent(messageId)}/delete`, {
