@@ -1330,6 +1330,35 @@
     });
   }
 
+  const downloadAllQuestionsBtn = byId("downloadAllQuestionsBtn");
+  if (downloadAllQuestionsBtn) {
+    downloadAllQuestionsBtn.addEventListener("click", async () => {
+      const status = byId("bulkDownloadStatus");
+      downloadAllQuestionsBtn.disabled = true;
+      if (status) status.textContent = "正在收集全部试卷和题目...";
+      try {
+        const result = await window.BulkDownload.downloadAllSubjects(window.ALevelApi, (progress) => {
+          if (!status) return;
+          if (progress.imageTotal) {
+            status.textContent = `正在下载图片 ${progress.imageIndex}/${progress.imageTotal}，失败 ${progress.failures} 张`;
+          } else {
+            status.textContent = `已收集 ${progress.paperCount} 套试卷、${progress.questionCount} 道题目`;
+          }
+        });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(result.blob);
+        link.download = "ExPassway-all-questions.zip";
+        link.click();
+        URL.revokeObjectURL(link.href);
+        if (status) status.textContent = `下载已生成：${result.manifest.papers.length} 套试卷，失败图片 ${result.manifest.failedImages.length} 张`;
+      } catch (error) {
+        if (status) status.textContent = `批量下载失败：${error.message}`;
+      } finally {
+        downloadAllQuestionsBtn.disabled = false;
+      }
+    });
+  }
+
   function bindPaperActions() {
     const submitBtn = byId("submitPaper");
     const toAnalysis = byId("toAnalysis");

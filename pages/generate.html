@@ -18,6 +18,7 @@
           <p class="tip" data-i18n="choosePaperSubtitle">先选一套真题，再选做题模式，最后打开题目开始作答。</p>
         </div>
         <div class="paper-picker-actions">
+          <button id="downloadAllQuestionsBtn" class="mode-btn-secondary" type="button" data-i18n="downloadAllQuestions">下载全部题库</button>
           <button id="goHistoryBtn" class="mode-btn-secondary" type="button" data-i18n="goHistoryBtn" hidden>查看记录</button>
           <button id="goHomeFromPickerBtn" class="mode-btn-primary" type="button" data-i18n="homeBtn">返回首页</button>
         </div>
@@ -32,6 +33,7 @@
         <p id="paperYearResultCount" class="paper-filter-count" aria-live="polite"></p>
       </div>
       <div id="paperSetList" class="paper-set-list"></div>
+      <p id="bulkDownloadStatus" class="tip" aria-live="polite"></p>
     </section>
 
     <section class="card mode-landing hidden-panel" id="modeLanding">
@@ -132,6 +134,7 @@
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
   <script src="../scripts/exam-catalog.js?v=20260718-1"></script>
   <script src="../scripts/api.js?v=20260729-1"></script>
+  <script src="../scripts/bulk-download.js?v=20260913-1"></script>
   <script src="../scripts/pet.js?v=20260806-2"></script>
   <script src="../scripts/generate.js?v=20260823-1"></script>
 </body>
