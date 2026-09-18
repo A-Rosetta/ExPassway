@@ -1,5 +1,5 @@
 const assert = require("node:assert/strict");
-const path = require("node:path");
+const nodePath = require("node:path");
 const { chromium, webkit } = require("playwright");
 
 const baseUrl = process.env.STUDENT_UI_BASE_URL || "http://127.0.0.1/alevel";
@@ -183,6 +183,7 @@ const threads = [
     likeCount: 12,
     followerCount: 4,
     followed: false,
+    preview: "Why does the mole ratio change here?",
     lastPostAt: now,
   },
   {
@@ -202,6 +203,7 @@ const threads = [
     likeCount: 7,
     followerCount: 2,
     followed: true,
+    preview: "How can I identify the ions quickly?",
     lastPostAt: now,
   },
 ];
@@ -319,7 +321,14 @@ async function mockApi(page, currentUser = user, authDelayMs = 0) {
     }
     if (path === "/api/discussions" && method === "GET") {
       const followed = url.searchParams.get("followedOnly") === "1";
-      return json(route, followed ? threads.filter((thread) => thread.followed) : threads);
+      const search = (url.searchParams.get("search") || "").trim().toLowerCase();
+      const topic = url.searchParams.get("topic") || "";
+      const sort = url.searchParams.get("sort") || "latest";
+      let rows = followed ? threads.filter((thread) => thread.followed) : [...threads];
+      if (search) rows = rows.filter((thread) => [thread.title, thread.topic, thread.questionKey, thread.preview].some((value) => String(value || "").toLowerCase().includes(search)));
+      if (topic) rows = rows.filter((thread) => thread.topic === topic);
+      if (sort === "likes") rows.sort((a, b) => b.likeCount - a.likeCount);
+      return json(route, rows);
     }
     if (path === "/api/discussions" && method === "POST") {
       return json(route, { ...threads[0], id: "thread-new", title: "新讨论" }, 201);
@@ -349,7 +358,7 @@ async function mockApi(page, currentUser = user, authDelayMs = 0) {
       return route.fulfill({
         status: 200,
         contentType: "image/png",
-        path: path.resolve(__dirname, "../assets/question-images/0620_s23_qp_21/q01_full.png"),
+        path: nodePath.resolve(__dirname, "../assets/question-images/0620_s23_qp_21/q01_full.png"),
       });
     }
     if (/^\/api\/discussions\//.test(path) && method !== "GET") return json(route, { ok: true });
@@ -1130,6 +1139,20 @@ async function verifyCommunity(browser, config) {
       "离子方程式中旁观离子如何快速判断？"
     );
 
+    await page.locator("#communityFeedSearch").fill("Ions");
+    await page.locator("#communityFeedSearchForm").evaluate((form) => form.requestSubmit());
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 1);
+    assert.equal(await page.locator(".discussion-thread").first().locator(".tag").filter({ hasText: "Ions" }).count(), 1);
+    await page.locator("#communityFeedSearch").fill("");
+    await page.locator("#communityFeedSearchForm").evaluate((form) => form.requestSubmit());
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 2);
+    await page.locator("#communityFeedTopic").selectOption("Ions");
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 1);
+    await page.locator("#communityFeedTopic").selectOption("");
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 2);
+    await page.locator("#communityFeedSort").selectOption("likes");
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 2);
+
     const zhRun = await openPage(browser, config, "/pages/community.html", { language: "zh-CN" });
     try {
       await zhRun.page.locator(".discussion-thread").first().waitFor({ state: "visible" });
@@ -1422,6 +1445,11 @@ async function runConfig(config) {
       await verifyGeneratedPaper(browser, config);
       return;
     }
+    if (process.env.STUDENT_UI_FOCUS === "community") {
+      await verifyCommunity(browser, config);
+      console.log(JSON.stringify({ viewport: config.name, page: "community", ok: true }));
+      return;
+    }
     if (process.env.STUDENT_UI_FOCUS === "security") {
       for (const pageSpec of pageSpecs.filter(({ name }) => ["home", "generate", "review", "image-mapper"].includes(name))) {
         await verifyStandardPage(browser, config, pageSpec);
@@ -1461,15 +1489,24 @@ async function runConfig(config) {
 (async () => {
   const only = process.env.STUDENT_UI_ONLY || "";
   if (!only || only === "desktop") {
-    await runConfig({ name: "desktop-chromium", browser: chromium, viewport: { width: 1440, height: 900 }, mobile: false });
+    await runConfig({
+      name: "desktop-chromium",
+      browser: chromium,
+      viewport: { width: 1440, height: 900 },
+      mobile: false,
+      executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH,
+    });
   }
   if (!only || only === "mobile") {
+    const mobileBrowser = process.env.PLAYWRIGHT_MOBILE_BROWSER === "chromium" ? chromium : webkit;
     await runConfig({
       name: "mobile-webkit",
-      browser: webkit,
+      browser: mobileBrowser,
       viewport: { width: 390, height: 844 },
       mobile: true,
-      executablePath: process.env.WEBKIT_EXECUTABLE_PATH,
+      executablePath: process.env.PLAYWRIGHT_MOBILE_BROWSER === "chromium"
+        ? process.env.PLAYWRIGHT_EXECUTABLE_PATH
+        : process.env.WEBKIT_EXECUTABLE_PATH,
     });
   }
 })().catch((error) => {

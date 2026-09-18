@@ -116,6 +116,7 @@ function mapThread(row) {
     likeCount: Number(row.like_count || 0),
     followerCount: Number(row.follower_count || 0),
     followed: Boolean(row.followed),
+    preview: row.preview || "",
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     lastPostAt: row.last_post_at,
@@ -149,7 +150,10 @@ function threadSelect() {
         WHERE p.thread_id = t.id) AS like_count,
       (SELECT COUNT(*) FROM discussion_thread_follows f WHERE f.thread_id = t.id) AS follower_count,
       EXISTS(SELECT 1 FROM discussion_thread_follows f
-        WHERE f.thread_id = t.id AND f.user_id = ?) AS followed
+        WHERE f.thread_id = t.id AND f.user_id = ?) AS followed,
+      (SELECT p.body FROM discussion_posts p
+        WHERE p.thread_id = t.id AND p.hidden = 0 AND p.approved = 1
+        ORDER BY p.created_at, p.id LIMIT 1) AS preview
     FROM discussion_threads t
     LEFT JOIN users u ON u.id = t.author_id
   `;
@@ -182,6 +186,7 @@ async function listThreads(db, viewer, url) {
   const topic = limitedText(url.searchParams.get("topic"), 120);
   const tag = limitedText(url.searchParams.get("tag"), 40);
   const status = normalizeStatus(url.searchParams.get("status"));
+  const search = limitedText(url.searchParams.get("search"), 160)?.trim().toLowerCase();
   if (questionKey) add("t.question_key = ?", questionKey);
   if (subjectCode) add("t.subject_code = ?", subjectCode);
   else if (subject) add("t.subject = ?", subject);
@@ -189,6 +194,19 @@ async function listThreads(db, viewer, url) {
   if (topic) add("t.topic = ?", topic);
   if (tag) add("EXISTS(SELECT 1 FROM json_each(t.tags) WHERE value = ?)", tag);
   if (status) add("t.status = ?", status);
+  if (search) {
+    const pattern = `%${search}%`;
+    clauses.push(`(
+      lower(COALESCE(t.title, '')) LIKE ? OR
+      lower(COALESCE(t.question_key, '')) LIKE ? OR
+      lower(COALESCE(t.subject, '')) LIKE ? OR
+      lower(COALESCE(t.topic, '')) LIKE ? OR
+      EXISTS(SELECT 1 FROM discussion_posts p
+        WHERE p.thread_id = t.id AND p.hidden = 0 AND p.approved = 1
+          AND lower(COALESCE(p.body, '')) LIKE ?)
+    )`);
+    values.push(pattern, pattern, pattern, pattern, pattern);
+  }
   if (["1", "true"].includes(url.searchParams.get("followedOnly"))) {
     clauses.push("EXISTS(SELECT 1 FROM discussion_thread_follows f WHERE f.thread_id = t.id AND f.user_id = ?)");
     values.push(viewer.id);
@@ -219,12 +237,19 @@ async function listThreads(db, viewer, url) {
     clauses.push(`t.paper_slug IN (SELECT p.slug FROM exam_papers p WHERE ${paperClauses.join(" AND ")})`);
     values.push(...paperValues);
   }
+  const sort = limitedText(url.searchParams.get("sort"), 20) || "latest";
+  const orderBy = {
+    latest: "t.created_at DESC",
+    active: "t.last_post_at DESC",
+    answers: "post_count DESC, t.last_post_at DESC",
+    likes: "like_count DESC, t.last_post_at DESC",
+  }[sort] || "t.created_at DESC";
   values.push(toLimit(url.searchParams.get("limit")));
   const where = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
   const rows = await db.prepare(`
     ${threadSelect()}
     ${where}
-    ORDER BY t.sticky DESC, t.last_post_at DESC
+    ORDER BY t.sticky DESC, ${orderBy}, t.id DESC
     LIMIT ?
   `).bind(...values).all();
   return rows.results.map(mapThread);
