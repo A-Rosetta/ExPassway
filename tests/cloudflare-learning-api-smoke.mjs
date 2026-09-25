@@ -88,8 +88,20 @@ try {
       ) VALUES (
         'question-2019', 'CIE', 'IGCSE Biology', 'MCQ', '基础', 'Cells', '2019',
         'Which structure controls the cell?', '["Cell membrane","Nucleus","Cytoplasm","Vacuole"]',
-        1, 'concept', '["recall"]', '["Recall the control centre."]', '[]',
+        1, 'concept', '["recall"]', '["Recall the control centre."]', '[{"url":"/assets/test/q01.png"}]',
         '0610', '0610_s19_qp_21', 1, 1
+      )
+    `),
+    db.prepare(`
+      INSERT INTO question_bank (
+        id, board, subject, paper, difficulty, topic, year, stem, options,
+        answer, mistake_type, skills, hints, images, subject_code, paper_slug,
+        question_no, active
+      ) VALUES (
+        'question-2023', 'CIE', 'IGCSE Biology', 'MCQ', '基础', 'Cells', '2023',
+        'Which structure contains genetic material?', '["Cell wall","Nucleus","Cytoplasm","Vacuole"]',
+        1, 'concept', '["recall"]', '[]', '[{"url":"/assets/test/q02.png"}]',
+        '0610', '0610_s23_qp_21', 2, 1
       )
     `),
     db.prepare(`
@@ -240,6 +252,24 @@ try {
       VALUES ('book-section', 'syllabus-section')
     `),
     db.prepare(`
+      INSERT INTO curriculum_sections (
+        id, curriculum_version_id, syllabus_code, title_en, title_zh,
+        level, core_level, sort_order
+      ) VALUES (
+        'syllabus-section-2', 'bio-version', 'B1.2', 'Cell division', '细胞分裂',
+        'statement', 'core', 2
+      )
+    `),
+    db.prepare(`
+      INSERT INTO coursebook_sections (
+        id, coursebook_chapter_id, section_code, title_en, title_zh, sort_order
+      ) VALUES ('book-section-2', 'chapter-1', '1.2', 'Cell division', '细胞分裂', 2)
+    `),
+    db.prepare(`
+      INSERT INTO coursebook_section_mappings (coursebook_section_id, curriculum_section_id)
+      VALUES ('book-section-2', 'syllabus-section-2')
+    `),
+    db.prepare(`
       INSERT INTO question_section_mappings (
         question_id, curriculum_section_id, coursebook_section_id,
         is_primary, confidence, status, source
@@ -251,7 +281,53 @@ try {
         is_primary, confidence, status, source
       ) VALUES ('question-2024', 'syllabus-section', 'book-section', 1, 1, 'reviewed', 'manual')
     `),
+    db.prepare(`
+      INSERT INTO question_section_mappings (
+        question_id, curriculum_section_id, coursebook_section_id,
+        is_primary, confidence, status, source
+      ) VALUES ('question-2023', 'syllabus-section-2', 'book-section-2', 1, 1, 'reviewed', 'manual')
+    `),
   ]);
+
+  {
+    const subjects = await api(handleLearningApiRequest, db, token, "/api/curriculum/subjects");
+    assert.equal(subjects.response.status, 200);
+    assert.deepEqual(subjects.payload.data.map((subject) => subject.code), ["0610"]);
+
+    const generated = await api(handleLearningApiRequest, db, token, "/api/paper-builder/generate", {
+      method: "POST",
+      body: JSON.stringify({
+        curriculumVersion: "bio-version",
+        sections: [
+          { coursebookSectionId: "book-section", count: 1 },
+          { coursebookSectionId: "book-section-2", count: 1 },
+        ],
+      }),
+    });
+    assert.equal(generated.response.status, 201);
+    assert.deepEqual(generated.payload.data.groups.map((group) => group.questions[0].id), [
+      "question-2019",
+      "question-2023",
+    ]);
+    assert.deepEqual(generated.payload.data.groups.map((group) => group.questions[0].answer), [1, 1]);
+    assert.equal(generated.payload.data.groups[0].questions[0].images[0].url, "/assets/test/q01.png");
+
+    const shortage = await api(handleLearningApiRequest, db, token, "/api/paper-builder/generate", {
+      method: "POST",
+      body: JSON.stringify({
+        curriculumVersion: "bio-version",
+        sections: [{ coursebookSectionId: "book-section-2", count: 2 }],
+      }),
+    });
+    assert.equal(shortage.response.status, 409);
+    assert.equal(shortage.payload.error.code, "INSUFFICIENT_QUESTIONS");
+
+    const unauthorized = await api(handleLearningApiRequest, db, "", "/api/paper-builder/generate", {
+      method: "POST",
+      body: JSON.stringify({ curriculumVersion: "bio-version", sections: [] }),
+    });
+    assert.equal(unauthorized.response.status, 401);
+  }
 
   async function createChapterSession() {
     return api(handleLearningApiRequest, db, token, "/api/chapter-practice/sessions", {

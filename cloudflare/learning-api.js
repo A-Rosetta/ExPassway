@@ -565,8 +565,8 @@ async function submitLocalPaper(request, env) {
 
 function requireCurriculumCode(value) {
   const subjectCode = String(value || "").trim();
-  if (!["0610", "0620", "0625", "0654", "0455"].includes(subjectCode)) {
-    throw new AuthError(404, "Chapter practice is not available for this subject.", "CURRICULUM_NOT_FOUND");
+  if (!/^\d{4}$/.test(subjectCode)) {
+    throw new AuthError(400, "Subject code must contain four digits.", "INVALID_INPUT");
   }
   return subjectCode;
 }
@@ -597,6 +597,39 @@ async function getCurriculumVersion(db, subjectCode, versionId = "") {
     ORDER BY active DESC
     LIMIT 1
   `).bind(subjectCode, versionId, versionId, versionId).first();
+}
+
+async function listCurriculumSubjects(db) {
+  const rows = await db.prepare(`
+    SELECT subject.code, subject.name, subject.name_zh,
+      version.id AS version_id, version.qualification,
+      version.exam_year_start, version.exam_year_end, version.version
+    FROM curriculum_versions version
+    JOIN exam_subjects subject ON subject.code = version.subject_code
+    WHERE version.active = 1
+      AND EXISTS (
+        SELECT 1
+        FROM curriculum_sections syllabus_section
+        JOIN coursebook_section_mappings book_mapping
+          ON book_mapping.curriculum_section_id = syllabus_section.id
+        WHERE syllabus_section.curriculum_version_id = version.id
+      )
+    ORDER BY subject.name
+  `).all();
+  return rows.results.map((row) => ({
+    code: row.code,
+    name: row.name,
+    nameZh: row.name_zh || "",
+    version: mapCurriculumVersion({
+      id: row.version_id,
+      subject_code: row.code,
+      qualification: row.qualification,
+      exam_year_start: row.exam_year_start,
+      exam_year_end: row.exam_year_end,
+      version: row.version,
+      active: 1,
+    }),
+  }));
 }
 
 async function listChapterCatalog(db, userId, version) {
@@ -815,6 +848,105 @@ async function createChapterPractice(request, env) {
     },
     questions,
   };
+}
+
+async function createChapterPaper(request, env) {
+  await requireCurrentUser(request, env);
+  const body = await readJsonBody(request);
+  const versionId = requireString(body.curriculumVersion, "curriculumVersion");
+  const rawSelections = requireArray(body.sections, "sections");
+  if (!rawSelections.length || rawSelections.length > 20) {
+    throw new AuthError(400, "Select between 1 and 20 sections.", "INVALID_INPUT");
+  }
+  const selections = rawSelections.map((row) => ({
+    coursebookSectionId: requireString(row?.coursebookSectionId, "sections.coursebookSectionId"),
+    count: toInteger(row?.count, 0, 1, 20, "sections.count"),
+  }));
+  if (new Set(selections.map((row) => row.coursebookSectionId)).size !== selections.length) {
+    throw new AuthError(400, "Each section can only be selected once.", "INVALID_INPUT");
+  }
+  if (selections.reduce((sum, row) => sum + row.count, 0) > 80) {
+    throw new AuthError(400, "A paper can contain at most 80 questions.", "INVALID_INPUT");
+  }
+
+  const versionRow = await env.DB.prepare("SELECT * FROM curriculum_versions WHERE id = ? LIMIT 1")
+    .bind(versionId).first();
+  const version = versionRow && await getCurriculumVersion(env.DB, versionRow.subject_code, versionId);
+  if (!version) throw new AuthError(404, "Curriculum version not found.", "CURRICULUM_NOT_FOUND");
+
+  const groups = [];
+  const usedGroups = new Set();
+  for (const selection of selections) {
+    const section = await env.DB.prepare(`
+      SELECT DISTINCT book_section.*, chapter.chapter_no,
+        chapter.title_en AS chapter_title_en, chapter.title_zh AS chapter_title_zh
+      FROM coursebook_sections book_section
+      JOIN coursebook_chapters chapter ON chapter.id = book_section.coursebook_chapter_id
+      JOIN coursebook_section_mappings book_mapping ON book_mapping.coursebook_section_id = book_section.id
+      JOIN curriculum_sections syllabus_section ON syllabus_section.id = book_mapping.curriculum_section_id
+      WHERE book_section.id = ? AND syllabus_section.curriculum_version_id = ?
+      LIMIT 1
+    `).bind(selection.coursebookSectionId, version.id).first();
+    if (!section) throw new AuthError(404, "Coursebook section not found.", "SECTION_NOT_FOUND");
+
+    const exclusionGroups = [...usedGroups];
+    const exclusionSql = exclusionGroups.length
+      ? `AND COALESCE(NULLIF(mapping.similar_question_group, ''), mapping.question_id)
+          NOT IN (${exclusionGroups.map(() => "?").join(", ")})`
+      : "";
+    const candidates = await env.DB.prepare(`
+      WITH candidate_rows AS (
+        SELECT question.*, mapping.curriculum_section_id, mapping.coursebook_section_id,
+          mapping.similar_question_group, syllabus_section.syllabus_code,
+          ROW_NUMBER() OVER (
+            PARTITION BY COALESCE(NULLIF(mapping.similar_question_group, ''), mapping.question_id)
+            ORDER BY random()
+          ) AS group_rank
+        FROM question_section_mappings mapping
+        JOIN question_bank question ON question.id = mapping.question_id
+        JOIN curriculum_sections syllabus_section ON syllabus_section.id = mapping.curriculum_section_id
+        WHERE mapping.coursebook_section_id = ? AND mapping.status = 'reviewed'
+          AND mapping.is_primary = 1 AND question.active = 1
+          AND question.subject_code = ? AND question.answer BETWEEN 0 AND 3
+          AND (length(trim(COALESCE(question.stem, ''))) > 0 OR json_array_length(question.images) > 0)
+          ${questionYearFilter(version.subject_code)}
+          ${exclusionSql}
+      )
+      SELECT * FROM candidate_rows WHERE group_rank = 1
+      ORDER BY random()
+      LIMIT ?
+    `).bind(
+      selection.coursebookSectionId,
+      version.subject_code,
+      ...exclusionGroups,
+      selection.count
+    ).all();
+    if (candidates.results.length < selection.count) {
+      throw new AuthError(
+        409,
+        `Not enough eligible questions in ${section.section_code}.`,
+        "INSUFFICIENT_QUESTIONS"
+      );
+    }
+
+    const questions = candidates.results.map((row) => mapQuestion(row, true));
+    questions.forEach((question) => usedGroups.add(question.similarQuestionGroup || question.id));
+    groups.push({
+      section: {
+        id: section.id,
+        sectionCode: section.section_code,
+        titleEn: section.title_en,
+        titleZh: section.title_zh,
+        chapterNo: Number(section.chapter_no),
+        chapterTitleEn: section.chapter_title_en,
+        chapterTitleZh: section.chapter_title_zh,
+      },
+      requestedCount: selection.count,
+      questions,
+    });
+  }
+
+  return { subjectCode: version.subject_code, curriculumVersion: mapCurriculumVersion(version), groups };
 }
 
 async function submitChapterPractice(request, env, sessionId) {
@@ -1051,6 +1183,13 @@ export async function handleLearningApiRequest(request, env) {
       return success(mapNotebookEntry(row), request.method);
     }
 
+    if (request.method === "GET" && url.pathname === "/api/curriculum/subjects") {
+      await requireCurrentUser(request, env);
+      return success(await listCurriculumSubjects(env.DB), request.method);
+    }
+    if (request.method === "POST" && url.pathname === "/api/paper-builder/generate") {
+      return success(await createChapterPaper(request, env), request.method, 201);
+    }
     const versions = url.pathname.match(/^\/api\/curriculum\/([^/]+)\/versions$/);
     if (versions && request.method === "GET") {
       await requireCurrentUser(request, env);

@@ -21,7 +21,8 @@
     "test:cloudflare-import-runner": "node tests/cloudflare-import-runner-smoke.mjs",
     "test:cloudflare-learning-api": "node tests/cloudflare-learning-api-smoke.mjs",
     "test:cloudflare-read-api": "node tests/cloudflare-read-api-smoke.mjs",
-    "test:unit": "node tests/bulk-download-smoke.mjs && node tests/cloudflare-admin-api-smoke.mjs && node tests/cloudflare-auth-smoke.mjs && node tests/cloudflare-community-api-smoke.mjs && node tests/cloudflare-content-api-smoke.mjs && node tests/cloudflare-import-runner-smoke.mjs && node tests/cloudflare-learning-api-smoke.mjs && node tests/cloudflare-legacy-route-smoke.mjs && node tests/cloudflare-security-headers-smoke.mjs && node tests/chat-crypto-smoke.mjs && node tests/cloudflare-chat-api-smoke.mjs",
+    "test:paper-export": "node tests/paper-export-smoke.mjs",
+    "test:unit": "node tests/bulk-download-smoke.mjs && node tests/cloudflare-admin-api-smoke.mjs && node tests/cloudflare-auth-smoke.mjs && node tests/cloudflare-community-api-smoke.mjs && node tests/cloudflare-content-api-smoke.mjs && node tests/cloudflare-import-runner-smoke.mjs && node tests/cloudflare-learning-api-smoke.mjs && node tests/cloudflare-legacy-route-smoke.mjs && node tests/cloudflare-security-headers-smoke.mjs && node tests/chat-crypto-smoke.mjs && node tests/cloudflare-chat-api-smoke.mjs && node tests/paper-export-smoke.mjs",
     "typecheck": "tsc --project jsconfig.json"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "esbuild": "^0.28.1",
     "eslint": "10.8.0",
     "globals": "17.9.0",
+    "jspdf": "^4.2.1",
     "miniflare": "4.20260730.0",
     "playwright": "1.62.0",
     "prettier": "3.9.6",

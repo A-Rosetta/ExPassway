@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="paperBuilderTitle">Chapter Paper Builder</title>
+  <script src="../scripts/theme-init.js?v=20260730-1"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260823-1" />
+  <link rel="stylesheet" href="../assets/site-design.css?v=20260806-2" />
+  <link rel="stylesheet" href="../assets/paper-builder.css?v=20260924-2" />
+</head>
+<body class="site-ui utility-ui paper-builder-page">
+  <main class="container">
+    <section class="card hero">
+      <div class="paper-builder-heading">
+        <div>
+          <h1 data-i18n="paperBuilderTitle">Chapter Paper Builder</h1>
+          <p class="tip" data-i18n="paperBuilderSubtitle">Choose a subject, set question counts by section, and build a grouped paper.</p>
+        </div>
+        <a class="btn-secondary" href="generate.html" data-i18n="paperBuilderBack">Back to papers</a>
+      </div>
+      <p id="paperBuilderStatus" class="tip" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card panel paper-builder-controls">
+      <div class="paper-builder-toolbar">
+        <label class="paper-builder-subject-label" for="paperBuilderSubject" data-i18n="paperBuilderSubject">Subject</label>
+        <select id="paperBuilderSubject" disabled>
+          <option value="" data-i18n="paperBuilderChooseSubject">Choose a subject</option>
+        </select>
+        <span id="paperBuilderTotal" class="paper-builder-total" data-i18n="paperBuilderTotal">0 questions selected</span>
+        <button id="generateChapterPaper" class="btn-primary" type="button" disabled data-i18n="paperBuilderGenerate">Generate preview</button>
+      </div>
+      <div id="paperBuilderChapters" class="paper-builder-chapters" aria-live="polite"></div>
+    </section>
+
+    <section id="paperBuilderPreviewSection" class="card panel paper-builder-preview-section" hidden>
+      <div class="paper-builder-preview-heading">
+        <div>
+          <h2 data-i18n="paperBuilderPreview">Preview</h2>
+          <p id="paperBuilderPreviewSummary" class="tip"></p>
+        </div>
+        <button id="downloadChapterPaper" class="btn-primary" type="button" disabled data-i18n="paperBuilderDownload">Download ZIP with PDFs</button>
+      </div>
+      <div id="paperBuilderPreview" class="paper-builder-preview"></div>
+    </section>
+  </main>
+
+  <script src="../scripts/i18n.js?v=20260924-2"></script>
+  <script src="../scripts/site-ui.js?v=20260808-3"></script>
+  <script src="../scripts/api.js?v=20260731-1"></script>
+  <script src="../scripts/bulk-download.js?v=20260913-1"></script>
+  <script src="../scripts/paper-builder.bundle.js?v=20260924-2"></script>
+</body>
+</html>

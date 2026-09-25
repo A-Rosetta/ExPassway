@@ -1,6 +1,7 @@
 import { copyFile, mkdir, rm, stat } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
+import { build } from "esbuild";
 
 const outputDirectory = ".cloudflare-dist";
 const allowedPaths = ["_headers", "index.html", "pages/", "scripts/", "assets/"];
@@ -35,6 +36,8 @@ for (const generatedFile of [
   "scripts/chat-notifications.js",
   "scripts/chat-crypto-worker.js",
   "assets/vendor/chat-crypto-worker.js",
+  "pages/paper-builder.html",
+  "assets/paper-builder.css",
 ]) {
   if (!files.includes(generatedFile)) files.push(generatedFile);
 }
@@ -47,5 +50,15 @@ for (const file of files) {
   await mkdir(dirname(destination), { recursive: true });
   await copyFile(file, destination);
 }
+
+await build({
+  entryPoints: ["scripts/paper-builder.js"],
+  bundle: true,
+  format: "iife",
+  minify: true,
+  platform: "browser",
+  target: "es2022",
+  outfile: join(outputDirectory, "scripts/paper-builder.bundle.js"),
+});
 
 console.log(`Prepared ${files.length} tracked static assets in ${outputDirectory}.`);
