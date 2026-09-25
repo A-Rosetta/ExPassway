@@ -1850,7 +1850,8 @@
     grid-template-columns: 1fr;
   }
 
-  .site-ui .home-heading-actions button {
+  .site-ui .home-heading-actions button,
+  .site-ui .home-heading-actions > a {
     width: 100%;
   }
 

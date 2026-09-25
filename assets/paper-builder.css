@@ -62,7 +62,7 @@
   border-top: 1px solid var(--line, rgba(127, 140, 150, 0.14));
   display: grid;
   gap: 12px;
-  grid-template-columns: minmax(0, 1fr) auto minmax(96px, 124px);
+  grid-template-columns: minmax(0, 1fr) max-content minmax(210px, 240px);
   padding: 12px 8px;
 }
 
@@ -84,8 +84,10 @@
 .paper-builder-page .paper-builder-section-count {
   align-items: center;
   display: grid;
-  gap: 6px;
-  grid-template-columns: 1fr auto;
+  gap: 12px;
+  grid-template-columns: max-content minmax(96px, 124px);
+  justify-content: end;
+  white-space: nowrap;
 }
 
 .paper-builder-page .paper-builder-section-count input {
@@ -173,5 +175,16 @@
   .paper-builder-page .paper-builder-section-count {
     grid-column: 2;
     grid-row: 1 / span 2;
+    display: block;
+  }
+
+  .paper-builder-page .paper-builder-section-count span {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 }
