@@ -32,6 +32,7 @@
     accountV2: null,
     accountEpochs: new Map(),
     accountMode: false,
+    accountPasskeyReady: false,
   };
   const $ = (selector) => document.querySelector(selector);
   const status = $("#chatStatus");
@@ -195,10 +196,36 @@
     return Boolean(window.PublicKeyCredential && navigator.credentials?.create && navigator.credentials?.get);
   }
 
+  function isExistingPasskeyError(error) {
+    const name = String(error?.name || "");
+    const message = String(error?.message || error || "");
+    return name === "InvalidStateError" || /not,? or is no longer,? usable/i.test(message);
+  }
+
+  function passkeyActionError(error, code, action) {
+    if (error?.code) return error;
+    const detail = String(error?.message || error || "");
+    const wrapped = new Error(detail ? `${action}: ${detail}` : action);
+    wrapped.name = error?.name || "Error";
+    wrapped.code = code;
+    wrapped.cause = error;
+    return wrapped;
+  }
+
   async function accountPasskeyAssertion() {
     const response = await window.ALevelApi.getChatPasskeyAuthenticationOptions();
     const publicKey = publicKeyOptions(response);
-    const credential = await navigator.credentials.get({ publicKey });
+    let credential;
+    try {
+      credential = await navigator.credentials.get({ publicKey });
+    } catch (error) {
+      throw passkeyActionError(error, "PASSKEY_ASSERTION_FAILED", "Could not use the secure chat Passkey");
+    }
+    if (!credential) {
+      const error = new Error("The Passkey prompt returned no credential.");
+      error.code = "PASSKEY_ASSERTION_FAILED";
+      throw error;
+    }
     const prfOutput = passkeyPrfOutput(credential);
     const verified = await window.ALevelApi.verifyChatPasskey("authenticate", {
       challenge: response.publicKey?.challenge || response.challenge,
@@ -234,6 +261,7 @@
       throw error;
     }
     state.accountMode = true;
+    state.accountPasskeyReady = Boolean(bundle?.passkeyReady);
     $("#legacyDevicePanel").hidden = true;
     if (!supportsAccountPasskey()) {
       $("#chatSetupPanel").hidden = true;
@@ -256,16 +284,34 @@
     }
     const enable = $("#enableAccountSync");
     if (enable) enable.disabled = true;
-    setStatus("Creating a Passkey for secure chat...");
+    setStatus(state.accountPasskeyReady
+      ? "Unlocking the existing Passkey to finish secure chat setup..."
+      : "Creating a Passkey for secure chat...");
     try {
-      const registration = await window.ALevelApi.getChatPasskeyRegistrationOptions();
-      const credential = await navigator.credentials.create({ publicKey: publicKeyOptions(registration) });
-      const registrationChallenge = registration.publicKey?.challenge || registration.challenge;
-      if (!registrationChallenge) throw new Error("The Passkey registration challenge was missing. Refresh and try again.");
-      await window.ALevelApi.verifyChatPasskey("register", {
-        challenge: registrationChallenge,
-        credential: serialiseCredential(credential),
-      });
+      if (!state.accountPasskeyReady) {
+        const registration = await window.ALevelApi.getChatPasskeyRegistrationOptions();
+        let credential = null;
+        try {
+          credential = await navigator.credentials.create({ publicKey: publicKeyOptions(registration) });
+        } catch (error) {
+          if (!isExistingPasskeyError(error)) {
+            throw passkeyActionError(error, "PASSKEY_REGISTRATION_FAILED", "Could not create the secure chat Passkey");
+          }
+          state.accountPasskeyReady = true;
+          setStatus("This device already has a secure chat Passkey. Unlocking it to finish setup...");
+        }
+        if (credential) {
+          const registrationChallenge = registration.publicKey?.challenge || registration.challenge;
+          if (!registrationChallenge) throw new Error("The Passkey registration challenge was missing. Refresh and try again.");
+          await window.ALevelApi.verifyChatPasskey("register", {
+            challenge: registrationChallenge,
+            credential: serialiseCredential(credential),
+          });
+          state.accountPasskeyReady = true;
+        }
+      } else {
+        setStatus("This device already has a secure chat Passkey. Unlocking it to finish setup...");
+      }
       const assertion = await accountPasskeyAssertion();
       const generated = await cryptoCall("generateAccountV2Vault", {
         userId: state.profile.id,
