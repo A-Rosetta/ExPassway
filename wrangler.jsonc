@@ -7,7 +7,7 @@
 	"preview_urls": false,
 	"vars": {
 		"SUPABASE_AUTH_REDIRECT_URL": "https://expassway.com/pages/login.html",
-		"OPENAI_HINT_MODEL": "gpt-5.6-luna",
+		"OPENAI_HINT_MODEL": "gpt-6-luna",
 		"OPENAI_API_BASE_URL": "https://www.rayinai.com",
 		"CHAT_ENABLED": "true",
 		"CHAT_ACCOUNT_V2_ENABLED": "true",
