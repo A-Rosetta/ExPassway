@@ -84,7 +84,7 @@
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260926-2", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260927-1", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
       const detail = String(event?.message || "").trim();
       for (const pending of state.pendingCrypto.values()) {
