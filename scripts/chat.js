@@ -260,8 +260,10 @@
     try {
       const registration = await window.ALevelApi.getChatPasskeyRegistrationOptions();
       const credential = await navigator.credentials.create({ publicKey: publicKeyOptions(registration) });
+      const registrationChallenge = registration.publicKey?.challenge || registration.challenge;
+      if (!registrationChallenge) throw new Error("The Passkey registration challenge was missing. Refresh and try again.");
       await window.ALevelApi.verifyChatPasskey("register", {
-        challenge: registration.challenge,
+        challenge: registrationChallenge,
         credential: serialiseCredential(credential),
       });
       const assertion = await accountPasskeyAssertion();
