@@ -461,7 +461,16 @@ export async function handleAccountV2Route(request, env, user) {
     if (!enabled(env)) fail(503, "CHAT_ACCOUNT_V2_DISABLED", "Account sync is disabled.");
     const contact = await db.prepare("SELECT peer_user_id FROM chat_contacts WHERE user_id = ? AND id = ?").bind(user.id, parts[3]).first();
     if (!contact) fail(404, "CONTACT_NOT_FOUND", "Contact not found.");
-    return success(bundle(await activeKey(db, contact.peer_user_id)), method);
+    const accountKey = await activeKey(db, contact.peer_user_id);
+    let vault = null;
+    let passkey = null;
+    try {
+      vault = await db.prepare("SELECT 1 FROM chat_account_vault_versions WHERE user_id = ? AND key_version = ?").bind(contact.peer_user_id, accountKey?.key_version || "").first();
+      passkey = await db.prepare("SELECT 1 FROM chat_passkeys WHERE user_id = ? AND revoked_at IS NULL LIMIT 1").bind(contact.peer_user_id).first();
+    } catch (_error) {
+      vault = await db.prepare("SELECT 1 FROM chat_vaults WHERE user_id = ? AND key_version = ?").bind(contact.peer_user_id, accountKey?.key_version || "").first();
+    }
+    return success({ contactId: parts[3], accountKey: bundle(accountKey), enabled: Boolean(accountKey && vault && passkey), passkeyReady: Boolean(passkey) }, method);
   }
   let conversation = conversationId ? await db.prepare("SELECT * FROM chat_conversations WHERE id = ?").bind(conversationId).first() : null;
   if (["messages", "attachments"].includes(parts[2]) && parts[3] && parts[3] !== "init") {

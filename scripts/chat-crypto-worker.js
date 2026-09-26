@@ -168,6 +168,14 @@ function validEpoch(value) {
   return epoch;
 }
 
+function validControlEpoch(value) {
+  const epoch = Number(value);
+  if (!Number.isInteger(epoch) || epoch < 0 || epoch > 2147483647) {
+    throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "expectedEpoch is invalid.");
+  }
+  return epoch;
+}
+
 function canonicalJson(value) {
   if (value === null || typeof value === "boolean" || typeof value === "string") return JSON.stringify(value);
   if (typeof value === "number") {
@@ -1137,7 +1145,7 @@ async function accountV2SignControl({ conversationId, expectedEpoch, action, pay
   const value = {
     version: ACCOUNT_V2_PROTOCOL_VERSION,
     conversationId: requiredAccountV2String(conversationId, "conversationId", 256),
-    expectedEpoch: validEpoch(expectedEpoch),
+    expectedEpoch: validControlEpoch(expectedEpoch),
     action: requiredAccountV2String(action, "action", 128),
     payload: payload && typeof payload === "object" ? payload : {},
     senderUserId: account.userId,

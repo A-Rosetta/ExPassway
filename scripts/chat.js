@@ -33,6 +33,7 @@
     accountEpochs: new Map(),
     accountMode: false,
     accountPasskeyReady: false,
+    accountContactStatus: new Map(),
   };
   const $ = (selector) => document.querySelector(selector);
   const status = $("#chatStatus");
@@ -44,21 +45,11 @@
   }
 
   function formatActionError(error) {
-    const message = error?.message || String(error || "Unknown error");
+    const message = error?.message || (typeof error === "string" ? error : "");
     const details = [];
     if (error?.code && error.code !== "HTTP_ERROR") details.push(error.code);
     if (error?.status) details.push(`HTTP ${error.status}`);
-    return `${message}${details.length ? ` (${details.join(", ")})` : ""}`;
-  }
-
-  async function shortIdentityFingerprint(identityKey) {
-    const normalized = String(identityKey || "").replace(/-/g, "+").replace(/_/g, "/");
-    if (!normalized) return "?";
-    const binary = atob(normalized + "=".repeat((4 - normalized.length % 4) % 4));
-    const digest = await crypto.subtle.digest("SHA-256", Uint8Array.from(binary, (character) => character.charCodeAt(0)));
-    let encoded = "";
-    for (const byte of new Uint8Array(digest)) encoded += String.fromCharCode(byte);
-    return btoa(encoded).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "").slice(0, 12);
+    return `${message || (details.length ? "The operation failed." : "No error details were returned.")}${details.length ? ` (${details.join(", ")})` : ""}`;
   }
 
   function currentToken() {
@@ -95,8 +86,13 @@
     if (state.cryptoWorker) return state.cryptoWorker;
     const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260926-2", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
-      const error = new Error(event.message || "The chat encryption worker stopped unexpectedly.");
-      for (const pending of state.pendingCrypto.values()) pending.reject(error);
+      const detail = String(event?.message || "").trim();
+      for (const pending of state.pendingCrypto.values()) {
+        const error = new Error(detail || `The chat encryption worker stopped during ${pending.action}.`);
+        error.code = "CRYPTO_WORKER_UNAVAILABLE";
+        error.action = pending.action;
+        pending.reject(error);
+      }
       state.pendingCrypto.clear();
       state.cryptoWorker = null;
     };
@@ -107,8 +103,9 @@
       state.pendingCrypto.delete(id);
       if (ok) pending.resolve(result);
       else {
-        const failure = new Error(error || "Chat crypto operation failed.");
+        const failure = new Error(error || `Chat crypto operation failed during ${pending.action}.`);
         failure.code = code || "CRYPTO_ERROR";
+        failure.action = pending.action;
         pending.reject(failure);
       }
     };
@@ -119,8 +116,16 @@
   function cryptoCall(action, payload) {
     const id = crypto.randomUUID();
     return new Promise((resolve, reject) => {
-      state.pendingCrypto.set(id, { resolve, reject });
-      createCryptoWorker().postMessage({ id, action, payload });
+      state.pendingCrypto.set(id, { resolve, reject, action });
+      try {
+        createCryptoWorker().postMessage({ id, action, payload });
+      } catch (error) {
+        state.pendingCrypto.delete(id);
+        const failure = new Error(error?.message || `Could not start chat crypto operation ${action}.`);
+        failure.code = error?.code || "CRYPTO_WORKER_UNAVAILABLE";
+        failure.action = action;
+        reject(failure);
+      }
     });
   }
 
@@ -362,9 +367,9 @@
     invites.filter((invite) => invite.active).slice(0, 5).forEach((invite) => {
       const item = document.createElement("div");
       item.className = "chat-invite-item";
-      item.innerHTML = `<div><code></code><small></small></div><span></span>`;
-      item.querySelector("code").textContent = invite.id;
-      item.querySelector("small").textContent = t("chatInviteIdOnly", "Internal ID only");
+      item.innerHTML = `<div><strong></strong><small></small></div><span></span>`;
+      item.querySelector("strong").textContent = t("chatInviteActive", "Active invite");
+      item.querySelector("small").textContent = t("chatInviteShareHint", "Share the invite link shown above; it works once.");
       item.querySelector("span").textContent = new Date(invite.expiresAt).toLocaleDateString();
       host.appendChild(item);
     });
@@ -394,9 +399,9 @@
         });
       } else {
         button.querySelector("strong").textContent = conversation.peer?.alias || t("chatNoConversation", "Conversation");
-        button.querySelector("small").textContent = conversation.peer?.identityFingerprint
-          ? conversation.peer.identityFingerprint.slice(0, 12)
-          : "";
+        button.querySelector("small").textContent = state.accountMode
+          ? "End-to-end encrypted"
+          : "Encrypted chat";
       }
       button.addEventListener("click", () => selectConversation(conversation));
       host.appendChild(button);
@@ -448,10 +453,31 @@
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.value = contact.id;
+      const accountStatus = state.accountContactStatus.get(contact.id);
+      checkbox.disabled = state.accountMode && accountStatus !== true;
       const text = document.createElement("span");
       text.textContent = contact.profile?.alias || t("chatNoConversation", "Conversation");
       label.append(checkbox, text);
+      if (state.accountMode && accountStatus !== true) {
+        const unavailable = document.createElement("small");
+        unavailable.textContent = accountStatus === false
+          ? t("chatContactSecureRequired", "Needs secure chat enabled")
+          : t("chatContactSecureChecking", "Checking secure chat...");
+        label.appendChild(unavailable);
+      }
       host.appendChild(label);
+      if (state.accountMode && !state.accountContactStatus.has(contact.id)) {
+        state.accountContactStatus.set(contact.id, null);
+        window.ALevelApi.getChatContactAccountBundle(contact.id)
+          .then((bundle) => {
+            state.accountContactStatus.set(contact.id, Boolean(bundle?.enabled && bundle?.accountKey));
+            renderGroupContactPicker();
+          })
+          .catch(() => {
+            state.accountContactStatus.set(contact.id, false);
+            renderGroupContactPicker();
+          });
+      }
     });
   }
 
@@ -498,7 +524,6 @@
     const host = $("#deviceList");
     if (!host) return;
     host.replaceChildren();
-    state.device && ($("#deviceFingerprint").textContent = t("chatDeviceReady", "Device ready. Safety number: {fingerprint}", { fingerprint: state.device.identityFingerprint }));
     const devices = state.devices.length ? state.devices : (state.device ? [state.device] : []);
     devices.forEach((device) => {
       const item = document.createElement("div");
@@ -726,7 +751,11 @@
     const recipients = [];
     for (const contactId of contactIds) {
       const bundle = await window.ALevelApi.getChatContactAccountBundle(contactId);
-      if (!bundle?.accountKey) throw new Error("Every selected contact must enable secure chat first.");
+      if (!bundle?.enabled || !bundle?.accountKey) {
+        const error = new Error("Every selected contact must enable secure chat first.");
+        error.code = "ACCOUNT_NOT_ENABLED";
+        throw error;
+      }
       recipients.push({ userId: bundle.accountKey.userId, keyVersion: bundle.accountKey.keyVersion, encryptionPublicKey: bundle.accountKey.encryptionPublicKey });
       userIds.push(bundle.accountKey.userId);
     }
@@ -983,6 +1012,27 @@
     const generation = state.syncGeneration;
     state.syncInFlight = (async () => {
       const conversationId = state.activeConversation.id;
+      if (state.accountMode) {
+        const payload = await window.ALevelApi.syncChatEvents(conversationId, state.cursor);
+        if (state.syncGeneration !== generation || state.activeConversation?.id !== conversationId) return;
+        const events = Array.isArray(payload?.events) ? payload.events : [];
+        const incoming = events
+          .filter((event) => event.type === "message" && event.message)
+          .map((event) => event.message);
+        if (incoming.length) {
+          const fresh = await decryptMessages(incoming);
+          const known = new Map(state.messages.map((message) => [message.id, message]));
+          fresh.forEach((message) => known.set(message.id, message));
+          state.messages = [...known.values()].sort((left, right) => String(left.createdAt || "").localeCompare(String(right.createdAt || "")));
+        }
+        for (const event of events.filter((item) => item.type === "deleted" && item.messageId)) {
+          const existing = state.messages.find((message) => message.id === event.messageId);
+          if (existing) Object.assign(existing, { deleted: true, plaintext: null, ciphertext: "" });
+        }
+        state.cursor = payload?.nextCursor == null ? state.cursor : String(payload.nextCursor);
+        renderMessages();
+        return;
+      }
       const payload = await window.ALevelApi.syncChatMessages(conversationId, state.cursor);
       if (state.syncGeneration !== generation || state.activeConversation?.id !== conversationId) return;
       const fresh = await decryptMessages(payload.messages || []);
@@ -1051,7 +1101,7 @@
       : conversation.peer?.alias || "Conversation";
     if (state.accountMode) {
       await openAccountEpochs(conversation);
-      $("#conversationSafety").textContent = `Account key: ${state.accountV2.fingerprint}`;
+      $("#conversationSafety").textContent = "Secure account chat";
     } else {
       await renderSafetyNumber(conversation);
     }
@@ -1099,16 +1149,6 @@
           : t("chatSafetyUnverified", "Not verified");
       label.textContent = `${t("chatSafetyNumber", "Safety number")}: ${safety} · ${safetyStatus}`;
       host.appendChild(label);
-      const deviceFingerprints = document.createElement("small");
-      deviceFingerprints.className = "chat-device-fingerprints";
-      const fingerprints = await Promise.all(peerDevices.map(async (device) =>
-        `${device.deviceNumber}: ${await shortIdentityFingerprint(device.identityKey)}`));
-      deviceFingerprints.textContent = t(
-        "chatPeerDeviceFingerprints",
-        "Peer device fingerprints: {devices}",
-        { devices: fingerprints.join(" · ") || "-" },
-      );
-      host.appendChild(deviceFingerprints);
       if (conversation.kind === "group") {
         const memberNames = document.createElement("small");
         memberNames.className = "chat-device-fingerprints";
@@ -1139,7 +1179,7 @@
         host.appendChild(reset);
       }
     } catch (error) {
-      host.textContent = conversation.peer?.identityFingerprint || "";
+      host.textContent = t("chatSecurityStatusUnavailable", "Secure identity status unavailable.");
       if (error?.code) setStatus(`${error.message} (${error.code})`, true);
     }
   }
@@ -1202,12 +1242,15 @@
     state.peerBundles.clear();
     state.conversationBundles.clear();
     state.ownBundle = null;
-    state.devices = await window.ALevelApi.listChatDevices();
-    await ensurePrekeys();
-    await updateRecoveryAvailability();
+    state.accountContactStatus.clear();
+    if (!state.accountMode) {
+      state.devices = await window.ALevelApi.listChatDevices();
+      await ensurePrekeys();
+      await updateRecoveryAvailability();
+    }
     renderInvites(invites);
     renderContacts();
-    renderDevices();
+    if (!state.accountMode) renderDevices();
   }
 
   async function ensurePrekeys() {

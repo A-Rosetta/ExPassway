@@ -119,6 +119,8 @@ await assert.rejects(
   (error) => error.code === "ACCOUNT_V2_DECRYPT_FAILED",
 );
 
+const createControl = await alice.call("signAccountV2Control", { conversationId: "group-1", expectedEpoch: 0, action: "create", payload: { kind: "group" } });
+assert.equal(createControl.expectedEpoch, 0);
 const control = await alice.call("signAccountV2Control", { conversationId: "group-1", expectedEpoch: 1, action: "member.add", payload: { z: 2, a: 1 } });
 const controlReordered = await alice.call("signAccountV2Control", { conversationId: "group-1", expectedEpoch: 1, action: "member.add", payload: { a: 1, z: 2 } });
 assert.equal(control.signature, controlReordered.signature);

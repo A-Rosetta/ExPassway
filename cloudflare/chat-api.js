@@ -2482,7 +2482,11 @@ async function handleRoute(request, env, user) {
     return success(await listContacts(db, user.id), method);
   if (method === "GET" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "contacts" && parts[4] === "account-bundle") {
     const contact = await requireContact(db, parts[3], user.id);
-    return success({ contactId: parts[3], accountKey: (await accountKeyBundle(db, contact.peer_user_id)).accountKey }, method);
+    const account = await accountKeyBundle(db, contact.peer_user_id);
+    // Expose only the readiness bit and public account key. Credential IDs and
+    // vault versions are not needed by the contact picker and should remain
+    // out of the UI response.
+    return success({ contactId: parts[3], accountKey: account.accountKey, enabled: account.enabled }, method);
   }
   if (
     method === "GET" &&
