@@ -1896,7 +1896,7 @@ async function accountKeyBundle(db, userId) {
   return {
     accountKey: mapAccountKey(row),
     enabled: Boolean(row && credential && vault),
-    passkeyReady: Boolean(credential?.backup_eligible),
+    passkeyReady: Boolean(credential),
     credentialId: credential?.credential_id || null,
     vaultKeyVersion: vault?.key_version || null,
   };
@@ -1928,7 +1928,7 @@ async function requireAccountWriteProof(db, userId, body) {
   if (Number(result?.meta?.changes ?? result?.changes ?? 0) !== 1) {
     throw new AuthError(
       403,
-      "Verify your Passkey again before changing secure sync keys or vault data.",
+      "Verify your Passkey again before changing secure chat keys or vault data.",
       "ACCOUNT_WRITE_PROOF_REQUIRED"
     );
   }
@@ -2118,8 +2118,6 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
           "The WebAuthn credential is not registered for this account.",
           "WEBAUTHN_CREDENTIAL_NOT_FOUND"
         );
-      if (!passkey.backup_eligible)
-        throw new AuthError(403, "This passkey is not backup-eligible.", "WEBAUTHN_BACKUP_REQUIRED");
       verified = await verifyAuthenticationResponse({
         credential,
         challenge,
@@ -2128,8 +2126,6 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
         publicKey: passkey.public_key,
         expectedSignCount: Number(passkey.sign_count || 0),
       });
-      if (!verified.backupEligible)
-        throw new AuthError(403, "This passkey is not backup-eligible.", "WEBAUTHN_BACKUP_REQUIRED");
       verified.credentialId = credentialId;
       verified.passkeyId = passkey.id;
       verified.expectedSignCount = Number(passkey.sign_count || 0);
@@ -2160,8 +2156,6 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
     );
   }
   if (kind === "registration") {
-    if (!verified.backupEligible)
-      throw new AuthError(400, "Only a backup-eligible, synchronizable passkey can unlock secure chat.", "WEBAUTHN_BACKUP_REQUIRED");
     const existing = await db
       .prepare("SELECT user_id FROM chat_passkeys WHERE credential_id = ?")
       .bind(verified.credentialId)

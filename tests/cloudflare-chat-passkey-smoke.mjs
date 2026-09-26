@@ -173,7 +173,7 @@ try {
   ]);
   const registrationAuthData = concat(
     await sha256("expassway.test"),
-    Uint8Array.of(0x4d),
+    Uint8Array.of(0x45),
     countBytes(0),
     new Uint8Array(16),
     Uint8Array.of(0, credentialId.length),
@@ -209,7 +209,7 @@ try {
   const authenticationClientData = clientData("webauthn.get", authenticationChallenge);
   const authenticationData = concat(
     await sha256("expassway.test"),
-    Uint8Array.of(0x0d),
+    Uint8Array.of(0x05),
     countBytes(1)
   );
   const signedData = concat(

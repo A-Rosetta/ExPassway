@@ -184,7 +184,7 @@
   function passkeyPrfOutput(credential) {
     const result = credential.getClientExtensionResults?.()?.prf?.results?.first;
     if (!result) {
-      const error = new Error("This Passkey cannot produce the required PRF output. Choose a synced platform Passkey with PRF support.");
+      const error = new Error("This Passkey cannot produce the required PRF output. Choose a Passkey with PRF support.");
       error.code = "PASSKEY_PRF_UNAVAILABLE";
       throw error;
     }
@@ -210,7 +210,7 @@
   async function unlockAccountSync() {
     const vault = await window.ALevelApi.getChatAccountVault();
     if (!vault) return setupAccountSync();
-    setStatus("Unlocking secure sync with your Passkey...");
+    setStatus("Unlocking secure chat with your Passkey...");
     const assertion = await accountPasskeyAssertion();
     const unlocked = await cryptoCall("unlockAccountV2Vault", {
       userId: state.profile.id,
@@ -256,7 +256,7 @@
     }
     const enable = $("#enableAccountSync");
     if (enable) enable.disabled = true;
-    setStatus("Creating a synced Passkey for secure chat...");
+    setStatus("Creating a Passkey for secure chat...");
     try {
       const registration = await window.ALevelApi.getChatPasskeyRegistrationOptions();
       const credential = await navigator.credentials.create({ publicKey: publicKeyOptions(registration) });
@@ -285,7 +285,7 @@
       state.accountV2 = { ...generated, unlocked: true, proof: assertion.proof };
       $("#chatSetupPanel").hidden = true;
       $("#chatApp").hidden = false;
-      setStatus("Secure sync is ready.");
+      setStatus("Secure chat is ready.");
       await refreshData();
     } catch (error) {
       setStatus(formatActionError(error), true);
@@ -659,7 +659,7 @@
     const bundle = await window.ALevelApi.getChatConversationAccountBundle(conversation.id);
     const recipients = (bundle?.members || []).filter((member) => member.accountKey?.status === "active" || member.accountKey);
     if (!recipients.length) {
-      const error = new Error("Every member must enable secure sync before this conversation can use account encryption.");
+      const error = new Error("Every member must enable secure chat before this conversation can use account encryption.");
       error.code = "ACCOUNT_KEYS_REQUIRED";
       throw error;
     }
@@ -680,7 +680,7 @@
     const recipients = [];
     for (const contactId of contactIds) {
       const bundle = await window.ALevelApi.getChatContactAccountBundle(contactId);
-      if (!bundle?.accountKey) throw new Error("Every selected contact must enable secure sync first.");
+      if (!bundle?.accountKey) throw new Error("Every selected contact must enable secure chat first.");
       recipients.push({ userId: bundle.accountKey.userId, keyVersion: bundle.accountKey.keyVersion, encryptionPublicKey: bundle.accountKey.encryptionPublicKey });
       userIds.push(bundle.accountKey.userId);
     }
@@ -706,7 +706,7 @@
     const recipients = await getAccountRecipients(conversation);
     for (const contactId of contactIds) {
       const bundle = await window.ALevelApi.getChatContactAccountBundle(contactId);
-      if (!bundle?.accountKey) throw new Error("The selected contact must enable secure sync first.");
+      if (!bundle?.accountKey) throw new Error("The selected contact must enable secure chat first.");
       recipients.push({ userId: bundle.accountKey.userId, keyVersion: bundle.accountKey.keyVersion, encryptionPublicKey: bundle.accountKey.encryptionPublicKey });
     }
     const unique = [...new Map(recipients.map((recipient) => [recipient.userId, recipient])).values()];
