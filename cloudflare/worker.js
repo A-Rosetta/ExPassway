@@ -9,7 +9,7 @@ import { handleReadApiRequest } from "./read-api.js";
 
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "script-src 'self'",
+  "script-src 'self' 'wasm-unsafe-eval'",
   "style-src 'self' https://fonts.googleapis.com",
   "style-src-elem 'self' https://fonts.googleapis.com",
   "style-src-attr 'unsafe-inline'",
