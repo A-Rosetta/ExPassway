@@ -89,7 +89,13 @@ async function recipientKeys(db, recipients, userIds) {
   const keys = [];
   for (const userId of userIds) {
     const key = await activeKey(db, userId);
-    const ready = key && await db.prepare("SELECT 1 FROM chat_vaults WHERE user_id = ? AND key_version = ?").bind(userId, key.key_version).first();
+    let ready = null;
+    try {
+      ready = key && await db.prepare("SELECT 1 FROM chat_account_vault_versions WHERE user_id = ? AND key_version = ?").bind(userId, key.key_version).first();
+    } catch (_error) {
+      // Older installations used chat_vaults before account-v2 vault versions were introduced.
+      ready = key && await db.prepare("SELECT 1 FROM chat_vaults WHERE user_id = ? AND key_version = ?").bind(userId, key.key_version).first();
+    }
     if (!ready) fail(409, "ACCOUNT_NOT_ENABLED", "Every participant must first enable secure account sync.");
     const recipient = recipients.find((r) => r.userId === userId);
     if (!recipient || recipient.keyVersion !== key.key_version) fail(409, "ACCOUNT_KEY_CHANGED", "An account key changed. Refresh the member keys.");

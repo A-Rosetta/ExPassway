@@ -58,7 +58,12 @@ function classifyCryptoError(error, fallbackCode = "DECRYPT_FAILED") {
 }
 
 async function getSodium() {
-  if (!sodiumReadyPromise) sodiumReadyPromise = sodium.ready.then(() => sodium);
+  if (!sodiumReadyPromise) {
+    sodiumReadyPromise = sodium.ready.then(() => sodium).catch((error) => {
+      sodiumReadyPromise = null;
+      throw accountV2Error("CRYPTO_WASM_INIT_FAILED", "The browser could not initialize the secure crypto module. Refresh the page and try again.", error);
+    });
+  }
   return sodiumReadyPromise;
 }
 
@@ -177,25 +182,33 @@ function canonicalJson(value) {
 }
 
 async function accountV2Hkdf(ikm, salt, info) {
-  const material = await crypto.subtle.importKey("raw", toByteArray(ikm), "HKDF", false, ["deriveBits"]);
-  const bits = await crypto.subtle.deriveBits({
-    name: "HKDF",
-    hash: "SHA-256",
-    salt: toByteArray(salt),
-    info: utf8(info),
-  }, material, 256);
-  return new Uint8Array(bits);
+  try {
+    const material = await crypto.subtle.importKey("raw", toByteArray(ikm), "HKDF", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({
+      name: "HKDF",
+      hash: "SHA-256",
+      salt: toByteArray(salt),
+      info: utf8(info),
+    }, material, 256);
+    return new Uint8Array(bits);
+  } catch (error) {
+    throw accountV2Error("ACCOUNT_V2_KDF_FAILED", "The Passkey output could not derive the account vault key.", error);
+  }
 }
 
-async function accountV2AesGcmEncrypt(keyBytes, plaintext, aad) {
-  const nonce = crypto.getRandomValues(new Uint8Array(12));
-  const key = await crypto.subtle.importKey("raw", toByteArray(keyBytes), "AES-GCM", false, ["encrypt"]);
-  const ciphertext = await crypto.subtle.encrypt(
-    { name: "AES-GCM", iv: nonce, additionalData: toByteArray(aad) },
-    key,
-    toByteArray(plaintext),
-  );
-  return { nonce, ciphertext: new Uint8Array(ciphertext) };
+async function accountV2AesGcmEncrypt(keyBytes, plaintext, aad, code = "ACCOUNT_V2_ENCRYPT_FAILED") {
+  try {
+    const nonce = crypto.getRandomValues(new Uint8Array(12));
+    const key = await crypto.subtle.importKey("raw", toByteArray(keyBytes), "AES-GCM", false, ["encrypt"]);
+    const ciphertext = await crypto.subtle.encrypt(
+      { name: "AES-GCM", iv: nonce, additionalData: toByteArray(aad) },
+      key,
+      toByteArray(plaintext),
+    );
+    return { nonce, ciphertext: new Uint8Array(ciphertext) };
+  } catch (error) {
+    throw accountV2Error(code, "The account-encrypted data could not be encrypted in this browser.", error);
+  }
 }
 
 async function accountV2AesGcmDecrypt(keyBytes, nonce, ciphertext, aad, code = "ACCOUNT_V2_DECRYPT_FAILED") {
@@ -931,7 +944,7 @@ async function generateAccountV2Vault({ userId, keyVersion = "1", prfOutput } = 
   account.signingPrivateKey = account.signingKeyPair.privateKey;
   account.fingerprint = await accountV2Fingerprint(account.encryptionPublicKey, account.signingPublicKey);
   const wrappingKey = await accountV2Hkdf(prf, utf8(`expassway-chat-account-v2-prf|${user}`), ACCOUNT_V2_KDF_VERSION);
-  const encrypted = await accountV2AesGcmEncrypt(wrappingKey, utf8(JSON.stringify({ format: ACCOUNT_V2_VAULT_FORMAT, version: ACCOUNT_V2_VAULT_VERSION, userId: user, keyVersion: version, vaultRootKey: bytesToBase64Url(account.vaultRootKey), encryptionPrivateKey: bytesToBase64Url(account.encryptionPrivateKey), signingPrivateKey: bytesToBase64Url(account.signingPrivateKey) })), accountV2VaultAad(user, version));
+  const encrypted = await accountV2AesGcmEncrypt(wrappingKey, utf8(JSON.stringify({ format: ACCOUNT_V2_VAULT_FORMAT, version: ACCOUNT_V2_VAULT_VERSION, userId: user, keyVersion: version, vaultRootKey: bytesToBase64Url(account.vaultRootKey), encryptionPrivateKey: bytesToBase64Url(account.encryptionPrivateKey), signingPrivateKey: bytesToBase64Url(account.signingPrivateKey) })), accountV2VaultAad(user, version), "ACCOUNT_V2_VAULT_ENCRYPT_FAILED");
   accountV2WipeAccount(state.accountV2);
   state.accountV2 = account;
   return { ...accountV2PublicBundle(account), kdfVersion: ACCOUNT_V2_KDF_VERSION, nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
