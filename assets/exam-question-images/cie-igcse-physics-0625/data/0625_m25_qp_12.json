@@ -1,0 +1,658 @@
+{
+  "questionPaper": "0625_m25_qp_12.pdf",
+  "markScheme": "0625_m25_ms_12.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q01.png",
+      "rawText": "A student is asked to find the volume of a small irregularly shaped piece of rock. The student has the following apparatus available. 100 90 80 70 60 50 40 30 20 10 10 0 20 30 40 50 60 70 80 90 100 measuring cylinder containing water ruler balance Which apparatus must the student use to find the volume of the small piece of rock? A balance and ruler B ruler only C balance and measuring cylinder D measuring cylinder only",
+      "parseStatus": "ok",
+      "stem": "A student is asked to find the volume of a small irregularly shaped piece of rock. The student has the following apparatus available. 100 90 80 70 60 50 40 30 20 10 10 0 20 30 40 50 60 70 80 90 100 measuring cylinder containing water ruler balance Which apparatus must the student use to find the volume of the small piece of rock?",
+      "options": {
+        "A": "balance and ruler",
+        "B": "ruler only",
+        "C": "balance and measuring cylinder",
+        "D": "measuring cylinder only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q02.png",
+      "rawText": "A digital stop-clock measures time in minutes and seconds. The stop-clock reads 00:50 when it is started (i.e. 00 minutes 50 seconds). It reads 02:10 when it is stopped. What is the shortest possible time that has passed between starting and stopping the stop-clock? A 1 minute 06 seconds B 1 minute 20 seconds C 2 minutes 10 seconds D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q03.png",
+      "rawText": "Four students are instructed to find the time it takes for a ball bearing to fall through a vertical height of 1.0 m. Each student uses a different procedure. Which student follows the correct procedure? A The student measures the time taken for the ball to fall 1.0 m five times. He then adds the times taken together and divides by five. B The student measures the time taken for the ball to fall 1.0 m five times. He then multiplies the times taken together and divides by five. C The student measures the time taken for the ball to fall 2.0 m. He then divides the time taken by two. D The student measures the time taken for the ball to fall 2.0 m five times. He then adds the times taken together and divides by ten.",
+      "parseStatus": "ok",
+      "stem": "Four students are instructed to find the time it takes for a ball bearing to fall through a vertical height of 1.0 m. Each student uses a different procedure. Which student follows the correct procedure?",
+      "options": {
+        "A": "The student measures the time taken for the ball to fall 1.0 m five times. He then adds the times taken together and divides by five.",
+        "B": "The student measures the time taken for the ball to fall 1.0 m five times. He then multiplies the times taken together and divides by five.",
+        "C": "The student measures the time taken for the ball to fall 2.0 m. He then divides the time taken by two.",
+        "D": "The student measures the time taken for the ball to fall 2.0 m five times. He then adds the times taken together and divides by ten."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q04.png",
+      "rawText": "The graph shows the motion of a car for a 5-second period. speed time / s 0 0 3",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q05.png",
+      "rawText": "Which property of an object is a gravitational force acting on its mass? A density B surface area C volume D weight",
+      "parseStatus": "ok",
+      "stem": "Which property of an object is a gravitational force acting on its mass?",
+      "options": {
+        "A": "density",
+        "B": "surface area",
+        "C": "volume",
+        "D": "weight"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q06.png",
+      "rawText": "A stone has a weight of 5.7 N. The gravitational field strength g is 9.8 N / kg. What is the mass of the stone? A 0.58 kg B 5.7 kg C 56 kg D 550 kg",
+      "parseStatus": "ok",
+      "stem": "A stone has a weight of 5.7 N. The gravitational field strength g is 9.8 N / kg. What is the mass of the stone?",
+      "options": {
+        "A": "0.58 kg",
+        "B": "5.7 kg",
+        "C": "56 kg",
+        "D": "550 kg"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q07.png",
+      "rawText": "Which equation is correct? A mass = force on accelerati B mass = density  volume C mass = impulse force D mass = 2 velocity energy kinetic",
+      "parseStatus": "ok",
+      "stem": "Which equation is correct?",
+      "options": {
+        "A": "mass = force on accelerati",
+        "B": "mass = density  volume",
+        "C": "mass = impulse force",
+        "D": "mass = 2 velocity energy kinetic"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q08.png",
+      "rawText": "What is meant by the moment of a force? A the magnitude of the force B the work done by the force C the time for which the force acts D the turning effect of the force",
+      "parseStatus": "ok",
+      "stem": "What is meant by the moment of a force?",
+      "options": {
+        "A": "the magnitude of the force",
+        "B": "the work done by the force",
+        "C": "the time for which the force acts",
+        "D": "the turning effect of the force"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q09.png",
+      "rawText": "A mass of 20 kg is held stationary by a rope passing over a frictionless pulley. 20 kg T pulley wheel What is the force T in the rope? A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q10.png",
+      "rawText": "Which equation relates the work done W on an object by a force F when it moves a distance d ? A d = WF B d = W F C F = W d D F = d W",
+      "parseStatus": "ok",
+      "stem": "Which equation relates the work done W on an object by a force F when it moves a distance d ?",
+      "options": {
+        "A": "d = WF",
+        "B": "d = W F",
+        "C": "F = W d",
+        "D": "F = d W"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q11.png",
+      "rawText": "A boy produces an average useful power output of 60 W as he rides his bicycle for 2.0 minutes. How much useful energy does he transfer? A 0.50 J B 30 J C 120 J D 7200 J",
+      "parseStatus": "ok",
+      "stem": "A boy produces an average useful power output of 60 W as he rides his bicycle for 2.0 minutes. How much useful energy does he transfer?",
+      "options": {
+        "A": "0.50 J",
+        "B": "30 J",
+        "C": "120 J",
+        "D": "7200 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q12.png",
+      "rawText": "The diagram shows a solid block resting on a bench. The dimensions of the block are shown. bench 80 cm 20 cm 40 cm P Q R On which labelled surface should the block rest to produce the smallest pressure on the bench? A P B Q C R D P, Q and R produce the same pressure",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a solid block resting on a bench. The dimensions of the block are shown. bench 80 cm 20 cm 40 cm P Q R On which labelled surface should the block rest to produce the smallest pressure on the bench?",
+      "options": {
+        "A": "P",
+        "B": "Q",
+        "C": "R",
+        "D": "P, Q and R produce the same pressure"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q13.png",
+      "rawText": "A skier is standing still on a flat area of snow. skis The total weight of the skier is 550 N. The total area of his skis in contact with the ground is 0.015 m2. What is the pressure exerted on the ground by the skier? A 0.83 N / m2 B 8.3 N / m2 C 3700 N / m2 D 37 000 N / m2",
+      "parseStatus": "ok",
+      "stem": "A skier is standing still on a flat area of snow. skis The total weight of the skier is 550 N. The total area of his skis in contact with the ground is 0.015 m2. What is the pressure exerted on the ground by the skier?",
+      "options": {
+        "A": "0.83 N / m2",
+        "B": "8.3 N / m2",
+        "C": "3700 N / m2",
+        "D": "37 000 N / m2"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q14.png",
+      "rawText": "A force acts on an area to produce a pressure. Which changes produce the same pressure? A doubling the area and doubling the force B doubling the area and halving the force C doubling the area and making the force four times bigger D halving the area and doubling the force",
+      "parseStatus": "ok",
+      "stem": "A force acts on an area to produce a pressure. Which changes produce the same pressure?",
+      "options": {
+        "A": "doubling the area and doubling the force",
+        "B": "doubling the area and halving the force",
+        "C": "doubling the area and making the force four times bigger",
+        "D": "halving the area and doubling the force"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q15.png",
+      "rawText": "The diagram shows a cylinder containing oxygen under high pressure. The temperature of the cylinder and the oxygen decreases. Which statement describes what happens to the pressure in the cylinder and gives the reason why the pressure changes? A The pressure decreases because the oxygen particles move faster. B The pressure decreases because the oxygen particles move more slowly. C The pressure increases because the oxygen particles move faster. D The pressure increases because the oxygen particles move more slowly.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cylinder containing oxygen under high pressure. The temperature of the cylinder and the oxygen decreases. Which statement describes what happens to the pressure in the cylinder and gives the reason why the pressure changes?",
+      "options": {
+        "A": "The pressure decreases because the oxygen particles move faster.",
+        "B": "The pressure decreases because the oxygen particles move more slowly.",
+        "C": "The pressure increases because the oxygen particles move faster.",
+        "D": "The pressure increases because the oxygen particles move more slowly."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q16.png",
+      "rawText": "Which statement describes what happens during solidification? A Particles begin to move around each other easily. B Particles stop moving around each other. C The temperature of the particles continues to decrease during solidification. D The temperature of the particles continues to increase during solidification.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes what happens during solidification?",
+      "options": {
+        "A": "Particles begin to move around each other easily.",
+        "B": "Particles stop moving around each other.",
+        "C": "The temperature of the particles continues to decrease during solidification.",
+        "D": "The temperature of the particles continues to increase during solidification."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q17.png",
+      "rawText": "Solids expand the ......1...... and the average separation between molecules is the ......2...... . Which words complete the sentence about the expansion of solids when they are heated, relative to liquids and gases? 1 2 A least greatest B least smallest C most greatest D most smallest",
+      "parseStatus": "ok",
+      "stem": "Solids expand the ......1...... and the average separation between molecules is the ......2...... . Which words complete the sentence about the expansion of solids when they are heated, relative to liquids and gases? 1 2",
+      "options": {
+        "A": "least greatest",
+        "B": "least smallest",
+        "C": "most greatest",
+        "D": "most smallest"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q18.png",
+      "rawText": "A girl blows some air into a party balloon and ties a knot to seal the air in the balloon. The girl holds the sealed balloon above a hot convector heater. She observes that the volume of the balloon increases significantly. Which statement identifies the cause of this increase in volume? A The air in the balloon contracts. B The air in the balloon expands. C The material of the balloon contracts. D The material of the balloon expands.",
+      "parseStatus": "ok",
+      "stem": "A girl blows some air into a party balloon and ties a knot to seal the air in the balloon. The girl holds the sealed balloon above a hot convector heater. She observes that the volume of the balloon increases significantly. Which statement identifies the cause of this increase in volume?",
+      "options": {
+        "A": "The air in the balloon contracts.",
+        "B": "The air in the balloon expands.",
+        "C": "The material of the balloon contracts.",
+        "D": "The material of the balloon expands."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q19.png",
+      "rawText": "The graph shows what happens to the density of a substance as its temperature changes over time. density time 0 0 t1 t2 Which term describes the change of state taking place at time t2? A melting B freezing C condensation D boiling",
+      "parseStatus": "ok",
+      "stem": "The graph shows what happens to the density of a substance as its temperature changes over time. density time 0 0 t1 t2 Which term describes the change of state taking place at time t2?",
+      "options": {
+        "A": "melting",
+        "B": "freezing",
+        "C": "condensation",
+        "D": "boiling"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q20.png",
+      "rawText": "A candle is used to heat some water in a glass beaker. glass beaker candle water What is the main method of heat transfer through the glass and within the water? through the glass within the water A conduction conduction B conduction convection C convection conduction D convection convection",
+      "parseStatus": "ok",
+      "stem": "A candle is used to heat some water in a glass beaker. glass beaker candle water What is the main method of heat transfer through the glass and within the water? through the glass within the water",
+      "options": {
+        "A": "conduction conduction",
+        "B": "conduction convection",
+        "C": "convection conduction",
+        "D": "convection convection"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q21.png",
+      "rawText": "Which equation enables the speed of a wave to be calculated? A speed = amplitude  frequency B speed = amplitude  wavelength C speed = frequency  wavelength D speed = wavelength frequency",
+      "parseStatus": "ok",
+      "stem": "Which equation enables the speed of a wave to be calculated?",
+      "options": {
+        "A": "speed = amplitude  frequency",
+        "B": "speed = amplitude  wavelength",
+        "C": "speed = frequency  wavelength",
+        "D": "speed = wavelength frequency"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q22.png",
+      "rawText": "A ray of light is incident on the surface of a plane mirror, as shown. In which position is the reflected ray? ray of light 30° 30° 30° 60° plane mirror A B D C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q23.png",
+      "rawText": "The diagram shows a ray of light passing from glass to air. The dotted line labelled ‘normal’ is a line drawn perpendicular to the surface of the glass. What is the angle of refraction? A B C D air glass normal",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q24.png",
+      "rawText": "The diagram shows how a converging lens forms an image of an object. object image Which description of the image formed by the lens is correct? A real, inverted and diminished B real, upright and enlarged C virtual, inverted and diminished D virtual, upright and enlarged",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how a converging lens forms an image of an object. object image Which description of the image formed by the lens is correct?",
+      "options": {
+        "A": "real, inverted and diminished",
+        "B": "real, upright and enlarged",
+        "C": "virtual, inverted and diminished",
+        "D": "virtual, upright and enlarged"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q25.png",
+      "rawText": "Which row describes the image viewed in a plane mirror? type of image image size A real enlarged B real same size C virtual enlarged D virtual same size",
+      "parseStatus": "ok",
+      "stem": "Which row describes the image viewed in a plane mirror? type of image image size",
+      "options": {
+        "A": "real enlarged",
+        "B": "real same size",
+        "C": "virtual enlarged",
+        "D": "virtual same size"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q26.png",
+      "rawText": "The table gives the range of frequencies of three types of electromagnetic radiation. type of radiation range of frequencies / Hz radio 3  104 to 3  109 visible light 4  1014 to 8  1014 X-rays 3  1016 to 3  1019 Which type of electromagnetic radiation has a frequency of 4  1015 Hz? A gamma radiation B infrared radiation C microwave radiation D ultraviolet radiation",
+      "parseStatus": "ok",
+      "stem": "The table gives the range of frequencies of three types of electromagnetic radiation. type of radiation range of frequencies / Hz radio 3  104 to 3  109 visible light 4  1014 to 8  1014 X-rays 3  1016 to 3  1019 Which type of electromagnetic radiation has a frequency of 4  1015 Hz?",
+      "options": {
+        "A": "gamma radiation",
+        "B": "infrared radiation",
+        "C": "microwave radiation",
+        "D": "ultraviolet radiation"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q27.png",
+      "rawText": "An athlete hears a starting pistol fire 1.5 seconds after she sees a puff of smoke from the pistol. The sound and the smoke are made at the same time. The starting pistol is 450 metres away from the athlete. What is the speed of sound calculated from this observation? A 150 m / s B 300 m / s C 330 m / s D 675 m / s",
+      "parseStatus": "ok",
+      "stem": "An athlete hears a starting pistol fire 1.5 seconds after she sees a puff of smoke from the pistol. The sound and the smoke are made at the same time. The starting pistol is 450 metres away from the athlete. What is the speed of sound calculated from this observation?",
+      "options": {
+        "A": "150 m / s",
+        "B": "300 m / s",
+        "C": "330 m / s",
+        "D": "675 m / s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q28.png",
+      "rawText": "A plotting compass is placed close to the pole of a magnet with poles marked X and Y. The N pole of the plotting compass points to pole X, as shown. X Y Pole Y of the magnet is then placed close to another magnet with poles marked P and Q, as shown. The magnets repel each other. X Y P magnets repel Q Which row is correct? pole X pole P A N N B N S C S N D S S",
+      "parseStatus": "ok",
+      "stem": "A plotting compass is placed close to the pole of a magnet with poles marked X and Y. The N pole of the plotting compass points to pole X, as shown. X Y Pole Y of the magnet is then placed close to another magnet with poles marked P and Q, as shown. The magnets repel each other. X Y P magnets repel Q Which row is correct? pole X pole P",
+      "options": {
+        "A": "N N",
+        "B": "N S",
+        "C": "S N",
+        "D": "S S"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q29.png",
+      "rawText": "Why are electrical cables often made from copper? A Copper contains free electrons and is a good conductor. B Copper contains free electrons and is a good insulator. C Copper contains free protons and is a good conductor. D Copper contains free protons and is a good insulator.",
+      "parseStatus": "ok",
+      "stem": "Why are electrical cables often made from copper?",
+      "options": {
+        "A": "Copper contains free electrons and is a good conductor.",
+        "B": "Copper contains free electrons and is a good insulator.",
+        "C": "Copper contains free protons and is a good conductor.",
+        "D": "Copper contains free protons and is a good insulator."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q30.png",
+      "rawText": "There is a current I in a resistor. The potential difference (p.d.) across the resistor is V. What does the product IV represent? A the charge flowing through the resistor B the energy transferred by the resistor C the power dissipated by the resistor D the resistance of the resistor",
+      "parseStatus": "ok",
+      "stem": "There is a current I in a resistor. The potential difference (p.d.) across the resistor is V. What does the product IV represent?",
+      "options": {
+        "A": "the charge flowing through the resistor",
+        "B": "the energy transferred by the resistor",
+        "C": "the power dissipated by the resistor",
+        "D": "the resistance of the resistor"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q31.png",
+      "rawText": "Which circuit contains a thermistor and a heater? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q32.png",
+      "rawText": "Four 2.0 V cells are connected together in series to make a battery, as shown. What is the combined electromotive force (e.m.f.) of the battery? A 0.50 V B 2.0 V C 6.0 V D 8.0 V",
+      "parseStatus": "ok",
+      "stem": "Four 2.0 V cells are connected together in series to make a battery, as shown. What is the combined electromotive force (e.m.f.) of the battery?",
+      "options": {
+        "A": "0.50 V",
+        "B": "2.0 V",
+        "C": "6.0 V",
+        "D": "8.0 V"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q33.png",
+      "rawText": "An isolated metal sphere is positively charged. It is then brought near to another isolated metal sphere that is neutral. + + + + + + + + + + + + neutral metal sphere positively charged metal sphere left right What happens to the charges on the neutral sphere as the positively charged sphere is brought close to it? A Some positive charges move to the left and some negative charges move to the right. B Some positive charges move to the right and some negative charges move to the left. C Some positive charges move to the right, but the negative charges do not move. D The positive charges do not move, but some negative charges move to the left.",
+      "parseStatus": "ok",
+      "stem": "An isolated metal sphere is positively charged. It is then brought near to another isolated metal sphere that is neutral. + + + + + + + + + + + + neutral metal sphere positively charged metal sphere left right What happens to the charges on the neutral sphere as the positively charged sphere is brought close to it?",
+      "options": {
+        "A": "Some positive charges move to the left and some negative charges move to the right.",
+        "B": "Some positive charges move to the right and some negative charges move to the left.",
+        "C": "Some positive charges move to the right, but the negative charges do not move.",
+        "D": "The positive charges do not move, but some negative charges move to the left."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q34.png",
+      "rawText": "The potential difference (p.d.) across a car headlamp is 12 V. The current in the lamp is 2.5 A. How much energy is transferred by the lamp in 1.0 hour? A 1800 J B 1800 W C 108 000 J D 108 000 W",
+      "parseStatus": "ok",
+      "stem": "The potential difference (p.d.) across a car headlamp is 12 V. The current in the lamp is 2.5 A. How much energy is transferred by the lamp in 1.0 hour?",
+      "options": {
+        "A": "1800 J",
+        "B": "1800 W",
+        "C": "108 000 J",
+        "D": "108 000 W"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q35.png",
+      "rawText": "A copper wire rests in a uniform magnetic field. Which change causes an induced electromotive force (e.m.f.) in the wire? A connecting the wire to a power supply B connecting the wire to earth C heating the wire D moving the wire",
+      "parseStatus": "ok",
+      "stem": "A copper wire rests in a uniform magnetic field. Which change causes an induced electromotive force (e.m.f.) in the wire?",
+      "options": {
+        "A": "connecting the wire to a power supply",
+        "B": "connecting the wire to earth",
+        "C": "heating the wire",
+        "D": "moving the wire"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q36.png",
+      "rawText": "An element has two isotopes. Which row compares the nucleus of one atom of each isotope? the charge on each nucleus the mass of each nucleus A different different B different the same C the same different D the same the same",
+      "parseStatus": "ok",
+      "stem": "An element has two isotopes. Which row compares the nucleus of one atom of each isotope? the charge on each nucleus the mass of each nucleus",
+      "options": {
+        "A": "different different",
+        "B": "different the same",
+        "C": "the same different",
+        "D": "the same the same"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q37.png",
+      "rawText": "In a laboratory, a radiation detector is connected to a counter which shows a reading for the count rate due to background radiation. detector Which unit is count rate measured in? A counts / s B minutes / count C coulombs / minute D amperes / s",
+      "parseStatus": "ok",
+      "stem": "In a laboratory, a radiation detector is connected to a counter which shows a reading for the count rate due to background radiation. detector Which unit is count rate measured in?",
+      "options": {
+        "A": "counts / s",
+        "B": "minutes / count",
+        "C": "coulombs / minute",
+        "D": "amperes / s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q38.png",
+      "rawText": "Which statement about alpha, beta and gamma emissions is correct? A Alpha-particles are lighter than beta-particles. B Beta-particles are not deflected by magnetic fields. C Gamma rays are more penetrating than alpha-particles and beta-particles. D Gamma rays are more ionising than alpha-particles and beta-particles.",
+      "parseStatus": "ok",
+      "stem": "Which statement about alpha, beta and gamma emissions is correct?",
+      "options": {
+        "A": "Alpha-particles are lighter than beta-particles.",
+        "B": "Beta-particles are not deflected by magnetic fields.",
+        "C": "Gamma rays are more penetrating than alpha-particles and beta-particles.",
+        "D": "Gamma rays are more ionising than alpha-particles and beta-particles."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q39.png",
+      "rawText": "What is an effect of ionising nuclear radiation on living things? A cell mutation B electric shock C internal cooling of body cells D broken bones",
+      "parseStatus": "ok",
+      "stem": "What is an effect of ionising nuclear radiation on living things?",
+      "options": {
+        "A": "cell mutation",
+        "B": "electric shock",
+        "C": "internal cooling of body cells",
+        "D": "broken bones"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_12/q40.png",
+      "rawText": "The diagram shows the Earth orbiting the Sun. Sun position 1 Which row identifies and explains the correct season in the northern hemisphere on the Earth in position 1? season explanation A summer the northern hemisphere tilts away from the Sun B summer the northern hemisphere tilts towards the Sun C winter the northern hemisphere tilts away from the Sun D winter the northern hemisphere tilts towards the Sun",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the Earth orbiting the Sun. Sun position 1 Which row identifies and explains the correct season in the northern hemisphere on the Earth in position 1? season explanation",
+      "options": {
+        "A": "summer the northern hemisphere tilts away from the Sun",
+        "B": "summer the northern hemisphere tilts towards the Sun",
+        "C": "winter the northern hemisphere tilts away from the Sun",
+        "D": "winter the northern hemisphere tilts towards the Sun"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,673 @@
+{
+  "questionPaper": "0625_s24_qp_13.pdf",
+  "markScheme": "0625_s24_ms_13.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q01.png",
+      "rawText": "A student wishes to find the volume of a small, irregularly shaped stone. stone A ruler and a measuring cylinder containing some water are available. Which apparatus is needed? A neither the ruler nor the measuring cylinder B the measuring cylinder only C the ruler and the measuring cylinder D the ruler only",
+      "parseStatus": "ok",
+      "stem": "A student wishes to find the volume of a small, irregularly shaped stone. stone",
+      "options": {
+        "A": "ruler and a measuring cylinder containing some water are available. Which apparatus is needed? A neither the ruler nor the measuring cylinder",
+        "B": "the measuring cylinder only",
+        "C": "the ruler and the measuring cylinder",
+        "D": "the ruler only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q02.png",
+      "rawText": "A car travels along a road at a constant speed. What correctly describes the speed–time graph of the car? A a horizontal line B a vertical line C a diagonal line upwards D a curved line with increasing gradient",
+      "parseStatus": "ok",
+      "stem": "A car travels along a road at a constant speed. What correctly describes the speed–time graph of the car?",
+      "options": {
+        "A": "a horizontal line",
+        "B": "a vertical line",
+        "C": "a diagonal line upwards",
+        "D": "a curved line with increasing gradient"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q03.png",
+      "rawText": "Four objects are moving along a straight line. The distance of each object from a fixed point on the line is plotted against time. Which object is decelerating? 0 0 A distance from fixed point time B distance from fixed point time C distance from fixed point time D distance from fixed point time 0 0 0 0 0 0",
+      "parseStatus": "ok",
+      "stem": "Four objects are moving along a straight line. The distance of each object from a fixed point on the line is plotted against time. Which object is decelerating? 0 0",
+      "options": {
+        "A": "distance from fixed point time",
+        "B": "distance from fixed point time",
+        "C": "distance from fixed point time",
+        "D": "distance from fixed point time 0 0 0 0 0 0"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q04.png",
+      "rawText": "An object is taken from the Earth to the Moon. The acceleration of free fall is 9.8 m / s2 on the Earth and is 1.6 m / s2 on the Moon. Which row describes the mass and the weight of the object on the Moon compared to on the Earth? mass weight A greater than on the Earth same as on the Earth B less than on the Earth same as on the Earth C same as on the Earth greater than on the Earth D same as on the Earth less than on the Earth",
+      "parseStatus": "ok",
+      "stem": "An object is taken from the Earth to the Moon. The acceleration of free fall is 9.8 m / s2 on the Earth and is 1.6 m / s2 on the Moon. Which row describes the mass and the weight of the object on the Moon compared to on the Earth? mass weight",
+      "options": {
+        "A": "greater than on the Earth same as on the Earth",
+        "B": "less than on the Earth same as on the Earth",
+        "C": "same as on the Earth greater than on the Earth",
+        "D": "same as on the Earth less than on the Earth"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q05.png",
+      "rawText": "The diagram shows some liquid in a measuring cylinder. The mass of the liquid is 16 g. 25 20 15 10 5 cm3 What is the density of the liquid? A 0.80 g / cm 3 B 1.3 g / cm 3 C 36 g / cm 3 D 320 g / cm 3",
+      "parseStatus": "ok",
+      "stem": "The diagram shows some liquid in a measuring cylinder. The mass of the liquid is 16 g. 25 20 15 10 5 cm3 What is the density of the liquid?",
+      "options": {
+        "A": "0.80 g / cm 3",
+        "B": "1.3 g / cm 3",
+        "C": "36 g / cm 3",
+        "D": "320 g / cm 3"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q06.png",
+      "rawText": "A single force acts upon an object and the volume of the object does not change. Which statement is correct? A The density of the object changes. B The velocity of the object changes. C The mass of the object changes. D The weight of the object changes.",
+      "parseStatus": "ok",
+      "stem": "A single force acts upon an object and the volume of the object does not change. Which statement is correct?",
+      "options": {
+        "A": "The density of the object changes.",
+        "B": "The velocity of the object changes.",
+        "C": "The mass of the object changes.",
+        "D": "The weight of the object changes."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q07.png",
+      "rawText": "Four electric motors do the same quantity of work when they lift a weight of 10 N through the same distance. The times taken by each motor to lift the weight are shown. What is the time taken by the motor which produces the most power? A 1.5 s B 6.0 s C 15 s D 60 s",
+      "parseStatus": "ok",
+      "stem": "Four electric motors do the same quantity of work when they lift a weight of 10 N through the same distance. The times taken by each motor to lift the weight are shown. What is the time taken by the motor which produces the most power?",
+      "options": {
+        "A": "1.5 s",
+        "B": "6.0 s",
+        "C": "15 s",
+        "D": "60 s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q08.png",
+      "rawText": "Which row describes how the pressure beneath the surface of a liquid depends on the depth below the surface and on the density of the liquid? depth below surface density of liquid A pressure decreases with increasing depth pressure decreases with increasing density B pressure decreases with increasing depth pressure increases with increasing density C pressure increases with increasing depth pressure decreases with increasing density D pressure increases with increasing depth pressure increases with increasing density",
+      "parseStatus": "ok",
+      "stem": "Which row describes how the pressure beneath the surface of a liquid depends on the depth below the surface and on the density of the liquid? depth below surface density of liquid",
+      "options": {
+        "A": "pressure decreases with increasing depth pressure decreases with increasing density",
+        "B": "pressure decreases with increasing depth pressure increases with increasing density",
+        "C": "pressure increases with increasing depth pressure decreases with increasing density",
+        "D": "pressure increases with increasing depth pressure increases with increasing density"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q09.png",
+      "rawText": "In which process does a gas turn into a liquid? A boiling B condensing C freezing D melting",
+      "parseStatus": "ok",
+      "stem": "In which process does a gas turn into a liquid?",
+      "options": {
+        "A": "boiling",
+        "B": "condensing",
+        "C": "freezing",
+        "D": "melting"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q10.png",
+      "rawText": "A pollen grain in a beaker of still water is viewed through a microscope. Which diagram shows the most likely movement of the pollen grain? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q11.png",
+      "rawText": "What is the relationship between temperatures in kelvin (T ) and temperatures in degrees Celsius ( )? A  = T + 273 B  = T – 273 C  = T + 373 D  = T – 373",
+      "parseStatus": "ok",
+      "stem": "What is the relationship between temperatures in kelvin (T ) and temperatures in degrees Celsius ( )?",
+      "options": {
+        "A": " = T + 273",
+        "B": " = T – 273",
+        "C": " = T + 373",
+        "D": " = T – 373"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q12.png",
+      "rawText": "In a famous experiment, a scientist showed that, when water in an insulated tub is stirred, its temperature increases. What can be concluded from this experiment? A Temperature is a store of energy. B The water absorbs heat from the surroundings. C Work done by stirring increases the internal energy of the water. D Energy is not conserved.",
+      "parseStatus": "ok",
+      "stem": "In a famous experiment, a scientist showed that, when water in an insulated tub is stirred, its temperature increases. What can be concluded from this experiment?",
+      "options": {
+        "A": "Temperature is a store of energy.",
+        "B": "The water absorbs heat from the surroundings.",
+        "C": "Work done by stirring increases the internal energy of the water.",
+        "D": "Energy is not conserved."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q13.png",
+      "rawText": "Solids expand when heated and contract when cooled. In which example is there a useful application of expansion and not an unwanted effect? A bridges B railway lines C telephone cables D thermostats",
+      "parseStatus": "ok",
+      "stem": "Solids expand when heated and contract when cooled. In which example is there a useful application of expansion and not an unwanted effect?",
+      "options": {
+        "A": "bridges",
+        "B": "railway lines",
+        "C": "telephone cables",
+        "D": "thermostats"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q14.png",
+      "rawText": "A rod is made half of aluminium and half of glass. A pin is attached to each end of the rod by wax. The rod is heated at the centre. A pin falls off when the wax melts. aluminium glass heat pin P pin Q wax wax Which statement is correct? A Pin P falls off first because aluminium is a better thermal conductor than glass. B Pin P falls off first because aluminium is a worse thermal conductor than glass. C Pin Q falls off first because glass is a better thermal conductor than aluminium. D Pin Q falls off first because glass is a worse thermal conductor than aluminium.",
+      "parseStatus": "ok",
+      "stem": "A rod is made half of aluminium and half of glass.",
+      "options": {
+        "A": "pin is attached to each end of the rod by wax. The rod is heated at the centre. A pin falls off when the wax melts. aluminium glass heat pin P pin Q wax wax Which statement is correct? A Pin P falls off first because aluminium is a better thermal conductor than glass.",
+        "B": "Pin P falls off first because aluminium is a worse thermal conductor than glass.",
+        "C": "Pin Q falls off first because glass is a better thermal conductor than aluminium.",
+        "D": "Pin Q falls off first because glass is a worse thermal conductor than aluminium."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q15.png",
+      "rawText": "In countries where it is usually hot, houses are often painted white. What is the reason for this? A White surfaces are good reflectors of infrared radiation. B White surfaces are good conductors of infrared radiation. C White surfaces are good absorbers of infrared radiation. D White surfaces are good emitters of infrared radiation.",
+      "parseStatus": "ok",
+      "stem": "In countries where it is usually hot, houses are often painted white. What is the reason for this?",
+      "options": {
+        "A": "White surfaces are good reflectors of infrared radiation.",
+        "B": "White surfaces are good conductors of infrared radiation.",
+        "C": "White surfaces are good absorbers of infrared radiation.",
+        "D": "White surfaces are good emitters of infrared radiation."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q16.png",
+      "rawText": "What is the name of the distance from one crest in a transverse wave to the next crest? A amplitude B period C wavefront D wavelength",
+      "parseStatus": "ok",
+      "stem": "What is the name of the distance from one crest in a transverse wave to the next crest?",
+      "options": {
+        "A": "amplitude",
+        "B": "period",
+        "C": "wavefront",
+        "D": "wavelength"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q17.png",
+      "rawText": "Waves on the surface of water travel from deep water to shallow water. Which diagram shows the correct path of the waves in the shallow water? deep water A shallow water deep water B shallow water deep water C shallow water deep water D shallow water",
+      "parseStatus": "ok",
+      "stem": "Waves on the surface of water travel from deep water to shallow water. Which diagram shows the correct path of the waves in the shallow water? deep water",
+      "options": {
+        "A": "shallow water deep water",
+        "B": "shallow water deep water",
+        "C": "shallow water deep water",
+        "D": "shallow water"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q18.png",
+      "rawText": "The diagram shows a thin converging lens with principal focuses at F1 and F2. F1 F2 principal axis A small light source is placed at F1. A beam of light from the source passes through the lens. Which statement correctly describes the beam of light emerging from the lens? A The beam converges to F2. B The beam converges to a point to the right of F2. C The beam diverges from a point to the left of F1. D The beam travels parallel to the principal axis.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a thin converging lens with principal focuses at F1 and F2. F1 F2 principal axis",
+      "options": {
+        "A": "small light source is placed at F1. A beam of light from the source passes through the lens. Which statement correctly describes the beam of light emerging from the lens? A The beam converges to F2.",
+        "B": "The beam converges to a point to the right of F2.",
+        "C": "The beam diverges from a point to the left of F1.",
+        "D": "The beam travels parallel to the principal axis."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q19.png",
+      "rawText": "A student reads the following relationship in his physics book. i = r What is the student reading about? A diffraction due to a gap B dispersion of light by a prism C reflection in a plane mirror D refraction as light enters glass",
+      "parseStatus": "ok",
+      "stem": "A student reads the following relationship in his physics book. i = r What is the student reading about?",
+      "options": {
+        "A": "diffraction due to a gap",
+        "B": "dispersion of light by a prism",
+        "C": "reflection in a plane mirror",
+        "D": "refraction as light enters glass"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q20.png",
+      "rawText": "The table shows information about different colours of light. colour of light frequency / Hz violet 7.2  1014 blue 6.3  1014 yellow 5.2  1014 red 4.5  1014 Using the data, what is the frequency of orange light? A 4.0  1014 Hz B 5.0  1014 Hz C 6.0  1014 Hz D 7.0  1014 Hz",
+      "parseStatus": "ok",
+      "stem": "The table shows information about different colours of light. colour of light frequency / Hz violet 7.2  1014 blue 6.3  1014 yellow 5.2  1014 red 4.5  1014 Using the data, what is the frequency of orange light?",
+      "options": {
+        "A": "4.0  1014 Hz",
+        "B": "5.0  1014 Hz",
+        "C": "6.0  1014 Hz",
+        "D": "7.0  1014 Hz"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q21.png",
+      "rawText": "The table gives the wavelengths of three electromagnetic waves. electromagnetic wave wavelength / m P 3.2  10–3 Q 5.0  10–9 R 2.6  103 Which row correctly identifies P, Q and R? P Q R A microwave radio wave X-ray B microwave X-ray radio wave C radio wave microwave X-ray D radio wave X-ray microwave",
+      "parseStatus": "ok",
+      "stem": "The table gives the wavelengths of three electromagnetic waves. electromagnetic wave wavelength / m P 3.2  10–3 Q 5.0  10–9 R 2.6  103 Which row correctly identifies P, Q and R? P Q R",
+      "options": {
+        "A": "microwave radio wave X-ray",
+        "B": "microwave X-ray radio wave",
+        "C": "radio wave microwave X-ray",
+        "D": "radio wave X-ray microwave"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q22.png",
+      "rawText": "A healthy human ear is able to hear a range of frequencies. What is this approximate range? A 10 Hz to 1000 Hz B 20 Hz to 2000 Hz C 20 Hz to 20 000 Hz D 200 Hz to 200 000 Hz",
+      "parseStatus": "ok",
+      "stem": "A healthy human ear is able to hear a range of frequencies. What is this approximate range?",
+      "options": {
+        "A": "10 Hz to 1000 Hz",
+        "B": "20 Hz to 2000 Hz",
+        "C": "20 Hz to 20 000 Hz",
+        "D": "200 Hz to 200 000 Hz"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q23.png",
+      "rawText": "A student hits two wooden blocks together in front of a wall and calculates the speed of sound to be 340 m / s. The time between the student hitting the blocks and hearing the echo is 0.59 s. NOT TO SCALE What is the distance between the student and the wall? A 100 m B 200 m C 290 m D 570 m",
+      "parseStatus": "ok",
+      "stem": "A student hits two wooden blocks together in front of a wall and calculates the speed of sound to be 340 m / s. The time between the student hitting the blocks and hearing the echo is 0.59 s. NOT TO SCALE What is the distance between the student and the wall?",
+      "options": {
+        "A": "100 m",
+        "B": "200 m",
+        "C": "290 m",
+        "D": "570 m"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q24.png",
+      "rawText": "The diagram shows part of the magnetic field between two bar magnets. X Y Which statement about the ends of the magnets is correct? A X and Y are both N poles. B X and Y are both S poles. C X is an N pole and Y is an S pole. D X is an S pole and Y is an N pole.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of the magnetic field between two bar magnets. X Y Which statement about the ends of the magnets is correct?",
+      "options": {
+        "A": "X and Y are both N poles.",
+        "B": "X and Y are both S poles.",
+        "C": "X is an N pole and Y is an S pole.",
+        "D": "X is an S pole and Y is an N pole."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q25.png",
+      "rawText": "Diagrams 1, 2 and 3 show an experiment to compare two magnets 1 and 2. 125.3 g diagram 1 N S 124.9 g diagram 2 N S 126.7 g diagram 3 N S W X Y Z magnet 1 magnet magnet magnet magnet 2 Which row explains the readings on the balances? polarity of magnet 1 polarity of magnet 2 A X is an N pole Z is an N pole B X is an N pole Z is an S pole C X is an S pole Z is an N pole D X is an S pole Z is an S pole",
+      "parseStatus": "ok",
+      "stem": "Diagrams 1, 2 and 3 show an experiment to compare two magnets 1 and 2. 125.3 g diagram 1 N S 124.9 g diagram 2 N S 126.7 g diagram 3 N S W X Y Z magnet 1 magnet magnet magnet magnet 2 Which row explains the readings on the balances? polarity of magnet 1 polarity of magnet 2",
+      "options": {
+        "A": "X is an N pole Z is an N pole",
+        "B": "X is an N pole Z is an S pole",
+        "C": "X is an S pole Z is an N pole",
+        "D": "X is an S pole Z is an S pole"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q26.png",
+      "rawText": "Which graph of voltage against time shows an a.c. voltage? voltage time 0 0 C voltage time 0 0 A voltage time 0 0 D voltage time 0 0 B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q27.png",
+      "rawText": "There is a current I in a resistor for a time t. The potential difference (p.d) across the resistor is V. What does the product IVt represent? A the charge flowing through the resistor B the energy transferred by the resistor C the power dissipated by the resistor D the resistance of the resistor",
+      "parseStatus": "ok",
+      "stem": "There is a current I in a resistor for a time t. The potential difference (p.d) across the resistor is V. What does the product IVt represent?",
+      "options": {
+        "A": "the charge flowing through the resistor",
+        "B": "the energy transferred by the resistor",
+        "C": "the power dissipated by the resistor",
+        "D": "the resistance of the resistor"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q28.png",
+      "rawText": "A student designs a circuit to turn on a fan when the temperature increases. Which component does the student need to use in her circuit? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q29.png",
+      "rawText": "Four statements about safety when designing electrical products are listed. 1 If the outer casing is a conductor, it should be earthed. 2 If the outer casing is a conductor, it should not be earthed. 3 If the outer casing is an insulator, it should be earthed. 4 If the outer casing is an insulator, it should not be earthed. Which statements are correct? A 1 and 3 B 1 and 4 C 2 and 3 D 2 and 4",
+      "parseStatus": "ok",
+      "stem": "Four statements about safety when designing electrical products are listed. 1 If the outer casing is a conductor, it should be earthed. 2 If the outer casing is a conductor, it should not be earthed. 3 If the outer casing is an insulator, it should be earthed. 4 If the outer casing is an insulator, it should not be earthed. Which statements are correct?",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "2 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q30.png",
+      "rawText": "A transformer has 400 turns on the primary coil connected to the 240 V mains supply. There are two secondary coils to serve different parts of a television. Secondary coil 1 has 2500 turns and secondary coil 2 has 20 turns. Which row is correct? p.d. across secondary coil 1 / V p.d. across secondary coil 2 / V A 12 3.2 B 1500 12 C 4200 12 D 4200 33",
+      "parseStatus": "ok",
+      "stem": "A transformer has 400 turns on the primary coil connected to the 240 V mains supply. There are two secondary coils to serve different parts of a television. Secondary coil 1 has 2500 turns and secondary coil 2 has 20 turns. Which row is correct? p.d. across secondary coil 1 / V p.d. across secondary coil 2 / V",
+      "options": {
+        "A": "12 3.2",
+        "B": "1500 12",
+        "C": "4200 12",
+        "D": "4200 33"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q31.png",
+      "rawText": "A class is designing a d.c. motor. To achieve a greater turning effect, three suggestions are made. 1 Have a larger current in the coil of the motor. 2 Have a stronger magnet in the motor. 3 Put a larger number of turns on the coil. Which suggestions will help to increase the turning effect? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "A class is designing a d.c. motor. To achieve a greater turning effect, three suggestions are made. 1 Have a larger current in the coil of the motor. 2 Have a stronger magnet in the motor. 3 Put a larger number of turns on the coil. Which suggestions will help to increase the turning effect?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q32.png",
+      "rawText": "Which statement about the structure of an atom is correct? A It contains positively charged particles only. B It contains negatively charged particles only. C It contains no charged particles. D It contains positively charged particles and negatively charged particles.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the structure of an atom is correct?",
+      "options": {
+        "A": "It contains positively charged particles only.",
+        "B": "It contains negatively charged particles only.",
+        "C": "It contains no charged particles.",
+        "D": "It contains positively charged particles and negatively charged particles."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q33.png",
+      "rawText": "A nuclide of strontium is represented by Sr. 90 38 Which row gives the number and location of the electrons in an atom of Sr? 90 38 number of electrons location of electrons A 38 in the nucleus B 38 surrounding the nucleus C 52 in the nucleus D 52 surrounding the nucleus",
+      "parseStatus": "ok",
+      "stem": "A nuclide of strontium is represented by Sr. 90 38 Which row gives the number and location of the electrons in an atom of Sr? 90 38 number of electrons location of electrons",
+      "options": {
+        "A": "38 in the nucleus",
+        "B": "38 surrounding the nucleus",
+        "C": "52 in the nucleus",
+        "D": "52 surrounding the nucleus"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q34.png",
+      "rawText": "A radiation detector in a laboratory is measuring background radiation. Which row describes the readings and the cause? readings cause A vary with no pattern background radiation is random B vary with no pattern radiation detectors are unstable C slowly increase during the day background radiation increases as temperature increases D slowly reduce during the day background radiation decreases as temperature increases",
+      "parseStatus": "ok",
+      "stem": "A radiation detector in a laboratory is measuring background radiation. Which row describes the readings and the cause? readings cause",
+      "options": {
+        "A": "vary with no pattern background radiation is random",
+        "B": "vary with no pattern radiation detectors are unstable",
+        "C": "slowly increase during the day background radiation increases as temperature increases",
+        "D": "slowly reduce during the day background radiation decreases as temperature increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q35.png",
+      "rawText": "The nuclei of the atoms in a substance are changing randomly and emitting radiation. What is happening to the substance? A It is undergoing electromagnetic induction. B It is undergoing magnetisation. C It is undergoing solidification. D It is undergoing radioactive decay.",
+      "parseStatus": "ok",
+      "stem": "The nuclei of the atoms in a substance are changing randomly and emitting radiation. What is happening to the substance?",
+      "options": {
+        "A": "It is undergoing electromagnetic induction.",
+        "B": "It is undergoing magnetisation.",
+        "C": "It is undergoing solidification.",
+        "D": "It is undergoing radioactive decay."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q36.png",
+      "rawText": "What is the safest way to store a radioactive source? A in a lead-lined box in a metal cabinet B on a shelf away from other radioactive materials C in a glass bottle containing oil D in a fume cupboard",
+      "parseStatus": "ok",
+      "stem": "What is the safest way to store a radioactive source?",
+      "options": {
+        "A": "in a lead-lined box in a metal cabinet",
+        "B": "on a shelf away from other radioactive materials",
+        "C": "in a glass bottle containing oil",
+        "D": "in a fume cupboard"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q37.png",
+      "rawText": "Which row explains the apparent daily motion of the Sun across the sky and the cycle of phases of the Moon? the daily motion of the Sun across the sky the cycle of phases of the Moon A the Earth rotates on its axis once every 24 hours the Earth orbits the Sun once approximately every 365 days B the Earth rotates on its axis once every 24 hours the Moon orbits the Earth approximately once every month C the Moon orbits the Earth approximately once every month the Earth orbits the Sun once approximately every 365 days D the Moon orbits the Earth approximately once every month the Earth rotates on its axis once every 24 hours",
+      "parseStatus": "ok",
+      "stem": "Which row explains the apparent daily motion of the Sun across the sky and the cycle of phases of the Moon? the daily motion of the Sun across the sky the cycle of phases of the Moon",
+      "options": {
+        "A": "the Earth rotates on its axis once every 24 hours the Earth orbits the Sun once approximately every 365 days",
+        "B": "the Earth rotates on its axis once every 24 hours the Moon orbits the Earth approximately once every month",
+        "C": "the Moon orbits the Earth approximately once every month the Earth orbits the Sun once approximately every 365 days",
+        "D": "the Moon orbits the Earth approximately once every month the Earth rotates on its axis once every 24 hours"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q38.png",
+      "rawText": "The nearest star to the Sun is 4 light-years away. A spaceship travels at 0.1% of the speed of light. What is the total time taken for a journey from the Sun to the star and back again? A 400 years B 800 years C 4000 years D 8000 years",
+      "parseStatus": "ok",
+      "stem": "The nearest star to the Sun is 4 light-years away.",
+      "options": {
+        "A": "spaceship travels at 0.1% of the speed of light. What is the total time taken for a journey from the Sun to the star and back again? A 400 years",
+        "B": "800 years",
+        "C": "4000 years",
+        "D": "8000 years"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q39.png",
+      "rawText": "In which regions of the electromagnetic spectrum does the Sun radiate most of its energy? A microwave to infrared B ultraviolet to X-ray C infrared to ultraviolet D radio to infrared",
+      "parseStatus": "ok",
+      "stem": "In which regions of the electromagnetic spectrum does the Sun radiate most of its energy?",
+      "options": {
+        "A": "microwave to infrared",
+        "B": "ultraviolet to X-ray",
+        "C": "infrared to ultraviolet",
+        "D": "radio to infrared"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s24_qp_13/q40.png",
+      "rawText": "What is the approximate diameter of the Milky Way? A 100 000 kilometres B 1 000 000 kilometres C 100 000 light-years D 1 000 000 light-years",
+      "parseStatus": "ok",
+      "stem": "What is the approximate diameter of the Milky Way?",
+      "options": {
+        "A": "100 000 kilometres",
+        "B": "1 000 000 kilometres",
+        "C": "100 000 light-years",
+        "D": "1 000 000 light-years"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

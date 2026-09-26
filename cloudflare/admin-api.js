@@ -194,7 +194,7 @@ async function getImportJob(db, jobId, detail = false) {
 function parsePdfFileName(fileName, subjectCode) {
   const name = String(fileName || "");
   const match = name.match(FILE_PATTERN);
-  if (!match || match[1] !== subjectCode || (match[5] === "1" && subjectCode !== "0455")) {
+  if (!match || match[1] !== subjectCode || (match[5] === "1" && !new Set(["0455", "0625"]).has(subjectCode))) {
     throw new AuthError(400, `Use a supported official MCQ file name for subject ${subjectCode}.`, "INVALID_FILE_NAME");
   }
   return {

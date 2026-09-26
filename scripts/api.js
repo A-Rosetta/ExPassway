@@ -311,9 +311,19 @@
     async getCurriculumVersions(token, subjectCode) {
       return request(`/api/curriculum/${encodeURIComponent(subjectCode)}/versions`, { token });
     },
+    async getCurriculumSubjects(token) {
+      return request("/api/curriculum/subjects", { token });
+    },
     async getChapterCatalog(token, subjectCode, version = "") {
       const query = version ? `?version=${encodeURIComponent(version)}` : "";
       return request(`/api/curriculum/${encodeURIComponent(subjectCode)}/chapters${query}`, { token });
+    },
+    async generateChapterPaper(token, input) {
+      return request("/api/paper-builder/generate", {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
     },
     async createChapterPractice(token, input) {
       return request("/api/chapter-practice/sessions", {

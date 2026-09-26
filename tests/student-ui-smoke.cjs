@@ -1,5 +1,5 @@
 const assert = require("node:assert/strict");
-const path = require("node:path");
+const nodePath = require("node:path");
 const { chromium, webkit } = require("playwright");
 
 const baseUrl = process.env.STUDENT_UI_BASE_URL || "http://127.0.0.1/alevel";
@@ -183,6 +183,7 @@ const threads = [
     likeCount: 12,
     followerCount: 4,
     followed: false,
+    preview: "Why does the mole ratio change here?",
     lastPostAt: now,
   },
   {
@@ -202,6 +203,7 @@ const threads = [
     likeCount: 7,
     followerCount: 2,
     followed: true,
+    preview: "How can I identify the ions quickly?",
     lastPostAt: now,
   },
 ];
@@ -300,6 +302,14 @@ async function mockApi(page, currentUser = user, authDelayMs = 0) {
       return json(route, { ...adminHintSet, status: hintReviewStatus });
     }
     if (path === "/api/catalog/subjects") return json(route, subjects);
+    if (path === "/api/curriculum/subjects") {
+      return json(route, [{
+        code: "0610",
+        name: "Biology",
+        nameZh: "生物",
+        version: chapterCatalog().version,
+      }]);
+    }
     if (/^\/api\/catalog\/subjects\/\d{4}\/papers$/.test(path)) {
       return json(route, papersFor(path.split("/")[4]));
     }
@@ -319,7 +329,14 @@ async function mockApi(page, currentUser = user, authDelayMs = 0) {
     }
     if (path === "/api/discussions" && method === "GET") {
       const followed = url.searchParams.get("followedOnly") === "1";
-      return json(route, followed ? threads.filter((thread) => thread.followed) : threads);
+      const search = (url.searchParams.get("search") || "").trim().toLowerCase();
+      const topic = url.searchParams.get("topic") || "";
+      const sort = url.searchParams.get("sort") || "latest";
+      let rows = followed ? threads.filter((thread) => thread.followed) : [...threads];
+      if (search) rows = rows.filter((thread) => [thread.title, thread.topic, thread.questionKey, thread.preview].some((value) => String(value || "").toLowerCase().includes(search)));
+      if (topic) rows = rows.filter((thread) => thread.topic === topic);
+      if (sort === "likes") rows.sort((a, b) => b.likeCount - a.likeCount);
+      return json(route, rows);
     }
     if (path === "/api/discussions" && method === "POST") {
       return json(route, { ...threads[0], id: "thread-new", title: "新讨论" }, 201);
@@ -349,7 +366,7 @@ async function mockApi(page, currentUser = user, authDelayMs = 0) {
       return route.fulfill({
         status: 200,
         contentType: "image/png",
-        path: path.resolve(__dirname, "../assets/question-images/0620_s23_qp_21/q01_full.png"),
+        path: nodePath.resolve(__dirname, "../assets/question-images/0620_s23_qp_21/q01_full.png"),
       });
     }
     if (/^\/api\/discussions\//.test(path) && method !== "GET") return json(route, { ok: true });
@@ -564,9 +581,14 @@ async function openPage(browser, config, pathname, options = {}) {
   });
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("requestfailed", (request) => failedRequests.push(`${request.method()} ${request.url()}`));
+  await page.route("https://fonts.googleapis.com/**", (route) => route.fulfill({
+    status: 200,
+    contentType: "text/css",
+    body: "",
+  }));
   await seedStorage(page, pathname, options.language);
   const apiMock = await mockApi(page);
-  await page.goto(`${baseUrl}${pathname}`, { waitUntil: "networkidle" });
+  await page.goto(`${baseUrl}${pathname}`, { waitUntil: "domcontentloaded" });
   return { context, page, errors, failedRequests, apiMock };
 }
 
@@ -676,7 +698,7 @@ async function verifyHomeThemes(browser, config) {
     assert.match(dark.petBackdrop, /blur\(20px\)/);
     assert.match(await page.locator("#themeToggle").getAttribute("aria-label"), /light mode/i);
 
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "domcontentloaded" });
     await page.locator(".course-card--biology").waitFor({ state: "visible" });
     assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
     assert.equal(await page.evaluate(() => localStorage.getItem("app-theme")), "dark");
@@ -721,6 +743,9 @@ async function verifyStandardPage(browser, config, pageSpec) {
   const run = await openPage(browser, config, pageSpec.path, { colorScheme: "light", theme: "light" });
   try {
     await run.page.locator(pageSpec.ready).first().waitFor({ state: "visible" });
+    if (pageSpec.name === "home") {
+      await waitForPageCondition(run.page, () => document.querySelector("#subjectCourses")?.getAttribute("aria-busy") === "false");
+    }
     await run.page.locator("#themeToggle").waitFor({ state: "visible" });
     await run.page.locator("[data-language-toggle]").waitFor({ state: "visible" });
     assert.match(await run.page.locator("#themeToggle").getAttribute("aria-label"), /dark mode/i);
@@ -1130,6 +1155,20 @@ async function verifyCommunity(browser, config) {
       "离子方程式中旁观离子如何快速判断？"
     );
 
+    await page.locator("#communityFeedSearch").fill("Ions");
+    await page.locator("#communityFeedSearchForm").evaluate((form) => form.requestSubmit());
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 1);
+    assert.equal(await page.locator(".discussion-thread").first().locator(".tag").filter({ hasText: "Ions" }).count(), 1);
+    await page.locator("#communityFeedSearch").fill("");
+    await page.locator("#communityFeedSearchForm").evaluate((form) => form.requestSubmit());
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 2);
+    await page.locator("#communityFeedTopic").selectOption("Ions");
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 1);
+    await page.locator("#communityFeedTopic").selectOption("");
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 2);
+    await page.locator("#communityFeedSort").selectOption("likes");
+    await waitForPageCondition(page, () => document.querySelectorAll(".discussion-thread").length === 2);
+
     const zhRun = await openPage(browser, config, "/pages/community.html", { language: "zh-CN" });
     try {
       await zhRun.page.locator(".discussion-thread").first().waitFor({ state: "visible" });
@@ -1366,10 +1405,32 @@ const pageSpecs = [
     verify: async (page) => {
       assert.equal(await page.locator(".home-brand__mark").textContent(), "E");
       assert.equal(await page.locator("[data-i18n='homeBrand']").textContent(), "ExPassway");
-      assert.equal(await page.locator(".course-card").count(), 4);
+      assert.equal(await page.locator("#subjectCourses .course-card").count(), 4);
+      assert.equal(await page.locator("#openChapterPaperBuilder").getAttribute("href"), "pages/paper-builder.html");
     },
   },
   { name: "generate", path: "/pages/generate.html", ready: ".paper-set-item", verify: async (page) => assert.equal(await page.locator(".paper-set-item").count(), 2) },
+  {
+    name: "paper-builder",
+    path: "/pages/paper-builder.html",
+    ready: ".paper-builder-section-row",
+    pet: false,
+    verify: async (page) => {
+      const metrics = await page.locator(".paper-builder-section-count").first().evaluate((element) => {
+        const label = element.querySelector("span").getBoundingClientRect();
+        const input = element.querySelector("input").getBoundingClientRect();
+        return {
+          labelWidth: label.width,
+          labelHeight: label.height,
+          inputWidth: input.width,
+          whiteSpace: getComputedStyle(element.querySelector("span")).whiteSpace,
+        };
+      });
+      assert.ok(metrics.labelHeight <= 32, `Question label wrapped vertically: ${JSON.stringify(metrics)}`);
+      assert.equal(metrics.whiteSpace, "nowrap", `Question label can wrap: ${JSON.stringify(metrics)}`);
+      assert.ok(metrics.inputWidth >= 88, `Question input is too narrow: ${JSON.stringify(metrics)}`);
+    },
+  },
   { name: "biology", path: "/pages/biology.html", ready: ".chapter-band", verify: async (page) => assert.equal(await page.locator(".chapter-band").count(), 20) },
   { name: "notebook", path: "/pages/notebook.html", ready: ".notebook-question", verify: async (page) => assert.equal(await page.locator(".notebook-question").count(), 10) },
   { name: "review", path: "/pages/review.html", ready: ".review-answer-overview", verify: async (page) => assert.equal(await page.locator(".review-question-card").count(), 2) },
@@ -1417,13 +1478,25 @@ async function runConfig(config) {
     ...(config.executablePath ? { executablePath: config.executablePath } : {}),
   });
   try {
+    if (process.env.STUDENT_UI_FOCUS === "paper-builder") {
+      for (const pageSpec of pageSpecs.filter(({ name }) => ["home", "paper-builder"].includes(name))) {
+        await verifyStandardPage(browser, config, pageSpec);
+        console.log(JSON.stringify({ viewport: config.name, page: pageSpec.name, ok: true }));
+      }
+      return;
+    }
     if (process.env.STUDENT_UI_FOCUS === "practice") {
       await verifyHomeThemes(browser, config);
       await verifyGeneratedPaper(browser, config);
       return;
     }
+    if (process.env.STUDENT_UI_FOCUS === "community") {
+      await verifyCommunity(browser, config);
+      console.log(JSON.stringify({ viewport: config.name, page: "community", ok: true }));
+      return;
+    }
     if (process.env.STUDENT_UI_FOCUS === "security") {
-      for (const pageSpec of pageSpecs.filter(({ name }) => ["home", "generate", "review", "image-mapper"].includes(name))) {
+      for (const pageSpec of pageSpecs.filter(({ name }) => ["home", "generate", "paper-builder", "review", "image-mapper"].includes(name))) {
         await verifyStandardPage(browser, config, pageSpec);
         console.log(JSON.stringify({ viewport: config.name, page: pageSpec.name, ok: true }));
       }
@@ -1461,15 +1534,24 @@ async function runConfig(config) {
 (async () => {
   const only = process.env.STUDENT_UI_ONLY || "";
   if (!only || only === "desktop") {
-    await runConfig({ name: "desktop-chromium", browser: chromium, viewport: { width: 1440, height: 900 }, mobile: false });
+    await runConfig({
+      name: "desktop-chromium",
+      browser: chromium,
+      viewport: { width: 1440, height: 900 },
+      mobile: false,
+      executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH,
+    });
   }
   if (!only || only === "mobile") {
+    const mobileBrowser = process.env.PLAYWRIGHT_MOBILE_BROWSER === "chromium" ? chromium : webkit;
     await runConfig({
       name: "mobile-webkit",
-      browser: webkit,
+      browser: mobileBrowser,
       viewport: { width: 390, height: 844 },
       mobile: true,
-      executablePath: process.env.WEBKIT_EXECUTABLE_PATH,
+      executablePath: process.env.PLAYWRIGHT_MOBILE_BROWSER === "chromium"
+        ? process.env.PLAYWRIGHT_EXECUTABLE_PATH
+        : process.env.WEBKIT_EXECUTABLE_PATH,
     });
   }
 })().catch((error) => {

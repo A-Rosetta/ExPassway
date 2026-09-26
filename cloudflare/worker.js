@@ -113,6 +113,7 @@ async function routeRequest(request, env) {
     || url.pathname.startsWith("/api/users/")
     || url.pathname.startsWith("/api/curriculum/")
     || url.pathname.startsWith("/api/chapter-practice/")
+    || url.pathname === "/api/paper-builder/generate"
   ) {
     return handleLearningApiRequest(request, env);
   }

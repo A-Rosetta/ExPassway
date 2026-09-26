@@ -1,0 +1,678 @@
+{
+  "questionPaper": "0625_s23_qp_11.pdf",
+  "markScheme": "0625_s23_ms_11.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q01.png",
+      "rawText": "Which unit is a unit of weight? A kilogram B kilojoule C kilometre D kilonewton",
+      "parseStatus": "ok",
+      "stem": "Which unit is a unit of weight?",
+      "options": {
+        "A": "kilogram",
+        "B": "kilojoule",
+        "C": "kilometre",
+        "D": "kilonewton"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q02.png",
+      "rawText": "The graph represents the motion of a vehicle. 20 0 0 400 time / s speed m / s What is the distance travelled by the vehicle in 400 s? A 20 m B 400 m C 4000 m D 8000 m",
+      "parseStatus": "ok",
+      "stem": "The graph represents the motion of a vehicle. 20 0 0 400 time / s speed m / s What is the distance travelled by the vehicle in 400 s?",
+      "options": {
+        "A": "20 m",
+        "B": "400 m",
+        "C": "4000 m",
+        "D": "8000 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q03.png",
+      "rawText": "The diagram shows a distance–time graph for an object moving in a straight line. 12 6 0 0 10 30 time / s distance / m X Y What is the average speed between X and Y? A 0.20 m / s B 0.30 m / s C 0.40 m / s D 0.60 m / s",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a distance–time graph for an object moving in a straight line. 12 6 0 0 10 30 time / s distance / m X Y What is the average speed between X and Y?",
+      "options": {
+        "A": "0.20 m / s",
+        "B": "0.30 m / s",
+        "C": "0.40 m / s",
+        "D": "0.60 m / s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q04.png",
+      "rawText": "A space rocket travels to the Moon. The acceleration of free fall is greater on the Earth than it is on the Moon. How do the mass and weight of the space rocket on the Moon compare with their values on the Earth? mass on the Moon weight on the Moon A less than on the Earth same as on the Earth B less than on the Earth more than on the Earth C same as on the Earth less than on the Earth D same as on the Earth more than on the Earth",
+      "parseStatus": "ok",
+      "stem": "A space rocket travels to the Moon. The acceleration of free fall is greater on the Earth than it is on the Moon. How do the mass and weight of the space rocket on the Moon compare with their values on the Earth? mass on the Moon weight on the Moon",
+      "options": {
+        "A": "less than on the Earth same as on the Earth",
+        "B": "less than on the Earth more than on the Earth",
+        "C": "same as on the Earth less than on the Earth",
+        "D": "same as on the Earth more than on the Earth"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q05.png",
+      "rawText": "A shopkeeper pours rice into a dish that hangs from a spring balance. He records the reading. 0 1 2 3 4 5",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q06.png",
+      "rawText": "A student determines the density of an irregularly shaped stone. The stone is slowly lowered into a measuring cylinder partly filled with water. measuring cylinder stone Which other apparatus does the student need to calculate the density of the irregularly shaped stone? A a balance B a thermometer C a metre rule D a stop-watch",
+      "parseStatus": "ok",
+      "stem": "A student determines the density of an irregularly shaped stone. The stone is slowly lowered into a measuring cylinder partly filled with water. measuring cylinder stone Which other apparatus does the student need to calculate the density of the irregularly shaped stone?",
+      "options": {
+        "A": "a balance",
+        "B": "a thermometer",
+        "C": "a metre rule",
+        "D": "a stop-watch"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q07.png",
+      "rawText": "Four objects are moving. Which object has a zero resultant force acting on it? A the object moving at a decreasing speed B the object moving at an increasing speed C the object moving at a constant speed in a circle D the object moving at a constant speed in a straight line",
+      "parseStatus": "ok",
+      "stem": "Four objects are moving. Which object has a zero resultant force acting on it?",
+      "options": {
+        "A": "the object moving at a decreasing speed",
+        "B": "the object moving at an increasing speed",
+        "C": "the object moving at a constant speed in a circle",
+        "D": "the object moving at a constant speed in a straight line"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q08.png",
+      "rawText": "The diagram shows a uniform metre rule. The rule is pivoted at its mid-point. A weight of 4.0 N is suspended from the rule at the 5 cm mark. The rule is held by a string at the 30 cm mark. The rule is in equilibrium. 5 4.0 N 50 100 cm mark 30 0 cm mark metre rule pivot string What is the upward force that the string exerts on the rule? A 0.67 N B 4.0 N C 6.0 N D 9.0 N",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a uniform metre rule. The rule is pivoted at its mid-point.",
+      "options": {
+        "A": "weight of 4.0 N is suspended from the rule at the 5 cm mark. The rule is held by a string at the 30 cm mark. The rule is in equilibrium. 5 4.0 N 50 100 cm mark 30 0 cm mark metre rule pivot string What is the upward force that the string exerts on the rule? A 0.67 N",
+        "B": "4.0 N",
+        "C": "6.0 N",
+        "D": "9.0 N"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q09.png",
+      "rawText": "An irregularly shaped metal plate is freely suspended from a point P and is in equilibrium, as shown. Point Q is vertically below P. P Q Which statement about the position of the centre of gravity of the metal plate is correct? A It is at P. B It is at Q. C It is halfway between P and Q. D Further investigation is needed to determine its position.",
+      "parseStatus": "ok",
+      "stem": "An irregularly shaped metal plate is freely suspended from a point P and is in equilibrium, as shown. Point Q is vertically below P. P Q Which statement about the position of the centre of gravity of the metal plate is correct?",
+      "options": {
+        "A": "It is at P.",
+        "B": "It is at Q.",
+        "C": "It is halfway between P and Q.",
+        "D": "Further investigation is needed to determine its position."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q10.png",
+      "rawText": "Which row about the change of energy in the energy store must be correct? process energy store change of energy in store A water pumped up to a high-altitude dam gravitational potential energy of water increases B water pumped up to a high-altitude dam kinetic energy of water decreases C air passes through a wind turbine gravitational potential energy of air increases D air passes through a wind turbine kinetic energy of air increases",
+      "parseStatus": "ok",
+      "stem": "Which row about the change of energy in the energy store must be correct? process energy store change of energy in store",
+      "options": {
+        "A": "water pumped up to a high-altitude dam gravitational potential energy of water increases",
+        "B": "water pumped up to a high-altitude dam kinetic energy of water decreases",
+        "C": "air passes through a wind turbine gravitational potential energy of air increases",
+        "D": "air passes through a wind turbine kinetic energy of air increases"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q11.png",
+      "rawText": "A rock of weight 50 N falls a vertical distance of 7.0 m from rest. What is the change in the gravitational potential energy store of the rock? A decrease of 7.1 J B decrease of 350 J C increase of 7.1 J D increase of 350 J",
+      "parseStatus": "ok",
+      "stem": "A rock of weight 50 N falls a vertical distance of 7.0 m from rest. What is the change in the gravitational potential energy store of the rock?",
+      "options": {
+        "A": "decrease of 7.1 J",
+        "B": "decrease of 350 J",
+        "C": "increase of 7.1 J",
+        "D": "increase of 350 J"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q12.png",
+      "rawText": "A child runs up a set of stairs four times. The time taken for each run is recorded. Which time is measured when the child’s useful power is greatest? A 10 s B 20 s C 30 s D 40 s",
+      "parseStatus": "ok",
+      "stem": "A child runs up a set of stairs four times. The time taken for each run is recorded. Which time is measured when the child’s useful power is greatest?",
+      "options": {
+        "A": "10 s",
+        "B": "20 s",
+        "C": "30 s",
+        "D": "40 s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q13.png",
+      "rawText": "A woman has a weight of 600 N. She stands on a horizontal floor. The area of her feet in contact with the floor is 0.050 m2. What is the pressure she exerts on the floor? A 1.2 × 103 N / m2 B 2.4 × 103 N / m2 C 1.2 × 104 N / m2 D 2.4 × 104 N / m2",
+      "parseStatus": "ok",
+      "stem": "A woman has a weight of 600 N. She stands on a horizontal floor. The area of her feet in contact with the floor is 0.050 m2. What is the pressure she exerts on the floor?",
+      "options": {
+        "A": "1.2 × 103 N / m2",
+        "B": "2.4 × 103 N / m2",
+        "C": "1.2 × 104 N / m2",
+        "D": "2.4 × 104 N / m2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q14.png",
+      "rawText": "Gases, liquids and solids are made up of small particles. Which row gives the relative separation of the particles? gas liquid solid A far apart far apart far apart B far apart far apart close together C far apart close together close together D close together close together far apart",
+      "parseStatus": "ok",
+      "stem": "Gases, liquids and solids are made up of small particles. Which row gives the relative separation of the particles? gas liquid solid",
+      "options": {
+        "A": "far apart far apart far apart",
+        "B": "far apart far apart close together",
+        "C": "far apart close together close together",
+        "D": "close together close together far apart"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q15.png",
+      "rawText": "Which statements about evaporation of water are correct? 1 Evaporation causes the remaining liquid to cool. 2 During evaporation, the more energetic particles escape from the surface of the liquid. 3 Evaporation only happens at 100 °C. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which statements about evaporation of water are correct? 1 Evaporation causes the remaining liquid to cool. 2 During evaporation, the more energetic particles escape from the surface of the liquid. 3 Evaporation only happens at 100 °C.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q16.png",
+      "rawText": "Which surface is the worst absorber of infrared radiation? A dull black B dull white C shiny black D shiny white",
+      "parseStatus": "ok",
+      "stem": "Which surface is the worst absorber of infrared radiation?",
+      "options": {
+        "A": "dull black",
+        "B": "dull white",
+        "C": "shiny black",
+        "D": "shiny white"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q17.png",
+      "rawText": "The diagrams show graphs of displacement against time for four waves. All the graphs are drawn to the same scale. Which wave has the largest amplitude and the highest frequency? displacement A time displacement B time displacement C time displacement D time 0 0 0 0 0 0 0 0",
+      "parseStatus": "ok",
+      "stem": "The diagrams show graphs of displacement against time for four waves. All the graphs are drawn to the same scale. Which wave has the largest amplitude and the highest frequency? displacement",
+      "options": {
+        "A": "time displacement",
+        "B": "time displacement",
+        "C": "time displacement",
+        "D": "time 0 0 0 0 0 0 0 0"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q18.png",
+      "rawText": "A student draws a diagram to show the directions of a light ray reflecting off a plane mirror. mirror 1 3 2 What are the correct terms for the lines drawn? normal incident ray reflected ray A 1 2 3 B 1 3 2 C 2 1 3 D 2 3 1",
+      "parseStatus": "ok",
+      "stem": "A student draws a diagram to show the directions of a light ray reflecting off a plane mirror. mirror 1 3 2 What are the correct terms for the lines drawn? normal incident ray reflected ray",
+      "options": {
+        "A": "1 2 3",
+        "B": "1 3 2",
+        "C": "2 1 3",
+        "D": "2 3 1"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q19.png",
+      "rawText": "An object O is placed at point P near to a thin converging lens. The diagram shows three rays from the top of O passing through the lens. Each point F is one focal length from the centre of the lens. Each point 2F is two focal lengths from the centre of the lens. P Q O 2F 2F F F image The object O is moved to point Q on the diagram. Which type of image is produced when the object O is at point Q? A inverted and the same size as the object B inverted and enlarged C upright and the same size as the object D upright and enlarged",
+      "parseStatus": "ok",
+      "stem": "An object O is placed at point P near to a thin converging lens. The diagram shows three rays from the top of O passing through the lens. Each point F is one focal length from the centre of the lens. Each point 2F is two focal lengths from the centre of the lens. P Q O 2F 2F F F image The object O is moved to point Q on the diagram. Which type of image is produced when the object O is at point Q?",
+      "options": {
+        "A": "inverted and the same size as the object",
+        "B": "inverted and enlarged",
+        "C": "upright and the same size as the object",
+        "D": "upright and enlarged"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q20.png",
+      "rawText": "Which diagram shows the dispersion of white light by a glass prism? violet red A violet violet red red B white white violet red C violet violet red red D violet red white white",
+      "parseStatus": "ok",
+      "stem": "Which diagram shows the dispersion of white light by a glass prism? violet red",
+      "options": {
+        "A": "violet violet red red",
+        "B": "white white violet red",
+        "C": "violet violet red red",
+        "D": "violet red white white"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q21.png",
+      "rawText": "Which statement is correct? A A remote controller emits microwave radiation. B A remote controller emits infrared radiation. C A remote controller emits ultrasound. D A remote controller emits ultraviolet radiation.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "A remote controller emits microwave radiation.",
+        "B": "A remote controller emits infrared radiation.",
+        "C": "A remote controller emits ultrasound.",
+        "D": "A remote controller emits ultraviolet radiation."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q22.png",
+      "rawText": "Student X fires a starting pistol which produces smoke and sound. Student Y is standing 100 m away and sees the smoke the instant it is produced. The speed of sound in air is 340 m / s. What is the time delay between student Y seeing the smoke and hearing the sound? A 0.29 s B 0.59 s C 1.7 s D 3.4 s",
+      "parseStatus": "ok",
+      "stem": "Student X fires a starting pistol which produces smoke and sound. Student Y is standing 100 m away and sees the smoke the instant it is produced. The speed of sound in air is 340 m / s. What is the time delay between student Y seeing the smoke and hearing the sound?",
+      "options": {
+        "A": "0.29 s",
+        "B": "0.59 s",
+        "C": "1.7 s",
+        "D": "3.4 s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q23.png",
+      "rawText": "An unmagnetised piece of soft iron is placed close to a strong permanent magnet, as shown. S X N permanent magnet soft iron What is the induced polarity of end X of the soft iron and in which direction does the magnetic force act on the soft iron? polarity of end X direction of force on the soft iron A N to the left B N to the right C S to the left D S to the right",
+      "parseStatus": "ok",
+      "stem": "An unmagnetised piece of soft iron is placed close to a strong permanent magnet, as shown. S X N permanent magnet soft iron What is the induced polarity of end X of the soft iron and in which direction does the magnetic force act on the soft iron? polarity of end X direction of force on the soft iron",
+      "options": {
+        "A": "N to the left",
+        "B": "N to the right",
+        "C": "S to the left",
+        "D": "S to the right"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q24.png",
+      "rawText": "A plastic rod is rubbed with a cloth. plastic rod cloth The rod and the cloth both become charged as electrons move between them. The rod becomes negatively charged. Which diagram shows how the rod becomes negatively charged and shows the final charge on the cloth? A + ++ + + + + + + – – – – – – – – – – – – – – – – – – – – – electron movement final charge on the cloth electron movement electron movement electron movement B + ++ + + + + + + – – – – – C – –– – – – – – – – – – – – D – –– – – – – – – – – – – – final charge on the cloth final charge on the cloth final charge on the cloth",
+      "parseStatus": "ok",
+      "stem": "A plastic rod is rubbed with a cloth. plastic rod cloth The rod and the cloth both become charged as electrons move between them. The rod becomes negatively charged. Which diagram shows how the rod becomes negatively charged and shows the final charge on the cloth?",
+      "options": {
+        "A": "+ ++ + + + + + + – – – – – – – – – – – – – – – – – – – – – electron movement final charge on the cloth electron movement electron movement electron movement",
+        "B": "+ ++ + + + + + + – – – – –",
+        "C": "– –– – – – – – – – – – – –",
+        "D": "– –– – – – – – – – – – – – final charge on the cloth final charge on the cloth final charge on the cloth"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q25.png",
+      "rawText": "Which particles move to cause a current in a copper wire? A copper atoms B electrons from the copper atoms C protons from the copper nuclei D neutrons from the copper nuclei",
+      "parseStatus": "ok",
+      "stem": "Which particles move to cause a current in a copper wire?",
+      "options": {
+        "A": "copper atoms",
+        "B": "electrons from the copper atoms",
+        "C": "protons from the copper nuclei",
+        "D": "neutrons from the copper nuclei"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q26.png",
+      "rawText": "Four students draw a circuit diagram of the apparatus used to measure the resistance of resistor R. Which circuit is correct? A A V B A V R R C A V D A V R R",
+      "parseStatus": "ok",
+      "stem": "Four students draw a circuit diagram of the apparatus used to measure the resistance of resistor R. Which circuit is correct?",
+      "options": {
+        "A": "A V",
+        "B": "A V R R",
+        "C": "A V",
+        "D": "A V R R"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q27.png",
+      "rawText": "The battery on a bicycle is connected in parallel to its lamp and bell. The circuit includes two switches, S1 and S2. S1 S2 bell The cyclist closes S1 to light the lamp. She then also closes S2 to sound the bell. What happens to the current in the battery and the power output from the battery when the cyclist closes S2? current in the battery power output from the battery A increases increases B increases stays the same C stays the same increases D stays the same stays the same",
+      "parseStatus": "ok",
+      "stem": "The battery on a bicycle is connected in parallel to its lamp and bell. The circuit includes two switches, S1 and S2. S1 S2 bell The cyclist closes S1 to light the lamp. She then also closes S2 to sound the bell. What happens to the current in the battery and the power output from the battery when the cyclist closes S2? current in the battery power output from the battery",
+      "options": {
+        "A": "increases increases",
+        "B": "increases stays the same",
+        "C": "stays the same increases",
+        "D": "stays the same stays the same"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q28.png",
+      "rawText": "Which symbol represents an electric heater? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q29.png",
+      "rawText": "A student connects the circuit shown. 1 2 3 4 bell Which switches must be closed for the bell to ring without lighting the lamp? A 1 and 2 only B 1 and 3 only C 1, 3 and 4 D 2, 3 and 4",
+      "parseStatus": "ok",
+      "stem": "A student connects the circuit shown. 1 2 3 4 bell Which switches must be closed for the bell to ring without lighting the lamp?",
+      "options": {
+        "A": "1 and 2 only",
+        "B": "1 and 3 only",
+        "C": "1, 3 and 4",
+        "D": "2, 3 and 4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q30.png",
+      "rawText": "A double-insulated electrical appliance must be connected safely to the electricity supply. Which statement is correct? A It must be connected with a fuse and an earth wire. B It can be connected with a fuse only. C It can be connected with an earth wire only. D It does not need a fuse or an earth wire.",
+      "parseStatus": "ok",
+      "stem": "A double-insulated electrical appliance must be connected safely to the electricity supply. Which statement is correct?",
+      "options": {
+        "A": "It must be connected with a fuse and an earth wire.",
+        "B": "It can be connected with a fuse only.",
+        "C": "It can be connected with an earth wire only.",
+        "D": "It does not need a fuse or an earth wire."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q31.png",
+      "rawText": "A simple electric generator induces an electromotive force (e.m.f.). Which modification would increase the induced e.m.f.? A Increase the number of turns in the coil of the generator. B Increase the distance between the magnetic poles. C Reduce the strength of the magnetic field around the coil. D Reverse the direction of the magnetic field.",
+      "parseStatus": "ok",
+      "stem": "A simple electric generator induces an electromotive force (e.m.f.). Which modification would increase the induced e.m.f.?",
+      "options": {
+        "A": "Increase the number of turns in the coil of the generator.",
+        "B": "Increase the distance between the magnetic poles.",
+        "C": "Reduce the strength of the magnetic field around the coil.",
+        "D": "Reverse the direction of the magnetic field."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q32.png",
+      "rawText": "The diagram shows a vertical wire carrying a current I placed between the poles of a magnet. N I S What is the direction of the force on the wire exerted by the magnetic field? A from N to S B from S to N C horizontal and at right angles to the direction from N to S D parallel to the wire",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a vertical wire carrying a current I placed between the poles of a magnet. N I S What is the direction of the force on the wire exerted by the magnetic field?",
+      "options": {
+        "A": "from N to S",
+        "B": "from S to N",
+        "C": "horizontal and at right angles to the direction from N to S",
+        "D": "parallel to the wire"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q33.png",
+      "rawText": "What is an advantage of transmitting electricity at a high voltage? A It is faster. B It is safer. C Less energy is wasted. D Less equipment is needed.",
+      "parseStatus": "ok",
+      "stem": "What is an advantage of transmitting electricity at a high voltage?",
+      "options": {
+        "A": "It is faster.",
+        "B": "It is safer.",
+        "C": "Less energy is wasted.",
+        "D": "Less equipment is needed."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q34.png",
+      "rawText": "How are positive and negative ions formed from atoms? positive ion negative ion A add positive charge to the nucleus add an electron to the atom B add positive charge to the nucleus remove positive charge from the nucleus C remove an electron from the atom add an electron to the atom D remove an electron from the atom remove positive charge from the nucleus",
+      "parseStatus": "ok",
+      "stem": "How are positive and negative ions formed from atoms? positive ion negative ion",
+      "options": {
+        "A": "add positive charge to the nucleus add an electron to the atom",
+        "B": "add positive charge to the nucleus remove positive charge from the nucleus",
+        "C": "remove an electron from the atom add an electron to the atom",
+        "D": "remove an electron from the atom remove positive charge from the nucleus"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q35.png",
+      "rawText": "A nucleus of element X is represented as . 56 26X Which is an isotope of element X? A X 26 56 B X 54 26 C X 56 24 D X 54 28",
+      "parseStatus": "ok",
+      "stem": "A nucleus of element X is represented as . 56 26X Which is an isotope of element X?",
+      "options": {
+        "A": "X 26 56",
+        "B": "X 54 26",
+        "C": "X 56 24",
+        "D": "X 54 28"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q36.png",
+      "rawText": "Which statement about the random decay of the nuclei in a sample of uranium-238 is correct? A The probabilities of an alpha-particle, a beta-particle or a gamma ray being emitted from a nucleus in the sample are equal. B The probability of a nucleus in the sample decaying decreases as time passes. C The probability of a nucleus decaying in any ten minute interval is the same for all the nuclei in the sample. D The probability of a nucleus in the sample decaying increases as time passes.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the random decay of the nuclei in a sample of uranium-238 is correct?",
+      "options": {
+        "A": "The probabilities of an alpha-particle, a beta-particle or a gamma ray being emitted from a nucleus in the sample are equal.",
+        "B": "The probability of a nucleus in the sample decaying decreases as time passes.",
+        "C": "The probability of a nucleus decaying in any ten minute interval is the same for all the nuclei in the sample.",
+        "D": "The probability of a nucleus in the sample decaying increases as time passes."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q37.png",
+      "rawText": "The count rate due to a sample of a radioactive isotope is measured for 80 minutes. time / minutes second / counts rate count 0 480 20 380 40 300 60 240 80 190 What is the half-life of the isotope? A 20 minutes B 40 minutes C 60 minutes D 80 minutes",
+      "parseStatus": "ok",
+      "stem": "The count rate due to a sample of a radioactive isotope is measured for 80 minutes. time / minutes second / counts rate count 0 480 20 380 40 300 60 240 80 190 What is the half-life of the isotope?",
+      "options": {
+        "A": "20 minutes",
+        "B": "40 minutes",
+        "C": "60 minutes",
+        "D": "80 minutes"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q38.png",
+      "rawText": "Which planet in our Solar System is nearest to the Sun and what is the nature of the planet? planet nature A Mercury rocky B Mercury gaseous C Venus rocky D Venus gaseous",
+      "parseStatus": "ok",
+      "stem": "Which planet in our Solar System is nearest to the Sun and what is the nature of the planet? planet nature",
+      "options": {
+        "A": "Mercury rocky",
+        "B": "Mercury gaseous",
+        "C": "Venus rocky",
+        "D": "Venus gaseous"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q39.png",
+      "rawText": "The Sun consists mostly of two elements. What are these two elements? A helium and nitrogen B hydrogen and helium C hydrogen and oxygen D oxygen and nitrogen",
+      "parseStatus": "ok",
+      "stem": "The Sun consists mostly of two elements. What are these two elements?",
+      "options": {
+        "A": "helium and nitrogen",
+        "B": "hydrogen and helium",
+        "C": "hydrogen and oxygen",
+        "D": "oxygen and nitrogen"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s23_qp_11/q40.png",
+      "rawText": "Which statement about the Milky Way is correct? A It is a galaxy. B It is a group of galaxies. C It is a group of stars outside our own galaxy. D It is a group of stars which are part of our galaxy.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Milky Way is correct?",
+      "options": {
+        "A": "It is a galaxy.",
+        "B": "It is a group of galaxies.",
+        "C": "It is a group of stars outside our own galaxy.",
+        "D": "It is a group of stars which are part of our galaxy."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

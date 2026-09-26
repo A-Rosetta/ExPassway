@@ -1850,7 +1850,8 @@
     grid-template-columns: 1fr;
   }
 
-  .site-ui .home-heading-actions button {
+  .site-ui .home-heading-actions button,
+  .site-ui .home-heading-actions > a {
     width: 100%;
   }
 
@@ -2535,6 +2536,49 @@
   gap: 16px;
 }
 
+.site-ui .community-feed-controls {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 180px 180px auto;
+  gap: 10px;
+  align-items: end;
+  margin-top: 20px;
+}
+
+.site-ui .community-feed-controls label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.site-ui .community-feed-controls label > span:not(.sr-only) {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.site-ui .community-feed-controls input,
+.site-ui .community-feed-controls select {
+  min-width: 0;
+  width: 100%;
+}
+
+.site-ui .community-feed-search-button {
+  min-height: 44px;
+}
+
+.site-ui .community-feed-preview {
+  display: -webkit-box;
+  margin: 12px 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.site-ui .community-feed-empty {
+  padding: 24px;
+}
+
 .site-ui .community-rail {
   position: sticky;
   top: calc(84px + env(safe-area-inset-top));
@@ -2713,6 +2757,18 @@
   .site-ui .moderation-row {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .site-ui .community-feed-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-ui .community-feed-search {
+    grid-column: 1 / -1;
+  }
+
+  .site-ui .community-feed-search-button {
+    width: 100%;
   }
 
   .site-ui .discussion-list {
@@ -3110,6 +3166,15 @@
 }
 
 @media (max-width: 430px) {
+  .site-ui .community-topbar__actions #communityBackHome {
+    width: 80px !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+    flex: 0 0 80px;
+    padding-inline: 8px;
+    white-space: nowrap;
+  }
+
   .site-ui .site-header-command {
     width: 44px;
     max-width: 44px;

@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0625_m24_qp_22.pdf",
+  "markScheme": "0625_m24_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q01.png",
+      "rawText": "A student has a measuring cylinder containing water and also has a balance. Which of these could she use to find the volume of a small metal sphere? She has no other apparatus. A either the measuring cylinder containing water or the balance B the measuring cylinder containing water only C the balance only D neither the measuring cylinder nor the balance",
+      "parseStatus": "ok",
+      "stem": "A student has a measuring cylinder containing water and also has a balance. Which of these could she use to find the volume of a small metal sphere? She has no other apparatus.",
+      "options": {
+        "A": "either the measuring cylinder containing water or the balance",
+        "B": "the measuring cylinder containing water only",
+        "C": "the balance only",
+        "D": "neither the measuring cylinder nor the balance"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q02.png",
+      "rawText": "The diagram shows a solid object on a flat surface, with two forces acting on the object.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q03.png",
+      "rawText": "A ball is falling towards the ground. Which transfer between energy stores is taking place? A elastic energy to kinetic energy B gravitational potential energy to elastic energy C gravitational potential energy to kinetic energy D kinetic energy to gravitational potential energy",
+      "parseStatus": "ok",
+      "stem": "A ball is falling towards the ground. Which transfer between energy stores is taking place?",
+      "options": {
+        "A": "elastic energy to kinetic energy",
+        "B": "gravitational potential energy to elastic energy",
+        "C": "gravitational potential energy to kinetic energy",
+        "D": "kinetic energy to gravitational potential energy"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q04.png",
+      "rawText": "Which row contains one scalar quantity and one vector quantity? quantity 1 quantity 2 A energy velocity B mass time C momentum weight D distance temperature",
+      "parseStatus": "ok",
+      "stem": "Which row contains one scalar quantity and one vector quantity? quantity 1 quantity 2",
+      "options": {
+        "A": "energy velocity",
+        "B": "mass time",
+        "C": "momentum weight",
+        "D": "distance temperature"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q05.png",
+      "rawText": "The table gives data about four liquids, W, X, Y and Z. liquid mass / g volume / cm3 W 10 10 X 20 15 Y 30 50 Z 40 50 None of the liquids mixes with any of the other liquids. All the liquids are put in the same container and settle to form four separate layers. Which statement is correct? A W forms the layer below X. B X forms the top layer. C Y forms the bottom layer. D Z forms the layer below Y.",
+      "parseStatus": "ok",
+      "stem": "The table gives data about four liquids, W, X, Y and Z. liquid mass / g volume / cm3 W 10 10 X 20 15 Y 30 50 Z 40 50 None of the liquids mixes with any of the other liquids. All the liquids are put in the same container and settle to form four separate layers. Which statement is correct?",
+      "options": {
+        "A": "W forms the layer below X.",
+        "B": "X forms the top layer.",
+        "C": "Y forms the bottom layer.",
+        "D": "Z forms the layer below Y."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q06.png",
+      "rawText": "A weightless beam is balanced on a pivot as shown. Forces P, Q and R act on the beam. weightless beam P R Q pivot d c b a Which equation is correct? A (P  c) + (Q  b) = (R  a) B (P  c) – (Q  b) = (R  a) C (P  d) + (Q  b) = (R  a) D (P  d) – (Q  b) = (R  a)",
+      "parseStatus": "ok",
+      "stem": "A weightless beam is balanced on a pivot as shown. Forces P, Q and R act on the beam. weightless beam P R Q pivot d c b a Which equation is correct?",
+      "options": {
+        "A": "(P  c) + (Q  b) = (R  a)",
+        "B": "(P  c) – (Q  b) = (R  a)",
+        "C": "(P  d) + (Q  b) = (R  a)",
+        "D": "(P  d) – (Q  b) = (R  a)"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q07.png",
+      "rawText": "An object is moving at +3.0 m / s. A force acts on the object. After a time, the object is moving at –4.0 m / s. The mass of the object is 5.0 kg. What is the change in momentum of the body? A –35 kg m / s B –5.0 kg m / s C +5.0 kg m / s D +35 kg m / s",
+      "parseStatus": "ok",
+      "stem": "An object is moving at +3.0 m / s.",
+      "options": {
+        "A": "force acts on the object. After a time, the object is moving at –4.0 m / s. The mass of the object is 5.0 kg. What is the change in momentum of the body? A –35 kg m / s",
+        "B": "–5.0 kg m / s",
+        "C": "+5.0 kg m / s",
+        "D": "+35 kg m / s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q08.png",
+      "rawText": "The diagram shows a column of liquid. The pressure, due to the liquid, at the bottom of the liquid is 6000 N / m2. 50 cm What is the density of the liquid? A 310 kg / m3 B 1200 kg / m3 C 29 000 kg / m3 D 120 000 kg / m3",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a column of liquid. The pressure, due to the liquid, at the bottom of the liquid is 6000 N / m2. 50 cm What is the density of the liquid?",
+      "options": {
+        "A": "310 kg / m3",
+        "B": "1200 kg / m3",
+        "C": "29 000 kg / m3",
+        "D": "120 000 kg / m3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q09.png",
+      "rawText": "Which statement correctly describes a change of state? A A gas condenses to form a liquid. B A liquid melts to form a solid. C A solid condenses to form a liquid. D A solid boils to form a gas.",
+      "parseStatus": "ok",
+      "stem": "Which statement correctly describes a change of state?",
+      "options": {
+        "A": "A gas condenses to form a liquid.",
+        "B": "A liquid melts to form a solid.",
+        "C": "A solid condenses to form a liquid.",
+        "D": "A solid boils to form a gas."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q10.png",
+      "rawText": "The diagram shows a pan used for cooking food. base of pan handle of pan Which row is correct for the materials used to make the base of the pan and the handle of the pan? base of pan handle of pan A good thermal conductor good thermal conductor B good thermal conductor poor thermal conductor C poor thermal conductor good thermal conductor D poor thermal conductor poor thermal conductor",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a pan used for cooking food. base of pan handle of pan Which row is correct for the materials used to make the base of the pan and the handle of the pan? base of pan handle of pan",
+      "options": {
+        "A": "good thermal conductor good thermal conductor",
+        "B": "good thermal conductor poor thermal conductor",
+        "C": "poor thermal conductor good thermal conductor",
+        "D": "poor thermal conductor poor thermal conductor"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q11.png",
+      "rawText": "Solar heating panels consist of pipes carrying water that absorb radiation from the Sun. Which texture and colour is the surface of the pipes so that the temperature of the water rises at the quickest rate? A dull black B dull white C shiny black D shiny white",
+      "parseStatus": "ok",
+      "stem": "Solar heating panels consist of pipes carrying water that absorb radiation from the Sun. Which texture and colour is the surface of the pipes so that the temperature of the water rises at the quickest rate?",
+      "options": {
+        "A": "dull black",
+        "B": "dull white",
+        "C": "shiny black",
+        "D": "shiny white"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q12.png",
+      "rawText": "When pollen grains in water are viewed through a microscope, they are seen to be in continuous, rapid, random motion. What causes a pollen grain to move in this way? A convection currents in the water B bombardment by a single molecule of water C uneven bombardment on different sides by water molecules D collision with another pollen grain",
+      "parseStatus": "ok",
+      "stem": "When pollen grains in water are viewed through a microscope, they are seen to be in continuous, rapid, random motion. What causes a pollen grain to move in this way?",
+      "options": {
+        "A": "convection currents in the water",
+        "B": "bombardment by a single molecule of water",
+        "C": "uneven bombardment on different sides by water molecules",
+        "D": "collision with another pollen grain"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q13.png",
+      "rawText": "A circular, flat-bottomed dish contains 100 cm3 of water. Students are asked how to increase the rate at which the water evaporates. Their suggestions are listed. student 1 Pour the water into a flat-bottomed dish of larger diameter. student 2 Cool the dish and water. student 3 Create a current of air over the dish with a fan. Which suggestions will increase the rate of evaporation? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "A circular, flat-bottomed dish contains 100 cm3 of water. Students are asked how to increase the rate at which the water evaporates. Their suggestions are listed. student 1 Pour the water into a flat-bottomed dish of larger diameter. student 2 Cool the dish and water. student 3 Create a current of air over the dish with a fan. Which suggestions will increase the rate of evaporation?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q14.png",
+      "rawText": "Matter consists of very small particles in a continual state of motion. Which row describes the behaviour of particles in a liquid? force between particles motion of particles A strong move randomly at high speed B strong vibrate, but change positions C weak vibrate in fixed positions D weak move randomly at high speed",
+      "parseStatus": "ok",
+      "stem": "Matter consists of very small particles in a continual state of motion. Which row describes the behaviour of particles in a liquid? force between particles motion of particles",
+      "options": {
+        "A": "strong move randomly at high speed",
+        "B": "strong vibrate, but change positions",
+        "C": "weak vibrate in fixed positions",
+        "D": "weak move randomly at high speed"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q15.png",
+      "rawText": "The diagram shows the equipment used in an experiment on the heating of aluminium. thermometer insulated aluminium block heater to power supply A V The table gives the results for the experiment. mass of block 0.80 kg voltmeter reading 12 V ammeter reading 5.0 A time 300 s The specific heat capacity of aluminium is 900 J / (kg C). What is the maximum possible temperature rise in the block? A 9 C B 20 C C 25 C D 225 C",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the equipment used in an experiment on the heating of aluminium. thermometer insulated aluminium block heater to power supply",
+      "options": {
+        "A": "V The table gives the results for the experiment. mass of block 0.80 kg voltmeter reading 12 V ammeter reading 5.0 A time 300 s The specific heat capacity of aluminium is 900 J / (kg C). What is the maximum possible temperature rise in the block? A 9 C",
+        "B": "20 C",
+        "C": "25 C",
+        "D": "225 C"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q16.png",
+      "rawText": "The diagram shows a wave. 0 0 displacement from undisturbed position position along wave Q S R P Which dimensions describe the properties of the wave? A P = amplitude, S = speed B P = speed, Q = wavelength C R = amplitude, Q = wavelength D R = amplitude, S = wavelength",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a wave. 0 0 displacement from undisturbed position position along wave Q S R P Which dimensions describe the properties of the wave?",
+      "options": {
+        "A": "P = amplitude, S = speed",
+        "B": "P = speed, Q = wavelength",
+        "C": "R = amplitude, Q = wavelength",
+        "D": "R = amplitude, S = wavelength"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q17.png",
+      "rawText": "Which row describes some characteristics of an image formed in a plane mirror? image type image size A real diminished B real same size as the object C virtual diminished D virtual same size as the object",
+      "parseStatus": "ok",
+      "stem": "Which row describes some characteristics of an image formed in a plane mirror? image type image size",
+      "options": {
+        "A": "real diminished",
+        "B": "real same size as the object",
+        "C": "virtual diminished",
+        "D": "virtual same size as the object"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q18.png",
+      "rawText": "The range of audible frequencies for elephants is 10 Hz to 12 000 Hz, and for horses is 55 Hz to 33 000 Hz. Which statement about the range of audible frequencies for a healthy human ear is correct? A The human ear can hear all sounds heard by both elephants and horses. B The human ear can hear all sounds heard by elephants but not all those heard by horses. C The human ear can hear all sounds heard by horses but not all those heard by elephants. D The human ear cannot hear all sounds heard by elephants nor those heard by horses.",
+      "parseStatus": "ok",
+      "stem": "The range of audible frequencies for elephants is 10 Hz to 12 000 Hz, and for horses is 55 Hz to 33 000 Hz. Which statement about the range of audible frequencies for a healthy human ear is correct?",
+      "options": {
+        "A": "The human ear can hear all sounds heard by both elephants and horses.",
+        "B": "The human ear can hear all sounds heard by elephants but not all those heard by horses.",
+        "C": "The human ear can hear all sounds heard by horses but not all those heard by elephants.",
+        "D": "The human ear cannot hear all sounds heard by elephants nor those heard by horses."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q19.png",
+      "rawText": "An object is placed in front of a plane mirror. The ray diagram shows the reflection of one ray of light from the object by the mirror. plane mirror object Where does the mirror form an image of the object? image A image B image C D image",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q20.png",
+      "rawText": "Light refracts as it enters glass from air, as shown. 1 \u0001 2 \u0001 air glass Which expression is equal to the refractive index of glass? A 1 2 sin sin   B ) – sin(90 sin 2 1    C 2 1 sin ) – sin(90    D ) – sin(90 ) – sin(90 2 1    ",
+      "parseStatus": "ok",
+      "stem": "Light refracts as it enters glass from air, as shown. 1 \u0001 2 \u0001 air glass Which expression is equal to the refractive index of glass?",
+      "options": {
+        "A": "1 2 sin sin  ",
+        "B": ") – sin(90 sin 2 1   ",
+        "C": "2 1 sin ) – sin(90   ",
+        "D": ") – sin(90 ) – sin(90 2 1    "
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q21.png",
+      "rawText": "Light travelling at a speed of 3.0  108 m / s strikes the surface of a glass block and undergoes refraction as it enters the block. The diagram shows a ray of this light before and after it enters the block. 33\u0002 55\u0002 glass block What is the speed of light in the glass? A 1.8  108 m / s B 2.0  108 m / s C 4.5  108 m / s D 5.0  108 m / s",
+      "parseStatus": "ok",
+      "stem": "Light travelling at a speed of 3.0  108 m / s strikes the surface of a glass block and undergoes refraction as it enters the block. The diagram shows a ray of this light before and after it enters the block. 33\u0002 55\u0002 glass block What is the speed of light in the glass?",
+      "options": {
+        "A": "1.8  108 m / s",
+        "B": "2.0  108 m / s",
+        "C": "4.5  108 m / s",
+        "D": "5.0  108 m / s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q22.png",
+      "rawText": "Which row about converging lenses and diverging lenses is correct? converging lenses diverging lenses A always produce inverted images can focus a parallel beam of light B can be used as magnifying glasses do not have a principal focus C can be used to correct short-sightedness are usually thinner than converging lenses D can produce real and virtual images can be used to correct short-sightedness",
+      "parseStatus": "ok",
+      "stem": "Which row about converging lenses and diverging lenses is correct? converging lenses diverging lenses",
+      "options": {
+        "A": "always produce inverted images can focus a parallel beam of light",
+        "B": "can be used as magnifying glasses do not have a principal focus",
+        "C": "can be used to correct short-sightedness are usually thinner than converging lenses",
+        "D": "can produce real and virtual images can be used to correct short-sightedness"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q23.png",
+      "rawText": "A charged rod X is placed on a balance and another rod Y is brought close to it, as shown. 45.3 g X 45.7 g X Y Which combination of charges would cause the change in the balance reading shown? X Y A negative charge negative charge B negative charge positive charge C negative charge no charge D positive charge no charge",
+      "parseStatus": "ok",
+      "stem": "A charged rod X is placed on a balance and another rod Y is brought close to it, as shown. 45.3 g X 45.7 g X Y Which combination of charges would cause the change in the balance reading shown? X Y",
+      "options": {
+        "A": "negative charge negative charge",
+        "B": "negative charge positive charge",
+        "C": "negative charge no charge",
+        "D": "positive charge no charge"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q24.png",
+      "rawText": "What is the unit of potential difference (p.d.)? A ampere B coulomb C coulomb / second D volt",
+      "parseStatus": "ok",
+      "stem": "What is the unit of potential difference (p.d.)?",
+      "options": {
+        "A": "ampere",
+        "B": "coulomb",
+        "C": "coulomb / second",
+        "D": "volt"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q25.png",
+      "rawText": "The diagram shows a transformer. 550 turns 115 turns output voltage 22 000 V iron core What is the output voltage? A 0.35 V B 2.9 V C 4600 V D 105 000 V",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a transformer. 550 turns 115 turns output voltage 22 000 V iron core What is the output voltage?",
+      "options": {
+        "A": "0.35 V",
+        "B": "2.9 V",
+        "C": "4600 V",
+        "D": "105 000 V"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q26.png",
+      "rawText": "The diagrams show two arrangements of a pair of identical bar magnets. diagram 1 S N N P S diagram 2 S N S Q N R Three points, P, Q and R, are shown. At which point is the magnetic field due to the magnets weakest and at which point is it strongest? weakest magnetic field strongest magnetic field A P Q B P R C Q P D Q R",
+      "parseStatus": "ok",
+      "stem": "The diagrams show two arrangements of a pair of identical bar magnets. diagram 1 S N N P S diagram 2 S N S Q N R Three points, P, Q and R, are shown. At which point is the magnetic field due to the magnets weakest and at which point is it strongest? weakest magnetic field strongest magnetic field",
+      "options": {
+        "A": "P Q",
+        "B": "P R",
+        "C": "Q P",
+        "D": "Q R"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q27.png",
+      "rawText": "A nichrome wire, P, has a length of 1.0 m and a diameter of 1.0 mm. A second nichrome wire, Q, has a length of 2.0 m and a diameter of 2.0 mm. Which statement correctly compares the resistance of Q with that of P? A The resistance of Q is one-quarter the resistance of P. B The resistance of Q is one-half the resistance of P. C The resistance of Q is the same as the resistance of P. D The resistance of Q is four times the resistance of P.",
+      "parseStatus": "ok",
+      "stem": "A nichrome wire, P, has a length of 1.0 m and a diameter of 1.0 mm.",
+      "options": {
+        "A": "second nichrome wire, Q, has a length of 2.0 m and a diameter of 2.0 mm. Which statement correctly compares the resistance of Q with that of P? A The resistance of Q is one-quarter the resistance of P.",
+        "B": "The resistance of Q is one-half the resistance of P.",
+        "C": "The resistance of Q is the same as the resistance of P.",
+        "D": "The resistance of Q is four times the resistance of P."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q28.png",
+      "rawText": "A student has two resistors. One resistor has a resistance of 2.0  and the other has a resistance of 40 k. Which statement is correct? A When connected in parallel, the combined resistance is 1.9 . B When connected in parallel, the combined resistance is 2.0 . C When connected in series, the combined resistance is 1.9 . D When connected in series, the combined resistance is 42 .",
+      "parseStatus": "ok",
+      "stem": "A student has two resistors. One resistor has a resistance of 2.0  and the other has a resistance of 40 k. Which statement is correct?",
+      "options": {
+        "A": "When connected in parallel, the combined resistance is 1.9 .",
+        "B": "When connected in parallel, the combined resistance is 2.0 .",
+        "C": "When connected in series, the combined resistance is 1.9 .",
+        "D": "When connected in series, the combined resistance is 42 ."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q29.png",
+      "rawText": "In which circuit do both lamps light? D C B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q30.png",
+      "rawText": "An isotope of strontium has the nuclide notation Sr. 84 38 How many protons and neutrons are there in a nucleus of this isotope? protons neutrons A 38 46 B 38 84 C 46 38 D 46 84",
+      "parseStatus": "ok",
+      "stem": "An isotope of strontium has the nuclide notation Sr. 84 38 How many protons and neutrons are there in a nucleus of this isotope? protons neutrons",
+      "options": {
+        "A": "38 46",
+        "B": "38 84",
+        "C": "46 38",
+        "D": "46 84"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q31.png",
+      "rawText": "A student is investigating the count rate of a radioactive substance. How must he adjust his reading for the background count? A Add the background count to his reading. B Ignore the background count as it will not affect his reading. C Subtract the background count from his reading. D Take repeat readings to eliminate the background count.",
+      "parseStatus": "ok",
+      "stem": "A student is investigating the count rate of a radioactive substance. How must he adjust his reading for the background count?",
+      "options": {
+        "A": "Add the background count to his reading.",
+        "B": "Ignore the background count as it will not affect his reading.",
+        "C": "Subtract the background count from his reading.",
+        "D": "Take repeat readings to eliminate the background count."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q32.png",
+      "rawText": "What occurs during nuclear fusion? A Two light atomic nuclei join together and emit energy. B Two light atomic nuclei join together and absorb energy. C A heavy atomic nucleus splits and emits energy. D A heavy atomic nucleus splits and absorbs energy.",
+      "parseStatus": "ok",
+      "stem": "What occurs during nuclear fusion?",
+      "options": {
+        "A": "Two light atomic nuclei join together and emit energy.",
+        "B": "Two light atomic nuclei join together and absorb energy.",
+        "C": "A heavy atomic nucleus splits and emits energy.",
+        "D": "A heavy atomic nucleus splits and absorbs energy."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q33.png",
+      "rawText": "A beta-particle enters a uniform magnetic field directed into the page and deflects downwards, as shown. region of magnetic field into page Which direction of electric field would also deflect an electron downwards? A into the page B out of the page C down the page D up the page",
+      "parseStatus": "ok",
+      "stem": "A beta-particle enters a uniform magnetic field directed into the page and deflects downwards, as shown. region of magnetic field into page Which direction of electric field would also deflect an electron downwards?",
+      "options": {
+        "A": "into the page",
+        "B": "out of the page",
+        "C": "down the page",
+        "D": "up the page"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q34.png",
+      "rawText": "The radioactive isotope radon, Rn, 222 86 is an alpha () emitter. During this radioactive decay, an isotope of polonium, Po, is produced. How many neutrons does a nucleus of this isotope of polonium contain? A 130 B 132 C 134 D 136",
+      "parseStatus": "ok",
+      "stem": "The radioactive isotope radon, Rn, 222 86 is an alpha () emitter. During this radioactive decay, an isotope of polonium, Po, is produced. How many neutrons does a nucleus of this isotope of polonium contain?",
+      "options": {
+        "A": "130",
+        "B": "132",
+        "C": "134",
+        "D": "136"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q35.png",
+      "rawText": "Which statement gives two safety precautions to take when a person is working with ionising radiation? A decrease exposure time and decrease distance between the person and the source B decrease exposure time and increase distance between the person and the source C increase exposure time and decrease distance between the person and the source D increase exposure time and increase distance between the person and the source",
+      "parseStatus": "ok",
+      "stem": "Which statement gives two safety precautions to take when a person is working with ionising radiation?",
+      "options": {
+        "A": "decrease exposure time and decrease distance between the person and the source",
+        "B": "decrease exposure time and increase distance between the person and the source",
+        "C": "increase exposure time and decrease distance between the person and the source",
+        "D": "increase exposure time and increase distance between the person and the source"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q36.png",
+      "rawText": "Which list correctly shows the planets in decreasing order of distance from the Sun? A Jupiter  Saturn  Neptune  Uranus B Jupiter  Saturn  Uranus  Neptune C Neptune  Uranus  Saturn  Jupiter D Uranus  Neptune  Saturn  Jupiter",
+      "parseStatus": "ok",
+      "stem": "Which list correctly shows the planets in decreasing order of distance from the Sun?",
+      "options": {
+        "A": "Jupiter  Saturn  Neptune  Uranus",
+        "B": "Jupiter  Saturn  Uranus  Neptune",
+        "C": "Neptune  Uranus  Saturn  Jupiter",
+        "D": "Uranus  Neptune  Saturn  Jupiter"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q37.png",
+      "rawText": "The Sun radiates most of its energy in three regions of the electromagnetic spectrum. In the pie chart, region 1 is infrared radiation and region 2 is visible radiation. 1 2 3 What is region 3? A microwave B radio C ultraviolet D X-ray",
+      "parseStatus": "ok",
+      "stem": "The Sun radiates most of its energy in three regions of the electromagnetic spectrum. In the pie chart, region 1 is infrared radiation and region 2 is visible radiation. 1 2 3 What is region 3?",
+      "options": {
+        "A": "microwave",
+        "B": "radio",
+        "C": "ultraviolet",
+        "D": "X-ray"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q38.png",
+      "rawText": "The diagram shows a comet moving in an elliptical orbit around the Sun. At which position is the comet moving with the greatest speed? Sun A B C D comet",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q39.png",
+      "rawText": "Nuclear reactions in the Sun release large quantities of energy. Which statement about this process is correct? A It involves the fission of helium to produce hydrogen. B It involves the fission of hydrogen to produce helium. C It involves the fusion of helium to produce hydrogen. D It involves the fusion of hydrogen to produce helium.",
+      "parseStatus": "ok",
+      "stem": "Nuclear reactions in the Sun release large quantities of energy. Which statement about this process is correct?",
+      "options": {
+        "A": "It involves the fission of helium to produce hydrogen.",
+        "B": "It involves the fission of hydrogen to produce helium.",
+        "C": "It involves the fusion of helium to produce hydrogen.",
+        "D": "It involves the fusion of hydrogen to produce helium."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_22/q40.png",
+      "rawText": "The table gives data about four planets in our Solar System. Uranus Earth planet X planet Y mean surface temperature / C –195 15 –65 –140 What are planets X and Y? planet X planet Y A Mars Saturn B Mars Neptune C Mercury Saturn D Mercury Neptune",
+      "parseStatus": "ok",
+      "stem": "The table gives data about four planets in our Solar System. Uranus Earth planet X planet Y mean surface temperature / C –195 15 –65 –140 What are planets X and Y? planet X planet Y",
+      "options": {
+        "A": "Mars Saturn",
+        "B": "Mars Neptune",
+        "C": "Mercury Saturn",
+        "D": "Mercury Neptune"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

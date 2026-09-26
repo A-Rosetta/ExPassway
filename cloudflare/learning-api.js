@@ -563,12 +563,19 @@ async function submitLocalPaper(request, env) {
   return { ...submitted, analysis: buildAnalysis({ wrongLog: submitted.wrongLog, lastResult: submitted.result, language: body.language }) };
 }
 
-function requireBiologyCode(value) {
+function requireCurriculumCode(value) {
   const subjectCode = String(value || "").trim();
-  if (subjectCode !== "0610") {
-    throw new AuthError(404, "Chapter practice is currently available for Biology 0610.", "CURRICULUM_NOT_FOUND");
+  if (!/^\d{4}$/.test(subjectCode)) {
+    throw new AuthError(400, "Subject code must contain four digits.", "INVALID_INPUT");
   }
   return subjectCode;
+}
+
+function questionYearFilter(subjectCode, tableAlias = "question") {
+  if (subjectCode === "0610") {
+    return `AND ${tableAlias}.year GLOB '[0-9][0-9][0-9][0-9]' AND CAST(${tableAlias}.year AS INTEGER) BETWEEN 2019 AND 2023`;
+  }
+  return `AND ${tableAlias}.year GLOB '[0-9][0-9][0-9][0-9]' AND CAST(${tableAlias}.year AS INTEGER) BETWEEN 2023 AND 2025`;
 }
 
 function mapCurriculumVersion(row) {
@@ -590,6 +597,39 @@ async function getCurriculumVersion(db, subjectCode, versionId = "") {
     ORDER BY active DESC
     LIMIT 1
   `).bind(subjectCode, versionId, versionId, versionId).first();
+}
+
+async function listCurriculumSubjects(db) {
+  const rows = await db.prepare(`
+    SELECT subject.code, subject.name, subject.name_zh,
+      version.id AS version_id, version.qualification,
+      version.exam_year_start, version.exam_year_end, version.version
+    FROM curriculum_versions version
+    JOIN exam_subjects subject ON subject.code = version.subject_code
+    WHERE version.active = 1
+      AND EXISTS (
+        SELECT 1
+        FROM curriculum_sections syllabus_section
+        JOIN coursebook_section_mappings book_mapping
+          ON book_mapping.curriculum_section_id = syllabus_section.id
+        WHERE syllabus_section.curriculum_version_id = version.id
+      )
+    ORDER BY subject.name
+  `).all();
+  return rows.results.map((row) => ({
+    code: row.code,
+    name: row.name,
+    nameZh: row.name_zh || "",
+    version: mapCurriculumVersion({
+      id: row.version_id,
+      subject_code: row.code,
+      qualification: row.qualification,
+      exam_year_start: row.exam_year_start,
+      exam_year_end: row.exam_year_end,
+      version: row.version,
+      active: 1,
+    }),
+  }));
 }
 
 async function listChapterCatalog(db, userId, version) {
@@ -629,11 +669,10 @@ async function listChapterCatalog(db, userId, version) {
       WHERE mapping.status = 'reviewed' AND mapping.is_primary = 1
         AND mapping.coursebook_section_id IS NOT NULL
         AND syllabus_section.curriculum_version_id = ?
-        AND question.active = 1 AND question.subject_code = '0610'
-        AND question.year GLOB '[0-9][0-9][0-9][0-9]'
-        AND CAST(question.year AS INTEGER) BETWEEN 2019 AND 2023
+        AND question.active = 1 AND question.subject_code = ?
+        ${questionYearFilter(version.subject_code)}
       GROUP BY mapping.coursebook_section_id
-    `).bind(version.id).all(),
+    `).bind(version.id, version.subject_code).all(),
     db.prepare(`
       SELECT attempt.coursebook_section_id,
         SUM(CASE WHEN attempt.first_exposure = 1 THEN 1 ELSE 0 END) AS first_attempts,
@@ -740,7 +779,8 @@ async function createChapterPractice(request, env) {
   const versionId = requireString(body.curriculumVersion, "curriculumVersion");
   const sectionId = requireString(body.coursebookSectionId, "coursebookSectionId");
   const count = toInteger(body.count, 10, 1, 20, "count");
-  const version = await getCurriculumVersion(env.DB, "0610", versionId);
+  const versionRow = await env.DB.prepare("SELECT * FROM curriculum_versions WHERE id = ? LIMIT 1").bind(versionId).first();
+  const version = versionRow && await getCurriculumVersion(env.DB, versionRow.subject_code, versionId);
   if (!version) throw new AuthError(404, "Curriculum version not found.", "CURRICULUM_NOT_FOUND");
   const section = await env.DB.prepare(`
     SELECT DISTINCT book_section.*, chapter.chapter_no,
@@ -774,26 +814,26 @@ async function createChapterPractice(request, env) {
       JOIN question_bank question ON question.id = mapping.question_id
       JOIN curriculum_sections syllabus_section ON syllabus_section.id = mapping.curriculum_section_id
       WHERE mapping.coursebook_section_id = ? AND mapping.status = 'reviewed'
-        AND mapping.is_primary = 1 AND question.active = 1 AND question.subject_code = '0610'
-        AND question.year GLOB '[0-9][0-9][0-9][0-9]'
-        AND CAST(question.year AS INTEGER) BETWEEN 2019 AND 2023
+        AND mapping.is_primary = 1 AND question.active = 1 AND question.subject_code = ?
+        ${questionYearFilter(version.subject_code)}
     )
     SELECT * FROM candidate_rows WHERE group_rank = 1
     ORDER BY (latest_attempted_at IS NOT NULL), latest_correct, latest_attempted_at, random()
     LIMIT ?
-  `).bind(user.id, user.id, sectionId, count).all();
+  `).bind(user.id, user.id, sectionId, version.subject_code, count).all();
   const questions = candidates.results.map((row) => mapQuestion(row));
   if (!questions.length) {
     throw new AuthError(409, "This section has no reviewed questions yet.", "NO_REVIEWED_QUESTIONS");
   }
   const sessionId = crypto.randomUUID();
   const createdAt = new Date().toISOString();
+  const subject = await env.DB.prepare("SELECT name FROM exam_subjects WHERE code = ? LIMIT 1").bind(version.subject_code).first();
   await env.DB.prepare(`
     INSERT INTO practice_sessions (
       id, user_id, grade, board, subject, paper, difficulty, topics,
       requested_count, generated_questions, fallback_applied, status, created_at, practice_mode
-    ) VALUES (?, ?, 'IGCSE', 'CIE', 'IGCSE Biology', 'MCQ', NULL, ?, ?, ?, 0, 'generated', ?, 'chapter')
-  `).bind(sessionId, user.id, JSON.stringify([sectionId]), questions.length, JSON.stringify(questions), createdAt).run();
+    ) VALUES (?, ?, 'IGCSE', 'CIE', ?, 'MCQ', NULL, ?, ?, ?, 0, 'generated', ?, 'chapter')
+  `).bind(sessionId, user.id, `IGCSE ${subject?.name || version.subject_code}`, JSON.stringify([sectionId]), questions.length, JSON.stringify(questions), createdAt).run();
   return {
     sessionId,
     createdAt,
@@ -808,6 +848,105 @@ async function createChapterPractice(request, env) {
     },
     questions,
   };
+}
+
+async function createChapterPaper(request, env) {
+  await requireCurrentUser(request, env);
+  const body = await readJsonBody(request);
+  const versionId = requireString(body.curriculumVersion, "curriculumVersion");
+  const rawSelections = requireArray(body.sections, "sections");
+  if (!rawSelections.length || rawSelections.length > 20) {
+    throw new AuthError(400, "Select between 1 and 20 sections.", "INVALID_INPUT");
+  }
+  const selections = rawSelections.map((row) => ({
+    coursebookSectionId: requireString(row?.coursebookSectionId, "sections.coursebookSectionId"),
+    count: toInteger(row?.count, 0, 1, 20, "sections.count"),
+  }));
+  if (new Set(selections.map((row) => row.coursebookSectionId)).size !== selections.length) {
+    throw new AuthError(400, "Each section can only be selected once.", "INVALID_INPUT");
+  }
+  if (selections.reduce((sum, row) => sum + row.count, 0) > 80) {
+    throw new AuthError(400, "A paper can contain at most 80 questions.", "INVALID_INPUT");
+  }
+
+  const versionRow = await env.DB.prepare("SELECT * FROM curriculum_versions WHERE id = ? LIMIT 1")
+    .bind(versionId).first();
+  const version = versionRow && await getCurriculumVersion(env.DB, versionRow.subject_code, versionId);
+  if (!version) throw new AuthError(404, "Curriculum version not found.", "CURRICULUM_NOT_FOUND");
+
+  const groups = [];
+  const usedGroups = new Set();
+  for (const selection of selections) {
+    const section = await env.DB.prepare(`
+      SELECT DISTINCT book_section.*, chapter.chapter_no,
+        chapter.title_en AS chapter_title_en, chapter.title_zh AS chapter_title_zh
+      FROM coursebook_sections book_section
+      JOIN coursebook_chapters chapter ON chapter.id = book_section.coursebook_chapter_id
+      JOIN coursebook_section_mappings book_mapping ON book_mapping.coursebook_section_id = book_section.id
+      JOIN curriculum_sections syllabus_section ON syllabus_section.id = book_mapping.curriculum_section_id
+      WHERE book_section.id = ? AND syllabus_section.curriculum_version_id = ?
+      LIMIT 1
+    `).bind(selection.coursebookSectionId, version.id).first();
+    if (!section) throw new AuthError(404, "Coursebook section not found.", "SECTION_NOT_FOUND");
+
+    const exclusionGroups = [...usedGroups];
+    const exclusionSql = exclusionGroups.length
+      ? `AND COALESCE(NULLIF(mapping.similar_question_group, ''), mapping.question_id)
+          NOT IN (${exclusionGroups.map(() => "?").join(", ")})`
+      : "";
+    const candidates = await env.DB.prepare(`
+      WITH candidate_rows AS (
+        SELECT question.*, mapping.curriculum_section_id, mapping.coursebook_section_id,
+          mapping.similar_question_group, syllabus_section.syllabus_code,
+          ROW_NUMBER() OVER (
+            PARTITION BY COALESCE(NULLIF(mapping.similar_question_group, ''), mapping.question_id)
+            ORDER BY random()
+          ) AS group_rank
+        FROM question_section_mappings mapping
+        JOIN question_bank question ON question.id = mapping.question_id
+        JOIN curriculum_sections syllabus_section ON syllabus_section.id = mapping.curriculum_section_id
+        WHERE mapping.coursebook_section_id = ? AND mapping.status = 'reviewed'
+          AND mapping.is_primary = 1 AND question.active = 1
+          AND question.subject_code = ? AND question.answer BETWEEN 0 AND 3
+          AND (length(trim(COALESCE(question.stem, ''))) > 0 OR json_array_length(question.images) > 0)
+          ${questionYearFilter(version.subject_code)}
+          ${exclusionSql}
+      )
+      SELECT * FROM candidate_rows WHERE group_rank = 1
+      ORDER BY random()
+      LIMIT ?
+    `).bind(
+      selection.coursebookSectionId,
+      version.subject_code,
+      ...exclusionGroups,
+      selection.count
+    ).all();
+    if (candidates.results.length < selection.count) {
+      throw new AuthError(
+        409,
+        `Not enough eligible questions in ${section.section_code}.`,
+        "INSUFFICIENT_QUESTIONS"
+      );
+    }
+
+    const questions = candidates.results.map((row) => mapQuestion(row, true));
+    questions.forEach((question) => usedGroups.add(question.similarQuestionGroup || question.id));
+    groups.push({
+      section: {
+        id: section.id,
+        sectionCode: section.section_code,
+        titleEn: section.title_en,
+        titleZh: section.title_zh,
+        chapterNo: Number(section.chapter_no),
+        chapterTitleEn: section.chapter_title_en,
+        chapterTitleZh: section.chapter_title_zh,
+      },
+      requestedCount: selection.count,
+      questions,
+    });
+  }
+
+  return { subjectCode: version.subject_code, curriculumVersion: mapCurriculumVersion(version), groups };
 }
 
 async function submitChapterPractice(request, env, sessionId) {
@@ -907,7 +1046,7 @@ async function submitChapterPractice(request, env, sessionId) {
   }
   await saveWrongNotebook(env.DB, user.id, answerQuestions, details, {
     board: "CIE",
-    subject: "IGCSE Biology",
+    subject: session.subject,
     paper: "Chapter Practice",
   });
   return result;
@@ -1044,10 +1183,17 @@ export async function handleLearningApiRequest(request, env) {
       return success(mapNotebookEntry(row), request.method);
     }
 
+    if (request.method === "GET" && url.pathname === "/api/curriculum/subjects") {
+      await requireCurrentUser(request, env);
+      return success(await listCurriculumSubjects(env.DB), request.method);
+    }
+    if (request.method === "POST" && url.pathname === "/api/paper-builder/generate") {
+      return success(await createChapterPaper(request, env), request.method, 201);
+    }
     const versions = url.pathname.match(/^\/api\/curriculum\/([^/]+)\/versions$/);
     if (versions && request.method === "GET") {
       await requireCurrentUser(request, env);
-      const subjectCode = requireBiologyCode(decodeURIComponent(versions[1]));
+      const subjectCode = requireCurriculumCode(decodeURIComponent(versions[1]));
       const rows = await env.DB.prepare(`
         SELECT * FROM curriculum_versions WHERE subject_code = ?
         ORDER BY active DESC, exam_year_start DESC, version DESC
@@ -1057,7 +1203,7 @@ export async function handleLearningApiRequest(request, env) {
     const chapters = url.pathname.match(/^\/api\/curriculum\/([^/]+)\/chapters$/);
     if (chapters && request.method === "GET") {
       const { user } = await requireCurrentUser(request, env);
-      const subjectCode = requireBiologyCode(decodeURIComponent(chapters[1]));
+      const subjectCode = requireCurriculumCode(decodeURIComponent(chapters[1]));
       const version = await getCurriculumVersion(env.DB, subjectCode, url.searchParams.get("version") || "");
       if (!version) throw new AuthError(404, "Curriculum version not found.", "CURRICULUM_NOT_FOUND");
       return success(await listChapterCatalog(env.DB, user.id, version), request.method);

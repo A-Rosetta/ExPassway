@@ -6,7 +6,7 @@
   <title data-i18n="homePageTitle">ExPassway</title>
   <script src="scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
-  <link rel="stylesheet" href="assets/styles.css?v=20260808-2" />
+  <link rel="stylesheet" href="assets/styles.css?v=20260822-1" />
   <link rel="stylesheet" href="assets/site-design.css?v=20260806-2" />
 </head>
 <body class="student-ui site-ui home-dashboard">
@@ -49,7 +49,9 @@
           <h1 id="mySubjectsTitle" data-i18n="homeMySubjects">我的学科</h1>
         </div>
         <div class="home-heading-actions">
+          <a id="openChapterPaperBuilder" class="btn-secondary" href="pages/paper-builder.html" data-i18n="paperBuilderOpen">按章节组卷</a>
           <button id="openPdfDownload" class="btn-primary home-pdf-download-button" type="button" data-i18n="homeDownloadPdfs" disabled>下载试卷 PDF</button>
+          <button id="toggleMoreSubjects" class="btn-secondary home-more-subjects-button" type="button" data-i18n="homeMoreSubjects" aria-controls="moreSubjectPanel" aria-expanded="false">更多科目</button>
           <button id="goAdmin" class="btn-secondary home-admin-button" type="button" data-i18n="goAdmin" hidden>查看后台数据面板</button>
         </div>
       </div>
@@ -61,6 +63,13 @@
         <div class="course-card course-card--loading" aria-hidden="true"></div>
       </div>
       <p id="backendStatus" class="home-status" role="status"></p>
+
+      <div id="moreSubjectPanel" class="home-more-subjects" hidden>
+        <div class="home-more-subjects__heading">
+          <h2 data-i18n="homeMoreSubjectsTitle">更多科目</h2>
+        </div>
+        <div id="moreSubjectCourses" class="course-grid" aria-live="polite"></div>
+      </div>
     </section>
 
   </main>
@@ -149,10 +158,10 @@
     </div>
   </dialog>
 
-  <script src="scripts/i18n.js?v=20260802-9"></script>
+  <script src="scripts/i18n.js?v=20260822-1"></script>
   <script src="scripts/api.js?v=20260729-1"></script>
   <script src="scripts/pet.js?v=20260731-1"></script>
-  <script src="scripts/app.js?v=20260802-9"></script>
+  <script src="scripts/app.js?v=20260822-1"></script>
   <script src="scripts/site-ui.js?v=20260808-3"></script>
 </body>
 </html>

@@ -132,6 +132,7 @@ try {
     assert.equal(created.payload.data.paperSlug, "0610_s23_qp_22");
     assert.deepEqual(created.payload.data.tags, ["paper", "question", "topic"]);
     assert.equal(created.payload.data.postCount, 1);
+    assert.equal(created.payload.data.preview, "Why is the answer B?");
     threadId = created.payload.data.id;
 
     const filtered = await api(
@@ -141,6 +142,11 @@ try {
     );
     assert.equal(filtered.response.status, 200);
     assert.equal(filtered.payload.data.length, 1);
+
+    const searched = await api(env, tokens.student, "/api/discussions?search=answer%20B&sort=likes");
+    assert.equal(searched.response.status, 200);
+    assert.equal(searched.payload.data.length, 1);
+    assert.equal(searched.payload.data[0].preview, "Why is the answer B?");
 
     const detail = await api(env, tokens.student, `/api/discussions/${threadId}`);
     assert.equal(detail.response.status, 200);

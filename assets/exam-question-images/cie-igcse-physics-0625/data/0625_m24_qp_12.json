@@ -1,0 +1,683 @@
+{
+  "questionPaper": "0625_m24_qp_12.pdf",
+  "markScheme": "0625_m24_ms_12.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q01.png",
+      "rawText": "The diagram shows a pendulum that oscillates between P and Q. Q P pendulum bob support string Which method is used to find the average period of oscillation for the pendulum? A Measure the time it takes to swing from P to Q. B Measure the time it takes to swing from P to Q to P 10 times and divide that time by 10. C Measure the time it takes to swing from P to Q to P 10 times and multiply that time by 10. D Measure the time it takes to swing from Q to P.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a pendulum that oscillates between P and Q. Q P pendulum bob support string Which method is used to find the average period of oscillation for the pendulum?",
+      "options": {
+        "A": "Measure the time it takes to swing from P to Q.",
+        "B": "Measure the time it takes to swing from P to Q to P 10 times and divide that time by 10.",
+        "C": "Measure the time it takes to swing from P to Q to P 10 times and multiply that time by 10.",
+        "D": "Measure the time it takes to swing from Q to P."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q02.png",
+      "rawText": "A car moves through a measured distance s in a known time t. What is the correct equation used to calculate the average speed v of the car? A v = t s B v = s  t C v = s t D v = s  t 2",
+      "parseStatus": "ok",
+      "stem": "A car moves through a measured distance s in a known time t. What is the correct equation used to calculate the average speed v of the car?",
+      "options": {
+        "A": "v = t s",
+        "B": "v = s  t",
+        "C": "v = s t",
+        "D": "v = s  t 2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q03.png",
+      "rawText": "On Mars, the acceleration of free fall is 3.7 m / s2. What is the weight of a 2.0 kg mass on Mars? A 0.54 N B 1.9 N C 7.4 N D 20 N",
+      "parseStatus": "ok",
+      "stem": "On Mars, the acceleration of free fall is 3.7 m / s2. What is the weight of a 2.0 kg mass on Mars?",
+      "options": {
+        "A": "0.54 N",
+        "B": "1.9 N",
+        "C": "7.4 N",
+        "D": "20 N"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q04.png",
+      "rawText": "A rocket is travelling vertically upwards. Three vertical forces act on it. The thrust acts upwards and is equal to 100 000 N. The weight acts downwards and is equal to 80 000 N. What is the air resistance force acting on the rocket when it is travelling upwards at a constant speed? A 20 000 N downwards B 20 000 N upwards C 180 000 N downwards D 180 000 N upwards",
+      "parseStatus": "ok",
+      "stem": "A rocket is travelling vertically upwards. Three vertical forces act on it. The thrust acts upwards and is equal to 100 000 N. The weight acts downwards and is equal to 80 000 N. What is the air resistance force acting on the rocket when it is travelling upwards at a constant speed?",
+      "options": {
+        "A": "20 000 N downwards",
+        "B": "20 000 N upwards",
+        "C": "180 000 N downwards",
+        "D": "180 000 N upwards"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q05.png",
+      "rawText": "An irregular plane object is suspended freely from point O. The object is displaced and then released. It swings a few times, and comes to rest as shown. O irregular plane object Where is the centre of gravity of the object? A horizontally to the left of O B horizontally to the right of O C vertically above O D vertically below O",
+      "parseStatus": "ok",
+      "stem": "An irregular plane object is suspended freely from point O. The object is displaced and then released. It swings a few times, and comes to rest as shown. O irregular plane object Where is the centre of gravity of the object?",
+      "options": {
+        "A": "horizontally to the left of O",
+        "B": "horizontally to the right of O",
+        "C": "vertically above O",
+        "D": "vertically below O"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q06.png",
+      "rawText": "Three situations are listed. 1 someone blowing air into a party balloon 2 a crane lifting a block of concrete 3 a pile of books at rest on a shelf In which situations is work being done? A 1, 2 and 3 B 1 and 2 only C 1 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Three situations are listed. 1 someone blowing air into a party balloon 2 a crane lifting a block of concrete 3 a pile of books at rest on a shelf In which situations is work being done?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q07.png",
+      "rawText": "Which row describes an advantage and a disadvantage of wind turbines? advantage disadvantage A no fuel needed harmful gases released B variable supply fuel needed C no harmful gases released variable supply D constant supply noisy",
+      "parseStatus": "ok",
+      "stem": "Which row describes an advantage and a disadvantage of wind turbines? advantage disadvantage",
+      "options": {
+        "A": "no fuel needed harmful gases released",
+        "B": "variable supply fuel needed",
+        "C": "no harmful gases released variable supply",
+        "D": "constant supply noisy"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q08.png",
+      "rawText": "The diagram shows a rectangular metal block with dimensions 2.5 cm  3.0 cm  4.5 cm. The block is resting on the ground. The block exerts a pressure of 0.23 N / cm2 on the ground. 2.5 cm 4.5 cm 3.0 cm NOT TO SCALE What is the weight of the metal block? A 0.020 N B 1.7 N C 2.6 N D 3.1 N",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a rectangular metal block with dimensions 2.5 cm  3.0 cm  4.5 cm. The block is resting on the ground. The block exerts a pressure of 0.23 N / cm2 on the ground. 2.5 cm 4.5 cm 3.0 cm NOT TO SCALE What is the weight of the metal block?",
+      "options": {
+        "A": "0.020 N",
+        "B": "1.7 N",
+        "C": "2.6 N",
+        "D": "3.1 N"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q09.png",
+      "rawText": "Which row correctly describes the movement of particles in solids and liquids? solids liquids A no movement move around each other B no movement vibration only C vibration only move around each other D vibration only vibration only",
+      "parseStatus": "ok",
+      "stem": "Which row correctly describes the movement of particles in solids and liquids? solids liquids",
+      "options": {
+        "A": "no movement move around each other",
+        "B": "no movement vibration only",
+        "C": "vibration only move around each other",
+        "D": "vibration only vibration only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q10.png",
+      "rawText": "What is the boiling temperature of water at standard atmospheric pressure? A –173 K B 100 K C 273 K D 373 K",
+      "parseStatus": "ok",
+      "stem": "What is the boiling temperature of water at standard atmospheric pressure?",
+      "options": {
+        "A": "–173 K",
+        "B": "100 K",
+        "C": "273 K",
+        "D": "373 K"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q11.png",
+      "rawText": "Which row describes how the volume and mass of liquid mercury change as it is heated? volume mass A decreases decreases B decreases stays the same C increases increases D increases stays the same",
+      "parseStatus": "ok",
+      "stem": "Which row describes how the volume and mass of liquid mercury change as it is heated? volume mass",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases stays the same",
+        "C": "increases increases",
+        "D": "increases stays the same"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q12.png",
+      "rawText": "In which situation does the store of internal energy of the water increase? A water at 0 C freezing to form ice B water being heated from 25 C to 40 C C steam condensing on a window D water in a puddle on a breezy day",
+      "parseStatus": "ok",
+      "stem": "In which situation does the store of internal energy of the water increase?",
+      "options": {
+        "A": "water at 0 C freezing to form ice",
+        "B": "water being heated from 25 C to 40 C",
+        "C": "steam condensing on a window",
+        "D": "water in a puddle on a breezy day"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q13.png",
+      "rawText": "Which statement describes what happens to particles during the evaporation of a liquid? A Particles become fixed in position. B Particles escape from the surface. C Particles move much closer together. D Particles start to move around at random.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes what happens to particles during the evaporation of a liquid?",
+      "options": {
+        "A": "Particles become fixed in position.",
+        "B": "Particles escape from the surface.",
+        "C": "Particles move much closer together.",
+        "D": "Particles start to move around at random."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q14.png",
+      "rawText": "Which of the following is not an example of convection? A a spoon handle becoming hot when it is placed in a hot drink B a thermal up-draught in the atmosphere that glider pilots use C flames and smoke rising from a fire D warming up water in a kettle on a gas ring",
+      "parseStatus": "ok",
+      "stem": "Which of the following is not an example of convection?",
+      "options": {
+        "A": "a spoon handle becoming hot when it is placed in a hot drink",
+        "B": "a thermal up-draught in the atmosphere that glider pilots use",
+        "C": "flames and smoke rising from a fire",
+        "D": "warming up water in a kettle on a gas ring"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q15.png",
+      "rawText": "A hollow aluminium cube is filled with very hot water. Side X of the cube is opposite side Y of the cube. One of these two sides is black and one is white. A student holds the back of one hand 5 cm from side X, and then immediately holds the back of the other hand 5 cm from side Y. 5 cm 5 cm side X side Y very hot water aluminium cube The hand held near side Y feels warmer than the hand held near side X. Which row identifies the black side and correctly compares the rate of emission of thermal radiation from each side? black side rate of emission of thermal radiation A X greater for X B X the same for X and Y C Y greater for Y D Y the same for X and Y",
+      "parseStatus": "ok",
+      "stem": "A hollow aluminium cube is filled with very hot water. Side X of the cube is opposite side Y of the cube. One of these two sides is black and one is white.",
+      "options": {
+        "A": "student holds the back of one hand 5 cm from side X, and then immediately holds the back of the other hand 5 cm from side Y. 5 cm 5 cm side X side Y very hot water aluminium cube The hand held near side Y feels warmer than the hand held near side X. Which row identifies the black side and correctly compares the rate of emission of thermal radiation from each side? black side rate of emission of thermal radiation A X greater for X",
+        "B": "X the same for X and Y",
+        "C": "Y greater for Y",
+        "D": "Y the same for X and Y"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q16.png",
+      "rawText": "The diagram shows a ray of light travelling from air into a glass block and changing direction so that it is closer to the normal. air glass block normal What is the name of this process and why does it happen? process why it happens A diffraction speed of the light decreases B diffraction speed of the light increases C refraction speed of the light increases D refraction speed of the light decreases",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light travelling from air into a glass block and changing direction so that it is closer to the normal. air glass block normal What is the name of this process and why does it happen? process why it happens",
+      "options": {
+        "A": "diffraction speed of the light decreases",
+        "B": "diffraction speed of the light increases",
+        "C": "refraction speed of the light increases",
+        "D": "refraction speed of the light decreases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q17.png",
+      "rawText": "Which row gives an example of a longitudinal wave and describes the direction of the vibrations? example of a longitudinal wave direction of vibrations A light wave at right angles to the direction of propagation B Iight wave parallel to the direction of propagation C sound wave at right angles to the direction of propagation D sound wave parallel to the direction of propagation",
+      "parseStatus": "ok",
+      "stem": "Which row gives an example of a longitudinal wave and describes the direction of the vibrations? example of a longitudinal wave direction of vibrations",
+      "options": {
+        "A": "light wave at right angles to the direction of propagation",
+        "B": "Iight wave parallel to the direction of propagation",
+        "C": "sound wave at right angles to the direction of propagation",
+        "D": "sound wave parallel to the direction of propagation"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q18.png",
+      "rawText": "Which statement about total internal reflection is correct? A Total internal reflection occurs when light is incident on a glass to air boundary at an angle of incidence greater than the critical angle. B Total internal reflection occurs when light is incident on a glass to air boundary at an angle of incidence less than the critical angle. C Total internal reflection occurs when light is incident on an air to glass boundary at an angle of incidence greater than the critical angle. D Total internal reflection occurs when light is incident on an air to glass boundary at an angle of incidence less than the critical angle.",
+      "parseStatus": "ok",
+      "stem": "Which statement about total internal reflection is correct?",
+      "options": {
+        "A": "Total internal reflection occurs when light is incident on a glass to air boundary at an angle of incidence greater than the critical angle.",
+        "B": "Total internal reflection occurs when light is incident on a glass to air boundary at an angle of incidence less than the critical angle.",
+        "C": "Total internal reflection occurs when light is incident on an air to glass boundary at an angle of incidence greater than the critical angle.",
+        "D": "Total internal reflection occurs when light is incident on an air to glass boundary at an angle of incidence less than the critical angle."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q19.png",
+      "rawText": "A ray of green light passes through a glass prism, as shown. green light Which colours of light refract as shown in the table? refracts more than green refracts less than green A red blue B red yellow C violet blue D violet yellow",
+      "parseStatus": "ok",
+      "stem": "A ray of green light passes through a glass prism, as shown. green light Which colours of light refract as shown in the table? refracts more than green refracts less than green",
+      "options": {
+        "A": "red blue",
+        "B": "red yellow",
+        "C": "violet blue",
+        "D": "violet yellow"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q20.png",
+      "rawText": "Which electromagnetic waves are used for sterilising medical equipment? A gamma rays B microwaves C radio waves D visible light",
+      "parseStatus": "ok",
+      "stem": "Which electromagnetic waves are used for sterilising medical equipment?",
+      "options": {
+        "A": "gamma rays",
+        "B": "microwaves",
+        "C": "radio waves",
+        "D": "visible light"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q21.png",
+      "rawText": "Which process causes a sound wave to produce an echo? A diffraction B dispersion C reflection D refraction",
+      "parseStatus": "ok",
+      "stem": "Which process causes a sound wave to produce an echo?",
+      "options": {
+        "A": "diffraction",
+        "B": "dispersion",
+        "C": "reflection",
+        "D": "refraction"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q22.png",
+      "rawText": "A student stands 75 m from a wall and makes a short, loud sound by tapping two pieces of wood together. What is the approximate time between making the sound and the student hearing the echo produced? A 0.2 s B 0.5 s C 2 s D 5 s",
+      "parseStatus": "ok",
+      "stem": "A student stands 75 m from a wall and makes a short, loud sound by tapping two pieces of wood together. What is the approximate time between making the sound and the student hearing the echo produced?",
+      "options": {
+        "A": "0.2 s",
+        "B": "0.5 s",
+        "C": "2 s",
+        "D": "5 s"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q23.png",
+      "rawText": "Which statement is always true? A A magnetic material attracts a non-magnetic material. B A magnetic material repels another magnetic material. C A magnetic material attracts another magnetic material if one of them is magnetised. D A non-magnetic material repels another non-magnetic material.",
+      "parseStatus": "ok",
+      "stem": "Which statement is always true?",
+      "options": {
+        "A": "A magnetic material attracts a non-magnetic material.",
+        "B": "A magnetic material repels another magnetic material.",
+        "C": "A magnetic material attracts another magnetic material if one of them is magnetised.",
+        "D": "A non-magnetic material repels another non-magnetic material."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q24.png",
+      "rawText": "A polythene rod is charged by friction. The polythene rod becomes negatively charged. Which statement is correct? A The rod gains electrons. B The rod loses electrons. C The rod gains protons. D The rod loses protons.",
+      "parseStatus": "ok",
+      "stem": "A polythene rod is charged by friction. The polythene rod becomes negatively charged. Which statement is correct?",
+      "options": {
+        "A": "The rod gains electrons.",
+        "B": "The rod loses electrons.",
+        "C": "The rod gains protons.",
+        "D": "The rod loses protons."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q25.png",
+      "rawText": "What is the unit of electromotive force (e.m.f.)? A ampere B newton C ohm D volt",
+      "parseStatus": "ok",
+      "stem": "What is the unit of electromotive force (e.m.f.)?",
+      "options": {
+        "A": "ampere",
+        "B": "newton",
+        "C": "ohm",
+        "D": "volt"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q26.png",
+      "rawText": "The diagram shows a circuit containing two identical lamps and three ammeters. A A A ammeter 1 ammeter 3 ammeter 2 The current in ammeter 1 is 0.30 A. Which row gives possible values for the currents in ammeters 2 and 3? current in ammeter 2 / A current in ammeter 3 / A A 0.15 0.00 B 0.15 0.30 C 0.30 0.00 D 0.30 0.30",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a circuit containing two identical lamps and three ammeters.",
+      "options": {
+        "A": "A A ammeter 1 ammeter 3 ammeter 2 The current in ammeter 1 is 0.30 A. Which row gives possible values for the currents in ammeters 2 and 3? current in ammeter 2 / A current in ammeter 3 / A A 0.15 0.00",
+        "B": "0.15 0.30",
+        "C": "0.30 0.00",
+        "D": "0.30 0.30"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q27.png",
+      "rawText": "Into which wire is a switch connected in order to switch a mains appliance on and off safely? A live B negative C neutral D positive",
+      "parseStatus": "ok",
+      "stem": "Into which wire is a switch connected in order to switch a mains appliance on and off safely?",
+      "options": {
+        "A": "live",
+        "B": "negative",
+        "C": "neutral",
+        "D": "positive"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q28.png",
+      "rawText": "Which device uses the magnetic effect of an electric current? A heater B lamp C relay D thermistor",
+      "parseStatus": "ok",
+      "stem": "Which device uses the magnetic effect of an electric current?",
+      "options": {
+        "A": "heater",
+        "B": "lamp",
+        "C": "relay",
+        "D": "thermistor"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q29.png",
+      "rawText": "A transformer has 200 turns on its primary coil and is connected to a 240 V a.c. supply. The output voltage of the transformer is 60 V a.c. How many turns are on the secondary coil of the transformer? A 20 B 50 C 72 D 800",
+      "parseStatus": "ok",
+      "stem": "A transformer has 200 turns on its primary coil and is connected to a 240 V a.c. supply. The output voltage of the transformer is 60 V a.c. How many turns are on the secondary coil of the transformer?",
+      "options": {
+        "A": "20",
+        "B": "50",
+        "C": "72",
+        "D": "800"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q30.png",
+      "rawText": "Which statement about an atom is correct? A An atom has positive charge because there are only positive charges in the nucleus. B An atom has negative charge because there are only negative charges in the nucleus. C An atom has neutral charge because the positive charge in the nucleus equals the total negative charge of the electrons. D An atom has neutral charge because the negative charge in the nucleus equals the total positive charge of the electrons.",
+      "parseStatus": "ok",
+      "stem": "Which statement about an atom is correct?",
+      "options": {
+        "A": "An atom has positive charge because there are only positive charges in the nucleus.",
+        "B": "An atom has negative charge because there are only negative charges in the nucleus.",
+        "C": "An atom has neutral charge because the positive charge in the nucleus equals the total negative charge of the electrons.",
+        "D": "An atom has neutral charge because the negative charge in the nucleus equals the total positive charge of the electrons."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q31.png",
+      "rawText": "The table gives information about four nuclei. nucleus proton number nucleon number 1 26 59 2 27 59 3 27 60 4 28 60 Which nuclei are isotopes of the same element? A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The table gives information about four nuclei. nucleus proton number nucleon number 1 26 59 2 27 59 3 27 60 4 28 60 Which nuclei are isotopes of the same element?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q32.png",
+      "rawText": "Which apparatus is used to measure background radiation? A a counter, a detector and a source B a counter and a detector only C a counter and a source only D a detector and a source only",
+      "parseStatus": "ok",
+      "stem": "Which apparatus is used to measure background radiation?",
+      "options": {
+        "A": "a counter, a detector and a source",
+        "B": "a counter and a detector only",
+        "C": "a counter and a source only",
+        "D": "a detector and a source only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q33.png",
+      "rawText": "Which row correctly identifies the nature of each radioactive emission? alpha () beta () gamma () A helium nucleus electromagnetic wave electron B electron helium nucleus electromagnetic wave C helium nucleus electron electromagnetic wave D electromagnetic wave electron helium nucleus",
+      "parseStatus": "ok",
+      "stem": "Which row correctly identifies the nature of each radioactive emission? alpha () beta () gamma ()",
+      "options": {
+        "A": "helium nucleus electromagnetic wave electron",
+        "B": "electron helium nucleus electromagnetic wave",
+        "C": "helium nucleus electron electromagnetic wave",
+        "D": "electromagnetic wave electron helium nucleus"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q34.png",
+      "rawText": "A nucleus spontaneously emits radiation and becomes a nucleus of a different element. What could the emitted radiation be? A alpha or beta B alpha or gamma C beta or neutron D gamma or neutron",
+      "parseStatus": "ok",
+      "stem": "A nucleus spontaneously emits radiation and becomes a nucleus of a different element. What could the emitted radiation be?",
+      "options": {
+        "A": "alpha or beta",
+        "B": "alpha or gamma",
+        "C": "beta or neutron",
+        "D": "gamma or neutron"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q35.png",
+      "rawText": "The diagram shows a lead-lined box used for storing a radioactive source. Why is the inside of the box lined with lead? A It helps the source to stay radioactive for longer. B It makes the box heavier. C It makes the radioactive source more stable. D It reduces the amount of radiation that can escape from the box.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a lead-lined box used for storing a radioactive source. Why is the inside of the box lined with lead?",
+      "options": {
+        "A": "It helps the source to stay radioactive for longer.",
+        "B": "It makes the box heavier.",
+        "C": "It makes the radioactive source more stable.",
+        "D": "It reduces the amount of radiation that can escape from the box."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q36.png",
+      "rawText": "A student draws a simplified diagram showing the Sun and the different movements of the Moon and the Earth. Which arrow represents a motion taking 365 days to complete? C B A D Sun Moon Earth NOT TO SCALE",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q37.png",
+      "rawText": "The table gives information about four of the planets in our Solar System. Two of these planets are gaseous and two are rocky. planet average distance from the Sun / km 1 1.4  109 2 2.3  108 3 5.8  107 4 7.8  108 Which two planets are rocky? A 1 and 2 B 1 and 4 C 2 and 3 D 3 and 4",
+      "parseStatus": "ok",
+      "stem": "The table gives information about four of the planets in our Solar System. Two of these planets are gaseous and two are rocky. planet average distance from the Sun / km 1 1.4  109 2 2.3  108 3 5.8  107 4 7.8  108 Which two planets are rocky?",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 4",
+        "C": "2 and 3",
+        "D": "3 and 4"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q38.png",
+      "rawText": "Which row shows the most common elements in the Sun and the regions of the electromagnetic spectrum in which most of the Sun’s energy is radiated? elements regions A carbon and oxygen gamma and radio waves B carbon and oxygen infrared and visible C hydrogen and helium gamma and radio waves D hydrogen and helium infrared and visible",
+      "parseStatus": "ok",
+      "stem": "Which row shows the most common elements in the Sun and the regions of the electromagnetic spectrum in which most of the Sun’s energy is radiated? elements regions",
+      "options": {
+        "A": "carbon and oxygen gamma and radio waves",
+        "B": "carbon and oxygen infrared and visible",
+        "C": "hydrogen and helium gamma and radio waves",
+        "D": "hydrogen and helium infrared and visible"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q39.png",
+      "rawText": "What is the meaning of a light-year? A the distance light travels in space in one year B the number of years it takes light to travel from the Sun to the Earth C the speed that light travels in space D the time it takes light to travel from the Sun to the nearest star",
+      "parseStatus": "ok",
+      "stem": "What is the meaning of a light-year?",
+      "options": {
+        "A": "the distance light travels in space in one year",
+        "B": "the number of years it takes light to travel from the Sun to the Earth",
+        "C": "the speed that light travels in space",
+        "D": "the time it takes light to travel from the Sun to the nearest star"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m24_qp_12/q40.png",
+      "rawText": "What is the approximate diameter of the Milky Way? A 100 light-years B 1000 light-years C 10 000 light-years D 100 000 light-years",
+      "parseStatus": "ok",
+      "stem": "What is the approximate diameter of the Milky Way?",
+      "options": {
+        "A": "100 light-years",
+        "B": "1000 light-years",
+        "C": "10 000 light-years",
+        "D": "100 000 light-years"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

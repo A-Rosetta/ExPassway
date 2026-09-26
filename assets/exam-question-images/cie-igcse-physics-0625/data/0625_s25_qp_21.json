@@ -1,0 +1,658 @@
+{
+  "questionPaper": "0625_s25_qp_21.pdf",
+  "markScheme": "0625_s25_ms_21.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q01.png",
+      "rawText": "The speed–time graph for a racing car is divided into four sections, P, Q, R and S. The car starts the race but soon crashes into a wall of tyres. 0 0 speed time P Q R S Which sections of the graph show that there is an acceleration that is changing? A P, Q, R and S B Q, R and S only C Q and R only D R and S only",
+      "parseStatus": "ok",
+      "stem": "The speed–time graph for a racing car is divided into four sections, P, Q, R and S. The car starts the race but soon crashes into a wall of tyres. 0 0 speed time P Q R S Which sections of the graph show that there is an acceleration that is changing?",
+      "options": {
+        "A": "P, Q, R and S",
+        "B": "Q, R and S only",
+        "C": "Q and R only",
+        "D": "R and S only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q02.png",
+      "rawText": "The diagram shows the four forces acting on an aircraft in flight. 120 kN 60 kN 60 kN 40 kN Which arrow shows the direction of the resultant of the four forces? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q03.png",
+      "rawText": "The diagrams show two metal blocks, X and Y, suspended from identical force meters. X and Y have identical dimensions. 0 1 2 3",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q04.png",
+      "rawText": "A girl has a gold necklace. Which apparatus does she need to find the density of the gold? balance measuring cylinder thermometer ruler A \u0016 \u0016 \u0016 \u0016 key B \u0016 \u0016 \u0016 \u001a \u0016 = needed C \u0016 \u0016 \u001a \u001a \u001a = not needed D \u0016 \u001a \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "A girl has a gold necklace. Which apparatus does she need to find the density of the gold? balance measuring cylinder thermometer ruler",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u0016 \u0016 \u001a \u0016 = needed",
+        "C": "\u0016 \u0016 \u001a \u001a \u001a = not needed",
+        "D": "\u0016 \u001a \u001a \u001a"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q05.png",
+      "rawText": "A spring has a length of 25 cm when a load of 2.0 N is suspended from it. The spring has a length of 35 cm when a 7.0 N load is used. What is the spring constant of the spring? A 0.20 N / cm B 0.50 N / cm C 2.0 N / cm D 5.0 N / cm",
+      "parseStatus": "ok",
+      "stem": "A spring has a length of 25 cm when a load of 2.0 N is suspended from it. The spring has a length of 35 cm when a 7.0 N load is used. What is the spring constant of the spring?",
+      "options": {
+        "A": "0.20 N / cm",
+        "B": "0.50 N / cm",
+        "C": "2.0 N / cm",
+        "D": "5.0 N / cm"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q06.png",
+      "rawText": "The diagrams E–H show a block of wood on a frictionless surface. In each diagram, the block has two forces acting on its sides. E 2 N 2 N F 2 N 2 N 2 N 2 N G 2 N 2 N H Which diagrams show the block in equilibrium? A E, F, G and H B E, G and H only C E and F only D G and H only",
+      "parseStatus": "ok",
+      "stem": "The diagrams E–H show a block of wood on a frictionless surface. In each diagram, the block has two forces acting on its sides. E 2 N 2 N F 2 N 2 N 2 N 2 N G 2 N 2 N H Which diagrams show the block in equilibrium?",
+      "options": {
+        "A": "E, F, G and H",
+        "B": "E, G and H only",
+        "C": "E and F only",
+        "D": "G and H only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q07.png",
+      "rawText": "Which statement is not correct? A the momentum of a system is conserved in all interactions B impulse = change of momentum C force acting = change of momentum  time D momentum = mass  velocity",
+      "parseStatus": "ok",
+      "stem": "Which statement is not correct?",
+      "options": {
+        "A": "the momentum of a system is conserved in all interactions",
+        "B": "impulse = change of momentum",
+        "C": "force acting = change of momentum  time",
+        "D": "momentum = mass  velocity"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q08.png",
+      "rawText": "A force acting on a moving ball causes its motion to change. This force stays constant. What makes the force produce a greater change in the motion of the ball? A decreasing the total mass of the ball B increasing the temperature of the ball C using a ball with a hollow centre but the same mass D using a different material for the ball so that it has a lower density but the same mass",
+      "parseStatus": "ok",
+      "stem": "A force acting on a moving ball causes its motion to change. This force stays constant. What makes the force produce a greater change in the motion of the ball?",
+      "options": {
+        "A": "decreasing the total mass of the ball",
+        "B": "increasing the temperature of the ball",
+        "C": "using a ball with a hollow centre but the same mass",
+        "D": "using a different material for the ball so that it has a lower density but the same mass"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q09.png",
+      "rawText": "A farmer has two carts. The carts have the same weight, but one has four narrow wheels and the other has four wide wheels. narrow wheel wide wheel Which cart wheels sink less into soft ground and what is the reason? cart wheels reason A narrow greater pressure on the ground B narrow less pressure on the ground C wide greater pressure on the ground D wide less pressure on the ground",
+      "parseStatus": "ok",
+      "stem": "A farmer has two carts. The carts have the same weight, but one has four narrow wheels and the other has four wide wheels. narrow wheel wide wheel Which cart wheels sink less into soft ground and what is the reason? cart wheels reason",
+      "options": {
+        "A": "narrow greater pressure on the ground",
+        "B": "narrow less pressure on the ground",
+        "C": "wide greater pressure on the ground",
+        "D": "wide less pressure on the ground"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q10.png",
+      "rawText": "A hot gas and a cool liquid are at the same pressure. Which row describes the separation and the motion of the particles of a hot gas compared to those of a cool liquid? separation of gas particles motion of gas particles A greater than a cool liquid faster than a cool liquid B greater than a cool liquid slower than a cool liquid C less than a cool liquid faster than a cool liquid D less than a cool liquid slower than a cool liquid",
+      "parseStatus": "ok",
+      "stem": "A hot gas and a cool liquid are at the same pressure. Which row describes the separation and the motion of the particles of a hot gas compared to those of a cool liquid? separation of gas particles motion of gas particles",
+      "options": {
+        "A": "greater than a cool liquid faster than a cool liquid",
+        "B": "greater than a cool liquid slower than a cool liquid",
+        "C": "less than a cool liquid faster than a cool liquid",
+        "D": "less than a cool liquid slower than a cool liquid"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q11.png",
+      "rawText": "A fixed mass of gas has a volume of 1.2 m3 and is at a pressure of 200 kPa. The gas expands at constant temperature to a volume of 1.8 m3. What is the new pressure of the gas? A 120 kPa B 130 kPa C 300 kPa D 600 kPa",
+      "parseStatus": "ok",
+      "stem": "A fixed mass of gas has a volume of 1.2 m3 and is at a pressure of 200 kPa. The gas expands at constant temperature to a volume of 1.8 m3. What is the new pressure of the gas?",
+      "options": {
+        "A": "120 kPa",
+        "B": "130 kPa",
+        "C": "300 kPa",
+        "D": "600 kPa"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q12.png",
+      "rawText": "The specific heat capacity of solid P is greater than that of solid Q. What does this statement mean? A Less energy is needed to raise the temperature by 1 °C of unit mass of solid P than unit mass of solid Q. B Less energy is needed to melt unit mass of solid P than unit mass of solid Q. C More energy is needed to raise the temperature by 1 °C of unit mass of solid P than unit mass of solid Q. D More energy is needed to melt unit mass of solid P than unit mass of solid Q.",
+      "parseStatus": "ok",
+      "stem": "The specific heat capacity of solid P is greater than that of solid Q. What does this statement mean?",
+      "options": {
+        "A": "Less energy is needed to raise the temperature by 1 °C of unit mass of solid P than unit mass of solid Q.",
+        "B": "Less energy is needed to melt unit mass of solid P than unit mass of solid Q.",
+        "C": "More energy is needed to raise the temperature by 1 °C of unit mass of solid P than unit mass of solid Q.",
+        "D": "More energy is needed to melt unit mass of solid P than unit mass of solid Q."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q13.png",
+      "rawText": "When water evaporates, what escapes from the surface of the water? A individual atoms B individual molecules C individual protons D tiny drops of water",
+      "parseStatus": "ok",
+      "stem": "When water evaporates, what escapes from the surface of the water?",
+      "options": {
+        "A": "individual atoms",
+        "B": "individual molecules",
+        "C": "individual protons",
+        "D": "tiny drops of water"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q14.png",
+      "rawText": "A sealed container of gas is heated. The pressure of the gas increases. Which statement explains this increase in pressure? A The forces of the gas particles striking the walls of the container increase. B The forces of attraction between the gas particles and the walls of the container increase. C The gas particles collide with each other more frequently. D The gas particles lose more energy when they strike the walls of the container.",
+      "parseStatus": "ok",
+      "stem": "A sealed container of gas is heated. The pressure of the gas increases. Which statement explains this increase in pressure?",
+      "options": {
+        "A": "The forces of the gas particles striking the walls of the container increase.",
+        "B": "The forces of attraction between the gas particles and the walls of the container increase.",
+        "C": "The gas particles collide with each other more frequently.",
+        "D": "The gas particles lose more energy when they strike the walls of the container."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q15.png",
+      "rawText": "A student has a copper rod and a wooden rod. Both rods have the same dimensions. The student puts one end of each rod into a beaker of crushed ice. After a few minutes, the student picks up the rods by the ends not in the ice. Which statement is correct? A The copper rod feels colder than the wooden rod because copper is a better conductor than wood. B The copper rod feels warmer than the wooden rod because copper is a better conductor than wood. C The wooden rod feels colder than the copper rod because wood is a better conductor than copper. D The wooden rod feels warmer than the copper rod because wood is a better conductor than copper.",
+      "parseStatus": "ok",
+      "stem": "A student has a copper rod and a wooden rod. Both rods have the same dimensions. The student puts one end of each rod into a beaker of crushed ice. After a few minutes, the student picks up the rods by the ends not in the ice. Which statement is correct?",
+      "options": {
+        "A": "The copper rod feels colder than the wooden rod because copper is a better conductor than wood.",
+        "B": "The copper rod feels warmer than the wooden rod because copper is a better conductor than wood.",
+        "C": "The wooden rod feels colder than the copper rod because wood is a better conductor than copper.",
+        "D": "The wooden rod feels warmer than the copper rod because wood is a better conductor than copper."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q16.png",
+      "rawText": "The diagram shows a black object X at constant temperature. The arrows represent the absorption and emission of thermal radiation at the surface. Object Y is at the same constant temperature as X and is identical except that it has a white surface. Which row correctly compares object X with object Y? rate of absorption for X rate of emission for X A higher higher B lower higher C higher lower D lower lower",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a black object X at constant temperature. The arrows represent the absorption and emission of thermal radiation at the surface. Object Y is at the same constant temperature as X and is identical except that it has a white surface. Which row correctly compares object X with object Y? rate of absorption for X rate of emission for X",
+      "options": {
+        "A": "higher higher",
+        "B": "lower higher",
+        "C": "higher lower",
+        "D": "lower lower"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q17.png",
+      "rawText": "The diagram shows a cork with a weight attached so that the cork floats upright in water. X Y cork water surface weight Transverse waves travel across the water from X to Y. In which direction do the waves make the cork move? A   right and left B  up and down C  only to the right D  only to the left",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a cork with a weight attached so that the cork floats upright in water. X Y cork water surface weight Transverse waves travel across the water from X to Y. In which direction do the waves make the cork move?",
+      "options": {
+        "A": "  right and left",
+        "B": " up and down",
+        "C": " only to the right",
+        "D": " only to the left"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q18.png",
+      "rawText": "A thin converging lens is used as a magnifying glass. How does the image compare with the object? A real and inverted B real and upright C virtual and inverted D virtual and upright",
+      "parseStatus": "ok",
+      "stem": "A thin converging lens is used as a magnifying glass. How does the image compare with the object?",
+      "options": {
+        "A": "real and inverted",
+        "B": "real and upright",
+        "C": "virtual and inverted",
+        "D": "virtual and upright"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q19.png",
+      "rawText": "The diagram shows two plane mirrors at 90° to each other. A ray of light is incident on one of the mirrors. The ray reflects off both mirrors before reaching a screen. At which labelled point does the ray reach the screen? ray of light screen A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q20.png",
+      "rawText": "The speed of light in a material is 50% of the speed of light in air. What is the refractive index of the material? A 0.5 B 2.0 C 6.0  108 D 1.5  108",
+      "parseStatus": "ok",
+      "stem": "The speed of light in a material is 50% of the speed of light in air. What is the refractive index of the material?",
+      "options": {
+        "A": "0.5",
+        "B": "2.0",
+        "C": "6.0  108",
+        "D": "1.5  108"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q21.png",
+      "rawText": "A beam of white light is split into a spectrum of seven colours. Which name is given to this process? A diffraction B dispersion C reflection D refraction",
+      "parseStatus": "ok",
+      "stem": "A beam of white light is split into a spectrum of seven colours. Which name is given to this process?",
+      "options": {
+        "A": "diffraction",
+        "B": "dispersion",
+        "C": "reflection",
+        "D": "refraction"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q22.png",
+      "rawText": "Satellites are sometimes used to receive and re-transmit television signals. Which row shows the type of satellite and the electromagnetic waves used? type of satellite electromagnetic waves used A low orbit infrared B low orbit microwaves C geostationary infrared D geostationary microwaves",
+      "parseStatus": "ok",
+      "stem": "Satellites are sometimes used to receive and re-transmit television signals. Which row shows the type of satellite and the electromagnetic waves used? type of satellite electromagnetic waves used",
+      "options": {
+        "A": "low orbit infrared",
+        "B": "low orbit microwaves",
+        "C": "geostationary infrared",
+        "D": "geostationary microwaves"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q23.png",
+      "rawText": "A sound wave travels through the air and strikes a solid block of steel. Some of the sound is reflected from the steel, and some is transmitted through the steel. How does the speed and the wavelength of the sound in steel compare to the speed and the wavelength of the sound in air? speed in steel wavelength in steel A less than in air less than in air B less than in air greater than in air C greater than in air less than in air D greater than in air greater than in air",
+      "parseStatus": "ok",
+      "stem": "A sound wave travels through the air and strikes a solid block of steel. Some of the sound is reflected from the steel, and some is transmitted through the steel. How does the speed and the wavelength of the sound in steel compare to the speed and the wavelength of the sound in air? speed in steel wavelength in steel",
+      "options": {
+        "A": "less than in air less than in air",
+        "B": "less than in air greater than in air",
+        "C": "greater than in air less than in air",
+        "D": "greater than in air greater than in air"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q24.png",
+      "rawText": "The diagram shows a bracelet containing two magnets. The arrows represent the pattern and the direction of the magnetic field due to the magnets. J K X Y Which row identifies the magnetic pole at J, the magnetic pole at K and where the magnetic field is the strongest? magnetic pole at J magnetic pole at K where the magnetic field is the strongest A N N X B N N Y C S S X D S S Y",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a bracelet containing two magnets. The arrows represent the pattern and the direction of the magnetic field due to the magnets. J K X Y Which row identifies the magnetic pole at J, the magnetic pole at K and where the magnetic field is the strongest? magnetic pole at J magnetic pole at K where the magnetic field is the strongest",
+      "options": {
+        "A": "N N X",
+        "B": "N N Y",
+        "C": "S S X",
+        "D": "S S Y"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q25.png",
+      "rawText": "Which row describes an electric field and its direction? description of electric field direction of electric field A region in which an electric charge experiences a force direction of the force on a positive charge B region in which an electric charge experiences a force direction of the force on a negative charge C region in which an electric charge produces a current direction of the force on a positive charge D region in which an electric charge produces a current direction of the force on a negative charge",
+      "parseStatus": "ok",
+      "stem": "Which row describes an electric field and its direction? description of electric field direction of electric field",
+      "options": {
+        "A": "region in which an electric charge experiences a force direction of the force on a positive charge",
+        "B": "region in which an electric charge experiences a force direction of the force on a negative charge",
+        "C": "region in which an electric charge produces a current direction of the force on a positive charge",
+        "D": "region in which an electric charge produces a current direction of the force on a negative charge"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q26.png",
+      "rawText": "Copper wire is available in fixed lengths but in various diameters d. Each wire has a different resistance R. Which relationship between R and d is correct? A R is directly proportional to d. B R is directly proportional to d 2. C R is inversely proportional to d. D R is inversely proportional to d 2.",
+      "parseStatus": "ok",
+      "stem": "Copper wire is available in fixed lengths but in various diameters d. Each wire has a different resistance R. Which relationship between R and d is correct?",
+      "options": {
+        "A": "R is directly proportional to d.",
+        "B": "R is directly proportional to d 2.",
+        "C": "R is inversely proportional to d.",
+        "D": "R is inversely proportional to d 2."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q27.png",
+      "rawText": "The diagram shows three 20  resistors, R1, R2 and R3, and a switch S connected to a d.c. power supply. R1 R2 S R3 Switch S is open. The potential difference (p.d.) across R3 is 9.0 V. What is the p.d. across R3 when switch S is closed? A 3.0 V B 6.0 V C 12 V D 27 V",
+      "parseStatus": "ok",
+      "stem": "The diagram shows three 20  resistors, R1, R2 and R3, and a switch S connected to a d.c. power supply. R1 R2 S R3 Switch S is open. The potential difference (p.d.) across R3 is 9.0 V. What is the p.d. across R3 when switch S is closed?",
+      "options": {
+        "A": "3.0 V",
+        "B": "6.0 V",
+        "C": "12 V",
+        "D": "27 V"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q28.png",
+      "rawText": "The circuits shown all include a d.c. power supply, one diode and two light-emitting diodes (LEDs). In which circuit will both LEDs be turned on? A B + – + – C D + – + –",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q29.png",
+      "rawText": "A wire connected to a resistor R is moved in a magnetic field. A current is induced in the direction shown. In which direction is the wire moved? N S D A B C B R wire induced current",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q30.png",
+      "rawText": "Which component is not found in an a.c. generator? A coil of wire B split-ring commutator C magnetic poles D slip rings",
+      "parseStatus": "ok",
+      "stem": "Which component is not found in an a.c. generator?",
+      "options": {
+        "A": "coil of wire",
+        "B": "split-ring commutator",
+        "C": "magnetic poles",
+        "D": "slip rings"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q31.png",
+      "rawText": "There is a current in a straight metal wire in the direction shown. direction of current Which row describes the direction and the pattern of the magnetic field due to the wire when looking from vertically above the wire? direction pattern A anticlockwise circular B left to right parallel lines C clockwise circular D right to left parallel lines",
+      "parseStatus": "ok",
+      "stem": "There is a current in a straight metal wire in the direction shown. direction of current Which row describes the direction and the pattern of the magnetic field due to the wire when looking from vertically above the wire? direction pattern",
+      "options": {
+        "A": "anticlockwise circular",
+        "B": "left to right parallel lines",
+        "C": "clockwise circular",
+        "D": "right to left parallel lines"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q32.png",
+      "rawText": "A simple transformer contains an iron core. What is the function of the iron core in the transformer? A to conduct current from the primary coil to the secondary coil B to enable the secondary coil to act as an electromagnet C to ensure there is a high voltage between the primary coil and the secondary coil D to link the magnetic field in the primary coil to the secondary coil",
+      "parseStatus": "ok",
+      "stem": "A simple transformer contains an iron core. What is the function of the iron core in the transformer?",
+      "options": {
+        "A": "to conduct current from the primary coil to the secondary coil",
+        "B": "to enable the secondary coil to act as an electromagnet",
+        "C": "to ensure there is a high voltage between the primary coil and the secondary coil",
+        "D": "to link the magnetic field in the primary coil to the secondary coil"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q33.png",
+      "rawText": "In an alpha particle scattering experiment, a beam of alpha particles is fired at a very thin piece of gold foil. In which direction do most of the alpha particles travel after hitting the foil? gold foil beam of alpha particles A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q34.png",
+      "rawText": "An atom of boron contains 5 protons and 5 electrons. The nucleon number of the atom is 11. How many neutrons are there in the atom? A 5 B 6 C 11 D 16",
+      "parseStatus": "ok",
+      "stem": "An atom of boron contains 5 protons and 5 electrons. The nucleon number of the atom is 11. How many neutrons are there in the atom?",
+      "options": {
+        "A": "5",
+        "B": "6",
+        "C": "11",
+        "D": "16"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q35.png",
+      "rawText": "A detector placed near a radioactive isotope gives a measured count rate of 800 counts / minute. The half-life of the isotope is three hours. The background count rate is 32 counts / minute. What is the count rate on the detector after six hours? A 192 counts / minute B 200 counts / minute C 224 counts / minute D 232 counts / minute",
+      "parseStatus": "ok",
+      "stem": "A detector placed near a radioactive isotope gives a measured count rate of 800 counts / minute. The half-life of the isotope is three hours. The background count rate is 32 counts / minute. What is the count rate on the detector after six hours?",
+      "options": {
+        "A": "192 counts / minute",
+        "B": "200 counts / minute",
+        "C": "224 counts / minute",
+        "D": "232 counts / minute"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q36.png",
+      "rawText": "Sodium-24 is a radioactive isotope that emits beta radiation. Which nuclear equation shows how sodium-24 decays? 24Na A \u0001 11 24Mg + 12 0\u0002 –1 24Na B \u0001 11 24Ne + 10 0\u0002 –1 24Na C \u0001 11 20F + 9 4\u0002 2 4\u0002 2 24Na D \u0001 11 20Al + 13",
+      "parseStatus": "ok",
+      "stem": "Sodium-24 is a radioactive isotope that emits beta radiation. Which nuclear equation shows how sodium-24 decays? 24Na",
+      "options": {
+        "A": "\u0001 11 24Mg + 12 0\u0002 –1 24Na",
+        "B": "\u0001 11 24Ne + 10 0\u0002 –1 24Na",
+        "C": "\u0001 11 20F + 9 4\u0002 2 4\u0002 2 24Na",
+        "D": "\u0001 11 20Al + 13"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q37.png",
+      "rawText": "Which safety precautions must be taken when using a source of gamma radiation? 1 Reduce the distance between the source and the person. 2 Reduce the time of exposure to the radiation. 3 Use a suitable shielding material between the source and the person. A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Which safety precautions must be taken when using a source of gamma radiation? 1 Reduce the distance between the source and the person. 2 Reduce the time of exposure to the radiation. 3 Use a suitable shielding material between the source and the person.",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q38.png",
+      "rawText": "A student defines three periods of time: ● the time TS taken for the Earth to orbit the Sun ● the time TR taken for the Earth to rotate once on its axis ● the time TM taken for the Moon to orbit the Earth. Which row shows the shortest period of time and the longest period of time? shortest period of time longest period of time A TS TR B TR TS C TR TM D TM TS",
+      "parseStatus": "ok",
+      "stem": "A student defines three periods of time: ● the time TS taken for the Earth to orbit the Sun ● the time TR taken for the Earth to rotate once on its axis ● the time TM taken for the Moon to orbit the Earth. Which row shows the shortest period of time and the longest period of time? shortest period of time longest period of time",
+      "options": {
+        "A": "TS TR",
+        "B": "TR TS",
+        "C": "TR TM",
+        "D": "TM TS"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q39.png",
+      "rawText": "Which statement about the Universe is correct? A The Universe consists of 100 000 galaxies. B Redshift is a decrease in the observed wavelength of electromagnetic radiation emitted from receding galaxies. C Light emitted from distant galaxies appears redshifted. D Redshift of the light from distant galaxies gives evidence that the Universe is contracting.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Universe is correct?",
+      "options": {
+        "A": "The Universe consists of 100 000 galaxies.",
+        "B": "Redshift is a decrease in the observed wavelength of electromagnetic radiation emitted from receding galaxies.",
+        "C": "Light emitted from distant galaxies appears redshifted.",
+        "D": "Redshift of the light from distant galaxies gives evidence that the Universe is contracting."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_21/q40.png",
+      "rawText": "Which statement about the cosmic microwave background radiation (CMBR) is correct? A CMBR now has a frequency higher than that of infrared radiation. B CMBR has always had exactly the same frequency. C CMBR had a shorter wavelength in the past. D CMBR was produced a long time after the Universe was formed.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the cosmic microwave background radiation (CMBR) is correct?",
+      "options": {
+        "A": "CMBR now has a frequency higher than that of infrared radiation.",
+        "B": "CMBR has always had exactly the same frequency.",
+        "C": "CMBR had a shorter wavelength in the past.",
+        "D": "CMBR was produced a long time after the Universe was formed."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,673 @@
+{
+  "questionPaper": "0625_w23_qp_12.pdf",
+  "markScheme": "0625_w23_ms_12.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q01.png",
+      "rawText": "A student investigates the oscillation of a mass suspended from a spring. The student pulls the mass down from its rest position P and then releases it so that it oscillates vertically. The student then follows the instructions listed to find the period of the oscillating mass. 1 Count 10 complete oscillations.",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q02.png",
+      "rawText": "A student measures the average speed of a cyclist in a race. Which quantities must she measure? A the total time taken to complete the race and the time taken for the cyclist to reach her highest speed B the total time taken to complete the race and the total distance travelled by the cyclist at her highest speed C the total time taken to complete the race and the total distance travelled by the cyclist D the time taken to reach her highest speed and the total distance travelled by the cyclist",
+      "parseStatus": "ok",
+      "stem": "A student measures the average speed of a cyclist in a race. Which quantities must she measure?",
+      "options": {
+        "A": "the total time taken to complete the race and the time taken for the cyclist to reach her highest speed",
+        "B": "the total time taken to complete the race and the total distance travelled by the cyclist at her highest speed",
+        "C": "the total time taken to complete the race and the total distance travelled by the cyclist",
+        "D": "the time taken to reach her highest speed and the total distance travelled by the cyclist"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q03.png",
+      "rawText": "The graph shows the motion of a sprinter. 10.0 8.0 6.0 4.0 2.0 0 0 1.0 2.0 3.0 4.0 5.0 time / s speed m / s 6.0 7.0 She accelerates steadily from rest to 8.0 m / s in 4.0 s. How far does she travel in the last three seconds of her acceleration? A 9.0 m B 15 m C 16 m D 24 m",
+      "parseStatus": "ok",
+      "stem": "The graph shows the motion of a sprinter. 10.0 8.0 6.0 4.0 2.0 0 0 1.0 2.0 3.0 4.0 5.0 time / s speed m / s 6.0 7.0 She accelerates steadily from rest to 8.0 m / s in 4.0 s. How far does she travel in the last three seconds of her acceleration?",
+      "options": {
+        "A": "9.0 m",
+        "B": "15 m",
+        "C": "16 m",
+        "D": "24 m"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q04.png",
+      "rawText": "A person steps onto a bathroom scale. The bathroom scale records both mass and weight. Which row shows the readings on the bathroom scale? mass weight A 60 N 590 kg B 60 kg 590 N C 590 kg 60 N D 590 N 60 kg",
+      "parseStatus": "ok",
+      "stem": "A person steps onto a bathroom scale. The bathroom scale records both mass and weight. Which row shows the readings on the bathroom scale? mass weight",
+      "options": {
+        "A": "60 N 590 kg",
+        "B": "60 kg 590 N",
+        "C": "590 kg 60 N",
+        "D": "590 N 60 kg"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q05.png",
+      "rawText": "Which equation is correct? A density = mass  volume B density = weight  volume C mass = density  volume D weight = density  volume",
+      "parseStatus": "ok",
+      "stem": "Which equation is correct?",
+      "options": {
+        "A": "density = mass  volume",
+        "B": "density = weight  volume",
+        "C": "mass = density  volume",
+        "D": "weight = density  volume"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q06.png",
+      "rawText": "The diagrams show four identical objects. Each object is acted on by only the forces shown. Which diagram shows an object in equilibrium? A 10 N 10 N 20 N B 10 N 10 N 10 N C 10 N 10 N 10 N D 10 N 10 N 20 N",
+      "parseStatus": "ok",
+      "stem": "The diagrams show four identical objects. Each object is acted on by only the forces shown. Which diagram shows an object in equilibrium?",
+      "options": {
+        "A": "10 N 10 N 20 N",
+        "B": "10 N 10 N 10 N",
+        "C": "10 N 10 N 10 N",
+        "D": "10 N 10 N 20 N"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q07.png",
+      "rawText": "A uniform wooden ruler is pivoted at its centre. A load of 2.0 N is suspended from each end of the ruler. 2.0 N pivot 2.0 N load load wooden ruler F The pivot exerts an upward force F on the ruler. What is F equal to? A 2.0 N B the weight of the ruler C 4.0 N D 4.0 N plus the weight of the ruler",
+      "parseStatus": "ok",
+      "stem": "A uniform wooden ruler is pivoted at its centre.",
+      "options": {
+        "A": "load of 2.0 N is suspended from each end of the ruler. 2.0 N pivot 2.0 N load load wooden ruler F The pivot exerts an upward force F on the ruler. What is F equal to? A 2.0 N",
+        "B": "the weight of the ruler",
+        "C": "4.0 N",
+        "D": "4.0 N plus the weight of the ruler"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q08.png",
+      "rawText": "The diagram shows part of a rollercoaster ride with the car at different positions. The car runs freely down from position X to position Y and up the hill on the other side. X Y car What happens to the energy in the kinetic store and the gravitational potential store of the car as it moves from position X to position Y? energy in kinetic store energy in gravitational potential store A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a rollercoaster ride with the car at different positions. The car runs freely down from position X to position Y and up the hill on the other side. X Y car What happens to the energy in the kinetic store and the gravitational potential store of the car as it moves from position X to position Y? energy in kinetic store energy in gravitational potential store",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q09.png",
+      "rawText": "In a small power station, biofuel is used to generate electricity. Which energy store is reduced by this process? A chemical B kinetic C nuclear D thermal",
+      "parseStatus": "ok",
+      "stem": "In a small power station, biofuel is used to generate electricity. Which energy store is reduced by this process?",
+      "options": {
+        "A": "chemical",
+        "B": "kinetic",
+        "C": "nuclear",
+        "D": "thermal"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q10.png",
+      "rawText": "An electric car is charged overnight. In 8.0 hours, 180 MJ of energy is transferred. What is the power of the charger? A 6.3 kW B 380 kW C 23 MW D 1400 MW",
+      "parseStatus": "ok",
+      "stem": "An electric car is charged overnight. In 8.0 hours, 180 MJ of energy is transferred. What is the power of the charger?",
+      "options": {
+        "A": "6.3 kW",
+        "B": "380 kW",
+        "C": "23 MW",
+        "D": "1400 MW"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q11.png",
+      "rawText": "Tractors have large tyres. These help to prevent the wheels from sinking into soft ground. tractor Which statement explains this? A Larger tyres exert a greater force on the ground. B Larger tyres exert a greater pressure on the ground. C Larger tyres exert a smaller force on the ground. D Larger tyres exert a smaller pressure on the ground.",
+      "parseStatus": "ok",
+      "stem": "Tractors have large tyres. These help to prevent the wheels from sinking into soft ground. tractor Which statement explains this?",
+      "options": {
+        "A": "Larger tyres exert a greater force on the ground.",
+        "B": "Larger tyres exert a greater pressure on the ground.",
+        "C": "Larger tyres exert a smaller force on the ground.",
+        "D": "Larger tyres exert a smaller pressure on the ground."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q12.png",
+      "rawText": "Brownian motion is the random motion of particles. In which states of matter is Brownian motion observed? A gases, liquids and solids B gases and liquids only C gases and solids only D liquids and solids only",
+      "parseStatus": "ok",
+      "stem": "Brownian motion is the random motion of particles. In which states of matter is Brownian motion observed?",
+      "options": {
+        "A": "gases, liquids and solids",
+        "B": "gases and liquids only",
+        "C": "gases and solids only",
+        "D": "liquids and solids only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q13.png",
+      "rawText": "A student investigates the relationship between the pressure of a gas and its volume at constant temperature. He records his results in the table. reading 2 cm / N pressure volume / cm3 1 10.0 24 2 7.4 32 3 4.0 63 4 13.0 19 What is the correct conclusion from the experiment? A The volume decreases when the pressure increases. B The volume increases when the pressure increases. C The volume initially increases when the pressure increases, but then decreases. D The volume is independent of the pressure.",
+      "parseStatus": "ok",
+      "stem": "A student investigates the relationship between the pressure of a gas and its volume at constant temperature. He records his results in the table. reading 2 cm / N pressure volume / cm3 1 10.0 24 2 7.4 32 3 4.0 63 4 13.0 19 What is the correct conclusion from the experiment?",
+      "options": {
+        "A": "The volume decreases when the pressure increases.",
+        "B": "The volume increases when the pressure increases.",
+        "C": "The volume initially increases when the pressure increases, but then decreases.",
+        "D": "The volume is independent of the pressure."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q14.png",
+      "rawText": "A wooden wheel can be strengthened by putting a tight circle of iron around it. wooden wheel iron circle Which action would make it easier to fit the circle over the wood? A cooling the iron circle only B heating the iron circle C heating the wooden wheel and cooling the iron circle D heating the wooden wheel but not heating or cooling the iron circle",
+      "parseStatus": "ok",
+      "stem": "A wooden wheel can be strengthened by putting a tight circle of iron around it. wooden wheel iron circle Which action would make it easier to fit the circle over the wood?",
+      "options": {
+        "A": "cooling the iron circle only",
+        "B": "heating the iron circle",
+        "C": "heating the wooden wheel and cooling the iron circle",
+        "D": "heating the wooden wheel but not heating or cooling the iron circle"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q15.png",
+      "rawText": "Which diagram shows the processes happening during changes of state? A gas liquid solid boiling solidification B melting gas liquid solid condensation melting solid liquid gas boiling boiling C solidification solid liquid gas D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q16.png",
+      "rawText": "A room is heated by a radiator. The diagrams X and Y show two possible circulations of hot air, which heat the room. diagram X radiator diagram Y radiator ceiling floor ceiling floor Which diagram and reason explain the heating of the room by convection? diagram reason A X air density decreases when air is heated B X air density increases when air is heated C Y air density decreases when air is heated D Y air density increases when air is heated",
+      "parseStatus": "ok",
+      "stem": "A room is heated by a radiator. The diagrams X and Y show two possible circulations of hot air, which heat the room. diagram X radiator diagram Y radiator ceiling floor ceiling floor Which diagram and reason explain the heating of the room by convection? diagram reason",
+      "options": {
+        "A": "X air density decreases when air is heated",
+        "B": "X air density increases when air is heated",
+        "C": "Y air density decreases when air is heated",
+        "D": "Y air density increases when air is heated"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q17.png",
+      "rawText": "Which description and example are correct for a transverse wave? description example A The direction of vibration is parallel to the direction of propagation. sound B The direction of vibration is parallel to the direction of propagation. waves on a rope C The direction of vibration is at right angles to the direction of propagation. sound D The direction of vibration is at right angles to the direction of propagation. waves on a rope",
+      "parseStatus": "ok",
+      "stem": "Which description and example are correct for a transverse wave? description example",
+      "options": {
+        "A": "The direction of vibration is parallel to the direction of propagation. sound",
+        "B": "The direction of vibration is parallel to the direction of propagation. waves on a rope",
+        "C": "The direction of vibration is at right angles to the direction of propagation. sound",
+        "D": "The direction of vibration is at right angles to the direction of propagation. waves on a rope"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q18.png",
+      "rawText": "Straight wavefronts on the surface of a ripple tank approach a gap in a barrier. The diagram shows how the wavefronts change shape as they pass through the gap. straight wavefronts barrier What is the name of this effect? A diffraction B propagation C reflection D refraction",
+      "parseStatus": "ok",
+      "stem": "Straight wavefronts on the surface of a ripple tank approach a gap in a barrier. The diagram shows how the wavefronts change shape as they pass through the gap. straight wavefronts barrier What is the name of this effect?",
+      "options": {
+        "A": "diffraction",
+        "B": "propagation",
+        "C": "reflection",
+        "D": "refraction"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q19.png",
+      "rawText": "Red, green and violet lights are part of the visible spectrum of light. What is the order of colours from shortest to longest wavelength? A red  green  violet B red  violet  green C violet  red  green D violet  green  red",
+      "parseStatus": "ok",
+      "stem": "Red, green and violet lights are part of the visible spectrum of light. What is the order of colours from shortest to longest wavelength?",
+      "options": {
+        "A": "red  green  violet",
+        "B": "red  violet  green",
+        "C": "violet  red  green",
+        "D": "violet  green  red"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q20.png",
+      "rawText": "Which diagram shows the image correctly formed by reflection? A object image B object image C object image D object image mirror mirror mirror mirror",
+      "parseStatus": "ok",
+      "stem": "Which diagram shows the image correctly formed by reflection?",
+      "options": {
+        "A": "object image",
+        "B": "object image",
+        "C": "object image",
+        "D": "object image mirror mirror mirror mirror"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q21.png",
+      "rawText": "A student passes parallel rays of light through four different converging lenses. He measures the distance x and the distance y for each experiment. x y Which lens has the longest focal length? x / cm y / cm A 4.6 2.0 B 5.1 3.1 C 5.9 2.3 D 6.1 2.4",
+      "parseStatus": "ok",
+      "stem": "A student passes parallel rays of light through four different converging lenses. He measures the distance x and the distance y for each experiment. x y Which lens has the longest focal length? x / cm y / cm",
+      "options": {
+        "A": "4.6 2.0",
+        "B": "5.1 3.1",
+        "C": "5.9 2.3",
+        "D": "6.1 2.4"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q22.png",
+      "rawText": "The table shows different types of wave in the electromagnetic spectrum. radio waves microwaves infrared waves visible light ultraviolet waves X-rays gamma rays Where do all the waves travel at the same speed? A in a vacuum B in diamond C in glass D in water",
+      "parseStatus": "ok",
+      "stem": "The table shows different types of wave in the electromagnetic spectrum. radio waves microwaves infrared waves visible light ultraviolet waves X-rays gamma rays Where do all the waves travel at the same speed?",
+      "options": {
+        "A": "in a vacuum",
+        "B": "in diamond",
+        "C": "in glass",
+        "D": "in water"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q23.png",
+      "rawText": "Which statement about a sound that can be heard by a person with normal hearing is correct? A The sound is a longitudinal wave with a frequency between 2.0 Hz and 20 Hz. B The sound is a longitudinal wave with a frequency between 20 Hz and 20 000 Hz. C The sound is a transverse wave with a frequency between 2.0 Hz and 2000 Hz. D The sound is a transverse wave with a frequency between 2.0 Hz and 20 MHz.",
+      "parseStatus": "ok",
+      "stem": "Which statement about a sound that can be heard by a person with normal hearing is correct?",
+      "options": {
+        "A": "The sound is a longitudinal wave with a frequency between 2.0 Hz and 20 Hz.",
+        "B": "The sound is a longitudinal wave with a frequency between 20 Hz and 20 000 Hz.",
+        "C": "The sound is a transverse wave with a frequency between 2.0 Hz and 2000 Hz.",
+        "D": "The sound is a transverse wave with a frequency between 2.0 Hz and 20 MHz."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q24.png",
+      "rawText": "A hard magnetic material can be used to make a permanent magnet. A soft magnetic material can be used to make a temporary magnet. Which row shows whether iron and steel are hard or soft magnetic materials? iron steel A hard hard B hard soft C soft hard D soft soft",
+      "parseStatus": "ok",
+      "stem": "A hard magnetic material can be used to make a permanent magnet.",
+      "options": {
+        "A": "soft magnetic material can be used to make a temporary magnet. Which row shows whether iron and steel are hard or soft magnetic materials? iron steel A hard hard",
+        "B": "hard soft",
+        "C": "soft hard",
+        "D": "soft soft"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q25.png",
+      "rawText": "A battery is connected to an ammeter and a resistor. A The ammeter reading is 0.20 A. An electrical insulator is connected in parallel with the resistor. What is the ammeter reading? A 0 A B between 0 A and 0.20 A C 0.20 A D greater than 0.20 A",
+      "parseStatus": "ok",
+      "stem": "A battery is connected to an ammeter and a resistor.",
+      "options": {
+        "A": "The ammeter reading is 0.20 A. An electrical insulator is connected in parallel with the resistor. What is the ammeter reading? A 0 A",
+        "B": "between 0 A and 0.20 A",
+        "C": "0.20 A",
+        "D": "greater than 0.20 A"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q26.png",
+      "rawText": "Which unit is used to measure electromotive force (e.m.f.)? A ampere B joule C volt D watt",
+      "parseStatus": "ok",
+      "stem": "Which unit is used to measure electromotive force (e.m.f.)?",
+      "options": {
+        "A": "ampere",
+        "B": "joule",
+        "C": "volt",
+        "D": "watt"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q27.png",
+      "rawText": "Which equation is correct for resistance R, potential difference (p.d.) V and current I ? A R = I V B R = V + I C R = V I D R = V  I",
+      "parseStatus": "ok",
+      "stem": "Which equation is correct for resistance R, potential difference (p.d.) V and current I ?",
+      "options": {
+        "A": "R = I V",
+        "B": "R = V + I",
+        "C": "R = V I",
+        "D": "R = V  I"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q28.png",
+      "rawText": "In the diagram, rod R is suspended from an insulating thread. + + + + + Q R moves away from rod Q insulating thread When the positively charged rod Q is brought close to rod R, rod R moves away from rod Q. Which conclusion can be made from this observation? A Rod R is charged, but it is not possible to identify the sign of the charge. B Rod R must be positively charged. C Rod R must be negatively charged. D Rod R is uncharged.",
+      "parseStatus": "ok",
+      "stem": "In the diagram, rod R is suspended from an insulating thread. + + + + + Q R moves away from rod Q insulating thread When the positively charged rod Q is brought close to rod R, rod R moves away from rod Q. Which conclusion can be made from this observation?",
+      "options": {
+        "A": "Rod R is charged, but it is not possible to identify the sign of the charge.",
+        "B": "Rod R must be positively charged.",
+        "C": "Rod R must be negatively charged.",
+        "D": "Rod R is uncharged."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q29.png",
+      "rawText": "In which heating system circuit would thermistors not be useful? A to keep different rooms at different temperatures B to turn an alarm on if the system overheats C to turn a heating system off at a particular temperature D to turn a heating system on when a sound is detected",
+      "parseStatus": "ok",
+      "stem": "In which heating system circuit would thermistors not be useful?",
+      "options": {
+        "A": "to keep different rooms at different temperatures",
+        "B": "to turn an alarm on if the system overheats",
+        "C": "to turn a heating system off at a particular temperature",
+        "D": "to turn a heating system on when a sound is detected"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q30.png",
+      "rawText": "Which statement is correct? A A fuse is included in a circuit to prevent the current becoming too high. B A fuse should be connected to the neutral wire in a plug. C An electric circuit will only work if it includes a fuse. D An earth wire is needed to prevent the fuse blowing.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "A fuse is included in a circuit to prevent the current becoming too high.",
+        "B": "A fuse should be connected to the neutral wire in a plug.",
+        "C": "An electric circuit will only work if it includes a fuse.",
+        "D": "An earth wire is needed to prevent the fuse blowing."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q31.png",
+      "rawText": "Which graph of current I against time t represents an alternating current (a.c.)? 0 A I t 0 0 B I t 0 0 C I t 0 0 D I t 0",
+      "parseStatus": "ok",
+      "stem": "Which graph of current I against time t represents an alternating current (a.c.)? 0",
+      "options": {
+        "A": "I t 0 0",
+        "B": "I t 0 0",
+        "C": "I t 0 0",
+        "D": "I t 0"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q32.png",
+      "rawText": "The diagram shows a wire in the magnetic field between two poles of a magnet. N S magnet wire The current in the wire repeatedly changes between a constant value in one direction and a constant value in the opposite direction, as shown in the graph. current time 0 0 What is the effect on the wire? A The force on the wire alternates between one direction and the opposite direction. B The force on the wire is constant in size and direction. C There is no force acting on the wire at any time. D There is only a force on the wire when the current reverses.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a wire in the magnetic field between two poles of a magnet. N S magnet wire The current in the wire repeatedly changes between a constant value in one direction and a constant value in the opposite direction, as shown in the graph. current time 0 0 What is the effect on the wire?",
+      "options": {
+        "A": "The force on the wire alternates between one direction and the opposite direction.",
+        "B": "The force on the wire is constant in size and direction.",
+        "C": "There is no force acting on the wire at any time.",
+        "D": "There is only a force on the wire when the current reverses."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q33.png",
+      "rawText": "A transformer has Np turns on its primary coil and Ns turns on its secondary coil. The voltage across the primary coil is Vp and the voltage across the secondary coil is Vs. What is the relationship between these four quantities? A Vp  Vs = Np  Ns B s p V V = s p N N C s p V V = p s N N D s p V V = Np  Ns",
+      "parseStatus": "ok",
+      "stem": "A transformer has Np turns on its primary coil and Ns turns on its secondary coil. The voltage across the primary coil is Vp and the voltage across the secondary coil is Vs. What is the relationship between these four quantities?",
+      "options": {
+        "A": "Vp  Vs = Np  Ns",
+        "B": "s p V V = s p N N",
+        "C": "s p V V = p s N N",
+        "D": "s p V V = Np  Ns"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q34.png",
+      "rawText": "The diagrams represent the protons, neutrons and electrons in different atoms and ions. Which diagram shows a negatively charged ion? A B C D key = proton = neutron = electron",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q35.png",
+      "rawText": "Which row correctly describes an example of radioactive decay? original nucleus emission change or no change of element A stable  change of element B unstable  change of element C unstable  no change of element D unstable  no change of element",
+      "parseStatus": "ok",
+      "stem": "Which row correctly describes an example of radioactive decay? original nucleus emission change or no change of element",
+      "options": {
+        "A": "stable  change of element",
+        "B": "unstable  change of element",
+        "C": "unstable  no change of element",
+        "D": "unstable  no change of element"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q36.png",
+      "rawText": "A detector is used to monitor the emissions from a radioactive source over several days. The table shows the count rate from the source at different times. time / days count rate counts / s 0 250 1 215 2 180 3 148 4 120 5 100 What is the half-life of the source? A between 1 and 2 days B between 2 and 3 days C between 3 and 4 days D between 4 and 5 days",
+      "parseStatus": "ok",
+      "stem": "A detector is used to monitor the emissions from a radioactive source over several days. The table shows the count rate from the source at different times. time / days count rate counts / s 0 250 1 215 2 180 3 148 4 120 5 100 What is the half-life of the source?",
+      "options": {
+        "A": "between 1 and 2 days",
+        "B": "between 2 and 3 days",
+        "C": "between 3 and 4 days",
+        "D": "between 4 and 5 days"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q37.png",
+      "rawText": "What is the most effective precaution to reduce the risk when handling, storing or using a radioactive source that emits -rays? A Handle the source for the least possible time. B Have a fire extinguisher nearby when using the source. C Store the source at a low temperature. D Wear plastic safety goggles when handling the source.",
+      "parseStatus": "ok",
+      "stem": "What is the most effective precaution to reduce the risk when handling, storing or using a radioactive source that emits -rays?",
+      "options": {
+        "A": "Handle the source for the least possible time.",
+        "B": "Have a fire extinguisher nearby when using the source.",
+        "C": "Store the source at a low temperature.",
+        "D": "Wear plastic safety goggles when handling the source."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q38.png",
+      "rawText": "Approximately how long does the Moon take to orbit the Earth? A 1 day B 7 days C 28 days D 365 days",
+      "parseStatus": "ok",
+      "stem": "Approximately how long does the Moon take to orbit the Earth?",
+      "options": {
+        "A": "1 day",
+        "B": "7 days",
+        "C": "28 days",
+        "D": "365 days"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q39.png",
+      "rawText": "The Sun transfers energy to the Earth through electromagnetic radiation. What are two of the parts of the electromagnetic spectrum to which most of the energy belongs? A gamma rays and X-rays B infrared radiation and visible light C microwaves and visible light D radio waves and microwaves",
+      "parseStatus": "ok",
+      "stem": "The Sun transfers energy to the Earth through electromagnetic radiation. What are two of the parts of the electromagnetic spectrum to which most of the energy belongs?",
+      "options": {
+        "A": "gamma rays and X-rays",
+        "B": "infrared radiation and visible light",
+        "C": "microwaves and visible light",
+        "D": "radio waves and microwaves"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w23_qp_12/q40.png",
+      "rawText": "What provides evidence that the Universe is expanding? A Stars in galaxies outside the Milky Way are all red. B The Andromeda galaxy is moving toward the Milky Way. C Light from distant galaxies is shifted to longer wavelengths. D The Universe is 14 billion years old.",
+      "parseStatus": "ok",
+      "stem": "What provides evidence that the Universe is expanding?",
+      "options": {
+        "A": "Stars in galaxies outside the Milky Way are all red.",
+        "B": "The Andromeda galaxy is moving toward the Milky Way.",
+        "C": "Light from distant galaxies is shifted to longer wavelengths.",
+        "D": "The Universe is 14 billion years old."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,678 @@
+{
+  "questionPaper": "0625_s25_qp_12.pdf",
+  "markScheme": "0625_s25_ms_12.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q01.png",
+      "rawText": "A pendulum starts swinging and its motion is timed. The time measured for 20 complete swings is 30 s. What is the time for one complete swing of the pendulum? A 0.67 s B 0.75 s C 1.5 s D 3.0 s",
+      "parseStatus": "ok",
+      "stem": "A pendulum starts swinging and its motion is timed. The time measured for 20 complete swings is 30 s. What is the time for one complete swing of the pendulum?",
+      "options": {
+        "A": "0.67 s",
+        "B": "0.75 s",
+        "C": "1.5 s",
+        "D": "3.0 s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q02.png",
+      "rawText": "Which piece of apparatus is used to determine the volume of an irregularly shaped solid? A balance B measuring cylinder C ruler D thermometer",
+      "parseStatus": "ok",
+      "stem": "Which piece of apparatus is used to determine the volume of an irregularly shaped solid?",
+      "options": {
+        "A": "balance",
+        "B": "measuring cylinder",
+        "C": "ruler",
+        "D": "thermometer"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q03.png",
+      "rawText": "A speed–time graph is plotted for the motion of a car. Which quantity does the area under the speed–time graph represent? A acceleration of the car B average speed of the car C distance travelled by the car D final velocity of the car",
+      "parseStatus": "ok",
+      "stem": "A speed–time graph is plotted for the motion of a car. Which quantity does the area under the speed–time graph represent?",
+      "options": {
+        "A": "acceleration of the car",
+        "B": "average speed of the car",
+        "C": "distance travelled by the car",
+        "D": "final velocity of the car"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q04.png",
+      "rawText": "Which quantity is an example of a force? A density B mass C volume D weight",
+      "parseStatus": "ok",
+      "stem": "Which quantity is an example of a force?",
+      "options": {
+        "A": "density",
+        "B": "mass",
+        "C": "volume",
+        "D": "weight"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q05.png",
+      "rawText": "Four hollow glass balls, P, Q, R and S, each have a volume of 30 cm3. The mass of each ball is shown. ball mass / g P 15 Q 25 R 35 S 45 Which balls will float in a liquid of density 0.95 g / cm3? A P and Q B P only C R and S D S only",
+      "parseStatus": "ok",
+      "stem": "Four hollow glass balls, P, Q, R and S, each have a volume of 30 cm3. The mass of each ball is shown. ball mass / g P 15 Q 25 R 35 S 45 Which balls will float in a liquid of density 0.95 g / cm3?",
+      "options": {
+        "A": "P and Q",
+        "B": "P only",
+        "C": "R and S",
+        "D": "S only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q06.png",
+      "rawText": "A car travels at constant speed along a straight road that has a slight downwards slope. Which statement is correct? A There is a resultant force on the car down the slope. B There is a resultant force on the car up the slope. C There is a resultant force on the car vertically downwards. D There is no resultant force on the car.",
+      "parseStatus": "ok",
+      "stem": "A car travels at constant speed along a straight road that has a slight downwards slope. Which statement is correct?",
+      "options": {
+        "A": "There is a resultant force on the car down the slope.",
+        "B": "There is a resultant force on the car up the slope.",
+        "C": "There is a resultant force on the car vertically downwards.",
+        "D": "There is no resultant force on the car."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q07.png",
+      "rawText": "A torque wrench is a tool that ensures nuts or bolts are tightened to the required amount. A mechanic sets the torque wrench to produce a moment of 50 N m. The torque wrench has a length from the centre of the bolt to the handle of 600 mm. What is the smallest force the mechanic needs to apply to tighten the bolt correctly? A 0.080 N B 30 N C 83 N D 30 kN",
+      "parseStatus": "ok",
+      "stem": "A torque wrench is a tool that ensures nuts or bolts are tightened to the required amount.",
+      "options": {
+        "A": "mechanic sets the torque wrench to produce a moment of 50 N m. The torque wrench has a length from the centre of the bolt to the handle of 600 mm. What is the smallest force the mechanic needs to apply to tighten the bolt correctly? A 0.080 N",
+        "B": "30 N",
+        "C": "83 N",
+        "D": "30 kN"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q08.png",
+      "rawText": "The work done W by a force is related to the magnitude F of the force and the distance d moved in the direction of the force. Which equation for W is correct? A W = d  F B W = d + F C W = F  d D W = F  d",
+      "parseStatus": "ok",
+      "stem": "The work done W by a force is related to the magnitude F of the force and the distance d moved in the direction of the force. Which equation for W is correct?",
+      "options": {
+        "A": "W = d  F",
+        "B": "W = d + F",
+        "C": "W = F  d",
+        "D": "W = F  d"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q09.png",
+      "rawText": "Which energy resource requires a power station with a boiler to produce steam when generating electricity? A coal B tides C water behind a dam D wind",
+      "parseStatus": "ok",
+      "stem": "Which energy resource requires a power station with a boiler to produce steam when generating electricity?",
+      "options": {
+        "A": "coal",
+        "B": "tides",
+        "C": "water behind a dam",
+        "D": "wind"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q10.png",
+      "rawText": "A scientist heats a solid substance until it turns into a liquid, and then into a gas. Which row describes the two changes of state of the substance as it is heated? change of state 1 change of state 2 A freezing condensing B freezing boiling C melting condensing D melting boiling",
+      "parseStatus": "ok",
+      "stem": "A scientist heats a solid substance until it turns into a liquid, and then into a gas. Which row describes the two changes of state of the substance as it is heated? change of state 1 change of state 2",
+      "options": {
+        "A": "freezing condensing",
+        "B": "freezing boiling",
+        "C": "melting condensing",
+        "D": "melting boiling"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q11.png",
+      "rawText": "Gases can be compressed, but liquids cannot be compressed. Which statement explains this difference? A Each particle in a gas is more compressible than each particle in a liquid. B Particles in a gas are further apart than particles in a liquid. C Particles in a gas attract each other more strongly than particles in a liquid. D Particles in a gas move more slowly than particles in a liquid.",
+      "parseStatus": "ok",
+      "stem": "Gases can be compressed, but liquids cannot be compressed. Which statement explains this difference?",
+      "options": {
+        "A": "Each particle in a gas is more compressible than each particle in a liquid.",
+        "B": "Particles in a gas are further apart than particles in a liquid.",
+        "C": "Particles in a gas attract each other more strongly than particles in a liquid.",
+        "D": "Particles in a gas move more slowly than particles in a liquid."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q12.png",
+      "rawText": "A fixed mass of gas at a constant temperature is trapped in a cylinder which has a movable piston. Which row states and explains what happens to the pressure of the gas in the cylinder when the volume of the gas increases? pressure explanation A decreases gas particles collide with the cylinder at a lower speed B decreases gas particles collide with the cylinder less frequently C increases gas particles collide with the cylinder at a higher speed D increases gas particles collide with the cylinder more frequently",
+      "parseStatus": "ok",
+      "stem": "A fixed mass of gas at a constant temperature is trapped in a cylinder which has a movable piston. Which row states and explains what happens to the pressure of the gas in the cylinder when the volume of the gas increases? pressure explanation",
+      "options": {
+        "A": "decreases gas particles collide with the cylinder at a lower speed",
+        "B": "decreases gas particles collide with the cylinder less frequently",
+        "C": "increases gas particles collide with the cylinder at a higher speed",
+        "D": "increases gas particles collide with the cylinder more frequently"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q13.png",
+      "rawText": "Which quantity does not change when there is an increase in temperature? A the density of a steel block B the diameter of the hole in a metal nut C the length of an iron rod D the mass of a metal coin",
+      "parseStatus": "ok",
+      "stem": "Which quantity does not change when there is an increase in temperature?",
+      "options": {
+        "A": "the density of a steel block",
+        "B": "the diameter of the hole in a metal nut",
+        "C": "the length of an iron rod",
+        "D": "the mass of a metal coin"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q14.png",
+      "rawText": "A person holds an empty glass beaker and pours hot water into it. Why does it take a few seconds before his hand starts to feel hot? A Glass is a poor thermal conductor. B Water is a poor thermal conductor. C Glass is a better thermal conductor than water. D Water is a better thermal conductor than glass.",
+      "parseStatus": "ok",
+      "stem": "A person holds an empty glass beaker and pours hot water into it. Why does it take a few seconds before his hand starts to feel hot?",
+      "options": {
+        "A": "Glass is a poor thermal conductor.",
+        "B": "Water is a poor thermal conductor.",
+        "C": "Glass is a better thermal conductor than water.",
+        "D": "Water is a better thermal conductor than glass."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q15.png",
+      "rawText": "A liquid is heated and it expands. How does this lead to the formation of a convection current? A The density of the heated liquid decreases. B The density of the heated liquid increases. C The mass of the heated liquid particles decreases. D The mass of the heated liquid particles increases.",
+      "parseStatus": "ok",
+      "stem": "A liquid is heated and it expands. How does this lead to the formation of a convection current?",
+      "options": {
+        "A": "The density of the heated liquid decreases.",
+        "B": "The density of the heated liquid increases.",
+        "C": "The mass of the heated liquid particles decreases.",
+        "D": "The mass of the heated liquid particles increases."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q16.png",
+      "rawText": "Some electric hotplates are metal and do not glow when hot. Other hotplates are glass and have a heater underneath that glows red. The heater makes the glass hot. With both hotplates, there is no air gap between the hotplate and a metal pan placed on the hotplate. Which statement is correct? A The glass hotplate transfers less energy by radiation to the base of the pan than the metal hotplate. B The glass hotplate transfers energy by convection to the base of the pan. C The metal hotplate transfers energy by conduction to the base of the pan. D The metal hotplate transfers energy by convection to the base of the pan.",
+      "parseStatus": "ok",
+      "stem": "Some electric hotplates are metal and do not glow when hot. Other hotplates are glass and have a heater underneath that glows red. The heater makes the glass hot. With both hotplates, there is no air gap between the hotplate and a metal pan placed on the hotplate. Which statement is correct?",
+      "options": {
+        "A": "The glass hotplate transfers less energy by radiation to the base of the pan than the metal hotplate.",
+        "B": "The glass hotplate transfers energy by convection to the base of the pan.",
+        "C": "The metal hotplate transfers energy by conduction to the base of the pan.",
+        "D": "The metal hotplate transfers energy by convection to the base of the pan."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q17.png",
+      "rawText": "Twelve crests of a water wave pass a boat anchored at sea in a time of 180 s. The distance between consecutive crests of the wave is 10 m. What is the speed of the wave? A 0.056 m / s B 0.67 m / s C 15 m / s D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q18.png",
+      "rawText": "The diagrams show examples of wave motion. 1 2 3 4 waves on water waves in air waves on a rope waves in a spring ripple tank drum Which waves are longitudinal? A 1 only B 2, 3 and 4 C 2 and 3 only D 2 and 4 only",
+      "parseStatus": "ok",
+      "stem": "The diagrams show examples of wave motion. 1 2 3 4 waves on water waves in air waves on a rope waves in a spring ripple tank drum Which waves are longitudinal?",
+      "options": {
+        "A": "1 only",
+        "B": "2, 3 and 4",
+        "C": "2 and 3 only",
+        "D": "2 and 4 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q19.png",
+      "rawText": "A ray of light passes through a glass block. What is the path of the light? air ray of light glass D C B A",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q20.png",
+      "rawText": "The diagram shows a converging lens forming an image. not to scale 24 cm 10 cm 14 cm image object converging lens What is the focal length of the converging lens? A 10 cm B 14 cm C 24 cm D 34 cm",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a converging lens forming an image. not to scale 24 cm 10 cm 14 cm image object converging lens What is the focal length of the converging lens?",
+      "options": {
+        "A": "10 cm",
+        "B": "14 cm",
+        "C": "24 cm",
+        "D": "34 cm"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q21.png",
+      "rawText": "Which type of radiation does a remote controller use to send its instructions to a television (TV)? A gamma rays B infrared radiation C ultraviolet radiation D X-rays",
+      "parseStatus": "ok",
+      "stem": "Which type of radiation does a remote controller use to send its instructions to a television (TV)?",
+      "options": {
+        "A": "gamma rays",
+        "B": "infrared radiation",
+        "C": "ultraviolet radiation",
+        "D": "X-rays"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q22.png",
+      "rawText": "A person exposed to excessive radiation from certain parts of the electromagnetic spectrum is likely to suffer cell damage. Which radiations cause cell damage? A gamma rays and ultraviolet B gamma rays only C green light and red light D radio waves and green light",
+      "parseStatus": "ok",
+      "stem": "A person exposed to excessive radiation from certain parts of the electromagnetic spectrum is likely to suffer cell damage. Which radiations cause cell damage?",
+      "options": {
+        "A": "gamma rays and ultraviolet",
+        "B": "gamma rays only",
+        "C": "green light and red light",
+        "D": "radio waves and green light"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q23.png",
+      "rawText": "The diagram shows the ranges of human hearing and of ultrasound waves. 0 101 2 \u0001 101 2 \u0001 104 102 103 104 105 106 range of human hearing ultrasound Which characteristic of sound waves do the numbers on the diagram refer to? A amplitude in cm B frequency in Hz C speed in metres / second D wavelength in metres",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the ranges of human hearing and of ultrasound waves. 0 101 2 \u0001 101 2 \u0001 104 102 103 104 105 106 range of human hearing ultrasound Which characteristic of sound waves do the numbers on the diagram refer to?",
+      "options": {
+        "A": "amplitude in cm",
+        "B": "frequency in Hz",
+        "C": "speed in metres / second",
+        "D": "wavelength in metres"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q24.png",
+      "rawText": "A student has a bar magnet and two metal blocks. The student places the bar magnet next to end W and end X of metal block 1. The student then places the bar magnet next to end Y and end Z of metal block 2. The diagram shows which ends of the metal blocks are attracted or repelled by the bar magnet. N S W X attract metal block 1 N S X W attract bar magnet N S Y Z attract metal block 2 N S Z Y repel Which metal blocks are bar magnets? A both metal block 1 and metal block 2 B metal block 1 only C metal block 2 only D neither metal block 1 nor metal block 2",
+      "parseStatus": "ok",
+      "stem": "A student has a bar magnet and two metal blocks. The student places the bar magnet next to end W and end X of metal block 1. The student then places the bar magnet next to end Y and end Z of metal block 2. The diagram shows which ends of the metal blocks are attracted or repelled by the bar magnet. N S W X attract metal block 1 N S X W attract bar magnet N S Y Z attract metal block 2 N S Z Y repel Which metal blocks are bar magnets?",
+      "options": {
+        "A": "both metal block 1 and metal block 2",
+        "B": "metal block 1 only",
+        "C": "metal block 2 only",
+        "D": "neither metal block 1 nor metal block 2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q25.png",
+      "rawText": "A glass rod is rubbed with a silk cloth. The glass rod becomes positively charged. Which statement explains how this happens? A Negative charges move from the glass rod to the silk cloth. B Negative charges move from the silk cloth to the glass rod. C Positive charges move from the glass rod to the silk cloth. D Positive charges move from the silk cloth to the glass rod.",
+      "parseStatus": "ok",
+      "stem": "A glass rod is rubbed with a silk cloth. The glass rod becomes positively charged. Which statement explains how this happens?",
+      "options": {
+        "A": "Negative charges move from the glass rod to the silk cloth.",
+        "B": "Negative charges move from the silk cloth to the glass rod.",
+        "C": "Positive charges move from the glass rod to the silk cloth.",
+        "D": "Positive charges move from the silk cloth to the glass rod."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q26.png",
+      "rawText": "Which statement describes what is happening when there is an electric current in a metal wire? A Electrons in the wire vibrate. B Electrons move along the wire. C Positive charges in the wire vibrate. D Positive charges move along the wire.",
+      "parseStatus": "ok",
+      "stem": "Which statement describes what is happening when there is an electric current in a metal wire?",
+      "options": {
+        "A": "Electrons in the wire vibrate.",
+        "B": "Electrons move along the wire.",
+        "C": "Positive charges in the wire vibrate.",
+        "D": "Positive charges move along the wire."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q27.png",
+      "rawText": "Which two electrical quantities have the same unit? A current and charge B electromotive force (e.m.f.) and potential difference (p.d.) C potential difference (p.d.) and current D resistance and electromotive force (e.m.f.)",
+      "parseStatus": "ok",
+      "stem": "Which two electrical quantities have the same unit?",
+      "options": {
+        "A": "current and charge",
+        "B": "electromotive force (e.m.f.) and potential difference (p.d.)",
+        "C": "potential difference (p.d.) and current",
+        "D": "resistance and electromotive force (e.m.f.)"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q28.png",
+      "rawText": "A 10 V d.c. power supply is connected across a resistor. The current in the resistor is 0.050 A. What is the resistance of the resistor? A 0.0050  B 0.50  C 2.0  D 200 ",
+      "parseStatus": "ok",
+      "stem": "A 10 V d.c. power supply is connected across a resistor. The current in the resistor is 0.050 A. What is the resistance of the resistor?",
+      "options": {
+        "A": "0.0050 ",
+        "B": "0.50 ",
+        "C": "2.0 ",
+        "D": "200 "
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q29.png",
+      "rawText": "A resistor and a thermistor are connected in a series circuit, as shown. A V What happens to the readings on the ammeter and the voltmeter when the thermistor is heated? ammeter reading voltmeter reading A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "A resistor and a thermistor are connected in a series circuit, as shown.",
+      "options": {
+        "A": "V What happens to the readings on the ammeter and the voltmeter when the thermistor is heated? ammeter reading voltmeter reading A decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q30.png",
+      "rawText": "In which circuit does the ammeter read 2.0 A? A A 12 V 6.0 \u0002 6.0 \u0002 A B 6.0 V 6.0 \u0002 6.0 \u0002 A C 12 V 3.0 \u0002 3.0 \u0002 A D 18 V 3.0 \u0002 3.0 \u0002",
+      "parseStatus": "ok",
+      "stem": "In which circuit does the ammeter read 2.0 A?",
+      "options": {
+        "A": "A 12 V 6.0 \u0002 6.0 \u0002 A",
+        "B": "6.0 V 6.0 \u0002 6.0 \u0002 A",
+        "C": "12 V 3.0 \u0002 3.0 \u0002 A",
+        "D": "18 V 3.0 \u0002 3.0 \u0002"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q31.png",
+      "rawText": "A 240 V mains-powered vacuum cleaner has a power output of 2700 W. Which fuse is suitable for use in the plug of the vacuum cleaner? A 3 A B 5 A C 10 A D 13 A",
+      "parseStatus": "ok",
+      "stem": "A 240 V mains-powered vacuum cleaner has a power output of 2700 W. Which fuse is suitable for use in the plug of the vacuum cleaner?",
+      "options": {
+        "A": "3 A",
+        "B": "5 A",
+        "C": "10 A",
+        "D": "13 A"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q32.png",
+      "rawText": "The transformer in a laptop power supply is used to change mains voltage from 240 V to 20 V. The transformer has 600 turns on the secondary coil. Which type of transformer is it and how many turns does the transformer have on the primary coil? transformer type number of turns on primary coil A step-down 50 B step-down 7200 C step-up 50 D step-up 7200",
+      "parseStatus": "ok",
+      "stem": "The transformer in a laptop power supply is used to change mains voltage from 240 V to 20 V. The transformer has 600 turns on the secondary coil. Which type of transformer is it and how many turns does the transformer have on the primary coil? transformer type number of turns on primary coil",
+      "options": {
+        "A": "step-down 50",
+        "B": "step-down 7200",
+        "C": "step-up 50",
+        "D": "step-up 7200"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q33.png",
+      "rawText": "An ion of the element oxygen is negatively charged. Which change causes the ion to become a neutral oxygen atom? A gain of electrons B gain of protons C loss of electrons D loss of protons",
+      "parseStatus": "ok",
+      "stem": "An ion of the element oxygen is negatively charged. Which change causes the ion to become a neutral oxygen atom?",
+      "options": {
+        "A": "gain of electrons",
+        "B": "gain of protons",
+        "C": "loss of electrons",
+        "D": "loss of protons"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q34.png",
+      "rawText": "A nuclide of nitrogen is represented as N. 15 7 What is the number of neutrons in this nuclide? A 7 B 8 C 15 D 22",
+      "parseStatus": "ok",
+      "stem": "A nuclide of nitrogen is represented as N. 15 7 What is the number of neutrons in this nuclide?",
+      "options": {
+        "A": "7",
+        "B": "8",
+        "C": "15",
+        "D": "22"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q35.png",
+      "rawText": "Which list only includes sources of naturally occurring background radiation? A cosmic rays, radon gas, nuclear power stations B food and drink, mobile phones, cosmic rays C rocks and buildings, food and drink, radon gas D rocks and buildings, mobile phones, nuclear power stations",
+      "parseStatus": "ok",
+      "stem": "Which list only includes sources of naturally occurring background radiation?",
+      "options": {
+        "A": "cosmic rays, radon gas, nuclear power stations",
+        "B": "food and drink, mobile phones, cosmic rays",
+        "C": "rocks and buildings, food and drink, radon gas",
+        "D": "rocks and buildings, mobile phones, nuclear power stations"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q36.png",
+      "rawText": "A student compares alpha emissions, beta emissions and gamma emissions. Which statement is correct? A Alpha emissions are the most ionising. B Beta emissions are the most penetrating. C Beta emissions are part of the electromagnetic spectrum. D Gamma emissions are streams of charged particles.",
+      "parseStatus": "ok",
+      "stem": "A student compares alpha emissions, beta emissions and gamma emissions. Which statement is correct?",
+      "options": {
+        "A": "Alpha emissions are the most ionising.",
+        "B": "Beta emissions are the most penetrating.",
+        "C": "Beta emissions are part of the electromagnetic spectrum.",
+        "D": "Gamma emissions are streams of charged particles."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q37.png",
+      "rawText": "In school laboratories, radioactive sources are stored in lead-lined boxes. Why is lead used? A Lead neutralises radiation. B Lead absorbs radiation. C Lead repels radiation. D Lead dissolves radiation.",
+      "parseStatus": "ok",
+      "stem": "In school laboratories, radioactive sources are stored in lead-lined boxes. Why is lead used?",
+      "options": {
+        "A": "Lead neutralises radiation.",
+        "B": "Lead absorbs radiation.",
+        "C": "Lead repels radiation.",
+        "D": "Lead dissolves radiation."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q38.png",
+      "rawText": "The Sun, the Earth and the Moon are all bodies in the Solar System. The Earth has a periodic cycle of day and night and a periodic cycle of seasons. Which row relates the periods of these cycles to the motions of these bodies? period of day and night period of the seasons A the Earth orbits the Sun the Earth rotates about its axis B the Earth orbits the Sun the Moon orbits the Earth C the Earth rotates about its axis the Earth orbits the Sun D the Earth rotates about its axis the Moon orbits the Earth",
+      "parseStatus": "ok",
+      "stem": "The Sun, the Earth and the Moon are all bodies in the Solar System. The Earth has a periodic cycle of day and night and a periodic cycle of seasons. Which row relates the periods of these cycles to the motions of these bodies? period of day and night period of the seasons",
+      "options": {
+        "A": "the Earth orbits the Sun the Earth rotates about its axis",
+        "B": "the Earth orbits the Sun the Moon orbits the Earth",
+        "C": "the Earth rotates about its axis the Earth orbits the Sun",
+        "D": "the Earth rotates about its axis the Moon orbits the Earth"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q39.png",
+      "rawText": "The strength of the gravitational field at the surface of a planet depends on the ......1...... . The strength of the gravitational field ......2...... as the distance from the planet increases. Which words correctly complete the sentences? 1 2 A atmospheric pressure decreases B mass of the planet decreases C atmospheric pressure increases D mass of the planet increases",
+      "parseStatus": "ok",
+      "stem": "The strength of the gravitational field at the surface of a planet depends on the ......1...... . The strength of the gravitational field ......2...... as the distance from the planet increases. Which words correctly complete the sentences? 1 2",
+      "options": {
+        "A": "atmospheric pressure decreases",
+        "B": "mass of the planet decreases",
+        "C": "atmospheric pressure increases",
+        "D": "mass of the planet increases"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_12/q40.png",
+      "rawText": "The Sun radiates most of its energy in three regions of the electromagnetic spectrum. The diagram shows the proportion of the total energy radiated in each of these regions. P Q R Region P is visible light and region Q is ultraviolet. What is region R? A infrared B microwaves C radio waves D X-rays",
+      "parseStatus": "ok",
+      "stem": "The Sun radiates most of its energy in three regions of the electromagnetic spectrum. The diagram shows the proportion of the total energy radiated in each of these regions. P Q R Region P is visible light and region Q is ultraviolet. What is region R?",
+      "options": {
+        "A": "infrared",
+        "B": "microwaves",
+        "C": "radio waves",
+        "D": "X-rays"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

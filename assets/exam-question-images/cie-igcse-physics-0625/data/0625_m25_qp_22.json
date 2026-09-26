@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0625_m25_qp_22.pdf",
+  "markScheme": "0625_m25_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q01.png",
+      "rawText": "The diagram shows three forces acting on an object. 6.0 N 9.0 N 1.0 N What is the magnitude of the resultant force acting on the object? A 2.0 N B 10 N C 14 N D 16 N",
+      "parseStatus": "ok",
+      "stem": "The diagram shows three forces acting on an object. 6.0 N 9.0 N 1.0 N What is the magnitude of the resultant force acting on the object?",
+      "options": {
+        "A": "2.0 N",
+        "B": "10 N",
+        "C": "14 N",
+        "D": "16 N"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q02.png",
+      "rawText": "Which row defines speed and velocity? speed velocity A distance travelled in a given direction speed per unit time B distance travelled per unit time speed in a given direction C distance travelled in a given direction speed in a given direction D distance travelled per unit time speed per unit time",
+      "parseStatus": "ok",
+      "stem": "Which row defines speed and velocity? speed velocity",
+      "options": {
+        "A": "distance travelled in a given direction speed per unit time",
+        "B": "distance travelled per unit time speed in a given direction",
+        "C": "distance travelled in a given direction speed in a given direction",
+        "D": "distance travelled per unit time speed per unit time"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q03.png",
+      "rawText": "The graph shows the journey of a motorcyclist. Which section of the graph shows the time when the motorcyclist is stationary at some traffic lights? 0 0 speed time A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q04.png",
+      "rawText": "The acceleration of free fall on the Moon has one sixth of its value on the Earth. On the Earth, an astronaut’s mass is measured as 60 kg. Which row gives the mass and weight of the astronaut on the Earth and on the Moon? Earth Moon mass / kg weight / N mass / kg weight / N A 60 6.1 10 1.0 B 60 6.1 60 6.1 C 60 590 10 16 D 60 590 60 98",
+      "parseStatus": "ok",
+      "stem": "The acceleration of free fall on the Moon has one sixth of its value on the Earth. On the Earth, an astronaut’s mass is measured as 60 kg. Which row gives the mass and weight of the astronaut on the Earth and on the Moon? Earth Moon mass / kg weight / N mass / kg weight / N",
+      "options": {
+        "A": "60 6.1 10 1.0",
+        "B": "60 6.1 60 6.1",
+        "C": "60 590 10 16",
+        "D": "60 590 60 98"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q05.png",
+      "rawText": "The load–extension graph for a material is shown. Which point indicates the limit of proportionality? load extension A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q06.png",
+      "rawText": "An object of mass 4.0 kg is moving with a velocity of 3.0 m / s in a straight line. What is the momentum of the object? A 0.75 kg m / s B 1.3 kg m / s C 12 kg m / s D 24 kg m / s",
+      "parseStatus": "ok",
+      "stem": "An object of mass 4.0 kg is moving with a velocity of 3.0 m / s in a straight line. What is the momentum of the object?",
+      "options": {
+        "A": "0.75 kg m / s",
+        "B": "1.3 kg m / s",
+        "C": "12 kg m / s",
+        "D": "24 kg m / s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q07.png",
+      "rawText": "A tall cylinder is partly filled with two liquids, which do not mix. The two liquids have different densities. A student measures the pressure due to the liquids at different depths. position P position Q liquids with different densities Which graph shows how the liquid pressure varies between positions P and Q? pressure pressure depth depth A B P P Q Q pressure pressure depth depth C D P P Q Q",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q08.png",
+      "rawText": "A tennis ball with momentum 2.3 kg m / s is struck by a tennis racket. The racket causes the direction of motion of the ball to reverse. The racket exerts an average force of 1500 N during the impact with the ball. The racket and ball are in contact with each other for a time of 0.0024 s. What is the magnitude of the momentum of the ball as it leaves the tennis racket? A 1.3 kg m / s B 3.6 kg m / s C 5.9 kg m / s D 8.6 kg m / s",
+      "parseStatus": "ok",
+      "stem": "A tennis ball with momentum 2.3 kg m / s is struck by a tennis racket. The racket causes the direction of motion of the ball to reverse. The racket exerts an average force of 1500 N during the impact with the ball. The racket and ball are in contact with each other for a time of 0.0024 s. What is the magnitude of the momentum of the ball as it leaves the tennis racket?",
+      "options": {
+        "A": "1.3 kg m / s",
+        "B": "3.6 kg m / s",
+        "C": "5.9 kg m / s",
+        "D": "8.6 kg m / s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q09.png",
+      "rawText": "A car is travelling at a speed of 8.0 m / s. The kinetic energy stored in the car is 32 000 J. What is the kinetic energy stored in the car when its speed increases to 16 m / s? A 16 000 J B 32 000 J C 64 000 J D 130 000 J",
+      "parseStatus": "ok",
+      "stem": "A car is travelling at a speed of 8.0 m / s. The kinetic energy stored in the car is 32 000 J. What is the kinetic energy stored in the car when its speed increases to 16 m / s?",
+      "options": {
+        "A": "16 000 J",
+        "B": "32 000 J",
+        "C": "64 000 J",
+        "D": "130 000 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q10.png",
+      "rawText": "The Sun is not the primary source of energy for which resource? A oil B tidal C wind D wave",
+      "parseStatus": "ok",
+      "stem": "The Sun is not the primary source of energy for which resource?",
+      "options": {
+        "A": "oil",
+        "B": "tidal",
+        "C": "wind",
+        "D": "wave"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q11.png",
+      "rawText": "An experiment is done to compare the rate of conduction of thermal energy in metal and plastic spoons. An ice cube is placed on one end of each spoon and the other end is heated gently. heat metal spoon ice cube heat plastic spoon ice cube Which row has the correct prediction and correct explanation? prediction explanation A The ice cube would melt more quickly on the metal spoon. Metal is a good conductor. B The ice cube would melt more quickly on the metal spoon. Plastic is a good conductor. C The ice cube would melt more quickly on the plastic spoon. Metal is a poor conductor. D The ice cube would melt more quickly on the plastic spoon. Plastic is a poor conductor.",
+      "parseStatus": "ok",
+      "stem": "An experiment is done to compare the rate of conduction of thermal energy in metal and plastic spoons. An ice cube is placed on one end of each spoon and the other end is heated gently. heat metal spoon ice cube heat plastic spoon ice cube Which row has the correct prediction and correct explanation? prediction explanation",
+      "options": {
+        "A": "The ice cube would melt more quickly on the metal spoon. Metal is a good conductor.",
+        "B": "The ice cube would melt more quickly on the metal spoon. Plastic is a good conductor.",
+        "C": "The ice cube would melt more quickly on the plastic spoon. Metal is a poor conductor.",
+        "D": "The ice cube would melt more quickly on the plastic spoon. Plastic is a poor conductor."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q12.png",
+      "rawText": "Four students determine the efficiency of four different electrical devices. The teacher knows that one student has made a mistake in the calculation. Which value for efficiency is not correct? A 12% B 36% C 78% D 102%",
+      "parseStatus": "ok",
+      "stem": "Four students determine the efficiency of four different electrical devices. The teacher knows that one student has made a mistake in the calculation. Which value for efficiency is not correct?",
+      "options": {
+        "A": "12%",
+        "B": "36%",
+        "C": "78%",
+        "D": "102%"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q13.png",
+      "rawText": "A sample of gas is sealed inside a container of fixed volume. The temperature of the gas is increased. Which statement explains why the pressure of the gas increases? A The gas particles collide with the walls of the container more frequently. B The mass of the gas particles increases. C The number of gas particles in the container increases. D The time between collisions of the gas particles increases.",
+      "parseStatus": "ok",
+      "stem": "A sample of gas is sealed inside a container of fixed volume. The temperature of the gas is increased. Which statement explains why the pressure of the gas increases?",
+      "options": {
+        "A": "The gas particles collide with the walls of the container more frequently.",
+        "B": "The mass of the gas particles increases.",
+        "C": "The number of gas particles in the container increases.",
+        "D": "The time between collisions of the gas particles increases."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q14.png",
+      "rawText": "A student does an experiment to determine the specific heat capacity of a metal block. She records the following measurements. energy supplied = 12 kJ initial temperature = 20 °C final temperature = 45 °C mass of metal block = 600 g What is the specific heat capacity of the metal block? A 8.0  10– 4 J / (kg °C) B 0.80 J / (kg °C) C 180 J / (kg °C) D 800 J / (kg °C)",
+      "parseStatus": "ok",
+      "stem": "A student does an experiment to determine the specific heat capacity of a metal block. She records the following measurements. energy supplied = 12 kJ initial temperature = 20 °C final temperature = 45 °C mass of metal block = 600 g What is the specific heat capacity of the metal block?",
+      "options": {
+        "A": "8.0  10– 4 J / (kg °C)",
+        "B": "0.80 J / (kg °C)",
+        "C": "180 J / (kg °C)",
+        "D": "800 J / (kg °C)"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q15.png",
+      "rawText": "A metal block is left overnight in a cool, shady room. In the morning, the metal block is moved into warm surroundings. Which statement about the metal block is correct in the morning? A The internal energy of the metal block increases. B The temperature of the metal block decreases. C Convection transfers energy throughout the metal block. D The metal contracts slightly.",
+      "parseStatus": "ok",
+      "stem": "A metal block is left overnight in a cool, shady room. In the morning, the metal block is moved into warm surroundings. Which statement about the metal block is correct in the morning?",
+      "options": {
+        "A": "The internal energy of the metal block increases.",
+        "B": "The temperature of the metal block decreases.",
+        "C": "Convection transfers energy throughout the metal block.",
+        "D": "The metal contracts slightly."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q16.png",
+      "rawText": "A fixed mass of gas is contained within a sealed syringe at a pressure of 100 kPa. The plunger is slowly moved until the pressure is 80 kPa. The final volume of the gas is 50 cm3. The temperature of the gas does not change. What is the volume of the gas before the plunger is moved? A 0.25 cm3 B 40 cm3 C 63 cm3 D 160 cm3",
+      "parseStatus": "ok",
+      "stem": "A fixed mass of gas is contained within a sealed syringe at a pressure of 100 kPa. The plunger is slowly moved until the pressure is 80 kPa. The final volume of the gas is 50 cm3. The temperature of the gas does not change. What is the volume of the gas before the plunger is moved?",
+      "options": {
+        "A": "0.25 cm3",
+        "B": "40 cm3",
+        "C": "63 cm3",
+        "D": "160 cm3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q17.png",
+      "rawText": "The diagram shows the more energetic water molecules escaping from the surface of liquid water. = water molecule key water What is this process called? A Brownian motion B condensation C evaporation D conduction",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the more energetic water molecules escaping from the surface of liquid water. = water molecule key water What is this process called?",
+      "options": {
+        "A": "Brownian motion",
+        "B": "condensation",
+        "C": "evaporation",
+        "D": "conduction"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q18.png",
+      "rawText": "A hot object emits thermal radiation. Which row describes two changes that both reduce the rate of emission of radiation? surface area surface temperature A increased increased B increased reduced C reduced increased D reduced reduced",
+      "parseStatus": "ok",
+      "stem": "A hot object emits thermal radiation. Which row describes two changes that both reduce the rate of emission of radiation? surface area surface temperature",
+      "options": {
+        "A": "increased increased",
+        "B": "increased reduced",
+        "C": "reduced increased",
+        "D": "reduced reduced"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q19.png",
+      "rawText": "The frequency of a wave is doubled. The speed of the wave does not change. What happens to the wavelength of the wave? A It becomes four times as large. B It does not change. C It doubles. D It halves.",
+      "parseStatus": "ok",
+      "stem": "The frequency of a wave is doubled. The speed of the wave does not change. What happens to the wavelength of the wave?",
+      "options": {
+        "A": "It becomes four times as large.",
+        "B": "It does not change.",
+        "C": "It doubles.",
+        "D": "It halves."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q20.png",
+      "rawText": "Which statement about ultrasound is correct? A It has a higher frequency than audible sound and it is a longitudinal wave. B It has a higher frequency than audible sound and it is a transverse wave. C It has a lower frequency than audible sound and it is a longitudinal wave. D It has a lower frequency than audible sound and it is a transverse wave.",
+      "parseStatus": "ok",
+      "stem": "Which statement about ultrasound is correct?",
+      "options": {
+        "A": "It has a higher frequency than audible sound and it is a longitudinal wave.",
+        "B": "It has a higher frequency than audible sound and it is a transverse wave.",
+        "C": "It has a lower frequency than audible sound and it is a longitudinal wave.",
+        "D": "It has a lower frequency than audible sound and it is a transverse wave."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q21.png",
+      "rawText": "Which statement about the image produced by a plane mirror is not correct? A The image is real. B The image is upright. C The image is the same size as the object. D The distance from the image to the mirror is the same as the distance from the object to the mirror.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the image produced by a plane mirror is not correct?",
+      "options": {
+        "A": "The image is real.",
+        "B": "The image is upright.",
+        "C": "The image is the same size as the object.",
+        "D": "The distance from the image to the mirror is the same as the distance from the object to the mirror."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q22.png",
+      "rawText": "A ray of light is incident on a boundary between air and water. Under which conditions is the ray of light totally internally reflected? A The ray, initially in the air, is incident on the air–water boundary at any angle of incidence. B The ray, initially in the air, is incident on the air–water boundary at an angle of incidence greater than the critical angle. C The ray, initially in the water, is incident on the water–air boundary at any angle of incidence. D The ray, initially in the water, is incident on the water–air boundary at an angle of incidence greater than the critical angle.",
+      "parseStatus": "ok",
+      "stem": "A ray of light is incident on a boundary between air and water. Under which conditions is the ray of light totally internally reflected?",
+      "options": {
+        "A": "The ray, initially in the air, is incident on the air–water boundary at any angle of incidence.",
+        "B": "The ray, initially in the air, is incident on the air–water boundary at an angle of incidence greater than the critical angle.",
+        "C": "The ray, initially in the water, is incident on the water–air boundary at any angle of incidence.",
+        "D": "The ray, initially in the water, is incident on the water–air boundary at an angle of incidence greater than the critical angle."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q23.png",
+      "rawText": "A converging lens is used to make an image on a screen. candle screen converging lens image formed here Which type of image is formed on the screen? A real and inverted B real and upright C virtual and inverted D virtual and upright",
+      "parseStatus": "ok",
+      "stem": "A converging lens is used to make an image on a screen. candle screen converging lens image formed here Which type of image is formed on the screen?",
+      "options": {
+        "A": "real and inverted",
+        "B": "real and upright",
+        "C": "virtual and inverted",
+        "D": "virtual and upright"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q24.png",
+      "rawText": "A negatively charged rod is brought near to a metal sphere. A positive charge develops on the surface of the metal sphere closest to the negatively charged rod. Why is this? A Electrons in the sphere are attracted by the negatively charged rod. B Electrons in the sphere are repelled by the negatively charged rod. C Positive charges in the sphere are attracted by the negatively charged rod. D Positive charges in the sphere are repelled by the negatively charged rod.",
+      "parseStatus": "ok",
+      "stem": "A negatively charged rod is brought near to a metal sphere.",
+      "options": {
+        "A": "positive charge develops on the surface of the metal sphere closest to the negatively charged rod. Why is this? A Electrons in the sphere are attracted by the negatively charged rod.",
+        "B": "Electrons in the sphere are repelled by the negatively charged rod.",
+        "C": "Positive charges in the sphere are attracted by the negatively charged rod.",
+        "D": "Positive charges in the sphere are repelled by the negatively charged rod."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q25.png",
+      "rawText": "The electromotive force (e.m.f.) of a cell is defined in terms of which quantities? A the energy transferred by the cell in moving charge around the circuit B the energy transferred by the cell in moving voltage around the circuit C the power transferred by the cell in moving charge around the circuit D the power transferred by the cell in moving voltage around the circuit",
+      "parseStatus": "ok",
+      "stem": "The electromotive force (e.m.f.) of a cell is defined in terms of which quantities?",
+      "options": {
+        "A": "the energy transferred by the cell in moving charge around the circuit",
+        "B": "the energy transferred by the cell in moving voltage around the circuit",
+        "C": "the power transferred by the cell in moving charge around the circuit",
+        "D": "the power transferred by the cell in moving voltage around the circuit"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q26.png",
+      "rawText": "A resistor of resistance R is connected to a battery of electromotive force (e.m.f.) V. There is a current I in the resistor. Power P is dissipated by the resistor. In time t, the energy transferred is E. Which expression is correct? A E = IVt B E = PIt C P = VIR D P = R V",
+      "parseStatus": "ok",
+      "stem": "A resistor of resistance R is connected to a battery of electromotive force (e.m.f.) V. There is a current I in the resistor. Power P is dissipated by the resistor. In time t, the energy transferred is E. Which expression is correct?",
+      "options": {
+        "A": "E = IVt",
+        "B": "E = PIt",
+        "C": "P = VIR",
+        "D": "P = R V"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q27.png",
+      "rawText": "A copper wire of length 80 cm and cross-sectional area 0.20 mm2 has resistance R. Which length of copper wire of cross-sectional area 0.40 mm2 has resistance R ? A 10 cm B 20 cm C 40 cm D 160 cm",
+      "parseStatus": "ok",
+      "stem": "A copper wire of length 80 cm and cross-sectional area 0.20 mm2 has resistance R. Which length of copper wire of cross-sectional area 0.40 mm2 has resistance R ?",
+      "options": {
+        "A": "10 cm",
+        "B": "20 cm",
+        "C": "40 cm",
+        "D": "160 cm"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q28.png",
+      "rawText": "Four identical resistors are connected to a battery as shown. Each resistor has a value of 120 . R4 R3 R2 R1 Resistor R4 is removed. Which effect does removing this resistor have on the effective resistance of the circuit? A The effective resistance does not change. B The effective resistance decreases by 20 . C The effective resistance increases by 20 . D The effective resistance decreases by 120 .",
+      "parseStatus": "ok",
+      "stem": "Four identical resistors are connected to a battery as shown. Each resistor has a value of 120 . R4 R3 R2 R1 Resistor R4 is removed. Which effect does removing this resistor have on the effective resistance of the circuit?",
+      "options": {
+        "A": "The effective resistance does not change.",
+        "B": "The effective resistance decreases by 20 .",
+        "C": "The effective resistance increases by 20 .",
+        "D": "The effective resistance decreases by 120 ."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q29.png",
+      "rawText": "The resistors in the circuit shown are identical. The reading on voltmeter V2 is 1.5 V. The reading on ammeter A2 is 0.50 A. The reading on ammeter A3 is 0.25 A. A A V V V1 V2 A1 A2 A3 A What are the readings on ammeter A1 and voltmeter V1? ammeter A1 / A voltmeter V1 / V A 0.25 1.5 B 0.25 3.0 C 0.75 1.5 D 0.75 3.0",
+      "parseStatus": "ok",
+      "stem": "The resistors in the circuit shown are identical. The reading on voltmeter V2 is 1.5 V. The reading on ammeter A2 is 0.50 A. The reading on ammeter A3 is 0.25 A.",
+      "options": {
+        "A": "A V V V1 V2 A1 A2 A3 A What are the readings on ammeter A1 and voltmeter V1? ammeter A1 / A voltmeter V1 / V A 0.25 1.5",
+        "B": "0.25 3.0",
+        "C": "0.75 1.5",
+        "D": "0.75 3.0"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q30.png",
+      "rawText": "A wire is moved in the region between the poles of a magnet. N pole S pole direction of induced current wire A current is induced in the wire. In which direction is the wire moved? A horizontally from the N pole to the S pole B horizontally from the S pole to the N pole C perpendicularly into the plane of the paper D perpendicularly out of the plane of the paper",
+      "parseStatus": "ok",
+      "stem": "A wire is moved in the region between the poles of a magnet. N pole S pole direction of induced current wire",
+      "options": {
+        "A": "current is induced in the wire. In which direction is the wire moved? A horizontally from the N pole to the S pole",
+        "B": "horizontally from the S pole to the N pole",
+        "C": "perpendicularly into the plane of the paper",
+        "D": "perpendicularly out of the plane of the paper"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q31.png",
+      "rawText": "A fixed resistor is connected to the secondary coil of a step-down transformer. The transformer is 100% efficient. 240 V a.c. A The variable resistor is adjusted so that the current in the fixed resistor decreases by 0.25 A. What is the change to the current in the primary circuit? A It decreases by 0.25 A. B It decreases by less than 0.25 A. C It decreases by more than 0.25 A. D There is no change.",
+      "parseStatus": "ok",
+      "stem": "A fixed resistor is connected to the secondary coil of a step-down transformer. The transformer is 100% efficient. 240 V a.c.",
+      "options": {
+        "A": "The variable resistor is adjusted so that the current in the fixed resistor decreases by 0.25 A. What is the change to the current in the primary circuit? A It decreases by 0.25 A.",
+        "B": "It decreases by less than 0.25 A.",
+        "C": "It decreases by more than 0.25 A.",
+        "D": "There is no change."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q32.png",
+      "rawText": "An electrical device changes the voltage of an electrical supply from 240 V a.c. to 20 V a.c. What is this device? A a generator B a relay C a transformer D a voltmeter",
+      "parseStatus": "ok",
+      "stem": "An electrical device changes the voltage of an electrical supply from 240 V a.c. to 20 V a.c. What is this device?",
+      "options": {
+        "A": "a generator",
+        "B": "a relay",
+        "C": "a transformer",
+        "D": "a voltmeter"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q33.png",
+      "rawText": "An a.c. generator is set up so that its coil of wire is perpendicular to the magnetic field. The coil of wire is rotated slowly to produce an alternating electromotive force (e.m.f.). A graph of the induced e.m.f. against time is plotted as the coil rotates. induced e.m.f. / V time / s O P R Q S Which section of the graph represents a rotation of three-quarters of a turn? A OP B OQ C OR D OS",
+      "parseStatus": "ok",
+      "stem": "An a.c. generator is set up so that its coil of wire is perpendicular to the magnetic field. The coil of wire is rotated slowly to produce an alternating electromotive force (e.m.f.).",
+      "options": {
+        "A": "graph of the induced e.m.f. against time is plotted as the coil rotates. induced e.m.f. / V time / s O P R Q S Which section of the graph represents a rotation of three-quarters of a turn? A OP",
+        "B": "OQ",
+        "C": "OR",
+        "D": "OS"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q34.png",
+      "rawText": "A uranium nucleus U 238 92 decays to form thorium by emitting an -particle. Thorium decays to protactinium by emitting a -particle. Which row gives the atomic number and mass number of this isotope of protactinium? atomic number mass number A 89 234 B 90 235 C 91 234 D 95 235",
+      "parseStatus": "ok",
+      "stem": "A uranium nucleus U 238 92 decays to form thorium by emitting an -particle. Thorium decays to protactinium by emitting a -particle. Which row gives the atomic number and mass number of this isotope of protactinium? atomic number mass number",
+      "options": {
+        "A": "89 234",
+        "B": "90 235",
+        "C": "91 234",
+        "D": "95 235"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q35.png",
+      "rawText": "Which row shows what happens when a nucleus decays by emitting a -particle? change in the nucleus particle emitted A a neutron changes to a proton and an electron electron B a neutron changes to a proton and an electron proton C a proton changes to a neutron and an electron electron D a proton changes to a neutron and an electron neutron",
+      "parseStatus": "ok",
+      "stem": "Which row shows what happens when a nucleus decays by emitting a -particle? change in the nucleus particle emitted",
+      "options": {
+        "A": "a neutron changes to a proton and an electron electron",
+        "B": "a neutron changes to a proton and an electron proton",
+        "C": "a proton changes to a neutron and an electron electron",
+        "D": "a proton changes to a neutron and an electron neutron"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q36.png",
+      "rawText": "Which precaution does not always reduce a scientist’s exposure when working with sources of ionising radiation? A ensuring the scientist only works with sources of radiation that have long half-lives B increasing the distance between the scientist and the source of radiation C limiting the time for which the scientist handles the source of radiation D placing a lead shield between the scientist and the source of radiation",
+      "parseStatus": "ok",
+      "stem": "Which precaution does not always reduce a scientist’s exposure when working with sources of ionising radiation?",
+      "options": {
+        "A": "ensuring the scientist only works with sources of radiation that have long half-lives",
+        "B": "increasing the distance between the scientist and the source of radiation",
+        "C": "limiting the time for which the scientist handles the source of radiation",
+        "D": "placing a lead shield between the scientist and the source of radiation"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q37.png",
+      "rawText": "A detector is placed near a radioactive isotope and records a count rate of 700 counts / min. The half-life of the isotope is 8 min. The average background count rate is 60 counts / min. What is the count rate measured by the detector after 16 min? A 100 counts / min B 160 counts / min C 175 counts / min D 220 counts / min",
+      "parseStatus": "ok",
+      "stem": "A detector is placed near a radioactive isotope and records a count rate of 700 counts / min. The half-life of the isotope is 8 min. The average background count rate is 60 counts / min. What is the count rate measured by the detector after 16 min?",
+      "options": {
+        "A": "100 counts / min",
+        "B": "160 counts / min",
+        "C": "175 counts / min",
+        "D": "220 counts / min"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q38.png",
+      "rawText": "The nucleus of an isotope of nitrogen, N, absorbs a neutron. It then decays into an isotope of carbon, C, and emits x. n 1 0 + N 14 7  C 14 6 + x What is x? A -particle B -particle C -radiation D proton",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q39.png",
+      "rawText": "The graph shows how the strength of the Earth’s gravitational field varies as the distance from the Earth’s surface increases. strength of the Earth’s gravitational field distance from the surface of the Earth 0 0 Which row describes the effect that this has on the mass and on the weight of an object as it moves further away from the Earth’s surface? mass of object weight of object A decreases decreases B decreases unchanged C unchanged decreases D unchanged unchanged",
+      "parseStatus": "ok",
+      "stem": "The graph shows how the strength of the Earth’s gravitational field varies as the distance from the Earth’s surface increases. strength of the Earth’s gravitational field distance from the surface of the Earth 0 0 Which row describes the effect that this has on the mass and on the weight of an object as it moves further away from the Earth’s surface? mass of object weight of object",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases unchanged",
+        "C": "unchanged decreases",
+        "D": "unchanged unchanged"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m25_qp_22/q40.png",
+      "rawText": "A student plots a graph of the speed of different galaxies moving away from the Earth against their distance from the Earth. 0.2 0.4 0.6 0.8 1.0 distance / 1025 m 1.2 0 0 5 000 000 10 000 000 15 000 000 20 000 000 25 000 000 speed m / s Using the best straight line shown on the graph, what is the value of the Hubble constant H0? A 2.0  10–18 s–1 B 2.2  10–18 s–1 C 4.5  1017 s D 5.0  1017 s",
+      "parseStatus": "ok",
+      "stem": "A student plots a graph of the speed of different galaxies moving away from the Earth against their distance from the Earth. 0.2 0.4 0.6 0.8 1.0 distance / 1025 m 1.2 0 0 5 000 000 10 000 000 15 000 000 20 000 000 25 000 000 speed m / s Using the best straight line shown on the graph, what is the value of the Hubble constant H0?",
+      "options": {
+        "A": "2.0  10–18 s–1",
+        "B": "2.2  10–18 s–1",
+        "C": "4.5  1017 s",
+        "D": "5.0  1017 s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -57,6 +57,12 @@ export default [
     },
   },
   {
+    files: ["scripts/paper-builder.js", "scripts/paper-export.js"],
+    languageOptions: {
+      sourceType: "module",
+    },
+  },
+  {
     files: ["tools/**/*.{js,mjs,cjs}", "tests/**/*.{js,mjs,cjs}", "eslint.config.js"],
     languageOptions: {
       ecmaVersion: "latest",

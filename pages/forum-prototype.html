@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>学习社区原型 | ExPassway</title>
+  <link rel="icon" href="data:," />
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #f8fafb;
+      --text: #1d2939;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --brand: #287a59;
+      --brand-dark: #1e6046;
+      --brand-soft: #e8f4ed;
+      --orange: #b85c16;
+      --shadow: 0 14px 36px rgba(20, 35, 50, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(228, 231, 236, 0.9);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner,
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      min-height: 68px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .topbar-label {
+      padding-left: 20px;
+      border-left: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .topbar-spacer { flex: 1; }
+
+    .text-button,
+    .primary-button,
+    .filter-button,
+    .action-button {
+      border: 0;
+      border-radius: 8px;
+      transition: 160ms ease;
+    }
+
+    .text-button {
+      padding: 8px 10px;
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .text-button:hover { background: var(--surface-soft); color: var(--text); }
+
+    .primary-button {
+      padding: 10px 16px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .primary-button:hover { background: var(--brand-dark); }
+
+    .page { padding: 42px 0 72px; }
+
+    .page-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    h1, h2, p { margin-top: 0; }
+    h1 { margin-bottom: 8px; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; }
+    .intro { margin-bottom: 0; color: var(--muted); }
+
+    .search-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      box-shadow: 0 4px 14px rgba(20, 35, 50, 0.03);
+    }
+
+    .search-box span { color: var(--muted); font-size: 20px; }
+    .search-box input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+
+    .filter-field { display: grid; gap: 5px; }
+    .filter-field label { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .filter-field select {
+      width: 100%;
+      min-height: 38px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 270px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .list-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .list-heading h2 { margin-bottom: 0; font-size: 18px; }
+    .result-count { color: var(--muted); font-size: 13px; }
+
+    .question-list { display: grid; gap: 12px; }
+
+    .question-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      box-shadow: 0 4px 14px rgba(20, 35, 50, 0.03);
+      transition: 160ms ease;
+    }
+
+    .question-card:hover {
+      border-color: #b9d9c8;
+      box-shadow: var(--shadow);
+      transform: translateY(-1px);
+    }
+
+    .question-meta,
+    .question-footer,
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .question-meta { justify-content: space-between; margin-bottom: 10px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag,
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tag { background: var(--brand-soft); color: var(--brand-dark); }
+    .status { background: #fff2e8; color: var(--orange); }
+    .status.solved { background: #eaf7ef; color: var(--brand-dark); }
+    .time { color: var(--muted); font-size: 12px; }
+
+    .question-title {
+      margin-bottom: 8px;
+      font-size: 19px;
+      line-height: 1.35;
+    }
+
+    .question-title button {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .question-title button:hover { color: var(--brand-dark); }
+    .question-excerpt { margin-bottom: 18px; color: var(--muted); font-size: 14px; }
+
+    .question-footer {
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .author { color: var(--muted); font-size: 13px; }
+    .avatar {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 50%;
+      background: #d9eee2;
+      color: var(--brand-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .stats { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 12px; }
+    .action-button {
+      padding: 4px 7px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .action-button:hover,
+    .action-button.is-active { background: var(--brand-soft); color: var(--brand-dark); }
+
+    .side-panel {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+
+    .side-panel + .side-panel { margin-top: 12px; }
+    .side-panel h2 { margin-bottom: 10px; font-size: 16px; }
+    .side-panel p { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+
+    .chapter-list { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+    .chapter-list button {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 8px 0;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      text-align: left;
+    }
+
+    .chapter-list button:hover { color: var(--brand-dark); }
+    .chapter-list small { color: var(--muted); }
+
+    .load-more {
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .load-more:hover { border-color: #b9d9c8; color: var(--brand-dark); }
+    .empty { padding: 36px 20px; border: 1px dashed var(--line); border-radius: 10px; background: var(--surface); color: var(--muted); text-align: center; }
+
+    @media (max-width: 800px) {
+      .topbar-inner { gap: 12px; }
+      .topbar-label { display: none; }
+      .topbar-inner .text-button { display: none; }
+      .page { padding-top: 28px; }
+      .page-heading { align-items: flex-start; flex-direction: column; }
+      .page-heading .primary-button { width: 100%; }
+      .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .content-grid { grid-template-columns: 1fr; }
+      .side-panel { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .topbar-inner, .page { width: min(100% - 20px, 1120px); }
+      .brand { font-size: 16px; }
+      .search-row { flex-direction: column; }
+      .search-row .primary-button { width: 100%; }
+      .filters { grid-template-columns: 1fr; }
+      .question-card { padding: 16px; }
+      .question-footer { align-items: flex-start; flex-direction: column; }
+      .stats { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">E</span>
+        <span>ExPassway</span>
+      </a>
+      <span class="topbar-label">学习社区原型</span>
+      <span class="topbar-spacer"></span>
+      <button class="text-button" type="button" data-action="login">登录</button>
+      <button class="text-button" type="button" data-action="home">返回首页</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="page-heading" aria-labelledby="pageTitle">
+      <div>
+        <p class="eyebrow">EXPASSWAY COMMUNITY</p>
+        <h1 id="pageTitle">学习社区</h1>
+        <p class="intro">讨论题目、分享解法、解决学习问题。</p>
+      </div>
+      <button class="primary-button" type="button" data-action="ask">+ 我要提问</button>
+    </section>
+
+    <section aria-label="搜索和筛选">
+      <div class="search-row">
+        <label class="search-box" for="searchInput">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="搜索问题、章节或关键词" />
+        </label>
+        <button class="primary-button" type="button" data-action="search">搜索</button>
+      </div>
+
+      <div class="filters">
+        <div class="filter-field">
+          <label for="subjectFilter">学科</label>
+          <select id="subjectFilter">
+            <option value="all">全部学科</option>
+            <option value="physics">物理</option>
+            <option value="biology">生物</option>
+            <option value="chemistry">化学</option>
+            <option value="mathematics">数学</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="chapterFilter">章节</label>
+          <select id="chapterFilter">
+            <option value="all">全部章节</option>
+            <option value="mechanics">力学</option>
+            <option value="electricity">电学</option>
+            <option value="waves">波</option>
+            <option value="cells">细胞结构</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="statusFilter">状态</label>
+          <select id="statusFilter">
+            <option value="all">全部问题</option>
+            <option value="open">未解决</option>
+            <option value="solved">已解决</option>
+            <option value="featured">精选问题</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="sortFilter">排序</label>
+          <select id="sortFilter">
+            <option value="latest">最新发布</option>
+            <option value="active">最近活跃</option>
+            <option value="answers">最多回答</option>
+            <option value="likes">最多点赞</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <section aria-labelledby="listTitle">
+        <div class="list-heading">
+          <h2 id="listTitle">最新问题</h2>
+          <span class="result-count" id="resultCount">显示 4 个问题</span>
+        </div>
+        <div class="question-list" id="questionList"></div>
+        <button class="load-more" id="loadMore" type="button">加载更多</button>
+      </section>
+
+      <aside>
+        <section class="side-panel">
+          <h2>热门章节</h2>
+          <ul class="chapter-list">
+            <li><button type="button" data-chapter="mechanics"><span>物理 · 力学</span><small>28</small></button></li>
+            <li><button type="button" data-chapter="electricity"><span>物理 · 电学</span><small>21</small></button></li>
+            <li><button type="button" data-chapter="cells"><span>生物 · 细胞结构</span><small>16</small></button></li>
+            <li><button type="button" data-chapter="waves"><span>物理 · 波</span><small>12</small></button></li>
+          </ul>
+        </section>
+        <section class="side-panel">
+          <h2>原型说明</h2>
+          <p>这里使用的是示例问题。搜索、筛选、点赞和加载更多只在当前页面演示，不会修改真实数据。</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        id: 1,
+        subject: "physics",
+        subjectLabel: "物理",
+        chapter: "mechanics",
+        chapterLabel: "力学",
+        title: "如何判断这道题应该使用动量守恒还是能量守恒？",
+        excerpt: "我在做 0625 力学章节的题目时，不确定什么时候使用动量守恒，什么时候使用机械能守恒，希望有人可以解释判断方法。",
+        author: "Terrance",
+        avatar: "T",
+        time: "2 小时前",
+        answers: 12,
+        likes: 8,
+        status: "open",
+        statusLabel: "未解决",
+        featured: false
+      },
+      {
+        id: 2,
+        subject: "biology",
+        subjectLabel: "生物",
+        chapter: "cells",
+        chapterLabel: "细胞结构",
+        title: "线粒体和叶绿体的主要区别是什么？",
+        excerpt: "想整理一份细胞器对比表，但不确定考试中应该重点比较哪些结构和功能。",
+        author: "Alice",
+        avatar: "A",
+        time: "5 小时前",
+        answers: 4,
+        likes: 3,
+        status: "solved",
+        statusLabel: "已解决",
+        featured: false
+      },
+      {
+        id: 3,
+        subject: "physics",
+        subjectLabel: "物理",
+        chapter: "electricity",
+        chapterLabel: "电学",
+        title: "电路题中为什么要先判断电流方向？",
+        excerpt: "这道题的电流方向和我一开始假设的不一样，想知道假设方向错误时应该如何继续计算。",
+        author: "Mia",
+        avatar: "M",
+        time: "昨天",
+        answers: 9,
+        likes: 15,
+        status: "featured",
+        statusLabel: "精选",
+        featured: true
+      },
+      {
+        id: 4,
+        subject: "chemistry",
+        subjectLabel: "化学",
+        chapter: "all",
+        chapterLabel: "基础概念",
+        title: "如何快速判断化学方程式是否配平？",
+        excerpt: "我经常在最后一步漏掉系数，想找一个适合考试检查的简单方法。",
+        author: "Leo",
+        avatar: "L",
+        time: "昨天",
+        answers: 6,
+        likes: 6,
+        status: "open",
+        statusLabel: "未解决",
+        featured: false
+      }
+    ];
+
+    const list = document.querySelector("#questionList");
+    const count = document.querySelector("#resultCount");
+    const searchInput = document.querySelector("#searchInput");
+    const subjectFilter = document.querySelector("#subjectFilter");
+    const chapterFilter = document.querySelector("#chapterFilter");
+    const statusFilter = document.querySelector("#statusFilter");
+    const sortFilter = document.querySelector("#sortFilter");
+
+    function getVisibleQuestions() {
+      const query = searchInput.value.trim().toLowerCase();
+      const subject = subjectFilter.value;
+      const chapter = chapterFilter.value;
+      const status = statusFilter.value;
+      const visible = questions.filter((question) => {
+        const matchesQuery = !query || [question.title, question.excerpt, question.subjectLabel, question.chapterLabel]
+          .some((value) => value.toLowerCase().includes(query));
+        const matchesSubject = subject === "all" || question.subject === subject;
+        const matchesChapter = chapter === "all" || question.chapter === chapter;
+        const matchesStatus = status === "all"
+          || (status === "featured" ? question.featured : question.status === status);
+        return matchesQuery && matchesSubject && matchesChapter && matchesStatus;
+      });
+
+      return visible.sort((a, b) => {
+        if (sortFilter.value === "answers") return b.answers - a.answers;
+        if (sortFilter.value === "likes") return b.likes - a.likes;
+        return a.id - b.id;
+      });
+    }
+
+    function render() {
+      const visible = getVisibleQuestions();
+      count.textContent = `显示 ${visible.length} 个问题`;
+      list.innerHTML = visible.length
+        ? visible.map((question) => `
+          <article class="question-card" data-question-id="${question.id}">
+            <div class="question-meta">
+              <div class="tags">
+                <span class="tag">${question.subjectLabel}</span>
+                <span class="tag">${question.chapterLabel}</span>
+              </div>
+              <span class="time">${question.time}</span>
+            </div>
+            <h3 class="question-title">
+              <button type="button" data-action="open-question">${question.title}</button>
+            </h3>
+            <p class="question-excerpt">${question.excerpt}</p>
+            <div class="question-footer">
+              <div class="author"><span class="avatar">${question.avatar}</span><span>${question.author}</span></div>
+              <div class="stats">
+                <button class="action-button" type="button" data-action="answer">${question.answers} 个回答</button>
+                <button class="action-button" type="button" data-action="like">♡ ${question.likes}</button>
+                <button class="action-button" type="button" data-action="save">收藏</button>
+                <span class="status ${question.status === "solved" ? "solved" : ""}">${question.statusLabel}</span>
+              </div>
+            </div>
+          </article>
+        `).join("")
+        : '<div class="empty">没有找到匹配的问题，请调整筛选条件。</div>';
+    }
+
+    [searchInput, subjectFilter, chapterFilter, statusFilter, sortFilter].forEach((control) => {
+      control.addEventListener("input", render);
+      control.addEventListener("change", render);
+    });
+
+    document.querySelectorAll("[data-chapter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        chapterFilter.value = button.dataset.chapter;
+        render();
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      const action = event.target.closest("[data-action]")?.dataset.action;
+      if (!action) return;
+      if (["ask", "open-question", "answer", "home", "login"].includes(action)) {
+        window.alert("这是静态原型，正式版将在下一步接入真实页面。");
+        return;
+      }
+      if (action === "search") render();
+      if (action === "like" || action === "save") {
+        event.target.classList.toggle("is-active");
+        if (action === "save") event.target.textContent = event.target.classList.contains("is-active") ? "已收藏" : "收藏";
+      }
+    });
+
+    document.querySelector("#loadMore").addEventListener("click", (event) => {
+      event.currentTarget.textContent = "示例问题已全部加载";
+      event.currentTarget.disabled = true;
+    });
+
+    render();
+  </script>
+</body>
+</html>

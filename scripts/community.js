@@ -1383,6 +1383,9 @@
       subject: selectedDiscussionSubject(),
       paper: state.context.paper || "MCQ",
       status: byId("communityStatusFilter").value,
+      search: byId("communityFeedSearch").value.trim(),
+      topic: byId("communityFeedTopic").value,
+      sort: byId("communityFeedSort").value,
       followedOnly: state.followedOnly ? "1" : "",
       limit: 30,
     };
@@ -1407,14 +1410,26 @@
     return t("communityStatusOpen");
   }
 
+  function renderFeedTopicOptions() {
+    const select = byId("communityFeedTopic");
+    const selected = select.value;
+    const topics = [...new Set(state.threads.map((thread) => thread.topic).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b));
+    select.innerHTML = `<option value="">${escapeHtml(t("communityAllTopics"))}</option>${topics.map((topic) => `
+      <option value="${escapeHtml(topic)}">${escapeHtml(topic)}</option>
+    `).join("")}`;
+    if (topics.includes(selected)) select.value = selected;
+  }
+
   function renderThreads() {
     const wrap = byId("communityThreadList");
+    renderFeedTopicOptions();
     if (!state.threads.length) {
-      wrap.innerHTML = `<p class="tip">${t("communityNoThreads")}</p>`;
+      wrap.innerHTML = `<p class="tip community-feed-empty">${t("communityNoThreads")}</p>`;
       return;
     }
     wrap.innerHTML = state.threads.map((thread) => `
-      <article class="discussion-thread ${thread.sticky ? "is-sticky" : ""}" data-thread-id="${escapeHtml(thread.id)}">
+      <article class="discussion-thread community-feed-card ${thread.sticky ? "is-sticky" : ""}" data-thread-id="${escapeHtml(thread.id)}">
         <div class="discussion-thread-head">
           <button class="thread-title-button" data-open-thread="${escapeHtml(thread.id)}">
             ${thread.sticky ? `<span class="status-pill">${t("communitySticky")}</span>` : ""}
@@ -1422,7 +1437,9 @@
           </button>
           <span class="status-pill status-${escapeHtml(thread.status)}">${statusLabel(thread.status)}</span>
         </div>
+        ${thread.preview ? `<p class="community-feed-preview">${escapeHtml(thread.preview.replace(/\s+/g, " ").trim().slice(0, 240))}</p>` : ""}
         <div class="tag-row">
+          ${thread.subject ? `<span class="tag">${escapeHtml(thread.subject)}</span>` : ""}
           ${(thread.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
           ${thread.topic ? `<span class="tag">${escapeHtml(thread.topic)}</span>` : ""}
           ${thread.questionKey ? `<span class="tag">${t("communityQuestionTag", { key: escapeHtml(thread.questionKey) })}</span>` : ""}
@@ -1783,6 +1800,13 @@
     await loadCatalogFilters();
     await fillFilters();
     await renderContext();
+    byId("communityFeedSearchForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      await loadThreads();
+      showCommunityView("list");
+    });
+    byId("communityFeedTopic").addEventListener("change", loadThreads);
+    byId("communityFeedSort").addEventListener("change", loadThreads);
     ["communitySyllabusCode", "communityExamSeason", "communityExamYear", "communityPaperNumber", "communityVariant"].forEach((id) => {
       byId(id).addEventListener("change", () => {
         if (id === "communitySyllabusCode") refreshCatalogFilterOptions();
@@ -1807,6 +1831,9 @@
       byId("communityPaperNumber").value = "";
       byId("communityVariant").value = "";
       byId("communityStatusFilter").value = "";
+      byId("communityFeedSearch").value = "";
+      byId("communityFeedTopic").value = "";
+      byId("communityFeedSort").value = "latest";
       renderPaperReferencePreview();
       await loadThreads();
       showCommunityView("list");

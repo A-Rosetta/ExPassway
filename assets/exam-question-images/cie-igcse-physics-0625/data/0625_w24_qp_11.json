@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0625_w24_qp_11.pdf",
+  "markScheme": "0625_w24_ms_11.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q01.png",
+      "rawText": "The diagram shows a rectangular metal sheet close to two rulers. 0 0 10 20 30 10 20 30 40 50 cm cm metal sheet What is the area of the metal sheet? A 700 cm2 B 875 cm2 C 900 cm2 D 1125 cm2",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a rectangular metal sheet close to two rulers. 0 0 10 20 30 10 20 30 40 50 cm cm metal sheet What is the area of the metal sheet?",
+      "options": {
+        "A": "700 cm2",
+        "B": "875 cm2",
+        "C": "900 cm2",
+        "D": "1125 cm2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q02.png",
+      "rawText": "The diagram shows the speed–time graph of an object. In which section does the object have the largest acceleration? speed time A B C D 0 0",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q03.png",
+      "rawText": "An object begins to fall close to the Earth’s surface. Air resistance can be ignored. Which statement about the object’s acceleration is correct? A The acceleration is constant. B The acceleration decreases as the body falls. C The acceleration increases as the body falls. D The acceleration is zero.",
+      "parseStatus": "ok",
+      "stem": "An object begins to fall close to the Earth’s surface. Air resistance can be ignored. Which statement about the object’s acceleration is correct?",
+      "options": {
+        "A": "The acceleration is constant.",
+        "B": "The acceleration decreases as the body falls.",
+        "C": "The acceleration increases as the body falls.",
+        "D": "The acceleration is zero."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q04.png",
+      "rawText": "Which quantity is equal to gravitational force? A gravitational field strength  mass B gravitational field strength  weight C mass per unit weight D weight per unit mass",
+      "parseStatus": "ok",
+      "stem": "Which quantity is equal to gravitational force?",
+      "options": {
+        "A": "gravitational field strength  mass",
+        "B": "gravitational field strength  weight",
+        "C": "mass per unit weight",
+        "D": "weight per unit mass"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q05.png",
+      "rawText": "A concrete building block has the dimensions shown. 29 cm 18 cm 12 cm The mass of the block is 15 000 g. What is the density of the block? A 43 g / cm3 B 2.4 g / cm3 C 0.42 g / cm3 D 0.023 g / cm3",
+      "parseStatus": "ok",
+      "stem": "A concrete building block has the dimensions shown. 29 cm 18 cm 12 cm The mass of the block is 15 000 g. What is the density of the block?",
+      "options": {
+        "A": "43 g / cm3",
+        "B": "2.4 g / cm3",
+        "C": "0.42 g / cm3",
+        "D": "0.023 g / cm3"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q06.png",
+      "rawText": "What is measured by the moment of a force? A the acceleration produced by the force B the turning effect of the force C the time for which the force acts D the increase in energy caused by the force",
+      "parseStatus": "ok",
+      "stem": "What is measured by the moment of a force?",
+      "options": {
+        "A": "the acceleration produced by the force",
+        "B": "the turning effect of the force",
+        "C": "the time for which the force acts",
+        "D": "the increase in energy caused by the force"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q07.png",
+      "rawText": "Two identical containers, P and Q, are partly filled with different quantities of sand. The position of the centre of gravity for each container is labelled X. X P X Q Which container is more stable and what is the reason why it is more stable? A P is more stable because it has a lower centre of gravity. B P is more stable because it has a smaller mass. C Q is more stable because it has a greater depth of sand. D Q is more stable because it has a higher centre of gravity.",
+      "parseStatus": "ok",
+      "stem": "Two identical containers, P and Q, are partly filled with different quantities of sand. The position of the centre of gravity for each container is labelled X. X P X Q Which container is more stable and what is the reason why it is more stable?",
+      "options": {
+        "A": "P is more stable because it has a lower centre of gravity.",
+        "B": "P is more stable because it has a smaller mass.",
+        "C": "Q is more stable because it has a greater depth of sand.",
+        "D": "Q is more stable because it has a higher centre of gravity."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q08.png",
+      "rawText": "The diagram shows a steel sphere falling through a cylinder of oil. steel sphere oil Which row indicates what happens to the steel sphere and what happens to the oil as the steel sphere falls? the steel sphere becomes warmer the oil becomes warmer A yes yes B yes no C no yes D no no",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a steel sphere falling through a cylinder of oil. steel sphere oil Which row indicates what happens to the steel sphere and what happens to the oil as the steel sphere falls? the steel sphere becomes warmer the oil becomes warmer",
+      "options": {
+        "A": "yes yes",
+        "B": "yes no",
+        "C": "no yes",
+        "D": "no no"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q09.png",
+      "rawText": "A moving object is brought to rest by a frictional force of 30 N over a distance of 5.0 m. The diagram shows the energy transferred between stores. store of kinetic energy store of internal energy How much energy is transferred by this force and how is the energy transferred? energy transferred / J how the energy is transferred A 6.0 by electrical working B 6.0 by mechanical working C 150 by electrical working D 150 by mechanical working",
+      "parseStatus": "ok",
+      "stem": "A moving object is brought to rest by a frictional force of 30 N over a distance of 5.0 m. The diagram shows the energy transferred between stores. store of kinetic energy store of internal energy How much energy is transferred by this force and how is the energy transferred? energy transferred / J how the energy is transferred",
+      "options": {
+        "A": "6.0 by electrical working",
+        "B": "6.0 by mechanical working",
+        "C": "150 by electrical working",
+        "D": "150 by mechanical working"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q10.png",
+      "rawText": "A motor transfers 24 J of energy in 60 seconds. What is the power output of the motor? A 0.40 W B 2.5 W C 24 W D 1400 W",
+      "parseStatus": "ok",
+      "stem": "A motor transfers 24 J of energy in 60 seconds. What is the power output of the motor?",
+      "options": {
+        "A": "0.40 W",
+        "B": "2.5 W",
+        "C": "24 W",
+        "D": "1400 W"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q11.png",
+      "rawText": "An artist makes four sculptures with circular bases and places them on sand. All the sculptures are of equal weight and volume. Which sculpture is least likely to sink into the sand? sand A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q12.png",
+      "rawText": "A quantity of water is boiled to form the same mass of steam. Which row shows how the volume and density of the water change? volume density A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "A quantity of water is boiled to form the same mass of steam. Which row shows how the volume and density of the water change? volume density",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q13.png",
+      "rawText": "The diagram represents gas particles moving around in a sealed container. The gas particles collide with the walls of the container. The temperature of the gas is increased. What happens to the average speed of the gas particles and what happens to the number of collisions by the gas particles with the walls of the container? average speed of gas particles the number of collisions with the walls of the container A increases less frequent collisions B increases more frequent collisions C stays the same less frequent collisions D stays the same more frequent collisions",
+      "parseStatus": "ok",
+      "stem": "The diagram represents gas particles moving around in a sealed container. The gas particles collide with the walls of the container. The temperature of the gas is increased. What happens to the average speed of the gas particles and what happens to the number of collisions by the gas particles with the walls of the container? average speed of gas particles the number of collisions with the walls of the container",
+      "options": {
+        "A": "increases less frequent collisions",
+        "B": "increases more frequent collisions",
+        "C": "stays the same less frequent collisions",
+        "D": "stays the same more frequent collisions"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q14.png",
+      "rawText": "A metal object is heated strongly in an oven. What happens to the volume of the object and the internal energy stored in the object? volume internal energy A decreases decreases B decreases increases C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "A metal object is heated strongly in an oven. What happens to the volume of the object and the internal energy stored in the object? volume internal energy",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases increases",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q15.png",
+      "rawText": "Which row describes the process of melting? initial state final state change in temperature A liquid gas yes B liquid solid no C solid gas yes D solid liquid no",
+      "parseStatus": "ok",
+      "stem": "Which row describes the process of melting? initial state final state change in temperature",
+      "options": {
+        "A": "liquid gas yes",
+        "B": "liquid solid no",
+        "C": "solid gas yes",
+        "D": "solid liquid no"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q16.png",
+      "rawText": "A beaker of water is heated and thermal energy travels through the water by convection. What happens to the density of the water when it is heated and how does the water move? A The density decreases and the heated water moves downwards. B The density decreases and the heated water moves upwards. C The density increases and the heated water moves downwards. D The density increases and the heated water moves upwards.",
+      "parseStatus": "ok",
+      "stem": "A beaker of water is heated and thermal energy travels through the water by convection. What happens to the density of the water when it is heated and how does the water move?",
+      "options": {
+        "A": "The density decreases and the heated water moves downwards.",
+        "B": "The density decreases and the heated water moves upwards.",
+        "C": "The density increases and the heated water moves downwards.",
+        "D": "The density increases and the heated water moves upwards."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q17.png",
+      "rawText": "Waves travel across the surface of water. What is meant by the amplitude of the wave? A the maximum distance of a water particle from its mean position B how far the wave travels every second C the number of waves passing a point every second D the distance between the top of consecutive waves",
+      "parseStatus": "ok",
+      "stem": "Waves travel across the surface of water. What is meant by the amplitude of the wave?",
+      "options": {
+        "A": "the maximum distance of a water particle from its mean position",
+        "B": "how far the wave travels every second",
+        "C": "the number of waves passing a point every second",
+        "D": "the distance between the top of consecutive waves"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q18.png",
+      "rawText": "Water waves change direction when they move from shallow water to deep water. shallow water deep water original wave direction new wave direction What is the name of this effect? A diffraction B dispersion C reflection D refraction",
+      "parseStatus": "ok",
+      "stem": "Water waves change direction when they move from shallow water to deep water. shallow water deep water original wave direction new wave direction What is the name of this effect?",
+      "options": {
+        "A": "diffraction",
+        "B": "dispersion",
+        "C": "reflection",
+        "D": "refraction"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q19.png",
+      "rawText": "The ray diagram shows the formation of an image when light is reflected by a plane mirror. image object eye mirror X Y Z Which lines represent light rays? A X, Y and Z B X and Y only C X and Z only D Y and Z only",
+      "parseStatus": "ok",
+      "stem": "The ray diagram shows the formation of an image when light is reflected by a plane mirror. image object eye mirror X Y Z Which lines represent light rays?",
+      "options": {
+        "A": "X, Y and Z",
+        "B": "X and Y only",
+        "C": "X and Z only",
+        "D": "Y and Z only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q20.png",
+      "rawText": "Which diagram shows how an image of an object is formed on a screen by a converging lens? screen object 2 \u0001 focal length A screen object 2 \u0001 focal length focal length focal length B screen object C screen object D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q21.png",
+      "rawText": "Which diagram shows the dispersion of white light by a glass prism? A white light red violet B white light red red violet C white light red violet D white light violet",
+      "parseStatus": "ok",
+      "stem": "Which diagram shows the dispersion of white light by a glass prism?",
+      "options": {
+        "A": "white light red violet",
+        "B": "white light red red violet",
+        "C": "white light red violet",
+        "D": "white light violet"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q22.png",
+      "rawText": "Which regions of the electromagnetic spectrum are used for satellite television and for security marking? satellite television security marking A microwaves infrared B microwaves ultraviolet C X-rays infrared D X-rays ultraviolet",
+      "parseStatus": "ok",
+      "stem": "Which regions of the electromagnetic spectrum are used for satellite television and for security marking? satellite television security marking",
+      "options": {
+        "A": "microwaves infrared",
+        "B": "microwaves ultraviolet",
+        "C": "X-rays infrared",
+        "D": "X-rays ultraviolet"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q23.png",
+      "rawText": "The horn on a ship makes a sound. The captain on the ship hears an echo from a cliff 4.0 s later. The speed of sound is 340 m / s. How far away is the cliff from the ship? A 170 m B 340 m C 680 m D 1400 m",
+      "parseStatus": "ok",
+      "stem": "The horn on a ship makes a sound. The captain on the ship hears an echo from a cliff 4.0 s later. The speed of sound is 340 m / s. How far away is the cliff from the ship?",
+      "options": {
+        "A": "170 m",
+        "B": "340 m",
+        "C": "680 m",
+        "D": "1400 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q24.png",
+      "rawText": "A bar magnet is next to a steel bar. Some of the magnetic field lines due to the magnet are shown. X Y steel bar What are the correct poles of the magnet and would the steel bar attract or repel the bar magnet? X Y force A N pole S pole attraction B N pole S pole repulsion C S pole N pole attraction D S pole N pole repulsion",
+      "parseStatus": "ok",
+      "stem": "A bar magnet is next to a steel bar. Some of the magnetic field lines due to the magnet are shown. X Y steel bar What are the correct poles of the magnet and would the steel bar attract or repel the bar magnet? X Y force",
+      "options": {
+        "A": "N pole S pole attraction",
+        "B": "N pole S pole repulsion",
+        "C": "S pole N pole attraction",
+        "D": "S pole N pole repulsion"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q25.png",
+      "rawText": "Which row about electrical conduction in metals is correct? statement 1 statement 2 A It is the movement of free electrons. Electric charge is a flow of current. B It is the movement of positive ions. Electric charge is a flow of current. C It is the movement of free electrons. Electric current is a flow of charge. D It is the movement of positive ions. Electric current is a flow of charge.",
+      "parseStatus": "ok",
+      "stem": "Which row about electrical conduction in metals is correct? statement 1 statement 2",
+      "options": {
+        "A": "It is the movement of free electrons. Electric charge is a flow of current.",
+        "B": "It is the movement of positive ions. Electric charge is a flow of current.",
+        "C": "It is the movement of free electrons. Electric current is a flow of charge.",
+        "D": "It is the movement of positive ions. Electric current is a flow of charge."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q26.png",
+      "rawText": "The diagram shows three wires, P, Q and R. They are all made from the same metal. 2 cm 0.8 cm2 P 2 cm 1.6 cm2 R 4 cm 0.8 cm2 Q Which list gives the wires in order of resistance, from lowest to highest? A P  Q  R B Q  R  P C R  P  Q D R  Q  P",
+      "parseStatus": "ok",
+      "stem": "The diagram shows three wires, P, Q and R. They are all made from the same metal. 2 cm 0.8 cm2 P 2 cm 1.6 cm2 R 4 cm 0.8 cm2 Q Which list gives the wires in order of resistance, from lowest to highest?",
+      "options": {
+        "A": "P  Q  R",
+        "B": "Q  R  P",
+        "C": "R  P  Q",
+        "D": "R  Q  P"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q27.png",
+      "rawText": "A 60 W lamp operates at normal brightness for 2.0 minutes. How much energy is transferred by the lamp? A 0.50 J B 30 J C 120 J D 7200 J",
+      "parseStatus": "ok",
+      "stem": "A 60 W lamp operates at normal brightness for 2.0 minutes. How much energy is transferred by the lamp?",
+      "options": {
+        "A": "0.50 J",
+        "B": "30 J",
+        "C": "120 J",
+        "D": "7200 J"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q28.png",
+      "rawText": "What is a thermistor? A a container to keep a hot liquid warm B a circuit to control room temperature C a temperature-dependent resistor D a heater for a room",
+      "parseStatus": "ok",
+      "stem": "What is a thermistor?",
+      "options": {
+        "A": "a container to keep a hot liquid warm",
+        "B": "a circuit to control room temperature",
+        "C": "a temperature-dependent resistor",
+        "D": "a heater for a room"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q29.png",
+      "rawText": "The diagram shows a circuit containing two identical resistors connected to a battery. The current is measured at X and at Y. X Y Which row is correct? arrangement of resistors current at Y compared with current at X A parallel less than X B parallel equal to X C series less than X D series equal to X",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a circuit containing two identical resistors connected to a battery. The current is measured at X and at Y. X Y Which row is correct? arrangement of resistors current at Y compared with current at X",
+      "options": {
+        "A": "parallel less than X",
+        "B": "parallel equal to X",
+        "C": "series less than X",
+        "D": "series equal to X"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q30.png",
+      "rawText": "The mains voltage is 120 V. Which fuse should be fitted to an electric kettle with a power of 1.5 kW? A 3 A B 5 A C 10 A D 13 A",
+      "parseStatus": "ok",
+      "stem": "The mains voltage is 120 V. Which fuse should be fitted to an electric kettle with a power of 1.5 kW?",
+      "options": {
+        "A": "3 A",
+        "B": "5 A",
+        "C": "10 A",
+        "D": "13 A"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q31.png",
+      "rawText": "The diagrams show a strong magnet and a weak magnet moving into the same coil of wire at different speeds. arrangement X strong magnet N S moving slowly arrangement Y weak magnet N S moving slowly arrangement Z strong magnet N S moving quickly Which arrangement induces the largest electromotive force (e.m.f.) and which arrangement induces the smallest e.m.f.? largest e.m.f. smallest e.m.f. A X Y B Y Z C Z X D Z Y",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a strong magnet and a weak magnet moving into the same coil of wire at different speeds. arrangement X strong magnet N S moving slowly arrangement Y weak magnet N S moving slowly arrangement Z strong magnet N S moving quickly Which arrangement induces the largest electromotive force (e.m.f.) and which arrangement induces the smallest e.m.f.? largest e.m.f. smallest e.m.f.",
+      "options": {
+        "A": "X Y",
+        "B": "Y Z",
+        "C": "Z X",
+        "D": "Z Y"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q32.png",
+      "rawText": "The diagrams show a current-carrying wire with an arrow in the direction of the current. Which diagram shows the magnetic field produced by the current? A magnetic field lines wire B magnetic field lines wire C magnetic field lines wire D magnetic field lines wire",
+      "parseStatus": "ok",
+      "stem": "The diagrams show a current-carrying wire with an arrow in the direction of the current. Which diagram shows the magnetic field produced by the current?",
+      "options": {
+        "A": "magnetic field lines wire",
+        "B": "magnetic field lines wire",
+        "C": "magnetic field lines wire",
+        "D": "magnetic field lines wire"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q33.png",
+      "rawText": "What are the best materials to use for the construction of a transformer? A copper for the core and steel for the coils wound around it B copper for the core and copper for the coils wound around it C soft iron for the core and copper for the coils wound around it D steel for the core and copper for the coils wound around it",
+      "parseStatus": "ok",
+      "stem": "What are the best materials to use for the construction of a transformer?",
+      "options": {
+        "A": "copper for the core and steel for the coils wound around it",
+        "B": "copper for the core and copper for the coils wound around it",
+        "C": "soft iron for the core and copper for the coils wound around it",
+        "D": "steel for the core and copper for the coils wound around it"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q34.png",
+      "rawText": "Which diagram represents the structure of a neutral atom? + + – – – key neutron proton electron A B + + – + + C + + + D – – – –",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q35.png",
+      "rawText": "The diagram shows five atoms in a radioactive substance. The atoms each give out an -particle. atom 1 atom 5 atom 4 atom 3 atom 2 first particle second particle Atom 1 is the first to give out a particle. Atom 3 is the second to give out a particle. Which atom will give out the next particle? A atom 2 B atom 4 C atom 5 D impossible to tell",
+      "parseStatus": "ok",
+      "stem": "The diagram shows five atoms in a radioactive substance. The atoms each give out an -particle. atom 1 atom 5 atom 4 atom 3 atom 2 first particle second particle Atom 1 is the first to give out a particle. Atom 3 is the second to give out a particle. Which atom will give out the next particle?",
+      "options": {
+        "A": "atom 2",
+        "B": "atom 4",
+        "C": "atom 5",
+        "D": "impossible to tell"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q36.png",
+      "rawText": "The diagram shows a radioactive source, a thick aluminium sheet and a radiation detector. radioactive source thick aluminium sheet radiation detector The radiation detector shows a reading greater than the background reading. Which type of radiation is being emitted by the source and detected by the detector? A -radiation B -radiation C -radiation D infrared radiation",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a radioactive source, a thick aluminium sheet and a radiation detector. radioactive source thick aluminium sheet radiation detector The radiation detector shows a reading greater than the background reading. Which type of radiation is being emitted by the source and detected by the detector?",
+      "options": {
+        "A": "-radiation",
+        "B": "-radiation",
+        "C": "-radiation",
+        "D": "infrared radiation"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q37.png",
+      "rawText": "The half-life of the radioactive isotope caesium Cs 137 55 is 30 years. Starting with 30 g of the isotope, which mass of the isotope remains after 90 years? A 10.0 g B 7.50 g C 3.75 g D 1.25 g",
+      "parseStatus": "ok",
+      "stem": "The half-life of the radioactive isotope caesium Cs 137 55 is 30 years. Starting with 30 g of the isotope, which mass of the isotope remains after 90 years?",
+      "options": {
+        "A": "10.0 g",
+        "B": "7.50 g",
+        "C": "3.75 g",
+        "D": "1.25 g"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q38.png",
+      "rawText": "Which list gives the names of the planets in the correct order? A Mercury, Mars, Earth, Venus, Jupiter, Saturn, Uranus, Neptune B Mercury, Venus, Earth, Mars, Saturn, Uranus, Jupiter, Neptune C Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune D Venus, Mars, Earth, Mercury, Jupiter, Saturn, Uranus, Neptune",
+      "parseStatus": "ok",
+      "stem": "Which list gives the names of the planets in the correct order?",
+      "options": {
+        "A": "Mercury, Mars, Earth, Venus, Jupiter, Saturn, Uranus, Neptune",
+        "B": "Mercury, Venus, Earth, Mars, Saturn, Uranus, Jupiter, Neptune",
+        "C": "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune",
+        "D": "Venus, Mars, Earth, Mercury, Jupiter, Saturn, Uranus, Neptune"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q39.png",
+      "rawText": "Which row describes the Sun and the Milky Way? the Sun the Milky Way A a galaxy a galaxy B a galaxy a star C a star a galaxy D a star a star",
+      "parseStatus": "ok",
+      "stem": "Which row describes the Sun and the Milky Way? the Sun the Milky Way",
+      "options": {
+        "A": "a galaxy a galaxy",
+        "B": "a galaxy a star",
+        "C": "a star a galaxy",
+        "D": "a star a star"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_11/q40.png",
+      "rawText": "What is the approximate diameter of the Milky Way? A 100 light-years B 1000 light-years C 10 000 light-years D 100 000 light-years",
+      "parseStatus": "ok",
+      "stem": "What is the approximate diameter of the Milky Way?",
+      "options": {
+        "A": "100 light-years",
+        "B": "1000 light-years",
+        "C": "10 000 light-years",
+        "D": "100 000 light-years"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

@@ -1,0 +1,668 @@
+{
+  "questionPaper": "0625_m23_qp_22.pdf",
+  "markScheme": "0625_m23_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q01.png",
+      "rawText": "Which list contains two scalar quantities and two vector quantities? A distance, speed, time, velocity B force, velocity, distance, mass C mass, energy, temperature, momentum D weight, acceleration, momentum, speed",
+      "parseStatus": "ok",
+      "stem": "Which list contains two scalar quantities and two vector quantities?",
+      "options": {
+        "A": "distance, speed, time, velocity",
+        "B": "force, velocity, distance, mass",
+        "C": "mass, energy, temperature, momentum",
+        "D": "weight, acceleration, momentum, speed"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q02.png",
+      "rawText": "The diagram shows the speed–time graph for a car. speed time 0 0 Y X Which row describes the motion of the car at point X and at point Y? point X point Y A at rest moving with constant speed B moving with constant speed at rest C moving with changing speed at rest D moving with changing speed moving with constant speed",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the speed–time graph for a car. speed time 0 0 Y X Which row describes the motion of the car at point X and at point Y? point X point Y",
+      "options": {
+        "A": "at rest moving with constant speed",
+        "B": "moving with constant speed at rest",
+        "C": "moving with changing speed at rest",
+        "D": "moving with changing speed moving with constant speed"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q03.png",
+      "rawText": "Four objects are moving in a straight line. The table shows the distances moved by each object in each second of its motion. Which object is moving with constant non-zero acceleration? distance moved in 1st second / m distance moved in 2nd second / m distance moved in 3rd second / m distance moved in 4th second / m A 5 5 5 5 B 5 6 7 8 C 5 7 10 14 D 5 8 14 26",
+      "parseStatus": "ok",
+      "stem": "Four objects are moving in a straight line. The table shows the distances moved by each object in each second of its motion. Which object is moving with constant non-zero acceleration? distance moved in 1st second / m distance moved in 2nd second / m distance moved in 3rd second / m distance moved in 4th second / m",
+      "options": {
+        "A": "5 5 5 5",
+        "B": "5 6 7 8",
+        "C": "5 7 10 14",
+        "D": "5 8 14 26"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q04.png",
+      "rawText": "The drag force on a car increases with speed. At 20 m / s, the total drag force is 400 N. The mass of the car is 1200 kg and the driving force is constant at 700 N. Which statement about the acceleration of the car at 20 m / s is correct? A The acceleration is 0.25 m / s2 but will decrease as time passes. B The acceleration is 0.25 m / s2 but will increase as time passes. C The acceleration is 0.58 m / s2 but will decrease as time passes. D The acceleration is 0.58 m / s2 but will increase as time passes.",
+      "parseStatus": "ok",
+      "stem": "The drag force on a car increases with speed. At 20 m / s, the total drag force is 400 N. The mass of the car is 1200 kg and the driving force is constant at 700 N. Which statement about the acceleration of the car at 20 m / s is correct?",
+      "options": {
+        "A": "The acceleration is 0.25 m / s2 but will decrease as time passes.",
+        "B": "The acceleration is 0.25 m / s2 but will increase as time passes.",
+        "C": "The acceleration is 0.58 m / s2 but will decrease as time passes.",
+        "D": "The acceleration is 0.58 m / s2 but will increase as time passes."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q05.png",
+      "rawText": "A rectangular swimming pool is 50 m long and 25 m wide. It contains water at a depth of 2 m. The density of the water is 1000 kg / m3. What is the mass of the water in the pool? A 2.5 kg B 2500 kg C 77 000 kg D 2 500 000 kg",
+      "parseStatus": "ok",
+      "stem": "A rectangular swimming pool is 50 m long and 25 m wide. It contains water at a depth of 2 m. The density of the water is 1000 kg / m3. What is the mass of the water in the pool?",
+      "options": {
+        "A": "2.5 kg",
+        "B": "2500 kg",
+        "C": "77 000 kg",
+        "D": "2 500 000 kg"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q06.png",
+      "rawText": "An object is rising vertically at constant speed through water. There are three vertical forces acting on it: the weight W, the drag force D, and the upward force U. Which diagram shows the magnitude and direction of the vertical forces acting on the object? U = 2.0 N A W = 3.0 N D = 1.0 N U = 3.0 N B W = 1.0 N D = 2.0 N U = 2.0 N C W = 3.0 N D = 1.0 N U = 3.0 N D W = 2.0 N D = 1.0 N",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q07.png",
+      "rawText": "Two boys of equal weight sit on one side of a see-saw, as shown. Their father, of weight 1000 N, sits on the other side. The see-saw is balanced and is being used so that it moves up and down. During one part of the cycle, the father descends through a distance of 40 cm. At the same time, the boy nearest the pivot rises through 20 cm, while the other boy rises through 80 cm. What is the weight of each boy? A 200 N B 400 N C 600 N D 800 N",
+      "parseStatus": "ok",
+      "stem": "Two boys of equal weight sit on one side of a see-saw, as shown. Their father, of weight 1000 N, sits on the other side. The see-saw is balanced and is being used so that it moves up and down. During one part of the cycle, the father descends through a distance of 40 cm. At the same time, the boy nearest the pivot rises through 20 cm, while the other boy rises through 80 cm. What is the weight of each boy?",
+      "options": {
+        "A": "200 N",
+        "B": "400 N",
+        "C": "600 N",
+        "D": "800 N"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q08.png",
+      "rawText": "A student measures the length of a spring. She then attaches different weights to the spring. She measures the length of the spring for each weight. The table shows her results. weight / N length / mm 0 520 1.0 524 2.0 528 3.0 533 4.0 537 5.0 540 What is the extension of the spring with a weight of 3.0 N attached to it? A 4 mm B 5 mm C 12 mm D 13 mm",
+      "parseStatus": "ok",
+      "stem": "A student measures the length of a spring. She then attaches different weights to the spring. She measures the length of the spring for each weight. The table shows her results. weight / N length / mm 0 520 1.0 524 2.0 528 3.0 533 4.0 537 5.0 540 What is the extension of the spring with a weight of 3.0 N attached to it?",
+      "options": {
+        "A": "4 mm",
+        "B": "5 mm",
+        "C": "12 mm",
+        "D": "13 mm"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q09.png",
+      "rawText": "The momentum of a body is changed by a force acting on it for a period of time. Which action increases the change in momentum? A doubling the force and halving the time B doubling the force for the same time C halving both the force and the time D halving the force and doubling the time",
+      "parseStatus": "ok",
+      "stem": "The momentum of a body is changed by a force acting on it for a period of time. Which action increases the change in momentum?",
+      "options": {
+        "A": "doubling the force and halving the time",
+        "B": "doubling the force for the same time",
+        "C": "halving both the force and the time",
+        "D": "halving the force and doubling the time"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q10.png",
+      "rawText": "The equation used to find the change in gravitational potential energy of an object can be written as ∆EP = Y × Z × ∆h where ∆EP is the change in gravitational energy and ∆h is the change in height. Which row gives the quantities Y and Z? Y Z A mass gravitational field strength B gravitational field strength density C density speed D speed mass",
+      "parseStatus": "ok",
+      "stem": "The equation used to find the change in gravitational potential energy of an object can be written as ∆EP = Y × Z × ∆h where ∆EP is the change in gravitational energy and ∆h is the change in height. Which row gives the quantities Y and Z? Y Z",
+      "options": {
+        "A": "mass gravitational field strength",
+        "B": "gravitational field strength density",
+        "C": "density speed",
+        "D": "speed mass"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q11.png",
+      "rawText": "A machine has a power input of 200 W and a useful output energy of 1 kJ in 6 minutes. What is the efficiency of the machine? A 0.014% B 0.83% C 1.4% D 83%",
+      "parseStatus": "ok",
+      "stem": "A machine has a power input of 200 W and a useful output energy of 1 kJ in 6 minutes. What is the efficiency of the machine?",
+      "options": {
+        "A": "0.014%",
+        "B": "0.83%",
+        "C": "1.4%",
+        "D": "83%"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q12.png",
+      "rawText": "What is the unit of power? A joule B newton C volt D watt",
+      "parseStatus": "ok",
+      "stem": "What is the unit of power?",
+      "options": {
+        "A": "joule",
+        "B": "newton",
+        "C": "volt",
+        "D": "watt"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q13.png",
+      "rawText": "The diagram shows a rectangular block of weight 16 N. It is resting on a flat surface. 4.0 cm 5.0 cm 9.0 cm What is the pressure at the base of the block due to its weight? A 0.089 N / cm2 B 0.36 N / cm2 C 0.80 N / cm2 D 320 N / cm2",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a rectangular block of weight 16 N. It is resting on a flat surface. 4.0 cm 5.0 cm 9.0 cm What is the pressure at the base of the block due to its weight?",
+      "options": {
+        "A": "0.089 N / cm2",
+        "B": "0.36 N / cm2",
+        "C": "0.80 N / cm2",
+        "D": "320 N / cm2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q14.png",
+      "rawText": "An oil tank has a base of area 2.5 m2 and is filled with oil to a depth of 1.2 m. The density of the oil is 800 kg / m3. What is the force exerted on the base of the tank due to the oil? A 940 N B 2400 N C 9400 N D 24 000 N",
+      "parseStatus": "ok",
+      "stem": "An oil tank has a base of area 2.5 m2 and is filled with oil to a depth of 1.2 m. The density of the oil is 800 kg / m3. What is the force exerted on the base of the tank due to the oil?",
+      "options": {
+        "A": "940 N",
+        "B": "2400 N",
+        "C": "9400 N",
+        "D": "24 000 N"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q15.png",
+      "rawText": "A sample of gas is trapped in a rigid container. As the temperature of the gas is increased, the pressure increases. Which statement is not correct? A The gas molecules have greater kinetic energy. B The gas molecules hit the walls of the container harder. C The gas molecules hit the walls of the container more frequently. D The gas molecules move further apart.",
+      "parseStatus": "ok",
+      "stem": "A sample of gas is trapped in a rigid container. As the temperature of the gas is increased, the pressure increases. Which statement is not correct?",
+      "options": {
+        "A": "The gas molecules have greater kinetic energy.",
+        "B": "The gas molecules hit the walls of the container harder.",
+        "C": "The gas molecules hit the walls of the container more frequently.",
+        "D": "The gas molecules move further apart."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q16.png",
+      "rawText": "What happens when the temperature of a liquid increases? A The mass of the liquid increases, making the liquid less dense. B The mass of the liquid increases, making the liquid more dense. C The volume of the liquid increases, making the liquid less dense. D The volume of the liquid increases, making the liquid more dense.",
+      "parseStatus": "ok",
+      "stem": "What happens when the temperature of a liquid increases?",
+      "options": {
+        "A": "The mass of the liquid increases, making the liquid less dense.",
+        "B": "The mass of the liquid increases, making the liquid more dense.",
+        "C": "The volume of the liquid increases, making the liquid less dense.",
+        "D": "The volume of the liquid increases, making the liquid more dense."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q17.png",
+      "rawText": "A bar of metal, which is a good thermal conductor, is heated at one end. What is the main method of transfer of thermal energy along the bar? A lattice vibration B movement of atoms of the metal along the bar C transfer by electrons D vibration of atoms of the metal bar",
+      "parseStatus": "ok",
+      "stem": "A bar of metal, which is a good thermal conductor, is heated at one end. What is the main method of transfer of thermal energy along the bar?",
+      "options": {
+        "A": "lattice vibration",
+        "B": "movement of atoms of the metal along the bar",
+        "C": "transfer by electrons",
+        "D": "vibration of atoms of the metal bar"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q18.png",
+      "rawText": "A transverse wave moves along a rope. The diagram shows the position of the rope at one particular time. W X Y Z rope Which two labelled points are one wavelength apart? A W and X B W and Z C X and Z D Y and Z",
+      "parseStatus": "ok",
+      "stem": "A transverse wave moves along a rope. The diagram shows the position of the rope at one particular time. W X Y Z rope Which two labelled points are one wavelength apart?",
+      "options": {
+        "A": "W and X",
+        "B": "W and Z",
+        "C": "X and Z",
+        "D": "Y and Z"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q19.png",
+      "rawText": "Light in transparent plastic meets a boundary with air. Light is transmitted into the air only if the angle marked θ in the diagram is greater than 36°. air plastic \u0001 What is the refractive index of the plastic? A 0.59 B 0.81 C 1.2 D 1.7",
+      "parseStatus": "ok",
+      "stem": "Light in transparent plastic meets a boundary with air. Light is transmitted into the air only if the angle marked θ in the diagram is greater than 36°. air plastic \u0001 What is the refractive index of the plastic?",
+      "options": {
+        "A": "0.59",
+        "B": "0.81",
+        "C": "1.2",
+        "D": "1.7"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q20.png",
+      "rawText": "A thin converging lens has a focal length f. An object O is placed to the left of the lens, as shown. f f O Where is the image formed and how does its size compare to the object? image position image size A on the opposite side of the lens to the object larger than the object B on the opposite side of the lens to the object smaller than the object C on the same side of the lens as the object larger than the object D on the same side of the lens as the object smaller than the object",
+      "parseStatus": "ok",
+      "stem": "A thin converging lens has a focal length f. An object O is placed to the left of the lens, as shown. f f O Where is the image formed and how does its size compare to the object? image position image size",
+      "options": {
+        "A": "on the opposite side of the lens to the object larger than the object",
+        "B": "on the opposite side of the lens to the object smaller than the object",
+        "C": "on the same side of the lens as the object larger than the object",
+        "D": "on the same side of the lens as the object smaller than the object"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q21.png",
+      "rawText": "Which diagram shows what happens when a ray of white light passes through a prism? A spectrum B spectrum C spectrum D spectrum white light white light white light white light",
+      "parseStatus": "ok",
+      "stem": "Which diagram shows what happens when a ray of white light passes through a prism?",
+      "options": {
+        "A": "spectrum",
+        "B": "spectrum",
+        "C": "spectrum",
+        "D": "spectrum white light white light white light white light"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q22.png",
+      "rawText": "A television (TV) station transmits a signal to a television receiving dish. The television has an on / off indicator light. The television is switched on by a remote control which changes the indicator light from red to green. Which electromagnetic wave used in these actions has the longest wavelength? TV station A B satellite receiving dish remote control TV red green C D indicator light",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q23.png",
+      "rawText": "A student makes a list of some applications of waves. 1 medical scanning of soft tissue 2 sterilising water 3 using sonar to calculate ocean depths Which applications use ultrasound waves? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "A student makes a list of some applications of waves. 1 medical scanning of soft tissue 2 sterilising water 3 using sonar to calculate ocean depths Which applications use ultrasound waves?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q24.png",
+      "rawText": "The diagram shows a bar magnet at rest on a smooth horizontal surface. A length of soft-iron wire is held parallel to the magnet. N S soft-iron wire magnet The wire is released. What happens? A The wire moves away from the magnet. B The wire moves towards the magnet. C The wire’s centre stays in its present position and the wire rotates through 90° in a clockwise direction. D The wire’s centre stays in its present position and the wire rotates through 90° in an anticlockwise direction.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a bar magnet at rest on a smooth horizontal surface.",
+      "options": {
+        "A": "length of soft-iron wire is held parallel to the magnet. N S soft-iron wire magnet The wire is released. What happens? A The wire moves away from the magnet.",
+        "B": "The wire moves towards the magnet.",
+        "C": "The wire’s centre stays in its present position and the wire rotates through 90° in a clockwise direction.",
+        "D": "The wire’s centre stays in its present position and the wire rotates through 90° in an anticlockwise direction."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q25.png",
+      "rawText": "Which diagram shows the electric field pattern and direction around a positive point charge? A B C D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q26.png",
+      "rawText": "A laboratory has a standard wire of known resistance. It also has other wires, made from the same material as the standard wire, but of different lengths and diameters. Which wire would definitely have a resistance of less than the standard wire? wire length wire diameter A longer larger B longer smaller C shorter larger D shorter smaller",
+      "parseStatus": "ok",
+      "stem": "A laboratory has a standard wire of known resistance. It also has other wires, made from the same material as the standard wire, but of different lengths and diameters. Which wire would definitely have a resistance of less than the standard wire? wire length wire diameter",
+      "options": {
+        "A": "longer larger",
+        "B": "longer smaller",
+        "C": "shorter larger",
+        "D": "shorter smaller"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q27.png",
+      "rawText": "The graph shows the relationship between the current in a circuit component and the potential difference (p.d.) across it. The graph has a straight section and a curved section. current p.d. 0 0 What happens to the resistance of the component in these two sections as the current increases? straight section curved section A resistance increases resistance decreases B resistance increases resistance increases C no change in resistance resistance decreases D no change in resistance resistance increases",
+      "parseStatus": "ok",
+      "stem": "The graph shows the relationship between the current in a circuit component and the potential difference (p.d.) across it. The graph has a straight section and a curved section. current p.d. 0 0 What happens to the resistance of the component in these two sections as the current increases? straight section curved section",
+      "options": {
+        "A": "resistance increases resistance decreases",
+        "B": "resistance increases resistance increases",
+        "C": "no change in resistance resistance decreases",
+        "D": "no change in resistance resistance increases"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q28.png",
+      "rawText": "The diagram shows part of a circuit. 2.0 \u0002 1.0 \u0002 4.0 \u0002 What is the combined resistance of the resistors? A 0.14 Ω B 0.57 Ω C 1.7 Ω D 7.0 Ω",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a circuit. 2.0 \u0002 1.0 \u0002 4.0 \u0002 What is the combined resistance of the resistors?",
+      "options": {
+        "A": "0.14 Ω",
+        "B": "0.57 Ω",
+        "C": "1.7 Ω",
+        "D": "7.0 Ω"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q29.png",
+      "rawText": "The diagram shows a circuit which includes two resistors and a battery. V 6.0 V 10 \u0002",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q30.png",
+      "rawText": "A wire is moved down in a direction perpendicular to the magnetic field. N S Three changes are suggested. 1 The speed of the movement of the wire is increased. 2 The magnetic field strength is decreased. 3 The direction of the magnetic field is reversed. Which changes increase the electromotive force (e.m.f.) induced in the wire? A 1 and 3 B 1 only C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "A wire is moved down in a direction perpendicular to the magnetic field. N S Three changes are suggested. 1 The speed of the movement of the wire is increased. 2 The magnetic field strength is decreased. 3 The direction of the magnetic field is reversed. Which changes increase the electromotive force (e.m.f.) induced in the wire?",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 only",
+        "C": "2 and 3",
+        "D": "3 only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q31.png",
+      "rawText": "A wire is moved across a magnetic field. This causes an induced current in the wire. The induced current interacts with the magnetic field to produce a force on the wire. In which direction is this force? A in the direction of the current B in the direction of movement of the wire C in the opposite direction to the current D in the opposite direction to the movement of the wire",
+      "parseStatus": "ok",
+      "stem": "A wire is moved across a magnetic field. This causes an induced current in the wire. The induced current interacts with the magnetic field to produce a force on the wire. In which direction is this force?",
+      "options": {
+        "A": "in the direction of the current",
+        "B": "in the direction of movement of the wire",
+        "C": "in the opposite direction to the current",
+        "D": "in the opposite direction to the movement of the wire"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q32.png",
+      "rawText": "A 100% efficient step-down transformer has primary voltage Vp and primary current Ip. Which row compares the secondary voltage with Vp and the secondary current with Ip? secondary voltage secondary current A greater than Vp greater than Ip B greater than Vp less than Ip C less than Vp greater than Ip D less than Vp less than Ip",
+      "parseStatus": "ok",
+      "stem": "A 100% efficient step-down transformer has primary voltage Vp and primary current Ip. Which row compares the secondary voltage with Vp and the secondary current with Ip? secondary voltage secondary current",
+      "options": {
+        "A": "greater than Vp greater than Ip",
+        "B": "greater than Vp less than Ip",
+        "C": "less than Vp greater than Ip",
+        "D": "less than Vp less than Ip"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q33.png",
+      "rawText": "The scattering of α-particles by a thin metal foil supports the nuclear model of an atom. Why are α-particles used rather than neutrons? A because they always travel more slowly B because they are heavier C because they are larger in diameter D because they have a positive charge",
+      "parseStatus": "ok",
+      "stem": "The scattering of α-particles by a thin metal foil supports the nuclear model of an atom. Why are α-particles used rather than neutrons?",
+      "options": {
+        "A": "because they always travel more slowly",
+        "B": "because they are heavier",
+        "C": "because they are larger in diameter",
+        "D": "because they have a positive charge"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q34.png",
+      "rawText": "An iron nuclide is represented by the symbol shown. 56 26Fe Which statements about a nucleus of this iron nuclide are correct? 1 The nucleus contains 56 neutrons. 2 The nucleon number is 30. 3 The proton number is 26. A 1 and 2 B 1 and 3 C 2 and 3 D 3 only",
+      "parseStatus": "ok",
+      "stem": "An iron nuclide is represented by the symbol shown. 56 26Fe Which statements about a nucleus of this iron nuclide are correct? 1 The nucleus contains 56 neutrons. 2 The nucleon number is 30. 3 The proton number is 26.",
+      "options": {
+        "A": "1 and 2",
+        "B": "1 and 3",
+        "C": "2 and 3",
+        "D": "3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q35.png",
+      "rawText": "A sample of a radioactive isotope has an initial rate of emission of 128 counts per minute and a half-life of 4 days. How long will it take for the rate of emission to fall to 32 counts per minute? A 2 days B 4 days C 8 days D 12 days",
+      "parseStatus": "ok",
+      "stem": "A sample of a radioactive isotope has an initial rate of emission of 128 counts per minute and a half-life of 4 days. How long will it take for the rate of emission to fall to 32 counts per minute?",
+      "options": {
+        "A": "2 days",
+        "B": "4 days",
+        "C": "8 days",
+        "D": "12 days"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q36.png",
+      "rawText": "Several scientists are working in a laboratory. The scientists are experimenting with sources which emit ionising radiation. Each scientist is given a list of safety rules. Three of the rules are shown. 1 Keep at least 2 m away from other people. 2 Do not stay longer than 4 hours per day in the laboratory. 3 Stay behind the lead-lined screen. Which safety rules are for protection against the effects of ionising radiation? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Several scientists are working in a laboratory. The scientists are experimenting with sources which emit ionising radiation. Each scientist is given a list of safety rules. Three of the rules are shown. 1 Keep at least 2 m away from other people. 2 Do not stay longer than 4 hours per day in the laboratory. 3 Stay behind the lead-lined screen. Which safety rules are for protection against the effects of ionising radiation?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q37.png",
+      "rawText": "Which data is needed to calculate the average orbital speed of a satellite around a planet? the distance of the satellite from the centre of the planet the radius of the planet the period of rotation of the planet the time for the satellite to orbit the planet once A \u0016 \u0016 \u0016 \u001a B \u0016 \u001a \u001a \u0016 C \u001a \u0016 \u0016 \u001a D \u0016 \u0016 \u001a \u0016 key \u0016= needed \u001a= not needed",
+      "parseStatus": "ok",
+      "stem": "Which data is needed to calculate the average orbital speed of a satellite around a planet? the distance of the satellite from the centre of the planet the radius of the planet the period of rotation of the planet the time for the satellite to orbit the planet once",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u001a",
+        "B": "\u0016 \u001a \u001a \u0016",
+        "C": "\u001a \u0016 \u0016 \u001a",
+        "D": "\u0016 \u0016 \u001a \u0016 key \u0016= needed \u001a= not needed"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q38.png",
+      "rawText": "Approximately how long does it take for the Moon to make one complete orbit of the Earth? A 24 hours B 1 month C 1 season D 1 year",
+      "parseStatus": "ok",
+      "stem": "Approximately how long does it take for the Moon to make one complete orbit of the Earth?",
+      "options": {
+        "A": "24 hours",
+        "B": "1 month",
+        "C": "1 season",
+        "D": "1 year"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q39.png",
+      "rawText": "The energy generated in stable stars comes from nuclear reactions. Which type of reaction occurs in the Sun? A Helium nuclei break up to give hydrogen nuclei. B Helium nuclei join together to form hydrogen nuclei. C Hydrogen nuclei break up to give helium nuclei. D Hydrogen nuclei join together to form helium nuclei.",
+      "parseStatus": "ok",
+      "stem": "The energy generated in stable stars comes from nuclear reactions. Which type of reaction occurs in the Sun?",
+      "options": {
+        "A": "Helium nuclei break up to give hydrogen nuclei.",
+        "B": "Helium nuclei join together to form hydrogen nuclei.",
+        "C": "Hydrogen nuclei break up to give helium nuclei.",
+        "D": "Hydrogen nuclei join together to form helium nuclei."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_m23_qp_22/q40.png",
+      "rawText": "Two quantities define the Hubble constant H0. ● the speed at which the galaxy is moving away from the Earth v ● the distance of the galaxy from the Earth d What is the relationship between v and d and what is the current estimate for H0? relationship current estimate for H0 A v is proportional to d 2.2 × 10–18 s–1 B v is proportional to d 1 2.2 × 10–18 s–1 C v is proportional to d 3.0 × 108 m / s D v is proportional to d 1 3.0 × 108 m / s",
+      "parseStatus": "ok",
+      "stem": "Two quantities define the Hubble constant H0. ● the speed at which the galaxy is moving away from the Earth v ● the distance of the galaxy from the Earth d What is the relationship between v and d and what is the current estimate for H0? relationship current estimate for H0",
+      "options": {
+        "A": "v is proportional to d 2.2 × 10–18 s–1",
+        "B": "v is proportional to d 1 2.2 × 10–18 s–1",
+        "C": "v is proportional to d 3.0 × 108 m / s",
+        "D": "v is proportional to d 1 3.0 × 108 m / s"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    }
+  ]
+}

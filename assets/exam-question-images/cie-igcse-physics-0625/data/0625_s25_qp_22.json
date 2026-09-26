@@ -1,0 +1,678 @@
+{
+  "questionPaper": "0625_s25_qp_22.pdf",
+  "markScheme": "0625_s25_ms_22.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q01.png",
+      "rawText": "Which instrument is most suitable to determine the volume of a small irregularly shaped stone? A 30 cm ruler B digital timer C measuring cylinder D tape measure",
+      "parseStatus": "ok",
+      "stem": "Which instrument is most suitable to determine the volume of a small irregularly shaped stone?",
+      "options": {
+        "A": "30 cm ruler",
+        "B": "digital timer",
+        "C": "measuring cylinder",
+        "D": "tape measure"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q02.png",
+      "rawText": "A steel ball is dropped from the top floor of a building. Air resistance can be ignored. Which statement describes the motion of the ball? A The ball falls with constant acceleration. B The ball falls with constant speed. C The ball falls with decreasing speed. D The ball falls with increasing acceleration.",
+      "parseStatus": "ok",
+      "stem": "A steel ball is dropped from the top floor of a building. Air resistance can be ignored. Which statement describes the motion of the ball?",
+      "options": {
+        "A": "The ball falls with constant acceleration.",
+        "B": "The ball falls with constant speed.",
+        "C": "The ball falls with decreasing speed.",
+        "D": "The ball falls with increasing acceleration."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q03.png",
+      "rawText": "The diagram shows a velocity–time graph for an object which is accelerating. 120 110 100 90 80 70 60 50 40 30 20 10 0 0 10 20 30 40 time / s velocity m / s What is the acceleration of the object? A 0.40 m / s2 B 2.5 m / s2 C 3.0 m / s2 D 100 m / s2",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a velocity–time graph for an object which is accelerating. 120 110 100 90 80 70 60 50 40 30 20 10 0 0 10 20 30 40 time / s velocity m / s What is the acceleration of the object?",
+      "options": {
+        "A": "0.40 m / s2",
+        "B": "2.5 m / s2",
+        "C": "3.0 m / s2",
+        "D": "100 m / s2"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q04.png",
+      "rawText": "Diagram 1 shows a piece of flexible material that contains many pockets of air. Diagram 2 shows the same piece of flexible material after it has been compressed so that its volume decreases. diagram 1 (before compression) diagram 2 (after compression) What happens to the mass and to the weight of the flexible material when it is compressed? mass weight A increases increases B increases no change C no change increases D no change no change",
+      "parseStatus": "ok",
+      "stem": "Diagram 1 shows a piece of flexible material that contains many pockets of air. Diagram 2 shows the same piece of flexible material after it has been compressed so that its volume decreases. diagram 1 (before compression) diagram 2 (after compression) What happens to the mass and to the weight of the flexible material when it is compressed? mass weight",
+      "options": {
+        "A": "increases increases",
+        "B": "increases no change",
+        "C": "no change increases",
+        "D": "no change no change"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q05.png",
+      "rawText": "A student determines the density of copper. She has a rectangular block of copper. Which other apparatus does she need? balance ruler stop-watch thermometer A \u0016 \u0016 \u0016 \u0016 key B \u0016 \u0016 \u0016 \u001a \u0016 = needed C \u0016 \u0016 \u001a \u001a \u001a = not needed D \u0016 \u001a \u001a \u001a",
+      "parseStatus": "ok",
+      "stem": "A student determines the density of copper. She has a rectangular block of copper. Which other apparatus does she need? balance ruler stop-watch thermometer",
+      "options": {
+        "A": "\u0016 \u0016 \u0016 \u0016 key",
+        "B": "\u0016 \u0016 \u0016 \u001a \u0016 = needed",
+        "C": "\u0016 \u0016 \u001a \u001a \u001a = not needed",
+        "D": "\u0016 \u001a \u001a \u001a"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q06.png",
+      "rawText": "A 0.15 kg mass is suspended from a vertical spring. The mass is pulled downwards until the spring has extended by 12 cm from its unstretched length. The spring constant of the spring is 30 N / m. What is the magnitude of the initial acceleration of the spring when it is released? A 14 m / s2 B 24 m / s2 C 28 m / s2 D 34 m / s2",
+      "parseStatus": "ok",
+      "stem": "A 0.15 kg mass is suspended from a vertical spring. The mass is pulled downwards until the spring has extended by 12 cm from its unstretched length. The spring constant of the spring is 30 N / m. What is the magnitude of the initial acceleration of the spring when it is released?",
+      "options": {
+        "A": "14 m / s2",
+        "B": "24 m / s2",
+        "C": "28 m / s2",
+        "D": "34 m / s2"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q07.png",
+      "rawText": "A cricket ball of mass 0.15 kg is moving at a speed of 30 m / s. The diagram shows a batsman holding a bat stationary as the ball hits the bat and bounces back at the same speed in the opposite direction. The ball is in contact with the bat for 1.0  10–3 s. ball bat The table shows the change in momentum of the ball and the magnitude of the force applied to the ball. Which row is correct? s / m kg momentum of change force applied to ball / N A 4.5 4500 B 4.5 9000 C 9.0 4500 D 9.0 9000",
+      "parseStatus": "ok",
+      "stem": "A cricket ball of mass 0.15 kg is moving at a speed of 30 m / s. The diagram shows a batsman holding a bat stationary as the ball hits the bat and bounces back at the same speed in the opposite direction. The ball is in contact with the bat for 1.0  10–3 s. ball bat The table shows the change in momentum of the ball and the magnitude of the force applied to the ball. Which row is correct? s / m kg momentum of change force applied to ball / N",
+      "options": {
+        "A": "4.5 4500",
+        "B": "4.5 9000",
+        "C": "9.0 4500",
+        "D": "9.0 9000"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q08.png",
+      "rawText": "A stone is thrown vertically upwards at a speed of 5.0 m / s. All of the energy initially in the kinetic store of the stone is transferred to its gravitational potential store when the stone reaches its maximum height. Which equation gives the maximum height h reached by the stone? A h = 2 5.0 2 9.8  B h = 9.8 2 5.02  C h = 9.8 2 5.02  D h = 2 5.0 9.8 2 ",
+      "parseStatus": "ok",
+      "stem": "A stone is thrown vertically upwards at a speed of 5.0 m / s. All of the energy initially in the kinetic store of the stone is transferred to its gravitational potential store when the stone reaches its maximum height. Which equation gives the maximum height h reached by the stone?",
+      "options": {
+        "A": "h = 2 5.0 2 9.8 ",
+        "B": "h = 9.8 2 5.02 ",
+        "C": "h = 9.8 2 5.02 ",
+        "D": "h = 2 5.0 9.8 2 "
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q09.png",
+      "rawText": "Three energy resources are listed. 1 geothermal 2 wind 3 nuclear fuel Which resources get their energy from the Sun? A 1, 2 and 3 B 1 and 2 only C 1 only D 2 only",
+      "parseStatus": "ok",
+      "stem": "Three energy resources are listed. 1 geothermal 2 wind 3 nuclear fuel Which resources get their energy from the Sun?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 only",
+        "D": "2 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q10.png",
+      "rawText": "A sample of a substance has a shape that is determined by its container. What are the possible states of this sample? A gas, liquid and solid B gas and liquid only C gas and solid only D solid and liquid only",
+      "parseStatus": "ok",
+      "stem": "A sample of a substance has a shape that is determined by its container. What are the possible states of this sample?",
+      "options": {
+        "A": "gas, liquid and solid",
+        "B": "gas and liquid only",
+        "C": "gas and solid only",
+        "D": "solid and liquid only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q11.png",
+      "rawText": "A stationary smoke particle is hit by a fast-moving nitrogen molecule. Which row describes the motion of the smoke particle and of the nitrogen molecule after the collision? smoke particle nitrogen molecule A moves rebounds B moves stops C remains stationary rebounds D remains stationary stops",
+      "parseStatus": "ok",
+      "stem": "A stationary smoke particle is hit by a fast-moving nitrogen molecule. Which row describes the motion of the smoke particle and of the nitrogen molecule after the collision? smoke particle nitrogen molecule",
+      "options": {
+        "A": "moves rebounds",
+        "B": "moves stops",
+        "C": "remains stationary rebounds",
+        "D": "remains stationary stops"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q12.png",
+      "rawText": "A bubble of gas rises from the bottom of a lake to the top. The table shows readings of the gas pressure inside the bubble and the volume of the bubble. The temperature of the water in the lake is constant. The values in three rows of the table are correct and one row is not correct. Which row is not correct? pressure / kPa volume / cm3 A 360 2.4 B 270 3.2 C 160 4.6 D 120 7.2",
+      "parseStatus": "ok",
+      "stem": "A bubble of gas rises from the bottom of a lake to the top. The table shows readings of the gas pressure inside the bubble and the volume of the bubble. The temperature of the water in the lake is constant. The values in three rows of the table are correct and one row is not correct. Which row is not correct? pressure / kPa volume / cm3",
+      "options": {
+        "A": "360 2.4",
+        "B": "270 3.2",
+        "C": "160 4.6",
+        "D": "120 7.2"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q13.png",
+      "rawText": "The diagram shows a glass flask sealed with a small volume of mercury in a glass tube. When the flask is gently warmed, the mercury rises up the tube. air mercury glass tube What is the main cause of the movement of the mercury? A expansion of air in the flask B expansion of the glass flask C expansion of the glass tube D expansion of the mercury",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a glass flask sealed with a small volume of mercury in a glass tube. When the flask is gently warmed, the mercury rises up the tube. air mercury glass tube What is the main cause of the movement of the mercury?",
+      "options": {
+        "A": "expansion of air in the flask",
+        "B": "expansion of the glass flask",
+        "C": "expansion of the glass tube",
+        "D": "expansion of the mercury"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q14.png",
+      "rawText": "The diagram shows the equipment used in an experiment to determine the specific heat capacity of a metal. In the experiment, a heater is switched on for t s and the increase in temperature  of a block of the metal is measured in °C. thermometer insulated metal block of mass m kg heater of power P W to power supply Which equation gives the specific heat capacity of the metal? A c =   tm P B c =   m t P C c = P tm   D c = t P m  ",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the equipment used in an experiment to determine the specific heat capacity of a metal. In the experiment, a heater is switched on for t s and the increase in temperature  of a block of the metal is measured in °C. thermometer insulated metal block of mass m kg heater of power P W to power supply Which equation gives the specific heat capacity of the metal?",
+      "options": {
+        "A": "c =   tm P",
+        "B": "c =   m t P",
+        "C": "c = P tm  ",
+        "D": "c = t P m  "
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q15.png",
+      "rawText": "The diagram shows four rods. Each rod is made of a different metal. X P S Q R copper iron brass silver Wax is used to attach small metal balls at the rod ends P, Q, R and S. Each rod is the same size. They are heated uniformly by a Bunsen burner at point X. As the rods warm up, the wax melts and the balls fall off. Why does the ball on the silver rod fall first? A Silver is the best conductor of heat. B Silver is the worst conductor of heat. C Silver is the best radiator of heat. D Silver is the worst radiator of heat.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows four rods. Each rod is made of a different metal. X P S Q R copper iron brass silver Wax is used to attach small metal balls at the rod ends P, Q, R and S. Each rod is the same size. They are heated uniformly by a Bunsen burner at point X. As the rods warm up, the wax melts and the balls fall off. Why does the ball on the silver rod fall first?",
+      "options": {
+        "A": "Silver is the best conductor of heat.",
+        "B": "Silver is the worst conductor of heat.",
+        "C": "Silver is the best radiator of heat.",
+        "D": "Silver is the worst radiator of heat."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q16.png",
+      "rawText": "Three solid copper spheres, X, Y and Z, are heated to the same temperature. sphere diameter colour of surface X 2d black Y d white Z 2d white Which row gives the order for the rate of emission of radiation? highest rate of emission second highest rate of emission lowest rate of emission A X Y Z B X Z Y C Z X Y D Z Y X",
+      "parseStatus": "ok",
+      "stem": "Three solid copper spheres, X, Y and Z, are heated to the same temperature. sphere diameter colour of surface X 2d black Y d white Z 2d white Which row gives the order for the rate of emission of radiation? highest rate of emission second highest rate of emission lowest rate of emission",
+      "options": {
+        "A": "X Y Z",
+        "B": "X Z Y",
+        "C": "Z X Y",
+        "D": "Z Y X"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q17.png",
+      "rawText": "Which wave will diffract the most when passing through a gap that is 0.85 m wide? s / m speed wave wave frequency / Hz A 300 280 B 300 400 C 350 280 D 350 400",
+      "parseStatus": "ok",
+      "stem": "Which wave will diffract the most when passing through a gap that is 0.85 m wide? s / m speed wave wave frequency / Hz",
+      "options": {
+        "A": "300 280",
+        "B": "300 400",
+        "C": "350 280",
+        "D": "350 400"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q18.png",
+      "rawText": "Which arrow on the graph shows the amplitude of the wave? 0 0 displacement distance C D A B",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q19.png",
+      "rawText": "Which row describes a seismic S-wave? type of wave direction of vibration A longitudinal parallel to the direction of travel of the wavefront B longitudinal perpendicular to the direction of travel of the wavefront C transverse parallel to the direction of travel of the wavefront D transverse perpendicular to the direction of travel of the wavefront",
+      "parseStatus": "ok",
+      "stem": "Which row describes a seismic S-wave? type of wave direction of vibration",
+      "options": {
+        "A": "longitudinal parallel to the direction of travel of the wavefront",
+        "B": "longitudinal perpendicular to the direction of travel of the wavefront",
+        "C": "transverse parallel to the direction of travel of the wavefront",
+        "D": "transverse perpendicular to the direction of travel of the wavefront"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q20.png",
+      "rawText": "The image of an object is formed by a plane mirror. Which row gives the correct properties of the image? real or virtual distance of the image from the mirror A real closer to the mirror than the object B real the same distance from the mirror as the object C virtual closer to the mirror than the object D virtual the same distance from the mirror as the object",
+      "parseStatus": "ok",
+      "stem": "The image of an object is formed by a plane mirror. Which row gives the correct properties of the image? real or virtual distance of the image from the mirror",
+      "options": {
+        "A": "real closer to the mirror than the object",
+        "B": "real the same distance from the mirror as the object",
+        "C": "virtual closer to the mirror than the object",
+        "D": "virtual the same distance from the mirror as the object"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q21.png",
+      "rawText": "A ray of light, travelling in air, is incident on an air–glass boundary. The angles between the incident ray, the refracted ray and the boundary are shown. 50° 64° incident ray refracted ray air glass Which equation is used to calculate the refractive index n of the glass? A n = ° 26 sin ° 40 sin B n = ° 64 sin ° 40 sin C n = ° 26 sin ° 50 sin D n = ° 64 sin ° 50 sin",
+      "parseStatus": "ok",
+      "stem": "A ray of light, travelling in air, is incident on an air–glass boundary. The angles between the incident ray, the refracted ray and the boundary are shown. 50° 64° incident ray refracted ray air glass Which equation is used to calculate the refractive index n of the glass?",
+      "options": {
+        "A": "n = ° 26 sin ° 40 sin",
+        "B": "n = ° 64 sin ° 40 sin",
+        "C": "n = ° 26 sin ° 50 sin",
+        "D": "n = ° 64 sin ° 50 sin"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q22.png",
+      "rawText": "A small object O is placed near a converging lens, as shown. The lens forms an image I. I O Which statement is correct? A The image I is diminished. B The image I is inverted. C The image I is real. D The object O is closer to the lens than its principal focus.",
+      "parseStatus": "ok",
+      "stem": "A small object O is placed near a converging lens, as shown. The lens forms an image I. I O Which statement is correct?",
+      "options": {
+        "A": "The image I is diminished.",
+        "B": "The image I is inverted.",
+        "C": "The image I is real.",
+        "D": "The object O is closer to the lens than its principal focus."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q23.png",
+      "rawText": "What is the approximate speed of light in air? A 300 m / s B 300 km / s C 3.0  108 m / s D 3.0  108 km / s",
+      "parseStatus": "ok",
+      "stem": "What is the approximate speed of light in air?",
+      "options": {
+        "A": "300 m / s",
+        "B": "300 km / s",
+        "C": "3.0  108 m / s",
+        "D": "3.0  108 km / s"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q24.png",
+      "rawText": "A ship sends an ultrasound pulse to the seabed to measure the depth of the sea. The speed of ultrasound waves in sea water is 1500 m / s. The pulse takes 4.6 seconds to travel to the seabed and back to the ship. What is the depth of the sea? A 330 m B 650 m C 3500 m D 6900 m",
+      "parseStatus": "ok",
+      "stem": "A ship sends an ultrasound pulse to the seabed to measure the depth of the sea. The speed of ultrasound waves in sea water is 1500 m / s. The pulse takes 4.6 seconds to travel to the seabed and back to the ship. What is the depth of the sea?",
+      "options": {
+        "A": "330 m",
+        "B": "650 m",
+        "C": "3500 m",
+        "D": "6900 m"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q25.png",
+      "rawText": "A dolphin has a range of audible frequencies of 150 Hz–150 kHz. Which range of frequencies can be heard both by humans with good hearing and by dolphins? A 20 Hz–150 Hz B 20 Hz–150 kHz C 20 kHz–150 kHz D 150 Hz–20 kHz",
+      "parseStatus": "ok",
+      "stem": "A dolphin has a range of audible frequencies of 150 Hz–150 kHz. Which range of frequencies can be heard both by humans with good hearing and by dolphins?",
+      "options": {
+        "A": "20 Hz–150 Hz",
+        "B": "20 Hz–150 kHz",
+        "C": "20 kHz–150 kHz",
+        "D": "150 Hz–20 kHz"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q26.png",
+      "rawText": "A positively charged balloon is placed against a wall. The charge makes the balloon stick to the wall. Which statement explains this? A Positive charges on the balloon attract electrons in the wall. B Positive charges on the balloon attract protons in the wall. C Positive charges on the balloon repel electrons in the wall. D Positive charges on the balloon repel protons in the wall.",
+      "parseStatus": "ok",
+      "stem": "A positively charged balloon is placed against a wall. The charge makes the balloon stick to the wall. Which statement explains this?",
+      "options": {
+        "A": "Positive charges on the balloon attract electrons in the wall.",
+        "B": "Positive charges on the balloon attract protons in the wall.",
+        "C": "Positive charges on the balloon repel electrons in the wall.",
+        "D": "Positive charges on the balloon repel protons in the wall."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q27.png",
+      "rawText": "A student is trying to determine the resistance of a lamp. He sets up the incorrect circuit shown. A V Which change would allow him to take the measurements needed to calculate the resistance of the lamp? A Disconnect the ammeter and move it to the left of the lamp. B Swap the positions of the ammeter and the voltmeter in the circuit. C Disconnect the ammeter and connect it in parallel with the lamp. D Disconnect the voltmeter and connect it in parallel with the lamp.",
+      "parseStatus": "ok",
+      "stem": "A student is trying to determine the resistance of a lamp. He sets up the incorrect circuit shown.",
+      "options": {
+        "A": "V Which change would allow him to take the measurements needed to calculate the resistance of the lamp? A Disconnect the ammeter and move it to the left of the lamp.",
+        "B": "Swap the positions of the ammeter and the voltmeter in the circuit.",
+        "C": "Disconnect the ammeter and connect it in parallel with the lamp.",
+        "D": "Disconnect the voltmeter and connect it in parallel with the lamp."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q28.png",
+      "rawText": "A metallic wire X has a resistance. What is the difference in resistance for a wire of the same material as X that is: ● shorter than X but the same diameter ● the same length as X but with a smaller diameter? resistance of shorter wire resistance of wire with smaller diameter A greater greater B greater smaller C smaller greater D smaller smaller",
+      "parseStatus": "ok",
+      "stem": "A metallic wire X has a resistance. What is the difference in resistance for a wire of the same material as X that is: ● shorter than X but the same diameter ● the same length as X but with a smaller diameter? resistance of shorter wire resistance of wire with smaller diameter",
+      "options": {
+        "A": "greater greater",
+        "B": "greater smaller",
+        "C": "smaller greater",
+        "D": "smaller smaller"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q29.png",
+      "rawText": "The diagram shows the circuit for a potential divider. R1 V1 R2 V2 Which equation is used to calculate V1? A V1 = ) ( 2 1 2 1 R R V R +  B V1 = 2 1 2 R R V  C V1 = 2 1 1 2 R R R V +  D V1 = 2 2 1 R V R ",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the circuit for a potential divider. R1 V1 R2 V2 Which equation is used to calculate V1?",
+      "options": {
+        "A": "V1 = ) ( 2 1 2 1 R R V R + ",
+        "B": "V1 = 2 1 2 R R V ",
+        "C": "V1 = 2 1 1 2 R R R V + ",
+        "D": "V1 = 2 2 1 R V R "
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q30.png",
+      "rawText": "Which electrical device is used to convert a.c. to d.c.? A diode B relay C thermistor D transformer",
+      "parseStatus": "ok",
+      "stem": "Which electrical device is used to convert a.c. to d.c.?",
+      "options": {
+        "A": "diode",
+        "B": "relay",
+        "C": "thermistor",
+        "D": "transformer"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q31.png",
+      "rawText": "A cell is connected to a parallel combination of a 2.0  resistor and a 4.0  resistor. The current in the 4.0  resistor is 1.0 A. 2.0 \u0001 4.0 \u0001 1.0 A What is the current in the cell? A 1.0 A B 1.5 A C 2.0 A D 3.0 A",
+      "parseStatus": "ok",
+      "stem": "A cell is connected to a parallel combination of a 2.0  resistor and a 4.0  resistor. The current in the 4.0  resistor is 1.0 A. 2.0 \u0001 4.0 \u0001 1.0",
+      "options": {
+        "A": "What is the current in the cell? A 1.0 A",
+        "B": "1.5 A",
+        "C": "2.0 A",
+        "D": "3.0 A"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q32.png",
+      "rawText": "When there is an electric current in a long straight wire, a magnetic field is created around the wire. Which diagram shows the correct pattern and direction of magnetic field lines around a long straight wire carrying current into the page? A B C D key wire carrying current into page",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q33.png",
+      "rawText": "The primary voltage supplied to a transformer is 3.0 V. The secondary voltage is 5.0 V and the secondary current is 2.0 A. The transformer is 100% efficient. What is the primary current in the transformer? A 1.2 A B 2.0 A C 3.3 A D 7.5 A",
+      "parseStatus": "ok",
+      "stem": "The primary voltage supplied to a transformer is 3.0 V. The secondary voltage is 5.0 V and the secondary current is 2.0 A. The transformer is 100% efficient. What is the primary current in the transformer?",
+      "options": {
+        "A": "1.2 A",
+        "B": "2.0 A",
+        "C": "3.3 A",
+        "D": "7.5 A"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q34.png",
+      "rawText": "When a thin gold foil is bombarded with alpha particles, some alpha particles are deflected through large angles. Which statement explains this deflection? A Most of the atom consists of empty space. B All of the positive charge and most of the mass of the gold atom are concentrated in a small volume. C Positive charge in the gold atom is spread evenly throughout the atom. D All of the negative charge is concentrated at its centre.",
+      "parseStatus": "ok",
+      "stem": "When a thin gold foil is bombarded with alpha particles, some alpha particles are deflected through large angles. Which statement explains this deflection?",
+      "options": {
+        "A": "Most of the atom consists of empty space.",
+        "B": "All of the positive charge and most of the mass of the gold atom are concentrated in a small volume.",
+        "C": "Positive charge in the gold atom is spread evenly throughout the atom.",
+        "D": "All of the negative charge is concentrated at its centre."
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q35.png",
+      "rawText": "A detector near a radioactive source shows a reading of 2000 counts / minute. How is the corrected count rate determined? A by moving the detector closer to the source B by placing an absorber between the detector and the source C by repeating and averaging the measurements D by taking away the background radiation count rate",
+      "parseStatus": "ok",
+      "stem": "A detector near a radioactive source shows a reading of 2000 counts / minute. How is the corrected count rate determined?",
+      "options": {
+        "A": "by moving the detector closer to the source",
+        "B": "by placing an absorber between the detector and the source",
+        "C": "by repeating and averaging the measurements",
+        "D": "by taking away the background radiation count rate"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q36.png",
+      "rawText": "Which statement about alpha, beta and gamma radiation is not correct? A Alpha particles are deflected most in an electric field. B Beta particles are deflected most in a magnetic field. C Gamma radiation is not deflected by a magnetic field. D Gamma radiation is least ionising.",
+      "parseStatus": "ok",
+      "stem": "Which statement about alpha, beta and gamma radiation is not correct?",
+      "options": {
+        "A": "Alpha particles are deflected most in an electric field.",
+        "B": "Beta particles are deflected most in a magnetic field.",
+        "C": "Gamma radiation is not deflected by a magnetic field.",
+        "D": "Gamma radiation is least ionising."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q37.png",
+      "rawText": "A sample of a radioactive material has a half-life of 20 minutes. Which statement is correct? A After 30 minutes, less than half of the material has decayed. B After 40 minutes, all of the radioactive material has decayed. C After 60 minutes, an eighth of the radioactive material remains. D After 120 minutes, a sixth of the radioactive material remains.",
+      "parseStatus": "ok",
+      "stem": "A sample of a radioactive material has a half-life of 20 minutes. Which statement is correct?",
+      "options": {
+        "A": "After 30 minutes, less than half of the material has decayed.",
+        "B": "After 40 minutes, all of the radioactive material has decayed.",
+        "C": "After 60 minutes, an eighth of the radioactive material remains.",
+        "D": "After 120 minutes, a sixth of the radioactive material remains."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q38.png",
+      "rawText": "Which statement is correct? A The Earth orbits the Sun once in approximately 24 hours. B The Earth orbits the Moon once in approximately 1 week. C The Moon orbits the Earth once in approximately 1 month. D The Sun orbits the Earth once in approximately 365 days.",
+      "parseStatus": "ok",
+      "stem": "Which statement is correct?",
+      "options": {
+        "A": "The Earth orbits the Sun once in approximately 24 hours.",
+        "B": "The Earth orbits the Moon once in approximately 1 week.",
+        "C": "The Moon orbits the Earth once in approximately 1 month.",
+        "D": "The Sun orbits the Earth once in approximately 365 days."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q39.png",
+      "rawText": "Stars are powered by nuclear reactions that release energy. Which statement describes the nuclear reaction in stable stars? A Nuclear fission converts helium into hydrogen. B Nuclear fission converts hydrogen into helium. C Nuclear fusion converts helium into hydrogen. D Nuclear fusion converts hydrogen into helium.",
+      "parseStatus": "ok",
+      "stem": "Stars are powered by nuclear reactions that release energy. Which statement describes the nuclear reaction in stable stars?",
+      "options": {
+        "A": "Nuclear fission converts helium into hydrogen.",
+        "B": "Nuclear fission converts hydrogen into helium.",
+        "C": "Nuclear fusion converts helium into hydrogen.",
+        "D": "Nuclear fusion converts hydrogen into helium."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_s25_qp_22/q40.png",
+      "rawText": "A galaxy is moving away from the Earth at a velocity of 3000 km / s. What is the distance between the Earth and the galaxy? A 7.3  10–25 m B 7.3  10–22 m C 1.4  1021 m D 1.4  1024 m",
+      "parseStatus": "ok",
+      "stem": "A galaxy is moving away from the Earth at a velocity of 3000 km / s. What is the distance between the Earth and the galaxy?",
+      "options": {
+        "A": "7.3  10–25 m",
+        "B": "7.3  10–22 m",
+        "C": "1.4  1021 m",
+        "D": "1.4  1024 m"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    }
+  ]
+}

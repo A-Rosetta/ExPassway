@@ -32,7 +32,7 @@ def parse_file_name(path, subject_code):
     if not match or match.group("subject") != subject_code:
         return None
     data = match.groupdict()
-    if data["paper"] == "1" and subject_code != "0455":
+    if data["paper"] == "1" and subject_code not in {"0455", "0625"}:
         return None
     data["paper_slug"] = (
         f"{data['subject']}_{data['season'].lower()}{data['year']}_"
@@ -228,7 +228,7 @@ def main():
             continue
         try:
             meta = entry["meta"]
-            question_count = 30 if meta["paper"] == "1" else 40
+            question_count = 30 if meta["paper"] == "1" and subject_code == "0455" else 40
             expected_questions = tuple(range(1, question_count + 1))
             answers, discounted = extract_mark_scheme(entry["ms"], expected_questions)
             rows = cut_questions(

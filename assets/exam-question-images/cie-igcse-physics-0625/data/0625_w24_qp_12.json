@@ -1,0 +1,663 @@
+{
+  "questionPaper": "0625_w24_qp_12.pdf",
+  "markScheme": "0625_w24_ms_12.pdf",
+  "questionCount": 40,
+  "discountedQuestions": [],
+  "rows": [
+    {
+      "questionNo": 1,
+      "pageIndex": 1,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q01.png",
+      "rawText": "A student measures the volumes of three liquids using three different measuring cylinders. 2.0 1.5 1.0 0.5 cm3 cm3 cm3 1 4.0 3.0 2.0 1.0",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 2,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q02.png",
+      "rawText": "The diagram shows how the speed of a falling object changes with time. 0 0 speed time X Y Z Which row describes the motion of the object between X and Y, and between Y and Z? between X and Y between Y and Z A accelerating at rest B accelerating constant speed C decelerating at rest D decelerating constant speed",
+      "parseStatus": "ok",
+      "stem": "The diagram shows how the speed of a falling object changes with time. 0 0 speed time X Y Z Which row describes the motion of the object between X and Y, and between Y and Z? between X and Y between Y and Z",
+      "options": {
+        "A": "accelerating at rest",
+        "B": "accelerating constant speed",
+        "C": "decelerating at rest",
+        "D": "decelerating constant speed"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 3,
+      "pageIndex": 2,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q03.png",
+      "rawText": "The speed–time graph represents a journey. speed time 0 0 X Y How does the graph show that the distance travelled in section X of the journey is greater than the distance travelled in section Y? A The area under section X of the graph is greater than the area under section Y. B The gradient of section X of the graph is greater than the gradient of section Y. C The speed at the end of section X of the journey is greater than the speed at the end of section Y. D The time for section X of the journey is greater than the time for section Y.",
+      "parseStatus": "ok",
+      "stem": "The speed–time graph represents a journey. speed time 0 0 X Y How does the graph show that the distance travelled in section X of the journey is greater than the distance travelled in section Y?",
+      "options": {
+        "A": "The area under section X of the graph is greater than the area under section Y.",
+        "B": "The gradient of section X of the graph is greater than the gradient of section Y.",
+        "C": "The speed at the end of section X of the journey is greater than the speed at the end of section Y.",
+        "D": "The time for section X of the journey is greater than the time for section Y."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 4,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q04.png",
+      "rawText": "Which row contains two correct statements about the mass and the weight of an object? mass of an object weight of an object A is measured using a measuring cylinder is measured using a balance B is the gravitational force exerted on the object is the quantity of matter in the object C is measured in newtons is measured in kilograms D is the same everywhere can vary from place to place",
+      "parseStatus": "ok",
+      "stem": "Which row contains two correct statements about the mass and the weight of an object? mass of an object weight of an object",
+      "options": {
+        "A": "is measured using a measuring cylinder is measured using a balance",
+        "B": "is the gravitational force exerted on the object is the quantity of matter in the object",
+        "C": "is measured in newtons is measured in kilograms",
+        "D": "is the same everywhere can vary from place to place"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 5,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q05.png",
+      "rawText": "Which equipment is used to find the density of an irregularly shaped stone? A force meter and ruler B measuring cylinder, ruler and water C measuring cylinder, top pan balance and water D top pan balance and ruler",
+      "parseStatus": "ok",
+      "stem": "Which equipment is used to find the density of an irregularly shaped stone?",
+      "options": {
+        "A": "force meter and ruler",
+        "B": "measuring cylinder, ruler and water",
+        "C": "measuring cylinder, top pan balance and water",
+        "D": "top pan balance and ruler"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 6,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q06.png",
+      "rawText": "The diagram shows a force F acting at 90 to a bar at a distance d from the point P. P F d Which pair of changes causes the greatest increase in the moment of the force F about the point P? A halving F and halving d B halving F and doubling d C doubling F and halving d D doubling F and doubling d",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a force F acting at 90 to a bar at a distance d from the point P. P F d Which pair of changes causes the greatest increase in the moment of the force F about the point P?",
+      "options": {
+        "A": "halving F and halving d",
+        "B": "halving F and doubling d",
+        "C": "doubling F and halving d",
+        "D": "doubling F and doubling d"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 7,
+      "pageIndex": 3,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q07.png",
+      "rawText": "A child of weight 420 N is sitting on a swing with her feet on the ground. The child experiences an upward force from the ground of 130 N and an upward force from the swing of 290 N. What is the resultant force on the child? A 0 N B 260 N C 580 N D 840 N",
+      "parseStatus": "ok",
+      "stem": "A child of weight 420 N is sitting on a swing with her feet on the ground. The child experiences an upward force from the ground of 130 N and an upward force from the swing of 290 N. What is the resultant force on the child?",
+      "options": {
+        "A": "0 N",
+        "B": "260 N",
+        "C": "580 N",
+        "D": "840 N"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 8,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q08.png",
+      "rawText": "A builder lifts one concrete block from the ground onto a platform. blocks ground platform 2.1 m 2.6 m The weight of one block is 170 N. What is the useful work done against gravity on one block? A 360 J B 440 J C 360 W D 440 W",
+      "parseStatus": "ok",
+      "stem": "A builder lifts one concrete block from the ground onto a platform. blocks ground platform 2.1 m 2.6 m The weight of one block is 170 N. What is the useful work done against gravity on one block?",
+      "options": {
+        "A": "360 J",
+        "B": "440 J",
+        "C": "360 W",
+        "D": "440 W"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 9,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q09.png",
+      "rawText": "Students are asked for examples of water being used to store energy. Three examples are listed. 1 energy stored in water waves 2 energy stored in tides 3 energy stored in water behind dams Which examples describe water being used to store energy? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "Students are asked for examples of water being used to store energy. Three examples are listed. 1 energy stored in water waves 2 energy stored in tides 3 energy stored in water behind dams Which examples describe water being used to store energy?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 10,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q10.png",
+      "rawText": "Which statement about power is correct? A Power is measured in joules. B Power = energy  time. C Power is the rate of energy transfer. D Greater power always gives higher efficiency.",
+      "parseStatus": "ok",
+      "stem": "Which statement about power is correct?",
+      "options": {
+        "A": "Power is measured in joules.",
+        "B": "Power = energy  time.",
+        "C": "Power is the rate of energy transfer.",
+        "D": "Greater power always gives higher efficiency."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 11,
+      "pageIndex": 4,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q11.png",
+      "rawText": "In which position does a person exert least pressure on the ground? A kneeling on the ground B lying flat on the ground C sitting on the ground D standing on the ground",
+      "parseStatus": "ok",
+      "stem": "In which position does a person exert least pressure on the ground?",
+      "options": {
+        "A": "kneeling on the ground",
+        "B": "lying flat on the ground",
+        "C": "sitting on the ground",
+        "D": "standing on the ground"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 12,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q12.png",
+      "rawText": "Which name is given to the change of state when steam at 100 C changes to water at 100 C? A boiling B condensation C evaporation D melting",
+      "parseStatus": "ok",
+      "stem": "Which name is given to the change of state when steam at 100 C changes to water at 100 C?",
+      "options": {
+        "A": "boiling",
+        "B": "condensation",
+        "C": "evaporation",
+        "D": "melting"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 13,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q13.png",
+      "rawText": "A fixed mass of air is trapped inside a cylinder fitted with a moveable piston. The piston is slowly pushed in. piston cylinder trapped air What happens to the pressure and the volume of the trapped air? pressure volume A decreases decreases B decreases does not change C increases decreases D increases increases",
+      "parseStatus": "ok",
+      "stem": "A fixed mass of air is trapped inside a cylinder fitted with a moveable piston. The piston is slowly pushed in. piston cylinder trapped air What happens to the pressure and the volume of the trapped air? pressure volume",
+      "options": {
+        "A": "decreases decreases",
+        "B": "decreases does not change",
+        "C": "increases decreases",
+        "D": "increases increases"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 14,
+      "pageIndex": 5,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q14.png",
+      "rawText": "The diagram shows electricity cables being put up on a warm day. The cables are suspended between the supporting pylons, as shown. supporting pylons electricity cables Why are the cables not tightened to make them higher above the ground? A They will contract on cold days. B They will contract on very warm days. C They will expand on cold days. D They will expand on very warm days.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows electricity cables being put up on a warm day. The cables are suspended between the supporting pylons, as shown. supporting pylons electricity cables Why are the cables not tightened to make them higher above the ground?",
+      "options": {
+        "A": "They will contract on cold days.",
+        "B": "They will contract on very warm days.",
+        "C": "They will expand on cold days.",
+        "D": "They will expand on very warm days."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 15,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q15.png",
+      "rawText": "Which diagram shows the overall movement of particles and the temperature change when a liquid evaporates? liquid cools particles escape from the liquid A liquid heats up particles enter the liquid B liquid heats up particles escape from the liquid C liquid cools particles enter the liquid D",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 16,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q16.png",
+      "rawText": "There is a vacuum between the double walls of a vacuum flask. Which types of thermal transfer are reduced by the vacuum? A conduction, convection and radiation B conduction and convection only C conduction and radiation only D convection and radiation only",
+      "parseStatus": "ok",
+      "stem": "There is a vacuum between the double walls of a vacuum flask. Which types of thermal transfer are reduced by the vacuum?",
+      "options": {
+        "A": "conduction, convection and radiation",
+        "B": "conduction and convection only",
+        "C": "conduction and radiation only",
+        "D": "convection and radiation only"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 17,
+      "pageIndex": 6,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q17.png",
+      "rawText": "The diagram shows a transverse wave. 1 2 3 5 4 distance Which distance is equal to one wavelength? A the distance between points 1 and 2 B the distance between points 1 and 3 C the distance between points 2 and 3 D the distance between points 4 and 5",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a transverse wave. 1 2 3 5 4 distance Which distance is equal to one wavelength?",
+      "options": {
+        "A": "the distance between points 1 and 2",
+        "B": "the distance between points 1 and 3",
+        "C": "the distance between points 2 and 3",
+        "D": "the distance between points 4 and 5"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 18,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q18.png",
+      "rawText": "The diagram shows a wave before it reflects from a barrier. Which labelled section of the diagram represents a wavefront? B A C D barrier",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 19,
+      "pageIndex": 7,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q19.png",
+      "rawText": "The diagram shows a ray of light as it passes from air into glass. P Q S R air glass Which row shows the angle of refraction and the normal? angle of refraction normal A P R B P S C Q R D Q S",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a ray of light as it passes from air into glass. P Q S R air glass Which row shows the angle of refraction and the normal? angle of refraction normal",
+      "options": {
+        "A": "P R",
+        "B": "P S",
+        "C": "Q R",
+        "D": "Q S"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 20,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q20.png",
+      "rawText": "The diagram shows rays of light passing through a converging lens. Which labelled arrow represents the focal length of the lens? A B D C",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 21,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q21.png",
+      "rawText": "The diagram shows a narrow beam of white light being dispersed by a glass prism to produce a visible spectrum. P Q white light Which statement describes what happens to the frequency and wavelength of the light in observing from P to Q across the spectrum? A The frequency and the wavelength both increase. B The frequency and the wavelength both decrease. C The frequency decreases but the wavelength increases. D The frequency increases but the wavelength decreases.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a narrow beam of white light being dispersed by a glass prism to produce a visible spectrum. P Q white light Which statement describes what happens to the frequency and wavelength of the light in observing from P to Q across the spectrum?",
+      "options": {
+        "A": "The frequency and the wavelength both increase.",
+        "B": "The frequency and the wavelength both decrease.",
+        "C": "The frequency decreases but the wavelength increases.",
+        "D": "The frequency increases but the wavelength decreases."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 22,
+      "pageIndex": 8,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q22.png",
+      "rawText": "The early Universe was filled with gamma radiation. Since then, the radiation has shifted to the microwave region of the electromagnetic spectrum. How has this change affected the wavelength and speed of the radiation? wavelength speed A decreased decreased B decreased stayed the same C increased decreased D increased stayed the same",
+      "parseStatus": "ok",
+      "stem": "The early Universe was filled with gamma radiation. Since then, the radiation has shifted to the microwave region of the electromagnetic spectrum. How has this change affected the wavelength and speed of the radiation? wavelength speed",
+      "options": {
+        "A": "decreased decreased",
+        "B": "decreased stayed the same",
+        "C": "increased decreased",
+        "D": "increased stayed the same"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 23,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q23.png",
+      "rawText": "Sound waves may cause an echo. What happens to sound waves to cause an echo and what is the nature of sound waves? what an echo is caused by nature of sound waves A reflection longitudinal B reflection transverse C refraction longitudinal D refraction transverse",
+      "parseStatus": "ok",
+      "stem": "Sound waves may cause an echo. What happens to sound waves to cause an echo and what is the nature of sound waves? what an echo is caused by nature of sound waves",
+      "options": {
+        "A": "reflection longitudinal",
+        "B": "reflection transverse",
+        "C": "refraction longitudinal",
+        "D": "refraction transverse"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 24,
+      "pageIndex": 9,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q24.png",
+      "rawText": "The diagram shows what happens when a bar PQ is brought near to a permanent magnet which is standing on a balance. 78.2 g N S 89.9 g N S P Q What could bar PQ be? A an iron bar or a permanent magnet with P a N pole B an iron bar or a permanent magnet with Q a N pole C an iron bar only D a permanent magnet only",
+      "parseStatus": "ok",
+      "stem": "The diagram shows what happens when a bar PQ is brought near to a permanent magnet which is standing on a balance. 78.2 g N S 89.9 g N S P Q What could bar PQ be?",
+      "options": {
+        "A": "an iron bar or a permanent magnet with P a N pole",
+        "B": "an iron bar or a permanent magnet with Q a N pole",
+        "C": "an iron bar only",
+        "D": "a permanent magnet only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 25,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q25.png",
+      "rawText": "Direct current (d.c.) can be represented on a voltage–time graph. Which graph shows the correct waveform for a d.c. supply? 0 A 0 voltage time 0 B 0 voltage time 0 C 0 voltage time 0 D 0 voltage time",
+      "parseStatus": "ok",
+      "stem": "Direct current (d.c.) can be represented on a voltage–time graph. Which graph shows the correct waveform for a d.c. supply? 0",
+      "options": {
+        "A": "0 voltage time 0",
+        "B": "0 voltage time 0",
+        "C": "0 voltage time 0",
+        "D": "0 voltage time"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 26,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q26.png",
+      "rawText": "A resistor with a potential difference (p.d.) of 100 V across it carries a current of 5.0 mA. What is the resistance of the resistor? A 0.50  B 20  C 500  D 20 000 ",
+      "parseStatus": "ok",
+      "stem": "A resistor with a potential difference (p.d.) of 100 V across it carries a current of 5.0 mA. What is the resistance of the resistor?",
+      "options": {
+        "A": "0.50 ",
+        "B": "20 ",
+        "C": "500 ",
+        "D": "20 000 "
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 27,
+      "pageIndex": 10,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q27.png",
+      "rawText": "The diagram shows the information label on an electric kettle. Voltage: 110 V a.c. Power: 1500 W Frequency: 50 Hz What is the value of the current when the kettle is heating water? A 0.073 A B 2.2 A C 3.7 A D 14 A",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the information label on an electric kettle. Voltage: 110 V a.c. Power: 1500 W Frequency: 50 Hz What is the value of the current when the kettle is heating water?",
+      "options": {
+        "A": "0.073 A",
+        "B": "2.2 A",
+        "C": "3.7 A",
+        "D": "14 A"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 28,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q28.png",
+      "rawText": "Which circuit enables the resistance of the thermistor to be determined? A V A B A V C D A A V V",
+      "parseStatus": "image_only",
+      "stem": "",
+      "options": {},
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 29,
+      "pageIndex": 11,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q29.png",
+      "rawText": "A student makes a battery by connecting five cells, as shown. 2.5 V 2.0 V 1.5 V 2.5 V 2.0 V What is the electromotive force (e.m.f.) of the battery? A 1.0 V B 2.1 V C 3.5 V D 10.5 V",
+      "parseStatus": "ok",
+      "stem": "A student makes a battery by connecting five cells, as shown. 2.5 V 2.0 V 1.5 V 2.5 V 2.0 V What is the electromotive force (e.m.f.) of the battery?",
+      "options": {
+        "A": "1.0 V",
+        "B": "2.1 V",
+        "C": "3.5 V",
+        "D": "10.5 V"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 30,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q30.png",
+      "rawText": "The diagram shows the safety label on an electric oven. 60 Hz 240 V ~ 10.1 A The oven is connected to a mains electric circuit. A fuse is placed in the circuit to protect the cabling and prevent overheating if there is fault. Where should the fuse be placed and which rating should the fuse have? position of fuse fuse rating / A A live wire 10 B live wire 13 C neutral wire 10 D neutral wire 13",
+      "parseStatus": "ok",
+      "stem": "The diagram shows the safety label on an electric oven. 60 Hz 240 V ~ 10.1",
+      "options": {
+        "A": "The oven is connected to a mains electric circuit. A fuse is placed in the circuit to protect the cabling and prevent overheating if there is fault. Where should the fuse be placed and which rating should the fuse have? position of fuse fuse rating / A A live wire 10",
+        "B": "live wire 13",
+        "C": "neutral wire 10",
+        "D": "neutral wire 13"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 31,
+      "pageIndex": 12,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q31.png",
+      "rawText": "A straight wire is stationary between the poles of a magnet. It lies perpendicular to the magnetic field. magnet pole magnet pole wire Which action does not induce an e.m.f. in the wire? A moving the magnet up towards the top of the page and the wire down towards the bottom of the page B moving the magnet up towards the top of the page only C moving the wire and the magnet up towards the top of the page at the same speed D moving the wire down towards the bottom of the page only",
+      "parseStatus": "ok",
+      "stem": "A straight wire is stationary between the poles of a magnet. It lies perpendicular to the magnetic field. magnet pole magnet pole wire Which action does not induce an e.m.f. in the wire?",
+      "options": {
+        "A": "moving the magnet up towards the top of the page and the wire down towards the bottom of the page",
+        "B": "moving the magnet up towards the top of the page only",
+        "C": "moving the wire and the magnet up towards the top of the page at the same speed",
+        "D": "moving the wire down towards the bottom of the page only"
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 32,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q32.png",
+      "rawText": "The diagram shows a wire hanging vertically between the poles of a magnet. N S There is a current in the wire in the direction shown. The wire moves into the plane of the page away from the observer. In which direction does the wire move when the current is reversed? A The wire moves into the plane of the page, away from the observer. B The wire moves to the left. C The wire moves to the right. D The wire moves out of the plane of the page, towards the observer.",
+      "parseStatus": "ok",
+      "stem": "The diagram shows a wire hanging vertically between the poles of a magnet. N S There is a current in the wire in the direction shown. The wire moves into the plane of the page away from the observer. In which direction does the wire move when the current is reversed?",
+      "options": {
+        "A": "The wire moves into the plane of the page, away from the observer.",
+        "B": "The wire moves to the left.",
+        "C": "The wire moves to the right.",
+        "D": "The wire moves out of the plane of the page, towards the observer."
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 33,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q33.png",
+      "rawText": "A current-carrying coil in a magnetic field experiences a turning effect. Students are asked how the turning effect can be increased. Three suggestions are listed. 1 decreasing the number of turns on the coil 2 increasing the current 3 increasing the strength of the magnetic field Which suggestions will increase the turning effect? A 1, 2 and 3 B 1 and 2 only C 1 and 3 only D 2 and 3 only",
+      "parseStatus": "ok",
+      "stem": "A current-carrying coil in a magnetic field experiences a turning effect. Students are asked how the turning effect can be increased. Three suggestions are listed. 1 decreasing the number of turns on the coil 2 increasing the current 3 increasing the strength of the magnetic field Which suggestions will increase the turning effect?",
+      "options": {
+        "A": "1, 2 and 3",
+        "B": "1 and 2 only",
+        "C": "1 and 3 only",
+        "D": "2 and 3 only"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 34,
+      "pageIndex": 13,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q34.png",
+      "rawText": "A student suggests three sources of naturally occurring background radiation. 1 cosmic rays 2 medical X-rays 3 radioactive emissions from radon gas from the ground Which suggestions are correct? A 1 and 3 B 1 only C 2 and 3 D 2 only",
+      "parseStatus": "ok",
+      "stem": "A student suggests three sources of naturally occurring background radiation. 1 cosmic rays 2 medical X-rays 3 radioactive emissions from radon gas from the ground Which suggestions are correct?",
+      "options": {
+        "A": "1 and 3",
+        "B": "1 only",
+        "C": "2 and 3",
+        "D": "2 only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 35,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q35.png",
+      "rawText": "A student measures the rate at which ionising radiation is emitted from a radioactive substance. He places a detector at different distances from the radioactive source. radioactive source detector count rate meter distance d The table shows how the count rate from the source varies with distance d. distance d / cm 0 2 4 6 count rate / counts per minute 1250 115 0 0 Which type of ionising radiation is being emitted by the substance? A -particles B -particles C -rays D X-rays",
+      "parseStatus": "ok",
+      "stem": "A student measures the rate at which ionising radiation is emitted from a radioactive substance. He places a detector at different distances from the radioactive source. radioactive source detector count rate meter distance d The table shows how the count rate from the source varies with distance d. distance d / cm 0 2 4 6 count rate / counts per minute 1250 115 0 0 Which type of ionising radiation is being emitted by the substance?",
+      "options": {
+        "A": "-particles",
+        "B": "-particles",
+        "C": "-rays",
+        "D": "X-rays"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 36,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q36.png",
+      "rawText": "Radioactive decay results in the emission of -particles, -particles and -radiation. Which types of emission result in a nucleus changing to that of a different element? A -particle emission and -particle emission B -particle emission and -radiation emission C -particle emission and -radiation emission D -radiation emission only",
+      "parseStatus": "ok",
+      "stem": "Radioactive decay results in the emission of -particles, -particles and -radiation. Which types of emission result in a nucleus changing to that of a different element?",
+      "options": {
+        "A": "-particle emission and -particle emission",
+        "B": "-particle emission and -radiation emission",
+        "C": "-particle emission and -radiation emission",
+        "D": "-radiation emission only"
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 37,
+      "pageIndex": 14,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q37.png",
+      "rawText": "A radioactive isotope has a half-life of 120 minutes. It emits radiation at a rate of 100 particles per second. How long does it take for the rate of emission to fall to 25 particles per second? A 30 minutes B 45 minutes C 90 minutes D 240 minutes",
+      "parseStatus": "ok",
+      "stem": "A radioactive isotope has a half-life of 120 minutes. It emits radiation at a rate of 100 particles per second. How long does it take for the rate of emission to fall to 25 particles per second?",
+      "options": {
+        "A": "30 minutes",
+        "B": "45 minutes",
+        "C": "90 minutes",
+        "D": "240 minutes"
+      },
+      "answer": 3,
+      "answerLetter": "D",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 38,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q38.png",
+      "rawText": "The diagram shows part of a solar system. P Q R Which row correctly identifies the bodies P, Q and R? P Q R A moon planet star B planet moon star C planet star moon D star planet moon",
+      "parseStatus": "ok",
+      "stem": "The diagram shows part of a solar system. P Q R Which row correctly identifies the bodies P, Q and R? P Q R",
+      "options": {
+        "A": "moon planet star",
+        "B": "planet moon star",
+        "C": "planet star moon",
+        "D": "star planet moon"
+      },
+      "answer": 1,
+      "answerLetter": "B",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 39,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q39.png",
+      "rawText": "Which statement about the Sun is not correct? A The Sun is one of the biggest stars. B The Sun emits ultraviolet radiation. C The Sun emits infrared radiation. D Helium is present in the Sun.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Sun is not correct?",
+      "options": {
+        "A": "The Sun is one of the biggest stars.",
+        "B": "The Sun emits ultraviolet radiation.",
+        "C": "The Sun emits infrared radiation.",
+        "D": "Helium is present in the Sun."
+      },
+      "answer": 0,
+      "answerLetter": "A",
+      "answerStatus": "valid"
+    },
+    {
+      "questionNo": 40,
+      "pageIndex": 15,
+      "imageUrl": "/assets/exam-question-images/cie-igcse-physics-0625/0625_w24_qp_12/q40.png",
+      "rawText": "Which statement about the Milky Way galaxy is correct? A It contains stars that are about the same distance from the Earth as the Sun. B It is a collection of about 1000 stars that can be seen from the Earth. C It is the galaxy that contains the Sun and the Earth. D Its diameter is about 1 light-year.",
+      "parseStatus": "ok",
+      "stem": "Which statement about the Milky Way galaxy is correct?",
+      "options": {
+        "A": "It contains stars that are about the same distance from the Earth as the Sun.",
+        "B": "It is a collection of about 1000 stars that can be seen from the Earth.",
+        "C": "It is the galaxy that contains the Sun and the Earth.",
+        "D": "Its diameter is about 1 light-year."
+      },
+      "answer": 2,
+      "answerLetter": "C",
+      "answerStatus": "valid"
+    }
+  ]
+}

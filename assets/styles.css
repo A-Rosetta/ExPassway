@@ -1060,6 +1060,107 @@ button {
   object-fit: contain;
 }
 
+.question-image-zoom {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.question-image-zoom:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.question-image-dialog {
+  width: min(1200px, calc(100% - 32px));
+  max-height: calc(100vh - 32px);
+  border: 0;
+  border-radius: 10px;
+  padding: 0;
+  background: var(--card);
+  color: var(--text);
+}
+
+.question-image-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.question-image-dialog__shell {
+  padding: 1rem;
+}
+
+.question-image-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.question-image-dialog__header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.question-image-dialog__header .profile-dialog__close {
+  flex: 0 0 auto;
+}
+
+.question-image-dialog__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.question-image-dialog__toolbar button,
+.question-image-dialog__open {
+  min-width: 2.35rem;
+  min-height: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  background: var(--surface-raised, #f5f7fa);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.question-image-dialog__toolbar button:hover,
+.question-image-dialog__open:hover {
+  background: var(--surface-pressed, #e8edf3);
+}
+
+.question-image-dialog__open {
+  margin-left: auto;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.question-image-dialog__viewport {
+  max-height: calc(100vh - 10.5rem);
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #17191d;
+  padding: 0.75rem;
+}
+
+.question-image-dialog img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: none;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
 .options-wrap {
   margin-top: 0.65rem;
   display: grid;
@@ -3167,10 +3268,36 @@ body.home-dashboard {
   --book-accent: #f1aaa0;
 }
 
+.course-card--physics {
+  --book: #3f6f9f;
+  --book-dark: #274c72;
+  --book-accent: #a8c9e8;
+}
+
 .course-card--default {
   --book: #586579;
   --book-dark: #394456;
   --book-accent: #bec6d1;
+}
+
+.home-more-subjects {
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid #d9dde3;
+}
+
+.home-more-subjects__heading h2 {
+  margin: 0 0 1.15rem;
+  color: #273446;
+  font-size: 1.25rem;
+}
+
+[data-theme="dark"] .home-more-subjects {
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="dark"] .home-more-subjects__heading h2 {
+  color: #e8ecef;
 }
 
 /*
