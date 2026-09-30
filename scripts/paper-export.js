@@ -6,6 +6,30 @@ const MARGIN = 14;
 const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
 const PAGE_BOTTOM = PAGE_HEIGHT - MARGIN;
 
+function orderedQuestions(groups) {
+  return (groups || []).flatMap((group) => group.questions || []);
+}
+
+function positiveMarks(value) {
+  const marks = Number(value);
+  return Number.isInteger(marks) && marks > 0 ? marks : 1;
+}
+
+function paperMetadata(groups, options, documentTitle) {
+  const questions = orderedQuestions(groups);
+  const calculatedMarks = questions.reduce((total, question) => total + positiveMarks(question.marks), 0);
+  const suppliedMarks = Number(options.totalMarks);
+  const generatedAt = options.generatedAt || new Date().toISOString();
+  return {
+    questions,
+    paperTitle: String(options.paperTitle || documentTitle),
+    paperCode: String(options.paperCode || ""),
+    subjectName: String(options.subjectName || ""),
+    totalMarks: Number.isFinite(suppliedMarks) && suppliedMarks >= 0 ? suppliedMarks : calculatedMarks,
+    generatedAt: String(generatedAt),
+  };
+}
+
 function sectionTitle(section) {
   const chapter = section.chapterNo ? `Chapter ${section.chapterNo}: ${section.chapterTitleEn}` : section.chapterTitleEn;
   return [chapter, `${section.sectionCode} ${section.titleEn}`].filter(Boolean).join(" - ");
@@ -27,6 +51,36 @@ function createDocument(title) {
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4", compress: true });
   doc.setProperties({ title, creator: "ExPassway" });
   return doc;
+}
+
+function writePaperHeader(doc, metadata, label) {
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text(metadata.paperTitle, MARGIN, 16, { maxWidth: CONTENT_WIDTH });
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  const facts = [
+    metadata.subjectName,
+    `${metadata.questions.length} questions`,
+    `${metadata.totalMarks} marks`,
+    `Generated ${metadata.generatedAt.slice(0, 10)}`,
+  ].filter(Boolean);
+  doc.text(`${label} | ${facts.join(" | ")}`, MARGIN, 23, { maxWidth: CONTENT_WIDTH });
+  return 32;
+}
+
+function addPageFooters(doc, paperCode) {
+  const pageCount = doc.getNumberOfPages();
+  for (let page = 1; page <= pageCount; page += 1) {
+    doc.setPage(page);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.setTextColor(90);
+    doc.text("ExPassway", MARGIN, PAGE_HEIGHT - 7);
+    if (paperCode) doc.text(paperCode, PAGE_WIDTH / 2, PAGE_HEIGHT - 7, { align: "center" });
+    doc.text(`${page} / ${pageCount}`, PAGE_WIDTH - MARGIN, PAGE_HEIGHT - 7, { align: "right" });
+    doc.setTextColor(0);
+  }
 }
 
 function addPageHeading(doc, section, continued = false) {
@@ -57,14 +111,14 @@ export function answerLetter(answer) {
   return String.fromCharCode(65 + index);
 }
 
-export async function createQuestionPaperPdf(groups, { subjectName = "", loadImage } = {}) {
-  const doc = createDocument(`ExPassway Question Paper - ${subjectName}`);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(16);
-  doc.text(`ExPassway Question Paper${subjectName ? ` - ${subjectName}` : ""}`, MARGIN, 17);
-  let y = 27;
+export async function createQuestionPaperPdf(groups, options = {}) {
+  const metadata = paperMetadata(groups, options, "ExPassway Question Paper");
+  const doc = createDocument(`${metadata.paperTitle} - Question Paper`);
+  const loadImage = options.loadImage;
+  let y = writePaperHeader(doc, metadata, "Question Paper");
   let currentSection = null;
   let questionNumber = 0;
+  const questionIds = [];
 
   for (const group of groups || []) {
     const section = group.section || {};
@@ -78,12 +132,13 @@ export async function createQuestionPaperPdf(groups, { subjectName = "", loadIma
 
     for (const question of group.questions || []) {
       questionNumber += 1;
+      questionIds.push(question.id);
       const sources = (question.images || []).map(imageUrl).filter(Boolean);
       doc.setFont("helvetica", "bold");
       doc.setFontSize(10);
       if (y > PAGE_BOTTOM - 10) y = addPageHeading(doc, currentSection, true);
-      const sourceNumber = question.questionNo ? ` (source Q${question.questionNo})` : "";
-      doc.text(`Question ${questionNumber}${sourceNumber}`, MARGIN, y);
+      const marks = positiveMarks(question.marks);
+      doc.text(`Question ${questionNumber} [${marks} ${marks === 1 ? "mark" : "marks"}]`, MARGIN, y);
       y += 5;
 
       if (sources.length) {
@@ -116,20 +171,27 @@ export async function createQuestionPaperPdf(groups, { subjectName = "", loadIma
     }
   }
 
+  addPageFooters(doc, metadata.paperCode);
+
   return {
     bytes: new Uint8Array(doc.output("arraybuffer")),
     questionCount: questionNumber,
+    questionIds,
+    totalMarks: metadata.totalMarks,
+    paperTitle: metadata.paperTitle,
+    paperCode: metadata.paperCode,
+    subjectName: metadata.subjectName,
+    generatedAt: metadata.generatedAt,
     pageCount: doc.getNumberOfPages(),
   };
 }
 
-export async function createAnswerKeyPdf(groups, { subjectName = "" } = {}) {
-  const doc = createDocument(`ExPassway Answer Key - ${subjectName}`);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(16);
-  doc.text(`ExPassway Answer Key${subjectName ? ` - ${subjectName}` : ""}`, MARGIN, 17);
-  let y = 29;
+export async function createAnswerKeyPdf(groups, options = {}) {
+  const metadata = paperMetadata(groups, options, "ExPassway Answer Key");
+  const doc = createDocument(`${metadata.paperTitle} - Answer Key`);
+  let y = writePaperHeader(doc, metadata, "Answer Key");
   let questionNumber = 0;
+  const questionIds = [];
 
   for (const group of groups || []) {
     const section = group.section || {};
@@ -144,16 +206,60 @@ export async function createAnswerKeyPdf(groups, { subjectName = "" } = {}) {
 
     for (const question of group.questions || []) {
       questionNumber += 1;
-      if (y > PAGE_BOTTOM - 7) y = addPageHeading(doc, section, true);
-      doc.text(`${questionNumber}. ${answerLetter(question.answer)}`, MARGIN + 2, y);
-      y += 6;
+      questionIds.push(question.id);
+      if (y > PAGE_BOTTOM - 12) y = addPageHeading(doc, section, true);
+      const source = [
+        question.paperSlug || "Source unavailable",
+        question.questionNo ? `Q${question.questionNo}` : "",
+        sectionTitle(section),
+      ].filter(Boolean).join(" | ");
+      y = writeTextBlock(
+        doc,
+        `${questionNumber}. ${answerLetter(question.answer)} - ${source}`,
+        MARGIN + 2,
+        y,
+        CONTENT_WIDTH - 2,
+        section
+      );
+      y += 1;
     }
     y += 3;
   }
 
+  addPageFooters(doc, metadata.paperCode);
+
   return {
     bytes: new Uint8Array(doc.output("arraybuffer")),
     answerCount: questionNumber,
+    questionIds,
+    totalMarks: metadata.totalMarks,
+    paperTitle: metadata.paperTitle,
+    paperCode: metadata.paperCode,
+    subjectName: metadata.subjectName,
+    generatedAt: metadata.generatedAt,
     pageCount: doc.getNumberOfPages(),
   };
+}
+
+function createZip(entries) {
+  if (!globalThis.BulkDownload?.createZip) {
+    throw new Error("BulkDownload.createZip is required before creating paper archives.");
+  }
+  return globalThis.BulkDownload.createZip(entries);
+}
+
+export function createPaperZip(questionPdf, answerPdf) {
+  return createZip([
+    { name: "试卷.pdf", data: questionPdf.bytes },
+    { name: "答案.pdf", data: answerPdf.bytes },
+  ]);
+}
+
+export function createEquivalentPaperZip(aQuestionPdf, aAnswerPdf, bQuestionPdf, bAnswerPdf) {
+  return createZip([
+    { name: "A卷.pdf", data: aQuestionPdf.bytes },
+    { name: "A卷答案.pdf", data: aAnswerPdf.bytes },
+    { name: "B卷.pdf", data: bQuestionPdf.bytes },
+    { name: "B卷答案.pdf", data: bAnswerPdf.bytes },
+  ]);
 }

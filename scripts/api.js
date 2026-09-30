@@ -325,6 +325,49 @@
         body: JSON.stringify(input || {}),
       });
     },
+    async searchPaperBuilderQuestions(token, input = {}) {
+      const params = new URLSearchParams();
+      Object.entries(input).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== "") {
+          params.set(key, String(value));
+        }
+      });
+      const query = params.toString();
+      return request(`/api/paper-builder/questions${query ? `?${query}` : ""}`, { token });
+    },
+    async listSavedPapers(token) {
+      return request("/api/paper-builder/papers", { token });
+    },
+    async createSavedPaper(token, input) {
+      return request("/api/paper-builder/papers", {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async getSavedPaper(token, paperId) {
+      return request(`/api/paper-builder/papers/${encodeURIComponent(paperId)}`, { token });
+    },
+    async updateSavedPaper(token, paperId, input) {
+      return request(`/api/paper-builder/papers/${encodeURIComponent(paperId)}`, {
+        method: "PATCH",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async deleteSavedPaper(token, paperId) {
+      return request(`/api/paper-builder/papers/${encodeURIComponent(paperId)}`, {
+        method: "DELETE",
+        token,
+      });
+    },
+    async generateEquivalentPaper(token, paperId, input = {}) {
+      return request(`/api/paper-builder/papers/${encodeURIComponent(paperId)}/equivalent`, {
+        method: "POST",
+        token,
+        body: JSON.stringify(input),
+      });
+    },
     async createChapterPractice(token, input) {
       return request("/api/chapter-practice/sessions", {
         method: "POST",
