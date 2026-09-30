@@ -154,6 +154,7 @@ try {
     `),
   ]);
   const token = await issueToken(userId);
+  const otherToken = await issueToken(otherUserId);
 
   {
     const missing = await api(
@@ -393,6 +394,145 @@ try {
       "/api/paper-builder/questions?subjectCode=0610"
     );
     assert.equal(unauthorizedSearch.response.status, 401);
+  }
+
+  let savedPaperId;
+  let savedPaperCopyId;
+  {
+    const created = await api(handleLearningApiRequest, db, token, "/api/paper-builder/papers", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "Cell biology review",
+        subjectCode: "0610",
+        curriculumVersionId: "bio-version",
+        buildMode: "manual",
+        status: "draft",
+        settings: { targetSections: { "book-section": 1, "book-section-2": 1 } },
+        items: [
+          { questionId: "question-2019", marks: 2, sectionId: "book-section" },
+          { questionId: "question-2023", marks: 1, sectionId: "book-section-2" },
+        ],
+      }),
+    });
+    assert.equal(created.response.status, 201);
+    assert.match(created.payload.data.paperCode, /^0610-[A-Z0-9]{8}$/);
+    assert.equal(created.payload.data.questionCount, 2);
+    assert.equal(created.payload.data.totalMarks, 3);
+    assert.deepEqual(created.payload.data.items.map((item) => item.position), [0, 1]);
+    savedPaperId = created.payload.data.id;
+
+    const reopened = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      `/api/paper-builder/papers/${savedPaperId}`
+    );
+    assert.equal(reopened.response.status, 200);
+    assert.deepEqual(
+      reopened.payload.data.items.map((item) => item.questionId),
+      ["question-2019", "question-2023"]
+    );
+
+    const foreignGet = await api(
+      handleLearningApiRequest,
+      db,
+      otherToken,
+      `/api/paper-builder/papers/${savedPaperId}`
+    );
+    assert.equal(foreignGet.response.status, 404);
+
+    const updated = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      `/api/paper-builder/papers/${savedPaperId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          title: "Cell biology review updated",
+          subjectCode: "0610",
+          curriculumVersionId: "bio-version",
+          buildMode: "manual",
+          status: "final",
+          settings: { targetSections: { "book-section": 1, "book-section-2": 1 } },
+          items: [
+            { questionId: "question-2023", marks: 1, sectionId: "book-section-2" },
+            { questionId: "question-2019", marks: 2, sectionId: "book-section" },
+          ],
+        }),
+      }
+    );
+    assert.equal(updated.response.status, 200);
+    assert.equal(updated.payload.data.paperCode, created.payload.data.paperCode);
+    assert.equal(updated.payload.data.status, "final");
+    assert.deepEqual(
+      updated.payload.data.items.map((item) => item.questionId),
+      ["question-2023", "question-2019"]
+    );
+    assert.deepEqual(updated.payload.data.items.map((item) => item.position), [0, 1]);
+
+    const foreignPatch = await api(
+      handleLearningApiRequest,
+      db,
+      otherToken,
+      `/api/paper-builder/papers/${savedPaperId}`,
+      { method: "PATCH", body: JSON.stringify({ title: "Not allowed", items: [] }) }
+    );
+    assert.equal(foreignPatch.response.status, 404);
+
+    const copied = await api(handleLearningApiRequest, db, token, "/api/paper-builder/papers", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "Cell biology review copy",
+        subjectCode: updated.payload.data.subjectCode,
+        curriculumVersionId: updated.payload.data.curriculumVersionId,
+        buildMode: "manual",
+        status: "draft",
+        settings: updated.payload.data.settings,
+        items: updated.payload.data.items.map((item) => ({
+          questionId: item.questionId,
+          marks: item.marks,
+          sectionId: item.sectionId,
+        })),
+      }),
+    });
+    assert.equal(copied.response.status, 201);
+    assert.notEqual(copied.payload.data.paperCode, created.payload.data.paperCode);
+    savedPaperCopyId = copied.payload.data.id;
+
+    const listed = await api(handleLearningApiRequest, db, token, "/api/paper-builder/papers");
+    assert.equal(listed.response.status, 200);
+    assert.deepEqual(
+      new Set(listed.payload.data.map((paper) => paper.id)),
+      new Set([savedPaperId, savedPaperCopyId])
+    );
+
+    const foreignDelete = await api(
+      handleLearningApiRequest,
+      db,
+      otherToken,
+      `/api/paper-builder/papers/${savedPaperId}`,
+      { method: "DELETE" }
+    );
+    assert.equal(foreignDelete.response.status, 404);
+
+    const deleted = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      `/api/paper-builder/papers/${savedPaperId}`,
+      { method: "DELETE" }
+    );
+    assert.equal(deleted.response.status, 200);
+    assert.equal(deleted.payload.data.deleted, true);
+
+    const missingPaper = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      `/api/paper-builder/papers/${savedPaperId}`
+    );
+    assert.equal(missingPaper.response.status, 404);
   }
 
   {

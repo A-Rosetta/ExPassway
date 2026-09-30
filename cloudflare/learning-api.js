@@ -7,6 +7,7 @@ import {
   routeNotFound,
   success,
 } from "./auth-api.js";
+import { buildPaperBlueprint } from "../shared/paper-blueprint.js";
 
 const CORS_PREFLIGHT_HEADERS = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
@@ -695,6 +696,324 @@ async function searchPaperBuilderQuestions(request, env) {
   };
 }
 
+function mapSavedPaper(row, items = null) {
+  const paper = {
+    id: row.id,
+    paperCode: row.paper_code,
+    title: row.title,
+    subjectCode: row.subject_code,
+    curriculumVersionId: row.curriculum_version_id || "",
+    buildMode: row.build_mode,
+    buildSeed: row.build_seed || "",
+    status: row.status,
+    questionCount: Number(row.question_count),
+    totalMarks: Number(row.total_marks),
+    settings: parseJson(row.settings, {}),
+    blueprint: parseJson(row.blueprint, {}),
+    parentPaperId: row.parent_paper_id || "",
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+  if (items) paper.items = items;
+  return paper;
+}
+
+function mapSavedPaperItem(row) {
+  const question = mapPaperBuilderQuestion(row);
+  return {
+    ...question,
+    questionId: row.saved_question_id,
+    position: Number(row.saved_position),
+    marks: Number(row.saved_marks),
+    sectionId: row.saved_section_id || "",
+    sourceGroup: row.saved_source_group || "",
+  };
+}
+
+async function getOwnedSavedPaperRow(db, userId, paperId) {
+  const row = await db.prepare(`
+    SELECT * FROM saved_papers WHERE id = ? AND user_id = ? LIMIT 1
+  `).bind(paperId, userId).first();
+  if (!row) throw new AuthError(404, "Saved paper not found.", "PAPER_NOT_FOUND");
+  return row;
+}
+
+async function loadSavedPaper(db, userId, paperId) {
+  const paper = await getOwnedSavedPaperRow(db, userId, paperId);
+  const rows = await db.prepare(`
+    SELECT question.*,
+      source.year AS exam_year,
+      source.season,
+      source.paper_number,
+      source.variant,
+      source.duration_minutes,
+      source.source_question_count,
+      item.question_id AS saved_question_id,
+      item.position AS saved_position,
+      item.marks AS saved_marks,
+      item.section_id AS saved_section_id,
+      item.source_group AS saved_source_group,
+      item.section_id AS coursebook_section_id,
+      section.section_code,
+      section.title_en AS section_title_en,
+      section.title_zh AS section_title_zh,
+      CASE WHEN item.section_id IS NULL THEN NULL ELSE 'reviewed' END AS mapping_status,
+      item.source_group AS similar_question_group
+    FROM saved_paper_items item
+    JOIN question_bank question ON question.id = item.question_id
+    LEFT JOIN exam_papers source ON source.slug = question.paper_slug
+    LEFT JOIN coursebook_sections section ON section.id = item.section_id
+    WHERE item.paper_id = ?
+    ORDER BY item.position
+  `).bind(paperId).all();
+  return mapSavedPaper(paper, rows.results.map(mapSavedPaperItem));
+}
+
+function normalizePaperObject(value, field, fallback = {}) {
+  if (value === undefined) return fallback;
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new AuthError(400, `Field "${field}" must be an object.`, "INVALID_INPUT");
+  }
+  return value;
+}
+
+async function normalizeSavedPaperItems(db, subjectCode, value) {
+  const items = requireArray(value, "items");
+  if (items.length > 200) {
+    throw new AuthError(400, 'Field "items" cannot contain more than 200 questions.', "INVALID_INPUT");
+  }
+  const requests = items.map((item, position) => ({
+    questionId: requireString(item?.questionId, `items[${position}].questionId`),
+    marks: toInteger(item?.marks, 1, 1, 100, `items[${position}].marks`),
+    sectionId: String(item?.sectionId || "").trim(),
+    position,
+  }));
+  if (new Set(requests.map((item) => item.questionId)).size !== requests.length) {
+    throw new AuthError(400, "A question cannot be added to the same paper twice.", "DUPLICATE_QUESTION");
+  }
+  if (requests.length === 0) return { items: [], blueprint: buildPaperBlueprint([]) };
+
+  const placeholders = requests.map(() => "?").join(", ");
+  const rows = await db.prepare(`
+    SELECT question.*,
+      source.slug AS source_paper_slug,
+      source.year AS exam_year,
+      source.season,
+      source.paper_number,
+      source.variant,
+      source.duration_minutes,
+      source.source_question_count,
+      source.status AS source_status,
+      mapping.coursebook_section_id,
+      mapping.status AS mapping_status,
+      mapping.similar_question_group,
+      section.section_code
+    FROM question_bank question
+    LEFT JOIN exam_papers source ON source.slug = question.paper_slug
+    LEFT JOIN question_section_mappings mapping ON mapping.rowid = (
+      SELECT selected_mapping.rowid
+      FROM question_section_mappings selected_mapping
+      WHERE selected_mapping.question_id = question.id
+        AND selected_mapping.is_primary = 1
+        AND selected_mapping.status <> 'rejected'
+      ORDER BY CASE selected_mapping.status WHEN 'reviewed' THEN 0 ELSE 1 END,
+        selected_mapping.confidence DESC,
+        selected_mapping.curriculum_section_id
+      LIMIT 1
+    )
+    LEFT JOIN coursebook_sections section ON section.id = mapping.coursebook_section_id
+    WHERE question.id IN (${placeholders})
+  `).bind(...requests.map((item) => item.questionId)).all();
+  const byId = new Map(rows.results.map((row) => [row.id, row]));
+  const normalized = requests.map((item) => {
+    const row = byId.get(item.questionId);
+    const images = parseJson(row?.images, []);
+    if (!row
+      || !row.active
+      || row.subject_code !== subjectCode
+      || !Number.isInteger(Number(row.answer))
+      || Number(row.answer) < 0
+      || Number(row.answer) > 3
+      || (!String(row.stem || "").trim() && images.length === 0)
+      || !row.source_paper_slug
+      || row.source_status !== "published") {
+      throw new AuthError(400, `Question "${item.questionId}" is not available for this paper.`, "INVALID_QUESTION");
+    }
+    const reviewedSectionId = row.mapping_status === "reviewed" ? row.coursebook_section_id || "" : "";
+    if (item.sectionId && item.sectionId !== reviewedSectionId) {
+      throw new AuthError(
+        400,
+        `Question "${item.questionId}" is not reviewed for section "${item.sectionId}".`,
+        "INVALID_SECTION"
+      );
+    }
+    return {
+      id: row.id,
+      questionId: row.id,
+      position: item.position,
+      marks: item.marks,
+      sectionId: item.sectionId || reviewedSectionId,
+      sectionCode: item.sectionId || reviewedSectionId ? row.section_code || "" : "",
+      sourceGroup: row.similar_question_group || "",
+      answer: Number(row.answer),
+      paperSlug: row.paper_slug,
+      year: Number(row.exam_year),
+      season: row.season,
+      difficulty: row.difficulty || "",
+      estimatedSeconds: row.duration_minutes && row.source_question_count
+        ? Number(row.duration_minutes) * 60 / Number(row.source_question_count)
+        : null,
+    };
+  });
+  return { items: normalized, blueprint: buildPaperBlueprint(normalized) };
+}
+
+async function normalizeSavedPaperPayload(db, body, existing = null, existingItems = []) {
+  const suppliedSubjectCode = body.subjectCode === undefined
+    ? existing?.subject_code
+    : requireCurriculumCode(body.subjectCode);
+  const subjectCode = requireCurriculumCode(suppliedSubjectCode);
+  if (existing && subjectCode !== existing.subject_code) {
+    throw new AuthError(400, "A saved paper's subject cannot be changed.", "INVALID_INPUT");
+  }
+  const title = requireString(body.title === undefined ? existing?.title : body.title, "title");
+  const buildMode = String(body.buildMode === undefined ? existing?.build_mode || "manual" : body.buildMode).trim();
+  const status = String(body.status === undefined ? existing?.status || "draft" : body.status).trim();
+  if (!new Set(["manual", "smart", "equivalent"]).has(buildMode)) {
+    throw new AuthError(400, 'Field "buildMode" is invalid.', "INVALID_INPUT");
+  }
+  if (!new Set(["draft", "final"]).has(status)) {
+    throw new AuthError(400, 'Field "status" is invalid.', "INVALID_INPUT");
+  }
+
+  const curriculumVersionId = String(
+    body.curriculumVersionId === undefined ? existing?.curriculum_version_id || "" : body.curriculumVersionId || ""
+  ).trim();
+  if (curriculumVersionId) {
+    const version = await db.prepare(`
+      SELECT id FROM curriculum_versions WHERE id = ? AND subject_code = ? LIMIT 1
+    `).bind(curriculumVersionId, subjectCode).first();
+    if (!version) throw new AuthError(400, "Curriculum version does not match the subject.", "INVALID_INPUT");
+  }
+
+  const settings = normalizePaperObject(
+    body.settings,
+    "settings",
+    existing ? parseJson(existing.settings, {}) : {}
+  );
+  const buildSeed = String(
+    body.buildSeed === undefined ? existing?.build_seed || "" : body.buildSeed || ""
+  ).trim();
+  const rawItems = body.items === undefined ? existingItems : body.items;
+  const normalized = await normalizeSavedPaperItems(db, subjectCode, rawItems);
+  return {
+    title,
+    subjectCode,
+    curriculumVersionId,
+    buildMode,
+    buildSeed,
+    status,
+    settings,
+    items: normalized.items,
+    blueprint: normalized.blueprint,
+  };
+}
+
+function savedPaperItemStatements(db, paperId, items) {
+  return items.map((item) => db.prepare(`
+    INSERT INTO saved_paper_items (
+      paper_id, question_id, position, marks, section_id, source_group
+    ) VALUES (?, ?, ?, ?, ?, ?)
+  `).bind(
+    paperId,
+    item.questionId,
+    item.position,
+    item.marks,
+    item.sectionId || null,
+    item.sourceGroup || null
+  ));
+}
+
+async function createSavedPaper(request, env) {
+  const { user } = await requireCurrentUser(request, env);
+  const body = await readJsonBody(request);
+  const value = await normalizeSavedPaperPayload(env.DB, body);
+  const id = crypto.randomUUID();
+  const paperCode = `${value.subjectCode}-${crypto.randomUUID().replaceAll("-", "").slice(0, 8).toUpperCase()}`;
+  const statements = [env.DB.prepare(`
+    INSERT INTO saved_papers (
+      id, user_id, paper_code, title, subject_code, curriculum_version_id,
+      build_mode, build_seed, status, question_count, total_marks, settings, blueprint
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).bind(
+    id,
+    user.id,
+    paperCode,
+    value.title,
+    value.subjectCode,
+    value.curriculumVersionId || null,
+    value.buildMode,
+    value.buildSeed || null,
+    value.status,
+    value.blueprint.questionCount,
+    value.blueprint.totalMarks,
+    JSON.stringify(value.settings),
+    JSON.stringify(value.blueprint)
+  ), ...savedPaperItemStatements(env.DB, id, value.items)];
+  await env.DB.batch(statements);
+  return loadSavedPaper(env.DB, user.id, id);
+}
+
+async function listSavedPapers(request, env) {
+  const { user } = await requireCurrentUser(request, env);
+  const rows = await env.DB.prepare(`
+    SELECT * FROM saved_papers WHERE user_id = ? ORDER BY updated_at DESC, created_at DESC
+  `).bind(user.id).all();
+  return rows.results.map((row) => mapSavedPaper(row));
+}
+
+async function updateSavedPaper(request, env, paperId) {
+  const { user } = await requireCurrentUser(request, env);
+  const existing = await getOwnedSavedPaperRow(env.DB, user.id, paperId);
+  const current = await loadSavedPaper(env.DB, user.id, paperId);
+  const body = await readJsonBody(request);
+  const value = await normalizeSavedPaperPayload(env.DB, body, existing, current.items);
+  const statements = [
+    env.DB.prepare(`
+      UPDATE saved_papers SET
+        title = ?, curriculum_version_id = ?, build_mode = ?, build_seed = ?,
+        status = ?, question_count = ?, total_marks = ?, settings = ?, blueprint = ?,
+        updated_at = ?
+      WHERE id = ? AND user_id = ?
+    `).bind(
+      value.title,
+      value.curriculumVersionId || null,
+      value.buildMode,
+      value.buildSeed || null,
+      value.status,
+      value.blueprint.questionCount,
+      value.blueprint.totalMarks,
+      JSON.stringify(value.settings),
+      JSON.stringify(value.blueprint),
+      new Date().toISOString(),
+      paperId,
+      user.id
+    ),
+    env.DB.prepare("DELETE FROM saved_paper_items WHERE paper_id = ?").bind(paperId),
+    ...savedPaperItemStatements(env.DB, paperId, value.items),
+  ];
+  await env.DB.batch(statements);
+  return loadSavedPaper(env.DB, user.id, paperId);
+}
+
+async function deleteSavedPaper(request, env, paperId) {
+  const { user } = await requireCurrentUser(request, env);
+  await getOwnedSavedPaperRow(env.DB, user.id, paperId);
+  await env.DB.prepare("DELETE FROM saved_papers WHERE id = ? AND user_id = ?")
+    .bind(paperId, user.id).run();
+  return { deleted: true };
+}
+
 function questionYearFilter(subjectCode, tableAlias = "question") {
   if (subjectCode === "0610") {
     return `AND ${tableAlias}.year GLOB '[0-9][0-9][0-9][0-9]' AND CAST(${tableAlias}.year AS INTEGER) BETWEEN 2019 AND 2023`;
@@ -1313,6 +1632,32 @@ export async function handleLearningApiRequest(request, env) {
     }
     if (request.method === "GET" && url.pathname === "/api/paper-builder/questions") {
       return success(await searchPaperBuilderQuestions(request, env), request.method);
+    }
+    if (url.pathname === "/api/paper-builder/papers" && request.method === "GET") {
+      return success(await listSavedPapers(request, env), request.method);
+    }
+    if (url.pathname === "/api/paper-builder/papers" && request.method === "POST") {
+      return success(await createSavedPaper(request, env), request.method, 201);
+    }
+    const savedPaper = url.pathname.match(/^\/api\/paper-builder\/papers\/([^/]+)$/);
+    if (savedPaper && request.method === "GET") {
+      const { user } = await requireCurrentUser(request, env);
+      return success(
+        await loadSavedPaper(env.DB, user.id, decodeURIComponent(savedPaper[1])),
+        request.method
+      );
+    }
+    if (savedPaper && request.method === "PATCH") {
+      return success(
+        await updateSavedPaper(request, env, decodeURIComponent(savedPaper[1])),
+        request.method
+      );
+    }
+    if (savedPaper && request.method === "DELETE") {
+      return success(
+        await deleteSavedPaper(request, env, decodeURIComponent(savedPaper[1])),
+        request.method
+      );
     }
     if (request.method === "POST" && url.pathname === "/api/paper-builder/generate") {
       return success(await createChapterPaper(request, env), request.method, 201);
