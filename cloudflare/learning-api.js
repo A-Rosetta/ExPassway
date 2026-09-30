@@ -934,20 +934,18 @@ function savedPaperItemStatements(db, paperId, items) {
   ));
 }
 
-async function createSavedPaper(request, env) {
-  const { user } = await requireCurrentUser(request, env);
-  const body = await readJsonBody(request);
-  const value = await normalizeSavedPaperPayload(env.DB, body);
+async function persistSavedPaper(db, userId, value, parentPaperId = "") {
   const id = crypto.randomUUID();
   const paperCode = `${value.subjectCode}-${crypto.randomUUID().replaceAll("-", "").slice(0, 8).toUpperCase()}`;
-  const statements = [env.DB.prepare(`
+  const statements = [db.prepare(`
     INSERT INTO saved_papers (
       id, user_id, paper_code, title, subject_code, curriculum_version_id,
-      build_mode, build_seed, status, question_count, total_marks, settings, blueprint
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      build_mode, build_seed, status, question_count, total_marks, settings,
+      blueprint, parent_paper_id
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `).bind(
     id,
-    user.id,
+    userId,
     paperCode,
     value.title,
     value.subjectCode,
@@ -958,10 +956,18 @@ async function createSavedPaper(request, env) {
     value.blueprint.questionCount,
     value.blueprint.totalMarks,
     JSON.stringify(value.settings),
-    JSON.stringify(value.blueprint)
-  ), ...savedPaperItemStatements(env.DB, id, value.items)];
-  await env.DB.batch(statements);
-  return loadSavedPaper(env.DB, user.id, id);
+    JSON.stringify(value.blueprint),
+    parentPaperId || null
+  ), ...savedPaperItemStatements(db, id, value.items)];
+  await db.batch(statements);
+  return loadSavedPaper(db, userId, id);
+}
+
+async function createSavedPaper(request, env) {
+  const { user } = await requireCurrentUser(request, env);
+  const body = await readJsonBody(request);
+  const value = await normalizeSavedPaperPayload(env.DB, body);
+  return persistSavedPaper(env.DB, user.id, value);
 }
 
 async function listSavedPapers(request, env) {
@@ -1012,6 +1018,125 @@ async function deleteSavedPaper(request, env, paperId) {
   await env.DB.prepare("DELETE FROM saved_papers WHERE id = ? AND user_id = ?")
     .bind(paperId, user.id).run();
   return { deleted: true };
+}
+
+function equivalentCandidateAvailability(candidates, allowSimilarGroups) {
+  if (allowSimilarGroups) return candidates.length;
+  const groups = new Set();
+  let available = 0;
+  for (const candidate of candidates) {
+    if (!candidate.sourceGroup) {
+      available += 1;
+    } else if (!groups.has(candidate.sourceGroup)) {
+      groups.add(candidate.sourceGroup);
+      available += 1;
+    }
+  }
+  return available;
+}
+
+async function generateEquivalentPaper(request, env, paperId) {
+  const { user } = await requireCurrentUser(request, env);
+  const sourceRow = await getOwnedSavedPaperRow(env.DB, user.id, paperId);
+  const source = await loadSavedPaper(env.DB, user.id, paperId);
+  const body = await readJsonBody(request);
+  if (body.allowSimilarGroups !== undefined && typeof body.allowSimilarGroups !== "boolean") {
+    throw new AuthError(400, 'Field "allowSimilarGroups" must be a boolean.', "INVALID_INPUT");
+  }
+  const allowSimilarGroups = body.allowSimilarGroups === true;
+  const sourceNormalized = await normalizeSavedPaperItems(
+    env.DB,
+    source.subjectCode,
+    source.items.map((item) => ({
+      questionId: item.questionId,
+      marks: item.marks,
+      sectionId: item.sectionId,
+    }))
+  );
+  const sourceIds = new Set(sourceNormalized.items.map((item) => item.questionId));
+  const sourceGroups = new Set(sourceNormalized.items.map((item) => item.sourceGroup).filter(Boolean));
+  const sectionIds = [...new Set(sourceNormalized.items.map((item) => item.sectionId).filter(Boolean))];
+  const candidatesBySection = new Map(sectionIds.map((sectionId) => [sectionId, []]));
+
+  if (sectionIds.length) {
+    const placeholders = sectionIds.map(() => "?").join(", ");
+    const rows = await env.DB.prepare(`
+      SELECT question.id,
+        mapping.coursebook_section_id AS section_id,
+        mapping.similar_question_group AS source_group
+      FROM question_bank question
+      JOIN exam_papers source ON source.slug = question.paper_slug AND source.status = 'published'
+      JOIN question_section_mappings mapping
+        ON mapping.question_id = question.id
+        AND mapping.is_primary = 1
+        AND mapping.status = 'reviewed'
+      WHERE question.active = 1
+        AND question.subject_code = ?
+        AND question.answer BETWEEN 0 AND 3
+        AND (length(trim(question.stem)) > 0 OR json_array_length(question.images) > 0)
+        AND mapping.coursebook_section_id IN (${placeholders})
+      ORDER BY random()
+    `).bind(source.subjectCode, ...sectionIds).all();
+    for (const row of rows.results) {
+      if (sourceIds.has(row.id)) continue;
+      const sourceGroup = row.source_group || "";
+      if (!allowSimilarGroups && sourceGroup && sourceGroups.has(sourceGroup)) continue;
+      candidatesBySection.get(row.section_id)?.push({
+        questionId: row.id,
+        sectionId: row.section_id,
+        sourceGroup,
+      });
+    }
+  }
+
+  const requirements = new Map();
+  for (const item of sourceNormalized.items) {
+    requirements.set(item.sectionId, (requirements.get(item.sectionId) || 0) + 1);
+  }
+  const deficits = [];
+  for (const [sectionId, required] of requirements) {
+    const candidates = candidatesBySection.get(sectionId) || [];
+    const available = equivalentCandidateAvailability(candidates, allowSimilarGroups);
+    if (!sectionId || available < required) {
+      deficits.push({ sectionId: sectionId || "unmapped", required, available });
+    }
+  }
+  if (deficits.length) {
+    throw new AuthError(
+      409,
+      "The reviewed question pool cannot produce an equivalent paper.",
+      "EQUIVALENT_POOL_INSUFFICIENT",
+      { allowSimilarGroups, sections: deficits }
+    );
+  }
+
+  const selectedIds = new Set();
+  const selectedGroups = new Set();
+  const selectedItems = sourceNormalized.items.map((sourceItem) => {
+    const candidates = candidatesBySection.get(sourceItem.sectionId) || [];
+    const candidate = candidates.find((item) => (
+      !selectedIds.has(item.questionId)
+      && (allowSimilarGroups || !item.sourceGroup || !selectedGroups.has(item.sourceGroup))
+    ));
+    selectedIds.add(candidate.questionId);
+    if (candidate.sourceGroup) selectedGroups.add(candidate.sourceGroup);
+    return {
+      questionId: candidate.questionId,
+      marks: sourceItem.marks,
+      sectionId: sourceItem.sectionId,
+    };
+  });
+  const value = await normalizeSavedPaperPayload(env.DB, {
+    title: `${source.title} B`,
+    subjectCode: source.subjectCode,
+    curriculumVersionId: source.curriculumVersionId,
+    buildMode: "equivalent",
+    buildSeed: crypto.randomUUID(),
+    status: "draft",
+    settings: { ...source.settings, allowSimilarGroups },
+    items: selectedItems,
+  });
+  return persistSavedPaper(env.DB, user.id, value, sourceRow.id);
 }
 
 function questionYearFilter(subjectCode, tableAlias = "question") {
@@ -1657,6 +1782,14 @@ export async function handleLearningApiRequest(request, env) {
       return success(
         await deleteSavedPaper(request, env, decodeURIComponent(savedPaper[1])),
         request.method
+      );
+    }
+    const equivalentPaper = url.pathname.match(/^\/api\/paper-builder\/papers\/([^/]+)\/equivalent$/);
+    if (equivalentPaper && request.method === "POST") {
+      return success(
+        await generateEquivalentPaper(request, env, decodeURIComponent(equivalentPaper[1])),
+        request.method,
+        201
       );
     }
     if (request.method === "POST" && url.pathname === "/api/paper-builder/generate") {

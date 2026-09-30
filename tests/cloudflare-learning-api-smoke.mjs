@@ -310,8 +310,11 @@ try {
     db.prepare(`
       INSERT INTO question_section_mappings (
         question_id, curriculum_section_id, coursebook_section_id,
-        is_primary, confidence, status, source
-      ) VALUES ('question-2019', 'syllabus-section', 'book-section', 1, 1, 'reviewed', 'manual')
+        is_primary, confidence, status, source, similar_question_group
+      ) VALUES (
+        'question-2019', 'syllabus-section', 'book-section',
+        1, 1, 'reviewed', 'manual', 'cells-control'
+      )
     `),
     db.prepare(`
       INSERT INTO question_section_mappings (
@@ -322,8 +325,11 @@ try {
     db.prepare(`
       INSERT INTO question_section_mappings (
         question_id, curriculum_section_id, coursebook_section_id,
-        is_primary, confidence, status, source
-      ) VALUES ('question-2023', 'syllabus-section-2', 'book-section-2', 1, 1, 'reviewed', 'manual')
+        is_primary, confidence, status, source, similar_question_group
+      ) VALUES (
+        'question-2023', 'syllabus-section-2', 'book-section-2',
+        1, 1, 'reviewed', 'manual', 'cells-genetic'
+      )
     `),
     db.prepare(`
       INSERT INTO question_bank (
@@ -533,6 +539,196 @@ try {
       `/api/paper-builder/papers/${savedPaperId}`
     );
     assert.equal(missingPaper.response.status, 404);
+  }
+
+  await db.batch([
+    db.prepare(`
+      INSERT INTO question_bank (
+        id, board, subject, paper, difficulty, topic, year, stem, options,
+        answer, mistake_type, skills, hints, images, subject_code, paper_slug,
+        question_no, active
+      ) VALUES (
+        'question-equiv-1', 'CIE', 'IGCSE Biology', 'MCQ', 'foundation', 'Cells', '2023',
+        'Equivalent candidate for cell structure.', '["A","B","C","D"]',
+        2, 'concept', '[]', '[]', '[{"url":"/assets/test/equivalent-1.png"}]',
+        '0610', '0610_s23_qp_21', 4, 1
+      )
+    `),
+    db.prepare(`
+      INSERT INTO question_section_mappings (
+        question_id, curriculum_section_id, coursebook_section_id,
+        is_primary, confidence, status, source, similar_question_group
+      ) VALUES (
+        'question-equiv-1', 'syllabus-section', 'book-section',
+        1, 1, 'reviewed', 'manual', 'cells-control-alternative'
+      )
+    `),
+    db.prepare(`
+      INSERT INTO question_bank (
+        id, board, subject, paper, difficulty, topic, year, stem, options,
+        answer, mistake_type, skills, hints, images, subject_code, paper_slug,
+        question_no, active
+      ) VALUES (
+        'question-equiv-2', 'CIE', 'IGCSE Biology', 'MCQ', 'foundation', 'Cells', '2023',
+        'Equivalent candidate for cell division.', '["A","B","C","D"]',
+        3, 'concept', '[]', '[]', '[{"url":"/assets/test/equivalent-2.png"}]',
+        '0610', '0610_s23_qp_21', 5, 1
+      )
+    `),
+    db.prepare(`
+      INSERT INTO question_section_mappings (
+        question_id, curriculum_section_id, coursebook_section_id,
+        is_primary, confidence, status, source, similar_question_group
+      ) VALUES (
+        'question-equiv-2', 'syllabus-section-2', 'book-section-2',
+        1, 1, 'reviewed', 'manual', 'cells-genetic-alternative'
+      )
+    `),
+    db.prepare(`
+      INSERT INTO curriculum_sections (
+        id, curriculum_version_id, syllabus_code, title_en, title_zh,
+        level, core_level, sort_order
+      ) VALUES (
+        'syllabus-section-3', 'bio-version', 'B1.3', 'Specialised cells', 'Specialised cells',
+        'statement', 'core', 3
+      )
+    `),
+    db.prepare(`
+      INSERT INTO coursebook_sections (
+        id, coursebook_chapter_id, section_code, title_en, title_zh, sort_order
+      ) VALUES (
+        'book-section-3', 'chapter-1', '1.3', 'Specialised cells', 'Specialised cells', 3
+      )
+    `),
+    db.prepare(`
+      INSERT INTO coursebook_section_mappings (coursebook_section_id, curriculum_section_id)
+      VALUES ('book-section-3', 'syllabus-section-3')
+    `),
+    db.prepare(`
+      INSERT INTO question_bank (
+        id, board, subject, paper, difficulty, topic, year, stem, options,
+        answer, mistake_type, skills, hints, images, subject_code, paper_slug,
+        question_no, active
+      ) VALUES (
+        'question-relax-source', 'CIE', 'IGCSE Biology', 'MCQ', 'foundation', 'Cells', '2023',
+        'Source question for relaxed equivalent generation.', '["A","B","C","D"]',
+        0, 'concept', '[]', '[]', '[{"url":"/assets/test/relax-source.png"}]',
+        '0610', '0610_s23_qp_21', 6, 1
+      )
+    `),
+    db.prepare(`
+      INSERT INTO question_section_mappings (
+        question_id, curriculum_section_id, coursebook_section_id,
+        is_primary, confidence, status, source, similar_question_group
+      ) VALUES (
+        'question-relax-source', 'syllabus-section-3', 'book-section-3',
+        1, 1, 'reviewed', 'manual', 'specialised-cells-shared'
+      )
+    `),
+    db.prepare(`
+      INSERT INTO question_bank (
+        id, board, subject, paper, difficulty, topic, year, stem, options,
+        answer, mistake_type, skills, hints, images, subject_code, paper_slug,
+        question_no, active
+      ) VALUES (
+        'question-relax-candidate', 'CIE', 'IGCSE Biology', 'MCQ', 'foundation', 'Cells', '2023',
+        'Only same-group candidate for relaxed equivalent generation.', '["A","B","C","D"]',
+        1, 'concept', '[]', '[]', '[{"url":"/assets/test/relax-candidate.png"}]',
+        '0610', '0610_s23_qp_21', 7, 1
+      )
+    `),
+    db.prepare(`
+      INSERT INTO question_section_mappings (
+        question_id, curriculum_section_id, coursebook_section_id,
+        is_primary, confidence, status, source, similar_question_group
+      ) VALUES (
+        'question-relax-candidate', 'syllabus-section-3', 'book-section-3',
+        1, 1, 'reviewed', 'manual', 'specialised-cells-shared'
+      )
+    `),
+  ]);
+
+  {
+    const source = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      `/api/paper-builder/papers/${savedPaperCopyId}`
+    );
+    const sourceIds = new Set(source.payload.data.items.map((item) => item.questionId));
+    const sourceGroups = new Set(source.payload.data.items.map((item) => item.sourceGroup));
+    const equivalent = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      `/api/paper-builder/papers/${savedPaperCopyId}/equivalent`,
+      { method: "POST", body: JSON.stringify({}) }
+    );
+    assert.equal(equivalent.response.status, 201);
+    assert.equal(equivalent.payload.data.parentPaperId, savedPaperCopyId);
+    assert.equal(equivalent.payload.data.buildMode, "equivalent");
+    assert.deepEqual(
+      equivalent.payload.data.items.map((item) => item.sectionId),
+      ["book-section-2", "book-section"]
+    );
+    assert.ok(equivalent.payload.data.items.every((item) => !sourceIds.has(item.questionId)));
+    assert.ok(equivalent.payload.data.items.every((item) => !sourceGroups.has(item.sourceGroup)));
+
+    const foreignEquivalent = await api(
+      handleLearningApiRequest,
+      db,
+      otherToken,
+      `/api/paper-builder/papers/${savedPaperCopyId}/equivalent`,
+      { method: "POST", body: JSON.stringify({}) }
+    );
+    assert.equal(foreignEquivalent.response.status, 404);
+
+    const relaxedSource = await api(handleLearningApiRequest, db, token, "/api/paper-builder/papers", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "Relaxed source",
+        subjectCode: "0610",
+        curriculumVersionId: "bio-version",
+        buildMode: "manual",
+        status: "draft",
+        settings: {},
+        items: [{ questionId: "question-relax-source", marks: 2, sectionId: "book-section-3" }],
+      }),
+    });
+    assert.equal(relaxedSource.response.status, 201);
+
+    const strictShortage = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      `/api/paper-builder/papers/${relaxedSource.payload.data.id}/equivalent`,
+      { method: "POST", body: JSON.stringify({}) }
+    );
+    assert.equal(strictShortage.response.status, 409);
+    assert.equal(strictShortage.payload.error.code, "EQUIVALENT_POOL_INSUFFICIENT");
+    assert.deepEqual(strictShortage.payload.error.details.sections, [
+      { sectionId: "book-section-3", required: 1, available: 0 },
+    ]);
+
+    const relaxedEquivalent = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      `/api/paper-builder/papers/${relaxedSource.payload.data.id}/equivalent`,
+      { method: "POST", body: JSON.stringify({ allowSimilarGroups: true }) }
+    );
+    assert.equal(relaxedEquivalent.response.status, 201);
+    assert.equal(relaxedEquivalent.payload.data.items[0].questionId, "question-relax-candidate");
+    assert.notEqual(relaxedEquivalent.payload.data.items[0].questionId, "question-relax-source");
+    assert.equal(relaxedEquivalent.payload.data.items[0].marks, 2);
+
+    await db.prepare(`
+      UPDATE question_bank SET active = 0
+      WHERE id IN (
+        'question-equiv-1', 'question-equiv-2',
+        'question-relax-source', 'question-relax-candidate'
+      )
+    `).run();
   }
 
   {
