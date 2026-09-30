@@ -571,6 +571,130 @@ function requireCurriculumCode(value) {
   return subjectCode;
 }
 
+function optionalSearchInteger(url, name, min, max) {
+  const value = url.searchParams.get(name);
+  return value === null || value === "" ? null : toInteger(value, null, min, max, name);
+}
+
+function mapPaperBuilderQuestion(row) {
+  const question = mapQuestion(row, true);
+  return {
+    ...question,
+    year: row.exam_year == null ? question.year : Number(row.exam_year),
+    season: row.season || "",
+    paperNumber: row.paper_number == null ? null : Number(row.paper_number),
+    variant: row.variant == null ? null : Number(row.variant),
+    sectionId: row.coursebook_section_id || "",
+    sectionCode: row.section_code || "",
+    sectionTitleEn: row.section_title_en || "",
+    sectionTitleZh: row.section_title_zh || "",
+    mappingStatus: row.mapping_status || "unmapped",
+    sourceGroup: row.similar_question_group || "",
+    estimatedSeconds: row.duration_minutes && row.source_question_count
+      ? Number(row.duration_minutes) * 60 / Number(row.source_question_count)
+      : null,
+  };
+}
+
+async function searchPaperBuilderQuestions(request, env) {
+  await requireCurrentUser(request, env);
+  const url = new URL(request.url);
+  const subjectCode = requireCurriculumCode(url.searchParams.get("subjectCode"));
+  const page = toInteger(url.searchParams.get("page"), 1, 1, 100000, "page");
+  const pageSize = toInteger(url.searchParams.get("pageSize"), 20, 1, 50, "pageSize");
+  const year = optionalSearchInteger(url, "year", 2000, 2099);
+  const paperNumber = optionalSearchInteger(url, "paperNumber", 1, 2);
+  const variant = optionalSearchInteger(url, "variant", 1, 9);
+  const questionNo = optionalSearchInteger(url, "questionNo", 1, 200);
+  const season = String(url.searchParams.get("season") || "").trim().toLowerCase();
+  const paperSlug = String(url.searchParams.get("paperSlug") || "").trim();
+  const sectionId = String(url.searchParams.get("sectionId") || "").trim();
+
+  if (season && !new Set(["m", "s", "w"]).has(season)) {
+    throw new AuthError(400, 'Field "season" must be one of m, s, or w.', "INVALID_INPUT");
+  }
+
+  const where = [
+    "question.active = 1",
+    "question.subject_code = ?",
+    "paper.status = 'published'",
+    "question.answer BETWEEN 0 AND 3",
+    "(length(trim(question.stem)) > 0 OR json_array_length(question.images) > 0)",
+  ];
+  const params = [subjectCode];
+  const addFilter = (sql, value) => {
+    if (value === null || value === "") return;
+    where.push(sql);
+    params.push(value);
+  };
+
+  addFilter("paper.year = ?", year);
+  addFilter("paper.season = ?", season);
+  addFilter("paper.paper_number = ?", paperNumber);
+  addFilter("paper.variant = ?", variant);
+  addFilter("question.paper_slug = ?", paperSlug);
+  addFilter("question.question_no = ?", questionNo);
+  if (sectionId) {
+    where.push("mapping.coursebook_section_id = ?", "mapping.status = 'reviewed'");
+    params.push(sectionId);
+  }
+
+  const joins = `
+    JOIN exam_papers paper ON paper.slug = question.paper_slug
+    LEFT JOIN question_section_mappings mapping ON mapping.rowid = (
+      SELECT selected_mapping.rowid
+      FROM question_section_mappings selected_mapping
+      WHERE selected_mapping.question_id = question.id
+        AND selected_mapping.is_primary = 1
+        AND selected_mapping.status <> 'rejected'
+      ORDER BY CASE selected_mapping.status WHEN 'reviewed' THEN 0 ELSE 1 END,
+        selected_mapping.confidence DESC,
+        selected_mapping.curriculum_section_id
+      LIMIT 1
+    )
+    LEFT JOIN coursebook_sections section ON section.id = mapping.coursebook_section_id
+  `;
+  const whereSql = where.join(" AND ");
+  const countRow = await env.DB.prepare(`
+    SELECT COUNT(*) AS total
+    FROM question_bank question
+    ${joins}
+    WHERE ${whereSql}
+  `).bind(...params).first();
+  const total = Number(countRow?.total || 0);
+  const offset = (page - 1) * pageSize;
+  const rows = await env.DB.prepare(`
+    SELECT question.*,
+      paper.year AS exam_year,
+      paper.season,
+      paper.paper_number,
+      paper.variant,
+      paper.duration_minutes,
+      paper.source_question_count,
+      mapping.curriculum_section_id,
+      mapping.coursebook_section_id,
+      mapping.status AS mapping_status,
+      mapping.similar_question_group,
+      section.section_code,
+      section.title_en AS section_title_en,
+      section.title_zh AS section_title_zh
+    FROM question_bank question
+    ${joins}
+    WHERE ${whereSql}
+    ORDER BY paper.year DESC, paper.season, paper.paper_number, paper.variant,
+      question.question_no, question.id
+    LIMIT ? OFFSET ?
+  `).bind(...params, pageSize, offset).all();
+
+  return {
+    items: rows.results.map(mapPaperBuilderQuestion),
+    page,
+    pageSize,
+    total,
+    totalPages: total === 0 ? 0 : Math.ceil(total / pageSize),
+  };
+}
+
 function questionYearFilter(subjectCode, tableAlias = "question") {
   if (subjectCode === "0610") {
     return `AND ${tableAlias}.year GLOB '[0-9][0-9][0-9][0-9]' AND CAST(${tableAlias}.year AS INTEGER) BETWEEN 2019 AND 2023`;
@@ -1186,6 +1310,9 @@ export async function handleLearningApiRequest(request, env) {
     if (request.method === "GET" && url.pathname === "/api/curriculum/subjects") {
       await requireCurrentUser(request, env);
       return success(await listCurriculumSubjects(env.DB), request.method);
+    }
+    if (request.method === "GET" && url.pathname === "/api/paper-builder/questions") {
+      return success(await searchPaperBuilderQuestions(request, env), request.method);
     }
     if (request.method === "POST" && url.pathname === "/api/paper-builder/generate") {
       return success(await createChapterPaper(request, env), request.method, 201);

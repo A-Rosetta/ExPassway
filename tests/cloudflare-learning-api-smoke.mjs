@@ -98,6 +98,26 @@ try {
       VALUES ('0610', 'Biology', '生物', 'biology')
     `),
     db.prepare(`
+      INSERT INTO exam_papers (
+        slug, subject_code, year, season, paper_number, variant,
+        duration_minutes, source_question_count, valid_question_count,
+        qp_file_name, ms_file_name, status
+      ) VALUES (
+        '0610_s19_qp_21', '0610', 2019, 's', 2, 1,
+        45, 40, 40, '0610_s19_qp_21.pdf', '0610_s19_ms_21.pdf', 'published'
+      )
+    `),
+    db.prepare(`
+      INSERT INTO exam_papers (
+        slug, subject_code, year, season, paper_number, variant,
+        duration_minutes, source_question_count, valid_question_count,
+        qp_file_name, ms_file_name, status
+      ) VALUES (
+        '0610_s23_qp_21', '0610', 2023, 's', 2, 1,
+        45, 40, 40, '0610_s23_qp_21.pdf', '0610_s23_ms_21.pdf', 'published'
+      )
+    `),
+    db.prepare(`
       INSERT INTO question_bank (
         id, board, subject, paper, difficulty, topic, year, stem, options,
         answer, mistake_type, skills, hints, images, subject_code, paper_slug,
@@ -129,7 +149,7 @@ try {
       ) VALUES (
         'question-2024', 'CIE', 'IGCSE Biology', 'MCQ', '基础', 'Cells', '2024',
         'This question must not enter the chapter pool.', '["A","B","C","D"]',
-        0, 'concept', '[]', '[]', '[]', '0610', '0610_s24_qp_21', 1, 1
+        0, 'concept', '[]', '[]', '[]', '0610', '0610_s24_qp_21', 1, 0
       )
     `),
   ]);
@@ -304,7 +324,76 @@ try {
         is_primary, confidence, status, source
       ) VALUES ('question-2023', 'syllabus-section-2', 'book-section-2', 1, 1, 'reviewed', 'manual')
     `),
+    db.prepare(`
+      INSERT INTO question_bank (
+        id, board, subject, paper, difficulty, topic, year, stem, options,
+        answer, mistake_type, skills, hints, images, subject_code, paper_slug,
+        question_no, active
+      ) VALUES (
+        'question-pending', 'CIE', 'IGCSE Biology', 'MCQ', 'foundation', 'Cells', '2023',
+        'This mapping has not been reviewed.', '["A","B","C","D"]',
+        0, 'concept', '[]', '[]', '[{"url":"/assets/test/pending.png"}]',
+        '0610', '0610_s23_qp_21', 3, 1
+      )
+    `),
+    db.prepare(`
+      INSERT INTO question_section_mappings (
+        question_id, curriculum_section_id, coursebook_section_id,
+        is_primary, confidence, status, source
+      ) VALUES ('question-pending', 'syllabus-section', 'book-section', 1, 0.6, 'suggested', 'rule')
+    `),
   ]);
+
+  {
+    const search = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      "/api/paper-builder/questions?subjectCode=0610&page=1&pageSize=20"
+    );
+    assert.equal(search.response.status, 200);
+    assert.ok(search.payload.data.items.some((item) => item.id === "question-2019"));
+    assert.ok(search.payload.data.items.some((item) => item.id === "question-pending"));
+    assert.ok(search.payload.data.items.every((item) => item.id !== "question-2024"));
+    assert.equal(search.payload.data.page, 1);
+    assert.equal(search.payload.data.pageSize, 20);
+
+    const reviewedSection = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      "/api/paper-builder/questions?subjectCode=0610&sectionId=book-section"
+    );
+    assert.equal(reviewedSection.response.status, 200);
+    assert.deepEqual(reviewedSection.payload.data.items.map((item) => item.id), ["question-2019"]);
+    assert.equal(reviewedSection.payload.data.items[0].estimatedSeconds, 67.5);
+    assert.equal(reviewedSection.payload.data.items[0].mappingStatus, "reviewed");
+
+    const filtered = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      "/api/paper-builder/questions?subjectCode=0610&year=2023&season=s&paperNumber=2&variant=1&questionNo=2"
+    );
+    assert.deepEqual(filtered.payload.data.items.map((item) => item.id), ["question-2023"]);
+
+    const badPageSize = await api(
+      handleLearningApiRequest,
+      db,
+      token,
+      "/api/paper-builder/questions?subjectCode=0610&pageSize=101"
+    );
+    assert.equal(badPageSize.response.status, 400);
+    assert.equal(badPageSize.payload.error.code, "INVALID_INPUT");
+
+    const unauthorizedSearch = await api(
+      handleLearningApiRequest,
+      db,
+      "",
+      "/api/paper-builder/questions?subjectCode=0610"
+    );
+    assert.equal(unauthorizedSearch.response.status, 401);
+  }
 
   {
     const subjects = await api(handleLearningApiRequest, db, token, "/api/curriculum/subjects");
