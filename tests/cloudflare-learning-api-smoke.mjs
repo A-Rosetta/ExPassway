@@ -58,12 +58,29 @@ try {
     "../migrations/0001_initial.sql",
     "../migrations/0002_supabase_auth.sql",
     "../migrations/0003_admin_platform.sql",
+    "../migrations/0011_saved_papers.sql",
   ]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) {
       await db.prepare(statement).run();
     }
   }
+
+  const savedPaperColumns = await db.prepare("PRAGMA table_info(saved_papers)").all();
+  assert.deepEqual(
+    savedPaperColumns.results.map((column) => column.name),
+    [
+      "id", "user_id", "paper_code", "title", "subject_code",
+      "curriculum_version_id", "build_mode", "build_seed", "status",
+      "question_count", "total_marks", "settings", "blueprint",
+      "parent_paper_id", "created_at", "updated_at",
+    ],
+  );
+  const savedItemColumns = await db.prepare("PRAGMA table_info(saved_paper_items)").all();
+  assert.deepEqual(
+    savedItemColumns.results.map((column) => column.name),
+    ["paper_id", "question_id", "position", "marks", "section_id", "source_group", "created_at"],
+  );
 
   const userId = "11111111-1111-4111-8111-111111111111";
   const otherUserId = "22222222-2222-4222-8222-222222222222";
