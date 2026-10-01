@@ -375,6 +375,8 @@ try {
     assert.deepEqual(reviewedSection.payload.data.items.map((item) => item.id), ["question-2019"]);
     assert.equal(reviewedSection.payload.data.items[0].estimatedSeconds, 67.5);
     assert.equal(reviewedSection.payload.data.items[0].mappingStatus, "reviewed");
+    assert.equal(reviewedSection.payload.data.items[0].mappingConfidence, 1);
+    assert.equal(reviewedSection.payload.data.items[0].mappingSource, "manual");
 
     const filtered = await api(
       handleLearningApiRequest,

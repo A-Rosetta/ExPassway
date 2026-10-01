@@ -30,6 +30,23 @@ export function addBasketItem(state, question) {
   return true;
 }
 
+export function addBasketItems(state, questions) {
+  const existing = new Set(state.items.map((item) => item.id));
+  const additions = questions.filter((question) => {
+    const id = question.id || question.questionId;
+    if (existing.has(id)) return false;
+    existing.add(id);
+    return true;
+  });
+  if (state.items.length + additions.length > 200) throw new Error("paperBuilderBasketLimit");
+  const subjectCode = state.subjectCode || additions[0]?.subjectCode;
+  if (additions.some((question) => question.subjectCode !== subjectCode)) {
+    throw new Error("paperBuilderSameSubject");
+  }
+  for (const question of additions) addBasketItem(state, question);
+  return additions.length;
+}
+
 export function removeBasketItem(state, id) {
   const index = state.items.findIndex((item) => item.id === id);
   if (index < 0) return;
@@ -73,7 +90,7 @@ function initializePaperBuilder() {
   const view = {
     token: "", subjects: [], subject: null, catalog: null, sections: [],
     results: [], page: 1, pages: 0, total: 0, mode: "manual", busy: false,
-    saved: [], equivalent: null, sourcePaper: null, dragId: "",
+    saved: [], equivalent: null, sourcePaper: null, dragId: "", selectedIds: new Set(),
   };
   const filterIds = {
     year: "paperBuilderYear", season: "paperBuilderSeason",
@@ -179,7 +196,17 @@ function initializePaperBuilder() {
   function renderSectionFilter() {
     const select = byId("paperBuilderSection");
     select.replaceChildren(new Option(t("paperBuilderAllSections"), ""));
-    for (const section of view.sections) select.add(new Option(sectionLabel(section), section.id));
+    let group = null;
+    let chapterId = "";
+    for (const section of view.sections) {
+      if (section.chapterNo !== chapterId) {
+        chapterId = section.chapterNo;
+        group = document.createElement("optgroup");
+        group.label = t("paperBuilderChapter", { number: section.chapterNo, title: localized(section, "chapterTitleEn", "chapterTitleZh") });
+        select.append(group);
+      }
+      group.append(new Option(sectionLabel(section), section.id));
+    }
     select.value = paper.settings.filters?.sectionId || "";
   }
 
@@ -248,6 +275,7 @@ function initializePaperBuilder() {
     view.page = result.page;
     view.pages = result.totalPages;
     view.total = result.total;
+    view.selectedIds.clear();
     renderResults();
     setStatus("");
   }
@@ -302,29 +330,55 @@ function initializePaperBuilder() {
     }
   }
 
+  function renderBulkControls() {
+    const available = view.results.filter((item) => !paper.items.some((current) => current.id === item.id));
+    const selectedCount = available.filter((item) => view.selectedIds.has(item.id)).length;
+    const all = byId("paperBuilderSelectPage");
+    all.checked = available.length > 0 && selectedCount === available.length;
+    all.indeterminate = selectedCount > 0 && selectedCount < available.length;
+    all.disabled = view.busy || !available.length;
+    byId("paperBuilderSelectedCount").textContent = t("paperBuilderBulkCount", { count: selectedCount });
+    byId("paperBuilderAddSelected").disabled = view.busy || !selectedCount;
+  }
+
   function renderResults() {
     const root = byId("paperBuilderResults");
     root.replaceChildren();
     byId("paperBuilderManualCount").textContent = t("paperBuilderResultCount", { count: view.total });
     if (!view.results.length) root.append(element("p", "paper-builder-empty", t("paperBuilderNoResults")));
     for (const item of view.results) {
-      const selected = paper.items.some((current) => current.id === item.id);
+      const inBasket = paper.items.some((current) => current.id === item.id);
       const card = element("article", "paper-builder-result");
       const heading = element("div", "paper-builder-result-heading");
-      heading.append(element("strong", "paper-builder-result-title", sourceLabel(item)));
-      heading.append(button(t(selected ? "paperBuilderRemove" : "paperBuilderAdd"), () => {
+      const selectLabel = element("label", "paper-builder-result-select");
+      const checkbox = element("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = view.selectedIds.has(item.id) && !inBasket;
+      checkbox.disabled = view.busy || inBasket;
+      checkbox.setAttribute("aria-label", t("paperBuilderSelectQuestion", { question: sourceLabel(item) }));
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) view.selectedIds.add(item.id);
+        else view.selectedIds.delete(item.id);
+        renderBulkControls();
+      });
+      selectLabel.append(checkbox, element("strong", "paper-builder-result-title", sourceLabel(item)));
+      heading.append(selectLabel);
+      heading.append(button(t(inBasket ? "paperBuilderRemove" : "paperBuilderAdd"), () => {
         try {
-          if (selected) removeBasketItem(paper, item.id);
-          else addBasketItem(paper, item);
+          if (inBasket) removeBasketItem(paper, item.id);
+          else { addBasketItem(paper, item); view.selectedIds.delete(item.id); }
           markChanged();
           setStatus("");
         } catch (error) { setStatus(t(error.message), true); }
       }));
       card.append(heading);
+      const chapter = view.sections.find((section) => section.id === item.sectionId);
       const section = item.mappingStatus === "reviewed"
-        ? [item.sectionCode, localized(item, "sectionTitleEn", "sectionTitleZh")].filter(Boolean).join(" ")
+        ? [chapter && t("paperBuilderChapter", { number: chapter.chapterNo, title: localized(chapter, "chapterTitleEn", "chapterTitleZh") }),
+          item.sectionCode, localized(item, "sectionTitleEn", "sectionTitleZh")].filter(Boolean).join(" · ")
         : t("paperBuilderPendingReview");
-      card.append(element("p", "paper-builder-result-meta", section));
+      const tentative = item.mappingConfidence != null && item.mappingConfidence <= 0.2 && item.mappingSource === "rule";
+      card.append(element("p", "paper-builder-result-meta", section + (tentative ? " · " + t("paperBuilderChapterNeedsCheck") : "")));
       appendContent(card, item, true);
       const actions = element("div", "paper-builder-result-actions");
       const answer = element("span", "paper-builder-answer", String.fromCharCode(65 + Number(item.answer)));
@@ -348,6 +402,7 @@ function initializePaperBuilder() {
     });
     byId("paperBuilderPrevious").disabled = view.busy || view.page <= 1;
     byId("paperBuilderNext").disabled = view.busy || view.page >= view.pages;
+    renderBulkControls();
   }
 
   function selectedTargetTotal() {
@@ -827,6 +882,22 @@ function initializePaperBuilder() {
     });
     byId("paperBuilderPrevious").addEventListener("click", () => perform(() => searchQuestions(view.page - 1)));
     byId("paperBuilderNext").addEventListener("click", () => perform(() => searchQuestions(view.page + 1)));
+    byId("paperBuilderSelectPage").addEventListener("change", (event) => {
+      const available = view.results.filter((item) => !paper.items.some((current) => current.id === item.id));
+      for (const item of available) {
+        if (event.target.checked) view.selectedIds.add(item.id);
+        else view.selectedIds.delete(item.id);
+      }
+      renderResults();
+    });
+    byId("paperBuilderAddSelected").addEventListener("click", () => {
+      try {
+        const count = addBasketItems(paper, view.results.filter((item) => view.selectedIds.has(item.id)));
+        view.selectedIds.clear();
+        if (count) markChanged();
+        setStatus(t("paperBuilderBulkAdded", { count }));
+      } catch (error) { setStatus(t(error.message), true); }
+    });
     byId("generateChapterPaper").addEventListener("click", () => perform(generateSmart));
     byId("paperBuilderSave").addEventListener("click", () => perform(savePaper));
     byId("paperBuilderPreview").addEventListener("click", showPreview);

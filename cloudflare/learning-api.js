@@ -592,6 +592,8 @@ function mapPaperBuilderQuestion(row) {
     sectionTitleEn: row.section_title_en || "",
     sectionTitleZh: row.section_title_zh || "",
     mappingStatus: row.mapping_status || "unmapped",
+    mappingConfidence: row.mapping_confidence == null ? null : Number(row.mapping_confidence),
+    mappingSource: row.mapping_source || "",
     sourceGroup: row.similar_question_group || "",
     estimatedSeconds: row.duration_minutes && row.source_question_count
       ? Number(row.duration_minutes) * 60 / Number(row.source_question_count)
@@ -707,6 +709,8 @@ async function searchPaperBuilderQuestions(request, env) {
       mapping.curriculum_section_id,
       mapping.coursebook_section_id,
       mapping.status AS mapping_status,
+      mapping.confidence AS mapping_confidence,
+      mapping.source AS mapping_source,
       mapping.similar_question_group,
       section.section_code,
       section.title_en AS section_title_en,
