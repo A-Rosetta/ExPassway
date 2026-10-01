@@ -8,6 +8,10 @@ import sodium from "libsodium-wrappers-sumo";
 
 const DB_NAME = "expassway-chat-crypto-v1";
 const STORE_NAME = "vault";
+const ACCOUNT_V2_VAULT_FORMAT = "expassway-chat-account-v2";
+const ACCOUNT_V2_VAULT_VERSION = 2;
+const ACCOUNT_V2_KDF_VERSION = "hkdf-sha256-v1";
+const ACCOUNT_V2_PROTOCOL_VERSION = "account-v2";
 const state = {
   identityKeyPair: null,
   registrationId: null,
@@ -19,6 +23,10 @@ const state = {
   recoveryCandidate: null,
   verifiedSafetyNumbers: {},
   safetyNumberChanges: {},
+  // Account-v2 secrets intentionally never enter IndexedDB. They live only for
+  // the lifetime of this worker after a successful Passkey PRF unlock.
+  accountV2: null,
+  accountV2Candidate: null,
 };
 
 const deviceLocks = new Map();
@@ -50,7 +58,12 @@ function classifyCryptoError(error, fallbackCode = "DECRYPT_FAILED") {
 }
 
 async function getSodium() {
-  if (!sodiumReadyPromise) sodiumReadyPromise = sodium.ready.then(() => sodium);
+  if (!sodiumReadyPromise) {
+    sodiumReadyPromise = sodium.ready.then(() => sodium).catch((error) => {
+      sodiumReadyPromise = null;
+      throw accountV2Error("CRYPTO_WASM_INIT_FAILED", "The browser could not initialize the secure crypto module. Refresh the page and try again.", error);
+    });
+  }
   return sodiumReadyPromise;
 }
 
@@ -104,6 +117,175 @@ function binaryStringToBase64Url(value) {
 
 function base64UrlToBinaryString(value) {
   return String.fromCharCode(...base64ToBytes(value));
+}
+
+function utf8(value) {
+  return new TextEncoder().encode(String(value));
+}
+
+function accountV2Error(code, message, cause) {
+  return cryptoError(code, message, cause);
+}
+
+function requiredBase64Bytes(value, field, expectedLength = null) {
+  if (typeof value !== "string" || !value) throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", `${field} is required.`);
+  if (!/^[A-Za-z0-9_-]+$/.test(value) || value.length % 4 === 1) {
+    throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", `${field} is not valid base64url.`);
+  }
+  let bytes;
+  try {
+    bytes = base64ToBytes(value);
+  } catch (error) {
+    throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", `${field} is not valid base64url.`, error);
+  }
+  if (expectedLength !== null && bytes.byteLength !== expectedLength) {
+    throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", `${field} has an invalid length.`);
+  }
+  if (bytesToBase64Url(bytes) !== value) {
+    throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", `${field} is not canonical base64url.`);
+  }
+  return bytes;
+}
+
+function sodiumRandomBytes(sodiumInstance, length) {
+  if (!sodiumInstance || typeof sodiumInstance.randombytes_buf !== "function") {
+    throw accountV2Error("CRYPTO_UNAVAILABLE", "libsodium randombytes_buf is unavailable.");
+  }
+  return sodiumInstance.randombytes_buf(length);
+}
+
+function requiredAccountV2String(value, field, maxLength = 512) {
+  const normalized = String(value || "");
+  if (!normalized || normalized.length > maxLength) throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", `${field} is invalid.`);
+  return normalized;
+}
+
+function validEpoch(value) {
+  const epoch = Number(value);
+  if (!Number.isInteger(epoch) || epoch < 1 || epoch > 2147483647) {
+    throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "epoch is invalid.");
+  }
+  return epoch;
+}
+
+function validControlEpoch(value) {
+  const epoch = Number(value);
+  if (!Number.isInteger(epoch) || epoch < 0 || epoch > 2147483647) {
+    throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "expectedEpoch is invalid.");
+  }
+  return epoch;
+}
+
+function canonicalJson(value) {
+  if (value === null || typeof value === "boolean" || typeof value === "string") return JSON.stringify(value);
+  if (typeof value === "number") {
+    if (!Number.isFinite(value)) throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "The signed payload contains an invalid number.");
+    return JSON.stringify(value);
+  }
+  if (Array.isArray(value)) return `[${value.map((item) => canonicalJson(item)).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`).join(",")}}`;
+  }
+  throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "The signed payload contains an unsupported value.");
+}
+
+async function accountV2Hkdf(ikm, salt, info) {
+  try {
+    const material = await crypto.subtle.importKey("raw", toByteArray(ikm), "HKDF", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({
+      name: "HKDF",
+      hash: "SHA-256",
+      salt: toByteArray(salt),
+      info: utf8(info),
+    }, material, 256);
+    return new Uint8Array(bits);
+  } catch (error) {
+    throw accountV2Error("ACCOUNT_V2_KDF_FAILED", "The Passkey output could not derive the account vault key.", error);
+  }
+}
+
+async function accountV2AesGcmEncrypt(keyBytes, plaintext, aad, code = "ACCOUNT_V2_ENCRYPT_FAILED") {
+  try {
+    const nonce = crypto.getRandomValues(new Uint8Array(12));
+    const key = await crypto.subtle.importKey("raw", toByteArray(keyBytes), "AES-GCM", false, ["encrypt"]);
+    const ciphertext = await crypto.subtle.encrypt(
+      { name: "AES-GCM", iv: nonce, additionalData: toByteArray(aad) },
+      key,
+      toByteArray(plaintext),
+    );
+    return { nonce, ciphertext: new Uint8Array(ciphertext) };
+  } catch (error) {
+    throw accountV2Error(code, "The account-encrypted data could not be encrypted in this browser.", error);
+  }
+}
+
+async function accountV2AesGcmDecrypt(keyBytes, nonce, ciphertext, aad, code = "ACCOUNT_V2_DECRYPT_FAILED") {
+  try {
+    const key = await crypto.subtle.importKey("raw", toByteArray(keyBytes), "AES-GCM", false, ["decrypt"]);
+    const plaintext = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv: toByteArray(nonce), additionalData: toByteArray(aad) },
+      key,
+      toByteArray(ciphertext),
+    );
+    return new Uint8Array(plaintext);
+  } catch (error) {
+    throw accountV2Error(code, "The account-encrypted data could not be authenticated or decrypted.", error);
+  }
+}
+
+async function accountV2Fingerprint(encryptionPublicKey, signingPublicKey) {
+  const digest = await crypto.subtle.digest(
+    "SHA-256",
+    utf8(`${bytesToBase64Url(encryptionPublicKey)}.${bytesToBase64Url(signingPublicKey)}`),
+  );
+  return bytesToBase64Url(new Uint8Array(digest));
+}
+
+function accountV2VaultAad(userId, keyVersion) {
+  return utf8(`expassway-chat-account-v2-vault|${String(userId)}|${String(keyVersion)}|${ACCOUNT_V2_KDF_VERSION}`);
+}
+
+function accountV2EnvelopeAad({ conversationId, epoch, userId, keyVersion, ephemeralPublicKey }) {
+  return utf8(`expassway-chat-account-v2-envelope|${String(conversationId)}|${Number(epoch)}|${String(userId)}|${String(keyVersion)}|${String(ephemeralPublicKey)}`);
+}
+
+function accountV2MessageAad({ conversationId, clientMessageId, epoch, senderUserId }) {
+  return utf8(`expassway-chat-account-v2-message|${String(conversationId)}|${String(clientMessageId)}|${Number(epoch)}|${String(senderUserId)}`);
+}
+
+function accountV2MetadataAad({ conversationId, epoch, version }) {
+  return utf8(`expassway-chat-account-v2-metadata|${String(conversationId)}|${validEpoch(epoch)}|${String(version)}`);
+}
+
+function accountV2EpochKey(conversationId, epoch) {
+  return `${String(conversationId)}:${Number(epoch)}`;
+}
+
+function accountV2RequireUnlocked() {
+  if (!state.accountV2) {
+    throw accountV2Error("ACCOUNT_VAULT_LOCKED", "Unlock the account chat vault with a Passkey before using encrypted chat.");
+  }
+  return state.accountV2;
+}
+
+function accountV2PublicBundle(account) {
+  return {
+    userId: account.userId,
+    keyVersion: account.keyVersion,
+    encryptionPublicKey: bytesToBase64Url(account.encryptionPublicKey),
+    signingPublicKey: bytesToBase64Url(account.signingPublicKey),
+    fingerprint: account.fingerprint,
+    status: "active",
+  };
+}
+
+function accountV2WipeAccount(account) {
+  if (!account) return;
+  for (const value of [account.vaultRootKey, account.encryptionPrivateKey, account.signingPrivateKey]) {
+    if (value instanceof Uint8Array) value.fill(0);
+  }
+  for (const value of account.epochKeys?.values?.() || []) value.fill(0);
+  account.epochKeys?.clear?.();
 }
 
 function randomRegistrationId() {
@@ -751,6 +933,260 @@ async function getLocalPlaintext({ clientMessageId }) {
   return new TextDecoder().decode(plaintext);
 }
 
+async function generateAccountV2Vault({ userId, keyVersion = "1", prfOutput } = {}) {
+  const user = requiredAccountV2String(userId, "userId", 256);
+  const version = requiredAccountV2String(keyVersion, "keyVersion", 64);
+  const prf = requiredBase64Bytes(prfOutput, "prfOutput", 32);
+  const s = await getSodium();
+  const account = {
+    userId: user,
+    keyVersion: version,
+    vaultRootKey: sodiumRandomBytes(s, 32),
+    encryptionKeyPair: s.crypto_box_keypair(),
+    signingKeyPair: s.crypto_sign_keypair(),
+    epochKeys: new Map(),
+  };
+  account.encryptionPublicKey = account.encryptionKeyPair.publicKey;
+  account.encryptionPrivateKey = account.encryptionKeyPair.privateKey;
+  account.signingPublicKey = account.signingKeyPair.publicKey;
+  account.signingPrivateKey = account.signingKeyPair.privateKey;
+  account.fingerprint = await accountV2Fingerprint(account.encryptionPublicKey, account.signingPublicKey);
+  const wrappingKey = await accountV2Hkdf(prf, utf8(`expassway-chat-account-v2-prf|${user}`), ACCOUNT_V2_KDF_VERSION);
+  const encrypted = await accountV2AesGcmEncrypt(wrappingKey, utf8(JSON.stringify({ format: ACCOUNT_V2_VAULT_FORMAT, version: ACCOUNT_V2_VAULT_VERSION, userId: user, keyVersion: version, vaultRootKey: bytesToBase64Url(account.vaultRootKey), encryptionPrivateKey: bytesToBase64Url(account.encryptionPrivateKey), signingPrivateKey: bytesToBase64Url(account.signingPrivateKey) })), accountV2VaultAad(user, version), "ACCOUNT_V2_VAULT_ENCRYPT_FAILED");
+  accountV2WipeAccount(state.accountV2);
+  state.accountV2 = account;
+  return { ...accountV2PublicBundle(account), kdfVersion: ACCOUNT_V2_KDF_VERSION, nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
+}
+
+async function unlockAccountV2Vault({ userId, keyVersion = "1", prfOutput, nonce, ciphertext } = {}) {
+  const user = requiredAccountV2String(userId, "userId", 256);
+  const version = requiredAccountV2String(keyVersion, "keyVersion", 64);
+  const prf = requiredBase64Bytes(prfOutput, "prfOutput", 32);
+  const wrappingKey = await accountV2Hkdf(prf, utf8(`expassway-chat-account-v2-prf|${user}`), ACCOUNT_V2_KDF_VERSION);
+  const plaintext = await accountV2AesGcmDecrypt(wrappingKey, requiredBase64Bytes(nonce, "nonce", 12), requiredBase64Bytes(ciphertext, "ciphertext"), accountV2VaultAad(user, version), "ACCOUNT_VAULT_UNLOCK_FAILED");
+  let snapshot;
+  try { snapshot = JSON.parse(new TextDecoder().decode(plaintext)); } catch (error) {
+    plaintext.fill(0);
+    throw accountV2Error("ACCOUNT_VAULT_UNLOCK_FAILED", "The account vault is malformed.", error);
+  }
+  plaintext.fill(0);
+  if (snapshot.format !== ACCOUNT_V2_VAULT_FORMAT || snapshot.version !== ACCOUNT_V2_VAULT_VERSION || snapshot.userId !== user || snapshot.keyVersion !== version) {
+    throw accountV2Error("ACCOUNT_VAULT_UNLOCK_FAILED", "The account vault version or account identity does not match.");
+  }
+  const s = await getSodium();
+  let account;
+  try {
+    account = { userId: user, keyVersion: snapshot.keyVersion, vaultRootKey: requiredBase64Bytes(snapshot.vaultRootKey, "vaultRootKey", 32), encryptionPrivateKey: requiredBase64Bytes(snapshot.encryptionPrivateKey, "encryptionPrivateKey", 32), signingPrivateKey: requiredBase64Bytes(snapshot.signingPrivateKey, "signingPrivateKey", 64), epochKeys: new Map() };
+  } catch (error) {
+    throw accountV2Error("ACCOUNT_VAULT_UNLOCK_FAILED", "The account vault contains invalid key material.", error);
+  }
+  account.encryptionPublicKey = s.crypto_scalarmult_base(account.encryptionPrivateKey);
+  account.signingPublicKey = s.crypto_sign_ed25519_sk_to_pk(account.signingPrivateKey);
+  account.fingerprint = await accountV2Fingerprint(account.encryptionPublicKey, account.signingPublicKey);
+  state.accountV2 = account;
+  return { ...accountV2PublicBundle(account), unlocked: true };
+}
+
+async function lockAccountV2Vault() {
+  accountV2WipeAccount(state.accountV2);
+  accountV2WipeAccount(state.accountV2Candidate);
+  state.accountV2 = null;
+  state.accountV2Candidate = null;
+  return { locked: true };
+}
+
+async function createAccountV2Envelope({ conversationId, epoch, recipient, contentKey } = {}) {
+  accountV2RequireUnlocked();
+  const id = requiredAccountV2String(conversationId, "conversationId", 256);
+  const recipientUserId = requiredAccountV2String(recipient?.userId, "recipient.userId", 256);
+  const recipientKeyVersion = requiredAccountV2String(recipient?.keyVersion || "1", "recipient.keyVersion", 64);
+  const recipientPublicKey = requiredBase64Bytes(recipient?.encryptionPublicKey, "recipient.encryptionPublicKey", 32);
+  const key = requiredBase64Bytes(contentKey, "contentKey", 32);
+  const s = await getSodium();
+  const ephemeral = s.crypto_box_keypair();
+  const shared = s.crypto_scalarmult(ephemeral.privateKey, recipientPublicKey);
+  const wrapKey = await accountV2Hkdf(shared, utf8(`expassway-chat-account-v2-envelope-key|${id}|${validEpoch(epoch)}`), ACCOUNT_V2_KDF_VERSION);
+  const ephemeralPublicKey = bytesToBase64Url(ephemeral.publicKey);
+  const aad = accountV2EnvelopeAad({ conversationId, epoch, userId: recipientUserId, keyVersion: recipientKeyVersion, ephemeralPublicKey });
+  const encrypted = await accountV2AesGcmEncrypt(wrapKey, key, aad);
+  ephemeral.privateKey.fill(0);
+  shared.fill(0);
+  wrapKey.fill(0);
+  key.fill(0);
+  return { userId: recipientUserId, keyVersion: recipientKeyVersion, ephemeralPublicKey, nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
+}
+
+async function openAccountV2Envelope({ conversationId, epoch, envelope } = {}) {
+  const account = accountV2RequireUnlocked();
+  const id = requiredAccountV2String(conversationId, "conversationId", 256);
+  const ephemeralPublicKey = requiredBase64Bytes(envelope?.ephemeralPublicKey, "envelope.ephemeralPublicKey", 32);
+  const nonce = requiredBase64Bytes(envelope?.nonce, "envelope.nonce", 12);
+  const ciphertext = requiredBase64Bytes(envelope?.ciphertext, "envelope.ciphertext");
+  const shared = (await getSodium()).crypto_scalarmult(account.encryptionPrivateKey, ephemeralPublicKey);
+  const keyVersion = requiredAccountV2String(envelope.keyVersion || "1", "envelope.keyVersion", 64);
+  const userId = requiredAccountV2String(envelope.userId, "envelope.userId", 256);
+  if (userId !== account.userId || keyVersion !== account.keyVersion) {
+    throw accountV2Error("ACCOUNT_V2_ENVELOPE_INVALID", "The epoch envelope is addressed to a different account key version.");
+  }
+  const aad = accountV2EnvelopeAad({ conversationId: id, epoch, userId, keyVersion, ephemeralPublicKey: envelope.ephemeralPublicKey });
+  const wrapKey = await accountV2Hkdf(shared, utf8(`expassway-chat-account-v2-envelope-key|${id}|${validEpoch(epoch)}`), ACCOUNT_V2_KDF_VERSION);
+  const key = await accountV2AesGcmDecrypt(wrapKey, nonce, ciphertext, aad, "ACCOUNT_V2_ENVELOPE_INVALID");
+  shared.fill(0);
+  wrapKey.fill(0);
+  if (key.byteLength !== 32) throw accountV2Error("ACCOUNT_V2_ENVELOPE_INVALID", "The epoch content key has an invalid length.");
+  account.epochKeys.set(accountV2EpochKey(id, epoch), key);
+  return { conversationId: id, epoch: validEpoch(epoch), opened: true };
+}
+
+async function getAccountV2State() {
+  if (!state.accountV2) return { unlocked: false };
+  return { ...accountV2PublicBundle(state.accountV2), unlocked: true };
+}
+
+async function createAccountV2Epoch({ conversationId, epoch, recipients } = {}) {
+  const account = accountV2RequireUnlocked();
+  const id = requiredAccountV2String(conversationId, "conversationId", 256);
+  const number = validEpoch(epoch);
+  if (!Array.isArray(recipients) || !recipients.length || recipients.length > 50) {
+    throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "Epoch recipients are invalid.");
+  }
+  const contentKey = sodiumRandomBytes(await getSodium(), 32);
+  const uniqueRecipients = new Set();
+  const envelopes = [];
+  for (const recipient of recipients) {
+    const userId = requiredAccountV2String(recipient?.userId, "recipient.userId", 256);
+    if (uniqueRecipients.has(userId)) throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "Epoch recipients must be unique.");
+    uniqueRecipients.add(userId);
+    envelopes.push(await createAccountV2Envelope({
+      conversationId: id,
+      epoch: number,
+      recipient,
+      contentKey: bytesToBase64Url(contentKey),
+    }));
+  }
+  account.epochKeys.set(accountV2EpochKey(id, number), contentKey);
+  return { conversationId: id, epoch: number, recipients: envelopes };
+}
+
+function accountV2SignedMessage(message) {
+  return {
+    version: ACCOUNT_V2_PROTOCOL_VERSION,
+    conversationId: requiredAccountV2String(message?.conversationId, "conversationId", 256),
+    clientMessageId: requiredAccountV2String(message?.clientMessageId, "clientMessageId", 256),
+    epoch: validEpoch(message?.epoch),
+    senderUserId: requiredAccountV2String(message?.senderUserId, "senderUserId", 256),
+    senderKeyId: requiredAccountV2String(message?.senderKeyId, "senderKeyId", 64),
+    nonce: requiredAccountV2String(message?.nonce, "nonce", 256),
+    ciphertext: requiredAccountV2String(message?.ciphertext, "ciphertext", 1024 * 1024),
+    attachmentRefs: Array.isArray(message?.attachmentRefs) ? message.attachmentRefs : [],
+  };
+}
+
+async function encryptAccountV2MessageFromVault({ conversationId, clientMessageId, epoch, plaintext, attachmentRefs = [] } = {}) {
+  const account = accountV2RequireUnlocked();
+  const id = requiredAccountV2String(conversationId, "conversationId", 256);
+  const messageId = requiredAccountV2String(clientMessageId, "clientMessageId", 256);
+  const number = validEpoch(epoch);
+  const contentKey = account.epochKeys.get(accountV2EpochKey(id, number));
+  if (!contentKey) throw accountV2Error("EPOCH_KEY_UNAVAILABLE", "The conversation epoch key is not available in this unlocked vault.");
+  const value = typeof plaintext === "string" ? plaintext : JSON.stringify(plaintext);
+  const encrypted = await accountV2AesGcmEncrypt(
+    contentKey,
+    utf8(value),
+    accountV2MessageAad({ conversationId: id, clientMessageId: messageId, epoch: number, senderUserId: account.userId }),
+  );
+  const unsigned = accountV2SignedMessage({
+    conversationId: id,
+    clientMessageId: messageId,
+    epoch: number,
+    senderUserId: account.userId,
+    senderKeyId: account.keyVersion,
+    nonce: bytesToBase64Url(encrypted.nonce),
+    ciphertext: bytesToBase64Url(encrypted.ciphertext),
+    attachmentRefs,
+  });
+  const signature = (await getSodium()).crypto_sign_detached(utf8(canonicalJson(unsigned)), account.signingPrivateKey);
+  return { ...unsigned, signature: bytesToBase64Url(signature) };
+}
+
+async function decryptAccountV2MessageFromVault({ message, signingPublicKey } = {}) {
+  const account = accountV2RequireUnlocked();
+  const signed = accountV2SignedMessage(message);
+  const signature = requiredBase64Bytes(message?.signature, "signature", 64);
+  const senderKey = requiredBase64Bytes(signingPublicKey, "signingPublicKey", 32);
+  const valid = (await getSodium()).crypto_sign_verify_detached(signature, utf8(canonicalJson(signed)), senderKey);
+  if (!valid) throw accountV2Error("SIGNATURE_INVALID", "The account-v2 message signature is invalid.");
+  const contentKey = account.epochKeys.get(accountV2EpochKey(signed.conversationId, signed.epoch));
+  if (!contentKey) throw accountV2Error("EPOCH_KEY_UNAVAILABLE", "The conversation epoch key is not available in this unlocked vault.");
+  const plaintext = await accountV2AesGcmDecrypt(
+    contentKey,
+    requiredBase64Bytes(signed.nonce, "nonce", 12),
+    requiredBase64Bytes(signed.ciphertext, "ciphertext"),
+    accountV2MessageAad(signed),
+  );
+  return { plaintext: new TextDecoder().decode(plaintext), verified: true };
+}
+
+async function accountV2SignMessage(payload) {
+  const account = accountV2RequireUnlocked();
+  const input = accountV2SignedMessage({ ...payload, senderUserId: account.userId, senderKeyId: payload.senderKeyId || account.keyVersion });
+  const signature = (await getSodium()).crypto_sign_detached(utf8(canonicalJson(input)), account.signingPrivateKey);
+  return { ...input, signature: bytesToBase64Url(signature) };
+}
+
+async function accountV2VerifyMessage({ message, signingPublicKey } = {}) {
+  const input = accountV2SignedMessage(message);
+  const valid = (await getSodium()).crypto_sign_verify_detached(requiredBase64Bytes(message?.signature, "signature", 64), utf8(canonicalJson(input)), requiredBase64Bytes(signingPublicKey, "signingPublicKey", 32));
+  return { valid };
+}
+
+async function accountV2SignControl({ conversationId, expectedEpoch, action, payload } = {}) {
+  const account = accountV2RequireUnlocked();
+  const value = {
+    version: ACCOUNT_V2_PROTOCOL_VERSION,
+    conversationId: requiredAccountV2String(conversationId, "conversationId", 256),
+    expectedEpoch: validControlEpoch(expectedEpoch),
+    action: requiredAccountV2String(action, "action", 128),
+    payload: payload && typeof payload === "object" ? payload : {},
+    senderUserId: account.userId,
+    senderKeyId: account.keyVersion,
+  };
+  const signature = (await getSodium()).crypto_sign_detached(utf8(canonicalJson(value)), account.signingPrivateKey);
+  return { ...value, signature: bytesToBase64Url(signature) };
+}
+
+async function encryptAccountV2Metadata({ conversationId, epoch, version, plaintext } = {}) {
+  const account = accountV2RequireUnlocked();
+  const id = requiredAccountV2String(conversationId, "conversationId", 256);
+  const number = validEpoch(epoch);
+  const metadataVersion = requiredAccountV2String(version, "version", 128);
+  const contentKey = account.epochKeys.get(accountV2EpochKey(id, number));
+  if (!contentKey) throw accountV2Error("EPOCH_KEY_UNAVAILABLE", "The conversation epoch key is not available in this unlocked vault.");
+  const value = typeof plaintext === "string" ? plaintext : JSON.stringify(plaintext);
+  const encrypted = await accountV2AesGcmEncrypt(
+    contentKey,
+    utf8(value),
+    accountV2MetadataAad({ conversationId: id, epoch: number, version: metadataVersion }),
+  );
+  return { epoch: number, version: metadataVersion, nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
+}
+
+async function decryptAccountV2Metadata({ conversationId, epoch, version, nonce, ciphertext } = {}) {
+  const account = accountV2RequireUnlocked();
+  const id = requiredAccountV2String(conversationId, "conversationId", 256);
+  const number = validEpoch(epoch);
+  const metadataVersion = requiredAccountV2String(version, "version", 128);
+  const contentKey = account.epochKeys.get(accountV2EpochKey(id, number));
+  if (!contentKey) throw accountV2Error("EPOCH_KEY_UNAVAILABLE", "The conversation epoch key is not available in this unlocked vault.");
+  const plaintext = await accountV2AesGcmDecrypt(
+    contentKey,
+    requiredBase64Bytes(nonce, "nonce", 12),
+    requiredBase64Bytes(ciphertext, "ciphertext"),
+    accountV2MetadataAad({ conversationId: id, epoch: number, version: metadataVersion }),
+  );
+  return { plaintext: new TextDecoder().decode(plaintext) };
+}
+
 self.onmessage = async (event) => {
   const { id, action, payload = {} } = event.data || {};
   try {
@@ -776,6 +1212,20 @@ self.onmessage = async (event) => {
     else if (action === "decryptAttachment") result = await decryptAttachment(payload);
     else if (action === "storeLocalPlaintext" || action === "storeSentPlaintext") result = await storeLocalPlaintext(payload);
     else if (action === "getLocalPlaintext" || action === "getSentPlaintext") result = await getLocalPlaintext(payload);
+    else if (action === "generateAccountV2Vault") result = await generateAccountV2Vault(payload);
+    else if (action === "unlockAccountV2Vault") result = await unlockAccountV2Vault(payload);
+    else if (action === "lockAccountV2Vault") result = await lockAccountV2Vault(payload);
+    else if (action === "getAccountV2State") result = await getAccountV2State();
+    else if (action === "createAccountV2Epoch") result = await createAccountV2Epoch(payload);
+    else if (action === "createAccountV2Envelope") result = await createAccountV2Envelope(payload);
+    else if (action === "openAccountV2Envelope") result = await openAccountV2Envelope(payload);
+    else if (action === "encryptAccountV2Message") result = await encryptAccountV2MessageFromVault(payload);
+    else if (action === "decryptAccountV2Message") result = await decryptAccountV2MessageFromVault(payload);
+    else if (action === "signAccountV2Message") result = await accountV2SignMessage(payload);
+    else if (action === "signAccountV2Control") result = await accountV2SignControl(payload);
+    else if (action === "verifyAccountV2Message") result = await accountV2VerifyMessage(payload);
+    else if (action === "encryptAccountV2Metadata") result = await encryptAccountV2Metadata(payload);
+    else if (action === "decryptAccountV2Metadata") result = await decryptAccountV2Metadata(payload);
     else throw new Error(`Unknown chat crypto action: ${action}`);
     self.postMessage({ id, ok: true, result });
   } catch (error) {

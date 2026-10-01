@@ -29,6 +29,11 @@
     pollTimer: null,
     syncInFlight: null,
     syncGeneration: 0,
+    accountV2: null,
+    accountEpochs: new Map(),
+    accountMode: false,
+    accountPasskeyReady: false,
+    accountContactStatus: new Map(),
   };
   const $ = (selector) => document.querySelector(selector);
   const status = $("#chatStatus");
@@ -40,21 +45,11 @@
   }
 
   function formatActionError(error) {
-    const message = error?.message || String(error || "Unknown error");
+    const message = error?.message || (typeof error === "string" ? error : "");
     const details = [];
     if (error?.code && error.code !== "HTTP_ERROR") details.push(error.code);
     if (error?.status) details.push(`HTTP ${error.status}`);
-    return `${message}${details.length ? ` (${details.join(", ")})` : ""}`;
-  }
-
-  async function shortIdentityFingerprint(identityKey) {
-    const normalized = String(identityKey || "").replace(/-/g, "+").replace(/_/g, "/");
-    if (!normalized) return "?";
-    const binary = atob(normalized + "=".repeat((4 - normalized.length % 4) % 4));
-    const digest = await crypto.subtle.digest("SHA-256", Uint8Array.from(binary, (character) => character.charCodeAt(0)));
-    let encoded = "";
-    for (const byte of new Uint8Array(digest)) encoded += String.fromCharCode(byte);
-    return btoa(encoded).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "").slice(0, 12);
+    return `${message || (details.length ? "The operation failed." : "No error details were returned.")}${details.length ? ` (${details.join(", ")})` : ""}`;
   }
 
   function currentToken() {
@@ -89,10 +84,15 @@
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260812-1", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260927-1", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
-      const error = new Error(event.message || "The chat encryption worker stopped unexpectedly.");
-      for (const pending of state.pendingCrypto.values()) pending.reject(error);
+      const detail = String(event?.message || "").trim();
+      for (const pending of state.pendingCrypto.values()) {
+        const error = new Error(detail || `The chat encryption worker stopped during ${pending.action}.`);
+        error.code = "CRYPTO_WORKER_UNAVAILABLE";
+        error.action = pending.action;
+        pending.reject(error);
+      }
       state.pendingCrypto.clear();
       state.cryptoWorker = null;
     };
@@ -103,8 +103,9 @@
       state.pendingCrypto.delete(id);
       if (ok) pending.resolve(result);
       else {
-        const failure = new Error(error || "Chat crypto operation failed.");
+        const failure = new Error(error || `Chat crypto operation failed during ${pending.action}.`);
         failure.code = code || "CRYPTO_ERROR";
+        failure.action = pending.action;
         pending.reject(failure);
       }
     };
@@ -115,9 +116,232 @@
   function cryptoCall(action, payload) {
     const id = crypto.randomUUID();
     return new Promise((resolve, reject) => {
-      state.pendingCrypto.set(id, { resolve, reject });
-      createCryptoWorker().postMessage({ id, action, payload });
+      state.pendingCrypto.set(id, { resolve, reject, action });
+      try {
+        createCryptoWorker().postMessage({ id, action, payload });
+      } catch (error) {
+        state.pendingCrypto.delete(id);
+        const failure = new Error(error?.message || `Could not start chat crypto operation ${action}.`);
+        failure.code = error?.code || "CRYPTO_WORKER_UNAVAILABLE";
+        failure.action = action;
+        reject(failure);
+      }
     });
+  }
+
+  function base64UrlToBytes(value) {
+    const normalized = String(value || "").replace(/-/g, "+").replace(/_/g, "/");
+    const binary = atob(normalized + "=".repeat((4 - normalized.length % 4) % 4));
+    return Uint8Array.from(binary, (character) => character.charCodeAt(0));
+  }
+
+  function bytesToBase64Url(value) {
+    const bytes = value instanceof Uint8Array ? value : new Uint8Array(value);
+    let binary = "";
+    for (const byte of bytes) binary += String.fromCharCode(byte);
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+  }
+
+  function publicKeyOptions(raw) {
+    const source = raw?.publicKey || raw || {};
+    const options = { ...source };
+    options.challenge = base64UrlToBytes(source.challenge);
+    if (source.user?.id) options.user = { ...source.user, id: base64UrlToBytes(source.user.id) };
+    for (const field of ["allowCredentials", "excludeCredentials"]) {
+      if (Array.isArray(source[field])) options[field] = source[field].map((credential) => ({
+        ...credential,
+        id: base64UrlToBytes(credential.id),
+      }));
+    }
+    if (source.extensions?.prf?.eval?.first) {
+      options.extensions = { ...source.extensions, prf: { ...source.extensions.prf, eval: {
+        ...source.extensions.prf.eval,
+        first: base64UrlToBytes(source.extensions.prf.eval.first),
+      } } };
+    }
+    return options;
+  }
+
+  function serialiseCredential(credential) {
+    const response = credential.response;
+    const extensionResults = credential.getClientExtensionResults?.() || {};
+    const prf = extensionResults.prf ? { enabled: Boolean(extensionResults.prf.enabled || extensionResults.prf.results?.first) } : undefined;
+    const output = {
+      id: credential.id,
+      rawId: bytesToBase64Url(credential.rawId),
+      type: credential.type,
+      response: {
+        clientDataJSON: bytesToBase64Url(response.clientDataJSON),
+      },
+      clientExtensionResults: prf ? { prf } : {},
+    };
+    if (response.attestationObject) {
+      output.response.attestationObject = bytesToBase64Url(response.attestationObject);
+      output.response.transports = response.getTransports?.() || [];
+    }
+    if (response.authenticatorData) {
+      output.response.authenticatorData = bytesToBase64Url(response.authenticatorData);
+      output.response.signature = bytesToBase64Url(response.signature);
+      if (response.userHandle) output.response.userHandle = bytesToBase64Url(response.userHandle);
+    }
+    return output;
+  }
+
+  function passkeyPrfOutput(credential) {
+    const result = credential.getClientExtensionResults?.()?.prf?.results?.first;
+    if (!result) {
+      const error = new Error("This Passkey cannot produce the required PRF output. Choose a Passkey with PRF support.");
+      error.code = "PASSKEY_PRF_UNAVAILABLE";
+      throw error;
+    }
+    return bytesToBase64Url(result);
+  }
+
+  function supportsAccountPasskey() {
+    return Boolean(window.PublicKeyCredential && navigator.credentials?.create && navigator.credentials?.get);
+  }
+
+  function isExistingPasskeyError(error) {
+    const name = String(error?.name || "");
+    const message = String(error?.message || error || "");
+    return name === "InvalidStateError" || /not,? or is no longer,? usable/i.test(message);
+  }
+
+  function passkeyActionError(error, code, action) {
+    if (error?.code) return error;
+    const detail = String(error?.message || error || "");
+    const wrapped = new Error(detail ? `${action}: ${detail}` : action);
+    wrapped.name = error?.name || "Error";
+    wrapped.code = code;
+    wrapped.cause = error;
+    return wrapped;
+  }
+
+  async function accountPasskeyAssertion() {
+    const response = await window.ALevelApi.getChatPasskeyAuthenticationOptions();
+    const publicKey = publicKeyOptions(response);
+    let credential;
+    try {
+      credential = await navigator.credentials.get({ publicKey });
+    } catch (error) {
+      throw passkeyActionError(error, "PASSKEY_ASSERTION_FAILED", "Could not use the secure chat Passkey");
+    }
+    if (!credential) {
+      const error = new Error("The Passkey prompt returned no credential.");
+      error.code = "PASSKEY_ASSERTION_FAILED";
+      throw error;
+    }
+    const prfOutput = passkeyPrfOutput(credential);
+    const verified = await window.ALevelApi.verifyChatPasskey("authenticate", {
+      challenge: response.publicKey?.challenge || response.challenge,
+      credential: serialiseCredential(credential),
+    });
+    return { prfOutput, proof: verified?.proof || verified?.writeProof || "" };
+  }
+
+  async function unlockAccountSync() {
+    const vault = await window.ALevelApi.getChatAccountVault();
+    if (!vault) return setupAccountSync();
+    setStatus("Unlocking secure chat with your Passkey...");
+    const assertion = await accountPasskeyAssertion();
+    const unlocked = await cryptoCall("unlockAccountV2Vault", {
+      userId: state.profile.id,
+      keyVersion: vault.keyVersion,
+      nonce: vault.nonce,
+      ciphertext: vault.ciphertext,
+      prfOutput: assertion.prfOutput,
+    });
+    state.accountV2 = { ...unlocked, proof: assertion.proof };
+    $("#chatSetupPanel").hidden = true;
+    $("#chatApp").hidden = false;
+    setStatus("");
+    await refreshData();
+  }
+
+  async function ensureAccountState() {
+    let bundle;
+    try { bundle = await window.ALevelApi.getChatAccountKeyBundle(); }
+    catch (error) {
+      if (error?.status === 503 || error?.code === "CHAT_ACCOUNT_V2_DISABLED") return false;
+      throw error;
+    }
+    state.accountMode = true;
+    state.accountPasskeyReady = Boolean(bundle?.passkeyReady);
+    $("#legacyDevicePanel").hidden = true;
+    if (!supportsAccountPasskey()) {
+      $("#chatSetupPanel").hidden = true;
+      $("#chatUnsupportedPanel").hidden = false;
+      return true;
+    }
+    const vault = bundle?.enabled ? await window.ALevelApi.getChatAccountVault() : null;
+    $("#chatSetupPanel").hidden = false;
+    $("#enableAccountSync").hidden = Boolean(vault);
+    $("#unlockAccountSync").hidden = !vault;
+    if (!vault) $("#chatApp").hidden = true;
+    return true;
+  }
+
+  async function setupAccountSync() {
+    if (!supportsAccountPasskey()) {
+      $("#chatSetupPanel").hidden = true;
+      $("#chatUnsupportedPanel").hidden = false;
+      return;
+    }
+    const enable = $("#enableAccountSync");
+    if (enable) enable.disabled = true;
+    setStatus(state.accountPasskeyReady
+      ? "Unlocking the existing Passkey to finish secure chat setup..."
+      : "Creating a Passkey for secure chat...");
+    try {
+      if (!state.accountPasskeyReady) {
+        const registration = await window.ALevelApi.getChatPasskeyRegistrationOptions();
+        let credential = null;
+        try {
+          credential = await navigator.credentials.create({ publicKey: publicKeyOptions(registration) });
+        } catch (error) {
+          if (!isExistingPasskeyError(error)) {
+            throw passkeyActionError(error, "PASSKEY_REGISTRATION_FAILED", "Could not create the secure chat Passkey");
+          }
+          state.accountPasskeyReady = true;
+          setStatus("This device already has a secure chat Passkey. Unlocking it to finish setup...");
+        }
+        if (credential) {
+          const registrationChallenge = registration.publicKey?.challenge || registration.challenge;
+          if (!registrationChallenge) throw new Error("The Passkey registration challenge was missing. Refresh and try again.");
+          await window.ALevelApi.verifyChatPasskey("register", {
+            challenge: registrationChallenge,
+            credential: serialiseCredential(credential),
+          });
+          state.accountPasskeyReady = true;
+        }
+      } else {
+        setStatus("This device already has a secure chat Passkey. Unlocking it to finish setup...");
+      }
+      const assertion = await accountPasskeyAssertion();
+      const generated = await cryptoCall("generateAccountV2Vault", {
+        userId: state.profile.id,
+        prfOutput: assertion.prfOutput,
+      });
+      const writeInput = { proof: assertion.proof };
+      await window.ALevelApi.initializeChatAccount({
+        ...writeInput,
+        keyVersion: generated.keyVersion,
+        encryptionPublicKey: generated.encryptionPublicKey,
+        signingPublicKey: generated.signingPublicKey,
+        fingerprint: generated.fingerprint,
+        kdfVersion: generated.kdfVersion,
+        nonce: generated.nonce,
+        ciphertext: generated.ciphertext,
+      });
+      state.accountV2 = { ...generated, unlocked: true, proof: assertion.proof };
+      $("#chatSetupPanel").hidden = true;
+      $("#chatApp").hidden = false;
+      setStatus("Secure chat is ready.");
+      await refreshData();
+    } catch (error) {
+      setStatus(formatActionError(error), true);
+      if (enable) enable.disabled = false;
+    }
   }
 
   function extractInviteToken(value) {
@@ -143,9 +367,9 @@
     invites.filter((invite) => invite.active).slice(0, 5).forEach((invite) => {
       const item = document.createElement("div");
       item.className = "chat-invite-item";
-      item.innerHTML = `<div><code></code><small></small></div><span></span>`;
-      item.querySelector("code").textContent = invite.id;
-      item.querySelector("small").textContent = t("chatInviteIdOnly", "Internal ID only");
+      item.innerHTML = `<div><strong></strong><small></small></div><span></span>`;
+      item.querySelector("strong").textContent = t("chatInviteActive", "Active invite");
+      item.querySelector("small").textContent = t("chatInviteShareHint", "Share the invite link shown above; it works once.");
       item.querySelector("span").textContent = new Date(invite.expiresAt).toLocaleDateString();
       host.appendChild(item);
     });
@@ -155,12 +379,11 @@
     const host = $("#conversationList");
     if (!host) return;
     host.replaceChildren();
-    if (!state.conversations.length) {
+    if (!state.conversations.length && !state.accountMode) {
       const empty = document.createElement("p");
       empty.className = "chat-muted";
       empty.textContent = t("chatNoContacts", "No friends yet.");
       host.appendChild(empty);
-      return;
     }
     state.conversations.forEach((conversation) => {
       const button = document.createElement("button");
@@ -176,13 +399,40 @@
         });
       } else {
         button.querySelector("strong").textContent = conversation.peer?.alias || t("chatNoConversation", "Conversation");
-        button.querySelector("small").textContent = conversation.peer?.identityFingerprint
-          ? conversation.peer.identityFingerprint.slice(0, 12)
-          : "";
+        button.querySelector("small").textContent = state.accountMode
+          ? "End-to-end encrypted"
+          : "Encrypted chat";
       }
       button.addEventListener("click", () => selectConversation(conversation));
       host.appendChild(button);
     });
+    if (state.accountMode) {
+      const existingPeers = new Set(state.conversations.flatMap((conversation) => conversation.kind === "direct" && conversation.peer?.contactId ? [conversation.peer.contactId] : []));
+      const available = state.contacts.filter((contact) => !existingPeers.has(contact.id));
+      if (available.length) {
+        const heading = document.createElement("p");
+        heading.className = "chat-muted";
+        heading.textContent = "Start a secure chat";
+        host.appendChild(heading);
+        available.forEach((contact) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "chat-conversation-item";
+          button.textContent = contact.profile?.alias || "Paired contact";
+          button.addEventListener("click", async () => {
+            try {
+              setStatus("Creating secure conversation...");
+              const conversation = await createAccountConversation("direct", [contact.id]);
+              state.conversations = [conversation, ...state.conversations];
+              renderContacts();
+              await selectConversation(conversation);
+              setStatus("");
+            } catch (error) { setStatus(formatActionError(error), true); }
+          });
+          host.appendChild(button);
+        });
+      }
+    }
     renderGroupContactPicker();
   }
 
@@ -203,11 +453,64 @@
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.value = contact.id;
+      const accountStatus = state.accountContactStatus.get(contact.id);
+      checkbox.disabled = state.accountMode && accountStatus !== true;
       const text = document.createElement("span");
       text.textContent = contact.profile?.alias || t("chatNoConversation", "Conversation");
       label.append(checkbox, text);
+      if (state.accountMode && accountStatus !== true) {
+        const unavailable = document.createElement("small");
+        unavailable.textContent = accountStatus === false
+          ? t("chatContactSecureRequired", "Needs secure chat enabled")
+          : t("chatContactSecureChecking", "Checking secure chat...");
+        label.appendChild(unavailable);
+      }
       host.appendChild(label);
+      if (state.accountMode && !state.accountContactStatus.has(contact.id)) {
+        state.accountContactStatus.set(contact.id, null);
+        window.ALevelApi.getChatContactAccountBundle(contact.id)
+          .then((bundle) => {
+            state.accountContactStatus.set(contact.id, Boolean(bundle?.enabled && bundle?.accountKey));
+            renderGroupContactPicker();
+          })
+          .catch(() => {
+            state.accountContactStatus.set(contact.id, false);
+            renderGroupContactPicker();
+          });
+      }
     });
+  }
+
+  function renderGroupManagement(conversation) {
+    const host = $("#groupMemberList");
+    if (!host) return;
+    host.replaceChildren();
+    for (const member of conversation.group?.members || []) {
+      const row = document.createElement("div");
+      row.className = "chat-device-item";
+      const details = document.createElement("div");
+      details.className = "chat-device-item__details";
+      const name = document.createElement("strong");
+      name.textContent = member.isSelf ? "You" : (member.alias || "Paired contact");
+      const role = document.createElement("small");
+      role.textContent = member.role || "member";
+      details.append(name, role);
+      row.appendChild(details);
+      host.appendChild(row);
+    }
+    const self = conversation.group?.members?.find((member) => member.isSelf);
+    const actions = $("#groupMemberActions");
+    if (actions) {
+      actions.hidden = false;
+      $("#dissolveGroup").hidden = self?.role !== "owner";
+      $("#inviteGroupMember").hidden = !["owner", "admin"].includes(self?.role);
+      $("#groupInviteContact").replaceChildren(...state.contacts.map((contact) => {
+        const option = document.createElement("option");
+        option.value = contact.id;
+        option.textContent = contact.profile?.alias || "Paired contact";
+        return option;
+      }));
+    }
   }
 
   function setGroupFormVisible(visible) {
@@ -221,7 +524,6 @@
     const host = $("#deviceList");
     if (!host) return;
     host.replaceChildren();
-    state.device && ($("#deviceFingerprint").textContent = t("chatDeviceReady", "Device ready. Safety number: {fingerprint}", { fingerprint: state.device.identityFingerprint }));
     const devices = state.devices.length ? state.devices : (state.device ? [state.device] : []);
     devices.forEach((device) => {
       const item = document.createElement("div");
@@ -338,7 +640,7 @@
     host.replaceChildren();
     state.messages.forEach((message) => {
       const item = document.createElement("article");
-      item.className = `chat-message${message.senderDeviceId === state.device?.id ? " is-mine" : ""}`;
+      item.className = `chat-message${message.senderUserId === state.profile?.id || message.senderDeviceId === state.device?.id ? " is-mine" : ""}`;
       const decryptCode = message.decryptCode ? ` (${message.decryptCode})` : "";
       const text = message.deleted
         ? "[deleted]"
@@ -347,7 +649,7 @@
       if (state.activeConversation?.kind === "group" && message.senderAlias) {
         const sender = item.querySelector(".chat-message__sender");
         sender.hidden = false;
-        sender.textContent = message.senderDeviceId === state.device?.id
+        sender.textContent = message.senderUserId === state.profile?.id || message.senderDeviceId === state.device?.id
           ? t("chatYou", "You")
           : message.senderAlias;
       }
@@ -424,6 +726,135 @@
     return bundle?.devices || [];
   }
 
+  async function getAccountRecipients(conversation) {
+    const bundle = await window.ALevelApi.getChatConversationAccountBundle(conversation.id);
+    const recipients = (bundle?.members || []).filter((member) => member.accountKey?.status === "active" || member.accountKey);
+    if (!recipients.length) {
+      const error = new Error("Every member must enable secure chat before this conversation can use account encryption.");
+      error.code = "ACCOUNT_KEYS_REQUIRED";
+      throw error;
+    }
+    return recipients.map((member) => ({
+      userId: member.userId,
+      keyVersion: member.accountKey.keyVersion,
+      encryptionPublicKey: member.accountKey.encryptionPublicKey,
+    }));
+  }
+
+  async function signAccountControl(conversationId, expectedEpoch, action, payload) {
+    return cryptoCall("signAccountV2Control", { conversationId, expectedEpoch, action, payload });
+  }
+
+  async function createAccountConversation(kind, contactIds) {
+    const conversationId = crypto.randomUUID();
+    const userIds = [state.profile.id];
+    const recipients = [];
+    for (const contactId of contactIds) {
+      const bundle = await window.ALevelApi.getChatContactAccountBundle(contactId);
+      if (!bundle?.enabled || !bundle?.accountKey) {
+        const error = new Error("Every selected contact must enable secure chat first.");
+        error.code = "ACCOUNT_NOT_ENABLED";
+        throw error;
+      }
+      recipients.push({ userId: bundle.accountKey.userId, keyVersion: bundle.accountKey.keyVersion, encryptionPublicKey: bundle.accountKey.encryptionPublicKey });
+      userIds.push(bundle.accountKey.userId);
+    }
+    const self = state.accountV2;
+    recipients.push({ userId: state.profile.id, keyVersion: self.keyVersion, encryptionPublicKey: self.encryptionPublicKey });
+    const epoch = await cryptoCall("createAccountV2Epoch", { conversationId, epoch: 1, recipients });
+    const payload = { kind, contactIds, recipients: epoch.recipients };
+    if (kind === "group") {
+      payload.metadata = await cryptoCall("encryptAccountV2Metadata", {
+        conversationId,
+        epoch: 1,
+        version: "1",
+        plaintext: { name: "Encrypted group", avatarRef: null },
+      });
+      payload.metadata.version = 1;
+    }
+    const signed = await signAccountControl(conversationId, 0, "create", payload);
+    return window.ALevelApi.createAccountChatConversation({ ...signed, version: "account-v2", conversationId });
+  }
+
+  async function rotateGroupWithMembers(conversation, action, contactIds = []) {
+    const expectedEpoch = await currentAccountEpoch(conversation);
+    const recipients = await getAccountRecipients(conversation);
+    for (const contactId of contactIds) {
+      const bundle = await window.ALevelApi.getChatContactAccountBundle(contactId);
+      if (!bundle?.accountKey) throw new Error("The selected contact must enable secure chat first.");
+      recipients.push({ userId: bundle.accountKey.userId, keyVersion: bundle.accountKey.keyVersion, encryptionPublicKey: bundle.accountKey.encryptionPublicKey });
+    }
+    const unique = [...new Map(recipients.map((recipient) => [recipient.userId, recipient])).values()];
+    const nextEpoch = expectedEpoch + 1;
+    const epoch = await cryptoCall("createAccountV2Epoch", { conversationId: conversation.id, epoch: nextEpoch, recipients: unique });
+    const metadataVersion = String(Number(conversation.metadata?.version || 1) + 1);
+    const metadata = await cryptoCall("encryptAccountV2Metadata", {
+      conversationId: conversation.id,
+      epoch: nextEpoch,
+      version: metadataVersion,
+      plaintext: { name: "Encrypted group", avatarRef: null },
+    });
+    metadata.version = Number(metadataVersion);
+    const signed = await signAccountControl(conversation.id, expectedEpoch, action, {
+      ...(contactIds.length ? { contactIds } : {}),
+      recipients: epoch.recipients,
+      metadata,
+    });
+    return window.ALevelApi.updateChatGroupMembers(conversation.id, signed);
+  }
+
+  async function openAccountEpochs(conversation) {
+    if (!state.accountMode || !state.accountV2?.unlocked) return [];
+    const payload = await window.ALevelApi.getChatConversationEpochs(conversation.id);
+    const epochs = Array.isArray(payload?.epochs) ? payload.epochs : Array.isArray(payload) ? payload : [];
+    for (const item of epochs) {
+      await cryptoCall("openAccountV2Envelope", {
+        conversationId: conversation.id,
+        epoch: item.epoch,
+        envelope: item.envelope,
+      });
+    }
+    state.accountEpochs.set(conversation.id, epochs);
+    return epochs;
+  }
+
+  async function currentAccountEpoch(conversation) {
+    const epochs = await openAccountEpochs(conversation);
+    const current = [...epochs].sort((left, right) => Number(right.epoch) - Number(left.epoch))[0];
+    if (!current) {
+      const recipients = await getAccountRecipients(conversation);
+      const created = await cryptoCall("createAccountV2Epoch", { conversationId: conversation.id, epoch: 1, recipients });
+      await window.ALevelApi.createChatConversationEpoch(conversation.id, created);
+      state.accountEpochs.set(conversation.id, [{ epoch: 1, envelope: created.recipients.find((item) => item.userId === state.profile.id) }]);
+      return 1;
+    }
+    return Number(current.epoch);
+  }
+
+  async function sendAccountV2Payload(conversation, plaintext, attachmentRefs = []) {
+    const epoch = await currentAccountEpoch(conversation);
+    const clientMessageId = crypto.randomUUID();
+    const encrypted = await cryptoCall("encryptAccountV2Message", {
+      conversationId: conversation.id,
+      clientMessageId,
+      epoch,
+      plaintext,
+      attachmentRefs,
+    });
+    await window.ALevelApi.sendAccountV2Message({
+      conversationId: conversation.id,
+      clientMessageId,
+      contentEpoch: encrypted.epoch,
+      nonce: encrypted.nonce,
+      ciphertext: encrypted.ciphertext,
+      senderKeyId: encrypted.senderKeyId,
+      signature: encrypted.signature,
+      attachmentRefs: encrypted.attachmentRefs,
+      sizeBucket: "small",
+    });
+    return clientMessageId;
+  }
+
   async function getEncryptionRecipients(conversation) {
     const peerDevices = await getPeerDevices(conversation);
     if (!peerDevices.length) {
@@ -449,7 +880,9 @@
   }
 
   async function refreshRecipient(device, conversation) {
-    if (device.deviceId === state.device?.id) {
+    const isOwnDevice = state.ownBundle?.devices?.some((item) => item.deviceId === device.deviceId)
+      || device.deviceId === state.device?.id;
+    if (isOwnDevice) {
       state.ownBundle = null;
       const ownBundle = await window.ALevelApi.getChatOwnDeviceBundle(state.device.id);
       state.ownBundle = ownBundle;
@@ -519,6 +952,28 @@
         result.push({ ...message, deleted: true });
         continue;
       }
+      if (message.protocolVersion === "account-v2") {
+        try {
+          const decrypted = await cryptoCall("decryptAccountV2Message", {
+            message: {
+              conversationId: message.conversationId,
+              clientMessageId: message.clientMessageId,
+              epoch: message.contentEpoch,
+              senderUserId: message.senderUserId,
+              senderKeyId: message.senderKeyId || message.contentKeyVersion || "1",
+              nonce: message.nonce,
+              ciphertext: message.ciphertext,
+              attachmentRefs: message.attachmentRefs || [],
+              signature: message.signature,
+            },
+            signingPublicKey: message.senderSigningPublicKey,
+          });
+          result.push({ ...message, plaintext: decrypted.plaintext });
+        } catch (error) {
+          result.push({ ...message, plaintext: null, decryptCode: error?.code || "DECRYPT_FAILED" });
+        }
+        continue;
+      }
       try {
         const cachedPlaintext = await getCachedLocalPlaintext(message.clientMessageId);
         if (cachedPlaintext != null) {
@@ -552,11 +1007,32 @@
   }
 
   async function syncConversation() {
-    if (!state.activeConversation || !state.device) return;
+    if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
     if (state.syncInFlight) return state.syncInFlight;
     const generation = state.syncGeneration;
     state.syncInFlight = (async () => {
       const conversationId = state.activeConversation.id;
+      if (state.accountMode) {
+        const payload = await window.ALevelApi.syncChatEvents(conversationId, state.cursor);
+        if (state.syncGeneration !== generation || state.activeConversation?.id !== conversationId) return;
+        const events = Array.isArray(payload?.events) ? payload.events : [];
+        const incoming = events
+          .filter((event) => event.type === "message" && event.message)
+          .map((event) => event.message);
+        if (incoming.length) {
+          const fresh = await decryptMessages(incoming);
+          const known = new Map(state.messages.map((message) => [message.id, message]));
+          fresh.forEach((message) => known.set(message.id, message));
+          state.messages = [...known.values()].sort((left, right) => String(left.createdAt || "").localeCompare(String(right.createdAt || "")));
+        }
+        for (const event of events.filter((item) => item.type === "deleted" && item.messageId)) {
+          const existing = state.messages.find((message) => message.id === event.messageId);
+          if (existing) Object.assign(existing, { deleted: true, plaintext: null, ciphertext: "" });
+        }
+        state.cursor = payload?.nextCursor == null ? state.cursor : String(payload.nextCursor);
+        renderMessages();
+        return;
+      }
       const payload = await window.ALevelApi.syncChatMessages(conversationId, state.cursor);
       if (state.syncGeneration !== generation || state.activeConversation?.id !== conversationId) return;
       const fresh = await decryptMessages(payload.messages || []);
@@ -584,7 +1060,8 @@
   }
 
   async function openRealtime() {
-    if (!state.activeConversation || !state.device) return;
+    if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
+    if (state.accountMode) return;
     state.socket?.close();
     try {
       const ticket = await window.ALevelApi.createChatWebSocketTicket(state.activeConversation.id, state.device.id);
@@ -622,8 +1099,14 @@
     $("#conversationTitle").textContent = conversation.kind === "group"
       ? t("chatGroupTitle", "Group ({count} members)", { count: conversation.group?.memberCount || 0 })
       : conversation.peer?.alias || "Conversation";
-    await renderSafetyNumber(conversation);
+    if (state.accountMode) {
+      await openAccountEpochs(conversation);
+      $("#conversationSafety").textContent = "Secure account chat";
+    } else {
+      await renderSafetyNumber(conversation);
+    }
     $("#retentionSelect").value = String(conversation.retentionSeconds);
+    $("#groupManageButton").hidden = conversation.kind !== "group";
     renderContacts();
     try {
       await syncConversation();
@@ -666,16 +1149,6 @@
           : t("chatSafetyUnverified", "Not verified");
       label.textContent = `${t("chatSafetyNumber", "Safety number")}: ${safety} · ${safetyStatus}`;
       host.appendChild(label);
-      const deviceFingerprints = document.createElement("small");
-      deviceFingerprints.className = "chat-device-fingerprints";
-      const fingerprints = await Promise.all(peerDevices.map(async (device) =>
-        `${device.deviceNumber}: ${await shortIdentityFingerprint(device.identityKey)}`));
-      deviceFingerprints.textContent = t(
-        "chatPeerDeviceFingerprints",
-        "Peer device fingerprints: {devices}",
-        { devices: fingerprints.join(" · ") || "-" },
-      );
-      host.appendChild(deviceFingerprints);
       if (conversation.kind === "group") {
         const memberNames = document.createElement("small");
         memberNames.className = "chat-device-fingerprints";
@@ -706,7 +1179,7 @@
         host.appendChild(reset);
       }
     } catch (error) {
-      host.textContent = conversation.peer?.identityFingerprint || "";
+      host.textContent = t("chatSecurityStatusUnavailable", "Secure identity status unavailable.");
       if (error?.code) setStatus(`${error.message} (${error.code})`, true);
     }
   }
@@ -769,12 +1242,15 @@
     state.peerBundles.clear();
     state.conversationBundles.clear();
     state.ownBundle = null;
-    state.devices = await window.ALevelApi.listChatDevices();
-    await ensurePrekeys();
-    await updateRecoveryAvailability();
+    state.accountContactStatus.clear();
+    if (!state.accountMode) {
+      state.devices = await window.ALevelApi.listChatDevices();
+      await ensurePrekeys();
+      await updateRecoveryAvailability();
+    }
     renderInvites(invites);
     renderContacts();
-    renderDevices();
+    if (!state.accountMode) renderDevices();
   }
 
   async function ensurePrekeys() {
@@ -801,7 +1277,9 @@
       return;
     }
     try {
-      const conversation = await window.ALevelApi.createChatGroup(selected);
+      const conversation = state.accountMode
+        ? await createAccountConversation("group", selected)
+        : await window.ALevelApi.createChatGroup(selected);
       state.conversations = [conversation, ...state.conversations.filter((item) => item.id !== conversation.id)];
       setGroupFormVisible(false);
       renderContacts();
@@ -879,7 +1357,7 @@
 
   async function sendMessage(event) {
     event.preventDefault();
-    if (!state.activeConversation || !state.device) return;
+    if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
     const input = $("#messageInput");
     const plaintext = input.value.trim();
     if (!plaintext) return;
@@ -887,6 +1365,13 @@
     button.disabled = true;
     setStatus(t("chatSending", "Encrypting and sending..."));
     try {
+      if (state.accountMode) {
+        await sendAccountV2Payload(state.activeConversation, plaintext);
+        input.value = "";
+        await syncConversation();
+        setStatus("");
+        return;
+      }
       await assertSafetyStable(state.activeConversation);
       const peers = await getEncryptionRecipients(state.activeConversation);
       if (!peers.length) throw new Error("The contact has no active device.");
@@ -916,10 +1401,10 @@
   }
 
   async function sendImage(file) {
-    if (!file || !state.activeConversation || !state.device) return;
+    if (!file || !state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
     if (file.size > 10 * 1024 * 1024) throw new Error("Encrypted images must be 10 MB or smaller.");
     setStatus(t("chatSending", "Encrypting and sending..."));
-    await assertSafetyStable(state.activeConversation);
+    if (!state.accountMode) await assertSafetyStable(state.activeConversation);
     const encryptedFile = await cryptoCall("encryptAttachment", { bytes: await file.arrayBuffer() });
     const reservation = await window.ALevelApi.initChatAttachment({
       conversationId: state.activeConversation.id,
@@ -927,6 +1412,21 @@
     });
     await window.ALevelApi.uploadChatAttachment(reservation.attachmentId, encryptedFile.bytes);
     await window.ALevelApi.completeChatAttachment(reservation.attachmentId);
+    if (state.accountMode) {
+      const metadata = JSON.stringify({
+        kind: "image",
+        attachmentId: reservation.attachmentId,
+        key: encryptedFile.key,
+        nonce: encryptedFile.nonce,
+        name: file.name,
+        mime: file.type || "image/*",
+      });
+      await sendAccountV2Payload(state.activeConversation, metadata, [reservation.attachmentId]);
+      $("#imageInput").value = "";
+      await syncConversation();
+      setStatus("");
+      return;
+    }
     const peers = await getEncryptionRecipients(state.activeConversation);
     if (!peers.length) throw new Error("The contact has no active device.");
     const metadata = JSON.stringify({
@@ -958,6 +1458,47 @@
   }
 
   function wireEvents() {
+    $("#enableAccountSync")?.addEventListener("click", setupAccountSync);
+    $("#unlockAccountSync")?.addEventListener("click", unlockAccountSync);
+    $("#groupManageButton")?.addEventListener("click", () => {
+      const panel = $("#groupManagePanel");
+      if (!state.activeConversation || state.activeConversation.kind !== "group" || !panel) return;
+      panel.hidden = false;
+      renderGroupManagement(state.activeConversation);
+    });
+    $("#closeGroupManage")?.addEventListener("click", () => { $("#groupManagePanel").hidden = true; });
+    $("#leaveGroup")?.addEventListener("click", async () => {
+      if (!state.activeConversation || !window.confirm("Leave this group? A remaining owner or administrator must rotate the encryption epoch.")) return;
+      try {
+        const expectedEpoch = await currentAccountEpoch(state.activeConversation);
+        const signed = await signAccountControl(state.activeConversation.id, expectedEpoch, "leave", {});
+        await window.ALevelApi.leaveChatGroup(state.activeConversation.id, signed);
+        $("#groupManagePanel").hidden = true;
+        await refreshData();
+      } catch (error) { setStatus(formatActionError(error), true); }
+    });
+    $("#inviteGroupMember")?.addEventListener("click", async () => {
+      const conversation = state.activeConversation;
+      const contactId = $("#groupInviteContact")?.value;
+      if (!conversation || !contactId) return;
+      try {
+        await rotateGroupWithMembers(conversation, "add", [contactId]);
+        $("#groupManagePanel").hidden = true;
+        await refreshData();
+      } catch (error) { setStatus(formatActionError(error), true); }
+    });
+    $("#dissolveGroup")?.addEventListener("click", async () => {
+      const conversation = state.activeConversation;
+      if (!conversation || !window.confirm("Disband this group?")) return;
+      try {
+        const expectedEpoch = await currentAccountEpoch(conversation);
+        const signed = await signAccountControl(conversation.id, expectedEpoch, "dissolve", {});
+        await window.ALevelApi.dissolveChatGroup(conversation.id, signed);
+        $("#groupManagePanel").hidden = true;
+        state.activeConversation = null;
+        await refreshData();
+      } catch (error) { setStatus(formatActionError(error), true); }
+    });
     $("#generateDeviceKeys")?.addEventListener("click", setupDevice);
     $("#createGroup")?.addEventListener("click", () => setGroupFormVisible(true));
     $("#confirmCreateGroup")?.addEventListener("click", createGroup);
@@ -999,6 +1540,14 @@
       wireEvents();
       if (invite) $("#inviteToken").value = invite;
       state.profile = await window.ALevelApi.getChatProfile();
+      const accountConfigured = await ensureAccountState();
+      if (accountConfigured) {
+        if (state.accountV2?.unlocked) {
+          $("#chatApp").hidden = false;
+          await refreshData();
+        }
+        return;
+      }
       await ensureDevice();
       const existing = savedDevice();
       if (!existing) {

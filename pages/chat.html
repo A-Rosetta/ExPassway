@@ -28,7 +28,7 @@
       <div>
         <p class="home-eyebrow" data-i18n="chatNavLabel">Chat</p>
         <h1 data-i18n="chatTitle">Friends and chat</h1>
-        <p data-i18n="chatSubtitle">End-to-end encrypted direct messages.</p>
+        <p data-i18n="chatSubtitle">End-to-end encrypted messages protected by your account vault.</p>
       </div>
       <p id="chatStatus" class="chat-status" role="status" aria-live="polite"></p>
     </section>
@@ -38,12 +38,19 @@
     </section>
 
     <section id="chatSetupPanel" class="chat-panel chat-setup-panel" hidden>
-      <h2 data-i18n="chatSetupTitle">Set up this device</h2>
-      <p data-i18n="chatSetupDescription">Keys stay on this device.</p>
+      <h2 id="chatSetupTitle" data-i18n="chatSetupTitle">Set up secure chat</h2>
+      <p id="chatSetupDescription" data-i18n="chatSetupDescription">A Passkey and your fingerprint protect this device's encrypted account vault.</p>
       <div class="chat-setup-actions">
-        <button id="generateDeviceKeys" class="btn-primary" type="button" data-i18n="chatSetupButton">Generate device keys</button>
-        <button id="restoreRecoveryBackupSetup" class="btn-secondary" type="button" data-i18n="chatRestoreBackup">Restore device from backup</button>
+        <button id="enableAccountSync" class="btn-primary" type="button">Enable secure chat</button>
+        <button id="unlockAccountSync" class="btn-secondary" type="button" hidden>Unlock secure chat</button>
+        <button id="generateDeviceKeys" class="btn-primary" type="button" data-i18n="chatSetupButton" hidden>Generate device keys</button>
+        <button id="restoreRecoveryBackupSetup" class="btn-secondary" type="button" data-i18n="chatRestoreBackup" hidden>Restore device from backup</button>
       </div>
+    </section>
+
+    <section id="chatUnsupportedPanel" class="chat-panel chat-panel--notice" hidden>
+      <h2>Secure chat needs a compatible Passkey</h2>
+      <p>Your browser must support user-verifying Passkeys and the WebAuthn PRF extension.</p>
     </section>
 
     <section id="chatApp" class="chat-layout" hidden>
@@ -67,7 +74,7 @@
           </div>
           <button id="createGroup" class="btn-secondary chat-small-action" type="button" data-i18n="chatCreateGroup">Create group</button>
           <section id="groupCreatePanel" class="chat-group-create" hidden>
-            <p class="chat-muted" data-i18n="chatGroupCreateDescription">Choose paired friends. Messages are encrypted separately for each active member device.</p>
+            <p class="chat-muted" data-i18n="chatGroupCreateDescription">Choose paired friends who have enabled secure chat. Each member receives only the group epochs they are entitled to read.</p>
             <div id="groupContactList" class="chat-group-contact-list"></div>
             <div class="chat-compose__actions">
               <button id="confirmCreateGroup" class="btn-primary chat-small-action" type="button" data-i18n="chatConfirmCreateGroup">Create</button>
@@ -76,9 +83,8 @@
           </section>
           <div id="conversationList" class="chat-conversation-list" aria-live="polite"></div>
         </section>
-        <section class="chat-panel chat-device-panel">
+        <section id="legacyDevicePanel" class="chat-panel chat-device-panel">
           <h2 data-i18n="chatDevices">Devices</h2>
-          <p id="deviceFingerprint" class="chat-fingerprint"></p>
           <div class="chat-recovery-actions">
             <button id="createRecoveryBackup" class="btn-secondary chat-small-action" type="button" data-i18n="chatCreateBackup">Create encrypted recovery backup</button>
             <button id="restoreRecoveryBackup" class="btn-secondary chat-small-action" type="button" data-i18n="chatRestoreBackup">Restore device from backup</button>
@@ -98,6 +104,7 @@
               <h2 id="conversationTitle"></h2>
               <p id="conversationSafety" class="chat-muted"></p>
             </div>
+            <button id="groupManageButton" class="btn-secondary chat-small-action" type="button" hidden>Members</button>
             <label class="chat-retention-control">
               <span data-i18n="chatRetention">Retention</span>
               <select id="retentionSelect">
@@ -108,6 +115,16 @@
               </select>
             </label>
           </header>
+          <section id="groupManagePanel" class="chat-group-manage" hidden aria-label="Group members">
+            <div class="chat-panel__heading"><h3>Members</h3><button id="closeGroupManage" class="btn-secondary chat-icon-action" type="button" aria-label="Close" title="Close">×</button></div>
+            <div id="groupMemberList" class="chat-device-list"></div>
+            <div id="groupMemberActions" class="chat-compose__actions" hidden>
+              <select id="groupInviteContact" aria-label="Paired contact"></select>
+              <button id="inviteGroupMember" class="btn-secondary chat-small-action" type="button">Invite</button>
+              <button id="leaveGroup" class="btn-secondary chat-small-action" type="button">Leave group</button>
+              <button id="dissolveGroup" class="btn-secondary chat-small-action" type="button" hidden>Disband group</button>
+            </div>
+          </section>
           <div id="messageList" class="chat-message-list" aria-live="polite"></div>
           <form id="messageForm" class="chat-compose">
             <textarea id="messageInput" rows="2" data-i18n-placeholder="chatInputPlaceholder" placeholder="Write an encrypted message..." required></textarea>
@@ -128,10 +145,10 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260811-1"></script>
+  <script src="../scripts/i18n.js?v=20260926-1"></script>
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
-  <script src="../scripts/api.js?v=20260811-1"></script>
+  <script src="../scripts/api.js?v=20260913-1"></script>
   <script data-chat-notifications-loader="true" src="../scripts/chat-notifications.js?v=20260809-4"></script>
-  <script src="../scripts/chat.js?v=20260813-1"></script>
+    <script src="../scripts/chat.js?v=20260926-3"></script>
 </body>
 </html>
