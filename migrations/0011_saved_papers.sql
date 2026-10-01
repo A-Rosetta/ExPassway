@@ -26,6 +26,9 @@ ON saved_papers(paper_code);
 CREATE INDEX idx_saved_papers_parent
 ON saved_papers(parent_paper_id);
 
+CREATE INDEX idx_saved_papers_subject
+ON saved_papers(subject_code);
+
 CREATE TABLE saved_paper_items (
   paper_id TEXT NOT NULL REFERENCES saved_papers(id) ON DELETE CASCADE,
   question_id TEXT NOT NULL REFERENCES question_bank(id) ON DELETE RESTRICT,

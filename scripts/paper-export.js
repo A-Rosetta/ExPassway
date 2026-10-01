@@ -31,8 +31,9 @@ function paperMetadata(groups, options, documentTitle) {
 }
 
 function sectionTitle(section) {
-  const chapter = section.chapterNo ? `Chapter ${section.chapterNo}: ${section.chapterTitleEn}` : section.chapterTitleEn;
-  return [chapter, `${section.sectionCode} ${section.titleEn}`].filter(Boolean).join(" - ");
+  const chapter = section.chapterNo ? `Chapter ${section.chapterNo}: ${section.chapterTitleEn || ""}` : section.chapterTitleEn;
+  const title = [section.sectionCode, section.titleEn].filter(Boolean).join(" ");
+  return [chapter, title].filter(Boolean).join(" - ");
 }
 
 function imageUrl(image) {
@@ -53,10 +54,55 @@ function createDocument(title) {
   return doc;
 }
 
+function textCanvas(doc) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  const fontSize = doc.getFontSize() * 96 / 72;
+  const font = `${doc.getFont().fontStyle.includes("bold") ? "bold " : ""}${fontSize}px Arial, "Microsoft YaHei", sans-serif`;
+  context.font = font;
+  return { canvas, context, fontSize, font };
+}
+
+function textLines(doc, text, maxWidth) {
+  const value = String(text || "");
+  if (!/[^\u0000-\u00ff]/.test(value)) return doc.splitTextToSize(value, maxWidth);
+  const { context } = textCanvas(doc);
+  const pixelWidth = maxWidth * 96 / 25.4;
+  const lines = [];
+  for (const paragraph of value.split("\n")) {
+    let line = "";
+    for (const character of paragraph) {
+      if (line && context.measureText(line + character).width > pixelWidth) {
+        lines.push(line);
+        line = "";
+      }
+      line += character;
+    }
+    lines.push(line);
+  }
+  return lines;
+}
+
+function writeLine(doc, text, x, y) {
+  if (!/[^\u0000-\u00ff]/.test(text)) { doc.text(text, x, y); return; }
+  const { canvas, context, fontSize, font } = textCanvas(doc);
+  const width = Math.ceil(context.measureText(text).width + 2);
+  const height = Math.ceil(fontSize * 1.4);
+  canvas.width = width * 3;
+  canvas.height = height * 3;
+  context.scale(3, 3);
+  context.font = font;
+  context.fillStyle = "#000";
+  context.fillText(text, 0, fontSize);
+  doc.addImage(canvas.toDataURL("image/png"), "PNG", x, y - fontSize * 25.4 / 96,
+    width * 25.4 / 96, height * 25.4 / 96, undefined, "FAST");
+}
+
 function writePaperHeader(doc, metadata, label) {
   doc.setFont("helvetica", "bold");
   doc.setFontSize(16);
-  doc.text(metadata.paperTitle, MARGIN, 16, { maxWidth: CONTENT_WIDTH });
+  const titleLines = textLines(doc, metadata.paperTitle, CONTENT_WIDTH);
+  titleLines.forEach((line, index) => writeLine(doc, line, MARGIN, 16 + index * 7));
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
   const facts = [
@@ -65,8 +111,10 @@ function writePaperHeader(doc, metadata, label) {
     `${metadata.totalMarks} marks`,
     `Generated ${metadata.generatedAt.slice(0, 10)}`,
   ].filter(Boolean);
-  doc.text(`${label} | ${facts.join(" | ")}`, MARGIN, 23, { maxWidth: CONTENT_WIDTH });
-  return 32;
+  const factsLines = textLines(doc, `${label} | ${facts.join(" | ")}`, CONTENT_WIDTH);
+  const factsY = 16 + titleLines.length * 7;
+  factsLines.forEach((line, index) => writeLine(doc, line, MARGIN, factsY + index * 4));
+  return factsY + factsLines.length * 4 + 6;
 }
 
 function addPageFooters(doc, paperCode) {
@@ -87,17 +135,16 @@ function addPageHeading(doc, section, continued = false) {
   doc.addPage();
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
-  doc.text(`${sectionTitle(section)}${continued ? " (continued)" : ""}`, MARGIN, 17, {
-    maxWidth: CONTENT_WIDTH,
-  });
-  return 25;
+  const lines = textLines(doc, `${sectionTitle(section) || "Questions"}${continued ? " (continued)" : ""}`, CONTENT_WIDTH);
+  lines.forEach((line, index) => writeLine(doc, line, MARGIN, 17 + index * 5));
+  return 20 + lines.length * 5;
 }
 
 function writeTextBlock(doc, text, x, y, maxWidth, section) {
-  const lines = doc.splitTextToSize(String(text || ""), maxWidth);
+  const lines = textLines(doc, text, maxWidth);
   for (const line of lines) {
     if (y > PAGE_BOTTOM - 7) y = addPageHeading(doc, section, true);
-    doc.text(line, x, y);
+    writeLine(doc, line, x, y);
     y += 5.5;
   }
   return y;
@@ -126,30 +173,34 @@ export async function createQuestionPaperPdf(groups, options = {}) {
     if (y > PAGE_BOTTOM - 15) y = addPageHeading(doc, section);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(11);
-    doc.text(title || "Questions", MARGIN, y, { maxWidth: CONTENT_WIDTH });
-    y += 7;
+    y = writeTextBlock(doc, title || "Questions", MARGIN, y, CONTENT_WIDTH, section) + 2;
     currentSection = section;
 
     for (const question of group.questions || []) {
       questionNumber += 1;
       questionIds.push(question.id);
       const sources = (question.images || []).map(imageUrl).filter(Boolean);
+      const images = [];
+      for (const source of sources) {
+        const bytes = loadImage
+          ? await loadImage(source)
+          : new Uint8Array(await (await fetch(source)).arrayBuffer());
+        const dimensions = doc.getImageProperties(bytes);
+        const width = Math.min(CONTENT_WIDTH, dimensions.width * 25.4 / 150);
+        images.push({ bytes, width, height: width * dimensions.height / dimensions.width });
+      }
       doc.setFont("helvetica", "bold");
       doc.setFontSize(10);
-      if (y > PAGE_BOTTOM - 10) y = addPageHeading(doc, currentSection, true);
+      const neededHeight = images.length ? Math.min(images[0].height + 5, PAGE_BOTTOM - 35) : 16;
+      if (y + neededHeight > PAGE_BOTTOM) y = addPageHeading(doc, currentSection, true);
       const marks = positiveMarks(question.marks);
       doc.text(`Question ${questionNumber} [${marks} ${marks === 1 ? "mark" : "marks"}]`, MARGIN, y);
       y += 5;
 
       if (sources.length) {
-        for (const source of sources) {
-          const bytes = loadImage
-            ? await loadImage(source)
-            : new Uint8Array(await (await fetch(source)).arrayBuffer());
-          const dimensions = doc.getImageProperties(bytes);
-          const width = Math.min(CONTENT_WIDTH, dimensions.width * 25.4 / 150);
-          const naturalHeight = width * dimensions.height / dimensions.width;
-          if (y + naturalHeight > PAGE_BOTTOM) y = addPageHeading(doc, currentSection, true);
+        for (const [index, image] of images.entries()) {
+          const { bytes, width, height: naturalHeight } = image;
+          if (index > 0 && y + naturalHeight > PAGE_BOTTOM) y = addPageHeading(doc, currentSection, true);
           const scale = Math.min(1, (PAGE_BOTTOM - y) / naturalHeight);
           const imageWidth = width * scale;
           const imageHeight = naturalHeight * scale;
@@ -199,8 +250,7 @@ export async function createAnswerKeyPdf(groups, options = {}) {
     if (y > PAGE_BOTTOM - 12) y = addPageHeading(doc, section);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(11);
-    doc.text(title || "Answers", MARGIN, y, { maxWidth: CONTENT_WIDTH });
-    y += 7;
+    y = writeTextBlock(doc, title || "Answers", MARGIN, y, CONTENT_WIDTH, section) + 2;
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
 

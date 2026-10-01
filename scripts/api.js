@@ -335,6 +335,9 @@
       const query = params.toString();
       return request(`/api/paper-builder/questions${query ? `?${query}` : ""}`, { token });
     },
+    async getPaperBuilderSubjects(token) {
+      return request("/api/paper-builder/subjects", { token });
+    },
     async listSavedPapers(token) {
       return request("/api/paper-builder/papers", { token });
     },
