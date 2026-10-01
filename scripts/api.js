@@ -387,7 +387,8 @@
     },
     async getAdminCurriculumMappings(token, input = {}) {
       const params = new URLSearchParams();
-      params.set("status", input.status || "suggested");
+      params.set("subjectCode", input.subjectCode || "0610");
+      params.set("status", input.status || "unverified");
       params.set("limit", String(input.limit || 100));
       params.set("offset", String(input.offset || 0));
       if (input.year) params.set("year", input.year);
@@ -410,6 +411,13 @@
           body: JSON.stringify(input || {}),
         }
       );
+    },
+    async bulkReviewAdminCurriculumMappings(token, subjectCode, mappings) {
+      return request("/api/admin/curriculum/mappings/bulk-review", {
+        method: "POST",
+        token,
+        body: JSON.stringify({ subjectCode, mappings }),
+      });
     },
     async createUser(input) {
       return request("/api/users", {

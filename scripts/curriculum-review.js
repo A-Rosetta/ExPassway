@@ -5,7 +5,8 @@
   let authToken = "";
   let currentOffset = 0;
   let mappingRequestId = 0;
-  let data = { mappings: [], curriculumSections: [], coursebookSections: [], total: 0 };
+  let data = { mappings: [], curriculumSections: [], coursebookSections: [], years: [], total: 0 };
+  const selectedMappings = new Set();
 
   function byId(id) {
     return document.getElementById(id);
@@ -50,6 +51,20 @@
       `).join("");
   }
 
+  function mappingKey(mapping) {
+    return `${mapping.questionId}\u0000${mapping.curriculumSectionId}`;
+  }
+
+  function updateBulkControls() {
+    const eligible = [...byId("mappingList").querySelectorAll("[data-bulk-select]:not(:disabled)")];
+    const selectAll = byId("selectAllMappings");
+    selectAll.disabled = eligible.length === 0;
+    selectAll.checked = eligible.length > 0 && eligible.every((input) => input.checked);
+    selectAll.indeterminate = eligible.some((input) => input.checked) && !selectAll.checked;
+    byId("selectedMappingsCount").textContent = t("mappingSelectedCount", { count: selectedMappings.size });
+    byId("bulkReviewMappings").disabled = selectedMappings.size === 0;
+  }
+
   function renderMappings() {
     const list = byId("mappingList");
     if (!data.mappings.length) {
@@ -57,6 +72,8 @@
     } else {
       list.innerHTML = data.mappings.map((mapping, index) => {
       const image = (mapping.images || []).map(imageSource).find(Boolean);
+      const textOptions = !image && Array.isArray(mapping.options)
+        ? `<ol type="A">${mapping.options.map((option) => `<li>${safeText(option)}</li>`).join("")}</ol>` : "";
       const bookOptions = data.coursebookSections.map((section) => `
         <option value="${safeText(section.id)}" ${section.id === mapping.coursebookSectionId ? "selected" : ""}>
           ${safeText(section.sectionCode)} · ${safeText(localized(section, "title"))}
@@ -67,13 +84,16 @@
           <div class="curriculum-mapping-source">
             <div class="curriculum-mapping-id">
               <strong>${safeText(mapping.paperSlug || mapping.questionId)} · Q${safeText(mapping.questionNo || "-")}</strong>
-              <span>${safeText(mapping.year)} · ${safeText(mapping.source)} · ${Number(mapping.confidence || 0).toFixed(2)}</span>
+              <span>${safeText(mapping.year)} · ${safeText(mapping.source)} · ${Number(mapping.confidence || 0).toFixed(2)} · ${safeText(t(mapping.reviewedBy ? "mappingHumanVerified" : "mappingNoHumanReview"))}</span>
             </div>
             ${image
-              ? `<figure class="curriculum-mapping-image"><img src="${safeText(image)}" alt="${safeText(t("questionImageAlt", { number: mapping.questionNo || "" }))}" /></figure>`
-              : `<p>${safeText(mapping.stem)}</p>`}
+              ? `<figure class="curriculum-mapping-image"><img src="${safeText(image)}" alt="${safeText(t("questionImageAlt", { number: mapping.questionNo || "" }))}" loading="lazy" decoding="async" /></figure>`
+              : `<p>${safeText(mapping.stem)}</p>${textOptions}`}
+            <p class="tip">${safeText(t("mappingReferenceAnswer"))}: ${safeText(Number.isInteger(mapping.answer) && mapping.answer >= 0 && mapping.answer <= 3 ? "ABCD"[mapping.answer] : "-")}</p>
           </div>
           <div class="curriculum-mapping-controls">
+            <label class="mapping-bulk-toggle"><input data-bulk-select type="checkbox" ${mapping.isPrimary && !mapping.reviewedBy && mapping.status !== "rejected" ? "" : "disabled"} />
+              <span>${safeText(t("mappingSelectQuestion"))}</span></label>
             <label>${safeText(t("coursebookSectionLabel"))}
               <select data-book-section>${bookOptions}</select>
             </label>
@@ -98,8 +118,28 @@
         const mapping = data.mappings[index];
         const bookSelect = item.querySelector("[data-book-section]");
         const curriculumSelect = item.querySelector("[data-curriculum-section]");
+        const bulkSelect = item.querySelector("[data-bulk-select]");
+        const syncEligibility = () => {
+          const unchanged = bookSelect.value === mapping.coursebookSectionId
+            && curriculumSelect.value === mapping.curriculumSectionId
+            && item.querySelector("[data-primary]").checked === mapping.isPrimary;
+          bulkSelect.disabled = !unchanged || !mapping.isPrimary || !!mapping.reviewedBy || mapping.status === "rejected";
+          if (bulkSelect.disabled) {
+            bulkSelect.checked = false;
+            selectedMappings.delete(mappingKey(mapping));
+          }
+          updateBulkControls();
+        };
         bookSelect.addEventListener("change", () => {
           curriculumSelect.innerHTML = syllabusOptions(bookSelect.value, "");
+          syncEligibility();
+        });
+        curriculumSelect.addEventListener("change", syncEligibility);
+        item.querySelector("[data-primary]").addEventListener("change", syncEligibility);
+        bulkSelect.addEventListener("change", () => {
+          if (bulkSelect.checked) selectedMappings.add(mappingKey(mapping));
+          else selectedMappings.delete(mappingKey(mapping));
+          updateBulkControls();
         });
         item.querySelector("[data-review]").addEventListener("click", () => updateMapping(item, mapping, "reviewed"));
         item.querySelector("[data-reject]").addEventListener("click", () => updateMapping(item, mapping, "rejected"));
@@ -114,6 +154,15 @@
     });
     byId("previousMappings").disabled = currentOffset === 0;
     byId("nextMappings").disabled = currentOffset + data.mappings.length >= data.total;
+    updateBulkControls();
+  }
+
+  function renderYearFilter() {
+    const select = byId("mappingYear");
+    const current = select.value;
+    select.replaceChildren(new Option(t("allYears"), ""));
+    data.years.forEach((year) => select.add(new Option(year, year)));
+    select.value = data.years.includes(current) ? current : "";
   }
 
   function renderChapterFilter() {
@@ -129,7 +178,7 @@
       + [...chapters.entries()].map(([chapterNo, title]) => `
         <option value="${chapterNo}">${safeText(t("chapterFilterOption", { number: chapterNo, title }))}</option>
       `).join("");
-    select.value = current || "0";
+    select.value = [...select.options].some((option) => option.value === current) ? current : "0";
   }
 
   async function updateMapping(item, mapping, status) {
@@ -147,12 +196,12 @@
           status,
         }
       );
-      item.remove();
+      selectedMappings.delete(mappingKey(mapping));
       const messageKey = status === "reviewed"
         ? mapping.year === "2024" ? "mappingApprovedReserved" : "mappingApproved"
         : "mappingRejectedMessage";
       setStatus(t(messageKey));
-      if (!byId("mappingList").children.length) await loadMappings();
+      await loadMappings();
     } catch (error) {
       setStatus(t("mappingUpdateFailed", { message: error.message }), true);
       buttons.forEach((button) => { button.disabled = false; });
@@ -161,10 +210,14 @@
 
   async function loadMappings() {
     const requestId = ++mappingRequestId;
+    selectedMappings.clear();
+    byId("mappingList").querySelectorAll("[data-bulk-select]").forEach((input) => { input.checked = false; });
+    updateBulkControls();
     setStatus(t("loadingMappings"));
     try {
       const nextData = await window.ALevelApi.getAdminCurriculumMappings(authToken, {
         status: byId("mappingStatus").value,
+        subjectCode: byId("mappingSubject").value,
         year: byId("mappingYear").value,
         chapter: Number(byId("mappingChapter").value || 0),
         limit: PAGE_SIZE,
@@ -172,6 +225,7 @@
       });
       if (requestId !== mappingRequestId) return;
       data = nextData;
+      renderYearFilter();
       renderChapterFilter();
       renderMappings();
       setStatus(t("mappingsLoaded", { count: data.total }));
@@ -201,6 +255,26 @@
     }
   }
 
+  async function bulkReviewMappings() {
+    const mappings = data.mappings.filter((mapping) => selectedMappings.has(mappingKey(mapping)))
+      .map((mapping) => ({ questionId: mapping.questionId, curriculumSectionId: mapping.curriculumSectionId }));
+    if (!mappings.length || !window.confirm(t("mappingBulkConfirm", { count: mappings.length }))) return;
+    const button = byId("bulkReviewMappings");
+    button.disabled = true;
+    setStatus(t("mappingBulkWorking", { count: mappings.length }));
+    try {
+      const result = await window.ALevelApi.bulkReviewAdminCurriculumMappings(
+        authToken, byId("mappingSubject").value, mappings
+      );
+      await loadMappings();
+      setStatus(t("mappingBulkDone", { count: result.updated }));
+    } catch (error) {
+      setStatus(t("mappingUpdateFailed", { message: error.message }), true);
+    } finally {
+      updateBulkControls();
+    }
+  }
+
   async function init() {
     applyPage();
     authToken = localStorage.getItem(AUTH_TOKEN_KEY) || "";
@@ -218,13 +292,40 @@
       location.href = "./admin-login.html";
       return;
     }
+    try {
+      const subjects = await window.ALevelApi.getCurriculumSubjects(authToken);
+      const select = byId("mappingSubject");
+      subjects.forEach((subject) => select.add(new Option(
+        `${getLanguage() === "en" ? subject.name : subject.nameZh || subject.name} · ${subject.code}`, subject.code
+      )));
+      select.value = subjects.some((subject) => subject.code === "0610") ? "0610" : subjects[0]?.code || "";
+      if (!select.value) throw new Error(t("noCurriculumMappings"));
+    } catch (error) {
+      setStatus(t("mappingLoadFailed", { message: error.message }), true);
+      return;
+    }
     byId("refreshMappings").addEventListener("click", loadMappings);
-    ["mappingStatus", "mappingYear", "mappingChapter"].forEach((id) => {
+    ["mappingSubject", "mappingStatus", "mappingYear", "mappingChapter"].forEach((id) => {
       byId(id).addEventListener("change", () => {
         currentOffset = 0;
+        if (id === "mappingSubject") {
+          byId("mappingYear").value = "";
+          byId("mappingChapter").value = "0";
+          byId("generateSuggestions").hidden = byId("mappingSubject").value !== "0610";
+        }
         loadMappings();
       });
     });
+    byId("selectAllMappings").addEventListener("change", (event) => {
+      byId("mappingList").querySelectorAll("[data-bulk-select]:not(:disabled)").forEach((input) => {
+        input.checked = event.target.checked;
+        const mapping = data.mappings[Number(input.closest("[data-mapping-index]").dataset.mappingIndex)];
+        if (input.checked) selectedMappings.add(mappingKey(mapping));
+        else selectedMappings.delete(mappingKey(mapping));
+      });
+      updateBulkControls();
+    });
+    byId("bulkReviewMappings").addEventListener("click", bulkReviewMappings);
     byId("previousMappings").addEventListener("click", () => {
       currentOffset = Math.max(0, currentOffset - PAGE_SIZE);
       loadMappings();

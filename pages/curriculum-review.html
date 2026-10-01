@@ -3,38 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="curriculumReviewPageTitle">生物章节映射审核</title>
+  <title data-i18n="curriculumReviewPageTitle">章节映射审核</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
-  <link rel="stylesheet" href="../assets/styles.css?v=20260808-2" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20261001-1" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260803-7" />
 </head>
 <body class="site-ui utility-ui curriculum-review-page">
   <main class="container">
     <section class="card hero">
-      <h1 data-i18n="curriculumReviewTitle">Biology 0610 章节映射审核</h1>
-      <p data-i18n="curriculumReviewSubtitle">自动建议不会公开；审核通过后题目才会进入章节练习。2024 题目即使完成分类也保留给未见套卷。</p>
+      <h1 data-i18n="curriculumReviewTitle">多学科章节映射审核</h1>
+      <p data-i18n="curriculumReviewSubtitle">筛选并核对题目所属章节，再批量确认；自动分类不代表人工审核。</p>
       <p id="reviewStatus" class="tip" role="status"></p>
     </section>
 
     <section class="card panel">
       <div class="curriculum-review-toolbar">
+        <label><span data-i18n="mappingSubjectLabel">学科</span>
+          <select id="mappingSubject"></select>
+        </label>
         <label><span data-i18n="mappingStatusLabel">映射状态</span>
           <select id="mappingStatus">
+            <option value="unverified" data-i18n="mappingUnverified">待人工核对</option>
             <option value="suggested" data-i18n="mappingSuggested">待审核</option>
-            <option value="reviewed" data-i18n="mappingReviewed">已审核</option>
+            <option value="reviewed" data-i18n="mappingReviewed">已发布（含未人工核对）</option>
             <option value="rejected" data-i18n="mappingRejected">已拒绝</option>
           </select>
         </label>
         <label><span data-i18n="mappingYearLabel">试卷年份</span>
           <select id="mappingYear">
             <option value="" data-i18n="allYears">全部年份</option>
-            <option value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
           </select>
         </label>
         <label><span data-i18n="mappingChapterLabel">课本章节</span>
@@ -46,6 +44,11 @@
         <button id="generateSuggestions" class="btn-primary" type="button" data-i18n="generateMappingSuggestions">生成规则建议</button>
         <button id="backAdmin" class="btn-secondary" type="button" data-i18n="backAdmin">返回后台</button>
       </div>
+      <div class="curriculum-review-bulk">
+        <label><input id="selectAllMappings" type="checkbox" /> <span data-i18n="mappingSelectPage">选择本页可审核题目</span></label>
+        <span id="selectedMappingsCount" aria-live="polite">已选 0 题</span>
+        <button id="bulkReviewMappings" class="btn-primary" type="button" disabled data-i18n="mappingBulkReview">批量确认章节</button>
+      </div>
     </section>
 
     <section id="mappingList" class="curriculum-mapping-list" aria-live="polite"></section>
@@ -56,9 +59,9 @@
     </nav>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260731-2"></script>
+  <script src="../scripts/i18n.js?v=20261001-1"></script>
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
-  <script src="../scripts/api.js?v=20260731-1"></script>
-  <script src="../scripts/curriculum-review.js?v=20260731-1"></script>
+  <script src="../scripts/api.js?v=20261001-1"></script>
+  <script src="../scripts/curriculum-review.js?v=20261001-1"></script>
 </body>
 </html>
