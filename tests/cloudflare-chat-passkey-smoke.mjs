@@ -143,6 +143,8 @@ try {
     "../migrations/0012_chat_message_sender_key.sql",
     "../migrations/0013_chat_account_lifecycle.sql",
     "../migrations/0014_chat_passkey_hardening.sql",
+    "../migrations/0015_chat_conversation_protocol.sql",
+    "../migrations/0016_chat_profile_history.sql",
   ]) {
     for (const statement of unstable_splitSqlQuery(
       await readFile(new URL(file, import.meta.url), "utf8")

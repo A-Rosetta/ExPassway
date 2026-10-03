@@ -736,6 +736,12 @@
     async listChatConversations() {
       return request("/api/chat/conversations", { token: currentToken() });
     },
+    async deleteChatConversationHistory(conversationId) {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/history`, {
+        method: "DELETE",
+        token: currentToken(),
+      });
+    },
     async createChatConversation(contactId) {
       return request("/api/chat/conversations", {
         method: "POST",

@@ -29,7 +29,7 @@ async function call(user, path, options = {}) {
 
 try {
   const db = envBase.DB;
-  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql", "../migrations/0003_admin_platform.sql", "../migrations/0006_chat_foundation.sql", "../migrations/0007_chat_crypto_hardening.sql", "../migrations/0008_chat_account_v2.sql", "../migrations/0011_chat_messages_account_sender.sql", "../migrations/0012_chat_message_sender_key.sql", "../migrations/0013_chat_account_lifecycle.sql"]) {
+  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql", "../migrations/0003_admin_platform.sql", "../migrations/0006_chat_foundation.sql", "../migrations/0007_chat_crypto_hardening.sql", "../migrations/0008_chat_account_v2.sql", "../migrations/0011_chat_messages_account_sender.sql", "../migrations/0012_chat_message_sender_key.sql", "../migrations/0013_chat_account_lifecycle.sql", "../migrations/0015_chat_conversation_protocol.sql", "../migrations/0016_chat_profile_history.sql"]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) await db.prepare(statement).run();
   }

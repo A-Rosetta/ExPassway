@@ -89,6 +89,12 @@ is unavailable. Install Chromium with `npx playwright install chromium` if neede
 on Windows the suite also supports an installed Microsoft Edge. Real Passkey PRF
 support still needs a manual check in the intended browser and authenticator.
 
+Chat profiles support an editable nickname and a resized PNG, JPEG or WebP avatar.
+These are account profile metadata visible to chat participants. Message bodies
+and message attachments remain end-to-end encrypted. Historical chats can be
+removed from one account's list across its browsers without removing another
+participant's history. Realtime delivery falls back to a three-second cursor poll.
+
 ## Repository Map
 
 - `index.html`, `pages/`, `scripts/`, `assets/`: static application
@@ -105,6 +111,8 @@ support still needs a manual check in the intended browser and authenticator.
 Apply pending D1 migrations before deploying code that requires them. Account-v2
 chat requires `0015_chat_conversation_protocol.sql`; it adds the conversation
 protocol column and keeps existing conversations as `signal-v1`.
+Chat profile avatars and account-specific history removal also require
+`0016_chat_profile_history.sql`.
 
 ```bash
 npx wrangler d1 migrations apply expassway-db --remote

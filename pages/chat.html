@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
   <link rel="stylesheet" href="../assets/styles.css?v=20260808-2" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260811-1" />
+  <link rel="stylesheet" href="../assets/chat.css?v=20261003-2" />
 </head>
 <body class="student-ui site-ui chat-page">
   <header class="site-topbar chat-topbar">
@@ -55,6 +56,25 @@
 
     <section id="chatApp" class="chat-layout" hidden>
       <aside class="chat-sidebar">
+        <section class="chat-panel chat-profile-panel">
+          <div class="chat-profile-summary">
+            <span id="chatProfileAvatar" class="chat-avatar chat-avatar--large" aria-hidden="true"></span>
+            <div><h2 id="chatProfileName"></h2><p class="chat-muted" data-i18n="chatProfileTitle">Your chat profile</p></div>
+            <button id="editChatProfile" class="btn-secondary chat-small-action" type="button" data-i18n="chatProfileEdit">Edit</button>
+          </div>
+          <form id="chatProfileForm" class="chat-profile-form" hidden>
+            <label><span data-i18n="chatProfileNameLabel">Display name</span><input id="chatProfileAlias" type="text" minlength="2" maxlength="48" required autocomplete="nickname" placeholder="Agent R" /></label>
+            <p class="chat-muted" data-i18n="chatProfileNameHint">2–48 characters: letters, numbers, spaces, _, . and -.</p>
+            <div class="chat-profile-avatar-controls">
+              <span id="chatProfileAvatarPreview" class="chat-avatar chat-avatar--large" aria-hidden="true"></span>
+              <label class="btn-secondary chat-small-action chat-avatar-upload"><span data-i18n="chatProfileChooseAvatar">Choose avatar</span><input id="chatProfileAvatarInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" /></label>
+              <button id="removeChatProfileAvatar" class="btn-secondary chat-small-action" type="button" data-i18n="chatProfileRemoveAvatar">Remove avatar</button>
+            </div>
+            <p class="chat-muted" data-i18n="chatProfilePrivacyHint">Your name and avatar are visible to your paired friends and group members.</p>
+            <p id="chatProfileFeedback" class="chat-profile-feedback" role="status" aria-live="polite"></p>
+            <div class="chat-compose__actions"><button id="saveChatProfile" class="btn-primary chat-small-action" type="submit" data-i18n="chatProfileSave">Save</button><button id="cancelChatProfile" class="btn-secondary chat-small-action" type="button" data-i18n="chatProfileCancel">Cancel</button></div>
+          </form>
+        </section>
         <section class="chat-panel chat-invite-panel">
           <div class="chat-panel__heading">
             <h2 data-i18n="chatInvitesTitle">Friend invites</h2>
@@ -100,10 +120,11 @@
         </div>
         <div id="conversationActive" hidden>
           <header class="chat-conversation-header">
-            <div>
-              <h2 id="conversationTitle"></h2>
-              <p id="conversationSafety" class="chat-muted"></p>
+            <div class="chat-conversation-identity">
+              <span id="conversationAvatar" class="chat-avatar" aria-hidden="true"></span>
+              <div><h2 id="conversationTitle"></h2><p id="conversationSafety" class="chat-muted"></p></div>
             </div>
+            <button id="deleteHistoricalChat" class="btn-secondary chat-small-action" type="button" data-i18n="chatDeleteHistory" hidden>Delete historical chat</button>
             <button id="groupManageButton" class="btn-secondary chat-small-action" type="button" hidden>Members</button>
             <label class="chat-retention-control">
               <span data-i18n="chatRetention">Retention</span>
@@ -134,11 +155,13 @@
                 <span aria-hidden="true">+</span>
                 <input id="imageInput" type="file" accept="image/*" hidden />
               </label>
-              <button id="emojiButton" class="btn-secondary" type="button" data-i18n="chatEmoji">Emoji</button>
+              <button id="emojiButton" class="btn-secondary" type="button" data-i18n="chatEmoji" aria-expanded="false" aria-controls="emojiTray">Emoji</button>
               <button id="sendMessage" class="btn-primary" type="submit" data-i18n="chatSend">Send</button>
             </div>
-            <div id="emojiTray" class="chat-emoji-tray" hidden>
-              <button type="button">🙂</button><button type="button">🎉</button><button type="button">💡</button><button type="button">✅</button><button type="button">❤️</button>
+            <div id="emojiTray" class="chat-emoji-tray" hidden role="region" aria-label="Emoji" data-i18n-aria-label="chatEmoji">
+              <input id="emojiSearch" type="search" data-i18n-placeholder="chatEmojiSearch" placeholder="Search emoji" aria-label="Search emoji" data-i18n-aria-label="chatEmojiSearch" autocomplete="off" />
+              <div id="emojiCategories" class="chat-emoji-categories" role="group" aria-label="Emoji categories" data-i18n-aria-label="chatEmojiCategories"></div>
+              <div id="emojiGrid" class="chat-emoji-grid"></div>
             </div>
           </form>
         </div>
@@ -146,10 +169,10 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20261003-1"></script>
+  <script src="../scripts/i18n.js?v=20261003-2"></script>
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
-  <script src="../scripts/api.js?v=20261003-1"></script>
+  <script src="../scripts/api.js?v=20261003-2"></script>
   <script data-chat-notifications-loader="true" src="../scripts/chat-notifications.js?v=20260809-4"></script>
-    <script src="../scripts/chat.js?v=20261003-1"></script>
+    <script src="../scripts/chat.js?v=20261003-2"></script>
 </body>
 </html>

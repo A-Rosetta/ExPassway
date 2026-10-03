@@ -2,6 +2,20 @@
   const TOKEN_KEY = "alevel.authToken";
   const DEVICE_KEY = "expassway.chat.device.v1";
   const PENDING_INVITE_KEY = "expassway.chat.pendingInvite.v1";
+  const EMOJI_RECENT_KEY = "expassway.chat.recentEmoji.v1";
+  const EMOJI_CATEGORIES = [
+    { id: "faces", key: "chatEmojiFaces", label: "Faces", entries: "😀:grin 笑|😃:happy 开心|😄:smile 微笑|😁:beam 大笑|😆:laugh 笑|😅:sweat 汗|😂:joy 喜极而泣|🤣:rofl 笑哭|🙂:smile 微笑|🙃:upside down 倒脸|😉:wink 眨眼|😊:blush 害羞|😇:angel 天使|🥰:love 喜爱|😍:heart eyes 爱慕|🤩:star eyes 崇拜|😘:kiss 亲吻|😋:yum 好吃|😛:tongue 吐舌|😎:cool 酷|🤓:nerd 书呆|🧐:think 思考|🤔:thinking 思考|🤗:hug 拥抱|🤭:giggle 偷笑|🤫:quiet 安静|😴:sleep 睡觉|🥳:party 庆祝|😭:cry 哭|😢:sad 难过|😤:angry 生气|😱:scream 惊讶|😬:grimace 尴尬|🫠:melt 融化|😮:surprise 惊讶|😑:expressionless 无语" },
+    { id: "gestures", key: "chatEmojiGestures", label: "Gestures", entries: "👍:thumbs up 赞|👎:thumbs down 踩|👏:clap 鼓掌|🙌:celebrate 庆祝|👐:open hands 双手|🤲:palms 双掌|🤝:handshake 握手|🙏:thanks 谢谢|✌️:peace 胜利|🤞:luck 幸运|🤟:love you 爱你|🤘:rock 摇滚|👌:okay 好的|🤌:pinched 手势|👋:wave 挥手|🤚:hand 手掌|✋:stop 停止|🖐️:fingers 手指|👊:fist 拳头|🤛:left fist 左拳|🤜:right fist 右拳|💪:strong 加油|🫶:heart hands 比心|☝️:point 指向" },
+    { id: "hearts", key: "chatEmojiHearts", label: "Hearts", entries: "❤️:red heart 红心|🧡:orange heart 橙心|💛:yellow heart 黄心|💚:green heart 绿心|💙:blue heart 蓝心|💜:purple heart 紫心|🖤:black heart 黑心|🤍:white heart 白心|🤎:brown heart 棕心|🩷:pink heart 粉心|🩵:light blue heart 浅蓝心|🩶:grey heart 灰心|💔:broken heart 心碎|❤️‍🔥:heart fire 热爱|💕:two hearts 双心|💞:revolving hearts 爱心|💓:beating heart 心跳|💗:growing heart 喜欢|💖:sparkle heart 闪亮爱心|💘:cupid 爱神|💝:gift heart 心意|💟:heart decoration 爱心|💌:love letter 情书|💋:kiss 亲吻" },
+    { id: "animals", key: "chatEmojiAnimals", label: "Animals", entries: "🐶:dog 狗|🐱:cat 猫|🐭:mouse 老鼠|🐹:hamster 仓鼠|🐰:rabbit 兔|🦊:fox 狐狸|🐻:bear 熊|🐼:panda 熊猫|🐨:koala 考拉|🐯:tiger 老虎|🦁:lion 狮子|🐮:cow 牛|🐷:pig 猪|🐸:frog 青蛙|🐵:monkey 猴子|🐔:chicken 鸡|🐧:penguin 企鹅|🐦:bird 鸟|🦋:butterfly 蝴蝶|🐝:bee 蜜蜂|🐢:turtle 乌龟|🐬:dolphin 海豚|🐳:whale 鲸鱼|🦄:unicorn 独角兽" },
+    { id: "food", key: "chatEmojiFood", label: "Food", entries: "🍎:apple 苹果|🍊:orange 橙|🍋:lemon 柠檬|🍌:banana 香蕉|🍉:watermelon 西瓜|🍇:grapes 葡萄|🍓:strawberry 草莓|🫐:blueberry 蓝莓|🍒:cherry 樱桃|🥭:mango 芒果|🥑:avocado 牛油果|🥕:carrot 胡萝卜|🌽:corn 玉米|🍞:bread 面包|🥐:croissant 羊角面包|🍔:burger 汉堡|🍟:fries 薯条|🍕:pizza 披萨|🍜:noodles 面条|🍣:sushi 寿司|🍰:cake 蛋糕|🍩:donut 甜甜圈|☕:coffee 咖啡|🧋:bubble tea 奶茶" },
+    { id: "activities", key: "chatEmojiActivities", label: "Activities", entries: "⚽:football 足球|🏀:basketball 篮球|🏈:football 橄榄球|⚾:baseball 棒球|🎾:tennis 网球|🏐:volleyball 排球|🎱:pool 台球|🏓:table tennis 乒乓球|🏸:badminton 羽毛球|🏊:swim 游泳|🚴:cycle 骑车|🏃:run 跑步|🎮:game 游戏|🎲:dice 骰子|🎯:target 目标|🎸:guitar 吉他|🎹:piano 钢琴|🎨:art 画画|🎬:film 电影|🎤:microphone 唱歌|🎧:headphones 耳机|🏆:trophy 奖杯|🥇:medal 金牌|🎉:party 庆祝" },
+    { id: "objects", key: "chatEmojiObjects", label: "Objects", entries: "🚀:rocket 火箭|⭐:star 星星|🌟:glowing star 闪亮|✨:sparkles 闪光|🔥:fire 火|💡:idea 灯泡|✅:check 完成|❌:cross 错误|❓:question 问号|❗:exclamation 感叹|💯:hundred 满分|📚:books 书|✏️:pencil 铅笔|📝:note 笔记|💻:laptop 电脑|📱:phone 手机|📷:camera 相机|🎁:gift 礼物|🎈:balloon 气球|🌈:rainbow 彩虹|☀️:sun 太阳|🌙:moon 月亮|🌍:earth 地球|🌸:flower 花" },
+  ].map((category) => ({ ...category, entries: category.entries.split("|").map((entry) => {
+    const separator = entry.indexOf(":");
+    return { emoji: entry.slice(0, separator), keywords: entry.slice(separator + 1), category: category.id };
+  }) }));
+  const EMOJI_ENTRIES = EMOJI_CATEGORIES.flatMap((category) => category.entries);
   const t = (key, fallback, vars = {}) => {
     const translated = window.ALevelI18n?.t?.(key, vars);
     let value = translated && translated !== key ? translated : fallback;
@@ -43,6 +57,17 @@
     messageDrafts: new Map(),
     dataRefreshGeneration: 0,
     accountIdentityChanges: new Set(),
+    hiddenConversations: new Set(),
+    deletingHistories: new Set(),
+    profileDraftAvatar: "",
+    profileDirty: false,
+    profileSaving: false,
+    profileAvatarGeneration: 0,
+    profileAvatarProcessing: false,
+    profileRefreshInFlight: null,
+    lastProfileRefresh: 0,
+    emojiCategory: "all",
+    emojiSelection: null,
   };
   const $ = (selector) => document.querySelector(selector);
   const status = $("#chatStatus");
@@ -63,6 +88,251 @@
 
   function currentToken() {
     return localStorage.getItem(TOKEN_KEY) || "";
+  }
+
+  function setAvatar(host, alias, avatarDataUrl) {
+    if (!host) return;
+    const initial = Array.from(String(alias || "?").trim())[0]?.toLocaleUpperCase() || "?";
+    host.replaceChildren();
+    host.setAttribute("aria-hidden", "true");
+    if (!/^data:image\/(?:webp|jpeg|png);base64,[A-Za-z0-9+/]+={0,2}$/.test(avatarDataUrl || "")) {
+      host.textContent = initial;
+      return;
+    }
+    const image = document.createElement("img");
+    image.alt = "";
+    image.src = avatarDataUrl;
+    image.addEventListener("error", () => { if (host.contains(image)) host.textContent = initial; }, { once: true });
+    host.appendChild(image);
+  }
+
+  function createAvatar(alias, avatarDataUrl) {
+    const host = document.createElement("span");
+    host.className = "chat-avatar";
+    setAvatar(host, alias, avatarDataUrl);
+    return host;
+  }
+
+  function renderChatProfile() {
+    const profile = state.profile;
+    if (!profile) return;
+    $("#chatProfileName").textContent = profile.alias;
+    setAvatar($("#chatProfileAvatar"), profile.alias, profile.avatarDataUrl);
+    if (!state.profileDirty && !state.profileSaving && !state.profileAvatarProcessing) {
+      $("#chatProfileAlias").value = profile.alias;
+      state.profileDraftAvatar = profile.avatarDataUrl || "";
+    }
+    setAvatar($("#chatProfileAvatarPreview"), $("#chatProfileAlias").value, state.profileDraftAvatar);
+  }
+
+  function setProfileFeedback(message, isError = false) {
+    const feedback = $("#chatProfileFeedback");
+    feedback.textContent = message || "";
+    feedback.classList.toggle("is-error", isError);
+  }
+
+  function setProfileControls() {
+    $("#saveChatProfile").disabled = state.profileSaving || state.profileAvatarProcessing;
+    $("#cancelChatProfile").disabled = state.profileSaving;
+    $("#chatProfileAlias").disabled = state.profileSaving;
+    $("#chatProfileAvatarInput").disabled = state.profileSaving;
+    $("#removeChatProfileAvatar").disabled = state.profileSaving || state.profileAvatarProcessing;
+  }
+
+  function closeProfileEditor() {
+    if (state.profileSaving) return;
+    state.profileAvatarGeneration += 1;
+    state.profileAvatarProcessing = false;
+    state.profileDirty = false;
+    $("#chatProfileForm").hidden = true;
+    $("#chatProfileAvatarInput").value = "";
+    setProfileFeedback("");
+    setProfileControls();
+    renderChatProfile();
+  }
+
+  async function prepareProfileAvatar(file) {
+    if (!file) return;
+    const generation = ++state.profileAvatarGeneration;
+    state.profileAvatarProcessing = true;
+    setProfileControls();
+    setProfileFeedback(t("chatProfileAvatarPreparing", "Preparing avatar..."));
+    let url;
+    try {
+      if (file.size > 5 * 1024 * 1024) throw new Error(t("chatProfileAvatarTooLarge", "Choose an image smaller than 5 MB."));
+      if (!["image/png", "image/jpeg", "image/webp", "image/gif"].includes(file.type)) throw new Error(t("chatProfileAvatarInvalid", "Choose a PNG, JPEG, WebP or GIF image."));
+      url = URL.createObjectURL(file);
+      const image = new Image();
+      image.src = url;
+      await image.decode();
+      if (!image.naturalWidth || !image.naturalHeight) throw new Error(t("chatProfileAvatarInvalid", "Choose a PNG, JPEG, WebP or GIF image."));
+      const scale = Math.min(1, 256 / Math.max(image.naturalWidth, image.naturalHeight));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+      const context = canvas.getContext("2d");
+      if (!context) throw new Error(t("chatProfileAvatarFailed", "This image could not be processed."));
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      let encoded = await new Promise((resolve) => canvas.toBlob(resolve, "image/webp", .85));
+      if (!encoded || encoded.type !== "image/webp") encoded = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", .85));
+      if (!encoded || encoded.size > 256 * 1024) throw new Error(t("chatProfileAvatarFailed", "This image could not be processed."));
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(new Error(t("chatProfileAvatarFailed", "This image could not be processed.")));
+        reader.readAsDataURL(encoded);
+      });
+      if (generation !== state.profileAvatarGeneration) return;
+      state.profileDraftAvatar = dataUrl;
+      state.profileDirty = true;
+      renderChatProfile();
+      setProfileFeedback("");
+    } catch (error) {
+      if (generation === state.profileAvatarGeneration) setProfileFeedback(error?.message || t("chatProfileAvatarFailed", "This image could not be processed."), true);
+    } finally {
+      if (url) URL.revokeObjectURL(url);
+      if (generation === state.profileAvatarGeneration) {
+        state.profileAvatarProcessing = false;
+        $("#chatProfileAvatarInput").value = "";
+        setProfileControls();
+      }
+    }
+  }
+
+  async function saveChatProfile(event) {
+    event.preventDefault();
+    if (state.profileSaving || state.profileAvatarProcessing) return;
+    const alias = $("#chatProfileAlias").value.trim();
+    if (Array.from(alias).length < 2 || Array.from(alias).length > 48 || !/^[\p{L}\p{N} _.-]+$/u.test(alias)) {
+      setProfileFeedback(t("chatProfileNameInvalid", "Use 2–48 letters, numbers, spaces, _, . or -."), true);
+      return;
+    }
+    state.profileSaving = true;
+    setProfileControls();
+    setProfileFeedback(t("chatProfileSaving", "Saving profile..."));
+    try {
+      const profile = await window.ALevelApi.updateChatProfile({ alias, avatarDataUrl: state.profileDraftAvatar });
+      state.dataRefreshGeneration += 1;
+      state.profile = profile;
+      state.profileDirty = false;
+      state.profileSaving = false;
+      closeProfileEditor();
+      renderGroupManagement(state.activeConversation || {});
+      renderMessages();
+      setStatus(t("chatProfileSaved", "Chat profile saved."));
+    } catch (error) {
+      setProfileFeedback(formatActionError(error), true);
+    } finally {
+      state.profileSaving = false;
+      setProfileControls();
+    }
+  }
+
+  function isHistoricalConversation(conversation) {
+    return Boolean(conversation && (!isAccountConversation(conversation) || conversation.historical
+      || (conversation.kind === "direct" && state.accountIdentityChanges.has(conversation.id))));
+  }
+
+  function forgetHistoricalConversation(conversationId, rememberHidden = true) {
+    state.dataRefreshGeneration += 1;
+    if (rememberHidden) state.hiddenConversations.add(conversationId);
+    state.conversations = state.conversations.filter((conversation) => conversation.id !== conversationId);
+    state.messageDrafts.delete(conversationId);
+    state.accountEpochs.delete(conversationId);
+    state.accountGroupMetadata.delete(conversationId);
+    state.accountIdentityChanges.delete(conversationId);
+    if (state.activeConversation?.id === conversationId) {
+      state.syncGeneration += 1;
+      state.syncInFlight = null;
+      state.activeConversation = null;
+      state.messages = [];
+      state.cursor = "";
+      $("#messageInput").value = "";
+      stopPolling();
+      state.socket?.close();
+      state.socket = null;
+    }
+    renderContacts();
+    renderActiveConversation();
+    if (!state.activeConversation) renderMessages();
+  }
+
+  async function deleteHistoricalChat() {
+    const conversation = state.activeConversation;
+    if (!isHistoricalConversation(conversation) || state.deletingHistories.has(conversation.id)) return;
+    if (!window.confirm(t("chatDeleteHistoryConfirm", "Remove this historical chat from your account's conversation list on all devices? Your friend's history stays available. This cannot be undone."))) return;
+    state.deletingHistories.add(conversation.id);
+    renderActiveConversation();
+    try {
+      await window.ALevelApi.deleteChatConversationHistory(conversation.id);
+      forgetHistoricalConversation(conversation.id);
+      setStatus(t("chatHistoryDeleted", "Historical chat removed from your account."));
+    } catch (error) { setStatus(formatActionError(error), true); }
+    finally {
+      state.deletingHistories.delete(conversation.id);
+      renderActiveConversation();
+    }
+  }
+
+  function recentEmojis() {
+    try {
+      const values = JSON.parse(localStorage.getItem(`${EMOJI_RECENT_KEY}.${state.profile?.id || ""}`) || "[]");
+      return Array.isArray(values) ? values.filter((value) => EMOJI_ENTRIES.some((entry) => entry.emoji === value)).slice(0, 24) : [];
+    } catch (_error) { return []; }
+  }
+
+  function renderEmojiPicker() {
+    const categories = $("#emojiCategories");
+    const grid = $("#emojiGrid");
+    if (!categories || !grid) return;
+    const allCategories = [{ id: "all", key: "chatEmojiAll", label: "All" }, { id: "recent", key: "chatEmojiRecent", label: "Recent" }, ...EMOJI_CATEGORIES];
+    categories.replaceChildren(...allCategories.map((category) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.category = category.id;
+      button.setAttribute("aria-pressed", String(state.emojiCategory === category.id));
+      button.textContent = t(category.key, category.label);
+      return button;
+    }));
+    const query = $("#emojiSearch").value.trim().toLocaleLowerCase();
+    const recent = recentEmojis();
+    const candidates = state.emojiCategory === "recent"
+      ? recent.map((emoji) => EMOJI_ENTRIES.find((entry) => entry.emoji === emoji)).filter(Boolean)
+      : EMOJI_ENTRIES.filter((entry) => state.emojiCategory === "all" || entry.category === state.emojiCategory);
+    const matching = candidates.filter((entry) => !query || `${entry.emoji} ${entry.keywords}`.toLocaleLowerCase().includes(query));
+    grid.replaceChildren(...matching.map((entry) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.emoji = entry.emoji;
+      button.textContent = entry.emoji;
+      button.title = entry.keywords;
+      button.setAttribute("aria-label", `${entry.emoji} ${entry.keywords}`);
+      return button;
+    }));
+    if (!matching.length) {
+      const empty = document.createElement("p");
+      empty.className = "chat-emoji-empty";
+      empty.textContent = t("chatEmojiNoResults", "No emoji found.");
+      grid.appendChild(empty);
+    }
+  }
+
+  function closeEmojiPicker() {
+    $("#emojiTray").hidden = true;
+    $("#emojiButton").setAttribute("aria-expanded", "false");
+  }
+
+  function insertEmoji(emoji) {
+    const input = $("#messageInput");
+    const conversation = state.activeConversation;
+    if (!conversation || input.disabled) return;
+    const selection = state.emojiSelection?.conversationId === conversation.id ? state.emojiSelection : { start: input.selectionStart, end: input.selectionEnd };
+    input.setRangeText(emoji, selection.start, selection.end, "end");
+    state.messageDrafts.set(conversation.id, input.value);
+    state.emojiSelection = { conversationId: conversation.id, start: input.selectionStart, end: input.selectionEnd };
+    try { localStorage.setItem(`${EMOJI_RECENT_KEY}.${state.profile?.id || ""}`, JSON.stringify([emoji, ...recentEmojis().filter((value) => value !== emoji)].slice(0, 24))); } catch (_error) { }
+    closeEmojiPicker();
+    input.focus();
   }
 
   function isAccountConversation(conversation) {
@@ -88,9 +358,12 @@
       return;
     }
     $("#conversationTitle").textContent = conversationName(conversation);
+    setAvatar($("#conversationAvatar"), conversationName(conversation), conversation.kind === "direct" ? conversation.peer?.avatarDataUrl : "");
     const legacyReadOnly = state.accountMode && !isAccountConversation(conversation);
     const rotationRequired = Boolean(conversation.rotationRequired);
-    const identityChanged = state.accountIdentityChanges.has(conversation.id);
+    const identityChanged = state.accountIdentityChanges.has(conversation.id) || (isAccountConversation(conversation) && conversation.historical);
+    $("#deleteHistoricalChat").hidden = !isHistoricalConversation(conversation);
+    $("#deleteHistoricalChat").disabled = state.deletingHistories.has(conversation.id);
     const selfRole = conversation.role || conversation.group?.members?.find((member) => member.isSelf)?.role;
     $("#retentionSelect").value = String(conversation.retentionSeconds);
     $("#retentionSelect").disabled = legacyReadOnly || (isAccountConversation(conversation) && conversation.kind === "group" && selfRole !== "owner");
@@ -98,6 +371,8 @@
     $("#messageInput").disabled = legacyReadOnly || rotationRequired || identityChanged;
     $("#sendMessage").disabled = legacyReadOnly || rotationRequired || identityChanged || state.sendingText.has(conversation.id);
     $("#imageInput").disabled = legacyReadOnly || rotationRequired || identityChanged || state.sendingImages.has(conversation.id);
+    $("#emojiButton").disabled = legacyReadOnly || rotationRequired || identityChanged;
+    if ($("#emojiButton").disabled) closeEmojiPicker();
     if (legacyReadOnly) $("#conversationSafety").textContent = "Historical chat: messages can be read on the original device. Start a new secure chat to send messages.";
     else if (isAccountConversation(conversation)) $("#conversationSafety").textContent = rotationRequired
       ? "A member left. An owner or administrator must update the group encryption before messages can be sent."
@@ -499,7 +774,9 @@
       const button = document.createElement("button");
       button.type = "button";
       button.className = `chat-conversation-item${state.activeConversation?.id === conversation.id ? " is-active" : ""}`;
-      button.innerHTML = `<strong></strong><small></small>`;
+      button.dataset.conversationId = conversation.id;
+      button.innerHTML = `<div class="chat-contact-identity"><div><strong></strong><small></small></div></div>`;
+      button.firstElementChild.prepend(createAvatar(conversationName(conversation), conversation.peer?.avatarDataUrl));
       if (conversation.kind === "group") {
         button.querySelector("strong").textContent = conversationName(conversation);
         button.querySelector("small").textContent = t("chatGroupMemberCount", "{count} members", {
@@ -507,7 +784,7 @@
         });
       } else {
         button.querySelector("strong").textContent = conversation.peer?.alias || t("chatNoConversation", "Conversation");
-        button.querySelector("small").textContent = state.accountMode
+        button.querySelector("small").textContent = isHistoricalConversation(conversation) ? t("chatHistoricalLabel", "Historical chat") : state.accountMode
           ? "End-to-end encrypted"
           : "Encrypted chat";
       }
@@ -526,7 +803,12 @@
           const button = document.createElement("button");
           button.type = "button";
           button.className = "chat-conversation-item";
-          button.textContent = contact.profile?.alias || "Paired contact";
+          const identity = document.createElement("span");
+          identity.className = "chat-contact-identity";
+          const name = document.createElement("strong");
+          name.textContent = contact.profile?.alias || "Paired contact";
+          identity.append(createAvatar(name.textContent, contact.profile?.avatarDataUrl), name);
+          button.appendChild(identity);
           button.addEventListener("click", async () => {
             if (button.disabled) return;
             button.disabled = true;
@@ -570,7 +852,7 @@
       checkbox.checked = selected.has(contact.id) && accountStatus !== false;
       const text = document.createElement("span");
       text.textContent = contact.profile?.alias || t("chatNoConversation", "Conversation");
-      label.append(checkbox, text);
+      label.append(checkbox, createAvatar(text.textContent, contact.profile?.avatarDataUrl), text);
       if (state.accountMode && accountStatus !== true) {
         const unavailable = document.createElement("small");
         unavailable.textContent = accountStatus === false
@@ -611,11 +893,14 @@
       const details = document.createElement("div");
       details.className = "chat-device-item__details";
       const name = document.createElement("strong");
-      name.textContent = member.isSelf ? "You" : (member.alias || "Paired contact");
+      name.textContent = member.isSelf ? `${state.profile?.alias || member.alias || t("chatYou", "You")} (${t("chatYou", "You")})` : (member.alias || "Paired contact");
       const role = document.createElement("small");
       role.textContent = member.role || "member";
       details.append(name, role);
-      row.appendChild(details);
+      const identity = document.createElement("div");
+      identity.className = "chat-member-identity";
+      identity.append(createAvatar(name.textContent, member.isSelf ? state.profile?.avatarDataUrl : member.avatarDataUrl), details);
+      row.appendChild(identity);
       if (!member.isSelf && member.userId) {
         const controls = document.createElement("div");
         controls.className = "chat-device-item__actions";
@@ -803,12 +1088,19 @@
         ? "[deleted]"
         : message.plaintext || `${t("chatDecryptFailed", "Could not decrypt this message.")}${decryptCode}`;
       item.innerHTML = `<small class="chat-message__sender" hidden></small><p></p><div class="chat-message__attachment" hidden></div><time></time>`;
-      if (state.activeConversation?.kind === "group" && message.senderAlias) {
+      if (state.activeConversation?.kind === "group") {
         const sender = item.querySelector(".chat-message__sender");
         sender.hidden = false;
-        sender.textContent = isMine
-          ? t("chatYou", "You")
-          : message.senderAlias;
+        const member = state.activeConversation.group?.members?.find((entry) => entry.userId === message.senderUserId);
+        const name = isMine ? `${state.profile?.alias || t("chatYou", "You")} (${t("chatYou", "You")})`
+          : member?.alias || message.senderAlias || "Paired contact";
+        sender.textContent = name;
+        const identity = document.createElement("div");
+        identity.className = "chat-message__identity";
+        const senderAvatar = isMine ? state.profile?.avatarDataUrl
+          : member ? member.avatarDataUrl : message.senderAvatarDataUrl;
+        identity.append(createAvatar(name, senderAvatar), sender);
+        item.prepend(identity);
       }
       let structured = null;
       try { structured = JSON.parse(text); } catch (_error) { }
@@ -1224,6 +1516,10 @@
         do {
           const payload = await window.ALevelApi.syncChatEvents(conversationId, state.cursor);
           if (!conversationIsCurrent(conversationId, generation)) return;
+          if (payload?.hidden) {
+            forgetHistoricalConversation(conversationId);
+            return;
+          }
           const events = Array.isArray(payload?.events) ? payload.events : [];
           const incoming = events.filter((event) => event.type === "message" && event.message).map((event) => event.message);
           const controlsChanged = events.some((event) => !["message", "deleted"].includes(event.type));
@@ -1258,6 +1554,11 @@
       }
       const payload = await window.ALevelApi.syncChatMessages(conversationId, state.cursor);
       if (state.syncGeneration !== generation || state.activeConversation?.id !== conversationId) return;
+      if (payload?.hidden) {
+        forgetHistoricalConversation(conversationId);
+        return;
+      }
+      if (!state.device) return;
       const fresh = await decryptMessages(payload.messages || []);
       if (!conversationIsCurrent(conversationId, generation)) return;
       const known = new Set(state.messages.map((message) => message.id));
@@ -1279,8 +1580,9 @@
     stopPolling();
     state.pollTimer = window.setInterval(() => {
       if (document.hidden || !state.activeConversation) return;
-      syncConversation().catch((error) => setStatus(formatActionError(error), true));
-    }, 5000);
+      if (!state.syncInFlight) syncConversation().catch((error) => setStatus(formatActionError(error), true));
+      if (Date.now() - state.lastProfileRefresh >= 30000) refreshPresentation().catch(() => {});
+    }, 3000);
   }
 
   async function openRealtime() {
@@ -1323,6 +1625,8 @@
     state.socket = null;
     state.syncInFlight = null;
     state.activeConversation = conversation;
+    closeEmojiPicker();
+    state.emojiSelection = null;
     $("#messageInput").value = state.messageDrafts.get(conversation.id) || "";
     $("#imageInput").value = "";
     state.messages = [];
@@ -1345,6 +1649,7 @@
         }
         if (!state.device) {
           setStatus("This historical chat needs its original device to decrypt messages.", true);
+          startPolling();
           return;
         }
       } else {
@@ -1497,7 +1802,7 @@
     }
     state.profile = profile;
     state.contacts = contacts;
-    state.conversations = conversations;
+    state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
     state.peerBundles.clear();
     state.conversationBundles.clear();
     state.ownBundle = null;
@@ -1505,7 +1810,7 @@
     state.accountContactStatus.clear();
     state.accountContactRequests.clear();
     if (state.activeConversation) {
-      const refreshed = conversations.find((conversation) => conversation.id === state.activeConversation.id);
+      const refreshed = state.conversations.find((conversation) => conversation.id === state.activeConversation.id);
       state.activeConversation = refreshed || null;
       if (!refreshed) {
         state.syncGeneration += 1;
@@ -1523,10 +1828,43 @@
       await updateRecoveryAvailability();
     }
     renderInvites(invites);
+    state.lastProfileRefresh = Date.now();
+    renderChatProfile();
     renderContacts();
     renderActiveConversation();
     if (!state.activeConversation) renderMessages();
     if (!state.accountMode) renderDevices();
+  }
+
+  async function refreshPresentation() {
+    if (state.profileRefreshInFlight) return state.profileRefreshInFlight;
+    const generation = state.dataRefreshGeneration;
+    const selectionGeneration = state.syncGeneration;
+    state.profileRefreshInFlight = (async () => {
+      const [profile, contacts, conversations] = await Promise.all([
+        window.ALevelApi.getChatProfile(), window.ALevelApi.listChatContacts(), window.ALevelApi.listChatConversations(),
+      ]);
+      if (generation !== state.dataRefreshGeneration || selectionGeneration !== state.syncGeneration) return;
+      state.dataRefreshGeneration += 1;
+      state.lastProfileRefresh = Date.now();
+      state.profile = profile;
+      state.contacts = contacts;
+      state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
+      if (state.activeConversation) {
+        const refreshed = state.conversations.find((conversation) => conversation.id === state.activeConversation.id);
+        if (!refreshed) {
+          forgetHistoricalConversation(state.activeConversation.id, false);
+          renderChatProfile();
+          return;
+        }
+        state.activeConversation = refreshed;
+      }
+      renderChatProfile();
+      renderContacts();
+      renderActiveConversation();
+      renderMessages();
+    })().finally(() => { state.profileRefreshInFlight = null; });
+    return state.profileRefreshInFlight;
   }
 
   async function ensurePrekeys() {
@@ -1768,6 +2106,23 @@
   }
 
   function wireEvents() {
+    $("#editChatProfile")?.addEventListener("click", () => {
+      if (state.profileSaving) return;
+      $("#chatProfileForm").hidden = false;
+      renderChatProfile();
+      $("#chatProfileAlias").focus();
+    });
+    $("#chatProfileForm")?.addEventListener("submit", saveChatProfile);
+    $("#cancelChatProfile")?.addEventListener("click", closeProfileEditor);
+    $("#chatProfileAlias")?.addEventListener("input", () => { state.profileDirty = true; renderChatProfile(); });
+    $("#chatProfileAvatarInput")?.addEventListener("change", (event) => prepareProfileAvatar(event.target.files?.[0]));
+    $("#removeChatProfileAvatar")?.addEventListener("click", () => {
+      if (state.profileSaving || state.profileAvatarProcessing) return;
+      state.profileDraftAvatar = "";
+      state.profileDirty = true;
+      renderChatProfile();
+    });
+    $("#deleteHistoricalChat")?.addEventListener("click", deleteHistoricalChat);
     $("#enableAccountSync")?.addEventListener("click", setupAccountSync);
     $("#unlockAccountSync")?.addEventListener("click", unlockAccountSync);
     $("#groupManageButton")?.addEventListener("click", () => {
@@ -1834,11 +2189,61 @@
     $("#refreshChat")?.addEventListener("click", () => refreshData().catch((error) => setStatus(formatActionError(error), true)));
     $("#messageForm")?.addEventListener("submit", sendMessage);
     $("#imageInput")?.addEventListener("change", (event) => sendImage(event.target.files?.[0]).catch((error) => setStatus(t("chatAttachmentFailed", "Image upload failed: {message}", { message: formatActionError(error) }), true)));
-    $("#emojiButton")?.addEventListener("click", () => { $("#emojiTray").hidden = !$("#emojiTray").hidden; });
-    $("#emojiTray")?.addEventListener("click", (event) => {
-      if (event.target.tagName !== "BUTTON") return;
-      $("#messageInput").value += event.target.textContent;
-      $("#messageInput").focus();
+    $("#messageInput")?.addEventListener("input", () => {
+      if (state.activeConversation) state.messageDrafts.set(state.activeConversation.id, $("#messageInput").value);
+    });
+    $("#emojiButton")?.addEventListener("click", () => {
+      if ($("#messageInput").disabled) return;
+      if (!$("#emojiTray").hidden) { closeEmojiPicker(); return; }
+      const input = $("#messageInput");
+      state.emojiSelection = { conversationId: state.activeConversation?.id, start: input.selectionStart, end: input.selectionEnd };
+      $("#emojiTray").hidden = false;
+      $("#emojiButton").setAttribute("aria-expanded", "true");
+      renderEmojiPicker();
+      $("#emojiSearch").focus();
+    });
+    $("#emojiSearch")?.addEventListener("input", renderEmojiPicker);
+    $("#emojiSearch")?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        $("#emojiGrid button")?.focus();
+      }
+    });
+    $("#emojiCategories")?.addEventListener("click", (event) => {
+      const category = event.target.closest("button[data-category]");
+      if (!category) return;
+      state.emojiCategory = category.dataset.category;
+      $("#emojiSearch").value = "";
+      renderEmojiPicker();
+      $("#emojiCategories").querySelector(`[data-category="${state.emojiCategory}"]`)?.focus();
+    });
+    $("#emojiGrid")?.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-emoji]");
+      if (button) insertEmoji(button.dataset.emoji);
+    });
+    $("#emojiGrid")?.addEventListener("keydown", (event) => {
+      const buttons = [...$("#emojiGrid").querySelectorAll("button[data-emoji]")];
+      const index = buttons.indexOf(event.target);
+      if (index < 0) return;
+      const columns = getComputedStyle($("#emojiGrid")).gridTemplateColumns.split(" ").length;
+      const offsets = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -columns, ArrowDown: columns };
+      let next = offsets[event.key] == null ? null : index + offsets[event.key];
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = buttons.length - 1;
+      if (next != null) { event.preventDefault(); buttons[Math.max(0, Math.min(buttons.length - 1, next))]?.focus(); }
+    });
+    $("#emojiTray")?.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") { event.preventDefault(); closeEmojiPicker(); $("#messageInput").focus(); }
+    });
+    document.addEventListener("click", (event) => {
+      const path = event.composedPath();
+      if (!path.includes($("#emojiTray")) && !path.includes($("#emojiButton"))) closeEmojiPicker();
+    });
+    window.addEventListener("alevel:languagechange", () => {
+      renderChatProfile();
+      renderContacts();
+      renderActiveConversation();
+      if (!$("#emojiTray").hidden) renderEmojiPicker();
     });
     $("#retentionSelect")?.addEventListener("change", async (event) => {
       if (!state.activeConversation) return;
@@ -1873,6 +2278,7 @@
       wireEvents();
       if (invite) $("#inviteToken").value = invite;
       state.profile = await window.ALevelApi.getChatProfile();
+      renderChatProfile();
       const accountConfigured = await ensureAccountState();
       if (accountConfigured) {
         if (state.accountV2?.unlocked) {

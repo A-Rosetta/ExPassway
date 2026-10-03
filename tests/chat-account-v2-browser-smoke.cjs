@@ -136,6 +136,12 @@ async function main() {
       await context.route("https://fonts.googleapis.com/**", (route) => route.fulfill({ status: 200, body: "" }));
       await context.addInitScript(({ token, userId, cancel }) => {
         localStorage.setItem("alevel.authToken", token);
+        window.__chatPollIntervals = [];
+        const realSetInterval = window.setInterval.bind(window);
+        window.setInterval = (callback, delay, ...args) => {
+          window.__chatPollIntervals.push(delay);
+          return realSetInterval(callback, delay, ...args);
+        };
         window.__cancelUnlock = cancel;
         const makeCredential = () => {
           const rawId = new TextEncoder().encode(userId).buffer;
@@ -176,7 +182,7 @@ async function main() {
     await alice.click("#sendMessage");
     await alice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
     await bob.click("#refreshChat");
-    await bob.locator("#conversationList button").filter({ has: bob.locator("strong", { hasText: "Alice" }) }).click();
+    await bob.locator("#conversationList button[data-conversation-id]").filter({ has: bob.locator("strong", { hasText: "Alice" }) }).click();
     await bob.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
     assert.equal(await bob.locator("#messageList article.is-mine").count(), 0);
     await bob.fill("#messageInput", "Bob's encrypted reply");
@@ -187,6 +193,7 @@ async function main() {
     await secondAlice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
     await secondAlice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
     await secondAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
+    assert.ok(await alice.evaluate(() => window.__chatPollIntervals.includes(3000)), "chat polling must run every three seconds");
     console.log("Browser: direct messages and second-browser vault unlock passed");
     // Retention must submit a signed control, and the peer applies its event.
     await alice.selectOption("#retentionSelect", "604800");
@@ -279,8 +286,7 @@ async function main() {
         await window.ALevelApi.initializeChatAccount({ ...vault, proof: verified.proof, reset: true });
       } finally { worker.terminate(); }
     }, { userId: users[1].id });
-    await alice.fill("#messageInput", "Must block the changed identity");
-    await alice.click("#sendMessage");
+    await alice.click("#refreshChat");
     await alice.locator("#startNewSecureChat").waitFor();
     assert.equal(await alice.isDisabled("#messageInput"), true);
     alice.once("dialog", (dialog) => dialog.dismiss());
@@ -290,7 +296,7 @@ async function main() {
     await alice.click("#startNewSecureChat");
     await alice.waitForFunction(() => document.querySelector("#chatStatus").textContent.includes("New secure conversation created"));
     const resetBob = await openUser(users[1], { existing: true });
-    await resetBob.locator("#conversationList button").filter({ has: resetBob.locator("strong", { hasText: "Alice" }) }).first().click();
+    await resetBob.locator("#conversationList button[data-conversation-id]").filter({ has: resetBob.locator("strong", { hasText: "Alice" }) }).first().click();
     await alice.fill("#messageInput", "Confirmed new private identity");
     await alice.click("#sendMessage");
     await resetBob.locator("#messageList").getByText("Confirmed new private identity", { exact: true }).waitFor();
@@ -317,16 +323,137 @@ async function main() {
     await resetBob.locator("#messageList").getByText("Group restored after explicit identity replacement", { exact: true }).waitFor();
     assert.equal(await resetBob.locator("#messageList").getByText("Before Carol joined", { exact: true }).count(), 0);
     console.log("Browser: identity reset confirmation and group recovery passed");
+
+    // Removing historical chats is account-specific and propagates to another
+    // browser without changing the peer's membership or ciphertext history.
+    const oldDirectId = calls.find((call) => call.user === "Alice" && call.path === "/api/chat/messages").body.conversationId;
+    const conversationButton = (page, id) => page.locator(`#conversationList button[data-conversation-id="${id}"]`);
+    for (const page of [alice, secondAlice]) {
+      await page.click("#refreshChat");
+      await conversationButton(page, oldDirectId).click();
+      await page.locator("#deleteHistoricalChat").waitFor({ state: "visible" });
+    }
+    const historyCount = await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_messages WHERE conversation_id=?").bind(oldDirectId).first();
+    alice.once("dialog", (dialog) => dialog.dismiss());
+    await alice.click("#deleteHistoricalChat");
+    assert.equal(await conversationButton(alice, oldDirectId).count(), 1);
+    alice.once("dialog", (dialog) => dialog.accept());
+    await alice.click("#deleteHistoricalChat");
+    await alice.locator("#conversationEmpty").waitFor({ state: "visible" });
+    await secondAlice.locator("#conversationEmpty").waitFor({ state: "visible" });
+    assert.equal(await conversationButton(secondAlice, oldDirectId).count(), 0);
+    await resetBob.click("#refreshChat");
+    assert.equal(await conversationButton(resetBob, oldDirectId).count(), 1, "the other account must keep its own historical chat");
+    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_messages WHERE conversation_id=?").bind(oldDirectId).first()).count, historyCount.count);
+
+    const legacyId = randomUUID();
+    await env.DB.prepare("INSERT INTO chat_conversations (id,kind,created_by,retention_seconds,created_at,updated_at) VALUES (?,'direct',?,0,?,?)")
+      .bind(legacyId, users[0].id, timestamp, timestamp).run();
+    for (const user of [users[0], users[2]]) await env.DB.prepare("INSERT INTO chat_conversation_members (conversation_id,user_id,joined_at) VALUES (?,?,?)")
+      .bind(legacyId, user.id, timestamp).run();
+    await alice.click("#refreshChat");
+    await conversationButton(alice, legacyId).click();
+    await alice.locator("#deleteHistoricalChat").waitFor({ state: "visible" });
+    assert.equal(await alice.isDisabled("#messageInput"), true);
+    alice.once("dialog", (dialog) => dialog.accept());
+    await alice.click("#deleteHistoricalChat");
+    await alice.locator("#conversationEmpty").waitFor({ state: "visible" });
+    await alice.click("#refreshChat");
+    await alice.waitForFunction((id) => !document.querySelector(`#conversationList button[data-conversation-id="${id}"]`), legacyId);
+    await carol.click("#refreshChat");
+    await conversationButton(carol, legacyId).waitFor();
+    console.log("Browser: historical chat removal, cancellation and account isolation passed");
+
+    // Profile edits preserve unsaved input during refresh and synchronize without
+    // changing the account's encryption identity or touching its encrypted vault.
+    const identityBefore = await env.DB.prepare("SELECT key_version FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first();
+    const avatarPng = Buffer.from(await alice.evaluate(() => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 48; canvas.height = 48;
+      const context = canvas.getContext("2d");
+      context.fillStyle = "#629d68"; context.fillRect(0, 0, 48, 48);
+      context.fillStyle = "#ffffff"; context.fillRect(12, 12, 24, 24);
+      return canvas.toDataURL("image/png").split(",")[1];
+    }), "base64");
+    await alice.click("#editChatProfile");
+    await alice.fill("#chatProfileAlias", "Agent R");
+    await alice.setInputFiles("#chatProfileAvatarInput", { name: "avatar.png", mimeType: "image/png", buffer: avatarPng });
+    await alice.locator("#chatProfileAvatarPreview img").waitFor();
+    await alice.click("#refreshChat");
+    assert.equal(await alice.inputValue("#chatProfileAlias"), "Agent R", "refresh must preserve unsaved profile edits");
+    await alice.click("#saveChatProfile");
+    await alice.waitForFunction(() => document.querySelector("#chatProfileName").textContent === "Agent R");
+    await alice.waitForFunction(() => document.querySelector("#chatProfileAvatar img")?.naturalWidth > 0);
+    const savedProfile = await alice.evaluate(() => window.ALevelApi.getChatProfile());
+    assert.match(savedProfile.avatarDataUrl, /^data:image\/(webp|jpeg|png);base64,/);
+    assert.ok(savedProfile.avatarDataUrl.length < 350000);
+    await secondAlice.click("#refreshChat");
+    await secondAlice.waitForFunction(() => document.querySelector("#chatProfileName").textContent === "Agent R");
+    await secondAlice.locator("#chatProfileAvatar img").waitFor();
+    await resetBob.click("#refreshChat");
+    await conversationButton(resetBob, attachmentConversation).click();
+    await resetBob.click("#groupManageButton");
+    await resetBob.locator("#groupMemberList > .chat-device-item").filter({ hasText: "Agent R" }).locator("img").waitFor();
+    await conversationButton(alice, attachmentConversation).click();
+    await alice.fill("#messageInput", "Profile avatar before removal");
+    await alice.click("#sendMessage");
+    await resetBob.locator("#messageList article").filter({ hasText: "Profile avatar before removal" }).locator("img").waitFor();
+    const profileWrites = calls.filter((call) => call.method === "PATCH" && call.path === "/api/chat/profile").length;
+    await alice.click("#editChatProfile");
+    if (process.env.CHAT_QA_SCREENSHOT) {
+      const directory = path.dirname(path.resolve(process.env.CHAT_QA_SCREENSHOT));
+      await fs.mkdir(directory, { recursive: true });
+      await alice.locator(".chat-profile-panel").screenshot({ path: path.join(directory, "chat-profile.png") });
+      await alice.setViewportSize({ width: 390, height: 844 });
+      await alice.locator(".chat-profile-panel").screenshot({ path: path.join(directory, "chat-profile-mobile.png") });
+      assert.ok(await alice.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), "the profile editor must fit the mobile viewport");
+      await alice.setViewportSize({ width: 1440, height: 980 });
+    }
+    await alice.fill("#chatProfileAlias", "Canceled nickname");
+    await alice.click("#cancelChatProfile");
+    assert.equal(calls.filter((call) => call.method === "PATCH" && call.path === "/api/chat/profile").length, profileWrites);
+    await alice.click("#editChatProfile");
+    await alice.click("#removeChatProfileAvatar");
+    await alice.click("#saveChatProfile");
+    await alice.locator("#chatProfileForm").waitFor({ state: "hidden" });
+    assert.equal((await alice.evaluate(() => window.ALevelApi.getChatProfile())).avatarDataUrl, "");
+    await resetBob.click("#refreshChat");
+    await resetBob.waitForFunction(() => [...document.querySelectorAll("#messageList article")]
+      .some((article) => article.textContent.includes("Profile avatar before removal") && !article.querySelector("img")));
+    assert.deepEqual(await env.DB.prepare("SELECT key_version FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first(), identityBefore);
+    console.log("Browser: nickname, avatar, profile cancellation and identity preservation passed");
+
+    await conversationButton(alice, attachmentConversation).click();
+    assert.equal(await alice.locator("#deleteHistoricalChat").isVisible(), false, "active groups must use their membership controls");
+    await alice.fill("#messageInput", "AC");
+    await alice.locator("#messageInput").evaluate((input) => input.setSelectionRange(1, 1));
+    await alice.click("#emojiButton");
+    await alice.locator('#emojiCategories [data-category="all"]').click();
+    assert.equal(await alice.locator("#emojiTray").isVisible(), true, "category changes must keep the picker open");
+    assert.ok(await alice.locator("#emojiGrid [data-emoji]").count() >= 120);
+    await alice.fill("#emojiSearch", "rocket");
+    await alice.locator('#emojiGrid [data-emoji="🚀"]').first().click();
+    assert.equal(await alice.inputValue("#messageInput"), "A🚀C");
+    await alice.click("#sendMessage");
+    await resetBob.locator("#messageList").getByText("A🚀C", { exact: true }).waitFor();
+    console.log("Browser: expanded emoji search, caret insertion and encrypted delivery passed");
     assert.deepEqual(pageErrors, []);
     assert.deepEqual(consoleErrors, []);
     if (process.env.CHAT_QA_SCREENSHOT) {
       const screenshot = path.resolve(process.env.CHAT_QA_SCREENSHOT);
       await fs.mkdir(path.dirname(screenshot), { recursive: true });
       await carol.locator("#messageList").getByText("Group restored after explicit identity replacement", { exact: true }).waitFor();
-      await carol.screenshot({ path: screenshot });
+      if (!await alice.locator("#emojiTray").isVisible()) await alice.click("#emojiButton");
+      await alice.locator('#emojiCategories [data-category="all"]').click();
+      await alice.fill("#emojiSearch", "");
+      await alice.locator("#emojiTray").scrollIntoViewIfNeeded();
+      await alice.screenshot({ path: screenshot });
       console.log(`Browser screenshot: ${screenshot}`);
-      await carol.setViewportSize({ width: 390, height: 844 });
-      await carol.screenshot({ path: path.join(path.dirname(screenshot), "chat-mobile.png") });
+      await alice.setViewportSize({ width: 390, height: 844 });
+      await alice.locator("#emojiTray").scrollIntoViewIfNeeded();
+      const emojiBounds = await alice.locator("#emojiTray").boundingBox();
+      assert.ok(emojiBounds.x >= 0 && emojiBounds.x + emojiBounds.width <= 391, "the emoji picker must fit the mobile viewport");
+      await alice.screenshot({ path: path.join(path.dirname(screenshot), "chat-mobile.png") });
     }
     console.log("account-v2 browser smoke passed (real Worker + API; mocked Passkey ceremony)");
   } catch (error) {

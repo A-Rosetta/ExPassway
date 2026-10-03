@@ -80,7 +80,7 @@ async function member(db, conversationId, userId, allowLeft = false) {
   return row;
 }
 async function members(db, conversationId) {
-  return rows(db.prepare(`SELECT m.*, p.chat_alias FROM chat_conversation_members m LEFT JOIN chat_profiles p ON p.user_id = m.user_id
+  return rows(db.prepare(`SELECT m.*, p.chat_alias, p.avatar_data_url FROM chat_conversation_members m LEFT JOIN chat_profiles p ON p.user_id = m.user_id
     WHERE m.conversation_id = ? AND m.left_at IS NULL ORDER BY m.joined_at, m.user_id`).bind(conversationId));
 }
 async function contactUsers(db, userId, contactIds) {
@@ -158,17 +158,30 @@ async function broadcast(db, env, conversationId) {
   }
   return Number(event?.sequence || 0);
 }
+export async function isHistoricalConversation(db, row) {
+  if (row.protocol_version !== VERSION) return true;
+  if (row.kind !== "direct") return false;
+  // A reset by either participant makes this immutable direct epoch historical.
+  const changed = await db.prepare(`SELECT 1 FROM chat_conversation_members m
+    LEFT JOIN chat_epoch_recipients r ON r.conversation_id = m.conversation_id
+      AND r.epoch = ? AND r.user_id = m.user_id
+    LEFT JOIN chat_account_identity_heads h ON h.user_id = m.user_id
+    WHERE m.conversation_id = ? AND m.left_at IS NULL
+      AND (r.key_version IS NULL OR h.key_version IS NULL OR r.key_version <> h.key_version)
+    LIMIT 1`).bind(row.current_epoch, row.id).first();
+  return Boolean(changed);
+}
 export async function mapAccountConversation(db, row, userId) {
   if (row.protocol_version !== VERSION) return null;
   const active = await members(db, row.id);
   const mapped = [];
   for (const m of active) {
     const contact = m.user_id === userId ? null : await db.prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ?").bind(userId, m.user_id).first();
-    mapped.push({ userId: m.user_id, alias: m.chat_alias || "Paired contact", role: m.role, joinedAt: m.joined_at, isSelf: m.user_id === userId, contactId: contact?.id || null, accountKey: bundle(await activeKey(db, m.user_id)) });
+    mapped.push({ userId: m.user_id, alias: m.chat_alias || "Paired contact", avatarDataUrl: m.avatar_data_url || "", role: m.role, joinedAt: m.joined_at, isSelf: m.user_id === userId, contactId: contact?.id || null, accountKey: bundle(await activeKey(db, m.user_id)) });
   }
   const data = await db.prepare("SELECT * FROM chat_group_metadata WHERE conversation_id = ?").bind(row.id).first();
   const last = await db.prepare("SELECT created_at FROM chat_messages WHERE conversation_id = ? ORDER BY created_at DESC LIMIT 1").bind(row.id).first();
-  return { id: row.id, kind: row.kind, protocolVersion: VERSION, epoch: Number(row.current_epoch), currentEpoch: Number(row.current_epoch),
+  return { id: row.id, kind: row.kind, protocolVersion: VERSION, historical: await isHistoricalConversation(db, row), epoch: Number(row.current_epoch), currentEpoch: Number(row.current_epoch),
     rotationRequired: Boolean(row.rotation_required), role: mapped.find((m) => m.isSelf)?.role || null, retentionSeconds: row.retention_seconds,
     createdAt: row.created_at, updatedAt: row.updated_at, lastMessageAt: last?.created_at || null, legacySourceId: row.legacy_source_id || null,
     members: mapped, group: row.kind === "group" ? { members: mapped, memberCount: mapped.length } : null,
@@ -313,12 +326,12 @@ async function sendable(db, conversation, userId, senderKeyId, epoch) {
 function mapMessage(row) {
   return { id: row.id, conversationId: row.conversation_id, protocolVersion: VERSION, version: VERSION,
     senderUserId: row.sender_user_id, senderKeyId: row.sender_key_id, senderSigningPublicKey: row.signing_public_key,
-    senderAlias: row.chat_alias || "Paired contact", clientMessageId: row.client_message_id, contentEpoch: row.content_epoch, epoch: row.content_epoch,
+    senderAlias: row.chat_alias || "Paired contact", senderAvatarDataUrl: row.avatar_data_url || "", clientMessageId: row.client_message_id, contentEpoch: row.content_epoch, epoch: row.content_epoch,
     nonce: row.deleted_at ? null : row.nonce, ciphertext: row.deleted_at ? "" : row.ciphertext, signature: row.deleted_at ? null : row.signature,
     attachmentRefs: row.deleted_at ? [] : JSON.parse(row.attachment_refs), createdAt: row.created_at, expiresAt: row.expires_at, deleted: Boolean(row.deleted_at) };
 }
 async function messageById(db, messageId) {
-  return db.prepare(`SELECT m.*, k.signing_public_key, p.chat_alias FROM chat_messages m
+  return db.prepare(`SELECT m.*, k.signing_public_key, p.chat_alias, p.avatar_data_url FROM chat_messages m
     LEFT JOIN chat_account_keys k ON k.user_id = m.sender_user_id AND k.key_version = m.sender_key_id
     LEFT JOIN chat_profiles p ON p.user_id = m.sender_user_id WHERE m.id = ?`).bind(messageId).first();
 }
@@ -500,7 +513,7 @@ export async function handleAccountV2Route(request, env, user) {
   }
   if (!enabled(env)) fail(503, "CHAT_ACCOUNT_V2_DISABLED", "Account sync is disabled.");
   if (parts[2] === "conversations" && !parts[3] && method === "GET") {
-    const rows = await db.prepare(`SELECT c.* FROM chat_conversations c JOIN chat_conversation_members m ON m.conversation_id=c.id AND m.user_id=? AND m.left_at IS NULL WHERE c.protocol_version='account-v2' AND c.deleted_at IS NULL ORDER BY c.updated_at DESC`).bind(user.id).all();
+    const rows = await db.prepare(`SELECT c.* FROM chat_conversations c JOIN chat_conversation_members m ON m.conversation_id=c.id AND m.user_id=? AND m.left_at IS NULL AND m.history_hidden_at IS NULL WHERE c.protocol_version='account-v2' AND c.deleted_at IS NULL ORDER BY c.updated_at DESC`).bind(user.id).all();
     const result = [];
     for (const row of rows.results || []) result.push(await mapAccountConversation(db, row, user.id));
     return success(result, method);

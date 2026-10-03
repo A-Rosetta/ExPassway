@@ -13,13 +13,14 @@ import {
   verifyRegistrationResponse,
   webAuthnContext,
 } from "./webauthn.js";
-import { handleAccountV2Route, cleanupAccountV2, mapAccountConversation } from "./chat-account-v2.js";
+import { handleAccountV2Route, cleanupAccountV2, mapAccountConversation, isHistoricalConversation } from "./chat-account-v2.js";
 
 const encoder = new TextEncoder();
 const MAX_CIPHERTEXT_LENGTH = 512 * 1024;
 const MAX_PROFILE_CIPHERTEXT_LENGTH = 64 * 1024;
 const MAX_EVIDENCE_LENGTH = 2 * 1024 * 1024;
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+const MAX_AVATAR_BYTES = 256 * 1024;
 const MAX_GROUP_MEMBERS = 50;
 const RETENTION_OPTIONS = new Set([86400, 604800, 2592000, 0]);
 
@@ -64,6 +65,34 @@ function boundedString(value, field, maxLength) {
     throw new AuthError(413, `Field "${field}" is too large.`, "PAYLOAD_TOO_LARGE");
   }
   return normalized;
+}
+
+function validateAvatarDataUrl(value) {
+  if (value === "") return "";
+  if (typeof value !== "string")
+    throw new AuthError(400, "Choose a PNG, JPEG or WebP avatar.", "INVALID_CHAT_AVATAR");
+  if (value.length > Math.ceil(MAX_AVATAR_BYTES / 3) * 4 + 32)
+    throw new AuthError(413, "The avatar must be no larger than 256 KiB.", "CHAT_AVATAR_TOO_LARGE");
+  const match = /^data:image\/(png|jpeg|webp);base64,([A-Za-z0-9+/]+={0,2})$/.exec(value);
+  let binary;
+  try {
+    if (!match) throw new Error("format");
+    binary = atob(match[2]);
+    if (btoa(binary) !== match[2]) throw new Error("noncanonical");
+  } catch (_) {
+    throw new AuthError(400, "Choose a valid PNG, JPEG or WebP avatar.", "INVALID_CHAT_AVATAR");
+  }
+  if (binary.length > MAX_AVATAR_BYTES)
+    throw new AuthError(413, "The avatar must be no larger than 256 KiB.", "CHAT_AVATAR_TOO_LARGE");
+  const byte = (index) => binary.charCodeAt(index);
+  const png = binary.length >= 24 && [137, 80, 78, 71, 13, 10, 26, 10].every((n, i) => byte(i) === n)
+    && binary.slice(12, 16) === "IHDR";
+  const jpeg = binary.length >= 4 && byte(0) === 255 && byte(1) === 216 && byte(2) === 255;
+  const webp = binary.length >= 16 && binary.slice(0, 4) === "RIFF" && binary.slice(8, 12) === "WEBP"
+    && ["VP8 ", "VP8L", "VP8X"].includes(binary.slice(12, 16));
+  if (!(match[1] === "png" ? png : match[1] === "jpeg" ? jpeg : webp))
+    throw new AuthError(400, "The avatar content does not match its image type.", "INVALID_CHAT_AVATAR");
+  return value;
 }
 
 async function sha256Base64Url(value) {
@@ -186,7 +215,7 @@ async function ensureProfile(db, userId, fingerprint = "") {
   const existing = await db
     .prepare(
       `
-    SELECT user_id, chat_alias, identity_fingerprint, profile_ciphertext, created_at, updated_at
+    SELECT user_id, chat_alias, identity_fingerprint, profile_ciphertext, avatar_data_url, created_at, updated_at
     FROM chat_profiles WHERE user_id = ?
   `
     )
@@ -221,7 +250,7 @@ async function ensureProfile(db, userId, fingerprint = "") {
         .run();
       return await db
         .prepare(
-          `SELECT user_id, chat_alias, identity_fingerprint, profile_ciphertext, created_at, updated_at
+          `SELECT user_id, chat_alias, identity_fingerprint, profile_ciphertext, avatar_data_url, created_at, updated_at
         FROM chat_profiles WHERE user_id = ?`
         )
         .bind(userId)
@@ -237,6 +266,7 @@ function mapProfile(row) {
   return {
     id: row.user_id,
     alias: row.chat_alias,
+    avatarDataUrl: row.avatar_data_url || "",
     identityFingerprint: row.identity_fingerprint || null,
     profileCiphertext: row.profile_ciphertext || "",
   };
@@ -358,7 +388,7 @@ async function requireContact(db, contactId, userId) {
     .prepare(
       `
     SELECT c.id, c.user_id, c.peer_user_id, c.created_at, c.accepted_at,
-      p.chat_alias, p.identity_fingerprint, p.profile_ciphertext
+      p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url
     FROM chat_contacts c
     LEFT JOIN chat_profiles p ON p.user_id = c.peer_user_id
     WHERE c.id = ? AND c.user_id = ?
@@ -392,7 +422,7 @@ async function mapConversation(db, row, userId) {
     const memberRows = await db
       .prepare(
         `
-      SELECT m.user_id, m.role, m.joined_at, p.chat_alias, p.identity_fingerprint,
+      SELECT m.user_id, m.role, m.joined_at, p.chat_alias, p.identity_fingerprint, p.avatar_data_url,
         (SELECT COUNT(*) FROM chat_devices d WHERE d.user_id = m.user_id AND d.revoked_at IS NULL) AS device_count
       FROM chat_conversation_members m
       LEFT JOIN chat_profiles p ON p.user_id = m.user_id
@@ -414,6 +444,7 @@ async function mapConversation(db, row, userId) {
       members.push({
         contactId: contact?.id || null,
         alias: member.user_id === userId ? null : member.chat_alias || "Paired contact",
+        avatarDataUrl: member.avatar_data_url || "",
         role: member.role,
         deviceCount: Number(member.device_count || 0),
         identityFingerprint: member.identity_fingerprint || null,
@@ -431,6 +462,8 @@ async function mapConversation(db, row, userId) {
     return {
       id: row.id,
       kind: row.kind,
+      protocolVersion: row.protocol_version || "signal-v1",
+      historical: true,
       retentionSeconds: Number(row.retention_seconds),
       createdAt: row.created_at,
       updatedAt: row.updated_at,
@@ -442,7 +475,7 @@ async function mapConversation(db, row, userId) {
   const peer = await db
     .prepare(
       `
-    SELECT m.user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext,
+    SELECT m.user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url,
       d.id AS device_id, d.device_number
     FROM chat_conversation_members m
     LEFT JOIN chat_profiles p ON p.user_id = m.user_id
@@ -470,6 +503,8 @@ async function mapConversation(db, row, userId) {
   return {
     id: row.id,
     kind: row.kind,
+    protocolVersion: row.protocol_version || "signal-v1",
+    historical: true,
     retentionSeconds: Number(row.retention_seconds),
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -480,6 +515,7 @@ async function mapConversation(db, row, userId) {
           deviceId: peer.device_id || null,
           deviceNumber: peer.device_number || null,
           alias: peer.chat_alias || "Paired contact",
+          avatarDataUrl: peer.avatar_data_url || "",
           identityFingerprint: peer.identity_fingerprint || null,
           profileCiphertext: peer.profile_ciphertext || "",
         }
@@ -719,7 +755,7 @@ async function listContacts(db, userId) {
   const rows = await db
     .prepare(
       `
-    SELECT c.id, c.created_at, c.accepted_at, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext
+    SELECT c.id, c.created_at, c.accepted_at, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url
     FROM chat_contacts c
     LEFT JOIN chat_profiles p ON p.user_id = c.peer_user_id
     WHERE c.user_id = ? ORDER BY c.accepted_at DESC
@@ -733,6 +769,7 @@ async function listContacts(db, userId) {
     acceptedAt: row.accepted_at,
     profile: {
       alias: row.chat_alias || "Paired contact",
+      avatarDataUrl: row.avatar_data_url || "",
       identityFingerprint: row.identity_fingerprint || null,
       profileCiphertext: row.profile_ciphertext || "",
     },
@@ -1225,6 +1262,7 @@ async function getPrekeyBundle(db, contactId, userId) {
     contactId,
     profile: {
       alias: contact.chat_alias || "Paired contact",
+      avatarDataUrl: contact.avatar_data_url || "",
       identityFingerprint: contact.identity_fingerprint || null,
       profileCiphertext: contact.profile_ciphertext || "",
     },
@@ -1282,7 +1320,7 @@ async function getConversationPrekeyBundle(db, conversationId, userId) {
   const members = await db
     .prepare(
       `
-    SELECT m.user_id, p.chat_alias
+    SELECT m.user_id, p.chat_alias, p.avatar_data_url
     FROM chat_conversation_members m
     LEFT JOIN chat_profiles p ON p.user_id = m.user_id
     WHERE m.conversation_id = ? AND m.user_id <> ? AND m.left_at IS NULL
@@ -1337,6 +1375,7 @@ async function getConversationPrekeyBundle(db, conversationId, userId) {
     result.push({
       userId: member.user_id,
       alias: member.chat_alias || "Paired contact",
+      avatarDataUrl: member.avatar_data_url || "",
       devices: deviceBundle,
     });
   }
@@ -1426,7 +1465,7 @@ async function syncMessages(db, userId, url) {
         .prepare(
           `
       SELECT m.id, m.conversation_id, m.sender_device_id, m.sender_user_id, m.sender_key_id,
-        d.device_number AS sender_device_number, p.chat_alias AS sender_alias,
+        d.device_number AS sender_device_number, p.chat_alias AS sender_alias, p.avatar_data_url AS sender_avatar_data_url,
         ak.signing_public_key AS sender_signing_public_key,
         m.client_message_id, m.protocol_version, m.content_epoch, m.nonce, m.signature,
         m.ciphertext, m.attachment_refs, m.size_bucket,
@@ -1444,7 +1483,7 @@ async function syncMessages(db, userId, url) {
         .prepare(
           `
       SELECT m.id, m.conversation_id, m.sender_device_id, m.sender_user_id, m.sender_key_id,
-        d.device_number AS sender_device_number, p.chat_alias AS sender_alias,
+        d.device_number AS sender_device_number, p.chat_alias AS sender_alias, p.avatar_data_url AS sender_avatar_data_url,
         ak.signing_public_key AS sender_signing_public_key,
         m.client_message_id, m.protocol_version, m.content_epoch, m.nonce, m.signature,
         m.ciphertext, m.attachment_refs, m.size_bucket,
@@ -1465,6 +1504,7 @@ async function syncMessages(db, userId, url) {
     senderKeyId: row.sender_key_id || null,
     senderDeviceNumber: row.sender_device_number,
     senderAlias: row.sender_alias || "Paired contact",
+    senderAvatarDataUrl: row.sender_avatar_data_url || "",
     senderSigningPublicKey: row.sender_signing_public_key || null,
     clientMessageId: row.client_message_id,
     protocolVersion: row.protocol_version,
@@ -1559,14 +1599,14 @@ async function postMessage(db, env, userId, body) {
     const existingSender = existing.sender_device_id
       ? await db
           .prepare(
-            `SELECT d.device_number, p.chat_alias AS sender_alias
+            `SELECT d.device_number, p.chat_alias AS sender_alias, p.avatar_data_url AS sender_avatar_data_url
           FROM chat_devices d LEFT JOIN chat_profiles p ON p.user_id = d.user_id WHERE d.id = ?`
           )
           .bind(existing.sender_device_id)
           .first()
       : await db
           .prepare(
-            "SELECT NULL AS device_number, chat_alias AS sender_alias FROM chat_profiles WHERE user_id = ?"
+            "SELECT NULL AS device_number, chat_alias AS sender_alias, avatar_data_url AS sender_avatar_data_url FROM chat_profiles WHERE user_id = ?"
           )
           .bind(userId)
           .first();
@@ -1577,6 +1617,7 @@ async function postMessage(db, env, userId, body) {
         senderDeviceId: existing.sender_device_id,
         senderDeviceNumber: existingSender?.device_number || null,
         senderAlias: existingSender?.sender_alias || "Paired contact",
+        senderAvatarDataUrl: existingSender?.sender_avatar_data_url || "",
         clientMessageId: existing.client_message_id,
         protocolVersion: existing.protocol_version,
         ciphertext: existing.deleted_at ? "" : existing.ciphertext,
@@ -1669,6 +1710,7 @@ async function postMessage(db, env, userId, body) {
           .bind(userId)
           .first()
       )?.chat_alias || "You",
+    senderAvatarDataUrl: (await db.prepare("SELECT avatar_data_url FROM chat_profiles WHERE user_id = ?").bind(userId).first())?.avatar_data_url || "",
     clientMessageId,
     protocolVersion,
     contentEpoch: accountMessage?.epoch || null,
@@ -2378,6 +2420,28 @@ async function handleRoute(request, env, user) {
   const method = request.method;
   const db = env.DB;
 
+  // History visibility is account-local and works for both encryption protocols.
+  if (method === "DELETE" && parts.length === 5 && parts[0] === "api" && parts[1] === "chat"
+      && parts[2] === "conversations" && parts[4] === "history") {
+    const conversation = await requireConversationMember(db, parts[3], user.id);
+    const membership = await db.prepare("SELECT history_hidden_at FROM chat_conversation_members WHERE conversation_id = ? AND user_id = ?")
+      .bind(conversation.id, user.id).first();
+    if (!membership.history_hidden_at && !await isHistoricalConversation(db, conversation))
+      throw new AuthError(400, "Only a historical chat can be removed from your history.", "HISTORICAL_CHAT_REQUIRED");
+    await db.prepare("UPDATE chat_conversation_members SET history_hidden_at = COALESCE(history_hidden_at, ?) WHERE conversation_id = ? AND user_id = ?")
+      .bind(nowIso(), conversation.id, user.id).run();
+    return success({ conversationId: conversation.id, hidden: true }, method);
+  }
+  if (method === "GET" && ["/api/chat/sync", "/api/chat/sync-events"].includes(url.pathname)) {
+    const conversationId = url.searchParams.get("conversationId");
+    if (conversationId) {
+      const membership = await db.prepare("SELECT history_hidden_at FROM chat_conversation_members WHERE conversation_id = ? AND user_id = ?")
+        .bind(conversationId, user.id).first();
+      if (membership?.history_hidden_at)
+        return success({ conversationId, hidden: true, events: [], messages: [], nextCursor: null, hasMore: false }, method);
+    }
+  }
+
   // Account-v2 owns its conversation, message, attachment and sync contract.
   const accountV2Response = await handleAccountV2Route(request, env, user);
   if (accountV2Response) return accountV2Response;
@@ -2541,13 +2605,14 @@ async function handleRoute(request, env, user) {
   if (method === "GET" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "conversations" && parts[3] && parts[4] === "account-bundle") {
     ensureAccountV2Enabled(env);
     await requireConversationMember(db, parts[3], user.id);
-    const members = await db.prepare(`SELECT m.user_id,p.chat_alias,m.role
+    const members = await db.prepare(`SELECT m.user_id,p.chat_alias,p.avatar_data_url,m.role
       FROM chat_conversation_members m LEFT JOIN chat_profiles p ON p.user_id=m.user_id
       WHERE m.conversation_id=? AND m.left_at IS NULL ORDER BY m.joined_at,m.user_id`).bind(parts[3]).all();
     const result = [];
     for (const member of members.results || []) {
       const account = await accountKeyBundle(db, member.user_id);
-      result.push({ userId: member.user_id, alias: member.chat_alias || "Paired contact", role: member.role, accountKey: account.accountKey });
+      result.push({ userId: member.user_id, alias: member.chat_alias || "Paired contact",
+      avatarDataUrl: member.avatar_data_url || "", role: member.role, accountKey: account.accountKey });
     }
     return success({ conversationId: parts[3], members: result }, method);
   }
@@ -2603,11 +2668,11 @@ async function handleRoute(request, env, user) {
   }
   if (method === "PATCH" && url.pathname === "/api/chat/profile") {
     const body = await readJsonBody(request);
+    if (!body || typeof body !== "object" || Array.isArray(body))
+      throw new AuthError(400, "Chat profile must be an object.", "INVALID_CHAT_PROFILE");
     const current = await ensureProfile(db, user.id);
-    const alias =
-      typeof body.alias === "string" && body.alias.trim()
-        ? body.alias.trim().slice(0, 48)
-        : current.chat_alias;
+    const alias = body.alias === undefined ? current.chat_alias
+      : typeof body.alias === "string" ? body.alias.trim() : "";
     const profileCiphertext =
       typeof body.profileCiphertext === "string"
         ? boundedString(body.profileCiphertext, "profileCiphertext", MAX_PROFILE_CIPHERTEXT_LENGTH)
@@ -2615,16 +2680,22 @@ async function handleRoute(request, env, user) {
     if (!/^[\p{L}\p{N} _.-]{2,48}$/u.test(alias)) {
       throw new AuthError(
         400,
-        "Chat nickname contains unsupported characters.",
+        "Chat nickname must contain 2–48 letters, numbers, spaces, underscores, dots or hyphens.",
         "INVALID_CHAT_ALIAS"
       );
     }
-    await db
+    const avatarDataUrl = body.avatarDataUrl === undefined ? current.avatar_data_url || ""
+      : validateAvatarDataUrl(body.avatarDataUrl);
+    try { await db
       .prepare(
-        `UPDATE chat_profiles SET chat_alias = ?, profile_ciphertext = ?, updated_at = ? WHERE user_id = ?`
+        `UPDATE chat_profiles SET chat_alias = ?, profile_ciphertext = ?, avatar_data_url = ?, updated_at = ? WHERE user_id = ?`
       )
-      .bind(alias, profileCiphertext, nowIso(), user.id)
-      .run();
+      .bind(alias, profileCiphertext, avatarDataUrl, nowIso(), user.id)
+      .run(); } catch (error) {
+      if (/UNIQUE constraint failed:\s*chat_profiles\.chat_alias/.test(String(error?.message || error)))
+        throw new AuthError(409, "This chat nickname is already in use. Choose another one.", "CHAT_ALIAS_TAKEN");
+      throw error;
+    }
     return success(mapProfile(await ensureProfile(db, user.id)), method);
   }
 
@@ -2634,7 +2705,7 @@ async function handleRoute(request, env, user) {
         `
       SELECT c.*
       FROM chat_conversations c JOIN chat_conversation_members m ON m.conversation_id = c.id
-      WHERE m.user_id = ? AND m.left_at IS NULL AND c.deleted_at IS NULL
+      WHERE m.user_id = ? AND m.left_at IS NULL AND m.history_hidden_at IS NULL AND c.deleted_at IS NULL
       ORDER BY c.updated_at DESC
     `
       )
