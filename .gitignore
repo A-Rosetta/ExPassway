@@ -21,6 +21,7 @@ pnpm-debug.log*
 # OS/editor
 .DS_Store
 .vscode/
+.worktrees/
 
 # user-uploaded community images
 assets/uploads/community/*

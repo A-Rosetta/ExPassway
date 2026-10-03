@@ -303,6 +303,79 @@ try {
   }
 
   {
+    await db.batch([
+      db.prepare(`INSERT INTO curriculum_versions
+        (id, subject_code, qualification, exam_year_start, exam_year_end, version, active)
+        VALUES ('0654-test-v1', '0654', 'IGCSE', 2023, 2025, 'test', 1)`),
+      db.prepare(`INSERT INTO curriculum_sections
+        (id, curriculum_version_id, syllabus_code, title_en, level, sort_order)
+        VALUES ('0654-section', '0654-test-v1', 'B1', 'Cells', 'section', 1)`),
+      db.prepare(`INSERT INTO coursebook_chapters
+        (id, book_key, chapter_no, title_en, sort_order)
+        VALUES ('0654-chapter', '0654-test', 1, 'Biology', 1)`),
+      db.prepare(`INSERT INTO coursebook_sections
+        (id, coursebook_chapter_id, section_code, title_en, sort_order)
+        VALUES ('0654-book-section', '0654-chapter', 'B1', 'Cells', 1)`),
+      db.prepare(`INSERT INTO coursebook_section_mappings
+        (coursebook_section_id, curriculum_section_id)
+        VALUES ('0654-book-section', '0654-section')`),
+      db.prepare(`INSERT INTO question_bank
+        (id, board, subject, paper, year, stem, options, answer, subject_code, paper_slug, question_no)
+        VALUES ('question-2', 'CIE', 'IGCSE Sciences', 'MCQ', '2025', 'A cell question',
+          '["A","B","C","D"]', 1, '0654', '0654_s25_qp_21', 1)`),
+      db.prepare(`INSERT INTO question_section_mappings
+        (question_id, curriculum_section_id, coursebook_section_id, is_primary, status, source)
+        VALUES ('question-2', '0654-section', '0654-book-section', 1, 'reviewed', 'rule')`),
+      db.prepare(`INSERT INTO question_bank
+        (id, board, subject, paper, year, stem, options, answer, subject_code, paper_slug, question_no)
+        VALUES ('question-3', 'CIE', 'IGCSE Sciences', 'MCQ', '2025', 'Another cell question',
+          '["A","B","C","D"]', 2, '0654', '0654_s25_qp_21', 2)`),
+      db.prepare(`INSERT INTO question_section_mappings
+        (question_id, curriculum_section_id, coursebook_section_id, is_primary, status, source)
+        VALUES ('question-3', '0654-section', '0654-book-section', 1, 'reviewed', 'rule')`),
+    ]);
+
+    const unverified = await api(env, adminToken,
+      "/api/admin/curriculum/mappings?subjectCode=0654&status=unverified&chapter=1&year=2025");
+    assert.equal(unverified.response.status, 200);
+    assert.deepEqual(unverified.payload.data.mappings.map((mapping) => mapping.questionId).sort(), ["question-2", "question-3"]);
+    assert.ok(unverified.payload.data.coursebookSections.some((section) => section.sectionCode === "B1"));
+
+    const body = { subjectCode: "0654", mappings: [
+      { questionId: "question-2", curriculumSectionId: "0654-section" },
+      { questionId: "question-3", curriculumSectionId: "0654-section" },
+    ] };
+    const forbidden = await api(env, studentToken, "/api/admin/curriculum/mappings/bulk-review", {
+      method: "POST", body: JSON.stringify(body),
+    });
+    assert.equal(forbidden.response.status, 403);
+
+    const stale = await api(env, adminToken, "/api/admin/curriculum/mappings/bulk-review", {
+      method: "POST", body: JSON.stringify({ ...body, mappings: [
+        ...body.mappings, { questionId: "missing", curriculumSectionId: "0654-section" },
+      ] }),
+    });
+    assert.equal(stale.response.status, 409);
+    assert.deepEqual((await db.prepare("SELECT reviewed_by FROM question_section_mappings WHERE question_id IN ('question-2', 'question-3')").all())
+      .results.map((row) => row.reviewed_by), [null, null]);
+
+    const approved = await api(env, adminToken, "/api/admin/curriculum/mappings/bulk-review", {
+      method: "POST", body: JSON.stringify(body),
+    });
+    assert.equal(approved.response.status, 200);
+    assert.equal(approved.payload.data.updated, 2);
+    const mappings = await db.prepare("SELECT status, source, reviewed_by FROM question_section_mappings WHERE question_id IN ('question-2', 'question-3')").all();
+    assert.deepEqual(mappings.results, [
+      { status: "reviewed", source: "manual", reviewed_by: admin.id },
+      { status: "reviewed", source: "manual", reviewed_by: admin.id },
+    ]);
+    const remaining = await api(env, adminToken, "/api/admin/curriculum/mappings?subjectCode=0654&status=unverified");
+    assert.equal(remaining.payload.data.total, 0);
+    const audit = await db.prepare("SELECT details FROM admin_audit_events WHERE action = 'curriculum.mapping.bulk_review'").first();
+    assert.deepEqual(JSON.parse(audit.details), { subjectCode: "0654", count: 2 });
+  }
+
+  {
     const settings = await api(env, adminToken, "/api/admin/settings/ai-hints");
     assert.equal(settings.response.status, 200);
     assert.equal(settings.payload.data.enabled, false);

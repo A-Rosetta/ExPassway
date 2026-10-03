@@ -7,6 +7,7 @@ import {
   routeNotFound,
   success,
 } from "./auth-api.js";
+import { buildPaperBlueprint, buildBlueprintIssues } from "../shared/paper-blueprint.js";
 
 const CORS_PREFLIGHT_HEADERS = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
@@ -571,6 +572,655 @@ function requireCurriculumCode(value) {
   return subjectCode;
 }
 
+function optionalSearchInteger(url, name, min, max) {
+  const value = url.searchParams.get(name);
+  return value === null || value === "" ? null : toInteger(value, null, min, max, name);
+}
+
+function mapPaperBuilderQuestion(row) {
+  const question = mapQuestion(row, true);
+  return {
+    ...question,
+    active: Boolean(row.active),
+    sourceStatus: row.source_status || "published",
+    year: row.exam_year == null ? question.year : Number(row.exam_year),
+    season: row.season || "",
+    paperNumber: row.paper_number == null ? null : Number(row.paper_number),
+    variant: row.variant == null ? null : Number(row.variant),
+    sectionId: row.coursebook_section_id || "",
+    sectionCode: row.section_code || "",
+    sectionTitleEn: row.section_title_en || "",
+    sectionTitleZh: row.section_title_zh || "",
+    mappingStatus: row.mapping_status || "unmapped",
+    mappingConfidence: row.mapping_confidence == null ? null : Number(row.mapping_confidence),
+    mappingSource: row.mapping_source || "",
+    sourceGroup: row.similar_question_group || "",
+    estimatedSeconds: row.duration_minutes && row.source_question_count
+      ? Number(row.duration_minutes) * 60 / Number(row.source_question_count)
+      : null,
+  };
+}
+
+async function fillEstimatedDurations(db, subjectCode, items) {
+  if (!items.some((item) => !item.estimatedSeconds)) return items;
+  const rows = await db.prepare(`
+    SELECT duration_minutes * 60.0 / source_question_count AS seconds
+    FROM exam_papers
+    WHERE subject_code = ? AND status = 'published'
+      AND duration_minutes > 0 AND source_question_count > 0
+    ORDER BY seconds
+  `).bind(subjectCode).all();
+  const durations = rows.results.map((row) => Number(row.seconds));
+  const middle = Math.floor(durations.length / 2);
+  const median = durations.length
+    ? durations.length % 2 ? durations[middle] : (durations[middle - 1] + durations[middle]) / 2
+    : null;
+  return items.map((item) => ({ ...item, estimatedSeconds: item.estimatedSeconds || median }));
+}
+
+async function listPaperBuilderSubjects(db) {
+  const [rows, curriculum] = await Promise.all([
+    db.prepare("SELECT code, name, name_zh FROM exam_subjects WHERE active = 1 ORDER BY name").all(),
+    listCurriculumSubjects(db),
+  ]);
+  return rows.results.map((row) => ({
+    code: row.code, name: row.name, nameZh: row.name_zh || "",
+    version: curriculum.find((subject) => subject.code === row.code)?.version || null,
+  }));
+}
+
+async function searchPaperBuilderQuestions(request, env) {
+  await requireCurrentUser(request, env);
+  const url = new URL(request.url);
+  const subjectCode = requireCurriculumCode(url.searchParams.get("subjectCode"));
+  const page = toInteger(url.searchParams.get("page"), 1, 1, 100000, "page");
+  const pageSize = toInteger(url.searchParams.get("pageSize"), 20, 1, 50, "pageSize");
+  const year = optionalSearchInteger(url, "year", 2000, 2099);
+  const paperNumber = optionalSearchInteger(url, "paperNumber", 1, 2);
+  const variant = optionalSearchInteger(url, "variant", 1, 9);
+  const questionNo = optionalSearchInteger(url, "questionNo", 1, 200);
+  const season = String(url.searchParams.get("season") || "").trim().toLowerCase();
+  const paperSlug = String(url.searchParams.get("paperSlug") || "").trim();
+  const sectionId = String(url.searchParams.get("sectionId") || "").trim();
+
+  if (season && !new Set(["m", "s", "w"]).has(season)) {
+    throw new AuthError(400, 'Field "season" must be one of m, s, or w.', "INVALID_INPUT");
+  }
+
+  const where = [
+    "question.active = 1",
+    "question.subject_code = ?",
+    "paper.status = 'published'",
+    "question.answer BETWEEN 0 AND 3",
+    "question.question_no > 0",
+    "EXISTS (SELECT 1 FROM exam_subjects subject WHERE subject.code = question.subject_code AND subject.active = 1)",
+    "(length(trim(question.stem)) > 0 OR json_array_length(question.images) > 0)",
+  ];
+  const params = [subjectCode];
+  const addFilter = (sql, value) => {
+    if (value === null || value === "") return;
+    where.push(sql);
+    params.push(value);
+  };
+
+  addFilter("paper.year = ?", year);
+  addFilter("paper.season = ?", season);
+  addFilter("paper.paper_number = ?", paperNumber);
+  addFilter("paper.variant = ?", variant);
+  addFilter("question.paper_slug = ?", paperSlug);
+  addFilter("question.question_no = ?", questionNo);
+  if (sectionId) {
+    where.push("mapping.coursebook_section_id = ?", "mapping.status = 'reviewed'");
+    params.push(sectionId);
+  }
+
+  const joins = `
+    JOIN exam_papers paper ON paper.slug = question.paper_slug
+    LEFT JOIN question_section_mappings mapping ON mapping.rowid = (
+      SELECT selected_mapping.rowid
+      FROM question_section_mappings selected_mapping
+      WHERE selected_mapping.question_id = question.id
+        AND selected_mapping.is_primary = 1
+        AND selected_mapping.status <> 'rejected'
+      ORDER BY CASE selected_mapping.status WHEN 'reviewed' THEN 0 ELSE 1 END,
+        selected_mapping.confidence DESC,
+        selected_mapping.curriculum_section_id
+      LIMIT 1
+    )
+    LEFT JOIN coursebook_sections section ON section.id = mapping.coursebook_section_id
+  `;
+  const whereSql = where.join(" AND ");
+  const countRow = await env.DB.prepare(`
+    SELECT COUNT(*) AS total
+    FROM question_bank question
+    ${joins}
+    WHERE ${whereSql}
+  `).bind(...params).first();
+  const total = Number(countRow?.total || 0);
+  const offset = (page - 1) * pageSize;
+  const rows = await env.DB.prepare(`
+    SELECT question.*,
+      paper.year AS exam_year,
+      paper.season,
+      paper.paper_number,
+      paper.variant,
+      paper.duration_minutes,
+      paper.source_question_count,
+      mapping.curriculum_section_id,
+      mapping.coursebook_section_id,
+      mapping.status AS mapping_status,
+      mapping.confidence AS mapping_confidence,
+      mapping.source AS mapping_source,
+      mapping.similar_question_group,
+      section.section_code,
+      section.title_en AS section_title_en,
+      section.title_zh AS section_title_zh
+    FROM question_bank question
+    ${joins}
+    WHERE ${whereSql}
+    ORDER BY paper.year DESC, paper.season, paper.paper_number, paper.variant,
+      question.question_no, question.id
+    LIMIT ? OFFSET ?
+  `).bind(...params, pageSize, offset).all();
+
+  return {
+    items: await fillEstimatedDurations(env.DB, subjectCode, rows.results.map(mapPaperBuilderQuestion)),
+    page,
+    pageSize,
+    total,
+    totalPages: total === 0 ? 0 : Math.ceil(total / pageSize),
+  };
+}
+
+function mapSavedPaper(row, items = null) {
+  const paper = {
+    id: row.id,
+    paperCode: row.paper_code,
+    title: row.title,
+    subjectCode: row.subject_code,
+    curriculumVersionId: row.curriculum_version_id || "",
+    buildMode: row.build_mode,
+    buildSeed: row.build_seed || "",
+    status: row.status,
+    questionCount: Number(row.question_count),
+    totalMarks: Number(row.total_marks),
+    settings: parseJson(row.settings, {}),
+    blueprint: parseJson(row.blueprint, {}),
+    parentPaperId: row.parent_paper_id || "",
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+  if (items) paper.items = items;
+  return paper;
+}
+
+function mapSavedPaperItem(row) {
+  const question = mapPaperBuilderQuestion(row);
+  return {
+    ...question,
+    questionId: row.saved_question_id,
+    position: Number(row.saved_position),
+    marks: Number(row.saved_marks),
+    sectionId: row.saved_section_id || "",
+    sourceGroup: row.saved_source_group || "",
+  };
+}
+
+async function getOwnedSavedPaperRow(db, userId, paperId) {
+  const row = await db.prepare(`
+    SELECT * FROM saved_papers WHERE id = ? AND user_id = ? LIMIT 1
+  `).bind(paperId, userId).first();
+  if (!row) throw new AuthError(404, "Saved paper not found.", "PAPER_NOT_FOUND");
+  return row;
+}
+
+async function loadSavedPaper(db, userId, paperId) {
+  const paper = await getOwnedSavedPaperRow(db, userId, paperId);
+  const rows = await db.prepare(`
+    SELECT question.*,
+      source.year AS exam_year,
+      source.season,
+      source.paper_number,
+      source.variant,
+      source.duration_minutes,
+      source.source_question_count,
+      COALESCE(source.status, 'unavailable') AS source_status,
+      item.question_id AS saved_question_id,
+      item.position AS saved_position,
+      item.marks AS saved_marks,
+      item.section_id AS saved_section_id,
+      item.source_group AS saved_source_group,
+      item.section_id AS coursebook_section_id,
+      section.section_code,
+      section.title_en AS section_title_en,
+      section.title_zh AS section_title_zh,
+      CASE WHEN EXISTS (
+        SELECT 1 FROM question_section_mappings mapping
+        WHERE mapping.question_id = question.id AND mapping.is_primary = 1
+          AND mapping.status = 'reviewed' AND mapping.coursebook_section_id = item.section_id
+      ) THEN 'reviewed' ELSE 'unmapped' END AS mapping_status,
+      item.source_group AS similar_question_group
+    FROM saved_paper_items item
+    JOIN question_bank question ON question.id = item.question_id
+    LEFT JOIN exam_papers source ON source.slug = question.paper_slug
+    LEFT JOIN coursebook_sections section ON section.id = item.section_id
+    WHERE item.paper_id = ?
+    ORDER BY item.position
+  `).bind(paperId).all();
+  const items = await fillEstimatedDurations(db, paper.subject_code, rows.results.map(mapSavedPaperItem));
+  return mapSavedPaper(paper, items);
+}
+
+function normalizePaperObject(value, field, fallback = {}) {
+  if (value === undefined) return fallback;
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new AuthError(400, `Field "${field}" must be an object.`, "INVALID_INPUT");
+  }
+  return value;
+}
+
+async function normalizeSavedPaperItems(db, subjectCode, value) {
+  const items = requireArray(value, "items");
+  if (items.length > 200) {
+    throw new AuthError(400, 'Field "items" cannot contain more than 200 questions.', "INVALID_INPUT");
+  }
+  const requests = items.map((item, position) => ({
+    questionId: requireString(item?.questionId, `items[${position}].questionId`),
+    marks: toInteger(item?.marks, 1, 1, 100, `items[${position}].marks`),
+    sectionId: String(item?.sectionId || "").trim(),
+    position,
+  }));
+  if (new Set(requests.map((item) => item.questionId)).size !== requests.length) {
+    throw new AuthError(400, "A question cannot be added to the same paper twice.", "DUPLICATE_QUESTION");
+  }
+  if (requests.length === 0) return { items: [], blueprint: buildPaperBlueprint([]) };
+
+  const rows = await db.prepare(`
+    SELECT question.*,
+      source.slug AS source_paper_slug,
+      source.year AS exam_year,
+      source.season,
+      source.paper_number,
+      source.variant,
+      source.duration_minutes,
+      source.source_question_count,
+      source.status AS source_status,
+      mapping.coursebook_section_id,
+      mapping.status AS mapping_status,
+      mapping.similar_question_group,
+      section.section_code
+    FROM question_bank question
+    LEFT JOIN exam_papers source ON source.slug = question.paper_slug
+    LEFT JOIN question_section_mappings mapping ON mapping.rowid = (
+      SELECT selected_mapping.rowid
+      FROM question_section_mappings selected_mapping
+      WHERE selected_mapping.question_id = question.id
+        AND selected_mapping.is_primary = 1
+        AND selected_mapping.status <> 'rejected'
+      ORDER BY CASE selected_mapping.status WHEN 'reviewed' THEN 0 ELSE 1 END,
+        selected_mapping.confidence DESC,
+        selected_mapping.curriculum_section_id
+      LIMIT 1
+    )
+    LEFT JOIN coursebook_sections section ON section.id = mapping.coursebook_section_id
+    WHERE question.id IN (SELECT value FROM json_each(?))
+  `).bind(JSON.stringify(requests.map((item) => item.questionId))).all();
+  const byId = new Map(rows.results.map((row) => [row.id, row]));
+  const normalized = requests.map((item) => {
+    const row = byId.get(item.questionId);
+    const images = parseJson(row?.images, []);
+    if (!row
+      || !row.active
+      || row.subject_code !== subjectCode
+      || !Number.isInteger(Number(row.answer))
+      || Number(row.answer) < 0
+      || Number(row.answer) > 3
+      || (!String(row.stem || "").trim() && images.length === 0)
+      || !row.source_paper_slug
+      || !row.question_no
+      || row.source_status !== "published") {
+      throw new AuthError(400, `Question "${item.questionId}" is not available for this paper.`, "INVALID_QUESTION");
+    }
+    const reviewedSectionId = row.mapping_status === "reviewed" ? row.coursebook_section_id || "" : "";
+    if (item.sectionId && item.sectionId !== reviewedSectionId) {
+      throw new AuthError(
+        400,
+        `Question "${item.questionId}" is not reviewed for section "${item.sectionId}".`,
+        "INVALID_SECTION"
+      );
+    }
+    return {
+      id: row.id,
+      questionId: row.id,
+      position: item.position,
+      marks: item.marks,
+      sectionId: item.sectionId || reviewedSectionId,
+      sectionCode: item.sectionId || reviewedSectionId ? row.section_code || "" : "",
+      sourceGroup: row.similar_question_group || "",
+      answer: Number(row.answer),
+      paperSlug: row.paper_slug,
+      year: Number(row.exam_year),
+      season: row.season,
+      paperNumber: row.paper_number == null ? null : Number(row.paper_number),
+      difficulty: row.difficulty || "",
+      estimatedSeconds: row.duration_minutes && row.source_question_count
+        ? Number(row.duration_minutes) * 60 / Number(row.source_question_count)
+        : null,
+    };
+  });
+  const timed = await fillEstimatedDurations(db, subjectCode, normalized);
+  return { items: timed, blueprint: buildPaperBlueprint(timed) };
+}
+
+async function normalizeSavedPaperPayload(db, body, existing = null, existingItems = []) {
+  const suppliedSubjectCode = body.subjectCode === undefined
+    ? existing?.subject_code
+    : requireCurriculumCode(body.subjectCode);
+  const subjectCode = requireCurriculumCode(suppliedSubjectCode);
+  const subject = await db.prepare("SELECT code FROM exam_subjects WHERE code = ? AND active = 1")
+    .bind(subjectCode).first();
+  if (!subject) throw new AuthError(400, "Subject is not available for paper building.", "INVALID_INPUT");
+  if (existing && subjectCode !== existing.subject_code) {
+    throw new AuthError(400, "A saved paper's subject cannot be changed.", "INVALID_INPUT");
+  }
+  const title = requireString(body.title === undefined ? existing?.title : body.title, "title");
+  if (title.length > 160) throw new AuthError(400, "Paper title is too long.", "INVALID_INPUT");
+  const buildMode = String(body.buildMode === undefined ? existing?.build_mode || "manual" : body.buildMode).trim();
+  const status = String(body.status === undefined ? existing?.status || "draft" : body.status).trim();
+  if (!new Set(["manual", "smart", "equivalent"]).has(buildMode)) {
+    throw new AuthError(400, 'Field "buildMode" is invalid.', "INVALID_INPUT");
+  }
+  if (!new Set(["draft", "final"]).has(status)) {
+    throw new AuthError(400, 'Field "status" is invalid.', "INVALID_INPUT");
+  }
+
+  const curriculumVersionId = String(
+    body.curriculumVersionId === undefined ? existing?.curriculum_version_id || "" : body.curriculumVersionId || ""
+  ).trim();
+  if (curriculumVersionId) {
+    const version = await db.prepare(`
+      SELECT id FROM curriculum_versions WHERE id = ? AND subject_code = ? LIMIT 1
+    `).bind(curriculumVersionId, subjectCode).first();
+    if (!version) throw new AuthError(400, "Curriculum version does not match the subject.", "INVALID_INPUT");
+  }
+
+  const settings = normalizePaperObject(
+    body.settings,
+    "settings",
+    existing ? parseJson(existing.settings, {}) : {}
+  );
+  settings.targetSections = normalizePaperObject(settings.targetSections, "settings.targetSections", {});
+  if (Object.keys(settings.targetSections).length > 200) {
+    throw new AuthError(400, "Too many section targets.", "INVALID_INPUT");
+  }
+  for (const [sectionId, count] of Object.entries(settings.targetSections)) {
+    settings.targetSections[sectionId] = toInteger(count, 0, 0, 200, "settings.targetSections");
+  }
+  const buildSeed = String(
+    body.buildSeed === undefined ? existing?.build_seed || "" : body.buildSeed || ""
+  ).trim();
+  const rawItems = body.items === undefined ? existingItems : body.items;
+  const normalized = await normalizeSavedPaperItems(db, subjectCode, rawItems);
+  if (status === "final") {
+    const blockers = buildBlueprintIssues(normalized.blueprint, { targetSections: settings.targetSections })
+      .filter((issue) => issue.blocking);
+    if (!normalized.items.length || blockers.length) {
+      throw new AuthError(409, "Section targets must be met before finalizing a paper.", "BLUEPRINT_BLOCKED", { issues: blockers });
+    }
+  }
+  return {
+    title,
+    subjectCode,
+    curriculumVersionId,
+    buildMode,
+    buildSeed,
+    status,
+    settings,
+    items: normalized.items,
+    blueprint: normalized.blueprint,
+  };
+}
+
+function savedPaperItemStatements(db, paperId, items) {
+  if (!items.length) return [];
+  return [db.prepare(`
+    INSERT INTO saved_paper_items (
+      paper_id, question_id, position, marks, section_id, source_group
+    )
+    SELECT ?, json_extract(value, '$.questionId'), json_extract(value, '$.position'),
+      json_extract(value, '$.marks'), NULLIF(json_extract(value, '$.sectionId'), ''),
+      NULLIF(json_extract(value, '$.sourceGroup'), '')
+    FROM json_each(?)
+  `).bind(
+    paperId,
+    JSON.stringify(items)
+  )];
+}
+
+async function persistSavedPaper(db, userId, value, parentPaperId = "") {
+  const id = crypto.randomUUID();
+  const paperCode = `${value.subjectCode}-${crypto.randomUUID().replaceAll("-", "").slice(0, 8).toUpperCase()}`;
+  const statements = [db.prepare(`
+    INSERT INTO saved_papers (
+      id, user_id, paper_code, title, subject_code, curriculum_version_id,
+      build_mode, build_seed, status, question_count, total_marks, settings,
+      blueprint, parent_paper_id
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).bind(
+    id,
+    userId,
+    paperCode,
+    value.title,
+    value.subjectCode,
+    value.curriculumVersionId || null,
+    value.buildMode,
+    value.buildSeed || null,
+    value.status,
+    value.blueprint.questionCount,
+    value.blueprint.totalMarks,
+    JSON.stringify(value.settings),
+    JSON.stringify(value.blueprint),
+    parentPaperId || null
+  ), ...savedPaperItemStatements(db, id, value.items)];
+  await db.batch(statements);
+  return loadSavedPaper(db, userId, id);
+}
+
+async function createSavedPaper(request, env) {
+  const { user } = await requireCurrentUser(request, env);
+  const body = await readJsonBody(request);
+  const value = await normalizeSavedPaperPayload(env.DB, body);
+  return persistSavedPaper(env.DB, user.id, value);
+}
+
+async function listSavedPapers(request, env) {
+  const { user } = await requireCurrentUser(request, env);
+  const rows = await env.DB.prepare(`
+    SELECT * FROM saved_papers WHERE user_id = ? ORDER BY updated_at DESC, created_at DESC
+  `).bind(user.id).all();
+  return rows.results.map((row) => mapSavedPaper(row));
+}
+
+async function updateSavedPaper(request, env, paperId) {
+  const { user } = await requireCurrentUser(request, env);
+  const existing = await getOwnedSavedPaperRow(env.DB, user.id, paperId);
+  const current = await loadSavedPaper(env.DB, user.id, paperId);
+  const body = await readJsonBody(request);
+  const value = await normalizeSavedPaperPayload(env.DB, body, existing, current.items);
+  const statements = [
+    env.DB.prepare(`
+      UPDATE saved_papers SET
+        title = ?, curriculum_version_id = ?, build_mode = ?, build_seed = ?,
+        status = ?, question_count = ?, total_marks = ?, settings = ?, blueprint = ?,
+        updated_at = ?
+      WHERE id = ? AND user_id = ?
+    `).bind(
+      value.title,
+      value.curriculumVersionId || null,
+      value.buildMode,
+      value.buildSeed || null,
+      value.status,
+      value.blueprint.questionCount,
+      value.blueprint.totalMarks,
+      JSON.stringify(value.settings),
+      JSON.stringify(value.blueprint),
+      new Date().toISOString(),
+      paperId,
+      user.id
+    ),
+    env.DB.prepare("DELETE FROM saved_paper_items WHERE paper_id = ?").bind(paperId),
+    ...savedPaperItemStatements(env.DB, paperId, value.items),
+  ];
+  await env.DB.batch(statements);
+  return loadSavedPaper(env.DB, user.id, paperId);
+}
+
+async function deleteSavedPaper(request, env, paperId) {
+  const { user } = await requireCurrentUser(request, env);
+  await getOwnedSavedPaperRow(env.DB, user.id, paperId);
+  await env.DB.prepare("DELETE FROM saved_papers WHERE id = ? AND user_id = ?")
+    .bind(paperId, user.id).run();
+  return { deleted: true };
+}
+
+async function generateEquivalentPaper(request, env, paperId) {
+  const { user } = await requireCurrentUser(request, env);
+  const sourceRow = await getOwnedSavedPaperRow(env.DB, user.id, paperId);
+  const source = await loadSavedPaper(env.DB, user.id, paperId);
+  const body = await readJsonBody(request);
+  if (body.allowSimilarGroups !== undefined && typeof body.allowSimilarGroups !== "boolean") {
+    throw new AuthError(400, 'Field "allowSimilarGroups" must be a boolean.', "INVALID_INPUT");
+  }
+  const allowSimilarGroups = body.allowSimilarGroups === true;
+  const sourceNormalized = await normalizeSavedPaperItems(
+    env.DB,
+    source.subjectCode,
+    source.items.map((item) => ({
+      questionId: item.questionId,
+      marks: item.marks,
+      sectionId: item.sectionId,
+    }))
+  );
+  if (!sourceNormalized.items.length) throw new AuthError(400, "The A paper must contain questions.", "INVALID_INPUT");
+  const sourceIds = new Set(sourceNormalized.items.map((item) => item.questionId));
+  const sourceGroups = new Set(sourceNormalized.items.map((item) => item.sourceGroup).filter(Boolean));
+  const sectionIds = [...new Set(sourceNormalized.items.map((item) => item.sectionId).filter(Boolean))];
+  const candidatesBySection = new Map(sectionIds.map((sectionId) => [sectionId, []]));
+
+  if (sectionIds.length) {
+    const rows = await env.DB.prepare(`
+      SELECT question.id,
+        mapping.coursebook_section_id AS section_id,
+        mapping.similar_question_group AS source_group,
+        source.paper_number, source.year, question.difficulty
+      FROM question_bank question
+      JOIN exam_papers source ON source.slug = question.paper_slug AND source.status = 'published'
+      JOIN question_section_mappings mapping
+        ON mapping.rowid = (
+          SELECT selected.rowid FROM question_section_mappings selected
+          WHERE selected.question_id = question.id AND selected.is_primary = 1 AND selected.status <> 'rejected'
+          ORDER BY CASE selected.status WHEN 'reviewed' THEN 0 ELSE 1 END,
+            selected.confidence DESC, selected.curriculum_section_id
+          LIMIT 1
+        )
+        AND mapping.status = 'reviewed'
+      WHERE question.active = 1
+        AND question.subject_code = ?
+        AND question.answer BETWEEN 0 AND 3
+        AND question.question_no > 0
+        AND (length(trim(question.stem)) > 0 OR json_array_length(question.images) > 0)
+        AND mapping.coursebook_section_id IN (SELECT value FROM json_each(?))
+      ORDER BY question.id
+    `).bind(source.subjectCode, JSON.stringify(sectionIds)).all();
+    for (const row of rows.results) {
+      if (sourceIds.has(row.id)) continue;
+      const sourceGroup = row.source_group || "";
+      if (!allowSimilarGroups && sourceGroup && sourceGroups.has(sourceGroup)) continue;
+      candidatesBySection.get(row.section_id)?.push({
+        questionId: row.id,
+        sectionId: row.section_id,
+        sourceGroup,
+        paperNumber: row.paper_number == null ? null : Number(row.paper_number),
+        year: Number(row.year),
+        difficulty: row.difficulty || "",
+      });
+    }
+  }
+
+  const reliableDifficulty = sourceNormalized.blueprint.difficulty.coverage >= 0.7;
+  const buildSeed = crypto.randomUUID();
+  const rank = (id) => {
+    let hash = 2166136261;
+    for (const character of buildSeed + id) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
+    return hash >>> 0;
+  };
+  const slots = sourceNormalized.items.map((item) => ({
+    source: item,
+    candidates: (candidatesBySection.get(item.sectionId) || []).filter((candidate) => (
+      !item.paperNumber || !candidate.paperNumber || item.paperNumber === candidate.paperNumber
+    )).sort((left, right) => (
+      (reliableDifficulty && item.difficulty
+        ? Number(right.difficulty === item.difficulty) - Number(left.difficulty === item.difficulty) : 0)
+      || Math.abs(left.year - item.year) - Math.abs(right.year - item.year)
+      || rank(left.questionId) - rank(right.questionId)
+    )),
+    selected: null,
+  }));
+  const assigned = new Map();
+  const findMatch = (slot, visited) => {
+    for (const candidate of slot.candidates) {
+      const key = !allowSimilarGroups && candidate.sourceGroup
+        ? "group:" + candidate.sourceGroup : "question:" + candidate.questionId;
+      if (visited.has(key)) continue;
+      visited.add(key);
+      const previous = assigned.get(key);
+      if (!previous || findMatch(previous, visited)) {
+        assigned.set(key, slot);
+        slot.selected = candidate;
+        return true;
+      }
+    }
+    return false;
+  };
+  for (const slot of [...slots].sort((left, right) => left.candidates.length - right.candidates.length)) {
+    findMatch(slot, new Set());
+  }
+  const requirements = new Map();
+  for (const slot of slots) {
+    const sectionId = slot.source.sectionId || "unmapped";
+    const deficit = requirements.get(sectionId) || { sectionId, required: 0, available: 0 };
+    deficit.required += 1;
+    if (slot.selected) deficit.available += 1;
+    requirements.set(sectionId, deficit);
+  }
+  const deficits = [...requirements.values()].filter((value) => value.available < value.required);
+  if (deficits.length) {
+    throw new AuthError(
+      409,
+      "The reviewed question pool cannot produce an equivalent paper.",
+      "EQUIVALENT_POOL_INSUFFICIENT",
+      { allowSimilarGroups, sections: deficits }
+    );
+  }
+
+  const selectedItems = slots.map((slot) => ({
+    questionId: slot.selected.questionId,
+    marks: slot.source.marks,
+    sectionId: slot.source.sectionId,
+  }));
+  const value = await normalizeSavedPaperPayload(env.DB, {
+    title: `${source.title.slice(0, 158)} B`,
+    subjectCode: source.subjectCode,
+    curriculumVersionId: source.curriculumVersionId,
+    buildMode: "equivalent",
+    buildSeed,
+    status: "draft",
+    settings: { ...source.settings, allowSimilarGroups },
+    items: selectedItems,
+  });
+  return persistSavedPaper(env.DB, user.id, value, sourceRow.id);
+}
+
 function questionYearFilter(subjectCode, tableAlias = "question") {
   if (subjectCode === "0610") {
     return `AND ${tableAlias}.year GLOB '[0-9][0-9][0-9][0-9]' AND CAST(${tableAlias}.year AS INTEGER) BETWEEN 2019 AND 2023`;
@@ -854,6 +1504,11 @@ async function createChapterPaper(request, env) {
   await requireCurrentUser(request, env);
   const body = await readJsonBody(request);
   const versionId = requireString(body.curriculumVersion, "curriculumVersion");
+  const excludeQuestionIds = requireArray(body.excludeQuestionIds || [], "excludeQuestionIds");
+  if (excludeQuestionIds.length > 200) throw new AuthError(400, "Too many excluded questions.", "INVALID_INPUT");
+  const excludedIds = excludeQuestionIds.map((id) => requireString(id, "excludeQuestionIds"));
+  const buildSeed = String(body.buildSeed || crypto.randomUUID());
+  if (buildSeed.length > 160) throw new AuthError(400, "Build seed is too long.", "INVALID_INPUT");
   const rawSelections = requireArray(body.sections, "sections");
   if (!rawSelections.length || rawSelections.length > 20) {
     throw new AuthError(400, "Select between 1 and 20 sections.", "INVALID_INPUT");
@@ -876,6 +1531,20 @@ async function createChapterPaper(request, env) {
 
   const groups = [];
   const usedGroups = new Set();
+  if (excludedIds.length) {
+    const rows = await env.DB.prepare(`
+      SELECT question.id, mapping.similar_question_group
+      FROM question_bank question
+      LEFT JOIN question_section_mappings mapping ON mapping.question_id = question.id AND mapping.is_primary = 1
+      WHERE question.subject_code = ? AND question.id IN (SELECT value FROM json_each(?))
+    `).bind(version.subject_code, JSON.stringify(excludedIds)).all();
+    for (const row of rows.results) usedGroups.add(row.similar_question_group || row.id);
+  }
+  const rank = (id) => {
+    let hash = 2166136261;
+    for (const character of buildSeed + id) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
+    return hash >>> 0;
+  };
   for (const selection of selections) {
     const section = await env.DB.prepare(`
       SELECT DISTINCT book_section.*, chapter.chapter_no,
@@ -892,45 +1561,58 @@ async function createChapterPaper(request, env) {
     const exclusionGroups = [...usedGroups];
     const exclusionSql = exclusionGroups.length
       ? `AND COALESCE(NULLIF(mapping.similar_question_group, ''), mapping.question_id)
-          NOT IN (${exclusionGroups.map(() => "?").join(", ")})`
+          NOT IN (SELECT value FROM json_each(?))`
       : "";
     const candidates = await env.DB.prepare(`
-      WITH candidate_rows AS (
         SELECT question.*, mapping.curriculum_section_id, mapping.coursebook_section_id,
           mapping.similar_question_group, syllabus_section.syllabus_code,
-          ROW_NUMBER() OVER (
-            PARTITION BY COALESCE(NULLIF(mapping.similar_question_group, ''), mapping.question_id)
-            ORDER BY random()
-          ) AS group_rank
+          source.year AS exam_year, source.season, source.paper_number, source.variant,
+          source.duration_minutes, source.source_question_count,
+          'reviewed' AS mapping_status
         FROM question_section_mappings mapping
         JOIN question_bank question ON question.id = mapping.question_id
         JOIN curriculum_sections syllabus_section ON syllabus_section.id = mapping.curriculum_section_id
+        JOIN exam_papers source ON source.slug = question.paper_slug AND source.status = 'published'
         WHERE mapping.coursebook_section_id = ? AND mapping.status = 'reviewed'
           AND mapping.is_primary = 1 AND question.active = 1
+          AND mapping.rowid = (
+            SELECT selected.rowid FROM question_section_mappings selected
+            WHERE selected.question_id = question.id AND selected.is_primary = 1 AND selected.status <> 'rejected'
+            ORDER BY CASE selected.status WHEN 'reviewed' THEN 0 ELSE 1 END,
+              selected.confidence DESC, selected.curriculum_section_id
+            LIMIT 1
+          )
           AND question.subject_code = ? AND question.answer BETWEEN 0 AND 3
+          AND question.question_no > 0
           AND (length(trim(COALESCE(question.stem, ''))) > 0 OR json_array_length(question.images) > 0)
+          AND syllabus_section.curriculum_version_id = ?
           ${questionYearFilter(version.subject_code)}
           ${exclusionSql}
-      )
-      SELECT * FROM candidate_rows WHERE group_rank = 1
-      ORDER BY random()
-      LIMIT ?
+        ORDER BY question.id
     `).bind(
       selection.coursebookSectionId,
       version.subject_code,
-      ...exclusionGroups,
-      selection.count
+      version.id,
+      ...(exclusionGroups.length ? [JSON.stringify(exclusionGroups)] : [])
     ).all();
-    if (candidates.results.length < selection.count) {
+    const selected = [];
+    for (const row of candidates.results.sort((left, right) => rank(left.id) - rank(right.id) || left.id.localeCompare(right.id))) {
+      const group = row.similar_question_group || row.id;
+      if (usedGroups.has(group) || excludedIds.includes(row.id)) continue;
+      usedGroups.add(group);
+      selected.push(row);
+      if (selected.length === selection.count) break;
+    }
+    if (selected.length < selection.count) {
       throw new AuthError(
         409,
         `Not enough eligible questions in ${section.section_code}.`,
-        "INSUFFICIENT_QUESTIONS"
+        "INSUFFICIENT_QUESTIONS",
+        { sectionId: selection.coursebookSectionId, required: selection.count, available: selected.length }
       );
     }
 
-    const questions = candidates.results.map((row) => mapQuestion(row, true));
-    questions.forEach((question) => usedGroups.add(question.similarQuestionGroup || question.id));
+    const questions = await fillEstimatedDurations(env.DB, version.subject_code, selected.map(mapPaperBuilderQuestion));
     groups.push({
       section: {
         id: section.id,
@@ -946,7 +1628,7 @@ async function createChapterPaper(request, env) {
     });
   }
 
-  return { subjectCode: version.subject_code, curriculumVersion: mapCurriculumVersion(version), groups };
+  return { subjectCode: version.subject_code, curriculumVersion: mapCurriculumVersion(version), buildSeed, groups };
 }
 
 async function submitChapterPractice(request, env, sessionId) {
@@ -1186,6 +1868,47 @@ export async function handleLearningApiRequest(request, env) {
     if (request.method === "GET" && url.pathname === "/api/curriculum/subjects") {
       await requireCurrentUser(request, env);
       return success(await listCurriculumSubjects(env.DB), request.method);
+    }
+    if (request.method === "GET" && url.pathname === "/api/paper-builder/subjects") {
+      await requireCurrentUser(request, env);
+      return success(await listPaperBuilderSubjects(env.DB), request.method);
+    }
+    if (request.method === "GET" && url.pathname === "/api/paper-builder/questions") {
+      return success(await searchPaperBuilderQuestions(request, env), request.method);
+    }
+    if (url.pathname === "/api/paper-builder/papers" && request.method === "GET") {
+      return success(await listSavedPapers(request, env), request.method);
+    }
+    if (url.pathname === "/api/paper-builder/papers" && request.method === "POST") {
+      return success(await createSavedPaper(request, env), request.method, 201);
+    }
+    const savedPaper = url.pathname.match(/^\/api\/paper-builder\/papers\/([^/]+)$/);
+    if (savedPaper && request.method === "GET") {
+      const { user } = await requireCurrentUser(request, env);
+      return success(
+        await loadSavedPaper(env.DB, user.id, decodeURIComponent(savedPaper[1])),
+        request.method
+      );
+    }
+    if (savedPaper && request.method === "PATCH") {
+      return success(
+        await updateSavedPaper(request, env, decodeURIComponent(savedPaper[1])),
+        request.method
+      );
+    }
+    if (savedPaper && request.method === "DELETE") {
+      return success(
+        await deleteSavedPaper(request, env, decodeURIComponent(savedPaper[1])),
+        request.method
+      );
+    }
+    const equivalentPaper = url.pathname.match(/^\/api\/paper-builder\/papers\/([^/]+)\/equivalent$/);
+    if (equivalentPaper && request.method === "POST") {
+      return success(
+        await generateEquivalentPaper(request, env, decodeURIComponent(equivalentPaper[1])),
+        request.method,
+        201
+      );
     }
     if (request.method === "POST" && url.pathname === "/api/paper-builder/generate") {
       return success(await createChapterPaper(request, env), request.method, 201);

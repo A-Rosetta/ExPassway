@@ -335,6 +335,52 @@
         body: JSON.stringify(input || {}),
       });
     },
+    async searchPaperBuilderQuestions(token, input = {}) {
+      const params = new URLSearchParams();
+      Object.entries(input).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== "") {
+          params.set(key, String(value));
+        }
+      });
+      const query = params.toString();
+      return request(`/api/paper-builder/questions${query ? `?${query}` : ""}`, { token });
+    },
+    async getPaperBuilderSubjects(token) {
+      return request("/api/paper-builder/subjects", { token });
+    },
+    async listSavedPapers(token) {
+      return request("/api/paper-builder/papers", { token });
+    },
+    async createSavedPaper(token, input) {
+      return request("/api/paper-builder/papers", {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async getSavedPaper(token, paperId) {
+      return request(`/api/paper-builder/papers/${encodeURIComponent(paperId)}`, { token });
+    },
+    async updateSavedPaper(token, paperId, input) {
+      return request(`/api/paper-builder/papers/${encodeURIComponent(paperId)}`, {
+        method: "PATCH",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async deleteSavedPaper(token, paperId) {
+      return request(`/api/paper-builder/papers/${encodeURIComponent(paperId)}`, {
+        method: "DELETE",
+        token,
+      });
+    },
+    async generateEquivalentPaper(token, paperId, input = {}) {
+      return request(`/api/paper-builder/papers/${encodeURIComponent(paperId)}/equivalent`, {
+        method: "POST",
+        token,
+        body: JSON.stringify(input),
+      });
+    },
     async createChapterPractice(token, input) {
       return request("/api/chapter-practice/sessions", {
         method: "POST",
@@ -351,7 +397,8 @@
     },
     async getAdminCurriculumMappings(token, input = {}) {
       const params = new URLSearchParams();
-      params.set("status", input.status || "suggested");
+      params.set("subjectCode", input.subjectCode || "0610");
+      params.set("status", input.status || "unverified");
       params.set("limit", String(input.limit || 100));
       params.set("offset", String(input.offset || 0));
       if (input.year) params.set("year", input.year);
@@ -374,6 +421,13 @@
           body: JSON.stringify(input || {}),
         }
       );
+    },
+    async bulkReviewAdminCurriculumMappings(token, subjectCode, mappings) {
+      return request("/api/admin/curriculum/mappings/bulk-review", {
+        method: "POST",
+        token,
+        body: JSON.stringify({ subjectCode, mappings }),
+      });
     },
     async createUser(input) {
       return request("/api/users", {

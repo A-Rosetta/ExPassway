@@ -1265,6 +1265,31 @@ button {
   min-width: 180px;
 }
 
+.curriculum-review-bulk {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.curriculum-review-bulk label,
+.curriculum-mapping-controls .mapping-bulk-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.curriculum-review-bulk input,
+.curriculum-mapping-controls .mapping-bulk-toggle input {
+  width: auto;
+  margin: 0;
+}
+
+.curriculum-review-bulk #selectedMappingsCount {
+  color: #526165;
+}
+
 .curriculum-mapping-list {
   display: grid;
   gap: 1rem;

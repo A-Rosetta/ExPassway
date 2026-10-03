@@ -3,54 +3,191 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="paperBuilderTitle">Chapter Paper Builder</title>
+  <title data-i18n="paperBuilderTitle">Smart Paper Builder</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
   <link rel="stylesheet" href="../assets/styles.css?v=20260823-1" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260806-2" />
-  <link rel="stylesheet" href="../assets/paper-builder.css?v=20260925-1" />
+  <link rel="stylesheet" href="../assets/paper-builder.css?v=20261001-1" />
 </head>
 <body class="site-ui utility-ui paper-builder-page">
   <main class="container">
     <section class="card hero">
       <div class="paper-builder-heading">
         <div>
-          <h1 data-i18n="paperBuilderTitle">Chapter Paper Builder</h1>
-          <p class="tip" data-i18n="paperBuilderSubtitle">Choose a subject, set question counts by section, and build a grouped paper.</p>
+          <h1 data-i18n="paperBuilderTitle">Smart Paper Builder</h1>
+          <p class="tip" data-i18n="paperBuilderSubtitle">Build a paper manually, by chapter, or from a saved draft.</p>
         </div>
         <a class="btn-secondary" href="generate.html" data-i18n="paperBuilderBack">Back to papers</a>
       </div>
-      <p id="paperBuilderStatus" class="tip" role="status" aria-live="polite"></p>
-    </section>
-
-    <section class="card panel paper-builder-controls">
-      <div class="paper-builder-toolbar">
-        <label class="paper-builder-subject-label" for="paperBuilderSubject" data-i18n="paperBuilderSubject">Subject</label>
-        <select id="paperBuilderSubject" disabled>
-          <option value="" data-i18n="paperBuilderChooseSubject">Choose a subject</option>
-        </select>
-        <span id="paperBuilderTotal" class="paper-builder-total" data-i18n="paperBuilderTotal">0 questions selected</span>
-        <button id="generateChapterPaper" class="btn-primary" type="button" disabled data-i18n="paperBuilderGenerate">Generate preview</button>
+      <div class="paper-builder-status-row">
+        <p id="paperBuilderStatus" class="tip" role="status" aria-live="polite"></p>
+        <span id="paperBuilderDirty" class="paper-builder-dirty" hidden data-i18n="paperBuilderUnsaved">Unsaved changes</span>
       </div>
-      <div id="paperBuilderChapters" class="paper-builder-chapters" aria-live="polite"></div>
+      <div class="paper-builder-document-fields">
+        <label><span data-i18n="paperBuilderPaperTitle">Paper name</span><input id="paperBuilderPaperTitle" type="text" maxlength="160" /></label>
+        <label><span data-i18n="paperBuilderPaperStatus">Save as</span><select id="paperBuilderPaperStatus"><option value="draft" data-i18n="paperBuilderDraft">Draft</option><option value="final" data-i18n="paperBuilderFinal">Final</option></select></label>
+        <span id="paperBuilderPaperCode" class="tip"></span>
+        <button id="paperBuilderNew" type="button" class="btn-secondary" data-i18n="paperBuilderNew">New paper</button>
+      </div>
+      <div class="paper-builder-modes" role="tablist" aria-label="Paper builder modes">
+        <button id="paperBuilderModeManual" class="paper-builder-mode is-active" type="button" role="tab" aria-selected="true" data-mode="manual" data-i18n="paperBuilderModeManual">Manual selection</button>
+        <button id="paperBuilderModeSmart" class="paper-builder-mode" type="button" role="tab" aria-selected="false" data-mode="smart" data-i18n="paperBuilderModeSmart">Smart by chapter</button>
+        <button id="paperBuilderModeSaved" class="paper-builder-mode" type="button" role="tab" aria-selected="false" data-mode="saved" data-i18n="paperBuilderModeSaved">My papers</button>
+      </div>
     </section>
 
-    <section id="paperBuilderPreviewSection" class="card panel paper-builder-preview-section" hidden>
-      <div class="paper-builder-preview-heading">
-        <div>
-          <h2 data-i18n="paperBuilderPreview">Preview</h2>
-          <p id="paperBuilderPreviewSummary" class="tip"></p>
+    <div class="paper-builder-workspace">
+      <div class="paper-builder-main-column">
+        <section id="paperBuilderManualPanel" class="card panel paper-builder-mode-panel" data-panel="manual">
+          <div class="paper-builder-panel-heading">
+            <div>
+              <h2 data-i18n="paperBuilderManualTitle">Choose questions</h2>
+              <p class="tip" data-i18n="paperBuilderManualSubtitle">Search published questions and add them to the paper.</p>
+            </div>
+            <span id="paperBuilderManualCount" class="paper-builder-total">0 questions</span>
+          </div>
+          <div id="paperBuilderFilters" class="paper-builder-filters">
+            <label>
+              <span data-i18n="paperBuilderSubject">Subject</span>
+              <select id="paperBuilderManualSubject"><option value="" data-i18n="paperBuilderChooseSubject">Choose a subject</option></select>
+            </label>
+            <label>
+              <span data-i18n="paperBuilderYear">Year</span>
+              <select id="paperBuilderYear"><option value="" data-i18n="paperBuilderAll">All</option></select>
+            </label>
+            <label>
+              <span data-i18n="paperBuilderSeason">Season</span>
+              <select id="paperBuilderSeason"><option value="" data-i18n="paperBuilderAll">All</option></select>
+            </label>
+            <label>
+              <span data-i18n="paperBuilderPaperNumber">Paper</span>
+              <select id="paperBuilderPaperNumber"><option value="" data-i18n="paperBuilderAll">All</option></select>
+            </label>
+            <label>
+              <span data-i18n="paperBuilderVariant">Variant</span>
+              <select id="paperBuilderVariant"><option value="" data-i18n="paperBuilderAll">All</option></select>
+            </label>
+            <label>
+              <span data-i18n="paperBuilderSection">Section</span>
+              <select id="paperBuilderSection"><option value="" data-i18n="paperBuilderAllSections">All reviewed sections</option></select>
+            </label>
+            <label class="paper-builder-filter-search">
+              <span data-i18n="paperBuilderSourcePaper">Source paper code</span>
+              <input id="paperBuilderSearch" type="search" autocomplete="off" placeholder="0625_s23_qp_21" />
+            </label>
+            <label><span data-i18n="paperBuilderSourceQuestion">Source question number</span><input id="paperBuilderQuestionNo" type="number" min="1" max="200" /></label>
+            <button id="paperBuilderSearchButton" class="btn-secondary" type="button" data-i18n="paperBuilderSearch">Search</button>
+          </div>
+          <div class="paper-builder-bulk-toolbar">
+            <label class="paper-builder-select-page"><input id="paperBuilderSelectPage" type="checkbox" /><span data-i18n="paperBuilderSelectPage">Select this page</span></label>
+            <span id="paperBuilderSelectedCount" class="tip">0 selected</span>
+            <button id="paperBuilderAddSelected" class="btn-secondary" type="button" disabled data-i18n="paperBuilderAddSelected">Add selected to basket</button>
+          </div>
+          <div id="paperBuilderResults" class="paper-builder-results" aria-live="polite"></div>
+          <div class="paper-builder-pagination">
+            <button id="paperBuilderPrevious" class="btn-secondary" type="button" disabled data-i18n="paperBuilderPrevious">Previous</button>
+            <span id="paperBuilderPageSummary" class="tip"></span>
+            <button id="paperBuilderNext" class="btn-secondary" type="button" disabled data-i18n="paperBuilderNext">Next</button>
+          </div>
+        </section>
+
+        <section id="paperBuilderSmartPanel" class="card panel paper-builder-mode-panel" data-panel="smart" hidden>
+          <div class="paper-builder-panel-heading">
+            <div>
+              <h2 data-i18n="paperBuilderSmartTitle">Build by chapter</h2>
+              <p class="tip" data-i18n="paperBuilderSmartSubtitle">Use reviewed chapter pools for transparent paper generation.</p>
+            </div>
+          </div>
+          <div class="paper-builder-controls">
+            <div class="paper-builder-toolbar">
+              <label class="paper-builder-subject-label" for="paperBuilderSubject" data-i18n="paperBuilderSubject">Subject</label>
+              <select id="paperBuilderSubject" disabled>
+                <option value="" data-i18n="paperBuilderChooseSubject">Choose a subject</option>
+              </select>
+              <span id="paperBuilderTotal" class="paper-builder-total" data-i18n="paperBuilderTotal">0 questions selected</span>
+              <button id="generateChapterPaper" class="btn-primary" type="button" disabled data-i18n="paperBuilderGenerate">Generate preview</button>
+            </div>
+            <div id="paperBuilderChapters" class="paper-builder-chapters" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section id="paperBuilderSavedPanel" class="card panel paper-builder-mode-panel" data-panel="saved" hidden>
+          <div class="paper-builder-panel-heading">
+            <div>
+              <h2 data-i18n="paperBuilderSavedTitle">My papers</h2>
+              <p class="tip" data-i18n="paperBuilderSavedSubtitle">Open, copy, download, or delete saved papers.</p>
+            </div>
+          </div>
+          <div id="paperBuilderSavedList" class="paper-builder-saved-list" aria-live="polite"></div>
+        </section>
+
+        <section id="paperBuilderPreviewSection" class="card panel paper-builder-preview-section" hidden>
+          <div class="paper-builder-preview-heading">
+            <div>
+              <h2 data-i18n="paperBuilderPreview">Preview</h2>
+              <p id="paperBuilderPreviewSummary" class="tip"></p>
+            </div>
+            <button id="paperBuilderClosePreview" class="btn-secondary" type="button" data-i18n="paperBuilderClose">Close</button>
+          </div>
+          <div id="paperBuilderPreviewContent" class="paper-builder-preview"></div>
+        </section>
+        <section id="paperBuilderEquivalentPanel" class="card panel" hidden>
+          <h2 data-i18n="paperBuilderComparisonTitle">A/B comparison</h2>
+          <div id="paperBuilderComparison"></div>
+          <div id="paperBuilderEquivalentDeficits"></div>
+          <button id="paperBuilderRelaxEquivalent" class="btn-secondary" type="button" hidden data-i18n="paperBuilderRelaxEquivalent">Allow similar groups, still exclude every A question</button>
+          <button id="paperBuilderDownloadPair" class="btn-primary" type="button" hidden data-i18n="paperBuilderDownloadPair">Download A/B ZIP</button>
+          <button id="paperBuilderOpenB" class="btn-secondary" type="button" hidden data-i18n="paperBuilderOpenB">Open B paper</button>
+        </section>
+      </div>
+
+      <aside id="paperBuilderSidebar" class="paper-builder-sidebar" aria-label="Paper basket">
+        <div class="paper-builder-modes" role="tablist" aria-label="Paper details">
+          <button id="paperBuilderBasketTab" class="paper-builder-mode is-active" type="button" role="tab" aria-selected="true" data-i18n="paperBuilderBasketTitle">Question basket</button>
+          <button id="paperBuilderBlueprintTab" class="paper-builder-mode" type="button" role="tab" aria-selected="false" data-i18n="paperBuilderBlueprintTitle">Blueprint</button>
         </div>
-        <button id="downloadChapterPaper" class="btn-primary" type="button" disabled data-i18n="paperBuilderDownload">Download ZIP with PDFs</button>
-      </div>
-      <div id="paperBuilderPreview" class="paper-builder-preview"></div>
-    </section>
+        <section id="paperBuilderBasket" class="card panel paper-builder-basket paper-builder-basket-drawer">
+          <div class="paper-builder-panel-heading">
+            <h2 data-i18n="paperBuilderBasketTitle">Question basket</h2>
+            <button id="paperBuilderClear" class="btn-secondary" type="button" data-i18n="paperBuilderClear">Clear</button>
+          </div>
+          <p id="paperBuilderBasketSummary" class="tip"></p>
+          <button id="paperBuilderSort" class="btn-secondary" type="button" data-i18n="paperBuilderSort">Sort by section</button>
+          <div id="paperBuilderBasketItems" class="paper-builder-basket-items" aria-live="polite"></div>
+        </section>
+        <section id="paperBuilderBlueprint" class="card panel paper-builder-blueprint" hidden>
+          <div class="paper-builder-panel-heading">
+            <h2 data-i18n="paperBuilderBlueprintTitle">Blueprint</h2>
+          </div>
+          <div id="paperBuilderBlueprintContent" class="paper-builder-blueprint-content"></div>
+        </section>
+        <div class="paper-builder-actions">
+          <button id="paperBuilderSave" class="btn-primary" type="button" disabled data-i18n="paperBuilderSave">Save paper</button>
+          <button id="paperBuilderPreview" class="btn-secondary" type="button" disabled data-i18n="paperBuilderPreviewButton">Preview paper</button>
+          <button id="paperBuilderDownload" class="btn-secondary" type="button" disabled data-i18n="paperBuilderDownload">Download ZIP</button>
+          <button id="paperBuilderEquivalent" class="btn-secondary" type="button" disabled data-i18n="paperBuilderEquivalent">Generate B paper</button>
+        </div>
+      </aside>
+    </div>
   </main>
+  <button id="paperBuilderBasketToggle" class="btn-primary paper-builder-basket-toggle" type="button" aria-expanded="false" aria-controls="paperBuilderSidebar" data-i18n="paperBuilderBasketTitle">Question basket</button>
 
-  <script src="../scripts/i18n.js?v=20260924-2"></script>
+  <dialog id="paperBuilderImageDialog" class="paper-builder-image-dialog">
+    <form method="dialog">
+      <button class="paper-builder-dialog-close" type="submit" aria-label="Close image" data-i18n="paperBuilderImageClose">Close</button>
+    </form>
+    <div class="paper-builder-image-tools">
+      <label><span data-i18n="paperBuilderZoom">Zoom</span><input id="paperBuilderImageZoom" type="range" min="100" max="400" step="25" value="100" /></label>
+      <a id="paperBuilderOriginalImage" target="_blank" rel="noopener" data-i18n="paperBuilderOriginalImage">Open original PNG</a>
+    </div>
+    <img id="paperBuilderImage" alt="" />
+  </dialog>
+
+  <script src="../scripts/i18n.js?v=20261001-1"></script>
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
-  <script src="../scripts/api.js?v=20260731-1"></script>
+  <script src="../scripts/api.js?v=20260930-1"></script>
   <script src="../scripts/bulk-download.js?v=20260913-1"></script>
-  <script src="../scripts/paper-builder.bundle.js?v=20260924-2"></script>
+  <script src="../scripts/paper-builder.bundle.js?v=20261001-1"></script>
 </body>
 </html>

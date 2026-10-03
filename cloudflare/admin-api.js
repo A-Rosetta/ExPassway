@@ -229,21 +229,28 @@ async function sha256(bytes) {
 }
 
 async function listMappings(db, url) {
-  const status = String(url.searchParams.get("status") || "suggested");
-  if (!new Set(["suggested", "reviewed", "rejected"]).has(status)) {
+  const status = String(url.searchParams.get("status") || "unverified");
+  if (!new Set(["suggested", "unverified", "reviewed", "rejected"]).has(status)) {
     throw new AuthError(400, "Invalid mapping status.", "INVALID_INPUT");
   }
+  const subjectCode = String(url.searchParams.get("subjectCode") || "0610");
+  if (!/^\d{4}$/.test(subjectCode)) throw new AuthError(400, "Invalid subject code.", "INVALID_INPUT");
   const limit = toInteger(url.searchParams.get("limit"), 100, 1, 300, "limit");
   const offset = toInteger(url.searchParams.get("offset"), 0, 0, 100000, "offset");
   const year = String(url.searchParams.get("year") || "");
-  const chapter = toInteger(url.searchParams.get("chapter"), 0, 0, 20, "chapter");
-  if (year && !/^20(?:19|20|21|22|23|24)$/.test(year)) {
-    throw new AuthError(400, "Invalid Biology paper year.", "INVALID_INPUT");
-  }
-  const versionId = "0610-2026-2028-v2";
-  const [rows, count, syllabus, bookSections] = await Promise.all([
+  const chapter = toInteger(url.searchParams.get("chapter"), 0, 0, 99, "chapter");
+  if (year && !/^20\d{2}$/.test(year)) throw new AuthError(400, "Invalid paper year.", "INVALID_INPUT");
+  const version = await db.prepare("SELECT id FROM curriculum_versions WHERE subject_code = ? AND active = 1 LIMIT 1")
+    .bind(subjectCode).first();
+  if (!version) throw new AuthError(404, "Curriculum version not found.", "CURRICULUM_NOT_FOUND");
+  const versionId = version.id;
+  const statusFilter = status === "unverified"
+    ? "mapping.status = 'reviewed' AND mapping.reviewed_by IS NULL"
+    : "mapping.status = ?";
+  const statusParams = status === "unverified" ? [] : [status];
+  const [rows, count, syllabus, bookSections, years] = await Promise.all([
     db.prepare(`
-      SELECT mapping.*, question.stem, question.year, question.paper_slug,
+      SELECT mapping.*, question.stem, question.options, question.answer, question.year, question.paper_slug,
         question.question_no, question.images, syllabus_section.syllabus_code,
         syllabus_section.title_en AS syllabus_title_en,
         syllabus_section.title_zh AS syllabus_title_zh,
@@ -254,26 +261,29 @@ async function listMappings(db, url) {
       JOIN question_bank question ON question.id = mapping.question_id
       JOIN curriculum_sections syllabus_section ON syllabus_section.id = mapping.curriculum_section_id
       LEFT JOIN coursebook_sections book_section ON book_section.id = mapping.coursebook_section_id
-      WHERE mapping.status = ? AND syllabus_section.curriculum_version_id = ?
+      LEFT JOIN coursebook_chapters chapter_row ON chapter_row.id = book_section.coursebook_chapter_id
+      WHERE ${statusFilter} AND syllabus_section.curriculum_version_id = ?
         AND (? = '' OR question.year = ?)
-        AND (? = 0 OR book_section.section_code LIKE CAST(? AS TEXT) || '.%')
+        AND (? = 0 OR chapter_row.chapter_no = ?)
       ORDER BY mapping.created_at, question.year DESC, question.paper_slug, question.question_no
       LIMIT ? OFFSET ?
-    `).bind(status, versionId, year, year, chapter, chapter, limit, offset).all(),
+    `).bind(...statusParams, versionId, year, year, chapter, chapter, limit, offset).all(),
     db.prepare(`
       SELECT COUNT(*) AS count
       FROM question_section_mappings mapping
       JOIN question_bank question ON question.id = mapping.question_id
       JOIN curriculum_sections syllabus_section ON syllabus_section.id = mapping.curriculum_section_id
       LEFT JOIN coursebook_sections book_section ON book_section.id = mapping.coursebook_section_id
-      WHERE mapping.status = ? AND syllabus_section.curriculum_version_id = ?
+      LEFT JOIN coursebook_chapters chapter_row ON chapter_row.id = book_section.coursebook_chapter_id
+      WHERE ${statusFilter} AND syllabus_section.curriculum_version_id = ?
         AND (? = '' OR question.year = ?)
-        AND (? = 0 OR book_section.section_code LIKE CAST(? AS TEXT) || '.%')
-    `).bind(status, versionId, year, year, chapter, chapter).first(),
+        AND (? = 0 OR chapter_row.chapter_no = ?)
+    `).bind(...statusParams, versionId, year, year, chapter, chapter).first(),
     db.prepare(`
       SELECT id, syllabus_code, title_en, title_zh, core_level
       FROM curriculum_sections
-      WHERE curriculum_version_id = ? AND level = 'statement'
+      WHERE curriculum_version_id = ?
+        AND EXISTS (SELECT 1 FROM coursebook_section_mappings bridge WHERE bridge.curriculum_section_id = curriculum_sections.id)
       ORDER BY sort_order
     `).bind(versionId).all(),
     db.prepare(`
@@ -289,8 +299,12 @@ async function listMappings(db, url) {
       GROUP BY book_section.id
       ORDER BY chapter.sort_order, book_section.sort_order
     `).bind(versionId).all(),
+    db.prepare("SELECT DISTINCT year FROM question_bank WHERE subject_code = ? AND year GLOB '[0-9][0-9][0-9][0-9]' ORDER BY year DESC")
+      .bind(subjectCode).all(),
   ]);
   return {
+    subjectCode,
+    years: years.results.map((row) => row.year),
     total: Number(count?.count || 0),
     mappings: rows.results.map((row) => ({
       questionId: row.question_id,
@@ -300,8 +314,11 @@ async function listMappings(db, url) {
       confidence: row.confidence == null ? null : Number(row.confidence),
       status: row.status,
       source: row.source,
+      reviewedBy: row.reviewed_by || null,
       similarQuestionGroup: row.similar_question_group,
       stem: row.stem,
+      options: parseJson(row.options, []),
+      answer: row.answer == null ? null : Number(row.answer),
       year: row.year,
       paperSlug: row.paper_slug,
       questionNo: row.question_no == null ? null : Number(row.question_no),
@@ -333,6 +350,62 @@ async function listMappings(db, url) {
       curriculumSectionIds: parseJson(row.curriculum_section_ids, []),
     })),
   };
+}
+
+async function bulkReviewMappings(request, env, admin) {
+  const body = await readJsonBody(request);
+  const subjectCode = String(body.subjectCode || "");
+  if (!/^\d{4}$/.test(subjectCode) || !Array.isArray(body.mappings)
+    || body.mappings.length < 1 || body.mappings.length > 100) {
+    throw new AuthError(400, "Select 1 to 100 mappings from one subject.", "INVALID_INPUT");
+  }
+  const keys = body.mappings.map((item) => ({
+    questionId: limitedText(item?.questionId, 200, "Question ID", true),
+    curriculumSectionId: limitedText(item?.curriculumSectionId, 200, "Curriculum section ID", true),
+  }));
+  if (new Set(keys.map((item) => `${item.questionId}\u0000${item.curriculumSectionId}`)).size !== keys.length
+    || new Set(keys.map((item) => item.questionId)).size !== keys.length) {
+    throw new AuthError(400, "Select each question once.", "INVALID_INPUT");
+  }
+  const selectedJson = JSON.stringify(keys);
+  const rows = await env.DB.prepare(`
+    SELECT mapping.question_id, mapping.curriculum_section_id, mapping.status,
+      mapping.is_primary, mapping.reviewed_by, question.subject_code,
+      section.curriculum_version_id,
+      EXISTS (SELECT 1 FROM coursebook_section_mappings bridge
+        WHERE bridge.coursebook_section_id = mapping.coursebook_section_id
+          AND bridge.curriculum_section_id = mapping.curriculum_section_id) AS valid_section,
+      EXISTS (SELECT 1 FROM question_section_mappings other
+        WHERE other.question_id = mapping.question_id AND other.status = 'reviewed'
+          AND other.is_primary = 1 AND other.curriculum_section_id <> mapping.curriculum_section_id) AS conflicting_primary
+    FROM question_section_mappings mapping
+    JOIN json_each(?) selected ON mapping.question_id = json_extract(selected.value, '$.questionId')
+      AND mapping.curriculum_section_id = json_extract(selected.value, '$.curriculumSectionId')
+    JOIN question_bank question ON question.id = mapping.question_id
+    JOIN curriculum_sections section ON section.id = mapping.curriculum_section_id
+  `).bind(selectedJson).all();
+  const version = await env.DB.prepare("SELECT id FROM curriculum_versions WHERE subject_code = ? AND active = 1 LIMIT 1")
+    .bind(subjectCode).first();
+  if (!version || rows.results.length !== keys.length || rows.results.some((row) =>
+    row.subject_code !== subjectCode || row.curriculum_version_id !== version.id
+    || !row.valid_section || !row.is_primary || row.reviewed_by
+    || !new Set(["suggested", "reviewed"]).has(row.status) || row.conflicting_primary
+  )) {
+    throw new AuthError(409, "Selection changed or contains an invalid chapter mapping. Reload and try again.", "MAPPING_CONFLICT");
+  }
+  const now = new Date().toISOString();
+  const updated = await env.DB.prepare(`
+    UPDATE question_section_mappings SET status = 'reviewed', source = 'manual',
+      reviewed_by = ?, reviewed_at = ?, updated_at = ?
+    WHERE (question_id, curriculum_section_id) IN (
+      SELECT json_extract(value, '$.questionId'), json_extract(value, '$.curriculumSectionId')
+      FROM json_each(?)
+    )
+      AND reviewed_by IS NULL AND status IN ('suggested', 'reviewed') AND is_primary = 1
+  `).bind(admin.id, now, now, selectedJson).run();
+  await writeAudit(env.DB, admin.id, "curriculum.mapping.bulk_review", "curriculum_mapping", null,
+    { subjectCode, count: Number(updated.meta.changes || 0) });
+  return { updated: Number(updated.meta.changes || 0) };
 }
 
 async function suggestMappings(db, limit) {
@@ -718,6 +791,9 @@ export async function handleAdminApiRequest(request, env) {
     if (request.method === "POST" && url.pathname === "/api/admin/curriculum/mappings/suggest") {
       const body = await readJsonBody(request);
       return success(await suggestMappings(env.DB, toInteger(body.limit, 100, 1, 100, "limit")), request.method, 201);
+    }
+    if (request.method === "POST" && url.pathname === "/api/admin/curriculum/mappings/bulk-review") {
+      return success(await bulkReviewMappings(request, env, admin), request.method);
     }
     const mappingReview = url.pathname.match(/^\/api\/admin\/curriculum\/mappings\/([^/]+)\/([^/]+)$/);
     if (mappingReview && request.method === "PATCH") {
