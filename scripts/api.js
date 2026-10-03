@@ -672,6 +672,42 @@
         body: JSON.stringify(input || {}),
       });
     },
+    async searchChatUsers(query) {
+      const params = new URLSearchParams({ q: String(query || "").trim() });
+      return request(`/api/chat/users/search?${params}`, { token: currentToken() });
+    },
+    async addChatContactByUserId(chatUserId) {
+      return request("/api/chat/contacts/by-user-id", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({ chatUserId: String(chatUserId || "").trim() }),
+      });
+    },
+    async getGlobalChatDiscussion() {
+      return request("/api/chat/global-discussion", { token: currentToken() });
+    },
+    async createGlobalChatDiscussion(input) {
+      return request("/api/chat/global-discussion", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+        timeoutMs: 60000,
+      });
+    },
+    async rotateGlobalChatDiscussion(input) {
+      return request("/api/chat/global-discussion/rotate", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
+        timeoutMs: 60000,
+      });
+    },
+    async leaveGlobalChatDiscussion() {
+      return request("/api/chat/global-discussion/leave", {
+        method: "POST",
+        token: currentToken(),
+      });
+    },
     async listChatInvites() {
       return request("/api/chat/invites", { token: currentToken() });
     },

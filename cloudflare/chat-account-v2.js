@@ -181,12 +181,18 @@ export async function mapAccountConversation(db, row, userId) {
   }
   const data = await db.prepare("SELECT * FROM chat_group_metadata WHERE conversation_id = ?").bind(row.id).first();
   const last = await db.prepare("SELECT created_at FROM chat_messages WHERE conversation_id = ? ORDER BY created_at DESC LIMIT 1").bind(row.id).first();
+  const isGlobalDiscussion = row.global_slug === "site-wide-discussion";
+  const siteRole = (await db.prepare("SELECT role FROM users WHERE id = ?").bind(userId).first())?.role || null;
   return { id: row.id, kind: row.kind, protocolVersion: VERSION, historical: await isHistoricalConversation(db, row), epoch: Number(row.current_epoch), currentEpoch: Number(row.current_epoch),
     rotationRequired: Boolean(row.rotation_required), role: mapped.find((m) => m.isSelf)?.role || null, retentionSeconds: row.retention_seconds,
     createdAt: row.created_at, updatedAt: row.updated_at, lastMessageAt: last?.created_at || null, legacySourceId: row.legacy_source_id || null,
     members: mapped, group: row.kind === "group" ? { members: mapped, memberCount: mapped.length } : null,
     peer: row.kind === "direct" ? mapped.find((m) => !m.isSelf) || null : null,
-    metadata: data ? { epoch: data.epoch, version: data.version, nonce: data.nonce, ciphertext: data.ciphertext } : null };
+    metadata: data ? { epoch: data.epoch, version: data.version, nonce: data.nonce, ciphertext: data.ciphertext } : null,
+    isGlobalDiscussion,
+    globalDiscussion: isGlobalDiscussion,
+    globalSlug: isGlobalDiscussion ? row.global_slug : null,
+    siteRole };
 }
 async function createConversation(db, env, userId, body) {
   const conversationId = str(body.conversationId, "conversationId");
@@ -219,6 +225,7 @@ async function createConversation(db, env, userId, body) {
 }
 async function changeConversation(db, env, userId, conversationId, body) {
   const c = await member(db, conversationId, userId);
+  if (c.global_slug === "site-wide-discussion" && body?.action !== "leave") fail(403, "GLOBAL_MEMBERSHIP_MANAGED", "Website administrators manage membership and roles for the global discussion.");
   const signed = await control(db, userId, body, conversationId, str(body.action, "action", 40));
   const p = signed.payload;
   const active = await members(db, conversationId);
@@ -240,6 +247,13 @@ async function changeConversation(db, env, userId, conversationId, body) {
   } else {
     if (c.kind !== "group") fail(400, "INVALID_GROUP_OPERATION", "Direct conversations require a new conversation to change participants or identity.");
     if (signed.action === "leave") {
+      if (c.global_slug === "site-wide-discussion") {
+        const siteRole = (await db.prepare("SELECT role FROM users WHERE id = ?").bind(userId).first())?.role;
+        if (siteRole === "admin" || actor.role === "admin" || actor.role === "owner") {
+          fail(403, "ADMIN_CANNOT_LEAVE_GLOBAL_DISCUSSION", "Website administrators cannot leave the discussion.");
+        }
+        statements.push(db.prepare("INSERT INTO chat_global_optouts (conversation_id, user_id, left_at) VALUES (?, ?, ?) ON CONFLICT(conversation_id, user_id) DO UPDATE SET left_at = excluded.left_at").bind(conversationId, userId, timestamp));
+      }
       if (actor.role === "owner") fail(409, "OWNER_TRANSFER_REQUIRED", "Transfer ownership before leaving.");
       next = next.filter((m) => m.user_id !== userId);
       leaving = true;

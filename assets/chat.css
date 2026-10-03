@@ -41,6 +41,15 @@
 .site-ui .chat-avatar-upload input { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }
 .site-ui .chat-avatar-upload:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
 .site-ui .chat-profile-feedback.is-error { color: #d65b5b; }
+.site-ui .chat-user-search-form { display: grid; gap: 8px; margin-bottom: 10px; }
+.site-ui .chat-user-search-form label { display: grid; gap: 6px; font-size: .85rem; }
+.site-ui .chat-user-search-results { display: grid; gap: 8px; margin-bottom: 14px; }
+.site-ui .chat-user-search-result { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px; border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+.site-ui .chat-user-search-result .chat-contact-identity { flex: 1 1 auto; min-width: 0; }
+.site-ui .chat-user-search-result small { overflow-wrap: anywhere; color: var(--muted); }
+.site-ui .chat-global-discussion-panel { border-color: color-mix(in srgb, var(--accent) 38%, transparent); }
+.site-ui .chat-global-discussion-panel h2 { margin: 0; }
+.site-ui .chat-global-discussion-panel p { margin: 4px 0 0; }
 .site-ui .chat-contact-identity > div { display: grid; gap: 4px; }
 .site-ui .chat-conversation-header { flex-wrap: wrap; }
 .site-ui .chat-conversation-identity { flex: 1 1 220px; }

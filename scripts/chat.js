@@ -65,6 +65,11 @@
     profileAvatarGeneration: 0,
     profileAvatarProcessing: false,
     profileRefreshInFlight: null,
+    userSearchGeneration: 0,
+    globalDiscussion: null,
+    globalInfo: null,
+    globalPendingCount: 0,
+    globalReconcileInFlight: null,
     lastProfileRefresh: 0,
     emojiCategory: "all",
     emojiSelection: null,
@@ -119,6 +124,7 @@
     $("#chatProfileName").textContent = profile.alias;
     setAvatar($("#chatProfileAvatar"), profile.alias, profile.avatarDataUrl);
     if (!state.profileDirty && !state.profileSaving && !state.profileAvatarProcessing) {
+      $("#chatProfileUserId").value = profile.chatUserId || "";
       $("#chatProfileAlias").value = profile.alias;
       state.profileDraftAvatar = profile.avatarDataUrl || "";
     }
@@ -135,6 +141,7 @@
     $("#saveChatProfile").disabled = state.profileSaving || state.profileAvatarProcessing;
     $("#cancelChatProfile").disabled = state.profileSaving;
     $("#chatProfileAlias").disabled = state.profileSaving;
+    $("#chatProfileUserId").disabled = state.profileSaving;
     $("#chatProfileAvatarInput").disabled = state.profileSaving;
     $("#removeChatProfileAvatar").disabled = state.profileSaving || state.profileAvatarProcessing;
   }
@@ -203,6 +210,11 @@
     event.preventDefault();
     if (state.profileSaving || state.profileAvatarProcessing) return;
     const alias = $("#chatProfileAlias").value.trim();
+    const chatUserId = $("#chatProfileUserId").value.trim();
+    if (!/^[A-Za-z0-9][A-Za-z0-9_.-]{2,47}$/.test(chatUserId)) {
+      setProfileFeedback(t("chatUserIdInvalid", "Use 3–48 letters, numbers, dots, hyphens or underscores for your user ID."), true);
+      return;
+    }
     if (Array.from(alias).length < 2 || Array.from(alias).length > 48 || !/^[\p{L}\p{N} _.-]+$/u.test(alias)) {
       setProfileFeedback(t("chatProfileNameInvalid", "Use 2–48 letters, numbers, spaces, _, . or -."), true);
       return;
@@ -211,7 +223,7 @@
     setProfileControls();
     setProfileFeedback(t("chatProfileSaving", "Saving profile..."));
     try {
-      const profile = await window.ALevelApi.updateChatProfile({ alias, avatarDataUrl: state.profileDraftAvatar });
+      const profile = await window.ALevelApi.updateChatProfile({ chatUserId, alias, avatarDataUrl: state.profileDraftAvatar });
       state.dataRefreshGeneration += 1;
       state.profile = profile;
       state.profileDirty = false;
@@ -344,6 +356,7 @@
   }
 
   function conversationName(conversation) {
+    if (conversation?.isGlobalDiscussion || conversation?.globalDiscussion) return t("chatGlobalDiscussionTitle", "Global Discussion");
     return conversation.kind === "group"
       ? state.accountGroupMetadata.get(conversation.id)?.name || t("chatGroupTitle", "Group ({count} members)", { count: conversation.group?.memberCount || 0 })
       : conversation.peer?.alias || "Conversation";
@@ -760,6 +773,86 @@
     });
   }
 
+  function renderUserSearchResults(results, query = "") {
+    const host = $("#chatUserSearchResults");
+    if (!host) return;
+    host.replaceChildren();
+    const users = Array.isArray(results) ? results : [];
+    if (!users.length) {
+      const empty = document.createElement("p");
+      empty.className = "chat-muted";
+      empty.textContent = query
+        ? t("chatSearchNoResults", "No secure chat user found.")
+        : t("chatSearchHint", "Search for a secure chat user ID to add a friend.");
+      host.appendChild(empty);
+      return;
+    }
+    users.forEach((user) => {
+      const item = document.createElement("div");
+      item.className = "chat-user-search-result";
+      const identity = document.createElement("div");
+      identity.className = "chat-contact-identity";
+      const details = document.createElement("div");
+      const name = document.createElement("strong");
+      name.textContent = user.alias || user.chatUserId || t("chatUnknownUser", "Secure chat user");
+      const id = document.createElement("small");
+      id.textContent = user.chatUserId || "";
+      details.append(name, id);
+      identity.append(createAvatar(name.textContent, user.avatarDataUrl), details);
+      item.appendChild(identity);
+      const alreadyContact = Boolean(user.isContact || user.contactId || state.contacts.some((contact) => contact.id === user.contactId));
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "btn-secondary chat-small-action";
+      button.textContent = alreadyContact ? t("chatAlreadyFriend", "Added") : t("chatAddFriend", "Add");
+      button.disabled = alreadyContact || user.enabled === false;
+      if (user.enabled === false) button.title = t("chatSearchNeedsSecure", "This user has not enabled secure chat.");
+      button.addEventListener("click", async () => {
+        if (button.disabled || !user.chatUserId) return;
+        button.disabled = true;
+        try {
+          await window.ALevelApi.addChatContactByUserId(user.chatUserId);
+          button.textContent = t("chatAlreadyFriend", "Added");
+          setStatus(t("chatFriendAdded", "Friend added."));
+          await refreshData();
+        } catch (error) {
+          button.disabled = false;
+          setStatus(formatActionError(error), true);
+        }
+      });
+      item.appendChild(button);
+      host.appendChild(item);
+    });
+  }
+
+  async function searchChatUsers(event) {
+    event?.preventDefault();
+    const input = $("#chatUserSearchInput");
+    const button = $("#chatUserSearchButton");
+    const query = input?.value.trim() || "";
+    if (query.length < 3) {
+      renderUserSearchResults([], query);
+      setStatus(t("chatSearchTooShort", "Enter at least 3 characters to search."), true);
+      return;
+    }
+    const generation = ++state.userSearchGeneration;
+    if (button) button.disabled = true;
+    try {
+      setStatus(t("chatSearchingUsers", "Searching secure chat users..."));
+      const response = await window.ALevelApi.searchChatUsers(query);
+      if (generation !== state.userSearchGeneration) return;
+      const users = Array.isArray(response) ? response : response?.users || response?.results || [];
+      renderUserSearchResults(users, query);
+      setStatus("");
+    } catch (error) {
+      if (generation !== state.userSearchGeneration) return;
+      renderUserSearchResults([], query);
+      setStatus(formatActionError(error), true);
+    } finally {
+      if (generation === state.userSearchGeneration && button) button.disabled = false;
+    }
+  }
+
   function renderContacts() {
     const host = $("#conversationList");
     if (!host) return;
@@ -770,7 +863,32 @@
       empty.textContent = t("chatNoContacts", "No friends yet.");
       host.appendChild(empty);
     }
-    state.conversations.forEach((conversation) => {
+    const orderedConversations = [...state.conversations].sort((left, right) => Number(Boolean(right.isGlobalDiscussion || right.globalDiscussion)) - Number(Boolean(left.isGlobalDiscussion || left.globalDiscussion)));
+    state.conversations = orderedConversations;
+    const globalDiscussion = orderedConversations.find((conversation) => conversation.isGlobalDiscussion || conversation.globalDiscussion);
+    state.globalDiscussion = globalDiscussion || null;
+    const globalPanel = $("#globalDiscussionPanel");
+    if (globalPanel) {
+      const globalInfo = state.globalInfo || {};
+      const waitingForMembership = Boolean(globalInfo.global && globalInfo.conversationId && !globalDiscussion && !globalInfo.optedOut && (globalInfo.siteRole === "admin" || globalInfo.studentCanLeave));
+      globalPanel.hidden = !globalDiscussion && !globalInfo.needsBootstrap && !waitingForMembership;
+      if (globalDiscussion || globalInfo.needsBootstrap || waitingForMembership) {
+        const memberCount = Number(globalDiscussion?.group?.memberCount || globalDiscussion?.memberCount || globalInfo.activeMemberCount || 0);
+        $("#globalDiscussionMeta").textContent = (globalInfo.needsBootstrap || waitingForMembership) && !globalInfo.canManage
+          ? t("chatGlobalWaitingForAdmin", "An administrator is preparing the encrypted discussion.")
+          : t("chatGlobalDiscussionMeta", "{count} members · end-to-end encrypted", { count: memberCount });
+        $("#globalDiscussionPending").textContent = globalInfo.needsBootstrap && !globalInfo.canManage ? "" : state.globalPendingCount
+          ? t("chatGlobalPending", "{count} secure chat accounts need an encryption update.", { count: state.globalPendingCount })
+          : "";
+        $("#globalDiscussionPending").hidden = (globalInfo.needsBootstrap || waitingForMembership) && !globalInfo.canManage || !state.globalPendingCount;
+        const role = globalDiscussion?.role || globalDiscussion?.group?.members?.find((member) => member.isSelf)?.role || "member";
+        $("#leaveGlobalDiscussion").hidden = !globalDiscussion || role === "admin" || role === "owner" || globalDiscussion.siteRole === "admin";
+        $("#openGlobalDiscussion").hidden = !globalDiscussion;
+        $("#bootstrapGlobalDiscussion").hidden = !globalInfo.needsBootstrap || !globalInfo.canManage;
+        $("#rotateGlobalDiscussion").hidden = !globalDiscussion || !globalInfo.pendingCount || !globalInfo.canManage;
+      }
+    }
+    orderedConversations.forEach((conversation) => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = `chat-conversation-item${state.activeConversation?.id === conversation.id ? " is-active" : ""}`;
@@ -778,7 +896,8 @@
       button.innerHTML = `<div class="chat-contact-identity"><div><strong></strong><small></small></div></div>`;
       button.firstElementChild.prepend(createAvatar(conversationName(conversation), conversation.peer?.avatarDataUrl));
       if (conversation.kind === "group") {
-        button.querySelector("strong").textContent = conversationName(conversation);
+        button.querySelector("strong").textContent = conversation.isGlobalDiscussion || conversation.globalDiscussion
+          ? t("chatGlobalDiscussionTitle", "Global Discussion") : conversationName(conversation);
         button.querySelector("small").textContent = t("chatGroupMemberCount", "{count} members", {
           count: conversation.group?.memberCount || 0,
         });
@@ -886,7 +1005,8 @@
     if (!host) return;
     host.replaceChildren();
     const self = conversation.group?.members?.find((member) => member.isSelf);
-    const canManage = ["owner", "admin"].includes(self?.role);
+    const isGlobal = Boolean(conversation.isGlobalDiscussion || conversation.globalDiscussion);
+    const canManage = !isGlobal && ["owner", "admin"].includes(self?.role);
     for (const member of conversation.group?.members || []) {
       const row = document.createElement("div");
       row.className = "chat-device-item";
@@ -923,7 +1043,7 @@
           controls.appendChild(button);
         };
         if (canManage && member.role !== "owner" && (self.role === "owner" || member.role === "member")) addAction("Remove", "remove", { userId: member.userId }, true);
-        if (self?.role === "owner" && member.role !== "owner") {
+        if (!isGlobal && self?.role === "owner" && member.role !== "owner") {
           addAction(member.role === "admin" ? "Make member" : "Make administrator", "role", { userId: member.userId, role: member.role === "admin" ? "member" : "admin" });
           addAction("Transfer ownership", "transfer", { userId: member.userId });
         }
@@ -934,11 +1054,12 @@
     const actions = $("#groupMemberActions");
     if (actions) {
       actions.hidden = false;
-      $("#dissolveGroup").hidden = self?.role !== "owner";
-      $("#leaveGroup").hidden = self?.role === "owner";
-      $("#rotateGroupKey").hidden = !canManage || !conversation.rotationRequired;
-      $("#inviteGroupMember").hidden = !canManage;
-      $("#groupInviteContact").hidden = !canManage;
+      $("#dissolveGroup").hidden = isGlobal || self?.role !== "owner";
+      $("#leaveGroup").hidden = self?.role === "owner" || (isGlobal && (self?.role === "admin" || conversation.siteRole === "admin"));
+      $("#leaveGroup").textContent = isGlobal ? t("chatLeaveGlobalDiscussion", "Leave discussion") : t("chatLeaveGroup", "Leave group");
+      $("#rotateGroupKey").hidden = isGlobal || !canManage || !conversation.rotationRequired;
+      $("#inviteGroupMember").hidden = isGlobal || !canManage;
+      $("#groupInviteContact").hidden = isGlobal || !canManage;
       const existing = new Set((conversation.group?.members || []).map((member) => member.contactId).filter(Boolean));
       const eligible = state.contacts.filter((contact) => !existing.has(contact.id) && state.accountContactStatus.get(contact.id) === true);
       const selectedContact = $("#groupInviteContact").value;
@@ -949,7 +1070,7 @@
         return option;
       }));
       if (eligible.some((contact) => contact.id === selectedContact)) $("#groupInviteContact").value = selectedContact;
-      $("#inviteGroupMember").disabled = eligible.length === 0 || Number(conversation.group?.memberCount) >= 50;
+      $("#inviteGroupMember").disabled = eligible.length === 0 || Number(conversation.group?.memberCount) >= (isGlobal ? 1000 : 50);
     }
   }
 
@@ -1785,11 +1906,12 @@
   async function refreshData() {
     const generation = ++state.dataRefreshGeneration;
     const selectionGeneration = state.syncGeneration;
-    const [profile, invites, contacts, conversations] = await Promise.all([
+    const [profile, invites, contacts, conversations, globalInfo] = await Promise.all([
       window.ALevelApi.getChatProfile(),
       window.ALevelApi.listChatInvites(),
       window.ALevelApi.listChatContacts(),
       window.ALevelApi.listChatConversations(),
+      state.accountMode ? window.ALevelApi.getGlobalChatDiscussion().catch(() => null) : Promise.resolve(null),
     ]);
     if (generation !== state.dataRefreshGeneration) return;
     if (selectionGeneration !== state.syncGeneration) return refreshData();
@@ -1801,6 +1923,8 @@
       }
     }
     state.profile = profile;
+    state.globalInfo = globalInfo || null;
+    state.globalPendingCount = Number(globalInfo?.pendingCount || 0);
     state.contacts = contacts;
     state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
     state.peerBundles.clear();
@@ -1834,6 +1958,7 @@
     renderActiveConversation();
     if (!state.activeConversation) renderMessages();
     if (!state.accountMode) renderDevices();
+    scheduleGlobalDiscussionReconcile();
   }
 
   async function refreshPresentation() {
@@ -1841,13 +1966,16 @@
     const generation = state.dataRefreshGeneration;
     const selectionGeneration = state.syncGeneration;
     state.profileRefreshInFlight = (async () => {
-      const [profile, contacts, conversations] = await Promise.all([
+      const [profile, contacts, conversations, globalInfo] = await Promise.all([
         window.ALevelApi.getChatProfile(), window.ALevelApi.listChatContacts(), window.ALevelApi.listChatConversations(),
+        state.accountMode ? window.ALevelApi.getGlobalChatDiscussion().catch(() => null) : Promise.resolve(null),
       ]);
       if (generation !== state.dataRefreshGeneration || selectionGeneration !== state.syncGeneration) return;
       state.dataRefreshGeneration += 1;
       state.lastProfileRefresh = Date.now();
       state.profile = profile;
+      state.globalInfo = globalInfo || null;
+      state.globalPendingCount = Number(globalInfo?.pendingCount || 0);
       state.contacts = contacts;
       state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
       if (state.activeConversation) {
@@ -1863,6 +1991,7 @@
       renderContacts();
       renderActiveConversation();
       renderMessages();
+      scheduleGlobalDiscussionReconcile();
     })().finally(() => { state.profileRefreshInFlight = null; });
     return state.profileRefreshInFlight;
   }
@@ -1905,6 +2034,85 @@
     } catch (error) {
       setStatus(t("chatGroupCreateFailed", "Could not create group: {message}", { message: formatActionError(error) }), true);
     } finally { button.disabled = false; }
+  }
+
+  function globalRecipientInput(item) {
+    const key = item?.accountKey || item;
+    if (!key?.userId || !key?.keyVersion || !key?.encryptionPublicKey) return null;
+    return { userId: key.userId, keyVersion: key.keyVersion, encryptionPublicKey: key.encryptionPublicKey };
+  }
+
+  function globalRecipients(info) {
+    const members = info?.conversation?.group?.members || info?.conversation?.members || [];
+    const pending = Array.isArray(info?.pendingRecipients) ? info.pendingRecipients : [];
+    return [...new Map([...members, ...pending].map((item) => {
+      const value = globalRecipientInput(item);
+      return value ? [value.userId, value] : null;
+    }).filter(Boolean)).values()];
+  }
+
+  async function globalEpochPayload(conversationId, epoch, recipients) {
+    const created = await cryptoCall("createAccountV2Epoch", { conversationId, epoch, recipients });
+    const metadata = await cryptoCall("encryptAccountV2Metadata", {
+      conversationId,
+      epoch,
+      version: 1,
+      plaintext: { name: t("chatGlobalDiscussionTitle", "Global Discussion"), avatarRef: null },
+    });
+    return { recipients: created.recipients, metadata };
+  }
+
+  async function initializeGlobalDiscussion() {
+    const button = $("#bootstrapGlobalDiscussion");
+    const info = state.globalInfo;
+    if (!info?.needsBootstrap || button?.disabled) return;
+    const recipients = globalRecipients(info);
+    if (!recipients.length) {
+      setStatus(t("chatGlobalNoRecipients", "No enabled secure chat account is ready to join yet."), true);
+      return;
+    }
+    if (button) button.disabled = true;
+    try {
+      const conversationId = crypto.randomUUID();
+      const payload = await globalEpochPayload(conversationId, 1, recipients);
+      await window.ALevelApi.createGlobalChatDiscussion({ conversationId, ...payload });
+      setStatus(t("chatGlobalInitialized", "Global discussion initialized."));
+      await refreshData();
+    } catch (error) {
+      setStatus(t("chatGlobalInitializeFailed", "Could not initialize the global discussion: {message}", { message: formatActionError(error) }), true);
+    } finally { if (button) button.disabled = false; }
+  }
+
+  function scheduleGlobalDiscussionReconcile() {
+    const info = state.globalInfo;
+    if (!state.accountV2?.unlocked || !info?.canManage || (!info.needsBootstrap && !Number(info.pendingCount) && !info.rotationRequired)) return;
+    if (state.globalReconcileInFlight) return;
+    state.globalReconcileInFlight = Promise.resolve().then(async () => {
+      if (info.needsBootstrap) await initializeGlobalDiscussion();
+      else await rotateGlobalDiscussion();
+    }).catch((error) => setStatus(t("chatGlobalAutoUpdateFailed", "Could not sync the global discussion: {message}", { message: formatActionError(error) }), true))
+      .finally(() => { state.globalReconcileInFlight = null; });
+  }
+
+  async function rotateGlobalDiscussion() {
+    const info = state.globalInfo;
+    const conversation = state.globalDiscussion;
+    if (!conversation || !info || !Number.isSafeInteger(Number(conversation.currentEpoch ?? conversation.epoch))) return;
+    const recipients = globalRecipients(info);
+    if (!recipients.length) return;
+    const button = $("#rotateGlobalDiscussion");
+    if (button?.disabled) return;
+    if (button) button.disabled = true;
+    try {
+      const expectedEpoch = Number(conversation.currentEpoch ?? conversation.epoch);
+      const epoch = expectedEpoch + 1;
+      const payload = await globalEpochPayload(conversation.id, epoch, recipients);
+      await window.ALevelApi.rotateGlobalChatDiscussion({ conversationId: conversation.id, expectedEpoch, epoch, ...payload });
+      setStatus(t("chatGlobalRotated", "Global discussion encryption updated."));
+      await refreshData();
+    } catch (error) {
+      setStatus(t("chatGlobalRotateFailed", "Could not update global discussion encryption: {message}", { message: formatActionError(error) }), true);
+    } finally { if (button) button.disabled = false; }
   }
 
   async function createInvite() {
@@ -2115,6 +2323,7 @@
     $("#chatProfileForm")?.addEventListener("submit", saveChatProfile);
     $("#cancelChatProfile")?.addEventListener("click", closeProfileEditor);
     $("#chatProfileAlias")?.addEventListener("input", () => { state.profileDirty = true; renderChatProfile(); });
+    $("#chatProfileUserId")?.addEventListener("input", () => { state.profileDirty = true; renderChatProfile(); });
     $("#chatProfileAvatarInput")?.addEventListener("change", (event) => prepareProfileAvatar(event.target.files?.[0]));
     $("#removeChatProfileAvatar")?.addEventListener("click", () => {
       if (state.profileSaving || state.profileAvatarProcessing) return;
@@ -2134,7 +2343,14 @@
     $("#closeGroupManage")?.addEventListener("click", () => { $("#groupManagePanel").hidden = true; });
     $("#leaveGroup")?.addEventListener("click", async () => {
       const conversation = state.activeConversation;
-      if (!conversation || !window.confirm("Leave this group? A remaining owner or administrator must rotate the encryption epoch.")) return;
+      const isGlobal = Boolean(conversation?.isGlobalDiscussion || conversation?.globalDiscussion);
+      const self = conversation?.group?.members?.find((member) => member.isSelf);
+      const role = conversation?.role || self?.role;
+      if (!conversation || (isGlobal && (conversation.siteRole === "admin" || role === "admin" || role === "owner"))) {
+        if (isGlobal) setStatus(t("chatGlobalAdminCannotLeave", "Administrators cannot leave the global discussion."), true);
+        return;
+      }
+      if (!window.confirm(isGlobal ? t("chatLeaveGlobalConfirm", "Leave the global discussion? You can be invited again by an administrator.") : t("chatLeaveGroupConfirm", "Leave this group? A remaining owner or administrator must rotate the encryption epoch."))) return;
       try {
         const expectedEpoch = await currentAccountEpoch(conversation);
         const signed = await signAccountControl(conversation.id, expectedEpoch, "leave", {});
@@ -2183,6 +2399,30 @@
     $("#cancelCreateGroup")?.addEventListener("click", () => setGroupFormVisible(false));
     $("#createInvite")?.addEventListener("click", createInvite);
     $("#acceptInvite")?.addEventListener("click", acceptInvite);
+    $("#chatUserSearchForm")?.addEventListener("submit", searchChatUsers);
+    $("#openGlobalDiscussion")?.addEventListener("click", async () => {
+      const conversation = state.globalDiscussion;
+      if (!conversation) return;
+      try { await selectConversation(conversation); } catch (error) { setStatus(formatActionError(error), true); }
+    });
+    $("#bootstrapGlobalDiscussion")?.addEventListener("click", () => initializeGlobalDiscussion());
+    $("#rotateGlobalDiscussion")?.addEventListener("click", () => rotateGlobalDiscussion());
+    $("#leaveGlobalDiscussion")?.addEventListener("click", async () => {
+      const conversation = state.globalDiscussion;
+      const self = conversation?.group?.members?.find((member) => member.isSelf);
+      const role = conversation?.role || self?.role;
+      if (!conversation || conversation.siteRole === "admin" || role === "admin" || role === "owner") {
+        setStatus(t("chatGlobalAdminCannotLeave", "Administrators cannot leave the global discussion."), true);
+        return;
+      }
+      if (!window.confirm(t("chatLeaveGlobalConfirm", "Leave the global discussion? You can be invited again by an administrator."))) return;
+      try {
+        const expectedEpoch = await currentAccountEpoch(conversation);
+        const signed = await signAccountControl(conversation.id, expectedEpoch, "leave", { globalDiscussion: true });
+        await window.ALevelApi.leaveChatGroup(conversation.id, signed);
+        await refreshData();
+      } catch (error) { setStatus(formatActionError(error), true); }
+    });
     $("#createRecoveryBackup")?.addEventListener("click", () => createRecoveryBackup(state.device?.id));
     $("#restoreRecoveryBackup")?.addEventListener("click", restoreRecoveryBackup);
     $("#restoreRecoveryBackupSetup")?.addEventListener("click", restoreRecoveryBackup);

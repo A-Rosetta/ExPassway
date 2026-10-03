@@ -22,6 +22,8 @@ const MAX_EVIDENCE_LENGTH = 2 * 1024 * 1024;
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 const MAX_AVATAR_BYTES = 256 * 1024;
 const MAX_GROUP_MEMBERS = 50;
+const MAX_GLOBAL_MEMBERS = 1000;
+const GLOBAL_DISCUSSION_SLUG = "site-wide-discussion";
 const RETENTION_OPTIONS = new Set([86400, 604800, 2592000, 0]);
 
 function nowIso() {
@@ -215,42 +217,54 @@ async function ensureProfile(db, userId, fingerprint = "") {
   const existing = await db
     .prepare(
       `
-    SELECT user_id, chat_alias, identity_fingerprint, profile_ciphertext, avatar_data_url, created_at, updated_at
+    SELECT user_id, chat_alias, chat_user_id, identity_fingerprint, profile_ciphertext, avatar_data_url, created_at, updated_at
     FROM chat_profiles WHERE user_id = ?
   `
     )
     .bind(userId)
     .first();
   if (existing) {
-    if (!existing.identity_fingerprint && fingerprint) {
+    if (!existing.chat_user_id || (!existing.identity_fingerprint && fingerprint)) {
+      let chatUserId = existing.chat_user_id;
+      for (let attempt = 0; !chatUserId && attempt < 5; attempt += 1) {
+        const candidate = `learner_${randomId(6).toLowerCase()}`;
+        try {
+          const result = await db.prepare("UPDATE chat_profiles SET chat_user_id = ? WHERE user_id = ? AND chat_user_id IS NULL")
+            .bind(candidate, userId).run();
+          if (Number(result?.meta?.changes ?? result?.changes ?? 0) === 1) chatUserId = candidate;
+        } catch (error) {
+          if (!String(error?.message || error).includes("UNIQUE")) throw error;
+        }
+      }
       await db
         .prepare(
-          "UPDATE chat_profiles SET identity_fingerprint = ?, updated_at = ? WHERE user_id = ?"
+          "UPDATE chat_profiles SET identity_fingerprint = COALESCE(?, identity_fingerprint), updated_at = ? WHERE user_id = ?"
         )
-        .bind(fingerprint, nowIso(), userId)
+        .bind(fingerprint || null, nowIso(), userId)
         .run();
-      return { ...existing, identity_fingerprint: fingerprint };
+      return { ...existing, chat_user_id: chatUserId || existing.chat_user_id, identity_fingerprint: fingerprint || existing.identity_fingerprint };
     }
     return existing;
   }
 
   for (let attempt = 0; attempt < 3; attempt += 1) {
     const alias = `learner-${randomId(5).toLowerCase()}`;
+    const chatUserId = `learner_${randomId(6).toLowerCase()}`;
     const timestamp = nowIso();
     try {
       await db
         .prepare(
           `
         INSERT INTO chat_profiles
-          (user_id, chat_alias, identity_fingerprint, profile_ciphertext, created_at, updated_at)
-        VALUES (?, ?, ?, '', ?, ?)
+          (user_id, chat_alias, chat_user_id, identity_fingerprint, profile_ciphertext, created_at, updated_at)
+        VALUES (?, ?, ?, ?, '', ?, ?)
       `
         )
-        .bind(userId, alias, fingerprint || null, timestamp, timestamp)
+        .bind(userId, alias, chatUserId, fingerprint || null, timestamp, timestamp)
         .run();
       return await db
         .prepare(
-          `SELECT user_id, chat_alias, identity_fingerprint, profile_ciphertext, avatar_data_url, created_at, updated_at
+          `SELECT user_id, chat_alias, chat_user_id, identity_fingerprint, profile_ciphertext, avatar_data_url, created_at, updated_at
         FROM chat_profiles WHERE user_id = ?`
         )
         .bind(userId)
@@ -265,10 +279,25 @@ async function ensureProfile(db, userId, fingerprint = "") {
 function mapProfile(row) {
   return {
     id: row.user_id,
+    chatUserId: row.chat_user_id || null,
     alias: row.chat_alias,
     avatarDataUrl: row.avatar_data_url || "",
     identityFingerprint: row.identity_fingerprint || null,
     profileCiphertext: row.profile_ciphertext || "",
+  };
+}
+
+function validChatUserId(value) {
+  return typeof value === "string" && /^[A-Za-z0-9][A-Za-z0-9_.-]{2,47}$/.test(value);
+}
+
+function mapDirectoryProfile(row, contactId = null) {
+  return {
+    chatUserId: row.chat_user_id,
+    alias: row.chat_alias || "Paired contact",
+    avatarDataUrl: row.avatar_data_url || "",
+    enabled: Boolean(row.account_enabled),
+    contactId: contactId || null,
   };
 }
 
@@ -755,7 +784,7 @@ async function listContacts(db, userId) {
   const rows = await db
     .prepare(
       `
-    SELECT c.id, c.created_at, c.accepted_at, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url
+      SELECT c.id, c.created_at, c.accepted_at, p.chat_user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url
     FROM chat_contacts c
     LEFT JOIN chat_profiles p ON p.user_id = c.peer_user_id
     WHERE c.user_id = ? ORDER BY c.accepted_at DESC
@@ -768,12 +797,272 @@ async function listContacts(db, userId) {
     createdAt: row.created_at,
     acceptedAt: row.accepted_at,
     profile: {
+      chatUserId: row.chat_user_id || null,
       alias: row.chat_alias || "Paired contact",
       avatarDataUrl: row.avatar_data_url || "",
       identityFingerprint: row.identity_fingerprint || null,
       profileCiphertext: row.profile_ciphertext || "",
     },
   }));
+}
+
+async function directoryAccountEnabled(db, userId) {
+  const row = await db.prepare(`SELECT 1 FROM chat_account_keys k
+    JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
+    JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
+    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    JOIN users u ON u.id=k.user_id AND u.disabled_at IS NULL
+    WHERE k.user_id=? AND k.status='active' LIMIT 1`).bind(userId).first();
+  return Boolean(row);
+}
+
+async function searchChatUsers(db, userId, query) {
+  const q = String(query || "").trim();
+  if (!validChatUserId(q)) throw new AuthError(400, "Enter at least 3 valid ID characters.", "INVALID_CHAT_USER_ID");
+  const rows = await db.prepare(`SELECT p.chat_user_id,p.chat_alias,p.avatar_data_url,
+      CASE WHEN k.user_id IS NOT NULL AND h.user_id IS NOT NULL AND v.user_id IS NOT NULL AND pk.user_id IS NOT NULL THEN 1 ELSE 0 END AS account_enabled,
+      c.id AS contact_id
+    FROM chat_profiles p JOIN users u ON u.id=p.user_id AND u.disabled_at IS NULL
+    LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
+    LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
+    LEFT JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
+    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    LEFT JOIN chat_contacts c ON c.user_id=? AND c.peer_user_id=p.user_id
+    WHERE p.user_id<>? AND p.chat_user_id LIKE ?
+    GROUP BY p.user_id ORDER BY p.chat_user_id LIMIT 20`).bind(userId, userId, `${q}%`).all();
+  return (rows.results || []).map((row) => mapDirectoryProfile(row, row.contact_id));
+}
+
+async function addContactByChatUserId(db, userId, value) {
+  const chatUserId = String(value || "").trim();
+  if (!validChatUserId(chatUserId)) throw new AuthError(400, "The chat ID is invalid.", "INVALID_CHAT_USER_ID");
+  const target = await db.prepare(`SELECT p.user_id,p.chat_user_id,p.chat_alias,p.avatar_data_url,
+      CASE WHEN k.user_id IS NOT NULL AND h.user_id IS NOT NULL AND v.user_id IS NOT NULL AND pk.user_id IS NOT NULL THEN 1 ELSE 0 END AS account_enabled
+    FROM chat_profiles p JOIN users u ON u.id=p.user_id AND u.disabled_at IS NULL
+    LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
+    LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
+    LEFT JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
+    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    WHERE p.chat_user_id=? GROUP BY p.user_id`).bind(chatUserId).first();
+  if (!target || target.user_id === userId) throw new AuthError(404, "Chat user not found.", "CHAT_USER_NOT_FOUND");
+  if (!target.account_enabled) throw new AuthError(409, "This user must enable secure chat first.", "ACCOUNT_NOT_ENABLED");
+  if (!(await directoryAccountEnabled(db, userId))) throw new AuthError(409, "Enable secure chat before adding friends.", "ACCOUNT_NOT_ENABLED");
+  const timestamp = nowIso();
+  const existing = await db.prepare("SELECT id FROM chat_contacts WHERE user_id=? AND peer_user_id=?").bind(userId, target.user_id).first();
+  const contactId = existing?.id || randomId();
+  const peer = await db.prepare("SELECT id FROM chat_contacts WHERE user_id=? AND peer_user_id=?").bind(target.user_id, userId).first();
+  const peerContactId = peer?.id || randomId();
+  await db.batch([
+    db.prepare(`INSERT INTO chat_contacts (id,user_id,peer_user_id,created_at,accepted_at) VALUES (?,?,?,?,?)
+      ON CONFLICT(user_id,peer_user_id) DO UPDATE SET accepted_at=excluded.accepted_at`).bind(contactId, userId, target.user_id, timestamp, timestamp),
+    db.prepare(`INSERT INTO chat_contacts (id,user_id,peer_user_id,created_at,accepted_at) VALUES (?,?,?,?,?)
+      ON CONFLICT(user_id,peer_user_id) DO UPDATE SET accepted_at=excluded.accepted_at`).bind(peerContactId, target.user_id, userId, timestamp, timestamp),
+  ]);
+  return { id: contactId, profile: mapDirectoryProfile(target, contactId) };
+}
+
+async function globalReadyAccounts(db, conversationId = null) {
+  const rows = await db.prepare(`SELECT k.user_id,k.key_version,k.encryption_public_key,k.signing_public_key,k.fingerprint,
+      p.chat_user_id,p.chat_alias,p.avatar_data_url,u.role
+    FROM chat_account_keys k
+    JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
+    JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
+    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    JOIN users u ON u.id=k.user_id AND u.disabled_at IS NULL
+    JOIN chat_profiles p ON p.user_id=k.user_id
+    WHERE k.status='active' GROUP BY k.user_id ORDER BY p.chat_user_id`).all();
+  const ready = rows.results || [];
+  if (!conversationId) return ready;
+  const optouts = await db.prepare("SELECT user_id FROM chat_global_optouts WHERE conversation_id=?").bind(conversationId).all();
+  const optedOut = new Set((optouts.results || []).map((item) => item.user_id));
+  return ready.filter((item) => item.role === "admin" || !optedOut.has(item.user_id));
+}
+
+function globalRecipientEnvelope(value, userId, keyVersion) {
+  if (!value || value.userId !== userId || value.keyVersion !== keyVersion) {
+    throw new AuthError(409, "Refresh the enabled account keys before joining the discussion.", "ACCOUNT_KEY_CHANGED");
+  }
+  for (const [field, length] of [["ephemeralPublicKey", 32], ["nonce", 12]]) {
+    if (!isBase64Url(value[field], 512)) throw new AuthError(400, "The discussion key envelope is invalid.", "INVALID_GLOBAL_ENVELOPE");
+    const normalized = value[field].replace(/-/g, "+").replace(/_/g, "/");
+    let bytes;
+    try { bytes = atob(normalized + "=".repeat((4 - normalized.length % 4) % 4)); } catch (_) { throw new AuthError(400, "The discussion key envelope is invalid.", "INVALID_GLOBAL_ENVELOPE"); }
+    if (bytes.length !== length) throw new AuthError(400, "The discussion key envelope is invalid.", "INVALID_GLOBAL_ENVELOPE");
+  }
+  if (!isBase64Url(value.ciphertext, MAX_CIPHERTEXT_LENGTH)) throw new AuthError(400, "The discussion key envelope is invalid.", "INVALID_GLOBAL_ENVELOPE");
+  const cipherNormalized = value.ciphertext.replace(/-/g, "+").replace(/_/g, "/");
+  let cipherBytes;
+  try { cipherBytes = atob(cipherNormalized + "=".repeat((4 - (cipherNormalized.length % 4)) % 4)); } catch (_) { throw new AuthError(400, "The discussion key envelope is invalid.", "INVALID_GLOBAL_ENVELOPE"); }
+  if (cipherBytes.length !== 48) throw new AuthError(400, "The discussion key envelope is invalid.", "INVALID_GLOBAL_ENVELOPE");
+  return value;
+}
+
+function globalMetadata(value, epoch) {
+  if (!value || Number(value.epoch) !== epoch || !Number.isSafeInteger(Number(value.version)) || Number(value.version) < 1
+      || !isBase64Url(value.nonce, 512) || !isBase64Url(value.ciphertext, 64 * 1024)) {
+    throw new AuthError(400, "Encrypted discussion metadata is invalid.", "INVALID_GLOBAL_METADATA");
+  }
+  return { ...value, epoch, version: Number(value.version) };
+}
+
+async function requireSiteAdmin(db, userId) {
+  const row = await db.prepare("SELECT role FROM users WHERE id=? AND disabled_at IS NULL").bind(userId).first();
+  if (row?.role !== "admin") throw new AuthError(403, "Only website administrators can manage the discussion.", "FORBIDDEN");
+  return row;
+}
+
+async function globalDiscussion(db, userId) {
+  const ready = await globalReadyAccounts(db);
+  const siteRole = (await db.prepare("SELECT role FROM users WHERE id=? AND disabled_at IS NULL").bind(userId).first())?.role || null;
+  const siteAdmin = siteRole === "admin";
+  const row = await db.prepare("SELECT * FROM chat_conversations WHERE global_slug=? AND deleted_at IS NULL").bind(GLOBAL_DISCUSSION_SLUG).first();
+  if (!row) return { conversation: null, conversationId: null, pendingRecipients: siteAdmin ? ready.map((item) => ({ userId: item.user_id, chatUserId: item.chat_user_id, alias: item.chat_alias || "", accountKey: mapAccountKey(item) })) : [], pendingCount: ready.length, needsBootstrap: true, canManage: siteAdmin, siteRole, studentCanLeave: false, adminCanLeave: false };
+  const active = await db.prepare("SELECT user_id,role FROM chat_conversation_members WHERE conversation_id=? AND left_at IS NULL").bind(row.id).all();
+  const activeIds = new Set((active.results || []).map((item) => item.user_id));
+  const activeRoles = new Map((active.results || []).map((item) => [item.user_id, item.role]));
+  const epochKeys = await db.prepare("SELECT user_id,key_version FROM chat_epoch_recipients WHERE conversation_id=? AND epoch=?").bind(row.id, row.current_epoch).all();
+  const epochKeyVersions = new Map((epochKeys.results || []).map((item) => [item.user_id, item.key_version]));
+  const optouts = await db.prepare("SELECT user_id FROM chat_global_optouts WHERE conversation_id=?").bind(row.id).all();
+  const optedOut = new Set((optouts.results || []).map((item) => item.user_id));
+  const pending = ready.filter((item) => {
+    const expectedRole = item.role === "admin" ? (item.user_id === row.created_by ? "owner" : "admin") : "member";
+    return (!activeIds.has(item.user_id) || epochKeyVersions.get(item.user_id) !== item.key_version || activeRoles.get(item.user_id) !== expectedRole)
+      && (!optedOut.has(item.user_id) || item.role === "admin");
+  });
+  const self = (active.results || []).find((item) => item.user_id === userId);
+  return {
+    conversation: self ? { ...(await mapAccountConversation(db, row, userId)), global: true, globalSlug: GLOBAL_DISCUSSION_SLUG } : null,
+    conversationId: row.id,
+    epoch: Number(row.current_epoch),
+    activeMemberCount: activeIds.size,
+    pendingRecipients: siteAdmin ? pending.map((item) => ({ userId: item.user_id, chatUserId: item.chat_user_id, alias: item.chat_alias || "", accountKey: mapAccountKey(item) })) : [],
+    pendingCount: pending.length,
+    needsBootstrap: false,
+    optedOut: optedOut.has(userId),
+    canManage: siteAdmin,
+    siteRole,
+    studentCanLeave: Boolean(self && !siteAdmin),
+    adminCanLeave: false,
+    rotationRequired: Boolean(row.rotation_required),
+    global: true,
+    globalSlug: GLOBAL_DISCUSSION_SLUG,
+  };
+}
+
+async function globalEnvelopeRows(db, recipients, readyById) {
+  if (!Array.isArray(recipients) || recipients.length < 1 || recipients.length > MAX_GLOBAL_MEMBERS) throw new AuthError(400, "A discussion epoch needs at least one recipient.", "INVALID_GLOBAL_ENVELOPE");
+  const seen = new Set();
+  const rows = [];
+  for (const recipient of recipients) {
+    const account = readyById.get(recipient?.userId);
+    if (!account || seen.has(recipient.userId)) throw new AuthError(409, "The recipient set is stale. Refresh and retry.", "GLOBAL_RECIPIENT_SET_CHANGED");
+    seen.add(recipient.userId);
+    globalRecipientEnvelope(recipient, account.user_id, account.key_version);
+    rows.push({ account, envelope: recipient });
+  }
+  if (seen.size !== readyById.size) throw new AuthError(409, "Include every currently enabled secure-chat account in the discussion epoch.", "GLOBAL_RECIPIENT_SET_CHANGED");
+  return rows;
+}
+
+async function createGlobalDiscussion(db, env, userId, body) {
+  await requireSiteAdmin(db, userId);
+  const existing = await db.prepare("SELECT id FROM chat_conversations WHERE global_slug=?").bind(GLOBAL_DISCUSSION_SLUG).first();
+  if (existing) throw new AuthError(409, "The site discussion already exists. Refresh it before rotating the epoch.", "GLOBAL_DISCUSSION_EXISTS");
+  const conversationId = boundedString(body?.conversationId, "conversationId", 100);
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(conversationId)) throw new AuthError(400, "A UUID v4 conversation ID is required.", "INVALID_CONVERSATION_ID");
+  const ready = await globalReadyAccounts(db);
+  const readyById = new Map(ready.map((item) => [item.user_id, item]));
+  const recipients = await globalEnvelopeRows(db, body?.recipients, readyById);
+  if (!recipients.some((item) => item.account.user_id === userId)) throw new AuthError(403, "The creating administrator must be included in the discussion epoch.", "GLOBAL_ADMIN_NOT_INCLUDED");
+  const metadata = globalMetadata(body?.metadata, 1);
+  const timestamp = nowIso();
+  const statements = [db.prepare(`INSERT INTO chat_conversations (id,kind,created_by,retention_seconds,protocol_version,current_epoch,control_revision,rotation_required,global_slug,created_at,updated_at)
+    VALUES (?,'group',?,0,'account-v2',1,1,0,?,?,?)`).bind(conversationId, userId, GLOBAL_DISCUSSION_SLUG, timestamp, timestamp)];
+  statements.push(db.prepare("INSERT INTO chat_conversation_epochs (conversation_id,epoch,created_by,created_at) VALUES (?,?,?,?)").bind(conversationId, 1, userId, timestamp));
+  for (const item of recipients) {
+    const role = item.account.role === "admin" ? (item.account.user_id === userId ? "owner" : "admin") : "member";
+    statements.push(db.prepare("INSERT INTO chat_conversation_members (conversation_id,user_id,role,joined_at) VALUES (?,?,?,?)").bind(conversationId, item.account.user_id, role, timestamp));
+    statements.push(db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+      (SELECT 1 FROM chat_account_keys k JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
+       JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
+       WHERE k.user_id=? AND k.key_version=? AND k.status='active') THEN 1 ELSE 0 END)`).bind(randomId(), item.account.user_id, item.account.key_version));
+    statements.push(db.prepare("INSERT INTO chat_epoch_recipients (conversation_id,epoch,user_id,key_version,ephemeral_public_key,nonce,envelope_ciphertext,created_at) VALUES (?,?,?,?,?,?,?,?)").bind(conversationId, 1, item.account.user_id, item.account.key_version, item.envelope.ephemeralPublicKey, item.envelope.nonce, item.envelope.ciphertext, timestamp));
+  }
+  statements.push(db.prepare("INSERT INTO chat_group_metadata (conversation_id,epoch,version,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?)").bind(conversationId, 1, metadata.version, metadata.nonce, metadata.ciphertext, timestamp));
+  statements.push(db.prepare("INSERT INTO chat_sync_events (conversation_id,event_type,entity_id,content_epoch,created_at) VALUES (?,?,?,?,?)").bind(conversationId, "global-created", conversationId, 1, timestamp));
+  statements.push(db.prepare("DELETE FROM chat_account_atomic_guards"));
+  try { await db.batch(statements); } catch (error) {
+    if (/CHECK constraint failed|UNIQUE constraint failed/.test(String(error?.message || error))) throw new AuthError(409, "Account keys changed during discussion setup. Refresh and retry.", "GLOBAL_RECIPIENT_SET_CHANGED");
+    throw error;
+  }
+  const row = await db.prepare("SELECT * FROM chat_conversations WHERE id=?").bind(conversationId).first();
+  return globalDiscussion(db, userId).then((result) => ({ ...result, conversation: row ? result.conversation : null }));
+}
+
+async function rotateGlobalDiscussion(db, userId, body) {
+  await requireSiteAdmin(db, userId);
+  const conversationId = boundedString(body?.conversationId, "conversationId", 100);
+  const conversation = await db.prepare("SELECT * FROM chat_conversations WHERE id=? AND global_slug=? AND deleted_at IS NULL").bind(conversationId, GLOBAL_DISCUSSION_SLUG).first();
+  if (!conversation) throw new AuthError(404, "Site discussion not found.", "GLOBAL_DISCUSSION_NOT_FOUND");
+  const expectedEpoch = Number(body?.expectedEpoch);
+  const epoch = Number(body?.epoch);
+  if (!Number.isSafeInteger(expectedEpoch) || expectedEpoch !== Number(conversation.current_epoch) || epoch !== expectedEpoch + 1) throw new AuthError(409, "The discussion epoch changed. Refresh and retry.", "EPOCH_CONFLICT");
+  const ready = await globalReadyAccounts(db, conversationId);
+  const readyById = new Map(ready.map((item) => [item.user_id, item]));
+  const recipients = await globalEnvelopeRows(db, body?.recipients, readyById);
+  if (!recipients.some((item) => item.account.user_id === userId)) throw new AuthError(403, "The managing administrator must be included in the discussion epoch.", "GLOBAL_ADMIN_NOT_INCLUDED");
+  const metadata = globalMetadata(body?.metadata, epoch);
+  const timestamp = nowIso();
+  const active = await db.prepare("SELECT user_id FROM chat_conversation_members WHERE conversation_id=? AND left_at IS NULL").bind(conversationId).all();
+  const desired = new Set(recipients.map((item) => item.account.user_id));
+  const statements = [db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+    (SELECT 1 FROM chat_conversations WHERE id=? AND current_epoch=? AND control_revision=? AND deleted_at IS NULL) THEN 1 ELSE 0 END)`).bind(randomId(), conversationId, expectedEpoch, conversation.control_revision)];
+  for (const member of active.results || []) if (!desired.has(member.user_id)) statements.push(db.prepare("UPDATE chat_conversation_members SET left_at=? WHERE conversation_id=? AND user_id=? AND left_at IS NULL").bind(timestamp, conversationId, member.user_id));
+  statements.push(db.prepare("INSERT INTO chat_conversation_epochs (conversation_id,epoch,created_by,created_at) VALUES (?,?,?,?)").bind(conversationId, epoch, userId, timestamp));
+  for (const item of recipients) {
+    const role = item.account.role === "admin" ? (item.account.user_id === conversation.created_by ? "owner" : "admin") : "member";
+    statements.push(db.prepare(`INSERT INTO chat_conversation_members (conversation_id,user_id,role,joined_at,left_at) VALUES (?,?,?,?,NULL)
+      ON CONFLICT(conversation_id,user_id) DO UPDATE SET role=excluded.role,left_at=NULL`).bind(conversationId, item.account.user_id, role, timestamp));
+    statements.push(db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+      (SELECT 1 FROM chat_account_keys k JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
+       JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
+       WHERE k.user_id=? AND k.key_version=? AND k.status='active') THEN 1 ELSE 0 END)`).bind(randomId(), item.account.user_id, item.account.key_version));
+    statements.push(db.prepare("INSERT INTO chat_epoch_recipients (conversation_id,epoch,user_id,key_version,ephemeral_public_key,nonce,envelope_ciphertext,created_at) VALUES (?,?,?,?,?,?,?,?)").bind(conversationId, epoch, item.account.user_id, item.account.key_version, item.envelope.ephemeralPublicKey, item.envelope.nonce, item.envelope.ciphertext, timestamp));
+  }
+  statements.push(db.prepare("UPDATE chat_group_metadata SET epoch=?,version=?,nonce=?,ciphertext=?,updated_at=? WHERE conversation_id=?").bind(epoch, metadata.version, metadata.nonce, metadata.ciphertext, timestamp, conversationId));
+  statements.push(db.prepare("UPDATE chat_conversations SET current_epoch=?,rotation_required=0,control_revision=control_revision+1,updated_at=? WHERE id=?").bind(epoch, timestamp, conversationId));
+  statements.push(db.prepare("INSERT INTO chat_sync_events (conversation_id,event_type,entity_id,content_epoch,created_at) VALUES (?,?,?,?,?)").bind(conversationId, "global-epoch", String(epoch), epoch, timestamp));
+  statements.push(db.prepare("DELETE FROM chat_account_atomic_guards"));
+  try { await db.batch(statements); } catch (error) { if (/CHECK constraint failed|UNIQUE constraint failed/.test(String(error?.message || error))) throw new AuthError(409, "The discussion changed. Refresh and retry.", "EPOCH_CONFLICT"); throw error; }
+  return globalDiscussion(db, userId);
+}
+
+async function leaveGlobalDiscussion(db, userId) {
+  const conversation = await db.prepare("SELECT * FROM chat_conversations WHERE global_slug=? AND deleted_at IS NULL").bind(GLOBAL_DISCUSSION_SLUG).first();
+  if (!conversation) throw new AuthError(404, "Site discussion not found.", "GLOBAL_DISCUSSION_NOT_FOUND");
+  const siteRole = (await db.prepare("SELECT role FROM users WHERE id=?").bind(userId).first())?.role;
+  if (siteRole === "admin") throw new AuthError(403, "Website administrators cannot leave the discussion.", "ADMIN_CANNOT_LEAVE_GLOBAL_DISCUSSION");
+  const membership = await db.prepare("SELECT role,left_at FROM chat_conversation_members WHERE conversation_id=? AND user_id=?").bind(conversation.id, userId).first();
+  if (membership?.role === "admin" || membership?.role === "owner") throw new AuthError(403, "Administrators cannot leave the discussion.", "ADMIN_CANNOT_LEAVE_GLOBAL_DISCUSSION");
+  if (!membership || membership.left_at !== null) throw new AuthError(409, "You are not an active member of the discussion.", "NOT_GLOBAL_DISCUSSION_MEMBER");
+  const timestamp = nowIso();
+  try {
+    await db.batch([
+      db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+        (SELECT 1 FROM chat_conversation_members WHERE conversation_id=? AND user_id=? AND left_at IS NULL) THEN 1 ELSE 0 END)`).bind(randomId(), conversation.id, userId),
+      db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+        (SELECT 1 FROM chat_conversations WHERE id=? AND current_epoch=? AND control_revision=? AND deleted_at IS NULL) THEN 1 ELSE 0 END)`).bind(randomId(), conversation.id, conversation.current_epoch, conversation.control_revision),
+      db.prepare("INSERT INTO chat_global_optouts (conversation_id,user_id,left_at) VALUES (?,?,?) ON CONFLICT(conversation_id,user_id) DO UPDATE SET left_at=excluded.left_at").bind(conversation.id, userId, timestamp),
+      db.prepare("UPDATE chat_conversation_members SET left_at=? WHERE conversation_id=? AND user_id=? AND left_at IS NULL").bind(timestamp, conversation.id, userId),
+      db.prepare("UPDATE chat_conversations SET rotation_required=1,control_revision=control_revision+1,updated_at=? WHERE id=?").bind(timestamp, conversation.id),
+      db.prepare("INSERT INTO chat_sync_events (conversation_id,event_type,entity_id,content_epoch,created_at) VALUES (?,?,?,?,?)").bind(conversation.id, "global-member-left", userId, conversation.current_epoch, timestamp),
+      db.prepare("DELETE FROM chat_account_atomic_guards"),
+    ]);
+  } catch (error) {
+    if (/CHECK constraint failed|UNIQUE constraint failed/.test(String(error?.message || error))) throw new AuthError(409, "The discussion membership changed. Refresh and retry.", "GLOBAL_MEMBERSHIP_CHANGED");
+    throw error;
+  }
+  return { left: true, conversationId: conversation.id, requiresEpochRotation: true };
 }
 
 async function listDevices(db, userId) {
@@ -2446,6 +2735,19 @@ async function handleRoute(request, env, user) {
   const accountV2Response = await handleAccountV2Route(request, env, user);
   if (accountV2Response) return accountV2Response;
 
+  if (url.pathname.startsWith("/api/chat/global-discussion")) {
+    ensureAccountV2Enabled(env);
+    if (method === "GET" && url.pathname === "/api/chat/global-discussion")
+      return success(await globalDiscussion(db, user.id), method);
+    if (method === "POST" && url.pathname === "/api/chat/global-discussion")
+      return success(await createGlobalDiscussion(db, env, user.id, await readJsonBody(request)), method, 201);
+    if (method === "POST" && url.pathname === "/api/chat/global-discussion/rotate")
+      return success(await rotateGlobalDiscussion(db, user.id, await readJsonBody(request)), method);
+    if (method === "POST" && url.pathname === "/api/chat/global-discussion/leave")
+      return success(await leaveGlobalDiscussion(db, user.id), method);
+    throw new AuthError(404, "Global discussion route not found.", "ROUTE_NOT_FOUND");
+  }
+
   // Account-v2 lifecycle. The Worker verifies the WebAuthn ceremony and stores
   // only public credential metadata plus the client-encrypted account vault.
   if (url.pathname.startsWith("/api/chat/account")) ensureAccountV2Enabled(env);
@@ -2575,6 +2877,15 @@ async function handleRoute(request, env, user) {
 
   if (method === "GET" && url.pathname === "/api/chat/contacts")
     return success(await listContacts(db, user.id), method);
+  if (method === "GET" && url.pathname === "/api/chat/users/search") {
+    ensureAccountV2Enabled(env);
+    return success(await searchChatUsers(db, user.id, url.searchParams.get("q")), method);
+  }
+  if (method === "POST" && url.pathname === "/api/chat/contacts/by-user-id") {
+    ensureAccountV2Enabled(env);
+    const body = await readJsonBody(request);
+    return success(await addContactByChatUserId(db, user.id, body?.chatUserId), method, 201);
+  }
   if (method === "GET" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "contacts" && parts[4] === "account-bundle") {
     const contact = await requireContact(db, parts[3], user.id);
     const account = await accountKeyBundle(db, contact.peer_user_id);
@@ -2673,6 +2984,11 @@ async function handleRoute(request, env, user) {
     const current = await ensureProfile(db, user.id);
     const alias = body.alias === undefined ? current.chat_alias
       : typeof body.alias === "string" ? body.alias.trim() : "";
+    const chatUserId = body.chatUserId === undefined ? current.chat_user_id
+      : typeof body.chatUserId === "string" ? body.chatUserId.trim() : "";
+    if (!validChatUserId(chatUserId)) {
+      throw new AuthError(400, "Chat ID must be 3–48 letters, numbers, dots, hyphens or underscores.", "INVALID_CHAT_USER_ID");
+    }
     const profileCiphertext =
       typeof body.profileCiphertext === "string"
         ? boundedString(body.profileCiphertext, "profileCiphertext", MAX_PROFILE_CIPHERTEXT_LENGTH)
@@ -2688,12 +3004,14 @@ async function handleRoute(request, env, user) {
       : validateAvatarDataUrl(body.avatarDataUrl);
     try { await db
       .prepare(
-        `UPDATE chat_profiles SET chat_alias = ?, profile_ciphertext = ?, avatar_data_url = ?, updated_at = ? WHERE user_id = ?`
+        `UPDATE chat_profiles SET chat_alias = ?, chat_user_id = ?, profile_ciphertext = ?, avatar_data_url = ?, updated_at = ? WHERE user_id = ?`
       )
-      .bind(alias, profileCiphertext, avatarDataUrl, nowIso(), user.id)
+      .bind(alias, chatUserId, profileCiphertext, avatarDataUrl, nowIso(), user.id)
       .run(); } catch (error) {
       if (/UNIQUE constraint failed:\s*chat_profiles\.chat_alias/.test(String(error?.message || error)))
         throw new AuthError(409, "This chat nickname is already in use. Choose another one.", "CHAT_ALIAS_TAKEN");
+      if (/UNIQUE constraint failed:\s*chat_profiles\.chat_user_id/.test(String(error?.message || error)))
+        throw new AuthError(409, "This chat ID is already in use. Choose another one.", "CHAT_USER_ID_TAKEN");
       throw error;
     }
     return success(mapProfile(await ensureProfile(db, user.id)), method);
@@ -3000,7 +3318,7 @@ export async function handleChatApiRequest(request, env) {
         request,
         failure(error.status, error.code, error.message, request.method, error.details)
       );
-    console.error("Chat API request failed");
+    console.error("Chat API request failed", error);
     return withCors(
       request,
       failure(500, "INTERNAL_SERVER_ERROR", "Chat request failed.", request.method)

@@ -1074,7 +1074,7 @@ async function createAccountV2Epoch({ conversationId, epoch, recipients } = {}) 
   const account = accountV2RequireUnlocked();
   const id = requiredAccountV2String(conversationId, "conversationId", 256);
   const number = validEpoch(epoch);
-  if (!Array.isArray(recipients) || !recipients.length || recipients.length > 50) {
+  if (!Array.isArray(recipients) || !recipients.length || recipients.length > 1000) {
     throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "Epoch recipients are invalid.");
   }
   const contentKey = sodiumRandomBytes(await getSodium(), 32);
