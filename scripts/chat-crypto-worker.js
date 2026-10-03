@@ -983,6 +983,7 @@ async function unlockAccountV2Vault({ userId, keyVersion = "1", prfOutput, nonce
   account.encryptionPublicKey = s.crypto_scalarmult_base(account.encryptionPrivateKey);
   account.signingPublicKey = s.crypto_sign_ed25519_sk_to_pk(account.signingPrivateKey);
   account.fingerprint = await accountV2Fingerprint(account.encryptionPublicKey, account.signingPublicKey);
+  accountV2WipeAccount(state.accountV2);
   state.accountV2 = account;
   return { ...accountV2PublicBundle(account), unlocked: true };
 }
@@ -998,44 +999,70 @@ async function lockAccountV2Vault() {
 async function createAccountV2Envelope({ conversationId, epoch, recipient, contentKey } = {}) {
   accountV2RequireUnlocked();
   const id = requiredAccountV2String(conversationId, "conversationId", 256);
+  const number = validEpoch(epoch);
   const recipientUserId = requiredAccountV2String(recipient?.userId, "recipient.userId", 256);
   const recipientKeyVersion = requiredAccountV2String(recipient?.keyVersion || "1", "recipient.keyVersion", 64);
   const recipientPublicKey = requiredBase64Bytes(recipient?.encryptionPublicKey, "recipient.encryptionPublicKey", 32);
   const key = requiredBase64Bytes(contentKey, "contentKey", 32);
   const s = await getSodium();
   const ephemeral = s.crypto_box_keypair();
-  const shared = s.crypto_scalarmult(ephemeral.privateKey, recipientPublicKey);
-  const wrapKey = await accountV2Hkdf(shared, utf8(`expassway-chat-account-v2-envelope-key|${id}|${validEpoch(epoch)}`), ACCOUNT_V2_KDF_VERSION);
-  const ephemeralPublicKey = bytesToBase64Url(ephemeral.publicKey);
-  const aad = accountV2EnvelopeAad({ conversationId, epoch, userId: recipientUserId, keyVersion: recipientKeyVersion, ephemeralPublicKey });
-  const encrypted = await accountV2AesGcmEncrypt(wrapKey, key, aad);
-  ephemeral.privateKey.fill(0);
-  shared.fill(0);
-  wrapKey.fill(0);
-  key.fill(0);
-  return { userId: recipientUserId, keyVersion: recipientKeyVersion, ephemeralPublicKey, nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
+  let shared;
+  let wrapKey;
+  try {
+    try {
+      shared = s.crypto_scalarmult(ephemeral.privateKey, recipientPublicKey);
+    } catch (error) {
+      throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "The recipient encryption key is invalid.", error);
+    }
+    wrapKey = await accountV2Hkdf(shared, utf8(`expassway-chat-account-v2-envelope-key|${id}|${number}`), ACCOUNT_V2_KDF_VERSION);
+    const ephemeralPublicKey = bytesToBase64Url(ephemeral.publicKey);
+    const aad = accountV2EnvelopeAad({ conversationId: id, epoch: number, userId: recipientUserId, keyVersion: recipientKeyVersion, ephemeralPublicKey });
+    const encrypted = await accountV2AesGcmEncrypt(wrapKey, key, aad);
+    return { userId: recipientUserId, keyVersion: recipientKeyVersion, ephemeralPublicKey, nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
+  } finally {
+    ephemeral.privateKey.fill(0);
+    shared?.fill(0);
+    wrapKey?.fill(0);
+    key.fill(0);
+  }
 }
 
 async function openAccountV2Envelope({ conversationId, epoch, envelope } = {}) {
   const account = accountV2RequireUnlocked();
   const id = requiredAccountV2String(conversationId, "conversationId", 256);
+  const number = validEpoch(epoch);
   const ephemeralPublicKey = requiredBase64Bytes(envelope?.ephemeralPublicKey, "envelope.ephemeralPublicKey", 32);
   const nonce = requiredBase64Bytes(envelope?.nonce, "envelope.nonce", 12);
   const ciphertext = requiredBase64Bytes(envelope?.ciphertext, "envelope.ciphertext");
-  const shared = (await getSodium()).crypto_scalarmult(account.encryptionPrivateKey, ephemeralPublicKey);
   const keyVersion = requiredAccountV2String(envelope.keyVersion || "1", "envelope.keyVersion", 64);
   const userId = requiredAccountV2String(envelope.userId, "envelope.userId", 256);
   if (userId !== account.userId || keyVersion !== account.keyVersion) {
     throw accountV2Error("ACCOUNT_V2_ENVELOPE_INVALID", "The epoch envelope is addressed to a different account key version.");
   }
-  const aad = accountV2EnvelopeAad({ conversationId: id, epoch, userId, keyVersion, ephemeralPublicKey: envelope.ephemeralPublicKey });
-  const wrapKey = await accountV2Hkdf(shared, utf8(`expassway-chat-account-v2-envelope-key|${id}|${validEpoch(epoch)}`), ACCOUNT_V2_KDF_VERSION);
-  const key = await accountV2AesGcmDecrypt(wrapKey, nonce, ciphertext, aad, "ACCOUNT_V2_ENVELOPE_INVALID");
-  shared.fill(0);
-  wrapKey.fill(0);
-  if (key.byteLength !== 32) throw accountV2Error("ACCOUNT_V2_ENVELOPE_INVALID", "The epoch content key has an invalid length.");
-  account.epochKeys.set(accountV2EpochKey(id, epoch), key);
-  return { conversationId: id, epoch: validEpoch(epoch), opened: true };
+  let shared;
+  let wrapKey;
+  try {
+    try {
+      shared = (await getSodium()).crypto_scalarmult(account.encryptionPrivateKey, ephemeralPublicKey);
+    } catch (error) {
+      if (error?.code) throw error;
+      throw accountV2Error("ACCOUNT_V2_ENVELOPE_INVALID", "The epoch envelope encryption key is invalid.", error);
+    }
+    const aad = accountV2EnvelopeAad({ conversationId: id, epoch: number, userId, keyVersion, ephemeralPublicKey: envelope.ephemeralPublicKey });
+    wrapKey = await accountV2Hkdf(shared, utf8(`expassway-chat-account-v2-envelope-key|${id}|${number}`), ACCOUNT_V2_KDF_VERSION);
+    const key = await accountV2AesGcmDecrypt(wrapKey, nonce, ciphertext, aad, "ACCOUNT_V2_ENVELOPE_INVALID");
+    if (key.byteLength !== 32) {
+      key.fill(0);
+      throw accountV2Error("ACCOUNT_V2_ENVELOPE_INVALID", "The epoch content key has an invalid length.");
+    }
+    const keyId = accountV2EpochKey(id, number);
+    account.epochKeys.get(keyId)?.fill(0);
+    account.epochKeys.set(keyId, key);
+    return { conversationId: id, epoch: number, opened: true };
+  } finally {
+    shared?.fill(0);
+    wrapKey?.fill(0);
+  }
 }
 
 async function getAccountV2State() {
@@ -1187,7 +1214,7 @@ async function decryptAccountV2Metadata({ conversationId, epoch, version, nonce,
   return { plaintext: new TextDecoder().decode(plaintext) };
 }
 
-self.onmessage = async (event) => {
+async function handleCryptoRequest(event) {
   const { id, action, payload = {} } = event.data || {};
   try {
     let result;
@@ -1231,4 +1258,14 @@ self.onmessage = async (event) => {
   } catch (error) {
     self.postMessage({ id, ok: false, error: String(error?.message || error), code: error?.code || "CRYPTO_ERROR" });
   }
+}
+
+self.onmessage = (event) => {
+  // WebCrypto yields between steps, so worker messages can otherwise overlap.
+  // A lock response must guarantee that every earlier account operation has
+  // finished and that none can restore an unlocked account after the lock.
+  if (String(event.data?.action || "").includes("AccountV2")) {
+    return withDeviceLock("account-v2", () => handleCryptoRequest(event));
+  }
+  return handleCryptoRequest(event);
 };

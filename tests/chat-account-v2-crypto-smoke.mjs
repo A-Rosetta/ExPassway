@@ -48,7 +48,8 @@ function createWorker() {
     async call(action, payload = {}) {
       const requestId = ++id;
       await context.self.onmessage({ data: { id: requestId, action, payload } });
-      const message = messages.splice(0).find((item) => item.id === requestId);
+      const messageIndex = messages.findIndex((item) => item.id === requestId);
+      const message = messageIndex >= 0 ? messages.splice(messageIndex, 1)[0] : null;
       assert.ok(message, `worker did not answer ${action}`);
       if (!message.ok) {
         const error = new Error(message.error);
@@ -99,6 +100,14 @@ await assert.rejects(
   () => bobUnlocked.call("openAccountV2Envelope", { conversationId: "group-1", epoch: 1, envelope: { ...bobEnvelope, userId: "mallory" } }),
   (error) => error.code === "ACCOUNT_V2_ENVELOPE_INVALID",
 );
+await assert.rejects(
+  () => bobUnlocked.call("openAccountV2Envelope", { conversationId: "group-1", epoch: 1, envelope: { ...bobEnvelope, ephemeralPublicKey: b64(new Uint8Array(32)) } }),
+  (error) => error.code === "ACCOUNT_V2_ENVELOPE_INVALID",
+);
+await assert.rejects(
+  () => alice.call("createAccountV2Envelope", { conversationId: "group-1", epoch: 1, recipient: { ...recipients[1], encryptionPublicKey: b64(new Uint8Array(32)) }, contentKey: b64(sodium.randombytes_buf(32)) }),
+  (error) => error.code === "INVALID_ACCOUNT_V2_INPUT",
+);
 
 const message1 = await alice.call("encryptAccountV2Message", { conversationId: "group-1", clientMessageId: "m1", epoch: 1, plaintext: "hello" });
 const opened1 = await bobUnlocked.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey });
@@ -108,7 +117,7 @@ assert.notEqual(message1.nonce, message2.nonce);
 const tamperedMessage = { ...message1, conversationId: "other" };
 await assert.rejects(
   () => bobUnlocked.call("decryptAccountV2Message", { message: tamperedMessage, signingPublicKey: aliceVault.signingPublicKey }),
-  (error) => error.code === "SIGNATURE_INVALID" || error.code === "ACCOUNT_VAULT_LOCKED" || error.code === "EPOCH_KEY_UNAVAILABLE" || error.code === "ACCOUNT_V2_DECRYPT_FAILED",
+  (error) => error.code === "SIGNATURE_INVALID",
 );
 
 const metadata = await alice.call("encryptAccountV2Metadata", { conversationId: "group-1", epoch: 1, version: "3", plaintext: JSON.stringify({ name: "Team" }) });
@@ -130,4 +139,10 @@ assert.equal(await sodium.crypto_sign_verify_detached(Buffer.from(controlSignatu
 await alice.call("lockAccountV2Vault");
 assert.equal((await alice.call("getAccountV2State")).unlocked, false);
 await assert.rejects(() => alice.call("encryptAccountV2Message", { conversationId: "group-1", clientMessageId: "locked", epoch: 1, plaintext: "nope" }), (error) => error.code === "ACCOUNT_VAULT_LOCKED");
+const racingWorker = createWorker();
+await Promise.all([
+  racingWorker.call("generateAccountV2Vault", { userId: "alice", keyVersion: "1", prfOutput: prf }),
+  racingWorker.call("lockAccountV2Vault"),
+]);
+assert.equal((await racingWorker.call("getAccountV2State")).unlocked, false, "locking must wait for earlier vault operations and wipe their result");
 console.log("account-v2 crypto smoke passed");

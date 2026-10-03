@@ -6,7 +6,7 @@ const VERSION = "account-v2";
 const MAX_CIPHER = 512 * 1024;
 const now = () => new Date().toISOString();
 const id = () => crypto.randomUUID();
-const fail = (status, code, message) => { throw new AuthError(status, message, code); };
+const fail = (status, code, message, details = null) => { throw new AuthError(status, message, code, details); };
 const rows = async (statement) => (await statement.all()).results || [];
 const enabled = (env) => ["true", "1", "yes", "on"].includes(String(env.CHAT_ACCOUNT_V2_ENABLED).toLowerCase());
 
@@ -18,7 +18,9 @@ function bytes(value, name, length) {
   str(value, name, MAX_CIPHER);
   if (!/^[A-Za-z0-9_-]+$/.test(value)) fail(400, "INVALID_ACCOUNT_PAYLOAD", `${name} must be base64url.`);
   const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
-  const result = Uint8Array.from(atob(normalized + "=".repeat((4 - normalized.length % 4) % 4)), (c) => c.charCodeAt(0));
+  let result;
+  try { result = Uint8Array.from(atob(normalized + "=".repeat((4 - normalized.length % 4) % 4)), (c) => c.charCodeAt(0)); }
+  catch (_) { fail(400, "INVALID_ACCOUNT_PAYLOAD", `${name} must be valid base64url.`); }
   if (length && result.length !== length) fail(400, "INVALID_ACCOUNT_PAYLOAD", `${name} has an invalid length.`);
   return result;
 }
@@ -38,7 +40,15 @@ function bundle(row) {
     signingPublicKey: row.signing_public_key, fingerprint: row.fingerprint, status: row.status } : null;
 }
 async function activeKey(db, userId) {
-  return db.prepare("SELECT * FROM chat_account_keys WHERE user_id = ? AND status = 'active' ORDER BY updated_at DESC LIMIT 1").bind(userId).first();
+  return db.prepare(`SELECT k.* FROM chat_account_keys k LEFT JOIN chat_account_identity_heads h ON h.user_id = k.user_id
+    WHERE k.user_id = ? AND k.status = 'active' AND (h.key_version IS NULL OR k.key_version = h.key_version)
+    ORDER BY k.updated_at DESC, k.key_version DESC LIMIT 1`).bind(userId).first();
+}
+async function accountReady(db, userId, keyVersion) {
+  const vault = keyVersion && await db.prepare(`SELECT v.key_version FROM chat_account_vault_versions v
+    JOIN chat_passkeys p ON (p.credential_id = v.credential_id OR v.credential_id IS NULL) AND p.user_id = v.user_id AND p.revoked_at IS NULL
+    WHERE v.user_id = ? AND v.key_version = ?`).bind(userId, keyVersion).first();
+  return Boolean(vault);
 }
 async function verifySigned(db, userId, value, signature, code = "INVALID_CONTROL_SIGNATURE") {
   if (value.senderUserId !== userId || value.version !== VERSION) fail(400, code, "The signed account identity is invalid.");
@@ -89,13 +99,7 @@ async function recipientKeys(db, recipients, userIds) {
   const keys = [];
   for (const userId of userIds) {
     const key = await activeKey(db, userId);
-    let ready = null;
-    try {
-      ready = key && await db.prepare("SELECT 1 FROM chat_account_vault_versions WHERE user_id = ? AND key_version = ?").bind(userId, key.key_version).first();
-    } catch (_error) {
-      // Older installations used chat_vaults before account-v2 vault versions were introduced.
-      ready = key && await db.prepare("SELECT 1 FROM chat_vaults WHERE user_id = ? AND key_version = ?").bind(userId, key.key_version).first();
-    }
+    const ready = key && await accountReady(db, userId, key.key_version);
     if (!ready) fail(409, "ACCOUNT_NOT_ENABLED", "Every participant must first enable secure account sync.");
     const recipient = recipients.find((r) => r.userId === userId);
     if (!recipient || recipient.keyVersion !== key.key_version) fail(409, "ACCOUNT_KEY_CHANGED", "An account key changed. Refresh the member keys.");
@@ -262,9 +266,20 @@ async function changeConversation(db, env, userId, conversationId, body) {
   }
   if (rotate) {
     epoch += 1;
+    const previous = await db.prepare("SELECT version FROM chat_group_metadata WHERE conversation_id = ?").bind(conversationId).first();
+    const data = metadata(p.metadata, epoch);
+    if (data.version !== Number(previous?.version || 0) + 1) fail(409, "METADATA_CONFLICT", "The group profile changed. Refresh it first.");
     const keys = await recipientKeys(db, p.recipients, next.map((m) => m.user_id));
+    const previousRecipients = await rows(db.prepare("SELECT user_id,key_version FROM chat_epoch_recipients WHERE conversation_id=? AND epoch=?").bind(conversationId,c.current_epoch));
+    for (const key of keys) {
+      if (!active.some((m) => m.user_id === key.user_id)) continue;
+      const previousRecipient = previousRecipients.find((r) => r.user_id === key.user_id);
+      if (previousRecipient?.key_version !== key.key_version) {
+        fail(409,"ACCOUNT_KEY_CHANGED","A current member reset their identity. Remove and invite that account again before rotating the group key.",{userId:key.user_id});
+      }
+    }
     statements.push(...keys.map((key) => keyGuard(db, key)), ...epochStatements(db, conversationId, epoch, userId, p.recipients, timestamp));
-    statements.push(metadataStatement(db, conversationId, metadata(p.metadata, epoch), timestamp));
+    statements.push(metadataStatement(db, conversationId, data, timestamp));
   } else if (signed.action === "metadata") {
     if (c.rotation_required) fail(409, "ROTATION_REQUIRED", "Complete the membership rotation first.");
     const previous = await db.prepare("SELECT version FROM chat_group_metadata WHERE conversation_id = ?").bind(conversationId).first();
@@ -337,7 +352,11 @@ async function postAccountMessage(db, env, userId, body) {
     const current = await members(db, conversationId);
     if (original.length !== current.length || original.some((m) => !current.some((n) => n.user_id === m.user_id))) fail(403, "INVALID_MIGRATION_RECIPIENTS", "Archives may only be delivered to the original members.");
     const previous = await db.prepare("SELECT target_message_id FROM chat_legacy_message_migrations WHERE source_message_id = ?").bind(source.id).first();
-    if (previous) return { duplicate: true, message: mapMessage(await messageById(db, previous.target_message_id)) };
+    if (previous) {
+      const target = await messageById(db, previous.target_message_id);
+      if (!target) fail(410, "MIGRATED_MESSAGE_UNAVAILABLE", "The migrated message is no longer retained.");
+      return { duplicate: true, message: mapMessage(target) };
+    }
   }
   const messageId = id();
   const timestamp = now();
@@ -360,14 +379,15 @@ async function events(db, conversationId, userId, url) {
     AND (? IS NULL OR e.created_at <= ?) ORDER BY e.sequence LIMIT ?`).bind(conversationId, after, c.left_at, c.left_at, limit));
   const result = [];
   for (const event of raw) {
-    if (event.content_epoch && !(await db.prepare("SELECT 1 FROM chat_epoch_recipients WHERE conversation_id = ? AND epoch = ? AND user_id = ?").bind(conversationId, event.content_epoch, userId).first())) continue;
+    const ownRemoval = event.event_type === "remove" && event.entity_id === userId;
+    if (event.content_epoch && !ownRemoval && !(await db.prepare("SELECT 1 FROM chat_epoch_recipients WHERE conversation_id = ? AND epoch = ? AND user_id = ?").bind(conversationId, event.content_epoch, userId).first())) continue;
     const item = { sequence: event.sequence, type: event.event_type, entityId: event.entity_id, epoch: event.content_epoch, createdAt: event.created_at };
     if (event.event_type === "message") {
       const message = await messageById(db, event.entity_id);
       if (!message || message.deleted_at || (message.expires_at && message.expires_at <= now())) { item.type = "deleted"; item.messageId = event.entity_id; }
       else item.message = mapMessage(message);
     } else if (event.event_type === "deleted") item.messageId = event.entity_id;
-    else if (event.control_json) item.control = JSON.parse(event.control_json);
+    else if (event.control_json && !ownRemoval) item.control = JSON.parse(event.control_json);
     result.push(item);
   }
   return { events: result, nextCursor: raw.at(-1)?.sequence || after, hasMore: raw.length === limit };
@@ -396,7 +416,9 @@ async function tombstone(db, message, timestamp) {
     db.prepare("UPDATE chat_messages SET deleted_at = ?, ciphertext = '', nonce = NULL, signature = NULL, attachment_refs = '[]' WHERE id = ? AND deleted_at IS NULL").bind(timestamp, message.id),
     db.prepare("UPDATE chat_sync_events SET payload_ciphertext = NULL WHERE conversation_id = ? AND entity_id = ?").bind(message.conversation_id, message.id),
     eventStatement(db, message.conversation_id, "deleted", message.id, message.content_epoch, timestamp),
-    ...refs.map((ref) => db.prepare("UPDATE chat_attachments SET status = 'deleted', deleted_at = ? WHERE id = ?").bind(timestamp, ref)),
+    ...refs.map((ref) => db.prepare(`UPDATE chat_attachments SET status = 'deleted', deleted_at = ? WHERE id = ?
+      AND NOT EXISTS (SELECT 1 FROM chat_messages m, json_each(m.attachment_refs) r
+        WHERE r.value = ? AND m.deleted_at IS NULL AND (m.expires_at IS NULL OR m.expires_at > ?))`).bind(timestamp, ref, ref, timestamp)),
   ]);
 }
 export async function cleanupAccountV2(db, timestamp) {
@@ -453,7 +475,7 @@ export async function handleAccountV2Route(request, env, user) {
   if (url.pathname.startsWith("/api/chat/account/")) return null;
   let conversationId = parts[2] === "conversations" && parts[3] ? parts[3] : url.searchParams.get("conversationId");
   let body = null;
-  if (method !== "GET" && method !== "PUT" && ["conversations", "messages", "attachments", "ws-ticket"].includes(parts[2]) && !parts[4]) {
+  if (["POST", "PATCH"].includes(method) && ["conversations", "messages", "attachments", "ws-ticket"].includes(parts[2]) && !parts[4]) {
     body = await readJsonBody(request.clone());
     conversationId ||= body.conversationId;
   }
@@ -462,15 +484,8 @@ export async function handleAccountV2Route(request, env, user) {
     const contact = await db.prepare("SELECT peer_user_id FROM chat_contacts WHERE user_id = ? AND id = ?").bind(user.id, parts[3]).first();
     if (!contact) fail(404, "CONTACT_NOT_FOUND", "Contact not found.");
     const accountKey = await activeKey(db, contact.peer_user_id);
-    let vault = null;
-    let passkey = null;
-    try {
-      vault = await db.prepare("SELECT 1 FROM chat_account_vault_versions WHERE user_id = ? AND key_version = ?").bind(contact.peer_user_id, accountKey?.key_version || "").first();
-      passkey = await db.prepare("SELECT 1 FROM chat_passkeys WHERE user_id = ? AND revoked_at IS NULL LIMIT 1").bind(contact.peer_user_id).first();
-    } catch (_error) {
-      vault = await db.prepare("SELECT 1 FROM chat_vaults WHERE user_id = ? AND key_version = ?").bind(contact.peer_user_id, accountKey?.key_version || "").first();
-    }
-    return success({ contactId: parts[3], accountKey: bundle(accountKey), enabled: Boolean(accountKey && vault && passkey), passkeyReady: Boolean(passkey) }, method);
+    const ready = await accountReady(db, contact.peer_user_id, accountKey?.key_version);
+    return success({ contactId: parts[3], accountKey: bundle(accountKey), enabled: ready, passkeyReady: ready }, method);
   }
   let conversation = conversationId ? await db.prepare("SELECT * FROM chat_conversations WHERE id = ?").bind(conversationId).first() : null;
   if (["messages", "attachments"].includes(parts[2]) && parts[3] && parts[3] !== "init") {
@@ -494,7 +509,7 @@ export async function handleAccountV2Route(request, env, user) {
   if (parts[2] === "conversations" && parts[3]) {
     if (method === "GET" && ["members", "account-bundle"].includes(parts[4])) return success(await mapAccountConversation(db, await member(db, parts[3], user.id), user.id), method);
     if (method === "GET" && parts[4] === "epochs") return success(await epochs(db, parts[3], user.id), method);
-    if (["POST", "PATCH"].includes(method) && ["control", "members", "epochs", "leave", "settings", "metadata"].includes(parts[4])) return success(await changeConversation(db, env, user.id, parts[3], await readJsonBody(request)), method);
+    if ((["POST", "PATCH"].includes(method) && ["control", "members", "epochs", "leave", "settings", "metadata", "dissolve"].includes(parts[4])) || (method === "PUT" && parts[4] === "metadata")) return success(await changeConversation(db, env, user.id, parts[3], await readJsonBody(request)), method);
     fail(400, "PROTOCOL_MISMATCH", "This operation is unavailable for account-v2.");
   }
   if (parts[2] === "messages" && method === "POST") {

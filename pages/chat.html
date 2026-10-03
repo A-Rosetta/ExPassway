@@ -96,7 +96,7 @@
       <section class="chat-panel chat-conversation-panel">
         <div id="conversationEmpty" class="chat-empty-state">
           <p data-i18n="chatNoConversation">Choose a friend to start chatting.</p>
-          <p class="chat-muted" data-i18n="chatComingLater">Calls and MLS group key rotation will arrive later.</p>
+          <p class="chat-muted">Create a secure conversation or choose an existing chat.</p>
         </div>
         <div id="conversationActive" hidden>
           <header class="chat-conversation-header">
@@ -121,6 +121,7 @@
             <div id="groupMemberActions" class="chat-compose__actions" hidden>
               <select id="groupInviteContact" aria-label="Paired contact"></select>
               <button id="inviteGroupMember" class="btn-secondary chat-small-action" type="button">Invite</button>
+              <button id="rotateGroupKey" class="btn-secondary chat-small-action" type="button" hidden>Update group encryption</button>
               <button id="leaveGroup" class="btn-secondary chat-small-action" type="button">Leave group</button>
               <button id="dissolveGroup" class="btn-secondary chat-small-action" type="button" hidden>Disband group</button>
             </div>
@@ -145,10 +146,10 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20260926-1"></script>
+  <script src="../scripts/i18n.js?v=20261003-1"></script>
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
-  <script src="../scripts/api.js?v=20260913-1"></script>
+  <script src="../scripts/api.js?v=20261003-1"></script>
   <script data-chat-notifications-loader="true" src="../scripts/chat-notifications.js?v=20260809-4"></script>
-    <script src="../scripts/chat.js?v=20260926-3"></script>
+    <script src="../scripts/chat.js?v=20261003-1"></script>
 </body>
 </html>

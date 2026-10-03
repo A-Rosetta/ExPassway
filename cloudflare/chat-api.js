@@ -13,7 +13,7 @@ import {
   verifyRegistrationResponse,
   webAuthnContext,
 } from "./webauthn.js";
-import { handleAccountV2Route, cleanupAccountV2 } from "./chat-account-v2.js";
+import { handleAccountV2Route, cleanupAccountV2, mapAccountConversation } from "./chat-account-v2.js";
 
 const encoder = new TextEncoder();
 const MAX_CIPHERTEXT_LENGTH = 512 * 1024;
@@ -326,7 +326,7 @@ async function requireConversationMember(db, conversationId, userId) {
   const row = await db
     .prepare(
       `
-    SELECT c.id, c.kind, c.created_by, c.retention_seconds, c.created_at, c.updated_at
+    SELECT c.*
     FROM chat_conversations c
     JOIN chat_conversation_members m ON m.conversation_id = c.id
     WHERE c.id = ? AND m.user_id = ? AND m.left_at IS NULL AND c.deleted_at IS NULL
@@ -374,7 +374,7 @@ async function existingDirectConversation(db, userId, peerUserId) {
   return db
     .prepare(
       `
-    SELECT c.id, c.kind, c.created_by, c.retention_seconds, c.created_at, c.updated_at
+    SELECT c.*
     FROM chat_conversations c
     JOIN chat_conversation_members mine ON mine.conversation_id = c.id AND mine.user_id = ? AND mine.left_at IS NULL
     JOIN chat_conversation_members peer ON peer.conversation_id = c.id AND peer.user_id = ? AND peer.left_at IS NULL
@@ -387,6 +387,7 @@ async function existingDirectConversation(db, userId, peerUserId) {
 }
 
 async function mapConversation(db, row, userId) {
+  if (row.protocol_version === "account-v2") return mapAccountConversation(db, row, userId);
   if (row.kind === "group") {
     const memberRows = await db
       .prepare(
@@ -1880,16 +1881,19 @@ function mapAccountKey(row) {
 async function accountKeyBundle(db, userId) {
   const row = await db
     .prepare(
-      `SELECT user_id,key_version,encryption_public_key,signing_public_key,fingerprint,status,created_at,updated_at
-    FROM chat_account_keys WHERE user_id = ? AND status = 'active' ORDER BY updated_at DESC LIMIT 1`
+      `SELECT k.* FROM chat_account_keys k LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id
+    WHERE k.user_id = ? AND k.status = 'active' AND (h.key_version IS NULL OR h.key_version=k.key_version)
+    ORDER BY k.updated_at DESC,k.key_version DESC LIMIT 1`
     )
     .bind(userId)
     .first();
   let credential = null;
   let vault = null;
   try {
-    credential = await db.prepare("SELECT credential_id,backup_eligible,revoked_at FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL ORDER BY created_at ASC LIMIT 1").bind(userId).first();
-    vault = await db.prepare("SELECT key_version FROM chat_account_vault_versions WHERE user_id=? ORDER BY updated_at DESC LIMIT 1").bind(userId).first();
+    vault = row && await db.prepare("SELECT key_version,credential_id FROM chat_account_vault_versions WHERE user_id=? AND key_version=?").bind(userId, row.key_version).first();
+    credential = await db.prepare(`SELECT credential_id,backup_eligible,revoked_at FROM chat_passkeys
+      WHERE user_id=? AND revoked_at IS NULL AND (? IS NULL OR credential_id=?) ORDER BY created_at DESC,id DESC LIMIT 1`)
+      .bind(userId, vault?.credential_id || null, vault?.credential_id || null).first();
   } catch (_error) {
     // Older test/compatibility databases predate the hardening migration.
   }
@@ -1992,14 +1996,17 @@ async function passkeyOptions(db, userId, kind, request, env) {
   const context = webAuthnContext(request, env);
   const challenge = bytesToBase64Url(randomBytes(32));
   const existingPrf = kind === "authentication"
-    ? await db.prepare("SELECT prf_salt FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL ORDER BY created_at ASC LIMIT 1").bind(userId).first()
+    ? await db.prepare(`SELECT p.credential_id,p.prf_salt FROM chat_passkeys p
+      LEFT JOIN chat_account_identity_heads h ON h.user_id=p.user_id
+      WHERE p.user_id=? AND p.revoked_at IS NULL AND (h.credential_id IS NULL OR p.credential_id=h.credential_id)
+      ORDER BY p.created_at DESC,p.id DESC LIMIT 1`).bind(userId).first()
     : null;
   const prfSalt = existingPrf?.prf_salt || bytesToBase64Url(randomBytes(32));
   const timestamp = Date.now();
   const expiresAt = new Date(timestamp + 5 * 60 * 1000).toISOString();
   await db
     .prepare(
-      `INSERT INTO chat_webauthn_challenges (id,user_id,challenge,kind,rp_id,origin,prf_salt,expires_at,created_at) VALUES (?,?,?,?,?,?,?,?,?)`
+      `INSERT INTO chat_webauthn_challenges (id,user_id,challenge,kind,rp_id,origin,prf_salt,expires_at,created_at,credential_id) VALUES (?,?,?,?,?,?,?,?,?,?)`
     )
     .bind(
       randomId(),
@@ -2010,7 +2017,8 @@ async function passkeyOptions(db, userId, kind, request, env) {
       context.origin,
       prfSalt,
       expiresAt,
-      new Date(timestamp).toISOString()
+      new Date(timestamp).toISOString(),
+      existingPrf?.credential_id || null
     )
     .run();
   const credentialRows = await db
@@ -2020,7 +2028,7 @@ async function passkeyOptions(db, userId, kind, request, env) {
     )
     .bind(userId)
     .all();
-  const credentials = credentialRows.results || [];
+  const credentials = (credentialRows.results || []).filter((row) => kind === "registration" || row.credential_id === existingPrf?.credential_id);
   const prf = { eval: { first: prfSalt } };
   const publicKey =
     kind === "registration"
@@ -2062,7 +2070,7 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
   const challenge = boundedString(body.challenge, "challenge", 256);
   const row = await db
     .prepare(
-      `SELECT id,rp_id,origin,prf_salt FROM chat_webauthn_challenges WHERE user_id = ? AND challenge = ? AND kind = ? AND used_at IS NULL AND expires_at > ?`
+      `SELECT id,rp_id,origin,prf_salt,credential_id FROM chat_webauthn_challenges WHERE user_id = ? AND challenge = ? AND kind = ? AND used_at IS NULL AND expires_at > ?`
     )
     .bind(userId, challenge, kind, nowIso())
     .first();
@@ -2105,6 +2113,9 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       }
     } else {
       const credentialId = webAuthnCredentialId(credential);
+      if (row.credential_id !== credentialId) {
+        throw new AuthError(400, "Use the Passkey selected for this account vault.", "WEBAUTHN_CREDENTIAL_MISMATCH");
+      }
       const passkey = await db
         .prepare(
           `SELECT id,user_id,credential_id,public_key,sign_count,backup_eligible FROM chat_passkeys
@@ -2208,12 +2219,16 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       "WEBAUTHN_COUNTER_CONFLICT"
     );
   }
+  const identity = await db.prepare("SELECT key_version,credential_id FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
+  if (identity?.credential_id && identity.credential_id !== verified.credentialId) {
+    throw new AuthError(409,"The secure chat identity changed during Passkey verification. Start again.","ACCOUNT_IDENTITY_CHANGED");
+  }
   return {
     verified: true,
     credentialId: verified.credentialId,
     prfSalt: row.prf_salt,
     signCount: verified.signCount,
-    ...(await issueAccountWriteProof(db, userId, verified.credentialId)),
+    ...(await issueAccountWriteProof(db, userId, verified.credentialId, identity?.key_version || null)),
   };
 }
 
@@ -2245,22 +2260,38 @@ async function initializeAccount(db, userId, body) {
   if (![encryptionPublicKey, signingPublicKey, fingerprint, nonce, ciphertext].every((value) => isBase64Url(value, 512 * 1024)))
     throw new AuthError(400, "The account initialization payload is invalid.", "INVALID_ACCOUNT_INITIALIZATION");
   const existing = await db.prepare("SELECT key_version FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
+  if ((proof?.key_version || null) !== (existing?.key_version || null))
+    throw new AuthError(409,"The secure chat identity changed after Passkey verification. Verify again.","ACCOUNT_IDENTITY_CHANGED");
   if (existing && body.reset !== true)
     throw new AuthError(409, "This account already has a secure chat identity.", "ACCOUNT_IDENTITY_ALREADY_INITIALIZED");
   const current = await db.prepare("SELECT key_version FROM chat_account_keys WHERE user_id=? AND key_version=?").bind(userId, keyVersion).first();
   if (current) throw new AuthError(409, "This account key version already exists.", "ACCOUNT_KEY_VERSION_EXISTS");
   const timestamp = nowIso();
-  await db.batch([
+  try { await db.batch([
+    db.prepare(`INSERT INTO chat_account_initialization_guards (id,valid) VALUES (?,CASE WHEN
+      ((? IS NULL AND NOT EXISTS (SELECT 1 FROM chat_account_identity_heads WHERE user_id=?)) OR
+       EXISTS (SELECT 1 FROM chat_account_identity_heads WHERE user_id=? AND key_version=?)) THEN 1 ELSE 0 END)`)
+      .bind(randomId(), existing?.key_version || null, userId, userId, existing?.key_version || null),
+    db.prepare("UPDATE chat_account_keys SET status='revoked',updated_at=? WHERE user_id=? AND status='active'").bind(timestamp,userId),
     db.prepare("INSERT INTO chat_account_keys (user_id,key_version,encryption_public_key,signing_public_key,fingerprint,status,created_at,updated_at) VALUES (?,?,?,?,?,'active',?,?)").bind(userId,keyVersion,encryptionPublicKey,signingPublicKey,fingerprint,timestamp,timestamp),
     db.prepare("INSERT INTO chat_account_vault_versions (user_id,key_version,credential_id,kdf_version,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?,?)").bind(userId,keyVersion,proof?.credential_id || null,"hkdf-sha256-v1",nonce,ciphertext,timestamp),
     db.prepare("INSERT INTO chat_account_identity_heads (user_id,key_version,credential_id) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET key_version=excluded.key_version,credential_id=excluded.credential_id").bind(userId,keyVersion,proof?.credential_id || null),
-  ]);
+    db.prepare("UPDATE chat_passkeys SET key_version=? WHERE user_id=? AND credential_id=?").bind(keyVersion,userId,proof?.credential_id || null),
+    db.prepare("DELETE FROM chat_account_initialization_guards"),
+  ]); } catch (error) {
+    if (/CHECK constraint failed|UNIQUE constraint failed/.test(String(error?.message || error))) {
+      throw new AuthError(409,"The secure chat identity changed. Refresh and verify your Passkey again.","ACCOUNT_IDENTITY_CHANGED");
+    }
+    throw error;
+  }
   return { initialized: true, reset: Boolean(existing), keyVersion, fingerprint, updatedAt: timestamp };
 }
 
 async function getVault(db, userId) {
   let row;
-  try { row = await db.prepare("SELECT key_version,kdf_version,nonce,ciphertext,updated_at FROM chat_account_vault_versions WHERE user_id = ? ORDER BY updated_at DESC LIMIT 1").bind(userId).first(); }
+  try { row = await db.prepare(`SELECT v.key_version,v.kdf_version,v.nonce,v.ciphertext,v.updated_at FROM chat_account_vault_versions v
+    LEFT JOIN chat_account_identity_heads h ON h.user_id=v.user_id WHERE v.user_id = ? AND (h.key_version IS NULL OR h.key_version=v.key_version)
+    ORDER BY v.updated_at DESC,v.key_version DESC LIMIT 1`).bind(userId).first(); }
   catch (_error) { row = await db.prepare("SELECT key_version,kdf_version,nonce,ciphertext,updated_at FROM chat_vaults WHERE user_id = ?").bind(userId).first(); }
   return row
     ? {
@@ -2601,7 +2632,7 @@ async function handleRoute(request, env, user) {
     const rows = await db
       .prepare(
         `
-      SELECT c.id, c.kind, c.created_by, c.retention_seconds, c.created_at, c.updated_at
+      SELECT c.*
       FROM chat_conversations c JOIN chat_conversation_members m ON m.conversation_id = c.id
       WHERE m.user_id = ? AND m.left_at IS NULL AND c.deleted_at IS NULL
       ORDER BY c.updated_at DESC
@@ -2922,6 +2953,15 @@ export async function handleChatWebSocketRequest(request, env) {
       throw new AuthError(401, "A one-time chat ticket is required.", "WS_TICKET_REQUIRED");
     const ticket = ticketProtocol.slice("ticket.".length);
     const ticketRow = await acceptWebSocketTicket(env.DB, ticket, conversationId);
+    const conversation = await env.DB.prepare(`SELECT c.protocol_version FROM chat_conversations c
+      JOIN chat_conversation_members m ON m.conversation_id=c.id
+      WHERE c.id=? AND m.user_id=? AND m.left_at IS NULL AND c.deleted_at IS NULL`)
+      .bind(conversationId,ticketRow.user_id).first();
+    if (!conversation) throw new AuthError(404,"Conversation not found.","CONVERSATION_NOT_FOUND");
+    const protocol = conversation.protocol_version === "account-v2" ? "expassway-chat-v2" : "expassway-chat-v1";
+    if (conversation.protocol_version === "account-v2") ensureAccountV2Enabled(env);
+    else await requireOwnedDevice(env.DB,ticketRow.device_id,ticketRow.user_id);
+    if (!protocols.includes(protocol)) throw new AuthError(400,"The chat WebSocket protocol does not match this conversation.","PROTOCOL_MISMATCH");
     if (!env.CHAT_ROOMS)
       throw new AuthError(
         503,
@@ -2934,8 +2974,9 @@ export async function handleChatWebSocketRequest(request, env) {
       headers: {
         Upgrade: "websocket",
         "X-Chat-User": ticketRow.user_id,
-        "X-Chat-Device": ticketRow.device_id,
+        ...(ticketRow.device_id ? { "X-Chat-Device": ticketRow.device_id } : {}),
         "X-Chat-Conversation": ticketRow.conversation_id,
+        "X-Chat-Protocol": protocol,
       },
     });
     return env.CHAT_ROOMS.get(roomId).fetch(roomRequest);
@@ -2956,23 +2997,28 @@ export async function cleanupChatData(env) {
   if (env.CHAT_MEDIA_BUCKET) {
     const expired = await env.DB.prepare(
       `
-      SELECT object_key FROM chat_attachments
+      SELECT id,object_key FROM chat_attachments
       WHERE (expires_at IS NOT NULL AND expires_at <= ?) OR status = 'deleted'
       LIMIT 500
     `
     )
       .bind(timestamp)
       .all();
-    for (const row of expired.results || []) {
-      await env.CHAT_MEDIA_BUCKET.delete(row.object_key);
+    const attachments = expired.results || [];
+    if (attachments.length) {
+      await env.CHAT_MEDIA_BUCKET.delete(attachments.map((row) => row.object_key));
+      const deletions = [];
+      for (let offset = 0; offset < attachments.length; offset += 90) {
+        const ids = attachments.slice(offset, offset + 90).map((row) => row.id);
+        deletions.push(env.DB.prepare(`DELETE FROM chat_attachments WHERE id IN (${ids.map(() => "?").join(",")})
+          AND ((expires_at IS NOT NULL AND expires_at <= ?) OR status='deleted')`).bind(...ids,timestamp));
+      }
+      await env.DB.batch(deletions);
     }
   }
   await env.DB.batch([
     env.DB.prepare(
-      "DELETE FROM chat_messages WHERE expires_at IS NOT NULL AND expires_at <= ?"
-    ).bind(timestamp),
-    env.DB.prepare(
-      "DELETE FROM chat_attachments WHERE (expires_at IS NOT NULL AND expires_at <= ?) OR status = 'deleted'"
+      "DELETE FROM chat_messages WHERE protocol_version <> 'account-v2' AND expires_at IS NOT NULL AND expires_at <= ?"
     ).bind(timestamp),
     env.DB.prepare(
       "DELETE FROM chat_invites WHERE expires_at <= ? OR used_at IS NOT NULL OR revoked_at IS NOT NULL"
@@ -2989,5 +3035,7 @@ export async function cleanupChatData(env) {
     env.DB.prepare(
       "DELETE FROM chat_reports WHERE expires_at IS NOT NULL AND expires_at <= ?"
     ).bind(timestamp),
+    env.DB.prepare("DELETE FROM chat_webauthn_challenges WHERE expires_at <= ?").bind(timestamp),
+    env.DB.prepare("DELETE FROM chat_account_write_proofs WHERE expires_at <= ?").bind(timestamp),
   ]);
 }

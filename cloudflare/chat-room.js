@@ -22,19 +22,20 @@ export class ChatRoom {
     const userId = request.headers.get("X-Chat-User");
     const deviceId = request.headers.get("X-Chat-Device");
     const conversationId = request.headers.get("X-Chat-Conversation");
-    if (!userId || !deviceId || !conversationId) {
+    const protocol = request.headers.get("X-Chat-Protocol") || "expassway-chat-v1";
+    if (!userId || !conversationId || !["expassway-chat-v1", "expassway-chat-v2"].includes(protocol) || (protocol === "expassway-chat-v1" && !deviceId)) {
       return new Response("Missing chat connection context", { status: 400 });
     }
 
     const pair = new WebSocketPair();
     const client = pair[0];
     const server = pair[1];
-    this.state.acceptWebSocket(server, ["expassway-chat-v1"]);
-    server.serializeAttachment({ userId, deviceId, conversationId });
+    this.state.acceptWebSocket(server, [protocol]);
+    server.serializeAttachment({ userId, deviceId, conversationId, protocol });
     return new Response(null, {
       status: 101,
       webSocket: client,
-      headers: { "Sec-WebSocket-Protocol": "expassway-chat-v1" },
+      headers: { "Sec-WebSocket-Protocol": protocol },
     });
   }
 

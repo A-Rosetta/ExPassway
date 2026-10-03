@@ -64,6 +64,7 @@ npm run format
 npm run format:check
 npm run typecheck
 npm run test:unit
+npm run test:chat-browser
 npm run cloudflare:build
 npm run cloudflare:deploy
 npm run cloudflare:import
@@ -82,6 +83,12 @@ separately because the existing source tree has not yet been normalized to a sin
 The JavaScript project configuration supplies Cloudflare Workers types to editors without
 requiring an immediate strict TypeScript conversion of the existing JavaScript code.
 
+The chat browser suite uses the real frontend, crypto Worker, D1, R2 and chat APIs.
+It mocks the operating-system Passkey ceremony and exercises polling when realtime
+is unavailable. Install Chromium with `npx playwright install chromium` if needed;
+on Windows the suite also supports an installed Microsoft Edge. Real Passkey PRF
+support still needs a manual check in the intended browser and authenticator.
+
 ## Repository Map
 
 - `index.html`, `pages/`, `scripts/`, `assets/`: static application
@@ -95,7 +102,12 @@ requiring an immediate strict TypeScript conversion of the existing JavaScript c
 
 ## Deployment
 
+Apply pending D1 migrations before deploying code that requires them. Account-v2
+chat requires `0015_chat_conversation_protocol.sql`; it adds the conversation
+protocol column and keeps existing conversations as `signal-v1`.
+
 ```bash
+npx wrangler d1 migrations apply expassway-db --remote
 npm run cloudflare:deploy
 ```
 

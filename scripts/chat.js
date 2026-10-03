@@ -3,7 +3,8 @@
   const DEVICE_KEY = "expassway.chat.device.v1";
   const PENDING_INVITE_KEY = "expassway.chat.pendingInvite.v1";
   const t = (key, fallback, vars = {}) => {
-    let value = window.ALevelI18n?.t?.(key) || fallback;
+    const translated = window.ALevelI18n?.t?.(key, vars);
+    let value = translated && translated !== key ? translated : fallback;
     Object.entries(vars).forEach(([name, replacement]) => {
       value = value.replaceAll(`{${name}}`, String(replacement));
     });
@@ -34,6 +35,14 @@
     accountMode: false,
     accountPasskeyReady: false,
     accountContactStatus: new Map(),
+    accountGroupMetadata: new Map(),
+    contactStatusGeneration: 0,
+    accountContactRequests: new Set(),
+    sendingText: new Set(),
+    sendingImages: new Set(),
+    messageDrafts: new Map(),
+    dataRefreshGeneration: 0,
+    accountIdentityChanges: new Set(),
   };
   const $ = (selector) => document.querySelector(selector);
   const status = $("#chatStatus");
@@ -54,6 +63,77 @@
 
   function currentToken() {
     return localStorage.getItem(TOKEN_KEY) || "";
+  }
+
+  function isAccountConversation(conversation) {
+    return conversation?.protocolVersion === "account-v2";
+  }
+
+  function conversationIsCurrent(conversationId, generation) {
+    return state.activeConversation?.id === conversationId && state.syncGeneration === generation;
+  }
+
+  function conversationName(conversation) {
+    return conversation.kind === "group"
+      ? state.accountGroupMetadata.get(conversation.id)?.name || t("chatGroupTitle", "Group ({count} members)", { count: conversation.group?.memberCount || 0 })
+      : conversation.peer?.alias || "Conversation";
+  }
+
+  function renderActiveConversation() {
+    const conversation = state.activeConversation;
+    $("#conversationEmpty").hidden = Boolean(conversation);
+    $("#conversationActive").hidden = !conversation;
+    if (!conversation) {
+      $("#groupManagePanel").hidden = true;
+      return;
+    }
+    $("#conversationTitle").textContent = conversationName(conversation);
+    const legacyReadOnly = state.accountMode && !isAccountConversation(conversation);
+    const rotationRequired = Boolean(conversation.rotationRequired);
+    const identityChanged = state.accountIdentityChanges.has(conversation.id);
+    const selfRole = conversation.role || conversation.group?.members?.find((member) => member.isSelf)?.role;
+    $("#retentionSelect").value = String(conversation.retentionSeconds);
+    $("#retentionSelect").disabled = legacyReadOnly || (isAccountConversation(conversation) && conversation.kind === "group" && selfRole !== "owner");
+    $("#groupManageButton").hidden = conversation.kind !== "group" || !isAccountConversation(conversation);
+    $("#messageInput").disabled = legacyReadOnly || rotationRequired || identityChanged;
+    $("#sendMessage").disabled = legacyReadOnly || rotationRequired || identityChanged || state.sendingText.has(conversation.id);
+    $("#imageInput").disabled = legacyReadOnly || rotationRequired || identityChanged || state.sendingImages.has(conversation.id);
+    if (legacyReadOnly) $("#conversationSafety").textContent = "Historical chat: messages can be read on the original device. Start a new secure chat to send messages.";
+    else if (isAccountConversation(conversation)) $("#conversationSafety").textContent = rotationRequired
+      ? "A member left. An owner or administrator must update the group encryption before messages can be sent."
+      : "Secure account chat";
+    if (identityChanged) {
+      const safety = $("#conversationSafety");
+      safety.textContent = conversation.kind === "group"
+        ? "A member changed their chat identity. The group owner must remove that member and invite them again before messages can be sent."
+        : "A participant changed their chat identity. Existing messages remain in this historical conversation.";
+      if (conversation.kind === "direct" && conversation.peer?.contactId) {
+        const button = document.createElement("button");
+        button.id = "startNewSecureChat";
+        button.type = "button";
+        button.className = "btn-secondary chat-small-action";
+        button.textContent = "Start a new secure conversation";
+        button.addEventListener("click", async () => {
+          if (button.disabled || !window.confirm("A chat identity changed. Verify the change with your friend before continuing. Create a new secure conversation? Existing messages stay in this conversation.")) return;
+          button.disabled = true;
+          try {
+            const created = await createAccountConversation("direct", [conversation.peer.contactId]);
+            state.conversations = [created, ...state.conversations];
+            await selectConversation(created);
+            setStatus("New secure conversation created.");
+          } catch (error) { setStatus(formatActionError(error), true); }
+          finally { button.disabled = false; }
+        });
+        safety.appendChild(button);
+      }
+    }
+    if (conversation.kind === "group" && isAccountConversation(conversation)) renderGroupManagement(conversation);
+  }
+
+  function showAccountIdentityChange(conversation, error) {
+    if (!isAccountConversation(conversation) || error?.code !== "ACCOUNT_KEY_CHANGED") return;
+    state.accountIdentityChanges.add(conversation.id);
+    if (state.activeConversation?.id === conversation.id) renderActiveConversation();
   }
 
   function savedDevice() {
@@ -84,8 +164,9 @@
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20260927-1", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20261003-1", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
+      if (state.cryptoWorker !== worker) return;
       const detail = String(event?.message || "").trim();
       for (const pending of state.pendingCrypto.values()) {
         const error = new Error(detail || `The chat encryption worker stopped during ${pending.action}.`);
@@ -94,7 +175,26 @@
         pending.reject(error);
       }
       state.pendingCrypto.clear();
+      worker.terminate();
       state.cryptoWorker = null;
+      if (state.accountV2?.unlocked) {
+        state.accountV2 = null;
+        state.accountEpochs.clear();
+        state.accountGroupMetadata.clear();
+        state.messages = [];
+        state.activeConversation = null;
+        state.cursor = "";
+        state.syncGeneration += 1;
+        state.syncInFlight = null;
+        stopPolling();
+        state.socket?.close();
+        state.socket = null;
+        $("#chatApp").hidden = true;
+        $("#chatSetupPanel").hidden = false;
+        $("#enableAccountSync").hidden = true;
+        $("#unlockAccountSync").hidden = false;
+        setStatus("Chat encryption stopped. Unlock secure chat again to continue.", true);
+      }
     };
     worker.onmessage = (event) => {
       const { id, ok, result, error, code } = event.data || {};
@@ -240,22 +340,31 @@
   }
 
   async function unlockAccountSync() {
-    const vault = await window.ALevelApi.getChatAccountVault();
-    if (!vault) return setupAccountSync();
-    setStatus("Unlocking secure chat with your Passkey...");
-    const assertion = await accountPasskeyAssertion();
-    const unlocked = await cryptoCall("unlockAccountV2Vault", {
-      userId: state.profile.id,
-      keyVersion: vault.keyVersion,
-      nonce: vault.nonce,
-      ciphertext: vault.ciphertext,
-      prfOutput: assertion.prfOutput,
-    });
-    state.accountV2 = { ...unlocked, proof: assertion.proof };
-    $("#chatSetupPanel").hidden = true;
-    $("#chatApp").hidden = false;
-    setStatus("");
-    await refreshData();
+    const button = $("#unlockAccountSync");
+    if (button.disabled) return;
+    button.disabled = true;
+    try {
+      const vault = await window.ALevelApi.getChatAccountVault();
+      if (!vault) return await setupAccountSync();
+      setStatus("Unlocking secure chat with your Passkey...");
+      const assertion = await accountPasskeyAssertion();
+      const unlocked = await cryptoCall("unlockAccountV2Vault", {
+        userId: state.profile.id,
+        keyVersion: vault.keyVersion,
+        nonce: vault.nonce,
+        ciphertext: vault.ciphertext,
+        prfOutput: assertion.prfOutput,
+      });
+      state.accountV2 = { ...unlocked, proof: assertion.proof };
+      $("#chatSetupPanel").hidden = true;
+      $("#chatApp").hidden = false;
+      setStatus("");
+      await refreshData();
+    } catch (error) {
+      setStatus(formatActionError(error), true);
+    } finally {
+      button.disabled = false;
+    }
   }
 
   async function ensureAccountState() {
@@ -288,6 +397,7 @@
       return;
     }
     const enable = $("#enableAccountSync");
+    if (enable?.disabled) return;
     if (enable) enable.disabled = true;
     setStatus(state.accountPasskeyReady
       ? "Unlocking the existing Passkey to finish secure chat setup..."
@@ -391,9 +501,7 @@
       button.className = `chat-conversation-item${state.activeConversation?.id === conversation.id ? " is-active" : ""}`;
       button.innerHTML = `<strong></strong><small></small>`;
       if (conversation.kind === "group") {
-        button.querySelector("strong").textContent = t("chatGroupTitle", "Group ({count} members)", {
-          count: conversation.group?.memberCount || 0,
-        });
+        button.querySelector("strong").textContent = conversationName(conversation);
         button.querySelector("small").textContent = t("chatGroupMemberCount", "{count} members", {
           count: conversation.group?.memberCount || 0,
         });
@@ -403,11 +511,11 @@
           ? "End-to-end encrypted"
           : "Encrypted chat";
       }
-      button.addEventListener("click", () => selectConversation(conversation));
+      button.addEventListener("click", () => selectConversation(conversation).catch((error) => setStatus(formatActionError(error), true)));
       host.appendChild(button);
     });
     if (state.accountMode) {
-      const existingPeers = new Set(state.conversations.flatMap((conversation) => conversation.kind === "direct" && conversation.peer?.contactId ? [conversation.peer.contactId] : []));
+      const existingPeers = new Set(state.conversations.flatMap((conversation) => isAccountConversation(conversation) && conversation.kind === "direct" && conversation.peer?.contactId ? [conversation.peer.contactId] : []));
       const available = state.contacts.filter((contact) => !existingPeers.has(contact.id));
       if (available.length) {
         const heading = document.createElement("p");
@@ -420,6 +528,8 @@
           button.className = "chat-conversation-item";
           button.textContent = contact.profile?.alias || "Paired contact";
           button.addEventListener("click", async () => {
+            if (button.disabled) return;
+            button.disabled = true;
             try {
               setStatus("Creating secure conversation...");
               const conversation = await createAccountConversation("direct", [contact.id]);
@@ -428,6 +538,7 @@
               await selectConversation(conversation);
               setStatus("");
             } catch (error) { setStatus(formatActionError(error), true); }
+            finally { button.disabled = false; }
           });
           host.appendChild(button);
         });
@@ -439,6 +550,7 @@
   function renderGroupContactPicker() {
     const host = $("#groupContactList");
     if (!host) return;
+    const selected = new Set([...host.querySelectorAll("input:checked")].map((input) => input.value));
     host.replaceChildren();
     if (!state.contacts.length) {
       const empty = document.createElement("p");
@@ -455,6 +567,7 @@
       checkbox.value = contact.id;
       const accountStatus = state.accountContactStatus.get(contact.id);
       checkbox.disabled = state.accountMode && accountStatus !== true;
+      checkbox.checked = selected.has(contact.id) && accountStatus !== false;
       const text = document.createElement("span");
       text.textContent = contact.profile?.alias || t("chatNoConversation", "Conversation");
       label.append(checkbox, text);
@@ -466,17 +579,22 @@
         label.appendChild(unavailable);
       }
       host.appendChild(label);
-      if (state.accountMode && !state.accountContactStatus.has(contact.id)) {
-        state.accountContactStatus.set(contact.id, null);
+      if (state.accountMode && !state.accountContactStatus.has(contact.id) && !state.accountContactRequests.has(contact.id)) {
+        const generation = state.contactStatusGeneration;
+        state.accountContactRequests.add(contact.id);
         window.ALevelApi.getChatContactAccountBundle(contact.id)
           .then((bundle) => {
+            if (generation !== state.contactStatusGeneration) return;
             state.accountContactStatus.set(contact.id, Boolean(bundle?.enabled && bundle?.accountKey));
             renderGroupContactPicker();
+            if (state.activeConversation?.kind === "group") renderGroupManagement(state.activeConversation);
           })
           .catch(() => {
+            if (generation !== state.contactStatusGeneration) return;
             state.accountContactStatus.set(contact.id, false);
             renderGroupContactPicker();
-          });
+          })
+          .finally(() => { if (generation === state.contactStatusGeneration) state.accountContactRequests.delete(contact.id); });
       }
     });
   }
@@ -485,6 +603,8 @@
     const host = $("#groupMemberList");
     if (!host) return;
     host.replaceChildren();
+    const self = conversation.group?.members?.find((member) => member.isSelf);
+    const canManage = ["owner", "admin"].includes(self?.role);
     for (const member of conversation.group?.members || []) {
       const row = document.createElement("div");
       row.className = "chat-device-item";
@@ -496,20 +616,55 @@
       role.textContent = member.role || "member";
       details.append(name, role);
       row.appendChild(details);
+      if (!member.isSelf && member.userId) {
+        const controls = document.createElement("div");
+        controls.className = "chat-device-item__actions";
+        const addAction = (label, action, payload, rotate = false) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "btn-secondary chat-small-action";
+          button.textContent = label;
+          button.addEventListener("click", async () => {
+            if (!window.confirm(`${label}: ${member.alias || "this member"}?`)) return;
+            button.disabled = true;
+            try {
+              if (rotate) await rotateGroupWithMembers(conversation, action, [], payload);
+              else await submitGroupControl(conversation, action, payload);
+              await refreshData();
+              if (state.activeConversation?.id === conversation.id) setStatus("");
+            } catch (error) { setStatus(formatActionError(error), true); }
+            finally { button.disabled = false; }
+          });
+          controls.appendChild(button);
+        };
+        if (canManage && member.role !== "owner" && (self.role === "owner" || member.role === "member")) addAction("Remove", "remove", { userId: member.userId }, true);
+        if (self?.role === "owner" && member.role !== "owner") {
+          addAction(member.role === "admin" ? "Make member" : "Make administrator", "role", { userId: member.userId, role: member.role === "admin" ? "member" : "admin" });
+          addAction("Transfer ownership", "transfer", { userId: member.userId });
+        }
+        row.appendChild(controls);
+      }
       host.appendChild(row);
     }
-    const self = conversation.group?.members?.find((member) => member.isSelf);
     const actions = $("#groupMemberActions");
     if (actions) {
       actions.hidden = false;
       $("#dissolveGroup").hidden = self?.role !== "owner";
-      $("#inviteGroupMember").hidden = !["owner", "admin"].includes(self?.role);
-      $("#groupInviteContact").replaceChildren(...state.contacts.map((contact) => {
+      $("#leaveGroup").hidden = self?.role === "owner";
+      $("#rotateGroupKey").hidden = !canManage || !conversation.rotationRequired;
+      $("#inviteGroupMember").hidden = !canManage;
+      $("#groupInviteContact").hidden = !canManage;
+      const existing = new Set((conversation.group?.members || []).map((member) => member.contactId).filter(Boolean));
+      const eligible = state.contacts.filter((contact) => !existing.has(contact.id) && state.accountContactStatus.get(contact.id) === true);
+      const selectedContact = $("#groupInviteContact").value;
+      $("#groupInviteContact").replaceChildren(...eligible.map((contact) => {
         const option = document.createElement("option");
         option.value = contact.id;
         option.textContent = contact.profile?.alias || "Paired contact";
         return option;
       }));
+      if (eligible.some((contact) => contact.id === selectedContact)) $("#groupInviteContact").value = selectedContact;
+      $("#inviteGroupMember").disabled = eligible.length === 0 || Number(conversation.group?.memberCount) >= 50;
     }
   }
 
@@ -639,8 +794,10 @@
     if (!host) return;
     host.replaceChildren();
     state.messages.forEach((message) => {
+      const isMine = Boolean((message.senderUserId && message.senderUserId === state.profile?.id)
+        || (message.senderDeviceId && message.senderDeviceId === state.device?.id));
       const item = document.createElement("article");
-      item.className = `chat-message${message.senderUserId === state.profile?.id || message.senderDeviceId === state.device?.id ? " is-mine" : ""}`;
+      item.className = `chat-message${isMine ? " is-mine" : ""}`;
       const decryptCode = message.decryptCode ? ` (${message.decryptCode})` : "";
       const text = message.deleted
         ? "[deleted]"
@@ -649,7 +806,7 @@
       if (state.activeConversation?.kind === "group" && message.senderAlias) {
         const sender = item.querySelector(".chat-message__sender");
         sender.hidden = false;
-        sender.textContent = message.senderUserId === state.profile?.id || message.senderDeviceId === state.device?.id
+        sender.textContent = isMine
           ? t("chatYou", "You")
           : message.senderAlias;
       }
@@ -662,7 +819,7 @@
         const downloadButton = document.createElement("button");
         downloadButton.type = "button";
         downloadButton.className = "btn-secondary chat-small-action";
-        downloadButton.textContent = t("chatAttachImage", "Download encrypted image");
+        downloadButton.textContent = t("chatDownloadImage", "Download encrypted image");
         downloadButton.addEventListener("click", () => downloadImage(structured));
         attachment.appendChild(downloadButton);
       } else {
@@ -728,8 +885,8 @@
 
   async function getAccountRecipients(conversation) {
     const bundle = await window.ALevelApi.getChatConversationAccountBundle(conversation.id);
-    const recipients = (bundle?.members || []).filter((member) => member.accountKey?.status === "active" || member.accountKey);
-    if (!recipients.length) {
+    const recipients = bundle?.members || [];
+    if (!recipients.length || recipients.some((member) => !member.accountKey || (member.accountKey.status && member.accountKey.status !== "active"))) {
       const error = new Error("Every member must enable secure chat before this conversation can use account encryption.");
       error.code = "ACCOUNT_KEYS_REQUIRED";
       throw error;
@@ -745,9 +902,14 @@
     return cryptoCall("signAccountV2Control", { conversationId, expectedEpoch, action, payload });
   }
 
+  async function submitGroupControl(conversation, action, payload) {
+    const expectedEpoch = await currentAccountEpoch(conversation);
+    const signed = await signAccountControl(conversation.id, expectedEpoch, action, payload);
+    return window.ALevelApi.updateChatGroupMembers(conversation.id, signed);
+  }
+
   async function createAccountConversation(kind, contactIds) {
     const conversationId = crypto.randomUUID();
-    const userIds = [state.profile.id];
     const recipients = [];
     for (const contactId of contactIds) {
       const bundle = await window.ALevelApi.getChatContactAccountBundle(contactId);
@@ -757,7 +919,6 @@
         throw error;
       }
       recipients.push({ userId: bundle.accountKey.userId, keyVersion: bundle.accountKey.keyVersion, encryptionPublicKey: bundle.accountKey.encryptionPublicKey });
-      userIds.push(bundle.accountKey.userId);
     }
     const self = state.accountV2;
     recipients.push({ userId: state.profile.id, keyVersion: self.keyVersion, encryptionPublicKey: self.encryptionPublicKey });
@@ -776,12 +937,13 @@
     return window.ALevelApi.createAccountChatConversation({ ...signed, version: "account-v2", conversationId });
   }
 
-  async function rotateGroupWithMembers(conversation, action, contactIds = []) {
+  async function rotateGroupWithMembers(conversation, action, contactIds = [], extraPayload = {}) {
     const expectedEpoch = await currentAccountEpoch(conversation);
-    const recipients = await getAccountRecipients(conversation);
+    let recipients = await getAccountRecipients(conversation);
+    if (action === "remove") recipients = recipients.filter((recipient) => recipient.userId !== extraPayload.userId);
     for (const contactId of contactIds) {
       const bundle = await window.ALevelApi.getChatContactAccountBundle(contactId);
-      if (!bundle?.accountKey) throw new Error("The selected contact must enable secure chat first.");
+      if (!bundle?.enabled || !bundle?.accountKey) throw new Error("The selected contact must enable secure chat first.");
       recipients.push({ userId: bundle.accountKey.userId, keyVersion: bundle.accountKey.keyVersion, encryptionPublicKey: bundle.accountKey.encryptionPublicKey });
     }
     const unique = [...new Map(recipients.map((recipient) => [recipient.userId, recipient])).values()];
@@ -792,21 +954,46 @@
       conversationId: conversation.id,
       epoch: nextEpoch,
       version: metadataVersion,
-      plaintext: { name: "Encrypted group", avatarRef: null },
+      plaintext: state.accountGroupMetadata.get(conversation.id) || { name: "Encrypted group", avatarRef: null },
     });
     metadata.version = Number(metadataVersion);
     const signed = await signAccountControl(conversation.id, expectedEpoch, action, {
+      ...extraPayload,
       ...(contactIds.length ? { contactIds } : {}),
       recipients: epoch.recipients,
       metadata,
     });
-    return window.ALevelApi.updateChatGroupMembers(conversation.id, signed);
+    try {
+      const result = await window.ALevelApi.updateChatGroupMembers(conversation.id, signed);
+      const accepted = result?.conversation;
+      if (accepted?.id === conversation.id && isAccountConversation(accepted)) {
+        const previous = state.conversations.find((item) => item.id === conversation.id);
+        const active = state.activeConversation?.id === conversation.id ? state.activeConversation : null;
+        const knownEpoch = Math.max(Number(previous?.currentEpoch ?? previous?.epoch ?? 0), Number(active?.currentEpoch ?? active?.epoch ?? 0));
+        if (Number(accepted.currentEpoch ?? accepted.epoch) >= knownEpoch) {
+          state.dataRefreshGeneration += 1;
+          state.conversations = [accepted, ...state.conversations.filter((item) => item.id !== accepted.id)];
+          if (active) state.activeConversation = accepted;
+          state.accountIdentityChanges.delete(conversation.id);
+          renderActiveConversation();
+          renderContacts();
+          if (active) setStatus("");
+        }
+      }
+      return result;
+    } catch (error) {
+      showAccountIdentityChange(conversation, error);
+      // Reopen accepted envelopes after a rejected candidate rotation.
+      await openAccountEpochs(conversation).catch(() => {});
+      throw error;
+    }
   }
 
   async function openAccountEpochs(conversation) {
-    if (!state.accountMode || !state.accountV2?.unlocked) return [];
+    if (!isAccountConversation(conversation) || !state.accountV2?.unlocked) return [];
     const payload = await window.ALevelApi.getChatConversationEpochs(conversation.id);
-    const epochs = Array.isArray(payload?.epochs) ? payload.epochs : Array.isArray(payload) ? payload : [];
+    const history = Array.isArray(payload?.epochs) ? payload.epochs : Array.isArray(payload) ? payload : [];
+    const epochs = history.filter((item) => item.envelope?.keyVersion === state.accountV2.keyVersion);
     for (const item of epochs) {
       await cryptoCall("openAccountV2Envelope", {
         conversationId: conversation.id,
@@ -815,6 +1002,24 @@
       });
     }
     state.accountEpochs.set(conversation.id, epochs);
+    if (conversation.metadata && !epochs.some((item) => Number(item.epoch) === Number(conversation.metadata.epoch))) {
+      const refreshed = await window.ALevelApi.getChatConversationAccountBundle(conversation.id);
+      if (refreshed?.id === conversation.id && isAccountConversation(refreshed)) {
+        Object.assign(conversation, refreshed);
+        const active = state.activeConversation;
+        if (active?.id === conversation.id && Number(refreshed.currentEpoch ?? refreshed.epoch) >= Number(active.currentEpoch ?? active.epoch ?? 0)) {
+          Object.assign(active, refreshed);
+        }
+      }
+    }
+    if (conversation.metadata) {
+      const decrypted = await cryptoCall("decryptAccountV2Metadata", {
+        conversationId: conversation.id,
+        ...conversation.metadata,
+        version: String(conversation.metadata.version),
+      });
+      state.accountGroupMetadata.set(conversation.id, JSON.parse(decrypted.plaintext));
+    }
     return epochs;
   }
 
@@ -822,17 +1027,15 @@
     const epochs = await openAccountEpochs(conversation);
     const current = [...epochs].sort((left, right) => Number(right.epoch) - Number(left.epoch))[0];
     if (!current) {
-      const recipients = await getAccountRecipients(conversation);
-      const created = await cryptoCall("createAccountV2Epoch", { conversationId: conversation.id, epoch: 1, recipients });
-      await window.ALevelApi.createChatConversationEpoch(conversation.id, created);
-      state.accountEpochs.set(conversation.id, [{ epoch: 1, envelope: created.recipients.find((item) => item.userId === state.profile.id) }]);
-      return 1;
+      const error = new Error("This account has no usable key for this conversation. Refresh the chat or ask its owner to restore your membership.");
+      error.code = "EPOCH_KEY_UNAVAILABLE";
+      throw error;
     }
     return Number(current.epoch);
   }
 
-  async function sendAccountV2Payload(conversation, plaintext, attachmentRefs = []) {
-    const epoch = await currentAccountEpoch(conversation);
+  async function sendAccountV2Payload(conversation, plaintext, attachmentRefs = [], contentEpoch = null) {
+    const epoch = contentEpoch ?? await currentAccountEpoch(conversation);
     const clientMessageId = crypto.randomUUID();
     const encrypted = await cryptoCall("encryptAccountV2Message", {
       conversationId: conversation.id,
@@ -1008,34 +1211,55 @@
 
   async function syncConversation() {
     if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
-    if (state.syncInFlight) return state.syncInFlight;
     const generation = state.syncGeneration;
+    if (state.syncInFlight) {
+      await state.syncInFlight;
+      if (state.syncGeneration !== generation) return;
+      return syncConversation();
+    }
     state.syncInFlight = (async () => {
       const conversationId = state.activeConversation.id;
-      if (state.accountMode) {
-        const payload = await window.ALevelApi.syncChatEvents(conversationId, state.cursor);
-        if (state.syncGeneration !== generation || state.activeConversation?.id !== conversationId) return;
-        const events = Array.isArray(payload?.events) ? payload.events : [];
-        const incoming = events
-          .filter((event) => event.type === "message" && event.message)
-          .map((event) => event.message);
-        if (incoming.length) {
-          const fresh = await decryptMessages(incoming);
-          const known = new Map(state.messages.map((message) => [message.id, message]));
-          fresh.forEach((message) => known.set(message.id, message));
-          state.messages = [...known.values()].sort((left, right) => String(left.createdAt || "").localeCompare(String(right.createdAt || "")));
-        }
-        for (const event of events.filter((item) => item.type === "deleted" && item.messageId)) {
-          const existing = state.messages.find((message) => message.id === event.messageId);
-          if (existing) Object.assign(existing, { deleted: true, plaintext: null, ciphertext: "" });
-        }
-        state.cursor = payload?.nextCursor == null ? state.cursor : String(payload.nextCursor);
-        renderMessages();
+      if (isAccountConversation(state.activeConversation)) {
+        let hasMore;
+        do {
+          const payload = await window.ALevelApi.syncChatEvents(conversationId, state.cursor);
+          if (!conversationIsCurrent(conversationId, generation)) return;
+          const events = Array.isArray(payload?.events) ? payload.events : [];
+          const incoming = events.filter((event) => event.type === "message" && event.message).map((event) => event.message);
+          const controlsChanged = events.some((event) => !["message", "deleted"].includes(event.type));
+          if (controlsChanged) {
+            await refreshData();
+            if (!conversationIsCurrent(conversationId, generation)) return;
+          }
+          const opened = new Set((state.accountEpochs.get(conversationId) || []).map((item) => Number(item.epoch)));
+          if (controlsChanged || incoming.some((message) => !opened.has(Number(message.contentEpoch)))) {
+            await openAccountEpochs(state.activeConversation);
+            if (!conversationIsCurrent(conversationId, generation)) return;
+            renderActiveConversation();
+            renderContacts();
+          }
+          if (incoming.length) {
+            const fresh = await decryptMessages(incoming);
+            if (!conversationIsCurrent(conversationId, generation)) return;
+            const known = new Map(state.messages.map((message) => [message.id, message]));
+            fresh.forEach((message) => known.set(message.id, message));
+            state.messages = [...known.values()].sort((left, right) => String(left.createdAt || "").localeCompare(String(right.createdAt || "")));
+          }
+          for (const event of events.filter((item) => item.type === "deleted" && item.messageId)) {
+            const existing = state.messages.find((message) => message.id === event.messageId);
+            if (existing) Object.assign(existing, { deleted: true, plaintext: null, ciphertext: "" });
+          }
+          const nextCursor = payload?.nextCursor == null ? state.cursor : String(payload.nextCursor);
+          hasMore = Boolean(payload?.hasMore && nextCursor !== state.cursor);
+          state.cursor = nextCursor;
+          renderMessages();
+        } while (hasMore && conversationIsCurrent(conversationId, generation));
         return;
       }
       const payload = await window.ALevelApi.syncChatMessages(conversationId, state.cursor);
       if (state.syncGeneration !== generation || state.activeConversation?.id !== conversationId) return;
       const fresh = await decryptMessages(payload.messages || []);
+      if (!conversationIsCurrent(conversationId, generation)) return;
       const known = new Set(state.messages.map((message) => message.id));
       state.messages = [...state.messages, ...fresh.filter((message) => !known.has(message.id))];
       state.cursor = payload.nextCursor || state.cursor;
@@ -1061,23 +1285,29 @@
 
   async function openRealtime() {
     if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
-    if (state.accountMode) return;
+    const conversation = state.activeConversation;
+    const conversationId = conversation.id;
+    const generation = state.syncGeneration;
+    if (!isAccountConversation(conversation) && !state.device) return;
     state.socket?.close();
     try {
-      const ticket = await window.ALevelApi.createChatWebSocketTicket(state.activeConversation.id, state.device.id);
+      const ticket = await window.ALevelApi.createChatWebSocketTicket(conversationId, isAccountConversation(conversation) ? undefined : state.device.id);
+      if (!conversationIsCurrent(conversationId, generation)) return;
       const base = window.ALevelApi.getBaseUrl() || location.origin;
-      const wsUrl = new URL(`/api/chat/ws/${encodeURIComponent(state.activeConversation.id)}`, base);
+      const wsUrl = new URL(`/api/chat/ws/${encodeURIComponent(conversationId)}`, base);
       wsUrl.protocol = wsUrl.protocol === "https:" ? "wss:" : "ws:";
       const socket = new WebSocket(wsUrl, [ticket.protocol, `ticket.${ticket.ticket}`]);
       socket.onmessage = async (event) => {
         try {
           const payload = JSON.parse(event.data);
-          if (payload.type !== "message" || payload.message?.conversationId !== state.activeConversation.id) return;
-          const fresh = await decryptMessages([payload.message]);
-          if (!state.messages.some((message) => message.id === fresh[0].id)) state.messages.push(fresh[0]);
-          renderMessages();
+          if (!conversationIsCurrent(conversationId, generation)) return;
+          if (payload.type === "sync" && payload.conversationId === conversationId) await syncConversation();
+          else if (payload.type === "message" && payload.message?.conversationId === conversationId) await syncConversation();
         } catch (_error) {
         }
+      };
+      socket.onclose = () => {
+        if (conversationIsCurrent(conversationId, generation)) startPolling();
       };
       state.socket = socket;
     } catch (_error) {
@@ -1087,33 +1317,49 @@
 
   async function selectConversation(conversation) {
     stopPolling();
-    const previousSync = state.syncInFlight;
-    state.syncGeneration += 1;
+    if (state.activeConversation) state.messageDrafts.set(state.activeConversation.id, $("#messageInput").value);
+    const generation = ++state.syncGeneration;
+    state.socket?.close();
+    state.socket = null;
     state.syncInFlight = null;
-    await previousSync?.catch(() => {});
     state.activeConversation = conversation;
+    $("#messageInput").value = state.messageDrafts.get(conversation.id) || "";
+    $("#imageInput").value = "";
     state.messages = [];
     state.cursor = "";
-    $("#conversationEmpty").hidden = true;
-    $("#conversationActive").hidden = false;
-    $("#conversationTitle").textContent = conversation.kind === "group"
-      ? t("chatGroupTitle", "Group ({count} members)", { count: conversation.group?.memberCount || 0 })
-      : conversation.peer?.alias || "Conversation";
-    if (state.accountMode) {
-      await openAccountEpochs(conversation);
-      $("#conversationSafety").textContent = "Secure account chat";
-    } else {
-      await renderSafetyNumber(conversation);
-    }
-    $("#retentionSelect").value = String(conversation.retentionSeconds);
-    $("#groupManageButton").hidden = conversation.kind !== "group";
+    $("#groupManagePanel").hidden = true;
+    renderActiveConversation();
+    renderMessages();
     renderContacts();
     try {
+      if (isAccountConversation(conversation)) {
+        await openAccountEpochs(conversation);
+      } else if (state.accountMode) {
+        if (!state.device) {
+          const existing = savedDevice();
+          if (existing) {
+            const devices = await window.ALevelApi.listChatDevices();
+            const current = devices.find((device) => device.id === existing.id && !device.revokedAt);
+            if (current) state.device = { ...existing, ...current };
+          }
+        }
+        if (!state.device) {
+          setStatus("This historical chat needs its original device to decrypt messages.", true);
+          return;
+        }
+      } else {
+        await renderSafetyNumber(conversation);
+      }
+      if (!conversationIsCurrent(conversation.id, generation)) return;
+      renderActiveConversation();
       await syncConversation();
+      if (!conversationIsCurrent(conversation.id, generation)) return;
       await openRealtime();
+      if (!conversationIsCurrent(conversation.id, generation)) return;
       startPolling();
     } catch (error) {
-      setStatus(formatActionError(error), true);
+      showAccountIdentityChange(conversation, error);
+      if (conversationIsCurrent(conversation.id, generation)) setStatus(formatActionError(error), true);
     }
   }
 
@@ -1166,8 +1412,10 @@
         ? t("chatSafetyVerified", "Verified")
         : t("chatSafetyVerify", "Mark verified");
       button.addEventListener("click", async () => {
-        await cryptoCall("setSafetyNumberVerification", { key: verificationKey, safety });
-        await renderSafetyNumber(conversation);
+        try {
+          await cryptoCall("setSafetyNumberVerification", { key: verificationKey, safety });
+          if (state.activeConversation?.id === conversation.id) await renderSafetyNumber(conversation);
+        } catch (error) { setStatus(formatActionError(error), true); }
       });
       host.appendChild(button);
       if (conversation.kind !== "group") {
@@ -1230,19 +1478,45 @@
   }
 
   async function refreshData() {
+    const generation = ++state.dataRefreshGeneration;
+    const selectionGeneration = state.syncGeneration;
     const [profile, invites, contacts, conversations] = await Promise.all([
       window.ALevelApi.getChatProfile(),
       window.ALevelApi.listChatInvites(),
       window.ALevelApi.listChatContacts(),
       window.ALevelApi.listChatConversations(),
     ]);
+    if (generation !== state.dataRefreshGeneration) return;
+    if (selectionGeneration !== state.syncGeneration) return refreshData();
+    for (const conversation of conversations) {
+      if (!isAccountConversation(conversation) || conversation.kind !== "group") continue;
+      const previous = state.conversations.find((item) => item.id === conversation.id);
+      if (previous && Number(conversation.currentEpoch ?? conversation.epoch) > Number(previous.currentEpoch ?? previous.epoch)) {
+        state.accountIdentityChanges.delete(conversation.id);
+      }
+    }
     state.profile = profile;
     state.contacts = contacts;
     state.conversations = conversations;
     state.peerBundles.clear();
     state.conversationBundles.clear();
     state.ownBundle = null;
+    state.contactStatusGeneration += 1;
     state.accountContactStatus.clear();
+    state.accountContactRequests.clear();
+    if (state.activeConversation) {
+      const refreshed = conversations.find((conversation) => conversation.id === state.activeConversation.id);
+      state.activeConversation = refreshed || null;
+      if (!refreshed) {
+        state.syncGeneration += 1;
+        state.syncInFlight = null;
+        state.messages = [];
+        state.cursor = "";
+        stopPolling();
+        state.socket?.close();
+        state.socket = null;
+      }
+    }
     if (!state.accountMode) {
       state.devices = await window.ALevelApi.listChatDevices();
       await ensurePrekeys();
@@ -1250,6 +1524,8 @@
     }
     renderInvites(invites);
     renderContacts();
+    renderActiveConversation();
+    if (!state.activeConversation) renderMessages();
     if (!state.accountMode) renderDevices();
   }
 
@@ -1266,6 +1542,8 @@
   }
 
   async function createGroup() {
+    const button = $("#confirmCreateGroup");
+    if (button.disabled) return;
     const selected = [...document.querySelectorAll("#groupContactList input[type=checkbox]:checked")]
       .map((input) => input.value);
     if (!selected.length) {
@@ -1276,6 +1554,7 @@
       setStatus(t("chatGroupTooManyMembers", "A group can contain at most 50 people including you."), true);
       return;
     }
+    button.disabled = true;
     try {
       const conversation = state.accountMode
         ? await createAccountConversation("group", selected)
@@ -1287,7 +1566,7 @@
       setStatus(t("chatGroupCreated", "Encrypted group created."));
     } catch (error) {
       setStatus(t("chatGroupCreateFailed", "Could not create group: {message}", { message: formatActionError(error) }), true);
-    }
+    } finally { button.disabled = false; }
   }
 
   async function createInvite() {
@@ -1358,61 +1637,87 @@
   async function sendMessage(event) {
     event.preventDefault();
     if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
+    const conversation = state.activeConversation;
+    if (state.accountMode && !isAccountConversation(conversation)) return;
     const input = $("#messageInput");
     const plaintext = input.value.trim();
     if (!plaintext) return;
     const button = $("#sendMessage");
+    if (button.disabled) return;
+    state.sendingText.add(conversation.id);
     button.disabled = true;
+    let sent = false;
     setStatus(t("chatSending", "Encrypting and sending..."));
     try {
-      if (state.accountMode) {
-        await sendAccountV2Payload(state.activeConversation, plaintext);
-        input.value = "";
-        await syncConversation();
-        setStatus("");
+      if (isAccountConversation(conversation)) {
+        await sendAccountV2Payload(conversation, plaintext);
+        sent = true;
+        if (state.messageDrafts.get(conversation.id)?.trim() === plaintext) state.messageDrafts.delete(conversation.id);
+        if (state.activeConversation?.id === conversation.id) {
+          if (input.value.trim() === plaintext) input.value = "";
+          await syncConversation();
+          setStatus("");
+        }
         return;
       }
-      await assertSafetyStable(state.activeConversation);
-      const peers = await getEncryptionRecipients(state.activeConversation);
+      await assertSafetyStable(conversation);
+      const peers = await getEncryptionRecipients(conversation);
       if (!peers.length) throw new Error("The contact has no active device.");
       const recipients = {};
       for (const peer of peers) {
-        recipients[peer.deviceId] = await encryptForRecipient(state.activeConversation, peer, plaintext);
+        recipients[peer.deviceId] = await encryptForRecipient(conversation, peer, plaintext);
       }
       const envelope = btoa(JSON.stringify({ version: 1, recipients })).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
       const clientMessageId = crypto.randomUUID();
       await window.ALevelApi.sendChatMessage({
-        conversationId: state.activeConversation.id,
+        conversationId: conversation.id,
         senderDeviceId: state.device.id,
         clientMessageId,
         protocolVersion: "signal-v1",
         ciphertext: envelope,
         sizeBucket: "small",
       });
-      await cacheLocalPlaintext(clientMessageId, plaintext);
-      input.value = "";
-      await syncConversation();
-      setStatus("");
+      sent = true;
+      if (state.messageDrafts.get(conversation.id)?.trim() === plaintext) state.messageDrafts.delete(conversation.id);
+      await cacheLocalPlaintext(clientMessageId, plaintext).catch(() => {});
+      if (state.activeConversation?.id === conversation.id) {
+        if (input.value.trim() === plaintext) input.value = "";
+        await syncConversation();
+        setStatus("");
+      }
     } catch (error) {
-      setStatus(t("chatMessageFailed", "Message failed: {message}", { message: formatActionError(error) }), true);
+      showAccountIdentityChange(conversation, error);
+      if (state.activeConversation?.id === conversation.id) setStatus(sent
+        ? `Message sent, but chat refresh failed: ${formatActionError(error)}`
+        : t("chatMessageFailed", "Message failed: {message}", { message: formatActionError(error) }), true);
     } finally {
-      button.disabled = false;
+      state.sendingText.delete(conversation.id);
+      if (state.activeConversation?.id === conversation.id) renderActiveConversation();
     }
   }
 
   async function sendImage(file) {
     if (!file || !state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
-    if (file.size > 10 * 1024 * 1024) throw new Error("Encrypted images must be 10 MB or smaller.");
-    setStatus(t("chatSending", "Encrypting and sending..."));
-    if (!state.accountMode) await assertSafetyStable(state.activeConversation);
-    const encryptedFile = await cryptoCall("encryptAttachment", { bytes: await file.arrayBuffer() });
-    const reservation = await window.ALevelApi.initChatAttachment({
-      conversationId: state.activeConversation.id,
-      sizeBytes: encryptedFile.bytes.byteLength,
-    });
-    await window.ALevelApi.uploadChatAttachment(reservation.attachmentId, encryptedFile.bytes);
-    await window.ALevelApi.completeChatAttachment(reservation.attachmentId);
-    if (state.accountMode) {
+    const conversation = state.activeConversation;
+    const generation = state.syncGeneration;
+    if (state.accountMode && !isAccountConversation(conversation)) return;
+    if (state.sendingImages.has(conversation.id)) return;
+    if (file.size + 16 > 10 * 1024 * 1024) throw new Error("Encrypted images, including their authentication tag, must be 10 MB or smaller.");
+    state.sendingImages.add(conversation.id);
+    $("#imageInput").disabled = true;
+    let sent = false;
+    try {
+      setStatus(t("chatSending", "Encrypting and sending..."));
+      if (!isAccountConversation(conversation)) await assertSafetyStable(conversation);
+      const contentEpoch = isAccountConversation(conversation) ? await currentAccountEpoch(conversation) : null;
+      const encryptedFile = await cryptoCall("encryptAttachment", { bytes: await file.arrayBuffer() });
+      const reservation = await window.ALevelApi.initChatAttachment({
+        conversationId: conversation.id,
+        sizeBytes: encryptedFile.bytes.byteLength,
+        ...(contentEpoch == null ? {} : { protocolVersion: "account-v2", contentEpoch }),
+      });
+      await window.ALevelApi.uploadChatAttachment(reservation.attachmentId, encryptedFile.bytes);
+      await window.ALevelApi.completeChatAttachment(reservation.attachmentId);
       const metadata = JSON.stringify({
         kind: "image",
         attachmentId: reservation.attachmentId,
@@ -1421,40 +1726,45 @@
         name: file.name,
         mime: file.type || "image/*",
       });
-      await sendAccountV2Payload(state.activeConversation, metadata, [reservation.attachmentId]);
-      $("#imageInput").value = "";
-      await syncConversation();
-      setStatus("");
-      return;
+      if (isAccountConversation(conversation)) {
+        await sendAccountV2Payload(conversation, metadata, [reservation.attachmentId], contentEpoch);
+      } else {
+        const peers = await getEncryptionRecipients(conversation);
+        if (!peers.length) throw new Error("The contact has no active device.");
+        const recipients = {};
+        for (const peer of peers) {
+          recipients[peer.deviceId] = await encryptForRecipient(conversation, peer, metadata);
+        }
+        const envelope = btoa(JSON.stringify({ version: 1, recipients })).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+        const clientMessageId = crypto.randomUUID();
+        await window.ALevelApi.sendChatMessage({
+          conversationId: conversation.id,
+          senderDeviceId: state.device.id,
+          clientMessageId,
+          protocolVersion: "signal-v1",
+          ciphertext: envelope,
+          attachmentRefs: [reservation.attachmentId],
+        });
+        await cacheLocalPlaintext(clientMessageId, metadata).catch(() => {});
+      }
+      sent = true;
+      if (conversationIsCurrent(conversation.id, generation)) {
+        $("#imageInput").value = "";
+        await syncConversation();
+        setStatus("");
+      }
+    } catch (error) {
+      showAccountIdentityChange(conversation, error);
+      if (sent) {
+        if (conversationIsCurrent(conversation.id, generation)) setStatus(`Image sent, but chat refresh failed: ${formatActionError(error)}`, true);
+      } else throw error;
+    } finally {
+      state.sendingImages.delete(conversation.id);
+      if (state.activeConversation?.id === conversation.id) {
+        $("#imageInput").value = "";
+        renderActiveConversation();
+      }
     }
-    const peers = await getEncryptionRecipients(state.activeConversation);
-    if (!peers.length) throw new Error("The contact has no active device.");
-    const metadata = JSON.stringify({
-      kind: "image",
-      attachmentId: reservation.attachmentId,
-      key: encryptedFile.key,
-      nonce: encryptedFile.nonce,
-      name: file.name,
-      mime: file.type || "image/*",
-    });
-    const recipients = {};
-    for (const peer of peers) {
-      recipients[peer.deviceId] = await encryptForRecipient(state.activeConversation, peer, metadata);
-    }
-    const envelope = btoa(JSON.stringify({ version: 1, recipients })).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
-    const clientMessageId = crypto.randomUUID();
-    await window.ALevelApi.sendChatMessage({
-      conversationId: state.activeConversation.id,
-      senderDeviceId: state.device.id,
-      clientMessageId,
-      protocolVersion: "signal-v1",
-      ciphertext: envelope,
-      attachmentRefs: [reservation.attachmentId],
-    });
-    await cacheLocalPlaintext(clientMessageId, metadata);
-    $("#imageInput").value = "";
-    await syncConversation();
-    setStatus("");
   }
 
   function wireEvents() {
@@ -1468,11 +1778,12 @@
     });
     $("#closeGroupManage")?.addEventListener("click", () => { $("#groupManagePanel").hidden = true; });
     $("#leaveGroup")?.addEventListener("click", async () => {
-      if (!state.activeConversation || !window.confirm("Leave this group? A remaining owner or administrator must rotate the encryption epoch.")) return;
+      const conversation = state.activeConversation;
+      if (!conversation || !window.confirm("Leave this group? A remaining owner or administrator must rotate the encryption epoch.")) return;
       try {
-        const expectedEpoch = await currentAccountEpoch(state.activeConversation);
-        const signed = await signAccountControl(state.activeConversation.id, expectedEpoch, "leave", {});
-        await window.ALevelApi.leaveChatGroup(state.activeConversation.id, signed);
+        const expectedEpoch = await currentAccountEpoch(conversation);
+        const signed = await signAccountControl(conversation.id, expectedEpoch, "leave", {});
+        await window.ALevelApi.leaveChatGroup(conversation.id, signed);
         $("#groupManagePanel").hidden = true;
         await refreshData();
       } catch (error) { setStatus(formatActionError(error), true); }
@@ -1487,6 +1798,19 @@
         await refreshData();
       } catch (error) { setStatus(formatActionError(error), true); }
     });
+    $("#rotateGroupKey")?.addEventListener("click", async () => {
+      const conversation = state.activeConversation;
+      if (!conversation || !isAccountConversation(conversation)) return;
+      const button = $("#rotateGroupKey");
+      button.disabled = true;
+      try {
+        setStatus("Updating group encryption...");
+        await rotateGroupWithMembers(conversation, "rotate");
+        await refreshData();
+        setStatus("Group encryption updated.");
+      } catch (error) { setStatus(formatActionError(error), true); }
+      finally { button.disabled = false; }
+    });
     $("#dissolveGroup")?.addEventListener("click", async () => {
       const conversation = state.activeConversation;
       if (!conversation || !window.confirm("Disband this group?")) return;
@@ -1495,7 +1819,6 @@
         const signed = await signAccountControl(conversation.id, expectedEpoch, "dissolve", {});
         await window.ALevelApi.dissolveChatGroup(conversation.id, signed);
         $("#groupManagePanel").hidden = true;
-        state.activeConversation = null;
         await refreshData();
       } catch (error) { setStatus(formatActionError(error), true); }
     });
@@ -1519,11 +1842,21 @@
     });
     $("#retentionSelect")?.addEventListener("change", async (event) => {
       if (!state.activeConversation) return;
+      const conversation = state.activeConversation;
+      const generation = state.syncGeneration;
+      const retentionSeconds = Number(event.target.value);
+      event.target.disabled = true;
       try {
-        await window.ALevelApi.updateChatConversationSettings(state.activeConversation.id, Number(event.target.value));
-        state.activeConversation.retentionSeconds = Number(event.target.value);
+        if (isAccountConversation(conversation)) await submitGroupControl(conversation, "retention", { retentionSeconds });
+        else await window.ALevelApi.updateChatConversationSettings(conversation.id, retentionSeconds);
+        await refreshData();
       } catch (error) {
-        setStatus(error.message, true);
+        if (conversationIsCurrent(conversation.id, generation)) {
+          event.target.value = String(conversation.retentionSeconds);
+          setStatus(formatActionError(error), true);
+        }
+      } finally {
+        if (conversationIsCurrent(conversation.id, generation)) renderActiveConversation();
       }
     });
   }
@@ -1548,6 +1881,9 @@
         }
         return;
       }
+      $("#enableAccountSync").hidden = true;
+      $("#unlockAccountSync").hidden = true;
+      $("#generateDeviceKeys").hidden = false;
       await ensureDevice();
       const existing = savedDevice();
       if (!existing) {

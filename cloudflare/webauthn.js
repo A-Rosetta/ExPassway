@@ -20,7 +20,10 @@ function decodeBase64Url(value, field) {
   try {
     const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
     const binary = atob(normalized + "=".repeat((4 - (normalized.length % 4)) % 4));
-    return Uint8Array.from(binary, (character) => character.charCodeAt(0));
+    const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+    if (base64Url(bytes) !== value)
+      fail("INVALID_WEBAUTHN_CREDENTIAL", `${field} is not canonical base64url.`);
+    return bytes;
   } catch (_error) {
     fail("INVALID_WEBAUTHN_CREDENTIAL", `${field} is not valid base64url.`);
   }
@@ -172,6 +175,8 @@ function parseAuthenticatorData(data, registration) {
     backupEligible: Boolean(flags & 0x08),
     backupState: Boolean(flags & 0x10),
   };
+  if (result.backupState && !result.backupEligible)
+    fail("INVALID_WEBAUTHN_AUTHENTICATOR_DATA", "A credential cannot be backed up without being backup eligible.");
   if (!registration) {
     if (flags & 0x40)
       fail("INVALID_WEBAUTHN_AUTHENTICATOR_DATA", "Assertions cannot contain attested credential data.");
@@ -355,7 +360,7 @@ export async function verifyAuthenticationResponse({
   const authenticatorDataBytes = decodeBase64Url(response.authenticatorData, "authenticatorData");
   const authenticatorData = parseAuthenticatorData(authenticatorDataBytes, false);
   await checkRpId(authenticatorData, rpId);
-  if (expectedSignCount > 0 && authenticatorData.signCount > 0 && authenticatorData.signCount <= expectedSignCount) {
+  if ((expectedSignCount > 0 || authenticatorData.signCount > 0) && authenticatorData.signCount <= expectedSignCount) {
     fail("WEBAUTHN_CLONED_CREDENTIAL", "The WebAuthn signature counter did not increase.", 401);
   }
   let jwk;

@@ -46,7 +46,7 @@
   }
 
   async function request(path, options = {}) {
-    const timeoutMs = options.timeoutMs || DEFAULT_TIMEOUT_MS;
+    const timeoutMs = options.timeoutMs || (path.startsWith("/api/chat/") ? 30000 : DEFAULT_TIMEOUT_MS);
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -78,6 +78,16 @@
       }
 
       return payload?.data ?? payload;
+    } catch (error) {
+      if (controller.signal.aborted) {
+        const timeout = new Error(path.startsWith("/api/chat/")
+          ? "The chat request timed out. Refresh the chat to check whether the change was saved."
+          : "The request timed out. Please try again.");
+        timeout.code = "REQUEST_TIMEOUT";
+        timeout.cause = error;
+        throw timeout;
+      }
+      throw error;
     } finally {
       clearTimeout(timer);
     }
