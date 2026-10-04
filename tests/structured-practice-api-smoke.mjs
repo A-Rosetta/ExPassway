@@ -193,7 +193,7 @@ try {
   assert.equal(failedReplay.payload.error.details.retryAllowed, true);
   assert.equal(upstreamCalls, failedCalls, "A failed idempotent request cannot charge again.");
   upstreamMode = "timeout";
-  globalThis.setTimeout = (callback, milliseconds, ...args) => originalSetTimeout(callback, milliseconds === 45000 ? 15 : milliseconds, ...args);
+  globalThis.setTimeout = (callback, milliseconds, ...args) => originalSetTimeout(callback, milliseconds === 90000 ? 15 : milliseconds, ...args);
   assert.equal((await grade()).payload.error.code, "AI_GRADING_TIMEOUT");
   globalThis.setTimeout = originalSetTimeout;
 

@@ -7,7 +7,9 @@ const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
 const MAX_TOTAL_IMAGE_BYTES = 16 * 1024 * 1024;
 const MAX_IMAGES = 32;
 const MAX_CONTEXT_LENGTH = 150000;
-const GRADING_TIMEOUT_MS = 45000;
+// A complete structured question includes both QP and MS image fragments and
+// several part-level judgements; allow more time than a single MCQ hint.
+const GRADING_TIMEOUT_MS = 90000;
 
 export function officialAnswerParts(question) {
   let parts;
