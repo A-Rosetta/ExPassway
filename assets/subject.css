@@ -52,6 +52,46 @@
 .paper-toolbar label span { display: block; margin-bottom: 4px; font-size: .82rem; color: var(--text-muted, #687386); }
 .paper-toolbar select { width: 100%; }
 .paper-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.paper-archive-heading { margin-bottom: 22px; }
+.paper-archive-heading h2 { margin: 0 0 8px; font-size: clamp(1.7rem, 3.3vw, 2.5rem); letter-spacing: -.035em; }
+.paper-archive-heading p { margin: 0; line-height: 1.6; }
+.paper-year-navigation { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 22px; }
+.paper-year-chip { min-width: 76px; border: 1px solid var(--line); border-radius: 10px; padding: 11px 17px; background: var(--surface-raised, #fff); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+.paper-year-chip:hover { border-color: var(--accent); }
+.paper-year-chip.is-active { background: var(--accent); border-color: var(--accent); color: var(--primary-text); }
+.paper-year-chip:focus-visible, .paper-session-summary:focus-visible { outline: 3px solid var(--accent-teal); outline-offset: 4px; }
+.paper-year-list { display: grid; gap: 34px; }
+.paper-year-heading { margin: 0 0 14px; font-size: 1.5rem; letter-spacing: -.02em; }
+.paper-session-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.paper-session-card { min-width: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--surface-raised, #fff); box-shadow: var(--surface-shadow-small); overflow: hidden; }
+.paper-session-card[open] { grid-column: 1 / -1; border-color: color-mix(in srgb, var(--accent) 65%, var(--line)); }
+.paper-session-summary { display: grid; grid-template-columns: 48px minmax(0, 1fr) 18px; align-items: center; gap: 18px; padding: 25px; cursor: pointer; list-style: none; }
+.paper-session-summary::-webkit-details-marker { display: none; }
+.session-calendar { display: flex; align-items: center; justify-content: center; align-self: start; min-height: 48px; margin-top: 2px; border-top: 4px solid var(--accent); border-radius: 9px; background: color-mix(in srgb, var(--accent) 10%, var(--surface-raised, #fff)); color: var(--accent); font-size: .73rem; letter-spacing: .02em; font-weight: 800; }
+.session-summary-text { display: block; min-width: 0; }
+.session-title { display: block; margin: 0 0 5px; font-size: 1.15rem; line-height: 1.4; letter-spacing: -.02em; font-weight: 700; }
+.session-count { display: block; color: var(--text-muted); font-size: .84rem; line-height: 1.5; }
+.session-file-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.session-file-badge { display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); border-radius: 6px; background: color-mix(in srgb, var(--accent) 9%, var(--surface-raised, #fff)); color: var(--accent); font-size: .75rem; font-weight: 800; line-height: 1.2; }
+.session-file-badge--ms { background: color-mix(in srgb, var(--accent-teal) 12%, var(--surface-raised, #fff)); color: var(--text); border-color: color-mix(in srgb, var(--accent-teal) 35%, transparent); }
+.session-file-badge--er, .session-file-badge--gt { background: var(--surface, var(--bg)); color: var(--text-muted); border-color: var(--line); }
+.session-expand { width: 9px; height: 9px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); transition: transform .16s ease; }
+.paper-session-card[open] .session-expand { transform: rotate(225deg); }
+.paper-session-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 0 25px 25px; }
+.session-materials { display: grid; grid-column: 1 / -1; gap: 8px; padding: 14px 0; border-block: 1px solid var(--line); margin-bottom: 2px; }
+.session-resource-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.session-resource-info { display: flex; align-items: center; gap: 9px; }
+.session-resource-info h4 { margin: 0; font-size: .92rem; line-height: 1.5; }
+.session-resource-row .paper-actions { margin: 0; flex-shrink: 0; }
+.paper-card--session { box-shadow: none !important; border-radius: 10px !important; background: color-mix(in srgb, var(--surface-raised, #fff) 75%, var(--bg)); }
+.paper-card--session h4 { margin: 0 0 6px; font-size: 1rem; }
+.paper-card--session .paper-meta { margin: 8px 0; }
+.paper-source-code { overflow-wrap: anywhere; color: var(--text-muted); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .82rem; margin: 0; }
+.paper-card--session .paper-actions { margin-top: 12px; }
+.paper-card--session :is(.btn-secondary, .btn-primary), .session-resource-row .btn-secondary { padding: 8px 11px; font-size: .82rem; min-height: 36px; }
+.paper-attachment { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.paper-attachment > p { margin: 0; font-size: .86rem; line-height: 1.5; }
+.additional-resources-heading { margin: 36px 0 14px; font-size: 1.35rem; }
 .question-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
 .question-card { padding: 16px; }
 .question-card h3 { margin: 0 0 8px; }
@@ -69,3 +109,14 @@
 .subject-hub-page :is(.component-card, .readiness-item, .book-card, .paper-card, .question-card, .subject-empty) { border-radius: 16px; box-shadow: var(--surface-shadow-small); }
 .subject-hub-page .subject-dialog__content { background: var(--bg); color: var(--text); border-radius: 18px; }
 @media (max-width: 720px) { .subject-topbar__inner { align-items: flex-start; padding: 12px 0; flex-direction: column; } .subject-actions { width: 100%; overflow-x: auto; } .subject-hero { grid-template-columns: 1fr; gap: 20px; } .readiness-grid { grid-template-columns: repeat(3, 1fr); } .subject-shell { padding-top: 28px; } }
+@media (max-width: 720px) {
+  .paper-session-grid, .paper-session-body { grid-template-columns: minmax(0, 1fr); }
+  .paper-session-summary { padding: 20px; gap: 14px; grid-template-columns: 42px minmax(0, 1fr) 12px; }
+  .session-calendar { min-height: 44px; font-size: .68rem; }
+  .paper-session-body { padding: 0 16px 16px; }
+  .session-resource-row { flex-direction: column; align-items: flex-start; }
+  .paper-year-chip { min-width: 66px; padding: 10px 13px; }
+  .paper-year-navigation { gap: 7px; }
+  .paper-toolbar label { min-width: 0; flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .session-expand { transition: none; } }

@@ -176,6 +176,39 @@ function addPageHeading(doc, section, continued = false) {
   return 20 + lines.length * 5;
 }
 
+function nextPageContentY(doc, section) {
+  const font = doc.getFont();
+  const size = doc.getFontSize();
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10);
+  const lines = textLines(doc, `${sectionTitle(section) || "Questions"} (continued)`, CONTENT_WIDTH);
+  doc.setFont(font.fontName, font.fontStyle);
+  doc.setFontSize(size);
+  return 20 + lines.length * 5;
+}
+
+function structuredHeaderHeight(doc, question, headingHeight) {
+  const source = sourceQuestionLabel(question);
+  if (!source) return headingHeight;
+  const font = doc.getFont();
+  const size = doc.getFontSize();
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  const lines = textLines(doc, `Source: ${source}`, CONTENT_WIDTH);
+  doc.setFont(font.fontName, font.fontStyle);
+  doc.setFontSize(size);
+  return headingHeight + lines.length * 5.5 + 2;
+}
+
+function keepStructuredHeadingWithImage(doc, prepared, y, section, headerHeight) {
+  if (!prepared) return y;
+  const freshSpace = PAGE_BOTTOM - nextPageContentY(doc, section) - headerHeight;
+  if (prepared.height <= freshSpace + 0.01 && prepared.height + headerHeight > PAGE_BOTTOM - y + 0.01) {
+    return addPageHeading(doc, section, true);
+  }
+  return y;
+}
+
 function writeTextBlock(doc, text, x, y, maxWidth, section) {
   const lines = textLines(doc, text, maxWidth);
   for (const line of lines) {
@@ -192,7 +225,7 @@ function writeTextBlock(doc, text, x, y, maxWidth, section) {
   return y;
 }
 
-async function writeImageFragment(doc, image, y, section, loadImage) {
+async function prepareImageFragment(doc, image, loadImage) {
   const source = imageUrl(image);
   if (!source) throw new Error("A question image fragment has no URL.");
   let bytes;
@@ -206,6 +239,27 @@ async function writeImageFragment(doc, image, y, section, loadImage) {
   if (!(dimensions.width > 0 && dimensions.height > 0)) throw new Error(`Invalid question image: ${source}`);
   const width = Math.min(CONTENT_WIDTH, dimensions.width * 25.4 / 150);
   const height = width * dimensions.height / dimensions.width;
+  return { source, bytes, dimensions, width, height };
+}
+
+async function prepareLeadingStructuredImage(doc, value, loadImage, fallbackImages = []) {
+  const normalized = normalizeStructuredDocument(value);
+  const images = normalized.images.length ? normalized.images : fallbackImages;
+  const first = images.length ? orderedImages(images)[0]
+    : structuredDisplayBlocks(normalized).find((entry) => entry.type === "image" || blockText(entry).trim());
+  if (!first || (!images.length && first.type !== "image")) return null;
+  return prepareImageFragment(doc, first, loadImage);
+}
+
+async function writeImageFragment(doc, image, y, section, loadImage, prepared = null) {
+  const { bytes, dimensions, width, height } = prepared?.source === imageUrl(image)
+    ? prepared : await prepareImageFragment(doc, image, loadImage);
+  // Keep each page-sized fragment intact, including tables and their headings.
+  // A fragment larger than a fresh page still uses the existing clipped slices.
+  const freshSpace = PAGE_BOTTOM - nextPageContentY(doc, section);
+  if (height <= freshSpace + 0.01 && height > PAGE_BOTTOM - y + 0.01) {
+    y = addPageHeading(doc, section, true);
+  }
   let pixels = null;
   if (typeof createImageBitmap === "function" && typeof document !== "undefined") {
     const bitmap = await createImageBitmap(new Blob([bytes]));
@@ -256,7 +310,7 @@ async function writeImageFragment(doc, image, y, section, loadImage) {
   return y + 6;
 }
 
-async function writeStructuredContent(doc, value, y, section, loadImage, fallbackImages = []) {
+async function writeStructuredContent(doc, value, y, section, loadImage, fallbackImages = [], prepared = null) {
   const normalized = normalizeStructuredDocument(value);
   const images = normalized.images.length ? normalized.images : fallbackImages;
   const entries = images.length ? [] : structuredDisplayBlocks(normalized);
@@ -265,7 +319,7 @@ async function writeStructuredContent(doc, value, y, section, loadImage, fallbac
   }
   for (const entry of entries) {
     if (entry.type === "image") {
-      y = await writeImageFragment(doc, entry, y, section, loadImage);
+      y = await writeImageFragment(doc, entry, y, section, loadImage, prepared);
       continue;
     }
     const text = blockText(entry);
@@ -275,7 +329,7 @@ async function writeStructuredContent(doc, value, y, section, loadImage, fallbac
     const indent = Math.min(5, Math.max(0, Number(entry.depth) || 0)) * 3;
     y = writeTextBlock(doc, text, MARGIN + indent, y, CONTENT_WIDTH - indent, section) + (entry.type === "heading" ? 1 : 2);
   }
-  for (const image of orderedImages(images)) y = await writeImageFragment(doc, image, y, section, loadImage);
+  for (const image of orderedImages(images)) y = await writeImageFragment(doc, image, y, section, loadImage, prepared);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   return y;
@@ -312,6 +366,8 @@ export async function createQuestionPaperPdf(groups, options = {}) {
       questionIds.push(question.id);
       if (isStructuredQuestion(question)) {
         if (y > PAGE_BOTTOM - 18) y = addPageHeading(doc, currentSection, true);
+        const prepared = await prepareLeadingStructuredImage(doc, question.content, loadImage, question.images || []);
+        y = keepStructuredHeadingWithImage(doc, prepared, y, currentSection, structuredHeaderHeight(doc, question, 5));
         doc.setFont("helvetica", "bold");
         doc.setFontSize(10);
         const marks = questionMarks(question);
@@ -323,7 +379,7 @@ export async function createQuestionPaperPdf(groups, options = {}) {
           doc.setFontSize(8);
           y = writeTextBlock(doc, `Source: ${source}`, MARGIN, y, CONTENT_WIDTH, currentSection) + 2;
         }
-        y = await writeStructuredContent(doc, question.content, y, currentSection, loadImage, question.images || []);
+        y = await writeStructuredContent(doc, question.content, y, currentSection, loadImage, question.images || [], prepared);
         y += 4;
         continue;
       }
@@ -462,6 +518,9 @@ export async function createMarkSchemePdf(groups, options = {}) {
       questionNumber += 1;
       questionIds.push(question.id);
       if (y > PAGE_BOTTOM - 12) y = addPageHeading(doc, section, true);
+      const scheme = isStructuredQuestion(question) ? pairedMarkScheme(question.markScheme, question.content) : null;
+      const prepared = scheme ? await prepareLeadingStructuredImage(doc, scheme, options.loadImage) : null;
+      y = keepStructuredHeadingWithImage(doc, prepared, y, section, structuredHeaderHeight(doc, question, 5.5));
       const marks = questionMarks(question);
       y = writeTextBlock(doc, `${questionNumber}. [${marks} ${marks === 1 ? "mark" : "marks"}]`, MARGIN + 2, y, CONTENT_WIDTH - 2, section);
       if (isStructuredQuestion(question)) {
@@ -471,7 +530,7 @@ export async function createMarkSchemePdf(groups, options = {}) {
           doc.setFontSize(8);
           y = writeTextBlock(doc, `Source: ${source}`, MARGIN + 2, y, CONTENT_WIDTH - 2, section) + 2;
         }
-        y = await writeStructuredContent(doc, pairedMarkScheme(question.markScheme, question.content), y, section, options.loadImage);
+        y = await writeStructuredContent(doc, scheme, y, section, options.loadImage, [], prepared);
       } else {
         y = writeTextBlock(doc, `${answerLetter(question.answer)} - ${[
           question.paperSlug || "Source unavailable",

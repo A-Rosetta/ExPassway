@@ -105,6 +105,12 @@ assert.equal(structured.structuredQuestionCount, 20);
 assert.deepEqual(structured.answerDistribution, { A: 0, B: 0, C: 0, D: 0, unknown: 0 });
 assert.ok(!buildBlueprintIssues(structured).some((issue) => issue.code === "ANSWER_DISTRIBUTION_IMBALANCE"));
 
+const unlabelled = buildPaperBlueprint(["unmarked", " UNKNOWN ", null].map((difficulty, index) => ({
+  id: `unlabelled-${index}`, questionType: "structured", maxMarks: 9, difficulty,
+})));
+assert.deepEqual(unlabelled.difficulty, { known: 0, unknown: 3, coverage: 0, distribution: {} });
+assert.equal(buildPaperBlueprint([{ questionType: "mcq", marks: 1, difficulty: "unknown" }]).difficulty.known, 1);
+
 for (const maxMarks of [undefined, null, 0, -1, 1.5, "6", NaN, Infinity]) {
   assert.throws(() => buildPaperBlueprint([{ id: "invalid-official-marks", questionType: "structured", maxMarks, marks: 6 }]), (error) => (
     error.code === "STRUCTURED_OFFICIAL_MARKS_REQUIRED" && error.questionId === "invalid-official-marks"

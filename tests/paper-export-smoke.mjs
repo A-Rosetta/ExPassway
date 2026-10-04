@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { inflateSync } from "node:zlib";
+import { deflateSync, inflateSync } from "node:zlib";
 import {
   answerLetter,
   createAnswerKeyPdf,
@@ -111,6 +111,75 @@ assert.equal((await createQuestionPaperPdf([{ questions: [independentQuestion] }
 assert.equal((await createMarkSchemePdf([{ questions: [{ ...independentQuestion, content: {},
   markScheme: { blocks: [{ type: "text", text: "Fetch instruction, decode instruction, execute instruction." }] },
 }] }])).markSchemeCount, 1);
+
+function imageFixture(width, height) {
+  const checksum = (bytes) => {
+    let value = 0xffffffff;
+    for (const byte of bytes) {
+      value ^= byte;
+      for (let bit = 0; bit < 8; bit += 1) value = (value >>> 1) ^ ((value & 1) ? 0xedb88320 : 0);
+    }
+    return (value ^ 0xffffffff) >>> 0;
+  };
+  const chunk = (type, data) => {
+    const payload = Buffer.concat([Buffer.from(type), data]);
+    const size = Buffer.alloc(4); size.writeUInt32BE(data.length);
+    const crc = Buffer.alloc(4); crc.writeUInt32BE(checksum(payload));
+    return Buffer.concat([size, payload, crc]);
+  };
+  const header = Buffer.alloc(13); header.writeUInt32BE(width); header.writeUInt32BE(height, 4);
+  header[8] = 8; // Greyscale PNG: one byte per pixel, with no alpha or palette.
+  const pixels = Buffer.alloc((width + 1) * height, 255);
+  for (let row = 0; row < height; row += 1) {
+    pixels[row * (width + 1)] = 0;
+    if (row % 30 === 0) pixels.fill(60, row * (width + 1) + 1, (row + 1) * (width + 1));
+  }
+  return new Uint8Array(Buffer.concat([
+    Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
+    chunk("IHDR", header), chunk("IDAT", deflateSync(pixels)), chunk("IEND", Buffer.alloc(0)),
+  ]));
+}
+
+function imagePageStreams(pdf) {
+  return [...Buffer.from(pdf.bytes).toString("latin1").matchAll(/stream\r?\n([\s\S]*?)\r?\nendstream/g)]
+    .map((match) => { try { return inflateSync(Buffer.from(match[1], "latin1")).toString("latin1"); } catch { return ""; } })
+    .filter((stream) => /\/I\d+ Do/.test(stream));
+}
+
+const paginationImages = new Map([
+  ["/preceding.png", imageFixture(900, 1100)], // 186mm at the exporter's normal image scale.
+  ["/table.png", imageFixture(900, 1000)], // 169mm: fits a fresh page but not the first page remainder.
+  ["/long.png", imageFixture(900, 2100)], // 356mm: exceeds a full page and must still be sliced.
+]);
+const paginationLoads = [];
+const loadPaginationImage = async (source) => { paginationLoads.push(source); return paginationImages.get(source); };
+const paginationQuestion = (id, questionNo, urls) => ({
+  id, questionNo, paperSlug: "9618_s24_qp_13", questionType: "structured", maxMarks: 4,
+  content: { images: urls.map((url, order) => ({ url, order })) },
+  markScheme: { images: urls.map((url, order) => ({ url, order })) },
+});
+
+for (const exporter of [createQuestionPaperPdf, createMarkSchemePdf]) {
+  paginationLoads.length = 0;
+  const tablePdf = await exporter([{ questions: [paginationQuestion("table", 1, ["/preceding.png", "/table.png"])] }], { ...metadata, loadImage: loadPaginationImage });
+  const tablePages = imagePageStreams(tablePdf);
+  assert.equal(tablePdf.pageCount, 2);
+  assert.equal(tablePages.length, 2);
+  assert.deepEqual(paginationLoads, ["/preceding.png", "/table.png"], "Preflight must reuse the leading fragment, not fetch it twice.");
+  assert.deepEqual(tablePages.map((stream) => [...stream.matchAll(/\/I\d+ Do/g)].map((match) => match[0])), [["/I0 Do"], ["/I1 Do"]], "A page-sized table fragment must be drawn intact on the next page, rather than clipped across two pages.");
+
+  const headingsPdf = await exporter([{ questions: [paginationQuestion("first", 1, ["/preceding.png"]), paginationQuestion("second", 2, ["/table.png"])] }], { ...metadata, loadImage: loadPaginationImage });
+  const headingPages = imagePageStreams(headingsPdf);
+  assert.equal(headingsPdf.pageCount, 2);
+  assert.ok(!headingPages[0].includes("9618_s24_qp_13 | Q2"), "The next question's source must not be orphaned above the page break.");
+  assert.ok(headingPages[1].includes("9618_s24_qp_13 | Q2"), "The next question's source must appear on the same page as its leading image.");
+  assert.ok(headingPages[1].includes(exporter === createQuestionPaperPdf ? "Question 2" : "2. [4 marks]"), "The question heading must move with its leading image.");
+
+  const longPdf = await exporter([{ questions: [paginationQuestion("long", 1, ["/long.png"])] }], { ...metadata, loadImage: loadPaginationImage });
+  assert.equal(longPdf.pageCount, 2);
+  const longPages = imagePageStreams(longPdf);
+  assert.deepEqual(longPages.map((stream) => [...stream.matchAll(/\/I\d+ Do/g)].map((match) => match[0])), [["/I0 Do"], ["/I0 Do"]], "A fragment taller than a full page must retain its scale and continue on the next page.");
+}
 
 for (const maxMarks of [undefined, null, 0, -1, 1.5, "4", NaN, Infinity]) {
   const invalid = { ...independentQuestion, id: "invalid-official-marks", maxMarks, marks: 4,

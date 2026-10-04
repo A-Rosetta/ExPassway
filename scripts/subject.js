@@ -17,6 +17,7 @@ const state = {
   subject: { code: subjectCode, board: "CIE", qualification: "AS & A Level", name: "Computer Science", nameZh: "计算机科学" },
   components: [], resources: [], syllabus: [], syllabusResources: [], textbooks: [], papers: [], questions: [], counts: {}, readiness: {},
   filters: { year: "", season: "", paperNumber: "" }, status: "", statusVars: {}, failed: false, requestId: 0,
+  openSessions: new Set(),
 };
 const localized = (item, fallback = "") => getLanguage() === "zh-CN"
   ? item?.titleZh || item?.nameZh || item?.title || item?.name || fallback
@@ -146,38 +147,143 @@ function renderReadiness() {
     item.append(make("strong", "", count), make("span", "", t(label))); return item;
   }));
 }
+function examSeason(value) {
+  const normalized = String(value || "").toLowerCase().trim().replace(/[\s/_-]+/g, "");
+  if (["m", "march", "februarymarch", "febmarch"].includes(normalized)) return "m";
+  if (["s", "summer", "june", "mayjune"].includes(normalized)) return "s";
+  if (["w", "winter", "november", "octobernovember", "octnov"].includes(normalized)) return "w";
+  return normalized;
+}
+function seasonLabel(season) {
+  return t({ m: "subjectSeasonMarch", s: "subjectSeasonJune", w: "subjectSeasonNovember" }[season] || "subjectSeasonOther", { season });
+}
+function resourceCategory(resource) {
+  const type = String(resource.metadata?.resourceType || resource.kind || "").toLowerCase().replace(/_/g, "-");
+  const fileName = resource.metadata?.fileName || resource.id || resource.storageKey || "";
+  if (["examiner-report", "er"].includes(type) || /_er(?:\.|$)/i.test(fileName)) return "er";
+  if (["grade-threshold", "grade-thresholds", "gt"].includes(type) || /_gt(?:\.|$)/i.test(fileName)) return "gt";
+  if (["insert", "in"].includes(type)) return "in";
+  if (["source", "source-files"].includes(type)) return "source";
+  if (["qp", "ms"].includes(type)) return type;
+  return "other";
+}
+function resourceSession(resource) {
+  const paper = state.papers.find((item) => item.slug === resource.paperSlug);
+  if (paper) return { year: Number(paper.year), season: examSeason(paper.season) };
+  const category = resourceCategory(resource);
+  if (category === "other") return null;
+  const metadata = resource.metadata || {};
+  const match = [metadata.fileName, resource.paperSlug, resource.id, resource.storageKey].map((value) => /(?:^|[/_])(?:\d{4})_([msw])(\d{2})_/i.exec(String(value || ""))).find(Boolean);
+  const year = Number(metadata.year || metadata.examYear || (resource.examYearStart === resource.examYearEnd ? resource.examYearStart : 0) || (match ? 2000 + Number(match[2]) : 0));
+  const season = examSeason(metadata.season || metadata.examSeason || resource.season || match?.[1]);
+  return year > 0 && season ? { year, season } : null;
+}
+function examSessions() {
+  const sessions = new Map(); const additional = [];
+  const get = ({ year, season }) => {
+    const key = `${year}-${season}`;
+    if (!sessions.has(key)) sessions.set(key, { key, year, season, papers: [], resources: [] });
+    return sessions.get(key);
+  };
+  state.papers.forEach((paper) => get({ year: Number(paper.year), season: examSeason(paper.season) }).papers.push(paper));
+  state.resources.filter((resource) => !["syllabus", "textbook"].includes(resource.kind)).forEach((resource) => {
+    const session = resourceSession(resource);
+    if (session) get(session).resources.push(resource); else additional.push(resource);
+  });
+  const order = { w: 0, s: 1, m: 2 };
+  return { sessions: [...sessions.values()].sort((a, b) => b.year - a.year || (order[a.season] ?? 3) - (order[b.season] ?? 3) || a.season.localeCompare(b.season)), additional };
+}
+function paperHasFile(paper, type) {
+  return Boolean(paper[`${type}FileName`] || paper.metadata?.[`${type}StorageKey`]);
+}
+function resourceBadge(type) {
+  const label = { qp: "QP", ms: "MS", er: "ER", gt: "GT", in: "IN", source: "SRC", other: "PDF" }[type] || "PDF";
+  const badge = make("span", `session-file-badge session-file-badge--${type}`, label);
+  badge.title = t({ qp: "subjectQuestionPaper", ms: "subjectOfficialMarkScheme", er: "subjectExaminerReport", gt: "subjectGradeThreshold", in: "subjectInsert", source: "subjectSourceFiles", other: "subjectResource" }[type] || "subjectResource");
+  badge.setAttribute("aria-label", badge.title); return badge;
+}
 function renderPapers() {
-  const target = el("papersView"); target.replaceChildren(); const toolbar = make("div", "paper-toolbar");
-  [["year", "subjectYear", [...new Set(state.papers.map((paper) => paper.year))].sort((a, b) => b - a)], ["season", "subjectSeason", [...new Set(state.papers.map((paper) => paper.season))].sort()], ["paperNumber", "subjectPaperNumber", [1, 2, 3, 4]]].forEach(([key, labelKey, values]) => {
+  const target = el("papersView"); target.replaceChildren(); const { sessions, additional } = examSessions();
+  const heading = make("div", "paper-archive-heading"); heading.append(make("h2", "", t("subjectExamArchive")), make("p", "subject-muted", t("subjectExamArchiveHelp"))); target.appendChild(heading);
+  const years = [...new Set(sessions.map((session) => session.year))];
+  if (years.length) {
+    const navigation = make("nav", "paper-year-navigation"); navigation.setAttribute("aria-label", t("subjectYear"));
+    [["", t("subjectAllYears")], ...years.map((year) => [String(year), String(year)])].forEach(([year, label]) => {
+      const button = make("button", "paper-year-chip", label); button.type = "button"; button.dataset.year = year;
+      button.addEventListener("click", () => { state.filters.year = year; renderPaperList(); }); navigation.appendChild(button);
+    }); target.appendChild(navigation);
+  }
+  const toolbar = make("div", "paper-toolbar");
+  [["season", "subjectSeason", [...new Set(sessions.map((session) => session.season))]], ["paperNumber", "subjectPaperNumber", [1, 2, 3, 4]]].forEach(([key, labelKey, values]) => {
     const label = make("label"); label.appendChild(make("span", "", t(labelKey))); const select = make("select"); select.id = `subjectFilter${key}`;
-    select.appendChild(new Option(t("subjectAll"), "")); values.forEach((value) => select.appendChild(new Option(key === "paperNumber" ? `P${value}` : String(value), String(value)))); select.value = state.filters[key];
+    select.appendChild(new Option(t("subjectAll"), "")); values.forEach((value) => select.appendChild(new Option(key === "paperNumber" ? t("subjectPaperLabel", { number: value }) : seasonLabel(value), String(value)))); select.value = state.filters[key];
     select.addEventListener("change", () => { state.filters[key] = select.value; renderPaperList(); }); label.appendChild(select); toolbar.appendChild(label);
-  }); const container = make("div", "paper-list"); container.id = "subjectPaperList"; target.append(toolbar, container); renderPaperList();
-  const attachments = state.resources.filter((resource) => !["syllabus", "textbook"].includes(resource.kind)
-    && !state.papers.some((paper) => paper.slug === resource.paperSlug));
-  if (attachments.length) {
+  }); const container = make("div", "paper-year-list"); container.id = "subjectPaperList"; target.append(toolbar, container); renderPaperList();
+  if (additional.length) {
     const resources = make("div", "book-list"); resources.id = "subjectAdditionalResources";
-    target.append(make("h2", "", t("subjectAdditionalResources")), resources);
-    renderResources(null, resources.id, "", "", attachments);
+    target.append(make("h2", "additional-resources-heading", t("subjectAdditionalResources")), resources);
+    renderResources(null, resources.id, "", "", additional);
   }
 }
 function renderPaperList() {
-  const target = el("subjectPaperList"); const papers = state.papers.filter((paper) => Object.entries(state.filters).every(([key, value]) => !value || String(paper[key]) === value));
-  if (!papers.length) return empty(target, "subjectPapersEmptyTitle", state.papers.length ? "subjectNoMatchingPapers" : "subjectPapersEmptyBody");
-  target.replaceChildren(...papers.map((paper) => {
-    const card = make("article", "paper-card"); card.appendChild(make("h3", "", paper.slug));
-    card.appendChild(make("p", "paper-meta", `${paper.year} · ${paper.season} · P${paper.paperNumber} · ${t("subjectVariant", { value: paper.variant })}`));
-    const practical = Number(paper.paperNumber) === 4; if (practical) card.appendChild(make("p", "subject-muted", t("subjectPracticalMaterials")));
-    const actions = make("div", "paper-actions"); ["qp", "ms"].forEach((type) => {
-      if (!paper[`${type}FileName`] && !paper.metadata?.[`${type}StorageKey`]) return;
-      const link = make("a", "btn-secondary", t(type === "qp" ? "downloadQuestionPdf" : "downloadAnswerPdf")); link.href = `${api.getBaseUrl?.() || ""}/api/catalog/papers/${encodeURIComponent(paper.slug)}/download/${type}`; link.target = "_blank"; link.rel = "noopener"; actions.appendChild(link);
-      const read = make("a", "btn-secondary", `${t("subjectOpenResource")} ${type.toUpperCase()}`); read.href = `${link.href}?inline=1`; read.target = "_blank"; read.rel = "noopener"; actions.appendChild(read);
-    });
-    state.resources.filter((resource) => resource.paperSlug === paper.slug).forEach((resource) => { const button = make("button", "btn-secondary", localized(resource)); button.type = "button"; button.addEventListener("click", () => resourceDownload(resource, button)); actions.appendChild(button); });
-    const hasQuestions = Number(paper.validQuestionCount) > 0 || state.questions.some((question) => question.paperSlug === paper.slug);
-    if (!practical && hasQuestions) { const button = make("button", "btn-primary", t("subjectViewQuestions")); button.type = "button"; button.addEventListener("click", () => openQuestions(paper, button)); actions.appendChild(button); }
-    card.appendChild(actions); return card;
+  document.querySelectorAll(".paper-year-chip").forEach((button) => { const selected = button.dataset.year === state.filters.year; button.classList.toggle("is-active", selected); button.setAttribute("aria-pressed", String(selected)); });
+  const target = el("subjectPaperList"); const { sessions: allSessions } = examSessions();
+  const sessions = allSessions.filter((session) => (!state.filters.year || String(session.year) === state.filters.year) && (!state.filters.season || session.season === state.filters.season)).map((session) => {
+    if (!state.filters.paperNumber) return session;
+    const papers = session.papers.filter((paper) => String(paper.paperNumber) === state.filters.paperNumber);
+    return { ...session, papers, resources: session.resources.filter((resource) => !resource.paperSlug || papers.some((paper) => paper.slug === resource.paperSlug)) };
+  }).filter((session) => session.papers.length || session.resources.length);
+  if (!sessions.length) return empty(target, "subjectPapersEmptyTitle", allSessions.length ? "subjectNoMatchingPapers" : "subjectPapersEmptyBody");
+  const years = [...new Set(sessions.map((session) => session.year))];
+  target.replaceChildren(...years.map((year) => {
+    const section = make("section", "paper-year-group"); const title = make("h2", "paper-year-heading", year); title.id = `subjectPaperYear${year}`; section.setAttribute("aria-labelledby", title.id);
+    const grid = make("div", "paper-session-grid"); grid.append(...sessions.filter((session) => session.year === year).map(sessionCard)); section.append(title, grid); return section;
   }));
+}
+function sessionCard(session) {
+  const card = make("details", "paper-session-card"); card.dataset.session = session.key; card.open = state.openSessions.has(session.key);
+  card.addEventListener("toggle", () => { if (card.open) state.openSessions.add(session.key); else state.openSessions.delete(session.key); });
+  const summary = make("summary", "paper-session-summary"); const mark = make("span", "session-calendar", t({ m: "subjectMonthMarch", s: "subjectMonthJune", w: "subjectMonthNovember" }[session.season] || "subjectSeason")); mark.setAttribute("aria-hidden", "true");
+  const text = make("span", "session-summary-text"); text.appendChild(make("span", "session-title", `${seasonLabel(session.season)} ${session.year}`));
+  text.appendChild(make("span", "session-count", t(session.papers.length ? "subjectSessionPaperCount" : "subjectSessionResourcesOnly", { papers: session.papers.length, resources: session.resources.length })));
+  const badges = make("span", "session-file-badges"); const categories = new Set();
+  ["qp", "ms"].forEach((type) => { if (session.papers.some((paper) => paperHasFile(paper, type))) categories.add(type); });
+  session.resources.forEach((resource) => categories.add(resourceCategory(resource))); badges.append(...[...categories].map(resourceBadge)); text.appendChild(badges);
+  const arrow = make("span", "session-expand"); arrow.setAttribute("aria-hidden", "true"); summary.append(mark, text, arrow); card.appendChild(summary);
+  const body = make("div", "paper-session-body");
+  const shared = session.resources.filter((resource) => !session.papers.some((paper) => paper.slug === resource.paperSlug));
+  if (shared.length) {
+    const materials = make("div", "session-materials"); shared.forEach((resource) => {
+      const row = make("article", "session-resource-row"); const info = make("div", "session-resource-info"); info.append(resourceBadge(resourceCategory(resource)), make("h4", "", localized(resource))); row.appendChild(info);
+      const actions = make("div", "paper-actions"); addResourceActions(actions, resource); row.appendChild(actions); materials.appendChild(row);
+    }); body.appendChild(materials);
+  }
+  session.papers.sort((a, b) => Number(a.paperNumber) - Number(b.paperNumber) || Number(a.variant) - Number(b.variant)).forEach((paper) => body.appendChild(paperRow(paper)));
+  card.appendChild(body); return card;
+}
+function addResourceActions(target, resource) {
+  if ((resource.mimeType || resource.contentType) === "application/pdf") {
+    const open = make("button", "btn-secondary", t("subjectOpenResource")); open.type = "button"; open.addEventListener("click", () => resourceDownload(resource, open, true)); target.appendChild(open);
+  }
+  const download = make("button", "btn-secondary", t("subjectDownloadResource")); download.type = "button"; download.addEventListener("click", () => resourceDownload(resource, download)); target.appendChild(download);
+}
+function paperRow(paper) {
+  const card = make("article", "paper-card paper-card--session"); card.appendChild(make("h4", "", `${t("subjectPaperLabel", { number: paper.paperNumber })} · ${t("subjectVariant", { value: paper.variant })}`));
+  card.appendChild(make("p", "paper-source-code", paper.slug));
+  const metadata = [paper.durationMinutes ? t("subjectMinutes", { count: paper.durationMinutes }) : "", paper.totalMarks ? t("subjectMarks", { count: paper.totalMarks }) : ""].filter(Boolean); if (metadata.length) card.appendChild(make("p", "paper-meta", metadata.join(" · ")));
+  const practical = Number(paper.paperNumber) === 4; if (practical) card.appendChild(make("p", "subject-muted", t("subjectPracticalMaterials")));
+  const actions = make("div", "paper-actions"); ["qp", "ms"].forEach((type) => {
+    if (!paperHasFile(paper, type)) return;
+    const href = `${api.getBaseUrl?.() || ""}/api/catalog/papers/${encodeURIComponent(paper.slug)}/download/${type}`;
+    const read = make("a", "btn-secondary", t("subjectOpenFile", { type: type.toUpperCase() })); read.href = `${href}?inline=1`; read.target = "_blank"; read.rel = "noopener";
+    const link = make("a", "btn-secondary", t("subjectDownloadFile", { type: type.toUpperCase() })); link.href = href; link.target = "_blank"; link.rel = "noopener"; actions.append(read, link);
+  });
+  const hasQuestions = Number(paper.validQuestionCount) > 0 || state.questions.some((question) => question.paperSlug === paper.slug);
+  if (!practical && hasQuestions) { const button = make("button", "btn-primary", t("subjectViewQuestions")); button.type = "button"; button.addEventListener("click", () => openQuestions(paper, button)); actions.appendChild(button); }
+  card.appendChild(actions);
+  state.resources.filter((resource) => resource.paperSlug === paper.slug).forEach((resource) => {
+    const row = make("div", "paper-attachment"); row.appendChild(make("p", "", localized(resource))); const resourceActions = make("div", "paper-actions"); addResourceActions(resourceActions, resource); row.appendChild(resourceActions); card.appendChild(row);
+  }); return card;
 }
 async function openQuestions(paper, button) {
   const dialog = el("questionDialog"); const body = el("questionDialogBody"); const requestId = ++state.requestId;

@@ -38,6 +38,12 @@ assert.equal(structured.items[0].maxMarks, 9);
 assert.equal(structured.items[0].answer, null);
 assert.equal(serializeSavedPaper(structured).items[0].marks, 9);
 
+for (const difficulty of [undefined, null, "", "unmarked", " UNKNOWN "]) {
+  assert.equal(normalizeBuilderQuestion({ ...parent, difficulty }).difficulty, null);
+}
+assert.equal(normalizeBuilderQuestion({ ...parent, difficulty: "foundation" }).difficulty, "foundation");
+assert.equal(normalizeBuilderQuestion({ questionType: "mcq", difficulty: "unknown" }).difficulty, "unknown");
+
 for (const maxMarks of [undefined, null, 0, -1, 1.5, "8", NaN, Infinity]) {
   const invalid = { ...parent, id: "invalid-official-marks", maxMarks, marks: 8 };
   const normalized = normalizeBuilderQuestion(invalid);

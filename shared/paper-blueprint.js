@@ -67,7 +67,8 @@ export function buildPaperBlueprint(items = []) {
     const sectionCode = String(item?.sectionCode ?? "").trim();
     const paperSlug = String(item?.paperSlug ?? "").trim() || "unknown";
     const sourceGroup = String(item?.sourceGroup ?? "").trim();
-    const difficulty = String(item?.difficulty ?? "").trim();
+    const rawDifficulty = String(item?.difficulty ?? "").trim();
+    const difficulty = structured && ["unmarked", "unknown"].includes(rawDifficulty.toLowerCase()) ? "" : rawDifficulty;
     const letter = answerLetter(item?.answer);
 
     totalMarks += marks;

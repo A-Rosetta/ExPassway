@@ -22,12 +22,14 @@ export function filterFullParentQuestions(questions = []) {
 export function normalizeBuilderQuestion(question = {}) {
   if (!isStructuredQuestion(question)) return { ...question };
   const maxMarks = question.maxMarks ?? question.max_marks ?? null;
+  const difficulty = String(question.difficulty ?? "").trim();
   return {
     ...question,
     questionType: "structured",
     maxMarks,
     marks: maxMarks,
     answer: null,
+    difficulty: !difficulty || ["unmarked", "unknown"].includes(difficulty.toLowerCase()) ? null : difficulty,
     content: normalizeStructuredDocument(question.content),
     markScheme: normalizeStructuredDocument(question.markScheme),
     images: Array.isArray(question.images) ? question.images : [],

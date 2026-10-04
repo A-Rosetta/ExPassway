@@ -29,7 +29,8 @@
   function applyStatus(elementId, state) {
     const statusEl = getEl(elementId);
     if (!statusEl || !state) return;
-    statusEl.textContent = t(state.key, state.vars);
+    statusEl.textContent = state.key ? t(state.key, state.vars) : "";
+    statusEl.hidden = !state.key;
     statusEl.className = state.isBad ? "home-status bad" : "home-status good";
   }
 
@@ -288,12 +289,8 @@
       return [];
     }
     try {
-      const [subjects, storage] = await Promise.all([
-        window.ALevelApi.getCatalogSubjects(),
-        window.ALevelApi.getStorageMode().catch(() => null),
-      ]);
-      const modeText = storage?.mode ? t("storageMode", { mode: storage.mode }) : "";
-      setBackendStatus("backendConnected", false, { modeText });
+      const subjects = await window.ALevelApi.getCatalogSubjects();
+      setBackendStatus("", false);
       return Array.isArray(subjects) ? subjects.filter((subject) => subject.active !== false) : [];
     } catch (_err) {
       setBackendStatus("backendUnavailable", true);
