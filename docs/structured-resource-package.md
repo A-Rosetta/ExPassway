@@ -46,3 +46,26 @@ Missing QP or MS bytes are reported for the specific parent question and block t
 ## Rollout
 
 Apply migration `0019_9618_structured_content.sql`, deploy the Worker and static assets, and verify the zero-resource 9618 page. Import production resources independently later. Check the prepared manifest, upload declared files, upsert draft rows, verify file pairing and actual metadata, then publish and reload the catalog. The frontend enables available content from the returned resources; no new subject page or hardcoded syllabus edition is needed.
+
+## Import command
+
+Put the manifest and its declared `localPath` files in one package directory. The importer checks the manifest, hashes every file, verifies QP/MS references, and prints a count-only plan without changing D1 or R2:
+
+```powershell
+node tools/import-structured-resource-package.mjs --package .\packages\9618\package.json
+```
+
+Apply the reviewed package as draft content in a local Wrangler environment:
+
+```powershell
+node tools/import-structured-resource-package.mjs --package .\packages\9618\package.json --mode apply --target local
+```
+
+Remote writes are deliberately explicit. Review the dry-run output first, then use `--target remote --confirm-remote`; add `--publish` only after the files and metadata have been checked. The importer uploads all declared files before the D1 transaction and uses the stable resource, paper, and question keys for repeat imports. A draft re-import does not unpublish an already published row.
+
+```powershell
+node tools/import-structured-resource-package.mjs --package .\packages\9618\package.json --mode apply --target remote --confirm-remote
+node tools/import-structured-resource-package.mjs --package .\packages\9618\package.json --mode apply --target remote --confirm-remote --publish
+```
+
+The command uses `expassway-db` and `expassway-content` by default. Override them with `--database` and `--bucket` when running against a named Wrangler environment. It requires migration `0019_9618_structured_content.sql` to be applied first. The legacy `cloudflare:import` MCQ runner must not be used for this package format.

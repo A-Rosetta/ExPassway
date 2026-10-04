@@ -10,6 +10,7 @@
     "cloudflare:build": "npm run build:chat-crypto && node tools/build-cloudflare-assets.mjs",
     "cloudflare:deploy": "npm run cloudflare:build && wrangler deploy",
     "cloudflare:import": "node tools/run-cloudflare-import.mjs --action auto",
+    "cloudflare:import-structured": "node tools/import-structured-resource-package.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --cache --cache-location node_modules/.cache/eslint/.eslintcache",
@@ -23,8 +24,9 @@
     "test:cloudflare-read-api": "node tests/cloudflare-read-api-smoke.mjs",
     "test:cloudflare-9618": "node tests/cloudflare-9618-api-smoke.mjs",
     "test:paper-export": "node tests/paper-export-smoke.mjs",
+    "test:structured-resource-import": "node tests/structured-resource-import-smoke.mjs",
     "test:chat-browser": "node tests/chat-account-v2-browser-smoke.cjs",
-    "test:unit": "node tests/bulk-download-smoke.mjs && node tests/cloudflare-admin-api-smoke.mjs && node tests/cloudflare-auth-smoke.mjs && node tests/cloudflare-community-api-smoke.mjs && node tests/cloudflare-content-api-smoke.mjs && node tests/cloudflare-import-runner-smoke.mjs && node tests/cloudflare-learning-api-smoke.mjs && node tests/cloudflare-9618-api-smoke.mjs && node tests/structured-resource-package-smoke.mjs && node tests/cloudflare-legacy-route-smoke.mjs && node tests/cloudflare-security-headers-smoke.mjs && node tests/cloudflare-worker-routing-smoke.mjs && node tests/chat-crypto-smoke.mjs && node tests/chat-account-v2-crypto-smoke.mjs && node tests/chat-api-client-smoke.mjs && node tests/chat-webauthn-helper-smoke.mjs && node tests/cloudflare-chat-api-smoke.mjs && node tests/cloudflare-chat-account-v2-smoke.mjs && node tests/chat-profile-history-smoke.mjs && node tests/chat-directory-global-smoke.mjs && node tests/cloudflare-chat-passkey-smoke.mjs && node tests/paper-blueprint-smoke.mjs && node tests/paper-builder-bulk-smoke.mjs && node tests/paper-export-smoke.mjs",
+    "test:unit": "node tests/bulk-download-smoke.mjs && node tests/cloudflare-admin-api-smoke.mjs && node tests/cloudflare-auth-smoke.mjs && node tests/cloudflare-community-api-smoke.mjs && node tests/cloudflare-content-api-smoke.mjs && node tests/cloudflare-import-runner-smoke.mjs && node tests/cloudflare-learning-api-smoke.mjs && node tests/cloudflare-9618-api-smoke.mjs && node tests/structured-resource-package-smoke.mjs && node tests/structured-resource-import-smoke.mjs && node tests/cloudflare-legacy-route-smoke.mjs && node tests/cloudflare-security-headers-smoke.mjs && node tests/cloudflare-worker-routing-smoke.mjs && node tests/chat-crypto-smoke.mjs && node tests/chat-account-v2-crypto-smoke.mjs && node tests/chat-api-client-smoke.mjs && node tests/chat-webauthn-helper-smoke.mjs && node tests/cloudflare-chat-api-smoke.mjs && node tests/cloudflare-chat-account-v2-smoke.mjs && node tests/chat-profile-history-smoke.mjs && node tests/chat-directory-global-smoke.mjs && node tests/cloudflare-chat-passkey-smoke.mjs && node tests/paper-blueprint-smoke.mjs && node tests/paper-builder-bulk-smoke.mjs && node tests/paper-export-smoke.mjs",
     "typecheck": "tsc --project jsconfig.json"
   },
   "devDependencies": {
