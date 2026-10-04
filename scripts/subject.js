@@ -17,7 +17,7 @@ const state = {
   subject: { code: subjectCode, board: "CIE", qualification: "AS & A Level", name: "Computer Science", nameZh: "计算机科学" },
   components: [], resources: [], syllabus: [], syllabusResources: [], textbooks: [], papers: [], questions: [], counts: {}, readiness: {},
   filters: { year: "", season: "", paperNumber: "" }, status: "", statusVars: {}, failed: false,
-  openSessions: new Set(),
+  openSessions: new Set(), openResourceSections: new Set(),
 };
 const localized = (item, fallback = "") => getLanguage() === "zh-CN"
   ? item?.titleZh || item?.nameZh || item?.title || item?.name || fallback
@@ -240,15 +240,29 @@ function paperRow(paper) {
   }
   return card;
 }
+function resourceSection(key, titleKey, count, contentId) {
+  const section = make("details", "subject-resource-section"); section.dataset.resourceSection = key;
+  section.open = state.openResourceSections.has(key);
+  section.addEventListener("toggle", () => {
+    if (!section.isConnected) return;
+    if (section.open) state.openResourceSections.add(key); else state.openResourceSections.delete(key);
+  });
+  const summary = make("summary", "subject-resource-summary");
+  summary.append(make("h2", "", t(titleKey)), make("span", "subject-resource-count", t(count === 1 ? "subjectResourceCountSingular" : "subjectResourceCount", { count })));
+  const content = make("div", "book-list subject-resource-content"); content.id = contentId;
+  section.append(summary, content); return section;
+}
 function renderSyllabus() {
-  const target = el("syllabusView"); const syllabus = make("div", "book-list"); syllabus.id = "subjectSyllabusResources";
-  target.replaceChildren(syllabus);
-  renderResources("syllabusResources", syllabus.id, "subjectSyllabusEmptyTitle", "subjectSyllabusEmptyBody");
+  const target = el("syllabusView");
+  target.querySelectorAll(".subject-resource-section").forEach((section) => {
+    if (section.open) state.openResourceSections.add(section.dataset.resourceSection); else state.openResourceSections.delete(section.dataset.resourceSection);
+  });
+  target.replaceChildren(resourceSection("syllabus", "subjectSyllabus", state.syllabusResources.length, "subjectSyllabusResources"));
+  renderResources("syllabusResources", "subjectSyllabusResources", "subjectSyllabusEmptyTitle", "subjectSyllabusEmptyBody");
   const { additional } = examSessions();
   if (additional.length) {
-    const resources = make("div", "book-list"); resources.id = "subjectAdditionalResources";
-    target.append(make("h2", "additional-resources-heading", t("subjectAdditionalResources")), resources);
-    renderResources(null, resources.id, "", "", additional);
+    target.appendChild(resourceSection("additional", "subjectAdditionalResources", additional.length, "subjectAdditionalResources"));
+    renderResources(null, "subjectAdditionalResources", "", "", additional);
   }
 }
 function renderAll() {

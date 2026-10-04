@@ -46,7 +46,7 @@ async function activeKey(db, userId) {
 }
 async function accountReady(db, userId, keyVersion) {
   const vault = keyVersion && await db.prepare(`SELECT v.key_version FROM chat_account_vault_versions v
-    JOIN chat_passkeys p ON p.user_id = v.user_id AND p.revoked_at IS NULL
+    JOIN chat_passkeys p ON (p.credential_id = v.credential_id OR v.credential_id IS NULL) AND p.user_id = v.user_id AND p.revoked_at IS NULL
     WHERE v.user_id = ? AND v.key_version = ?`).bind(userId, keyVersion).first();
   return Boolean(vault);
 }

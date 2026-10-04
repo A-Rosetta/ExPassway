@@ -12,7 +12,7 @@ const JSON_HEADERS = {
 
 const CORS_PREFLIGHT_HEADERS = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
-  "Access-Control-Allow-Methods": "GET, POST, PATCH, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE, OPTIONS",
   "Access-Control-Allow-Origin": "*",
 };
 
@@ -187,7 +187,7 @@ function base64UrlToBytes(value) {
 
 function webAuthnCredentialId(credential) {
   const value = credential?.rawId || credential?.id;
-  if (typeof value !== "string" || !value || !/^[A-Za-z0-9_-]+$/.test(value)) {
+  if (typeof value !== "string" || !value || value.length > 1024 || !/^[A-Za-z0-9_-]+$/.test(value)) {
     throw new AuthError(400, "WebAuthn credential ID is invalid.", "INVALID_WEBAUTHN_CREDENTIAL");
   }
   return value;
@@ -212,8 +212,12 @@ function randomChallenge() {
 
 async function listUserPasskeys(db, userId) {
   try {
-    const rows = await db.prepare(`SELECT id,credential_id,transports,created_at,last_used_at,backup_eligible,backup_state,revoked_at
-      FROM chat_passkeys WHERE user_id=? ORDER BY created_at ASC,id ASC`).bind(userId).all();
+    const rows = await db.prepare(`SELECT p.id,p.credential_id,p.transports,p.created_at,p.last_used_at,p.backup_eligible,p.backup_state,p.revoked_at,
+      CASE WHEN p.revoked_at IS NULL AND EXISTS (
+        SELECT 1 FROM chat_account_vault_versions v WHERE v.user_id=p.user_id
+          AND (v.credential_id=p.credential_id OR v.credential_id IS NULL)
+      ) THEN 1 ELSE 0 END AS chat_unlock
+      FROM chat_passkeys p WHERE p.user_id=? ORDER BY p.created_at ASC,p.id ASC`).bind(userId).all();
     return rows.results || [];
   } catch (_error) {
     return [];
@@ -223,10 +227,6 @@ async function listUserPasskeys(db, userId) {
 async function passkeyReady(db, userId) {
   const rows = await listUserPasskeys(db, userId);
   return rows.some((row) => !row.revoked_at);
-}
-
-function credentialPublicKey(source) {
-  return source?.publicKey || source || {};
 }
 
 function webAuthnChallengeId() {
@@ -245,10 +245,10 @@ async function createPasskeyOptions(db, user, request, env, kind) {
   const prfSalt = rows[0]?.prf_salt || randomChallenge();
   const timestamp = Date.now();
   await db.prepare(`INSERT INTO auth_passkey_challenges
-    (id,email,user_id,challenge,rp_id,origin,prf_salt,expires_at,created_at)
-    VALUES (?,?,?,?,?,?,?,?,?)`).bind(
+    (id,email,user_id,challenge,rp_id,origin,prf_salt,expires_at,created_at,purpose)
+    VALUES (?,?,?,?,?,?,?,?,?,?)`).bind(
     webAuthnChallengeId(), user.email, user.id, challenge, context.rpId, context.origin,
-    prfSalt, new Date(timestamp + 5 * 60 * 1000).toISOString(), new Date(timestamp).toISOString()
+    prfSalt, new Date(timestamp + 5 * 60 * 1000).toISOString(), new Date(timestamp).toISOString(), kind
   ).run();
   const publicKey = kind === "register" ? {
     challenge,
@@ -274,7 +274,7 @@ async function createPasskeyOptions(db, user, request, env, kind) {
     allowCredentials: rows.map((row) => ({
       type: "public-key", id: row.credential_id, transports: JSON.parse(row.transports || "[]"),
     })),
-    extensions: { prf: { eval: { first: prfSalt } } },
+    extensions: { prf: { evalByCredential: Object.fromEntries(rows.map((row) => [row.credential_id, { first: row.prf_salt }])) } },
   };
   return { publicKey, kind };
 }
@@ -282,7 +282,7 @@ async function createPasskeyOptions(db, user, request, env, kind) {
 async function verifyAndStorePasskeyRegistration(db, user, body, request, env) {
   const challenge = requireString(body.challenge, "challenge");
   const row = await db.prepare(`SELECT id,rp_id,origin,prf_salt FROM auth_passkey_challenges
-    WHERE user_id=? AND challenge=? AND used_at IS NULL AND expires_at>?`)
+    WHERE user_id=? AND challenge=? AND purpose='register' AND used_at IS NULL AND expires_at>?`)
     .bind(user.id, challenge, new Date().toISOString()).first();
   if (!row) throw new AuthError(400, "WebAuthn challenge is invalid or expired.", "INVALID_WEBAUTHN_CHALLENGE");
   const credential = body.credential;
@@ -314,20 +314,25 @@ async function verifyAndStorePasskeyRegistration(db, user, body, request, env) {
   }
   const existing = await db.prepare("SELECT user_id FROM chat_passkeys WHERE credential_id=?")
     .bind(verified.credentialId).first();
-  if (existing && existing.user_id !== user.id) {
-    throw new AuthError(409, "This passkey belongs to another account.", "WEBAUTHN_CREDENTIAL_CONFLICT");
+  if (existing) {
+    throw new AuthError(409,
+      existing.user_id === user.id ? "This Passkey is already registered. Use it to sign in." : "This passkey belongs to another account.",
+      existing.user_id === user.id ? "WEBAUTHN_CREDENTIAL_EXISTS" : "WEBAUTHN_CREDENTIAL_CONFLICT");
   }
-  const prior = await db.prepare("SELECT prf_salt FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL ORDER BY created_at ASC,id ASC LIMIT 1")
-    .bind(user.id).first();
-  const salt = row.prf_salt || body.prfSalt || prior?.prf_salt;
-  await db.prepare(`INSERT INTO chat_passkeys
-    (id,user_id,credential_id,public_key,prf_salt,sign_count,transports,created_at,last_used_at,backup_eligible,backup_state)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(credential_id) DO UPDATE SET
-      public_key=excluded.public_key,sign_count=excluded.sign_count,transports=excluded.transports,
-      last_used_at=excluded.last_used_at,backup_eligible=excluded.backup_eligible,backup_state=excluded.backup_state,revoked_at=NULL`)
-    .bind(crypto.randomUUID(), user.id, verified.credentialId, JSON.stringify(verified.publicKey), salt,
-      verified.signCount, JSON.stringify(webAuthnTransports(credential)), timestamp, timestamp,
-      verified.backupEligible ? 1 : 0, verified.backupState ? 1 : 0).run();
+  const salt = row.prf_salt;
+  try {
+    await db.prepare(`INSERT INTO chat_passkeys
+      (id,user_id,credential_id,public_key,prf_salt,sign_count,transports,created_at,last_used_at,backup_eligible,backup_state)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?)`)
+      .bind(crypto.randomUUID(), user.id, verified.credentialId, JSON.stringify(verified.publicKey), salt,
+        verified.signCount, JSON.stringify(webAuthnTransports(credential)), timestamp, timestamp,
+        verified.backupEligible ? 1 : 0, verified.backupState ? 1 : 0).run();
+  } catch (error) {
+    if (/UNIQUE constraint failed/.test(String(error?.message || error))) {
+      throw new AuthError(409, "This Passkey was already registered. Start again.", "WEBAUTHN_CREDENTIAL_EXISTS");
+    }
+    throw error;
+  }
   return { verified: true, credentialId: verified.credentialId };
 }
 
@@ -337,10 +342,13 @@ async function verifyPasskeyLogin(db, email, body, request, env) {
   if (!userRow) throw new AuthError(404, "No account exists for this email address.", "ACCOUNT_NOT_FOUND");
   const challenge = requireString(body.challenge, "challenge");
   const row = await db.prepare(`SELECT id,rp_id,origin FROM auth_passkey_challenges
-    WHERE email=? AND challenge=? AND used_at IS NULL AND expires_at>?`)
-    .bind(normalizedEmail, challenge, new Date().toISOString()).first();
+    WHERE email=? AND user_id=? AND challenge=? AND purpose='authenticate' AND used_at IS NULL AND expires_at>?`)
+    .bind(normalizedEmail, userRow.id, challenge, new Date().toISOString()).first();
   if (!row) throw new AuthError(400, "WebAuthn challenge is invalid or expired.", "INVALID_WEBAUTHN_CHALLENGE");
   const credential = body.credential;
+  if (!credential || credential.type !== "public-key") {
+    throw new AuthError(400, "A WebAuthn public-key credential is required.", "INVALID_WEBAUTHN_CREDENTIAL");
+  }
   const credentialId = webAuthnCredentialId(credential);
   const passkey = await db.prepare(`SELECT id,credential_id,public_key,sign_count,prf_salt
     FROM chat_passkeys WHERE user_id=? AND credential_id=? AND revoked_at IS NULL`)
@@ -699,7 +707,7 @@ export async function handleAuthApiRequest(request, env) {
       if (user.isDisabled) {
         throw new AuthError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
       }
-      return success({ user, token: await issueToken(user, config.authSecret) }, request.method);
+      return success({ user, token: await issueToken(user, config.authSecret), needsPasskeySetup: !(await passkeyReady(env.DB, user.id)) }, request.method);
     }
 
     if (request.method === "POST" && url.pathname === "/api/auth/email/otp") {
@@ -714,9 +722,6 @@ export async function handleAuthApiRequest(request, env) {
       if (existing) {
         const user = mapUser(existing);
         if (user.isDisabled) throw new AuthError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
-        if (await passkeyReady(env.DB, user.id)) {
-          return success({ exists: true, hasPasskey: true }, request.method);
-        }
       }
       await reserveEmailOtpSend(env.DB, email);
       await requestEmailOtp(email, config);
@@ -756,7 +761,7 @@ export async function handleAuthApiRequest(request, env) {
       if (user.isDisabled) {
         throw new AuthError(403, "This account has been disabled.", "ACCOUNT_DISABLED");
       }
-      return success({ user, token: await issueToken(user, config.authSecret) }, request.method);
+      return success({ user, token: await issueToken(user, config.authSecret), needsPasskeySetup: !(await passkeyReady(env.DB, user.id)) }, request.method);
     }
 
     if (request.method === "POST" && url.pathname === "/api/auth/passkey/options") {
@@ -778,6 +783,7 @@ export async function handleAuthApiRequest(request, env) {
     if (request.method === "GET" && url.pathname === "/api/auth/me/passkeys") {
       const { row } = await requireCurrentUser(request, env);
       const passkeys = await listUserPasskeys(env.DB, row.id);
+      const activeCount = passkeys.filter((passkey) => !passkey.revoked_at).length;
       return success(passkeys.map((passkey) => ({
         id: passkey.id,
         credentialId: passkey.credential_id,
@@ -787,6 +793,9 @@ export async function handleAuthApiRequest(request, env) {
         backupEligible: Boolean(passkey.backup_eligible),
         backupState: Boolean(passkey.backup_state),
         revoked: Boolean(passkey.revoked_at),
+        chatUnlock: Boolean(passkey.chat_unlock),
+        canRevoke: !passkey.revoked_at && activeCount > 1 && !passkey.chat_unlock,
+        revokeBlockedReason: passkey.revoked_at ? null : activeCount <= 1 ? "LAST_PASSKEY" : passkey.chat_unlock ? "LAST_CHAT_PASSKEY" : null,
       })), request.method);
     }
 
@@ -806,9 +815,23 @@ export async function handleAuthApiRequest(request, env) {
       const id = decodeURIComponent(url.pathname.slice("/api/auth/me/passkeys/".length));
       const active = await env.DB.prepare("SELECT id FROM chat_passkeys WHERE id=? AND user_id=? AND revoked_at IS NULL").bind(id, row.id).first();
       if (!active) throw new AuthError(404, "Passkey not found.", "PASSKEY_NOT_FOUND");
-      const count = await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL").bind(row.id).first();
-      if (Number(count?.count || 0) <= 1) throw new AuthError(409, "Keep at least one Passkey on this account.", "LAST_PASSKEY");
-      await env.DB.prepare("UPDATE chat_passkeys SET revoked_at=? WHERE id=? AND user_id=?").bind(new Date().toISOString(), id, row.id).run();
+      const revoked = await env.DB.prepare(`UPDATE chat_passkeys SET revoked_at=?
+        WHERE id=? AND user_id=? AND revoked_at IS NULL
+          AND (SELECT COUNT(*) FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL)>1
+          AND NOT EXISTS (
+            SELECT 1 FROM chat_account_vault_versions v WHERE v.user_id=?
+              AND (v.credential_id=chat_passkeys.credential_id OR v.credential_id IS NULL)
+          )`).bind(new Date().toISOString(), id, row.id, row.id, row.id).run();
+      if (Number(revoked?.meta?.changes ?? revoked?.changes ?? 0) !== 1) {
+        const remaining = await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL").bind(row.id).first();
+        if (Number(remaining?.count || 0) <= 1) throw new AuthError(409, "Keep at least one Passkey on this account.", "LAST_PASSKEY");
+        const retainedVault = await env.DB.prepare(`SELECT 1 FROM chat_account_vault_versions v
+          JOIN chat_passkeys p ON p.user_id=v.user_id AND (p.credential_id=v.credential_id OR v.credential_id IS NULL)
+          WHERE p.id=? AND p.user_id=? LIMIT 1`).bind(id, row.id).first();
+        if (retainedVault) throw new AuthError(409,
+          "Keep this Passkey: it unlocks retained secure chat keys and history. Additional login Passkeys do not replace it.", "LAST_CHAT_PASSKEY");
+        throw new AuthError(409, "The Passkey changed while it was being removed. Refresh and try again.", "PASSKEY_CHANGED");
+      }
       return success({ revoked: true }, request.method);
     }
 

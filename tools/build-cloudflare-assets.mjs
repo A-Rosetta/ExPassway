@@ -44,6 +44,8 @@ for (const generatedFile of [
   "pages/structured-practice.html",
   "assets/structured-practice.css",
   "scripts/structured-practice.js",
+  "scripts/passkey-utils.js",
+  "scripts/passkey-settings.js",
 ]) {
   if (!files.includes(generatedFile)) files.push(generatedFile);
 }

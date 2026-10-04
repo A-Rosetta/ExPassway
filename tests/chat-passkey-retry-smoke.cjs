@@ -6,6 +6,7 @@ const { chromium } = require("playwright");
 
 async function main() {
   const chatScript = await fs.readFile("scripts/chat.js", "utf8");
+  const chatMarkup = await fs.readFile("pages/chat.html", "utf8");
   const server = http.createServer((_request, response) => {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end("<!doctype html><html><body></body></html>");
@@ -23,16 +24,14 @@ async function main() {
     }
     const page = await browser.newPage();
     await page.goto(`http://127.0.0.1:${server.address().port}/`);
-    await page.evaluate(() => {
-      document.body.innerHTML = `
-        <p id="chatStatus"></p>
-        <section id="chatSetupPanel">
-          <button id="enableAccountSync" type="button">Enable secure chat</button>
-          <button id="unlockAccountSync" type="button"></button>
-        </section>
-        <section id="chatUnsupportedPanel" hidden></section>
-        <section id="legacyDevicePanel"></section>
-        <section id="chatApp" hidden></section>`;
+    const pageErrors = [];
+    page.on("pageerror", (error) => pageErrors.push(error.message));
+    await page.evaluate((markup) => {
+      // Use the current page's profile and setup controls so initialization
+      // reaches the retry flow instead of failing on an outdated tiny DOM.
+      const parsed = new DOMParser().parseFromString(markup, "text/html");
+      parsed.querySelectorAll("script").forEach((script) => script.remove());
+      document.body.innerHTML = parsed.body.innerHTML;
       localStorage.setItem("alevel.authToken", "test-token");
       window.__calls = { registrationOptions: 0, create: 0, authenticationOptions: 0, authenticate: 0, initialize: 0 };
       window.PublicKeyCredential = function PublicKeyCredential() {};
@@ -78,7 +77,7 @@ async function main() {
         }
       };
       window.ALevelApi = {
-        getChatProfile: async () => ({ id: "user-1" }),
+        getChatProfile: async () => ({ id: "user-1", alias: "Retry User", chatUserId: "retry-user" }),
         getChatAccountKeyBundle: async () => ({ enabled: false, passkeyReady: true }),
         getChatAccountVault: async () => null,
         getChatPasskeyRegistrationOptions: async () => {
@@ -98,8 +97,10 @@ async function main() {
           throw new Error("TEST_STOP_AFTER_INITIALIZE");
         },
       };
-    });
+    }, chatMarkup);
     await page.addScriptTag({ content: chatScript });
+    await page.waitForFunction(() => !document.getElementById("chatSetupPanel").hidden
+      && !document.getElementById("enableAccountSync").hidden);
     await page.click("#enableAccountSync");
     await page.waitForFunction(() => window.__calls.initialize === 1);
     const calls = await page.evaluate(() => window.__calls);
@@ -110,6 +111,8 @@ async function main() {
       authenticate: 1,
       initialize: 1,
     });
+    assert.deepEqual(pageErrors, [], "The retry flow must not hide an initialization failure.");
+    await page.waitForFunction(() => document.getElementById("chatStatus").textContent.includes("TEST_STOP_AFTER_INITIALIZE"));
     console.log("chat Passkey retry smoke passed");
   } finally {
     await browser?.close();

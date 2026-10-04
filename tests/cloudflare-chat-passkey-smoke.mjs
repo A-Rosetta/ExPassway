@@ -4,6 +4,7 @@ import { webcrypto } from "node:crypto";
 import { Miniflare } from "miniflare";
 import { unstable_splitSqlQuery } from "wrangler";
 import { handleChatApiRequest } from "../cloudflare/chat-api.js";
+import { handleAuthApiRequest } from "../cloudflare/auth-api.js";
 
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 const AUTH_SECRET = "test-only-auth-secret-with-at-least-32-bytes";
@@ -71,9 +72,9 @@ async function sha256(value) {
   );
 }
 
-async function issueToken() {
+async function issueToken(account = user) {
   const payload = Buffer.from(
-    JSON.stringify({ sub: user.id, email: user.email, role: user.role, iat: 1, exp: 4102444800 })
+    JSON.stringify({ sub: account.id, email: account.email, role: account.role, iat: 1, exp: 4102444800 })
   ).toString("base64url");
   const key = await crypto.subtle.importKey(
     "raw",
@@ -97,6 +98,9 @@ const env = {
   CHAT_ACCOUNT_V2_ENABLED: "true",
   CHAT_WEBAUTHN_RP_ID: "expassway.test",
   CHAT_WEBAUTHN_ORIGIN: "https://expassway.test",
+  SUPABASE_URL: "https://supabase.test",
+  SUPABASE_ANON_KEY: "test-anon-key",
+  SUPABASE_AUTH_REDIRECT_URL: "https://expassway.test/pages/login.html",
   DB: await mf.getD1Database("DB"),
 };
 
@@ -114,6 +118,47 @@ async function call(path, body) {
     env
   );
   return { response, payload: await response.json() };
+}
+
+async function authCall(path, body, method = "POST", authenticated = true) {
+  const headers = { "Content-Type": "application/json" };
+  if (authenticated) headers.Authorization = `Bearer ${await issueToken(typeof authenticated === "object" ? authenticated : user)}`;
+  const response = await handleAuthApiRequest(new Request(`https://expassway.test${path}`, {
+    method, headers, body: body === undefined ? undefined : JSON.stringify(body),
+  }), env);
+  return { response, payload: await response.json() };
+}
+
+async function registrationFor(options) {
+  const signing = await crypto.subtle.generateKey({ name: "ECDSA", namedCurve: "P-256" }, true, ["sign", "verify"]);
+  const jwk = await crypto.subtle.exportKey("jwk", signing.publicKey);
+  const id = crypto.getRandomValues(new Uint8Array(32));
+  const cose = cborMap([
+    [1, cborUnsigned(2)], [3, cborInteger(-7)], [-1, cborUnsigned(1)],
+    [-2, cborBytes(Buffer.from(jwk.x, "base64url"))], [-3, cborBytes(Buffer.from(jwk.y, "base64url"))],
+  ]);
+  const data = concat(await sha256("expassway.test"), Uint8Array.of(0x45), countBytes(0), new Uint8Array(16), Uint8Array.of(0, id.length), id, cose);
+  return { signing, id: base64Url(id), credential: {
+    id: base64Url(id), rawId: base64Url(id), type: "public-key",
+    response: {
+      clientDataJSON: clientData("webauthn.create", options.publicKey.challenge),
+      attestationObject: base64Url(cborMap([["fmt", cborText("none")], ["authData", cborBytes(data)], ["attStmt", cborMap([])]])),
+      transports: ["internal"],
+    },
+    clientExtensionResults: { prf: { enabled: true } },
+  } };
+}
+
+async function assertionFor(options, credentialId, signing, count) {
+  const data = clientData("webauthn.get", options.publicKey.challenge);
+  const authenticatorData = concat(await sha256("expassway.test"), Uint8Array.of(0x05), countBytes(count));
+  const signature = await crypto.subtle.sign({ name: "ECDSA", hash: "SHA-256" }, signing.privateKey,
+    concat(authenticatorData, await sha256(Buffer.from(data, "base64url"))));
+  return {
+    id: credentialId, rawId: credentialId, type: "public-key",
+    response: { clientDataJSON: data, authenticatorData: base64Url(authenticatorData), signature: base64Url(signature) },
+    clientExtensionResults: { prf: { enabled: true } },
+  };
 }
 
 function clientData(type, challenge, origin = "https://expassway.test") {
@@ -134,6 +179,7 @@ try {
     "../migrations/0001_initial.sql",
     "../migrations/0002_supabase_auth.sql",
     "../migrations/0003_admin_platform.sql",
+    "../migrations/0005_email_otp_cooldown.sql",
     "../migrations/0006_chat_foundation.sql",
     "../migrations/0007_chat_crypto_hardening.sql",
     "../migrations/0008_chat_account_v2.sql",
@@ -146,12 +192,20 @@ try {
     "../migrations/0015_chat_conversation_protocol.sql",
     "../migrations/0016_chat_profile_history.sql",
     "../migrations/0017_chat_directory_global.sql",
+    "../migrations/0018_shared_passkeys.sql",
   ]) {
     for (const statement of unstable_splitSqlQuery(
       await readFile(new URL(file, import.meta.url), "utf8")
     ))
       await env.DB.prepare(statement).run();
   }
+  await env.DB.prepare(`INSERT INTO auth_passkey_challenges
+    (id,email,challenge,rp_id,origin,expires_at,created_at) VALUES ('pre-migration-challenge','legacy@example.com',
+      'old-challenge','expassway.test','https://expassway.test','2099-01-01T00:00:00.000Z','2026-01-01T00:00:00.000Z')`).run();
+  for (const statement of unstable_splitSqlQuery(await readFile(new URL("../migrations/0021_auth_passkey_challenge_purpose.sql", import.meta.url), "utf8"))) {
+    await env.DB.prepare(statement).run();
+  }
+  assert.ok((await env.DB.prepare("SELECT used_at FROM auth_passkey_challenges WHERE id='pre-migration-challenge'").first()).used_at);
   await env.DB.prepare(
     "INSERT INTO users (id,email,display_name,role,supabase_user_id) VALUES (?,?,'Passkey','student',?)"
   )
@@ -311,6 +365,133 @@ try {
   const authOptionsAgain = await call("/api/chat/account/passkeys/authenticate/options", {});
   assert.equal(authOptionsAgain.payload.data.publicKey.extensions.prf.eval.first,
     authenticationOptions.payload.data.publicKey.extensions.prf.eval.first);
+
+  // A shared Passkey signs into the account without pretending it can decrypt
+  // a vault encrypted with another authenticator's PRF secret.
+  const initialized = await call("/api/chat/account/initialize", {
+    proof: authenticated.payload.data.proof, keyVersion: "first-chat-key",
+    encryptionPublicKey: base64Url(crypto.getRandomValues(new Uint8Array(32))),
+    signingPublicKey: base64Url(crypto.getRandomValues(new Uint8Array(32))),
+    fingerprint: base64Url(crypto.getRandomValues(new Uint8Array(32))),
+    nonce: base64Url(crypto.getRandomValues(new Uint8Array(12))),
+    ciphertext: base64Url(crypto.getRandomValues(new Uint8Array(48))),
+  });
+  assert.equal(initialized.response.status, 201, JSON.stringify(initialized.payload));
+  const beforeKeys = await env.DB.prepare("SELECT * FROM chat_passkeys WHERE user_id=?").bind(user.id).all();
+  const originalPasskey = beforeKeys.results[0];
+  const sharedOptions = await authCall("/api/auth/me/passkeys/options", {});
+  assert.equal(sharedOptions.response.status, 200);
+  const shared = await registrationFor(sharedOptions.payload.data);
+  const wrongRegistrationPurpose = await authCall("/api/auth/passkey/verify", {
+    email: user.email, challenge: sharedOptions.payload.data.publicKey.challenge, credential: shared.credential,
+  }, "POST", false);
+  assert.equal(wrongRegistrationPurpose.payload.error.code, "INVALID_WEBAUTHN_CHALLENGE");
+  const missingPrf = await authCall("/api/auth/me/passkeys/verify", {
+    challenge: sharedOptions.payload.data.publicKey.challenge,
+    credential: { ...shared.credential, clientExtensionResults: {} },
+  });
+  assert.equal(missingPrf.payload.error.code, "WEBAUTHN_PRF_REQUIRED");
+  const sharedRegistered = await authCall("/api/auth/me/passkeys/verify", {
+    challenge: sharedOptions.payload.data.publicKey.challenge, credential: shared.credential,
+  });
+  assert.equal(sharedRegistered.response.status, 201, JSON.stringify(sharedRegistered.payload));
+  const registrationReplay = await authCall("/api/auth/me/passkeys/verify", {
+    challenge: sharedOptions.payload.data.publicKey.challenge, credential: shared.credential,
+  });
+  assert.equal(registrationReplay.payload.error.code, "INVALID_WEBAUTHN_CHALLENGE");
+  assert.equal((await env.DB.prepare("SELECT prf_salt FROM chat_passkeys WHERE credential_id=?").bind(base64Url(credentialId)).first()).prf_salt, originalPasskey.prf_salt);
+  const listing = await authCall("/api/auth/me/passkeys", undefined, "GET");
+  assert.equal(listing.payload.data.find((item) => item.credentialId === base64Url(credentialId)).chatUnlock, true);
+  assert.equal(listing.payload.data.find((item) => item.credentialId === base64Url(credentialId)).revokeBlockedReason, "LAST_CHAT_PASSKEY");
+  assert.equal(listing.payload.data.find((item) => item.credentialId === shared.id).canRevoke, true);
+  const sharedLoginOptions = await authCall("/api/auth/passkey/options", { email: user.email }, "POST", false);
+  assert.deepEqual(new Set(sharedLoginOptions.payload.data.publicKey.allowCredentials.map((item) => item.id)), new Set([base64Url(credentialId), shared.id]));
+  assert.equal(sharedLoginOptions.payload.data.publicKey.extensions.prf.evalByCredential[base64Url(credentialId)].first, originalPasskey.prf_salt);
+  const wrongAuthPurpose = await authCall("/api/auth/me/passkeys/verify", {
+    challenge: sharedLoginOptions.payload.data.publicKey.challenge, credential: shared.credential,
+  });
+  assert.equal(wrongAuthPurpose.payload.error.code, "INVALID_WEBAUTHN_CHALLENGE");
+  const sharedAssertion = await assertionFor(sharedLoginOptions.payload.data, shared.id, shared.signing, 1);
+  const missingSignature = await authCall("/api/auth/passkey/verify", {
+    email: user.email, challenge: sharedLoginOptions.payload.data.publicKey.challenge,
+    credential: { ...sharedAssertion, response: { ...sharedAssertion.response, signature: undefined } },
+  }, "POST", false);
+  assert.equal(missingSignature.response.status, 400);
+  const signedIn = await authCall("/api/auth/passkey/verify", {
+    email: user.email, challenge: sharedLoginOptions.payload.data.publicKey.challenge, credential: sharedAssertion,
+  }, "POST", false);
+  assert.equal(signedIn.response.status, 200, JSON.stringify(signedIn.payload));
+  assert.equal(signedIn.payload.data.user.id, user.id);
+  assert.ok(signedIn.payload.data.token);
+  const loginReplay = await authCall("/api/auth/passkey/verify", {
+    email: user.email, challenge: sharedLoginOptions.payload.data.publicKey.challenge, credential: sharedAssertion,
+  }, "POST", false);
+  assert.equal(loginReplay.payload.error.code, "INVALID_WEBAUTHN_CHALLENGE");
+  const chatWithShared = await call("/api/chat/account/passkeys/authenticate/options", {});
+  assert.deepEqual(chatWithShared.payload.data.publicKey.allowCredentials.map((item) => item.id), [base64Url(credentialId)]);
+  const rejectedSharedUnlock = await call("/api/chat/account/passkeys/authenticate/verify", {
+    challenge: chatWithShared.payload.data.publicKey.challenge,
+    credential: await assertionFor(chatWithShared.payload.data, shared.id, shared.signing, 2),
+  });
+  assert.equal(rejectedSharedUnlock.payload.error.code, "WEBAUTHN_CREDENTIAL_MISMATCH");
+  const protectedChatCredential = await authCall(`/api/auth/me/passkeys/${originalPasskey.id}`, undefined, "DELETE");
+  assert.equal(protectedChatCredential.payload.error.code, "LAST_CHAT_PASSKEY");
+  const sharedRow = await env.DB.prepare("SELECT id FROM chat_passkeys WHERE credential_id=?").bind(shared.id).first();
+  assert.equal((await authCall(`/api/auth/me/passkeys/${sharedRow.id}`, undefined, "DELETE")).response.status, 200);
+  const protectedLastCredential = await authCall(`/api/auth/me/passkeys/${originalPasskey.id}`, undefined, "DELETE");
+  assert.equal(protectedLastCredential.payload.error.code, "LAST_PASSKEY");
+  const revokedLoginOptions = await authCall("/api/auth/passkey/options", { email: user.email }, "POST", false);
+  const revokedLogin = await authCall("/api/auth/passkey/verify", {
+    email: user.email, challenge: revokedLoginOptions.payload.data.publicKey.challenge,
+    credential: await assertionFor(revokedLoginOptions.payload.data, shared.id, shared.signing, 2),
+  }, "POST", false);
+  assert.equal(revokedLogin.payload.error.code, "WEBAUTHN_CREDENTIAL_NOT_FOUND");
+
+  // Preserved historical identities need their original credential even when
+  // another credential now wraps the current identity.
+  await env.DB.prepare("UPDATE chat_passkeys SET revoked_at=NULL WHERE credential_id=?").bind(shared.id).run();
+  await env.DB.prepare(`INSERT INTO chat_account_vault_versions
+    (user_id,key_version,credential_id,kdf_version,nonce,ciphertext,updated_at)
+    VALUES (?,'second-chat-key',?,'hkdf-sha256-v1',?,?,?)`).bind(user.id, shared.id,
+    base64Url(crypto.getRandomValues(new Uint8Array(12))), base64Url(crypto.getRandomValues(new Uint8Array(48))), new Date().toISOString()).run();
+  await env.DB.prepare("UPDATE chat_account_identity_heads SET key_version='second-chat-key',credential_id=? WHERE user_id=?").bind(shared.id, user.id).run();
+  const protectedHistorical = await authCall(`/api/auth/me/passkeys/${originalPasskey.id}`, undefined, "DELETE");
+  assert.equal(protectedHistorical.payload.error.code, "LAST_CHAT_PASSKEY");
+  const retainedBeforeMigration = await env.DB.prepare("SELECT key_version,credential_id,nonce,ciphertext FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(user.id).all();
+  for (const statement of unstable_splitSqlQuery(await readFile(new URL("../migrations/0018_shared_passkeys.sql", import.meta.url), "utf8"))) {
+    await env.DB.prepare(statement).run();
+  }
+  const retainedAfterMigration = await env.DB.prepare("SELECT key_version,credential_id,nonce,ciphertext FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(user.id).all();
+  assert.deepEqual(retainedAfterMigration.results, retainedBeforeMigration.results);
+  assert.deepEqual((await env.DB.prepare("SELECT key_version,credential_id,nonce,ciphertext FROM chat_account_vault_wrappers WHERE user_id=? ORDER BY key_version").bind(user.id).all()).results, retainedBeforeMigration.results);
+  assert.equal((await env.DB.prepare("PRAGMA foreign_key_check").all()).results.length, 0);
+
+  // Two concurrent removals cannot race past the last-credential guard.
+  const secondary = { id: crypto.randomUUID(), email: "parallel@example.com", role: "student" };
+  await env.DB.prepare("INSERT INTO users (id,email,display_name,role) VALUES (?,?,'Parallel','student')").bind(secondary.id, secondary.email).run();
+  const parallelIds = [crypto.randomUUID(), crypto.randomUUID()];
+  for (const id of parallelIds) await env.DB.prepare(`INSERT INTO chat_passkeys
+    (id,user_id,credential_id,public_key,prf_salt,created_at) VALUES (?,?,?,?,?,?)`).bind(id, secondary.id,
+    base64Url(crypto.getRandomValues(new Uint8Array(32))), "test-unused-key", base64Url(crypto.getRandomValues(new Uint8Array(32))), new Date().toISOString()).run();
+  const removals = await Promise.all(parallelIds.map((id) => authCall(`/api/auth/me/passkeys/${id}`, undefined, "DELETE", secondary)));
+  assert.deepEqual(removals.map((item) => item.response.status).sort(), [200, 409]);
+  assert.equal(removals.find((item) => item.response.status === 409).payload.error.code, "LAST_PASSKEY");
+  assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL").bind(secondary.id).first()).count, 1);
+
+  // Account login remains recoverable by email when a Passkey is unavailable.
+  const originalFetch = globalThis.fetch;
+  let otpSent = false;
+  globalThis.fetch = async (url) => {
+    assert.equal(String(url), "https://supabase.test/auth/v1/otp");
+    otpSent = true;
+    return Response.json({});
+  };
+  try {
+    const fallback = await authCall("/api/auth/email/otp", { email: user.email }, "POST", false);
+    assert.equal(fallback.response.status, 200);
+    assert.equal(fallback.payload.data.sent, true);
+    assert.equal(otpSent, true);
+  } finally { globalThis.fetch = originalFetch; }
   console.log("Cloudflare chat passkey smoke checks passed.");
 } finally {
   await mf.dispose();

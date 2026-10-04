@@ -810,7 +810,7 @@ async function directoryAccountEnabled(db, userId) {
   const row = await db.prepare(`SELECT 1 FROM chat_account_keys k
     JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL
+    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
     JOIN users u ON u.id=k.user_id AND u.disabled_at IS NULL
     WHERE k.user_id=? AND k.status='active' LIMIT 1`).bind(userId).first();
   return Boolean(row);
@@ -826,7 +826,7 @@ async function searchChatUsers(db, userId, query) {
     LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
     LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     LEFT JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL
+    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
     LEFT JOIN chat_contacts c ON c.user_id=? AND c.peer_user_id=p.user_id
     WHERE p.user_id<>? AND p.chat_user_id LIKE ?
     GROUP BY p.user_id ORDER BY p.chat_user_id LIMIT 20`).bind(userId, userId, `${q}%`).all();
@@ -842,7 +842,7 @@ async function addContactByChatUserId(db, userId, value) {
     LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
     LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     LEFT JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL
+    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
     WHERE p.chat_user_id=? GROUP BY p.user_id`).bind(chatUserId).first();
   if (!target || target.user_id === userId) throw new AuthError(404, "Chat user not found.", "CHAT_USER_NOT_FOUND");
   if (!target.account_enabled) throw new AuthError(409, "This user must enable secure chat first.", "ACCOUNT_NOT_ENABLED");
@@ -867,7 +867,7 @@ async function globalReadyAccounts(db, conversationId = null) {
     FROM chat_account_keys k
     JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL
+    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
     JOIN users u ON u.id=k.user_id AND u.disabled_at IS NULL
     JOIN chat_profiles p ON p.user_id=k.user_id
     WHERE k.status='active' GROUP BY k.user_id ORDER BY p.chat_user_id`).all();
@@ -2256,7 +2256,9 @@ async function requireAccountWriteProof(db, userId, body) {
   const result = await db
     .prepare(
       `UPDATE chat_account_write_proofs SET uses_remaining = uses_remaining - 1
-       WHERE token_hash = ? AND user_id = ? AND expires_at > ? AND uses_remaining > 0`
+       WHERE token_hash = ? AND user_id = ? AND expires_at > ? AND uses_remaining > 0
+         AND EXISTS (SELECT 1 FROM chat_passkeys p WHERE p.user_id=chat_account_write_proofs.user_id
+           AND p.credential_id=chat_account_write_proofs.credential_id AND p.revoked_at IS NULL)`
     )
     .bind(await sha256Base64Url(proof), userId, nowIso())
     .run();
@@ -2326,10 +2328,10 @@ function webAuthnTransports(credential) {
 async function passkeyOptions(db, userId, kind, request, env) {
   const context = webAuthnContext(request, env);
   const challenge = bytesToBase64Url(randomBytes(32));
-  const existingPrf = (kind === "authentication" || kind === "registration")
+  const existingPrf = kind === "authentication"
     ? await db.prepare(`SELECT p.credential_id,p.prf_salt FROM chat_passkeys p
       LEFT JOIN chat_account_identity_heads h ON h.user_id=p.user_id
-      WHERE p.user_id=? AND p.revoked_at IS NULL
+      WHERE p.user_id=? AND p.revoked_at IS NULL AND (h.credential_id IS NULL OR p.credential_id=h.credential_id)
       ORDER BY p.created_at DESC,p.id DESC LIMIT 1`).bind(userId).first()
     : null;
   const prfSalt = existingPrf?.prf_salt || bytesToBase64Url(randomBytes(32));
@@ -2359,7 +2361,7 @@ async function passkeyOptions(db, userId, kind, request, env) {
     )
     .bind(userId)
     .all();
-  const credentials = credentialRows.results || [];
+  const credentials = (credentialRows.results || []).filter((row) => kind === "registration" || row.credential_id === existingPrf?.credential_id);
   const prf = { eval: { first: prfSalt } };
   const publicKey =
     kind === "registration"
@@ -2444,6 +2446,9 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       }
     } else {
       const credentialId = webAuthnCredentialId(credential);
+      if (row.credential_id !== credentialId) {
+        throw new AuthError(400, "Use the Passkey selected for this account vault.", "WEBAUTHN_CREDENTIAL_MISMATCH");
+      }
       const passkey = await db
         .prepare(
           `SELECT id,user_id,credential_id,public_key,sign_count,backup_eligible FROM chat_passkeys
@@ -2499,17 +2504,16 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       .prepare("SELECT user_id FROM chat_passkeys WHERE credential_id = ?")
       .bind(verified.credentialId)
       .first();
-    if (existing && existing.user_id !== userId)
+    if (existing)
       throw new AuthError(
         409,
-        "This passkey belongs to another account.",
-        "WEBAUTHN_CREDENTIAL_CONFLICT"
+        existing.user_id === userId ? "This Passkey is already registered. Use it to unlock secure chat." : "This passkey belongs to another account.",
+        existing.user_id === userId ? "WEBAUTHN_CREDENTIAL_EXISTS" : "WEBAUTHN_CREDENTIAL_CONFLICT"
       );
-    await db
+    try { await db
       .prepare(
         `INSERT INTO chat_passkeys (id,user_id,credential_id,public_key,prf_salt,sign_count,transports,created_at,last_used_at)
-      VALUES (?,?,?,?,?,?,?,?,?) ON CONFLICT(credential_id) DO UPDATE SET public_key=excluded.public_key,prf_salt=excluded.prf_salt,
-        sign_count=excluded.sign_count,transports=excluded.transports,last_used_at=excluded.last_used_at,revoked_at=NULL`
+      VALUES (?,?,?,?,?,?,?,?,?)`
       )
       .bind(
         randomId(),
@@ -2522,7 +2526,12 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
         timestamp,
         timestamp
       )
-      .run();
+      .run(); } catch (error) {
+      if (/UNIQUE constraint failed/.test(String(error?.message || error))) {
+        throw new AuthError(409, "This Passkey was already registered. Start again.", "WEBAUTHN_CREDENTIAL_EXISTS");
+      }
+      throw error;
+    }
     await db.prepare("UPDATE chat_passkeys SET backup_eligible=?, backup_state=? WHERE credential_id=?")
       .bind(verified.backupEligible ? 1 : 0, verified.backupState ? 1 : 0, verified.credentialId)
       .run();
@@ -2547,7 +2556,10 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       "WEBAUTHN_COUNTER_CONFLICT"
     );
   }
-  const identity = await db.prepare("SELECT key_version FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
+  const identity = await db.prepare("SELECT key_version,credential_id FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
+  if (identity?.credential_id && identity.credential_id !== verified.credentialId) {
+    throw new AuthError(409,"The secure chat identity changed during Passkey verification. Start again.","ACCOUNT_IDENTITY_CHANGED");
+  }
   return {
     verified: true,
     credentialId: verified.credentialId,
@@ -2567,10 +2579,20 @@ async function saveVault(db, userId, body) {
   const timestamp = nowIso();
   const existing = await db.prepare("SELECT key_version FROM chat_account_vault_versions WHERE user_id=? AND key_version=?").bind(userId, keyVersion).first();
   if (existing) throw new AuthError(409, "This account vault version already exists.", "ACCOUNT_VAULT_IMMUTABLE");
-  await db.batch([
+  try { await db.batch([
+    db.prepare(`INSERT INTO chat_account_initialization_guards (id,valid)
+      VALUES (?,CASE WHEN EXISTS (SELECT 1 FROM chat_passkeys
+        WHERE user_id=? AND credential_id=? AND revoked_at IS NULL) THEN 1 ELSE 0 END)`)
+      .bind(randomId(), userId, proof?.credential_id || null),
     db.prepare("INSERT INTO chat_account_vault_versions (user_id,key_version,credential_id,kdf_version,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?,?)").bind(userId,keyVersion,proof?.credential_id || null,"hkdf-sha256-v1",nonce,ciphertext,timestamp),
     db.prepare("INSERT INTO chat_account_identity_heads (user_id,key_version,credential_id) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET key_version=excluded.key_version,credential_id=excluded.credential_id").bind(userId,keyVersion,proof?.credential_id || null),
-  ]);
+    db.prepare("DELETE FROM chat_account_initialization_guards"),
+  ]); } catch (error) {
+    if (/CHECK constraint failed/.test(String(error?.message || error))) {
+      throw new AuthError(403, "Verify an active Passkey again before changing the secure chat vault.", "ACCOUNT_WRITE_PROOF_REQUIRED");
+    }
+    throw error;
+  }
   return { saved: true, keyVersion, updatedAt: timestamp };
 }
 
@@ -2595,8 +2617,10 @@ async function initializeAccount(db, userId, body) {
   try { await db.batch([
     db.prepare(`INSERT INTO chat_account_initialization_guards (id,valid) VALUES (?,CASE WHEN
       ((? IS NULL AND NOT EXISTS (SELECT 1 FROM chat_account_identity_heads WHERE user_id=?)) OR
-       EXISTS (SELECT 1 FROM chat_account_identity_heads WHERE user_id=? AND key_version=?)) THEN 1 ELSE 0 END)`)
-      .bind(randomId(), existing?.key_version || null, userId, userId, existing?.key_version || null),
+       EXISTS (SELECT 1 FROM chat_account_identity_heads WHERE user_id=? AND key_version=?))
+       AND EXISTS (SELECT 1 FROM chat_passkeys WHERE user_id=? AND credential_id=? AND revoked_at IS NULL)
+       THEN 1 ELSE 0 END)`)
+      .bind(randomId(), existing?.key_version || null, userId, userId, existing?.key_version || null, userId, proof?.credential_id || null),
     db.prepare("UPDATE chat_account_keys SET status='revoked',updated_at=? WHERE user_id=? AND status='active'").bind(timestamp,userId),
     db.prepare("INSERT INTO chat_account_keys (user_id,key_version,encryption_public_key,signing_public_key,fingerprint,status,created_at,updated_at) VALUES (?,?,?,?,?,'active',?,?)").bind(userId,keyVersion,encryptionPublicKey,signingPublicKey,fingerprint,timestamp,timestamp),
     db.prepare("INSERT INTO chat_account_vault_versions (user_id,key_version,credential_id,kdf_version,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?,?)").bind(userId,keyVersion,proof?.credential_id || null,"hkdf-sha256-v1",nonce,ciphertext,timestamp),

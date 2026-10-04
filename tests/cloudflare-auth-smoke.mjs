@@ -204,6 +204,7 @@ try {
     assert.equal(payload.data.user.language, "en");
     assert.equal(database.users[0].supabase_user_id, identityResponse.id);
     assert.match(payload.data.token, /^[^.]+\.[^.]+$/);
+    assert.equal(payload.data.needsPasskeySetup, true);
     sessionToken = payload.data.token;
 
     const current = await request("/api/auth/me", {
@@ -287,6 +288,7 @@ try {
     assert.equal(database.users.length, 1);
     assert.equal(payload.data.user.id, "11111111-1111-4111-8111-111111111111");
     assert.match(payload.data.token, /^[^.]+\.[^.]+$/);
+    assert.equal(payload.data.needsPasskeySetup, true);
   }
 
   {
