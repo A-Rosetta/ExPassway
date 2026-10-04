@@ -493,11 +493,45 @@
         body: JSON.stringify({ email }),
       });
     },
+    async checkEmailAccount(email) {
+      return request("/api/auth/email/check", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
+    },
     async verifyEmailOtp(email, code, language) {
       return request("/api/auth/email/verify", {
         method: "POST",
         body: JSON.stringify({ email, code, language }),
       });
+    },
+    async getAuthPasskeyOptions(email) {
+      return request("/api/auth/passkey/options", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
+    },
+    async verifyAuthPasskey(email, input) {
+      return request("/api/auth/passkey/verify", {
+        method: "POST",
+        body: JSON.stringify({ email, ...(input || {}) }),
+      });
+    },
+    async listPasskeys(token) {
+      return request("/api/auth/me/passkeys", { token });
+    },
+    async getPasskeyRegistrationOptions(token) {
+      return request("/api/auth/me/passkeys/options", { method: "POST", token });
+    },
+    async registerPasskey(token, input) {
+      return request("/api/auth/me/passkeys/verify", {
+        method: "POST",
+        token,
+        body: JSON.stringify(input || {}),
+      });
+    },
+    async revokePasskey(token, id) {
+      return request(`/api/auth/me/passkeys/${encodeURIComponent(id)}`, { method: "DELETE", token });
     },
     async getCurrentUser(token) {
       return request("/api/auth/me", { token });

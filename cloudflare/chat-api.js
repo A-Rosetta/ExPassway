@@ -810,7 +810,7 @@ async function directoryAccountEnabled(db, userId) {
   const row = await db.prepare(`SELECT 1 FROM chat_account_keys k
     JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL
     JOIN users u ON u.id=k.user_id AND u.disabled_at IS NULL
     WHERE k.user_id=? AND k.status='active' LIMIT 1`).bind(userId).first();
   return Boolean(row);
@@ -826,7 +826,7 @@ async function searchChatUsers(db, userId, query) {
     LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
     LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     LEFT JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL
     LEFT JOIN chat_contacts c ON c.user_id=? AND c.peer_user_id=p.user_id
     WHERE p.user_id<>? AND p.chat_user_id LIKE ?
     GROUP BY p.user_id ORDER BY p.chat_user_id LIMIT 20`).bind(userId, userId, `${q}%`).all();
@@ -842,7 +842,7 @@ async function addContactByChatUserId(db, userId, value) {
     LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
     LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     LEFT JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL
     WHERE p.chat_user_id=? GROUP BY p.user_id`).bind(chatUserId).first();
   if (!target || target.user_id === userId) throw new AuthError(404, "Chat user not found.", "CHAT_USER_NOT_FOUND");
   if (!target.account_enabled) throw new AuthError(409, "This user must enable secure chat first.", "ACCOUNT_NOT_ENABLED");
@@ -867,7 +867,7 @@ async function globalReadyAccounts(db, conversationId = null) {
     FROM chat_account_keys k
     JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL
     JOIN users u ON u.id=k.user_id AND u.disabled_at IS NULL
     JOIN chat_profiles p ON p.user_id=k.user_id
     WHERE k.status='active' GROUP BY k.user_id ORDER BY p.chat_user_id`).all();
@@ -2326,10 +2326,10 @@ function webAuthnTransports(credential) {
 async function passkeyOptions(db, userId, kind, request, env) {
   const context = webAuthnContext(request, env);
   const challenge = bytesToBase64Url(randomBytes(32));
-  const existingPrf = kind === "authentication"
+  const existingPrf = (kind === "authentication" || kind === "registration")
     ? await db.prepare(`SELECT p.credential_id,p.prf_salt FROM chat_passkeys p
       LEFT JOIN chat_account_identity_heads h ON h.user_id=p.user_id
-      WHERE p.user_id=? AND p.revoked_at IS NULL AND (h.credential_id IS NULL OR p.credential_id=h.credential_id)
+      WHERE p.user_id=? AND p.revoked_at IS NULL
       ORDER BY p.created_at DESC,p.id DESC LIMIT 1`).bind(userId).first()
     : null;
   const prfSalt = existingPrf?.prf_salt || bytesToBase64Url(randomBytes(32));
@@ -2359,7 +2359,7 @@ async function passkeyOptions(db, userId, kind, request, env) {
     )
     .bind(userId)
     .all();
-  const credentials = (credentialRows.results || []).filter((row) => kind === "registration" || row.credential_id === existingPrf?.credential_id);
+  const credentials = credentialRows.results || [];
   const prf = { eval: { first: prfSalt } };
   const publicKey =
     kind === "registration"
@@ -2444,9 +2444,6 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       }
     } else {
       const credentialId = webAuthnCredentialId(credential);
-      if (row.credential_id !== credentialId) {
-        throw new AuthError(400, "Use the Passkey selected for this account vault.", "WEBAUTHN_CREDENTIAL_MISMATCH");
-      }
       const passkey = await db
         .prepare(
           `SELECT id,user_id,credential_id,public_key,sign_count,backup_eligible FROM chat_passkeys
@@ -2550,10 +2547,7 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       "WEBAUTHN_COUNTER_CONFLICT"
     );
   }
-  const identity = await db.prepare("SELECT key_version,credential_id FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
-  if (identity?.credential_id && identity.credential_id !== verified.credentialId) {
-    throw new AuthError(409,"The secure chat identity changed during Passkey verification. Start again.","ACCOUNT_IDENTITY_CHANGED");
-  }
+  const identity = await db.prepare("SELECT key_version FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
   return {
     verified: true,
     credentialId: verified.credentialId,

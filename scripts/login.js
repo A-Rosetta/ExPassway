@@ -8,6 +8,8 @@
   const { t, getLanguage, applyPage } = window.ALevelI18n;
   let resendAvailableAt = 0;
   let resendTimer = 0;
+  let passkeyOptions = null;
+  let passkeyEmail = "";
 
   function byId(id) {
     return document.getElementById(id);
@@ -45,6 +47,122 @@
     localStorage.setItem(AUTH_TOKEN_KEY, payload.token);
     setAuthStatus(t(messageKey, { name: payload.user.displayName }));
     setTimeout(redirectAfterAuth, 300);
+  }
+
+  function base64UrlToBytes(value) {
+    const normalized = String(value || "").replace(/-/g, "+").replace(/_/g, "/");
+    const binary = atob(normalized + "=".repeat((4 - (normalized.length % 4)) % 4));
+    return Uint8Array.from(binary, (character) => character.charCodeAt(0));
+  }
+
+  function bytesToBase64Url(value) {
+    const bytes = value instanceof Uint8Array ? value : new Uint8Array(value);
+    let binary = "";
+    for (const byte of bytes) binary += String.fromCharCode(byte);
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+  }
+
+  function publicKeyOptions(raw) {
+    const source = raw?.publicKey || raw || {};
+    const options = { ...source, challenge: base64UrlToBytes(source.challenge) };
+    if (source.user?.id) options.user = { ...source.user, id: base64UrlToBytes(source.user.id) };
+    for (const field of ["allowCredentials", "excludeCredentials"]) {
+      if (Array.isArray(source[field])) options[field] = source[field].map((credential) => ({
+        ...credential,
+        id: base64UrlToBytes(credential.id),
+      }));
+    }
+    if (source.extensions?.prf?.eval?.first) {
+      options.extensions = { ...source.extensions, prf: { ...source.extensions.prf, eval: {
+        ...source.extensions.prf.eval,
+        first: base64UrlToBytes(source.extensions.prf.eval.first),
+      } } };
+    }
+    return options;
+  }
+
+  function serialiseCredential(credential) {
+    const response = credential.response;
+    const extensionResults = credential.getClientExtensionResults?.() || {};
+    const prf = extensionResults.prf ? {
+      enabled: Boolean(extensionResults.prf.enabled || extensionResults.prf.results?.first),
+    } : undefined;
+    const output = {
+      id: credential.id,
+      rawId: bytesToBase64Url(credential.rawId),
+      type: credential.type,
+      response: { clientDataJSON: bytesToBase64Url(response.clientDataJSON) },
+      clientExtensionResults: prf ? { prf } : {},
+    };
+    if (response.attestationObject) {
+      output.response.attestationObject = bytesToBase64Url(response.attestationObject);
+      output.response.transports = response.getTransports?.() || [];
+    }
+    return output;
+  }
+
+  async function offerPasskeyRegistration(payload) {
+    if (!payload.needsPasskeySetup) {
+      applyAuthSuccess(payload, "loginSuccess");
+      return;
+    }
+    if (!window.PublicKeyCredential || !navigator.credentials?.create) {
+      applyAuthSuccess(payload, "loginSuccess");
+      return;
+    }
+    const shouldRegister = window.confirm(t("passkeyRegisterPrompt"));
+    if (!shouldRegister) {
+      applyAuthSuccess(payload, "loginSuccess");
+      return;
+    }
+    try {
+      const options = await window.ALevelApi.getPasskeyRegistrationOptions(payload.token);
+      const credential = await navigator.credentials.create({ publicKey: publicKeyOptions(options) });
+      if (!credential) throw new Error("No Passkey was created.");
+      await window.ALevelApi.registerPasskey(payload.token, {
+        challenge: options.publicKey?.challenge || options.challenge,
+        credential: serialiseCredential(credential),
+      });
+    } catch (error) {
+      setAuthStatus(error.message || t("passkeyLoginFailed"), true);
+    }
+    applyAuthSuccess(payload, "loginSuccess");
+  }
+
+  async function tryPasskeyLogin(email) {
+    const button = byId("passkeyLoginBtn");
+    if (!button || !window.PublicKeyCredential || !navigator.credentials?.get) return false;
+    try {
+      const options = await window.ALevelApi.getAuthPasskeyOptions(email);
+      passkeyOptions = options;
+      passkeyEmail = email;
+      button.hidden = false;
+      setAuthStatus(t("passkeyLoginReady"));
+      return true;
+    } catch (error) {
+      passkeyOptions = null;
+      passkeyEmail = "";
+      button.hidden = true;
+      return false;
+    }
+  }
+
+  async function authenticateWithPasskey() {
+    const button = byId("passkeyLoginBtn");
+    if (!passkeyOptions || !passkeyEmail || button.disabled) return;
+    button.disabled = true;
+    try {
+      const credential = await navigator.credentials.get({ publicKey: publicKeyOptions(passkeyOptions) });
+      if (!credential) throw new Error("No Passkey was selected.");
+      const data = await window.ALevelApi.verifyAuthPasskey(passkeyEmail, {
+        challenge: passkeyOptions.publicKey?.challenge || passkeyOptions.challenge,
+        credential: serialiseCredential(credential),
+      });
+      applyAuthSuccess(data, "loginSuccess");
+    } catch (error) {
+      setAuthStatus(t("passkeyLoginFailed"), true);
+      button.disabled = false;
+    }
   }
 
   function setButtonBusy(button, busy, busyKey) {
@@ -110,6 +228,9 @@
     resendTimer = 0;
     updateResendButton();
     byId("emailOtpAddress").focus();
+    passkeyOptions = null;
+    passkeyEmail = "";
+    byId("passkeyLoginBtn").hidden = true;
   }
 
   async function handleGoogleCallback() {
@@ -173,6 +294,9 @@
       const button = byId("emailOtpRequestBtn");
       setButtonBusy(button, true, "sendingEmailOtp");
       try {
+        const account = await window.ALevelApi.checkEmailAccount(email);
+        if (account.exists && account.hasPasskey && !(passkeyOptions && passkeyEmail === email)
+          && await tryPasskeyLogin(email)) return;
         const result = await window.ALevelApi.requestEmailOtp(email);
         showOtpStep(email);
         startResendCooldown(result.retryAfterSeconds);
@@ -183,6 +307,7 @@
         setButtonBusy(button, false, "sendingEmailOtp");
       }
     });
+    byId("passkeyLoginBtn").addEventListener("click", authenticateWithPasskey);
     byId("emailOtpResendBtn").addEventListener("click", async () => {
       if (Date.now() < resendAvailableAt) return;
       const button = byId("emailOtpResendBtn");
@@ -212,8 +337,9 @@
       const button = byId("emailOtpVerifyBtn");
       setButtonBusy(button, true, "verifyingEmailOtp");
       try {
+        const account = await window.ALevelApi.checkEmailAccount(normalizedEmail());
         const data = await window.ALevelApi.verifyEmailOtp(normalizedEmail(), code, getLanguage());
-        applyAuthSuccess(data, "loginSuccess");
+        await offerPasskeyRegistration({ ...data, needsPasskeySetup: !account.exists || !account.hasPasskey });
       } catch (_err) {
         setAuthStatus(t("emailOtpVerifyFailed"), true);
         setButtonBusy(button, false, "verifyingEmailOtp");

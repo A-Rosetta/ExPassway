@@ -141,6 +141,15 @@
         <p id="petSettingsStatus" class="tip" role="status"></p>
       </section>
 
+      <section id="passkeySettings" aria-labelledby="passkeySettingsTitle">
+        <div class="profile-dialog__divider"></div>
+        <h3 id="passkeySettingsTitle">Passkeys</h3>
+        <p class="tip">Manage the Passkeys that can sign in to this account and unlock Secure Chat.</p>
+        <div id="passkeyList" class="profile-passkey-list" aria-live="polite"></div>
+        <div class="actions"><button id="addPasskeyBtn" class="btn-secondary" type="button">Add Passkey</button></div>
+        <p id="passkeySettingsStatus" class="tip" role="status"></p>
+      </section>
+
       <section id="passwordSettings">
         <div class="profile-dialog__divider"></div>
         <div class="grid-2">
@@ -162,6 +171,21 @@
   <script src="scripts/api.js?v=20261004-1"></script>
   <script src="scripts/pet.js?v=20260731-1"></script>
   <script src="scripts/app.js?v=20261004-1"></script>
+  <script>
+  (() => {
+    const tokenKey="alevel.authToken", list=document.getElementById("passkeyList"), add=document.getElementById("addPasskeyBtn"), status=document.getElementById("passkeySettingsStatus");
+    if(!list||!add)return;
+    const b64=v=>{const n=String(v||"").replace(/-/g,"+").replace(/_/g,"/");const x=atob(n+"=".repeat((4-n.length%4)%4));return Uint8Array.from(x,c=>c.charCodeAt(0));};
+    const out=v=>{const x=v instanceof Uint8Array?v:new Uint8Array(v);let s="";for(const c of x)s+=String.fromCharCode(c);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");};
+    const pk=raw=>{const x={...(raw.publicKey||raw),challenge:b64((raw.publicKey||raw).challenge)};if(x.user?.id)x.user={...x.user,id:b64(x.user.id)};for(const k of ["allowCredentials","excludeCredentials"])if(Array.isArray(x[k]))x[k]=x[k].map(c=>({...c,id:b64(c.id)}));if(x.extensions?.prf?.eval?.first)x.extensions={...x.extensions,prf:{...x.extensions.prf,eval:{...x.extensions.prf.eval,first:b64(x.extensions.prf.eval.first)}}};return x;};
+    const serialise=c=>{const r=c.response,e=c.getClientExtensionResults?.()||{};return{id:c.id,rawId:out(c.rawId),type:c.type,response:{clientDataJSON:out(r.clientDataJSON),attestationObject:out(r.attestationObject),transports:r.getTransports?.()||[]},clientExtensionResults:e.prf?{prf:{enabled:Boolean(e.prf.enabled||e.prf.results?.first)}}:{}};};
+    async function api(path,init={}){const res=await fetch(path,{...init,headers:{"Content-Type":"application/json",Authorization:"Bearer "+(localStorage.getItem(tokenKey)||""),...(init.headers||{})}});const body=await res.json();if(!res.ok||body.ok===false)throw new Error(body.error?.message||"Request failed");return body.data;}
+    async function load(){try{const rows=await api("/api/auth/me/passkeys");list.textContent="";const active=rows.filter(x=>!x.revoked);if(!active.length){list.textContent="No Passkeys registered.";return;}active.forEach(x=>{const row=document.createElement("div");row.className="profile-passkey-row";const text=document.createElement("span");text.textContent=(x.credentialId||"").slice(0,16)+"… · added "+new Date(x.createdAt).toLocaleString();const b=document.createElement("button");b.type="button";b.className="btn-secondary";b.textContent="Revoke";b.disabled=active.length<=1;b.onclick=async()=>{if(!confirm("Revoke this Passkey?"))return;try{await api("/api/auth/me/passkeys/"+encodeURIComponent(x.id),{method:"DELETE"});await load();}catch(e){status.textContent=e.message;}};row.append(text,b);list.append(row);});}catch(e){status.textContent=e.message;}}
+    add.onclick=async()=>{try{add.disabled=true;status.textContent="Creating Passkey…";const raw=await api("/api/auth/me/passkeys/options",{method:"POST"});const c=await navigator.credentials.create({publicKey:pk(raw)});if(!c)throw new Error("Passkey creation was cancelled.");await api("/api/auth/me/passkeys/verify",{method:"POST",body:JSON.stringify({challenge:(raw.publicKey||raw).challenge,credential:serialise(c)})});status.textContent="Passkey added.";await load();}catch(e){status.textContent=e.message;}finally{add.disabled=false;}};
+    document.getElementById("openProfile")?.addEventListener("click",()=>setTimeout(load,0));
+  })();
+  </script>
+
   <script src="scripts/site-ui.js?v=20260808-3"></script>
 </body>
 </html>
