@@ -219,7 +219,7 @@
     if (!select) return;
     const selected = select.value;
     select.innerHTML = (subjects || []).map((subject) => `
-      <option value="${safeText(subject.code)}">${safeText(`${subject.code} - ${getLanguage() === "en" ? subject.name : subject.nameZh || subject.name}`)}</option>
+      <option value="${safeText(subject.code)}"${subject.code === "9618" ? " disabled" : ""}>${safeText(`${subject.code} - ${getLanguage() === "en" ? subject.name : subject.nameZh || subject.name}`)}</option>
     `).join("");
     if ([...select.options].some((option) => option.value === selected)) select.value = selected;
     const body = byId("adminSubjectsBody");
@@ -227,15 +227,17 @@
       <tr>
         <td class="mono">${safeText(subject.code)}</td>
         <td>${safeText(getLanguage() === "en" ? subject.name : subject.nameZh || subject.name)}</td>
+        <td>${safeText(subject.qualification || "")}</td>
         <td>${safeText(t(subject.active ? "adminSubjectActive" : "adminSubjectInactive"))}</td>
         <td>${safeText(subject.questionCount)}</td>
+        <td>${safeText(subject.code === "9618" ? `${t("subjectResourcesPending")}: ${["syllabus", "textbooks", "papers", "questions"].map((key) => `${t({syllabus:"subjectSyllabus",textbooks:"subjectTextbooks",papers:"subjectPapers",questions:"subjectQuestions"}[key])}:${subject.contentCounts?.[key] || 0}`).join(" · ")}` : "")} ${subject.code === "9618" ? safeText(getLanguage() === "en" ? "Imported from a prepared resource package." : "资源由整理后的数据包导入。") : ""}</td>
         <td>${actionButtons([
           `<button type="button" class="btn-secondary" data-subject-questions="${safeText(subject.code)}">${safeText(t("adminViewQuestions"))}</button>`,
           `<button type="button" class="btn-secondary" data-subject-active="${safeText(subject.code)}" data-active="${subject.active ? "1" : "0"}">${safeText(t(subject.active ? "adminDisableSubject" : "adminEnableSubject"))}</button>`,
           `<button type="button" class="btn-danger" data-subject-delete="${safeText(subject.code)}">${safeText(t("adminDeleteSubject"))}</button>`,
         ])}</td>
       </tr>
-    `).join("") : `<tr><td colspan="5" class="tip">${safeText(t("adminNoSubjects"))}</td></tr>`;
+    `).join("") : `<tr><td colspan="7" class="tip">${safeText(t("adminNoSubjects"))}</td></tr>`;
     body.querySelectorAll("[data-subject-questions]").forEach((button) => {
       button.addEventListener("click", () => showSubjectQuestions(button.dataset.subjectQuestions));
     });
@@ -783,6 +785,7 @@
       name: byId("adminSubjectName").value.trim(),
       nameZh: byId("adminSubjectNameZh").value.trim(),
       assetKey: byId("adminSubjectAssetKey").value.trim(),
+      qualification: byId("adminSubjectQualification").value,
     };
     button.disabled = true;
     try {

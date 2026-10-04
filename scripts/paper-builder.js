@@ -1,5 +1,38 @@
 import { buildPaperBlueprint, buildBlueprintIssues, compareEquivalentPapers } from "../shared/paper-blueprint.js";
-import { createAnswerKeyPdf, createQuestionPaperPdf, createPaperZip, createEquivalentPaperZip } from "./paper-export.js";
+import { createAnswerKeyPdf, createMarkSchemePdf, createQuestionPaperPdf, createPaperZip, createEquivalentPaperZip } from "./paper-export.js";
+import { hasStructuredContent, normalizeStructuredDocument, orderedImages, pairedMarkScheme, structuredDisplayBlocks } from "../shared/structured-content.js";
+
+export function isStructuredQuestion(question) {
+  return String(question?.questionType ?? question?.question_type ?? "mcq").trim().toLowerCase() === "structured";
+}
+
+export function isFullParentQuestion(question) {
+  if (!question || question.isChild === true || question.isParent === false) return false;
+  const ownId = String(question.id || question.questionId || "");
+  for (const key of ["parentQuestionId", "parent_question_id", "parentId", "parent_id"]) {
+    if (question[key] != null && String(question[key]).trim() && String(question[key]).trim() !== ownId) return false;
+  }
+  return true;
+}
+
+export function filterFullParentQuestions(questions = []) {
+  return questions.filter(isFullParentQuestion);
+}
+
+export function normalizeBuilderQuestion(question = {}) {
+  if (!isStructuredQuestion(question)) return { ...question };
+  const maxMarks = question.maxMarks ?? question.max_marks ?? null;
+  return {
+    ...question,
+    questionType: "structured",
+    maxMarks,
+    marks: maxMarks,
+    answer: null,
+    content: normalizeStructuredDocument(question.content),
+    markScheme: normalizeStructuredDocument(question.markScheme),
+    images: Array.isArray(question.images) ? question.images : [],
+  };
+}
 
 export function createPaperBuilderState() {
   return {
@@ -10,18 +43,31 @@ export function createPaperBuilderState() {
 }
 
 function basketItem(question) {
+  question = normalizeBuilderQuestion(question);
   const reviewed = question.mappingStatus === "reviewed";
   return {
     ...question, id: question.id || question.questionId,
-    marks: Number.isInteger(question.marks) && question.marks > 0 ? question.marks : 1,
+    marks: isStructuredQuestion(question)
+      ? question.maxMarks
+      : Number.isInteger(question.marks) && question.marks > 0 ? question.marks : 1,
     sectionId: reviewed ? question.sectionId || "" : "",
     sectionCode: reviewed ? question.sectionCode || "" : "",
   };
 }
 
+function requireOfficialMarks(item) {
+  if (isStructuredQuestion(item) && (!Number.isInteger(item.maxMarks) || item.maxMarks <= 0)) {
+    const error = new Error("paperBuilderMissingOfficialMarks");
+    error.questionId = item.id || item.questionId || "";
+    throw error;
+  }
+}
+
 export function addBasketItem(state, question) {
+  if (!isFullParentQuestion(question)) return false;
   const item = basketItem(question);
   if (state.items.some((current) => current.id === item.id)) return false;
+  requireOfficialMarks(item);
   if (state.items.length >= 200) throw new Error("paperBuilderBasketLimit");
   if (state.subjectCode && item.subjectCode !== state.subjectCode) throw new Error("paperBuilderSameSubject");
   state.subjectCode = item.subjectCode;
@@ -32,7 +78,7 @@ export function addBasketItem(state, question) {
 
 export function addBasketItems(state, questions) {
   const existing = new Set(state.items.map((item) => item.id));
-  const additions = questions.filter((question) => {
+  const additions = filterFullParentQuestions(questions).filter((question) => {
     const id = question.id || question.questionId;
     if (existing.has(id)) return false;
     existing.add(id);
@@ -43,6 +89,7 @@ export function addBasketItems(state, questions) {
   if (additions.some((question) => question.subjectCode !== subjectCode)) {
     throw new Error("paperBuilderSameSubject");
   }
+  for (const question of additions) requireOfficialMarks(normalizeBuilderQuestion(question));
   for (const question of additions) addBasketItem(state, question);
   return additions.length;
 }
@@ -79,7 +126,7 @@ export function serializeSavedPaper(state) {
 }
 
 if (typeof window !== "undefined") {
-  window.PaperExport = { createAnswerKeyPdf, createQuestionPaperPdf, createPaperZip, createEquivalentPaperZip };
+  window.PaperExport = { createAnswerKeyPdf, createMarkSchemePdf, createQuestionPaperPdf, createPaperZip, createEquivalentPaperZip };
   initializePaperBuilder();
 }
 
@@ -100,6 +147,8 @@ function initializePaperBuilder() {
   };
   const t = (key, vars) => window.ALevelI18n?.t?.(key, vars) || key;
   const isChinese = () => window.ALevelI18n?.getLanguage?.() === "zh-CN";
+  const structuredOnly = () => paper.subjectCode === "9618";
+  const builderTitle = () => t(structuredOnly() ? "paperBuilderStructuredTitle" : "paperBuilderTitle");
   const localized = (value, en = "titleEn", zh = "titleZh") => isChinese()
     ? value?.[zh] || value?.[en] || "" : value?.[en] || value?.[zh] || "";
   const sectionLabel = (item) => [item.sectionCode, localized(item)].filter(Boolean).join(" ");
@@ -156,7 +205,7 @@ function initializePaperBuilder() {
         window.location.href = "./login.html";
         return;
       }
-      const message = error.message?.startsWith("paperBuilder") ? t(error.message) : error.message;
+      const message = error.message?.startsWith("paperBuilder") ? t(error.message, { questionId: error.questionId }) : error.message;
       setStatus(t("paperBuilderFailed", { message }), true);
     } finally {
       view.busy = false;
@@ -173,6 +222,7 @@ function initializePaperBuilder() {
   }
 
   function setMode(mode) {
+    if (mode === "smart" && structuredOnly()) mode = "manual";
     view.mode = mode;
     document.querySelectorAll("[data-panel]").forEach((node) => { node.hidden = node.dataset.panel !== mode; });
     document.querySelectorAll("[data-mode]").forEach((node) => {
@@ -190,6 +240,39 @@ function initializePaperBuilder() {
         select.add(new Option(localized(subject, "name", "nameZh") + " · " + subject.code, subject.code));
       }
       select.value = paper.subjectCode;
+    }
+    renderCapabilities();
+  }
+
+  function renderCapabilities() {
+    const manualOnly = structuredOnly();
+    for (const node of document.querySelectorAll("[data-i18n='paperBuilderTitle'], [data-i18n='paperBuilderStructuredTitle']")) {
+      node.dataset.i18n = manualOnly ? "paperBuilderStructuredTitle" : "paperBuilderTitle";
+      node.textContent = builderTitle();
+    }
+    for (const node of document.querySelectorAll("[data-i18n='paperBuilderSubtitle'], [data-i18n='paperBuilderStructuredSubtitle']")) {
+      node.dataset.i18n = manualOnly ? "paperBuilderStructuredSubtitle" : "paperBuilderSubtitle";
+      node.textContent = t(node.dataset.i18n);
+    }
+    const back = document.querySelector(".paper-builder-heading > a");
+    back.href = manualOnly ? "./subject.html?subject=9618" : "./generate.html";
+    back.dataset.i18n = manualOnly ? "paperBuilderBackToSubject" : "paperBuilderBack";
+    back.textContent = t(back.dataset.i18n);
+    byId("paperBuilderModeSmart").hidden = manualOnly;
+    byId("paperBuilderEquivalent").hidden = manualOnly;
+    if (manualOnly && view.mode === "smart") setMode("manual");
+    const paperNumber = byId("paperBuilderPaperNumber");
+    const selectedPaper = paperNumber.value;
+    paperNumber.replaceChildren(new Option(t("paperBuilderAll"), ""));
+    for (const number of manualOnly ? [1, 2, 3] : [1, 2]) paperNumber.add(new Option("Paper " + number, String(number)));
+    paperNumber.value = selectedPaper;
+    byId("paperBuilderSearch").placeholder = manualOnly ? "9618_s24_qp_11" : "0625_s23_qp_21";
+    const notice = byId("paperBuilderStructuredNotice");
+    if (notice) {
+      notice.hidden = !manualOnly;
+      notice.textContent = isChinese()
+        ? "9618 仅支持选择完整大题。官方分值不可修改；下载包含试卷和评分方案 PDF。"
+        : "9618 selects complete parent questions. Official marks are fixed; downloads contain the question paper and mark scheme PDFs.";
     }
   }
 
@@ -244,7 +327,7 @@ function initializePaperBuilder() {
     }
     paper = createPaperBuilderState();
     paper.subjectCode = code;
-    paper.title = t("paperBuilderTitle") + " · " + code;
+    paper.title = builderTitle() + " · " + code;
     clearEquivalent();
     history.replaceState(null, "", window.location.pathname + "?subject=" + encodeURIComponent(code));
     renderDocument();
@@ -271,7 +354,7 @@ function initializePaperBuilder() {
     const result = await api.searchPaperBuilderQuestions(view.token, {
       ...filters, subjectCode: paper.subjectCode, page, pageSize: 20,
     });
-    view.results = result.items;
+    view.results = filterFullParentQuestions((result.items || []).map(normalizeBuilderQuestion));
     view.page = result.page;
     view.pages = result.totalPages;
     view.total = result.total;
@@ -301,7 +384,8 @@ function initializePaperBuilder() {
   }
 
   function appendContent(root, item, compact = false) {
-    const images = (item.images || []).map(imageUrl).filter(Boolean);
+    const fragments = isStructuredQuestion(item) && item.content?.images?.length ? item.content.images : item.images || [];
+    const images = orderedImages(fragments).map(imageUrl).filter(Boolean);
     if (images.length) {
       for (const source of compact ? images.slice(0, 1) : images) {
         const image = element("img", compact ? "paper-builder-result-image" : "");
@@ -319,7 +403,10 @@ function initializePaperBuilder() {
         }, { once: true });
         root.append(image);
       }
-    } else {
+    }
+    if (isStructuredQuestion(item)) {
+      if (!images.length) appendStructuredBlocks(root, item.content, compact);
+    } else if (!images.length) {
       root.append(element("p", "", item.stem));
       const options = Array.isArray(item.options)
         ? item.options.map((text, index) => [String.fromCharCode(65 + index), text])
@@ -327,6 +414,27 @@ function initializePaperBuilder() {
       const list = element("div", "paper-builder-options");
       for (const [letter, text] of options) list.append(element("div", "", letter + ". " + text));
       root.append(list);
+    }
+  }
+
+  function appendStructuredBlocks(root, content, compact = false) {
+    const blocks = structuredDisplayBlocks(content);
+    for (const block of (compact ? blocks.slice(0, 2) : blocks)) {
+      if (block.type === "table") {
+        const table = element("table", "paper-builder-structured-table");
+        for (const [index, values] of [block.headers, ...(block.rows || [])].filter(Array.isArray).entries()) {
+          const row = element("tr");
+          for (const value of values) row.append(element(index === 0 && block.headers ? "th" : "td", "", String(value)));
+          table.append(row);
+        }
+        root.append(table);
+      } else if (block.type === "image") {
+        appendContent(root, { questionType: "mcq", images: [block] }, compact);
+      } else if (String(block.text || "").trim()) {
+        const node = element(block.type === "code" ? "pre" : "p", "paper-builder-structured-block", block.text);
+        if (Number(block.depth) > 0) node.style.marginInlineStart = Math.min(5, Number(block.depth)) * 12 + "px";
+        root.append(node);
+      }
     }
   }
 
@@ -344,7 +452,7 @@ function initializePaperBuilder() {
   function renderResults() {
     const root = byId("paperBuilderResults");
     root.replaceChildren();
-    byId("paperBuilderManualCount").textContent = t("paperBuilderResultCount", { count: view.total });
+    byId("paperBuilderManualCount").textContent = t(structuredOnly() ? "paperBuilderStructuredResultCount" : "paperBuilderResultCount", { count: view.total });
     if (!view.results.length) root.append(element("p", "paper-builder-empty", t("paperBuilderNoResults")));
     for (const item of view.results) {
       const inBasket = paper.items.some((current) => current.id === item.id);
@@ -369,7 +477,7 @@ function initializePaperBuilder() {
           else { addBasketItem(paper, item); view.selectedIds.delete(item.id); }
           markChanged();
           setStatus("");
-        } catch (error) { setStatus(t(error.message), true); }
+        } catch (error) { setStatus(t(error.message, { questionId: error.questionId }), true); }
       }));
       card.append(heading);
       const chapter = view.sections.find((section) => section.id === item.sectionId);
@@ -381,13 +489,23 @@ function initializePaperBuilder() {
       card.append(element("p", "paper-builder-result-meta", section + (tentative ? " · " + t("paperBuilderChapterNeedsCheck") : "")));
       appendContent(card, item, true);
       const actions = element("div", "paper-builder-result-actions");
-      const answer = element("span", "paper-builder-answer", String.fromCharCode(65 + Number(item.answer)));
-      answer.hidden = true;
-      const toggle = button(t("paperBuilderShowAnswer"), () => {
-        answer.hidden = !answer.hidden;
-        toggle.textContent = t(answer.hidden ? "paperBuilderShowAnswer" : "paperBuilderHideAnswer");
-      });
-      actions.append(toggle, answer);
+      if (!isStructuredQuestion(item)) {
+        const answer = element("span", "paper-builder-answer", String.fromCharCode(65 + Number(item.answer)));
+        answer.hidden = true;
+        const toggle = button(t("paperBuilderShowAnswer"), () => {
+          answer.hidden = !answer.hidden;
+          toggle.textContent = t(answer.hidden ? "paperBuilderShowAnswer" : "paperBuilderHideAnswer");
+        });
+        actions.append(toggle, answer);
+      } else {
+        actions.append(element("span", "tip", (isChinese() ? "官方分值：" : "Official marks: ") + item.maxMarks));
+        actions.append(element("span", "tip", t("difficultyFilterLabel") + ": " + (item.difficulty || t("paperBuilderUnlabelled"))));
+        const markScheme = element("details", "paper-builder-mark-scheme");
+        markScheme.append(element("summary", "", isChinese() ? "查看评分方案" : "View mark scheme"));
+        if (hasStructuredContent(item.markScheme)) appendContent(markScheme, { ...item, content: pairedMarkScheme(item.markScheme, item.content), images: [] });
+        else markScheme.append(element("p", "paper-builder-status-error", isChinese() ? "缺少评分方案，无法导出。" : "Mark scheme missing; export is unavailable."));
+        actions.append(markScheme);
+      }
       const details = element("details");
       details.append(element("summary", "", t("paperBuilderProvenance")));
       details.append(element("p", "tip", [
@@ -457,6 +575,7 @@ function initializePaperBuilder() {
   }
 
   async function generateSmart() {
+    if (structuredOnly()) throw new Error("9618 supports manual selection only.");
     const selections = Object.entries(paper.settings.targetSections).map(([sectionId, target]) => ({
       coursebookSectionId: sectionId,
       count: Number(target) - paper.items.filter((item) => item.sectionId === sectionId).length,
@@ -481,14 +600,19 @@ function initializePaperBuilder() {
     setStatus("");
   }
 
-  function paperIssues(items = paper.items, settings = paper.settings) {
+  function paperIssues(items = paper.items, settings = paper.settings, documentKind = "both") {
     const blueprint = buildPaperBlueprint(items);
     const issues = buildBlueprintIssues(blueprint, { targetSections: settings.targetSections || {} });
-    const invalid = items.filter((item) => (
-      item.active === false || (item.sourceStatus && item.sourceStatus !== "published") || !item.paperSlug || !item.questionNo
-      || !Number.isInteger(Number(item.answer)) || Number(item.answer) < 0 || Number(item.answer) > 3
-      || (!(item.images || []).some(imageUrl) && !String(item.stem || "").trim())
-    ));
+    const invalid = items.filter((item) => {
+      if (item.active === false || (item.sourceStatus && item.sourceStatus !== "published") || !item.paperSlug || !item.questionNo || !isFullParentQuestion(item)) return true;
+      if (isStructuredQuestion(item)) {
+        return !Number.isInteger(Number(item.maxMarks)) || Number(item.maxMarks) <= 0
+          || (documentKind !== "mark-scheme" && !(item.images || []).some(imageUrl) && !hasStructuredContent(item.content))
+          || (documentKind !== "question" && !hasStructuredContent(item.markScheme));
+      }
+      return !Number.isInteger(Number(item.answer)) || Number(item.answer) < 0 || Number(item.answer) > 3
+        || (!(item.images || []).some(imageUrl) && !String(item.stem || "").trim());
+    });
     if (invalid.length) issues.unshift({
       code: "INVALID_QUESTION", blocking: true, questionIds: invalid.map((item) => item.id), details: {},
     });
@@ -505,12 +629,12 @@ function initializePaperBuilder() {
     const root = byId("paperBuilderBlueprintContent");
     root.replaceChildren();
     const { blueprint, issues } = paperIssues();
-    blueprintRow(root, t("paperBuilderQuestionCount"), blueprint.questionCount);
+    blueprintRow(root, t(structuredOnly() ? "paperBuilderStructuredQuestionCount" : "paperBuilderQuestionCount"), blueprint.questionCount);
     blueprintRow(root, t("paperBuilderTotalMarks"), blueprint.totalMarks);
     const durationKnown = paper.items.length && paper.items.every((item) => Number(item.estimatedSeconds) > 0);
     blueprintRow(root, t("paperBuilderEstimated"), durationKnown
       ? t("paperBuilderMinutes", { count: Math.ceil(blueprint.estimatedSeconds / 60) }) : t("paperBuilderUnavailable"));
-    blueprintRow(root, t("paperBuilderAnswerDistribution"), ["A", "B", "C", "D"].map((letter) => letter + " " + blueprint.answerDistribution[letter]).join(" / "));
+    if (!structuredOnly() && blueprint.mcqQuestionCount) blueprintRow(root, t("paperBuilderAnswerDistribution"), ["A", "B", "C", "D"].map((letter) => letter + " " + blueprint.answerDistribution[letter]).join(" / "));
     const distribution = (record) => Object.entries(record).map(([key, value]) => key + ": " + value).join(" · ") || "—";
     blueprintRow(root, t("paperBuilderYears"), distribution(blueprint.years));
     blueprintRow(root, t("paperBuilderSources"), Object.values(blueprint.sources).map((source) => source.paperSlug + ": " + source.count).join(" · ") || "—");
@@ -538,7 +662,7 @@ function initializePaperBuilder() {
           ? paper.items.filter((item) => String.fromCharCode(65 + Number(item.answer)) === details.answer).map((item) => item.id) : []
       );
       const id = affected.find((questionId) => paper.items.some((item) => item.id === questionId && item.sectionId));
-      if (id) node.append(button(t("paperBuilderReplace"), () => perform(() => replaceQuestion(id))));
+      if (id && !structuredOnly()) node.append(button(t("paperBuilderReplace"), () => perform(() => replaceQuestion(id))));
       root.append(node);
     }
     return issues.some((issue) => issue.blocking);
@@ -570,12 +694,14 @@ function initializePaperBuilder() {
       actions.append(
         button("↑", () => { moveBasketItem(paper, item.id, index - 1); markChanged(); }, index === 0),
         button("↓", () => { moveBasketItem(paper, item.id, index + 1); markChanged(); }, index === paper.items.length - 1),
-        button(t("paperBuilderReplace"), () => perform(() => replaceQuestion(item.id)), !item.sectionId),
         button(t("paperBuilderRemove"), () => { removeBasketItem(paper, item.id); markChanged(); })
       );
+      if (!structuredOnly()) actions.append(button(t("paperBuilderReplace"), () => perform(() => replaceQuestion(item.id)), !item.sectionId));
       actions.children[0].setAttribute("aria-label", t("paperBuilderUp"));
       actions.children[1].setAttribute("aria-label", t("paperBuilderDown"));
-      const label = element("label", "paper-builder-marks-label", t("paperBuilderMarks"));
+      const label = element(isStructuredQuestion(item) ? "p" : "label", "paper-builder-marks-label", isStructuredQuestion(item)
+        ? (isChinese() ? "官方分值：" : "Official marks: ") + item.maxMarks : t("paperBuilderMarks"));
+      if (!isStructuredQuestion(item)) {
       const input = element("input");
       input.type = "number";
       input.min = "1";
@@ -587,23 +713,31 @@ function initializePaperBuilder() {
         markChanged();
       });
       label.append(input);
+      }
       card.append(actions, label);
       root.append(card);
     }
     if (!paper.items.length) root.append(element("p", "paper-builder-empty", t("paperBuilderEmptyBasket")));
-    byId("paperBuilderBasketSummary").textContent = t("paperBuilderBasketSummary", { count: paper.items.length, marks });
+    byId("paperBuilderBasketSummary").textContent = t(structuredOnly() ? "paperBuilderStructuredBasketSummary" : "paperBuilderBasketSummary", { count: paper.items.length, marks });
     byId("paperBuilderBasketToggle").textContent = t("paperBuilderBasketTitle") + " (" + paper.items.length + ")";
     byId("paperBuilderDirty").hidden = !paper.dirty;
     const blocking = renderBlueprint();
     byId("paperBuilderSave").disabled = view.busy || !paper.subjectCode || !paper.title.trim() || (paper.status === "final" && blocking);
     byId("paperBuilderPreview").disabled = view.busy || !paper.items.length;
     byId("paperBuilderDownload").disabled = view.busy || !paper.items.length || blocking;
+    byId("paperBuilderDownloadQuestion").disabled = view.busy || !paper.items.length
+      || paperIssues(paper.items, paper.settings, "question").issues.some((issue) => issue.blocking);
+    byId("paperBuilderDownloadMarkScheme").disabled = view.busy || !paper.items.length
+      || paperIssues(paper.items, paper.settings, "mark-scheme").issues.some((issue) => issue.blocking);
+    byId("paperBuilderDownloadQuestion").textContent = isChinese() ? "下载试卷 PDF" : "Download question paper PDF";
+    byId("paperBuilderDownloadMarkScheme").textContent = isChinese() ? "下载评分方案 PDF" : "Download mark scheme PDF";
     byId("paperBuilderEquivalent").disabled = view.busy || !paper.savedId || paper.dirty || !paper.items.length || blocking || paper.items.some((item) => !item.sectionId);
     byId("paperBuilderClear").disabled = view.busy || !paper.items.length;
     byId("paperBuilderSort").disabled = view.busy || !paper.items.length;
   }
 
   async function replaceQuestion(id) {
+    if (structuredOnly()) throw new Error("9618 supports manual selection only.");
     const original = paper.items.find((item) => item.id === id);
     if (!original?.sectionId) throw new Error("paperBuilderNeedSection");
     const ids = new Set(paper.items.map((item) => item.id));
@@ -687,7 +821,7 @@ function initializePaperBuilder() {
       card.append(element("h3", "", saved.title));
       card.append(element("p", "tip", [
         saved.paperCode, saved.subjectCode,
-        t("paperBuilderBasketSummary", { count: saved.questionCount, marks: saved.totalMarks }),
+        t(saved.subjectCode === "9618" ? "paperBuilderStructuredBasketSummary" : "paperBuilderBasketSummary", { count: saved.questionCount, marks: saved.totalMarks }),
         t(saved.status === "final" ? "paperBuilderFinal" : "paperBuilderDraft"),
         saved.updatedAt?.slice(0, 10),
       ].filter(Boolean).join(" · ")));
@@ -766,9 +900,9 @@ function initializePaperBuilder() {
     return new Uint8Array(await response.arrayBuffer());
   }
 
-  async function paperPdfs(value) {
+  async function paperPdfs(value, documentKind = "both") {
     const items = value.items || [];
-    if (!items.length || paperIssues(items, value.settings || {}).issues.some((issue) => issue.blocking)) {
+    if (!items.length || paperIssues(items, value.settings || {}, documentKind).issues.some((issue) => issue.blocking)) {
       throw new Error("paperBuilderExportBlocked");
     }
     const subject = view.subjects.find((item) => item.code === value.subjectCode);
@@ -777,8 +911,8 @@ function initializePaperBuilder() {
       subjectName: subject?.name || value.subjectCode, loadImage,
     };
     const groups = orderedGroups(items);
-    const questionPdf = await createQuestionPaperPdf(groups, metadata);
-    const answerPdf = await createAnswerKeyPdf(groups, metadata);
+    const questionPdf = documentKind === "mark-scheme" ? null : await createQuestionPaperPdf(groups, metadata);
+    const answerPdf = documentKind === "question" ? null : await createAnswerKeyPdf(groups, metadata);
     return { questionPdf, answerPdf };
   }
 
@@ -800,7 +934,17 @@ function initializePaperBuilder() {
     setStatus(t("paperBuilderDownloadReady", { questions: questionPdf.questionCount, answers: answerPdf.answerCount }));
   }
 
+  async function downloadSinglePdf(documentKind, value = paper) {
+    setStatus(t("paperBuilderBuildingPdf"));
+    const pdfs = await paperPdfs(value, documentKind);
+    const result = documentKind === "question" ? pdfs.questionPdf : pdfs.answerPdf;
+    saveArchive(new Blob([result.bytes], { type: "application/pdf" }),
+      "ExPassway-" + (value.paperCode || value.subjectCode) + "-" + documentKind + ".pdf");
+    setStatus(isChinese() ? "PDF 已生成。" : "PDF generated.");
+  }
+
   async function generateEquivalent(allowSimilarGroups = false) {
+    if (structuredOnly()) throw new Error("9618 supports manual selection only.");
     if (!paper.savedId || paper.dirty) throw new Error("paperBuilderSavedFirst");
     clearEquivalent();
     try {
@@ -896,13 +1040,15 @@ function initializePaperBuilder() {
         view.selectedIds.clear();
         if (count) markChanged();
         setStatus(t("paperBuilderBulkAdded", { count }));
-      } catch (error) { setStatus(t(error.message), true); }
+      } catch (error) { setStatus(t(error.message, { questionId: error.questionId }), true); }
     });
     byId("generateChapterPaper").addEventListener("click", () => perform(generateSmart));
     byId("paperBuilderSave").addEventListener("click", () => perform(savePaper));
     byId("paperBuilderPreview").addEventListener("click", showPreview);
     byId("paperBuilderClosePreview").addEventListener("click", () => { byId("paperBuilderPreviewSection").hidden = true; });
     byId("paperBuilderDownload").addEventListener("click", () => perform(() => downloadPaper()));
+    byId("paperBuilderDownloadQuestion").addEventListener("click", () => perform(() => downloadSinglePdf("question")));
+    byId("paperBuilderDownloadMarkScheme").addEventListener("click", () => perform(() => downloadSinglePdf("mark-scheme")));
     byId("paperBuilderEquivalent").addEventListener("click", () => perform(() => generateEquivalent(false)));
     byId("paperBuilderRelaxEquivalent").addEventListener("click", () => perform(() => generateEquivalent(true)));
     byId("paperBuilderDownloadPair").addEventListener("click", () => perform(async () => {
@@ -928,7 +1074,7 @@ function initializePaperBuilder() {
       paper = createPaperBuilderState();
       paper.subjectCode = code;
       paper.curriculumVersionId = view.catalog?.version?.id || "";
-      paper.title = t("paperBuilderTitle") + " · " + code;
+      paper.title = builderTitle() + " · " + code;
       clearEquivalent();
       renderDocument();
       resetFilters();
@@ -972,6 +1118,12 @@ function initializePaperBuilder() {
       const subject = view.subjects.find((item) => item.code === requested) || (requested ? null : view.subjects[0]);
       if (!subject) { setStatus(t("paperBuilderNoSubjects"), true); return; }
       await changeSubject(subject.code);
+      const requestedSection = params.get("sectionId");
+      if (requestedSection && view.sections.some((section) => section.id === requestedSection)) {
+        byId("paperBuilderSection").value = requestedSection;
+        paper.settings.filters = readFilters();
+        await searchQuestions(1);
+      }
     });
   }
 

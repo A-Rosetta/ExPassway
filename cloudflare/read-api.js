@@ -1,3 +1,5 @@
+import { AuthError, requireCurrentUser } from "./auth-api.js";
+
 const JSON_HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Content-Type": "application/json; charset=utf-8",
@@ -62,6 +64,21 @@ function apiTimestamp(value) {
   return Number.isNaN(date.getTime()) ? value : date.toISOString();
 }
 
+export function subjectCapabilities(code) {
+  const structured = code === "9618";
+  return {
+    papers: true,
+    structured,
+    components: structured,
+    resources: structured,
+    manualPaperBuilder: true,
+    smartPaperBuilder: !structured,
+    equivalentPaperBuilder: !structured,
+    onlinePractice: !structured,
+    aiHints: !structured,
+  };
+}
+
 function mapSubject(row) {
   return {
     code: row.code,
@@ -73,8 +90,44 @@ function mapSubject(row) {
     active: Boolean(row.active),
     paperCount: Number(row.paper_count || 0),
     questionCount: Number(row.question_count || 0),
+    capabilities: subjectCapabilities(row.code),
     createdAt: apiTimestamp(row.created_at),
     updatedAt: apiTimestamp(row.updated_at),
+  };
+}
+
+function mapComponent(row) {
+  return {
+    id: `${row.subject_code}-${row.paper_number}`,
+    subjectCode: row.subject_code,
+    paperNumber: Number(row.paper_number),
+    name: row.name,
+    nameZh: row.name_zh || "",
+    paperType: row.paper_type,
+    questionType: row.question_type,
+    durationMinutes: Number(row.duration_minutes),
+    totalMarks: Number(row.total_marks),
+    enabled: Boolean(row.enabled),
+    capabilities: parseJson(row.capabilities, {}),
+  };
+}
+
+function mapResource(row) {
+  return {
+    id: row.id,
+    componentId: null,
+    kind: row.kind,
+    title: row.title,
+    titleZh: row.title_zh || "",
+    version: row.version || "",
+    paperSlug: row.paper_slug || null,
+    mimeType: row.content_type,
+    status: row.status,
+    metadata: parseJson(row.metadata, {}),
+    examYearStart: row.exam_year_start == null ? null : Number(row.exam_year_start),
+    examYearEnd: row.exam_year_end == null ? null : Number(row.exam_year_end),
+    // Resource bytes are served through the authenticated content endpoint.
+    downloadUrl: `/api/content/resources/${encodeURIComponent(row.id)}`,
   };
 }
 
@@ -95,6 +148,7 @@ function mapPaper(row) {
     durationMinutes: Number(row.duration_minutes),
     sourceQuestionCount: Number(row.source_question_count),
     validQuestionCount: Number(row.valid_question_count),
+    totalMarks: Number(row.total_marks ?? row.valid_question_count),
     discountedQuestions: parseJson(row.discounted_questions, []),
     qpFileName: row.qp_file_name,
     msFileName: row.ms_file_name,
@@ -108,6 +162,7 @@ function mapPaper(row) {
 }
 
 function mapQuestion(row) {
+  const questionType = row.question_type || "mcq";
   return {
     id: row.id,
     board: row.board,
@@ -121,7 +176,11 @@ function mapQuestion(row) {
     year: row.year,
     stem: row.stem,
     options: parseJson(row.options, []),
-    answer: Number(row.answer),
+    answer: questionType === "mcq" && row.answer != null ? Number(row.answer) : null,
+    questionType,
+    maxMarks: Number(row.max_marks || 1),
+    content: parseJson(row.structured_content, {}),
+    markScheme: parseJson(row.mark_scheme, {}),
     images: parseJson(row.images, []),
     skills: parseJson(row.skills, []),
     hints: parseJson(row.hints, []),
@@ -140,12 +199,85 @@ async function listPublishedSubjects(db) {
       COUNT(DISTINCT p.slug) AS paper_count,
       COALESCE(SUM(p.valid_question_count), 0) AS question_count
     FROM exam_subjects s
-    JOIN exam_papers p ON p.subject_code = s.code AND p.status = 'published'
+    LEFT JOIN exam_papers p ON p.subject_code = s.code AND p.status = 'published'
     WHERE s.active = 1
     GROUP BY s.code
     ORDER BY s.qualification, s.name
   `).all();
   return result.results.map(mapSubject);
+}
+
+async function getSubjectOverview(db, subjectCode) {
+  const subject = await db.prepare(`
+    SELECT s.*, COUNT(DISTINCT p.slug) AS paper_count,
+      COALESCE(SUM(p.valid_question_count), 0) AS question_count
+    FROM exam_subjects s
+    LEFT JOIN exam_papers p ON p.subject_code = s.code AND p.status = 'published'
+    WHERE s.code = ? AND s.active = 1
+    GROUP BY s.code
+    LIMIT 1
+  `).bind(subjectCode).first();
+  if (!subject) return null;
+  const [components, resources, papers, questions] = await Promise.all([
+    db.prepare(`SELECT * FROM exam_subject_components
+      WHERE subject_code = ? AND enabled = 1 ORDER BY paper_number`).bind(subjectCode).all(),
+    db.prepare(`SELECT * FROM subject_resources
+      WHERE subject_code = ? AND status = 'published' ORDER BY created_at, id`).bind(subjectCode).all(),
+    listPublishedPapers(db, subjectCode),
+    db.prepare(`SELECT question.* FROM question_bank question
+      JOIN exam_papers paper ON paper.slug = question.paper_slug
+      WHERE question.subject_code = ? AND question.active = 1 AND paper.status = 'published'
+        AND (question.subject_code <> '9618' OR (paper.paper_number BETWEEN 1 AND 3 AND question.question_type = 'structured'))
+      ORDER BY paper.year, paper.season, paper.paper_number, paper.variant, question.question_no`)
+      .bind(subjectCode).all(),
+  ]);
+  const mappedResources = resources.results.map(mapResource);
+  const syllabusResources = mappedResources.filter((item) => item.kind === "syllabus");
+  const syllabus = syllabusResources.flatMap((item) => {
+    const metadata = item.metadata;
+    const directory = metadata.directory ?? metadata.sections ?? metadata.chapters;
+    return Array.isArray(directory) ? directory : [];
+  });
+  const textbooks = mappedResources.filter((item) => item.kind === "textbook").map((item) => ({
+    ...item,
+    chapters: item.metadata.directory ?? item.metadata.chapters ?? item.metadata.sections ?? [],
+    chapterMappings: item.metadata.chapterMappings || [],
+  }));
+  const counts = {
+    syllabus: syllabusResources.length,
+    textbooks: textbooks.length,
+    papers: papers.length,
+    questions: questions.results.length,
+    components: components.results.length,
+    resources: mappedResources.length,
+  };
+  return {
+    subject: mapSubject(subject),
+    components: components.results.map(mapComponent),
+    resources: mappedResources,
+    syllabusResources,
+    syllabus,
+    textbooks,
+    papers,
+    questions: questions.results.map(mapQuestion),
+    counts,
+    readiness: {
+      syllabus: counts.syllabus > 0,
+      textbooks: counts.textbooks > 0,
+      papers: counts.papers > 0,
+      questions: counts.questions > 0,
+      manualPaperBuilder: counts.questions > 0,
+    },
+  };
+}
+
+function capabilities() {
+  return {
+    catalog: { papers: true, structured: true, components: true, resources: true },
+    subjects: {
+      "9618": subjectCapabilities("9618"),
+    },
+  };
 }
 
 async function listPublishedPapers(db, subjectCode) {
@@ -172,10 +304,11 @@ async function getPublishedPaper(db, paperSlug) {
 
 async function listPaperQuestions(db, paperSlug) {
   const result = await db.prepare(`
-    SELECT *
-    FROM question_bank
-    WHERE active = 1 AND paper_slug = ?
-    ORDER BY question_no
+    SELECT question.*
+    FROM question_bank question JOIN exam_papers paper ON paper.slug = question.paper_slug
+    WHERE question.active = 1 AND question.paper_slug = ?
+      AND (question.subject_code <> '9618' OR (paper.paper_number BETWEEN 1 AND 3 AND question.question_type = 'structured'))
+    ORDER BY question.question_no
   `).bind(paperSlug).all();
   return result.results.map(mapQuestion);
 }
@@ -260,7 +393,8 @@ async function getCurriculum(db) {
   for (const subject of subjects) {
     const board = subject.board || "CIE";
     boards[board] ||= {};
-    boards[board][`${subject.qualification} ${subject.name}`] = ["MCQ"];
+    boards[board][`${subject.qualification} ${subject.name}`] = subject.code === "9618"
+      ? ["Structured", "Practical"] : ["MCQ"];
   }
   return {
     grades: [...new Set(subjects.map((subject) => subject.qualification))],
@@ -284,6 +418,18 @@ export async function handleReadApiRequest(request, env) {
   try {
     if (url.pathname === "/api/catalog/subjects") {
       return success(await listPublishedSubjects(env.DB), request.method);
+    }
+
+    const subjectOverviewMatch = url.pathname.match(/^\/api\/catalog\/subjects\/([^/]+)\/overview$/);
+    if (subjectOverviewMatch) {
+      await requireCurrentUser(request, env);
+      const subjectCode = decodeURIComponent(subjectOverviewMatch[1]).trim();
+      if (!/^\d{4}$/.test(subjectCode)) {
+        return failure(400, "INVALID_INPUT", "Subject code must contain four digits.", request.method);
+      }
+      const overview = await getSubjectOverview(env.DB, subjectCode);
+      if (!overview) return failure(404, "SUBJECT_NOT_FOUND", "Subject not found.", request.method);
+      return success(overview, request.method);
     }
 
     const subjectPapersMatch = url.pathname.match(/^\/api\/catalog\/subjects\/([^/]+)\/papers$/);
@@ -338,8 +484,15 @@ export async function handleReadApiRequest(request, env) {
       return success({ mode: "d1" }, request.method);
     }
 
+    if (url.pathname === "/api/meta/capabilities") {
+      return success(capabilities(), request.method);
+    }
+
     return routeNotFound(request, url);
   } catch (error) {
+    if (error instanceof AuthError) {
+      return failure(error.status, error.code, error.message, request.method, error.details);
+    }
     console.error("D1 read API failed", error);
     return failure(
       500,

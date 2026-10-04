@@ -123,6 +123,12 @@
     async getCatalogSubjects() {
       return request("/api/catalog/subjects");
     },
+    async getCatalogSubjectOverview(subjectCode, token = currentToken()) {
+      return request(`/api/catalog/subjects/${encodeURIComponent(subjectCode)}/overview`, {
+        token,
+        timeoutMs: 15000,
+      });
+    },
     async getCatalogPapers(subjectCode) {
       return request(`/api/catalog/subjects/${encodeURIComponent(subjectCode)}/papers`);
     },
@@ -131,6 +137,9 @@
     },
     async getCatalogPaperQuestions(paperSlug) {
       return request(`/api/catalog/papers/${encodeURIComponent(paperSlug)}/questions`);
+    },
+    async downloadResource(token, resourceId) {
+      return download(`/api/content/resources/${encodeURIComponent(resourceId)}`, token);
     },
     async generatePaper(input) {
       return request("/api/papers/generate", {

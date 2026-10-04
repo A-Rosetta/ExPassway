@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
   <link rel="stylesheet" href="../assets/styles.css?v=20260823-1" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20260806-2" />
-  <link rel="stylesheet" href="../assets/paper-builder.css?v=20261001-1" />
+  <link rel="stylesheet" href="../assets/paper-builder.css?v=20261004-1" />
 </head>
 <body class="site-ui utility-ui paper-builder-page">
   <main class="container">
@@ -24,6 +24,7 @@
         <p id="paperBuilderStatus" class="tip" role="status" aria-live="polite"></p>
         <span id="paperBuilderDirty" class="paper-builder-dirty" hidden data-i18n="paperBuilderUnsaved">Unsaved changes</span>
       </div>
+      <p id="paperBuilderStructuredNotice" class="tip" hidden></p>
       <div class="paper-builder-document-fields">
         <label><span data-i18n="paperBuilderPaperTitle">Paper name</span><input id="paperBuilderPaperTitle" type="text" maxlength="160" /></label>
         <label><span data-i18n="paperBuilderPaperStatus">Save as</span><select id="paperBuilderPaperStatus"><option value="draft" data-i18n="paperBuilderDraft">Draft</option><option value="final" data-i18n="paperBuilderFinal">Final</option></select></label>
@@ -166,6 +167,8 @@
           <button id="paperBuilderSave" class="btn-primary" type="button" disabled data-i18n="paperBuilderSave">Save paper</button>
           <button id="paperBuilderPreview" class="btn-secondary" type="button" disabled data-i18n="paperBuilderPreviewButton">Preview paper</button>
           <button id="paperBuilderDownload" class="btn-secondary" type="button" disabled data-i18n="paperBuilderDownload">Download ZIP</button>
+          <button id="paperBuilderDownloadQuestion" class="btn-secondary" type="button" disabled>Download question paper PDF</button>
+          <button id="paperBuilderDownloadMarkScheme" class="btn-secondary" type="button" disabled>Download mark scheme PDF</button>
           <button id="paperBuilderEquivalent" class="btn-secondary" type="button" disabled data-i18n="paperBuilderEquivalent">Generate B paper</button>
         </div>
       </aside>
@@ -184,10 +187,10 @@
     <img id="paperBuilderImage" alt="" />
   </dialog>
 
-  <script src="../scripts/i18n.js?v=20261001-1"></script>
+  <script src="../scripts/i18n.js?v=20261004-1"></script>
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
-  <script src="../scripts/api.js?v=20260930-1"></script>
+  <script src="../scripts/api.js?v=20261004-1"></script>
   <script src="../scripts/bulk-download.js?v=20260913-1"></script>
-  <script src="../scripts/paper-builder.bundle.js?v=20261001-1"></script>
+  <script src="../scripts/paper-builder.bundle.js?v=20261004-1"></script>
 </body>
 </html>

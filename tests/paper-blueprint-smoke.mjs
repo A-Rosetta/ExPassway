@@ -96,4 +96,19 @@ assert.deepEqual(comparison.repeatedQuestionIds, []);
 assert.deepEqual(comparison.repeatedSourceGroups, []);
 assert.equal(comparison.estimatedSecondsDifference, 0);
 
+const structured = buildPaperBlueprint(Array.from({ length: 20 }, (_, index) => ({
+  id: `structured-${index}`, questionType: "structured", maxMarks: 6, marks: 1, answer: null,
+})));
+assert.equal(structured.totalMarks, 120);
+assert.equal(structured.mcqQuestionCount, 0);
+assert.equal(structured.structuredQuestionCount, 20);
+assert.deepEqual(structured.answerDistribution, { A: 0, B: 0, C: 0, D: 0, unknown: 0 });
+assert.ok(!buildBlueprintIssues(structured).some((issue) => issue.code === "ANSWER_DISTRIBUTION_IMBALANCE"));
+
+for (const maxMarks of [undefined, null, 0, -1, 1.5, "6", NaN, Infinity]) {
+  assert.throws(() => buildPaperBlueprint([{ id: "invalid-official-marks", questionType: "structured", maxMarks, marks: 6 }]), (error) => (
+    error.code === "STRUCTURED_OFFICIAL_MARKS_REQUIRED" && error.questionId === "invalid-official-marks"
+  ));
+}
+
 console.log("Paper blueprint checks passed.");

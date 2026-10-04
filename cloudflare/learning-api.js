@@ -8,6 +8,30 @@ import {
   success,
 } from "./auth-api.js";
 import { buildPaperBlueprint, buildBlueprintIssues } from "../shared/paper-blueprint.js";
+import { hasStructuredContent, questionType } from "../shared/structured-content.js";
+
+// Kept local until the shared question model is available in every Worker
+// bundle. The migration stores these fields as snake_case; this adapter keeps
+// all learning endpoints on one stable wire shape.
+function normalizeQuestionType(value) {
+  return questionType(value);
+}
+
+function isStructuredQuestion(question) {
+  return normalizeQuestionType(question?.questionType ?? question?.question_type) === "structured";
+}
+
+function questionModel(row) {
+  const questionType = normalizeQuestionType(row.question_type ?? row.questionType);
+  const parsedContent = parseJson(row.structured_content, {});
+  const parsedMarkScheme = parseJson(row.mark_scheme, {});
+  return {
+    questionType,
+    maxMarks: row.max_marks == null ? (questionType === "mcq" ? 1 : null) : Number(row.max_marks),
+    content: parsedContent && typeof parsedContent === "object" ? parsedContent : {},
+    markScheme: parsedMarkScheme && typeof parsedMarkScheme === "object" ? parsedMarkScheme : {},
+  };
+}
 
 const CORS_PREFLIGHT_HEADERS = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
@@ -75,13 +99,14 @@ function mapQuestion(row, includeAnswer = false) {
     stem: row.stem,
     options: parseJson(row.options, []),
     images: parseJson(row.images, []),
+    ...questionModel(row),
   };
   if (row.curriculum_section_id) question.curriculumSectionId = row.curriculum_section_id;
   if (row.coursebook_section_id) question.coursebookSectionId = row.coursebook_section_id;
   if (row.syllabus_code) question.syllabusCode = row.syllabus_code;
   if (row.similar_question_group) question.similarQuestionGroup = row.similar_question_group;
   if (includeAnswer) {
-    question.answer = Number(row.answer);
+    question.answer = isStructuredQuestion(question) || row.answer == null ? null : Number(row.answer);
     question.mistakeType = row.mistake_type || "concept";
   }
   return question;
@@ -155,6 +180,9 @@ function buildOptionText(question, optionIndex) {
 }
 
 function evaluateQuestions(questions, answerInput) {
+  if (questions.some((question) => normalizeQuestionType(question.questionType) !== "mcq")) {
+    throw new AuthError(400, "Structured questions cannot be scored by the multiple-choice practice flow.", "UNSUPPORTED_QUESTION_TYPE");
+  }
   const answers = normalizeAnswers(answerInput);
   if (answers.length !== questions.length) {
     throw new AuthError(
@@ -366,6 +394,9 @@ async function generatePaper(request, env) {
   const { user } = await requireCurrentUser(request, env);
   const body = await readJsonBody(request);
   const selection = normalizeSelection(body);
+  if (body.subjectCode === "9618" || body.selection?.subjectCode === "9618" || /computer science/i.test(selection.subject)) {
+    throw new AuthError(400, "9618 structured questions use manual paper assembly.", "UNSUPPORTED_CAPABILITY");
+  }
   const options = body.options || body;
   const count = toInteger(options.count, 8, 1, 40, "options.count");
   const difficulty = typeof options.difficulty === "string" ? options.difficulty.trim() : "";
@@ -374,6 +405,7 @@ async function generatePaper(request, env) {
     : [];
   const year = typeof options.year === "string" ? options.year.trim() : "";
   const clauses = ["active = 1", "board = ?", "subject = ?", "paper = ?"];
+  clauses.push("COALESCE(question_type, 'mcq') = 'mcq'", "answer BETWEEN 0 AND 3");
   const bindings = [selection.board, selection.subject, selection.paper];
   if (difficulty) {
     clauses.push("difficulty = ?");
@@ -399,6 +431,7 @@ async function generatePaper(request, env) {
     result = await env.DB.prepare(`
       SELECT * FROM question_bank
       WHERE active = 1 AND board = ? AND subject = ?
+        AND COALESCE(question_type, 'mcq') = 'mcq' AND answer BETWEEN 0 AND 3
       ORDER BY random()
       LIMIT ?
     `).bind(selection.board, selection.subject, count).all();
@@ -462,6 +495,7 @@ async function createNotebookPractice(request, env, userId) {
     .filter((reason) => typeof reason === "string" && NOTEBOOK_MISTAKE_REASONS.has(reason));
 
   const clauses = ["entry.user_id = ?", "question.active = 1"];
+  clauses.push("COALESCE(question.question_type, 'mcq') = 'mcq'", "question.answer BETWEEN 0 AND 3");
   const bindings = [userId];
   if (subject) {
     clauses.push("entry.subject = ?");
@@ -543,6 +577,9 @@ async function submitLocalPaper(request, env) {
   if (questions.length !== questionIds.length) {
     throw new AuthError(400, "One or more questions were not found.", "QUESTION_NOT_FOUND");
   }
+  if (questions.some((question) => normalizeQuestionType(question.questionType) !== "mcq")) {
+    throw new AuthError(400, "Structured questions cannot be submitted to the multiple-choice practice flow.", "UNSUPPORTED_QUESTION_TYPE");
+  }
   const paperId = crypto.randomUUID();
   await env.DB.prepare(`
     INSERT INTO practice_sessions (
@@ -586,6 +623,7 @@ function mapPaperBuilderQuestion(row) {
     year: row.exam_year == null ? question.year : Number(row.exam_year),
     season: row.season || "",
     paperNumber: row.paper_number == null ? null : Number(row.paper_number),
+    paperType: row.source_paper_type || row.paper || "MCQ",
     variant: row.variant == null ? null : Number(row.variant),
     sectionId: row.coursebook_section_id || "",
     sectionCode: row.section_code || "",
@@ -620,12 +658,15 @@ async function fillEstimatedDurations(db, subjectCode, items) {
 
 async function listPaperBuilderSubjects(db) {
   const [rows, curriculum] = await Promise.all([
-    db.prepare("SELECT code, name, name_zh FROM exam_subjects WHERE active = 1 ORDER BY name").all(),
+    db.prepare("SELECT code, board, qualification, name, name_zh FROM exam_subjects WHERE active = 1 ORDER BY name").all(),
     listCurriculumSubjects(db),
   ]);
   return rows.results.map((row) => ({
-    code: row.code, name: row.name, nameZh: row.name_zh || "",
+    code: row.code, board: row.board, qualification: row.qualification, name: row.name, nameZh: row.name_zh || "",
     version: curriculum.find((subject) => subject.code === row.code)?.version || null,
+    capabilities: row.code === "9618"
+      ? { manual: true, smart: false, equivalent: false, practice: false, hints: false }
+      : { manual: true, smart: true, equivalent: true, practice: true, hints: true },
   }));
 }
 
@@ -636,7 +677,7 @@ async function searchPaperBuilderQuestions(request, env) {
   const page = toInteger(url.searchParams.get("page"), 1, 1, 100000, "page");
   const pageSize = toInteger(url.searchParams.get("pageSize"), 20, 1, 50, "pageSize");
   const year = optionalSearchInteger(url, "year", 2000, 2099);
-  const paperNumber = optionalSearchInteger(url, "paperNumber", 1, 2);
+  const paperNumber = optionalSearchInteger(url, "paperNumber", 1, 4);
   const variant = optionalSearchInteger(url, "variant", 1, 9);
   const questionNo = optionalSearchInteger(url, "questionNo", 1, 200);
   const season = String(url.searchParams.get("season") || "").trim().toLowerCase();
@@ -651,10 +692,11 @@ async function searchPaperBuilderQuestions(request, env) {
     "question.active = 1",
     "question.subject_code = ?",
     "paper.status = 'published'",
-    "question.answer BETWEEN 0 AND 3",
+    "(COALESCE(question.question_type, 'mcq') = 'structured' OR (COALESCE(question.question_type, 'mcq') = 'mcq' AND question.answer BETWEEN 0 AND 3))",
+    "(question.subject_code <> '9618' OR (paper.paper_number BETWEEN 1 AND 3 AND question.question_type = 'structured'))",
     "question.question_no > 0",
     "EXISTS (SELECT 1 FROM exam_subjects subject WHERE subject.code = question.subject_code AND subject.active = 1)",
-    "(length(trim(question.stem)) > 0 OR json_array_length(question.images) > 0)",
+    "(length(trim(question.stem)) > 0 OR json_array_length(question.images) > 0 OR (question.question_type = 'structured' AND question.structured_content <> '{}'))",
   ];
   const params = [subjectCode];
   const addFilter = (sql, value) => {
@@ -703,6 +745,7 @@ async function searchPaperBuilderQuestions(request, env) {
       paper.year AS exam_year,
       paper.season,
       paper.paper_number,
+      paper.paper_type AS source_paper_type,
       paper.variant,
       paper.duration_minutes,
       paper.source_question_count,
@@ -781,6 +824,7 @@ async function loadSavedPaper(db, userId, paperId) {
       source.year AS exam_year,
       source.season,
       source.paper_number,
+      source.paper_type AS source_paper_type,
       source.variant,
       source.duration_minutes,
       source.source_question_count,
@@ -826,7 +870,7 @@ async function normalizeSavedPaperItems(db, subjectCode, value) {
   }
   const requests = items.map((item, position) => ({
     questionId: requireString(item?.questionId, `items[${position}].questionId`),
-    marks: toInteger(item?.marks, 1, 1, 100, `items[${position}].marks`),
+    marks: item?.marks == null ? null : toInteger(item.marks, 1, 1, 1000, `items[${position}].marks`),
     sectionId: String(item?.sectionId || "").trim(),
     position,
   }));
@@ -841,6 +885,7 @@ async function normalizeSavedPaperItems(db, subjectCode, value) {
       source.year AS exam_year,
       source.season,
       source.paper_number,
+      source.paper_type AS source_paper_type,
       source.variant,
       source.duration_minutes,
       source.source_question_count,
@@ -869,17 +914,25 @@ async function normalizeSavedPaperItems(db, subjectCode, value) {
   const normalized = requests.map((item) => {
     const row = byId.get(item.questionId);
     const images = parseJson(row?.images, []);
+    const type = normalizeQuestionType(row?.question_type);
+    const structured = type === "structured";
+    const officialMarks = Number(row?.max_marks);
+    const hasContent = structured ? hasStructuredContent(parseJson(row?.structured_content, {})) : false;
     if (!row
       || !row.active
       || row.subject_code !== subjectCode
-      || !Number.isInteger(Number(row.answer))
-      || Number(row.answer) < 0
-      || Number(row.answer) > 3
-      || (!String(row.stem || "").trim() && images.length === 0)
+      || (type !== "mcq" && !structured)
+      || (!structured && (row.answer == null || !Number.isInteger(Number(row.answer)) || Number(row.answer) < 0 || Number(row.answer) > 3))
+      || (subjectCode === "9618" && (!structured || Number(row.paper_number) === 4))
+      || (structured && (!Number.isInteger(officialMarks) || officialMarks <= 0))
+      || (!String(row.stem || "").trim() && images.length === 0 && !hasContent)
       || !row.source_paper_slug
       || !row.question_no
       || row.source_status !== "published") {
       throw new AuthError(400, `Question "${item.questionId}" is not available for this paper.`, "INVALID_QUESTION");
+    }
+    if (structured && item.marks !== null && item.marks !== officialMarks) {
+      throw new AuthError(400, `Question "${item.questionId}" must retain its official ${officialMarks} marks.`, "OFFICIAL_MARKS_REQUIRED");
     }
     const reviewedSectionId = row.mapping_status === "reviewed" ? row.coursebook_section_id || "" : "";
     if (item.sectionId && item.sectionId !== reviewedSectionId) {
@@ -893,11 +946,13 @@ async function normalizeSavedPaperItems(db, subjectCode, value) {
       id: row.id,
       questionId: row.id,
       position: item.position,
-      marks: item.marks,
+      marks: structured ? officialMarks : item.marks ?? 1,
+      questionType: type,
+      maxMarks: structured ? officialMarks : Number(row.max_marks || 1),
       sectionId: item.sectionId || reviewedSectionId,
       sectionCode: item.sectionId || reviewedSectionId ? row.section_code || "" : "",
       sourceGroup: row.similar_question_group || "",
-      answer: Number(row.answer),
+      answer: structured ? null : Number(row.answer),
       paperSlug: row.paper_slug,
       year: Number(row.exam_year),
       season: row.season,
@@ -929,6 +984,9 @@ async function normalizeSavedPaperPayload(db, body, existing = null, existingIte
   const status = String(body.status === undefined ? existing?.status || "draft" : body.status).trim();
   if (!new Set(["manual", "smart", "equivalent"]).has(buildMode)) {
     throw new AuthError(400, 'Field "buildMode" is invalid.', "INVALID_INPUT");
+  }
+  if (subjectCode === "9618" && buildMode !== "manual") {
+    throw new AuthError(400, "9618 supports manual assembly of complete structured questions only.", "UNSUPPORTED_CAPABILITY");
   }
   if (!new Set(["draft", "final"]).has(status)) {
     throw new AuthError(400, 'Field "status" is invalid.', "INVALID_INPUT");
@@ -1087,6 +1145,9 @@ async function generateEquivalentPaper(request, env, paperId) {
   const { user } = await requireCurrentUser(request, env);
   const sourceRow = await getOwnedSavedPaperRow(env.DB, user.id, paperId);
   const source = await loadSavedPaper(env.DB, user.id, paperId);
+  if (source.subjectCode === "9618" || source.items.some(isStructuredQuestion)) {
+    throw new AuthError(400, "Equivalent paper generation is not available for structured questions.", "UNSUPPORTED_CAPABILITY");
+  }
   const body = await readJsonBody(request);
   if (body.allowSimilarGroups !== undefined && typeof body.allowSimilarGroups !== "boolean") {
     throw new AuthError(400, 'Field "allowSimilarGroups" must be a boolean.', "INVALID_INPUT");
@@ -1126,6 +1187,7 @@ async function generateEquivalentPaper(request, env, paperId) {
         AND mapping.status = 'reviewed'
       WHERE question.active = 1
         AND question.subject_code = ?
+        AND COALESCE(question.question_type, 'mcq') = 'mcq'
         AND question.answer BETWEEN 0 AND 3
         AND question.question_no > 0
         AND (length(trim(question.stem)) > 0 OR json_array_length(question.images) > 0)
@@ -1432,6 +1494,7 @@ async function createChapterPractice(request, env) {
   const versionRow = await env.DB.prepare("SELECT * FROM curriculum_versions WHERE id = ? LIMIT 1").bind(versionId).first();
   const version = versionRow && await getCurriculumVersion(env.DB, versionRow.subject_code, versionId);
   if (!version) throw new AuthError(404, "Curriculum version not found.", "CURRICULUM_NOT_FOUND");
+  if (version.subject_code === "9618") throw new AuthError(400, "Online practice is not available for 9618 structured questions.", "UNSUPPORTED_CAPABILITY");
   const section = await env.DB.prepare(`
     SELECT DISTINCT book_section.*, chapter.chapter_no,
       chapter.title_en AS chapter_title_en, chapter.title_zh AS chapter_title_zh
@@ -1528,6 +1591,7 @@ async function createChapterPaper(request, env) {
     .bind(versionId).first();
   const version = versionRow && await getCurriculumVersion(env.DB, versionRow.subject_code, versionId);
   if (!version) throw new AuthError(404, "Curriculum version not found.", "CURRICULUM_NOT_FOUND");
+  if (version.subject_code === "9618") throw new AuthError(400, "9618 supports manual assembly only.", "UNSUPPORTED_CAPABILITY");
 
   const groups = [];
   const usedGroups = new Set();
@@ -1582,7 +1646,7 @@ async function createChapterPaper(request, env) {
               selected.confidence DESC, selected.curriculum_section_id
             LIMIT 1
           )
-          AND question.subject_code = ? AND question.answer BETWEEN 0 AND 3
+          AND question.subject_code = ? AND COALESCE(question.question_type, 'mcq') = 'mcq' AND question.answer BETWEEN 0 AND 3
           AND question.question_no > 0
           AND (length(trim(COALESCE(question.stem, ''))) > 0 OR json_array_length(question.images) > 0)
           AND syllabus_section.curriculum_version_id = ?

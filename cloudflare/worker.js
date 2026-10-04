@@ -18,6 +18,7 @@ const CONTENT_SECURITY_POLICY = [
   "connect-src 'self' wss:",
   "media-src 'self' data: blob:",
   "worker-src 'self' blob:",
+  "frame-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'none'",
   "form-action 'self'",
@@ -27,9 +28,14 @@ const CONTENT_SECURITY_POLICY = [
 
 function defaultCacheControl(request, response) {
   const url = new URL(request.url);
+  if (url.pathname.startsWith("/api/content/resources/")
+    || /^\/api\/catalog\/(?:resources\/|subjects\/\d{4}\/resources\/)/.test(url.pathname)) {
+    return "private, no-store";
+  }
   if (
     url.pathname.startsWith("/api/community-images/")
     || url.pathname.startsWith("/api/content/")
+    || /^\/api\/catalog\/(?:resources\/|subjects\/\d{4}\/resources\/)/.test(url.pathname)
     || /^\/api\/catalog\/papers\/[^/]+\/download\/[^/]+$/.test(url.pathname)
   ) {
     return response.headers.get("Cache-Control") || "public, max-age=86400";
@@ -94,6 +100,7 @@ async function routeRequest(request, env) {
 
   if (
     url.pathname.startsWith("/api/content/")
+    || /^\/api\/catalog\/(?:resources\/|subjects\/\d{4}\/resources\/)/.test(url.pathname)
     || /^\/api\/catalog\/papers\/[^/]+\/download\/[^/]+$/.test(url.pathname)
   ) {
     return handleContentRequest(request, env);

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { addBasketItems, createPaperBuilderState } from "../scripts/paper-builder.js";
+import { addBasketItem, addBasketItems, createPaperBuilderState, normalizeBuilderQuestion, serializeSavedPaper } from "../scripts/paper-builder.js";
 
 const state = createPaperBuilderState();
 state.subjectCode = "0625";
@@ -25,5 +25,33 @@ assert.deepEqual(state.items.map((item) => item.id), ["q1", "q2", "q3"]);
 const empty = createPaperBuilderState();
 assert.throws(() => addBasketItems(empty, [question("q1"), question("other", "0610")]), /paperBuilderSameSubject/);
 assert.equal(empty.items.length, 0);
+
+const structured = createPaperBuilderState();
+const parent = {
+  id: "9618-parent", subjectCode: "9618", questionType: "structured", maxMarks: 9, marks: 1,
+  content: { blocks: [{ type: "text", text: "Explain the purpose of a processor." }] },
+  markScheme: { blocks: [{ type: "text", text: "Award marks for fetch, decode and execute." }] },
+};
+assert.equal(addBasketItems(structured, [parent, { ...parent, id: "part-a", parentQuestionId: parent.id }]), 1);
+assert.equal(structured.items[0].marks, 9);
+assert.equal(structured.items[0].maxMarks, 9);
+assert.equal(structured.items[0].answer, null);
+assert.equal(serializeSavedPaper(structured).items[0].marks, 9);
+
+for (const maxMarks of [undefined, null, 0, -1, 1.5, "8", NaN, Infinity]) {
+  const invalid = { ...parent, id: "invalid-official-marks", maxMarks, marks: 8 };
+  const normalized = normalizeBuilderQuestion(invalid);
+  if (maxMarks == null) assert.equal(normalized.maxMarks, null);
+  else assert.equal(normalized.maxMarks, maxMarks);
+  const fresh = createPaperBuilderState();
+  assert.throws(() => addBasketItem(fresh, invalid), (error) => (
+    error.message === "paperBuilderMissingOfficialMarks" && error.questionId === invalid.id
+  ));
+  assert.equal(fresh.items.length, 0);
+  assert.equal(fresh.subjectCode, "");
+  assert.equal(fresh.dirty, false);
+  assert.throws(() => addBasketItems(fresh, [parent, invalid]), /paperBuilderMissingOfficialMarks/);
+  assert.equal(fresh.items.length, 0, "Invalid official marks must reject the complete bulk addition.");
+}
 
 console.log("Paper builder bulk selection checks passed.");

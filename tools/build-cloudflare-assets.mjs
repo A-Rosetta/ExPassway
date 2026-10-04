@@ -38,6 +38,9 @@ for (const generatedFile of [
   "assets/vendor/chat-crypto-worker.js",
   "pages/paper-builder.html",
   "assets/paper-builder.css",
+  "pages/subject.html",
+  "assets/subject.css",
+  "scripts/subject.js",
 ]) {
   if (!files.includes(generatedFile)) files.push(generatedFile);
 }
@@ -59,6 +62,16 @@ await build({
   platform: "browser",
   target: "es2022",
   outfile: join(outputDirectory, "scripts/paper-builder.bundle.js"),
+});
+
+await build({
+  entryPoints: ["scripts/subject.js"],
+  bundle: true,
+  format: "iife",
+  minify: true,
+  platform: "browser",
+  target: "es2022",
+  outfile: join(outputDirectory, "scripts/subject.bundle.js"),
 });
 
 console.log(`Prepared ${files.length} tracked static assets in ${outputDirectory}.`);

@@ -63,6 +63,12 @@ export default [
     },
   },
   {
+    files: ["scripts/subject.js"],
+    languageOptions: {
+      sourceType: "module",
+    },
+  },
+  {
     files: ["tools/**/*.{js,mjs,cjs}", "tests/**/*.{js,mjs,cjs}", "eslint.config.js"],
     languageOptions: {
       ecmaVersion: "latest",

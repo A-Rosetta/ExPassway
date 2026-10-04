@@ -87,7 +87,7 @@
   }
 
   function selectSubject(subject) {
-    if (localStorage.getItem(VISITOR_MODE_KEY) === "1" && !readAuthToken()) {
+    if (!readAuthToken()) {
       location.href = "pages/login.html";
       return;
     }
@@ -96,9 +96,11 @@
       board: subject.board,
       subject: `${subject.qualification} ${subject.name}`,
       subjectCode: subject.code,
-      paper: "MCQ",
+      paper: subject.code === "9618" ? "Structured" : "MCQ",
     }));
-    location.href = ["0610", "0620", "0625", "0654", "0455"].includes(subject.code)
+    location.href = subject.code === "9618"
+      ? `pages/subject.html?subject=${encodeURIComponent(subject.code)}`
+      : ["0610", "0620", "0625", "0654", "0455"].includes(subject.code)
       ? `pages/biology.html?subject=${encodeURIComponent(subject.code)}`
       : "pages/generate.html";
   }
@@ -155,13 +157,16 @@
       qualification.textContent = `${subject.qualification} · ${subject.board} · ${subject.code}`;
       const stats = document.createElement("span");
       stats.className = "course-card__stats";
-      stats.textContent = t("subjectCourseStats", {
+      stats.textContent = t(subject.code === "9618" ? "subjectStructuredStats" : "subjectCourseStats", {
         papers: Number(subject.paperCount || 0),
         questions: Number(subject.questionCount || 0),
       });
+      if (subject.code === "9618" && !Number(subject.paperCount || 0) && !Number(subject.questionCount || 0)) {
+        stats.textContent += ` · ${t("subjectResourcesPending")}`;
+      }
       const action = document.createElement("span");
       action.className = "course-card__action";
-      action.textContent = t("openSubjectPicker");
+      action.textContent = t(subject.code === "9618" ? "subjectOpenHub" : "openSubjectPicker");
       action.setAttribute("aria-hidden", "true");
       details.append(title, qualification, stats, action);
       course.append(book, details);
@@ -305,8 +310,8 @@
 
   async function buildHome() {
     const token = readAuthToken();
-    const visitorMode = !token && localStorage.getItem(VISITOR_MODE_KEY) === "1";
-    if ((!token && !visitorMode) || (!visitorMode && !window.ALevelApi?.getCurrentUser)) {
+    const visitorMode = !token;
+    if (!visitorMode && !window.ALevelApi?.getCurrentUser) {
       location.href = "pages/login.html";
       return;
     }

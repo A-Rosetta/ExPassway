@@ -15,6 +15,22 @@ function answerLetter(answer) {
     : "unknown";
 }
 
+function isStructured(item) {
+  return String(item?.questionType ?? item?.question_type ?? "mcq").trim().toLowerCase() === "structured";
+}
+
+function questionMarks(item) {
+  if (!isStructured(item)) return positiveMarks(item?.marks);
+  if (!Number.isInteger(item?.maxMarks) || item.maxMarks <= 0) {
+    const questionId = String(item?.id || item?.questionId || "unknown");
+    const error = new Error(`Question "${questionId}" requires official maxMarks as a positive integer.`);
+    error.code = "STRUCTURED_OFFICIAL_MARKS_REQUIRED";
+    error.questionId = questionId;
+    throw error;
+  }
+  return item.maxMarks;
+}
+
 function incrementRecord(record, key, amount = 1) {
   record[key] = finiteNumber(record[key]) + amount;
   return record[key];
@@ -38,10 +54,14 @@ export function buildPaperBlueprint(items = []) {
   let totalMarks = 0;
   let estimatedSeconds = 0;
   let knownDifficulty = 0;
+  let mcqQuestionCount = 0;
+  let structuredQuestionCount = 0;
+  const questionTypes = { mcq: 0, structured: 0 };
 
   for (const item of items) {
     const id = String(item?.id ?? "");
-    const marks = positiveMarks(item?.marks);
+    const structured = isStructured(item);
+    const marks = questionMarks(item);
     const seconds = Math.max(0, finiteNumber(item?.estimatedSeconds));
     const sectionId = String(item?.sectionId ?? "").trim() || "unmapped";
     const sectionCode = String(item?.sectionCode ?? "").trim();
@@ -52,7 +72,12 @@ export function buildPaperBlueprint(items = []) {
 
     totalMarks += marks;
     estimatedSeconds += seconds;
-    answerDistribution[letter] += 1;
+    questionTypes[structured ? "structured" : "mcq"] += 1;
+    if (structured) structuredQuestionCount += 1;
+    else {
+      mcqQuestionCount += 1;
+      answerDistribution[letter] += 1;
+    }
 
     if (!sections[sectionId]) {
       sections[sectionId] = {
@@ -100,6 +125,9 @@ export function buildPaperBlueprint(items = []) {
       coverage: questionCount ? knownDifficulty / questionCount : 0,
       distribution: difficultyDistribution,
     },
+    mcqQuestionCount,
+    structuredQuestionCount,
+    questionTypes,
   };
 }
 
@@ -148,10 +176,11 @@ export function buildBlueprintIssues(blueprint, options = {}) {
     }
   }
 
-  if (questionCount >= 20) {
+  const answerableQuestionCount = Math.max(0, finiteNumber(blueprint?.mcqQuestionCount, questionCount));
+  if (answerableQuestionCount >= 20) {
     for (const letter of ["A", "B", "C", "D"]) {
       const count = finiteNumber(blueprint?.answerDistribution?.[letter]);
-      const ratio = count / questionCount;
+      const ratio = count / answerableQuestionCount;
       if (ratio > 0.4) {
         issues.push({
           code: "ANSWER_DISTRIBUTION_IMBALANCE",

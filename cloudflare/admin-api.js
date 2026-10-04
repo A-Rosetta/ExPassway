@@ -9,6 +9,7 @@ import {
 } from "./auth-api.js";
 import { dispatchImportWorkflow, writeAudit } from "./admin-support.js";
 import { handleAdminPlatformRoute } from "./admin-platform-api.js";
+import { subjectCapabilities } from "./read-api.js";
 
 const CORS_PREFLIGHT_HEADERS = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
@@ -92,8 +93,33 @@ function mapSubject(row) {
     active: Boolean(row.active),
     paperCount: Number(row.paper_count || 0),
     questionCount: Number(row.question_count || 0),
+    capabilities: subjectCapabilities(row.code),
     createdAt: row.created_at,
     updatedAt: row.updated_at,
+  };
+}
+
+async function subjectReadiness(db, subject) {
+  if (subject.code !== "9618") return subject;
+  const row = await db.prepare(`
+    SELECT
+      (SELECT COUNT(*) FROM subject_resources WHERE subject_code = ? AND status = 'published' AND kind = 'syllabus') AS syllabus,
+      (SELECT COUNT(*) FROM subject_resources WHERE subject_code = ? AND status = 'published' AND kind = 'textbook') AS textbooks,
+      (SELECT COUNT(*) FROM exam_papers WHERE subject_code = ? AND status = 'published') AS papers,
+      (SELECT COUNT(*) FROM question_bank question JOIN exam_papers paper ON paper.slug = question.paper_slug
+        WHERE question.subject_code = ? AND question.active = 1 AND paper.status = 'published') AS questions
+  `).bind(subject.code, subject.code, subject.code, subject.code).first();
+  return {
+    ...subject,
+    readiness: {
+      syllabus: Number(row.syllabus) > 0, textbooks: Number(row.textbooks) > 0,
+      papers: Number(row.papers) > 0, questions: Number(row.questions) > 0,
+    },
+    contentCounts: {
+      syllabus: Number(row.syllabus), textbooks: Number(row.textbooks),
+      papers: Number(row.papers), questions: Number(row.questions),
+    },
+    importMode: "structured-package",
   };
 }
 
@@ -192,6 +218,9 @@ async function getImportJob(db, jobId, detail = false) {
 }
 
 function parsePdfFileName(fileName, subjectCode) {
+  if (subjectCode === "9618") {
+    throw new AuthError(400, "9618 requires a structured content package, not the MCQ importer.", "UNSUPPORTED_IMPORT_TYPE");
+  }
   const name = String(fileName || "");
   const match = name.match(FILE_PATTERN);
   if (!match || match[1] !== subjectCode || (match[5] === "1" && !new Set(["0455", "0625"]).has(subjectCode))) {
@@ -656,7 +685,7 @@ export async function handleAdminApiRequest(request, env) {
         FROM exam_subjects s LEFT JOIN exam_papers p ON p.subject_code = s.code
         GROUP BY s.code ORDER BY s.qualification, s.name
       `).all();
-      return success(rows.results.map(mapSubject), request.method);
+      return success(await Promise.all(rows.results.map((row) => subjectReadiness(env.DB, mapSubject(row)))), request.method);
     }
     if (request.method === "POST" && url.pathname === "/api/admin/subjects") {
       const body = await readJsonBody(request);
@@ -664,19 +693,24 @@ export async function handleAdminApiRequest(request, env) {
       const name = limitedText(body.name, 120, "Subject English name", true);
       const nameZh = limitedText(body.nameZh, 120, "Subject Chinese name");
       const assetKey = String(body.assetKey || "").trim().toLowerCase();
+      const qualification = String(body.qualification || "IGCSE").trim();
       if (!/^\d{4}$/.test(code)) throw new AuthError(400, "Subject code must contain four digits.", "INVALID_INPUT");
+      if (!new Set(["IGCSE", "AS & A Level"]).has(qualification)) {
+        throw new AuthError(400, "Qualification must be IGCSE or AS & A Level.", "INVALID_INPUT");
+      }
       if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(assetKey)) {
         throw new AuthError(400, "Asset key must use lowercase letters, numbers, and hyphens.", "INVALID_INPUT");
       }
       const now = new Date().toISOString();
       await env.DB.prepare(`
         INSERT INTO exam_subjects (code, board, qualification, name, name_zh, asset_key, active, created_at, updated_at)
-        VALUES (?, 'CIE', 'IGCSE', ?, ?, ?, ?, ?, ?)
+        VALUES (?, 'CIE', ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT (code) DO UPDATE SET
+          qualification = excluded.qualification,
           name = excluded.name, name_zh = excluded.name_zh, asset_key = excluded.asset_key,
           active = excluded.active, updated_at = excluded.updated_at
-      `).bind(code, name, nameZh, assetKey, body.active === false ? 0 : 1, now, now).run();
-      await writeAudit(env.DB, admin.id, "subject.save", "subject", code, { name, assetKey });
+      `).bind(code, qualification, name, nameZh, assetKey, body.active === false ? 0 : 1, now, now).run();
+      await writeAudit(env.DB, admin.id, "subject.save", "subject", code, { name, assetKey, qualification });
       return success(mapSubject(await env.DB.prepare("SELECT * FROM exam_subjects WHERE code = ?").bind(code).first()), request.method, 201);
     }
 
@@ -690,6 +724,9 @@ export async function handleAdminApiRequest(request, env) {
       const body = await readJsonBody(request);
       const subjectCode = String(body.subjectCode || "").trim();
       if (!/^\d{4}$/.test(subjectCode)) throw new AuthError(400, "Select a registered subject.", "INVALID_INPUT");
+      if (subjectCode === "9618") {
+        throw new AuthError(400, "9618 requires a structured content package, not the MCQ importer.", "UNSUPPORTED_IMPORT_TYPE");
+      }
       const subject = await env.DB.prepare("SELECT 1 FROM exam_subjects WHERE code = ?").bind(subjectCode).first();
       if (!subject) throw new AuthError(404, "Register the subject before importing papers.", "SUBJECT_NOT_FOUND");
       const id = crypto.randomUUID();
@@ -706,6 +743,9 @@ export async function handleAdminApiRequest(request, env) {
       const jobId = decodeURIComponent(importFiles[1]);
       const job = await getImportJob(env.DB, jobId);
       if (!job) throw new AuthError(404, "Import job not found.", "IMPORT_JOB_NOT_FOUND");
+      if (job.subjectCode === "9618") {
+        throw new AuthError(400, "9618 requires a structured content package, not the MCQ importer.", "UNSUPPORTED_IMPORT_TYPE");
+      }
       if (!new Set(["uploading", "failed"]).has(job.status)) {
         throw new AuthError(409, "Files can only be uploaded before processing.", "INVALID_IMPORT_STATE");
       }
@@ -739,6 +779,9 @@ export async function handleAdminApiRequest(request, env) {
       const jobId = decodeURIComponent(importAction[1]);
       const job = await getImportJob(env.DB, jobId);
       if (!job) throw new AuthError(404, "Import job not found.", "IMPORT_JOB_NOT_FOUND");
+      if (job.subjectCode === "9618") {
+        throw new AuthError(400, "9618 requires a structured content package, not the MCQ importer.", "UNSUPPORTED_IMPORT_TYPE");
+      }
       if (importAction[2] === "process" && !new Set(["uploading", "failed"]).has(job.status)) {
         throw new AuthError(409, "Import job cannot be processed in its current state.", "INVALID_IMPORT_STATE");
       }

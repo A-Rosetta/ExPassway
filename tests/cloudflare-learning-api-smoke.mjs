@@ -59,6 +59,7 @@ try {
     "../migrations/0002_supabase_auth.sql",
     "../migrations/0003_admin_platform.sql",
     "../migrations/0011_saved_papers.sql",
+    "../migrations/0019_9618_structured_content.sql",
   ]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) {
@@ -938,6 +939,46 @@ try {
     assert.deepEqual(counts, { practices: 0, notebook: 0, attempts: 0 });
   }
 
+  // Structured parent questions work without a curriculum or chapter mapping.
+  for (const [paperNumber, questionId, marks] of [[3, "cs-parent-one", 12], [2, "cs-parent-two", 8], [4, "cs-practical", 75]]) {
+    const slug = `9618_s26_qp_${paperNumber}1`;
+    await db.prepare(`INSERT INTO exam_papers(slug,subject_code,year,season,paper_number,variant,paper_type,duration_minutes,source_question_count,valid_question_count,total_marks,qp_file_name,ms_file_name)
+      VALUES (?, '9618',2026,'s',?,1,?,90,1,1,75,'fixture-qp.pdf','fixture-ms.pdf')`).bind(slug, paperNumber, paperNumber === 4 ? "practical" : "structured").run();
+    await db.prepare(`INSERT INTO question_bank(id,board,subject,paper,stem,subject_code,paper_slug,question_no,answer,question_type,max_marks,structured_content,mark_scheme)
+      VALUES (?, 'CIE','AS & A Level Computer Science','Structured','Fixture only','9618',?,1,NULL,'structured',?,?,?)`)
+      .bind(questionId, slug, marks, JSON.stringify({ blocks: [{ type: "code", text: "FOR i <- 1 TO 3\n  OUTPUT i\nNEXT i" }] }), JSON.stringify({ blocks: [{ type: "text", text: "Official fixture criteria" }] })).run();
+  }
+  const structuredPool = await api(handleLearningApiRequest, db, token, "/api/paper-builder/questions?subjectCode=9618");
+  const structuredSubjects = await api(handleLearningApiRequest, db, token, "/api/paper-builder/subjects");
+  assert.equal(structuredSubjects.payload.data.find((subject) => subject.code === "9618").qualification, "AS & A Level");
+  assert.deepEqual(structuredPool.payload.data.items.map((item) => item.id).sort(), ["cs-parent-one", "cs-parent-two"]);
+  assert(structuredPool.payload.data.items.every((item) => item.answer === null && item.mappingStatus === "unmapped" && item.paperType === "structured"));
+  const input = { title: "Structured fixture", subjectCode: "9618", buildMode: "manual", status: "final", items: [{ questionId: "cs-parent-two", marks: 8 }, { questionId: "cs-parent-one", marks: 12 }] };
+  const structuredSave = await api(handleLearningApiRequest, db, token, "/api/paper-builder/papers", { method: "POST", body: JSON.stringify(input) });
+  assert.equal(structuredSave.response.status, 201);
+  assert.equal(structuredSave.payload.data.totalMarks, 20);
+  assert.equal(structuredSave.payload.data.blueprint.structuredQuestionCount, 2);
+  const structuredId = structuredSave.payload.data.id;
+  const reopenedStructured = await api(handleLearningApiRequest, db, token, `/api/paper-builder/papers/${structuredId}`);
+  assert.deepEqual(reopenedStructured.payload.data.items.map((item) => item.questionId), ["cs-parent-two", "cs-parent-one"]);
+  const reordered = await api(handleLearningApiRequest, db, token, `/api/paper-builder/papers/${structuredId}`, { method: "PATCH", body: JSON.stringify({ items: [...input.items].reverse() }) });
+  assert.equal(reordered.response.status, 200);
+  assert.deepEqual(reordered.payload.data.items.map((item) => item.questionId), ["cs-parent-one", "cs-parent-two"]);
+  const structuredCopy = await api(handleLearningApiRequest, db, token, "/api/paper-builder/papers", { method: "POST", body: JSON.stringify({ ...input, title: "Structured copy" }) });
+  assert.equal(structuredCopy.response.status, 201);
+  assert.notEqual(structuredCopy.payload.data.id, structuredId);
+  for (const [body, errorCode] of [
+    [{ ...input, items: [{ questionId: "cs-parent-one", marks: 1 }] }, "OFFICIAL_MARKS_REQUIRED"],
+    [{ ...input, items: [{ questionId: "cs-practical", marks: 75 }] }, "INVALID_QUESTION"],
+    [{ ...input, buildMode: "smart" }, "UNSUPPORTED_CAPABILITY"],
+  ]) {
+    const rejected = await api(handleLearningApiRequest, db, token, "/api/paper-builder/papers", { method: "POST", body: JSON.stringify(body) });
+    assert.equal(rejected.payload.error.code, errorCode);
+  }
+  const equivalentStructured = await api(handleLearningApiRequest, db, token, `/api/paper-builder/papers/${structuredId}/equivalent`, { method: "POST", body: "{}" });
+  assert.equal(equivalentStructured.payload.error.code, "UNSUPPORTED_CAPABILITY");
+  const structuredSubmit = await api(handleLearningApiRequest, db, token, "/api/papers/submit-local", { method: "POST", body: JSON.stringify({ userId, selection: { grade: "AS & A Level", board: "CIE", subject: "AS & A Level Computer Science", paper: "Structured" }, questions: [{ id: "cs-parent-one" }], answers: [{ selectedIndex: 0 }] }) });
+  assert.equal(structuredSubmit.payload.error.code, "UNSUPPORTED_QUESTION_TYPE");
   const foreignKeys = await db.prepare("PRAGMA foreign_key_check").all();
   assert.deepEqual(foreignKeys.results, []);
   console.log("Cloudflare D1 learning API smoke checks passed.");

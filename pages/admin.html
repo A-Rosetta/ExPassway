@@ -79,6 +79,9 @@
           <label><span data-i18n="adminSubjectAssetKeyLabel">Asset Directory Key</span>
             <input id="adminSubjectAssetKey" type="text" maxlength="80" placeholder="coordinated-sciences-0654" />
           </label>
+          <label><span data-i18n="adminSubjectQualificationLabel">Qualification</span>
+            <select id="adminSubjectQualification"><option value="IGCSE">IGCSE</option><option value="AS &amp; A Level">AS &amp; A Level</option></select>
+          </label>
         </div>
         <div class="actions">
           <button id="adminRegisterSubject" class="btn-secondary" type="button" data-i18n="adminRegisterSubject">Register or Update Subject</button>
@@ -89,8 +92,10 @@
             <thead><tr>
               <th data-i18n="adminSubjectCodeLabel">Subject Code</th>
               <th data-i18n="adminSubjectNameLabel">English Name</th>
+              <th data-i18n="adminSubjectQualificationLabel">Qualification</th>
               <th data-i18n="adminUserStatus">Status</th>
               <th data-i18n="adminImportFileCount">Questions</th>
+              <th data-i18n="adminSubjectReadinessLabel">Resources</th>
               <th data-i18n="adminUserActions">Actions</th>
             </tr></thead>
             <tbody id="adminSubjectsBody"></tbody>
@@ -321,9 +326,9 @@
     </div>
   </dialog>
 
-  <script src="../scripts/i18n.js?v=20261001-1"></script>
+  <script src="../scripts/i18n.js?v=20261004-1"></script>
   <script src="../scripts/site-ui.js?v=20260808-3"></script>
-  <script src="../scripts/api.js?v=20260731-2"></script>
-  <script src="../scripts/admin.js?v=20260806-1"></script>
+  <script src="../scripts/api.js?v=20261004-1"></script>
+  <script src="../scripts/admin.js?v=20261004-1"></script>
 </body>
 </html>
