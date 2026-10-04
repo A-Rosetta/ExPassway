@@ -207,6 +207,26 @@ try {
     assert.equal(payload.data.needsPasskeySetup, true);
     sessionToken = payload.data.token;
 
+    // Google registration and later email-code login resolve the same account.
+    const registeredAccount = structuredClone(database.users[0]);
+    const emailed = await request("/api/auth/email/otp", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "Student@Example.com" }),
+    }, {}, database);
+    assert.equal(emailed.response.status, 200);
+    identityResponse = googleIdentity({
+      app_metadata: { provider: "email", providers: ["google", "email"] },
+      identities: [{ provider: "google" }, { provider: "email" }],
+    });
+    const emailedLogin = await request("/api/auth/email/verify", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "Student@Example.com", code: "123456" }),
+    }, {}, database);
+    assert.equal(emailedLogin.response.status, 200);
+    assert.equal(emailedLogin.payload.data.user.id, payload.data.user.id);
+    assert.equal(database.users.length, 1);
+    assert.deepEqual(database.users[0], registeredAccount);
+
     const current = await request("/api/auth/me", {
       headers: { Authorization: `Bearer ${sessionToken}` },
     }, {}, database);

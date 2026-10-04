@@ -21,6 +21,10 @@
   color: var(--login-text);
 }
 
+.student-ui.auth-page.login-page .auth-provider-button[hidden] {
+  display: none;
+}
+
 /* Light mode is pure sage-clay Neumorphism, without the legacy glow background. */
 html:not([data-theme="dark"]) .student-ui.auth-page.login-page {
   background: var(--login-bg);

@@ -112,6 +112,68 @@ await assert.rejects(
 const message1 = await alice.call("encryptAccountV2Message", { conversationId: "group-1", clientMessageId: "m1", epoch: 1, plaintext: "hello" });
 const opened1 = await bobUnlocked.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey });
 assert.equal(opened1.plaintext, "hello");
+
+// Another account Passkey must wrap the same identity, including old versions,
+// rather than creating a fresh chat identity or losing already-open epoch keys.
+const secondPrf = b64(sodium.randombytes_buf(32));
+const credentialId = "second-bob-passkey";
+const bobWrapped = await bobUnlocked.call("wrapAccountV2Vault", { userId: "bob", keyVersion: "1", credentialId, prfOutput: secondPrf });
+assert.equal(bobWrapped.fingerprint, bobVault.fingerprint);
+assert.equal(bobWrapped.encryptionPublicKey, bobVault.encryptionPublicKey);
+assert.equal(bobWrapped.signingPublicKey, bobVault.signingPublicKey);
+for (const field of ["vaultRootKey", "encryptionPrivateKey", "signingPrivateKey", "prfOutput"]) assert.equal(Object.hasOwn(bobWrapped, field), false);
+const signedWrapper = { version: "account-v2", action: "wrap-vault", senderUserId: "bob", senderKeyId: "1",
+  credentialId, nonce: bobWrapped.nonce, ciphertext: bobWrapped.ciphertext };
+assert.equal(sodium.crypto_sign_verify_detached(Buffer.from(bobWrapped.signature, "base64url"),
+  new TextEncoder().encode(canonical(signedWrapper)), Buffer.from(bobVault.signingPublicKey, "base64url")), true);
+assert.equal((await bobUnlocked.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "hello",
+  "rewrapping must keep the active conversation epoch key");
+await assert.rejects(() => bobUnlocked.call("wrapAccountV2Vault", { userId: "mallory", keyVersion: "1", credentialId, prfOutput: secondPrf }),
+  (error) => error.code === "INVALID_ACCOUNT_V2_INPUT");
+const differentBob = createWorker();
+const differentIdentity = await differentBob.call("generateAccountV2Vault", { userId: "bob", keyVersion: "1", prfOutput: prf });
+await assert.rejects(() => bobUnlocked.call("unlockAccountV2Vault", { userId: "bob", keyVersion: "1", prfOutput: prf,
+  nonce: differentIdentity.nonce, ciphertext: differentIdentity.ciphertext, expectedFingerprint: bobVault.fingerprint,
+  expectedEncryptionPublicKey: bobVault.encryptionPublicKey, expectedSigningPublicKey: bobVault.signingPublicKey }),
+  (error) => error.code === "ACCOUNT_IDENTITY_CHANGED");
+assert.equal((await bobUnlocked.call("getAccountV2State")).fingerprint, bobVault.fingerprint,
+  "a valid ciphertext for different private keys must not replace the existing identity");
+assert.equal((await bobUnlocked.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "hello");
+
+const bobOld = createWorker();
+const oldVault = await bobOld.call("generateAccountV2Vault", { userId: "bob", keyVersion: "old", prfOutput: prf });
+const oldEpoch = await alice.call("createAccountV2Epoch", { conversationId: "historical-chat", epoch: 1,
+  recipients: [{ userId: "bob", keyVersion: "old", encryptionPublicKey: oldVault.encryptionPublicKey }] });
+const oldMessage = await alice.call("encryptAccountV2Message", { conversationId: "historical-chat", clientMessageId: "historical-message",
+  epoch: 1, plaintext: "Keep this historical chat" });
+await assert.rejects(() => bobUnlocked.call("unlockAccountV2Vault", { userId: "bob", keyVersion: "old", prfOutput: prf,
+  nonce: oldVault.nonce, ciphertext: oldVault.ciphertext, retainOnly: true, expectedFingerprint: bobVault.fingerprint }),
+  (error) => error.code === "ACCOUNT_IDENTITY_CHANGED");
+assert.equal((await bobUnlocked.call("getAccountV2State")).fingerprint, bobVault.fingerprint,
+  "rejecting an inconsistent historical vault must preserve the active identity");
+assert.deepEqual([...(await bobUnlocked.call("getAccountV2State")).retainedKeyVersions], []);
+await bobUnlocked.call("unlockAccountV2Vault", { userId: "bob", keyVersion: "old", prfOutput: prf,
+  nonce: oldVault.nonce, ciphertext: oldVault.ciphertext, retainOnly: true });
+const afterHistoricalUnlock = await bobUnlocked.call("getAccountV2State");
+assert.equal(afterHistoricalUnlock.fingerprint, bobVault.fingerprint, "historical unlock must not replace the active identity");
+assert.deepEqual([...afterHistoricalUnlock.retainedKeyVersions], ["old"]);
+assert.equal((await bobUnlocked.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "hello");
+const oldWrapped = await bobUnlocked.call("wrapAccountV2Vault", { userId: "bob", keyVersion: "old", credentialId, prfOutput: secondPrf });
+assert.equal(oldWrapped.fingerprint, oldVault.fingerprint);
+assert.equal((await bobUnlocked.call("getAccountV2State")).fingerprint, bobVault.fingerprint);
+
+const freshBob = createWorker();
+await freshBob.call("unlockAccountV2Vault", { userId: "bob", keyVersion: "1", prfOutput: secondPrf,
+  nonce: bobWrapped.nonce, ciphertext: bobWrapped.ciphertext });
+await freshBob.call("unlockAccountV2Vault", { userId: "bob", keyVersion: "old", prfOutput: secondPrf,
+  nonce: oldWrapped.nonce, ciphertext: oldWrapped.ciphertext, retainOnly: true });
+await freshBob.call("openAccountV2Envelope", { conversationId: "group-1", epoch: 1, envelope: bobEnvelope });
+await freshBob.call("openAccountV2Envelope", { conversationId: "historical-chat", epoch: 1, envelope: oldEpoch.recipients[0] });
+assert.equal((await freshBob.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "hello");
+assert.equal((await freshBob.call("decryptAccountV2Message", { message: oldMessage, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "Keep this historical chat");
+await freshBob.call("lockAccountV2Vault");
+await assert.rejects(() => freshBob.call("wrapAccountV2Vault", { userId: "bob", keyVersion: "old", credentialId, prfOutput: secondPrf }),
+  (error) => error.code === "ACCOUNT_VAULT_LOCKED");
 const message2 = await alice.call("encryptAccountV2Message", { conversationId: "group-1", clientMessageId: "m2", epoch: 1, plaintext: "hello" });
 assert.notEqual(message1.nonce, message2.nonce);
 const tamperedMessage = { ...message1, conversationId: "other" };

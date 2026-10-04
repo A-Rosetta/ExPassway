@@ -36,8 +36,18 @@
       row.className = "profile-passkey-row";
       const text = document.createElement("span");
       const date = new Date(passkey.createdAt).toLocaleString(getLanguage() === "zh-CN" ? "zh-CN" : "en");
-      const label = t(passkey.chatUnlock ? "passkeySettingsChatUnlock" : "passkeySettingsLoginOnly");
-      text.textContent = `${String(passkey.credentialId || "").slice(0, 16)}… · ${t("passkeySettingsAddedAt", { date })} · ${label}`;
+      text.textContent = `${String(passkey.credentialId || "").slice(0, 16)}… · ${t("passkeySettingsAddedAt", { date })}`;
+      if (passkey.chatSyncRequired) {
+        const sync = document.createElement("button");
+        sync.type = "button";
+        sync.className = "btn-secondary";
+        sync.disabled = busy;
+        sync.textContent = t("passkeySettingsSync");
+        sync.addEventListener("click", () => {
+          if (!busy) window.location.href = `pages/chat.html?passkey=${encodeURIComponent(passkey.credentialId)}`;
+        });
+        row.append(sync);
+      }
       const button = document.createElement("button");
       button.type = "button";
       button.className = "btn-secondary";
@@ -53,7 +63,8 @@
         catch (error) { failure(error); }
         finally { busy = false; render(); }
       });
-      row.append(text, button);
+      row.prepend(text);
+      row.append(button);
       list.append(row);
     });
   }
@@ -75,6 +86,13 @@
     render();
     setStatus("passkeySettingsCreating");
     try {
+      const vault = rows.some((passkey) => passkey.chatUnlock || passkey.chatSyncRequired)
+        || await api.getChatAccountVault();
+      if (vault) {
+        setStatus("passkeySettingsUnlockToAdd");
+        window.location.href = "pages/chat.html?passkeys=add";
+        return;
+      }
       const raw = await api.getPasskeyRegistrationOptions(token());
       const credential = await navigator.credentials.create({ publicKey: publicKeyOptions(raw) });
       if (!credential) { setStatus("passkeySettingsCancelled"); return; }

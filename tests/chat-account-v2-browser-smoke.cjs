@@ -65,23 +65,37 @@ async function main() {
         const buffers = [];
         for await (const buffer of req) buffers.push(buffer);
         const body = Buffer.concat(buffers);
-        if (url.pathname.startsWith("/api/chat/")) {
+        if (url.pathname.startsWith("/api/chat/") || /^\/api\/auth\/me\/passkeys\/(options|verify)$/.test(url.pathname)) {
           const user = tokens.get(String(req.headers.authorization || "").replace(/^Bearer /, ""));
-          if (/\/passkeys\/(register|authenticate)\/(options|verify)$/.test(url.pathname)) {
+          const registrationOptions = url.pathname === "/api/auth/me/passkeys/options";
+          const registrationVerify = url.pathname === "/api/auth/me/passkeys/verify";
+          if (registrationOptions || registrationVerify || /\/passkeys\/(register|authenticate)\/(options|verify)$/.test(url.pathname)) {
             if (!user) throw new Error("Passkey fixture requires authenticated user");
             let data;
-            const credentialId = Buffer.from(user.id).toString("base64url");
-            if (url.pathname.endsWith("/options")) {
-              data = { publicKey: { challenge: Buffer.alloc(32, 7).toString("base64url"), rpId: url.hostname, extensions: { prf: { eval: { first: Buffer.alloc(32, 8).toString("base64url") } } } } };
-            } else if (url.pathname.includes("/register/")) {
-              await env.DB.prepare("INSERT INTO chat_passkeys (id,user_id,credential_id,public_key,prf_salt,created_at) VALUES (?,?,?,?,?,?)").bind(randomUUID(), user.id, credentialId, "test-public-key", Buffer.alloc(32, 8).toString("base64url"), timestamp).run();
+            const json = body.length ? JSON.parse(body.toString()) : {};
+            const credentialId = json.credential?.id || Buffer.from(user.id).toString("base64url");
+            if (url.pathname.endsWith("/options") || registrationOptions) {
+              const optionsUrl = registrationOptions ? new URL("/api/chat/account/passkeys/register/options", url) : url;
+              const response = await handleChatApiRequest(new Request(optionsUrl, { method: req.method, headers: req.headers,
+                ...(body.length ? { body } : {}) }), env);
+              const payload = await response.json();
+              if (!response.ok) throw new Error(`Passkey options fixture: ${JSON.stringify(payload)}`);
+              data = payload.data;
+            } else if (url.pathname.includes("/register/") || registrationVerify) {
+              const challenge = await env.DB.prepare("SELECT prf_salt FROM chat_webauthn_challenges WHERE user_id=? AND challenge=?")
+                .bind(user.id, json.challenge).first();
+              await env.DB.prepare("INSERT INTO chat_passkeys (id,user_id,credential_id,public_key,prf_salt,created_at) VALUES (?,?,?,?,?,?)")
+                .bind(randomUUID(), user.id, credentialId, "test-public-key", challenge?.prf_salt || Buffer.alloc(32, 8).toString("base64url"), timestamp).run();
               data = { verified: true, credentialId };
             } else {
               const proof = randomUUID();
               const identity = await env.DB.prepare("SELECT key_version FROM chat_account_identity_heads WHERE user_id=?").bind(user.id).first();
-              await env.DB.prepare("INSERT INTO chat_account_write_proofs (id,token_hash,user_id,uses_remaining,expires_at,created_at,credential_id,purpose,key_version) VALUES (?,?,?,5,?,?,?,'account-write',?)")
-                .bind(randomUUID(), createHash("sha256").update(proof).digest("base64url"), user.id, new Date(Date.now() + 300000).toISOString(), timestamp, credentialId, identity?.key_version || null).run();
-              data = { verified: true, proof };
+              const challenge = await env.DB.prepare("SELECT reserved_key_version,purpose FROM chat_webauthn_challenges WHERE user_id=? AND challenge=?")
+                .bind(user.id, json.challenge).first();
+              await env.DB.prepare("INSERT INTO chat_account_write_proofs (id,token_hash,user_id,uses_remaining,expires_at,created_at,credential_id,purpose,key_version) VALUES (?,?,?,5,?,?,?,?,?)")
+                .bind(randomUUID(), createHash("sha256").update(proof).digest("base64url"), user.id, new Date(Date.now() + 300000).toISOString(), timestamp,
+                  credentialId, challenge?.purpose || "account-write", challenge?.reserved_key_version || identity?.key_version || null).run();
+              data = { verified: true, proof, credentialId, keyVersion: challenge?.reserved_key_version || identity?.key_version || null };
             }
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ ok: true, data }));
@@ -124,9 +138,12 @@ async function main() {
       if (!existsSync(edge)) throw error;
       browser = await chromium.launch({ headless: true, executablePath: edge });
     }
-    async function openUser(user, { cancelUnlock = false, existing = false } = {}) {
+    async function openUser(user, { cancelUnlock = false, existing = false, credentialId = "", query = "" } = {}) {
       const context = await browser.newContext({ viewport: { width: 1440, height: 980 }, reducedMotion: "reduce" });
       const page = await context.newPage();
+      // Several authenticated tabs poll the same local D1 instance. Keep the
+      // assertions bounded while allowing queued sync requests to complete.
+      page.setDefaultTimeout(60000);
       pages.push({ user: user.name, page });
       page.on("pageerror", (error) => pageErrors.push(`${user.name}: ${error.message}`));
       page.on("console", (message) => {
@@ -134,7 +151,7 @@ async function main() {
         if (message.type() === "error" && !message.text().startsWith("WebSocket connection to") && !expectedConflict) consoleErrors.push(`${user.name}: ${message.text()}`);
       });
       await context.route("https://fonts.googleapis.com/**", (route) => route.fulfill({ status: 200, body: "" }));
-      await context.addInitScript(({ token, userId, cancel }) => {
+      await context.addInitScript(({ token, userId, cancel, preferred }) => {
         localStorage.setItem("alevel.authToken", token);
         window.__chatPollIntervals = [];
         const realSetInterval = window.setInterval.bind(window);
@@ -143,23 +160,34 @@ async function main() {
           return realSetInterval(callback, delay, ...args);
         };
         window.__cancelUnlock = cancel;
-        const makeCredential = () => {
-          const rawId = new TextEncoder().encode(userId).buffer;
+        window.__preferredCredential = preferred;
+        window.__nextCreatedCredential = "";
+        const originalId = btoa(userId).replace(/=+$/, "");
+        const makeCredential = (id = originalId) => {
+          const rawId = Uint8Array.from(atob(id.replace(/-/g, "+").replace(/_/g, "/")), (character) => character.charCodeAt(0)).buffer;
           return {
-            id: btoa(userId).replace(/=+$/, ""), type: "public-key", rawId,
+            id, type: "public-key", rawId,
             response: { clientDataJSON: new TextEncoder().encode("{}").buffer, attestationObject: new ArrayBuffer(0), authenticatorData: new ArrayBuffer(0), signature: new ArrayBuffer(0), getTransports: () => ["internal"] },
-            getClientExtensionResults: () => ({ prf: { enabled: true, results: { first: new Uint8Array(32).fill(9).buffer } } }),
+            getClientExtensionResults: () => ({ prf: { enabled: true, results: { first: new Uint8Array(32).fill(id === originalId ? 9 : 13).buffer } } }),
           };
         };
         Object.defineProperty(navigator, "credentials", { configurable: true, value: {
-          create: async () => makeCredential(),
-          get: async () => {
+          create: async () => makeCredential(window.__nextCreatedCredential || originalId),
+          get: async ({ publicKey }) => {
             if (window.__cancelUnlock) { window.__cancelUnlock = false; throw new DOMException("Canceled by test", "NotAllowedError"); }
-            return makeCredential();
+            const ids = (publicKey.allowCredentials || []).map((credential) => btoa(String.fromCharCode(...new Uint8Array(credential.id))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""));
+            const selected = ids.includes(window.__preferredCredential) ? window.__preferredCredential : ids[0] || originalId;
+            assertPrf(publicKey, selected);
+            return makeCredential(selected);
           },
         } });
-      }, { token: user.token, userId: user.id, cancel: cancelUnlock });
-      await page.goto(`${baseUrl}/pages/chat.html`);
+        function assertPrf(options, selected) {
+          if (options.extensions?.prf?.evalByCredential && !(options.extensions.prf.evalByCredential[selected]?.first instanceof Uint8Array)) {
+            throw new Error("The selected Passkey PRF salt must be decoded into bytes.");
+          }
+        }
+      }, { token: user.token, userId: user.id, cancel: cancelUnlock, preferred: credentialId });
+      await page.goto(`${baseUrl}/pages/chat.html${query}`);
       assert.match(await page.title(), /ExPassway/);
       const button = page.locator(existing ? "#unlockAccountSync" : "#enableAccountSync");
       await button.click();
@@ -210,6 +238,36 @@ async function main() {
     await secondAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
     assert.ok(await alice.evaluate(() => window.__chatPollIntervals.includes(3000)), "chat polling must run every three seconds");
     console.log("Browser: direct messages and second-browser vault unlock passed");
+
+    // Enroll another account Passkey through the rendered UI. Cancelling its
+    // first assertion keeps the created credential and the original history;
+    // retry must add only a wrapper, never reinitialize the chat identity.
+    const secondAliceCredential = Buffer.from(`${users[0].id}:second`).toString("base64url");
+    const aliceIdentityBeforeWrap = await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first();
+    const aliceVaultBeforeWrap = (await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[0].id).all()).results;
+    await alice.evaluate((id) => { window.__nextCreatedCredential = id; window.__cancelUnlock = true; }, secondAliceCredential);
+    await alice.click("#addAccountPasskey");
+    await alice.click("#continuePasskeyEnrollment");
+    await alice.waitForFunction(() => document.querySelector("#chatStatus").textContent.includes("synchronization is incomplete"));
+    assert.equal(await alice.locator("#chatApp").isVisible(), true);
+    await alice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
+    assert.equal(new URL(alice.url()).searchParams.get("passkey"), secondAliceCredential, "a cancelled new Passkey assertion must keep a retryable credential");
+    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 1);
+    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_account_vault_wrappers WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 0);
+    await alice.click("#continuePasskeyEnrollment");
+    await alice.locator("#chatPasskeySyncPanel").waitFor({ state: "hidden" });
+    assert.deepEqual(await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first(), aliceIdentityBeforeWrap);
+    assert.deepEqual((await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[0].id).all()).results, aliceVaultBeforeWrap);
+    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 1,
+      "retry must reuse the already-created account Passkey");
+    const thirdAlice = await openUser(users[0], { existing: true, credentialId: secondAliceCredential });
+    await thirdAlice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
+    await thirdAlice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
+    await thirdAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
+    assert.ok(calls.some((call) => call.user === "Alice" && call.path === "/api/chat/account/vault/wrappers" && call.status === 200),
+      "the original identity must authorize the added wrapper's signature");
+    await thirdAlice.close();
+    console.log("Browser: shared Passkey enrollment, cancelled assertion retry and fresh-device history restore passed");
     // Retention must submit a signed control, and the peer applies its event.
     await alice.selectOption("#retentionSelect", "604800");
     await bob.waitForFunction(() => document.querySelector("#retentionSelect").value === "604800");
@@ -297,10 +355,14 @@ async function main() {
             userId, keyVersion: "reset-key-2", prfOutput: btoa(String.fromCharCode(...new Uint8Array(32).fill(9))).replace(/=+$/, ""),
           } });
         });
-        const verified = await window.ALevelApi.verifyChatPasskey("authenticate", {});
+        const authentication = await window.ALevelApi.getChatPasskeyAuthenticationOptions();
+        const verified = await window.ALevelApi.verifyChatPasskey("authenticate", {
+          challenge: authentication.publicKey.challenge, credential: { id: btoa(userId).replace(/=+$/, "") },
+        });
         await window.ALevelApi.initializeChatAccount({ ...vault, proof: verified.proof, reset: true });
       } finally { worker.terminate(); }
     }, { userId: users[1].id });
+    await bob.close();
     await alice.click("#refreshChat");
     await alice.locator("#startNewSecureChat").waitFor();
     assert.equal(await alice.isDisabled("#messageInput"), true);
@@ -336,8 +398,29 @@ async function main() {
     await resetBob.click("#refreshChat");
     await resetBob.locator("#conversationList button").filter({ hasText: /Group|Encrypted group|群聊/ }).click();
     await resetBob.locator("#messageList").getByText("Group restored after explicit identity replacement", { exact: true }).waitFor();
-    assert.equal(await resetBob.locator("#messageList").getByText("Before Carol joined", { exact: true }).count(), 0);
+    await resetBob.locator("#messageList").getByText("Before Carol joined", { exact: true }).waitFor();
     console.log("Browser: identity reset confirmation and group recovery passed");
+
+    const secondBobCredential = Buffer.from(`${users[1].id}:second`).toString("base64url");
+    const bobIdentityBeforeWrap = await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[1].id).first();
+    const bobVaultsBeforeWrap = (await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[1].id).all()).results;
+    await resetBob.evaluate((id) => { window.__nextCreatedCredential = id; }, secondBobCredential);
+    await resetBob.click("#addAccountPasskey");
+    await resetBob.click("#continuePasskeyEnrollment");
+    await resetBob.locator("#chatPasskeySyncPanel").waitFor({ state: "hidden" });
+    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_account_vault_wrappers WHERE user_id=? AND credential_id=?")
+      .bind(users[1].id, secondBobCredential).first()).count, 2, "the new Passkey must preserve every retained identity version");
+    assert.deepEqual(await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[1].id).first(), bobIdentityBeforeWrap);
+    assert.deepEqual((await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[1].id).all()).results, bobVaultsBeforeWrap);
+    const secondBob = await openUser(users[1], { existing: true, credentialId: secondBobCredential });
+    const historicalDirectId = calls.find((call) => call.user === "Alice" && call.path === "/api/chat/messages").body.conversationId;
+    await secondBob.locator(`#conversationList button[data-conversation-id="${historicalDirectId}"]`).click();
+    await secondBob.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
+    await secondBob.locator("#conversationList button").filter({ hasText: /Group|Encrypted group|群聊/ }).click();
+    await secondBob.locator("#messageList").getByText("Before Carol joined", { exact: true }).waitFor();
+    await secondBob.locator("#messageList").getByText("Group restored after explicit identity replacement", { exact: true }).waitFor();
+    await secondBob.close();
+    console.log("Browser: added Passkey decrypts current and historical identities in a fresh browser");
 
     // Removing historical chats is account-specific and propagates to another
     // browser without changing the peer's membership or ciphertext history.

@@ -27,6 +27,7 @@ const state = {
   // the lifetime of this worker after a successful Passkey PRF unlock.
   accountV2: null,
   accountV2Candidate: null,
+  accountV2History: new Map(),
 };
 
 const deviceLocks = new Map();
@@ -266,6 +267,21 @@ function accountV2RequireUnlocked() {
     throw accountV2Error("ACCOUNT_VAULT_LOCKED", "Unlock the account chat vault with a Passkey before using encrypted chat.");
   }
   return state.accountV2;
+}
+
+function accountV2ForVersion(keyVersion) {
+  const current = accountV2RequireUnlocked();
+  const version = requiredAccountV2String(keyVersion || current.keyVersion, "keyVersion", 64);
+  const account = version === current.keyVersion ? current : state.accountV2History.get(version);
+  if (!account || account.userId !== current.userId) {
+    throw accountV2Error("ACCOUNT_VAULT_LOCKED", "Unlock this historical account vault before adding another Passkey.");
+  }
+  return account;
+}
+
+function accountV2ClearHistory() {
+  for (const account of state.accountV2History.values()) accountV2WipeAccount(account);
+  state.accountV2History.clear();
 }
 
 function accountV2PublicBundle(account) {
@@ -953,12 +969,14 @@ async function generateAccountV2Vault({ userId, keyVersion = "1", prfOutput } = 
   account.fingerprint = await accountV2Fingerprint(account.encryptionPublicKey, account.signingPublicKey);
   const wrappingKey = await accountV2Hkdf(prf, utf8(`expassway-chat-account-v2-prf|${user}`), ACCOUNT_V2_KDF_VERSION);
   const encrypted = await accountV2AesGcmEncrypt(wrappingKey, utf8(JSON.stringify({ format: ACCOUNT_V2_VAULT_FORMAT, version: ACCOUNT_V2_VAULT_VERSION, userId: user, keyVersion: version, vaultRootKey: bytesToBase64Url(account.vaultRootKey), encryptionPrivateKey: bytesToBase64Url(account.encryptionPrivateKey), signingPrivateKey: bytesToBase64Url(account.signingPrivateKey) })), accountV2VaultAad(user, version), "ACCOUNT_V2_VAULT_ENCRYPT_FAILED");
+  accountV2ClearHistory();
   accountV2WipeAccount(state.accountV2);
   state.accountV2 = account;
   return { ...accountV2PublicBundle(account), kdfVersion: ACCOUNT_V2_KDF_VERSION, nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
 }
 
-async function unlockAccountV2Vault({ userId, keyVersion = "1", prfOutput, nonce, ciphertext } = {}) {
+async function unlockAccountV2Vault({ userId, keyVersion = "1", prfOutput, nonce, ciphertext, retainOnly = false,
+  expectedFingerprint, expectedEncryptionPublicKey, expectedSigningPublicKey } = {}) {
   const user = requiredAccountV2String(userId, "userId", 256);
   const version = requiredAccountV2String(keyVersion, "keyVersion", 64);
   const prf = requiredBase64Bytes(prfOutput, "prfOutput", 32);
@@ -983,14 +1001,63 @@ async function unlockAccountV2Vault({ userId, keyVersion = "1", prfOutput, nonce
   account.encryptionPublicKey = s.crypto_scalarmult_base(account.encryptionPrivateKey);
   account.signingPublicKey = s.crypto_sign_ed25519_sk_to_pk(account.signingPrivateKey);
   account.fingerprint = await accountV2Fingerprint(account.encryptionPublicKey, account.signingPublicKey);
+  if ((expectedFingerprint && account.fingerprint !== expectedFingerprint)
+      || (expectedEncryptionPublicKey && bytesToBase64Url(account.encryptionPublicKey) !== expectedEncryptionPublicKey)
+      || (expectedSigningPublicKey && bytesToBase64Url(account.signingPublicKey) !== expectedSigningPublicKey)) {
+    accountV2WipeAccount(account);
+    throw accountV2Error("ACCOUNT_IDENTITY_CHANGED", "The encrypted vault does not match the existing chat identity.");
+  }
+  if (retainOnly) {
+    const current = accountV2RequireUnlocked();
+    if (current.userId !== user) {
+      accountV2WipeAccount(account);
+      throw accountV2Error("ACCOUNT_VAULT_UNLOCK_FAILED", "A historical vault must belong to the currently unlocked account.");
+    }
+    if (current.keyVersion === version) {
+      accountV2WipeAccount(account);
+      return { ...accountV2PublicBundle(current), unlocked: true };
+    }
+    accountV2WipeAccount(state.accountV2History.get(version));
+    state.accountV2History.set(version, account);
+    return { ...accountV2PublicBundle(account), unlocked: true, retained: true };
+  }
+  accountV2ClearHistory();
   accountV2WipeAccount(state.accountV2);
   state.accountV2 = account;
   return { ...accountV2PublicBundle(account), unlocked: true };
 }
 
+async function wrapAccountV2Vault({ userId, keyVersion, credentialId, prfOutput } = {}) {
+  const account = accountV2ForVersion(keyVersion);
+  const user = requiredAccountV2String(userId, "userId", 256);
+  const credential = requiredAccountV2String(credentialId, "credentialId", 2048);
+  if (account.userId !== user) throw accountV2Error("INVALID_ACCOUNT_V2_INPUT", "The vault belongs to another account.");
+  const prf = requiredBase64Bytes(prfOutput, "prfOutput", 32);
+  let wrappingKey;
+  let plaintext;
+  try {
+    wrappingKey = await accountV2Hkdf(prf, utf8(`expassway-chat-account-v2-prf|${user}`), ACCOUNT_V2_KDF_VERSION);
+    plaintext = utf8(JSON.stringify({ format: ACCOUNT_V2_VAULT_FORMAT, version: ACCOUNT_V2_VAULT_VERSION,
+      userId: user, keyVersion: account.keyVersion, vaultRootKey: bytesToBase64Url(account.vaultRootKey),
+      encryptionPrivateKey: bytesToBase64Url(account.encryptionPrivateKey), signingPrivateKey: bytesToBase64Url(account.signingPrivateKey) }));
+    const encrypted = await accountV2AesGcmEncrypt(wrappingKey, plaintext, accountV2VaultAad(user, account.keyVersion), "ACCOUNT_V2_VAULT_ENCRYPT_FAILED");
+    const unsigned = { version: ACCOUNT_V2_PROTOCOL_VERSION, action: "wrap-vault", senderUserId: user,
+      senderKeyId: account.keyVersion, credentialId: credential,
+      nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
+    const signature = (await getSodium()).crypto_sign_detached(utf8(canonicalJson(unsigned)), account.signingPrivateKey);
+    return { ...accountV2PublicBundle(account), credentialId: credential, kdfVersion: ACCOUNT_V2_KDF_VERSION,
+      nonce: unsigned.nonce, ciphertext: unsigned.ciphertext, signature: bytesToBase64Url(signature) };
+  } finally {
+    prf.fill(0);
+    wrappingKey?.fill(0);
+    plaintext?.fill(0);
+  }
+}
+
 async function lockAccountV2Vault() {
   accountV2WipeAccount(state.accountV2);
   accountV2WipeAccount(state.accountV2Candidate);
+  accountV2ClearHistory();
   state.accountV2 = null;
   state.accountV2Candidate = null;
   return { locked: true };
@@ -1028,7 +1095,8 @@ async function createAccountV2Envelope({ conversationId, epoch, recipient, conte
 }
 
 async function openAccountV2Envelope({ conversationId, epoch, envelope } = {}) {
-  const account = accountV2RequireUnlocked();
+  const current = accountV2RequireUnlocked();
+  const account = accountV2ForVersion(envelope?.keyVersion || "1");
   const id = requiredAccountV2String(conversationId, "conversationId", 256);
   const number = validEpoch(epoch);
   const ephemeralPublicKey = requiredBase64Bytes(envelope?.ephemeralPublicKey, "envelope.ephemeralPublicKey", 32);
@@ -1056,8 +1124,8 @@ async function openAccountV2Envelope({ conversationId, epoch, envelope } = {}) {
       throw accountV2Error("ACCOUNT_V2_ENVELOPE_INVALID", "The epoch content key has an invalid length.");
     }
     const keyId = accountV2EpochKey(id, number);
-    account.epochKeys.get(keyId)?.fill(0);
-    account.epochKeys.set(keyId, key);
+    current.epochKeys.get(keyId)?.fill(0);
+    current.epochKeys.set(keyId, key);
     return { conversationId: id, epoch: number, opened: true };
   } finally {
     shared?.fill(0);
@@ -1067,7 +1135,8 @@ async function openAccountV2Envelope({ conversationId, epoch, envelope } = {}) {
 
 async function getAccountV2State() {
   if (!state.accountV2) return { unlocked: false };
-  return { ...accountV2PublicBundle(state.accountV2), unlocked: true };
+  return { ...accountV2PublicBundle(state.accountV2), unlocked: true,
+    retainedKeyVersions: [...state.accountV2History.keys()] };
 }
 
 async function createAccountV2Epoch({ conversationId, epoch, recipients } = {}) {
@@ -1241,6 +1310,7 @@ async function handleCryptoRequest(event) {
     else if (action === "getLocalPlaintext" || action === "getSentPlaintext") result = await getLocalPlaintext(payload);
     else if (action === "generateAccountV2Vault") result = await generateAccountV2Vault(payload);
     else if (action === "unlockAccountV2Vault") result = await unlockAccountV2Vault(payload);
+    else if (action === "wrapAccountV2Vault") result = await wrapAccountV2Vault(payload);
     else if (action === "lockAccountV2Vault") result = await lockAccountV2Vault(payload);
     else if (action === "getAccountV2State") result = await getAccountV2State();
     else if (action === "createAccountV2Epoch") result = await createAccountV2Epoch(payload);

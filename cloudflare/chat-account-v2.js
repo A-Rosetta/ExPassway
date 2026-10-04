@@ -45,9 +45,16 @@ async function activeKey(db, userId) {
     ORDER BY k.updated_at DESC, k.key_version DESC LIMIT 1`).bind(userId).first();
 }
 async function accountReady(db, userId, keyVersion) {
-  const vault = keyVersion && await db.prepare(`SELECT v.key_version FROM chat_account_vault_versions v
-    JOIN chat_passkeys p ON (p.credential_id = v.credential_id OR v.credential_id IS NULL) AND p.user_id = v.user_id AND p.revoked_at IS NULL
-    WHERE v.user_id = ? AND v.key_version = ?`).bind(userId, keyVersion).first();
+  if (!keyVersion) return false;
+  let vault;
+  try { vault = await db.prepare(`SELECT v.key_version FROM chat_account_vault_versions v
+    JOIN chat_passkeys p ON p.user_id=v.user_id AND p.revoked_at IS NULL AND
+      (p.credential_id=v.credential_id OR v.credential_id IS NULL OR EXISTS (SELECT 1 FROM chat_account_vault_wrappers w
+        WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=p.credential_id))
+    WHERE v.user_id=? AND v.key_version=? LIMIT 1`).bind(userId,keyVersion).first(); }
+  catch (_error) { vault = await db.prepare(`SELECT v.key_version FROM chat_account_vault_versions v
+    JOIN chat_passkeys p ON (p.credential_id=v.credential_id OR v.credential_id IS NULL) AND p.user_id=v.user_id AND p.revoked_at IS NULL
+    WHERE v.user_id=? AND v.key_version=? LIMIT 1`).bind(userId,keyVersion).first(); }
   return Boolean(vault);
 }
 async function verifySigned(db, userId, value, signature, code = "INVALID_CONTROL_SIGNATURE") {

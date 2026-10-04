@@ -77,7 +77,7 @@
         throw err;
       }
 
-      return payload?.data ?? payload;
+      return payload && Object.prototype.hasOwnProperty.call(payload, "data") ? payload.data : payload;
     } catch (error) {
       if (controller.signal.aborted) {
         const timeout = new Error(path.startsWith("/api/chat/")
@@ -669,8 +669,19 @@
     async upsertChatAccountKeyBundle(input) {
       return this.saveChatAccountKeys(input);
     },
-    async getChatAccountVault() {
-      return request("/api/chat/account/vault", { token: currentToken() });
+    async getChatAccountVault(input = {}) {
+      const params = new URLSearchParams();
+      for (const field of ["credentialId", "keyVersion"]) {
+        if (input[field]) params.set(field, String(input[field]));
+      }
+      const query = params.toString();
+      return request(`/api/chat/account/vault${query ? `?${query}` : ""}`, { token: currentToken() });
+    },
+    async getChatAccountVaults() {
+      return request("/api/chat/account/vaults", { token: currentToken() });
+    },
+    async saveChatAccountVaultWrapper(input) {
+      return request("/api/chat/account/vault/wrappers", { method: "PUT", token: currentToken(), body: JSON.stringify(input || {}) });
     },
     async saveChatAccountVault(input) {
       return request("/api/chat/account/vault", { method: "PUT", token: currentToken(), body: JSON.stringify(input || {}) });
@@ -678,17 +689,17 @@
     async initializeChatAccount(input) {
       return request("/api/chat/account/initialize", { method: "POST", token: currentToken(), body: JSON.stringify(input || {}) });
     },
-    async getChatPasskeyOptions(kind) {
+    async getChatPasskeyOptions(kind, input = {}) {
       if (kind !== "register" && kind !== "authenticate") {
         throw new TypeError("Passkey options kind must be register or authenticate");
       }
-      return request(`/api/chat/account/passkeys/${kind}/options`, { method: "POST", token: currentToken() });
+      return request(`/api/chat/account/passkeys/${kind}/options`, { method: "POST", token: currentToken(), body: JSON.stringify(input) });
     },
     async getChatPasskeyRegistrationOptions() {
       return this.getChatPasskeyOptions("register");
     },
-    async getChatPasskeyAuthenticationOptions() {
-      return this.getChatPasskeyOptions("authenticate");
+    async getChatPasskeyAuthenticationOptions(input = {}) {
+      return this.getChatPasskeyOptions("authenticate", input);
     },
     async verifyChatPasskey(kind, input) {
       if (kind !== "register" && kind !== "authenticate") {

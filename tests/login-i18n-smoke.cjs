@@ -188,7 +188,7 @@ async function newPage(browser, locale, savedLanguage) {
       assert.equal(await page.locator(".auth-page-controls").evaluate((element) => getComputedStyle(element).gap), "2px");
       assert.equal(await page.locator("#themeToggle").evaluate((element) => getComputedStyle(element).width), "40px");
       assert.equal(await page.locator("#themeToggle").evaluate((element) => getComputedStyle(element).height), "40px");
-      assert.equal(await page.locator(".home-theme-icon--sun").evaluate((element) => getComputedStyle(element).width), "22px");
+      assert.equal(await page.locator(".home-theme-lamp").evaluate((element) => getComputedStyle(element).width), "26px");
       assert.equal(await page.locator(".login-shell").evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(" ").length), 1);
       await context.close();
     }

@@ -5,6 +5,7 @@ import { Miniflare } from "miniflare";
 import { unstable_splitSqlQuery } from "wrangler";
 import { handleChatApiRequest } from "../cloudflare/chat-api.js";
 import { handleAuthApiRequest } from "../cloudflare/auth-api.js";
+import { canonicalAccountJson } from "../cloudflare/chat-account-v2.js";
 
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 const AUTH_SECRET = "test-only-auth-secret-with-at-least-32-bytes";
@@ -104,14 +105,14 @@ const env = {
   DB: await mf.getD1Database("DB"),
 };
 
-async function call(path, body) {
+async function call(path, body, method = "POST") {
   const headers = {
     Authorization: `Bearer ${await issueToken()}`,
     "Content-Type": "application/json",
   };
   const response = await handleChatApiRequest(
     new Request(`https://expassway.test${path}`, {
-      method: "POST",
+      method,
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),
     }),
@@ -203,6 +204,9 @@ try {
     (id,email,challenge,rp_id,origin,expires_at,created_at) VALUES ('pre-migration-challenge','legacy@example.com',
       'old-challenge','expassway.test','https://expassway.test','2099-01-01T00:00:00.000Z','2026-01-01T00:00:00.000Z')`).run();
   for (const statement of unstable_splitSqlQuery(await readFile(new URL("../migrations/0021_auth_passkey_challenge_purpose.sql", import.meta.url), "utf8"))) {
+    await env.DB.prepare(statement).run();
+  }
+  for (const statement of unstable_splitSqlQuery(await readFile(new URL("../migrations/0023_shared_passkey_vault_wrapping.sql", import.meta.url), "utf8"))) {
     await env.DB.prepare(statement).run();
   }
   assert.ok((await env.DB.prepare("SELECT used_at FROM auth_passkey_challenges WHERE id='pre-migration-challenge'").first()).used_at);
@@ -363,15 +367,16 @@ try {
   assert.equal(expired.payload.error.code, "INVALID_WEBAUTHN_CHALLENGE");
 
   const authOptionsAgain = await call("/api/chat/account/passkeys/authenticate/options", {});
-  assert.equal(authOptionsAgain.payload.data.publicKey.extensions.prf.eval.first,
-    authenticationOptions.payload.data.publicKey.extensions.prf.eval.first);
+  assert.equal(authOptionsAgain.payload.data.publicKey.extensions.prf.evalByCredential[base64Url(credentialId)].first,
+    authenticationOptions.payload.data.publicKey.extensions.prf.evalByCredential[base64Url(credentialId)].first);
 
   // A shared Passkey signs into the account without pretending it can decrypt
   // a vault encrypted with another authenticator's PRF secret.
+  const originalVaultSigning = await crypto.subtle.generateKey("Ed25519", true, ["sign", "verify"]);
   const initialized = await call("/api/chat/account/initialize", {
     proof: authenticated.payload.data.proof, keyVersion: "first-chat-key",
     encryptionPublicKey: base64Url(crypto.getRandomValues(new Uint8Array(32))),
-    signingPublicKey: base64Url(crypto.getRandomValues(new Uint8Array(32))),
+    signingPublicKey: base64Url(await crypto.subtle.exportKey("raw", originalVaultSigning.publicKey)),
     fingerprint: base64Url(crypto.getRandomValues(new Uint8Array(32))),
     nonce: base64Url(crypto.getRandomValues(new Uint8Array(12))),
     ciphertext: base64Url(crypto.getRandomValues(new Uint8Array(48))),
@@ -455,6 +460,14 @@ try {
     VALUES (?,'second-chat-key',?,'hkdf-sha256-v1',?,?,?)`).bind(user.id, shared.id,
     base64Url(crypto.getRandomValues(new Uint8Array(12))), base64Url(crypto.getRandomValues(new Uint8Array(48))), new Date().toISOString()).run();
   await env.DB.prepare("UPDATE chat_account_identity_heads SET key_version='second-chat-key',credential_id=? WHERE user_id=?").bind(shared.id, user.id).run();
+  const nextVaultSigning = await crypto.subtle.generateKey("Ed25519", true, ["sign", "verify"]);
+  await env.DB.prepare(`INSERT INTO chat_account_keys
+    (user_id,key_version,encryption_public_key,signing_public_key,fingerprint,status,created_at,updated_at)
+    VALUES (?,'second-chat-key',?,?,?,'active',?,?)`).bind(user.id,
+      base64Url(crypto.getRandomValues(new Uint8Array(32))),
+      base64Url(await crypto.subtle.exportKey("raw", nextVaultSigning.publicKey)),
+      base64Url(crypto.getRandomValues(new Uint8Array(32))), new Date().toISOString(), new Date().toISOString()).run();
+  await env.DB.prepare("UPDATE chat_account_keys SET status='revoked' WHERE user_id=? AND key_version='first-chat-key'").bind(user.id).run();
   const protectedHistorical = await authCall(`/api/auth/me/passkeys/${originalPasskey.id}`, undefined, "DELETE");
   assert.equal(protectedHistorical.payload.error.code, "LAST_CHAT_PASSKEY");
   const retainedBeforeMigration = await env.DB.prepare("SELECT key_version,credential_id,nonce,ciphertext FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(user.id).all();
@@ -465,6 +478,110 @@ try {
   assert.deepEqual(retainedAfterMigration.results, retainedBeforeMigration.results);
   assert.deepEqual((await env.DB.prepare("SELECT key_version,credential_id,nonce,ciphertext FROM chat_account_vault_wrappers WHERE user_id=? ORDER BY key_version").bind(user.id).all()).results, retainedBeforeMigration.results);
   assert.equal((await env.DB.prepare("PRAGMA foreign_key_check").all()).results.length, 0);
+
+  // Synchronizing another account Passkey wraps retained keys without changing
+  // any account identity or the original encrypted historical vaults.
+  const unlinked = await authCall("/api/auth/me/passkeys", undefined, "GET");
+  assert.deepEqual(unlinked.payload.data.find((item) => item.credentialId === shared.id).missingVaultVersions, ["first-chat-key"]);
+  assert.equal(unlinked.payload.data.find((item) => item.credentialId === shared.id).chatSyncRequired, true);
+  const loginWithoutPrfOptions = await authCall("/api/auth/passkey/options", { email: user.email }, "POST", false);
+  const signatureOnly = await assertionFor(loginWithoutPrfOptions.payload.data, shared.id, shared.signing, 2);
+  signatureOnly.clientExtensionResults = {};
+  const signatureOnlyLogin = await authCall("/api/auth/passkey/verify", {
+    email: user.email, challenge: loginWithoutPrfOptions.payload.data.publicKey.challenge, credential: signatureOnly,
+  }, "POST", false);
+  assert.equal(signatureOnlyLogin.response.status, 200, JSON.stringify(signatureOnlyLogin.payload));
+  const originalIdentityRows = await env.DB.prepare("SELECT * FROM chat_account_keys WHERE user_id=? ORDER BY key_version").bind(user.id).all();
+  const originalHead = await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(user.id).first();
+  const historicalOptions = await call("/api/chat/account/passkeys/authenticate/options", { keyVersion: "first-chat-key" });
+  assert.deepEqual(historicalOptions.payload.data.publicKey.allowCredentials.map((item) => item.id), [base64Url(credentialId)]);
+  const unavailableWrapper = await call(`/api/chat/account/vault?credentialId=${shared.id}&keyVersion=first-chat-key`, undefined, "GET");
+  assert.equal(unavailableWrapper.payload.error.code, "CHAT_VAULT_PASSKEY_NOT_LINKED");
+  let sharedCounter = 2;
+  for (const [keyVersion, signing] of [["first-chat-key", originalVaultSigning], ["second-chat-key", nextVaultSigning]]) {
+    const linkOptions = await call("/api/chat/account/passkeys/authenticate/options", { credentialId: shared.id, keyVersion, purpose: "account-wrap" });
+    assert.equal(linkOptions.response.status, 200, JSON.stringify(linkOptions.payload));
+    assert.deepEqual(linkOptions.payload.data.publicKey.allowCredentials.map((item) => item.id), [shared.id]);
+    const linkAssertion = await assertionFor(linkOptions.payload.data, shared.id, shared.signing, ++sharedCounter);
+    const noPrf = await call("/api/chat/account/passkeys/authenticate/verify", {
+      challenge: linkOptions.payload.data.publicKey.challenge, credential: { ...linkAssertion, clientExtensionResults: {} },
+    });
+    assert.equal(noPrf.payload.error.code, "WEBAUTHN_PRF_REQUIRED");
+    const linkedAuthentication = await call("/api/chat/account/passkeys/authenticate/verify", {
+      challenge: linkOptions.payload.data.publicKey.challenge, credential: linkAssertion,
+    });
+    assert.equal(linkedAuthentication.response.status, 200, JSON.stringify(linkedAuthentication.payload));
+    const proof = linkedAuthentication.payload.data.proof;
+    const resetWithWrapProof = await call("/api/chat/account/initialize", { proof, reset: true, keyVersion: "unwanted-reset" });
+    assert.equal(resetWithWrapProof.payload.error.code, "ACCOUNT_WRITE_PROOF_REQUIRED");
+    const value = { version: "account-v2", action: "wrap-vault", senderUserId: user.id, senderKeyId: keyVersion,
+      credentialId: shared.id, nonce: base64Url(crypto.getRandomValues(new Uint8Array(12))), ciphertext: base64Url(crypto.getRandomValues(new Uint8Array(48))) };
+    async function signedWrapper(input) {
+      return { proof, keyVersion, credentialId: shared.id, nonce: input.nonce, ciphertext: input.ciphertext,
+        signature: base64Url(await crypto.subtle.sign("Ed25519", signing.privateKey, encoder.encode(canonicalAccountJson(input)))) };
+    }
+    const invalidSignature = await call("/api/chat/account/vault/wrappers", {
+      ...(await signedWrapper(value)), signature: base64Url(crypto.getRandomValues(new Uint8Array(64))),
+    }, "PUT");
+    assert.equal(invalidSignature.payload.error.code, "INVALID_VAULT_WRAPPER_SIGNATURE");
+    const wrapper = await signedWrapper(value);
+    const saved = await call("/api/chat/account/vault/wrappers", wrapper, "PUT");
+    if (keyVersion === "first-chat-key") {
+      assert.equal(saved.response.status, 200, JSON.stringify(saved.payload));
+      const retry = await call("/api/chat/account/vault/wrappers", wrapper, "PUT");
+      assert.equal(retry.payload.data.unchanged, true);
+      const replacement = await call("/api/chat/account/vault/wrappers", await signedWrapper({ ...value, nonce: base64Url(crypto.getRandomValues(new Uint8Array(12))) }), "PUT");
+      assert.equal(replacement.payload.error.code, "ACCOUNT_VAULT_WRAPPER_IMMUTABLE");
+    } else {
+      // The existing original wrapper is immutable, including on explicit relink.
+      assert.equal(saved.payload.error.code, "ACCOUNT_VAULT_WRAPPER_IMMUTABLE");
+    }
+  }
+  const linkedVersions = await call("/api/chat/account/vaults", undefined, "GET");
+  assert.equal(linkedVersions.payload.data.length, 2);
+  assert.equal(linkedVersions.payload.data.find((value) => value.keyVersion === "first-chat-key").wrappers.length, 2);
+  const linkedHistoricalOptions = await call("/api/chat/account/passkeys/authenticate/options", { keyVersion: "first-chat-key" });
+  assert.deepEqual(new Set(linkedHistoricalOptions.payload.data.publicKey.allowCredentials.map((item) => item.id)), new Set([base64Url(credentialId), shared.id]));
+  assert.equal(linkedHistoricalOptions.payload.data.publicKey.extensions.prf.evalByCredential[shared.id].first,
+    (await env.DB.prepare("SELECT prf_salt FROM chat_passkeys WHERE credential_id=?").bind(shared.id).first()).prf_salt);
+  const sharedUnlock = await call("/api/chat/account/passkeys/authenticate/verify", {
+    challenge: linkedHistoricalOptions.payload.data.publicKey.challenge,
+    credential: await assertionFor(linkedHistoricalOptions.payload.data, shared.id, shared.signing, ++sharedCounter),
+  });
+  assert.equal(sharedUnlock.response.status, 200, JSON.stringify(sharedUnlock.payload));
+  assert.equal(sharedUnlock.payload.data.keyVersion, "first-chat-key");
+  assert.equal(sharedUnlock.payload.data.prfSalt, linkedHistoricalOptions.payload.data.publicKey.extensions.prf.evalByCredential[shared.id].first);
+  const linkedList = await authCall("/api/auth/me/passkeys", undefined, "GET");
+  assert.deepEqual(linkedList.payload.data.find((item) => item.credentialId === shared.id).missingVaultVersions, []);
+  assert.equal(linkedList.payload.data.find((item) => item.credentialId === originalPasskey.credential_id).canRevoke, true);
+  assert.equal(linkedList.payload.data.find((item) => item.credentialId === shared.id).canRevoke, false);
+  assert.deepEqual((await env.DB.prepare("SELECT key_version,credential_id,nonce,ciphertext FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(user.id).all()).results, retainedBeforeMigration.results);
+  assert.deepEqual((await env.DB.prepare("SELECT * FROM chat_account_keys WHERE user_id=? ORDER BY key_version").bind(user.id).all()).results, originalIdentityRows.results);
+  assert.deepEqual(await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(user.id).first(), originalHead);
+  assert.equal((await authCall(`/api/auth/me/passkeys/${originalPasskey.id}`, undefined, "DELETE")).response.status, 200);
+  const wrappedAfterRevoke = await call(`/api/chat/account/vault?credentialId=${shared.id}&keyVersion=first-chat-key`, undefined, "GET");
+  assert.equal(wrappedAfterRevoke.response.status, 200);
+  assert.equal(wrappedAfterRevoke.payload.data.credentialId, shared.id);
+  assert.equal((await env.DB.prepare("PRAGMA foreign_key_check").all()).results.length, 0);
+
+  // Legacy vaults without a known credential cannot assume another login
+  // Passkey decrypts the same vault until an explicit signed wrapper exists.
+  const legacy = { id: crypto.randomUUID(), email: "legacy-vault@example.com", role: "student" };
+  await env.DB.prepare("INSERT INTO users (id,email,display_name,role) VALUES (?,?,'Legacy','student')").bind(legacy.id, legacy.email).run();
+  const legacyIds = [crypto.randomUUID(), crypto.randomUUID()];
+  const legacyCredentials = [base64Url(crypto.getRandomValues(new Uint8Array(32))), base64Url(crypto.getRandomValues(new Uint8Array(32)))];
+  for (let index = 0; index < legacyIds.length; index++) await env.DB.prepare(`INSERT INTO chat_passkeys
+    (id,user_id,credential_id,public_key,prf_salt,created_at) VALUES (?,?,?,?,?,?)`).bind(legacyIds[index], legacy.id,
+    legacyCredentials[index], "test-unused-key", base64Url(crypto.getRandomValues(new Uint8Array(32))), new Date().toISOString()).run();
+  await env.DB.prepare(`INSERT INTO chat_account_vault_versions
+    (user_id,key_version,credential_id,kdf_version,nonce,ciphertext,updated_at) VALUES (?,'legacy-version',NULL,'hkdf-sha256-v1',?,?,?)`)
+    .bind(legacy.id, base64Url(crypto.getRandomValues(new Uint8Array(12))), base64Url(crypto.getRandomValues(new Uint8Array(48))), new Date().toISOString()).run();
+  const legacyList = await authCall("/api/auth/me/passkeys", undefined, "GET", legacy);
+  assert.ok(legacyList.payload.data.every((item) => item.chatSyncRequired && !item.canRevoke));
+  for (const passkeyId of legacyIds) {
+    const removal = await authCall(`/api/auth/me/passkeys/${passkeyId}`, undefined, "DELETE", legacy);
+    assert.equal(removal.payload.error.code, "LAST_CHAT_PASSKEY");
+  }
 
   // Two concurrent removals cannot race past the last-credential guard.
   const secondary = { id: crypto.randomUUID(), email: "parallel@example.com", role: "student" };
@@ -479,18 +596,34 @@ try {
   assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL").bind(secondary.id).first()).count, 1);
 
   // Account login remains recoverable by email when a Passkey is unavailable.
+  const retainedTables = ["users", "chat_passkeys", "chat_account_keys", "chat_account_identity_heads", "chat_account_vault_versions", "chat_account_vault_wrappers", "chat_messages"];
+  const accountRowsBeforeEmail = await Promise.all(retainedTables.map(async (table) =>
+    (await env.DB.prepare(`SELECT * FROM ${table} ORDER BY rowid`).all()).results));
   const originalFetch = globalThis.fetch;
   let otpSent = false;
   globalThis.fetch = async (url) => {
+    const identity = { id: "passkey-user", email: user.email, email_confirmed_at: "2026-01-01T00:00:00.000Z",
+      app_metadata: { provider: "google", providers: ["google", "email"] }, identities: [{ provider: "google" }, { provider: "email" }] };
+    if (String(url).endsWith("/auth/v1/user")) return Response.json(identity);
+    if (String(url).endsWith("/auth/v1/verify")) return Response.json({ user: identity });
     assert.equal(String(url), "https://supabase.test/auth/v1/otp");
     otpSent = true;
     return Response.json({});
   };
   try {
+    const googleLogin = await authCall("/api/auth/google", { accessToken: "verified-google-token" }, "POST", false);
+    assert.equal(googleLogin.response.status, 200);
+    assert.equal(googleLogin.payload.data.user.id, user.id);
     const fallback = await authCall("/api/auth/email/otp", { email: user.email }, "POST", false);
     assert.equal(fallback.response.status, 200);
     assert.equal(fallback.payload.data.sent, true);
     assert.equal(otpSent, true);
+    const emailLogin = await authCall("/api/auth/email/verify", { email: user.email, code: "123456" }, "POST", false);
+    assert.equal(emailLogin.response.status, 200, JSON.stringify(emailLogin.payload));
+    assert.equal(emailLogin.payload.data.user.id, googleLogin.payload.data.user.id);
+    const accountRowsAfterEmail = await Promise.all(retainedTables.map(async (table) =>
+      (await env.DB.prepare(`SELECT * FROM ${table} ORDER BY rowid`).all()).results));
+    assert.deepEqual(accountRowsAfterEmail, accountRowsBeforeEmail);
   } finally { globalThis.fetch = originalFetch; }
   console.log("Cloudflare chat passkey smoke checks passed.");
 } finally {

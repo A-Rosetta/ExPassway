@@ -210,15 +210,39 @@ function randomChallenge() {
   return bytesToBase64Url(bytes);
 }
 
+function credentialUnlocksVaultSql(passkey, vault, legacyCandidate = true) {
+  return `(${vault}.credential_id=${passkey}.credential_id ${legacyCandidate ? `OR ${vault}.credential_id IS NULL` : ""} OR EXISTS (
+    SELECT 1 FROM chat_account_vault_wrappers w WHERE w.user_id=${vault}.user_id
+      AND w.key_version=${vault}.key_version AND w.credential_id=${passkey}.credential_id
+  ))`;
+}
+
+function protectedChatVaultSql(passkey) {
+  return `EXISTS (SELECT 1 FROM chat_account_vault_versions v WHERE v.user_id=${passkey}.user_id
+    AND ${credentialUnlocksVaultSql(passkey, "v")}
+    AND NOT EXISTS (SELECT 1 FROM chat_passkeys other WHERE other.user_id=${passkey}.user_id
+      AND other.id<>${passkey}.id AND other.revoked_at IS NULL AND ${credentialUnlocksVaultSql("other", "v", false)}))`;
+}
+
 async function listUserPasskeys(db, userId) {
   try {
     const rows = await db.prepare(`SELECT p.id,p.credential_id,p.transports,p.created_at,p.last_used_at,p.backup_eligible,p.backup_state,p.revoked_at,
       CASE WHEN p.revoked_at IS NULL AND EXISTS (
         SELECT 1 FROM chat_account_vault_versions v WHERE v.user_id=p.user_id
-          AND (v.credential_id=p.credential_id OR v.credential_id IS NULL)
-      ) THEN 1 ELSE 0 END AS chat_unlock
+          AND ${credentialUnlocksVaultSql("p", "v")}
+          AND (NOT EXISTS (SELECT 1 FROM chat_account_identity_heads h WHERE h.user_id=p.user_id)
+            OR v.key_version=(SELECT h.key_version FROM chat_account_identity_heads h WHERE h.user_id=p.user_id))
+      ) THEN 1 ELSE 0 END AS chat_unlock,
+      CASE WHEN ${protectedChatVaultSql("p")} THEN 1 ELSE 0 END AS chat_protected
       FROM chat_passkeys p WHERE p.user_id=? ORDER BY p.created_at ASC,p.id ASC`).bind(userId).all();
-    return rows.results || [];
+    const vaults = (await db.prepare("SELECT key_version,credential_id FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(userId).all()).results || [];
+    const wrappers = (await db.prepare("SELECT key_version,credential_id FROM chat_account_vault_wrappers WHERE user_id=?").bind(userId).all()).results || [];
+    return (rows.results || []).map((passkey) => {
+      const linked = vaults.filter((vault) => !passkey.revoked_at && (vault.credential_id === passkey.credential_id
+        || wrappers.some((wrapper) => wrapper.key_version === vault.key_version && wrapper.credential_id === passkey.credential_id)));
+      return { ...passkey, linkedVaultVersions: linked.map((vault) => vault.key_version),
+        missingVaultVersions: vaults.filter((vault) => !linked.includes(vault)).map((vault) => vault.key_version) };
+    });
   } catch (_error) {
     return [];
   }
@@ -357,9 +381,6 @@ async function verifyPasskeyLogin(db, email, body, request, env) {
   const context = webAuthnContext(request, env);
   if (row.rp_id !== context.rpId || row.origin !== context.origin) {
     throw new AuthError(409, "The WebAuthn relying-party settings changed. Start again.", "WEBAUTHN_CONTEXT_CHANGED");
-  }
-  if (!webAuthnPrfEnabled(credential)) {
-    throw new AuthError(400, "This passkey does not expose the required PRF extension.", "WEBAUTHN_PRF_REQUIRED");
   }
   let verified;
   try {
@@ -794,8 +815,11 @@ export async function handleAuthApiRequest(request, env) {
         backupState: Boolean(passkey.backup_state),
         revoked: Boolean(passkey.revoked_at),
         chatUnlock: Boolean(passkey.chat_unlock),
-        canRevoke: !passkey.revoked_at && activeCount > 1 && !passkey.chat_unlock,
-        revokeBlockedReason: passkey.revoked_at ? null : activeCount <= 1 ? "LAST_PASSKEY" : passkey.chat_unlock ? "LAST_CHAT_PASSKEY" : null,
+        linkedVaultVersions: passkey.linkedVaultVersions,
+        missingVaultVersions: passkey.missingVaultVersions,
+        chatSyncRequired: !passkey.revoked_at && passkey.missingVaultVersions.length > 0,
+        canRevoke: !passkey.revoked_at && activeCount > 1 && !passkey.chat_protected,
+        revokeBlockedReason: passkey.revoked_at ? null : activeCount <= 1 ? "LAST_PASSKEY" : passkey.chat_protected ? "LAST_CHAT_PASSKEY" : null,
       })), request.method);
     }
 
@@ -818,18 +842,14 @@ export async function handleAuthApiRequest(request, env) {
       const revoked = await env.DB.prepare(`UPDATE chat_passkeys SET revoked_at=?
         WHERE id=? AND user_id=? AND revoked_at IS NULL
           AND (SELECT COUNT(*) FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL)>1
-          AND NOT EXISTS (
-            SELECT 1 FROM chat_account_vault_versions v WHERE v.user_id=?
-              AND (v.credential_id=chat_passkeys.credential_id OR v.credential_id IS NULL)
-          )`).bind(new Date().toISOString(), id, row.id, row.id, row.id).run();
+          AND NOT ${protectedChatVaultSql("chat_passkeys")}`).bind(new Date().toISOString(), id, row.id, row.id).run();
       if (Number(revoked?.meta?.changes ?? revoked?.changes ?? 0) !== 1) {
         const remaining = await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL").bind(row.id).first();
         if (Number(remaining?.count || 0) <= 1) throw new AuthError(409, "Keep at least one Passkey on this account.", "LAST_PASSKEY");
-        const retainedVault = await env.DB.prepare(`SELECT 1 FROM chat_account_vault_versions v
-          JOIN chat_passkeys p ON p.user_id=v.user_id AND (p.credential_id=v.credential_id OR v.credential_id IS NULL)
-          WHERE p.id=? AND p.user_id=? LIMIT 1`).bind(id, row.id).first();
+        const retainedVault = await env.DB.prepare(`SELECT 1 FROM chat_passkeys p
+          WHERE p.id=? AND p.user_id=? AND ${protectedChatVaultSql("p")} LIMIT 1`).bind(id, row.id).first();
         if (retainedVault) throw new AuthError(409,
-          "Keep this Passkey: it unlocks retained secure chat keys and history. Additional login Passkeys do not replace it.", "LAST_CHAT_PASSKEY");
+          "Keep this Passkey until another account Passkey can unlock every retained secure chat key and history version.", "LAST_CHAT_PASSKEY");
         throw new AuthError(409, "The Passkey changed while it was being removed. Refresh and try again.", "PASSKEY_CHANGED");
       }
       return success({ revoked: true }, request.method);

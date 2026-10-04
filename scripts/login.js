@@ -8,9 +8,6 @@
   const { t, getLanguage, applyPage } = window.ALevelI18n;
   let resendAvailableAt = 0;
   let resendTimer = 0;
-  let passkeyOptions = null;
-  let passkeyEmail = "";
-  let passkeyOfferedEmail = "";
 
   function byId(id) {
     return document.getElementById(id);
@@ -80,43 +77,46 @@
     applyAuthSuccess(payload, "loginSuccess");
   }
 
-  async function tryPasskeyLogin(email) {
-    const button = byId("passkeyLoginBtn");
-    if (!button || !window.PublicKeyCredential || !navigator.credentials?.get) return false;
-    try {
-      const options = await window.ALevelApi.getAuthPasskeyOptions(email);
-      passkeyOptions = options;
-      passkeyEmail = email;
-      passkeyOfferedEmail = email;
-      button.hidden = false;
-      setAuthStatus(t("passkeyLoginReady"));
-      return true;
-    } catch (_error) {
-      passkeyOptions = null;
-      passkeyEmail = "";
-      button.hidden = true;
-      return false;
-    }
+  function passkeyLoginSupported() {
+    return Boolean(window.isSecureContext && window.PublicKeyCredential && navigator.credentials?.get);
   }
 
   async function authenticateWithPasskey() {
     const button = byId("passkeyLoginBtn");
-    if (!passkeyOptions || !passkeyEmail || button.disabled) return;
-    button.disabled = true;
+    if (button.disabled) return;
+    const input = byId("emailOtpAddress");
+    const email = normalizedEmail();
+    if (!input.checkValidity() || !email) {
+      setFieldError(input, byId("emailOtpAddressError"), t("invalidEmailAddress"));
+      input.focus();
+      return;
+    }
+    setFieldError(input, byId("emailOtpAddressError"), "");
+    if (!passkeyLoginSupported()) {
+      setAuthStatus(t("passkeyLoginUnsupported"), true);
+      return;
+    }
+    const emailButton = byId("emailOtpRequestBtn");
+    setButtonBusy(button, true, "passkeyLoginStarting");
+    emailButton.disabled = true;
+    input.readOnly = true;
+    setAuthStatus(t("passkeyLoginStarting"));
     try {
-      const credential = await navigator.credentials.get({ publicKey: publicKeyOptions(passkeyOptions) });
+      // Each explicit click starts a fresh challenge for the current email.
+      const options = await window.ALevelApi.getAuthPasskeyOptions(email);
+      const credential = await navigator.credentials.get({ publicKey: publicKeyOptions(options) });
       if (!credential) throw new Error("No Passkey was selected.");
-      const data = await window.ALevelApi.verifyAuthPasskey(passkeyEmail, {
-        challenge: passkeyOptions.publicKey?.challenge || passkeyOptions.challenge,
+      const data = await window.ALevelApi.verifyAuthPasskey(email, {
+        challenge: options.publicKey?.challenge || options.challenge,
         credential: serialiseCredential(credential),
       });
       applyAuthSuccess(data, "loginSuccess");
     } catch (_error) {
-      passkeyOptions = null;
-      passkeyEmail = "";
-      button.hidden = true;
       setAuthStatus(t("passkeyLoginFailed"), true);
-      button.disabled = false;
+    } finally {
+      setButtonBusy(button, false, "passkeyLoginStarting");
+      emailButton.disabled = false;
+      input.readOnly = false;
     }
   }
 
@@ -183,10 +183,6 @@
     resendTimer = 0;
     updateResendButton();
     byId("emailOtpAddress").focus();
-    passkeyOptions = null;
-    passkeyEmail = "";
-    passkeyOfferedEmail = "";
-    byId("passkeyLoginBtn").hidden = true;
   }
 
   async function handleGoogleCallback() {
@@ -249,10 +245,9 @@
       setFieldError(input, errorElement, "");
       const button = byId("emailOtpRequestBtn");
       setButtonBusy(button, true, "sendingEmailOtp");
+      byId("passkeyLoginBtn").disabled = true;
+      input.readOnly = true;
       try {
-        const account = await window.ALevelApi.checkEmailAccount(email);
-        if (account.exists && account.hasPasskey && passkeyOfferedEmail !== email
-          && await tryPasskeyLogin(email)) return;
         const result = await window.ALevelApi.requestEmailOtp(email);
         showOtpStep(email);
         startResendCooldown(result.retryAfterSeconds);
@@ -261,8 +256,11 @@
         setAuthStatus(t("emailOtpSendFailed", { message: err.message || t("retryLater") }), true);
       } finally {
         setButtonBusy(button, false, "sendingEmailOtp");
+        byId("passkeyLoginBtn").disabled = false;
+        input.readOnly = false;
       }
     });
+    byId("passkeyLoginBtn").hidden = !passkeyLoginSupported();
     byId("passkeyLoginBtn").addEventListener("click", authenticateWithPasskey);
     byId("emailOtpResendBtn").addEventListener("click", async () => {
       if (Date.now() < resendAvailableAt) return;

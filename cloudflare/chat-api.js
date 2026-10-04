@@ -13,7 +13,7 @@ import {
   verifyRegistrationResponse,
   webAuthnContext,
 } from "./webauthn.js";
-import { handleAccountV2Route, cleanupAccountV2, mapAccountConversation, isHistoricalConversation } from "./chat-account-v2.js";
+import { handleAccountV2Route, cleanupAccountV2, mapAccountConversation, isHistoricalConversation, canonicalAccountJson } from "./chat-account-v2.js";
 
 const encoder = new TextEncoder();
 const MAX_CIPHERTEXT_LENGTH = 512 * 1024;
@@ -810,7 +810,9 @@ async function directoryAccountEnabled(db, userId) {
   const row = await db.prepare(`SELECT 1 FROM chat_account_keys k
     JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL AND
+      (v.credential_id IS NULL OR pk.credential_id=v.credential_id OR EXISTS (SELECT 1 FROM chat_account_vault_wrappers w
+        WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=pk.credential_id))
     JOIN users u ON u.id=k.user_id AND u.disabled_at IS NULL
     WHERE k.user_id=? AND k.status='active' LIMIT 1`).bind(userId).first();
   return Boolean(row);
@@ -820,13 +822,15 @@ async function searchChatUsers(db, userId, query) {
   const q = String(query || "").trim();
   if (!validChatUserId(q)) throw new AuthError(400, "Enter at least 3 valid ID characters.", "INVALID_CHAT_USER_ID");
   const rows = await db.prepare(`SELECT p.chat_user_id,p.chat_alias,p.avatar_data_url,
-      CASE WHEN k.user_id IS NOT NULL AND h.user_id IS NOT NULL AND v.user_id IS NOT NULL AND pk.user_id IS NOT NULL THEN 1 ELSE 0 END AS account_enabled,
+      MAX(CASE WHEN k.user_id IS NOT NULL AND h.user_id IS NOT NULL AND v.user_id IS NOT NULL AND pk.user_id IS NOT NULL THEN 1 ELSE 0 END) AS account_enabled,
       c.id AS contact_id
     FROM chat_profiles p JOIN users u ON u.id=p.user_id AND u.disabled_at IS NULL
     LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
     LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     LEFT JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL AND
+      (v.credential_id IS NULL OR pk.credential_id=v.credential_id OR EXISTS (SELECT 1 FROM chat_account_vault_wrappers w
+        WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=pk.credential_id))
     LEFT JOIN chat_contacts c ON c.user_id=? AND c.peer_user_id=p.user_id
     WHERE p.user_id<>? AND p.chat_user_id LIKE ?
     GROUP BY p.user_id ORDER BY p.chat_user_id LIMIT 20`).bind(userId, userId, `${q}%`).all();
@@ -837,12 +841,14 @@ async function addContactByChatUserId(db, userId, value) {
   const chatUserId = String(value || "").trim();
   if (!validChatUserId(chatUserId)) throw new AuthError(400, "The chat ID is invalid.", "INVALID_CHAT_USER_ID");
   const target = await db.prepare(`SELECT p.user_id,p.chat_user_id,p.chat_alias,p.avatar_data_url,
-      CASE WHEN k.user_id IS NOT NULL AND h.user_id IS NOT NULL AND v.user_id IS NOT NULL AND pk.user_id IS NOT NULL THEN 1 ELSE 0 END AS account_enabled
+      MAX(CASE WHEN k.user_id IS NOT NULL AND h.user_id IS NOT NULL AND v.user_id IS NOT NULL AND pk.user_id IS NOT NULL THEN 1 ELSE 0 END) AS account_enabled
     FROM chat_profiles p JOIN users u ON u.id=p.user_id AND u.disabled_at IS NULL
     LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
     LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     LEFT JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL AND
+      (v.credential_id IS NULL OR pk.credential_id=v.credential_id OR EXISTS (SELECT 1 FROM chat_account_vault_wrappers w
+        WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=pk.credential_id))
     WHERE p.chat_user_id=? GROUP BY p.user_id`).bind(chatUserId).first();
   if (!target || target.user_id === userId) throw new AuthError(404, "Chat user not found.", "CHAT_USER_NOT_FOUND");
   if (!target.account_enabled) throw new AuthError(409, "This user must enable secure chat first.", "ACCOUNT_NOT_ENABLED");
@@ -867,7 +873,9 @@ async function globalReadyAccounts(db, conversationId = null) {
     FROM chat_account_keys k
     JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
     JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
-    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND (v.credential_id IS NULL OR pk.credential_id=v.credential_id) AND pk.revoked_at IS NULL
+    JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL AND
+      (v.credential_id IS NULL OR pk.credential_id=v.credential_id OR EXISTS (SELECT 1 FROM chat_account_vault_wrappers w
+        WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=pk.credential_id))
     JOIN users u ON u.id=k.user_id AND u.disabled_at IS NULL
     JOIN chat_profiles p ON p.user_id=k.user_id
     WHERE k.status='active' GROUP BY k.user_id ORDER BY p.chat_user_id`).all();
@@ -985,6 +993,9 @@ async function createGlobalDiscussion(db, env, userId, body) {
     statements.push(db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
       (SELECT 1 FROM chat_account_keys k JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
        JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
+       JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL AND
+         (v.credential_id IS NULL OR pk.credential_id=v.credential_id OR EXISTS (SELECT 1 FROM chat_account_vault_wrappers w
+           WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=pk.credential_id))
        WHERE k.user_id=? AND k.key_version=? AND k.status='active') THEN 1 ELSE 0 END)`).bind(randomId(), item.account.user_id, item.account.key_version));
     statements.push(db.prepare("INSERT INTO chat_epoch_recipients (conversation_id,epoch,user_id,key_version,ephemeral_public_key,nonce,envelope_ciphertext,created_at) VALUES (?,?,?,?,?,?,?,?)").bind(conversationId, 1, item.account.user_id, item.account.key_version, item.envelope.ephemeralPublicKey, item.envelope.nonce, item.envelope.ciphertext, timestamp));
   }
@@ -1026,6 +1037,9 @@ async function rotateGlobalDiscussion(db, userId, body) {
     statements.push(db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
       (SELECT 1 FROM chat_account_keys k JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
        JOIN chat_account_vault_versions v ON v.user_id=k.user_id AND v.key_version=k.key_version
+       JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL AND
+         (v.credential_id IS NULL OR pk.credential_id=v.credential_id OR EXISTS (SELECT 1 FROM chat_account_vault_wrappers w
+           WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=pk.credential_id))
        WHERE k.user_id=? AND k.key_version=? AND k.status='active') THEN 1 ELSE 0 END)`).bind(randomId(), item.account.user_id, item.account.key_version));
     statements.push(db.prepare("INSERT INTO chat_epoch_recipients (conversation_id,epoch,user_id,key_version,ephemeral_public_key,nonce,envelope_ciphertext,created_at) VALUES (?,?,?,?,?,?,?,?)").bind(conversationId, epoch, item.account.user_id, item.account.key_version, item.envelope.ephemeralPublicKey, item.envelope.nonce, item.envelope.ciphertext, timestamp));
   }
@@ -2221,19 +2235,20 @@ async function accountKeyBundle(db, userId) {
   let credential = null;
   let vault = null;
   try {
-    vault = row && await db.prepare("SELECT key_version,credential_id FROM chat_account_vault_versions WHERE user_id=? AND key_version=?").bind(userId, row.key_version).first();
+    vault = row && (await listAccountVaults(db, userId)).find((value) => value.keyVersion === row.key_version);
     credential = await db.prepare(`SELECT credential_id,backup_eligible,revoked_at FROM chat_passkeys
       WHERE user_id=? AND revoked_at IS NULL AND (? IS NULL OR credential_id=?) ORDER BY created_at DESC,id DESC LIMIT 1`)
-      .bind(userId, vault?.credential_id || null, vault?.credential_id || null).first();
+      .bind(userId, vault?.credentialId || null, vault?.credentialId || null).first();
   } catch (_error) {
     // Older test/compatibility databases predate the hardening migration.
   }
   return {
     accountKey: mapAccountKey(row),
-    enabled: Boolean(row && credential && vault),
+    enabled: Boolean(row && credential && vault?.wrappers.length),
     passkeyReady: Boolean(credential),
     credentialId: credential?.credential_id || null,
-    vaultKeyVersion: vault?.key_version || null,
+    vaultKeyVersion: vault?.keyVersion || null,
+    credentialIds: vault?.wrappers.map((wrapper) => wrapper.credentialId) || [],
   };
 }
 
@@ -2251,16 +2266,17 @@ async function issueAccountWriteProof(db, userId, credentialId, keyVersion = nul
   return { proof: token, proofExpiresAt: expiresAt };
 }
 
-async function requireAccountWriteProof(db, userId, body) {
+async function requireAccountWriteProof(db, userId, body, purpose = "account-write") {
   const proof = boundedString(body?.proof, "proof", 256);
   const result = await db
     .prepare(
       `UPDATE chat_account_write_proofs SET uses_remaining = uses_remaining - 1
        WHERE token_hash = ? AND user_id = ? AND expires_at > ? AND uses_remaining > 0
+         AND COALESCE(purpose,'account-write') = ?
          AND EXISTS (SELECT 1 FROM chat_passkeys p WHERE p.user_id=chat_account_write_proofs.user_id
            AND p.credential_id=chat_account_write_proofs.credential_id AND p.revoked_at IS NULL)`
     )
-    .bind(await sha256Base64Url(proof), userId, nowIso())
+    .bind(await sha256Base64Url(proof), userId, nowIso(), purpose)
     .run();
   if (Number(result?.meta?.changes ?? result?.changes ?? 0) !== 1) {
     throw new AuthError(
@@ -2325,21 +2341,33 @@ function webAuthnTransports(credential) {
   return transports.filter((value) => typeof value === "string" && value.length <= 32).slice(0, 8);
 }
 
-async function passkeyOptions(db, userId, kind, request, env) {
+async function passkeyOptions(db, userId, kind, request, env, body = {}) {
   const context = webAuthnContext(request, env);
   const challenge = bytesToBase64Url(randomBytes(32));
-  const existingPrf = kind === "authentication"
-    ? await db.prepare(`SELECT p.credential_id,p.prf_salt FROM chat_passkeys p
-      LEFT JOIN chat_account_identity_heads h ON h.user_id=p.user_id
-      WHERE p.user_id=? AND p.revoked_at IS NULL AND (h.credential_id IS NULL OR p.credential_id=h.credential_id)
-      ORDER BY p.created_at DESC,p.id DESC LIMIT 1`).bind(userId).first()
-    : null;
+  const credentialRows = (await db.prepare(`SELECT credential_id,transports,prf_salt FROM chat_passkeys
+    WHERE user_id=? AND revoked_at IS NULL ORDER BY created_at ASC,id ASC`).bind(userId).all()).results || [];
+  const purpose = kind === "authentication" && body.purpose === "account-wrap" ? "account-wrap" : "account-write";
+  const requestedCredential = body.credentialId ? boundedString(body.credentialId, "credentialId", 1024) : null;
+  const head = await db.prepare("SELECT key_version FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
+  const keyVersion = kind === "authentication" ? (body.keyVersion ? boundedString(body.keyVersion, "keyVersion", 64) : head?.key_version || null) : null;
+  const vault = keyVersion && (await listAccountVaults(db, userId)).find((value) => value.keyVersion === keyVersion);
+  if (kind === "authentication" && keyVersion && !vault)
+    throw new AuthError(404, "The retained secure chat identity was not found.", "ACCOUNT_VAULT_NOT_FOUND");
+  if (purpose === "account-wrap" && !requestedCredential)
+    throw new AuthError(400, "Choose the account Passkey to synchronize.", "PASSKEY_REQUIRED");
+  const credentials = credentialRows.filter((value) => kind === "registration" || (
+    (!requestedCredential || value.credential_id === requestedCredential)
+    && (purpose === "account-wrap" || !vault || vault.wrappers.some((wrapper) => wrapper.credentialId === value.credential_id))
+  ));
+  if (kind === "authentication" && !credentials.length)
+    throw new AuthError(409, "Use an account Passkey that unlocks this retained secure chat identity.", "CHAT_VAULT_PASSKEY_UNAVAILABLE");
+  const existingPrf = kind === "authentication" ? credentials[0] : null;
   const prfSalt = existingPrf?.prf_salt || bytesToBase64Url(randomBytes(32));
   const timestamp = Date.now();
   const expiresAt = new Date(timestamp + 5 * 60 * 1000).toISOString();
   await db
     .prepare(
-      `INSERT INTO chat_webauthn_challenges (id,user_id,challenge,kind,rp_id,origin,prf_salt,expires_at,created_at,credential_id) VALUES (?,?,?,?,?,?,?,?,?,?)`
+      `INSERT INTO chat_webauthn_challenges (id,user_id,challenge,kind,rp_id,origin,prf_salt,expires_at,created_at,credential_id,reserved_key_version,purpose) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`
     )
     .bind(
       randomId(),
@@ -2351,27 +2379,23 @@ async function passkeyOptions(db, userId, kind, request, env) {
       prfSalt,
       expiresAt,
       new Date(timestamp).toISOString(),
-      existingPrf?.credential_id || null
+      kind === "authentication" ? requestedCredential : null,
+      keyVersion,
+      purpose
     )
     .run();
-  const credentialRows = await db
-    .prepare(
-      `SELECT credential_id,transports FROM chat_passkeys
-    WHERE user_id=? AND revoked_at IS NULL ORDER BY created_at ASC`
-    )
-    .bind(userId)
-    .all();
-  const credentials = (credentialRows.results || []).filter((row) => kind === "registration" || row.credential_id === existingPrf?.credential_id);
-  const prf = { eval: { first: prfSalt } };
+  const prf = kind === "registration" ? { eval: { first: prfSalt } } : {
+    evalByCredential: Object.fromEntries(credentials.map((value) => [value.credential_id, { first: value.prf_salt }])),
+  };
   const publicKey =
     kind === "registration"
       ? {
           challenge,
-          rp: { id: context.rpId, name: "ExPassway secure chat" },
+          rp: { id: context.rpId, name: "ExPassway" },
           user: {
             id: bytesToBase64Url(encoder.encode(userId)),
             name: userId,
-            displayName: "ExPassway chat account",
+            displayName: "ExPassway account",
           },
           pubKeyCredParams: [{ type: "public-key", alg: -7 }],
           timeout: 300000,
@@ -2403,7 +2427,7 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
   const challenge = boundedString(body.challenge, "challenge", 256);
   const row = await db
     .prepare(
-      `SELECT id,rp_id,origin,prf_salt,credential_id FROM chat_webauthn_challenges WHERE user_id = ? AND challenge = ? AND kind = ? AND used_at IS NULL AND expires_at > ?`
+      `SELECT id,rp_id,origin,prf_salt,credential_id,reserved_key_version,purpose FROM chat_webauthn_challenges WHERE user_id = ? AND challenge = ? AND kind = ? AND used_at IS NULL AND expires_at > ?`
     )
     .bind(userId, challenge, kind, nowIso())
     .first();
@@ -2446,12 +2470,12 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       }
     } else {
       const credentialId = webAuthnCredentialId(credential);
-      if (row.credential_id !== credentialId) {
+      if (row.credential_id && row.credential_id !== credentialId) {
         throw new AuthError(400, "Use the Passkey selected for this account vault.", "WEBAUTHN_CREDENTIAL_MISMATCH");
       }
       const passkey = await db
         .prepare(
-          `SELECT id,user_id,credential_id,public_key,sign_count,backup_eligible FROM chat_passkeys
+          `SELECT id,user_id,credential_id,public_key,sign_count,backup_eligible,prf_salt FROM chat_passkeys
         WHERE credential_id=? AND user_id=? AND revoked_at IS NULL`
         )
         .bind(credentialId, userId)
@@ -2462,6 +2486,11 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
           "The WebAuthn credential is not registered for this account.",
           "WEBAUTHN_CREDENTIAL_NOT_FOUND"
         );
+      if (row.purpose !== "account-wrap" && row.reserved_key_version) {
+        const vault = (await listAccountVaults(db, userId)).find((value) => value.keyVersion === row.reserved_key_version);
+        if (!vault?.wrappers.some((wrapper) => wrapper.credentialId === credentialId))
+          throw new AuthError(400, "Use an account Passkey synchronized with this retained chat identity.", "WEBAUTHN_CREDENTIAL_MISMATCH");
+      }
       verified = await verifyAuthenticationResponse({
         credential,
         challenge,
@@ -2473,6 +2502,7 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
       verified.credentialId = credentialId;
       verified.passkeyId = passkey.id;
       verified.expectedSignCount = Number(passkey.sign_count || 0);
+      verified.prfSalt = passkey.prf_salt;
     }
   } catch (error) {
     if (error instanceof AuthError) throw error;
@@ -2557,15 +2587,13 @@ async function verifyPasskey(db, userId, body, kind, request, env) {
     );
   }
   const identity = await db.prepare("SELECT key_version,credential_id FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
-  if (identity?.credential_id && identity.credential_id !== verified.credentialId) {
-    throw new AuthError(409,"The secure chat identity changed during Passkey verification. Start again.","ACCOUNT_IDENTITY_CHANGED");
-  }
   return {
     verified: true,
     credentialId: verified.credentialId,
-    prfSalt: row.prf_salt,
+    prfSalt: verified.prfSalt,
+    keyVersion: row.reserved_key_version || null,
     signCount: verified.signCount,
-    ...(await issueAccountWriteProof(db, userId, verified.credentialId, identity?.key_version || null)),
+    ...(await issueAccountWriteProof(db, userId, verified.credentialId, row.reserved_key_version || identity?.key_version || null, row.purpose || "account-write")),
   };
 }
 
@@ -2585,6 +2613,7 @@ async function saveVault(db, userId, body) {
         WHERE user_id=? AND credential_id=? AND revoked_at IS NULL) THEN 1 ELSE 0 END)`)
       .bind(randomId(), userId, proof?.credential_id || null),
     db.prepare("INSERT INTO chat_account_vault_versions (user_id,key_version,credential_id,kdf_version,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?,?)").bind(userId,keyVersion,proof?.credential_id || null,"hkdf-sha256-v1",nonce,ciphertext,timestamp),
+    db.prepare("INSERT INTO chat_account_vault_wrappers (user_id,key_version,credential_id,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?)").bind(userId,keyVersion,proof?.credential_id || null,nonce,ciphertext,timestamp),
     db.prepare("INSERT INTO chat_account_identity_heads (user_id,key_version,credential_id) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET key_version=excluded.key_version,credential_id=excluded.credential_id").bind(userId,keyVersion,proof?.credential_id || null),
     db.prepare("DELETE FROM chat_account_initialization_guards"),
   ]); } catch (error) {
@@ -2624,6 +2653,7 @@ async function initializeAccount(db, userId, body) {
     db.prepare("UPDATE chat_account_keys SET status='revoked',updated_at=? WHERE user_id=? AND status='active'").bind(timestamp,userId),
     db.prepare("INSERT INTO chat_account_keys (user_id,key_version,encryption_public_key,signing_public_key,fingerprint,status,created_at,updated_at) VALUES (?,?,?,?,?,'active',?,?)").bind(userId,keyVersion,encryptionPublicKey,signingPublicKey,fingerprint,timestamp,timestamp),
     db.prepare("INSERT INTO chat_account_vault_versions (user_id,key_version,credential_id,kdf_version,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?,?)").bind(userId,keyVersion,proof?.credential_id || null,"hkdf-sha256-v1",nonce,ciphertext,timestamp),
+    db.prepare("INSERT INTO chat_account_vault_wrappers (user_id,key_version,credential_id,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?)").bind(userId,keyVersion,proof?.credential_id || null,nonce,ciphertext,timestamp),
     db.prepare("INSERT INTO chat_account_identity_heads (user_id,key_version,credential_id) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET key_version=excluded.key_version,credential_id=excluded.credential_id").bind(userId,keyVersion,proof?.credential_id || null),
     db.prepare("UPDATE chat_passkeys SET key_version=? WHERE user_id=? AND credential_id=?").bind(keyVersion,userId,proof?.credential_id || null),
     db.prepare("DELETE FROM chat_account_initialization_guards"),
@@ -2636,12 +2666,48 @@ async function initializeAccount(db, userId, body) {
   return { initialized: true, reset: Boolean(existing), keyVersion, fingerprint, updatedAt: timestamp };
 }
 
-async function getVault(db, userId) {
-  let row;
-  try { row = await db.prepare(`SELECT v.key_version,v.kdf_version,v.nonce,v.ciphertext,v.updated_at FROM chat_account_vault_versions v
-    LEFT JOIN chat_account_identity_heads h ON h.user_id=v.user_id WHERE v.user_id = ? AND (h.key_version IS NULL OR h.key_version=v.key_version)
-    ORDER BY v.updated_at DESC,v.key_version DESC LIMIT 1`).bind(userId).first(); }
-  catch (_error) { row = await db.prepare("SELECT key_version,kdf_version,nonce,ciphertext,updated_at FROM chat_vaults WHERE user_id = ?").bind(userId).first(); }
+async function listAccountVaults(db, userId) {
+  const versions = (await db.prepare(`SELECT v.*,k.encryption_public_key,k.signing_public_key,k.fingerprint,k.status,k.created_at
+    FROM chat_account_vault_versions v LEFT JOIN chat_account_keys k ON k.user_id=v.user_id AND k.key_version=v.key_version
+    WHERE v.user_id=? ORDER BY v.updated_at ASC,v.key_version ASC`).bind(userId).all()).results || [];
+  const passkeys = (await db.prepare("SELECT credential_id FROM chat_passkeys WHERE user_id=? AND revoked_at IS NULL ORDER BY created_at ASC,id ASC").bind(userId).all()).results || [];
+  let additional = [];
+  try { additional = (await db.prepare(`SELECT w.* FROM chat_account_vault_wrappers w JOIN chat_passkeys p
+    ON p.user_id=w.user_id AND p.credential_id=w.credential_id AND p.revoked_at IS NULL WHERE w.user_id=? ORDER BY w.updated_at,w.credential_id`).bind(userId).all()).results || []; }
+  catch (_error) { /* Earlier databases still retain their original vault wrapper. */ }
+  return versions.map((version) => {
+    const wrappers = additional.filter((wrapper) => wrapper.key_version === version.key_version).map((wrapper) => ({
+      credentialId: wrapper.credential_id, keyVersion: version.key_version, kdfVersion: version.kdf_version,
+      nonce: wrapper.nonce, ciphertext: wrapper.ciphertext, updatedAt: wrapper.updated_at,
+    }));
+    for (const passkey of passkeys) {
+      if ((!version.credential_id || passkey.credential_id === version.credential_id)
+          && !wrappers.some((wrapper) => wrapper.credentialId === passkey.credential_id))
+        wrappers.push({ credentialId: passkey.credential_id, keyVersion: version.key_version, kdfVersion: version.kdf_version,
+          nonce: version.nonce, ciphertext: version.ciphertext, updatedAt: version.updated_at,
+          legacyCandidate: !version.credential_id });
+    }
+    const preferred = wrappers.find((wrapper) => wrapper.credentialId === version.credential_id) || wrappers[0];
+    return { keyVersion: version.key_version, kdfVersion: version.kdf_version, credentialId: preferred?.credentialId || version.credential_id,
+      nonce: preferred?.nonce || version.nonce, ciphertext: preferred?.ciphertext || version.ciphertext,
+      updatedAt: preferred?.updatedAt || version.updated_at, legacyCandidate: Boolean(preferred?.legacyCandidate), wrappers,
+      accountKey: version.encryption_public_key ? mapAccountKey(version) : null };
+  });
+}
+
+async function getVault(db, userId, input = {}) {
+  const versions = await listAccountVaults(db, userId);
+  const head = await db.prepare("SELECT key_version FROM chat_account_identity_heads WHERE user_id=?").bind(userId).first();
+  const keyVersion = input.keyVersion || head?.key_version || versions.at(-1)?.keyVersion;
+  const version = versions.find((value) => value.keyVersion === keyVersion);
+  if (input.keyVersion && !version) throw new AuthError(404, "The retained secure chat vault was not found.", "ACCOUNT_VAULT_NOT_FOUND");
+  if (version && input.credentialId) {
+    const wrapper = version.wrappers.find((value) => value.credentialId === input.credentialId);
+    if (!wrapper) throw new AuthError(409, "Synchronize this Passkey using an existing secure chat Passkey first.", "CHAT_VAULT_PASSKEY_NOT_LINKED");
+    return { ...version, ...wrapper };
+  }
+  if (version) return version;
+  const row = await db.prepare("SELECT key_version,kdf_version,nonce,ciphertext,updated_at FROM chat_vaults WHERE user_id = ?").bind(userId).first();
   return row
     ? {
         keyVersion: row.key_version,
@@ -2651,6 +2717,52 @@ async function getVault(db, userId) {
         updatedAt: row.updated_at,
       }
     : null;
+}
+
+async function saveVaultWrapper(db, userId, body) {
+  const keyVersion = boundedString(body.keyVersion, "keyVersion", 64);
+  const credentialId = boundedString(body.credentialId, "credentialId", 1024);
+  const nonce = boundedString(body.nonce, "nonce", 256);
+  const ciphertext = boundedString(body.ciphertext, "ciphertext", 512 * 1024);
+  const signature = boundedString(body.signature, "signature", 256);
+  if (!isBase64Url(nonce, 256) || base64UrlToBytes(nonce).length !== 12
+      || !isBase64Url(ciphertext, 512 * 1024) || base64UrlToBytes(ciphertext).length < 16
+      || !isBase64Url(signature, 256) || base64UrlToBytes(signature).length !== 64)
+    throw new AuthError(400, "The encrypted account wrapper is invalid.", "INVALID_VAULT_WRAPPER");
+  const proof = await requireAccountWriteProof(db, userId, body, "account-wrap");
+  if (proof.credential_id !== credentialId || proof.key_version !== keyVersion)
+    throw new AuthError(403, "Verify the selected Passkey for this retained account identity again.", "ACCOUNT_WRITE_PROOF_REQUIRED");
+  const key = await db.prepare(`SELECT k.* FROM chat_account_keys k JOIN chat_account_vault_versions v
+    ON v.user_id=k.user_id AND v.key_version=k.key_version WHERE k.user_id=? AND k.key_version=?`).bind(userId,keyVersion).first();
+  if (!key) throw new AuthError(404, "The retained secure chat identity was not found.", "ACCOUNT_VAULT_NOT_FOUND");
+  const value = { version: "account-v2", action: "wrap-vault", senderUserId: userId, senderKeyId: keyVersion, credentialId, nonce, ciphertext };
+  let verified = false;
+  try {
+    const publicKey = await crypto.subtle.importKey("raw", base64UrlToBytes(key.signing_public_key), { name: "Ed25519" }, false, ["verify"]);
+    verified = await crypto.subtle.verify("Ed25519", publicKey, base64UrlToBytes(signature), encoder.encode(canonicalAccountJson(value)));
+  } catch (_error) { /* Reject invalid crypto input with the same account signature error. */ }
+  if (!verified) throw new AuthError(400, "Unlock the original account identity before synchronizing its Passkey wrapper.", "INVALID_VAULT_WRAPPER_SIGNATURE");
+  const existing = await db.prepare("SELECT nonce,ciphertext FROM chat_account_vault_wrappers WHERE user_id=? AND key_version=? AND credential_id=?").bind(userId,keyVersion,credentialId).first();
+  if (existing) {
+    if (existing.nonce !== nonce || existing.ciphertext !== ciphertext)
+      throw new AuthError(409, "This Passkey already has an immutable wrapper for this identity.", "ACCOUNT_VAULT_WRAPPER_IMMUTABLE");
+    return { saved: true, keyVersion, credentialId, unchanged: true };
+  }
+  const timestamp = nowIso();
+  try { await db.batch([
+    db.prepare(`INSERT INTO chat_account_initialization_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+      (SELECT 1 FROM chat_passkeys WHERE user_id=? AND credential_id=? AND revoked_at IS NULL)
+      AND EXISTS (SELECT 1 FROM chat_account_vault_versions WHERE user_id=? AND key_version=?) THEN 1 ELSE 0 END)`)
+      .bind(randomId(),userId,credentialId,userId,keyVersion),
+    db.prepare("INSERT INTO chat_account_vault_wrappers (user_id,key_version,credential_id,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?)")
+      .bind(userId,keyVersion,credentialId,nonce,ciphertext,timestamp),
+    db.prepare("DELETE FROM chat_account_initialization_guards"),
+  ]); } catch (error) {
+    if (/CHECK constraint failed|UNIQUE constraint failed/.test(String(error?.message || error)))
+      throw new AuthError(409, "The Passkey or retained vault changed. Refresh and try again.", "ACCOUNT_VAULT_WRAPPER_CONFLICT");
+    throw error;
+  }
+  return { saved: true, keyVersion, credentialId, updatedAt: timestamp };
 }
 
 async function listEpochs(db, conversationId, userId) {
@@ -2778,7 +2890,7 @@ async function handleRoute(request, env, user) {
   if (method === "POST" && url.pathname === "/api/chat/account/passkeys/register/options")
     return success(await passkeyOptions(db, user.id, "registration", request, env), method);
   if (method === "POST" && url.pathname === "/api/chat/account/passkeys/authenticate/options")
-    return success(await passkeyOptions(db, user.id, "authentication", request, env), method);
+    return success(await passkeyOptions(db, user.id, "authentication", request, env, await readJsonBody(request)), method);
   if (method === "POST" && url.pathname === "/api/chat/account/passkeys/register/verify")
     return success(
       await verifyPasskey(db, user.id, await readJsonBody(request), "registration", request, env),
@@ -2791,7 +2903,11 @@ async function handleRoute(request, env, user) {
       method
     );
   if (method === "GET" && url.pathname === "/api/chat/account/vault")
-    return success(await getVault(db, user.id), method);
+    return success(await getVault(db, user.id, { credentialId: url.searchParams.get("credentialId"), keyVersion: url.searchParams.get("keyVersion") }), method);
+  if (method === "GET" && url.pathname === "/api/chat/account/vaults")
+    return success(await listAccountVaults(db, user.id), method);
+  if (method === "PUT" && url.pathname === "/api/chat/account/vault/wrappers")
+    return success(await saveVaultWrapper(db, user.id, await readJsonBody(request)), method);
   if (method === "PUT" && url.pathname === "/api/chat/account/vault")
     return success(await saveVault(db, user.id, await readJsonBody(request)), method);
 

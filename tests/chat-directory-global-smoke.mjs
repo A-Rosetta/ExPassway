@@ -41,7 +41,7 @@ function metadata(epoch) { return { epoch, version: epoch, nonce: opaque(12), ci
 
 try {
   const db = env.DB;
-  for (const file of ["0001_initial", "0002_supabase_auth", "0003_admin_platform", "0006_chat_foundation", "0007_chat_crypto_hardening", "0008_chat_account_v2", "0009_chat_webauthn_context", "0010_chat_account_write_proofs", "0011_chat_messages_account_sender", "0012_chat_message_sender_key", "0013_chat_account_lifecycle", "0014_chat_passkey_hardening", "0015_chat_conversation_protocol", "0016_chat_profile_history", "0017_chat_directory_global"]) {
+  for (const file of ["0001_initial", "0002_supabase_auth", "0003_admin_platform", "0006_chat_foundation", "0007_chat_crypto_hardening", "0008_chat_account_v2", "0009_chat_webauthn_context", "0010_chat_account_write_proofs", "0011_chat_messages_account_sender", "0012_chat_message_sender_key", "0013_chat_account_lifecycle", "0014_chat_passkey_hardening", "0015_chat_conversation_protocol", "0016_chat_profile_history", "0017_chat_directory_global", "0018_shared_passkeys"]) {
     for (const statement of unstable_splitSqlQuery(await readFile(new URL(`../migrations/${file}.sql`, import.meta.url), "utf8"))) await db.prepare(statement).run();
   }
   for (const user of [admin, student, late]) {
@@ -64,11 +64,38 @@ try {
   assert.equal(found.status, 200);
   assert.equal(found.payload.data[0].enabled, true);
   assert.equal(Object.hasOwn(found.payload.data[0], "userId"), false);
+  const retainedStudentVault = await db.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=?").bind(student.id).first();
+  const retainedStudentHead = await db.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(student.id).first();
+  const replacementCredential = opaque(32);
+  await db.batch([
+    db.prepare("INSERT INTO chat_passkeys (id,user_id,credential_id,public_key,prf_salt,created_at) VALUES (?,?,?,?,?,?)")
+      .bind(crypto.randomUUID(), student.id, replacementCredential, opaque(32), opaque(32), now),
+    db.prepare("UPDATE chat_passkeys SET revoked_at=? WHERE user_id=? AND credential_id=?").bind(now, student.id, student.id),
+    db.prepare("INSERT INTO chat_account_vault_wrappers (user_id,key_version,credential_id,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?)")
+      .bind(student.id, "other-version", replacementCredential, opaque(12), opaque(48), now),
+  ]);
+  const notLinked = await call(admin, `/api/chat/users/search?q=${targetId}`);
+  assert.equal(notLinked.payload.data[0].enabled, false);
+  assert.equal((await call(admin, "/api/chat/contacts/by-user-id", "POST", { chatUserId: targetId })).status, 409);
+  const notGloballyReady = await call(admin, "/api/chat/global-discussion");
+  assert.deepEqual(notGloballyReady.payload.data.pendingRecipients.map((recipient) => recipient.userId), [admin.id]);
+  await db.prepare("INSERT INTO chat_account_vault_wrappers (user_id,key_version,credential_id,nonce,ciphertext,updated_at) VALUES (?,?,?,?,?,?)")
+    .bind(student.id, "student-1", replacementCredential, opaque(12), opaque(48), now).run();
+  const wrappedReady = await call(student, "/api/chat/account/keys");
+  assert.equal(wrappedReady.payload.data.enabled, true);
+  assert.equal(wrappedReady.payload.data.credentialId, replacementCredential);
+  const stillSearchable = await call(admin, `/api/chat/users/search?q=${targetId}`);
+  assert.equal(stillSearchable.payload.data[0].enabled, true);
+  assert.equal((await call(admin, "/api/chat/global-discussion")).payload.data.pendingRecipients.length, 2);
+  assert.deepEqual(await db.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=?").bind(student.id).first(), retainedStudentVault);
+  assert.deepEqual(await db.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(student.id).first(), retainedStudentHead);
   const added = await call(admin, "/api/chat/contacts/by-user-id", "POST", { chatUserId: targetId });
   assert.equal(added.status, 201);
   assert.equal(Object.hasOwn(added.payload.data, "peerUserId"), false);
   assert.equal((await call(admin, "/api/chat/contacts")).payload.data.length, 1);
   assert.equal((await call(student, "/api/chat/contacts")).payload.data.length, 1);
+  const studentAddsAdmin = await call(student, "/api/chat/contacts/by-user-id", "POST", { chatUserId: customId });
+  assert.equal(studentAddsAdmin.status, 201, JSON.stringify(studentAddsAdmin.payload));
 
   const conversationId = crypto.randomUUID();
   const created = await call(admin, "/api/chat/global-discussion", "POST", {

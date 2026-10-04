@@ -247,6 +247,19 @@ html:not([data-theme="dark"]) .auth-page-controls .home-theme-toggle {
   display: none;
 }
 
+.profile-passkey-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-block: 0.75rem;
+}
+
+.profile-passkey-row > span {
+  flex: 1 1 220px;
+  overflow-wrap: anywhere;
+}
+
 .auth-step form {
   display: grid;
   gap: 14px;
