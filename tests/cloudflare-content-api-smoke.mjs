@@ -51,6 +51,9 @@ try {
     "../migrations/0001_initial.sql",
     "../migrations/0002_supabase_auth.sql",
     "../migrations/0003_admin_platform.sql",
+    "../migrations/0019_9618_structured_content.sql",
+    "../migrations/0020_structured_practice.sql",
+    "../migrations/0022_ai_call_cooldown.sql",
   ]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) await db.prepare(statement).run();
@@ -239,32 +242,46 @@ try {
       globalThis.fetch = originalFetch;
     }
 
-    await db.prepare("DELETE FROM ai_hint_generation_events WHERE user_id = ?").bind(user.id).run();
-    for (let index = 0; index < 19; index += 1) {
-      await db.prepare(`
-        INSERT INTO ai_hint_generation_events (id, user_id, question_id, language)
-        VALUES (?, ?, 'missing-question', 'en')
-      `).bind(`rate-event-${index}`, user.id).run();
-    }
-    const twentiethAttempt = await hint("missing-question");
-    assert.equal(twentiethAttempt.response.status, 422);
-    assert.equal(twentiethAttempt.payload.error.code, "QUESTION_IMAGE_UNAVAILABLE");
-    const eventsAfterFailure = await db.prepare("SELECT COUNT(*) AS count FROM ai_hint_generation_events WHERE user_id = ?")
-      .bind(user.id).first();
-    assert.equal(eventsAfterFailure.count, 19);
-    await db.prepare(`
-      INSERT INTO ai_hint_generation_events (id, user_id, question_id, language)
-      VALUES ('rate-event-19', ?, 'missing-question', 'en')
-    `).bind(user.id).run();
-    const twentyFirstAttempt = await hint("missing-question");
-    assert.equal(twentyFirstAttempt.response.status, 429);
-    assert.equal(twentyFirstAttempt.payload.error.code, "AI_HINT_RATE_LIMITED");
+    const immediate = await hint("versioned-question", "zh-CN");
+    assert.equal(immediate.response.status, 429);
+    assert.equal(immediate.payload.error.code, "AI_HINT_RATE_LIMITED");
+    assert(immediate.payload.error.details.retryAfterSeconds > 0 && immediate.payload.error.details.retryAfterSeconds <= 30);
+    assert.equal(immediate.response.headers.get("Retry-After"), String(immediate.payload.error.details.retryAfterSeconds));
+    assert.equal((await hint("versioned-question")).payload.data.source, "cache", "Cached hints do not consume the cooldown.");
+    const beforeMissing = (await db.prepare("SELECT reservation_id FROM ai_call_cooldowns WHERE user_id = ?").bind(user.id).first()).reservation_id;
+    const missingImage = await hint("missing-question");
+    assert.equal(missingImage.payload.error.code, "QUESTION_IMAGE_UNAVAILABLE");
+    assert.equal((await db.prepare("SELECT reservation_id FROM ai_call_cooldowns WHERE user_id = ?").bind(user.id).first()).reservation_id, beforeMissing, "Preflight failure does not consume the cooldown.");
+    const originalRetryFetch = globalThis.fetch;
+    let retryCalls = 0;
+    globalThis.fetch = async () => {
+      retryCalls += 1;
+      return Response.json({ id: "hint-response", output_text: JSON.stringify({ hints: [
+        "Inspect the information shown in the diagram.",
+        "Compare each choice with the relevant biological concept.",
+        "Use the remaining evidence to decide which choice fits best.",
+      ] }) });
+    };
+    try {
+      const expireCooldown = () => db.prepare("UPDATE ai_call_cooldowns SET called_at = ? WHERE user_id = ?").bind(Date.now() - 30000, user.id).run();
+      await expireCooldown();
+      await db.prepare("DELETE FROM question_hint_sets WHERE question_id = 'versioned-question'").run();
+      const concurrent = await Promise.all([hint("versioned-question"), hint("versioned-question", "zh-CN")]);
+      assert.deepEqual(concurrent.map(({ response }) => response.status).sort(), [200, 429]);
+      assert.equal(retryCalls, 1);
+      for (let index = 0; index < 24; index += 1) {
+        await expireCooldown();
+        await db.prepare("DELETE FROM question_hint_sets WHERE question_id = 'versioned-question'").run();
+        assert.equal((await hint("versioned-question")).response.status, 200);
+      }
+      assert((await db.prepare("SELECT COUNT(*) AS n FROM ai_hint_generation_events WHERE user_id = ?").bind(user.id).first()).n > 20, "No hourly hint quota remains.");
+    } finally { globalThis.fetch = originalRetryFetch; }
 
     await db.prepare("UPDATE exam_subjects SET active = 0 WHERE code = '0610'").run();
     const disabledSubjects = await handleReadApiRequest(new Request(
       "https://expassway.test/api/catalog/subjects"
     ), env);
-    assert.deepEqual((await json(disabledSubjects)).data, []);
+    assert(!(await json(disabledSubjects)).data.some((subject) => subject.code === "0610"));
     const disabledQuestion = await handleReadApiRequest(new Request(
       "https://expassway.test/api/questions/versioned-question"
     ), env);

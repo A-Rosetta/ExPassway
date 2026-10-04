@@ -214,7 +214,10 @@
         : await state.hintProvider?.showNextHint?.();
       renderHintResult(result);
     } catch (error) {
-      showBubble(t("hintLoadFailed", { message: error.message || t("retryLater") }), "hint-navigation");
+      const message = error.code === "AI_HINT_RATE_LIMITED"
+        ? t("aiCallCooldown", { seconds: error.payload?.error?.details?.retryAfterSeconds || 30 })
+        : error.message || t("retryLater");
+      showBubble(t("hintLoadFailed", { message }), "hint-navigation");
       state.hintActions.hidden = false;
       state.hintPrevious.hidden = true;
       state.hintNext.hidden = true;

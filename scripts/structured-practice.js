@@ -92,6 +92,7 @@ function renderPaperSummary() {
   byId("practiceScoreSummary").replaceChildren(node("p", "practice-score-label", t("structuredPracticeScoreLabel")), node("strong", "", `${earned} / ${maxMarks}`), node("p", "practice-muted", t("structuredPracticeScoreProgress", { count: grades.length, total: state.questions.length, marks: markedMax })));
 }
 function gradeErrorText(error) {
+  if (error?.code === "AI_GRADING_RATE_LIMITED") return t("aiCallCooldown", { seconds: error.retryAfterSeconds || 30 });
   const key = {
     GRADING_IN_PROGRESS: "structuredPracticeGradePending", GRADING_REQUEST_CONFLICT: "structuredPracticeGradeConflict",
     AI_GRADING_NOT_CONFIGURED: "structuredPracticeGradeUnavailable", AI_GRADING_RATE_LIMITED: "structuredPracticeGradeRateLimited",
@@ -144,7 +145,7 @@ async function gradeQuestion(question) {
     response.request = null;
   } catch (error) {
     if (requireLogin(error)) return;
-    response.error = { code: error.code, status: error.status };
+    response.error = { code: error.code, status: error.status, retryAfterSeconds: error.payload?.error?.details?.retryAfterSeconds };
     const completedFailure = error.payload?.error?.details?.retryAllowed === true || ["AI_GRADING_TIMEOUT", "AI_GRADING_UNAVAILABLE", "AI_GRADING_INVALID_RESULT", "AI_GRADING_INTERRUPTED", "GRADING_REQUEST_CONFLICT"].includes(error.code);
     if (completedFailure) response.request = null;
   } finally { response.pending = false; persistDraft(); renderQuestionResult(question); }

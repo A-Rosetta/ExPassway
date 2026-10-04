@@ -144,7 +144,7 @@ ON CONFLICT(slug) DO UPDATE SET
   paper_type = excluded.paper_type, duration_minutes = excluded.duration_minutes, source_question_count = excluded.source_question_count,
   valid_question_count = excluded.valid_question_count, total_marks = excluded.total_marks, qp_file_name = excluded.qp_file_name,
   ms_file_name = excluded.ms_file_name, metadata = excluded.metadata, updated_at = excluded.updated_at,
-  status = CASE WHEN exam_papers.status = 'published' AND excluded.status = 'draft' THEN exam_papers.status ELSE excluded.status END,
+  status = CASE WHEN exam_papers.status = 'published' AND excluded.status = 'draft' THEN exam_papers.status ELSE excluded.status END ,
   published_at = CASE WHEN excluded.status = 'published' THEN excluded.published_at ELSE exam_papers.published_at END;`;
 }
 

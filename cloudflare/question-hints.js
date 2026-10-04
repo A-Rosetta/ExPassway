@@ -1,4 +1,5 @@
 import { AuthError } from "./auth-api.js";
+import { aiCallCooldownError, reserveAiCallStatement } from "./ai-call-cooldown.js";
 
 export const HINT_PROMPT_VERSION = "igcse-progressive-v1";
 const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
@@ -200,34 +201,32 @@ export async function getOrGenerateQuestionHints(env, question, userId, requeste
   if (parseJson(setting?.value, false) !== true) {
     throw new AuthError(503, "Live AI hint generation is disabled.", "AI_HINTS_DISABLED");
   }
+  const image = await readQuestionImage(env, question);
+  const fingerprint = await fingerprintQuestion(question, image);
+  const cached = await env.DB.prepare(`
+    SELECT hints, prompt_version FROM question_hint_sets
+    WHERE question_id = ? AND language = ? AND prompt_version = ? AND question_fingerprint = ?
+      AND status = 'approved' LIMIT 1
+  `).bind(question.id, language, HINT_PROMPT_VERSION, fingerprint).first();
+  if (cached) return { hints: parseJson(cached.hints, []), promptVersion: cached.prompt_version, source: "cache" };
+  if (!env.OPENAI_API_KEY || !env.OPENAI_HINT_MODEL) {
+    throw new AuthError(503, "OpenAI hint generation is not configured.", "AI_HINTS_NOT_CONFIGURED");
+  }
   const reservationId = crypto.randomUUID();
   const reservedAt = new Date().toISOString();
-  const reservation = await env.DB.prepare(`
+  const reservations = await env.DB.batch([
+    reserveAiCallStatement(env.DB, userId, reservationId),
+    env.DB.prepare(`
     INSERT INTO ai_hint_generation_events (id, user_id, question_id, language, created_at)
     SELECT ?, ?, ?, ?, ?
-    WHERE (
-      SELECT COUNT(*) FROM ai_hint_generation_events
-      WHERE user_id = ?
-        AND created_at >= strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-1 hour')
-    ) < 20
-  `).bind(reservationId, userId, question.id, language, reservedAt, userId).run();
-  if (!reservation.meta.changes) {
-    throw new AuthError(429, "AI hint generation limit reached. Try again later.", "AI_HINT_RATE_LIMITED");
+    WHERE EXISTS (SELECT 1 FROM ai_call_cooldowns WHERE user_id = ? AND reservation_id = ?)
+  `).bind(reservationId, userId, question.id, language, reservedAt, userId, reservationId),
+  ]);
+  if (!reservations[1].meta.changes) {
+    throw await aiCallCooldownError(env.DB, userId, "AI_HINT_RATE_LIMITED");
   }
 
   try {
-    const image = await readQuestionImage(env, question);
-    const fingerprint = await fingerprintQuestion(question, image);
-    const cached = await env.DB.prepare(`
-      SELECT hints, prompt_version FROM question_hint_sets
-      WHERE question_id = ? AND language = ? AND prompt_version = ? AND question_fingerprint = ?
-        AND status = 'approved' LIMIT 1
-    `).bind(question.id, language, HINT_PROMPT_VERSION, fingerprint).first();
-    if (cached) {
-      await env.DB.prepare("DELETE FROM ai_hint_generation_events WHERE id = ?").bind(reservationId).run();
-      return { hints: parseJson(cached.hints, []), promptVersion: cached.prompt_version, source: "cache" };
-    }
-
     const generated = await requestOpenAI(env, question, language, image);
     const now = new Date().toISOString();
     await env.DB.prepare(`

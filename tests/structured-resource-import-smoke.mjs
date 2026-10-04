@@ -52,6 +52,9 @@ try {
   assert.match(plan.sql, /answer = NULL/);
   assert.match(plan.sql, /question_type = 'structured'/);
   assert.doesNotMatch(plan.sql, /BEGIN TRANSACTION|COMMIT;/);
+  assert.equal(unstable_splitSqlQuery(plan.sql).length,
+    1 + bundle.papers.length + bundle.resources.length + bundle.questions.length,
+    "Wrangler must split each UPSERT independently even when CASE ends before a comma.");
   const invocation = wranglerInvocation(["d1", "execute", "expassway-db", "--help"]);
   assert.equal(invocation.executable, process.execPath, "Wrangler must launch through Node, including on Windows");
   assert.match(invocation.args[0].replaceAll("\\", "/"), /node_modules\/wrangler\/bin\/wrangler\.js$/);

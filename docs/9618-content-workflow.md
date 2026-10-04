@@ -26,9 +26,9 @@ Before publication:
 
 ## Expanding the practice collection in batches
 
-The current local source folder, `D:\File\ALCS`, already contains matching QP/MS PDFs for June 2024, 2025, and 2026, variant 3, Papers 1–3: nine eligible papers. Only `9618_s24_qp_13` has been extracted into the question bank. No new source collection is needed for the other eight papers.
+The current local source folder, `D:\File\ALCS`, already contains matching QP/MS PDFs for June 2024, 2025, and 2026, variant 3, Papers 1–3: nine eligible papers. All nine papers have now been prepared: the original seven-question pilot and three reviewed batches covering the other eight papers. The batch packages remain outside the source repository with source hashes, crop coordinates, original part IDs and validation evidence.
 
-The reviewed original-paper inventory gives this next-batch order:
+The 2026-10-05 expansion used these batches:
 
 | Batch | Source paper slugs | Original parent questions |
 | --- | --- | --- |
@@ -36,7 +36,7 @@ The reviewed original-paper inventory gives this next-batch order:
 | 2: expand 2025 | `9618_s25_qp_13`, `9618_s25_qp_23`, `9618_s25_qp_33` | 7 + 7 + 13 = 27 |
 | 3: expand 2026 | `9618_s26_qp_13`, `9618_s26_qp_23`, `9618_s26_qp_33` | 8 + 8 + 11 = 27 |
 
-These eight papers supply 73 more parent questions; with the existing seven-question pilot, the collection would have nine practice papers and 80 parent questions. Verify each new extraction against its original PDF before publication. Paper 4 remains outside this expansion.
+These eight papers supply 73 additional parent questions, giving nine practice papers and 80 parent questions including the original pilot. Each batch was checked against the original PDFs, imported into an isolated local D1/R2 environment, and validated through the actual grading-context and full-paper PDF export code before publication. All three Paper 2 Inserts are included as question-owned images and text in each applicable grading context. Paper 4 remains outside this expansion.
 
 The importer already accepts multiple entries in `papers` and `questions`, so one reviewed package can publish a whole batch. The remaining work is preparation, rather than another website page: locate complete QP and official MS boundaries, preserve multi-page diagrams/tables/code and shared materials, build the original subpart tree, and check that leaf-part marks add up to each parent total. Paper 2 Inserts already exist for these years; include necessary material in the parent question's grading context instead of relying on a separate download that the grader cannot see.
 
@@ -66,7 +66,9 @@ After publication, reloading the catalogue enables **Practice This Paper** from 
 
 Check these current grading limits when preparing longer questions: QP and MS together may contain at most 32 registered image fragments; each PNG may be at most 4 MiB and their combined bytes at most 16 MiB. The serialized question/rubric context may be at most 150,000 characters. Official leaf marks must match the parent total, and usable official MS text or images must be present. Keep images readable; use meaningful fragments and avoid registering duplicate renderings of the same content. These are grading preflight checks in addition to the general package validator.
 
-The current per-user allowance is 20 AI-backed parent-question submissions in a rolling hour. Empty submissions do not call AI, and repeating the same successful request ID does not consume another call. Importing more papers does not raise this allowance. Verify provider availability and representative long/code/table questions before opening a larger batch to students.
+Student structured grading and live AI hint generation share one 30-second per-user cooldown, without an hourly request cap. Cached hints, all-blank submissions, and successful request replays do not call AI or consume the cooldown. The database reserves new calls atomically across both features and concurrent browser tabs; responses rejected during the cooldown include the remaining seconds and a Retry-After header. Calls that reach the AI provider keep their cooldown even if the provider fails. Migration `0022` adds the shared cooldown record while preserving historical hint events and grading attempts. Structured grading allows the provider up to 150 seconds for a complete parent question; the browser waits up to 180 seconds, and interrupted pending attempts expire after five minutes. The hint client waits up to 120 seconds to cover the existing two 45-second provider attempts. Verify provider availability and representative long/code/table questions before opening a larger batch to students.
+
+PDF export keeps near-page image fragments intact with at most a 10% proportional adjustment. Longer fragments retain their reading width and split at whitespace, ignoring persistent table rules when locating a seam. Check actual browser exports as well as schema metadata: this expansion verified all sixteen question/MS exports and repaired six text/table/diagram page cuts.
 
 ## Future past-paper source
 

@@ -6,6 +6,7 @@ const PAGE_HEIGHT = 297;
 const MARGIN = 14;
 const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
 const PAGE_BOTTOM = PAGE_HEIGHT - MARGIN;
+const documentSectionLabels = new WeakMap();
 
 function orderedQuestions(groups) {
   return (groups || []).flatMap((group) => group.questions || []);
@@ -83,9 +84,10 @@ export function structuredTextBlocks(value = {}) {
   return structuredDisplayBlocks(value).map(blockText).filter((text) => text.trim());
 }
 
-function createDocument(title) {
+function createDocument(title, sectionLabel = "Questions") {
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4", compress: true });
   doc.setProperties({ title, creator: "ExPassway" });
+  documentSectionLabels.set(doc, sectionLabel);
   return doc;
 }
 
@@ -171,7 +173,7 @@ function addPageHeading(doc, section, continued = false) {
   doc.addPage();
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
-  const lines = textLines(doc, `${sectionTitle(section) || "Questions"}${continued ? " (continued)" : ""}`, CONTENT_WIDTH);
+  const lines = textLines(doc, `${sectionTitle(section) || documentSectionLabels.get(doc)}${continued ? " (continued)" : ""}`, CONTENT_WIDTH);
   lines.forEach((line, index) => writeLine(doc, line, MARGIN, 17 + index * 5));
   return 20 + lines.length * 5;
 }
@@ -181,7 +183,7 @@ function nextPageContentY(doc, section) {
   const size = doc.getFontSize();
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
-  const lines = textLines(doc, `${sectionTitle(section) || "Questions"} (continued)`, CONTENT_WIDTH);
+  const lines = textLines(doc, `${sectionTitle(section) || documentSectionLabels.get(doc)} (continued)`, CONTENT_WIDTH);
   doc.setFont(font.fontName, font.fontStyle);
   doc.setFontSize(size);
   return 20 + lines.length * 5;
@@ -203,6 +205,7 @@ function structuredHeaderHeight(doc, question, headingHeight) {
 function keepStructuredHeadingWithImage(doc, prepared, y, section, headerHeight) {
   if (!prepared) return y;
   const freshSpace = PAGE_BOTTOM - nextPageContentY(doc, section) - headerHeight;
+  fitNearPageImage(prepared, freshSpace);
   if (prepared.height <= freshSpace + 0.01 && prepared.height + headerHeight > PAGE_BOTTOM - y + 0.01) {
     return addPageHeading(doc, section, true);
   }
@@ -251,12 +254,66 @@ async function prepareLeadingStructuredImage(doc, value, loadImage, fallbackImag
   return prepareImageFragment(doc, first, loadImage);
 }
 
+// A source page rendered a few millimetres taller than the PDF content area
+// should stay intact. Bound this adjustment to 10%; genuinely long fragments
+// retain their width and paginate instead of becoming unreadable thumbnails.
+function fitNearPageImage(prepared, availableHeight) {
+  if (prepared.height <= availableHeight || availableHeight / prepared.height < 0.9) return;
+  const scale = availableHeight / prepared.height;
+  prepared.width *= scale;
+  prepared.height = availableHeight;
+}
+
+/** Locate a whitespace seam without treating persistent table rules as text. */
+export function findImagePageBreak(pixels, targetRow, minimumRow) {
+  const { width, height, data } = pixels;
+  const target = Math.min(height - 1, Math.floor(targetRow));
+  const minimum = Math.max(0, Math.ceil(minimumRow));
+  if (target - minimum < 2) return null;
+  const ink = (row, column) => {
+    const index = (row * width + column) * 4;
+    return data[index + 3] > 20 && Math.min(data[index], data[index + 1], data[index + 2]) < 245;
+  };
+  const bandHeight = target - minimum + 1;
+  const continuous = new Uint8Array(width);
+  for (let column = 0; column < width; column += 1) {
+    let count = 0;
+    for (let row = minimum; row <= target; row += 1) if (ink(row, column)) count += 1;
+    if (count >= bandHeight * 0.95) continuous[column] = 1;
+  }
+  const rules = [];
+  const maxRuleWidth = Math.max(2, Math.ceil(width * 0.005));
+  for (let column = 0; column < width;) {
+    if (!continuous[column]) { column += 1; continue; }
+    const start = column;
+    while (column < width && continuous[column]) column += 1;
+    if (column - start <= maxRuleWidth) rules.push([start, column]);
+  }
+  const ignored = new Uint8Array(width);
+  // A lone stem/edge is not a table grid. Require separated narrow rules, and
+  // ignore only their exact persistent columns; diagram/text ink remains ink.
+  if (rules.length >= 2 && rules.at(-1)[0] - rules[0][0] >= width * 0.25) {
+    for (const [start, end] of rules) ignored.fill(1, start, end);
+  }
+  let blankRun = 0;
+  for (let row = target; row >= minimum; row -= 1) {
+    let blank = true;
+    for (let column = 0; column < width; column += 1) {
+      if (!ignored[column] && ink(row, column)) { blank = false; break; }
+    }
+    blankRun = blank ? blankRun + 1 : 0;
+    if (blankRun >= 3) return row + 1;
+  }
+  return null;
+}
+
 async function writeImageFragment(doc, image, y, section, loadImage, prepared = null) {
-  const { bytes, dimensions, width, height } = prepared?.source === imageUrl(image)
+  const fragment = prepared?.source === imageUrl(image)
     ? prepared : await prepareImageFragment(doc, image, loadImage);
-  // Keep each page-sized fragment intact, including tables and their headings.
-  // A fragment larger than a fresh page still uses the existing clipped slices.
   const freshSpace = PAGE_BOTTOM - nextPageContentY(doc, section);
+  fitNearPageImage(fragment, freshSpace);
+  const { bytes, dimensions, width, height } = fragment;
+  // Keep page-sized fragments intact. Larger fragments retain their scale.
   if (height <= freshSpace + 0.01 && height > PAGE_BOTTOM - y + 0.01) {
     y = addPageHeading(doc, section, true);
   }
@@ -276,26 +333,12 @@ async function writeImageFragment(doc, image, y, section, loadImage, prepared = 
     if (PAGE_BOTTOM - y < 12) y = addPageHeading(doc, section, true);
     let slice = Math.min(height - offset, PAGE_BOTTOM - y);
     if (pixels && offset + slice < height) {
-      // Prefer a nearby blank scanline so diagrams and printed text do not split
-      // through their ink at the page edge. Keep the image width/scale constant.
+      // Search far enough back to keep a diagram or table row together. Width
+      // remains constant on every clipped continuation of a long fragment.
       const target = Math.floor((offset + slice) * pixels.height / height);
-      const minimum = Math.max(Math.ceil(offset * pixels.height / height) + 1, target - Math.ceil(12 * pixels.height / height));
-      let blankRun = 0;
-      for (let row = target; row >= minimum; row -= 1) {
-        let blank = true;
-        for (let column = 0; column < pixels.width; column += 1) {
-          const index = (row * pixels.width + column) * 4;
-          if (pixels.data[index + 3] > 20 && Math.min(pixels.data[index], pixels.data[index + 1], pixels.data[index + 2]) < 245) {
-            blank = false;
-            break;
-          }
-        }
-        blankRun = blank ? blankRun + 1 : 0;
-        if (blankRun >= 3) {
-          slice = (row + 1) * height / pixels.height - offset;
-          break;
-        }
-      }
+      const minimum = Math.max(Math.ceil(offset * pixels.height / height) + 1, target - Math.ceil(50 * pixels.height / height));
+      const seam = findImagePageBreak(pixels, target, minimum);
+      if (seam !== null) slice = seam * height / pixels.height - offset;
     }
     doc.saveGraphicsState();
     doc.rect(MARGIN, y, width, slice, null);
@@ -499,7 +542,7 @@ export async function createAnswerKeyPdf(groups, options = {}) {
 
 export async function createMarkSchemePdf(groups, options = {}) {
   const metadata = paperMetadata(groups, options, "ExPassway Mark Scheme");
-  const doc = createDocument(`${metadata.paperTitle} - Mark Scheme`);
+  const doc = createDocument(`${metadata.paperTitle} - Mark Scheme`, "Mark Scheme");
   let y = writePaperHeader(doc, metadata, "Mark Scheme");
   let questionNumber = 0;
   const questionIds = [];

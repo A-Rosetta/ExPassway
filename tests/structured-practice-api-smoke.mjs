@@ -53,7 +53,7 @@ try {
     const sql = await readFile(new URL(`../migrations/${file}`, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) await db.prepare(statement).run();
   };
-  for (const file of ["0001_initial.sql", "0002_supabase_auth.sql", "0003_admin_platform.sql", "0019_9618_structured_content.sql", "0020_structured_practice.sql"]) await migrate(file);
+  for (const file of ["0001_initial.sql", "0002_supabase_auth.sql", "0003_admin_platform.sql", "0019_9618_structured_content.sql", "0020_structured_practice.sql", "0022_ai_call_cooldown.sql"]) await migrate(file);
   await db.batch([
     db.prepare("INSERT INTO users(id,display_name) VALUES ('student','Student'),('other','Other'),('disabled','Disabled')"),
     db.prepare("UPDATE users SET disabled_at = ? WHERE id = 'disabled'").bind(new Date().toISOString()),
@@ -78,9 +78,13 @@ try {
   const paperPath = `/api/structured-practice/papers/${slug}`;
   const gradePath = `/api/structured-practice/questions/${questionId}/grade`;
   const answered = [{ partId: "ai", text: "Four iterations; increasing counter." }, { partId: "aii", text: "4" }, { partId: "b", text: "1 2" }];
-  const grade = (answers = answered, requestId = crypto.randomUUID(), extra = {}, customEnv = env) => call(gradePath, {
+  let enforceCooldown = false;
+  const grade = async (answers = answered, requestId = crypto.randomUUID(), extra = {}, customEnv = env) => {
+    if (!enforceCooldown) await db.prepare("DELETE FROM ai_call_cooldowns WHERE user_id = 'student'").run();
+    return call(gradePath, {
     method: "POST", headers, body: JSON.stringify({ requestId, answers, language: "en", ...extra }),
   }, customEnv);
+  };
   let upstreamCalls = 0;
   let upstreamMode = "valid";
   let lastBody;
@@ -193,7 +197,7 @@ try {
   assert.equal(failedReplay.payload.error.details.retryAllowed, true);
   assert.equal(upstreamCalls, failedCalls, "A failed idempotent request cannot charge again.");
   upstreamMode = "timeout";
-  globalThis.setTimeout = (callback, milliseconds, ...args) => originalSetTimeout(callback, milliseconds === 90000 ? 15 : milliseconds, ...args);
+  globalThis.setTimeout = (callback, milliseconds, ...args) => originalSetTimeout(callback, milliseconds === 150000 ? 15 : milliseconds, ...args);
   assert.equal((await grade()).payload.error.code, "AI_GRADING_TIMEOUT");
   globalThis.setTimeout = originalSetTimeout;
 
@@ -236,21 +240,33 @@ try {
   assert.equal((await grade()).response.status, 404);
   await db.prepare("UPDATE exam_subjects SET active = 1 WHERE code = '9618'").run();
 
-  // Retain failed calls in the quota: upstream failures can still cost money.
-  const current = (await db.prepare("SELECT COUNT(*) AS n FROM structured_practice_attempts WHERE user_id='student' AND ai_called=1").first()).n;
-  for (let index = current; index < 19; index += 1) await db.prepare(`
-    INSERT INTO structured_practice_attempts(id,user_id,request_id,question_id,paper_slug,input_hash,question_fingerprint,language,answers,status,ai_called)
-    VALUES (?,'student',?,?,?,'quota','quota','en','[]','failed',1)
-  `).bind(crypto.randomUUID(), crypto.randomUUID(), questionId, slug).run();
+  // No hourly cap: requests are accepted after the shared 30-second cooldown.
+  enforceCooldown = true;
+  const expireCooldown = () => db.prepare("UPDATE ai_call_cooldowns SET called_at = ? WHERE user_id = 'student'").bind(Date.now() - 30000).run();
+  await expireCooldown();
   const beforeBoundary = upstreamCalls;
   const atBoundary = await Promise.all([grade(), grade()]);
-  assert.deepEqual(atBoundary.map((result) => result.response.status).sort(), [200, 429], "Concurrent reservations cannot exceed the last available hourly slot.");
+  assert.deepEqual(atBoundary.map((result) => result.response.status).sort(), [200, 429], "Concurrent requests cannot both take a free cooldown slot.");
   assert.equal(upstreamCalls, beforeBoundary + 1);
-  const beforeRate = upstreamCalls;
-  assert.equal((await grade()).payload.error.code, "AI_GRADING_RATE_LIMITED");
-  assert.equal(upstreamCalls, beforeRate);
-  assert.equal((await grade([], crypto.randomUUID())).response.status, 200, "Blank grading remains available without spending AI quota.");
-  assert.equal((await grade(answered, requestId)).payload.data.id, graded.payload.data.id, "Successful replay remains available after quota exhaustion.");
+  const limited = await grade();
+  assert.equal(limited.payload.error.code, "AI_GRADING_RATE_LIMITED");
+  assert(limited.payload.error.details.retryAfterSeconds > 0 && limited.payload.error.details.retryAfterSeconds <= 30);
+  assert.equal(limited.response.headers.get("Retry-After"), String(limited.payload.error.details.retryAfterSeconds));
+  assert.equal(upstreamCalls, beforeBoundary + 1);
+  assert.equal((await grade([], crypto.randomUUID())).response.status, 200, "Blank grading bypasses the AI cooldown.");
+  assert.equal((await grade(answered, requestId)).payload.data.id, graded.payload.data.id, "Successful replay bypasses the AI cooldown.");
+  for (let index = 0; index < 24; index += 1) {
+    await expireCooldown();
+    assert.equal((await grade()).response.status, 200);
+  }
+  assert((await db.prepare("SELECT COUNT(*) AS n FROM structured_practice_attempts WHERE user_id='student' AND ai_called=1").first()).n > 20);
+  upstreamMode = "failure";
+  await expireCooldown();
+  assert.equal((await grade()).payload.error.code, "AI_GRADING_UNAVAILABLE");
+  const callsAfterFailure = upstreamCalls;
+  assert.equal((await grade()).response.status, 429, "An upstream call still consumes the cooldown when it fails.");
+  assert.equal(upstreamCalls, callsAfterFailure);
+  upstreamMode = "valid";
   assert.equal((await db.prepare("SELECT answer FROM question_bank WHERE id='legacy'").first()).answer, 2);
   assert.equal((await db.prepare("SELECT COUNT(*) AS n FROM question_attempts").first()).n, 0);
   assert.equal((await db.prepare("SELECT COUNT(*) AS n FROM practice_sessions").first()).n, 0);

@@ -1,6 +1,7 @@
 import { AuthError, failure, requireCurrentUser, success } from "./auth-api.js";
 import { parseContent } from "../shared/structured-content.js";
 import { normalizeStructuredAnswers } from "../shared/structured-practice.js";
+import { aiCallCooldownError, reserveAiCallStatement } from "./ai-call-cooldown.js";
 import {
   blankStructuredGrade,
   officialAnswerParts,
@@ -160,7 +161,7 @@ async function previousAttempt(db, userId, requestId, inputHash) {
   if (!row) return null;
   if (row.input_hash !== inputHash) throw new AuthError(409, "This request ID was used with different answers.", "GRADING_REQUEST_CONFLICT");
   if (row.status === "succeeded") return parseContent(row.result);
-  if (row.status === "pending" && Date.now() - Date.parse(row.created_at) > 180000) {
+  if (row.status === "pending" && Date.now() - Date.parse(row.created_at) > 300000) {
     await db.prepare(`UPDATE structured_practice_attempts
       SET status = 'failed', error_status = 503, error_code = 'AI_GRADING_INTERRUPTED',
         error_message = 'The previous grading request did not finish. Please try again.',
@@ -193,23 +194,24 @@ async function gradeQuestion(request, env, userId, questionId) {
   const context = hasAnswer ? await prepareStructuredGradingContext(env, question, parts, answers) : null;
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
-  const inserted = await env.DB.prepare(`
+  const insertAttempt = env.DB.prepare(`
     INSERT INTO structured_practice_attempts
       (id, user_id, request_id, question_id, paper_slug, input_hash, question_fingerprint,
         language, answers, status, ai_called, created_at, updated_at)
     SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?
-    WHERE ? = 0 OR (
-      SELECT COUNT(*) FROM structured_practice_attempts
-      WHERE user_id = ? AND ai_called = 1
-        AND created_at >= strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-1 hour')
-    ) < 20
+    WHERE ? = 0 OR EXISTS (
+      SELECT 1 FROM ai_call_cooldowns WHERE user_id = ? AND reservation_id = ?
+    )
     ON CONFLICT(user_id, request_id) DO NOTHING
   `).bind(id, userId, requestId, questionId, question.paperSlug, inputHash, fingerprint,
-    body.language, JSON.stringify(answers), hasAnswer ? 1 : 0, now, now, hasAnswer ? 1 : 0, userId).run();
+    body.language, JSON.stringify(answers), hasAnswer ? 1 : 0, now, now, hasAnswer ? 1 : 0, userId, id);
+  const inserted = hasAnswer
+    ? (await env.DB.batch([reserveAiCallStatement(env.DB, userId, id, requestId), insertAttempt]))[1]
+    : await insertAttempt.run();
   if (!inserted.meta.changes) {
     const concurrent = await previousAttempt(env.DB, userId, requestId, inputHash);
     if (concurrent) return concurrent;
-    throw new AuthError(429, "AI grading limit reached. Please try again later.", "AI_GRADING_RATE_LIMITED", { retryAfterSeconds: 3600 });
+    throw await aiCallCooldownError(env.DB, userId, "AI_GRADING_RATE_LIMITED");
   }
   try {
     const grading = hasAnswer
@@ -266,6 +268,9 @@ export async function handleStructuredPracticeRequest(request, env) {
       ? failure(error.status, error.code, error.message, request.method, error.details)
       : failure(500, "INTERNAL_SERVER_ERROR", "Unexpected structured practice error.", request.method);
     response.headers.set("Cache-Control", "private, no-store");
+    if (error instanceof AuthError && error.status === 429 && error.details?.retryAfterSeconds) {
+      response.headers.set("Retry-After", String(error.details.retryAfterSeconds));
+    }
     return response;
   }
 }

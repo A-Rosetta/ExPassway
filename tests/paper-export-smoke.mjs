@@ -9,6 +9,7 @@ import {
   createQuestionPaperPdf,
   createMarkSchemePdf,
   structuredTextBlocks,
+  findImagePageBreak,
 } from "../scripts/paper-export.js";
 await import("../scripts/bulk-download.js");
 
@@ -150,6 +151,7 @@ const paginationImages = new Map([
   ["/preceding.png", imageFixture(900, 1100)], // 186mm at the exporter's normal image scale.
   ["/table.png", imageFixture(900, 1000)], // 169mm: fits a fresh page but not the first page remainder.
   ["/long.png", imageFixture(900, 2100)], // 356mm: exceeds a full page and must still be sliced.
+  ["/near-page.png", imageFixture(900, 1560)], // 264mm: complete table/diagram can fit with a bounded adjustment.
 ]);
 const paginationLoads = [];
 const loadPaginationImage = async (source) => { paginationLoads.push(source); return paginationImages.get(source); };
@@ -179,7 +181,52 @@ for (const exporter of [createQuestionPaperPdf, createMarkSchemePdf]) {
   assert.equal(longPdf.pageCount, 2);
   const longPages = imagePageStreams(longPdf);
   assert.deepEqual(longPages.map((stream) => [...stream.matchAll(/\/I\d+ Do/g)].map((match) => match[0])), [["/I0 Do"], ["/I0 Do"]], "A fragment taller than a full page must retain its scale and continue on the next page.");
+  const continuedText = longPages[1].replace(/\\([\\()])/g, "$1");
+  assert.ok(continuedText.includes(exporter === createMarkSchemePdf ? "Mark Scheme (continued)" : "Questions (continued)"), "Continuation pages identify the exported document type.");
+  if (exporter === createMarkSchemePdf) assert.ok(!continuedText.includes("Questions (continued)"), "A marking-criteria page must not be labelled as questions.");
+
+  const nearPagePdf = await exporter([{ questions: [paginationQuestion("near-page", 1, ["/near-page.png"])] }], { ...metadata, loadImage: loadPaginationImage });
+  const nearPageStreams = imagePageStreams(nearPagePdf);
+  assert.equal(nearPageStreams.length, 1, "A source table only slightly taller than a page must stay intact.");
+  assert.equal((nearPageStreams[0].match(/\/I0 Do/g) || []).length, 1);
+  assert.ok(nearPageStreams[0].includes("9618_s24_qp_13 | Q1"), "The bounded page-sized image keeps its source and question heading.");
+  const drawWidths = (streams) => streams.flatMap((stream) => [...stream.matchAll(/([\d.]+) 0 0 [\d.]+ [\d.]+ [\d.-]+ cm\n\/I\d+ Do/g)].map((match) => Number(match[1])));
+  const naturalWidthPoints = 900 * 72 / 150;
+  const fittedWidths = drawWidths(nearPageStreams);
+  assert.equal(fittedWidths.length, 1);
+  assert.ok(fittedWidths[0] >= naturalWidthPoints * 0.9 && fittedWidths[0] <= naturalWidthPoints, "A near-page adjustment must never shrink the original image by more than 10%.");
+  assert.ok(drawWidths(longPages).every((width) => Math.abs(width - naturalWidthPoints) < 0.01), "Every genuinely long image slice retains the original readable width.");
 }
+
+const namedSectionScheme = await createMarkSchemePdf([{ section: { chapterNo: 2, chapterTitleEn: "Data structures" }, questions: [paginationQuestion("named-section", 1, ["/long.png"])] }], { ...metadata, loadImage: loadPaginationImage });
+assert.ok(imagePageStreams(namedSectionScheme)[1].replace(/\\([\\()])/g, "$1").includes("Chapter 2: Data structures (continued)"), "The Mark Scheme fallback must not replace a real chapter title.");
+
+function rgbaFixture(width = 200, height = 200) {
+  const data = new Uint8ClampedArray(width * height * 4).fill(255);
+  const fill = (left, top, right, bottom) => {
+    for (let row = top; row < bottom; row += 1) for (let column = left; column < right; column += 1) {
+      const index = (row * width + column) * 4;
+      data[index] = data[index + 1] = data[index + 2] = 0;
+    }
+  };
+  return { width, height, data, fill };
+}
+const tableSeam = rgbaFixture();
+for (const column of [2, 50, 190]) tableSeam.fill(column, 0, column + 1, 200);
+tableSeam.fill(60, 120, 180, 130); // The target falls inside a printed answer row.
+tableSeam.fill(0, 105, 200, 106); // Horizontal rules must still count as ink.
+assert.equal(findImagePageBreak(tableSeam, 126, 80), 118, "Persistent vertical borders must not force a cut through printed text.");
+const diagramSeam = rgbaFixture();
+for (const column of [2, 190]) diagramSeam.fill(column, 0, column + 1, 200);
+diagramSeam.fill(60, 80, 62, 140);
+diagramSeam.fill(160, 80, 162, 140);
+diagramSeam.fill(60, 80, 162, 82);
+diagramSeam.fill(60, 138, 162, 140);
+assert.equal(findImagePageBreak(diagramSeam, 130, 30), 78, "Short diagram edges remain ink, so the complete diagram moves to the next page.");
+const solidSeam = rgbaFixture(); solidSeam.fill(0, 0, 200, 200);
+assert.equal(findImagePageBreak(solidSeam, 130, 30), null, "A filled diagram is not a blank seam.");
+const loneStem = rgbaFixture(); loneStem.fill(40, 0, 41, 200);
+assert.equal(findImagePageBreak(loneStem, 130, 30), null, "An isolated vertical stem must not be classified as table borders.");
 
 for (const maxMarks of [undefined, null, 0, -1, 1.5, "4", NaN, Infinity]) {
   const invalid = { ...independentQuestion, id: "invalid-official-marks", maxMarks, marks: 4,

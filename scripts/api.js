@@ -143,7 +143,7 @@
     },
     async gradeStructuredQuestion(token, questionId, input) {
       return request(`/api/structured-practice/questions/${encodeURIComponent(questionId)}/grade`, {
-        method: "POST", token, body: JSON.stringify(input), timeoutMs: 120000,
+        method: "POST", token, body: JSON.stringify(input), timeoutMs: 180000,
       });
     },
     async downloadResource(token, resourceId) {
@@ -563,7 +563,7 @@
         method: "POST",
         token,
         body: JSON.stringify({ language }),
-        timeoutMs: 50000,
+        timeoutMs: 120000,
       });
     },
     async changePassword(token, input) {

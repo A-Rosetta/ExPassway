@@ -202,7 +202,9 @@ export async function handleQuestionHintRequest(request, env) {
     }, request.method);
   } catch (error) {
     if (error instanceof AuthError) {
-      return failure(error.status, error.code, error.message, request.method, error.details);
+      const response = failure(error.status, error.code, error.message, request.method, error.details);
+      if (error.status === 429 && error.details?.retryAfterSeconds) response.headers.set("Retry-After", String(error.details.retryAfterSeconds));
+      return response;
     }
     console.error("D1 question hint API failed", error);
     return failure(500, "INTERNAL_SERVER_ERROR", "Unexpected server error.", request.method);
