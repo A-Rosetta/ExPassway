@@ -8,6 +8,10 @@ Paper 4 originals remain available for reading and downloading. Its companion so
 
 The first question-bank pilot is `9618_s24_qp_13`, paired with `9618_s24_ms_13`: seven complete parent questions, with official marks of 9, 9, 7, 14, 11, 3, and 22 (75 in total). Preserve all shared material and nested subparts, and keep the official question and mark-scheme fragments paired by question number and original PDF page. Difficulty and curriculum mappings remain unset until reviewed. Missing mappings must not block manual selection by source paper.
 
+The syllabus area also holds supporting guides, including the pseudocode guide. Past-paper sessions contain exam documents and a per-paper **Practice This Paper** link when complete questions are available. Structured practice uses its own API and attempt records; it must never send structured answers into MCQ judging or correctness analytics.
+
+Practice opens only the first parent question, with every official MS collapsed. Each original leaf subpart has a text answer; code whitespace is preserved. Grading uses the published question and official MS with the same API connection as AI hints and model `gpt-6-luna`. Results are AI practice scores, with bounded official part marks, feedback, and server-calculated totals. Blank answers earn zero, and a question without usable official MS cannot be graded. Keep result validation, user-scoped request IDs, duplicate-request handling, and per-user limits in place when changing the prompt or provider.
+
 ## Prepared package and validation
 
 Follow [structured resource package v1](structured-resource-package.md) and use the shared validator and importer. The local ALCS package is kept outside the source repository; derived pilot images are declared with their hashes and source-page crop coordinates. Stable question IDs permit a reviewed repeat import to update the same rows.

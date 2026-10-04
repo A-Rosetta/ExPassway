@@ -6,6 +6,7 @@ import { cleanupChatData, handleChatApiRequest, handleChatWebSocketRequest } fro
 import { ChatRoom } from "./chat-room.js";
 import { handleLearningApiRequest } from "./learning-api.js";
 import { handleReadApiRequest } from "./read-api.js";
+import { handleStructuredPracticeRequest } from "./structured-practice-api.js";
 
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
@@ -108,6 +109,10 @@ async function routeRequest(request, env) {
 
   if (url.pathname.startsWith("/api/question-hints/")) {
     return handleQuestionHintRequest(request, env);
+  }
+
+  if (url.pathname.startsWith("/api/structured-practice/")) {
+    return handleStructuredPracticeRequest(request, env);
   }
 
   if (url.pathname.startsWith("/api/discussions")) {

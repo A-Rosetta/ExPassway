@@ -41,6 +41,9 @@ for (const generatedFile of [
   "pages/subject.html",
   "assets/subject.css",
   "scripts/subject.js",
+  "pages/structured-practice.html",
+  "assets/structured-practice.css",
+  "scripts/structured-practice.js",
 ]) {
   if (!files.includes(generatedFile)) files.push(generatedFile);
 }
@@ -72,6 +75,12 @@ await build({
   platform: "browser",
   target: "es2022",
   outfile: join(outputDirectory, "scripts/subject.bundle.js"),
+});
+
+await build({
+  entryPoints: ["scripts/structured-practice.js"],
+  bundle: true, format: "iife", minify: true, platform: "browser", target: "es2022",
+  outfile: join(outputDirectory, "scripts/structured-practice.bundle.js"),
 });
 
 console.log(`Prepared ${files.length} tracked static assets in ${outputDirectory}.`);

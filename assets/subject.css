@@ -88,6 +88,9 @@
 .paper-card--session .paper-meta { margin: 8px 0; }
 .paper-source-code { overflow-wrap: anywhere; color: var(--text-muted); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .82rem; margin: 0; }
 .paper-card--session .paper-actions { margin-top: 12px; }
+.paper-practice-entry { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 14px; }
+.paper-practice-entry .btn-primary { display: inline-flex; align-items: center; min-height: 40px; }
+.paper-practice-entry p { margin: 8px 0 0; font-size: .82rem; color: var(--text-muted); }
 .paper-card--session :is(.btn-secondary, .btn-primary), .session-resource-row .btn-secondary { padding: 8px 11px; font-size: .82rem; min-height: 36px; }
 .paper-attachment { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
 .paper-attachment > p { margin: 0; font-size: .86rem; line-height: 1.5; }

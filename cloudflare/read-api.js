@@ -74,7 +74,8 @@ export function subjectCapabilities(code) {
     manualPaperBuilder: true,
     smartPaperBuilder: !structured,
     equivalentPaperBuilder: !structured,
-    onlinePractice: !structured,
+    onlinePractice: true,
+    structuredAiGrading: structured,
     aiHints: !structured,
   };
 }

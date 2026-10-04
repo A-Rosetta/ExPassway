@@ -28,4 +28,8 @@ const searchPayload = await searchResponse.json();
 assert.equal(searchResponse.status, 401);
 assert.equal(searchPayload.error.code, "UNAUTHORIZED");
 
+const practiceResponse = await worker.fetch(new Request("https://expassway.test/api/structured-practice/papers/9618_s24_qp_13"), env);
+assert.equal(practiceResponse.status, 401);
+assert.equal((await practiceResponse.json()).error.code, "UNAUTHORIZED");
+
 console.log("Cloudflare paper-builder worker routing checks passed.");

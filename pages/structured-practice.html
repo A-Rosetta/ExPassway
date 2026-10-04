@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="structuredPracticeTitle">Paper practice</title>
+  <script src="../scripts/theme-init.js?v=20260730-1"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="../assets/styles.css?v=20260822-1" />
+  <link rel="stylesheet" href="../assets/site-design.css?v=20260806-2" />
+  <link rel="stylesheet" href="../assets/structured-practice.css?v=20261004-4" />
+</head>
+<body class="student-ui site-ui structured-practice-page">
+  <header class="site-topbar practice-topbar">
+    <div class="site-topbar__inner practice-topbar__inner">
+      <a class="home-brand" href="../index.html"><span class="home-brand__mark" aria-hidden="true">E</span><span data-i18n="homeBrand">ExPassway</span></a>
+      <nav class="site-header-controls practice-header-actions" data-i18n-aria-label="structuredPracticeNavigation" aria-label="Practice navigation">
+        <a id="practiceBack" class="btn-secondary" href="subject.html?subject=9618&amp;view=papers" data-i18n="structuredPracticeBack">Back to this paper</a>
+        <button id="practiceLanguage" class="btn-secondary" type="button" data-language-toggle>中文</button>
+        <button id="themeToggle" class="btn-secondary" type="button" data-i18n-title="subjectTheme">Theme</button>
+      </nav>
+    </div>
+  </header>
+  <main class="practice-shell">
+    <section class="practice-hero" aria-labelledby="practiceTitle">
+      <div>
+        <p id="practicePaperCode" class="home-eyebrow"></p>
+        <h1 id="practiceTitle" data-i18n="structuredPracticeTitle">Paper practice</h1>
+        <p id="practicePaperMeta" class="practice-muted"></p>
+        <p class="practice-intro" data-i18n="structuredPracticeIntro">Answer one question at a time. AI feedback uses the official mark scheme; practice scores are estimates.</p>
+      </div>
+      <div id="practiceScoreSummary" class="practice-score-summary" role="status" aria-live="polite"></div>
+    </section>
+    <p id="practiceStatus" class="practice-status" role="status" aria-live="polite"></p>
+    <p id="practiceDraftStatus" class="practice-draft-status" role="status"></p>
+    <nav id="practiceQuestionNavigation" class="practice-question-navigation" data-i18n-aria-label="structuredPracticeQuestionNavigation" aria-label="Question navigation" hidden>
+      <button id="practicePrevious" class="btn-secondary" type="button" data-i18n="structuredPracticePrevious">Previous question</button>
+      <label><span data-i18n="structuredPracticeCurrentQuestion">Current question</span><select id="practiceQuestionPicker"></select></label>
+      <button id="practiceNext" class="btn-secondary" type="button" data-i18n="structuredPracticeNext">Next question</button>
+    </nav>
+    <div id="practiceQuestions" class="practice-question-list"></div>
+  </main>
+  <script src="../scripts/i18n.js?v=20261004-4"></script>
+  <script src="../scripts/site-ui.js?v=20260808-3"></script>
+  <script src="../scripts/api.js?v=20261004-4"></script>
+  <script src="../scripts/structured-practice.bundle.js?v=20261004-4"></script>
+</body>
+</html>

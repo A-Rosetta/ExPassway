@@ -1,7 +1,7 @@
-import { orderedImages, pairedMarkScheme, structuredDisplayBlocks } from "../shared/structured-content.js";
-
 const { getLanguage, setLanguage, t, applyPage } = window.ALevelI18n;
 const requestedCode = new URLSearchParams(location.search).get("subject") || "9618";
+const requestedView = new URLSearchParams(location.search).get("view") || "";
+const requestedPaper = new URLSearchParams(location.search).get("paper") || "";
 const subjectCode = /^\d{4}$/.test(requestedCode) ? requestedCode : "9618";
 const token = localStorage.getItem("alevel.authToken") || "";
 const api = window.ALevelApi;
@@ -16,7 +16,7 @@ const make = (tag, className, text) => {
 const state = {
   subject: { code: subjectCode, board: "CIE", qualification: "AS & A Level", name: "Computer Science", nameZh: "计算机科学" },
   components: [], resources: [], syllabus: [], syllabusResources: [], textbooks: [], papers: [], questions: [], counts: {}, readiness: {},
-  filters: { year: "", season: "", paperNumber: "" }, status: "", statusVars: {}, failed: false, requestId: 0,
+  filters: { year: "", season: "", paperNumber: "" }, status: "", statusVars: {}, failed: false,
   openSessions: new Set(),
 };
 const localized = (item, fallback = "") => getLanguage() === "zh-CN"
@@ -35,52 +35,6 @@ function unauthorized(error) {
 function empty(target, title, body) {
   const box = make("div", "subject-empty");
   box.append(make("h2", "", t(title)), make("p", "", t(body))); target.replaceChildren(box);
-}
-function url(value) {
-  if (!value) return "";
-  try { const target = new URL(value, location.href); return ["http:", "https:"].includes(target.protocol) ? target.href : ""; } catch { return ""; }
-}
-function images(target, values) {
-  orderedImages(values).forEach((image, index) => {
-    const source = image.url.startsWith("/api/") ? `${api.getBaseUrl?.() || ""}${image.url}` : image.url;
-    if (!url(source)) return;
-    const figure = make("figure", "question-image"); const img = make("img");
-    img.src = url(source); img.loading = "lazy"; img.alt = image.alt || t("subjectImagePage", { page: image.page || index + 1 });
-    figure.appendChild(img); if (image.caption) figure.appendChild(make("figcaption", "", image.caption)); target.appendChild(figure);
-  });
-}
-function documentContent(target, content) {
-  if (orderedImages(content?.images).length) { images(target, content.images); return; }
-  structuredDisplayBlocks(content).forEach((block) => {
-    let element;
-    if (block.type === "image") { images(target, [block]); return; }
-    if (block.type === "table") {
-      element = make("div", "content-table-wrap"); const table = make("table", "content-table");
-      if (block.caption) table.appendChild(make("caption", "", block.caption));
-      if (list(block.headers).length) { const head = make("thead"); const row = make("tr"); block.headers.forEach((cell) => row.appendChild(make("th", "", cell))); head.appendChild(row); table.appendChild(head); }
-      const body = make("tbody"); list(block.rows).forEach((cells) => { const row = make("tr"); list(cells).forEach((cell) => row.appendChild(make("td", "", typeof cell === "object" ? cell.text : cell))); body.appendChild(row); });
-      table.appendChild(body); element.appendChild(table);
-    } else if (["code", "pseudocode"].includes(block.type)) { element = make("pre", "question-code"); element.appendChild(make("code", "", block.text || "")); }
-    else element = make("p", "question-content", block.text || "");
-    element.style.marginLeft = `${Math.min(8, Number(block.depth) || 0) * 16}px`; target.appendChild(element);
-  });
-  images(target, content?.images);
-}
-function questionCard(question, index) {
-  const card = make("article", "question-card question-card--full");
-  card.appendChild(make("h3", "", t("subjectQuestionNumber", { number: question.questionNo || index + 1 })));
-  card.appendChild(make("p", "paper-meta", [question.paperSlug, question.maxMarks ? t("subjectMarks", { count: question.maxMarks }) : ""].filter(Boolean).join(" · ")));
-  const content = question.content || {};
-  const hasContent = orderedImages(content.images).length || structuredDisplayBlocks(content).length;
-  if (hasContent) documentContent(card, content);
-  else if (orderedImages(question.images).length) images(card, question.images);
-  else if (question.stem) card.appendChild(make("p", "question-content", question.stem));
-  const scheme = question.markScheme || {};
-  if (Object.keys(scheme).length) {
-    const details = make("details", "question-mark-scheme"); details.appendChild(make("summary", "", t("subjectMarkScheme")));
-    const body = make("div", "question-mark-scheme__body"); documentContent(body, pairedMarkScheme(scheme, content)); details.appendChild(body); card.appendChild(details);
-  } else card.appendChild(make("p", "subject-muted", t("subjectNoMarkScheme")));
-  return card;
 }
 function directory(target, entries, depth = 0) {
   if (depth > 12) return;
@@ -203,7 +157,7 @@ function resourceBadge(type) {
   badge.setAttribute("aria-label", badge.title); return badge;
 }
 function renderPapers() {
-  const target = el("papersView"); target.replaceChildren(); const { sessions, additional } = examSessions();
+  const target = el("papersView"); target.replaceChildren(); const { sessions } = examSessions();
   const heading = make("div", "paper-archive-heading"); heading.append(make("h2", "", t("subjectExamArchive")), make("p", "subject-muted", t("subjectExamArchiveHelp"))); target.appendChild(heading);
   const years = [...new Set(sessions.map((session) => session.year))];
   if (years.length) {
@@ -219,11 +173,6 @@ function renderPapers() {
     select.appendChild(new Option(t("subjectAll"), "")); values.forEach((value) => select.appendChild(new Option(key === "paperNumber" ? t("subjectPaperLabel", { number: value }) : seasonLabel(value), String(value)))); select.value = state.filters[key];
     select.addEventListener("change", () => { state.filters[key] = select.value; renderPaperList(); }); label.appendChild(select); toolbar.appendChild(label);
   }); const container = make("div", "paper-year-list"); container.id = "subjectPaperList"; target.append(toolbar, container); renderPaperList();
-  if (additional.length) {
-    const resources = make("div", "book-list"); resources.id = "subjectAdditionalResources";
-    target.append(make("h2", "additional-resources-heading", t("subjectAdditionalResources")), resources);
-    renderResources(null, resources.id, "", "", additional);
-  }
 }
 function renderPaperList() {
   document.querySelectorAll(".paper-year-chip").forEach((button) => { const selected = button.dataset.year === state.filters.year; button.classList.toggle("is-active", selected); button.setAttribute("aria-pressed", String(selected)); });
@@ -268,7 +217,7 @@ function addResourceActions(target, resource) {
   const download = make("button", "btn-secondary", t("subjectDownloadResource")); download.type = "button"; download.addEventListener("click", () => resourceDownload(resource, download)); target.appendChild(download);
 }
 function paperRow(paper) {
-  const card = make("article", "paper-card paper-card--session"); card.appendChild(make("h4", "", `${t("subjectPaperLabel", { number: paper.paperNumber })} · ${t("subjectVariant", { value: paper.variant })}`));
+  const card = make("article", "paper-card paper-card--session"); card.dataset.paperSlug = paper.slug; card.appendChild(make("h4", "", `${t("subjectPaperLabel", { number: paper.paperNumber })} · ${t("subjectVariant", { value: paper.variant })}`));
   card.appendChild(make("p", "paper-source-code", paper.slug));
   const metadata = [paper.durationMinutes ? t("subjectMinutes", { count: paper.durationMinutes }) : "", paper.totalMarks ? t("subjectMarks", { count: paper.totalMarks }) : ""].filter(Boolean); if (metadata.length) card.appendChild(make("p", "paper-meta", metadata.join(" · ")));
   const practical = Number(paper.paperNumber) === 4; if (practical) card.appendChild(make("p", "subject-muted", t("subjectPracticalMaterials")));
@@ -278,20 +227,29 @@ function paperRow(paper) {
     const read = make("a", "btn-secondary", t("subjectOpenFile", { type: type.toUpperCase() })); read.href = `${href}?inline=1`; read.target = "_blank"; read.rel = "noopener";
     const link = make("a", "btn-secondary", t("subjectDownloadFile", { type: type.toUpperCase() })); link.href = href; link.target = "_blank"; link.rel = "noopener"; actions.append(read, link);
   });
-  const hasQuestions = Number(paper.validQuestionCount) > 0 || state.questions.some((question) => question.paperSlug === paper.slug);
-  if (!practical && hasQuestions) { const button = make("button", "btn-primary", t("subjectViewQuestions")); button.type = "button"; button.addEventListener("click", () => openQuestions(paper, button)); actions.appendChild(button); }
+  const hasQuestions = (paper.paperType === "structured" && Number(paper.validQuestionCount) > 0) || state.questions.some((question) => question.paperSlug === paper.slug && question.questionType === "structured");
   card.appendChild(actions);
   state.resources.filter((resource) => resource.paperSlug === paper.slug).forEach((resource) => {
     const row = make("div", "paper-attachment"); row.appendChild(make("p", "", localized(resource))); const resourceActions = make("div", "paper-actions"); addResourceActions(resourceActions, resource); row.appendChild(resourceActions); card.appendChild(row);
-  }); return card;
+  });
+  if ([1, 2, 3].includes(Number(paper.paperNumber)) && hasQuestions) {
+    const practice = make("div", "paper-practice-entry");
+    const link = make("a", "btn-primary", t("subjectPracticeThisPaper"));
+    link.href = `./structured-practice.html?paper=${encodeURIComponent(paper.slug)}`;
+    practice.append(link, make("p", "", t("subjectPracticePaperHelp"))); card.appendChild(practice);
+  }
+  return card;
 }
-async function openQuestions(paper, button) {
-  const dialog = el("questionDialog"); const body = el("questionDialogBody"); const requestId = ++state.requestId;
-  el("questionDialogTitle").textContent = paper.slug; body.textContent = t("subjectLoadingQuestions"); dialog.showModal(); button.disabled = true;
-  try { const questions = list(await api.getCatalogPaperQuestions(paper.slug)); if (requestId !== state.requestId) return;
-    if (!questions.length) empty(body, "subjectQuestionsEmptyTitle", "subjectQuestionsEmptyBody"); else body.replaceChildren(...questions.map(questionCard));
-  } catch (error) { if (!unauthorized(error) && requestId === state.requestId) body.textContent = t("subjectQuestionsLoadFailed"); }
-  finally { button.disabled = false; }
+function renderSyllabus() {
+  const target = el("syllabusView"); const syllabus = make("div", "book-list"); syllabus.id = "subjectSyllabusResources";
+  target.replaceChildren(syllabus);
+  renderResources("syllabusResources", syllabus.id, "subjectSyllabusEmptyTitle", "subjectSyllabusEmptyBody");
+  const { additional } = examSessions();
+  if (additional.length) {
+    const resources = make("div", "book-list"); resources.id = "subjectAdditionalResources";
+    target.append(make("h2", "additional-resources-heading", t("subjectAdditionalResources")), resources);
+    renderResources(null, resources.id, "", "", additional);
+  }
 }
 function renderAll() {
   applyPage(); const name = localized(state.subject); el("subjectTitle").textContent = name;
@@ -301,8 +259,7 @@ function renderAll() {
   const builder = el("subjectBuilder"); builder.classList.toggle("is-disabled", !builderReady); builder.setAttribute("aria-disabled", String(!builderReady));
   if (builderReady) builder.href = `./paper-builder.html?subject=${encodeURIComponent(subjectCode)}`; else builder.removeAttribute("href");
   builder.title = t(builderReady ? "subjectBuilder" : "subjectBuilderPending"); el("subjectLanguage").textContent = getLanguage() === "en" ? "中文" : "EN";
-  renderReadiness(); renderComponents(); renderResources("syllabusResources", "syllabusView", "subjectSyllabusEmptyTitle", "subjectSyllabusEmptyBody"); renderResources("textbooks", "textbooksView", "subjectTextbooksEmptyTitle", "subjectTextbooksEmptyBody"); renderPapers();
-  if (!state.questions.length) empty(el("questionsView"), "subjectQuestionsEmptyTitle", "subjectQuestionsEmptyBody"); else el("questionsView").replaceChildren(...state.questions.map(questionCard));
+  renderReadiness(); renderComponents(); renderSyllabus(); renderResources("textbooks", "textbooksView", "subjectTextbooksEmptyTitle", "subjectTextbooksEmptyBody"); renderPapers();
   status(state.status, state.statusVars, state.failed);
 }
 function setup() {
@@ -320,7 +277,16 @@ async function init() {
     await api.getCurrentUser(token); const data = await api.getCatalogSubjectOverview(subjectCode, token); state.subject = { ...state.subject, ...data.subject };
     state.components = list(data.components); state.resources = list(data.resources); state.syllabus = list(data.syllabus); state.syllabusResources = list(data.syllabusResources).length ? data.syllabusResources : state.resources.filter((resource) => resource.kind === "syllabus"); state.textbooks = list(data.textbooks).length ? data.textbooks : state.resources.filter((resource) => resource.kind === "textbook"); state.readiness = data.readiness || {};
     state.questions = list(data.questions); state.counts = data.counts || {}; state.papers = list(data.papers); if (!state.papers.length) state.papers = list(await api.getCatalogPapers(subjectCode)); status("");
+    if (requestedView === "papers") {
+      const paper = state.papers.find((item) => item.slug === requestedPaper);
+      if (paper) { state.filters.year = String(paper.year); state.openSessions.add(`${paper.year}-${examSeason(paper.season)}`); }
+    }
   } catch (error) { if (unauthorized(error)) return; state.failed = true; status("subjectLoadFailed", { message: error.message }, true); }
   renderAll();
+  if (requestedView === "papers") {
+    document.querySelector('.subject-tab[data-view="papers"]')?.click();
+    const sourceCard = [...document.querySelectorAll(".paper-card")].find((card) => card.dataset.paperSlug === requestedPaper);
+    sourceCard?.scrollIntoView({ block: "center" });
+  }
 }
 init();

@@ -138,6 +138,14 @@
     async getCatalogPaperQuestions(paperSlug) {
       return request(`/api/catalog/papers/${encodeURIComponent(paperSlug)}/questions`);
     },
+    async getStructuredPracticePaper(token, paperSlug) {
+      return request(`/api/structured-practice/papers/${encodeURIComponent(paperSlug)}`, { token, timeoutMs: 15000 });
+    },
+    async gradeStructuredQuestion(token, questionId, input) {
+      return request(`/api/structured-practice/questions/${encodeURIComponent(questionId)}/grade`, {
+        method: "POST", token, body: JSON.stringify(input), timeoutMs: 120000,
+      });
+    },
     async downloadResource(token, resourceId) {
       return download(`/api/content/resources/${encodeURIComponent(resourceId)}`, token);
     },

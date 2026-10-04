@@ -74,7 +74,8 @@ try {
   assert.equal(capabilities.papers, true);
   assert.equal(capabilities.manualPaperBuilder, true);
   assert.equal(capabilities.smartPaperBuilder, false);
-  assert.equal(capabilities.onlinePractice, false);
+  assert.equal(capabilities.onlinePractice, true);
+  assert.equal(capabilities.structuredAiGrading, true);
 
   const slug = "9618_s26_qp_31";
   const assetBase = `/api/content/question-images/cie-as-a-level-computer-science-9618/${slug}`;

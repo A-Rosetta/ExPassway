@@ -63,7 +63,7 @@ export default [
     },
   },
   {
-    files: ["scripts/subject.js"],
+    files: ["scripts/subject.js", "scripts/structured-practice.js"],
     languageOptions: {
       sourceType: "module",
     },
