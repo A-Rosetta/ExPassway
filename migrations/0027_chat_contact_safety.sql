@@ -27,58 +27,53 @@ CREATE INDEX idx_chat_contact_reports_status ON chat_contact_reports(status, cre
 
 -- Triggers serialize safety decisions with D1 mutations. Application checks
 -- return helpful retry times; these checks also cover concurrent requests.
+-- RAISE ... WHERE avoids the remote D1 splitter confusing CASE's END with
+-- the trigger body's END. Keep uppercase BEGIN and LF line endings.
 CREATE TRIGGER chat_friend_request_safety BEFORE INSERT ON chat_friend_requests
 WHEN NEW.status = 'pending'
 BEGIN
-  SELECT CASE WHEN EXISTS (SELECT 1 FROM chat_user_blocks b
+  SELECT RAISE(ABORT, 'CHAT_CONTACT_BLOCKED') WHERE EXISTS (SELECT 1 FROM chat_user_blocks b
     WHERE (b.user_id = NEW.sender_user_id AND b.blocked_user_id = NEW.recipient_user_id)
-      OR (b.user_id = NEW.recipient_user_id AND b.blocked_user_id = NEW.sender_user_id))
-    THEN RAISE(ABORT, 'CHAT_CONTACT_BLOCKED') END;
-  SELECT CASE WHEN NOT EXISTS (SELECT 1 FROM chat_friend_requests r WHERE r.status = 'pending' AND
+      OR (b.user_id = NEW.recipient_user_id AND b.blocked_user_id = NEW.sender_user_id));
+  SELECT RAISE(ABORT, 'FRIEND_REQUEST_COOLDOWN') WHERE NOT EXISTS (SELECT 1 FROM chat_friend_requests r WHERE r.status = 'pending' AND
       ((r.sender_user_id = NEW.sender_user_id AND r.recipient_user_id = NEW.recipient_user_id)
        OR (r.sender_user_id = NEW.recipient_user_id AND r.recipient_user_id = NEW.sender_user_id)))
     AND EXISTS (SELECT 1 FROM chat_friend_requests r WHERE r.sender_user_id = NEW.sender_user_id
       AND r.recipient_user_id = NEW.recipient_user_id
-      AND r.created_at > strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-1 day'))
-    THEN RAISE(ABORT, 'FRIEND_REQUEST_COOLDOWN') END;
-  SELECT CASE WHEN (SELECT COUNT(*) FROM chat_friend_requests r WHERE r.sender_user_id = NEW.sender_user_id
-    AND r.created_at > strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-1 hour')) >= 10
-    THEN RAISE(ABORT, 'FRIEND_REQUEST_RATE_LIMITED') END;
+      AND r.created_at > strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-1 day'));
+  SELECT RAISE(ABORT, 'FRIEND_REQUEST_RATE_LIMITED') WHERE (SELECT COUNT(*) FROM chat_friend_requests r WHERE r.sender_user_id = NEW.sender_user_id
+    AND r.created_at > strftime('%Y-%m-%dT%H:%M:%fZ', 'now', '-1 hour')) >= 10;
 END;
 
 CREATE TRIGGER chat_friend_accept_safety BEFORE UPDATE OF status ON chat_friend_requests
 WHEN NEW.status = 'accepted'
 BEGIN
-  SELECT CASE WHEN EXISTS (SELECT 1 FROM chat_user_blocks b
+  SELECT RAISE(ABORT, 'CHAT_CONTACT_BLOCKED') WHERE EXISTS (SELECT 1 FROM chat_user_blocks b
     WHERE (b.user_id = NEW.sender_user_id AND b.blocked_user_id = NEW.recipient_user_id)
-      OR (b.user_id = NEW.recipient_user_id AND b.blocked_user_id = NEW.sender_user_id))
-    THEN RAISE(ABORT, 'CHAT_CONTACT_BLOCKED') END;
+      OR (b.user_id = NEW.recipient_user_id AND b.blocked_user_id = NEW.sender_user_id));
 END;
 
 CREATE TRIGGER chat_direct_membership_safety BEFORE INSERT ON chat_conversation_members
 WHEN (SELECT kind FROM chat_conversations WHERE id = NEW.conversation_id) = 'direct'
 BEGIN
-  SELECT CASE WHEN EXISTS (SELECT 1 FROM chat_conversation_members m JOIN chat_user_blocks b
+  SELECT RAISE(ABORT, 'CHAT_CONTACT_BLOCKED') WHERE EXISTS (SELECT 1 FROM chat_conversation_members m JOIN chat_user_blocks b
     ON (b.user_id = NEW.user_id AND b.blocked_user_id = m.user_id)
       OR (b.user_id = m.user_id AND b.blocked_user_id = NEW.user_id)
-    WHERE m.conversation_id = NEW.conversation_id AND m.user_id <> NEW.user_id AND m.left_at IS NULL)
-    THEN RAISE(ABORT, 'CHAT_CONTACT_BLOCKED') END;
+    WHERE m.conversation_id = NEW.conversation_id AND m.user_id <> NEW.user_id AND m.left_at IS NULL);
 END;
 
 CREATE TRIGGER chat_direct_message_safety BEFORE INSERT ON chat_messages
 WHEN (SELECT kind FROM chat_conversations WHERE id = NEW.conversation_id) = 'direct'
 BEGIN
-  SELECT CASE WHEN EXISTS (SELECT 1 FROM chat_conversation_members m JOIN chat_user_blocks b
+  SELECT RAISE(ABORT, 'CHAT_CONTACT_BLOCKED') WHERE EXISTS (SELECT 1 FROM chat_conversation_members m JOIN chat_user_blocks b
     ON (b.user_id = COALESCE(NEW.sender_user_id, (SELECT user_id FROM chat_devices WHERE id = NEW.sender_device_id)) AND b.blocked_user_id = m.user_id)
       OR (b.user_id = m.user_id AND b.blocked_user_id = COALESCE(NEW.sender_user_id, (SELECT user_id FROM chat_devices WHERE id = NEW.sender_device_id)))
     WHERE m.conversation_id = NEW.conversation_id AND m.left_at IS NULL
-      AND m.user_id <> COALESCE(NEW.sender_user_id, (SELECT user_id FROM chat_devices WHERE id = NEW.sender_device_id)))
-    THEN RAISE(ABORT, 'CHAT_CONTACT_BLOCKED') END;
-  SELECT CASE WHEN EXISTS (SELECT 1 FROM chat_conversation_members m
+      AND m.user_id <> COALESCE(NEW.sender_user_id, (SELECT user_id FROM chat_devices WHERE id = NEW.sender_device_id)));
+  SELECT RAISE(ABORT, 'CHAT_FRIENDSHIP_REQUIRED') WHERE EXISTS (SELECT 1 FROM chat_conversation_members m
     WHERE m.conversation_id = NEW.conversation_id AND m.left_at IS NULL
       AND m.user_id <> COALESCE(NEW.sender_user_id, (SELECT user_id FROM chat_devices WHERE id = NEW.sender_device_id))
       AND NOT EXISTS (SELECT 1 FROM chat_contacts c
         WHERE c.user_id = COALESCE(NEW.sender_user_id, (SELECT user_id FROM chat_devices WHERE id = NEW.sender_device_id))
-          AND c.peer_user_id = m.user_id AND c.accepted_at IS NOT NULL))
-    THEN RAISE(ABORT, 'CHAT_FRIENDSHIP_REQUIRED') END;
+          AND c.peer_user_id = m.user_id AND c.accepted_at IS NOT NULL));
 END;

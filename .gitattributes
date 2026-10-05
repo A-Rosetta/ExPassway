@@ -1,0 +1,2 @@
+# D1's remote query parser requires LF inside compound trigger statements.
+migrations/*.sql text eol=lf
