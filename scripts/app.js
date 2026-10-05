@@ -79,11 +79,11 @@
 
   function subjectTheme(code) {
     return {
-      "0610": { className: "biology", emblem: "DNA" },
-      "0620": { className: "chemistry", emblem: "H₂O" },
+      "0610": { className: "biology", emblem: "BIO" },
+      "0620": { className: "chemistry", emblem: "CHEM" },
       "0654": { className: "sciences", emblem: "SCI" },
       "0455": { className: "economics", emblem: "ECO" },
-      "0625": { className: "physics", emblem: "F=ma" },
+      "0625": { className: "physics", emblem: "PHY" },
     }[code] || { className: "default", emblem: code || "MCQ" };
   }
 
