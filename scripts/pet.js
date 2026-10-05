@@ -271,7 +271,7 @@
 
   function tryAmbientTip() {
     if (!state.preferences.enabled || state.dragging || document.hidden || activeInput() || intrusiveUiOpen()) return false;
-    const { key, value } = dailyTipState();
+    const { value } = dailyTipState();
     if (value.count >= DAILY_TIP_LIMIT || Date.now() - value.lastAt < TIP_INTERVAL) return false;
     showNextAmbientTip(true);
     window.setTimeout(() => {

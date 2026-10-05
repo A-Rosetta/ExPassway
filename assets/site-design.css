@@ -1094,8 +1094,7 @@
 .site-ui .chat-panel__heading,
 .site-ui .chat-conversation-header,
 .site-ui .chat-compose__actions,
-.site-ui .chat-device-item,
-.site-ui .chat-invite-item {
+.site-ui .chat-device-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1132,13 +1131,6 @@
   gap: 10px;
 }
 
-.site-ui .chat-invite-panel > label {
-  display: grid;
-  gap: 7px;
-  margin: 18px 0 10px;
-}
-
-.site-ui .chat-invite-panel input,
 .site-ui .chat-compose textarea,
 .site-ui .chat-retention-control select {
   width: 100%;
@@ -1150,27 +1142,17 @@
   font: inherit;
 }
 
-.site-ui .chat-invite-list,
 .site-ui .chat-device-list {
   display: grid;
   gap: 8px;
   margin-top: 14px;
 }
 
-.site-ui .chat-invite-item,
 .site-ui .chat-device-item {
   padding-top: 9px;
   border-top: 1px solid var(--surface-border);
   color: var(--muted);
   font-size: 0.78rem;
-}
-
-.site-ui .chat-invite-item code {
-  max-width: 180px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: var(--accent);
 }
 
 .site-ui .chat-small-action,

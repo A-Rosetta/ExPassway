@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { Miniflare } from "miniflare";
 import { unstable_splitSqlQuery } from "wrangler";
 import { handleAdminApiRequest } from "../cloudflare/admin-api.js";
@@ -47,6 +47,7 @@ const mf = new Miniflare({
   r2Buckets: {
     PRIVATE_IMPORTS_BUCKET: "private-imports-test",
     CONTENT_BUCKET: "content-test",
+    CHAT_MEDIA_BUCKET: "chat-media-test",
   },
   modules: true,
   script: "export default { fetch() { return new Response('ok'); } };",
@@ -56,6 +57,7 @@ try {
   const db = await mf.getD1Database("DB");
   const bucket = await mf.getR2Bucket("PRIVATE_IMPORTS_BUCKET");
   const contentBucket = await mf.getR2Bucket("CONTENT_BUCKET");
+  const chatMediaBucket = await mf.getR2Bucket("CHAT_MEDIA_BUCKET");
   for (const file of [
     "../migrations/0001_initial.sql",
     "../migrations/0002_supabase_auth.sql",
@@ -101,6 +103,7 @@ try {
   const dispatched = [];
   const supabaseDeletes = [];
   let githubStatus = 204;
+  let supabaseStatus = 204;
   globalThis.fetch = async (input, options) => {
     const url = String(input);
     if (url.startsWith("https://api.github.com/")) {
@@ -109,7 +112,7 @@ try {
     }
     if (url.startsWith("https://supabase.test/auth/v1/admin/users/")) {
       supabaseDeletes.push({ url, options });
-      return new Response(null, { status: 204 });
+      return new Response(null, { status: supabaseStatus });
     }
     return originalFetch(input, options);
   };
@@ -117,6 +120,7 @@ try {
     DB: db,
     PRIVATE_IMPORTS_BUCKET: bucket,
     CONTENT_BUCKET: contentBucket,
+    CHAT_MEDIA_BUCKET: chatMediaBucket,
     AUTH_SECRET,
     GITHUB_ACTIONS_TOKEN: "test-github-token",
     SUPABASE_URL: "https://supabase.test",
@@ -495,20 +499,106 @@ try {
   }
 
   {
+    // Run deletion against the current schema, including all shared credential and chat FKs.
+    for (const file of (await readdir(new URL("../migrations/", import.meta.url))).filter((file) => (
+      file.endsWith(".sql") && !/^000[123]_/.test(file)
+    )).sort()) {
+      const sql = await readFile(new URL(`../migrations/${file}`, import.meta.url), "utf8");
+      for (const statement of unstable_splitSqlQuery(sql)) await db.prepare(statement).run();
+    }
     const otherAdminId = "33333333-3333-4333-8333-333333333333";
     const deleteUserId = "44444444-4444-4444-8444-444444444444";
     await db.batch([
       db.prepare("INSERT INTO users (id, email, display_name, role, supabase_user_id) VALUES (?, 'other-admin@example.com', 'Other Admin', 'admin', 'supabase-other-admin')").bind(otherAdminId),
       db.prepare("INSERT INTO users (id, email, display_name, role, supabase_user_id) VALUES (?, 'delete@example.com', 'Delete Me', 'student', 'supabase-delete')").bind(deleteUserId),
     ]);
+    const timestamp = new Date().toISOString();
+    for (const userId of [deleteUserId, student.id]) {
+      await db.batch([
+        db.prepare("INSERT INTO chat_profiles (user_id, chat_alias, created_at, updated_at) VALUES (?, ?, ?, ?)").bind(userId, userId, timestamp, timestamp),
+        db.prepare("INSERT INTO chat_account_keys (user_id, key_version, encryption_public_key, signing_public_key, fingerprint, created_at, updated_at) VALUES (?, 'key-1', 'public-encryption', 'public-signing', 'fingerprint', ?, ?)").bind(userId, timestamp, timestamp),
+        db.prepare("INSERT INTO chat_passkeys (id, user_id, credential_id, public_key, prf_salt, created_at) VALUES (?, ?, ?, 'public', 'salt', ?)").bind(`passkey-${userId}`, userId, `credential-${userId}`, timestamp),
+        db.prepare("INSERT INTO chat_account_vault_versions (user_id, key_version, credential_id, kdf_version, nonce, ciphertext, updated_at) VALUES (?, 'key-1', ?, 'hkdf-sha256-v1', 'nonce', 'private-ciphertext', ?)").bind(userId, `credential-${userId}`, timestamp),
+        db.prepare("INSERT INTO chat_account_identity_heads (user_id, key_version, credential_id) VALUES (?, 'key-1', ?)").bind(userId, `credential-${userId}`),
+        db.prepare("INSERT INTO chat_account_vault_wrappers (user_id, key_version, credential_id, nonce, ciphertext, updated_at) VALUES (?, 'key-1', ?, 'nonce', 'private-ciphertext', ?)").bind(userId, `credential-${userId}`, timestamp),
+      ]);
+    }
+    await db.batch([
+      db.prepare("INSERT INTO chat_conversations (id, kind, created_by, protocol_version, current_epoch, created_at, updated_at) VALUES ('delete-group', 'group', ?, 'account-v2', 1, ?, ?)").bind(deleteUserId, timestamp, timestamp),
+      db.prepare("INSERT INTO chat_conversation_members (conversation_id, user_id, role, joined_at) VALUES ('delete-group', ?, 'owner', ?)").bind(deleteUserId, timestamp),
+      db.prepare("INSERT INTO chat_conversation_members (conversation_id, user_id, role, joined_at) VALUES ('delete-group', ?, 'member', ?)").bind(student.id, timestamp),
+      db.prepare("INSERT INTO chat_conversation_epochs (conversation_id, epoch, created_by, created_at) VALUES ('delete-group', 1, ?, ?)").bind(deleteUserId, timestamp),
+      ...[deleteUserId, student.id].map((userId) => db.prepare("INSERT INTO chat_epoch_recipients (conversation_id, epoch, user_id, key_version, ephemeral_public_key, nonce, envelope_ciphertext, created_at) VALUES ('delete-group', 1, ?, 'key-1', 'public', 'nonce', 'encrypted-envelope', ?)").bind(userId, timestamp)),
+      db.prepare("INSERT INTO chat_devices (id, user_id, identity_public_key, device_number, registration_id, signed_prekey_id, signed_prekey_public, signed_prekey_signature, created_at, updated_at) VALUES ('delete-device', ?, 'public', 1, 1, 1, 'public', 'signature', ?, ?)").bind(deleteUserId, timestamp, timestamp),
+      db.prepare("INSERT INTO chat_messages (id, conversation_id, sender_user_id, client_message_id, protocol_version, content_epoch, ciphertext, attachment_refs, created_at) VALUES ('delete-message', 'delete-group', ?, 'client-delete', 'account-v2', 1, 'target-ciphertext', '[\"target-media\",\"shared-media\"]', ?)").bind(deleteUserId, timestamp),
+      db.prepare("INSERT INTO chat_messages (id, conversation_id, sender_user_id, client_message_id, protocol_version, content_epoch, ciphertext, attachment_refs, created_at) VALUES ('peer-message', 'delete-group', ?, 'client-peer', 'account-v2', 1, 'peer-ciphertext', '[\"shared-media\",\"peer-media\"]', ?)").bind(student.id, timestamp),
+      db.prepare("INSERT INTO chat_messages (id, conversation_id, sender_device_id, client_message_id, protocol_version, ciphertext, attachment_refs, created_at) VALUES ('delete-legacy-message', 'delete-group', 'delete-device', 'legacy-delete', 'signal-v1', 'legacy-ciphertext', '[\"legacy-media\"]', ?)").bind(timestamp),
+      db.prepare("INSERT INTO chat_sync_events (conversation_id, event_type, entity_id, payload_ciphertext, created_at) VALUES ('delete-group', 'message', 'delete-message', 'old-target-ciphertext', ?)").bind(timestamp),
+      db.prepare("INSERT INTO auth_passkey_challenges (id, email, challenge, rp_id, origin, expires_at, created_at) VALUES ('email-only-challenge', 'delete@example.com', 'unique-challenge', 'expassway.test', 'https://expassway.test', '2099-01-01T00:00:00Z', ?)").bind(timestamp),
+      db.prepare("INSERT INTO email_otp_cooldowns (email_hash, available_at, updated_at) VALUES (?, 9999999999, ?)").bind(Buffer.from(await crypto.subtle.digest("SHA-256", new TextEncoder().encode("delete@example.com"))).toString("hex"), timestamp),
+      db.prepare("INSERT INTO ai_call_cooldowns (user_id, reservation_id, called_at) VALUES (?, 'target-ai', ?)").bind(deleteUserId, Date.now()),
+    ]);
+    for (const [id, owner] of [["target-media", deleteUserId], ["shared-media", deleteUserId], ["peer-media", student.id], ["legacy-media", null], ["pending-media", deleteUserId]]) {
+      await db.prepare("INSERT INTO chat_attachments (id, conversation_id, owner_user_id, object_key, size_bytes, size_bucket, status, created_at) VALUES (?, 'delete-group', ?, ?, 20, 'small', 'complete', ?)").bind(id, owner, `chat/${id}`, timestamp).run();
+      await chatMediaBucket.put(`chat/${id}`, `encrypted-${id}`);
+    }
     const selfDelete = await api(env, adminToken, `/api/admin/users/${admin.id}`, { method: "DELETE" });
     assert.equal(selfDelete.response.status, 409);
     const adminDelete = await api(env, adminToken, `/api/admin/users/${otherAdminId}`, { method: "DELETE" });
     assert.equal(adminDelete.response.status, 403);
+    const notConfigured = await api({ ...env, SUPABASE_SERVICE_ROLE_KEY: "" }, adminToken, `/api/admin/users/${deleteUserId}`, { method: "DELETE" });
+    assert.equal(notConfigured.response.status, 503);
+    assert.equal(supabaseDeletes.length, 0);
+    supabaseStatus = 503;
+    const rejected = await api(env, adminToken, `/api/admin/users/${deleteUserId}`, { method: "DELETE" });
+    assert.equal(rejected.response.status, 502);
+    assert.ok(await db.prepare("SELECT id FROM users WHERE id = ?").bind(deleteUserId).first());
+    assert.ok(await db.prepare("SELECT id FROM chat_messages WHERE id = 'delete-message'").first());
+    assert.ok(await chatMediaBucket.get("chat/target-media"));
+    supabaseStatus = 204;
     const deleted = await api(env, adminToken, `/api/admin/users/${deleteUserId}`, { method: "DELETE" });
     assert.equal(deleted.response.status, 200);
-    assert.equal(supabaseDeletes.length, 1);
+    assert.equal(supabaseDeletes.length, 2);
     assert.match(supabaseDeletes[0].url, /supabase-delete$/);
+    assert.equal(deleted.payload.data.mediaDeleted, 3);
+    assert.equal(deleted.payload.data.mediaCleanupPending, 0);
+    assert.equal(await db.prepare("SELECT id FROM users WHERE id = ?").bind(deleteUserId).first(), null);
+    assert.equal(await db.prepare("SELECT id FROM chat_messages WHERE id = 'delete-message'").first(), null);
+    assert.equal(await db.prepare("SELECT id FROM chat_messages WHERE id = 'delete-legacy-message'").first(), null);
+    assert.equal((await db.prepare("SELECT ciphertext FROM chat_messages WHERE id = 'peer-message'").first()).ciphertext, "peer-ciphertext");
+    assert.equal(await db.prepare("SELECT id FROM auth_passkey_challenges WHERE id = 'email-only-challenge'").first(), null);
+    assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM email_otp_cooldowns").first()).count, 0);
+    for (const table of ["chat_passkeys", "chat_account_keys", "chat_account_vault_versions", "chat_account_identity_heads", "chat_account_vault_wrappers", "chat_devices", "ai_call_cooldowns"]) {
+      assert.equal((await db.prepare(`SELECT COUNT(*) AS count FROM ${table} WHERE user_id = ?`).bind(deleteUserId).first()).count, 0);
+    }
+    assert.ok(await db.prepare("SELECT user_id FROM chat_account_vault_versions WHERE user_id = ?").bind(student.id).first());
+    assert.equal((await db.prepare("SELECT role FROM chat_conversation_members WHERE conversation_id = 'delete-group' AND user_id = ?").bind(student.id).first()).role, "owner");
+    assert.equal((await db.prepare("SELECT rotation_required FROM chat_conversations WHERE id = 'delete-group'").first()).rotation_required, 1);
+    assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM chat_sync_events WHERE event_type = 'deleted'").first()).count, 2);
+    assert.equal((await db.prepare("SELECT payload_ciphertext FROM chat_sync_events WHERE entity_id = 'delete-message' AND event_type = 'message'").first()).payload_ciphertext, null);
+    assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM chat_sync_events WHERE event_type = 'remove' AND entity_id = ?").bind(deleteUserId).first()).count, 1);
+    for (const id of ["target-media", "legacy-media", "pending-media"]) {
+      assert.equal(await chatMediaBucket.get(`chat/${id}`), null);
+      assert.equal(await db.prepare("SELECT id FROM chat_attachments WHERE id = ?").bind(id).first(), null);
+    }
+    assert.ok(await chatMediaBucket.get("chat/shared-media"));
+    assert.ok(await chatMediaBucket.get("chat/peer-media"));
+    assert.equal((await db.prepare("SELECT owner_user_id FROM chat_attachments WHERE id = 'shared-media'").first()).owner_user_id, null);
+    assert.equal((await db.prepare("SELECT owner_user_id FROM chat_attachments WHERE id = 'peer-media'").first()).owner_user_id, student.id);
+    const afterDelete = await api(env, adminToken, `/api/admin/users/${deleteUserId}`, { method: "DELETE" });
+    assert.equal(afterDelete.response.status, 404);
+
+    // A failed R2 deletion stays queued and cannot prevent the account deletion from completing.
+    const retryUserId = "55555555-5555-4555-8555-555555555555";
+    await db.prepare("INSERT INTO users (id, email, display_name, role) VALUES (?, 'retry@example.com', 'Retry', 'student')").bind(retryUserId).run();
+    await db.prepare("INSERT INTO chat_attachments (id, conversation_id, owner_user_id, object_key, size_bytes, size_bucket, status, created_at) VALUES ('retry-media', 'delete-group', ?, 'chat/retry-media', 20, 'small', 'complete', ?)").bind(retryUserId, timestamp).run();
+    await chatMediaBucket.put("chat/retry-media", "encrypted-retry");
+    const retryDeleted = await api({ ...env, CHAT_MEDIA_BUCKET: { async delete() { throw new Error("test R2 unavailable"); } } }, adminToken, `/api/admin/users/${retryUserId}`, { method: "DELETE" });
+    assert.equal(retryDeleted.response.status, 200);
+    assert.equal(retryDeleted.payload.data.mediaCleanupPending, 1);
+    assert.equal(await db.prepare("SELECT id FROM users WHERE id = ?").bind(retryUserId).first(), null);
+    assert.deepEqual(await db.prepare("SELECT status, owner_user_id FROM chat_attachments WHERE id = 'retry-media'").first(), { status: "deleted", owner_user_id: null });
+    assert.ok(await chatMediaBucket.get("chat/retry-media"));
   }
 
   {

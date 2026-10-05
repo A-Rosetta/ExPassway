@@ -70,6 +70,123 @@ async function deleteSupabaseUser(env, supabaseUserId) {
   }
 }
 
+async function prepareUserDeletion(db, target, actorUserId) {
+  const userId = target.id;
+  const timestamp = new Date().toISOString();
+  const email = String(target.email).trim().toLowerCase();
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(email));
+  const emailHash = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+  const conversations = (await db.prepare(`
+    SELECT c.id FROM chat_conversations c JOIN chat_conversation_members m ON m.conversation_id = c.id
+    WHERE m.user_id = ? AND m.left_at IS NULL AND c.protocol_version = 'account-v2'
+  `).bind(userId).all()).results;
+  const media = (await db.prepare(`SELECT id FROM chat_attachments WHERE owner_user_id = ? OR id IN (
+    SELECT r.value FROM chat_messages m, json_each(m.attachment_refs) r
+    WHERE m.sender_user_id = ? OR m.sender_device_id IN (SELECT id FROM chat_devices WHERE user_id = ?)
+  )`).bind(userId, userId, userId).all()).results;
+  const statements = [
+    db.prepare(`UPDATE chat_sync_events SET payload_ciphertext = NULL WHERE entity_id IN (
+      SELECT id FROM chat_messages WHERE sender_user_id = ?
+        OR sender_device_id IN (SELECT id FROM chat_devices WHERE user_id = ?)
+    )`).bind(userId, userId),
+    // Keep deletion events so other devices remove messages even after the sender FK cascades.
+    db.prepare(`INSERT INTO chat_sync_events (conversation_id, event_type, entity_id, content_epoch, created_at)
+      SELECT m.conversation_id, 'deleted', m.id, m.content_epoch, ? FROM chat_messages m
+      WHERE m.sender_user_id = ? OR m.sender_device_id IN (SELECT id FROM chat_devices WHERE user_id = ?)`)
+      .bind(timestamp, userId, userId),
+    // Legacy uploads have no owner column; their message references identify the uploader.
+    // A surviving peer's live reference keeps its encrypted file available.
+    db.prepare(`UPDATE chat_attachments SET status = 'deleted', deleted_at = ?
+      WHERE (owner_user_id = ? OR id IN (
+        SELECT r.value FROM chat_messages m, json_each(m.attachment_refs) r
+        WHERE m.sender_user_id = ? OR m.sender_device_id IN (SELECT id FROM chat_devices WHERE user_id = ?)
+      )) AND NOT EXISTS (
+        SELECT 1 FROM chat_messages m, json_each(m.attachment_refs) r
+        WHERE r.value = chat_attachments.id AND m.deleted_at IS NULL AND (m.expires_at IS NULL OR m.expires_at > ?)
+          AND COALESCE(m.sender_user_id, '') <> ?
+          AND NOT EXISTS (SELECT 1 FROM chat_devices d WHERE d.id = m.sender_device_id AND d.user_id = ?)
+      )`).bind(timestamp, userId, userId, userId, timestamp, userId, userId),
+    // This FK intentionally has no cascade. Retain the cleanup record until R2 deletion succeeds.
+    db.prepare("UPDATE chat_attachments SET owner_user_id = NULL WHERE owner_user_id = ?").bind(userId),
+    db.prepare(`UPDATE chat_conversation_members SET role = 'owner'
+      WHERE user_id = (
+        SELECT replacement.user_id FROM chat_conversation_members replacement
+        WHERE replacement.conversation_id = chat_conversation_members.conversation_id
+          AND replacement.user_id <> ? AND replacement.left_at IS NULL
+        ORDER BY CASE WHEN replacement.role = 'admin' THEN 0 ELSE 1 END, replacement.joined_at, replacement.user_id LIMIT 1
+      ) AND EXISTS (
+        SELECT 1 FROM chat_conversation_members departing JOIN chat_conversations c ON c.id = departing.conversation_id
+        WHERE departing.conversation_id = chat_conversation_members.conversation_id AND departing.user_id = ?
+          AND departing.role = 'owner' AND departing.left_at IS NULL AND c.kind = 'group'
+      ) AND NOT EXISTS (
+        SELECT 1 FROM chat_conversation_members owner WHERE owner.conversation_id = chat_conversation_members.conversation_id
+          AND owner.user_id <> ? AND owner.role = 'owner' AND owner.left_at IS NULL
+      )`).bind(userId, userId, userId),
+    db.prepare(`UPDATE chat_conversations SET rotation_required = 1, control_revision = control_revision + 1, updated_at = ?
+      WHERE protocol_version = 'account-v2' AND id IN (
+        SELECT conversation_id FROM chat_conversation_members WHERE user_id = ? AND left_at IS NULL
+      )`).bind(timestamp, userId),
+    db.prepare(`INSERT INTO chat_sync_events (conversation_id, event_type, entity_id, content_epoch, created_at)
+      SELECT c.id, 'remove', ?, c.current_epoch, ? FROM chat_conversations c
+      JOIN chat_conversation_members m ON m.conversation_id = c.id
+      WHERE m.user_id = ? AND m.left_at IS NULL AND c.protocol_version = 'account-v2'`).bind(userId, timestamp, userId),
+    db.prepare("DELETE FROM auth_passkey_challenges WHERE user_id = ? OR lower(email) = ?").bind(userId, email),
+    db.prepare("DELETE FROM email_otp_cooldowns WHERE email_hash = ?").bind(emailHash),
+    // Remove vault references before their shared credentials; every other user's versions remain intact.
+    db.prepare("DELETE FROM chat_account_identity_heads WHERE user_id = ?").bind(userId),
+    db.prepare("DELETE FROM chat_account_vault_versions WHERE user_id = ?").bind(userId),
+    db.prepare("DELETE FROM chat_account_vault_wrappers WHERE user_id = ?").bind(userId),
+    db.prepare("DELETE FROM question_attempts WHERE user_id = ?").bind(userId),
+    db.prepare("DELETE FROM wrong_notebook_entries WHERE user_id = ?").bind(userId),
+    db.prepare("DELETE FROM practice_sessions WHERE user_id = ?").bind(userId),
+    db.prepare("DELETE FROM users WHERE id = ?").bind(userId),
+    db.prepare(`INSERT INTO admin_audit_events (id, actor_user_id, action, target_type, target_id, details)
+      VALUES (?, ?, 'user.delete', 'user', ?, ?)`)
+      .bind(crypto.randomUUID(), actorUserId, userId, JSON.stringify({ role: target.role })),
+  ];
+  return { statements, conversations, media };
+}
+
+export async function deleteUserAccount(env, target, actorUserId = null) {
+  const deletion = await prepareUserDeletion(env.DB, target, actorUserId);
+  await deleteSupabaseUser(env, target.supabase_user_id);
+  await env.DB.batch(deletion.statements);
+  let mediaDeleted = 0;
+  let mediaCleanupPending = 0;
+  for (let offset = 0; offset < deletion.media.length; offset += 90) {
+    const ids = deletion.media.slice(offset, offset + 90).map((row) => row.id);
+    const pending = (await env.DB.prepare(`SELECT id, object_key FROM chat_attachments
+      WHERE id IN (${ids.map(() => "?").join(",")}) AND status = 'deleted'`).bind(...ids).all()).results;
+    if (!pending.length) continue;
+    if (env.CHAT_MEDIA_BUCKET) {
+      try {
+        await env.CHAT_MEDIA_BUCKET.delete(pending.map((row) => row.object_key));
+        await env.DB.prepare(`DELETE FROM chat_attachments WHERE status = 'deleted'
+          AND id IN (${pending.map(() => "?").join(",")})`).bind(...pending.map((row) => row.id)).run();
+        mediaDeleted += pending.length;
+        continue;
+      } catch (_error) { /* Keep rows so the scheduled media cleanup retries the deletion. */ }
+    }
+    mediaCleanupPending += pending.length;
+  }
+  await notifyDeletedUserConversations(env.DB, env, deletion.conversations);
+  return { id: target.id, deleted: true, mediaDeleted, mediaCleanupPending };
+}
+
+async function notifyDeletedUserConversations(db, env, conversations) {
+  if (!env.CHAT_ROOMS) return;
+  for (const conversation of conversations) {
+    try {
+      const event = await db.prepare("SELECT MAX(sequence) AS sequence FROM chat_sync_events WHERE conversation_id = ?")
+        .bind(conversation.id).first();
+      await env.CHAT_ROOMS.get(env.CHAT_ROOMS.idFromName(conversation.id)).fetch("https://chat-room/broadcast", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "sync", conversationId: conversation.id, sequence: event.sequence }),
+      });
+    } catch (_error) { /* Normal cursor sync recovers a missed realtime notification. */ }
+  }
+}
+
 async function userHistory(db, userId) {
   const user = await db.prepare("SELECT * FROM users WHERE id = ? LIMIT 1").bind(userId).first();
   if (!user) throw new AuthError(404, "User not found.", "USER_NOT_FOUND");
@@ -222,19 +339,7 @@ export async function handleAdminPlatformRoute(request, env, admin) {
     const target = await env.DB.prepare("SELECT * FROM users WHERE id = ? LIMIT 1").bind(userId).first();
     if (!target) throw new AuthError(404, "User not found.", "USER_NOT_FOUND");
     if (target.role === "admin") throw new AuthError(403, "Administrator accounts cannot be deleted here.", "FORBIDDEN");
-    await deleteSupabaseUser(env, target.supabase_user_id);
-    await env.DB.batch([
-      env.DB.prepare("DELETE FROM question_attempts WHERE user_id = ?").bind(userId),
-      env.DB.prepare("DELETE FROM wrong_notebook_entries WHERE user_id = ?").bind(userId),
-      env.DB.prepare("DELETE FROM practice_sessions WHERE user_id = ?").bind(userId),
-      env.DB.prepare("DELETE FROM discussion_post_likes WHERE user_id = ?").bind(userId),
-      env.DB.prepare("DELETE FROM discussion_thread_follows WHERE user_id = ?").bind(userId),
-      env.DB.prepare("DELETE FROM discussion_flags WHERE user_id = ?").bind(userId),
-      env.DB.prepare("DELETE FROM community_mutes WHERE user_id = ?").bind(userId),
-      env.DB.prepare("DELETE FROM users WHERE id = ?").bind(userId),
-    ]);
-    await writeAudit(env.DB, admin.id, "user.delete", "user", userId, { role: target.role });
-    return success({ id: userId, deleted: true }, request.method);
+    return success(await deleteUserAccount(env, target, admin.id), request.method);
   }
 
   const subjectQuestions = url.pathname.match(/^\/api\/admin\/subjects\/(\d{4})\/questions$/);

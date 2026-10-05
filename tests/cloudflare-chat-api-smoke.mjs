@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { webcrypto } from "node:crypto";
 import { Miniflare } from "miniflare";
 import { unstable_splitSqlQuery } from "wrangler";
@@ -29,8 +29,10 @@ async function call(user, path, options = {}) {
 
 try {
   const db = envBase.DB;
-  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql", "../migrations/0003_admin_platform.sql", "../migrations/0006_chat_foundation.sql", "../migrations/0007_chat_crypto_hardening.sql", "../migrations/0008_chat_account_v2.sql", "../migrations/0009_chat_webauthn_context.sql", "../migrations/0010_chat_account_write_proofs.sql", "../migrations/0011_chat_messages_account_sender.sql", "../migrations/0012_chat_message_sender_key.sql", "../migrations/0013_chat_account_lifecycle.sql", "../migrations/0014_chat_passkey_hardening.sql", "../migrations/0015_chat_conversation_protocol.sql", "../migrations/0016_chat_profile_history.sql", "../migrations/0017_chat_directory_global.sql", "../migrations/0018_shared_passkeys.sql", "../migrations/0023_shared_passkey_vault_wrapping.sql"]) {
-    const sql = await readFile(new URL(file, import.meta.url), "utf8");
+  const migrationDirectory = new URL("../migrations/", import.meta.url);
+  const cleanupMigration = "0024_retired_invites_cleanup.sql";
+  for (const file of (await readdir(migrationDirectory)).filter((file) => file.endsWith(".sql") && file !== cleanupMigration).sort()) {
+    const sql = await readFile(new URL(file, migrationDirectory), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) await db.prepare(statement).run();
   }
   await db.batch([
@@ -45,7 +47,21 @@ try {
     await db.prepare("INSERT INTO chat_invites (id,creator_user_id,token_hash,expires_at,created_at) VALUES (?,?,?,?,?)")
       .bind(invite.id, userA.id, invite.tokenHash, invite.expiresAt, "2000-01-01T00:00:00.000Z").run();
   }
-  const retainedInviteRows = (await db.prepare("SELECT * FROM chat_invites ORDER BY id").all()).results;
+  const retainedTableCounts = async () => {
+    const tables = (await db.prepare("SELECT name FROM sqlite_schema WHERE type='table' AND name NOT LIKE 'sqlite_%' AND substr(name,1,4) <> '_cf_' AND name <> 'chat_invites' ORDER BY name").all()).results;
+    return Promise.all(tables.map(async ({ name }) => {
+      try {
+        return [name, (await db.prepare(`SELECT COUNT(*) AS count FROM "${name.replaceAll('"', '""')}"`).first()).count];
+      } catch (error) {
+        throw new Error(`Cannot snapshot table ${name}: ${error.message}`, { cause: error });
+      }
+    }));
+  };
+  const countsBeforeMigration = await retainedTableCounts();
+  for (const statement of unstable_splitSqlQuery(await readFile(new URL(cleanupMigration, migrationDirectory), "utf8"))) await db.prepare(statement).run();
+  assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM sqlite_schema WHERE name='chat_invites'").first()).count, 0);
+  assert.deepEqual(await retainedTableCounts(), countsBeforeMigration);
+  assert.deepEqual((await db.prepare("PRAGMA foreign_key_check").all()).results, []);
   for (const [path, method] of [
     ["/api/chat/invites", "GET"],
     ["/api/chat/invites", "POST"],
@@ -59,7 +75,7 @@ try {
     assert.equal(removed.payload.error.code, "CHAT_INVITES_REMOVED");
     assert.equal(Object.hasOwn(removed.payload, "data"), false);
   }
-  assert.deepEqual((await db.prepare("SELECT * FROM chat_invites ORDER BY id").all()).results, retainedInviteRows);
+  assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM sqlite_schema WHERE name='chat_invites'").first()).count, 0);
   assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM chat_account_write_proofs").first()).count, 0);
   assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM chat_contacts").first()).count, 0);
   assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM chat_rate_limits WHERE action='invite'").first()).count, 0);
@@ -176,9 +192,69 @@ try {
   assert.equal(repeated.response.status, 201);
   assert.equal(repeated.payload.data.idempotent, true);
   assert.equal(repeated.payload.data.device.id, restored.payload.data.device.id);
-  await cleanupChatData(envBase);
-  assert.deepEqual((await db.prepare("SELECT * FROM chat_invites ORDER BY id").all()).results, retainedInviteRows);
-  console.log("Cloudflare chat API smoke checks passed: invite routes retired, ID contacts and legacy chat preserved.");
+  // Test expiration at the exact boundary in each storage unit, as well as
+  // consumed-but-unexpired records and both supported SQL timestamp formats.
+  const cleanupNowMs = Math.floor(Date.now() / 1000) * 1000;
+  const cleanupNowSeconds = cleanupNowMs / 1000;
+  const cleanupMinute = Math.floor(cleanupNowSeconds / 60) * 60;
+  const cleanupTimestamp = new Date(cleanupNowMs).toISOString();
+  const activeTimestamp = new Date(cleanupNowMs + 60_000).toISOString();
+  const activeSqlTimestamp = activeTimestamp.replace("T", " ").replace(".000Z", "");
+  const cleanupUserId = "33333333-3333-4333-8333-333333333333";
+  await db.prepare("INSERT INTO users (id,email,display_name,role) VALUES (?, 'maintenance@example.com', 'Maintenance', 'student')").bind(cleanupUserId).run();
+  for (const [id, expiresAt, usedAt] of [
+    ["active", activeTimestamp, null],
+    ["active-sql", activeSqlTimestamp, null],
+    ["expired", cleanupTimestamp, null],
+    ["used", activeTimestamp, cleanupTimestamp],
+  ]) {
+    await db.batch([
+      db.prepare("INSERT INTO auth_passkey_challenges (id,email,user_id,challenge,rp_id,origin,expires_at,created_at,used_at,purpose) VALUES (?,?,?,?, 'expassway.test','https://expassway.test',?,?,?, 'authenticate')")
+        .bind(`cleanup-${id}`, userA.email, userA.id, `auth-cleanup-${id}`, expiresAt, cleanupTimestamp, usedAt),
+      db.prepare("INSERT INTO chat_webauthn_challenges (id,user_id,challenge,kind,expires_at,created_at,used_at) VALUES (?,?,?,'authentication',?,?,?)")
+        .bind(`cleanup-${id}`, userA.id, `chat-cleanup-${id}`, expiresAt, cleanupTimestamp, usedAt),
+    ]);
+  }
+  for (const [id, expiresAt, usesRemaining] of [
+    ["active", activeTimestamp, 5], ["expired", cleanupTimestamp, 5], ["exhausted", activeTimestamp, 0],
+  ]) await db.prepare("INSERT INTO chat_account_write_proofs (id,token_hash,user_id,uses_remaining,expires_at,created_at) VALUES (?,?,?,?,?,?)")
+    .bind(`cleanup-${id}`, `proof-cleanup-${id}`, userA.id, usesRemaining, expiresAt, cleanupTimestamp).run();
+  for (const [id, expiresAt, usedAt] of [
+    ["active", activeTimestamp, null], ["expired", cleanupTimestamp, null], ["used", activeTimestamp, cleanupTimestamp],
+  ]) await db.batch([
+    db.prepare("INSERT INTO chat_ws_tickets (id,token_hash,user_id,conversation_id,expires_at,created_at,used_at) VALUES (?,?,?,?,?,?,?)")
+      .bind(`cleanup-${id}`, `ws-cleanup-${id}`, userA.id, conversationId, expiresAt, cleanupTimestamp, usedAt),
+    db.prepare("INSERT INTO chat_device_approval_tickets (id,token_hash,user_id,issuer_device_id,expires_at,created_at,used_at) VALUES (?,?,?,?,?,?,?)")
+      .bind(`cleanup-${id}`, `approval-cleanup-${id}`, userB.id, deviceB.payload.data.device.id, expiresAt, cleanupTimestamp, usedAt),
+  ]);
+  for (const [emailHash, availableAt] of [["active", cleanupNowSeconds + 1], ["expired", cleanupNowSeconds], ["older", cleanupNowSeconds - 1]])
+    await db.prepare("INSERT INTO email_otp_cooldowns (email_hash,available_at,updated_at) VALUES (?,?,?)").bind(emailHash, availableAt, cleanupTimestamp).run();
+  for (const [action, windowStart] of [["cleanup-active", cleanupMinute], ["cleanup-old", cleanupMinute - 60], ["cleanup-future", cleanupMinute + 60], ["invite", cleanupMinute + 60]])
+    await db.prepare("INSERT INTO chat_rate_limits (user_id,action,window_start,request_count,updated_at) VALUES (?,?,?,10,?)").bind(userA.id, action, windowStart, cleanupTimestamp).run();
+  for (const [userId, calledAt] of [[userA.id, cleanupNowMs - 29_999], [userB.id, cleanupNowMs - 30_000], [cleanupUserId, cleanupNowMs - 30_001]])
+    await db.prepare("INSERT INTO ai_call_cooldowns (user_id,reservation_id,called_at) VALUES (?,?,?)").bind(userId, `cleanup-${userId}`, calledAt).run();
+  const protectedTables = ["users", "chat_messages", "chat_conversations", "chat_devices", "chat_device_prekeys", "chat_passkeys", "chat_account_keys", "chat_vaults", "chat_account_vault_versions", "chat_account_vault_wrappers", "chat_account_identity_heads", "chat_epoch_recipients", "ai_hint_generation_events", "structured_practice_attempts", "practice_sessions", "question_attempts", "saved_papers"];
+  const protectedRows = async () => Promise.all(protectedTables.map(async (table) => [table, (await db.prepare(`SELECT * FROM ${table}`).all()).results]));
+  const rowsBeforeMaintenance = await protectedRows();
+  const actualDateNow = Date.now;
+  Date.now = () => cleanupNowMs;
+  try {
+    await cleanupChatData(envBase);
+  } finally {
+    Date.now = actualDateNow;
+  }
+  assert.deepEqual(await protectedRows(), rowsBeforeMaintenance);
+  for (const table of ["auth_passkey_challenges", "chat_webauthn_challenges"])
+    assert.deepEqual((await db.prepare(`SELECT id FROM ${table} WHERE id LIKE 'cleanup-%' ORDER BY id`).all()).results.map(({ id }) => id), ["cleanup-active", "cleanup-active-sql"]);
+  assert.deepEqual((await db.prepare("SELECT id FROM chat_account_write_proofs WHERE id LIKE 'cleanup-%' ORDER BY id").all()).results.map(({ id }) => id), ["cleanup-active", "cleanup-exhausted"]);
+  for (const table of ["chat_ws_tickets", "chat_device_approval_tickets"])
+    assert.deepEqual((await db.prepare(`SELECT id FROM ${table} WHERE id LIKE 'cleanup-%' ORDER BY id`).all()).results.map(({ id }) => id), ["cleanup-active"]);
+  assert.deepEqual((await db.prepare("SELECT email_hash FROM email_otp_cooldowns ORDER BY email_hash").all()).results, [{ email_hash: "active" }]);
+  assert.deepEqual((await db.prepare("SELECT action FROM chat_rate_limits WHERE action LIKE 'cleanup-%' OR action='invite' ORDER BY action").all()).results, [{ action: "cleanup-active" }, { action: "cleanup-future" }]);
+  assert.deepEqual((await db.prepare("SELECT user_id,called_at FROM ai_call_cooldowns").all()).results, [{ user_id: userA.id, called_at: cleanupNowMs - 29_999 }]);
+  assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM sqlite_schema WHERE name='chat_invites'").first()).count, 0);
+  assert.deepEqual((await db.prepare("PRAGMA foreign_key_check").all()).results, []);
+  console.log("Cloudflare chat API smoke checks passed: retired invite migration, active cooldown boundaries, ID contacts and legacy chat history preserved.");
 } finally {
   await mf.dispose();
 }

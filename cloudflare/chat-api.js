@@ -14,6 +14,7 @@ import {
   webAuthnContext,
 } from "./webauthn.js";
 import { handleAccountV2Route, cleanupAccountV2, mapAccountConversation, isHistoricalConversation, canonicalAccountJson } from "./chat-account-v2.js";
+import { AI_CALL_COOLDOWN_MS } from "./ai-call-cooldown.js";
 
 const encoder = new TextEncoder();
 const MAX_CIPHERTEXT_LENGTH = 512 * 1024;
@@ -3342,7 +3343,12 @@ export async function handleChatWebSocketRequest(request, env) {
 
 export async function cleanupChatData(env) {
   if (!env.DB) return;
-  const timestamp = nowIso();
+  // Capture one cutoff before doing any work: a concurrent request reserving a
+  // new challenge or cooldown after this point must remain valid.
+  const nowMs = Date.now();
+  const timestamp = new Date(nowMs).toISOString();
+  const nowSeconds = Math.floor(nowMs / 1000);
+  const minuteStart = Math.floor(nowSeconds / 60) * 60;
   await cleanupAccountV2(env.DB, timestamp);
   if (env.CHAT_MEDIA_BUCKET) {
     const expired = await env.DB.prepare(
@@ -3373,16 +3379,28 @@ export async function cleanupChatData(env) {
     env.DB.prepare(
       "DELETE FROM chat_device_prekeys WHERE consumed_at IS NOT NULL AND consumed_at <= datetime(?, '-1 day')"
     ).bind(timestamp),
-    env.DB.prepare("DELETE FROM chat_ws_tickets WHERE expires_at <= ? OR used_at IS NOT NULL").bind(
+    env.DB.prepare("DELETE FROM chat_ws_tickets WHERE julianday(expires_at) <= julianday(?) OR used_at IS NOT NULL").bind(
       timestamp
     ),
     env.DB.prepare(
-      "DELETE FROM chat_device_approval_tickets WHERE expires_at <= ? OR used_at IS NOT NULL"
+      "DELETE FROM chat_device_approval_tickets WHERE julianday(expires_at) <= julianday(?) OR used_at IS NOT NULL"
     ).bind(timestamp),
     env.DB.prepare(
       "DELETE FROM chat_reports WHERE expires_at IS NOT NULL AND expires_at <= ?"
     ).bind(timestamp),
-    env.DB.prepare("DELETE FROM chat_webauthn_challenges WHERE expires_at <= ?").bind(timestamp),
-    env.DB.prepare("DELETE FROM chat_account_write_proofs WHERE expires_at <= ?").bind(timestamp),
+    env.DB.prepare(
+      "DELETE FROM chat_webauthn_challenges WHERE used_at IS NOT NULL OR julianday(expires_at) <= julianday(?)"
+    ).bind(timestamp),
+    env.DB.prepare(
+      "DELETE FROM auth_passkey_challenges WHERE used_at IS NOT NULL OR julianday(expires_at) <= julianday(?)"
+    ).bind(timestamp),
+    env.DB.prepare(
+      // The final authorized write reads proof metadata after consuming its
+      // last use. Keep exhausted proofs until expiry to preserve that request.
+      "DELETE FROM chat_account_write_proofs WHERE julianday(expires_at) <= julianday(?)"
+    ).bind(timestamp),
+    env.DB.prepare("DELETE FROM email_otp_cooldowns WHERE available_at <= ?").bind(nowSeconds),
+    env.DB.prepare("DELETE FROM chat_rate_limits WHERE action = 'invite' OR window_start < ?").bind(minuteStart),
+    env.DB.prepare("DELETE FROM ai_call_cooldowns WHERE called_at <= ?").bind(nowMs - AI_CALL_COOLDOWN_MS),
   ]);
 }

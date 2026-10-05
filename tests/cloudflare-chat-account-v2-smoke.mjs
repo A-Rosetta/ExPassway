@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { webcrypto } from "node:crypto";
 import { Miniflare } from "miniflare";
 import { unstable_splitSqlQuery } from "wrangler";
@@ -71,8 +71,9 @@ async function create(kind, recipients, contactIds) {
 
 try {
   const db = env.DB;
-  for (const file of ["0001_initial", "0002_supabase_auth", "0003_admin_platform", "0006_chat_foundation", "0007_chat_crypto_hardening", "0008_chat_account_v2", "0009_chat_webauthn_context", "0010_chat_account_write_proofs", "0011_chat_messages_account_sender", "0012_chat_message_sender_key", "0013_chat_account_lifecycle", "0014_chat_passkey_hardening", "0015_chat_conversation_protocol", "0016_chat_profile_history", "0017_chat_directory_global", "0018_shared_passkeys", "0023_shared_passkey_vault_wrapping"]) {
-    for (const statement of unstable_splitSqlQuery(await readFile(new URL(`../migrations/${file}.sql`, import.meta.url), "utf8"))) await db.prepare(statement).run();
+  const migrationDirectory = new URL("../migrations/", import.meta.url);
+  for (const file of (await readdir(migrationDirectory)).filter((file) => file.endsWith(".sql")).sort()) {
+    for (const statement of unstable_splitSqlQuery(await readFile(new URL(file, migrationDirectory), "utf8"))) await db.prepare(statement).run();
   }
   for (const user of users) {
     await db.batch([

@@ -28,10 +28,6 @@
     return notebookMapPromise;
   }
 
-  function invalidateNotebookMap() {
-    notebookMapPromise = null;
-  }
-
   async function augmentReviewCards() {
     const wrap = document.getElementById("wrongQuestions");
     if (!wrap) return;
@@ -206,18 +202,6 @@
       hintsUsed: Number(hintUsageMap?.[idx]?.used || 0),
       starred: Boolean(starredQuestions[idx]),
     }));
-  }
-
-  function buildWrongLog(details) {
-    const logs = {};
-    details.forEach((d) => {
-      if (!logs[d.topic]) {
-        logs[d.topic] = { topic: d.topic, mistake: d.mistakeType, correct: 0, wrong: 0 };
-      }
-      if (d.correct) logs[d.topic].correct += 1;
-      else logs[d.topic].wrong += 1;
-    });
-    return Object.values(logs);
   }
 
   function evaluateLocal(questions, answers, hintUsageMap, starredQuestions = []) {
@@ -605,7 +589,6 @@
             language: getLanguage(),
           });
           const result = data.result;
-          const wrongLog = data.wrongLog || buildWrongLog(result.details || []);
           result.elapsedSeconds = elapsedSeconds;
           writeJson("alevel.lastResult", result);
           persistPaperResult(result, questions, paperSlug);
@@ -618,7 +601,6 @@
 
       const result = evaluateLocal(questions, answers, hintUsageMap, starredQuestions);
       result.elapsedSeconds = elapsedSeconds;
-      const wrongLog = buildWrongLog(result.details || []);
       writeJson("alevel.lastResult", result);
       persistPaperResult(result, questions, paperSlug);
       persistWrongNotebook(questions, result.details || [], selection);
@@ -636,7 +618,6 @@
         language: getLanguage(),
       });
       const result = data.result;
-      const wrongLog = data.wrongLog || buildWrongLog(result.details || []);
       result.hintUsedQuestions = Object.values(hintUsageMap).filter((x) => x.used > 0).length;
       result.totalHintClicks = Object.values(hintUsageMap).reduce((sum, x) => sum + (x.used || 0), 0);
       result.elapsedSeconds = elapsedSeconds;
@@ -648,7 +629,6 @@
     } catch (err) {
       const result = evaluateLocal(questions, answers, hintUsageMap, starredQuestions);
       result.elapsedSeconds = elapsedSeconds;
-      const wrongLog = buildWrongLog(result.details || []);
       writeJson("alevel.lastResult", result);
       persistPaperResult(result, questions, paperSlug);
       persistWrongNotebook(questions, result.details || [], selection);

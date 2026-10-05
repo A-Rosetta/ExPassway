@@ -179,10 +179,6 @@
     runMode.className = isBad ? "tip bad" : "tip good";
   }
 
-  function shuffle(arr) {
-    return [...arr].sort(() => Math.random() - 0.5);
-  }
-
   function formatElapsed(seconds) {
     const total = Math.max(0, Number(seconds || 0));
     const mins = Math.floor(total / 60);
@@ -340,32 +336,6 @@
     }, 0);
   }
 
-  function buildSubmitPayload(answers, hintUsageMap, starredQuestions = []) {
-    return answers.map((selectedIndex, idx) => ({
-      selectedIndex: Number.isInteger(selectedIndex) ? selectedIndex : -1,
-      hintsUsed: Number(hintUsageMap?.[idx]?.used || 0),
-      starred: Boolean(starredQuestions[idx]),
-    }));
-  }
-
-  function applyFeedback(details) {
-    details.forEach((row, idx) => {
-      const feedback = byId(`feedback_${idx}`);
-      if (!feedback) return;
-
-      if (row.selectedIndex === -1) {
-        feedback.innerHTML = `<span class='bad'>${t("notAnsweredCorrectAnswer", { answer: String.fromCharCode(65 + row.answer) })}</span>`;
-        return;
-      }
-
-      if (row.correct) {
-        feedback.innerHTML = `<span class='good'>${t("answeredCorrect")}</span>`;
-      } else {
-        feedback.innerHTML = `<span class='bad'>${t("answeredWrong", { answer: String.fromCharCode(65 + row.answer) })}</span>`;
-      }
-    });
-  }
-
   function initHintState(questions) {
     const map = {};
     (questions || []).forEach((q, idx) => {
@@ -376,111 +346,6 @@
       };
     });
     return map;
-  }
-
-  function buildWrongLog(details) {
-    const logs = {};
-    details.forEach((d) => {
-      if (!logs[d.topic]) {
-        logs[d.topic] = { topic: d.topic, mistake: d.mistakeType, correct: 0, wrong: 0 };
-      }
-      if (d.correct) logs[d.topic].correct += 1;
-      else logs[d.topic].wrong += 1;
-    });
-    return Object.values(logs);
-  }
-
-  function evaluateLocal(questions, answers, hintUsageMap, starredQuestions = []) {
-    let correct = 0;
-    const details = [];
-
-    for (let idx = 0; idx < questions.length; idx += 1) {
-      const q = questions[idx];
-      const selectedIndex = answers[idx] ?? -1;
-      const ok = selectedIndex === q.answer;
-      if (ok) correct += 1;
-
-      details.push({
-        id: q.id,
-        topic: q.topic,
-        skills: Array.isArray(q.skills) ? q.skills : [],
-        mistakeType: q.mistakeType || "concept",
-        correct: ok,
-        starred: Boolean(starredQuestions[idx]),
-        selectedIndex,
-        answer: q.answer,
-        hintsUsed: Number(hintUsageMap?.[idx]?.used || 0),
-        hintTotal: Array.isArray(q.hints) ? q.hints.length : 0,
-      });
-    }
-
-    const hintRows = Object.values(hintUsageMap || {});
-    const hintUsedQuestions = hintRows.filter((x) => x.used > 0).length;
-    const totalHintClicks = hintRows.reduce((sum, x) => sum + (x.used || 0), 0);
-
-    return {
-      total: questions.length,
-      correct,
-      wrong: questions.length - correct,
-      accuracy: questions.length ? (correct / questions.length) * 100 : 0,
-      hintUsedQuestions,
-      totalHintClicks,
-      details,
-      submittedAt: new Date().toISOString(),
-      elapsedSeconds: 0,
-    };
-  }
-
-  function persistResult(result, wrongLog) {
-    writeScopedJson("alevel.lastResult", result);
-  }
-
-  function persistWrongNotebook(questions, details, selection) {
-    const key = scopedKey("alevel.wrongNotebook");
-    let rows = [];
-    try {
-      rows = JSON.parse(localStorage.getItem(key) || "[]");
-      if (!Array.isArray(rows)) rows = [];
-    } catch (_e) {
-      rows = [];
-    }
-
-    const now = new Date().toISOString();
-    const byIdMap = new Map(rows.map((r) => [r.id, r]));
-
-    (details || []).forEach((d, idx) => {
-      if (d.correct) return;
-      const q = questions[idx] || {};
-      const optionText = (optIdx) =>
-        Number.isInteger(optIdx) && optIdx >= 0
-          ? `${String.fromCharCode(65 + optIdx)}. ${q.options?.[optIdx] || ""}`
-          : t("unanswered");
-
-      const id = q.id || `tmp-${selection?.subject || "unknown"}-${idx + 1}`;
-      const prev = byIdMap.get(id);
-      const next = {
-        id,
-        board: q.board || selection?.board || "",
-        subject: q.subject || selection?.subject || "",
-        paper: q.paper || selection?.paper || "",
-        topic: q.topic || "",
-        year: q.year || "",
-        stem: q.stem || "",
-        answer: d.answer,
-        answerText: optionText(d.answer),
-        lastSelected: d.selectedIndex,
-        lastSelectedText: optionText(d.selectedIndex),
-        wrongCount: (prev?.wrongCount || 0) + 1,
-        firstWrongAt: prev?.firstWrongAt || now,
-        lastWrongAt: now,
-      };
-      byIdMap.set(id, next);
-    });
-
-    const merged = Array.from(byIdMap.values()).sort(
-      (a, b) => new Date(b.lastWrongAt || 0) - new Date(a.lastWrongAt || 0)
-    );
-    localStorage.setItem(key, JSON.stringify(merged));
   }
 
   function goReviewPage() {
@@ -646,18 +511,6 @@
           normalizedImages: normalizeQuestionImages(question, index),
         };
       });
-  }
-
-  function renderScore(result) {
-    const box = byId("scoreBox");
-    const level = result.accuracy >= 80 ? "good" : "bad";
-    box.innerHTML = `
-      <h3>${t("currentScore")}</h3>
-      <p>${t("scoreText", { correct: result.correct, total: result.total })}</p>
-      <p>${t("accuracyLabel")}：<strong class='${level}'>${result.accuracy.toFixed(1)}%</strong></p>
-      <p>${t("hintUsageText", { questions: result.hintUsedQuestions || 0, clicks: result.totalHintClicks || 0 })}</p>
-      <p class='tip'>${t("submittedAt", { time: new Date(result.submittedAt).toLocaleString() })}</p>
-    `;
   }
 
   function renderPaper(picked, state) {
