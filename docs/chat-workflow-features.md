@@ -1,0 +1,26 @@
+# Chat workflow features
+
+Apply `0026_chat_read_state.sql` and `0027_chat_contact_safety.sql` before deploying the updated Worker and static assets. Both migrations extend existing data; no chat history is reset. Rebuild assets with `npm run cloudflare:build` so the new local-state, media-queue and message tools scripts and crypto Worker are included.
+
+Conversation lists show unread counts and locally decrypted latest-message previews. Opening a visible conversation advances its own read cursor; the Mark read control does the same. Read cursors advance monotonically even when requests arrive out of order. Notification settings and muted conversations are saved per account on this device. Muting suppresses alerts but keeps unread badges. Desktop alerts require browser permission; background notifications need an open page and are polling based when no active chat socket is available.
+
+Text and images are encrypted before being placed in the persistent send queue. Images retain ciphertext bytes in IndexedDB and seal their filename, content key and reply details separately. Sending, sent, failed and waiting-for-network states are shown in the conversation. Transient failures retry with bounded backoff; permanent failures expose Retry. Reloads restore queued messages and encrypted captions. Distinct per-message storage records preserve simultaneous offline sends from multiple tabs; Web Locks serialize dispatch on browsers that support them. Transport ciphertext and message IDs remain unchanged after ambiguous network errors. Only a definite epoch or attachment rejection permits an explicit retry to prepare a new payload. Storage failures preserve text input rather than reporting a durable queue.
+
+Replies and selected group-member mentions are authenticated inside the encrypted message content. Reply previews link to the source message when it remains in history. Mention recipients are stable account IDs, separate from the display text, and the selected recipient sees a mention marker.
+
+Message search indexes only history already decrypted on this device. It supports text, image filenames and local-calendar date ranges, plus navigation to a result. Search records and drafts are sealed with a Worker-derived key scoped to account, conversation, purpose and record ID. Browser storage contains ciphertext, not drafts or search text. Drafts include reply and mention selections, survive reload and are removed after a durable enqueue. Pins are local per-account conversation metadata. These device-local settings do not sync to other devices.
+
+Group announcements use existing encrypted group metadata and signed versioned controls. Owners and administrators can edit ordinary group announcements; website administrators can edit the global discussion announcement. Membership-key rotations preserve the current announcement. Announcement plaintext is never stored by the server.
+
+Deleting a friend removes the accepted relationship in both directions and prevents further direct sends while keeping encrypted conversation history. Blocking is reversible, cancels pending friend requests and prevents direct messages, uploads and new requests in both directions. Shared group participation remains available. Reports include the reporter's chosen reason and optional written description; chat plaintext is not automatically attached. Reports are stored for moderation in `chat_contact_reports`; a moderation inbox is outside this change. Reporting requires a contact, request, block or shared conversation relationship, and a referenced message must belong to the reported user.
+
+New friend requests are limited to ten per sender per hour and one request to the same recipient per 24 hours. Repeating an existing pending request is idempotent. D1 triggers enforce the same guards during concurrent writes; responses include a retry duration. The UI displays that duration.
+
+Validation commands:
+
+- `npm run check`: lint, Worker type checks, API/crypto/migration regressions and static build.
+- `npm run test:chat-browser`: real browser regressions for account setup, sessions, quotes, mentions, search, encrypted local persistence, contact safety, delivery and offline media. The full account and membership suites use isolated Miniflare data and the real crypto Worker; only the operating-system Passkey ceremony is replaced.
+
+For isolated account-v2 browser checks, run `tests/chat-account-v2-browser-smoke.cjs` with `CHAT_QA_FEATURES_ONLY=1` for quotes, mentions, search, drafts, pins, announcements and mobile layout, or `CHAT_QA_RECOVERY_ONLY=1` for identity reset, direct-conversation replacement and group member recovery. The default mode continues to run the complete account workflow. Run the Miniflare browser suites sequentially so unrelated test servers do not contend for their API timeouts.
+
+The tests leave production users and production databases untouched. Browser queues and drafts depend on the device's available storage and retained account keys. Clearing browser storage removes that device's unsent queue, drafts, pins and local search index.

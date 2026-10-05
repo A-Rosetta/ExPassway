@@ -56,7 +56,7 @@ async function message(user, conversationId, epoch) {
 
 try {
   const db = env.DB;
-  for (const file of ["0001_initial", "0002_supabase_auth", "0003_admin_platform", "0006_chat_foundation", "0007_chat_crypto_hardening", "0008_chat_account_v2", "0009_chat_webauthn_context", "0010_chat_account_write_proofs", "0011_chat_messages_account_sender", "0012_chat_message_sender_key", "0013_chat_account_lifecycle", "0014_chat_passkey_hardening", "0015_chat_conversation_protocol", "0016_chat_profile_history", "0017_chat_directory_global", "0018_shared_passkeys", "0025_chat_friend_requests"]) {
+  for (const file of ["0001_initial", "0002_supabase_auth", "0003_admin_platform", "0006_chat_foundation", "0007_chat_crypto_hardening", "0008_chat_account_v2", "0009_chat_webauthn_context", "0010_chat_account_write_proofs", "0011_chat_messages_account_sender", "0012_chat_message_sender_key", "0013_chat_account_lifecycle", "0014_chat_passkey_hardening", "0015_chat_conversation_protocol", "0016_chat_profile_history", "0017_chat_directory_global", "0018_shared_passkeys", "0025_chat_friend_requests", "0027_chat_contact_safety"]) {
     for (const statement of unstable_splitSqlQuery(await readFile(new URL(`../migrations/${file}.sql`, import.meta.url), "utf8"))) await db.prepare(statement).run();
   }
   for (const user of [admin, student, late]) {
@@ -137,9 +137,14 @@ try {
   assert.equal((await call(student, "/api/chat/contacts")).payload.data.length, 0);
   assert.equal((await call(student, `/api/chat/contact-requests/${requestId}/reject`, "POST")).payload.data.request.status, "rejected");
   assert.equal((await call(student, `/api/chat/contact-requests/${requestId}/accept`, "POST")).status, 409);
+  const cooldown = await call(admin, "/api/chat/contacts/by-user-id", "POST", { chatUserId: targetId });
+  assert.equal(cooldown.status, 429);
+  assert.equal(cooldown.payload.error.code, "FRIEND_REQUEST_COOLDOWN");
+  await db.prepare("UPDATE chat_friend_requests SET created_at='2000-01-01T00:00:00.000Z' WHERE id=?").bind(requestId).run();
   const retry = await call(admin, "/api/chat/contacts/by-user-id", "POST", { chatUserId: targetId });
   assert.equal(retry.payload.data.request.introduction, "");
   assert.equal((await call(admin, `/api/chat/contact-requests/${retry.payload.data.request.id}/cancel`, "POST")).payload.data.request.status, "cancelled");
+  await db.prepare("UPDATE chat_friend_requests SET created_at='2000-01-01T00:00:00.000Z' WHERE id=?").bind(retry.payload.data.request.id).run();
   const finalRequest = await call(admin, "/api/chat/contacts/by-user-id", "POST", { chatUserId: targetId, introduction: "Let's chat." });
   const accepted = await call(student, `/api/chat/contact-requests/${finalRequest.payload.data.request.id}/accept`, "POST");
   assert.equal(accepted.status, 200, JSON.stringify(accepted.payload));
@@ -259,6 +264,16 @@ try {
   assert.equal((await call(late, `/api/chat/sync?conversationId=${conversationId}`)).payload.data.events.filter((event) => event.type === "message").length, 0);
   assert.equal((await call(student, `/api/chat/sync?conversationId=${conversationId}`)).payload.data.events.filter((event) => event.type === "message").length, 1);
   assert.equal((await call(admin, "/api/chat/global-discussion")).payload.data.pendingCount, 0);
+  const blockedAnnouncement = await call(student, `/api/chat/conversations/${conversationId}/metadata`, "PUT",
+    await control(student, conversationId, 4, "metadata", { metadata: { ...metadata(4), version: 5 } }));
+  assert.equal(blockedAnnouncement.status, 403, "a member cannot overwrite the encrypted global announcement");
+  const announcement = await call(admin, `/api/chat/conversations/${conversationId}/metadata`, "PUT",
+    await control(admin, conversationId, 4, "metadata", { metadata: { ...metadata(4), version: 5 } }));
+  assert.equal(announcement.status, 200, JSON.stringify(announcement.payload));
+  assert.equal(announcement.payload.data.conversation.metadata.version, 5);
+  const staleAnnouncement = await call(admin, `/api/chat/conversations/${conversationId}/metadata`, "PUT",
+    await control(admin, conversationId, 4, "metadata", { metadata: { ...metadata(4), version: 5 } }));
+  assert.equal(staleAnnouncement.status, 409, "announcement edits use the existing metadata version guard");
   console.log("Chat directory and global discussion smoke checks passed.");
 } finally {
   await mf.dispose();

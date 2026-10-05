@@ -209,17 +209,28 @@ export async function mapAccountConversation(db, row, userId) {
   const mapped = [];
   for (const m of active) {
     const contact = m.user_id === userId ? null : await db.prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ? AND accepted_at IS NOT NULL").bind(userId, m.user_id).first();
-    mapped.push({ userId: m.user_id, alias: m.chat_alias || "Paired contact", avatarDataUrl: m.avatar_data_url || "", role: m.role, joinedAt: m.joined_at, isSelf: m.user_id === userId, contactId: contact?.id || null, accountKey: bundle(await activeKey(db, m.user_id)) });
+    const profile = await db.prepare("SELECT chat_user_id FROM chat_profiles WHERE user_id=?").bind(m.user_id).first();
+    mapped.push({ userId: m.user_id, chatUserId: profile?.chat_user_id || null, alias: m.chat_alias || "Paired contact", avatarDataUrl: m.avatar_data_url || "", role: m.role, joinedAt: m.joined_at, isSelf: m.user_id === userId, contactId: contact?.id || null, accountKey: bundle(await activeKey(db, m.user_id)) });
   }
   const data = await db.prepare("SELECT * FROM chat_group_metadata WHERE conversation_id = ?").bind(row.id).first();
   const summary = await conversationSummary(db, row.id, userId);
   const isGlobalDiscussion = row.global_slug === "site-wide-discussion";
   const siteRole = (await db.prepare("SELECT role FROM users WHERE id = ?").bind(userId).first())?.role || null;
+  const peer = row.kind === "direct" ? mapped.find((m) => !m.isSelf) || null : null;
+  if (peer) {
+    const blocks = await db.prepare(`SELECT
+      EXISTS(SELECT 1 FROM chat_user_blocks WHERE user_id=? AND blocked_user_id=?) AS own_block,
+      EXISTS(SELECT 1 FROM chat_user_blocks WHERE (user_id=? AND blocked_user_id=?) OR (user_id=? AND blocked_user_id=?)) AS blocked`)
+      .bind(userId, peer.userId, userId, peer.userId, peer.userId, userId).first();
+    peer.blockedBySelf = Boolean(blocks.own_block);
+    peer.contactAccepted = Boolean(peer.contactId);
+    peer.canSend = peer.contactAccepted && !blocks.blocked;
+  }
   return { id: row.id, kind: row.kind, protocolVersion: VERSION, historical: await isHistoricalConversation(db, row), epoch: Number(row.current_epoch), currentEpoch: Number(row.current_epoch),
     rotationRequired: Boolean(row.rotation_required), role: mapped.find((m) => m.isSelf)?.role || null, retentionSeconds: row.retention_seconds,
     createdAt: row.created_at, updatedAt: row.updated_at, ...summary, legacySourceId: row.legacy_source_id || null,
     members: mapped, group: row.kind === "group" ? { members: mapped, memberCount: mapped.length } : null,
-    peer: row.kind === "direct" ? mapped.find((m) => !m.isSelf) || null : null,
+    peer, canSend: row.kind === "direct" ? Boolean(peer?.canSend) : true,
     metadata: data ? { epoch: data.epoch, version: data.version, nonce: data.nonce, ciphertext: data.ciphertext } : null,
     isGlobalDiscussion,
     globalDiscussion: isGlobalDiscussion,
@@ -257,7 +268,11 @@ async function createConversation(db, env, userId, body) {
 }
 async function changeConversation(db, env, userId, conversationId, body) {
   const c = await member(db, conversationId, userId);
-  if (c.global_slug === "site-wide-discussion" && body?.action !== "leave") fail(403, "GLOBAL_MEMBERSHIP_MANAGED", "Website administrators manage membership and roles for the global discussion.");
+  if (c.global_slug === "site-wide-discussion" && body?.action !== "leave") {
+    if (body?.action !== "metadata") fail(403, "GLOBAL_MEMBERSHIP_MANAGED", "Website administrators manage membership and roles for the global discussion.");
+    const siteRole = (await db.prepare("SELECT role FROM users WHERE id = ?").bind(userId).first())?.role;
+    if (siteRole !== "admin") fail(403, "FORBIDDEN", "Only website administrators can publish a global discussion announcement.");
+  }
   const signed = await control(db, userId, body, conversationId, str(body.action, "action", 40));
   const p = signed.payload;
   const active = await members(db, conversationId);
@@ -355,6 +370,15 @@ async function changeConversation(db, env, userId, conversationId, body) {
 }
 
 async function sendable(db, conversation, userId, senderKeyId, epoch) {
+  if (conversation.kind === "direct") {
+    const peer = await db.prepare("SELECT user_id FROM chat_conversation_members WHERE conversation_id=? AND user_id<>? AND left_at IS NULL LIMIT 1")
+      .bind(conversation.id, userId).first();
+    const blocked = peer && await db.prepare("SELECT 1 FROM chat_user_blocks WHERE (user_id=? AND blocked_user_id=?) OR (user_id=? AND blocked_user_id=?)")
+      .bind(userId, peer.user_id, peer.user_id, userId).first();
+    if (blocked) fail(403, "CHAT_CONTACT_BLOCKED", "This contact cannot receive your message.");
+    if (!peer || !await db.prepare("SELECT 1 FROM chat_contacts WHERE user_id=? AND peer_user_id=? AND accepted_at IS NOT NULL").bind(userId, peer.user_id).first())
+      fail(403, "CHAT_FRIENDSHIP_REQUIRED", "An accepted friendship is required to send messages.");
+  }
   if (conversation.rotation_required) fail(409, "ROTATION_REQUIRED", "A member left. Rotate the group key before sending.");
   if (Number(conversation.current_epoch) !== epoch) fail(409, "EPOCH_CONFLICT", "Refresh the conversation epoch before sending.");
   const active = await members(db, conversation.id);

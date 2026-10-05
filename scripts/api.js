@@ -807,6 +807,22 @@
     async listChatContacts() {
       return request("/api/chat/contacts", { token: currentToken() });
     },
+    async deleteChatContact(contactId) {
+      return request(`/api/chat/contacts/${encodeURIComponent(contactId)}`, { method: "DELETE", token: currentToken() });
+    },
+    async getChatBlocks() {
+      return request("/api/chat/blocks", { token: currentToken() });
+    },
+    async blockChatUser(chatUserId) {
+      return request("/api/chat/blocks", { method: "POST", token: currentToken(),
+        body: JSON.stringify({ chatUserId: String(chatUserId || "").trim() }) });
+    },
+    async unblockChatUser(chatUserId) {
+      return request(`/api/chat/blocks/${encodeURIComponent(chatUserId)}`, { method: "DELETE", token: currentToken() });
+    },
+    async reportChatContact(input) {
+      return request("/api/chat/contact-reports", { method: "POST", token: currentToken(), body: JSON.stringify(input || {}) });
+    },
     async getChatContactBundle(contactId) {
       return request(`/api/chat/contacts/${encodeURIComponent(contactId)}/bundle`, { token: currentToken() });
     },

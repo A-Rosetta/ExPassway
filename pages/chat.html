@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="../assets/chat-mark.svg?v=20261005-5" />
+  <link rel="icon" type="image/svg+xml" href="../assets/chat-mark.svg?v=20261005-6" />
   <title data-i18n="chatPageTitle">ExPassway Chat</title>
   <script src="../scripts/theme-init.js?v=20260730-1"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" />
   <link rel="stylesheet" href="../assets/styles.css?v=20261005-2" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20261005-4" />
-  <link rel="stylesheet" href="../assets/chat.css?v=20261005-5" />
+  <link rel="stylesheet" href="../assets/chat.css?v=20261005-6" />
 </head>
 <body class="student-ui site-ui chat-page">
   <header class="site-topbar chat-topbar">
@@ -60,6 +60,13 @@
       <p id="chatPasskeySyncStatus" class="chat-muted" role="status" aria-live="polite"></p>
       <button id="continuePasskeyEnrollment" class="btn-primary" type="button" data-i18n="chatPasskeySyncContinue" disabled>Continue with Passkey</button>
     </section>
+
+          <form id="chatReportForm" class="chat-tools-panel" hidden>
+            <label><span data-i18n="chatReportReason">Reason</span><select id="chatReportReason"><option value="spam" data-i18n="chatReportSpam">Spam</option><option value="harassment" data-i18n="chatReportHarassment">Harassment</option><option value="unsafe" data-i18n="chatReportUnsafe">Unsafe content</option><option value="other" data-i18n="chatReportOther">Other</option></select></label>
+            <label><span data-i18n="chatReportDetails">Describe the issue (optional)</span><textarea id="chatReportDetails" rows="3" maxlength="2000"></textarea></label>
+            <p class="chat-muted" data-i18n="chatReportPrivacy">Your description is sent to moderators. Chat messages are not automatically included.</p>
+            <div class="chat-compose__actions"><button class="btn-primary chat-small-action" type="submit" data-i18n="chatReportSubmit">Submit report</button><button id="cancelChatReport" class="btn-secondary chat-small-action" type="button" data-i18n="chatProfileCancel">Cancel</button></div>
+          </form>
 
     <section id="chatApp" class="chat-layout" hidden>
       <aside class="chat-sidebar">
@@ -120,6 +127,9 @@
             <button id="refreshChat" class="btn-secondary chat-icon-action" type="button" aria-label="Refresh" title="Refresh">↻</button>
           </div>
           <button id="createGroup" class="btn-secondary chat-small-action" type="button" data-i18n="chatCreateGroup">Create group</button>
+          <button id="notificationToggle" class="btn-secondary chat-small-action" type="button" aria-pressed="false">Notifications</button>
+          <button id="manageBlocks" class="btn-secondary chat-small-action" type="button" data-i18n="chatManageBlocks">Blocked users</button>
+          <div id="blockedUsers" class="chat-device-list" hidden></div>
           <section id="groupCreatePanel" class="chat-group-create" hidden>
             <p class="chat-muted" data-i18n="chatGroupCreateDescription">Choose paired friends who have enabled secure chat. Each member receives only the group epochs they are entitled to read.</p>
             <div id="groupContactList" class="chat-group-contact-list"></div>
@@ -153,6 +163,13 @@
             </div>
             <button id="deleteHistoricalChat" class="btn-secondary chat-small-action" type="button" data-i18n="chatDeleteHistory" hidden>Delete historical chat</button>
             <button id="groupManageButton" class="btn-secondary chat-small-action" type="button" hidden>Members</button>
+            <div class="chat-conversation-tools">
+              <button id="markChatRead" class="btn-secondary chat-small-action" type="button" data-i18n="chatMarkRead">Mark read</button>
+              <button id="muteChat" class="btn-secondary chat-small-action" type="button" aria-pressed="false">Mute</button>
+              <button id="pinChat" class="btn-secondary chat-small-action" type="button" aria-pressed="false">Pin</button>
+              <button id="searchMessages" class="btn-secondary chat-small-action" type="button" data-i18n="chatSearchMessages" aria-expanded="false">Search messages</button>
+              <button id="contactManageButton" class="btn-secondary chat-small-action" type="button" data-i18n="chatManageContact" hidden>Contact</button>
+            </div>
             <label class="chat-retention-control">
               <span data-i18n="chatRetention">Retention</span>
               <select id="retentionSelect">
@@ -163,6 +180,16 @@
               </select>
             </label>
           </header>
+          <section id="contactManagePanel" class="chat-tools-panel" hidden>
+            <div class="chat-compose__actions"><button id="deleteFriend" class="btn-secondary chat-small-action" type="button" data-i18n="chatDeleteFriend">Delete friend</button><button id="blockFriend" class="btn-secondary chat-small-action" type="button">Block</button><button id="reportFriend" class="btn-secondary chat-small-action" type="button" data-i18n="chatReport">Report</button></div>
+          </section>
+
+          <section id="messageSearchPanel" class="chat-tools-panel" hidden>
+            <p class="chat-muted" data-i18n="chatSearchLocalHint">Search history decrypted on this device. Open a conversation to include its history.</p>
+            <div class="chat-search-controls"><input id="messageSearchQuery" type="search" placeholder="Search text or image filename" data-i18n-placeholder="chatSearchMessagePlaceholder" aria-label="Search text or image filename" /><select id="messageSearchType" aria-label="Message type"><option value="all" data-i18n="chatSearchAll">All messages</option><option value="text" data-i18n="chatSearchText">Text</option><option value="image" data-i18n="chatSearchImages">Images</option></select><label><span data-i18n="chatSearchFrom">From</span><input id="messageSearchFrom" type="date" /></label><label><span data-i18n="chatSearchTo">To</span><input id="messageSearchTo" type="date" /></label></div>
+            <div id="messageSearchResults" class="chat-search-results" aria-live="polite"></div>
+          </section>
+          <section id="groupAnnouncement" class="chat-tools-panel chat-announcement" hidden><strong data-i18n="chatAnnouncement">Group announcement</strong><p id="groupAnnouncementText"></p><button id="editGroupAnnouncement" class="btn-secondary chat-small-action" type="button" data-i18n="chatEditAnnouncement" hidden>Edit announcement</button><form id="groupAnnouncementForm" hidden><textarea id="groupAnnouncementInput" rows="3" maxlength="4000" aria-label="Group announcement"></textarea><div class="chat-compose__actions"><button class="btn-primary chat-small-action" type="submit" data-i18n="chatProfileSave">Save</button><button id="cancelGroupAnnouncement" class="btn-secondary chat-small-action" type="button" data-i18n="chatProfileCancel">Cancel</button></div></form></section>
           <section id="groupManagePanel" class="chat-group-manage" hidden aria-label="Group members">
             <div class="chat-panel__heading"><h3>Members</h3><button id="closeGroupManage" class="btn-secondary chat-icon-action" type="button" aria-label="Close" title="Close">×</button></div>
             <div id="groupMemberList" class="chat-device-list"></div>
@@ -176,13 +203,17 @@
           </section>
           <div id="messageList" class="chat-message-list" aria-live="polite"></div>
           <form id="messageForm" class="chat-compose">
+            <div id="replyPreview" class="chat-reply-preview" hidden><span id="replyPreviewText"></span><button id="cancelReply" class="btn-secondary chat-icon-action" type="button" aria-label="Cancel reply">×</button></div>
             <textarea id="messageInput" rows="2" data-i18n-placeholder="chatInputPlaceholder" placeholder="Write an encrypted message..." required></textarea>
+            <div id="mentionSuggestions" class="chat-mention-list" hidden role="group" aria-label="Mention group member"></div>
+            <p id="draftStatus" class="chat-muted" role="status" aria-live="polite"></p>
             <div class="chat-compose__actions">
               <label class="chat-file-button" title="Encrypt image" data-i18n-title="chatAttachImage" aria-label="Encrypt image" data-i18n-aria-label="chatAttachImage">
                 <span aria-hidden="true">+</span>
                 <input id="imageInput" type="file" accept="image/*" hidden />
               </label>
               <button id="emojiButton" class="btn-secondary" type="button" data-i18n="chatEmoji" aria-expanded="false" aria-controls="emojiTray">Emoji</button>
+              <button id="mentionButton" class="btn-secondary" type="button" data-i18n="chatMention" hidden>@ Mention</button>
               <button id="sendMessage" class="btn-primary" type="submit" data-i18n="chatSend">Send</button>
             </div>
             <div id="emojiTray" class="chat-emoji-tray" hidden role="region" aria-label="Emoji" data-i18n-aria-label="chatEmoji">
@@ -196,11 +227,14 @@
     </section>
   </main>
 
-  <script src="../scripts/i18n.js?v=20261005-5"></script>
-  <script src="../scripts/site-ui.js?v=20261005-5"></script>
+  <script src="../scripts/i18n.js?v=20261005-6"></script>
+  <script src="../scripts/site-ui.js?v=20261005-6"></script>
   <script src="../scripts/chat-session.js?v=20261005-3"></script>
-  <script src="../scripts/api.js?v=20261005-5"></script>
-  <script data-chat-notifications-loader="true" src="../scripts/chat-notifications.js?v=20261005-5"></script>
-  <script src="../scripts/chat.js?v=20261005-5"></script>
+  <script src="../scripts/api.js?v=20261005-6"></script>
+  <script data-chat-notifications-loader="true" src="../scripts/chat-notifications.js?v=20261005-6"></script>
+  <script src="../scripts/chat-message-tools.js?v=20261005-6"></script>
+  <script src="../scripts/chat-local-state.js?v=20261005-6"></script>
+  <script src="../scripts/chat-media-queue.js?v=20261005-6"></script>
+  <script src="../scripts/chat.js?v=20261005-6"></script>
 </body>
 </html>

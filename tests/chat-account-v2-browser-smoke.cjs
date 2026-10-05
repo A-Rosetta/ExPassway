@@ -14,6 +14,8 @@ async function main() {
   const { unstable_splitSqlQuery } = await import("wrangler");
   const { handleChatApiRequest } = await import("../cloudflare/chat-api.js");
   const root = path.resolve(__dirname, "..");
+  const featuresOnly = process.env.CHAT_QA_FEATURES_ONLY === "1";
+  const recoveryOnly = process.env.CHAT_QA_RECOVERY_ONLY === "1";
   const authSecret = "browser-chat-test-secret-with-at-least-32-bytes";
   const users = ["Alice", "Bob", "Carol", "Unconfigured"].map((name, index) => ({
     id: `${index + 1}1111111-1111-4111-8111-111111111111`,
@@ -38,6 +40,13 @@ async function main() {
     tokens.set(user.token, user);
   }
   const calls = [];
+  const pendingApi = new Set();
+  async function requestChatApi(request) {
+    const pending = handleChatApiRequest(request, env);
+    pendingApi.add(pending);
+    try { return await pending; }
+    finally { pendingApi.delete(pending); }
+  }
   let uploadGate;
   let uploadStarted;
   let releaseUpload;
@@ -76,8 +85,8 @@ async function main() {
             const credentialId = json.credential?.id || Buffer.from(user.id).toString("base64url");
             if (url.pathname.endsWith("/options") || registrationOptions) {
               const optionsUrl = registrationOptions ? new URL("/api/chat/account/passkeys/register/options", url) : url;
-              const response = await handleChatApiRequest(new Request(optionsUrl, { method: req.method, headers: req.headers,
-                ...(body.length ? { body } : {}) }), env);
+              const response = await requestChatApi(new Request(optionsUrl, { method: req.method, headers: req.headers,
+                ...(body.length ? { body } : {}) }));
               const payload = await response.json();
               if (!response.ok) throw new Error(`Passkey options fixture: ${JSON.stringify(payload)}`);
               data = payload.data;
@@ -108,7 +117,7 @@ async function main() {
             uploadStarted?.();
             await uploadGate;
           }
-          const response = await handleChatApiRequest(new Request(url, { method: req.method, headers: req.headers, ...(body.length ? { body } : {}) }), env);
+          const response = await requestChatApi(new Request(url, { method: req.method, headers: req.headers, ...(body.length ? { body } : {}) }));
           const responseBody = Buffer.from(await response.arrayBuffer());
           call.status = response.status;
           if (response.status >= 400) console.error(`${req.method} ${url.pathname}: ${response.status} ${responseBody}`);
@@ -132,6 +141,13 @@ async function main() {
     server.on("upgrade", (_req, socket) => socket.destroy());
     await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
     const baseUrl = `http://127.0.0.1:${server.address().port}`;
+    async function captureFeature(page, filename) {
+      if (!process.env.CHAT_QA_SCREENSHOT) return;
+      const directory = path.dirname(path.resolve(process.env.CHAT_QA_SCREENSHOT));
+      await fs.mkdir(directory, { recursive: true });
+      await page.locator("#conversationTitle").scrollIntoViewIfNeeded();
+      await page.locator(".chat-conversation-panel").screenshot({ path: path.join(directory, filename) });
+    }
     try { browser = await chromium.launch({ headless: true }); }
     catch (error) {
       const edge = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe";
@@ -189,6 +205,7 @@ async function main() {
       }, { token: user.token, userId: user.id, cancel: cancelUnlock, preferred: credentialId });
       await page.goto(`${baseUrl}/pages/chat.html${query}`);
       assert.match(await page.title(), /ExPassway/);
+      assert.equal(new URL(page.url()).pathname, "/pages/chat.html");
       const button = page.locator(existing ? "#unlockAccountSync" : "#enableAccountSync");
       await button.click();
       if (cancelUnlock) {
@@ -220,7 +237,7 @@ async function main() {
     assert.equal(await foundUser.getByRole("button").isDisabled(), true);
     console.log("Browser: custom chat ID save and secure user search passed");
     await alice.click("#refreshChat");
-    await alice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
+    await alice.locator("#conversationList button").filter({ has: alice.locator("strong", { hasText: "Bob" }) }).click();
     await alice.fill("#messageInput", "Alice's encrypted hello");
     await alice.click("#sendMessage");
     await alice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
@@ -232,48 +249,51 @@ async function main() {
     await bob.click("#sendMessage");
     await alice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
     // A fresh browser unlocks the same opaque vault and reads both authors.
-    const secondAlice = await openUser(users[0], { existing: true, cancelUnlock: true });
-    await secondAlice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
-    await secondAlice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
-    await secondAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
-    assert.ok(await alice.evaluate(() => window.__chatPollIntervals.includes(3000)), "chat polling must run every three seconds");
-    console.log("Browser: direct messages and second-browser vault unlock passed");
+    let secondAlice;
+    if (!featuresOnly && !recoveryOnly) {
+      secondAlice = await openUser(users[0], { existing: true, cancelUnlock: true });
+      await secondAlice.locator("#conversationList button").filter({ has: secondAlice.locator("strong", { hasText: "Bob" }) }).click();
+      await secondAlice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
+      await secondAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
+      assert.ok(await alice.evaluate(() => window.__chatPollIntervals.includes(3000)), "chat polling must run every three seconds");
+      console.log("Browser: direct messages and second-browser vault unlock passed");
 
-    // Enroll another account Passkey through the rendered UI. Cancelling its
-    // first assertion keeps the created credential and the original history;
-    // retry must add only a wrapper, never reinitialize the chat identity.
-    const secondAliceCredential = Buffer.from(`${users[0].id}:second`).toString("base64url");
-    const aliceIdentityBeforeWrap = await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first();
-    const aliceVaultBeforeWrap = (await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[0].id).all()).results;
-    await alice.goto(`${baseUrl}/pages/chat.html?passkeys=add`);
-    await alice.locator("#chatApp").waitFor({ state: "visible" });
-    await alice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
-    await alice.evaluate((id) => { window.__nextCreatedCredential = id; window.__cancelUnlock = true; }, secondAliceCredential);
-    await alice.click("#continuePasskeyEnrollment");
-    await alice.waitForFunction(() => document.querySelector("#chatStatus").textContent.includes("synchronization is incomplete"));
-    assert.equal(await alice.locator("#chatApp").isVisible(), true);
-    await alice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
-    assert.equal(new URL(alice.url()).searchParams.get("passkey"), secondAliceCredential, "a cancelled new Passkey assertion must keep a retryable credential");
-    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 1);
-    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_account_vault_wrappers WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 0);
-    await alice.click("#continuePasskeyEnrollment");
-    await alice.locator("#chatPasskeySyncPanel").waitFor({ state: "hidden" });
-    assert.deepEqual(await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first(), aliceIdentityBeforeWrap);
-    assert.deepEqual((await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[0].id).all()).results, aliceVaultBeforeWrap);
-    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 1,
-      "retry must reuse the already-created account Passkey");
-    const thirdAlice = await openUser(users[0], { existing: true, credentialId: secondAliceCredential });
-    await thirdAlice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
-    await thirdAlice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
-    await thirdAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
-    assert.ok(calls.some((call) => call.user === "Alice" && call.path === "/api/chat/account/vault/wrappers" && call.status === 200),
-      "the original identity must authorize the added wrapper's signature");
-    await thirdAlice.close();
-    console.log("Browser: shared Passkey enrollment, cancelled assertion retry and fresh-device history restore passed");
-    // Retention must submit a signed control, and the peer applies its event.
-    await alice.selectOption("#retentionSelect", "604800");
-    await bob.waitForFunction(() => document.querySelector("#retentionSelect").value === "604800");
-    assert.ok(calls.some((call) => call.user === "Alice" && call.body?.action === "retention" && call.body.signature));
+      // Enroll another account Passkey through the rendered UI. Cancelling its
+      // first assertion keeps the created credential and the original history;
+      // retry must add only a wrapper, never reinitialize the chat identity.
+      const secondAliceCredential = Buffer.from(`${users[0].id}:second`).toString("base64url");
+      const aliceIdentityBeforeWrap = await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first();
+      const aliceVaultBeforeWrap = (await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[0].id).all()).results;
+      await alice.goto(`${baseUrl}/pages/chat.html?passkeys=add`);
+      await alice.locator("#chatApp").waitFor({ state: "visible" });
+      await alice.locator("#conversationList button").filter({ has: alice.locator("strong", { hasText: "Bob" }) }).click();
+      await alice.evaluate((id) => { window.__nextCreatedCredential = id; window.__cancelUnlock = true; }, secondAliceCredential);
+      await alice.click("#continuePasskeyEnrollment");
+      await alice.waitForFunction(() => document.querySelector("#chatStatus").textContent.includes("synchronization is incomplete"));
+      assert.equal(await alice.locator("#chatApp").isVisible(), true);
+      await alice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
+      assert.equal(new URL(alice.url()).searchParams.get("passkey"), secondAliceCredential, "a cancelled new Passkey assertion must keep a retryable credential");
+      assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 1);
+      assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_account_vault_wrappers WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 0);
+      await alice.click("#continuePasskeyEnrollment");
+      await alice.locator("#chatPasskeySyncPanel").waitFor({ state: "hidden" });
+      assert.deepEqual(await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first(), aliceIdentityBeforeWrap);
+      assert.deepEqual((await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[0].id).all()).results, aliceVaultBeforeWrap);
+      assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_passkeys WHERE user_id=? AND credential_id=?").bind(users[0].id, secondAliceCredential).first()).count, 1,
+        "retry must reuse the already-created account Passkey");
+      const thirdAlice = await openUser(users[0], { existing: true, credentialId: secondAliceCredential });
+      await thirdAlice.locator("#conversationList button").filter({ has: thirdAlice.locator("strong", { hasText: "Bob" }) }).click();
+      await thirdAlice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
+      await thirdAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
+      assert.ok(calls.some((call) => call.user === "Alice" && call.path === "/api/chat/account/vault/wrappers" && call.status === 200),
+        "the original identity must authorize the added wrapper's signature");
+      await thirdAlice.close();
+      console.log("Browser: shared Passkey enrollment, cancelled assertion retry and fresh-device history restore passed");
+      // Retention must submit a signed control, and the peer applies its event.
+      await alice.selectOption("#retentionSelect", "604800");
+      await bob.waitForFunction(() => document.querySelector("#retentionSelect").value === "604800");
+      assert.ok(calls.some((call) => call.user === "Alice" && call.body?.action === "retention" && call.body.signature));
+    }
     // Group members may only be selected once account readiness is known.
     await alice.click("#createGroup");
     await alice.waitForFunction(() => !document.querySelector('input[value="contact-Alice-Bob"]').disabled);
@@ -290,7 +310,10 @@ async function main() {
     await bob.locator("#conversationList button").filter({ hasText: /Group|Encrypted group|群聊/ }).click();
     await bob.locator("#messageList").getByText("Before Carol joined", { exact: true }).waitFor();
     assert.equal(await bob.locator("#messageList .chat-message__sender").first().textContent(), "Alice");
-    assert.match(await bob.locator("#conversationList button.is-active small").textContent(), /2/);
+    assert.equal(await bob.locator("#conversationList button.is-active .chat-conversation-preview").textContent(), "Before Carol joined");
+    await bob.click("#groupManageButton");
+    assert.equal(await bob.locator("#groupMemberList > .chat-device-item").count(), 2);
+    await bob.click("#closeGroupManage");
     await alice.click("#groupManageButton");
     await alice.selectOption("#groupInviteContact", "contact-Alice-Carol");
     await alice.click("#inviteGroupMember");
@@ -303,49 +326,215 @@ async function main() {
     await carol.locator("#messageList").getByText("After Carol joined", { exact: true }).waitFor();
     assert.equal(await carol.locator("#messageList").getByText("Before Carol joined", { exact: true }).count(), 0);
     console.log("Browser: signed retention and group epoch changes passed");
-    // Hold the upload while switching the sender to a different conversation.
-    uploadGate = new Promise((resolve) => { releaseUpload = resolve; });
-    const uploading = new Promise((resolve) => { uploadStarted = resolve; });
-    const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/l9sAAAAASUVORK5CYII=", "base64");
-    await alice.fill("#messageInput", "Unsent group draft");
-    await alice.setInputFiles("#imageInput", { name: "pixel.png", mimeType: "image/png", buffer: png });
-    let uploadTimeout;
-    try {
-      await Promise.race([uploading, new Promise((_resolve, reject) => {
-        uploadTimeout = setTimeout(() => reject(new Error("The image upload did not begin within 15 seconds")), 15000);
-      })]);
-    } finally { clearTimeout(uploadTimeout); }
-    const attachmentConversation = calls.findLast((call) => call.path === "/api/chat/attachments/init").body.conversationId;
-    await alice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
-    assert.equal(await alice.inputValue("#messageInput"), "", "a group draft must not leak into the direct chat");
-    releaseUpload();
-    await bob.waitForFunction(() => document.querySelector("#messageList").textContent.includes("pixel.png"));
-    const fileMessage = calls.findLast((call) => call.path === "/api/chat/messages" && call.body?.attachmentRefs?.length);
-    assert.equal(fileMessage.body.conversationId, attachmentConversation, "attachment keys must stay bound to the original conversation");
-    uploadGate = null;
-    const downloadPromise = bob.waitForEvent("download");
-    await bob.locator("#messageList article").filter({ hasText: "pixel.png" }).locator("button").click();
-    const downloaded = await downloadPromise;
-    assert.deepEqual(await fs.readFile(await downloaded.path()), png, "the recipient must decrypt the original image bytes");
-    await secondAlice.click("#refreshChat");
-    await secondAlice.locator("#conversationList button").filter({ hasText: /Group|Encrypted group|群聊/ }).click();
-    await secondAlice.locator("#messageList").getByText("pixel.png", { exact: true }).waitFor();
-    const historyDownloadPromise = secondAlice.waitForEvent("download");
-    await secondAlice.locator("#messageList article").filter({ hasText: "pixel.png" }).locator("button").click();
-    assert.deepEqual(await fs.readFile(await (await historyDownloadPromise).path()), png, "the second browser must decrypt attachment history");
-    console.log("Browser: attachment download, history and conversation binding passed");
+
+    const groupConversationId = await alice.locator("#conversationList button.is-active").getAttribute("data-conversation-id");
+    const announcementText = "Learning notice: review chapter notes before Friday.";
+    let attachmentConversation;
+    if (recoveryOnly) {
+      await alice.click("#editGroupAnnouncement");
+      await alice.fill("#groupAnnouncementInput", announcementText);
+      await alice.locator("#groupAnnouncementForm").getByRole("button", { name: "Save", exact: true }).click();
+      await bob.waitForFunction((text) => document.querySelector("#groupAnnouncementText").textContent === text, announcementText);
+    } else {
+      // Reply and mention the selected member through the rendered composer. The
+      // recipient sees both the original quote and an authenticated mention marker.
+      const sourceMessage = alice.locator("#messageList article").filter({ has: alice.getByText("After Carol joined", { exact: true }) });
+      const sourceMessageId = await sourceMessage.getAttribute("data-client-message-id");
+      await sourceMessage.getByRole("button", { name: "Reply", exact: true }).click();
+      assert.match(await alice.locator("#replyPreviewText").textContent(), /After Carol joined/);
+      await alice.fill("#messageInput", "@Bo");
+      await alice.locator("#mentionSuggestions").getByRole("button", { name: "@Bob", exact: true }).click();
+      await alice.locator("#messageInput").pressSequentially("please check chapter notes");
+      const mentionText = "@Bob please check chapter notes";
+      assert.equal(await alice.inputValue("#messageInput"), mentionText);
+      await alice.click("#sendMessage");
+      const receivedMention = bob.locator("#messageList article").filter({ has: bob.getByText(mentionText, { exact: true }) });
+      await receivedMention.locator(".chat-message__mention").waitFor();
+      assert.match(await receivedMention.getAttribute("class"), /mentions-you/);
+      assert.equal(await receivedMention.locator(".chat-message__quote").textContent(), "Alice: After Carol joined",
+        "a sender's self-reference must preserve the author's name for recipients");
+      await receivedMention.locator(".chat-message__quote").click();
+      await bob.locator(`#messageList article[data-client-message-id="${sourceMessageId}"].is-highlighted`).waitFor();
+      const unmentionedCarol = carol.locator("#messageList article").filter({ has: carol.getByText(mentionText, { exact: true }) });
+      await unmentionedCarol.waitFor();
+      assert.equal(await unmentionedCarol.locator(".chat-message__mention").count(), 0, "the mention targets Bob rather than every group member");
+      await captureFeature(bob, "chat-reply-mention.png");
+      console.log("Browser: quote selection, group mention delivery and quote navigation passed");
+
+      await alice.click("#editGroupAnnouncement");
+      await alice.fill("#groupAnnouncementInput", announcementText);
+      await alice.locator("#groupAnnouncementForm").getByRole("button", { name: "Save", exact: true }).click();
+      await bob.waitForFunction((text) => document.querySelector("#groupAnnouncementText").textContent === text, announcementText);
+      await carol.waitForFunction((text) => document.querySelector("#groupAnnouncementText").textContent === text, announcementText);
+      assert.equal(await bob.locator("#editGroupAnnouncement").isVisible(), false, "ordinary members may read announcements");
+      const storedAnnouncement = await env.DB.prepare("SELECT ciphertext FROM chat_group_metadata WHERE conversation_id=?").bind(groupConversationId).first();
+      assert.equal(storedAnnouncement.ciphertext.includes(announcementText), false);
+      assert.ok(calls.some((call) => call.user === "Alice" && call.path === `/api/chat/conversations/${groupConversationId}/metadata`
+        && call.body?.signature && !JSON.stringify(call.body).includes(announcementText)), "announcement updates use the signed encrypted metadata control");
+
+      // Persist the text and selected quote, then reload the whole document and
+      // recover them from ciphertext using the same login's restored crypto vault.
+      const privateDraft = "PRIVATE UNSENT STUDY PLAN — retain my detailed reply";
+      await sourceMessage.getByRole("button", { name: "Reply", exact: true }).click();
+      await alice.waitForFunction((conversationId) => Object.values(localStorage).some((raw) => {
+        try { const value = JSON.parse(raw); return value.format === "expassway-chat-local-state" && value.conversationId === conversationId && value.purpose === "draft"; }
+        catch (_error) { return false; }
+      }), groupConversationId);
+      const beforeDraftCiphertext = await alice.evaluate((conversationId) => Object.values(localStorage).map((raw) => {
+        try { return JSON.parse(raw); } catch (_error) { return null; }
+      }).find((value) => value?.format === "expassway-chat-local-state" && value.conversationId === conversationId && value.purpose === "draft")?.ciphertext, groupConversationId);
+      await alice.fill("#messageInput", privateDraft);
+      await alice.waitForFunction(({ conversationId, previous }) => Object.values(localStorage).some((raw) => {
+        try { const value = JSON.parse(raw); return value.format === "expassway-chat-local-state" && value.conversationId === conversationId && value.purpose === "draft" && value.ciphertext !== previous; }
+        catch (_error) { return false; }
+      }), { conversationId: groupConversationId, previous: beforeDraftCiphertext });
+      await alice.locator("#draftStatus").getByText("Draft saved encrypted on this device.", { exact: true }).waitFor();
+      await alice.click("#pinChat");
+      assert.equal(await alice.locator("#pinChat").getAttribute("aria-pressed"), "true");
+      assert.equal(await alice.locator("#conversationList button[data-conversation-id]").first().getAttribute("data-conversation-id"), groupConversationId);
+      const encryptedStorage = await alice.evaluate((conversationId) => Object.values(localStorage).filter((raw) => {
+        try { const value = JSON.parse(raw); return value.format === "expassway-chat-local-state" && value.conversationId === conversationId && value.purpose === "draft"; }
+        catch (_error) { return false; }
+      }), groupConversationId);
+      assert.equal(encryptedStorage.length, 1);
+      assert.equal(encryptedStorage.some((raw) => raw.includes(privateDraft)), false);
+      assert.equal((await alice.evaluate(() => JSON.stringify(Object.values(localStorage)))).includes(privateDraft), false);
+      await alice.reload();
+      await alice.locator("#chatApp").waitFor({ state: "visible" });
+      await alice.locator(`#conversationList button[data-conversation-id="${groupConversationId}"]`).click();
+      await alice.waitForFunction((draft) => document.querySelector("#messageInput").value === draft, privateDraft);
+      assert.equal(await alice.locator("#pinChat").getAttribute("aria-pressed"), "true");
+      assert.match(await alice.locator("#replyPreviewText").textContent(), /After Carol joined/);
+      assert.equal(await alice.locator("#groupAnnouncementText").textContent(), announcementText);
+      await alice.locator("#messageList").getByText(mentionText, { exact: true }).waitFor();
+      await captureFeature(alice, "chat-encrypted-draft-pin-announcement.png");
+      await alice.fill("#messageInput", "");
+      await alice.click("#cancelReply");
+      await alice.waitForFunction((conversationId) => !Object.values(localStorage).some((raw) => {
+        try { const value = JSON.parse(raw); return value.format === "expassway-chat-local-state" && value.conversationId === conversationId && value.purpose === "draft"; }
+        catch (_error) { return false; }
+      }), groupConversationId);
+      console.log("Browser: encrypted draft and quote reload, pinned order and group announcement synchronization passed");
+
+      // Hold the upload while switching the sender to a different conversation.
+      uploadGate = new Promise((resolve) => { releaseUpload = resolve; });
+      const uploading = new Promise((resolve) => { uploadStarted = resolve; });
+      const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/l9sAAAAASUVORK5CYII=", "base64");
+      await alice.fill("#messageInput", "Unsent group draft");
+      await alice.setInputFiles("#imageInput", { name: "pixel.png", mimeType: "image/png", buffer: png });
+      let uploadTimeout;
+      try {
+        await Promise.race([uploading, new Promise((_resolve, reject) => {
+          uploadTimeout = setTimeout(() => reject(new Error("The image upload did not begin within 15 seconds")), 15000);
+        })]);
+      } finally { clearTimeout(uploadTimeout); }
+      attachmentConversation = calls.findLast((call) => call.path === "/api/chat/attachments/init").body.conversationId;
+      await alice.locator("#conversationList button").filter({ has: alice.locator("strong", { hasText: "Bob" }) }).click();
+      assert.equal(await alice.inputValue("#messageInput"), "", "a group draft must not leak into the direct chat");
+      releaseUpload();
+      await bob.waitForFunction(() => document.querySelector("#messageList").textContent.includes("pixel.png"));
+      const fileMessage = calls.findLast((call) => call.path === "/api/chat/messages" && call.body?.attachmentRefs?.length);
+      assert.equal(fileMessage.body.conversationId, attachmentConversation, "attachment keys must stay bound to the original conversation");
+      uploadGate = null;
+      const downloadPromise = bob.waitForEvent("download");
+      await bob.locator("#messageList article").filter({ hasText: "pixel.png" }).locator(".chat-message__attachment button").click();
+      const downloaded = await downloadPromise;
+      assert.deepEqual(await fs.readFile(await downloaded.path()), png, "the recipient must decrypt the original image bytes");
+      if (!secondAlice) secondAlice = await openUser(users[0], { existing: true });
+      await secondAlice.click("#refreshChat");
+      await secondAlice.locator("#conversationList button").filter({ hasText: /Group|Encrypted group|群聊/ }).click();
+      await secondAlice.locator("#messageList").getByText("pixel.png", { exact: true }).waitFor();
+      const historyDownloadPromise = secondAlice.waitForEvent("download");
+      await secondAlice.locator("#messageList article").filter({ hasText: "pixel.png" }).locator(".chat-message__attachment button").click();
+      assert.deepEqual(await fs.readFile(await (await historyDownloadPromise).path()), png, "the second browser must decrypt attachment history");
+      console.log("Browser: attachment download, history and conversation binding passed");
+      if (featuresOnly) await secondAlice.close();
+
+      // The local search operates on already-decrypted history. It finds text and
+      // image filenames, supports date boundaries, and opens the selected message.
+      await bob.reload();
+      await bob.locator("#chatApp").waitFor({ state: "visible" });
+      await bob.locator(`#conversationList button[data-conversation-id="${groupConversationId}"]`).click();
+      await bob.locator("#messageList").getByText("pixel.png", { exact: true }).waitFor();
+      await bob.click("#searchMessages");
+      await bob.fill("#messageSearchQuery", "Alice's encrypted hello");
+      await bob.selectOption("#messageSearchType", "text");
+      await bob.locator("#messageSearchResults .chat-search-result").filter({ hasText: "Alice's encrypted hello" }).waitFor();
+      // The old direct conversation has not been opened since reload: this result
+      // proves that its encrypted local history was restored and searched.
+      await bob.fill("#messageSearchQuery", "chapter notes");
+      await bob.selectOption("#messageSearchType", "text");
+      await bob.locator("#messageSearchResults .chat-search-result").filter({ hasText: mentionText }).waitFor();
+      await bob.fill("#messageSearchQuery", "pixel.png");
+      await bob.selectOption("#messageSearchType", "image");
+      const imageResult = bob.locator("#messageSearchResults .chat-search-result").filter({ hasText: "pixel.png" });
+      await imageResult.waitFor();
+      assert.equal(await bob.locator("#messageSearchResults .chat-search-result").count(), 1);
+      const browserToday = await bob.evaluate(() => {
+        const today = new Date();
+        return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+      });
+      await bob.fill("#messageSearchFrom", browserToday);
+      await bob.fill("#messageSearchTo", browserToday);
+      await imageResult.waitFor();
+      await bob.fill("#messageSearchTo", "2000-01-01");
+      await bob.waitForFunction(() => document.querySelectorAll("#messageSearchResults .chat-search-result").length === 0);
+      await bob.fill("#messageSearchTo", browserToday);
+      await imageResult.waitFor();
+      await captureFeature(bob, "chat-local-image-date-search.png");
+      await imageResult.click();
+      await bob.locator("#messageSearchPanel").waitFor({ state: "hidden" });
+      await bob.locator("#messageList article.is-highlighted").filter({ hasText: "pixel.png" }).waitFor();
+      const localCache = await bob.evaluate(() => JSON.stringify(Object.values(localStorage)));
+      assert.equal(localCache.includes(mentionText), false, "search history in browser storage remains encrypted");
+      assert.equal(localCache.includes("pixel.png"), false);
+      console.log("Browser: local text, image filename and date search with message navigation passed");
+      if (featuresOnly) {
+        await alice.locator(`#conversationList button[data-conversation-id="${groupConversationId}"]`).click();
+        await alice.locator("#messageList").getByText("pixel.png", { exact: true }).waitFor();
+        await alice.click("#groupManageButton");
+        alice.once("dialog", (dialog) => dialog.accept());
+        const rotationResponse = alice.waitForResponse((response) => response.request().method() === "PATCH"
+          && response.url().endsWith(`/api/chat/conversations/${groupConversationId}/members`));
+        await alice.locator("#groupMemberList > .chat-device-item").filter({ hasText: "Carol" }).getByRole("button", { name: "Remove", exact: true }).click();
+        assert.equal((await rotationResponse).status(), 200);
+        await alice.waitForFunction(() => !document.querySelector("#groupMemberList").textContent.includes("Carol"));
+        assert.equal(await alice.locator("#groupAnnouncementText").textContent(), announcementText,
+          "rotating the key after removing a member keeps the encrypted announcement");
+        await alice.click("#closeGroupManage");
+        await bob.click("#refreshChat");
+        await bob.locator(`#conversationList button[data-conversation-id="${groupConversationId}"]`).click();
+        assert.equal(await bob.locator("#groupAnnouncementText").textContent(), announcementText);
+        await bob.setViewportSize({ width: 390, height: 844 });
+        await bob.click("#searchMessages");
+        await bob.fill("#messageSearchQuery", "pixel.png");
+        await bob.selectOption("#messageSearchType", "image");
+        await bob.locator("#messageSearchResults .chat-search-result").filter({ hasText: "pixel.png" }).waitFor();
+        assert.ok(await bob.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), "new message controls fit the mobile viewport");
+        await captureFeature(bob, "chat-new-features-mobile.png");
+        assert.deepEqual(pageErrors, []);
+        assert.deepEqual(consoleErrors, []);
+        console.log("account-v2 new-feature browser smoke passed (real Worker + API; mocked Passkey ceremony)");
+        return;
+      }
+    }
     // The API stores opaque ciphertext. Neither message nor vault contains plaintext.
     const stored = await env.DB.prepare("SELECT ciphertext FROM chat_messages WHERE protocol_version='account-v2'").all();
-    assert.ok(stored.results.length >= 5);
+    assert.ok(stored.results.length >= (recoveryOnly ? 4 : 5));
     assert.equal(stored.results.some((row) => /encrypted hello|encrypted reply|Carol joined|pixel\.png/.test(row.ciphertext)), false);
     assert.equal(calls.some((call) => call.path.includes("/devices") || call.path.includes("/key-backup")), false);
     const reply = await env.DB.prepare("SELECT id FROM chat_messages WHERE sender_user_id=? AND conversation_id=?")
       .bind(users[1].id, calls.find((call) => call.user === "Alice" && call.path === "/api/chat/messages").body.conversationId).first();
-    await secondAlice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
-    await secondAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
+    const originalDirectId = calls.find((call) => call.user === "Alice" && call.path === "/api/chat/messages").body.conversationId;
+    await alice.locator(`#conversationList button[data-conversation-id="${originalDirectId}"]`).click();
+    await alice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
+    if (secondAlice) {
+      await secondAlice.locator("#conversationList button").filter({ has: secondAlice.locator("strong", { hasText: "Bob" }) }).click();
+      await secondAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
+    }
     await bob.evaluate((id) => window.ALevelApi.deleteChatMessage(id), reply.id);
     await alice.waitForFunction(() => document.querySelector("#messageList").textContent.includes("[deleted]"));
-    await secondAlice.waitForFunction(() => document.querySelector("#messageList").textContent.includes("[deleted]"));
+    if (secondAlice) await secondAlice.waitForFunction(() => document.querySelector("#messageList").textContent.includes("[deleted]"));
     // Reset an identity using a real encrypted vault and the real initialize route.
     await bob.evaluate(async ({ userId }) => {
       const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20261003-1");
@@ -393,15 +582,38 @@ async function main() {
     assert.equal(await alice.isDisabled("#messageInput"), false);
     await alice.waitForFunction(() => !!document.querySelector('#groupInviteContact option[value="contact-Alice-Bob"]'));
     await alice.selectOption("#groupInviteContact", "contact-Alice-Bob");
+    const identityRecoveryResponse = alice.waitForResponse((response) => response.request().method() === "PATCH"
+      && response.url().endsWith(`/api/chat/conversations/${groupConversationId}/members`));
     await alice.click("#inviteGroupMember");
+    assert.equal((await identityRecoveryResponse).status(), 200);
+    await alice.click("#refreshChat");
     await alice.waitForFunction(() => document.querySelector("#groupMemberList").textContent.includes("Bob"));
     await alice.fill("#messageInput", "Group restored after explicit identity replacement");
     await alice.click("#sendMessage");
     await resetBob.click("#refreshChat");
     await resetBob.locator("#conversationList button").filter({ hasText: /Group|Encrypted group|群聊/ }).click();
     await resetBob.locator("#messageList").getByText("Group restored after explicit identity replacement", { exact: true }).waitFor();
+    assert.equal(await alice.locator("#groupAnnouncementText").textContent(), announcementText, "membership rotation retains the announcement");
     await resetBob.locator("#messageList").getByText("Before Carol joined", { exact: true }).waitFor();
     console.log("Browser: identity reset confirmation and group recovery passed");
+    if (recoveryOnly) {
+      assert.deepEqual(pageErrors, []);
+      assert.deepEqual(consoleErrors, []);
+      await captureFeature(alice, "chat-identity-group-recovery.png");
+      await alice.addStyleTag({ content: await fs.readFile(path.join(root, "assets/chat.css"), "utf8") });
+      await alice.setViewportSize({ width: 390, height: 844 });
+      assert.ok(await alice.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), "the mobile composer stays within the viewport");
+      for (const selector of ["#emojiButton", "#mentionButton", "#sendMessage"]) {
+        const singleLine = await alice.locator(selector).evaluate((button) => {
+          const range = document.createRange(); range.selectNodeContents(button);
+          return new Set([...range.getClientRects()].map((rect) => Math.round(rect.top))).size <= 1;
+        });
+        assert.equal(singleLine, true, `${selector} must keep its label on one line`);
+      }
+      await captureFeature(alice, "chat-new-features-mobile.png");
+      console.log("account-v2 identity recovery browser smoke passed (real Worker + API; mocked Passkey ceremony)");
+      return;
+    }
 
     const secondBobCredential = Buffer.from(`${users[1].id}:second`).toString("base64url");
     const bobIdentityBeforeWrap = await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[1].id).first();
@@ -558,8 +770,15 @@ async function main() {
     }
     console.log("account-v2 browser smoke passed (real Worker + API; mocked Passkey ceremony)");
   } catch (error) {
-    for (const { user, page } of pages) {
-      if (!page.isClosed()) console.error(`${user} browser state:`, await page.locator("#chatStatus").textContent(), await page.locator("#conversationTitle").textContent(), await page.locator("#messageList").textContent(), "group panel:", await page.locator("#groupManagePanel").isVisible(), await page.locator("#groupMemberList").textContent());
+    for (const [pageIndex, { user, page }] of pages.entries()) {
+      if (!page.isClosed()) {
+        console.error(`${user} browser state:`, await page.locator("#chatStatus").textContent(), await page.locator("#conversationTitle").textContent(), await page.locator("#messageList").textContent(), "group panel:", await page.locator("#groupManagePanel").isVisible(), await page.locator("#groupMemberList").textContent());
+        if (process.env.CHAT_QA_SCREENSHOT) {
+          const directory = path.dirname(path.resolve(process.env.CHAT_QA_SCREENSHOT));
+          await fs.mkdir(directory, { recursive: true });
+          await page.screenshot({ path: path.join(directory, `chat-failure-${user.toLowerCase()}-${pageIndex}.png`) });
+        }
+      }
     }
     console.error("API writes:", calls.filter((call) => call.method !== "GET").slice(-20).map(({ user, method, path, body, status }) => ({ user, method, path, status, action: body?.action, conversationId: body?.conversationId })));
     throw error;
@@ -567,6 +786,7 @@ async function main() {
     releaseUpload?.();
     await browser?.close();
     if (server) await new Promise((resolve) => server.close(resolve));
+    await Promise.allSettled([...pendingApi]);
     await mf.dispose();
   }
 }

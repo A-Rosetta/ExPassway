@@ -12,6 +12,10 @@ const ACCOUNT_V2_VAULT_FORMAT = "expassway-chat-account-v2";
 const ACCOUNT_V2_VAULT_VERSION = 2;
 const ACCOUNT_V2_KDF_VERSION = "hkdf-sha256-v1";
 const ACCOUNT_V2_PROTOCOL_VERSION = "account-v2";
+const LOCAL_STATE_FORMAT = "expassway-chat-local-state";
+const LOCAL_STATE_VERSION = 1;
+const LOCAL_STATE_PURPOSES = new Set(["draft", "outbox", "preview", "search"]);
+const MAX_LOCAL_STATE_BYTES = 1024 * 1024;
 const state = {
   identityKeyPair: null,
   registrationId: null,
@@ -949,6 +953,89 @@ async function getLocalPlaintext({ clientMessageId }) {
   return new TextDecoder().decode(plaintext);
 }
 
+function chatLocalStateContext(input = {}) {
+  const context = {
+    format: LOCAL_STATE_FORMAT,
+    version: LOCAL_STATE_VERSION,
+    userId: requiredAccountV2String(input.userId, "userId", 256),
+    conversationId: requiredAccountV2String(input.conversationId, "conversationId", 256),
+    purpose: requiredAccountV2String(input.purpose, "purpose", 32),
+    recordId: String(input.recordId || ""),
+  };
+  if (!LOCAL_STATE_PURPOSES.has(context.purpose) || context.recordId.length > 256) {
+    throw cryptoError("INVALID_LOCAL_STATE", "The encrypted local record scope is invalid.");
+  }
+  return context;
+}
+
+async function chatLocalStateKey(input, scope, opening = false) {
+  const protocolVersion = input.protocolVersion || ACCOUNT_V2_PROTOCOL_VERSION;
+  if (protocolVersion === ACCOUNT_V2_PROTOCOL_VERSION) {
+    const current = accountV2RequireUnlocked();
+    if (current.userId !== scope.userId) throw cryptoError("INVALID_LOCAL_STATE", "The local record belongs to another account.");
+    const account = accountV2ForVersion(opening ? input.keyVersion : current.keyVersion);
+    return {
+      protocolVersion,
+      keyVersion: account.keyVersion,
+      deviceId: null,
+      key: await accountV2Hkdf(account.vaultRootKey, utf8(canonicalJson(scope)), "expassway-chat-local-state-key-v1"),
+    };
+  }
+  if (protocolVersion !== "signal-v1") throw cryptoError("INVALID_LOCAL_STATE", "The local record protocol is invalid.");
+  const deviceId = requiredAccountV2String(input.deviceId, "deviceId", 256);
+  await loadVault();
+  const identity = state.devices[deviceId]?.identityKeyPair;
+  if (!identity?.privKey) throw cryptoError("SESSION_MISSING", "This browser's chat identity is unavailable.");
+  return {
+    protocolVersion,
+    keyVersion: null,
+    deviceId,
+    key: await accountV2Hkdf(toByteArray(identity.privKey), utf8(canonicalJson(scope)), "expassway-chat-local-state-signal-key-v1"),
+  };
+}
+
+async function sealChatLocalState(input = {}) {
+  const scope = chatLocalStateContext(input);
+  const plaintext = utf8(typeof input.plaintext === "string" ? input.plaintext : JSON.stringify(input.plaintext));
+  if (input.plaintext === undefined || plaintext.byteLength > MAX_LOCAL_STATE_BYTES) {
+    throw cryptoError("INVALID_LOCAL_STATE", "The encrypted local record is too large or empty.");
+  }
+  const derived = await chatLocalStateKey(input, scope);
+  const envelope = { ...scope, protocolVersion: derived.protocolVersion, keyVersion: derived.keyVersion, deviceId: derived.deviceId };
+  try {
+    const encrypted = await accountV2AesGcmEncrypt(derived.key, plaintext, utf8(canonicalJson(envelope)), "LOCAL_STATE_ENCRYPT_FAILED");
+    return { ...envelope, nonce: bytesToBase64Url(encrypted.nonce), ciphertext: bytesToBase64Url(encrypted.ciphertext) };
+  } finally {
+    derived.key.fill(0);
+    plaintext.fill(0);
+  }
+}
+
+async function openChatLocalState(input = {}) {
+  const scope = chatLocalStateContext(input);
+  const sealed = input.sealed;
+  if (!sealed || Object.keys(scope).some((key) => sealed[key] !== scope[key])
+      || ![ACCOUNT_V2_PROTOCOL_VERSION, "signal-v1"].includes(sealed.protocolVersion)
+      || typeof sealed.ciphertext !== "string" || sealed.ciphertext.length > Math.ceil((MAX_LOCAL_STATE_BYTES + 16) * 4 / 3)
+      || (sealed.protocolVersion === "signal-v1" && input.deviceId !== sealed.deviceId)) {
+    throw cryptoError("INVALID_LOCAL_STATE", "The encrypted local record belongs to another scope or is invalid.");
+  }
+  const derived = await chatLocalStateKey({ ...input, protocolVersion: sealed.protocolVersion, keyVersion: sealed.keyVersion }, scope, true);
+  const envelope = { ...scope, protocolVersion: derived.protocolVersion, keyVersion: derived.keyVersion, deviceId: derived.deviceId };
+  let plaintext;
+  try {
+    if (sealed.keyVersion !== envelope.keyVersion || sealed.deviceId !== envelope.deviceId) {
+      throw cryptoError("INVALID_LOCAL_STATE", "The encrypted local record identity is invalid.");
+    }
+    plaintext = await accountV2AesGcmDecrypt(derived.key, requiredBase64Bytes(sealed.nonce, "nonce", 12),
+      requiredBase64Bytes(sealed.ciphertext, "ciphertext"), utf8(canonicalJson(envelope)), "LOCAL_STATE_DECRYPT_FAILED");
+    return { plaintext: new TextDecoder().decode(plaintext) };
+  } finally {
+    derived.key.fill(0);
+    plaintext?.fill(0);
+  }
+}
+
 async function generateAccountV2Vault({ userId, keyVersion = "1", prfOutput } = {}) {
   const user = requiredAccountV2String(userId, "userId", 256);
   const version = requiredAccountV2String(keyVersion, "keyVersion", 64);
@@ -1400,6 +1487,8 @@ async function handleCryptoRequest(event) {
     else if (action === "decryptAttachment") result = await decryptAttachment(payload);
     else if (action === "storeLocalPlaintext" || action === "storeSentPlaintext") result = await storeLocalPlaintext(payload);
     else if (action === "getLocalPlaintext" || action === "getSentPlaintext") result = await getLocalPlaintext(payload);
+    else if (action === "sealChatLocalState") result = await sealChatLocalState(payload);
+    else if (action === "openChatLocalState") result = await openChatLocalState(payload);
     else if (action === "generateAccountV2Vault") result = await generateAccountV2Vault(payload);
     else if (action === "unlockAccountV2Vault") result = await unlockAccountV2Vault(payload);
     else if (action === "wrapAccountV2Vault") result = await wrapAccountV2Vault(payload);
@@ -1428,7 +1517,7 @@ self.onmessage = (event) => {
   // WebCrypto yields between steps, so worker messages can otherwise overlap.
   // A lock response must guarantee that every earlier account operation has
   // finished and that none can restore an unlocked account after the lock.
-  if (String(event.data?.action || "").includes("AccountV2")) {
+  if (String(event.data?.action || "").includes("AccountV2") || ["sealChatLocalState", "openChatLocalState"].includes(event.data?.action)) {
     return withDeviceLock("account-v2", () => handleCryptoRequest(event));
   }
   return handleCryptoRequest(event);

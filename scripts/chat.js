@@ -65,6 +65,7 @@
     outbox: [],
     outboxInFlight: null,
     outboxStorageKey: "",
+    outboxSerialized: new Map(),
     messageDrafts: new Map(),
     dataRefreshGeneration: 0,
     accountIdentityChanges: new Set(),
@@ -91,6 +92,12 @@
     lastProfileRefresh: 0,
     emojiCategory: "all",
     emojiSelection: null,
+    localState: null,
+    draftWrites: new Map(),
+    replyTargets: new Map(),
+    mentionTargets: new Map(),
+    history: new Map(),
+    reportTarget: null,
   };
   const $ = (selector) => document.querySelector(selector);
   const status = $("#chatStatus");
@@ -102,6 +109,11 @@
   }
 
   function formatActionError(error) {
+    if (["FRIEND_REQUEST_COOLDOWN", "FRIEND_REQUEST_RATE_LIMITED"].includes(error?.code)) {
+      const seconds = Number(error?.payload?.error?.details?.retryAfterSeconds || error?.details?.retryAfterSeconds || 0);
+      return t(error.code === "FRIEND_REQUEST_COOLDOWN" ? "chatFriendCooldown" : "chatFriendRateLimit",
+        "Please wait {minutes} minutes before sending another friend request.", { minutes: Math.max(1, Math.ceil(seconds / 60)) });
+    }
     const message = error?.message || (typeof error === "string" ? error : "");
     const details = [];
     if (error?.code && error.code !== "HTTP_ERROR") details.push(error.code);
@@ -130,9 +142,16 @@
     state.accountGroupMetadata.clear();
     state.localPlaintexts = {};
     state.messageDrafts.clear();
+    state.localState = null;
+    state.replyTargets.clear();
+    state.mentionTargets.clear();
+    state.history.clear();
+    state.draftWrites.clear();
+    state.reportTarget = null;
     state.deliveryStates.clear();
     state.outbox = [];
     state.outboxStorageKey = "";
+    state.outboxSerialized.clear();
     state.messages = [];
     state.activeConversation = null;
     state.conversations = [];
@@ -159,6 +178,18 @@
     state.cryptoWorker?.terminate();
     state.cryptoWorker = null;
     $("#messageInput").value = "";
+    $("#messageSearchResults").replaceChildren();
+    $("#messageSearchPanel").hidden = true;
+    $("#chatReportDetails").value = "";
+    $("#chatReportForm").hidden = true;
+    $("#replyPreview").hidden = true;
+    $("#replyPreviewText").textContent = "";
+    $("#draftStatus").textContent = "";
+    $("#mentionSuggestions").replaceChildren();
+    $("#mentionSuggestions").hidden = true;
+    $("#groupAnnouncementInput").value = "";
+    $("#groupAnnouncementText").textContent = "";
+    window.ALevelChatNotifications?.setActiveConversation?.("");
     $("#messageList").replaceChildren();
     $("#chatApp").hidden = true;
     $("#chatSetupPanel").hidden = !currentToken();
@@ -356,6 +387,13 @@
     if (rememberHidden) state.hiddenConversations.add(conversationId);
     state.conversations = state.conversations.filter((conversation) => conversation.id !== conversationId);
     state.messageDrafts.delete(conversationId);
+    state.replyTargets.delete(conversationId);
+    state.mentionTargets.delete(conversationId);
+    for (const [id, message] of state.history) if (message.conversationId === conversationId) state.history.delete(id);
+    if (rememberHidden && state.localState) {
+      void state.localState.clearDraft(conversationId).catch(() => {});
+      for (const entry of state.localState.listEncrypted("search").filter((entry) => entry.conversationId === conversationId)) void state.localState.removeEncrypted(conversationId, "search", entry.recordId).catch(() => {});
+    }
     state.accountEpochs.delete(conversationId);
     state.accountGroupMetadata.delete(conversationId);
     state.accountIdentityChanges.delete(conversationId);
@@ -448,6 +486,7 @@
     const selection = state.emojiSelection?.conversationId === conversation.id ? state.emojiSelection : { start: input.selectionStart, end: input.selectionEnd };
     input.setRangeText(emoji, selection.start, selection.end, "end");
     state.messageDrafts.set(conversation.id, input.value);
+    void persistDraft(conversation.id);
     state.emojiSelection = { conversationId: conversation.id, start: input.selectionStart, end: input.selectionEnd };
     try { localStorage.setItem(`${EMOJI_RECENT_KEY}.${state.profile?.id || ""}`, JSON.stringify([emoji, ...recentEmojis().filter((value) => value !== emoji)].slice(0, 24))); } catch (_error) { }
     closeEmojiPicker();
@@ -486,15 +525,18 @@
     $("#conversationEmpty").hidden = Boolean(conversation);
     $("#conversationActive").hidden = !conversation;
     if (!conversation) {
+      window.ALevelChatNotifications?.setActiveConversation?.("");
       $("#groupManagePanel").hidden = true;
       return;
     }
+    window.ALevelChatNotifications?.setActiveConversation?.(conversation.id);
     $("#conversationTitle").textContent = conversationName(conversation);
     setAvatar($("#conversationAvatar"), conversationName(conversation), conversation.kind === "direct" ? conversation.peer?.avatarDataUrl : "");
     const legacyReadOnly = state.accountMode && !isAccountConversation(conversation);
     const rotationRequired = Boolean(conversation.rotationRequired);
     const leaving = state.leavingConversations.has(conversation.id);
     const identityChanged = state.accountIdentityChanges.has(conversation.id) || (isAccountConversation(conversation) && conversation.historical);
+    const contactRestricted = conversation.kind === "direct" && conversation.canSend === false;
     $("#deleteHistoricalChat").hidden = !isHistoricalConversation(conversation);
     $("#deleteHistoricalChat").disabled = state.deletingHistories.has(conversation.id);
     const selfRole = conversation.role || conversation.group?.members?.find((member) => member.isSelf)?.role;
@@ -506,10 +548,19 @@
     $("#retentionSelect").value = String(conversation.retentionSeconds);
     $("#retentionSelect").disabled = legacyReadOnly || (isAccountConversation(conversation) && conversation.kind === "group" && selfRole !== "owner");
     $("#groupManageButton").hidden = conversation.kind !== "group" || !isAccountConversation(conversation);
-    $("#messageInput").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving;
-    $("#sendMessage").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving || state.sendingText.has(conversation.id);
-    $("#imageInput").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving || state.sendingImages.has(conversation.id);
-    $("#emojiButton").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving;
+    $("#messageInput").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving || contactRestricted;
+    $("#sendMessage").disabled = $("#messageInput").disabled || state.sendingText.has(conversation.id);
+    $("#imageInput").disabled = $("#messageInput").disabled || state.sendingImages.has(conversation.id);
+    $("#emojiButton").disabled = $("#messageInput").disabled;
+    $("#mentionButton").disabled = $("#messageInput").disabled;
+    $("#mentionButton").hidden = conversation.kind !== "group";
+    $("#contactManageButton").hidden = conversation.kind !== "direct";
+    $("#deleteFriend").disabled = !conversation.peer?.contactId || conversation.peer?.contactAccepted === false;
+    $("#blockFriend").textContent = conversation.peer?.blockedBySelf ? t("chatUnblock", "Unblock") : t("chatBlock", "Block");
+    renderConversationPreferences();
+    renderReplyPreview();
+    renderAnnouncement();
+    $("#emojiButton").disabled = $("#messageInput").disabled;
     if ($("#emojiButton").disabled) closeEmojiPicker();
     if (legacyReadOnly) $("#conversationSafety").textContent = "Historical chat: messages can be read on the original device. Start a new secure chat to send messages.";
     else if (isAccountConversation(conversation)) $("#conversationSafety").textContent = rotationRequired
@@ -541,6 +592,270 @@
       }
     }
     if (conversation.kind === "group" && isAccountConversation(conversation)) renderGroupManagement(conversation);
+    if (contactRestricted) $("#conversationSafety").textContent = t("chatContactRestricted", "Sending is unavailable. Check friendship and block settings.");
+  }
+
+  function ensureLocalState() {
+    if (!state.profile?.id || !window.ExpChatLocalState) return;
+    if (state.localState) return;
+    state.localState = window.ExpChatLocalState.create({ userId: state.profile.id, cryptoCall,
+      getCryptoContext: () => state.accountMode ? { protocolVersion: "account-v2" } : { protocolVersion: "signal-v1", deviceId: state.device?.id } });
+  }
+
+  function persistDraft(conversationId) {
+    ensureLocalState();
+    if (!state.localState) return Promise.resolve();
+    const value = { text: state.messageDrafts.get(conversationId) || "", reply: state.replyTargets.get(conversationId) || null, mentions: state.mentionTargets.get(conversationId) || [] };
+    if (state.activeConversation?.id === conversationId) $("#draftStatus").textContent = value.text || value.reply ? t("chatDraftSaving", "Saving encrypted draft…") : "";
+    const local = state.localState;
+    const previous = state.draftWrites.get(conversationId) || Promise.resolve();
+    const write = previous.catch(() => {}).then(() => value.text || value.reply ? local.saveDraft(conversationId, value) : local.clearDraft(conversationId));
+    state.draftWrites.set(conversationId, write);
+    write.then(() => {
+      if (state.activeConversation?.id === conversationId && state.draftWrites.get(conversationId) === write) $("#draftStatus").textContent = value.text || value.reply ? t("chatDraftSaved", "Draft saved encrypted on this device.") : "";
+    }).catch(() => { if (state.activeConversation?.id === conversationId) $("#draftStatus").textContent = t("chatDraftSaveFailed", "Draft could not be saved. Keep this tab open."); });
+    return write;
+  }
+
+  async function restoreDraft(conversationId) {
+    ensureLocalState();
+    if (!state.localState || state.messageDrafts.has(conversationId)) return;
+    const generation = state.accountSessionGeneration;
+    try {
+      const draft = await state.localState.loadDraft(conversationId);
+      if (generation !== state.accountSessionGeneration) return;
+      if (!draft) return;
+      state.messageDrafts.set(conversationId, typeof draft === "string" ? draft : draft.text || "");
+      if (draft.reply) state.replyTargets.set(conversationId, draft.reply);
+      if (draft.mentions) state.mentionTargets.set(conversationId, draft.mentions);
+    } catch (_error) { setStatus(t("chatDraftUnavailable", "This saved draft could not be decrypted."), true); }
+  }
+
+  function renderConversationPreferences() {
+    const id = state.activeConversation?.id;
+    const muted = window.ALevelChatNotifications?.isMuted(id) || false;
+    const pinned = state.localState?.isPinned(id) || false;
+    $("#muteChat").textContent = muted ? t("chatUnmute", "Unmute") : t("chatMute", "Mute");
+    $("#muteChat").setAttribute("aria-pressed", String(muted));
+    $("#pinChat").textContent = pinned ? t("chatUnpin", "Unpin") : t("chatPin", "Pin");
+    $("#pinChat").setAttribute("aria-pressed", String(pinned));
+    const enabled = window.ALevelChatNotifications?.getPreferences().enabled || false;
+    $("#notificationToggle").textContent = enabled ? t("chatNotificationsOn", "Notifications on") : t("chatNotificationsOff", "Notifications off");
+    $("#notificationToggle").setAttribute("aria-pressed", String(enabled));
+  }
+
+  function messageContent(message) { return window.ExpChatMessageTools.content(message?.plaintext); }
+  function messagePreview(message) { return message?.deleted ? t("chatMessageDeleted", "Message deleted") : window.ExpChatMessageTools.preview(message?.plaintext, t("chatImagePreview", "Image")); }
+  function messageSender(message) {
+    return message?.senderUserId === state.profile?.id ? state.profile.alias || t("chatYou", "You") : state.activeConversation?.group?.members?.find((member) => member.userId === message?.senderUserId)?.alias || message?.senderAlias || state.activeConversation?.peer?.alias || t("chatUnknownUser", "Secure chat user");
+  }
+  function renderReplyPreview() {
+    const reply = state.replyTargets.get(state.activeConversation?.id);
+    $("#replyPreview").hidden = !reply;
+    $("#replyPreviewText").textContent = reply ? `${t("chatReplyTo", "Reply to")} ${reply.alias}: ${reply.preview}` : "";
+  }
+  function setReply(message) {
+    const id = state.activeConversation?.id;
+    if (!id || message.deleted || message.plaintext == null) return;
+    state.replyTargets.set(id, { clientMessageId: message.clientMessageId, alias: messageSender(message), preview: messagePreview(message).slice(0, 180) });
+    renderReplyPreview();
+    void persistDraft(id);
+    $("#messageInput").focus();
+  }
+  function composeContent(text, conversation) {
+    const mentions = (state.mentionTargets.get(conversation.id) || []).filter((entry) => text.includes(`@${entry.alias}`));
+    const reply = state.replyTargets.get(conversation.id) || null;
+    return JSON.stringify({ version: 1, kind: "text", text, ...(reply ? { reply } : {}), ...(conversation.kind === "group" && mentions.length ? { mentions } : {}) });
+  }
+  function clearSentMetadata(conversationId, plaintext) {
+    const sent = window.ExpChatMessageTools.content(plaintext);
+    if (JSON.stringify(state.replyTargets.get(conversationId) || null) === JSON.stringify(sent.reply || null)) state.replyTargets.delete(conversationId);
+    const remaining = (state.mentionTargets.get(conversationId) || []).filter((member) => !sent.mentions.some((entry) => entry.userId === member.userId));
+    state.mentionTargets.set(conversationId, remaining);
+    void persistDraft(conversationId);
+  }
+  function renderMentionSuggestions(showAll = false) {
+    const host = $("#mentionSuggestions");
+    host.replaceChildren();
+    const conversation = state.activeConversation;
+    const input = $("#messageInput");
+    const match = input.value.slice(0, input.selectionStart).match(/(?:^|\s)@([^@\n]*)$/);
+    if (conversation?.kind !== "group" || input.disabled || (!showAll && !match)) { host.hidden = true; return; }
+    const query = match?.[1]?.toLocaleLowerCase() || "";
+    const members = (conversation.group?.members || []).filter((member) => !member.isSelf && member.alias?.toLocaleLowerCase().includes(query));
+    for (const member of members.slice(0, 20)) {
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "btn-secondary chat-small-action"; button.textContent = `@${member.alias}`;
+      button.addEventListener("click", () => {
+        const position = input.selectionStart;
+        const start = match ? position - match[1].length - 1 : position;
+        input.setRangeText(`@${member.alias} `, start, position, "end");
+        const selected = state.mentionTargets.get(conversation.id) || [];
+        state.mentionTargets.set(conversation.id, [...selected.filter((entry) => entry.userId !== member.userId), { userId: member.userId, alias: member.alias }]);
+        state.messageDrafts.set(conversation.id, input.value);
+        void persistDraft(conversation.id); host.hidden = true; input.focus();
+      });
+      host.append(button);
+    }
+    host.hidden = !host.childElementCount;
+  }
+
+  async function rememberHistory(messages) {
+    ensureLocalState();
+    const local = state.localState;
+    const generation = state.accountSessionGeneration;
+    const writes = [];
+    for (const message of messages) {
+      if (message.localOnly) continue;
+      if (message.deleted) {
+        state.history.delete(message.id);
+        if (local) writes.push(local.removeEncrypted(message.conversationId, "search", message.id));
+      } else if (message.plaintext != null && state.history.get(message.id)?.plaintext !== message.plaintext) {
+        const record = { id: message.id, conversationId: message.conversationId, clientMessageId: message.clientMessageId,
+          senderUserId: message.senderUserId, senderAlias: message.senderAlias, createdAt: message.createdAt, plaintext: message.plaintext };
+        state.history.set(message.id, record);
+        if (local) writes.push(local.saveEncrypted(message.conversationId, "search", record, message.id));
+      }
+    }
+    renderMessageSearch();
+    const outcomes = await Promise.allSettled(writes);
+    if (generation === state.accountSessionGeneration && outcomes.some((result) => result.status === "rejected")) setStatus(t("chatSearchCacheFull", "Some search history could not be saved on this device. It remains searchable while this tab is open."));
+  }
+  async function restoreSearchHistory() {
+    ensureLocalState();
+    if (!state.localState) return;
+    const generation = state.accountSessionGeneration;
+    for (const entry of state.localState.listEncrypted("search")) {
+      try {
+        const messages = await state.localState.loadEncrypted(entry.conversationId, "search", entry.recordId);
+        if (generation !== state.accountSessionGeneration) return;
+        if (Array.isArray(messages)) messages.forEach((message) => state.history.set(message.id, message));
+        else if (messages?.id) state.history.set(messages.id, messages);
+      } catch (_error) { }
+    }
+  }
+  function renderMessageSearch() {
+    const host = $("#messageSearchResults");
+    if (!host || $("#messageSearchPanel").hidden) return;
+    host.replaceChildren();
+    const visible = new Set(state.conversations.map((conversation) => conversation.id));
+    const results = window.ExpChatMessageTools.search([...state.history.values()].filter((message) => visible.has(message.conversationId)), {
+      query: $("#messageSearchQuery").value, type: $("#messageSearchType").value, from: $("#messageSearchFrom").value, to: $("#messageSearchTo").value,
+    });
+    const summary = document.createElement("p"); summary.className = "chat-muted";
+    summary.textContent = t("chatSearchCount", "{count} results in decrypted local history", { count: results.length }); host.append(summary);
+    for (const message of results.slice(0, 100)) {
+      const conversation = state.conversations.find((entry) => entry.id === message.conversationId);
+      if (!conversation) continue;
+      const button = document.createElement("button"); button.type = "button"; button.className = "chat-search-result btn-secondary";
+      const label = document.createElement("strong"); label.textContent = `${conversationName(conversation)} · ${new Date(message.createdAt).toLocaleString()}`;
+      const preview = document.createElement("span"); preview.textContent = messagePreview(message); button.append(label, preview);
+      button.addEventListener("click", async () => {
+        if (state.activeConversation?.id !== conversation.id) await selectConversation(conversation);
+        $("#messageSearchPanel").hidden = true; $("#searchMessages").setAttribute("aria-expanded", "false");
+        jumpToMessage(message.clientMessageId);
+      }); host.append(button);
+    }
+  }
+  function jumpToMessage(clientMessageId) {
+    const item = [...$("#messageList").children].find((entry) => entry.dataset.clientMessageId === clientMessageId);
+    if (!item) { setStatus(t("chatSearchMessageMissing", "This message is no longer in the conversation history.")); return; }
+    item.scrollIntoView({ block: "center", behavior: "smooth" }); item.classList.add("is-highlighted");
+    setTimeout(() => item.classList.remove("is-highlighted"), 2000);
+  }
+
+  function renderAnnouncement() {
+    const conversation = state.activeConversation;
+    const available = conversation?.kind === "group" && isAccountConversation(conversation);
+    $("#groupAnnouncement").hidden = !available;
+    if (!available) return;
+    const announcement = state.accountGroupMetadata.get(conversation.id)?.announcement || "";
+    $("#groupAnnouncementText").textContent = announcement || t("chatNoAnnouncement", "No announcement yet.");
+    const role = conversation.role || conversation.group?.members?.find((member) => member.isSelf)?.role;
+    $("#editGroupAnnouncement").hidden = !["owner", "admin"].includes(role);
+    $("#editGroupAnnouncement").disabled = $("#messageInput").disabled;
+  }
+  async function saveAnnouncement(event) {
+    event.preventDefault();
+    const conversation = state.activeConversation;
+    if (!conversation || !isAccountConversation(conversation)) return;
+    const button = event.submitter; if (button) button.disabled = true;
+    try {
+      const epoch = await currentAccountEpoch(conversation);
+      const version = Number(conversation.metadata?.version || 0) + 1;
+      const plaintext = { ...(state.accountGroupMetadata.get(conversation.id) || {}), announcement: $("#groupAnnouncementInput").value.trim() };
+      const metadata = await cryptoCall("encryptAccountV2Metadata", { conversationId: conversation.id, epoch, version: String(version), plaintext });
+      metadata.version = version;
+      const signed = await signAccountControl(conversation.id, epoch, "metadata", { metadata });
+      await window.ALevelApi.updateChatGroupMetadata(conversation.id, signed);
+      state.accountGroupMetadata.set(conversation.id, plaintext);
+      $("#groupAnnouncementForm").hidden = true;
+      await refreshData(); renderAnnouncement();
+    } catch (error) { setStatus(formatActionError(error), true); }
+    finally { if (button) button.disabled = false; }
+  }
+
+  function notifyMessage(message) {
+    if (message.plaintext == null || message.deleted || !state.cursor) return;
+    window.ALevelChatNotifications?.notify({ conversationId: message.conversationId, conversationTitle: conversationName(state.activeConversation),
+      messageId: message.id, preview: messagePreview(message), mention: messageContent(message).mentions.some((entry) => entry.userId === state.profile.id),
+      isOwn: message.senderUserId === state.profile.id, activeConversationId: state.activeConversation?.id });
+  }
+
+  function contactPeer() {
+    const conversation = state.activeConversation;
+    if (conversation?.kind !== "direct") return null;
+    return { ...conversation.peer, chatUserId: conversation.peer?.chatUserId || state.contacts.find((contact) => contact.id === conversation.peer?.contactId)?.profile?.chatUserId };
+  }
+  async function manageContact(action) {
+    const conversation = state.activeConversation;
+    const peer = contactPeer();
+    if (!conversation || !peer) return;
+    try {
+      if (action === "delete") {
+        if (!window.confirm(t("chatDeleteFriendConfirm", "Delete this friend? Your chat history stays available."))) return;
+        await window.ALevelApi.deleteChatContact(peer.contactId);
+      } else if (conversation.peer?.blockedBySelf) await window.ALevelApi.unblockChatUser(peer.chatUserId);
+      else {
+        if (!window.confirm(t("chatBlockConfirm", "Block this user? Direct messages and friend requests will be stopped."))) return;
+        await window.ALevelApi.blockChatUser(peer.chatUserId);
+      }
+      await refreshData();
+      setStatus(t("chatContactUpdated", "Contact settings updated."));
+    } catch (error) { setStatus(formatActionError(error), true); }
+  }
+  async function openReport(target) {
+    try {
+      let chatUserId = target.chatUserId;
+      if (!chatUserId && target.userId) chatUserId = state.activeConversation?.group?.members?.find((member) => member.userId === target.userId)?.chatUserId || contactPeer()?.chatUserId;
+      if (!chatUserId) throw new Error(t("chatReportUnavailable", "This user's chat ID is unavailable. Refresh the conversation and try again."));
+      state.reportTarget = { ...target, chatUserId };
+      $("#chatReportForm").hidden = false; $("#chatReportDetails").value = ""; $("#chatReportReason").focus();
+    } catch (error) { setStatus(formatActionError(error), true); }
+  }
+  async function submitReport(event) {
+    event.preventDefault();
+    if (!state.reportTarget) return;
+    const button = event.submitter; if (button) button.disabled = true;
+    try {
+      await window.ALevelApi.reportChatContact({ ...state.reportTarget, reason: $("#chatReportReason").value, details: $("#chatReportDetails").value.trim() });
+      $("#chatReportForm").hidden = true; state.reportTarget = null; setStatus(t("chatReportSubmitted", "Report submitted."));
+    } catch (error) { setStatus(formatActionError(error), true); }
+    finally { if (button) button.disabled = false; }
+  }
+  async function renderBlockedUsers() {
+    const host = $("#blockedUsers"); host.replaceChildren();
+    try {
+      const blocks = await window.ALevelApi.getChatBlocks();
+      if (!blocks.length) { host.textContent = t("chatNoBlockedUsers", "No blocked users."); return; }
+      for (const peer of blocks) {
+        const row = document.createElement("div"); row.className = "chat-device-item";
+        const label = document.createElement("span"); label.textContent = `${peer.alias} · ${peer.chatUserId}`;
+        const unblock = document.createElement("button"); unblock.type = "button"; unblock.className = "btn-secondary chat-small-action"; unblock.textContent = t("chatUnblock", "Unblock");
+        unblock.addEventListener("click", async () => { try { await window.ALevelApi.unblockChatUser(peer.chatUserId); await renderBlockedUsers(); await refreshData(); } catch (error) { setStatus(formatActionError(error), true); } });
+        row.append(label, unblock); host.append(row);
+      }
+    } catch (error) { setStatus(formatActionError(error), true); }
   }
 
   function showAccountIdentityChange(conversation, error) {
@@ -574,31 +889,56 @@
     const key = outboxKey();
     state.outboxStorageKey = key;
     try {
-      const parsed = JSON.parse(localStorage.getItem(key) || "[]");
+      let parsed = JSON.parse(localStorage.getItem(key) || "[]");
+      const prefix = `${key}.item.`;
+      if (localStorage.getItem(`${key}.records`)) {
+        parsed = [];
+        for (let index = 0; index < localStorage.length; index += 1) {
+          const recordKey = localStorage.key(index);
+          if (recordKey?.startsWith(prefix)) { try { parsed.push(JSON.parse(localStorage.getItem(recordKey))); } catch (_error) { } }
+        }
+      } else if (Array.isArray(parsed)) {
+        parsed.filter((item) => item?.clientMessageId).forEach((item) => localStorage.setItem(`${prefix}${encodeURIComponent(item.clientMessageId)}`, JSON.stringify(item)));
+        localStorage.setItem(`${key}.records`, "1");
+      }
       state.outbox = Array.isArray(parsed) ? parsed.filter((item) => item?.clientMessageId && item?.conversationId && item?.payload) : [];
     } catch (_error) {
       state.outbox = [];
     }
-    state.outbox.forEach((item) => state.deliveryStates.set(item.clientMessageId, item.status || "queued"));
+    state.outbox.forEach((item) => {
+      if (item.status === "sending") item.status = "queued";
+      state.deliveryStates.set(item.clientMessageId, item.status || "queued");
+    });
+    state.outboxSerialized = new Map(state.outbox.map((item) => [item.clientMessageId, JSON.stringify(outboxRecord(item))]));
+  }
+
+  function outboxRecord(item) {
+    return { queueId: item.queueId, conversationId: item.conversationId, mode: item.mode, clientMessageId: item.clientMessageId,
+      payload: item.payload, status: item.status, error: item.error || "", createdAt: item.createdAt, localCiphertext: item.localCiphertext || null,
+      hasMedia: Boolean(item.hasMedia), nextAttemptAt: item.nextAttemptAt || 0, attempts: item.attempts || 0 };
   }
 
   function persistOutbox() {
-    if (!state.outboxStorageKey) return;
+    if (!state.outboxStorageKey) return false;
     try {
       // Only encrypted transport payloads are persisted. Plaintext is deliberately
       // omitted even when the current page has an optimistic message bubble.
-      localStorage.setItem(state.outboxStorageKey, JSON.stringify(state.outbox.map((item) => ({
-        queueId: item.queueId,
-        conversationId: item.conversationId,
-        mode: item.mode,
-        clientMessageId: item.clientMessageId,
-        payload: item.payload,
-        status: item.status,
-        error: item.error || "",
-        createdAt: item.createdAt,
-      }))));
+      const prefix = `${state.outboxStorageKey}.item.`;
+      const next = new Map(state.outbox.map((item) => [item.clientMessageId, JSON.stringify(outboxRecord(item))]));
+      for (const [id, record] of next) if (state.outboxSerialized.get(id) !== record) localStorage.setItem(`${prefix}${encodeURIComponent(id)}`, record);
+      for (const id of state.outboxSerialized.keys()) if (!next.has(id)) localStorage.removeItem(`${prefix}${encodeURIComponent(id)}`);
+      localStorage.setItem(`${state.outboxStorageKey}.records`, "1");
+      const merged = [];
+      for (let index = 0; index < localStorage.length; index += 1) {
+        const key = localStorage.key(index);
+        if (key?.startsWith(prefix)) merged.push(JSON.parse(localStorage.getItem(key)));
+      }
+      try { localStorage.setItem(state.outboxStorageKey, JSON.stringify(merged)); } catch (_error) { /* Individual message records are the durable queue. */ }
+      state.outboxSerialized = next;
+      if (!next.size || [...next.keys()].every((id) => localStorage.getItem(`${prefix}${encodeURIComponent(id)}`))) return true;
+      return false;
     } catch (_error) {
-      // Storage may be unavailable or full. Sending still works while this tab is open.
+      return false;
     }
   }
 
@@ -622,7 +962,7 @@
   }
 
   function optimisticMessage(item, plaintext) {
-    if (!item || !plaintext) return;
+    if (!item || !plaintext || state.activeConversation?.id !== item.conversationId) return;
     const existing = state.messages.find((message) => message.clientMessageId === item.clientMessageId);
     if (existing) {
       existing.plaintext = plaintext;
@@ -641,38 +981,77 @@
     state.messages.sort((left, right) => String(left.createdAt || "").localeCompare(String(right.createdAt || "")));
   }
 
-  function queueEncryptedMessage({ conversationId, mode, clientMessageId, payload, plaintext }) {
+  function queueEncryptedMessage({ conversationId, mode, clientMessageId, payload, plaintext, localCiphertext = null, hasMedia = false }) {
     const item = {
       queueId: crypto.randomUUID(),
       conversationId,
       mode,
       clientMessageId,
       payload,
-      status: navigator.onLine ? "failed" : "queued",
+      localCiphertext,
+      hasMedia,
+      status: "queued",
       error: "",
       createdAt: new Date().toISOString(),
     };
     state.outbox = [...state.outbox.filter((entry) => entry.clientMessageId !== clientMessageId), item];
     state.deliveryStates.set(clientMessageId, item.status);
+    if (!persistOutbox()) {
+      state.outbox = state.outbox.filter((entry) => entry.clientMessageId !== clientMessageId);
+      state.deliveryStates.delete(clientMessageId);
+      try { localStorage.removeItem(`${state.outboxStorageKey}.item.${encodeURIComponent(clientMessageId)}`); } catch (_error) { }
+      throw new Error(t("chatQueueStorageFailed", "The send queue could not be saved on this device. Your input has been kept; free browser storage and try again."));
+    }
     optimisticMessage(item, plaintext);
-    persistOutbox();
     renderMessages();
     renderContacts();
     return item;
   }
 
   async function dispatchQueuedMessage(item) {
-    if (!item?.payload) return;
+    if (!item?.payload || item.inFlight) return false;
+    item.inFlight = true;
+    const generation = state.accountSessionGeneration;
+    const execute = () => { assertAccountSession(generation); return performQueuedDispatch(item); };
+    try {
+      return navigator.locks ? await navigator.locks.request(`expassway-chat-send:${state.profile.id}:${item.clientMessageId}`, execute) : await execute();
+    } finally { item.inFlight = false; }
+  }
+
+  async function performQueuedDispatch(item) {
+    const recordKey = `${state.outboxStorageKey}.item.${encodeURIComponent(item.clientMessageId)}`;
+    const stored = localStorage.getItem(recordKey);
+    if (localStorage.getItem(`${state.outboxStorageKey}.records`) && !stored) {
+      state.outbox = state.outbox.filter((entry) => entry.clientMessageId !== item.clientMessageId);
+      state.outboxSerialized.delete(item.clientMessageId);
+      state.deliveryStates.set(item.clientMessageId, "sent");
+      return true;
+    }
+    if (stored) Object.assign(item, JSON.parse(stored));
+    const generation = state.accountSessionGeneration;
     setDeliveryState(item.clientMessageId, "sending");
     try {
+      if (item.localCiphertext && !item.payload.stagedImage) {
+        const opened = await cryptoCall("openChatLocalState", { userId: state.profile.id, conversationId: item.conversationId, purpose: "outbox", recordId: item.clientMessageId, sealed: item.localCiphertext,
+          ...(item.mode === "signal-v1" ? { protocolVersion: "signal-v1", deviceId: state.device.id } : {}) });
+        assertAccountSession(generation);
+        await cacheLocalPlaintext(item.clientMessageId, opened.plaintext).catch(() => {});
+      }
+      if (item.payload.stagedImage) await prepareQueuedImage(item);
       if (item.mode === "account-v2") await window.ALevelApi.sendAccountV2Message(item.payload);
       else await window.ALevelApi.sendChatMessage(item.payload);
+      if (generation !== state.accountSessionGeneration) return false;
       state.outbox = state.outbox.filter((entry) => entry.clientMessageId !== item.clientMessageId);
+      if (item.hasMedia) await window.ALevelChatMediaQueue?.remove(state.profile.id, item.clientMessageId).catch(() => {});
+      if (generation !== state.accountSessionGeneration) return false;
       setDeliveryState(item.clientMessageId, "sent");
       persistOutbox();
       return true;
     } catch (error) {
-      setDeliveryState(item.clientMessageId, isNetworkError(error) ? "queued" : "failed", formatActionError(error));
+      if (generation !== state.accountSessionGeneration) return false;
+      const transient = isNetworkError(error);
+      if (transient) { item.attempts = (item.attempts || 0) + 1; item.nextAttemptAt = Date.now() + Math.min(60000, 3000 * 2 ** Math.min(item.attempts, 5)); }
+      setDeliveryState(item.clientMessageId, transient ? "queued" : "failed", formatActionError(error));
       return false;
     }
   }
@@ -681,8 +1060,9 @@
     if (state.outboxInFlight || !state.outbox.length || !navigator.onLine) return;
     state.outboxInFlight = (async () => {
       for (const item of [...state.outbox]) {
+        if (item.status === "failed" || item.nextAttemptAt > Date.now()) continue;
         const sent = await dispatchQueuedMessage(item);
-        if (!sent && !navigator.onLine) break;
+        if (!sent && item.status === "queued") break;
       }
       if (state.activeConversation) {
         await syncConversation().catch(() => {});
@@ -699,9 +1079,57 @@
       setDeliveryState(clientMessageId, "queued");
       return;
     }
+    if (item.mode === "account-v2" && /EPOCH_CONFLICT|ROTATION_REQUIRED|INVALID_ATTACHMENTS/.test(item.error || "")) {
+      try { await refreshQueuedAccountPayload(item); }
+      catch (error) { setStatus(formatActionError(error), true); return; }
+    }
     await dispatchQueuedMessage(item);
     await syncConversation().catch(() => {});
     renderMessages();
+  }
+
+  async function refreshQueuedAccountPayload(item) {
+    const generation = state.accountSessionGeneration;
+    await refreshData();
+    assertAccountSession(generation);
+    const conversation = state.conversations.find((entry) => entry.id === item.conversationId);
+    if (!conversation || conversation.rotationRequired || conversation.canSend === false || isHistoricalConversation(conversation)) throw new Error(t("chatQueueWaitForAccess", "Restore this conversation's membership and encryption before retrying."));
+    const opened = await cryptoCall("openChatLocalState", { userId: state.profile.id, conversationId: conversation.id, purpose: "outbox", recordId: item.clientMessageId, sealed: item.localCiphertext });
+    assertAccountSession(generation);
+    if (item.hasMedia) {
+      const metadata = JSON.parse(opened.plaintext); delete metadata.attachmentId;
+      item.localCiphertext = await cryptoCall("sealChatLocalState", { userId: state.profile.id, conversationId: conversation.id, purpose: "outbox", recordId: item.clientMessageId, plaintext: JSON.stringify(metadata) });
+      item.payload = { stagedImage: true };
+    } else {
+      const epoch = await currentAccountEpoch(conversation);
+      const encrypted = await cryptoCall("encryptAccountV2Message", { conversationId: conversation.id, clientMessageId: item.clientMessageId, epoch, plaintext: opened.plaintext, attachmentRefs: [] });
+      item.payload = { conversationId: conversation.id, clientMessageId: item.clientMessageId, contentEpoch: encrypted.epoch, nonce: encrypted.nonce, ciphertext: encrypted.ciphertext,
+        senderKeyId: encrypted.senderKeyId, signature: encrypted.signature, attachmentRefs: encrypted.attachmentRefs, sizeBucket: "small" };
+    }
+    assertAccountSession(generation);
+    if (!persistOutbox()) throw new Error(t("chatQueueStorageFailed", "The send queue could not be saved on this device. Your input has been kept; free browser storage and try again."));
+  }
+
+  async function enqueuePayload(conversation, mode, payload, plaintext) {
+    ensureLocalState();
+    const generation = state.accountSessionGeneration;
+    const localCiphertext = await cryptoCall("sealChatLocalState", { userId: state.profile.id, conversationId: conversation.id,
+      purpose: "outbox", recordId: payload.clientMessageId, plaintext, ...(state.accountMode ? {} : { protocolVersion: "signal-v1", deviceId: state.device.id }) });
+    assertAccountSession(generation);
+    const item = queueEncryptedMessage({ conversationId: conversation.id, mode, clientMessageId: payload.clientMessageId, payload, plaintext, localCiphertext });
+    if (navigator.onLine) await dispatchQueuedMessage(item);
+    return payload.clientMessageId;
+  }
+
+  async function restoreOutboxMessages(conversation) {
+    for (const item of state.outbox.filter((entry) => entry.conversationId === conversation.id)) {
+      try {
+        const plaintext = item.localCiphertext ? (await cryptoCall("openChatLocalState", { userId: state.profile.id, conversationId: conversation.id, purpose: "outbox", recordId: item.clientMessageId, sealed: item.localCiphertext,
+          ...(state.accountMode ? {} : { protocolVersion: "signal-v1", deviceId: state.device.id }) })).plaintext : await getCachedLocalPlaintext(item.clientMessageId);
+        if (plaintext != null) await cacheLocalPlaintext(item.clientMessageId, plaintext).catch(() => {});
+        if (state.activeConversation?.id === conversation.id) optimisticMessage(item, plaintext || t("chatEncryptedPreview", "Encrypted message"));
+      } catch (_error) { optimisticMessage(item, t("chatEncryptedPreview", "Encrypted message")); }
+    }
   }
 
   async function getCachedLocalPlaintext(clientMessageId) {
@@ -715,7 +1143,7 @@
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20261005-3", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20261005-6", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
       if (state.cryptoWorker !== worker) return;
       const detail = String(event?.message || "").trim();
@@ -1378,6 +1806,13 @@
           });
           actions.appendChild(button);
         }
+        if (direction === "incoming") {
+          const block = document.createElement("button"); block.type = "button"; block.className = "btn-secondary chat-small-action"; block.textContent = t("chatBlock", "Block");
+          block.addEventListener("click", async () => { try { await window.ALevelApi.blockChatUser(profile.chatUserId); await refreshData(); } catch (error) { setStatus(formatActionError(error), true); } });
+          const report = document.createElement("button"); report.type = "button"; report.className = "btn-secondary chat-small-action"; report.textContent = t("chatReport", "Report");
+          report.addEventListener("click", () => openReport({ chatUserId: profile.chatUserId }));
+          actions.append(block, report);
+        }
         item.appendChild(actions);
         host.appendChild(item);
       }
@@ -1476,6 +1911,8 @@
       host.appendChild(empty);
     }
     const orderedConversations = [...state.conversations].sort((left, right) => {
+      const pinOrder = Number(state.localState?.isPinned(right.id) || false) - Number(state.localState?.isPinned(left.id) || false);
+      if (pinOrder) return pinOrder;
       const global = Number(Boolean(right.isGlobalDiscussion || right.globalDiscussion)) - Number(Boolean(left.isGlobalDiscussion || left.globalDiscussion));
       if (global) return global;
       return String(right.lastMessageAt || right.updatedAt || "").localeCompare(String(left.lastMessageAt || left.updatedAt || ""));
@@ -1536,6 +1973,13 @@
       unread.hidden = unreadCount < 1;
       unread.textContent = unreadCount > 99 ? "99+" : String(unreadCount);
       button.classList.toggle("has-unread", unreadCount > 0);
+      const indicators = [];
+      if (state.localState?.isPinned(conversation.id)) indicators.push(t("chatPinned", "Pinned"));
+      if (window.ALevelChatNotifications?.isMuted(conversation.id)) indicators.push(t("chatMuted", "Muted"));
+      if (indicators.length) {
+        const marker = document.createElement("small"); marker.className = "chat-conversation-flags"; marker.textContent = indicators.join(" · ");
+        button.querySelector(".chat-contact-identity > div").append(marker);
+      }
       button.addEventListener("click", () => selectConversation(conversation).catch((error) => setStatus(formatActionError(error), true)));
       host.appendChild(button);
     });
@@ -1590,6 +2034,7 @@
       return;
     }
     state.contacts.forEach((contact) => {
+      if (contact.blockedBySelf || state.conversations.some((conversation) => conversation.kind === "direct" && conversation.peer?.contactId === contact.id && conversation.canSend === false)) state.accountContactStatus.set(contact.id, false);
       const label = document.createElement("label");
       label.className = "chat-group-contact-option";
       const checkbox = document.createElement("input");
@@ -1845,12 +2290,15 @@
   function renderMessages() {
     const host = $("#messageList");
     if (!host) return;
+    const wasAtBottom = host.scrollHeight - host.scrollTop - host.clientHeight < 80;
+    const previousScroll = host.scrollTop;
     host.replaceChildren();
     state.messages.forEach((message) => {
       const isMine = Boolean((message.senderUserId && message.senderUserId === state.profile?.id)
         || (message.senderDeviceId && message.senderDeviceId === state.device?.id));
       const item = document.createElement("article");
       item.className = `chat-message${isMine ? " is-mine" : ""}`;
+      item.dataset.clientMessageId = message.clientMessageId || "";
       const decryptCode = message.decryptCode ? ` (${message.decryptCode})` : "";
       const text = message.deleted
         ? "[deleted]"
@@ -1872,12 +2320,18 @@
         if (adminBadge) identity.appendChild(adminBadge);
         item.prepend(identity);
       }
-      let structured = null;
-      try { structured = JSON.parse(text); } catch (_error) { }
-      if (structured?.kind === "image" && structured.attachmentId) {
+      const structured = window.ExpChatMessageTools.content(text);
+      if (!message.deleted && structured.reply) {
+        const quote = document.createElement("button"); quote.type = "button"; quote.className = "chat-message__quote";
+        const original = state.messages.find((entry) => entry.clientMessageId === structured.reply.clientMessageId);
+        quote.textContent = original?.deleted ? t("chatMessageDeleted", "Message deleted")
+          : original?.plaintext != null ? `${messageSender(original)}: ${messagePreview(original)}` : `${structured.reply.alias || ""}: ${structured.reply.preview || ""}`;
+        quote.addEventListener("click", () => jumpToMessage(structured.reply.clientMessageId)); item.querySelector("p").before(quote);
+      }
+      if (structured?.kind === "image") {
         item.querySelector("p").textContent = structured.name || t("chatAttachImage", "Encrypted image");
         const attachment = item.querySelector(".chat-message__attachment");
-        attachment.hidden = false;
+        attachment.hidden = !structured.attachmentId;
         const downloadButton = document.createElement("button");
         downloadButton.type = "button";
         downloadButton.className = "btn-secondary chat-small-action";
@@ -1885,15 +2339,19 @@
         downloadButton.addEventListener("click", () => downloadImage(structured));
         attachment.appendChild(downloadButton);
       } else {
-        item.querySelector("p").textContent = text;
+        item.querySelector("p").textContent = structured.text;
+      }
+      if (!message.deleted && structured.mentions?.some((member) => member.userId === state.profile?.id)) {
+        item.classList.add("mentions-you");
+        const mentioned = document.createElement("small"); mentioned.className = "chat-message__mention"; mentioned.textContent = t("chatMentionedYou", "Mentioned you"); item.append(mentioned);
       }
       item.querySelector("time").textContent = new Date(message.createdAt).toLocaleString();
       const delivery = state.deliveryStates.get(message.clientMessageId);
-      if (message.localOnly || delivery) {
+      if (isMine) {
         const meta = document.createElement("span");
         meta.className = `chat-message__delivery chat-message__delivery--${delivery || "sent"}`;
-        const labels = { sending: "Sending...", queued: "Queued until online", failed: "Failed", sent: "Sent" };
-        meta.textContent = labels[delivery] || "Sending...";
+        const labels = { sending: t("chatDeliverySending", "Sending…"), queued: t("chatDeliveryQueued", "Queued until online"), failed: t("chatDeliveryFailed", "Failed"), sent: t("chatDeliverySent", "Sent") };
+        meta.textContent = labels[delivery || (message.localOnly ? "queued" : "sent")];
         if (delivery === "failed") {
           const retry = document.createElement("button");
           retry.type = "button";
@@ -1902,11 +2360,21 @@
           retry.addEventListener("click", () => retryMessage(message.clientMessageId).catch((error) => setStatus(formatActionError(error), true)));
           meta.appendChild(retry);
         }
+        const queueItem = state.outbox.find((entry) => entry.clientMessageId === message.clientMessageId);
+        if (queueItem?.error) meta.title = queueItem.error;
         item.appendChild(meta);
+      }
+      if (!message.deleted && message.plaintext != null && !$("#messageInput").disabled) {
+        const reply = document.createElement("button"); reply.type = "button"; reply.className = "btn-secondary chat-small-action chat-message__reply"; reply.textContent = t("chatReply", "Reply");
+        reply.addEventListener("click", () => setReply(message)); item.append(reply);
+      }
+      if (!isMine && message.senderUserId) {
+        const report = document.createElement("button"); report.type = "button"; report.className = "btn-secondary chat-small-action chat-message__reply"; report.textContent = t("chatReport", "Report");
+        report.addEventListener("click", () => openReport({ userId: message.senderUserId, conversationId: message.conversationId, messageId: message.localOnly ? null : message.id })); item.append(report);
       }
       host.appendChild(item);
     });
-    host.scrollTop = host.scrollHeight;
+    host.scrollTop = wasAtBottom ? host.scrollHeight : previousScroll;
   }
 
   async function resetActiveSession() {
@@ -2103,7 +2571,8 @@
   }
 
   async function currentAccountEpoch(conversation) {
-    const epochs = await openAccountEpochs(conversation);
+    const cached = state.accountEpochs.get(conversation.id);
+    const epochs = !navigator.onLine && cached?.length ? cached : await openAccountEpochs(conversation);
     const current = [...epochs].sort((left, right) => Number(right.epoch) - Number(left.epoch))[0];
     if (!current) {
       const error = new Error("This account has no usable key for this conversation. Refresh the chat or ask its owner to restore your membership.");
@@ -2114,6 +2583,7 @@
   }
 
   async function sendAccountV2Payload(conversation, plaintext, attachmentRefs = [], contentEpoch = null) {
+    const generation = state.accountSessionGeneration;
     const epoch = contentEpoch ?? await currentAccountEpoch(conversation);
     const clientMessageId = crypto.randomUUID();
     const encrypted = await cryptoCall("encryptAccountV2Message", {
@@ -2123,7 +2593,8 @@
       plaintext,
       attachmentRefs,
     });
-    await window.ALevelApi.sendAccountV2Message({
+    assertAccountSession(generation);
+    await enqueuePayload(conversation, "account-v2", {
       conversationId: conversation.id,
       clientMessageId,
       contentEpoch: encrypted.epoch,
@@ -2133,7 +2604,7 @@
       signature: encrypted.signature,
       attachmentRefs: encrypted.attachmentRefs,
       sizeBucket: "small",
-    });
+    }, plaintext);
     return clientMessageId;
   }
 
@@ -2250,6 +2721,7 @@
             },
             signingPublicKey: message.senderSigningPublicKey,
           });
+          state.localPlaintexts[message.clientMessageId] = decrypted.plaintext;
           result.push({ ...message, plaintext: decrypted.plaintext });
         } catch (error) {
           result.push({ ...message, plaintext: null, decryptCode: error?.code || "DECRYPT_FAILED" });
@@ -2293,6 +2765,7 @@
     if (!message) return "";
     if (message.deleted) return t("chatMessageDeleted", "Message deleted");
     if (message.preview) return message.preview;
+    if (message.plaintext != null) return messagePreview(message);
     if (Array.isArray(message.attachmentRefs) && message.attachmentRefs.length) return t("chatImagePreview", "Image");
     return t("chatEncryptedPreview", "Encrypted message");
   }
@@ -2302,8 +2775,12 @@
       const message = conversation.latestMessage;
       if (!message) continue;
       try {
-        const cached = await getCachedLocalPlaintext(message.clientMessageId);
-        if (cached != null) message.preview = cached;
+        let plaintext = state.localPlaintexts[message.clientMessageId] ?? state.history.get(message.id)?.plaintext ?? state.messages.find((entry) => entry.id === message.id)?.plaintext;
+        if (plaintext == null && isAccountConversation(conversation) && state.accountV2?.unlocked) {
+          if (!(state.accountEpochs.get(conversation.id) || []).some((entry) => Number(entry.epoch) === Number(message.contentEpoch))) await openAccountEpochs(conversation);
+          plaintext = (await decryptMessages([message]))[0]?.plaintext;
+        } else if (plaintext == null) plaintext = await getCachedLocalPlaintext(message.clientMessageId);
+        if (plaintext != null) message.preview = window.ExpChatMessageTools.preview(plaintext, t("chatImagePreview", "Image"));
       } catch (_error) { /* A preview is optional and must not block the list. */ }
     }
   }
@@ -2311,12 +2788,17 @@
   async function markActiveConversationRead() {
     const conversation = state.activeConversation;
     const latest = conversation?.latestMessage;
-    if (!conversation || !latest || Number(conversation.unreadCount || 0) <= 0) return;
+    if (!conversation || !latest || document.hidden || latest.localOnly || conversation.lastReadMessageId === latest.id) return;
+    const generation = state.syncGeneration;
     try {
-      await window.ALevelApi.markChatConversationRead(conversation.id, latest.id);
-      conversation.unreadCount = 0;
-      conversation.lastReadAt = latest.createdAt;
-      conversation.lastReadMessageId = latest.id;
+      const result = await window.ALevelApi.markChatConversationRead(conversation.id, latest.id);
+      if (!conversationIsCurrent(conversation.id, generation)) return;
+      state.dataRefreshGeneration += 1;
+      Object.assign(conversation, result);
+      const current = state.conversations.find((entry) => entry.id === conversation.id);
+      if (current && current !== conversation) Object.assign(current, result);
+      if (state.activeConversation !== conversation) Object.assign(state.activeConversation, result);
+      window.ALevelChatNotifications?.updateUnread(state.conversations);
       renderContacts();
     } catch (_error) { /* Read state is best effort during transient network failures. */ }
   }
@@ -2357,24 +2839,39 @@
           if (incoming.length) {
             const fresh = await decryptMessages(incoming);
             if (!conversationIsCurrent(conversationId, generation)) return;
-            const known = new Map(state.messages.map((message) => [message.id, message]));
+            const receivedIds = new Set(fresh.map((message) => message.clientMessageId));
+            const newMessages = fresh.filter((message) => !state.messages.some((entry) => entry.id === message.id));
+            newMessages.forEach((message) => notifyMessage(message));
+            const known = new Map(state.messages.filter((message) => !message.localOnly || !receivedIds.has(message.clientMessageId)).map((message) => [message.id, message]));
             fresh.forEach((message) => known.set(message.id, message));
             state.messages = [...known.values()].sort((left, right) => String(left.createdAt || "").localeCompare(String(right.createdAt || "")));
           }
           for (const event of events.filter((item) => item.type === "deleted" && item.messageId)) {
             const existing = state.messages.find((message) => message.id === event.messageId);
-            if (existing) Object.assign(existing, { deleted: true, plaintext: null, ciphertext: "" });
+            const cached = state.history.get(event.messageId);
+            state.history.delete(event.messageId);
+            if (cached) {
+              delete state.localPlaintexts[cached.clientMessageId];
+              await state.localState?.removeEncrypted(conversationId, "search", event.messageId).catch(() => {});
+            }
+            if (existing) {
+              delete state.localPlaintexts[existing.clientMessageId];
+              Object.assign(existing, { deleted: true, plaintext: null, ciphertext: "" });
+            }
           }
           const nextCursor = payload?.nextCursor == null ? state.cursor : String(payload.nextCursor);
           hasMore = Boolean(payload?.hasMore && nextCursor !== state.cursor);
           state.cursor = nextCursor;
           if (incoming.length) {
             const latest = incoming.at(-1);
-            state.activeConversation.latestMessage = latest;
+            state.activeConversation.latestMessage = state.messages.find((message) => message.id === latest.id) || latest;
             state.activeConversation.lastMessageAt = latest.createdAt;
           }
           renderMessages();
+          if (incoming.length || events.some((event) => event.type === "deleted")) await rememberHistory(state.messages);
         } while (hasMore && conversationIsCurrent(conversationId, generation));
+        await markActiveConversationRead();
+        renderContacts();
         return;
       }
       const payload = await window.ALevelApi.syncChatMessages(conversationId, state.cursor);
@@ -2387,7 +2884,9 @@
       const fresh = await decryptMessages(payload.messages || []);
       if (!conversationIsCurrent(conversationId, generation)) return;
       const known = new Set(state.messages.map((message) => message.id));
-      state.messages = [...state.messages, ...fresh.filter((message) => !known.has(message.id))];
+      const receivedIds = new Set(fresh.map((message) => message.clientMessageId));
+      fresh.filter((message) => !known.has(message.id)).forEach(notifyMessage);
+      state.messages = [...state.messages.filter((message) => !message.localOnly || !receivedIds.has(message.clientMessageId)), ...fresh.filter((message) => !known.has(message.id))];
       state.cursor = payload.nextCursor || state.cursor;
       if (fresh.length) {
         const latest = fresh.at(-1);
@@ -2395,6 +2894,9 @@
         state.activeConversation.lastMessageAt = latest.createdAt;
       }
       renderMessages();
+      await rememberHistory(state.messages);
+      await markActiveConversationRead();
+      renderContacts();
     })().finally(() => {
       if (state.syncGeneration === generation) state.syncInFlight = null;
     });
@@ -2410,6 +2912,8 @@
     stopPolling();
     state.pollTimer = window.setInterval(() => {
       if (document.hidden) return;
+      void flushOutbox();
+      if (!navigator.onLine) return;
       if (state.activeConversation && !state.syncInFlight) syncConversation().catch((error) => setStatus(formatActionError(error), true));
       if (Date.now() - state.lastProfileRefresh >= 30000) refreshPresentation().catch(() => {});
     }, 3000);
@@ -2459,12 +2963,14 @@
 
   async function performConversationSelection(conversation) {
     stopPolling();
-    if (state.activeConversation) state.messageDrafts.set(state.activeConversation.id, $("#messageInput").value);
+    if (state.activeConversation) { state.messageDrafts.set(state.activeConversation.id, $("#messageInput").value); void persistDraft(state.activeConversation.id); }
     const generation = ++state.syncGeneration;
     state.socket?.close();
     state.socket = null;
     state.syncInFlight = null;
     state.activeConversation = conversation;
+    await restoreDraft(conversation.id);
+    if (!conversationIsCurrent(conversation.id, generation)) return;
     closeEmojiPicker();
     state.emojiSelection = null;
     $("#messageInput").value = state.messageDrafts.get(conversation.id) || "";
@@ -2472,10 +2978,22 @@
     state.messages = [];
     state.cursor = "";
     $("#groupManagePanel").hidden = true;
+    $("#contactManagePanel").hidden = true;
+    $("#chatReportForm").hidden = true;
+    $("#groupAnnouncementForm").hidden = true;
+    $("#mentionSuggestions").hidden = true;
+    $("#draftStatus").textContent = state.messageDrafts.get(conversation.id) ? t("chatDraftSaved", "Draft saved encrypted on this device.") : "";
     renderActiveConversation();
     renderMessages();
     renderContacts();
     try {
+      if (!navigator.onLine) {
+        await restoreOutboxMessages(conversation);
+        const localMessages = [...state.history.values()].filter((message) => message.conversationId === conversation.id);
+        const queued = state.messages;
+        state.messages = [...localMessages, ...queued].sort((left, right) => String(left.createdAt || "").localeCompare(String(right.createdAt || "")));
+        renderMessages(); startPolling(); return;
+      }
       if (isAccountConversation(conversation)) {
         await openAccountEpochs(conversation);
       } else if (state.accountMode) {
@@ -2498,6 +3016,8 @@
       if (!conversationIsCurrent(conversation.id, generation)) return;
       renderActiveConversation();
       await syncConversation();
+      await restoreOutboxMessages(conversation);
+      renderMessages();
       await markActiveConversationRead();
       if (!conversationIsCurrent(conversation.id, generation)) return;
       await openRealtime();
@@ -2689,11 +3209,17 @@
       }
     }
     state.profile = profile;
+    window.ALevelChatNotifications?.setUser(profile.id);
+    ensureLocalState();
+    if (state.outboxStorageKey !== outboxKey()) { loadOutbox(); await restoreSearchHistory(); }
     state.globalInfo = globalInfo || null;
     state.globalPendingCount = Number(globalInfo?.pendingCount || 0);
     state.contacts = contacts;
     state.friendRequests = { incoming: friendRequests?.incoming || [], outgoing: friendRequests?.outgoing || [] };
     state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
+    await hydrateConversationPreviews(state.conversations);
+    if (generation !== state.dataRefreshGeneration) return;
+    window.ALevelChatNotifications?.updateUnread(state.conversations);
     state.peerBundles.clear();
     state.conversationBundles.clear();
     state.ownBundle = null;
@@ -2728,6 +3254,7 @@
     if (!state.accountMode) renderDevices();
     if (!state.pollTimer) startPolling();
     scheduleGlobalDiscussionReconcile();
+    void flushOutbox();
   }
 
   async function refreshPresentation() {
@@ -2750,7 +3277,8 @@
       state.friendRequests = { incoming: friendRequests?.incoming || [], outgoing: friendRequests?.outgoing || [] };
       state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
       await hydrateConversationPreviews(state.conversations);
-      if (generation !== state.dataRefreshGeneration || selectionGeneration !== state.syncGeneration) return;
+      if (generation + 1 !== state.dataRefreshGeneration || selectionGeneration !== state.syncGeneration) return;
+      window.ALevelChatNotifications?.updateUnread(state.conversations);
       if (state.activeConversation) {
         const refreshed = state.conversations.find((conversation) => conversation.id === state.activeConversation.id);
         if (!refreshed) {
@@ -2831,12 +3359,14 @@
   }
 
   async function globalEpochPayload(conversationId, epoch, recipients) {
+    const existing = state.conversations.find((conversation) => conversation.id === conversationId);
+    if (existing?.metadata && !state.accountGroupMetadata.has(conversationId)) await openAccountEpochs(existing);
     const created = await cryptoCall("createAccountV2Epoch", { conversationId, epoch, recipients });
     const metadata = await cryptoCall("encryptAccountV2Metadata", {
       conversationId,
       epoch,
       version: 1,
-      plaintext: { name: t("chatGlobalDiscussionTitle", "Global Discussion"), avatarRef: null },
+      plaintext: state.accountGroupMetadata.get(conversationId) || { name: t("chatGlobalDiscussionTitle", "Global Discussion"), avatarRef: null },
     });
     return { recipients: created.recipients, metadata };
   }
@@ -2898,10 +3428,12 @@
     event.preventDefault();
     if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
     const conversation = state.activeConversation;
+    const generation = state.accountSessionGeneration;
     if (state.accountMode && !isAccountConversation(conversation)) return;
     const input = $("#messageInput");
-    const plaintext = input.value.trim();
-    if (!plaintext) return;
+    const text = input.value.trim();
+    if (!text) return;
+    const plaintext = composeContent(text, conversation);
     const button = $("#sendMessage");
     if (button.disabled) return;
     state.sendingText.add(conversation.id);
@@ -2911,11 +3443,14 @@
     try {
       if (isAccountConversation(conversation)) {
         await sendAccountV2Payload(conversation, plaintext);
+        assertAccountSession(generation);
         sent = true;
-        if (state.messageDrafts.get(conversation.id)?.trim() === plaintext) state.messageDrafts.delete(conversation.id);
+        if (state.messageDrafts.get(conversation.id)?.trim() === text) state.messageDrafts.delete(conversation.id);
+        clearSentMetadata(conversation.id, plaintext);
         if (state.activeConversation?.id === conversation.id) {
-          if (input.value.trim() === plaintext) input.value = "";
-          await syncConversation();
+          if (input.value.trim() === text) input.value = "";
+          if (navigator.onLine) await syncConversation();
+          renderReplyPreview();
           setStatus("");
         }
         return;
@@ -2929,20 +3464,24 @@
       }
       const envelope = btoa(JSON.stringify({ version: 1, recipients })).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
       const clientMessageId = crypto.randomUUID();
-      await window.ALevelApi.sendChatMessage({
+      assertAccountSession(generation);
+      await enqueuePayload(conversation, "signal-v1", {
         conversationId: conversation.id,
         senderDeviceId: state.device.id,
         clientMessageId,
         protocolVersion: "signal-v1",
         ciphertext: envelope,
         sizeBucket: "small",
-      });
+      }, plaintext);
+      assertAccountSession(generation);
       sent = true;
-      if (state.messageDrafts.get(conversation.id)?.trim() === plaintext) state.messageDrafts.delete(conversation.id);
+      if (state.messageDrafts.get(conversation.id)?.trim() === text) state.messageDrafts.delete(conversation.id);
+      clearSentMetadata(conversation.id, plaintext);
       await cacheLocalPlaintext(clientMessageId, plaintext).catch(() => {});
       if (state.activeConversation?.id === conversation.id) {
-        if (input.value.trim() === plaintext) input.value = "";
-        await syncConversation();
+        if (input.value.trim() === text) input.value = "";
+        if (navigator.onLine) await syncConversation();
+        renderReplyPreview();
         setStatus("");
       }
     } catch (error) {
@@ -2956,78 +3495,137 @@
     }
   }
 
+  async function prepareQueuedImage(item) {
+    const generation = state.accountSessionGeneration;
+    const userId = state.profile.id;
+    const conversation = state.conversations.find((entry) => entry.id === item.conversationId);
+    if (!conversation) throw new Error("This conversation is unavailable.");
+    const sealed = item.localCiphertext;
+    const opened = await cryptoCall("openChatLocalState", { userId, conversationId: conversation.id, purpose: "outbox", recordId: item.clientMessageId, sealed,
+      ...(state.accountMode ? {} : { protocolVersion: "signal-v1", deviceId: state.device.id }) });
+    const metadata = JSON.parse(opened.plaintext);
+    assertAccountSession(generation);
+    const encryptedBytes = await window.ALevelChatMediaQueue.get(userId, item.clientMessageId);
+    assertAccountSession(generation);
+    if (!encryptedBytes) throw new Error("The encrypted image is missing from this device's send queue.");
+    const epoch = isAccountConversation(conversation) ? await currentAccountEpoch(conversation) : null;
+    assertAccountSession(generation);
+    let attachmentId = item.payload.attachmentId;
+    if (!attachmentId) {
+      const reservation = await window.ALevelApi.initChatAttachment({ conversationId: conversation.id, sizeBytes: encryptedBytes.byteLength,
+        ...(epoch == null ? {} : { protocolVersion: "account-v2", contentEpoch: epoch }) });
+      assertAccountSession(generation);
+      attachmentId = reservation.attachmentId;
+      item.payload.attachmentId = attachmentId;
+      persistOutbox();
+    }
+    try {
+      await window.ALevelApi.uploadChatAttachment(attachmentId, encryptedBytes);
+      assertAccountSession(generation);
+      await window.ALevelApi.completeChatAttachment(attachmentId);
+    } catch (error) {
+      assertAccountSession(generation);
+      if (error?.code !== "ATTACHMENT_NOT_FOUND") throw error;
+      try { await window.ALevelApi.completeChatAttachment(attachmentId); }
+      catch (completionError) {
+        assertAccountSession(generation);
+        if (!["ATTACHMENT_NOT_FOUND", "ATTACHMENT_INCOMPLETE"].includes(completionError?.code)) throw completionError;
+        const replacement = await window.ALevelApi.initChatAttachment({ conversationId: conversation.id, sizeBytes: encryptedBytes.byteLength,
+          ...(epoch == null ? {} : { protocolVersion: "account-v2", contentEpoch: epoch }) });
+        assertAccountSession(generation);
+        attachmentId = replacement.attachmentId; item.payload.attachmentId = attachmentId; persistOutbox();
+        await window.ALevelApi.uploadChatAttachment(attachmentId, encryptedBytes);
+        assertAccountSession(generation);
+        await window.ALevelApi.completeChatAttachment(attachmentId);
+      }
+    }
+    assertAccountSession(generation);
+    metadata.attachmentId = attachmentId;
+    const plaintext = JSON.stringify(metadata);
+    if (isAccountConversation(conversation)) {
+      const encrypted = await cryptoCall("encryptAccountV2Message", { conversationId: conversation.id, clientMessageId: item.clientMessageId, epoch, plaintext, attachmentRefs: [attachmentId] });
+      item.payload = { conversationId: conversation.id, clientMessageId: item.clientMessageId, contentEpoch: encrypted.epoch, nonce: encrypted.nonce, ciphertext: encrypted.ciphertext,
+        senderKeyId: encrypted.senderKeyId, signature: encrypted.signature, attachmentRefs: encrypted.attachmentRefs, sizeBucket: "small" };
+    } else {
+      await assertSafetyStable(conversation);
+      const peers = await getEncryptionRecipients(conversation);
+      const recipients = {};
+      for (const peer of peers) recipients[peer.deviceId] = await encryptForRecipient(conversation, peer, plaintext);
+      const envelope = btoa(JSON.stringify({ version: 1, recipients })).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+      item.payload = { conversationId: conversation.id, senderDeviceId: state.device.id, clientMessageId: item.clientMessageId, protocolVersion: "signal-v1", ciphertext: envelope, attachmentRefs: [attachmentId] };
+    }
+    assertAccountSession(generation);
+    item.localCiphertext = await cryptoCall("sealChatLocalState", { userId, conversationId: conversation.id, purpose: "outbox", recordId: item.clientMessageId, plaintext,
+      ...(state.accountMode ? {} : { protocolVersion: "signal-v1", deviceId: state.device.id }) });
+    assertAccountSession(generation);
+    await cacheLocalPlaintext(item.clientMessageId, plaintext).catch(() => {});
+    optimisticMessage(item, plaintext);
+    if (!persistOutbox()) throw new Error(t("chatQueueStorageFailed", "The send queue could not be saved on this device. Your input has been kept; free browser storage and try again."));
+  }
+
   async function sendImage(file) {
     if (!file || !state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
     const conversation = state.activeConversation;
-    const generation = state.syncGeneration;
+    const generation = state.accountSessionGeneration;
     if (state.accountMode && !isAccountConversation(conversation)) return;
-    if (state.sendingImages.has(conversation.id)) return;
+    if (state.sendingImages.has(conversation.id) || $("#imageInput").disabled) return;
     if (file.size + 16 > 10 * 1024 * 1024) throw new Error("Encrypted images, including their authentication tag, must be 10 MB or smaller.");
+    if (!file.type.startsWith("image/")) throw new Error("Choose an image file.");
     state.sendingImages.add(conversation.id);
     $("#imageInput").disabled = true;
-    let sent = false;
+    const clientMessageId = crypto.randomUUID();
+    const userId = state.profile.id;
+    let queued = false;
     try {
       setStatus(t("chatSending", "Encrypting and sending..."));
-      if (!isAccountConversation(conversation)) await assertSafetyStable(conversation);
-      const contentEpoch = isAccountConversation(conversation) ? await currentAccountEpoch(conversation) : null;
       const encryptedFile = await cryptoCall("encryptAttachment", { bytes: await file.arrayBuffer() });
-      const reservation = await window.ALevelApi.initChatAttachment({
-        conversationId: conversation.id,
-        sizeBytes: encryptedFile.bytes.byteLength,
-        ...(contentEpoch == null ? {} : { protocolVersion: "account-v2", contentEpoch }),
-      });
-      await window.ALevelApi.uploadChatAttachment(reservation.attachmentId, encryptedFile.bytes);
-      await window.ALevelApi.completeChatAttachment(reservation.attachmentId);
-      const metadata = JSON.stringify({
-        kind: "image",
-        attachmentId: reservation.attachmentId,
-        key: encryptedFile.key,
-        nonce: encryptedFile.nonce,
-        name: file.name,
-        mime: file.type || "image/*",
-      });
-      if (isAccountConversation(conversation)) {
-        await sendAccountV2Payload(conversation, metadata, [reservation.attachmentId], contentEpoch);
-      } else {
-        const peers = await getEncryptionRecipients(conversation);
-        if (!peers.length) throw new Error("The contact has no active device.");
-        const recipients = {};
-        for (const peer of peers) {
-          recipients[peer.deviceId] = await encryptForRecipient(conversation, peer, metadata);
-        }
-        const envelope = btoa(JSON.stringify({ version: 1, recipients })).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
-        const clientMessageId = crypto.randomUUID();
-        await window.ALevelApi.sendChatMessage({
-          conversationId: conversation.id,
-          senderDeviceId: state.device.id,
-          clientMessageId,
-          protocolVersion: "signal-v1",
-          ciphertext: envelope,
-          attachmentRefs: [reservation.attachmentId],
-        });
-        await cacheLocalPlaintext(clientMessageId, metadata).catch(() => {});
-      }
-      sent = true;
-      if (conversationIsCurrent(conversation.id, generation)) {
-        $("#imageInput").value = "";
-        await syncConversation();
-        setStatus("");
-      }
+      assertAccountSession(generation);
+      const plaintext = JSON.stringify({ kind: "image", key: encryptedFile.key, nonce: encryptedFile.nonce, name: file.name, mime: file.type,
+        ...(state.replyTargets.get(conversation.id) ? { reply: state.replyTargets.get(conversation.id) } : {}) });
+      const localCiphertext = await cryptoCall("sealChatLocalState", { userId: state.profile.id, conversationId: conversation.id, purpose: "outbox", recordId: clientMessageId, plaintext,
+        ...(state.accountMode ? {} : { protocolVersion: "signal-v1", deviceId: state.device.id }) });
+      assertAccountSession(generation);
+      await window.ALevelChatMediaQueue.put(state.profile.id, clientMessageId, encryptedFile.bytes);
+      assertAccountSession(generation);
+      const item = queueEncryptedMessage({ conversationId: conversation.id, mode: isAccountConversation(conversation) ? "account-v2" : "signal-v1", clientMessageId, payload: { stagedImage: true }, plaintext, localCiphertext, hasMedia: true });
+      queued = true;
+      clearSentMetadata(conversation.id, plaintext);
+      if (state.activeConversation?.id === conversation.id) { $("#imageInput").value = ""; renderReplyPreview(); }
+      if (navigator.onLine) await dispatchQueuedMessage(item);
+      if (state.activeConversation?.id === conversation.id && navigator.onLine) await syncConversation();
+      setStatus("");
     } catch (error) {
+      if (!queued) await window.ALevelChatMediaQueue?.remove(userId, clientMessageId).catch(() => {});
       showAccountIdentityChange(conversation, error);
-      if (sent) {
-        if (conversationIsCurrent(conversation.id, generation)) setStatus(`Image sent, but chat refresh failed: ${formatActionError(error)}`, true);
-      } else throw error;
+      throw error;
     } finally {
       state.sendingImages.delete(conversation.id);
-      if (state.activeConversation?.id === conversation.id) {
-        $("#imageInput").value = "";
-        renderActiveConversation();
-      }
+      if (state.activeConversation?.id === conversation.id) renderActiveConversation();
     }
   }
 
   function wireEvents() {
+    $("#markChatRead")?.addEventListener("click", markActiveConversationRead);
+    $("#muteChat")?.addEventListener("click", () => { window.ALevelChatNotifications?.toggleMuted(state.activeConversation?.id); renderConversationPreferences(); renderContacts(); });
+    $("#pinChat")?.addEventListener("click", () => { ensureLocalState(); const id = state.activeConversation?.id; if (!id) return; state.localState?.setPinned(id, !state.localState.isPinned(id)); renderConversationPreferences(); renderContacts(); });
+    $("#notificationToggle")?.addEventListener("click", async () => { const enabled = !window.ALevelChatNotifications?.getPreferences().enabled; const granted = await window.ALevelChatNotifications?.setEnabled(enabled); renderConversationPreferences(); if (enabled && !granted) setStatus(t("chatNotificationsDenied", "Allow notifications in your browser to enable desktop alerts.")); });
+    window.addEventListener("expassway:chat-notification-preferences", () => { renderConversationPreferences(); renderContacts(); });
+    $("#cancelReply")?.addEventListener("click", () => { const id = state.activeConversation?.id; state.replyTargets.delete(id); renderReplyPreview(); void persistDraft(id); });
+    $("#mentionButton")?.addEventListener("click", () => renderMentionSuggestions(true));
+    $("#searchMessages")?.addEventListener("click", () => { const panel = $("#messageSearchPanel"); panel.hidden = !panel.hidden; $("#searchMessages").setAttribute("aria-expanded", String(!panel.hidden)); if (!panel.hidden) { renderMessageSearch(); $("#messageSearchQuery").focus(); } });
+    for (const id of ["messageSearchQuery", "messageSearchType", "messageSearchFrom", "messageSearchTo"]) $(`#${id}`)?.addEventListener("input", renderMessageSearch);
+    $("#contactManageButton")?.addEventListener("click", () => { $("#contactManagePanel").hidden = !$("#contactManagePanel").hidden; });
+    $("#deleteFriend")?.addEventListener("click", () => manageContact("delete"));
+    $("#blockFriend")?.addEventListener("click", () => manageContact("block"));
+    $("#reportFriend")?.addEventListener("click", () => openReport({ chatUserId: contactPeer()?.chatUserId, conversationId: state.activeConversation?.id }));
+    $("#chatReportForm")?.addEventListener("submit", submitReport);
+    $("#cancelChatReport")?.addEventListener("click", () => { $("#chatReportForm").hidden = true; state.reportTarget = null; });
+    $("#manageBlocks")?.addEventListener("click", () => { const host = $("#blockedUsers"); host.hidden = !host.hidden; if (!host.hidden) void renderBlockedUsers(); });
+    $("#editGroupAnnouncement")?.addEventListener("click", () => { $("#groupAnnouncementInput").value = state.accountGroupMetadata.get(state.activeConversation?.id)?.announcement || ""; $("#groupAnnouncementForm").hidden = false; $("#groupAnnouncementInput").focus(); });
+    $("#groupAnnouncementForm")?.addEventListener("submit", saveAnnouncement);
+    $("#cancelGroupAnnouncement")?.addEventListener("click", () => { $("#groupAnnouncementForm").hidden = true; });
+    window.addEventListener("online", () => { void flushOutbox(); });
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) { void markActiveConversationRead(); void flushOutbox(); } });
     $("#editChatProfile")?.addEventListener("click", () => {
       if (state.profileSaving) return;
       $("#chatProfileForm").hidden = false;
@@ -3136,7 +3734,8 @@
     $("#messageForm")?.addEventListener("submit", sendMessage);
     $("#imageInput")?.addEventListener("change", (event) => sendImage(event.target.files?.[0]).catch((error) => setStatus(t("chatAttachmentFailed", "Image upload failed: {message}", { message: formatActionError(error) }), true)));
     $("#messageInput")?.addEventListener("input", () => {
-      if (state.activeConversation) state.messageDrafts.set(state.activeConversation.id, $("#messageInput").value);
+      if (state.activeConversation) { state.messageDrafts.set(state.activeConversation.id, $("#messageInput").value); void persistDraft(state.activeConversation.id); }
+      renderMentionSuggestions();
     });
     $("#emojiButton")?.addEventListener("click", () => {
       if ($("#messageInput").disabled) return;

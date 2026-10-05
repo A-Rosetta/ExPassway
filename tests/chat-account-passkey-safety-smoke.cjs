@@ -111,12 +111,14 @@ async function main() {
           createChatWebSocketTicket: async () => { throw new Error("Realtime unavailable in this fixture."); },
           syncChatMessages: async () => {
             window.__calls.syncLegacy += 1;
-            return { messages: [{ id: "legacy-message", clientMessageId: "legacy-message", senderDeviceId: "legacy-device", protocolVersion: "signal-v1", createdAt: "2026-10-05T00:00:00.000Z" }], nextCursor: "1" };
+            return { messages: [{ id: "legacy-message", conversationId: "legacy-history-chat", clientMessageId: "legacy-message", senderDeviceId: "legacy-device", protocolVersion: "signal-v1", createdAt: "2026-10-05T00:00:00.000Z" }], nextCursor: "1" };
           },
         };
       }, { markup, scenario });
       await page.addStyleTag({ content: css });
       await page.addScriptTag({ content: i18n });
+      await page.addScriptTag({ content: await fs.readFile("scripts/chat-message-tools.js", "utf8") });
+      await page.addScriptTag({ content: await fs.readFile("scripts/chat-local-state.js", "utf8") });
       await page.addScriptTag({ content: source });
       if (scenario !== "legacy-device-chat") {
         await page.locator("#chatSetupPanel").waitFor({ state: "visible" });

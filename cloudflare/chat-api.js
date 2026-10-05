@@ -332,54 +332,59 @@ function rateLimitAction(request) {
   const url = new URL(request.url);
   if (url.pathname === "/api/chat/messages") return "message";
   if (url.pathname === "/api/chat/attachments/init") return "attachment";
-  if (url.pathname === "/api/chat/reports") return "report";
+  if (["/api/chat/reports", "/api/chat/contact-reports"].includes(url.pathname)) return "report";
   if (request.method === "POST" && (url.pathname === "/api/chat/contacts/by-user-id" || url.pathname.startsWith("/api/chat/contact-requests/"))) return "friend-request";
   return "read";
 }
 
 function rateLimitLimit(request) {
   const action = rateLimitAction(request);
-  return action === "message" ? 240 : action === "read" ? 600 : 30;
+  return action === "message" ? 240 : action === "read" ? 600 : action === "report" ? 10 : 30;
 }
 
 async function enforceRateLimit(db, userId, action, limit) {
   const nowSeconds = Math.floor(Date.now() / 1000);
   const windowStart = Math.floor(nowSeconds / 60) * 60;
   const timestamp = nowIso();
-  const row = await db
-    .prepare(
-      `SELECT window_start, request_count FROM chat_rate_limits WHERE user_id = ? AND action = ?`
-    )
-    .bind(userId, action)
-    .first();
-  if (!row || Number(row.window_start) !== windowStart) {
-    await db
-      .prepare(
-        `
-      INSERT INTO chat_rate_limits (user_id, action, window_start, request_count, updated_at)
-      VALUES (?, ?, ?, 1, ?)
-      ON CONFLICT(user_id, action) DO UPDATE SET window_start = excluded.window_start,
-        request_count = 1, updated_at = excluded.updated_at
-    `
-      )
-      .bind(userId, action, windowStart, timestamp)
-      .run();
-    return;
-  }
-  if (Number(row.request_count) >= limit) {
+  const allowed = await db.prepare(`
+    INSERT INTO chat_rate_limits (user_id, action, window_start, request_count, updated_at)
+    VALUES (?, ?, ?, 1, ?)
+    ON CONFLICT(user_id, action) DO UPDATE SET window_start = excluded.window_start,
+      request_count = CASE WHEN chat_rate_limits.window_start = excluded.window_start
+        THEN chat_rate_limits.request_count + 1 ELSE 1 END,
+      updated_at = excluded.updated_at
+    WHERE chat_rate_limits.window_start <> excluded.window_start OR chat_rate_limits.request_count < ?
+    RETURNING request_count`).bind(userId, action, windowStart, timestamp, limit).first();
+  if (!allowed) {
     throw new AuthError(429, "Chat request rate limit exceeded.", "CHAT_RATE_LIMITED", {
-      retryAfterSeconds: 60,
+      retryAfterSeconds: windowStart + 60 - nowSeconds,
     });
   }
-  try { await db
-    .prepare(
-      "UPDATE chat_rate_limits SET request_count = request_count + 1, updated_at = ? WHERE user_id = ? AND action = ?"
-    )
-    .bind(timestamp, userId, action)
-    .run();
-  } catch (_error) {
-    // Rate limiting is best effort when the optional counter table is unavailable.
-  }
+}
+
+async function contactSafety(db, userId, peerUserId) {
+  const row = await db.prepare(`SELECT
+    EXISTS(SELECT 1 FROM chat_user_blocks WHERE user_id=? AND blocked_user_id=?) AS blocked_by_self,
+    EXISTS(SELECT 1 FROM chat_user_blocks WHERE user_id=? AND blocked_user_id=? OR user_id=? AND blocked_user_id=?) AS blocked,
+    EXISTS(SELECT 1 FROM chat_contacts WHERE user_id=? AND peer_user_id=? AND accepted_at IS NOT NULL) AS contact_accepted`)
+    .bind(userId, peerUserId, userId, peerUserId, peerUserId, userId, userId, peerUserId).first();
+  return { blockedBySelf: Boolean(row.blocked_by_self), contactAccepted: Boolean(row.contact_accepted),
+    canSend: Boolean(row.contact_accepted) && !row.blocked, blocked: Boolean(row.blocked) };
+}
+
+async function requireUnblocked(db, userId, peerUserId) {
+  if ((await contactSafety(db, userId, peerUserId)).blocked)
+    throw new AuthError(403, "This contact cannot receive your request or message.", "CHAT_CONTACT_BLOCKED");
+}
+
+async function requireDirectSendAllowed(db, conversation, userId) {
+  if (conversation.kind !== "direct") return;
+  const peer = await db.prepare("SELECT user_id FROM chat_conversation_members WHERE conversation_id=? AND user_id<>? AND left_at IS NULL LIMIT 1")
+    .bind(conversation.id, userId).first();
+  if (!peer) throw new AuthError(403, "An accepted friendship is required to send messages.", "CHAT_FRIENDSHIP_REQUIRED");
+  const safety = await contactSafety(db, userId, peer.user_id);
+  if (safety.blocked) throw new AuthError(403, "This contact cannot receive your message.", "CHAT_CONTACT_BLOCKED");
+  if (!safety.contactAccepted) throw new AuthError(403, "An accepted friendship is required to send messages.", "CHAT_FRIENDSHIP_REQUIRED");
 }
 
 async function requireConversationMember(db, conversationId, userId) {
@@ -427,6 +432,7 @@ async function requireContact(db, contactId, userId) {
     .bind(contactId, userId)
     .first();
   if (!row) throw new AuthError(404, "Contact not found.", "CONTACT_NOT_FOUND");
+  await requireUnblocked(db, userId, row.peer_user_id);
   return row;
 }
 
@@ -524,15 +530,17 @@ async function markConversationRead(db, conversationId, userId, messageId = "") 
   if (messageId && !latest) throw new AuthError(404, "Message not found.", "MESSAGE_NOT_FOUND");
   if (!latest) return { conversationId, unreadCount: 0, lastReadAt: null, lastReadMessageId: null };
   try {
-    await db.prepare("UPDATE chat_conversation_members SET last_read_at=?, last_read_message_id=? WHERE conversation_id=? AND user_id=?")
-      .bind(latest.created_at, latest.id, conversationId, userId).run();
+    await db.prepare(`UPDATE chat_conversation_members SET last_read_at=?, last_read_message_id=? WHERE conversation_id=? AND user_id=?
+      AND (last_read_at IS NULL OR last_read_at<? OR (last_read_at=? AND COALESCE(last_read_message_id,'')<?))`)
+      .bind(latest.created_at, latest.id, conversationId, userId, latest.created_at, latest.created_at, latest.id).run();
   } catch (error) {
     if (/no such column|last_read_at/i.test(String(error?.message || error))) {
       throw new AuthError(503, "Read state is not available until the chat database migration is applied.", "READ_STATE_UNAVAILABLE");
     }
     throw error;
   }
-  return { conversationId, unreadCount: 0, lastReadAt: latest.created_at, lastReadMessageId: latest.id };
+  const summary = await conversationSummary(db, conversationId, userId);
+  return { conversationId, unreadCount: summary.unreadCount, lastReadAt: summary.lastReadAt, lastReadMessageId: summary.lastReadMessageId };
 }
 
 async function mapConversation(db, row, userId) {
@@ -541,7 +549,7 @@ async function mapConversation(db, row, userId) {
     const memberRows = await db
       .prepare(
         `
-      SELECT m.user_id, m.role, m.joined_at, p.chat_alias, p.identity_fingerprint, p.avatar_data_url,
+      SELECT m.user_id, m.role, m.joined_at, p.chat_user_id, p.chat_alias, p.identity_fingerprint, p.avatar_data_url,
         (SELECT COUNT(*) FROM chat_devices d WHERE d.user_id = m.user_id AND d.revoked_at IS NULL) AS device_count
       FROM chat_conversation_members m
       LEFT JOIN chat_profiles p ON p.user_id = m.user_id
@@ -561,6 +569,7 @@ async function mapConversation(db, row, userId) {
               .bind(userId, member.user_id)
               .first();
       members.push({
+        chatUserId: member.chat_user_id || null,
         contactId: contact?.id || null,
         alias: member.user_id === userId ? null : member.chat_alias || "Paired contact",
         avatarDataUrl: member.avatar_data_url || "",
@@ -587,7 +596,7 @@ async function mapConversation(db, row, userId) {
   const peer = await db
     .prepare(
       `
-    SELECT m.user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url,
+    SELECT m.user_id, p.chat_user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url,
       d.id AS device_id, d.device_number
     FROM chat_conversation_members m
     LEFT JOIN chat_profiles p ON p.user_id = m.user_id
@@ -605,6 +614,7 @@ async function mapConversation(db, row, userId) {
         .first()
     : null;
   const summary = await conversationSummary(db, row.id, userId);
+  const safety = peer ? await contactSafety(db, userId, peer.user_id) : { blockedBySelf: false, contactAccepted: false, canSend: false };
   return {
     id: row.id,
     kind: row.kind,
@@ -614,8 +624,13 @@ async function mapConversation(db, row, userId) {
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     ...summary,
+    canSend: safety.canSend,
     peer: peer
       ? {
+          chatUserId: peer.chat_user_id || null,
+          blockedBySelf: safety.blockedBySelf,
+          contactAccepted: safety.contactAccepted,
+          canSend: safety.canSend,
           contactId: contact?.id || null,
           deviceId: peer.device_id || null,
           deviceNumber: peer.device_number || null,
@@ -713,7 +728,8 @@ async function listContacts(db, userId) {
   const rows = await db
     .prepare(
       `
-      SELECT c.id, c.created_at, c.accepted_at, p.chat_user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url
+      SELECT c.id, c.created_at, c.accepted_at, p.chat_user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url,
+        EXISTS(SELECT 1 FROM chat_user_blocks b WHERE b.user_id=c.user_id AND b.blocked_user_id=c.peer_user_id) AS blocked_by_self
     FROM chat_contacts c
     LEFT JOIN chat_profiles p ON p.user_id = c.peer_user_id
     WHERE c.user_id = ? AND c.accepted_at IS NOT NULL ORDER BY c.accepted_at DESC
@@ -725,6 +741,7 @@ async function listContacts(db, userId) {
     id: row.id,
     createdAt: row.created_at,
     acceptedAt: row.accepted_at,
+    blockedBySelf: Boolean(row.blocked_by_self),
     profile: {
       chatUserId: row.chat_user_id || null,
       alias: row.chat_alias || "Paired contact",
@@ -764,7 +781,9 @@ async function searchChatUsers(db, userId, query) {
     LEFT JOIN chat_friend_requests r ON r.status='pending' AND
       ((r.sender_user_id=? AND r.recipient_user_id=p.user_id) OR (r.recipient_user_id=? AND r.sender_user_id=p.user_id))
     WHERE p.user_id<>? AND p.chat_user_id LIKE ?
-    GROUP BY p.user_id ORDER BY p.chat_user_id LIMIT 20`).bind(userId, userId, userId, userId, `${q}%`).all();
+      AND NOT EXISTS(SELECT 1 FROM chat_user_blocks b WHERE (b.user_id=? AND b.blocked_user_id=p.user_id)
+        OR (b.user_id=p.user_id AND b.blocked_user_id=?))
+    GROUP BY p.user_id ORDER BY p.chat_user_id LIMIT 20`).bind(userId, userId, userId, userId, `${q}%`, userId, userId).all();
   return (rows.results || []).map((row) => ({ ...mapDirectoryProfile(row, row.contact_id),
     requestId: row.request_id || null,
     requestDirection: row.request_id ? (row.request_sender === userId ? "outgoing" : "incoming") : null,
@@ -809,6 +828,7 @@ async function resolveFriendRequest(db, userId, requestId, action) {
   if (action === "cancel" ? request.sender_user_id !== userId : request.recipient_user_id !== userId)
     throw new AuthError(403, "Only the recipient can accept or reject a request; only the sender can cancel it.", "FORBIDDEN");
   if (request.status !== "pending") throw new AuthError(409, "This friend request has already been resolved.", "FRIEND_REQUEST_RESOLVED");
+  if (action === "accept") await requireUnblocked(db, request.sender_user_id, request.recipient_user_id);
   if (action === "accept" && (!(await directoryAccountEnabled(db, request.sender_user_id)) || !(await directoryAccountEnabled(db, request.recipient_user_id))))
     throw new AuthError(409, "Both accounts must enable secure chat before becoming friends.", "ACCOUNT_NOT_ENABLED");
   const timestamp = nowIso();
@@ -846,12 +866,14 @@ async function addContactByChatUserId(db, userId, value, introductionValue) {
         WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=pk.credential_id))
     WHERE p.chat_user_id=? GROUP BY p.user_id`).bind(chatUserId).first();
   if (!target || target.user_id === userId) throw new AuthError(404, "Chat user not found.", "CHAT_USER_NOT_FOUND");
+  await requireUnblocked(db, userId, target.user_id);
   if (!target.account_enabled) throw new AuthError(409, "This user must enable secure chat first.", "ACCOUNT_NOT_ENABLED");
   if (!(await directoryAccountEnabled(db, userId))) throw new AuthError(409, "Enable secure chat before adding friends.", "ACCOUNT_NOT_ENABLED");
   const existing = await db.prepare("SELECT id FROM chat_contacts WHERE user_id=? AND peer_user_id=? AND accepted_at IS NOT NULL").bind(userId, target.user_id).first();
   if (existing) return { id: existing.id, profile: mapDirectoryProfile(target, existing.id), request: null };
   let request = await pendingFriendRequest(db, userId, target.user_id);
   if (!request) {
+    await enforceFriendRequestFrequency(db, userId, target.user_id);
     const timestamp = nowIso();
     const requestId = randomId();
     try { await db.prepare(`INSERT INTO chat_friend_requests (id,sender_user_id,recipient_user_id,introduction,status,created_at)
@@ -861,6 +883,95 @@ async function addContactByChatUserId(db, userId, value, introductionValue) {
     if (!request) throw new AuthError(409, "The friend request changed. Refresh and retry.", "FRIEND_REQUEST_CHANGED");
   }
   return { id: null, profile: mapDirectoryProfile(target), request: await mapFriendRequest(db, request, userId) };
+}
+
+async function enforceFriendRequestFrequency(db, userId, peerUserId) {
+  const recent = await db.prepare(`SELECT MIN(created_at) AS oldest, COUNT(*) AS count FROM chat_friend_requests
+    WHERE sender_user_id=? AND created_at>?`).bind(userId, new Date(Date.now() - 3600000).toISOString()).first();
+  if (Number(recent.count) >= 10) throw new AuthError(429, "You can send at most 10 new friend requests per hour.", "FRIEND_REQUEST_RATE_LIMITED",
+    { retryAfterSeconds: Math.max(1, Math.ceil((Date.parse(recent.oldest) + 3600000 - Date.now()) / 1000)) });
+  const latest = await db.prepare(`SELECT created_at FROM chat_friend_requests
+    WHERE sender_user_id=? AND recipient_user_id=? ORDER BY created_at DESC LIMIT 1`).bind(userId, peerUserId).first();
+  const retryAfterSeconds = latest ? Math.ceil((Date.parse(latest.created_at) + 86400000 - Date.now()) / 1000) : 0;
+  if (retryAfterSeconds > 0) throw new AuthError(429, "Wait before sending another request to this user.", "FRIEND_REQUEST_COOLDOWN", { retryAfterSeconds });
+}
+
+async function chatUserByPublicId(db, userId, value) {
+  const chatUserId = String(value || "").trim();
+  if (!validChatUserId(chatUserId)) throw new AuthError(400, "The chat ID is invalid.", "INVALID_CHAT_USER_ID");
+  const profile = await db.prepare("SELECT user_id,chat_user_id,chat_alias,avatar_data_url FROM chat_profiles WHERE chat_user_id=?")
+    .bind(chatUserId).first();
+  if (!profile || profile.user_id === userId) throw new AuthError(404, "Chat user not found.", "CHAT_USER_NOT_FOUND");
+  return profile;
+}
+
+async function listUserBlocks(db, userId) {
+  const rows = await db.prepare(`SELECT b.created_at,p.chat_user_id,p.chat_alias,p.avatar_data_url
+    FROM chat_user_blocks b JOIN chat_profiles p ON p.user_id=b.blocked_user_id
+    WHERE b.user_id=? ORDER BY b.created_at DESC,p.chat_user_id`).bind(userId).all();
+  return (rows.results || []).map((row) => ({ ...mapDirectoryProfile(row), blockedAt: row.created_at }));
+}
+
+async function blockChatUser(db, userId, value) {
+  const profile = await chatUserByPublicId(db, userId, value);
+  const timestamp = nowIso();
+  await db.batch([
+    db.prepare("INSERT INTO chat_user_blocks (user_id,blocked_user_id,created_at) VALUES (?,?,?) ON CONFLICT(user_id,blocked_user_id) DO NOTHING")
+      .bind(userId, profile.user_id, timestamp),
+    db.prepare(`UPDATE chat_friend_requests SET status='cancelled',resolved_at=? WHERE status='pending' AND
+      ((sender_user_id=? AND recipient_user_id=?) OR (sender_user_id=? AND recipient_user_id=?))`)
+      .bind(timestamp, userId, profile.user_id, profile.user_id, userId),
+  ]);
+  return { blocked: true, profile: mapDirectoryProfile(profile) };
+}
+
+async function deleteContact(db, userId, contactId) {
+  // Deleting a friendship never deletes conversation membership, keys or history.
+  const contact = await db.prepare("SELECT peer_user_id FROM chat_contacts WHERE id=? AND user_id=? AND accepted_at IS NOT NULL")
+    .bind(contactId, userId).first();
+  if (!contact) throw new AuthError(404, "Contact not found.", "CONTACT_NOT_FOUND");
+  await db.prepare("DELETE FROM chat_contacts WHERE (user_id=? AND peer_user_id=?) OR (user_id=? AND peer_user_id=?)")
+    .bind(userId, contact.peer_user_id, contact.peer_user_id, userId).run();
+  return { deleted: true, contactId };
+}
+
+async function reportContact(db, userId, body) {
+  const target = await chatUserByPublicId(db, userId, body?.chatUserId);
+  if (!["spam", "harassment", "unsafe", "other"].includes(body?.reason))
+    throw new AuthError(400, "Choose a valid report reason.", "INVALID_REPORT_REASON");
+  if (body.details != null && typeof body.details !== "string") throw new AuthError(400, "Report details must be text.", "INVALID_REPORT_DETAILS");
+  const details = String(body.details || "").trim();
+  if (details.length > 2000) throw new AuthError(413, "Report details can contain at most 2000 characters.", "REPORT_DETAILS_TOO_LONG");
+  let conversationId = body.conversationId ? boundedString(body.conversationId, "conversationId", 100) : null;
+  const messageId = body.messageId ? boundedString(body.messageId, "messageId", 100) : null;
+  if (messageId) {
+    const message = await db.prepare(`SELECT m.conversation_id,COALESCE(m.sender_user_id,d.user_id) AS sender_user_id
+      FROM chat_messages m LEFT JOIN chat_devices d ON d.id=m.sender_device_id WHERE m.id=?`).bind(messageId).first();
+    if (!message || message.sender_user_id !== target.user_id || (conversationId && conversationId !== message.conversation_id))
+      throw new AuthError(404, "Message not found.", "MESSAGE_NOT_FOUND");
+    conversationId = message.conversation_id;
+  }
+  if (conversationId) {
+    await requireConversationMember(db, conversationId, userId);
+    const member = await db.prepare("SELECT 1 FROM chat_conversation_members WHERE conversation_id=? AND user_id=?")
+      .bind(conversationId, target.user_id).first();
+    if (!member) throw new AuthError(404, "Contact not found in this conversation.", "CONTACT_NOT_FOUND");
+  }
+  const relation = conversationId || await db.prepare(`SELECT 1 WHERE
+    EXISTS(SELECT 1 FROM chat_contacts WHERE user_id=? AND peer_user_id=?) OR
+    EXISTS(SELECT 1 FROM chat_user_blocks WHERE user_id=? AND blocked_user_id=?) OR
+    EXISTS(SELECT 1 FROM chat_friend_requests WHERE (sender_user_id=? AND recipient_user_id=?) OR (sender_user_id=? AND recipient_user_id=?)) OR
+    EXISTS(SELECT 1 FROM chat_conversation_members mine JOIN chat_conversation_members peer ON mine.conversation_id=peer.conversation_id
+      WHERE mine.user_id=? AND mine.left_at IS NULL AND peer.user_id=?)`)
+    .bind(userId, target.user_id, userId, target.user_id, userId, target.user_id, target.user_id, userId, userId, target.user_id).first();
+  if (!relation) throw new AuthError(403, "Only report a user you have interacted with.", "REPORT_RELATION_REQUIRED");
+  const duplicate = await db.prepare("SELECT id FROM chat_contact_reports WHERE reporter_user_id=? AND reported_user_id=? AND reason=? AND status='pending' AND message_id IS ?")
+    .bind(userId, target.user_id, body.reason, messageId).first();
+  if (duplicate) return { submitted: true, reportId: duplicate.id };
+  const reportId = randomId();
+  await db.prepare(`INSERT INTO chat_contact_reports (id,reporter_user_id,reported_user_id,reason,details,conversation_id,message_id,created_at)
+    VALUES (?,?,?,?,?,?,?,?)`).bind(reportId, userId, target.user_id, body.reason, details, conversationId, messageId, nowIso()).run();
+  return { submitted: true, reportId };
 }
 
 async function globalReadyAccounts(db, conversationId = null) {
@@ -2936,6 +3047,33 @@ async function handleRoute(request, env, user) {
     return success(await markConversationRead(db, parts[3], user.id, body?.messageId ? boundedString(body.messageId, "messageId", 100) : ""), method);
   }
 
+  if (method === "DELETE" && parts.length === 4 && parts[2] === "contacts")
+    return success(await deleteContact(db, user.id, boundedString(parts[3], "contactId", 100)), method);
+  if (url.pathname === "/api/chat/blocks") {
+    if (method === "GET") return success(await listUserBlocks(db, user.id), method);
+    if (method === "POST") return success(await blockChatUser(db, user.id, (await readJsonBody(request))?.chatUserId), method, 201);
+  }
+  if (method === "DELETE" && parts.length === 4 && parts[2] === "blocks") {
+    const profile = await chatUserByPublicId(db, user.id, decodeURIComponent(parts[3]));
+    await db.prepare("DELETE FROM chat_user_blocks WHERE user_id=? AND blocked_user_id=?").bind(user.id, profile.user_id).run();
+    return success({ blocked: false }, method);
+  }
+  if (method === "POST" && url.pathname === "/api/chat/contact-reports")
+    return success(await reportContact(db, user.id, await readJsonBody(request)), method, 201);
+
+  if (method === "GET" && parts[2] === "contacts" && parts[3] && ["account-key", "account-bundle", "bundle"].includes(parts[4]))
+    await requireContact(db, parts[3], user.id);
+  // Both encryption protocols pass this send policy before their own handlers.
+  // History reads, key epochs and downloads remain available after unlinking.
+  if ((method === "POST" && ["/api/chat/messages", "/api/chat/attachments/init"].includes(url.pathname))
+      || (parts[2] === "attachments" && parts[3] && parts[3] !== "init" && ["PUT", "POST"].includes(method))) {
+    let conversationId;
+    if (parts[2] === "attachments" && parts[3] && parts[3] !== "init") {
+      conversationId = (await db.prepare("SELECT conversation_id FROM chat_attachments WHERE id=?").bind(parts[3]).first())?.conversation_id;
+    } else conversationId = (await readJsonBody(request.clone()))?.conversationId;
+    if (conversationId) await requireDirectSendAllowed(db, await requireConversationMember(db, conversationId, user.id), user.id);
+  }
+
   // Account-v2 owns its conversation, message, attachment and sync contract.
   const accountV2Response = await handleAccountV2Route(request, env, user);
   if (accountV2Response) return accountV2Response;
@@ -3500,6 +3638,14 @@ export async function handleChatApiRequest(request, env) {
     const response = await handleRoute(request, env, user);
     return withCors(request, response);
   } catch (error) {
+    const safetyCode = ["CHAT_CONTACT_BLOCKED", "CHAT_FRIENDSHIP_REQUIRED", "FRIEND_REQUEST_COOLDOWN", "FRIEND_REQUEST_RATE_LIMITED"]
+      .find((code) => String(error?.message || error).includes(code));
+    if (!(error instanceof AuthError) && safetyCode)
+      return withCors(request, failure(safetyCode.startsWith("FRIEND_REQUEST_") ? 429 : 403, safetyCode,
+        safetyCode === "CHAT_FRIENDSHIP_REQUIRED" ? "An accepted friendship is required to send messages."
+          : safetyCode === "CHAT_CONTACT_BLOCKED" ? "This contact cannot receive your request or message."
+            : "Wait before sending another friend request.", request.method,
+        safetyCode.startsWith("FRIEND_REQUEST_") ? { retryAfterSeconds: safetyCode === "FRIEND_REQUEST_COOLDOWN" ? 86400 : 3600 } : undefined));
     if (error instanceof AuthError)
       return withCors(
         request,

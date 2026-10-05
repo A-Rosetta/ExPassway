@@ -242,6 +242,35 @@ async function main() {
     assert.equal((await contacts(admin)).length, 0);
     console.log("Browser: incoming friend request rejection preserves contact isolation");
 
+    // Incoming requests can be reported and blocked without accepting them.
+    const safetyRequestId = await sendRequest(admin, users[1], "Please review this request.");
+    await refresh(bob);
+    const safetyRow = requestRow(bob, safetyRequestId);
+    await safetyRow.getByRole("button", { name: "Report", exact: true }).click();
+    await bob.locator("#chatReportForm").waitFor({ state: "visible" });
+    await bob.selectOption("#chatReportReason", "spam");
+    await bob.fill("#chatReportDetails", "Unwanted request for browser safety validation.");
+    const reportResponse = bob.waitForResponse((response) => response.url().endsWith("/api/chat/contact-reports") && response.request().method() === "POST");
+    await bob.locator('#chatReportForm button[type="submit"]').click();
+    assert.equal((await reportResponse).status(), 201);
+    await bob.locator("#chatReportForm").waitFor({ state: "hidden" });
+    const savedReport = await env.DB.prepare("SELECT reason,details FROM chat_contact_reports WHERE reporter_user_id=? AND reported_user_id=?")
+      .bind(users[1].id, users[2].id).first();
+    assert.equal(savedReport.reason, "spam");
+    assert.equal(savedReport.details, "Unwanted request for browser safety validation.");
+    await safetyRow.getByRole("button", { name: "Block", exact: true }).click();
+    await safetyRow.waitFor({ state: "detached" });
+    assert.equal((await contacts(bob)).length, 0, "Blocking a request must not grant friendship.");
+    assert.equal((await bob.evaluate(() => window.ALevelApi.getChatBlocks()))[0].chatUserId, users[2].chatUserId);
+    await refresh(admin);
+    await requestRow(admin, safetyRequestId).waitFor({ state: "detached" });
+    await bob.click("#manageBlocks");
+    await bob.locator("#blockedUsers").getByRole("button", { name: "Unblock", exact: true }).click();
+    await bob.locator("#blockedUsers").getByText("No blocked users.", { exact: true }).waitFor();
+    assert.equal((await bob.evaluate(() => window.ALevelApi.getChatBlocks())).length, 0);
+    await bob.click("#manageBlocks");
+    console.log("Browser: request reporting, blocking cancellation and blocked-list recovery passed");
+
     // A pending request exposes its introduction, and becomes usable only on acceptance.
     const introduction = "Hi Bob, I am Alice from the Chemistry study group.";
     const acceptedId = await sendRequest(alice, users[1], introduction);
@@ -278,6 +307,67 @@ async function main() {
     await bob.locator("#conversationList button[data-conversation-id]").filter({ hasText: "Alice" }).click();
     await bob.locator("#messageList").getByText("Accepted friends can exchange encrypted messages.", { exact: true }).waitFor();
     console.log("Browser: explicit friend acceptance creates reciprocal contacts and encrypted direct messaging");
+
+    // Safety controls gate both accounts while preserving encrypted history.
+    const directId = await bob.locator('#conversationList button.is-active').getAttribute("data-conversation-id");
+    const historyCount = (await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_messages WHERE conversation_id=?").bind(directId).first()).count;
+    await bob.click("#contactManageButton");
+    await bob.click("#reportFriend");
+    await bob.selectOption("#chatReportReason", "harassment");
+    await bob.fill("#chatReportDetails", "User-written report; chat history must stay encrypted.");
+    const directReport = bob.waitForResponse((response) => response.url().endsWith("/api/chat/contact-reports") && response.request().method() === "POST");
+    await bob.locator('#chatReportForm button[type="submit"]').click();
+    assert.equal((await directReport).status(), 201);
+    await bob.locator("#chatReportForm").waitFor({ state: "hidden" });
+    const reportCall = calls.findLast((call) => call.path === "/api/chat/contact-reports" && call.user === "Bob");
+    assert.equal(reportCall.body.conversationId, directId);
+    assert.equal(reportCall.body.chatUserId, users[0].chatUserId);
+    assert.equal(Object.hasOwn(reportCall.body, "plaintext"), false);
+    bob.once("dialog", (dialog) => dialog.accept());
+    await bob.click("#blockFriend");
+    await bob.waitForFunction(() => document.querySelector("#messageInput").disabled);
+    assert.equal(await bob.locator("#sendMessage").isDisabled(), true);
+    assert.equal(await bob.locator("#imageInput").isDisabled(), true);
+    assert.equal(await bob.locator("#blockFriend").textContent(), "Unblock");
+    await refresh(alice);
+    await alice.waitForFunction(() => document.querySelector("#messageInput").disabled);
+    await alice.locator("#messageList").getByText("Accepted friends can exchange encrypted messages.", { exact: true }).waitFor();
+    assert.equal((await contacts(alice)).length, 1, "A reversible block retains friendship.");
+    await bob.click("#blockFriend");
+    await bob.waitForFunction(() => !document.querySelector("#messageInput").disabled);
+    await refresh(alice);
+    await alice.waitForFunction(() => !document.querySelector("#messageInput").disabled);
+    await alice.fill("#messageInput", "Unblock restores encrypted direct messaging.");
+    await alice.click("#sendMessage");
+    await alice.locator("#messageList").getByText("Unblock restores encrypted direct messaging.", { exact: true }).waitFor();
+    await refresh(bob);
+    await bob.locator("#messageList").getByText("Unblock restores encrypted direct messaging.", { exact: true }).waitFor();
+    bob.once("dialog", (dialog) => dialog.dismiss());
+    await bob.click("#deleteFriend");
+    assert.equal((await contacts(bob)).length, 1, "Cancelling delete preserves reciprocal contacts.");
+    bob.once("dialog", (dialog) => dialog.accept());
+    await bob.click("#deleteFriend");
+    await bob.waitForFunction(() => document.querySelector("#deleteFriend").disabled && document.querySelector("#messageInput").disabled);
+    await refresh(alice);
+    await alice.waitForFunction(() => document.querySelector("#messageInput").disabled);
+    assert.equal((await contacts(alice)).length, 0);
+    assert.equal((await contacts(bob)).length, 0);
+    assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_messages WHERE conversation_id=?").bind(directId).first()).count, historyCount + 1);
+    await bob.reload();
+    await bob.locator("#chatApp").waitFor({ state: "visible" });
+    await bob.locator(`#conversationList button[data-conversation-id="${directId}"]`).click();
+    await bob.locator("#messageList").getByText("Accepted friends can exchange encrypted messages.", { exact: true }).waitFor();
+    await bob.locator("#messageList").getByText("Unblock restores encrypted direct messaging.", { exact: true }).waitFor();
+    assert.equal(await bob.locator("#messageInput").isDisabled(), true);
+    if (process.env.CHAT_QA_SCREENSHOT) {
+      const directory = path.dirname(path.resolve(process.env.CHAT_QA_SCREENSHOT));
+      await screenshotAtTop(bob, path.join(directory, "chat-contact-history-desktop.png"));
+      await bob.setViewportSize({ width: 390, height: 844 });
+      await screenshotAtTop(bob, path.join(directory, "chat-contact-history-mobile.png"), true);
+      assert.ok(await bob.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), "contact history must fit the mobile viewport");
+      await bob.setViewportSize({ width: 1440, height: 980 });
+    }
+    console.log("Browser: report, block, unblock and unlink preserve history after refresh and gate sending");
 
     // An ordinary group owner is presented as Admin and can remove members.
     const adminRequestId = await sendRequest(admin, users[0]);

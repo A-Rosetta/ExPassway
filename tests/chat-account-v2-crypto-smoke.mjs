@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { webcrypto } from "node:crypto";
+import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 import { build } from "esbuild";
 import sodium from "libsodium-wrappers-sumo";
@@ -24,7 +25,7 @@ function canonical(value) {
   return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(",")}}`;
 }
 
-function createWorker() {
+function createWorker(legacyVault = null) {
   const messages = [];
   const context = {
     self: { postMessage(message) { messages.push(message); } },
@@ -39,6 +40,17 @@ function createWorker() {
     console,
     setTimeout,
     clearTimeout,
+  };
+  if (legacyVault) context.indexedDB = {
+    open() {
+      const request = { result: { transaction: () => ({ objectStore: () => ({ get: () => {
+        const getRequest = { result: legacyVault };
+        queueMicrotask(() => getRequest.onsuccess());
+        return getRequest;
+      } }) }) } };
+      queueMicrotask(() => request.onsuccess());
+      return request;
+    },
   };
   context.globalThis = context;
   vm.createContext(context);
@@ -172,6 +184,59 @@ await freshBob.call("openAccountV2Envelope", { conversationId: "historical-chat"
 assert.equal((await freshBob.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "hello");
 assert.equal((await freshBob.call("decryptAccountV2Message", { message: oldMessage, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "Keep this historical chat");
 
+// Drafts and queued inputs use a worker-derived key, and authenticate their full
+// account/conversation/purpose scope. Another Passkey or refreshed worker can
+// reopen them without storing either text or encryption keys in localStorage.
+const localScope = { userId: "bob", conversationId: "group-1", purpose: "draft", recordId: "" };
+const draftText = "private unsent revision 重新整理笔记";
+const sealedDraft = await bobUnlocked.call("sealChatLocalState", { ...localScope, plaintext: draftText });
+assert.equal(Object.hasOwn(sealedDraft, "key"), false);
+assert.equal(JSON.stringify(sealedDraft).includes(draftText), false);
+assert.equal((await freshBob.call("openChatLocalState", { ...localScope, sealed: sealedDraft })).plaintext, draftText,
+  "a refreshed worker unlocked with a different Passkey reopens the original encrypted draft");
+for (const scopeOverride of [{ userId: "alice" }, { conversationId: "group-2" }, { purpose: "outbox" }, { recordId: "other" }]) {
+  await assert.rejects(() => freshBob.call("openChatLocalState", { ...localScope, ...scopeOverride, sealed: sealedDraft }),
+    (error) => error.code === "INVALID_LOCAL_STATE");
+}
+for (const sealedOverride of [{ keyVersion: null }, { deviceId: "different" }, { protocolVersion: "unknown" },
+  { ciphertext: b64(new Uint8Array(32)) }, { nonce: b64(new Uint8Array(12)) }]) {
+  await assert.rejects(() => freshBob.call("openChatLocalState", { ...localScope, sealed: { ...sealedDraft, ...sealedOverride } }),
+    (error) => ["INVALID_LOCAL_STATE", "LOCAL_STATE_DECRYPT_FAILED"].includes(error.code));
+}
+const historicalDraft = await bobOld.call("sealChatLocalState", { ...localScope, plaintext: "An older identity's draft" });
+assert.equal((await freshBob.call("openChatLocalState", { ...localScope, sealed: historicalDraft })).plaintext, "An older identity's draft");
+await assert.rejects(() => bobUnlocked.call("sealChatLocalState", { ...localScope, userId: "alice", plaintext: draftText }),
+  (error) => error.code === "INVALID_LOCAL_STATE");
+
+const legacyVault = { devices: { "legacy-device": { identityKeyPair: { privKey: sodium.randombytes_buf(32).buffer } } } };
+const legacyScope = { ...localScope, protocolVersion: "signal-v1", deviceId: "legacy-device" };
+const legacyDraft = await createWorker(legacyVault).call("sealChatLocalState", { ...legacyScope, plaintext: draftText });
+assert.equal((await createWorker(legacyVault).call("openChatLocalState", { ...legacyScope, sealed: legacyDraft })).plaintext, draftText);
+await assert.rejects(() => createWorker(legacyVault).call("openChatLocalState", { ...legacyScope, deviceId: "other", sealed: legacyDraft }),
+  (error) => error.code === "INVALID_LOCAL_STATE");
+
+const localValues = new Map();
+const storage = { get length() { return localValues.size; }, key: (index) => [...localValues.keys()][index],
+  getItem: (key) => localValues.get(key) || null, setItem: (key, value) => localValues.set(key, String(value)),
+  removeItem: (key) => localValues.delete(key) };
+const helperContext = vm.createContext({ window: {}, localStorage: storage });
+vm.runInContext(await readFile("scripts/chat-local-state.js", "utf8"), helperContext);
+const localHelper = helperContext.window.ExpChatLocalState.create({ userId: "bob", cryptoCall: (...args) => bobUnlocked.call(...args) });
+const draftValue = { text: draftText, replyTo: { id: "message-to-reply" } };
+await localHelper.saveDraft("group-1", draftValue);
+assert.equal(JSON.stringify([...localValues.values()]).includes(draftText), false);
+const refreshedHelper = helperContext.window.ExpChatLocalState.create({ userId: "bob", cryptoCall: (...args) => freshBob.call(...args) });
+assert.equal(JSON.stringify(await refreshedHelper.loadDraft("group-1")), JSON.stringify(draftValue));
+const otherHelper = helperContext.window.ExpChatLocalState.create({ userId: "alice", cryptoCall: (...args) => alice.call(...args) });
+assert.equal(await otherHelper.loadDraft("group-1"), null, "local record paths isolate accounts");
+assert.equal(localHelper.setPinned("group-1", true), true);
+assert.equal(refreshedHelper.isPinned("group-1"), true);
+assert.equal(otherHelper.isPinned("group-1"), false);
+await localHelper.saveEncrypted("group-1", "outbox", { text: draftText }, "client-queued-1");
+assert.equal(JSON.stringify(localHelper.listEncrypted("outbox")), JSON.stringify([{ conversationId: "group-1", recordId: "client-queued-1" }]));
+await Promise.all([localHelper.saveDraft("group-1", { text: "Racing autosave" }), localHelper.clearDraft("group-1")]);
+assert.equal(await localHelper.loadDraft("group-1"), null, "sending must clear an earlier asynchronous autosave");
+
 // A login-bound cache transfers only authenticated ciphertext and a browser
 // CryptoKey. It restores every retained identity without replaying PRF output.
 const sessionKey = await webcrypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
@@ -206,6 +271,10 @@ await assert.rejects(() => resumedBob.call("sealAccountV2Session", { ...sessionI
 await freshBob.call("lockAccountV2Vault");
 await assert.rejects(() => freshBob.call("wrapAccountV2Vault", { userId: "bob", keyVersion: "old", credentialId, prfOutput: secondPrf }),
   (error) => error.code === "ACCOUNT_VAULT_LOCKED");
+await assert.rejects(() => freshBob.call("openChatLocalState", { ...localScope, sealed: sealedDraft }),
+  (error) => error.code === "ACCOUNT_VAULT_LOCKED");
+await assert.rejects(() => freshBob.call("sealChatLocalState", { ...localScope, plaintext: draftText }),
+  (error) => error.code === "ACCOUNT_VAULT_LOCKED");
 const message2 = await alice.call("encryptAccountV2Message", { conversationId: "group-1", clientMessageId: "m2", epoch: 1, plaintext: "hello" });
 assert.notEqual(message1.nonce, message2.nonce);
 const tamperedMessage = { ...message1, conversationId: "other" };
@@ -214,9 +283,10 @@ await assert.rejects(
   (error) => error.code === "SIGNATURE_INVALID",
 );
 
-const metadata = await alice.call("encryptAccountV2Metadata", { conversationId: "group-1", epoch: 1, version: "3", plaintext: JSON.stringify({ name: "Team" }) });
+const groupProfile = { name: "Team", announcement: { text: "Review chapter 4 by Friday.", updatedBy: "alice", updatedAt: "2026-10-05T08:00:00Z" } };
+const metadata = await alice.call("encryptAccountV2Metadata", { conversationId: "group-1", epoch: 1, version: "3", plaintext: JSON.stringify(groupProfile) });
 const openedMetadata = await bobUnlocked.call("decryptAccountV2Metadata", { conversationId: "group-1", epoch: 1, version: "3", ...metadata });
-assert.equal(openedMetadata.plaintext, JSON.stringify({ name: "Team" }));
+assert.equal(openedMetadata.plaintext, JSON.stringify(groupProfile));
 await assert.rejects(
   () => bobUnlocked.call("decryptAccountV2Metadata", { ...metadata, conversationId: "group-1", epoch: 1, version: "4" }),
   (error) => error.code === "ACCOUNT_V2_DECRYPT_FAILED",
