@@ -1,8 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-  <rect x="2" y="2" width="44" height="44" rx="14" fill="#3978E6"/>
+  <defs>
+    <linearGradient id="chat-gradient" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#276846"/>
+      <stop offset="1" stop-color="#9165A5"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="44" height="44" rx="14" fill="url(#chat-gradient)"/>
   <path d="M13 14.5C13 11.5 15.5 9 18.5 9H32C35 9 37.5 11.5 37.5 14.5V24C37.5 27 35 29.5 32 29.5H28" stroke="white" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round"/>
   <path d="M10.5 21C10.5 17.7 13.2 15 16.5 15H29C32.3 15 35 17.7 35 21V29C35 32.3 32.3 35 29 35H20.5L13 39V33.9C11.4 32.8 10.5 31 10.5 29V21Z" fill="white"/>
-  <circle cx="17" cy="25" r="1.6" fill="#3978E6"/>
-  <circle cx="22.7" cy="25" r="1.6" fill="#3978E6"/>
-  <circle cx="28.4" cy="25" r="1.6" fill="#3978E6"/>
+  <circle cx="17" cy="25" r="1.6" fill="url(#chat-gradient)"/>
+  <circle cx="22.7" cy="25" r="1.6" fill="url(#chat-gradient)"/>
+  <circle cx="28.4" cy="25" r="1.6" fill="url(#chat-gradient)"/>
 </svg>

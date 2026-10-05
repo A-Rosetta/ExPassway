@@ -13,7 +13,7 @@ import {
   verifyRegistrationResponse,
   webAuthnContext,
 } from "./webauthn.js";
-import { handleAccountV2Route, cleanupAccountV2, mapAccountConversation, isHistoricalConversation, canonicalAccountJson } from "./chat-account-v2.js";
+import { handleAccountV2Route, cleanupAccountV2, mapAccountConversation, isHistoricalConversation, canonicalAccountJson, verifyAccountControl } from "./chat-account-v2.js";
 import { AI_CALL_COOLDOWN_MS } from "./ai-call-cooldown.js";
 
 const encoder = new TextEncoder();
@@ -333,6 +333,7 @@ function rateLimitAction(request) {
   if (url.pathname === "/api/chat/messages") return "message";
   if (url.pathname === "/api/chat/attachments/init") return "attachment";
   if (url.pathname === "/api/chat/reports") return "report";
+  if (request.method === "POST" && (url.pathname === "/api/chat/contacts/by-user-id" || url.pathname.startsWith("/api/chat/contact-requests/"))) return "friend-request";
   return "read";
 }
 
@@ -420,7 +421,7 @@ async function requireContact(db, contactId, userId) {
       p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url
     FROM chat_contacts c
     LEFT JOIN chat_profiles p ON p.user_id = c.peer_user_id
-    WHERE c.id = ? AND c.user_id = ?
+    WHERE c.id = ? AND c.user_id = ? AND c.accepted_at IS NOT NULL
   `
     )
     .bind(contactId, userId)
@@ -467,7 +468,7 @@ async function mapConversation(db, row, userId) {
         member.user_id === userId
           ? null
           : await db
-              .prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ?")
+              .prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ? AND accepted_at IS NOT NULL")
               .bind(userId, member.user_id)
               .first();
       members.push({
@@ -517,7 +518,7 @@ async function mapConversation(db, row, userId) {
     .first();
   const contact = peer
     ? await db
-        .prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ?")
+        .prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ? AND accepted_at IS NOT NULL")
         .bind(userId, peer.user_id)
         .first()
     : null;
@@ -572,7 +573,7 @@ async function createGroupConversation(db, userId, body) {
     .prepare(
       `
     SELECT id, peer_user_id FROM chat_contacts
-    WHERE user_id = ? AND id IN (${placeholders})
+    WHERE user_id = ? AND accepted_at IS NOT NULL AND id IN (${placeholders})
   `
     )
     .bind(userId, ...contactIds)
@@ -640,7 +641,7 @@ async function listContacts(db, userId) {
       SELECT c.id, c.created_at, c.accepted_at, p.chat_user_id, p.chat_alias, p.identity_fingerprint, p.profile_ciphertext, p.avatar_data_url
     FROM chat_contacts c
     LEFT JOIN chat_profiles p ON p.user_id = c.peer_user_id
-    WHERE c.user_id = ? ORDER BY c.accepted_at DESC
+    WHERE c.user_id = ? AND c.accepted_at IS NOT NULL ORDER BY c.accepted_at DESC
   `
     )
     .bind(userId)
@@ -676,7 +677,7 @@ async function searchChatUsers(db, userId, query) {
   if (!validChatUserId(q)) throw new AuthError(400, "Enter at least 3 valid ID characters.", "INVALID_CHAT_USER_ID");
   const rows = await db.prepare(`SELECT p.chat_user_id,p.chat_alias,p.avatar_data_url,
       MAX(CASE WHEN k.user_id IS NOT NULL AND h.user_id IS NOT NULL AND v.user_id IS NOT NULL AND pk.user_id IS NOT NULL THEN 1 ELSE 0 END) AS account_enabled,
-      c.id AS contact_id
+      c.id AS contact_id, r.id AS request_id, r.sender_user_id AS request_sender
     FROM chat_profiles p JOIN users u ON u.id=p.user_id AND u.disabled_at IS NULL
     LEFT JOIN chat_account_keys k ON k.user_id=p.user_id AND k.status='active'
     LEFT JOIN chat_account_identity_heads h ON h.user_id=k.user_id AND h.key_version=k.key_version
@@ -684,13 +685,79 @@ async function searchChatUsers(db, userId, query) {
     LEFT JOIN chat_passkeys pk ON pk.user_id=v.user_id AND pk.revoked_at IS NULL AND
       (v.credential_id IS NULL OR pk.credential_id=v.credential_id OR EXISTS (SELECT 1 FROM chat_account_vault_wrappers w
         WHERE w.user_id=v.user_id AND w.key_version=v.key_version AND w.credential_id=pk.credential_id))
-    LEFT JOIN chat_contacts c ON c.user_id=? AND c.peer_user_id=p.user_id
+    LEFT JOIN chat_contacts c ON c.user_id=? AND c.peer_user_id=p.user_id AND c.accepted_at IS NOT NULL
+    LEFT JOIN chat_friend_requests r ON r.status='pending' AND
+      ((r.sender_user_id=? AND r.recipient_user_id=p.user_id) OR (r.recipient_user_id=? AND r.sender_user_id=p.user_id))
     WHERE p.user_id<>? AND p.chat_user_id LIKE ?
-    GROUP BY p.user_id ORDER BY p.chat_user_id LIMIT 20`).bind(userId, userId, `${q}%`).all();
-  return (rows.results || []).map((row) => mapDirectoryProfile(row, row.contact_id));
+    GROUP BY p.user_id ORDER BY p.chat_user_id LIMIT 20`).bind(userId, userId, userId, userId, `${q}%`).all();
+  return (rows.results || []).map((row) => ({ ...mapDirectoryProfile(row, row.contact_id),
+    requestId: row.request_id || null,
+    requestDirection: row.request_id ? (row.request_sender === userId ? "outgoing" : "incoming") : null,
+    requestStatus: row.request_id ? "pending" : null,
+  }));
 }
 
-async function addContactByChatUserId(db, userId, value) {
+function friendIntroduction(value) {
+  if (value == null) return "";
+  if (typeof value !== "string") throw new AuthError(400, "The introduction must be text.", "INVALID_FRIEND_INTRODUCTION");
+  const introduction = value.trim();
+  if (introduction.length > 500) throw new AuthError(413, "The introduction can contain at most 500 characters.", "FRIEND_INTRODUCTION_TOO_LONG");
+  return introduction;
+}
+
+async function pendingFriendRequest(db, userId, peerUserId) {
+  return db.prepare(`SELECT * FROM chat_friend_requests WHERE status='pending' AND
+    ((sender_user_id=? AND recipient_user_id=?) OR (sender_user_id=? AND recipient_user_id=?))`)
+    .bind(userId, peerUserId, peerUserId, userId).first();
+}
+
+async function mapFriendRequest(db, row, userId) {
+  const peerUserId = row.sender_user_id === userId ? row.recipient_user_id : row.sender_user_id;
+  const profile = await db.prepare("SELECT chat_user_id,chat_alias,avatar_data_url FROM chat_profiles WHERE user_id=?").bind(peerUserId).first();
+  const contact = await db.prepare("SELECT id FROM chat_contacts WHERE user_id=? AND peer_user_id=? AND accepted_at IS NOT NULL").bind(userId, peerUserId).first();
+  return { id: row.id, direction: row.sender_user_id === userId ? "outgoing" : "incoming",
+    status: row.status, introduction: row.introduction, createdAt: row.created_at, resolvedAt: row.resolved_at,
+    profile: mapDirectoryProfile({ ...profile, account_enabled: await directoryAccountEnabled(db, peerUserId) }, contact?.id),
+  };
+}
+
+async function listFriendRequests(db, userId) {
+  const rows = await db.prepare(`SELECT * FROM chat_friend_requests WHERE status='pending'
+    AND (sender_user_id=? OR recipient_user_id=?) ORDER BY created_at DESC, id`).bind(userId, userId).all();
+  const requests = await Promise.all((rows.results || []).map((row) => mapFriendRequest(db, row, userId)));
+  return { incoming: requests.filter((row) => row.direction === "incoming"), outgoing: requests.filter((row) => row.direction === "outgoing") };
+}
+
+async function resolveFriendRequest(db, userId, requestId, action) {
+  const request = await db.prepare("SELECT * FROM chat_friend_requests WHERE id=? AND (sender_user_id=? OR recipient_user_id=?)").bind(requestId, userId, userId).first();
+  if (!request) throw new AuthError(404, "Friend request not found.", "FRIEND_REQUEST_NOT_FOUND");
+  if (action === "cancel" ? request.sender_user_id !== userId : request.recipient_user_id !== userId)
+    throw new AuthError(403, "Only the recipient can accept or reject a request; only the sender can cancel it.", "FORBIDDEN");
+  if (request.status !== "pending") throw new AuthError(409, "This friend request has already been resolved.", "FRIEND_REQUEST_RESOLVED");
+  if (action === "accept" && (!(await directoryAccountEnabled(db, request.sender_user_id)) || !(await directoryAccountEnabled(db, request.recipient_user_id))))
+    throw new AuthError(409, "Both accounts must enable secure chat before becoming friends.", "ACCOUNT_NOT_ENABLED");
+  const timestamp = nowIso();
+  const status = { accept: "accepted", reject: "rejected", cancel: "cancelled" }[action];
+  const guardId = randomId();
+  const statements = [db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+    (SELECT 1 FROM chat_friend_requests WHERE id=? AND status='pending') THEN 1 ELSE 0 END)`).bind(guardId, requestId),
+    db.prepare("UPDATE chat_friend_requests SET status=?,resolved_at=? WHERE id=? AND status='pending'").bind(status, timestamp, requestId)];
+  if (action === "accept") for (const [owner, peer] of [[request.sender_user_id, request.recipient_user_id], [request.recipient_user_id, request.sender_user_id]]) {
+    statements.push(db.prepare(`INSERT INTO chat_contacts (id,user_id,peer_user_id,created_at,accepted_at) VALUES (?,?,?,?,?)
+      ON CONFLICT(user_id,peer_user_id) DO UPDATE SET accepted_at=COALESCE(chat_contacts.accepted_at,excluded.accepted_at)`).bind(randomId(), owner, peer, timestamp, timestamp));
+  }
+  statements.push(db.prepare("DELETE FROM chat_account_atomic_guards WHERE id=?").bind(guardId));
+  try { await db.batch(statements); } catch (error) {
+    if (/CHECK constraint failed|UNIQUE constraint failed/.test(String(error?.message || error))) throw new AuthError(409, "This friend request changed. Refresh and retry.", "FRIEND_REQUEST_RESOLVED");
+    throw error;
+  }
+  const resolved = await mapFriendRequest(db, { ...request, status, resolved_at: timestamp }, userId);
+  const contact = action === "accept" ? (await listContacts(db, userId)).find((item) => item.id === resolved.profile.contactId) : null;
+  return { request: resolved, contact };
+}
+
+async function addContactByChatUserId(db, userId, value, introductionValue) {
+  const introduction = friendIntroduction(introductionValue);
   const chatUserId = String(value || "").trim();
   if (!validChatUserId(chatUserId)) throw new AuthError(400, "The chat ID is invalid.", "INVALID_CHAT_USER_ID");
   const target = await db.prepare(`SELECT p.user_id,p.chat_user_id,p.chat_alias,p.avatar_data_url,
@@ -706,18 +773,19 @@ async function addContactByChatUserId(db, userId, value) {
   if (!target || target.user_id === userId) throw new AuthError(404, "Chat user not found.", "CHAT_USER_NOT_FOUND");
   if (!target.account_enabled) throw new AuthError(409, "This user must enable secure chat first.", "ACCOUNT_NOT_ENABLED");
   if (!(await directoryAccountEnabled(db, userId))) throw new AuthError(409, "Enable secure chat before adding friends.", "ACCOUNT_NOT_ENABLED");
-  const timestamp = nowIso();
-  const existing = await db.prepare("SELECT id FROM chat_contacts WHERE user_id=? AND peer_user_id=?").bind(userId, target.user_id).first();
-  const contactId = existing?.id || randomId();
-  const peer = await db.prepare("SELECT id FROM chat_contacts WHERE user_id=? AND peer_user_id=?").bind(target.user_id, userId).first();
-  const peerContactId = peer?.id || randomId();
-  await db.batch([
-    db.prepare(`INSERT INTO chat_contacts (id,user_id,peer_user_id,created_at,accepted_at) VALUES (?,?,?,?,?)
-      ON CONFLICT(user_id,peer_user_id) DO UPDATE SET accepted_at=excluded.accepted_at`).bind(contactId, userId, target.user_id, timestamp, timestamp),
-    db.prepare(`INSERT INTO chat_contacts (id,user_id,peer_user_id,created_at,accepted_at) VALUES (?,?,?,?,?)
-      ON CONFLICT(user_id,peer_user_id) DO UPDATE SET accepted_at=excluded.accepted_at`).bind(peerContactId, target.user_id, userId, timestamp, timestamp),
-  ]);
-  return { id: contactId, profile: mapDirectoryProfile(target, contactId) };
+  const existing = await db.prepare("SELECT id FROM chat_contacts WHERE user_id=? AND peer_user_id=? AND accepted_at IS NOT NULL").bind(userId, target.user_id).first();
+  if (existing) return { id: existing.id, profile: mapDirectoryProfile(target, existing.id), request: null };
+  let request = await pendingFriendRequest(db, userId, target.user_id);
+  if (!request) {
+    const timestamp = nowIso();
+    const requestId = randomId();
+    try { await db.prepare(`INSERT INTO chat_friend_requests (id,sender_user_id,recipient_user_id,introduction,status,created_at)
+      VALUES (?,?,?,?,'pending',?)`).bind(requestId, userId, target.user_id, introduction, timestamp).run(); }
+    catch (error) { if (!/UNIQUE constraint failed/.test(String(error?.message || error))) throw error; }
+    request = await pendingFriendRequest(db, userId, target.user_id);
+    if (!request) throw new AuthError(409, "The friend request changed. Refresh and retry.", "FRIEND_REQUEST_CHANGED");
+  }
+  return { id: null, profile: mapDirectoryProfile(target), request: await mapFriendRequest(db, request, userId) };
 }
 
 async function globalReadyAccounts(db, conversationId = null) {
@@ -777,13 +845,14 @@ async function globalDiscussion(db, userId) {
   const siteRole = (await db.prepare("SELECT role FROM users WHERE id=? AND disabled_at IS NULL").bind(userId).first())?.role || null;
   const siteAdmin = siteRole === "admin";
   const row = await db.prepare("SELECT * FROM chat_conversations WHERE global_slug=? AND deleted_at IS NULL").bind(GLOBAL_DISCUSSION_SLUG).first();
-  if (!row) return { conversation: null, conversationId: null, pendingRecipients: siteAdmin ? ready.map((item) => ({ userId: item.user_id, chatUserId: item.chat_user_id, alias: item.chat_alias || "", accountKey: mapAccountKey(item) })) : [], pendingCount: ready.length, needsBootstrap: true, canManage: siteAdmin, siteRole, studentCanLeave: false, adminCanLeave: false };
+  const selfReady = ready.some((item) => item.user_id === userId);
+  if (!row) return { conversation: null, conversationId: null, pendingRecipients: siteAdmin ? ready.map((item) => ({ userId: item.user_id, chatUserId: item.chat_user_id, alias: item.chat_alias || "", accountKey: mapAccountKey(item) })) : [], pendingCount: ready.length, needsBootstrap: true, canManage: siteAdmin, siteRole, studentCanLeave: false, adminCanLeave: false, membershipStatus: selfReady ? "pending" : "not-ready", canJoin: false, pendingJoin: selfReady, removed: false };
   const active = await db.prepare("SELECT user_id,role FROM chat_conversation_members WHERE conversation_id=? AND left_at IS NULL").bind(row.id).all();
   const activeIds = new Set((active.results || []).map((item) => item.user_id));
   const activeRoles = new Map((active.results || []).map((item) => [item.user_id, item.role]));
   const epochKeys = await db.prepare("SELECT user_id,key_version FROM chat_epoch_recipients WHERE conversation_id=? AND epoch=?").bind(row.id, row.current_epoch).all();
   const epochKeyVersions = new Map((epochKeys.results || []).map((item) => [item.user_id, item.key_version]));
-  const optouts = await db.prepare("SELECT user_id FROM chat_global_optouts WHERE conversation_id=?").bind(row.id).all();
+  const optouts = await db.prepare("SELECT user_id,reason FROM chat_global_optouts WHERE conversation_id=?").bind(row.id).all();
   const optedOut = new Set((optouts.results || []).map((item) => item.user_id));
   const pending = ready.filter((item) => {
     const expectedRole = item.role === "admin" ? (item.user_id === row.created_by ? "owner" : "admin") : "member";
@@ -791,6 +860,8 @@ async function globalDiscussion(db, userId) {
       && (!optedOut.has(item.user_id) || item.role === "admin");
   });
   const self = (active.results || []).find((item) => item.user_id === userId);
+  const ownOptout = (optouts.results || []).find((item) => item.user_id === userId);
+  const removed = Boolean(ownOptout?.reason === "removed" && !siteAdmin);
   return {
     conversation: self ? { ...(await mapAccountConversation(db, row, userId)), global: true, globalSlug: GLOBAL_DISCUSSION_SLUG } : null,
     conversationId: row.id,
@@ -800,6 +871,10 @@ async function globalDiscussion(db, userId) {
     pendingCount: pending.length,
     needsBootstrap: false,
     optedOut: optedOut.has(userId),
+    membershipStatus: self ? "active" : removed ? "removed" : ownOptout && !siteAdmin ? "left" : selfReady ? "pending" : "not-ready",
+    canJoin: Boolean(!self && !siteAdmin && ownOptout?.reason === "left" && selfReady),
+    pendingJoin: Boolean(!self && selfReady && (!ownOptout || siteAdmin)),
+    removed,
     canManage: siteAdmin,
     siteRole,
     studentCanLeave: Boolean(self && !siteAdmin),
@@ -919,7 +994,7 @@ async function leaveGlobalDiscussion(db, userId) {
         (SELECT 1 FROM chat_conversation_members WHERE conversation_id=? AND user_id=? AND left_at IS NULL) THEN 1 ELSE 0 END)`).bind(randomId(), conversation.id, userId),
       db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
         (SELECT 1 FROM chat_conversations WHERE id=? AND current_epoch=? AND control_revision=? AND deleted_at IS NULL) THEN 1 ELSE 0 END)`).bind(randomId(), conversation.id, conversation.current_epoch, conversation.control_revision),
-      db.prepare("INSERT INTO chat_global_optouts (conversation_id,user_id,left_at) VALUES (?,?,?) ON CONFLICT(conversation_id,user_id) DO UPDATE SET left_at=excluded.left_at").bind(conversation.id, userId, timestamp),
+      db.prepare("INSERT INTO chat_global_optouts (conversation_id,user_id,left_at,reason) VALUES (?,?,?,'left') ON CONFLICT(conversation_id,user_id) DO UPDATE SET left_at=excluded.left_at,reason='left'").bind(conversation.id, userId, timestamp),
       db.prepare("UPDATE chat_conversation_members SET left_at=? WHERE conversation_id=? AND user_id=? AND left_at IS NULL").bind(timestamp, conversation.id, userId),
       db.prepare("UPDATE chat_conversations SET rotation_required=1,control_revision=control_revision+1,updated_at=? WHERE id=?").bind(timestamp, conversation.id),
       db.prepare("INSERT INTO chat_sync_events (conversation_id,event_type,entity_id,content_epoch,created_at) VALUES (?,?,?,?,?)").bind(conversation.id, "global-member-left", userId, conversation.current_epoch, timestamp),
@@ -930,6 +1005,65 @@ async function leaveGlobalDiscussion(db, userId) {
     throw error;
   }
   return { left: true, conversationId: conversation.id, requiresEpochRotation: true };
+}
+
+async function joinGlobalDiscussion(db, userId) {
+  const conversation = await db.prepare("SELECT * FROM chat_conversations WHERE global_slug=? AND deleted_at IS NULL").bind(GLOBAL_DISCUSSION_SLUG).first();
+  if (!conversation) throw new AuthError(404, "Site discussion not found.", "GLOBAL_DISCUSSION_NOT_FOUND");
+  if (!(await directoryAccountEnabled(db, userId))) throw new AuthError(409, "Enable secure chat before joining the discussion.", "ACCOUNT_NOT_ENABLED");
+  const optout = await db.prepare("SELECT reason FROM chat_global_optouts WHERE conversation_id=? AND user_id=?").bind(conversation.id, userId).first();
+  if (optout?.reason === "removed") throw new AuthError(403, "An administrator removed you from this discussion.", "GLOBAL_DISCUSSION_REMOVED");
+  if (!optout) return globalDiscussion(db, userId);
+  const timestamp = nowIso();
+  const guardId = randomId();
+  try { await db.batch([
+    db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+      (SELECT 1 FROM chat_global_optouts WHERE conversation_id=? AND user_id=? AND reason='left') THEN 1 ELSE 0 END)`).bind(guardId, conversation.id, userId),
+    db.prepare("DELETE FROM chat_global_optouts WHERE conversation_id=? AND user_id=? AND reason='left'").bind(conversation.id, userId),
+    // Joining queues a fresh administrator epoch. It does not issue key
+    // envelopes for epochs the account missed while absent.
+    db.prepare("UPDATE chat_conversations SET control_revision=control_revision+1,updated_at=? WHERE id=?").bind(timestamp, conversation.id),
+    db.prepare("INSERT INTO chat_sync_events (conversation_id,event_type,entity_id,content_epoch,created_at) VALUES (?,?,?,?,?)").bind(conversation.id, "global-member-join-requested", userId, conversation.current_epoch, timestamp),
+    db.prepare("DELETE FROM chat_account_atomic_guards WHERE id=?").bind(guardId),
+  ]); } catch (error) {
+    if (/CHECK constraint failed|UNIQUE constraint failed/.test(String(error?.message || error))) throw new AuthError(409, "The discussion membership changed. Refresh and retry.", "GLOBAL_MEMBERSHIP_CHANGED");
+    throw error;
+  }
+  return globalDiscussion(db, userId);
+}
+
+async function removeGlobalDiscussionMember(db, userId, body) {
+  await requireSiteAdmin(db, userId);
+  const conversation = await db.prepare("SELECT * FROM chat_conversations WHERE global_slug=? AND deleted_at IS NULL").bind(GLOBAL_DISCUSSION_SLUG).first();
+  if (!conversation) throw new AuthError(404, "Site discussion not found.", "GLOBAL_DISCUSSION_NOT_FOUND");
+  const signed = await verifyAccountControl(db, userId, body, conversation.id, "remove");
+  if (signed.expectedEpoch !== Number(conversation.current_epoch)) throw new AuthError(409, "The discussion epoch changed. Refresh and retry.", "EPOCH_CONFLICT");
+  if (signed.payload.globalDiscussion !== true) throw new AuthError(400, "The signed removal must identify the global discussion.", "INVALID_ACCOUNT_CONTROL");
+  const targetUserId = boundedString(signed.payload.userId, "userId", 100);
+  if (!(await db.prepare("SELECT 1 FROM chat_conversation_members WHERE conversation_id=? AND user_id=? AND left_at IS NULL").bind(conversation.id, userId).first()))
+    throw new AuthError(403, "Join the discussion before managing its members.", "FORBIDDEN");
+  const target = await db.prepare(`SELECT m.role,u.role AS site_role FROM chat_conversation_members m
+    JOIN users u ON u.id=m.user_id WHERE m.conversation_id=? AND m.user_id=? AND m.left_at IS NULL`).bind(conversation.id, targetUserId).first();
+  if (!target) throw new AuthError(404, "The member is no longer in the discussion.", "GLOBAL_MEMBER_NOT_FOUND");
+  if (targetUserId === userId || target.site_role === "admin" || target.role !== "member") throw new AuthError(403, "Only ordinary discussion members can be removed.", "FORBIDDEN");
+  const timestamp = nowIso();
+  try { await db.batch([
+    db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+      (SELECT 1 FROM chat_conversations WHERE id=? AND current_epoch=? AND control_revision=? AND deleted_at IS NULL) THEN 1 ELSE 0 END)`).bind(randomId(), conversation.id, signed.expectedEpoch, conversation.control_revision),
+    db.prepare(`INSERT INTO chat_account_atomic_guards (id,valid) VALUES (?,CASE WHEN EXISTS
+      (SELECT 1 FROM users u JOIN chat_account_keys k ON k.user_id=u.id WHERE u.id=? AND u.role='admin' AND u.disabled_at IS NULL AND k.key_version=? AND k.status='active')
+      AND EXISTS (SELECT 1 FROM chat_conversation_members m JOIN users u ON u.id=m.user_id WHERE m.conversation_id=? AND m.user_id=? AND m.left_at IS NULL AND m.role='member' AND u.role<>'admin') THEN 1 ELSE 0 END)`).bind(randomId(), userId, signed.senderKeyId, conversation.id, targetUserId),
+    db.prepare("INSERT INTO chat_global_optouts (conversation_id,user_id,left_at,reason) VALUES (?,?,?,'removed') ON CONFLICT(conversation_id,user_id) DO UPDATE SET left_at=excluded.left_at,reason='removed'").bind(conversation.id, targetUserId, timestamp),
+    db.prepare("UPDATE chat_conversation_members SET left_at=? WHERE conversation_id=? AND user_id=? AND left_at IS NULL").bind(timestamp, conversation.id, targetUserId),
+    db.prepare("UPDATE chat_conversations SET rotation_required=1,control_revision=control_revision+1,updated_at=? WHERE id=?").bind(timestamp, conversation.id),
+    db.prepare("INSERT INTO chat_account_controls (signature,conversation_id,control_json,created_at) VALUES (?,?,?,?)").bind(signed.signature, conversation.id, JSON.stringify(signed), timestamp),
+    db.prepare("INSERT INTO chat_sync_events (conversation_id,event_type,entity_id,content_epoch,control_json,created_at) VALUES (?,?,?,?,?,?)").bind(conversation.id, "remove", targetUserId, conversation.current_epoch, JSON.stringify(signed), timestamp),
+    db.prepare("DELETE FROM chat_account_atomic_guards"),
+  ]); } catch (error) {
+    if (/CHECK constraint failed|UNIQUE constraint failed/.test(String(error?.message || error))) throw new AuthError(409, "The discussion membership changed. Refresh and retry.", "GLOBAL_MEMBERSHIP_CHANGED");
+    throw error;
+  }
+  return { ...(await globalDiscussion(db, userId)), removedUserId: targetUserId, requiresEpochRotation: true };
 }
 
 async function listDevices(db, userId) {
@@ -2736,6 +2870,10 @@ async function handleRoute(request, env, user) {
       return success(await rotateGlobalDiscussion(db, user.id, await readJsonBody(request)), method);
     if (method === "POST" && url.pathname === "/api/chat/global-discussion/leave")
       return success(await leaveGlobalDiscussion(db, user.id), method);
+    if (method === "POST" && url.pathname === "/api/chat/global-discussion/join")
+      return success(await joinGlobalDiscussion(db, user.id), method);
+    if (method === "POST" && url.pathname === "/api/chat/global-discussion/remove")
+      return success(await removeGlobalDiscussionMember(db, user.id, await readJsonBody(request)), method);
     throw new AuthError(404, "Global discussion route not found.", "ROUTE_NOT_FOUND");
   }
 
@@ -2839,6 +2977,13 @@ async function handleRoute(request, env, user) {
 
   if (method === "GET" && url.pathname === "/api/chat/contacts")
     return success(await listContacts(db, user.id), method);
+  if (parts[0] === "api" && parts[1] === "chat" && parts[2] === "contact-requests") {
+    ensureAccountV2Enabled(env);
+    if (method === "GET" && parts.length === 3) return success(await listFriendRequests(db, user.id), method);
+    if (method === "POST" && parts.length === 5 && ["accept", "reject", "cancel"].includes(parts[4]))
+      return success(await resolveFriendRequest(db, user.id, boundedString(parts[3], "requestId", 100), parts[4]), method);
+    throw new AuthError(404, "Friend request route not found.", "ROUTE_NOT_FOUND");
+  }
   if (method === "GET" && url.pathname === "/api/chat/users/search") {
     ensureAccountV2Enabled(env);
     return success(await searchChatUsers(db, user.id, url.searchParams.get("q")), method);
@@ -2846,7 +2991,7 @@ async function handleRoute(request, env, user) {
   if (method === "POST" && url.pathname === "/api/chat/contacts/by-user-id") {
     ensureAccountV2Enabled(env);
     const body = await readJsonBody(request);
-    return success(await addContactByChatUserId(db, user.id, body?.chatUserId), method, 201);
+    return success(await addContactByChatUserId(db, user.id, body?.chatUserId, body?.introduction), method, 201);
   }
   if (method === "GET" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "contacts" && parts[4] === "account-bundle") {
     const contact = await requireContact(db, parts[3], user.id);

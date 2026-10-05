@@ -26,7 +26,7 @@ async function main() {
       if (!existsSync(edge)) throw error;
       browser = await chromium.launch({ headless: true, executablePath: edge });
     }
-    for (const scenario of ["setup-race", "legacy-history", "legacy-candidate-enroll"]) {
+    for (const scenario of ["setup-race", "legacy-history", "legacy-candidate-enroll", "legacy-device-chat"]) {
       const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
       const errors = [];
       page.on("pageerror", (error) => errors.push(error.message));
@@ -37,6 +37,10 @@ async function main() {
         document.body.innerHTML = parsed.body.innerHTML;
         document.body.className = parsed.body.className;
         localStorage.setItem("alevel.authToken", "test-token");
+        const legacyDevice = { id: "legacy-device", label: "Original browser", deviceNumber: 1, oneTimePreKeyCount: 20 };
+        const legacyConversation = { id: "legacy-history-chat", kind: "direct", protocolVersion: "signal-v1", retentionSeconds: 0, peer: { alias: "Legacy Friend", contactId: "legacy-contact" } };
+        if (scenario === "legacy-device-chat") localStorage.setItem("expassway.chat.device.v1", JSON.stringify(legacyDevice));
+        const accountDisabled = () => Object.assign(new Error("Account encryption is disabled in this deployment."), { status: 503, code: "CHAT_ACCOUNT_V2_DISABLED" });
         const publicBundle = { userId: "user-1", keyVersion: "1", encryptionPublicKey: "AQ", signingPublicKey: "Ag", fingerprint: "existing-fingerprint" };
         const wrapper = { keyVersion: "1", credentialId: "AQID", nonce: "Aw", ciphertext: "BA" };
         if (scenario === "legacy-candidate-enroll") wrapper.legacyCandidate = true;
@@ -44,7 +48,7 @@ async function main() {
         const historical = { keyVersion: "old", credentialId: "AQID", nonce: "old-nonce", ciphertext: "old-ciphertext",
           legacyCandidate: true, wrappers: [{ keyVersion: "old", credentialId: "AQID", nonce: "old-nonce", ciphertext: "old-ciphertext", legacyCandidate: true }] };
         let raced = false;
-        window.__calls = { generate: 0, initialize: 0, unlock: 0, locked: 0, wrap: 0, savedWrapper: 0 };
+        window.__calls = { generate: 0, initialize: 0, unlock: 0, locked: 0, wrap: 0, savedWrapper: 0, requests: 0, global: 0, conversations: 0, syncLegacy: 0 };
         window.PublicKeyCredential = function PublicKeyCredential() {};
         Object.defineProperty(navigator, "credentials", { configurable: true, value: {
           create: async () => { throw new Error("No replacement Passkey should be created."); },
@@ -59,6 +63,9 @@ async function main() {
         window.Worker = class {
           postMessage(message) {
             let result = { ...publicBundle, unlocked: true, retainedKeyVersions: [], nonce: "Aw", ciphertext: "BA", signature: "BQ" };
+            if (scenario === "legacy-device-chat" && message.action === "getLocalPlaintext") result = "Legacy history preserved";
+            if (scenario === "legacy-device-chat" && message.action === "safetyNumber") result = "12345 67890";
+            if (scenario === "legacy-device-chat" && ["getSafetyNumberVerification", "getSafetyNumberChange"].includes(message.action)) result = null;
             if (message.action === "generateAccountV2Vault") window.__calls.generate += 1;
             if (message.action === "unlockAccountV2Vault") {
               window.__calls.unlock += 1;
@@ -74,8 +81,11 @@ async function main() {
         };
         window.ALevelApi = {
           getChatProfile: async () => ({ id: "user-1", alias: "History User", chatUserId: "history-user" }),
-          getChatAccountKeyBundle: async () => scenario === "setup-race" && !raced
-            ? { enabled: false, passkeyReady: true } : { enabled: true, passkeyReady: true, accountKey: publicBundle },
+          getChatAccountKeyBundle: async () => {
+            if (scenario === "legacy-device-chat") throw accountDisabled();
+            return scenario === "setup-race" && !raced
+              ? { enabled: false, passkeyReady: true } : { enabled: true, passkeyReady: true, accountKey: publicBundle };
+          },
           getChatAccountVault: async () => scenario === "setup-race" && !raced ? null : vault,
           getChatAccountVaults: async () => scenario === "legacy-history" ? [vault, historical] : [vault],
           getChatPasskeyAuthenticationOptions: async (input) => ({ publicKey: { challenge: "AQID", allowCredentials: [{ id: "AQID", type: "public-key" }],
@@ -83,16 +93,60 @@ async function main() {
           verifyChatPasskey: async () => { raced = true; return { proof: "test-proof", credentialId: "AQID", keyVersion: "1" }; },
           initializeChatAccount: async () => { window.__calls.initialize += 1; throw new Error("Existing identity must never be replaced"); },
           saveChatAccountVaultWrapper: async () => { window.__calls.savedWrapper += 1; return { saved: true }; },
-          listChatContacts: async () => [], listChatConversations: async () => [],
-          getGlobalChatDiscussion: async () => null,
+          listChatContacts: async () => [],
+          listChatConversations: async () => { window.__calls.conversations += 1; return scenario === "legacy-device-chat" ? [legacyConversation] : []; },
+          listChatContactRequests: async () => {
+            window.__calls.requests += 1;
+            if (scenario === "legacy-device-chat") throw accountDisabled();
+            return { incoming: [], outgoing: [] };
+          },
+          getGlobalChatDiscussion: async () => {
+            window.__calls.global += 1;
+            if (scenario === "legacy-device-chat") throw accountDisabled();
+            return null;
+          },
+          listChatDevices: async () => [legacyDevice],
+          getChatKeyBackup: async () => null,
+          getChatContactBundle: async () => ({ devices: [] }),
+          createChatWebSocketTicket: async () => { throw new Error("Realtime unavailable in this fixture."); },
+          syncChatMessages: async () => {
+            window.__calls.syncLegacy += 1;
+            return { messages: [{ id: "legacy-message", clientMessageId: "legacy-message", senderDeviceId: "legacy-device", protocolVersion: "signal-v1", createdAt: "2026-10-05T00:00:00.000Z" }], nextCursor: "1" };
+          },
         };
       }, { markup, scenario });
       await page.addStyleTag({ content: css });
       await page.addScriptTag({ content: i18n });
       await page.addScriptTag({ content: source });
-      await page.locator("#chatSetupPanel").waitFor({ state: "visible" });
-      await page.click(scenario === "setup-race" ? "#enableAccountSync" : "#unlockAccountSync");
+      if (scenario !== "legacy-device-chat") {
+        await page.locator("#chatSetupPanel").waitFor({ state: "visible" });
+        await page.click(scenario === "setup-race" ? "#enableAccountSync" : "#unlockAccountSync");
+      }
       await page.locator("#chatApp").waitFor({ state: "visible" });
+      await page.waitForFunction(() => window.__calls.conversations > 0 && !document.querySelector("#chatStatus").classList.contains("is-error"));
+      if (scenario === "legacy-device-chat") {
+        await page.locator('#conversationList [data-conversation-id="legacy-history-chat"]').waitFor();
+        assert.equal(await page.locator("#chatDisabledPanel").isVisible(), false);
+        assert.equal(await page.locator("#chatFriendRequestsPanel").isVisible(), false);
+        assert.equal(await page.locator(".chat-friend-search-panel").isVisible(), false);
+        await page.click('#conversationList [data-conversation-id="legacy-history-chat"]');
+        await page.locator("#messageList").getByText("Legacy history preserved", { exact: true }).waitFor();
+        await page.click("#refreshChat");
+        await page.waitForFunction(() => window.__calls.conversations >= 2);
+        // Exercise the scheduled presentation refresh without waiting 30 seconds.
+        await page.evaluate(() => {
+          const currentTime = Date.now.bind(Date);
+          Date.now = () => currentTime() + 31000;
+        });
+        await page.waitForFunction(() => window.__calls.conversations >= 3);
+        assert.equal(await page.locator("#conversationTitle").textContent(), "Legacy Friend");
+        assert.equal(await page.locator("#chatDisabledPanel").isVisible(), false);
+        assert.equal(await page.locator("#chatStatus").getAttribute("class"), "chat-status");
+        const legacyCalls = await page.evaluate(() => window.__calls);
+        assert.equal(legacyCalls.requests, 0, "legacy device chat must not request account-only friend requests");
+        assert.equal(legacyCalls.global, 0, "legacy device chat must not request account-only Global Discussion");
+        assert.ok(legacyCalls.syncLegacy >= 1, "legacy history must sync on its original device");
+      }
       if (scenario === "legacy-history") {
         await page.locator("#chatPasskeyHistoryStatus").waitFor({ state: "visible" });
         assert.match(await page.locator("#chatPasskeyHistoryStatus").textContent(), /older chat history/);
@@ -132,7 +186,7 @@ async function main() {
       assert.deepEqual(errors, []);
       await page.close();
     }
-    console.log("chat Passkey setup-race, legacy-history preservation and explicit-wrapper enrollment browser smoke passed");
+    console.log("chat Passkey setup-race, legacy-history preservation, explicit-wrapper enrollment and legacy device chat browser smoke passed");
   } finally {
     await browser?.close();
     await new Promise((resolve) => server.close(resolve));

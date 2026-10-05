@@ -255,7 +255,7 @@
   function loadChatNotifications() {
     if (!isStudentSurface() || document.querySelector("script[data-chat-notifications-loader]")) return;
     const script = document.createElement("script");
-    script.src = `${location.pathname.includes("/pages/") ? "../" : ""}scripts/chat-notifications.js?v=20261005-3`;
+    script.src = `${location.pathname.includes("/pages/") ? "../" : ""}scripts/chat-notifications.js?v=20261005-5`;
     script.dataset.chatNotificationsLoader = "true";
     document.body.appendChild(script);
   }

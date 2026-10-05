@@ -78,6 +78,9 @@ async function control(db, userId, body, conversationId, action) {
   await verifySigned(db, userId, value, body.signature);
   return { ...value, signature: body.signature };
 }
+export async function verifyAccountControl(db, userId, body, conversationId, action) {
+  return control(db, userId, body, conversationId, action);
+}
 async function member(db, conversationId, userId, allowLeft = false) {
   const row = await db.prepare(`SELECT c.*, m.role, m.left_at, m.joined_at FROM chat_conversations c
     JOIN chat_conversation_members m ON m.conversation_id = c.id
@@ -183,7 +186,7 @@ export async function mapAccountConversation(db, row, userId) {
   const active = await members(db, row.id);
   const mapped = [];
   for (const m of active) {
-    const contact = m.user_id === userId ? null : await db.prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ?").bind(userId, m.user_id).first();
+    const contact = m.user_id === userId ? null : await db.prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ? AND accepted_at IS NOT NULL").bind(userId, m.user_id).first();
     mapped.push({ userId: m.user_id, alias: m.chat_alias || "Paired contact", avatarDataUrl: m.avatar_data_url || "", role: m.role, joinedAt: m.joined_at, isSelf: m.user_id === userId, contactId: contact?.id || null, accountKey: bundle(await activeKey(db, m.user_id)) });
   }
   const data = await db.prepare("SELECT * FROM chat_group_metadata WHERE conversation_id = ?").bind(row.id).first();
@@ -259,7 +262,7 @@ async function changeConversation(db, env, userId, conversationId, body) {
         if (siteRole === "admin" || actor.role === "admin" || actor.role === "owner") {
           fail(403, "ADMIN_CANNOT_LEAVE_GLOBAL_DISCUSSION", "Website administrators cannot leave the discussion.");
         }
-        statements.push(db.prepare("INSERT INTO chat_global_optouts (conversation_id, user_id, left_at) VALUES (?, ?, ?) ON CONFLICT(conversation_id, user_id) DO UPDATE SET left_at = excluded.left_at").bind(conversationId, userId, timestamp));
+        statements.push(db.prepare("INSERT INTO chat_global_optouts (conversation_id, user_id, left_at, reason) VALUES (?, ?, ?, 'left') ON CONFLICT(conversation_id, user_id) DO UPDATE SET left_at = excluded.left_at, reason = 'left'").bind(conversationId, userId, timestamp));
       }
       if (actor.role === "owner") fail(409, "OWNER_TRANSFER_REQUIRED", "Transfer ownership before leaving.");
       next = next.filter((m) => m.user_id !== userId);
@@ -515,7 +518,7 @@ export async function handleAccountV2Route(request, env, user) {
   }
   if (method === "GET" && parts[2] === "contacts" && parts[3] && parts[4] === "account-key") {
     if (!enabled(env)) fail(503, "CHAT_ACCOUNT_V2_DISABLED", "Account sync is disabled.");
-    const contact = await db.prepare("SELECT peer_user_id FROM chat_contacts WHERE user_id = ? AND id = ?").bind(user.id, parts[3]).first();
+    const contact = await db.prepare("SELECT peer_user_id FROM chat_contacts WHERE user_id = ? AND id = ? AND accepted_at IS NOT NULL").bind(user.id, parts[3]).first();
     if (!contact) fail(404, "CONTACT_NOT_FOUND", "Contact not found.");
     const accountKey = await activeKey(db, contact.peer_user_id);
     const ready = await accountReady(db, contact.peer_user_id, accountKey?.key_version);

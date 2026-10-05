@@ -747,11 +747,22 @@
       const params = new URLSearchParams({ q: String(query || "").trim() });
       return request(`/api/chat/users/search?${params}`, { token: currentToken() });
     },
-    async addChatContactByUserId(chatUserId) {
+    async addChatContactByUserId(chatUserId, introduction = "") {
       return request("/api/chat/contacts/by-user-id", {
         method: "POST",
         token: currentToken(),
-        body: JSON.stringify({ chatUserId: String(chatUserId || "").trim() }),
+        body: JSON.stringify({ chatUserId: String(chatUserId || "").trim(), introduction: String(introduction || "").trim() }),
+      });
+    },
+    async listChatContactRequests() {
+      return request("/api/chat/contact-requests", { token: currentToken() });
+    },
+    async respondToChatContactRequest(requestId, action) {
+      if (!["accept", "reject", "cancel"].includes(action)) throw new Error("Invalid friend request action.");
+      return request(`/api/chat/contact-requests/${encodeURIComponent(requestId)}/${action}`, {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({}),
       });
     },
     async getGlobalChatDiscussion() {
@@ -777,6 +788,20 @@
       return request("/api/chat/global-discussion/leave", {
         method: "POST",
         token: currentToken(),
+      });
+    },
+    async joinGlobalChatDiscussion() {
+      return request("/api/chat/global-discussion/join", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify({}),
+      });
+    },
+    async removeGlobalChatMember(input) {
+      return request("/api/chat/global-discussion/remove", {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(input || {}),
       });
     },
     async listChatContacts() {

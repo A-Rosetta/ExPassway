@@ -43,6 +43,8 @@
     pollTimer: null,
     syncInFlight: null,
     syncGeneration: 0,
+    conversationSelections: new Set(),
+    leavingConversations: new Set(),
     accountV2: null,
     accountEpochs: new Map(),
     accountMode: false,
@@ -70,10 +72,17 @@
     profileAvatarProcessing: false,
     profileRefreshInFlight: null,
     userSearchGeneration: 0,
+    userSearchResults: [],
+    userSearchQuery: "",
+    friendRequestRecipient: null,
+    friendRequestSending: false,
+    friendRequests: { incoming: [], outgoing: [] },
+    friendRequestActions: new Set(),
     globalDiscussion: null,
     globalInfo: null,
     globalPendingCount: 0,
     globalReconcileInFlight: null,
+    globalJoinInFlight: false,
     lastProfileRefresh: 0,
     emojiCategory: "all",
     emojiSelection: null,
@@ -120,6 +129,17 @@
     state.activeConversation = null;
     state.conversations = [];
     state.contacts = [];
+    state.friendRequests = { incoming: [], outgoing: [] };
+    state.friendRequestSending = false;
+    state.friendRequestActions.clear();
+    state.globalJoinInFlight = false;
+    state.userSearchResults = [];
+    state.userSearchQuery = "";
+    state.userSearchGeneration += 1;
+    state.globalInfo = null;
+    state.globalDiscussion = null;
+    state.leavingConversations.clear();
+    closeFriendRequestForm();
     state.cursor = "";
     state.syncInFlight = null;
     state.passkeyEnrollmentBusy = false;
@@ -345,6 +365,7 @@
     renderContacts();
     renderActiveConversation();
     if (!state.activeConversation) renderMessages();
+    if (!state.pollTimer && (state.accountV2?.unlocked || state.device)) startPolling();
   }
 
   async function deleteHistoricalChat() {
@@ -430,7 +451,7 @@
   }
 
   function conversationIsCurrent(conversationId, generation) {
-    return state.activeConversation?.id === conversationId && state.syncGeneration === generation;
+    return state.activeConversation?.id === conversationId && state.syncGeneration === generation && !state.leavingConversations.has(conversationId);
   }
 
   function conversationName(conversation) {
@@ -438,6 +459,18 @@
     return conversation.kind === "group"
       ? state.accountGroupMetadata.get(conversation.id)?.name || t("chatGroupTitle", "Group ({count} members)", { count: conversation.group?.memberCount || 0 })
       : conversation.peer?.alias || "Conversation";
+  }
+
+  function memberRoleLabel(role) {
+    return ["owner", "admin"].includes(role) ? t("chatRoleAdmin", "Admin") : t("chatRoleMember", "Member");
+  }
+
+  function createAdminBadge(role) {
+    if (!["owner", "admin"].includes(role)) return null;
+    const badge = document.createElement("span");
+    badge.className = "chat-role-badge";
+    badge.textContent = memberRoleLabel(role);
+    return badge;
   }
 
   function renderActiveConversation() {
@@ -452,26 +485,32 @@
     setAvatar($("#conversationAvatar"), conversationName(conversation), conversation.kind === "direct" ? conversation.peer?.avatarDataUrl : "");
     const legacyReadOnly = state.accountMode && !isAccountConversation(conversation);
     const rotationRequired = Boolean(conversation.rotationRequired);
+    const leaving = state.leavingConversations.has(conversation.id);
     const identityChanged = state.accountIdentityChanges.has(conversation.id) || (isAccountConversation(conversation) && conversation.historical);
     $("#deleteHistoricalChat").hidden = !isHistoricalConversation(conversation);
     $("#deleteHistoricalChat").disabled = state.deletingHistories.has(conversation.id);
     const selfRole = conversation.role || conversation.group?.members?.find((member) => member.isSelf)?.role;
+    const roleBadge = $("#conversationRoleBadge");
+    if (roleBadge) {
+      roleBadge.hidden = conversation.kind !== "group" || !["owner", "admin"].includes(selfRole);
+      roleBadge.textContent = memberRoleLabel(selfRole);
+    }
     $("#retentionSelect").value = String(conversation.retentionSeconds);
     $("#retentionSelect").disabled = legacyReadOnly || (isAccountConversation(conversation) && conversation.kind === "group" && selfRole !== "owner");
     $("#groupManageButton").hidden = conversation.kind !== "group" || !isAccountConversation(conversation);
-    $("#messageInput").disabled = legacyReadOnly || rotationRequired || identityChanged;
-    $("#sendMessage").disabled = legacyReadOnly || rotationRequired || identityChanged || state.sendingText.has(conversation.id);
-    $("#imageInput").disabled = legacyReadOnly || rotationRequired || identityChanged || state.sendingImages.has(conversation.id);
-    $("#emojiButton").disabled = legacyReadOnly || rotationRequired || identityChanged;
+    $("#messageInput").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving;
+    $("#sendMessage").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving || state.sendingText.has(conversation.id);
+    $("#imageInput").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving || state.sendingImages.has(conversation.id);
+    $("#emojiButton").disabled = legacyReadOnly || rotationRequired || identityChanged || leaving;
     if ($("#emojiButton").disabled) closeEmojiPicker();
     if (legacyReadOnly) $("#conversationSafety").textContent = "Historical chat: messages can be read on the original device. Start a new secure chat to send messages.";
     else if (isAccountConversation(conversation)) $("#conversationSafety").textContent = rotationRequired
-      ? "A member left. An owner or administrator must update the group encryption before messages can be sent."
-      : "Secure account chat";
+      ? t("chatGroupRotationNeeded", "Membership changed. An Admin must update the group encryption before messages can be sent.")
+      : t("chatSecureAccountChat", "Secure account chat");
     if (identityChanged) {
       const safety = $("#conversationSafety");
       safety.textContent = conversation.kind === "group"
-        ? "A member changed their chat identity. The group owner must remove that member and invite them again before messages can be sent."
+        ? t("chatGroupIdentityChanged", "A member changed their chat identity. An Admin must remove that member and invite them again before messages can be sent.")
         : "A participant changed their chat identity. Existing messages remain in this historical conversation.";
       if (conversation.kind === "direct" && conversation.peer?.contactId) {
         const button = document.createElement("button");
@@ -1050,11 +1089,162 @@
     }
   }
 
+  function closeFriendRequestForm() {
+    state.friendRequestRecipient = null;
+    const form = $("#chatFriendRequestForm");
+    if (form) {
+      form.hidden = true;
+      form.reset();
+    }
+  }
+
+  function openFriendRequestForm(user) {
+    if (state.friendRequestSending) return;
+    state.friendRequestRecipient = user;
+    $("#chatFriendRequestRecipient").textContent = t("chatFriendRequestTo", "Request to {name}", { name: user.alias || user.chatUserId });
+    $("#chatFriendRequestForm").hidden = false;
+    $("#chatFriendIntroduction").value = "";
+    $("#chatFriendIntroduction").focus();
+  }
+
+  async function sendFriendRequest(event) {
+    event?.preventDefault();
+    const user = state.friendRequestRecipient;
+    if (!user?.chatUserId || state.friendRequestSending) return;
+    const introduction = $("#chatFriendIntroduction").value.trim();
+    if (introduction.length > 500) return;
+    const generation = state.accountSessionGeneration;
+    state.friendRequestSending = true;
+    $("#sendChatFriendRequest").disabled = true;
+    $("#cancelChatFriendRequest").disabled = true;
+    try {
+      const result = await window.ALevelApi.addChatContactByUserId(user.chatUserId, introduction);
+      assertAccountSession(generation);
+      closeFriendRequestForm();
+      if (result?.request) {
+        user.requestId = result.request.id;
+        user.requestDirection = result.request.direction;
+        user.requestStatus = result.request.status;
+        setStatus(t("chatFriendRequestSent", "Friend request sent. You can chat after they accept."));
+      } else {
+        user.isContact = true;
+        user.contactId = result?.id;
+        setStatus(t("chatAlreadyFriend", "Added"));
+      }
+      await refreshData();
+    } catch (error) {
+      if (generation === state.accountSessionGeneration) setStatus(formatActionError(error), true);
+    } finally {
+      state.friendRequestSending = false;
+      $("#sendChatFriendRequest").disabled = false;
+      $("#cancelChatFriendRequest").disabled = false;
+    }
+  }
+
+  function pendingFriendRequest(user) {
+    for (const direction of ["incoming", "outgoing"]) {
+      const request = state.friendRequests[direction].find((item) => item.profile?.chatUserId === user.chatUserId);
+      if (request) return { ...request, direction };
+    }
+    return user.requestId && user.requestStatus === "pending" && ["incoming", "outgoing"].includes(user.requestDirection)
+      ? { id: user.requestId, direction: user.requestDirection } : null;
+  }
+
+  function refreshUserSearchResults() {
+    for (const user of state.userSearchResults) {
+      const request = [...state.friendRequests.incoming, ...state.friendRequests.outgoing].find((item) => item.profile?.chatUserId === user.chatUserId);
+      user.requestId = request?.id || null;
+      user.requestDirection = request?.direction || null;
+      user.requestStatus = request?.status || null;
+    }
+    renderUserSearchResults(state.userSearchResults, state.userSearchQuery);
+  }
+
+  function renderFriendRequests() {
+    const host = $("#chatFriendRequests");
+    if (!host) return;
+    $("#chatFriendRequestsPanel").hidden = !state.accountMode;
+    const searchPanel = $(".chat-friend-search-panel");
+    if (searchPanel) searchPanel.hidden = !state.accountMode;
+    if (!state.accountMode) closeFriendRequestForm();
+    host.replaceChildren();
+    const incoming = state.friendRequests.incoming || [];
+    const outgoing = state.friendRequests.outgoing || [];
+    if (!incoming.length && !outgoing.length) {
+      const empty = document.createElement("p");
+      empty.className = "chat-muted";
+      empty.textContent = t("chatNoFriendRequests", "No pending friend requests.");
+      host.appendChild(empty);
+    }
+    for (const direction of ["incoming", "outgoing"]) {
+      const requests = state.friendRequests[direction];
+      if (!requests.length) continue;
+      const heading = document.createElement("h3");
+      heading.textContent = direction === "incoming" ? t("chatIncomingRequests", "Received") : t("chatOutgoingRequests", "Sent");
+      host.appendChild(heading);
+      for (const request of requests) {
+        const item = document.createElement("article");
+        item.className = "chat-friend-request";
+        item.dataset.requestId = request.id;
+        item.dataset.requestDirection = direction;
+        const profile = request.profile || {};
+        const name = profile.alias || profile.chatUserId || t("chatUnknownUser", "Secure chat user");
+        const identity = document.createElement("div");
+        identity.className = "chat-contact-identity";
+        const details = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = name;
+        const id = document.createElement("small");
+        id.className = "chat-friend-request__meta";
+        id.textContent = profile.chatUserId || "";
+        details.append(title, id);
+        identity.append(createAvatar(name, profile.avatarDataUrl), details);
+        item.appendChild(identity);
+        const introduction = document.createElement("p");
+        introduction.className = "chat-friend-request__introduction";
+        introduction.textContent = request.introduction || t("chatFriendNoIntroduction", "No introduction provided.");
+        item.appendChild(introduction);
+        const actions = document.createElement("div");
+        actions.className = "chat-compose__actions";
+        for (const action of direction === "incoming" ? ["accept", "reject"] : ["cancel"]) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `${action === "accept" ? "btn-primary" : "btn-secondary"} chat-small-action`;
+          button.dataset.requestAction = action;
+          button.textContent = action === "accept" ? t("chatAcceptFriendRequest", "Accept") : action === "reject" ? t("chatRejectFriendRequest", "Decline") : t("chatCancelFriendRequest", "Cancel request");
+          button.disabled = state.friendRequestActions.has(request.id);
+          button.addEventListener("click", async () => {
+            if (state.friendRequestActions.has(request.id)) return;
+            state.friendRequestActions.add(request.id);
+            const generation = state.accountSessionGeneration;
+            renderFriendRequests();
+            try {
+              await window.ALevelApi.respondToChatContactRequest(request.id, action);
+              assertAccountSession(generation);
+              await refreshData();
+              assertAccountSession(generation);
+              setStatus(action === "accept" ? t("chatFriendRequestAccepted", "Friend request accepted. You can now start a secure chat.") : action === "reject" ? t("chatFriendRequestRejected", "Friend request declined.") : t("chatFriendRequestCancelled", "Friend request cancelled."));
+            } catch (error) { if (generation === state.accountSessionGeneration) setStatus(formatActionError(error), true); }
+            finally {
+              state.friendRequestActions.delete(request.id);
+              renderFriendRequests();
+            }
+          });
+          actions.appendChild(button);
+        }
+        item.appendChild(actions);
+        host.appendChild(item);
+      }
+    }
+  }
+
   function renderUserSearchResults(results, query = "") {
     const host = $("#chatUserSearchResults");
     if (!host) return;
     host.replaceChildren();
     const users = Array.isArray(results) ? results : [];
+    state.userSearchResults = users;
+    state.userSearchQuery = query;
     if (!users.length) {
       const empty = document.createElement("p");
       empty.className = "chat-muted";
@@ -1077,25 +1267,23 @@
       details.append(name, id);
       identity.append(createAvatar(name.textContent, user.avatarDataUrl), details);
       item.appendChild(identity);
-      const alreadyContact = Boolean(user.isContact || user.contactId || state.contacts.some((contact) => contact.id === user.contactId));
+      const alreadyContact = Boolean(user.isContact || user.contactId || state.contacts.some((contact) => contact.profile?.chatUserId === user.chatUserId));
+      const pending = pendingFriendRequest(user);
+      const requestDirection = pending?.direction;
       const button = document.createElement("button");
       button.type = "button";
       button.className = "btn-secondary chat-small-action";
-      button.textContent = alreadyContact ? t("chatAlreadyFriend", "Added") : t("chatAddFriend", "Add");
-      button.disabled = alreadyContact || user.enabled === false;
+      button.textContent = alreadyContact ? t("chatAlreadyFriend", "Added") : requestDirection === "outgoing" ? t("chatFriendRequestPending", "Request sent") : requestDirection === "incoming" ? t("chatReviewFriendRequest", "Review request") : t("chatSendFriendRequest", "Send request");
+      button.disabled = alreadyContact || requestDirection === "outgoing" || user.enabled === false;
       if (user.enabled === false) button.title = t("chatSearchNeedsSecure", "This user has not enabled secure chat.");
-      button.addEventListener("click", async () => {
+      button.addEventListener("click", () => {
         if (button.disabled || !user.chatUserId) return;
-        button.disabled = true;
-        try {
-          await window.ALevelApi.addChatContactByUserId(user.chatUserId);
-          button.textContent = t("chatAlreadyFriend", "Added");
-          setStatus(t("chatFriendAdded", "Friend added."));
-          await refreshData();
-        } catch (error) {
-          button.disabled = false;
-          setStatus(formatActionError(error), true);
+        if (requestDirection === "incoming") {
+          $("#chatFriendRequestsPanel")?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          $("#chatFriendRequests")?.querySelector(`[data-request-id="${pending.id}"] [data-request-action="accept"]`)?.focus();
+          return;
         }
+        openFriendRequestForm(user);
       });
       item.appendChild(button);
       host.appendChild(item);
@@ -1113,6 +1301,7 @@
       return;
     }
     const generation = ++state.userSearchGeneration;
+    if (!state.friendRequestSending) closeFriendRequestForm();
     if (button) button.disabled = true;
     try {
       setStatus(t("chatSearchingUsers", "Searching secure chat users..."));
@@ -1147,29 +1336,41 @@
     const globalPanel = $("#globalDiscussionPanel");
     if (globalPanel) {
       const globalInfo = state.globalInfo || {};
-      const waitingForMembership = Boolean(globalInfo.global && globalInfo.conversationId && !globalDiscussion && !globalInfo.optedOut && (globalInfo.siteRole === "admin" || globalInfo.studentCanLeave));
-      globalPanel.hidden = !globalDiscussion && !globalInfo.needsBootstrap && !waitingForMembership;
-      if (globalDiscussion || globalInfo.needsBootstrap || waitingForMembership) {
-        const memberCount = Number(globalDiscussion?.group?.memberCount || globalDiscussion?.memberCount || globalInfo.activeMemberCount || 0);
-        $("#globalDiscussionMeta").textContent = (globalInfo.needsBootstrap || waitingForMembership) && !globalInfo.canManage
-          ? t("chatGlobalWaitingForAdmin", "An administrator is preparing the encrypted discussion.")
+      globalPanel.hidden = false;
+      const memberCount = Number(globalDiscussion?.group?.memberCount || globalDiscussion?.memberCount || globalInfo.activeMemberCount || 0);
+      $("#globalDiscussionMeta").textContent = !state.accountMode
+        ? t("chatGlobalAccountRequired", "Enable secure account chat to join this discussion.")
+        : globalInfo.needsBootstrap && !globalInfo.canManage
+          ? t("chatGlobalWaitingForAdmin", "An Admin is preparing the encrypted discussion.")
           : t("chatGlobalDiscussionMeta", "{count} members · end-to-end encrypted", { count: memberCount });
-        $("#globalDiscussionPending").textContent = globalInfo.needsBootstrap && !globalInfo.canManage ? "" : state.globalPendingCount
-          ? t("chatGlobalPending", "{count} secure chat accounts need an encryption update.", { count: state.globalPendingCount })
-          : "";
-        $("#globalDiscussionPending").hidden = (globalInfo.needsBootstrap || waitingForMembership) && !globalInfo.canManage || !state.globalPendingCount;
-        const role = globalDiscussion?.role || globalDiscussion?.group?.members?.find((member) => member.isSelf)?.role || "member";
-        $("#leaveGlobalDiscussion").hidden = !globalDiscussion || role === "admin" || role === "owner" || globalDiscussion.siteRole === "admin";
-        $("#openGlobalDiscussion").hidden = !globalDiscussion;
-        $("#bootstrapGlobalDiscussion").hidden = !globalInfo.needsBootstrap || !globalInfo.canManage;
-        $("#rotateGlobalDiscussion").hidden = !globalDiscussion || !globalInfo.pendingCount || !globalInfo.canManage;
-      }
+      const membershipStatus = globalInfo.membershipStatus;
+      const pendingText = globalInfo.removed || membershipStatus === "removed"
+        ? t("chatGlobalRemoved", "An Admin removed you from this discussion.")
+        : globalInfo.canJoin || membershipStatus === "left"
+          ? t("chatGlobalLeft", "You left this discussion. Join again whenever you are ready.")
+          : !globalDiscussion && (globalInfo.pendingJoin || membershipStatus === "pending")
+            ? t("chatGlobalJoinPending", "Waiting for an Admin to update encryption. You will join automatically when it is ready.")
+            : globalInfo.canManage && state.globalPendingCount
+              ? t("chatGlobalPending", "{count} secure chat accounts need an encryption update.", { count: state.globalPendingCount })
+              : "";
+      $("#globalDiscussionPending").textContent = pendingText;
+      $("#globalDiscussionPending").hidden = !pendingText;
+      const role = globalDiscussion?.role || globalDiscussion?.group?.members?.find((member) => member.isSelf)?.role || "member";
+      $("#leaveGlobalDiscussion").hidden = !globalDiscussion || role === "admin" || role === "owner" || globalDiscussion.siteRole === "admin";
+      $("#leaveGlobalDiscussion").disabled = Boolean(globalDiscussion && state.leavingConversations.has(globalDiscussion.id));
+      $("#openGlobalDiscussion").hidden = !globalDiscussion;
+      $("#openGlobalDiscussion").disabled = Boolean(globalDiscussion && state.leavingConversations.has(globalDiscussion.id));
+      $("#joinGlobalDiscussion").hidden = !state.accountMode || !globalInfo.canJoin;
+      $("#joinGlobalDiscussion").disabled = state.globalJoinInFlight;
+      $("#bootstrapGlobalDiscussion").hidden = !globalInfo.needsBootstrap || !globalInfo.canManage;
+      $("#rotateGlobalDiscussion").hidden = !globalDiscussion || (!globalInfo.pendingCount && !globalInfo.rotationRequired && !globalDiscussion.rotationRequired) || !globalInfo.canManage;
     }
     orderedConversations.forEach((conversation) => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = `chat-conversation-item${state.activeConversation?.id === conversation.id ? " is-active" : ""}`;
       button.dataset.conversationId = conversation.id;
+      button.disabled = state.leavingConversations.has(conversation.id);
       button.innerHTML = `<div class="chat-contact-identity"><div><strong></strong><small></small></div></div>`;
       button.firstElementChild.prepend(createAvatar(conversationName(conversation), conversation.peer?.avatarDataUrl));
       if (conversation.kind === "group") {
@@ -1283,7 +1484,10 @@
     host.replaceChildren();
     const self = conversation.group?.members?.find((member) => member.isSelf);
     const isGlobal = Boolean(conversation.isGlobalDiscussion || conversation.globalDiscussion);
-    const canManage = !isGlobal && ["owner", "admin"].includes(self?.role);
+    const selfRole = conversation.role || self?.role;
+    const canManage = isGlobal
+      ? conversation.siteRole === "admin" || state.globalInfo?.canManage === true
+      : ["owner", "admin"].includes(selfRole);
     for (const member of conversation.group?.members || []) {
       const row = document.createElement("div");
       row.className = "chat-device-item";
@@ -1292,7 +1496,8 @@
       const name = document.createElement("strong");
       name.textContent = member.isSelf ? `${state.profile?.alias || member.alias || t("chatYou", "You")} (${t("chatYou", "You")})` : (member.alias || "Paired contact");
       const role = document.createElement("small");
-      role.textContent = member.role || "member";
+      role.textContent = memberRoleLabel(member.role);
+      if (["owner", "admin"].includes(member.role)) role.className = "chat-role-badge";
       details.append(name, role);
       const identity = document.createElement("div");
       identity.className = "chat-member-identity";
@@ -1306,11 +1511,24 @@
           button.type = "button";
           button.className = "btn-secondary chat-small-action";
           button.textContent = label;
+          button.dataset.memberAction = action;
+          button.dataset.userId = member.userId;
           button.addEventListener("click", async () => {
-            if (!window.confirm(`${label}: ${member.alias || "this member"}?`)) return;
+            if (button.disabled) return;
+            const memberName = member.alias || t("chatUnknownUser", "Secure chat user");
+            const confirmation = action === "remove"
+              ? isGlobal
+                ? t("chatGlobalRemoveMemberConfirm", "Remove {name} from Global Discussion? They will lose access to new messages and cannot rejoin themselves.", { name: memberName })
+                : t("chatRemoveMemberConfirm", "Remove {name} from this group? They will lose access to new messages.", { name: memberName })
+              : t("chatGroupActionConfirm", "{action}: {name}?", { action: label, name: memberName });
+            if (!window.confirm(confirmation)) return;
             button.disabled = true;
             try {
-              if (rotate) await rotateGroupWithMembers(conversation, action, [], payload);
+              if (isGlobal && action === "remove") {
+                const expectedEpoch = await currentAccountEpoch(conversation);
+                const signed = await signAccountControl(conversation.id, expectedEpoch, action, { ...payload, globalDiscussion: true });
+                await window.ALevelApi.removeGlobalChatMember(signed);
+              } else if (rotate) await rotateGroupWithMembers(conversation, action, [], payload);
               else await submitGroupControl(conversation, action, payload);
               await refreshData();
               if (state.activeConversation?.id === conversation.id) setStatus("");
@@ -1319,10 +1537,10 @@
           });
           controls.appendChild(button);
         };
-        if (canManage && member.role !== "owner" && (self.role === "owner" || member.role === "member")) addAction("Remove", "remove", { userId: member.userId }, true);
-        if (!isGlobal && self?.role === "owner" && member.role !== "owner") {
-          addAction(member.role === "admin" ? "Make member" : "Make administrator", "role", { userId: member.userId, role: member.role === "admin" ? "member" : "admin" });
-          addAction("Transfer ownership", "transfer", { userId: member.userId });
+        if (canManage && member.role !== "owner" && (isGlobal ? member.role !== "admin" && member.siteRole !== "admin" : selfRole === "owner" || member.role === "member")) addAction(t("chatRemoveMember", "Remove"), "remove", { userId: member.userId }, true);
+        if (!isGlobal && selfRole === "owner" && member.role !== "owner") {
+          addAction(member.role === "admin" ? t("chatMakeMember", "Make member") : t("chatMakeAdmin", "Make Admin"), "role", { userId: member.userId, role: member.role === "admin" ? "member" : "admin" });
+          addAction(t("chatTransferOwnership", "Transfer ownership"), "transfer", { userId: member.userId });
         }
         row.appendChild(controls);
       }
@@ -1331,8 +1549,9 @@
     const actions = $("#groupMemberActions");
     if (actions) {
       actions.hidden = false;
-      $("#dissolveGroup").hidden = isGlobal || self?.role !== "owner";
-      $("#leaveGroup").hidden = self?.role === "owner" || (isGlobal && (self?.role === "admin" || conversation.siteRole === "admin"));
+      $("#dissolveGroup").hidden = isGlobal || selfRole !== "owner";
+      $("#leaveGroup").hidden = selfRole === "owner" || (isGlobal && (selfRole === "admin" || conversation.siteRole === "admin"));
+      $("#leaveGroup").disabled = state.leavingConversations.has(conversation.id);
       $("#leaveGroup").textContent = isGlobal ? t("chatLeaveGlobalDiscussion", "Leave discussion") : t("chatLeaveGroup", "Leave group");
       $("#rotateGroupKey").hidden = isGlobal || !canManage || !conversation.rotationRequired;
       $("#inviteGroupMember").hidden = isGlobal || !canManage;
@@ -1498,6 +1717,8 @@
         const senderAvatar = isMine ? state.profile?.avatarDataUrl
           : member ? member.avatarDataUrl : message.senderAvatarDataUrl;
         identity.append(createAvatar(name, senderAvatar), sender);
+        const adminBadge = createAdminBadge(member?.role || (isMine ? state.activeConversation.role : null));
+        if (adminBadge) identity.appendChild(adminBadge);
         item.prepend(identity);
       }
       let structured = null;
@@ -1978,8 +2199,8 @@
   function startPolling() {
     stopPolling();
     state.pollTimer = window.setInterval(() => {
-      if (document.hidden || !state.activeConversation) return;
-      if (!state.syncInFlight) syncConversation().catch((error) => setStatus(formatActionError(error), true));
+      if (document.hidden) return;
+      if (state.activeConversation && !state.syncInFlight) syncConversation().catch((error) => setStatus(formatActionError(error), true));
       if (Date.now() - state.lastProfileRefresh >= 30000) refreshPresentation().catch(() => {});
     }, 3000);
   }
@@ -1987,6 +2208,7 @@
   async function openRealtime() {
     if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
     const conversation = state.activeConversation;
+    if (state.leavingConversations.has(conversation.id)) return;
     const conversationId = conversation.id;
     const generation = state.syncGeneration;
     if (!isAccountConversation(conversation) && !state.device) return;
@@ -2017,6 +2239,15 @@
   }
 
   async function selectConversation(conversation) {
+    if (state.leavingConversations.has(conversation.id)) return;
+    const selection = { conversationId: conversation.id, promise: null };
+    state.conversationSelections.add(selection);
+    selection.promise = performConversationSelection(conversation);
+    try { return await selection.promise; }
+    finally { state.conversationSelections.delete(selection); }
+  }
+
+  async function performConversationSelection(conversation) {
     stopPolling();
     if (state.activeConversation) state.messageDrafts.set(state.activeConversation.id, $("#messageInput").value);
     const generation = ++state.syncGeneration;
@@ -2064,6 +2295,52 @@
     } catch (error) {
       showAccountIdentityChange(conversation, error);
       if (conversationIsCurrent(conversation.id, generation)) setStatus(formatActionError(error), true);
+    }
+  }
+
+  async function leaveConversation(conversation) {
+    if (!conversation || state.leavingConversations.has(conversation.id)) return;
+    const isGlobal = Boolean(conversation.isGlobalDiscussion || conversation.globalDiscussion);
+    const self = conversation.group?.members?.find((member) => member.isSelf);
+    const role = conversation.role || self?.role;
+    if (isGlobal && (conversation.siteRole === "admin" || role === "admin" || role === "owner")) {
+      setStatus(t("chatGlobalAdminCannotLeave", "Administrators cannot leave the global discussion."), true);
+      return;
+    }
+    if (!window.confirm(isGlobal ? t("chatLeaveGlobalConfirm", "Leave the global discussion? You can join again from this panel.") : t("chatLeaveGroupConfirm", "Leave this group? A remaining owner or administrator must rotate the encryption epoch."))) return;
+    const sessionGeneration = state.accountSessionGeneration;
+    state.leavingConversations.add(conversation.id);
+    const pending = [...state.conversationSelections].filter((selection) => selection.conversationId === conversation.id).map((selection) => selection.promise);
+    if (state.activeConversation?.id === conversation.id) {
+      if (state.syncInFlight) pending.push(state.syncInFlight);
+      state.syncGeneration += 1;
+      state.syncInFlight = null;
+      stopPolling();
+      state.socket?.close();
+      state.socket = null;
+    }
+    renderContacts();
+    renderActiveConversation();
+    try {
+      // Finish any already-issued reads and realtime ticket before membership
+      // is removed. The invalidated selection cannot issue a new ticket.
+      await Promise.allSettled(pending);
+      assertAccountSession(sessionGeneration);
+      const expectedEpoch = await currentAccountEpoch(conversation);
+      const signed = await signAccountControl(conversation.id, expectedEpoch, "leave", isGlobal ? { globalDiscussion: true } : {});
+      await window.ALevelApi.leaveChatGroup(conversation.id, signed);
+      assertAccountSession(sessionGeneration);
+      if (state.activeConversation?.id === conversation.id) $("#groupManagePanel").hidden = true;
+      await refreshData();
+    } catch (error) {
+      if (sessionGeneration === state.accountSessionGeneration) setStatus(formatActionError(error), true);
+    } finally {
+      state.leavingConversations.delete(conversation.id);
+      if (sessionGeneration === state.accountSessionGeneration) {
+        renderContacts();
+        renderActiveConversation();
+        if (!state.pollTimer) startPolling();
+      }
     }
   }
 
@@ -2184,11 +2461,12 @@
   async function refreshData() {
     const generation = ++state.dataRefreshGeneration;
     const selectionGeneration = state.syncGeneration;
-    const [profile, contacts, conversations, globalInfo] = await Promise.all([
+    const [profile, contacts, conversations, globalInfo, friendRequests] = await Promise.all([
       window.ALevelApi.getChatProfile(),
       window.ALevelApi.listChatContacts(),
       window.ALevelApi.listChatConversations(),
       state.accountMode ? window.ALevelApi.getGlobalChatDiscussion().catch(() => null) : Promise.resolve(null),
+      state.accountMode ? window.ALevelApi.listChatContactRequests() : Promise.resolve({ incoming: [], outgoing: [] }),
     ]);
     if (generation !== state.dataRefreshGeneration) return;
     if (selectionGeneration !== state.syncGeneration) return refreshData();
@@ -2203,6 +2481,7 @@
     state.globalInfo = globalInfo || null;
     state.globalPendingCount = Number(globalInfo?.pendingCount || 0);
     state.contacts = contacts;
+    state.friendRequests = { incoming: friendRequests?.incoming || [], outgoing: friendRequests?.outgoing || [] };
     state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
     state.peerBundles.clear();
     state.conversationBundles.clear();
@@ -2230,10 +2509,13 @@
     }
     state.lastProfileRefresh = Date.now();
     renderChatProfile();
+    renderFriendRequests();
+    refreshUserSearchResults();
     renderContacts();
     renderActiveConversation();
     if (!state.activeConversation) renderMessages();
     if (!state.accountMode) renderDevices();
+    if (!state.pollTimer) startPolling();
     scheduleGlobalDiscussionReconcile();
   }
 
@@ -2242,9 +2524,10 @@
     const generation = state.dataRefreshGeneration;
     const selectionGeneration = state.syncGeneration;
     state.profileRefreshInFlight = (async () => {
-      const [profile, contacts, conversations, globalInfo] = await Promise.all([
+      const [profile, contacts, conversations, globalInfo, friendRequests] = await Promise.all([
         window.ALevelApi.getChatProfile(), window.ALevelApi.listChatContacts(), window.ALevelApi.listChatConversations(),
         state.accountMode ? window.ALevelApi.getGlobalChatDiscussion().catch(() => null) : Promise.resolve(null),
+        state.accountMode ? window.ALevelApi.listChatContactRequests() : Promise.resolve({ incoming: [], outgoing: [] }),
       ]);
       if (generation !== state.dataRefreshGeneration || selectionGeneration !== state.syncGeneration) return;
       state.dataRefreshGeneration += 1;
@@ -2253,17 +2536,24 @@
       state.globalInfo = globalInfo || null;
       state.globalPendingCount = Number(globalInfo?.pendingCount || 0);
       state.contacts = contacts;
+      state.friendRequests = { incoming: friendRequests?.incoming || [], outgoing: friendRequests?.outgoing || [] };
       state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
       if (state.activeConversation) {
         const refreshed = state.conversations.find((conversation) => conversation.id === state.activeConversation.id);
         if (!refreshed) {
           forgetHistoricalConversation(state.activeConversation.id, false);
           renderChatProfile();
+          renderFriendRequests();
+          refreshUserSearchResults();
+          if (!state.pollTimer) startPolling();
+          scheduleGlobalDiscussionReconcile();
           return;
         }
         state.activeConversation = refreshed;
       }
       renderChatProfile();
+      renderFriendRequests();
+      refreshUserSearchResults();
       renderContacts();
       renderActiveConversation();
       renderMessages();
@@ -2559,24 +2849,7 @@
       renderGroupManagement(state.activeConversation);
     });
     $("#closeGroupManage")?.addEventListener("click", () => { $("#groupManagePanel").hidden = true; });
-    $("#leaveGroup")?.addEventListener("click", async () => {
-      const conversation = state.activeConversation;
-      const isGlobal = Boolean(conversation?.isGlobalDiscussion || conversation?.globalDiscussion);
-      const self = conversation?.group?.members?.find((member) => member.isSelf);
-      const role = conversation?.role || self?.role;
-      if (!conversation || (isGlobal && (conversation.siteRole === "admin" || role === "admin" || role === "owner"))) {
-        if (isGlobal) setStatus(t("chatGlobalAdminCannotLeave", "Administrators cannot leave the global discussion."), true);
-        return;
-      }
-      if (!window.confirm(isGlobal ? t("chatLeaveGlobalConfirm", "Leave the global discussion? You can be invited again by an administrator.") : t("chatLeaveGroupConfirm", "Leave this group? A remaining owner or administrator must rotate the encryption epoch."))) return;
-      try {
-        const expectedEpoch = await currentAccountEpoch(conversation);
-        const signed = await signAccountControl(conversation.id, expectedEpoch, "leave", {});
-        await window.ALevelApi.leaveChatGroup(conversation.id, signed);
-        $("#groupManagePanel").hidden = true;
-        await refreshData();
-      } catch (error) { setStatus(formatActionError(error), true); }
-    });
+    $("#leaveGroup")?.addEventListener("click", () => leaveConversation(state.activeConversation));
     $("#inviteGroupMember")?.addEventListener("click", async () => {
       const conversation = state.activeConversation;
       const contactId = $("#groupInviteContact")?.value;
@@ -2616,6 +2889,8 @@
     $("#confirmCreateGroup")?.addEventListener("click", createGroup);
     $("#cancelCreateGroup")?.addEventListener("click", () => setGroupFormVisible(false));
     $("#chatUserSearchForm")?.addEventListener("submit", searchChatUsers);
+    $("#chatFriendRequestForm")?.addEventListener("submit", sendFriendRequest);
+    $("#cancelChatFriendRequest")?.addEventListener("click", closeFriendRequestForm);
     $("#openGlobalDiscussion")?.addEventListener("click", async () => {
       const conversation = state.globalDiscussion;
       if (!conversation) return;
@@ -2623,22 +2898,24 @@
     });
     $("#bootstrapGlobalDiscussion")?.addEventListener("click", () => initializeGlobalDiscussion());
     $("#rotateGlobalDiscussion")?.addEventListener("click", () => rotateGlobalDiscussion());
-    $("#leaveGlobalDiscussion")?.addEventListener("click", async () => {
-      const conversation = state.globalDiscussion;
-      const self = conversation?.group?.members?.find((member) => member.isSelf);
-      const role = conversation?.role || self?.role;
-      if (!conversation || conversation.siteRole === "admin" || role === "admin" || role === "owner") {
-        setStatus(t("chatGlobalAdminCannotLeave", "Administrators cannot leave the global discussion."), true);
-        return;
-      }
-      if (!window.confirm(t("chatLeaveGlobalConfirm", "Leave the global discussion? You can be invited again by an administrator."))) return;
+    $("#joinGlobalDiscussion")?.addEventListener("click", async () => {
+      if (!state.globalInfo?.canJoin || state.globalJoinInFlight) return;
+      const generation = state.accountSessionGeneration;
+      state.globalJoinInFlight = true;
+      $("#joinGlobalDiscussion").disabled = true;
       try {
-        const expectedEpoch = await currentAccountEpoch(conversation);
-        const signed = await signAccountControl(conversation.id, expectedEpoch, "leave", { globalDiscussion: true });
-        await window.ALevelApi.leaveChatGroup(conversation.id, signed);
+        await window.ALevelApi.joinGlobalChatDiscussion();
+        assertAccountSession(generation);
         await refreshData();
-      } catch (error) { setStatus(formatActionError(error), true); }
+        assertAccountSession(generation);
+        setStatus(t("chatGlobalJoinRequested", "Join requested. An Admin must update encryption before you can chat."));
+      } catch (error) { if (generation === state.accountSessionGeneration) setStatus(formatActionError(error), true); }
+      finally {
+        state.globalJoinInFlight = false;
+        $("#joinGlobalDiscussion").disabled = false;
+      }
     });
+    $("#leaveGlobalDiscussion")?.addEventListener("click", () => leaveConversation(state.globalDiscussion));
     $("#createRecoveryBackup")?.addEventListener("click", () => createRecoveryBackup(state.device?.id));
     $("#restoreRecoveryBackup")?.addEventListener("click", restoreRecoveryBackup);
     $("#restoreRecoveryBackupSetup")?.addEventListener("click", restoreRecoveryBackup);
@@ -2697,8 +2974,12 @@
     });
     window.addEventListener("alevel:languagechange", () => {
       renderChatProfile();
+      renderFriendRequests();
+      renderUserSearchResults(state.userSearchResults, state.userSearchQuery);
+      if (state.friendRequestRecipient) $("#chatFriendRequestRecipient").textContent = t("chatFriendRequestTo", "Request to {name}", { name: state.friendRequestRecipient.alias || state.friendRequestRecipient.chatUserId });
       renderContacts();
       renderActiveConversation();
+      renderMessages();
       renderPasskeyEnrollment();
       if (!$("#emojiTray").hidden) renderEmojiPicker();
     });

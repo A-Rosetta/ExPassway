@@ -106,10 +106,17 @@ try {
   assert.equal(found.response.status, 200);
   assert.equal(found.payload.data[0].chatUserId, profileB.chatUserId);
   assert.equal(found.payload.data[0].enabled, true);
+  const friendRequest = await call(userA, "/api/chat/contacts/by-user-id", {
+    method: "POST", body: JSON.stringify({ chatUserId: profileB.chatUserId }),
+  });
+  assert.equal(friendRequest.response.status, 201);
+  assert.equal(friendRequest.payload.data.id, null);
+  assert.equal((await call(userA, "/api/chat/contacts")).payload.data.length, 0);
+  const acceptance = await call(userB, `/api/chat/contact-requests/${friendRequest.payload.data.request.id}/accept`, { method: "POST" });
+  assert.equal(acceptance.response.status, 200);
   const contact = await call(userA, "/api/chat/contacts/by-user-id", {
     method: "POST", body: JSON.stringify({ chatUserId: profileB.chatUserId }),
   });
-  assert.equal(contact.response.status, 201);
   const repeatedContact = await call(userA, "/api/chat/contacts/by-user-id", {
     method: "POST", body: JSON.stringify({ chatUserId: profileB.chatUserId }),
   });

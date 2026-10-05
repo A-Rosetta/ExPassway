@@ -19,7 +19,7 @@
     entry.href = chatPath();
     entry.dataset.chatEntry = "true";
     entry.innerHTML = `
-      <img class="chat-entry__icon" src="${location.pathname.includes("/pages/") ? "../" : ""}assets/chat-mark.svg?v=20261005-3" width="28" height="28" alt="" aria-hidden="true" />
+      <img class="chat-entry__icon" src="${location.pathname.includes("/pages/") ? "../" : ""}assets/chat-mark.svg?v=20261005-5" width="28" height="28" alt="" aria-hidden="true" />
       <span class="chat-entry__label" data-i18n="chatNavLabel"></span>
       <span class="chat-entry__badge" data-chat-unread hidden>0</span>`;
     entry.setAttribute("aria-label", t("chatNavLabel", "Chat"));

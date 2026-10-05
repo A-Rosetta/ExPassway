@@ -216,7 +216,7 @@ async function main() {
     await alice.click("#chatUserSearchButton");
     const foundUser = alice.locator("#chatUserSearchResults .chat-user-search-result").filter({ hasText: bobChatUserId });
     await foundUser.waitFor();
-    assert.equal(await foundUser.getByRole("button").textContent(), "Added");
+    assert.equal(await foundUser.getByRole("button").textContent(), "Friends");
     assert.equal(await foundUser.getByRole("button").isDisabled(), true);
     console.log("Browser: custom chat ID save and secure user search passed");
     await alice.click("#refreshChat");
