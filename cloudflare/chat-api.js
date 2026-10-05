@@ -446,6 +446,95 @@ async function existingDirectConversation(db, userId, peerUserId) {
     .first();
 }
 
+function mapConversationMessage(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    conversationId: row.conversation_id,
+    senderDeviceId: row.sender_device_id || null,
+    senderUserId: row.sender_user_id || null,
+    senderKeyId: row.sender_key_id || null,
+    senderDeviceNumber: row.sender_device_number == null ? null : Number(row.sender_device_number),
+    senderAlias: row.sender_alias || "Paired contact",
+    senderAvatarDataUrl: row.sender_avatar_data_url || "",
+    senderSigningPublicKey: row.sender_signing_public_key || null,
+    clientMessageId: row.client_message_id,
+    protocolVersion: row.protocol_version || "signal-v1",
+    contentEpoch: row.content_epoch == null ? null : Number(row.content_epoch),
+    nonce: row.deleted_at ? null : row.nonce,
+    signature: row.deleted_at ? null : row.signature,
+    ciphertext: row.deleted_at ? "" : row.ciphertext,
+    attachmentRefs: row.deleted_at ? [] : JSON.parse(row.attachment_refs || "[]"),
+    sizeBucket: row.size_bucket,
+    createdAt: row.created_at,
+    expiresAt: row.expires_at,
+    deleted: Boolean(row.deleted_at),
+  };
+}
+
+async function conversationSummary(db, conversationId, userId) {
+  const latest = await db.prepare(`
+    SELECT m.id, m.conversation_id, m.sender_device_id, m.sender_user_id, m.sender_key_id,
+      d.device_number AS sender_device_number, p.chat_alias AS sender_alias, p.avatar_data_url AS sender_avatar_data_url,
+      ak.signing_public_key AS sender_signing_public_key, m.client_message_id, m.protocol_version,
+      m.content_epoch, m.nonce, m.signature, m.ciphertext, m.attachment_refs, m.size_bucket,
+      m.created_at, m.expires_at, m.deleted_at
+    FROM chat_messages m
+      LEFT JOIN chat_devices d ON d.id = m.sender_device_id
+      LEFT JOIN chat_profiles p ON p.user_id = COALESCE(m.sender_user_id, d.user_id)
+      LEFT JOIN chat_account_keys ak ON ak.user_id = m.sender_user_id AND ak.key_version = m.sender_key_id
+    WHERE m.conversation_id = ?
+    ORDER BY m.created_at DESC, m.id DESC LIMIT 1`).bind(conversationId).first();
+  let membership = null;
+  try {
+    membership = await db.prepare("SELECT last_read_at, last_read_message_id FROM chat_conversation_members WHERE conversation_id=? AND user_id=?")
+      .bind(conversationId, userId).first();
+  } catch (_error) {
+    // Read-state migration may not yet be present in an older preview database.
+  }
+  let unreadCount = 0;
+  try {
+    const count = await db.prepare(`
+      SELECT COUNT(*) AS count
+      FROM chat_messages m
+        LEFT JOIN chat_devices d ON d.id = m.sender_device_id
+      WHERE m.conversation_id = ? AND m.deleted_at IS NULL
+        AND (m.created_at > COALESCE(?, '') OR (m.created_at = ? AND m.id > COALESCE(?, '')))
+        AND COALESCE(m.sender_user_id, d.user_id) <> ?`)
+      .bind(conversationId, membership?.last_read_at || null, membership?.last_read_at || null,
+        membership?.last_read_message_id || null, userId).first();
+    unreadCount = Number(count?.count || 0);
+  } catch (_error) {
+    // Keep listing conversations usable before the read-state migration is applied.
+  }
+  return {
+    unreadCount,
+    lastReadAt: membership?.last_read_at || null,
+    lastReadMessageId: membership?.last_read_message_id || null,
+    lastMessageAt: latest?.created_at || null,
+    latestMessage: mapConversationMessage(latest),
+  };
+}
+
+async function markConversationRead(db, conversationId, userId, messageId = "") {
+  await requireConversationMember(db, conversationId, userId);
+  const latest = messageId
+    ? await db.prepare("SELECT id, created_at FROM chat_messages WHERE conversation_id=? AND id=?").bind(conversationId, messageId).first()
+    : await db.prepare("SELECT id, created_at FROM chat_messages WHERE conversation_id=? ORDER BY created_at DESC, id DESC LIMIT 1").bind(conversationId).first();
+  if (messageId && !latest) throw new AuthError(404, "Message not found.", "MESSAGE_NOT_FOUND");
+  if (!latest) return { conversationId, unreadCount: 0, lastReadAt: null, lastReadMessageId: null };
+  try {
+    await db.prepare("UPDATE chat_conversation_members SET last_read_at=?, last_read_message_id=? WHERE conversation_id=? AND user_id=?")
+      .bind(latest.created_at, latest.id, conversationId, userId).run();
+  } catch (error) {
+    if (/no such column|last_read_at/i.test(String(error?.message || error))) {
+      throw new AuthError(503, "Read state is not available until the chat database migration is applied.", "READ_STATE_UNAVAILABLE");
+    }
+    throw error;
+  }
+  return { conversationId, unreadCount: 0, lastReadAt: latest.created_at, lastReadMessageId: latest.id };
+}
+
 async function mapConversation(db, row, userId) {
   if (row.protocol_version === "account-v2") return mapAccountConversation(db, row, userId);
   if (row.kind === "group") {
@@ -481,14 +570,7 @@ async function mapConversation(db, row, userId) {
         isSelf: member.user_id === userId,
       });
     }
-    const last = await db
-      .prepare(
-        `
-      SELECT created_at FROM chat_messages WHERE conversation_id = ? ORDER BY created_at DESC, id DESC LIMIT 1
-    `
-      )
-      .bind(row.id)
-      .first();
+    const summary = await conversationSummary(db, row.id, userId);
     return {
       id: row.id,
       kind: row.kind,
@@ -497,7 +579,7 @@ async function mapConversation(db, row, userId) {
       retentionSeconds: Number(row.retention_seconds),
       createdAt: row.created_at,
       updatedAt: row.updated_at,
-      lastMessageAt: last?.created_at || null,
+      ...summary,
       group: { memberCount: members.length, members },
       peer: null,
     };
@@ -522,14 +604,7 @@ async function mapConversation(db, row, userId) {
         .bind(userId, peer.user_id)
         .first()
     : null;
-  const last = await db
-    .prepare(
-      `
-    SELECT created_at FROM chat_messages WHERE conversation_id = ? ORDER BY created_at DESC, id DESC LIMIT 1
-  `
-    )
-    .bind(row.id)
-    .first();
+  const summary = await conversationSummary(db, row.id, userId);
   return {
     id: row.id,
     kind: row.kind,
@@ -538,7 +613,7 @@ async function mapConversation(db, row, userId) {
     retentionSeconds: Number(row.retention_seconds),
     createdAt: row.created_at,
     updatedAt: row.updated_at,
-    lastMessageAt: last?.created_at || null,
+    ...summary,
     peer: peer
       ? {
           contactId: contact?.id || null,
@@ -2854,6 +2929,11 @@ async function handleRoute(request, env, user) {
       if (membership?.history_hidden_at)
         return success({ conversationId, hidden: true, events: [], messages: [], nextCursor: null, hasMore: false }, method);
     }
+  }
+
+  if (method === "POST" && parts[0] === "api" && parts[1] === "chat" && parts[2] === "conversations" && parts[3] && parts[4] === "read") {
+    const body = await readJsonBody(request);
+    return success(await markConversationRead(db, parts[3], user.id, body?.messageId ? boundedString(body.messageId, "messageId", 100) : ""), method);
   }
 
   // Account-v2 owns its conversation, message, attachment and sync contract.

@@ -63,6 +63,10 @@
 .site-ui .chat-global-discussion-panel .chat-panel__heading { flex-wrap: wrap; gap: 12px; align-items: flex-start; }
 .site-ui .chat-global-discussion-panel .chat-compose__actions { flex-wrap: wrap; gap: 8px; }
 .site-ui .chat-contact-identity > div { display: grid; gap: 4px; }
+.site-ui .chat-contact-identity { position: relative; }
+.site-ui .chat-conversation-preview { display: block; overflow: hidden; color: var(--muted); font-size: .75rem; font-weight: 400; line-height: 1.3; text-overflow: ellipsis; white-space: nowrap; }
+.site-ui .chat-conversation-item.has-unread .chat-conversation-preview { color: var(--text); font-weight: 600; }
+.site-ui .chat-unread-badge { display: inline-flex; flex: 0 0 auto; min-width: 20px; height: 20px; align-items: center; justify-content: center; padding: 0 6px; border-radius: 10px; background: var(--accent); color: var(--bg); font-size: .68rem; font-weight: 700; line-height: 1; }
 .site-ui .chat-conversation-header { flex-wrap: wrap; }
 .site-ui .chat-conversation-identity { flex: 1 1 220px; }
 .site-ui .chat-member-identity { display: flex; align-items: center; gap: 8px; }

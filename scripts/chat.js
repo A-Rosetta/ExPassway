@@ -1,6 +1,7 @@
 (function () {
   const TOKEN_KEY = "alevel.authToken";
   const DEVICE_KEY = "expassway.chat.device.v1";
+  const OUTBOX_KEY = "expassway.chat.outbox.v1";
   const EMOJI_RECENT_KEY = "expassway.chat.recentEmoji.v1";
   const EMOJI_CATEGORIES = [
     { id: "faces", key: "chatEmojiFaces", label: "Faces", entries: "😀:grin 笑|😃:happy 开心|😄:smile 微笑|😁:beam 大笑|😆:laugh 笑|😅:sweat 汗|😂:joy 喜极而泣|🤣:rofl 笑哭|🙂:smile 微笑|🙃:upside down 倒脸|😉:wink 眨眼|😊:blush 害羞|😇:angel 天使|🥰:love 喜爱|😍:heart eyes 爱慕|🤩:star eyes 崇拜|😘:kiss 亲吻|😋:yum 好吃|😛:tongue 吐舌|😎:cool 酷|🤓:nerd 书呆|🧐:think 思考|🤔:thinking 思考|🤗:hug 拥抱|🤭:giggle 偷笑|🤫:quiet 安静|😴:sleep 睡觉|🥳:party 庆祝|😭:cry 哭|😢:sad 难过|😤:angry 生气|😱:scream 惊讶|😬:grimace 尴尬|🫠:melt 融化|😮:surprise 惊讶|😑:expressionless 无语" },
@@ -60,6 +61,10 @@
     accountContactRequests: new Set(),
     sendingText: new Set(),
     sendingImages: new Set(),
+    deliveryStates: new Map(),
+    outbox: [],
+    outboxInFlight: null,
+    outboxStorageKey: "",
     messageDrafts: new Map(),
     dataRefreshGeneration: 0,
     accountIdentityChanges: new Set(),
@@ -125,6 +130,9 @@
     state.accountGroupMetadata.clear();
     state.localPlaintexts = {};
     state.messageDrafts.clear();
+    state.deliveryStates.clear();
+    state.outbox = [];
+    state.outboxStorageKey = "";
     state.messages = [];
     state.activeConversation = null;
     state.conversations = [];
@@ -556,6 +564,144 @@
   async function cacheLocalPlaintext(clientMessageId, plaintext) {
     state.localPlaintexts[clientMessageId] = plaintext;
     await cryptoCall("storeLocalPlaintext", { clientMessageId, plaintext });
+  }
+
+  function outboxKey() {
+    return `${OUTBOX_KEY}.${state.profile?.id || "anonymous"}`;
+  }
+
+  function loadOutbox() {
+    const key = outboxKey();
+    state.outboxStorageKey = key;
+    try {
+      const parsed = JSON.parse(localStorage.getItem(key) || "[]");
+      state.outbox = Array.isArray(parsed) ? parsed.filter((item) => item?.clientMessageId && item?.conversationId && item?.payload) : [];
+    } catch (_error) {
+      state.outbox = [];
+    }
+    state.outbox.forEach((item) => state.deliveryStates.set(item.clientMessageId, item.status || "queued"));
+  }
+
+  function persistOutbox() {
+    if (!state.outboxStorageKey) return;
+    try {
+      // Only encrypted transport payloads are persisted. Plaintext is deliberately
+      // omitted even when the current page has an optimistic message bubble.
+      localStorage.setItem(state.outboxStorageKey, JSON.stringify(state.outbox.map((item) => ({
+        queueId: item.queueId,
+        conversationId: item.conversationId,
+        mode: item.mode,
+        clientMessageId: item.clientMessageId,
+        payload: item.payload,
+        status: item.status,
+        error: item.error || "",
+        createdAt: item.createdAt,
+      }))));
+    } catch (_error) {
+      // Storage may be unavailable or full. Sending still works while this tab is open.
+    }
+  }
+
+  function isNetworkError(error) {
+    if (!navigator.onLine) return true;
+    if (!error) return false;
+    if (error.status >= 500 || error.status === 408 || error.status === 429) return true;
+    return ["REQUEST_TIMEOUT", "TypeError", "NetworkError", "FETCH_FAILED"].includes(error.code || error.name);
+  }
+
+  function setDeliveryState(clientMessageId, statusValue, error = "") {
+    if (!clientMessageId) return;
+    state.deliveryStates.set(clientMessageId, statusValue);
+    const queued = state.outbox.find((item) => item.clientMessageId === clientMessageId);
+    if (queued) {
+      queued.status = statusValue;
+      queued.error = error;
+    }
+    persistOutbox();
+    if (state.activeConversation) renderMessages();
+  }
+
+  function optimisticMessage(item, plaintext) {
+    if (!item || !plaintext) return;
+    const existing = state.messages.find((message) => message.clientMessageId === item.clientMessageId);
+    if (existing) {
+      existing.plaintext = plaintext;
+      return;
+    }
+    state.messages.push({
+      id: `local-${item.clientMessageId}`,
+      conversationId: item.conversationId,
+      clientMessageId: item.clientMessageId,
+      senderUserId: state.profile?.id || null,
+      senderDeviceId: state.device?.id || null,
+      createdAt: item.createdAt || new Date().toISOString(),
+      plaintext,
+      localOnly: true,
+    });
+    state.messages.sort((left, right) => String(left.createdAt || "").localeCompare(String(right.createdAt || "")));
+  }
+
+  function queueEncryptedMessage({ conversationId, mode, clientMessageId, payload, plaintext }) {
+    const item = {
+      queueId: crypto.randomUUID(),
+      conversationId,
+      mode,
+      clientMessageId,
+      payload,
+      status: navigator.onLine ? "failed" : "queued",
+      error: "",
+      createdAt: new Date().toISOString(),
+    };
+    state.outbox = [...state.outbox.filter((entry) => entry.clientMessageId !== clientMessageId), item];
+    state.deliveryStates.set(clientMessageId, item.status);
+    optimisticMessage(item, plaintext);
+    persistOutbox();
+    renderMessages();
+    renderContacts();
+    return item;
+  }
+
+  async function dispatchQueuedMessage(item) {
+    if (!item?.payload) return;
+    setDeliveryState(item.clientMessageId, "sending");
+    try {
+      if (item.mode === "account-v2") await window.ALevelApi.sendAccountV2Message(item.payload);
+      else await window.ALevelApi.sendChatMessage(item.payload);
+      state.outbox = state.outbox.filter((entry) => entry.clientMessageId !== item.clientMessageId);
+      setDeliveryState(item.clientMessageId, "sent");
+      persistOutbox();
+      return true;
+    } catch (error) {
+      setDeliveryState(item.clientMessageId, isNetworkError(error) ? "queued" : "failed", formatActionError(error));
+      return false;
+    }
+  }
+
+  async function flushOutbox() {
+    if (state.outboxInFlight || !state.outbox.length || !navigator.onLine) return;
+    state.outboxInFlight = (async () => {
+      for (const item of [...state.outbox]) {
+        const sent = await dispatchQueuedMessage(item);
+        if (!sent && !navigator.onLine) break;
+      }
+      if (state.activeConversation) {
+        await syncConversation().catch(() => {});
+        renderMessages();
+      }
+    })().finally(() => { state.outboxInFlight = null; });
+    return state.outboxInFlight;
+  }
+
+  async function retryMessage(clientMessageId) {
+    const item = state.outbox.find((entry) => entry.clientMessageId === clientMessageId);
+    if (!item) return;
+    if (!navigator.onLine) {
+      setDeliveryState(clientMessageId, "queued");
+      return;
+    }
+    await dispatchQueuedMessage(item);
+    await syncConversation().catch(() => {});
+    renderMessages();
   }
 
   async function getCachedLocalPlaintext(clientMessageId) {
@@ -1329,7 +1475,11 @@
       empty.textContent = t("chatNoContacts", "No friends yet.");
       host.appendChild(empty);
     }
-    const orderedConversations = [...state.conversations].sort((left, right) => Number(Boolean(right.isGlobalDiscussion || right.globalDiscussion)) - Number(Boolean(left.isGlobalDiscussion || left.globalDiscussion)));
+    const orderedConversations = [...state.conversations].sort((left, right) => {
+      const global = Number(Boolean(right.isGlobalDiscussion || right.globalDiscussion)) - Number(Boolean(left.isGlobalDiscussion || left.globalDiscussion));
+      if (global) return global;
+      return String(right.lastMessageAt || right.updatedAt || "").localeCompare(String(left.lastMessageAt || left.updatedAt || ""));
+    });
     state.conversations = orderedConversations;
     const globalDiscussion = orderedConversations.find((conversation) => conversation.isGlobalDiscussion || conversation.globalDiscussion);
     state.globalDiscussion = globalDiscussion || null;
@@ -1371,20 +1521,21 @@
       button.className = `chat-conversation-item${state.activeConversation?.id === conversation.id ? " is-active" : ""}`;
       button.dataset.conversationId = conversation.id;
       button.disabled = state.leavingConversations.has(conversation.id);
-      button.innerHTML = `<div class="chat-contact-identity"><div><strong></strong><small></small></div></div>`;
+      button.innerHTML = `<div class="chat-contact-identity"><div><strong></strong><small class="chat-conversation-preview"></small></div><span class="chat-unread-badge" hidden></span></div>`;
       button.firstElementChild.prepend(createAvatar(conversationName(conversation), conversation.peer?.avatarDataUrl));
       if (conversation.kind === "group") {
         button.querySelector("strong").textContent = conversation.isGlobalDiscussion || conversation.globalDiscussion
           ? t("chatGlobalDiscussionTitle", "Global Discussion") : conversationName(conversation);
-        button.querySelector("small").textContent = t("chatGroupMemberCount", "{count} members", {
-          count: conversation.group?.memberCount || 0,
-        });
+        button.querySelector("small").textContent = conversationPreview(conversation) || t("chatGroupMemberCount", "{count} members", { count: conversation.group?.memberCount || 0 });
       } else {
         button.querySelector("strong").textContent = conversation.peer?.alias || t("chatNoConversation", "Conversation");
-        button.querySelector("small").textContent = isHistoricalConversation(conversation) ? t("chatHistoricalLabel", "Historical chat") : state.accountMode
-          ? "End-to-end encrypted"
-          : "Encrypted chat";
+        button.querySelector("small").textContent = conversationPreview(conversation) || (isHistoricalConversation(conversation) ? t("chatHistoricalLabel", "Historical chat") : state.accountMode ? "End-to-end encrypted" : "Encrypted chat");
       }
+      const unread = button.querySelector(".chat-unread-badge");
+      const unreadCount = Number(conversation.unreadCount || 0);
+      unread.hidden = unreadCount < 1;
+      unread.textContent = unreadCount > 99 ? "99+" : String(unreadCount);
+      button.classList.toggle("has-unread", unreadCount > 0);
       button.addEventListener("click", () => selectConversation(conversation).catch((error) => setStatus(formatActionError(error), true)));
       host.appendChild(button);
     });
@@ -1737,6 +1888,22 @@
         item.querySelector("p").textContent = text;
       }
       item.querySelector("time").textContent = new Date(message.createdAt).toLocaleString();
+      const delivery = state.deliveryStates.get(message.clientMessageId);
+      if (message.localOnly || delivery) {
+        const meta = document.createElement("span");
+        meta.className = `chat-message__delivery chat-message__delivery--${delivery || "sent"}`;
+        const labels = { sending: "Sending...", queued: "Queued until online", failed: "Failed", sent: "Sent" };
+        meta.textContent = labels[delivery] || "Sending...";
+        if (delivery === "failed") {
+          const retry = document.createElement("button");
+          retry.type = "button";
+          retry.className = "btn-secondary chat-small-action";
+          retry.textContent = t("chatRetrySend", "Retry");
+          retry.addEventListener("click", () => retryMessage(message.clientMessageId).catch((error) => setStatus(formatActionError(error), true)));
+          meta.appendChild(retry);
+        }
+        item.appendChild(meta);
+      }
       host.appendChild(item);
     });
     host.scrollTop = host.scrollHeight;
@@ -2121,6 +2288,39 @@
     return result;
   }
 
+  function conversationPreview(conversation) {
+    const message = conversation?.latestMessage;
+    if (!message) return "";
+    if (message.deleted) return t("chatMessageDeleted", "Message deleted");
+    if (message.preview) return message.preview;
+    if (Array.isArray(message.attachmentRefs) && message.attachmentRefs.length) return t("chatImagePreview", "Image");
+    return t("chatEncryptedPreview", "Encrypted message");
+  }
+
+  async function hydrateConversationPreviews(conversations) {
+    for (const conversation of conversations) {
+      const message = conversation.latestMessage;
+      if (!message) continue;
+      try {
+        const cached = await getCachedLocalPlaintext(message.clientMessageId);
+        if (cached != null) message.preview = cached;
+      } catch (_error) { /* A preview is optional and must not block the list. */ }
+    }
+  }
+
+  async function markActiveConversationRead() {
+    const conversation = state.activeConversation;
+    const latest = conversation?.latestMessage;
+    if (!conversation || !latest || Number(conversation.unreadCount || 0) <= 0) return;
+    try {
+      await window.ALevelApi.markChatConversationRead(conversation.id, latest.id);
+      conversation.unreadCount = 0;
+      conversation.lastReadAt = latest.createdAt;
+      conversation.lastReadMessageId = latest.id;
+      renderContacts();
+    } catch (_error) { /* Read state is best effort during transient network failures. */ }
+  }
+
   async function syncConversation() {
     if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
     const generation = state.syncGeneration;
@@ -2168,6 +2368,11 @@
           const nextCursor = payload?.nextCursor == null ? state.cursor : String(payload.nextCursor);
           hasMore = Boolean(payload?.hasMore && nextCursor !== state.cursor);
           state.cursor = nextCursor;
+          if (incoming.length) {
+            const latest = incoming.at(-1);
+            state.activeConversation.latestMessage = latest;
+            state.activeConversation.lastMessageAt = latest.createdAt;
+          }
           renderMessages();
         } while (hasMore && conversationIsCurrent(conversationId, generation));
         return;
@@ -2184,6 +2389,11 @@
       const known = new Set(state.messages.map((message) => message.id));
       state.messages = [...state.messages, ...fresh.filter((message) => !known.has(message.id))];
       state.cursor = payload.nextCursor || state.cursor;
+      if (fresh.length) {
+        const latest = fresh.at(-1);
+        state.activeConversation.latestMessage = latest;
+        state.activeConversation.lastMessageAt = latest.createdAt;
+      }
       renderMessages();
     })().finally(() => {
       if (state.syncGeneration === generation) state.syncInFlight = null;
@@ -2288,6 +2498,7 @@
       if (!conversationIsCurrent(conversation.id, generation)) return;
       renderActiveConversation();
       await syncConversation();
+      await markActiveConversationRead();
       if (!conversationIsCurrent(conversation.id, generation)) return;
       await openRealtime();
       if (!conversationIsCurrent(conversation.id, generation)) return;
@@ -2538,6 +2749,8 @@
       state.contacts = contacts;
       state.friendRequests = { incoming: friendRequests?.incoming || [], outgoing: friendRequests?.outgoing || [] };
       state.conversations = conversations.filter((conversation) => !state.hiddenConversations.has(conversation.id));
+      await hydrateConversationPreviews(state.conversations);
+      if (generation !== state.dataRefreshGeneration || selectionGeneration !== state.syncGeneration) return;
       if (state.activeConversation) {
         const refreshed = state.conversations.find((conversation) => conversation.id === state.activeConversation.id);
         if (!refreshed) {

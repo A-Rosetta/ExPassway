@@ -850,6 +850,13 @@
     async listChatConversations() {
       return request("/api/chat/conversations", { token: currentToken() });
     },
+    async markChatConversationRead(conversationId, messageId = "") {
+      return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/read`, {
+        method: "POST",
+        token: currentToken(),
+        body: JSON.stringify(messageId ? { messageId } : {}),
+      });
+    },
     async deleteChatConversationHistory(conversationId) {
       return request(`/api/chat/conversations/${encodeURIComponent(conversationId)}/history`, {
         method: "DELETE",

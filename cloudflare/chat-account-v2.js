@@ -137,6 +137,28 @@ function metadataStatement(db, conversationId, data, timestamp) {
     ON CONFLICT(conversation_id) DO UPDATE SET epoch = excluded.epoch, version = excluded.version, nonce = excluded.nonce, ciphertext = excluded.ciphertext, updated_at = excluded.updated_at`)
     .bind(conversationId, data.epoch, data.version, data.nonce, data.ciphertext, timestamp);
 }
+async function conversationSummary(db, conversationId, userId) {
+  const latest = await db.prepare(`SELECT m.id, m.conversation_id, m.sender_device_id, m.sender_user_id, m.sender_key_id,
+      d.device_number AS sender_device_number, p.chat_alias AS sender_alias, p.avatar_data_url AS sender_avatar_data_url,
+      ak.signing_public_key AS sender_signing_public_key, m.client_message_id, m.protocol_version, m.content_epoch,
+      m.nonce, m.signature, m.ciphertext, m.attachment_refs, m.size_bucket, m.created_at, m.expires_at, m.deleted_at
+    FROM chat_messages m LEFT JOIN chat_devices d ON d.id=m.sender_device_id
+      LEFT JOIN chat_profiles p ON p.user_id=COALESCE(m.sender_user_id,d.user_id)
+      LEFT JOIN chat_account_keys ak ON ak.user_id=m.sender_user_id AND ak.key_version=m.sender_key_id
+    WHERE m.conversation_id=? ORDER BY m.created_at DESC,m.id DESC LIMIT 1`).bind(conversationId).first();
+  let membership = null;
+  try { membership = await db.prepare("SELECT last_read_at,last_read_message_id FROM chat_conversation_members WHERE conversation_id=? AND user_id=?").bind(conversationId,userId).first(); } catch (_) {}
+  let unreadCount = 0;
+  try {
+    const count = await db.prepare(`SELECT COUNT(*) AS count FROM chat_messages m
+      LEFT JOIN chat_devices d ON d.id=m.sender_device_id WHERE m.conversation_id=? AND m.deleted_at IS NULL
+      AND (m.created_at>COALESCE(?, '') OR (m.created_at=COALESCE(?, '') AND m.id>COALESCE(?, '')))
+      AND COALESCE(m.sender_user_id,d.user_id)<>?`).bind(conversationId,membership?.last_read_at||null,membership?.last_read_at||null,membership?.last_read_message_id||null,userId).first();
+    unreadCount = Number(count?.count || 0);
+  } catch (_) {}
+  const latestMessage = latest ? { id: latest.id, conversationId: latest.conversation_id, senderDeviceId: latest.sender_device_id || null, senderUserId: latest.sender_user_id || null, senderKeyId: latest.sender_key_id || null, senderDeviceNumber: latest.sender_device_number == null ? null : Number(latest.sender_device_number), senderAlias: latest.sender_alias || "Paired contact", senderAvatarDataUrl: latest.sender_avatar_data_url || "", senderSigningPublicKey: latest.sender_signing_public_key || null, clientMessageId: latest.client_message_id, protocolVersion: latest.protocol_version || VERSION, contentEpoch: latest.content_epoch == null ? null : Number(latest.content_epoch), nonce: latest.deleted_at ? null : latest.nonce, signature: latest.deleted_at ? null : latest.signature, ciphertext: latest.deleted_at ? "" : latest.ciphertext, attachmentRefs: latest.deleted_at ? [] : JSON.parse(latest.attachment_refs || "[]"), sizeBucket: latest.size_bucket, createdAt: latest.created_at, expiresAt: latest.expires_at, deleted: Boolean(latest.deleted_at) } : null;
+  return { unreadCount, lastReadAt: membership?.last_read_at || null, lastReadMessageId: membership?.last_read_message_id || null, lastMessageAt: latest?.created_at || null, latestMessage };
+}
 function eventStatement(db, conversationId, type, entityId, epoch, timestamp, signed = null) {
   return db.prepare(`INSERT INTO chat_sync_events (conversation_id, event_type, entity_id, content_epoch, control_json, created_at) VALUES (?, ?, ?, ?, ?, ?)`)
     .bind(conversationId, type, entityId, epoch, signed ? JSON.stringify(signed) : null, timestamp);
@@ -190,12 +212,12 @@ export async function mapAccountConversation(db, row, userId) {
     mapped.push({ userId: m.user_id, alias: m.chat_alias || "Paired contact", avatarDataUrl: m.avatar_data_url || "", role: m.role, joinedAt: m.joined_at, isSelf: m.user_id === userId, contactId: contact?.id || null, accountKey: bundle(await activeKey(db, m.user_id)) });
   }
   const data = await db.prepare("SELECT * FROM chat_group_metadata WHERE conversation_id = ?").bind(row.id).first();
-  const last = await db.prepare("SELECT created_at FROM chat_messages WHERE conversation_id = ? ORDER BY created_at DESC LIMIT 1").bind(row.id).first();
+  const summary = await conversationSummary(db, row.id, userId);
   const isGlobalDiscussion = row.global_slug === "site-wide-discussion";
   const siteRole = (await db.prepare("SELECT role FROM users WHERE id = ?").bind(userId).first())?.role || null;
   return { id: row.id, kind: row.kind, protocolVersion: VERSION, historical: await isHistoricalConversation(db, row), epoch: Number(row.current_epoch), currentEpoch: Number(row.current_epoch),
     rotationRequired: Boolean(row.rotation_required), role: mapped.find((m) => m.isSelf)?.role || null, retentionSeconds: row.retention_seconds,
-    createdAt: row.created_at, updatedAt: row.updated_at, lastMessageAt: last?.created_at || null, legacySourceId: row.legacy_source_id || null,
+    createdAt: row.created_at, updatedAt: row.updated_at, ...summary, legacySourceId: row.legacy_source_id || null,
     members: mapped, group: row.kind === "group" ? { members: mapped, memberCount: mapped.length } : null,
     peer: row.kind === "direct" ? mapped.find((m) => !m.isSelf) || null : null,
     metadata: data ? { epoch: data.epoch, version: data.version, nonce: data.nonce, ciphertext: data.ciphertext } : null,
