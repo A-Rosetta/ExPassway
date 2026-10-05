@@ -23,8 +23,8 @@ const state = {
   recoveryCandidate: null,
   verifiedSafetyNumbers: {},
   safetyNumberChanges: {},
-  // Account-v2 secrets intentionally never enter IndexedDB. They live only for
-  // the lifetime of this worker after a successful Passkey PRF unlock.
+  // Account-v2 secrets stay inside this worker. The login-session cache receives
+  // only authenticated ciphertext wrapped with a non-extractable browser key.
   accountV2: null,
   accountV2Candidate: null,
   accountV2History: new Map(),
@@ -1063,6 +1063,98 @@ async function lockAccountV2Vault() {
   return { locked: true };
 }
 
+function accountV2SessionContext({ userId, sessionBinding, expiresAt, wrappingKey } = {}) {
+  const user = requiredAccountV2String(userId, "userId", 256);
+  const binding = requiredAccountV2String(sessionBinding, "sessionBinding", 256);
+  const expiry = Number(expiresAt);
+  if (!Number.isFinite(expiry) || expiry <= Date.now() || wrappingKey?.type !== "secret"
+      || wrappingKey.extractable !== false || wrappingKey.algorithm?.name !== "AES-GCM"
+      || wrappingKey.algorithm?.length !== 256 || !wrappingKey.usages?.includes("encrypt") || !wrappingKey.usages?.includes("decrypt")) {
+    throw accountV2Error("CHAT_SESSION_INVALID", "The local chat login session is invalid or expired.");
+  }
+  return { user, binding, expiry, aad: utf8(canonicalJson({ format: "expassway-chat-session-v1", userId: user, sessionBinding: binding, expiresAt: expiry })) };
+}
+
+function accountV2SessionSnapshot(account) {
+  return { userId: account.userId, keyVersion: account.keyVersion,
+    vaultRootKey: bytesToBase64Url(account.vaultRootKey), encryptionPrivateKey: bytesToBase64Url(account.encryptionPrivateKey),
+    signingPrivateKey: bytesToBase64Url(account.signingPrivateKey),
+    epochKeys: [...account.epochKeys].map(([id, key]) => [id, bytesToBase64Url(key)]) };
+}
+
+async function sealAccountV2Session(input = {}) {
+  const session = accountV2SessionContext(input);
+  const account = accountV2RequireUnlocked();
+  if (account.userId !== session.user) throw accountV2Error("CHAT_SESSION_INVALID", "The local chat session belongs to another account.");
+  const plaintext = utf8(JSON.stringify({ format: "expassway-chat-session-v1", userId: session.user,
+    sessionBinding: session.binding, expiresAt: session.expiry, credentialId: String(input.credentialId || ""),
+    current: accountV2SessionSnapshot(account), historical: [...state.accountV2History.values()].map(accountV2SessionSnapshot) }));
+  const nonce = crypto.getRandomValues(new Uint8Array(12));
+  try {
+    const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv: nonce, additionalData: session.aad }, input.wrappingKey, plaintext);
+    return { nonce: bytesToBase64Url(nonce), ciphertext: bytesToBase64Url(ciphertext) };
+  } finally { plaintext.fill(0); }
+}
+
+async function restoreAccountV2Session(input = {}) {
+  const session = accountV2SessionContext(input);
+  let plaintext;
+  const candidates = [];
+  try {
+    const ciphertext = requiredBase64Bytes(input.ciphertext, "ciphertext");
+    if (ciphertext.length > 4 * 1024 * 1024) throw accountV2Error("CHAT_SESSION_INVALID", "The local chat session is too large.");
+    plaintext = new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv: requiredBase64Bytes(input.nonce, "nonce", 12),
+      additionalData: session.aad }, input.wrappingKey, ciphertext));
+    const snapshot = JSON.parse(new TextDecoder().decode(plaintext));
+    if (snapshot.format !== "expassway-chat-session-v1" || snapshot.userId !== session.user || snapshot.sessionBinding !== session.binding
+        || snapshot.expiresAt !== session.expiry || !Array.isArray(snapshot.historical) || snapshot.historical.length > 200
+        || !Array.isArray(input.accountKeys) || !input.accountKeys[0]?.keyVersion || snapshot.current?.keyVersion !== input.accountKeys[0].keyVersion) {
+      throw accountV2Error("CHAT_SESSION_INVALID", "The local chat session does not match the current account identity.");
+    }
+    const s = await getSodium();
+    const versions = new Set();
+    const credential = requiredAccountV2String(snapshot.credentialId, "credentialId", 2048);
+    for (const entry of [snapshot.current, ...snapshot.historical]) {
+      const version = requiredAccountV2String(entry?.keyVersion, "keyVersion", 64);
+      const expected = input.accountKeys.find((key) => key?.keyVersion === version);
+      if (entry.userId !== session.user || versions.has(version) || !expected?.encryptionPublicKey || !expected.signingPublicKey || !expected.fingerprint
+          || (expected.userId && expected.userId !== session.user) || !expected.credentialIds?.includes(credential)
+          || !Array.isArray(entry.epochKeys) || entry.epochKeys.length > 2000) {
+        throw accountV2Error("CHAT_SESSION_INVALID", "The local chat history does not match the account's retained identities.");
+      }
+      versions.add(version);
+      const account = { userId: session.user, keyVersion: version, epochKeys: new Map() };
+      candidates.push(account);
+      account.vaultRootKey = requiredBase64Bytes(entry.vaultRootKey, "vaultRootKey", 32);
+      account.encryptionPrivateKey = requiredBase64Bytes(entry.encryptionPrivateKey, "encryptionPrivateKey", 32);
+      account.signingPrivateKey = requiredBase64Bytes(entry.signingPrivateKey, "signingPrivateKey", 64);
+      account.encryptionPublicKey = s.crypto_scalarmult_base(account.encryptionPrivateKey);
+      account.signingPublicKey = s.crypto_sign_ed25519_sk_to_pk(account.signingPrivateKey);
+      account.fingerprint = await accountV2Fingerprint(account.encryptionPublicKey, account.signingPublicKey);
+      if (account.fingerprint !== expected.fingerprint || bytesToBase64Url(account.encryptionPublicKey) !== expected.encryptionPublicKey
+          || bytesToBase64Url(account.signingPublicKey) !== expected.signingPublicKey) {
+        throw accountV2Error("ACCOUNT_IDENTITY_CHANGED", "The saved chat session does not match your current or historical chat identity.");
+      }
+      for (const item of entry.epochKeys) {
+        if (!Array.isArray(item) || item.length !== 2) throw accountV2Error("CHAT_SESSION_INVALID", "The local chat epoch cache is invalid.");
+        const id = requiredAccountV2String(item[0], "epochKeyId", 512);
+        if (account.epochKeys.has(id)) throw accountV2Error("CHAT_SESSION_INVALID", "The local chat epoch cache contains a duplicate.");
+        account.epochKeys.set(id, requiredBase64Bytes(item[1], "epochKey", 32));
+      }
+    }
+    // Validate every retained key before replacing any currently unlocked state.
+    accountV2ClearHistory();
+    accountV2WipeAccount(state.accountV2);
+    state.accountV2 = candidates.shift();
+    for (const historical of candidates) state.accountV2History.set(historical.keyVersion, historical);
+    candidates.length = 0;
+    return { ...await getAccountV2State(), credentialId: String(snapshot.credentialId || "") };
+  } catch (error) {
+    for (const candidate of candidates) accountV2WipeAccount(candidate);
+    throw error?.code ? error : accountV2Error("CHAT_SESSION_INVALID", "The local chat session could not be authenticated.", error);
+  } finally { plaintext?.fill(0); }
+}
+
 async function createAccountV2Envelope({ conversationId, epoch, recipient, contentKey } = {}) {
   accountV2RequireUnlocked();
   const id = requiredAccountV2String(conversationId, "conversationId", 256);
@@ -1312,6 +1404,8 @@ async function handleCryptoRequest(event) {
     else if (action === "unlockAccountV2Vault") result = await unlockAccountV2Vault(payload);
     else if (action === "wrapAccountV2Vault") result = await wrapAccountV2Vault(payload);
     else if (action === "lockAccountV2Vault") result = await lockAccountV2Vault(payload);
+    else if (action === "sealAccountV2Session") result = await sealAccountV2Session(payload);
+    else if (action === "restoreAccountV2Session") result = await restoreAccountV2Session(payload);
     else if (action === "getAccountV2State") result = await getAccountV2State();
     else if (action === "createAccountV2Epoch") result = await createAccountV2Epoch(payload);
     else if (action === "createAccountV2Envelope") result = await createAccountV2Envelope(payload);

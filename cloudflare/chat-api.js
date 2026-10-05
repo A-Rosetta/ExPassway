@@ -330,7 +330,6 @@ async function requireUserAndChat(request, env) {
 function rateLimitAction(request) {
   const url = new URL(request.url);
   if (url.pathname === "/api/chat/messages") return "message";
-  if (url.pathname === "/api/chat/invites" && request.method === "POST") return "invite";
   if (url.pathname === "/api/chat/attachments/init") return "attachment";
   if (url.pathname === "/api/chat/reports") return "report";
   return "read";
@@ -631,153 +630,6 @@ async function createGroupConversation(db, userId, body) {
     .bind(conversationId)
     .first();
   return mapConversation(db, row, userId);
-}
-
-async function createInvite(db, userId) {
-  const token = bytesToBase64Url(randomBytes(32));
-  const timestamp = Date.now();
-  const expiresAt = new Date(timestamp + 7 * 24 * 60 * 60 * 1000).toISOString();
-  const id = randomId();
-  try { await db
-    .prepare(
-      `
-    INSERT INTO chat_invites (id, creator_user_id, token_hash, expires_at, created_at)
-    VALUES (?, ?, ?, ?, ?)
-  `
-    )
-    .bind(id, userId, await sha256Base64Url(token), expiresAt, new Date(timestamp).toISOString())
-    .run(); } catch (_error) {
-    await db.prepare("INSERT INTO chat_account_write_proofs (id,token_hash,user_id,uses_remaining,expires_at,created_at) VALUES (?,?,?,?,?,?)")
-      .bind(randomId(), await sha256Base64Url(token), userId, 5, expiresAt, new Date(timestamp).toISOString()).run();
-  }
-  return { id, token, expiresAt };
-}
-
-async function listInvites(db, userId) {
-  const rows = await db
-    .prepare(
-      `
-    SELECT id, expires_at, used_at, revoked_at, created_at
-    FROM chat_invites WHERE creator_user_id = ? ORDER BY created_at DESC LIMIT 100
-  `
-    )
-    .bind(userId)
-    .all();
-  return (rows.results || []).map((row) => ({
-    id: row.id,
-    expiresAt: row.expires_at,
-    usedAt: row.used_at,
-    revokedAt: row.revoked_at,
-    createdAt: row.created_at,
-    active: !row.used_at && !row.revoked_at && row.expires_at > nowIso(),
-  }));
-}
-
-async function acceptInvite(db, token, userId) {
-  const tokenHash = await sha256Base64Url(token);
-  const invite = await db
-    .prepare(
-      `
-    SELECT id, creator_user_id, expires_at, used_at, revoked_at
-    FROM chat_invites WHERE token_hash = ?
-  `
-    )
-    .bind(tokenHash)
-    .first();
-  if (invite?.creator_user_id === userId) {
-    throw new AuthError(
-      409,
-      "You cannot accept an invite created by this account. Sign in with the other account.",
-      "INVITE_SELF"
-    );
-  }
-  if (!invite) {
-    throw new AuthError(404, "This invite is invalid.", "INVITE_INVALID");
-  }
-  if (invite.used_at || invite.revoked_at || invite.expires_at <= nowIso()) {
-    throw new AuthError(409, "This invite has expired or was already used.", "INVITE_UNAVAILABLE");
-  }
-
-  const existingContact = await db
-    .prepare(
-      `
-    SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ?
-  `
-    )
-    .bind(userId, invite.creator_user_id)
-    .first();
-  const timestamp = nowIso();
-  const contactId = existingContact?.id || randomId();
-  const peerContactId = existingContact
-    ? (
-        await db
-          .prepare("SELECT id FROM chat_contacts WHERE user_id = ? AND peer_user_id = ?")
-          .bind(invite.creator_user_id, userId)
-          .first()
-      )?.id || randomId()
-    : randomId();
-  const conversation = await existingDirectConversation(db, userId, invite.creator_user_id);
-  const conversationId = conversation?.id || randomId();
-
-  const statements = [
-    db
-      .prepare(
-        `
-    UPDATE chat_invites SET used_at = ?
-    WHERE id = ? AND used_at IS NULL AND revoked_at IS NULL AND expires_at > ?
-  `
-      )
-      .bind(timestamp, invite.id, timestamp),
-  ];
-  if (!existingContact) {
-    statements.push(
-      db
-        .prepare(
-          `
-      INSERT INTO chat_contacts (id, user_id, peer_user_id, created_at, accepted_at)
-      VALUES (?, ?, ?, ?, ?)
-    `
-        )
-        .bind(contactId, userId, invite.creator_user_id, timestamp, timestamp)
-    );
-    statements.push(
-      db
-        .prepare(
-          `
-      INSERT INTO chat_contacts (id, user_id, peer_user_id, created_at, accepted_at)
-      VALUES (?, ?, ?, ?, ?)
-    `
-        )
-        .bind(peerContactId, invite.creator_user_id, userId, timestamp, timestamp)
-    );
-  }
-  if (!conversation) {
-    statements.push(
-      db
-        .prepare(
-          `
-      INSERT INTO chat_conversations (id, kind, created_by, retention_seconds, created_at, updated_at)
-      VALUES (?, 'direct', ?, 2592000, ?, ?)
-    `
-        )
-        .bind(conversationId, invite.creator_user_id, timestamp, timestamp)
-    );
-    statements.push(
-      db
-        .prepare(
-          `
-      INSERT INTO chat_conversation_members (conversation_id, user_id, role, joined_at)
-      VALUES (?, ?, 'owner', ?), (?, ?, 'member', ?)
-    `
-        )
-        .bind(conversationId, invite.creator_user_id, timestamp, conversationId, userId, timestamp)
-    );
-  }
-  const results = await db.batch(statements);
-  if (Number(results[0]?.meta?.changes ?? results[0]?.changes ?? 0) !== 1) {
-    throw new AuthError(409, "This invite is no longer available.", "INVITE_UNAVAILABLE");
-  }
-  return { contactId, conversationId };
 }
 
 async function listContacts(db, userId) {
@@ -2839,6 +2691,14 @@ async function handleRoute(request, env, user) {
   const method = request.method;
   const db = env.DB;
 
+  if (parts[0] === "api" && parts[1] === "chat" && parts[2] === "invites") {
+    throw new AuthError(
+      410,
+      "Friend invite links have been removed. Add friends by their chat user ID.",
+      "CHAT_INVITES_REMOVED"
+    );
+  }
+
   // History visibility is account-local and works for both encryption protocols.
   if (method === "DELETE" && parts.length === 5 && parts[0] === "api" && parts[1] === "chat"
       && parts[2] === "conversations" && parts[4] === "history") {
@@ -2974,39 +2834,6 @@ async function handleRoute(request, env, user) {
       100
     );
     return success(await syncEvents(db, conversationId, user.id, url), method);
-  }
-
-  if (method === "GET" && url.pathname === "/api/chat/invites")
-    return success(await listInvites(db, user.id), method);
-  if (method === "POST" && url.pathname === "/api/chat/invites")
-    return success(await createInvite(db, user.id), method, 201);
-  if (
-    method === "POST" &&
-    parts[0] === "api" &&
-    parts[1] === "chat" &&
-    parts[2] === "invites" &&
-    parts[4] === "accept"
-  ) {
-    const token = boundedString(parts[3], "token", 200);
-    const accepted = await acceptInvite(db, token, user.id);
-    return success(accepted, method, 201);
-  }
-  if (
-    method === "DELETE" &&
-    parts[0] === "api" &&
-    parts[1] === "chat" &&
-    parts[2] === "invites" &&
-    parts[3]
-  ) {
-    const result = await db
-      .prepare(
-        "UPDATE chat_invites SET revoked_at = ? WHERE id = ? AND creator_user_id = ? AND used_at IS NULL AND revoked_at IS NULL"
-      )
-      .bind(nowIso(), parts[3], user.id)
-      .run();
-    if (Number(result?.meta?.changes ?? result?.changes ?? 0) !== 1)
-      throw new AuthError(404, "Invite not found.", "INVITE_NOT_FOUND");
-    return success({ revoked: true }, method);
   }
 
   if (method === "GET" && url.pathname === "/api/chat/contacts")
@@ -3542,9 +3369,6 @@ export async function cleanupChatData(env) {
   await env.DB.batch([
     env.DB.prepare(
       "DELETE FROM chat_messages WHERE protocol_version <> 'account-v2' AND expires_at IS NOT NULL AND expires_at <= ?"
-    ).bind(timestamp),
-    env.DB.prepare(
-      "DELETE FROM chat_invites WHERE expires_at <= ? OR used_at IS NOT NULL OR revoked_at IS NOT NULL"
     ).bind(timestamp),
     env.DB.prepare(
       "DELETE FROM chat_device_prekeys WHERE consumed_at IS NOT NULL AND consumed_at <= datetime(?, '-1 day')"

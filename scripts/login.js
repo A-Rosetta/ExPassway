@@ -34,12 +34,14 @@
   }
 
   function clearAuth() {
+    window.ALevelChatSession?.clear();
     localStorage.removeItem(USER_PROFILE_KEY);
     localStorage.removeItem(USER_ID_KEY);
     localStorage.removeItem(AUTH_TOKEN_KEY);
   }
 
   function applyAuthSuccess(payload, messageKey) {
+    window.ALevelChatSession?.clear();
     localStorage.removeItem(VISITOR_MODE_KEY);
     writeUserProfile(payload.user);
     localStorage.setItem(AUTH_TOKEN_KEY, payload.token);

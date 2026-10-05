@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { webcrypto } from "node:crypto";
 import { Miniflare } from "miniflare";
 import { unstable_splitSqlQuery } from "wrangler";
-import { handleChatApiRequest } from "../cloudflare/chat-api.js";
+import { handleChatApiRequest, cleanupChatData } from "../cloudflare/chat-api.js";
 
 if (!globalThis.crypto) globalThis.crypto = webcrypto;
 const AUTH_SECRET = "test-only-auth-secret-with-at-least-32-bytes";
@@ -17,7 +17,7 @@ async function issueToken(user) {
 const mf = new Miniflare({ compatibilityDate: "2026-07-29", d1Databases: { DB: "chat-api-test" }, r2Buckets: { CHAT_MEDIA_BUCKET: "chat-media-test" }, modules: true, script: "export default { fetch() { return new Response('ok'); } };" });
 const userA = { id: "11111111-1111-4111-8111-111111111111", email: "a@example.com", role: "student" };
 const userB = { id: "22222222-2222-4222-8222-222222222222", email: "b@example.com", role: "student" };
-const envBase = { AUTH_SECRET, CHAT_ENABLED: "true", CHAT_RECOVERY_BACKUP_ENABLED: "true", DB: await mf.getD1Database("DB"), CHAT_MEDIA_BUCKET: await mf.getR2Bucket("CHAT_MEDIA_BUCKET") };
+const envBase = { AUTH_SECRET, CHAT_ENABLED: "true", CHAT_ACCOUNT_V2_ENABLED: "true", CHAT_RECOVERY_BACKUP_ENABLED: "true", DB: await mf.getD1Database("DB"), CHAT_MEDIA_BUCKET: await mf.getR2Bucket("CHAT_MEDIA_BUCKET") };
 
 async function call(user, path, options = {}) {
   const headers = new Headers(options.headers || {});
@@ -29,7 +29,7 @@ async function call(user, path, options = {}) {
 
 try {
   const db = envBase.DB;
-  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql", "../migrations/0003_admin_platform.sql", "../migrations/0006_chat_foundation.sql", "../migrations/0007_chat_crypto_hardening.sql", "../migrations/0008_chat_account_v2.sql", "../migrations/0011_chat_messages_account_sender.sql", "../migrations/0012_chat_message_sender_key.sql", "../migrations/0013_chat_account_lifecycle.sql", "../migrations/0015_chat_conversation_protocol.sql", "../migrations/0016_chat_profile_history.sql", "../migrations/0017_chat_directory_global.sql"]) {
+  for (const file of ["../migrations/0001_initial.sql", "../migrations/0002_supabase_auth.sql", "../migrations/0003_admin_platform.sql", "../migrations/0006_chat_foundation.sql", "../migrations/0007_chat_crypto_hardening.sql", "../migrations/0008_chat_account_v2.sql", "../migrations/0009_chat_webauthn_context.sql", "../migrations/0010_chat_account_write_proofs.sql", "../migrations/0011_chat_messages_account_sender.sql", "../migrations/0012_chat_message_sender_key.sql", "../migrations/0013_chat_account_lifecycle.sql", "../migrations/0014_chat_passkey_hardening.sql", "../migrations/0015_chat_conversation_protocol.sql", "../migrations/0016_chat_profile_history.sql", "../migrations/0017_chat_directory_global.sql", "../migrations/0018_shared_passkeys.sql", "../migrations/0023_shared_passkey_vault_wrapping.sql"]) {
     const sql = await readFile(new URL(file, import.meta.url), "utf8");
     for (const statement of unstable_splitSqlQuery(sql)) await db.prepare(statement).run();
   }
@@ -37,7 +37,32 @@ try {
     db.prepare("INSERT INTO users (id, email, display_name, role, supabase_user_id) VALUES (?, ?, 'A', 'student', ?)").bind(userA.id, userA.email, "supabase-a"),
     db.prepare("INSERT INTO users (id, email, display_name, role, supabase_user_id) VALUES (?, ?, 'B', 'student', ?)").bind(userB.id, userB.email, "supabase-b"),
   ]);
-  assert.equal((await call(null, "/api/chat/invites")).response.status, 401);
+  const retiredInvites = [
+    { id: "retired-active", tokenHash: "active-token-hash", expiresAt: "2099-01-01T00:00:00.000Z" },
+    { id: "retired-expired", tokenHash: "expired-token-hash", expiresAt: "2000-01-01T00:00:00.000Z" },
+  ];
+  for (const invite of retiredInvites) {
+    await db.prepare("INSERT INTO chat_invites (id,creator_user_id,token_hash,expires_at,created_at) VALUES (?,?,?,?,?)")
+      .bind(invite.id, userA.id, invite.tokenHash, invite.expiresAt, "2000-01-01T00:00:00.000Z").run();
+  }
+  const retainedInviteRows = (await db.prepare("SELECT * FROM chat_invites ORDER BY id").all()).results;
+  for (const [path, method] of [
+    ["/api/chat/invites", "GET"],
+    ["/api/chat/invites", "POST"],
+    ["/api/chat/invites/retired-active", "DELETE"],
+    ["/api/chat/invites/active-token-hash/accept", "POST"],
+    ["/api/chat/invites/unknown-token/accept", "POST"],
+  ]) {
+    assert.equal((await call(null, path, { method })).response.status, 401);
+    const removed = await call(userA, path, { method });
+    assert.equal(removed.response.status, 410);
+    assert.equal(removed.payload.error.code, "CHAT_INVITES_REMOVED");
+    assert.equal(Object.hasOwn(removed.payload, "data"), false);
+  }
+  assert.deepEqual((await db.prepare("SELECT * FROM chat_invites ORDER BY id").all()).results, retainedInviteRows);
+  assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM chat_account_write_proofs").first()).count, 0);
+  assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM chat_contacts").first()).count, 0);
+  assert.equal((await db.prepare("SELECT COUNT(*) AS count FROM chat_rate_limits WHERE action='invite'").first()).count, 0);
   const invalidKey = { identityPublicKey: "bad.key", registrationId: 12, signedPreKey: { id: 1, publicKey: "key", signature: "sig" }, oneTimePreKeys: [] };
   assert.equal((await call(userA, "/api/chat/devices", { method: "POST", body: JSON.stringify(invalidKey) })).response.status, 400);
   const makeDevice = (prefix) => ({ identityPublicKey: `${prefix}Identity`, registrationId: 123, signedPreKey: { id: 1, publicKey: `${prefix}Signed`, signature: `${prefix}Signature` }, oneTimePreKeys: [{ id: 1, publicKey: `${prefix}Pre` }] });
@@ -45,12 +70,39 @@ try {
   const deviceB = await call(userB, "/api/chat/devices", { method: "POST", body: JSON.stringify(makeDevice("b")) });
   assert.equal(deviceA.response.status, 201);
   assert.equal(deviceB.response.status, 201);
-  const invite = await call(userA, "/api/chat/invites", { method: "POST" });
-  assert.equal(invite.response.status, 201);
-  const accepted = await call(userB, `/api/chat/invites/${invite.payload.data.token}/accept`, { method: "POST" });
-  assert.equal(accepted.response.status, 201);
-  assert.equal((await call(userB, `/api/chat/invites/${invite.payload.data.token}/accept`, { method: "POST" })).response.status, 409);
-  const conversationId = accepted.payload.data.conversationId;
+  // The current friend path is lookup by public chat ID. Keep the legacy
+  // conversation protocol below to cover existing Signal-v1 history as well.
+  const timestamp = new Date().toISOString();
+  for (const user of [userA, userB]) {
+    await db.batch([
+      db.prepare("INSERT INTO chat_account_keys (user_id,key_version,encryption_public_key,signing_public_key,fingerprint,created_at,updated_at) VALUES (?,'test-1',?,?,?,?,?)")
+        .bind(user.id, "public-encryption-key", "public-signing-key", "public-fingerprint", timestamp, timestamp),
+      db.prepare("INSERT INTO chat_passkeys (id,user_id,credential_id,public_key,prf_salt,created_at) VALUES (?,?,?,?,?,?)")
+        .bind(crypto.randomUUID(), user.id, user.id, "public-passkey", "prf-salt", timestamp),
+      db.prepare("INSERT INTO chat_account_vault_versions (user_id,key_version,credential_id,kdf_version,nonce,ciphertext,updated_at) VALUES (?,'test-1',?,'hkdf-sha256-v1','nonce','encrypted-vault',?)")
+        .bind(user.id, user.id, timestamp),
+      db.prepare("INSERT INTO chat_account_identity_heads (user_id,key_version,credential_id) VALUES (?,'test-1',?)")
+        .bind(user.id, user.id),
+    ]);
+  }
+  const profileB = (await call(userB, "/api/chat/profile")).payload.data;
+  const found = await call(userA, `/api/chat/users/search?q=${encodeURIComponent(profileB.chatUserId)}`);
+  assert.equal(found.response.status, 200);
+  assert.equal(found.payload.data[0].chatUserId, profileB.chatUserId);
+  assert.equal(found.payload.data[0].enabled, true);
+  const contact = await call(userA, "/api/chat/contacts/by-user-id", {
+    method: "POST", body: JSON.stringify({ chatUserId: profileB.chatUserId }),
+  });
+  assert.equal(contact.response.status, 201);
+  const repeatedContact = await call(userA, "/api/chat/contacts/by-user-id", {
+    method: "POST", body: JSON.stringify({ chatUserId: profileB.chatUserId }),
+  });
+  assert.equal(repeatedContact.payload.data.id, contact.payload.data.id);
+  const createdConversation = await call(userA, "/api/chat/conversations", {
+    method: "POST", body: JSON.stringify({ contactId: contact.payload.data.id }),
+  });
+  assert.equal(createdConversation.response.status, 201);
+  const conversationId = createdConversation.payload.data.id;
   const contactsA = await call(userA, "/api/chat/contacts");
   assert.equal(contactsA.response.status, 200);
   const group = await call(userA, "/api/chat/conversations", {
@@ -124,7 +176,9 @@ try {
   assert.equal(repeated.response.status, 201);
   assert.equal(repeated.payload.data.idempotent, true);
   assert.equal(repeated.payload.data.device.id, restored.payload.data.device.id);
-  console.log("Cloudflare chat API smoke checks passed.");
+  await cleanupChatData(envBase);
+  assert.deepEqual((await db.prepare("SELECT * FROM chat_invites ORDER BY id").all()).results, retainedInviteRows);
+  console.log("Cloudflare chat API smoke checks passed: invite routes retired, ID contacts and legacy chat preserved.");
 } finally {
   await mf.dispose();
 }

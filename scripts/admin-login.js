@@ -19,12 +19,14 @@
   }
 
   function clearAuth() {
+    window.ALevelChatSession?.clear();
     localStorage.removeItem(USER_PROFILE_KEY);
     localStorage.removeItem(USER_ID_KEY);
     localStorage.removeItem(AUTH_TOKEN_KEY);
   }
 
   function storeAdminSession(payload) {
+    window.ALevelChatSession?.clear();
     if (payload.user.role !== "admin") {
       clearAuth();
       setStatus(t("notAdmin"), true);

@@ -17,6 +17,7 @@
 }
 
 .site-ui .chat-profile-summary p { margin: 4px 0 0; font-size: .75rem; }
+.site-ui .chat-topbar .site-header-command { flex-shrink: 0; white-space: nowrap; }
 .site-ui .chat-profile-summary h2 { overflow-wrap: anywhere; }
 .site-ui .chat-avatar {
   display: inline-grid;

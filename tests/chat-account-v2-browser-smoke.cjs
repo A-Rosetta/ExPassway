@@ -119,7 +119,7 @@ async function main() {
         const filename = path.resolve(root, `.${url.pathname}`);
         if (!filename.startsWith(`${root}${path.sep}`)) { res.writeHead(403); res.end(); return; }
         const contents = await fs.readFile(filename);
-        const mime = filename.endsWith(".html") ? "text/html" : filename.endsWith(".js") ? "text/javascript" : filename.endsWith(".css") ? "text/css" : "application/octet-stream";
+        const mime = filename.endsWith(".html") ? "text/html" : filename.endsWith(".js") ? "text/javascript" : filename.endsWith(".css") ? "text/css" : filename.endsWith(".svg") ? "image/svg+xml" : "application/octet-stream";
         res.writeHead(200, { "Content-Type": mime });
         res.end(contents);
       } catch (error) {
@@ -245,8 +245,10 @@ async function main() {
     const secondAliceCredential = Buffer.from(`${users[0].id}:second`).toString("base64url");
     const aliceIdentityBeforeWrap = await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[0].id).first();
     const aliceVaultBeforeWrap = (await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[0].id).all()).results;
+    await alice.goto(`${baseUrl}/pages/chat.html?passkeys=add`);
+    await alice.locator("#chatApp").waitFor({ state: "visible" });
+    await alice.locator("#conversationList button").filter({ hasText: "Bob" }).click();
     await alice.evaluate((id) => { window.__nextCreatedCredential = id; window.__cancelUnlock = true; }, secondAliceCredential);
-    await alice.click("#addAccountPasskey");
     await alice.click("#continuePasskeyEnrollment");
     await alice.waitForFunction(() => document.querySelector("#chatStatus").textContent.includes("synchronization is incomplete"));
     assert.equal(await alice.locator("#chatApp").isVisible(), true);
@@ -404,8 +406,9 @@ async function main() {
     const secondBobCredential = Buffer.from(`${users[1].id}:second`).toString("base64url");
     const bobIdentityBeforeWrap = await env.DB.prepare("SELECT * FROM chat_account_identity_heads WHERE user_id=?").bind(users[1].id).first();
     const bobVaultsBeforeWrap = (await env.DB.prepare("SELECT * FROM chat_account_vault_versions WHERE user_id=? ORDER BY key_version").bind(users[1].id).all()).results;
+    await resetBob.goto(`${baseUrl}/pages/chat.html?passkeys=add`);
+    await resetBob.locator("#chatApp").waitFor({ state: "visible" });
     await resetBob.evaluate((id) => { window.__nextCreatedCredential = id; }, secondBobCredential);
-    await resetBob.click("#addAccountPasskey");
     await resetBob.click("#continuePasskeyEnrollment");
     await resetBob.locator("#chatPasskeySyncPanel").waitFor({ state: "hidden" });
     assert.equal((await env.DB.prepare("SELECT COUNT(*) AS count FROM chat_account_vault_wrappers WHERE user_id=? AND credential_id=?")

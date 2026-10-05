@@ -1765,6 +1765,7 @@
         localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(state.user));
       } catch (err) {
         if (err?.status === 401 || err?.status === 403) {
+          window.ALevelChatSession?.clear();
           localStorage.removeItem(USER_PROFILE_KEY);
           localStorage.removeItem(USER_ID_KEY);
           localStorage.removeItem(AUTH_TOKEN_KEY);
@@ -1868,6 +1869,7 @@
       location.href = "../index.html";
     });
     byId("communityLogout").addEventListener("click", () => {
+      window.ALevelChatSession?.clear();
       localStorage.removeItem(USER_PROFILE_KEY);
       localStorage.removeItem(USER_ID_KEY);
       localStorage.removeItem(AUTH_TOKEN_KEY);

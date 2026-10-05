@@ -299,6 +299,7 @@
   }
 
   function clearSession() {
+    window.ALevelChatSession?.clear();
     localStorage.removeItem(USER_PROFILE_KEY);
     localStorage.removeItem(USER_ID_KEY);
     localStorage.removeItem(AUTH_TOKEN_KEY);

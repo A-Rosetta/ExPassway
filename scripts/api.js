@@ -45,6 +45,13 @@
     return localStorage.getItem("alevel.authToken") || "";
   }
 
+  function invalidateChatSession(status, token, code) {
+    // A delayed failure from an old login must not clear a newer login's keys.
+    if ((status === 401 || (status === 403 && code === "ACCOUNT_DISABLED")) && token && token === currentToken()) {
+      window.ALevelChatSession?.clear();
+    }
+  }
+
   async function request(path, options = {}) {
     const timeoutMs = options.timeoutMs || (path.startsWith("/api/chat/") ? 30000 : DEFAULT_TIMEOUT_MS);
     const controller = new AbortController();
@@ -68,6 +75,7 @@
       const payload = await res.json().catch(() => ({}));
 
       if (!res.ok) {
+        invalidateChatSession(res.status, options.token, payload?.error?.code);
         const message =
           payload?.error?.message || `Request failed with status ${res.status}`;
         const err = new Error(message);
@@ -99,6 +107,7 @@
     });
     if (!response.ok) {
       const payload = await response.json().catch(() => ({}));
+      invalidateChatSession(response.status, token, payload?.error?.code);
       throw new Error(payload?.error?.message || `Request failed with status ${response.status}`);
     }
     return response.blob();
@@ -766,24 +775,6 @@
     },
     async leaveGlobalChatDiscussion() {
       return request("/api/chat/global-discussion/leave", {
-        method: "POST",
-        token: currentToken(),
-      });
-    },
-    async listChatInvites() {
-      return request("/api/chat/invites", { token: currentToken() });
-    },
-    async createChatInvite() {
-      return request("/api/chat/invites", { method: "POST", token: currentToken() });
-    },
-    async revokeChatInvite(inviteId) {
-      return request(`/api/chat/invites/${encodeURIComponent(inviteId)}`, {
-        method: "DELETE",
-        token: currentToken(),
-      });
-    },
-    async acceptChatInvite(token) {
-      return request(`/api/chat/invites/${encodeURIComponent(token)}/accept`, {
         method: "POST",
         token: currentToken(),
       });

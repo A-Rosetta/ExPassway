@@ -83,7 +83,7 @@ async function main() {
           verifyChatPasskey: async () => { raced = true; return { proof: "test-proof", credentialId: "AQID", keyVersion: "1" }; },
           initializeChatAccount: async () => { window.__calls.initialize += 1; throw new Error("Existing identity must never be replaced"); },
           saveChatAccountVaultWrapper: async () => { window.__calls.savedWrapper += 1; return { saved: true }; },
-          listChatInvites: async () => [], listChatContacts: async () => [], listChatConversations: async () => [],
+          listChatContacts: async () => [], listChatConversations: async () => [],
           getGlobalChatDiscussion: async () => null,
         };
       }, { markup, scenario });

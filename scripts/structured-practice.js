@@ -24,6 +24,7 @@ const matchingGrade = (question) => {
 
 function requireLogin(error) {
   if (error?.status !== 401) return false;
+  window.ALevelChatSession?.clear();
   localStorage.removeItem("alevel.authToken"); location.href = "./login.html"; return true;
 }
 function persistDraft() {

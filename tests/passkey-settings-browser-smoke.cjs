@@ -64,6 +64,15 @@ async function main() {
       });
       await page.route("**/pages/chat.html?**", (route) => route.fulfill({ status: 200, contentType: "text/html", body: "<!doctype html><html><body>Existing chat unlock destination</body></html>" }));
       await page.goto(`${baseUrl}/index.html`, { waitUntil: "networkidle" });
+      await page.locator("[data-chat-entry]").waitFor({ state: "visible" });
+      const chatIcon = page.locator(".chat-entry__icon");
+      assert.equal(await chatIcon.evaluate((image) => image.complete && image.naturalWidth > 0), true, "The new chat icon must load on both desktop and mobile.");
+      assert.equal(await page.locator("[data-chat-entry]").getAttribute("href"), "pages/chat.html");
+      assert.equal(await page.locator("[data-chat-entry]").getAttribute("aria-label"), language === "en" ? "Chat" : "聊天");
+      if (process.env.LOGIN_FLOW_SCREENSHOT_DIR) {
+        await fs.mkdir(process.env.LOGIN_FLOW_SCREENSHOT_DIR, { recursive: true });
+        await page.screenshot({ path: path.join(process.env.LOGIN_FLOW_SCREENSHOT_DIR, `chat-icon-home-${language}.png`), fullPage: false });
+      }
       if (mobile) await page.locator("#homeMenuToggle").click();
       await page.locator("#openProfile").click();
       await page.locator("#profileDialog").waitFor({ state: "visible" });

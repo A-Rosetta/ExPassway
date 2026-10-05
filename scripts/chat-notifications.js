@@ -19,7 +19,7 @@
     entry.href = chatPath();
     entry.dataset.chatEntry = "true";
     entry.innerHTML = `
-      <span class="chat-entry__icon" aria-hidden="true">◌</span>
+      <img class="chat-entry__icon" src="${location.pathname.includes("/pages/") ? "../" : ""}assets/chat-mark.svg?v=20261005-3" width="28" height="28" alt="" aria-hidden="true" />
       <span class="chat-entry__label" data-i18n="chatNavLabel"></span>
       <span class="chat-entry__badge" data-chat-unread hidden>0</span>`;
     entry.setAttribute("aria-label", t("chatNavLabel", "Chat"));
@@ -40,7 +40,12 @@
     refreshUnread();
     window.addEventListener("alevel:languagechange", addEntry);
     window.addEventListener("storage", (event) => {
-      if (event.key === TOKEN_KEY) addEntry();
+      if (event.key !== TOKEN_KEY && event.key !== null) return;
+      if (!localStorage.getItem(TOKEN_KEY)) document.querySelector("[data-chat-entry]")?.remove();
+      else addEntry();
+    });
+    window.addEventListener("expassway:chat-session-cleared", () => {
+      if (!localStorage.getItem(TOKEN_KEY)) document.querySelector("[data-chat-entry]")?.remove();
     });
   }
 

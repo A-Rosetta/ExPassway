@@ -30,6 +30,7 @@ function status(key, vars = {}, bad = false) {
 }
 function unauthorized(error) {
   if (![401, 403].includes(error?.status)) return false;
+  window.ALevelChatSession?.clear();
   localStorage.removeItem("alevel.authToken"); location.href = "./login.html"; return true;
 }
 function empty(target, title, body) {

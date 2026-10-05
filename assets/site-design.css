@@ -1004,8 +1004,11 @@
 }
 
 .site-ui .chat-entry__icon {
-  font-size: 1.15rem;
-  line-height: 1;
+  display: block;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 9px;
 }
 
 .site-ui .chat-entry__label {

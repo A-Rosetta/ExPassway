@@ -3,16 +3,19 @@ import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 
 const timers = [];
+let currentToken = "";
+let sessionClears = 0;
 let fetchRequest = async () => ({ ok: true, json: async () => ({ data: { ready: true } }) });
 const context = vm.createContext({
-  window: { location: { protocol: "https:", port: "", hostname: "expassway.test", pathname: "/pages/chat.html" } },
-  localStorage: { getItem: () => "", removeItem: () => {} },
+  window: { location: { protocol: "https:", port: "", hostname: "expassway.test", pathname: "/pages/chat.html" }, ALevelChatSession: { clear: () => { sessionClears += 1; } } },
+  localStorage: { getItem: key => key === "alevel.authToken" ? currentToken : "", removeItem: () => {} },
   URL, URLSearchParams, AbortController,
   setTimeout: (callback, milliseconds) => { timers.push({ callback, milliseconds }); return timers.length; },
   clearTimeout: () => {}, fetch: (...args) => fetchRequest(...args),
 });
 vm.runInContext(await readFile(new URL("../scripts/api.js", import.meta.url), "utf8"), context);
 const api = context.window.ALevelApi;
+for (const method of ["listChatInvites", "createChatInvite", "revokeChatInvite", "acceptChatInvite"]) assert.equal(api[method], undefined, "Invite links must not remain available in the client API.");
 assert.equal((await api.getChatProfile()).ready, true);
 assert.equal(timers.at(-1).milliseconds, 30000, "chat membership/vault requests need the same deadline as message sync");
 await api.getCatalogSubjects();
@@ -44,4 +47,16 @@ assert.equal(new URL(requests.at(-1).url, "https://expassway.test").pathname, "/
 assert.equal(JSON.parse(requests.at(-1).options.body).ciphertext, "encrypted");
 fetchRequest = async () => ({ ok: true, json: async () => ({ ok: true, data: null }) });
 assert.equal(await api.getChatAccountVault(), null, "A missing vault must stay null so setup cannot mistake the response envelope for encrypted key material.");
+currentToken = "active-login";
+fetchRequest = async () => ({ ok: false, status: 401, json: async () => ({ error: { code: "UNAUTHORIZED" } }) });
+await assert.rejects(api.getCurrentUser("old-login"));
+assert.equal(sessionClears, 0, "An old request must not clear a newer login's chat cache.");
+await assert.rejects(api.getCurrentUser("active-login"));
+assert.equal(sessionClears, 1, "Expired authentication must clear the unlocked chat cache.");
+fetchRequest = async () => ({ ok: false, status: 403, json: async () => ({ error: { code: "FORBIDDEN" } }) });
+await assert.rejects(api.getCurrentUser("active-login"));
+assert.equal(sessionClears, 1, "An unrelated forbidden operation is not a logout.");
+fetchRequest = async () => ({ ok: false, status: 403, json: async () => ({ error: { code: "ACCOUNT_DISABLED" } }) });
+await assert.rejects(api.getCurrentUser("active-login"));
+assert.equal(sessionClears, 2, "A disabled account must lose its cached chat unlock.");
 console.log("Chat API client timeout and error checks passed.");

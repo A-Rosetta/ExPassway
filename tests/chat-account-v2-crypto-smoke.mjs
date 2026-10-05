@@ -171,6 +171,38 @@ await freshBob.call("openAccountV2Envelope", { conversationId: "group-1", epoch:
 await freshBob.call("openAccountV2Envelope", { conversationId: "historical-chat", epoch: 1, envelope: oldEpoch.recipients[0] });
 assert.equal((await freshBob.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "hello");
 assert.equal((await freshBob.call("decryptAccountV2Message", { message: oldMessage, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "Keep this historical chat");
+
+// A login-bound cache transfers only authenticated ciphertext and a browser
+// CryptoKey. It restores every retained identity without replaying PRF output.
+const sessionKey = await webcrypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+await assert.rejects(() => webcrypto.subtle.exportKey("raw", sessionKey));
+const sessionInput = { userId: "bob", sessionBinding: "login-token-sha256", expiresAt: Date.now() + 60000, wrappingKey: sessionKey };
+const sealed = await freshBob.call("sealAccountV2Session", { ...sessionInput, credentialId });
+assert.deepEqual(Object.keys(sealed).sort(), ["ciphertext", "nonce"]);
+const accountKeys = [{ ...bobVault, credentialIds: [credentialId] }, { ...oldVault, credentialIds: [credentialId] }];
+const resumedBob = createWorker();
+const resumed = await resumedBob.call("restoreAccountV2Session", { ...sessionInput, ...sealed, accountKeys });
+assert.equal(resumed.fingerprint, bobVault.fingerprint);
+assert.deepEqual([...resumed.retainedKeyVersions], ["old"]);
+assert.equal(resumed.credentialId, credentialId);
+assert.equal((await resumedBob.call("decryptAccountV2Message", { message: message1, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "hello");
+assert.equal((await resumedBob.call("decryptAccountV2Message", { message: oldMessage, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "Keep this historical chat");
+for (const override of [
+  { userId: "mallory" }, { sessionBinding: "another-login-token" }, { expiresAt: Date.now() - 1 },
+  { ciphertext: b64(new Uint8Array(32)) }, { accountKeys: [{ ...bobVault, credentialIds: [] }, accountKeys[1]] },
+  { accountKeys: [accountKeys[0], { ...oldVault, credentialIds: [] }] },
+  { accountKeys: [{ ...differentIdentity, credentialIds: [credentialId] }, accountKeys[1]] },
+  { accountKeys: [{ ...bobVault, keyVersion: "new-head", credentialIds: [credentialId] }, accountKeys[1]] },
+]) {
+  await assert.rejects(() => resumedBob.call("restoreAccountV2Session", { ...sessionInput, ...sealed, accountKeys, ...override }),
+    (error) => ["CHAT_SESSION_INVALID", "ACCOUNT_IDENTITY_CHANGED"].includes(error.code));
+  assert.equal((await resumedBob.call("getAccountV2State")).fingerprint, bobVault.fingerprint,
+    "rejecting a stale, revoked, mismatched or tampered session must preserve the previously unlocked identity");
+  assert.equal((await resumedBob.call("decryptAccountV2Message", { message: oldMessage, signingPublicKey: aliceVault.signingPublicKey })).plaintext, "Keep this historical chat");
+}
+await resumedBob.call("lockAccountV2Vault");
+assert.equal((await resumedBob.call("getAccountV2State")).unlocked, false);
+await assert.rejects(() => resumedBob.call("sealAccountV2Session", { ...sessionInput, credentialId }), (error) => error.code === "ACCOUNT_VAULT_LOCKED");
 await freshBob.call("lockAccountV2Vault");
 await assert.rejects(() => freshBob.call("wrapAccountV2Vault", { userId: "bob", keyVersion: "old", credentialId, prfOutput: secondPrf }),
   (error) => error.code === "ACCOUNT_VAULT_LOCKED");

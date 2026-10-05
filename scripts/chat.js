@@ -1,7 +1,6 @@
 (function () {
   const TOKEN_KEY = "alevel.authToken";
   const DEVICE_KEY = "expassway.chat.device.v1";
-  const PENDING_INVITE_KEY = "expassway.chat.pendingInvite.v1";
   const EMOJI_RECENT_KEY = "expassway.chat.recentEmoji.v1";
   const EMOJI_CATEGORIES = [
     { id: "faces", key: "chatEmojiFaces", label: "Faces", entries: "😀:grin 笑|😃:happy 开心|😄:smile 微笑|😁:beam 大笑|😆:laugh 笑|😅:sweat 汗|😂:joy 喜极而泣|🤣:rofl 笑哭|🙂:smile 微笑|🙃:upside down 倒脸|😉:wink 眨眼|😊:blush 害羞|😇:angel 天使|🥰:love 喜爱|😍:heart eyes 爱慕|🤩:star eyes 崇拜|😘:kiss 亲吻|😋:yum 好吃|😛:tongue 吐舌|😎:cool 酷|🤓:nerd 书呆|🧐:think 思考|🤔:thinking 思考|🤗:hug 拥抱|🤭:giggle 偷笑|🤫:quiet 安静|😴:sleep 睡觉|🥳:party 庆祝|😭:cry 哭|😢:sad 难过|😤:angry 生气|😱:scream 惊讶|😬:grimace 尴尬|🫠:melt 融化|😮:surprise 惊讶|😑:expressionless 无语" },
@@ -49,6 +48,8 @@
     accountMode: false,
     accountPasskeyReady: false,
     accountBundle: null,
+    authToken: "",
+    accountSessionGeneration: 0,
     passkeyEnrollment: null,
     passkeyEnrollmentBusy: false,
     accountContactStatus: new Map(),
@@ -96,6 +97,80 @@
 
   function currentToken() {
     return localStorage.getItem(TOKEN_KEY) || "";
+  }
+
+  function assertAccountSession(generation) {
+    if (generation !== state.accountSessionGeneration || !state.authToken || state.authToken !== currentToken()) {
+      const error = new Error("Your login session changed. Sign in again before unlocking secure chat.");
+      error.code = "CHAT_SESSION_CHANGED";
+      throw error;
+    }
+  }
+
+  function lockLocalChatSession() {
+    state.accountSessionGeneration += 1;
+    state.dataRefreshGeneration += 1;
+    state.syncGeneration += 1;
+    state.accountV2 = null;
+    state.accountEpochs.clear();
+    state.accountGroupMetadata.clear();
+    state.localPlaintexts = {};
+    state.messageDrafts.clear();
+    state.messages = [];
+    state.activeConversation = null;
+    state.conversations = [];
+    state.contacts = [];
+    state.cursor = "";
+    state.syncInFlight = null;
+    state.passkeyEnrollmentBusy = false;
+    stopPolling();
+    state.socket?.close();
+    state.socket = null;
+    for (const pending of state.pendingCrypto.values()) pending.reject(new Error("The chat login session ended."));
+    state.pendingCrypto.clear();
+    state.cryptoWorker?.terminate();
+    state.cryptoWorker = null;
+    $("#messageInput").value = "";
+    $("#messageList").replaceChildren();
+    $("#chatApp").hidden = true;
+    $("#chatSetupPanel").hidden = !currentToken();
+    $("#enableAccountSync").hidden = Boolean(state.accountBundle?.accountKey);
+    $("#unlockAccountSync").hidden = !state.accountBundle?.accountKey;
+    renderPasskeyEnrollment();
+  }
+
+  async function saveUnlockedSession() {
+    if (!state.accountV2?.unlocked || state.authToken !== currentToken()) return;
+    try {
+      await window.ALevelChatSession?.save(cryptoCall, { userId: state.profile.id, credentialId: state.accountV2.credentialId });
+    } catch (_error) {
+      // Browsers may block IndexedDB. The normal Passkey unlock remains usable.
+    }
+  }
+
+  async function restoreUnlockedSession(bundle) {
+    if (!bundle?.accountKey || !window.ALevelChatSession) return false;
+    const generation = state.accountSessionGeneration;
+    const versions = await retainedAccountVaults();
+    assertAccountSession(generation);
+    const accountKeys = [{ ...bundle.accountKey, credentialIds: bundle.credentialIds || [] },
+      ...versions.filter((version) => version.keyVersion !== bundle.accountKey.keyVersion).map((version) => ({
+        ...version.accountKey, credentialIds: (version.wrappers || []).map((wrapper) => wrapper.credentialId).filter(Boolean),
+      }))];
+    const restored = await window.ALevelChatSession.restore(cryptoCall, { userId: state.profile.id, accountKeys });
+    if (!restored?.unlocked) {
+      if (state.authToken !== currentToken()) assertAccountSession(generation);
+      return false;
+    }
+    assertAccountSession(generation);
+    state.accountV2 = { ...restored, missingVaultVersions: versions.filter((version) => version.keyVersion !== restored.keyVersion
+      && !restored.retainedKeyVersions.includes(version.keyVersion)).map((version) => version.keyVersion) };
+    $("#chatSetupPanel").hidden = true;
+    $("#chatUnsupportedPanel").hidden = true;
+    $("#chatApp").hidden = false;
+    renderPasskeyEnrollment();
+    setStatus("");
+    return true;
   }
 
   function setAvatar(host, alias, avatarDataUrl) {
@@ -455,7 +530,7 @@
 
   function createCryptoWorker() {
     if (state.cryptoWorker) return state.cryptoWorker;
-    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20261005-2", { name: "expassway-chat-crypto" });
+    const worker = new Worker("../assets/vendor/chat-crypto-worker.js?v=20261005-3", { name: "expassway-chat-crypto" });
     worker.onerror = (event) => {
       if (state.cryptoWorker !== worker) return;
       const detail = String(event?.message || "").trim();
@@ -672,6 +747,8 @@
   }
 
   async function unlockExistingAccount(vault, assertion) {
+    const generation = state.accountSessionGeneration;
+    assertAccountSession(generation);
     const selected = matchingVault(vault, assertion.credentialId);
     if (!selected) {
       const error = new Error("This Passkey has not been synchronized with your chat history. Unlock with an existing Passkey, then synchronize it.");
@@ -683,9 +760,11 @@
       nonce: selected.nonce, ciphertext: selected.ciphertext, prfOutput: assertion.prfOutput,
       ...expectedVaultIdentity(vault.accountKey || state.accountBundle?.accountKey, selected.keyVersion),
     });
+    assertAccountSession(generation);
     validateUnlockedIdentity(unlocked, state.accountBundle?.accountKey);
     state.accountV2 = { ...unlocked, proof: assertion.proof, credentialId: assertion.credentialId };
     const versions = await retainedAccountVaults(vault);
+    assertAccountSession(generation);
     for (const historical of versions) {
       if (historical.keyVersion === unlocked.keyVersion) continue;
       const wrapped = matchingVault(historical, assertion.credentialId);
@@ -696,6 +775,7 @@
           ciphertext: wrapped.ciphertext, prfOutput: assertion.prfOutput, retainOnly: true,
           ...expectedVaultIdentity(historical.accountKey, wrapped.keyVersion),
         });
+        assertAccountSession(generation);
         validateUnlockedIdentity(restored, historical.accountKey);
       } catch (error) {
         // Older records without a credential ID are only candidates. A failed
@@ -704,6 +784,7 @@
       }
     }
     const cryptoState = await cryptoCall("getAccountV2State");
+    assertAccountSession(generation);
     state.accountV2.retainedKeyVersions = cryptoState.retainedKeyVersions || [];
     const availableVersions = new Set([unlocked.keyVersion, ...state.accountV2.retainedKeyVersions]);
     state.accountV2.missingVaultVersions = versions.filter((historical) => !availableVersions.has(historical.keyVersion)).map((historical) => historical.keyVersion);
@@ -711,10 +792,12 @@
     $("#chatApp").hidden = false;
     renderPasskeyEnrollment();
     setStatus("");
+    await saveUnlockedSession();
     await refreshData();
   }
 
   async function unlockAccountSync() {
+    const generation = state.accountSessionGeneration;
     const button = $("#unlockAccountSync");
     if (button.disabled) return;
     button.disabled = true;
@@ -727,6 +810,7 @@
       }
       setStatus("Unlocking secure chat with your Passkey...");
       const assertion = await accountPasskeyAssertion();
+      assertAccountSession(generation);
       await unlockExistingAccount(vault, assertion);
     } catch (error) {
       setStatus(formatActionError(error), true);
@@ -736,16 +820,19 @@
   }
 
   async function ensureAccountState() {
+    const generation = state.accountSessionGeneration;
     let bundle;
     try { bundle = await window.ALevelApi.getChatAccountKeyBundle(); }
     catch (error) {
       if (error?.status === 503 || error?.code === "CHAT_ACCOUNT_V2_DISABLED") return false;
       throw error;
     }
+    assertAccountSession(generation);
     state.accountMode = true;
     state.accountBundle = bundle;
     state.accountPasskeyReady = Boolean(bundle?.passkeyReady);
     $("#legacyDevicePanel").hidden = true;
+    if (await restoreUnlockedSession(bundle)) return true;
     if (!supportsAccountPasskey()) {
       $("#chatSetupPanel").hidden = true;
       $("#chatUnsupportedPanel").hidden = false;
@@ -761,6 +848,7 @@
   }
 
   async function setupAccountSync() {
+    const generation = state.accountSessionGeneration;
     if (!supportsAccountPasskey()) {
       $("#chatSetupPanel").hidden = true;
       $("#chatUnsupportedPanel").hidden = false;
@@ -778,8 +866,10 @@
       const existingVault = await window.ALevelApi.getChatAccountVault();
       const existingBundle = await window.ALevelApi.getChatAccountKeyBundle();
       state.accountBundle = existingBundle;
+      assertAccountSession(generation);
       if (existingVault) {
         const assertion = await accountPasskeyAssertion();
+        assertAccountSession(generation);
         return await unlockExistingAccount(existingVault, assertion);
       }
       if (existingBundle?.accountKey) throw new Error("Your existing chat vault is unavailable. Keep your existing Passkeys and try again.");
@@ -796,26 +886,31 @@
           setStatus("This device already has a secure chat Passkey. Unlocking it to finish setup...");
         }
         if (credential) {
+          assertAccountSession(generation);
           const registrationChallenge = registration.publicKey?.challenge || registration.challenge;
           if (!registrationChallenge) throw new Error("The Passkey registration challenge was missing. Refresh and try again.");
           await window.ALevelApi.verifyChatPasskey("register", {
             challenge: registrationChallenge,
             credential: serialiseCredential(credential),
           });
+          assertAccountSession(generation);
           state.accountPasskeyReady = true;
         }
       } else {
         setStatus("This device already has a secure chat Passkey. Unlocking it to finish setup...");
       }
       const assertion = await accountPasskeyAssertion();
+      assertAccountSession(generation);
       // A second browser may finish setup while the Passkey prompt is open.
       // Never generate replacement keys for an account with an existing vault.
       const currentVault = await window.ALevelApi.getChatAccountVault();
+      assertAccountSession(generation);
       if (currentVault) return await unlockExistingAccount(currentVault, assertion);
       const generated = await cryptoCall("generateAccountV2Vault", {
         userId: state.profile.id,
         prfOutput: assertion.prfOutput,
       });
+      assertAccountSession(generation);
       generatedCandidate = true;
       const writeInput = { proof: assertion.proof };
       await window.ALevelApi.initializeChatAccount({
@@ -828,6 +923,7 @@
         nonce: generated.nonce,
         ciphertext: generated.ciphertext,
       });
+      assertAccountSession(generation);
       state.accountV2 = { ...generated, unlocked: true, proof: assertion.proof, credentialId: assertion.credentialId,
         retainedKeyVersions: [], missingVaultVersions: [] };
       generatedCandidate = false;
@@ -835,6 +931,7 @@
       $("#chatApp").hidden = false;
       setStatus("Secure chat is ready.");
       renderPasskeyEnrollment();
+      await saveUnlockedSession();
       await refreshData();
     } catch (error) {
       if (generatedCandidate && !state.accountV2?.unlocked) await cryptoCall("lockAccountV2Vault").catch(() => {});
@@ -851,11 +948,6 @@
     const unlocked = Boolean(state.accountV2?.unlocked);
     const button = $("#continuePasskeyEnrollment");
     if (button) button.disabled = !unlocked || state.passkeyEnrollmentBusy;
-    const add = $("#addAccountPasskey");
-    if (add) {
-      add.hidden = !state.accountMode;
-      add.disabled = !unlocked || state.passkeyEnrollmentBusy;
-    }
     const message = $("#chatPasskeySyncStatus");
     if (message) message.textContent = state.passkeyEnrollmentBusy
       ? t("chatPasskeySyncWorking", "Synchronizing Passkey access to your chat history…")
@@ -877,16 +969,19 @@
   async function synchronizeAccountPasskey() {
     if (state.passkeyEnrollmentBusy || !state.accountV2?.unlocked || !state.passkeyEnrollment) return;
     state.passkeyEnrollmentBusy = true;
+    const generation = state.accountSessionGeneration;
     renderPasskeyEnrollment();
     try {
       let targetId = state.passkeyEnrollment.credentialId;
       if (!targetId) {
         const registration = await window.ALevelApi.getPasskeyRegistrationOptions(currentToken());
         const credential = await navigator.credentials.create({ publicKey: publicKeyOptions(registration) });
+        assertAccountSession(generation);
         if (!credential) throw new DOMException("The Passkey prompt was cancelled.", "NotAllowedError");
         const saved = await window.ALevelApi.registerPasskey(currentToken(), {
           challenge: (registration.publicKey || registration).challenge, credential: serialiseCredential(credential),
         });
+        assertAccountSession(generation);
         targetId = saved?.credentialId || credential.id;
         // Keep the created credential for a cancelled prompt or failed upload.
         state.passkeyEnrollment.credentialId = targetId;
@@ -896,13 +991,16 @@
         history.replaceState(null, "", retryUrl);
       }
       const versions = await retainedAccountVaults(await window.ALevelApi.getChatAccountVault());
+      assertAccountSession(generation);
       if (!versions.length) throw new Error("The existing encrypted account vault is unavailable.");
       const loaded = await cryptoCall("getAccountV2State");
+      assertAccountSession(generation);
       const unlockedVersions = new Set([loaded.keyVersion, ...(loaded.retainedKeyVersions || [])]);
       for (const vault of versions) {
         if (unlockedVersions.has(vault.keyVersion)) continue;
         setStatus(t("chatPasskeySyncHistory", "Verify an existing Passkey to preserve an older chat vault."));
         const existing = await accountPasskeyAssertion({ keyVersion: vault.keyVersion });
+        assertAccountSession(generation);
         const selected = matchingVault(vault, existing.credentialId);
         if (!selected) throw new Error("An existing Passkey is required to preserve this historical chat vault.");
         const restored = await cryptoCall("unlockAccountV2Vault", {
@@ -910,6 +1008,7 @@
           nonce: selected.nonce, ciphertext: selected.ciphertext, retainOnly: true,
           ...expectedVaultIdentity(vault.accountKey, selected.keyVersion),
         });
+        assertAccountSession(generation);
         validateUnlockedIdentity(restored, vault.accountKey);
         unlockedVersions.add(vault.keyVersion);
         state.accountV2.retainedKeyVersions = [...unlockedVersions].filter((version) => version !== state.accountV2.keyVersion);
@@ -919,18 +1018,24 @@
         const existingWrapper = matchingVault(vault, targetId);
         if (existingWrapper && !existingWrapper.legacyCandidate) continue;
         const target = await accountPasskeyAssertion({ credentialId: targetId, keyVersion: vault.keyVersion, purpose: "account-wrap" });
+        assertAccountSession(generation);
         if (target.credentialId !== targetId) throw new Error("Choose the Passkey being synchronized.");
         const wrapped = await cryptoCall("wrapAccountV2Vault", {
           userId: state.profile.id, keyVersion: vault.keyVersion, credentialId: targetId, prfOutput: target.prfOutput,
         });
+        assertAccountSession(generation);
         validateUnlockedIdentity(wrapped, vault.accountKey);
         await window.ALevelApi.saveChatAccountVaultWrapper({
           proof: target.proof, keyVersion: wrapped.keyVersion, credentialId: targetId,
           nonce: wrapped.nonce, ciphertext: wrapped.ciphertext, signature: wrapped.signature,
         });
+        assertAccountSession(generation);
       }
       state.accountV2.retainedKeyVersions = [...unlockedVersions].filter((version) => version !== state.accountV2.keyVersion);
       state.accountV2.missingVaultVersions = [];
+      state.accountV2.credentialId = targetId;
+      await saveUnlockedSession();
+      assertAccountSession(generation);
       state.passkeyEnrollment = null;
       const url = new URL(location.href);
       url.searchParams.delete("passkeys");
@@ -943,37 +1048,6 @@
       state.passkeyEnrollmentBusy = false;
       renderPasskeyEnrollment();
     }
-  }
-
-  function extractInviteToken(value) {
-    const raw = String(value || "").trim();
-    if (!raw) return "";
-    try {
-      const url = new URL(raw, location.href);
-      return url.searchParams.get("invite") || url.pathname.split("/").at(-1) || raw;
-    } catch (_error) {
-      return raw;
-    }
-  }
-
-  function pendingInviteToken() {
-    const fromUrl = new URL(location.href).searchParams.get("invite");
-    return extractInviteToken(fromUrl || sessionStorage.getItem(PENDING_INVITE_KEY) || "");
-  }
-
-  function renderInvites(invites) {
-    const host = $("#inviteList");
-    if (!host) return;
-    host.replaceChildren();
-    invites.filter((invite) => invite.active).slice(0, 5).forEach((invite) => {
-      const item = document.createElement("div");
-      item.className = "chat-invite-item";
-      item.innerHTML = `<div><strong></strong><small></small></div><span></span>`;
-      item.querySelector("strong").textContent = t("chatInviteActive", "Active invite");
-      item.querySelector("small").textContent = t("chatInviteShareHint", "Share the invite link shown above; it works once.");
-      item.querySelector("span").textContent = new Date(invite.expiresAt).toLocaleDateString();
-      host.appendChild(item);
-    });
   }
 
   function renderUserSearchResults(results, query = "") {
@@ -2110,9 +2184,8 @@
   async function refreshData() {
     const generation = ++state.dataRefreshGeneration;
     const selectionGeneration = state.syncGeneration;
-    const [profile, invites, contacts, conversations, globalInfo] = await Promise.all([
+    const [profile, contacts, conversations, globalInfo] = await Promise.all([
       window.ALevelApi.getChatProfile(),
-      window.ALevelApi.listChatInvites(),
       window.ALevelApi.listChatContacts(),
       window.ALevelApi.listChatConversations(),
       state.accountMode ? window.ALevelApi.getGlobalChatDiscussion().catch(() => null) : Promise.resolve(null),
@@ -2155,7 +2228,6 @@
       await ensurePrekeys();
       await updateRecoveryAvailability();
     }
-    renderInvites(invites);
     state.lastProfileRefresh = Date.now();
     renderChatProfile();
     renderContacts();
@@ -2319,71 +2391,6 @@
     } finally { if (button) button.disabled = false; }
   }
 
-  async function createInvite() {
-    try {
-      const invite = await window.ALevelApi.createChatInvite();
-      const url = new URL(location.href);
-      url.search = `?invite=${encodeURIComponent(invite.token)}`;
-      const inviteUrl = url.toString();
-      $("#inviteToken").value = inviteUrl;
-      let copied = false;
-      try {
-        if (navigator.clipboard?.writeText) {
-          await navigator.clipboard.writeText(inviteUrl);
-          copied = true;
-        }
-      } catch (_error) {
-        // Private browsing may deny clipboard access; the URL remains visible for manual copying.
-      }
-      setStatus(t(
-        copied ? "chatInviteCreated" : "chatInviteCreatedManualCopy",
-        copied
-          ? "Invite created. It expires in 7 days and can be used once."
-          : "Invite created. Copy the URL from the invite field; it expires in 7 days and can be used once."
-      ));
-      try {
-        await refreshData();
-      } catch (error) {
-        setStatus(t("chatInviteRefreshFailed", "Invite processed, but the chat list could not refresh: {message}", { message: error.message }), true);
-      }
-    } catch (error) {
-      setStatus(t("chatInviteFailed", "Invite action failed: {message}", { message: error.message }), true);
-    }
-  }
-
-  async function acceptInvite() {
-    const raw = $("#inviteToken").value.trim();
-    const token = extractInviteToken(raw);
-    if (!token) {
-      setStatus(t("chatInviteTokenMissing", "Paste the full invite URL or the invite token first."), true);
-      return;
-    }
-    if (/^[A-Za-z0-9_-]{20,32}$/.test(token)) {
-      setStatus(t("chatInviteIdNotToken", "This looks like an internal invite ID, not the invite token. Ask the creator to create a new invite and copy the full URL."), true);
-      return;
-    }
-    try {
-      await window.ALevelApi.acceptChatInvite(token);
-      $("#inviteToken").value = "";
-      sessionStorage.removeItem(PENDING_INVITE_KEY);
-      setStatus(t("chatInviteAccepted", "Friend paired."));
-      try {
-        await refreshData();
-      } catch (error) {
-        setStatus(t("chatInviteRefreshFailed", "Friend paired, but the chat list could not refresh: {message}", { message: error.message }), true);
-      }
-    } catch (error) {
-      if (error.code === "INVITE_SELF") {
-        setStatus(t("chatInviteSelf", error.message), true);
-        return;
-      }
-      const detail = error.code && error.code !== "HTTP_ERROR"
-        ? `${error.message || "Request failed"} (${error.code})`
-        : error.message || t("chatInviteUnknownError", "No error details were returned. Check the browser console and network response.");
-      setStatus(t("chatInviteFailed", "Invite action failed: {message}", { message: detail }), true);
-    }
-  }
-
   async function sendMessage(event) {
     event.preventDefault();
     if (!state.activeConversation || (!state.device && !state.accountV2?.unlocked)) return;
@@ -2539,12 +2546,6 @@
     $("#enableAccountSync")?.addEventListener("click", setupAccountSync);
     $("#unlockAccountSync")?.addEventListener("click", unlockAccountSync);
     $("#continuePasskeyEnrollment")?.addEventListener("click", synchronizeAccountPasskey);
-    $("#addAccountPasskey")?.addEventListener("click", () => {
-      if (state.passkeyEnrollmentBusy) return;
-      state.passkeyEnrollment = { credentialId: null };
-      renderPasskeyEnrollment();
-      $("#chatPasskeySyncPanel")?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-    });
     $("#restoreAccountHistory")?.addEventListener("click", () => {
       if (state.passkeyEnrollmentBusy || !state.accountV2?.credentialId) return;
       state.passkeyEnrollment = { credentialId: state.accountV2.credentialId };
@@ -2614,8 +2615,6 @@
     $("#createGroup")?.addEventListener("click", () => setGroupFormVisible(true));
     $("#confirmCreateGroup")?.addEventListener("click", createGroup);
     $("#cancelCreateGroup")?.addEventListener("click", () => setGroupFormVisible(false));
-    $("#createInvite")?.addEventListener("click", createInvite);
-    $("#acceptInvite")?.addEventListener("click", acceptInvite);
     $("#chatUserSearchForm")?.addEventListener("submit", searchChatUsers);
     $("#openGlobalDiscussion")?.addEventListener("click", async () => {
       const conversation = state.globalDiscussion;
@@ -2730,17 +2729,18 @@
     if (requestedCredential || enrollmentQuery.get("passkeys") === "add") {
       state.passkeyEnrollment = { credentialId: requestedCredential || null };
     }
-    const invite = pendingInviteToken();
     if (!currentToken()) {
-      if (invite) sessionStorage.setItem(PENDING_INVITE_KEY, invite);
-      const next = `chat.html${invite ? `?invite=${encodeURIComponent(invite)}` : ""}`;
+      const next = "chat.html";
       location.href = `login.html?next=${encodeURIComponent(next)}`;
       return;
     }
     try {
+      state.authToken = currentToken();
+      const generation = state.accountSessionGeneration;
       wireEvents();
-      if (invite) $("#inviteToken").value = invite;
+      window.addEventListener("expassway:chat-session-cleared", lockLocalChatSession);
       state.profile = await window.ALevelApi.getChatProfile();
+      assertAccountSession(generation);
       renderChatProfile();
       const accountConfigured = await ensureAccountState();
       if (accountConfigured) {
@@ -2761,7 +2761,6 @@
       }
       $("#chatApp").hidden = false;
       await refreshData();
-      if (invite) $("#inviteToken").value = invite;
     } catch (error) {
       if (error?.code === "CHAT_NOT_ENABLED" || error?.status === 503) {
         $("#chatSetupPanel").hidden = true;
