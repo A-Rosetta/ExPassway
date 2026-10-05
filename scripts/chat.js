@@ -2916,7 +2916,7 @@
       if (!navigator.onLine) return;
       if (state.activeConversation && !state.syncInFlight) syncConversation().catch((error) => setStatus(formatActionError(error), true));
       if (Date.now() - state.lastProfileRefresh >= 30000) refreshPresentation().catch(() => {});
-    }, 3000);
+    }, 1000);
   }
 
   async function openRealtime() {

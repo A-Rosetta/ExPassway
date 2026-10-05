@@ -117,6 +117,9 @@ async function main() {
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`${base}/pages/notifications.html`);
     await page.evaluate(() => {
+      window.__intervals = [];
+      const originalInterval = window.setInterval.bind(window);
+      window.setInterval = (handler, delay, ...args) => { window.__intervals.push(delay); return originalInterval(handler, delay, ...args); };
       const token = `${btoa(JSON.stringify({ sub: "alice" }))}.signature`;
       localStorage.setItem("alevel.authToken", token);
       window.__unread = [{ id: "one", unreadCount: 2, latestMessage: { id: "existing-1", senderUserId: "bob" } },
@@ -132,6 +135,7 @@ async function main() {
     });
     await page.addScriptTag({ content: notifications });
     await page.waitForFunction(() => document.querySelector("[data-chat-unread]")?.textContent === "5");
+    assert.deepEqual(await page.evaluate(() => window.__intervals), [1000], "homepage unread and notification polling must refresh every second");
     assert.equal(await page.locator("[data-chat-entry]").getAttribute("href"), "chat.html");
     assert.equal(await page.locator("[data-chat-entry]").getAttribute("aria-label"), "Chat (5)");
     assert.equal(await page.evaluate(async () => window.ALevelChatNotifications.setEnabled(true)), true);
@@ -241,6 +245,9 @@ async function main() {
     delivery.on("pageerror", (error) => errors.push(error.message));
     await delivery.goto(`${base}/pages/chat.html`);
     const setupFixture = ({ markup, offline = false }) => {
+      window.__intervals = [];
+      const originalInterval = window.setInterval.bind(window);
+      window.setInterval = (handler, delay, ...args) => { window.__intervals.push(delay); return originalInterval(handler, delay, ...args); };
       const parsed = new DOMParser().parseFromString(markup, "text/html");
       parsed.querySelectorAll("script").forEach((script) => script.remove());
       document.body.innerHTML = parsed.body.innerHTML;
@@ -343,6 +350,7 @@ async function main() {
     await delivery.locator(".chat-unread-badge:visible").waitFor({ state: "hidden" });
     assert.equal(await delivery.locator(".chat-unread-badge:visible").count(), 0);
     assert.match(await contact.textContent(), /Physics revision notes/);
+    assert.ok(await delivery.evaluate(() => window.__intervals.length >= 2 && window.__intervals.every((delay) => delay === 1000)), "message sync and unread badges must both poll every second");
     await delivery.evaluate(() => { window.__sendMode = "hold"; });
     await delivery.fill("#messageInput", "Send in progress");
     await delivery.click("#sendMessage");

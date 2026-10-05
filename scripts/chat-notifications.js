@@ -201,7 +201,7 @@
     window.addEventListener("expassway:chat-unread-changed", (event) => updateUnread(event.detail?.conversations || []));
     window.addEventListener("focus", refreshUnread);
     document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshUnread(); });
-    window.setInterval(() => { if (!document.hidden || state.preferences.enabled) refreshUnread(); }, 30000);
+    window.setInterval(() => { if (!document.hidden || state.preferences.enabled) refreshUnread(); }, 1000);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => setTimeout(initialize, 30));

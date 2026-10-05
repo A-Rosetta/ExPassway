@@ -255,7 +255,7 @@ async function main() {
       await secondAlice.locator("#conversationList button").filter({ has: secondAlice.locator("strong", { hasText: "Bob" }) }).click();
       await secondAlice.locator("#messageList").getByText("Alice's encrypted hello", { exact: true }).waitFor();
       await secondAlice.locator("#messageList").getByText("Bob's encrypted reply", { exact: true }).waitFor();
-      assert.ok(await alice.evaluate(() => window.__chatPollIntervals.includes(3000)), "chat polling must run every three seconds");
+      assert.ok(await alice.evaluate(() => window.__chatPollIntervals.includes(1000)), "chat polling must run every second");
       console.log("Browser: direct messages and second-browser vault unlock passed");
 
       // Enroll another account Passkey through the rendered UI. Cancelling its
