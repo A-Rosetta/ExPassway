@@ -38,7 +38,11 @@ async function main() {
       const context = await browser.newContext({ locale: language === "en" ? "en-US" : "zh-CN", viewport: { width: mobile ? 390 : 1440, height: mobile ? 844 : 980 }, reducedMotion: "reduce" });
       const page = await context.newPage();
       const calls = { registrations: 0, creates: 0, revocations: 0, vaultReads: 0 };
+      const svgResponses = new Map();
       page.on("pageerror", (error) => pageErrors.push(error.message));
+      page.on("response", (response) => {
+        if (new URL(response.url()).pathname.endsWith(".svg")) svgResponses.set(response.url(), response);
+      });
       await page.exposeFunction("__recordUnexpectedCreate", () => { calls.creates += 1; });
       await page.addInitScript((language) => {
         localStorage.clear();
@@ -55,6 +59,7 @@ async function main() {
         let data;
         if (url.pathname === "/api/auth/me" && method === "GET") data = { id: "chat-owner", email: "student@example.test", displayName: "History Owner", role: "student", language, hasPassword: false, pet: { enabled: false, skin: "codex-glass", position: { x: 0.9, y: 0.8 } } };
         else if (url.pathname === "/api/catalog/subjects") data = [];
+        else if (url.pathname === "/api/chat/conversations" && method === "GET") data = [];
         else if (url.pathname === "/api/auth/me/passkeys" && method === "GET") data = rows;
         else if (url.pathname === "/api/chat/account/vault") { calls.vaultReads += 1; data = { userId: "chat-owner", keyVersion: "1", credentialId: original.credentialId, ciphertext: "retained-fixture-vault" }; }
         else if (url.pathname.startsWith("/api/auth/me/passkeys/") && method === "DELETE") { calls.revocations += 1; data = { revoked: true }; }
@@ -66,7 +71,32 @@ async function main() {
       await page.goto(`${baseUrl}/index.html`, { waitUntil: "networkidle" });
       await page.locator("[data-chat-entry]").waitFor({ state: "visible" });
       const chatIcon = page.locator(".chat-entry__icon");
-      assert.equal(await chatIcon.evaluate((image) => image.complete && image.naturalWidth > 0), true, "The new chat icon must load on both desktop and mobile.");
+      assert.equal(await chatIcon.isVisible(), true, "The chat icon must be visible on both desktop and mobile.");
+      const iconAppearance = await chatIcon.evaluate((icon) => {
+        const rect = icon.getBoundingClientRect();
+        const style = getComputedStyle(icon);
+        const background = style.backgroundColor.match(/^rgba?\(([^)]+)\)$/);
+        const colorParts = background?.[1].split(",").map(Number) || [];
+        return { width: rect.width, height: rect.height, opacity: Number(style.opacity),
+          backgroundAlpha: colorParts.length === 3 ? 1 : colorParts[3] || 0,
+          maskImage: style.maskImage === "none" ? style.webkitMaskImage : style.maskImage };
+      });
+      assert(iconAppearance.width > 0 && iconAppearance.height > 0 && iconAppearance.opacity > 0,
+        "The chat icon must occupy visible space.");
+      assert(iconAppearance.backgroundAlpha > 0, "The mask needs a nontransparent foreground color.");
+      const maskUrl = iconAppearance.maskImage.match(/^url\(["']?([^"')]+)["']?\)$/)?.[1];
+      assert(maskUrl, "The chat icon must resolve a mask image URL.");
+      const maskResponse = svgResponses.get(maskUrl);
+      assert(maskResponse?.ok(), "The browser must successfully load the actual SVG used by the icon mask.");
+      assert.match(maskResponse.headers()["content-type"], /image\/svg\+xml/);
+      const maskBytes = await maskResponse.body();
+      assert(maskBytes.length > 0, "The mask response must contain SVG bytes.");
+      const usableSvg = await page.evaluate((source) => {
+        const svg = new DOMParser().parseFromString(source, "image/svg+xml");
+        return !svg.querySelector("parsererror") && svg.documentElement.localName === "svg"
+          && Boolean(svg.querySelector("path, rect, circle, ellipse, polygon, polyline, text, use"));
+      }, maskBytes.toString("utf8"));
+      assert(usableSvg, "The loaded icon mask must be a valid SVG with drawable content.");
       assert.equal(await page.locator("[data-chat-entry]").getAttribute("href"), "pages/chat.html");
       assert.equal(await page.locator("[data-chat-entry]").getAttribute("aria-label"), language === "en" ? "Chat" : "聊天");
       if (process.env.LOGIN_FLOW_SCREENSHOT_DIR) {
