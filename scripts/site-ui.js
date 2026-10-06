@@ -133,7 +133,19 @@
     if (theme === DARK) root.setAttribute("data-theme", DARK);
     else root.removeAttribute("data-theme");
     root.style.colorScheme = theme;
+    updateChatMarks(theme);
     updateThemeLabel();
+  }
+
+  function updateChatMarks(theme) {
+    const basePath = location.pathname.includes("/pages/") ? "../" : "";
+    const markPath = `${basePath}assets/chat-mark-${theme}.svg?v=20261006-2`;
+    document.querySelectorAll("img[data-chat-mark]").forEach((icon) => {
+      icon.src = markPath;
+    });
+    document.querySelectorAll('link[rel~="icon"][data-chat-mark]').forEach((icon) => {
+      icon.href = markPath;
+    });
   }
 
   function storeTheme(theme) {
@@ -255,7 +267,7 @@
   function loadChatNotifications() {
     if (!isStudentSurface() || document.querySelector("script[data-chat-notifications-loader]")) return;
     const script = document.createElement("script");
-    script.src = `${location.pathname.includes("/pages/") ? "../" : ""}scripts/chat-notifications.js?v=20261005-7`;
+    script.src = `${location.pathname.includes("/pages/") ? "../" : ""}scripts/chat-notifications.js?v=20261006-8`;
     script.dataset.chatNotificationsLoader = "true";
     document.body.appendChild(script);
   }

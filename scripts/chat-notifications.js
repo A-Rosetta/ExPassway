@@ -109,7 +109,7 @@
     entry.href = chatPath();
     entry.dataset.chatEntry = "true";
     entry.innerHTML = `
-      <img class="chat-entry__icon" src="${location.pathname.includes("/pages/") ? "../" : ""}assets/chat-mark.svg?v=20261006-1" width="28" height="28" alt="" aria-hidden="true" />
+      <img class="chat-entry__icon" data-chat-mark src="${location.pathname.includes("/pages/") ? "../" : ""}assets/chat-mark-${document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light"}.svg?v=20261006-2" width="28" height="28" alt="" aria-hidden="true" />
       <span class="chat-entry__label" data-i18n="chatNavLabel"></span>
       <span class="chat-entry__badge" data-chat-unread aria-live="polite" hidden>0</span>`;
     host.prepend(entry);
