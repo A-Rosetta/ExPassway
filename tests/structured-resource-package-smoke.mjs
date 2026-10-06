@@ -40,6 +40,17 @@ const bundle = {
 };
 
 assert.deepEqual(validateResourcePackage(bundle), { valid: true, errors: [] });
+const paperFiveArchive = structuredClone(bundle);
+paperFiveArchive.subjectCode = "9702";
+paperFiveArchive.papers = [{ slug: "9702_s26_qp_54", paperNumber: 5, year: 2026, season: "s", variant: 4, paperType: "structured", totalMarks: 30, durationMinutes: 75, qpStorageKey: "9618/qp.pdf", msStorageKey: "9618/ms.pdf" }];
+paperFiveArchive.questions = [];
+assert.deepEqual(validateResourcePackage(paperFiveArchive), { valid: true, errors: [] }, "Paper 5 originals are valid archive content.");
+const unsupportedPaper = structuredClone(paperFiveArchive);
+unsupportedPaper.papers[0].slug = "9702_s26_qp_64";
+unsupportedPaper.papers[0].paperNumber = 6;
+assert.equal(validateResourcePackage(unsupportedPaper).valid, false);
+paperFiveArchive.questions = [{ ...structuredClone(bundle.questions[0]), paperSlug: "9702_s26_qp_54", id: stableStructuredQuestionId("9702", "9702_s26_qp_54", 1) }];
+assert.ok(validateResourcePackage(paperFiveArchive).errors.some((error) => error.path === "questions[0]"), "Expanding archive components must not implicitly enable Paper 5 in the question bank.");
 assert.equal(stableStructuredQuestionId("9618", "9618_s24_qp_11", 1), "CIE-ASAL-9618-9618_s24_qp_11-01");
 const copy = () => structuredClone(bundle);
 const rejected = (mutate, expectedPath) => {
@@ -73,6 +84,20 @@ rejected((value) => { value.questions[0].markScheme.images[0].page = 0; }, "ques
 rejected((value) => { value.questions[0].markScheme.images[0].crop.height = 0; }, "questions[0].markScheme.images[0].crop");
 rejected((value) => { value.questions[0].markScheme.images[0].url = "https://third-party.example/asset.png"; }, "questions[0].markScheme.images[0].url");
 rejected((value) => { value.resources[0].storageKey = "undeclared-book.pdf"; }, "resources[0].storageKey");
+const discountedPaper = copy();
+discountedPaper.papers[0].sourceQuestionCount = 30;
+discountedPaper.papers[0].discountedQuestions = [2];
+assert.equal(validateResourcePackage(discountedPaper).valid, true);
+for (const discountedQuestions of [null, {}, "2"]) {
+  rejected((value) => { value.papers[0].discountedQuestions = discountedQuestions; }, "papers[0].discountedQuestions");
+}
+for (const discountedQuestions of [[0], [-1], [1.5], ["2"], [31], [2, 2]]) {
+  const invalidDiscounted = structuredClone(discountedPaper);
+  invalidDiscounted.papers[0].discountedQuestions = discountedQuestions;
+  const result = validateResourcePackage(invalidDiscounted);
+  assert.equal(result.valid, false);
+  assert(result.errors.some((error) => error.path.startsWith("papers[0].discountedQuestions[")));
+}
 
 // Malformed JSON shapes must produce useful validation errors, never crashes.
 for (const value of [null, [], "package", 1]) {

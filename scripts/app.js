@@ -77,14 +77,18 @@
     }
   }
 
-  function subjectTheme(code) {
-    return {
+  function subjectTheme(subject) {
+    const themes = {
       "0610": { className: "biology", emblem: "BIO" },
       "0620": { className: "chemistry", emblem: "CHEM" },
       "0654": { className: "sciences", emblem: "SCI" },
       "0455": { className: "economics", emblem: "ECO" },
       "0625": { className: "physics", emblem: "PHY" },
-    }[code] || { className: "default", emblem: code || "MCQ" };
+    };
+    const relatedCode = { Biology: "0610", Chemistry: "0620", Physics: "0625", Economics: "0455" }[subject.name];
+    return themes[subject.code] || themes[relatedCode] || (subject.name === "Geography"
+      ? { className: "sciences", emblem: "GEO" }
+      : { className: "default", emblem: subject.code || "MCQ" });
   }
 
   function selectSubject(subject) {
@@ -97,9 +101,9 @@
       board: subject.board,
       subject: `${subject.qualification} ${subject.name}`,
       subjectCode: subject.code,
-      paper: subject.code === "9618" ? "Structured" : "MCQ",
+      paper: subject.capabilities?.structured ? "Structured" : "MCQ",
     }));
-    location.href = subject.code === "9618"
+    location.href = subject.capabilities?.resources
       ? `pages/subject.html?subject=${encodeURIComponent(subject.code)}`
       : ["0610", "0620", "0625", "0654", "0455"].includes(subject.code)
       ? `pages/biology.html?subject=${encodeURIComponent(subject.code)}`
@@ -121,7 +125,7 @@
     }
 
     subjects.forEach((subject) => {
-      const theme = subjectTheme(subject.code);
+      const theme = subjectTheme(subject);
       const subjectName = currentLanguage === "en"
         ? subject.name
         : (subject.nameZh || subject.name);
@@ -158,16 +162,16 @@
       qualification.textContent = `${subject.qualification} · ${subject.board} · ${subject.code}`;
       const stats = document.createElement("span");
       stats.className = "course-card__stats";
-      stats.textContent = t(subject.code === "9618" ? "subjectStructuredStats" : "subjectCourseStats", {
+      stats.textContent = t(subject.capabilities?.resources && !subject.capabilities?.onlinePractice ? "subjectArchiveStats" : subject.capabilities?.structured ? "subjectStructuredStats" : "subjectCourseStats", {
         papers: Number(subject.paperCount || 0),
         questions: Number(subject.questionCount || 0),
       });
-      if (subject.code === "9618" && !Number(subject.paperCount || 0) && !Number(subject.questionCount || 0)) {
+      if (subject.capabilities?.resources && !Number(subject.paperCount || 0) && !Number(subject.questionCount || 0)) {
         stats.textContent += ` · ${t("subjectResourcesPending")}`;
       }
       const action = document.createElement("span");
       action.className = "course-card__action";
-      action.textContent = t(subject.code === "9618" ? "subjectOpenHub" : "openSubjectPicker");
+      action.textContent = t(subject.capabilities?.resources ? "subjectOpenHub" : "openSubjectPicker");
       action.setAttribute("aria-hidden", "true");
       details.append(title, qualification, stats, action);
       course.append(book, details);

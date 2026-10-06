@@ -9,6 +9,7 @@ import {
 } from "./auth-api.js";
 import { buildPaperBlueprint, buildBlueprintIssues } from "../shared/paper-blueprint.js";
 import { hasStructuredContent, questionType } from "../shared/structured-content.js";
+import { subjectCapabilities } from "./read-api.js";
 
 // Kept local until the shared question model is available in every Worker
 // bundle. The migration stores these fields as snake_case; this adapter keeps
@@ -661,13 +662,20 @@ async function listPaperBuilderSubjects(db) {
     db.prepare("SELECT code, board, qualification, name, name_zh FROM exam_subjects WHERE active = 1 ORDER BY name").all(),
     listCurriculumSubjects(db),
   ]);
-  return rows.results.map((row) => ({
-    code: row.code, board: row.board, qualification: row.qualification, name: row.name, nameZh: row.name_zh || "",
-    version: curriculum.find((subject) => subject.code === row.code)?.version || null,
-    capabilities: row.code === "9618"
-      ? { manual: true, smart: false, equivalent: false, practice: false, hints: false }
-      : { manual: true, smart: true, equivalent: true, practice: true, hints: true },
-  }));
+  return rows.results.filter((row) => subjectCapabilities(row.code).manualPaperBuilder).map((row) => {
+    const capabilities = subjectCapabilities(row.code);
+    return {
+      code: row.code, board: row.board, qualification: row.qualification, name: row.name, nameZh: row.name_zh || "",
+      version: curriculum.find((subject) => subject.code === row.code)?.version || null,
+      capabilities: {
+        manual: capabilities.manualPaperBuilder,
+        smart: capabilities.smartPaperBuilder,
+        equivalent: capabilities.equivalentPaperBuilder,
+        practice: capabilities.onlinePractice && !capabilities.structured,
+        hints: capabilities.aiHints,
+      },
+    };
+  });
 }
 
 async function searchPaperBuilderQuestions(request, env) {

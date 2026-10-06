@@ -6,6 +6,7 @@ import {
   success,
 } from "./auth-api.js";
 import { getOrGenerateQuestionHints } from "./question-hints.js";
+import { usesSubjectHub } from "../shared/subject-catalogue.js";
 
 function objectResponse(request, object, headers = {}) {
   const responseHeaders = new Headers({
@@ -79,7 +80,7 @@ export async function handleContentRequest(request, env) {
       "Content-Disposition": "inline",
     });
   }
-  const paper = url.pathname.match(/^\/api\/catalog\/papers\/([0-9]{4}_[msw][0-9]{2}_qp_[1-4][1-9])\/download\/(qp|ms)$/);
+  const paper = url.pathname.match(/^\/api\/catalog\/papers\/([0-9]{4}_[msw][0-9]{2}_qp_[1-5][1-9])\/download\/(qp|ms)$/);
   if (paper && (request.method === "GET" || request.method === "HEAD")) {
     const slug = paper[1];
     const documentType = paper[2];
@@ -108,8 +109,8 @@ export async function handleContentRequest(request, env) {
     const suffix = publicAsset[3];
     const release = "(?:releases/[0-9a-f-]{36}/)?";
     const valid = publicAsset[1] === "question-images"
-      ? new RegExp(`^${release}[0-9]{4}_[msw][0-9]{2}_qp_[1-4][1-9]/(?:q|ms-q)[0-9]{2,3}(?:-(?:ms-)?[0-9]{2,3})?\\.png$`, "i").test(suffix)
-      : new RegExp(`^${release}data/[0-9]{4}_[msw][0-9]{2}_qp_[1-4][1-9]\\.json$`, "i").test(suffix);
+      ? new RegExp(`^${release}[0-9]{4}_[msw][0-9]{2}_qp_[1-5][1-9]/(?:q|ms-q)[0-9]{2,3}(?:-(?:ms-)?[0-9]{2,3})?\\.png$`, "i").test(suffix)
+      : new RegExp(`^${release}data/[0-9]{4}_[msw][0-9]{2}_qp_[1-5][1-9]\\.json$`, "i").test(suffix);
     if (!valid) return failure(404, "NOT_FOUND", "Content not found.", request.method);
     const parts = suffix.split("/");
     const versioned = parts[0] === "releases";
@@ -131,7 +132,7 @@ export async function handleContentRequest(request, env) {
     const key = versioned
       ? `${parts.slice(0, 2).join("/")}/${publicAsset[1]}/${publicAsset[2]}/${parts.slice(2).join("/")}`
       : `${publicAsset[1]}/${publicAsset[2]}/${suffix}`;
-    if (published.code === "9618" && publicAsset[1] === "question-images") {
+    if (usesSubjectHub(published.code) && publicAsset[1] === "question-images") {
       const questionNo = Number(relativeParts[1].match(/^(?:ms-)?q(\d+)/)?.[1]);
       const question = await env.DB.prepare(`
         SELECT images, structured_content, mark_scheme FROM question_bank

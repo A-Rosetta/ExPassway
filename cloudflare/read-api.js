@@ -1,4 +1,5 @@
 import { AuthError, requireCurrentUser } from "./auth-api.js";
+import { SUBJECT_HUBS, subjectHubDefinition, usesSubjectHub } from "../shared/subject-catalogue.js";
 
 const JSON_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -65,18 +66,20 @@ function apiTimestamp(value) {
 }
 
 export function subjectCapabilities(code) {
-  const structured = code === "9618";
+  const hub = subjectHubDefinition(code);
+  const structured = hub?.structuredPractice === true;
+  const sourceOnly = Boolean(hub && !structured);
   return {
     papers: true,
     structured,
-    components: structured,
-    resources: structured,
-    manualPaperBuilder: true,
-    smartPaperBuilder: !structured,
-    equivalentPaperBuilder: !structured,
-    onlinePractice: true,
+    components: Boolean(hub),
+    resources: Boolean(hub),
+    manualPaperBuilder: !sourceOnly,
+    smartPaperBuilder: !hub,
+    equivalentPaperBuilder: !hub,
+    onlinePractice: !sourceOnly,
     structuredAiGrading: structured,
-    aiHints: !structured,
+    aiHints: !hub,
   };
 }
 
@@ -267,7 +270,7 @@ async function getSubjectOverview(db, subjectCode) {
       textbooks: counts.textbooks > 0,
       papers: counts.papers > 0,
       questions: counts.questions > 0,
-      manualPaperBuilder: counts.questions > 0,
+      manualPaperBuilder: subjectCapabilities(subjectCode).manualPaperBuilder && counts.questions > 0,
     },
   };
 }
@@ -275,9 +278,7 @@ async function getSubjectOverview(db, subjectCode) {
 function capabilities() {
   return {
     catalog: { papers: true, structured: true, components: true, resources: true },
-    subjects: {
-      "9618": subjectCapabilities("9618"),
-    },
+    subjects: Object.fromEntries(Object.keys(SUBJECT_HUBS).map((code) => [code, subjectCapabilities(code)])),
   };
 }
 
@@ -394,8 +395,9 @@ async function getCurriculum(db) {
   for (const subject of subjects) {
     const board = subject.board || "CIE";
     boards[board] ||= {};
-    boards[board][`${subject.qualification} ${subject.name}`] = subject.code === "9618"
-      ? ["Structured", "Practical"] : ["MCQ"];
+    boards[board][`${subject.qualification} ${subject.name}`] = usesSubjectHub(subject.code)
+      ? subject.capabilities.structured ? ["Structured", "Practical"] : []
+      : ["MCQ"];
   }
   return {
     grades: [...new Set(subjects.map((subject) => subject.qualification))],

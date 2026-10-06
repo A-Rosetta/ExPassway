@@ -87,6 +87,77 @@ try {
     assert.equal(resource.exam_year_end, null);
     assert.equal(resource.content_type, "application/pdf", "resources inherit their declared file MIME type");
 
+    await execute(db, await readFile(new URL("../migrations/0020_structured_practice.sql", import.meta.url), "utf8"));
+    await db.prepare("INSERT INTO users (id, display_name) VALUES (?, ?)").bind("archive-migration-user", "Migration fixture").run();
+    await db.prepare(`INSERT INTO structured_practice_attempts
+      (id, user_id, request_id, question_id, paper_slug, input_hash, question_fingerprint,
+       language, answers, status, ai_called, result, model, response_id, completed_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+      .bind("archive-migration-attempt", "archive-migration-user", "request-1", bundle.questions[0].id,
+        paperSlug, "input-fixture", "question-fixture", "en", '{"q1-a":"0"}', "succeeded", 1,
+        '{"marks":8}', "fixture-model", "response-1", "2026-10-05T00:00:00Z").run();
+    const preserved = {};
+    for (const table of ["exam_papers", "structured_practice_attempts", "exam_subject_components", "users", "question_bank", "subject_resources"]) {
+      preserved[table] = (await db.prepare(`SELECT * FROM ${table} ORDER BY 1, 2`).all()).results;
+    }
+    await execute(db, await readFile(new URL("../migrations/0028_as_a_level_subject_archives.sql", import.meta.url), "utf8"));
+    for (const table of Object.keys(preserved)) {
+      const current = (await db.prepare(`SELECT * FROM ${table} ORDER BY 1, 2`).all()).results;
+      assert.deepEqual(current.filter((row) => table !== "exam_subject_components" || row.subject_code === "9618"),
+        preserved[table], `${table}: expanding archive support preserves existing rows in full`);
+    }
+    assert.deepEqual((await db.prepare("PRAGMA foreign_key_check").all()).results, []);
+    const attemptForeignKeys = (await db.prepare("PRAGMA foreign_key_list(structured_practice_attempts)").all()).results;
+    assert.equal(attemptForeignKeys.find((row) => row.from === "paper_slug").table, "exam_papers", "Practice attempts must reference the final live paper table.");
+    assert.equal((await db.prepare("SELECT COUNT(*) AS n FROM sqlite_master WHERE name LIKE '%_0028'").first()).n, 0);
+    await assert.rejects(() => db.prepare("DELETE FROM exam_papers WHERE slug = ?").bind(paperSlug).run(), /FOREIGN KEY/,
+      "Existing attempt records still prevent deletion of their source paper.");
+    const archiveSubjects = (await db.prepare("SELECT code, qualification FROM exam_subjects WHERE code IN ('9702','9701','9708','9700','9696')").all()).results;
+    assert.equal(archiveSubjects.length, 5);
+    assert(archiveSubjects.every((subject) => subject.qualification === "AS & A Level"));
+    const archiveComponents = (await db.prepare("SELECT * FROM exam_subject_components WHERE subject_code <> '9618'").all()).results;
+    assert.equal(archiveComponents.length, 23);
+    assert(archiveComponents.every((component) => Object.values(JSON.parse(component.capabilities)).every((value) => value === false)),
+      "Original archives must not advertise question-bank tools before questions are imported.");
+    assert.equal(archiveComponents.filter((component) => component.paper_number === 5).length, 3);
+
+    const scienceArchive = {
+      ...structuredClone(bundle), subjectCode: "9702", subjectName: "Physics", resources: [], questions: [],
+      papers: [{ ...structuredClone(bundle.papers[0]), slug: "9702_s26_qp_54", paperNumber: 5,
+        variant: 4, durationMinutes: 75, totalMarks: 30, sourceQuestionCount: 2, validQuestionCount: 0 }],
+    };
+    await execute(db, buildImportSql(scienceArchive, { publish: true }));
+    const paperFive = await db.prepare("SELECT paper_number, year, paper_type, valid_question_count FROM exam_papers WHERE slug = '9702_s26_qp_54'").first();
+    assert.deepEqual(paperFive, { paper_number: 5, year: 2026, paper_type: "structured", valid_question_count: 0 });
+    const sciencePaperFour = structuredClone(scienceArchive);
+    sciencePaperFour.papers[0].slug = "9702_s26_qp_44";
+    sciencePaperFour.papers[0].paperNumber = 4;
+    delete sciencePaperFour.papers[0].paperType;
+    await execute(db, buildImportSql(sciencePaperFour));
+    assert.equal((await db.prepare("SELECT paper_type FROM exam_papers WHERE slug = '9702_s26_qp_44'").first()).paper_type, "structured",
+      "Paper 4 is not inherently practical outside Computer Science 9618.");
+    const discountedArchive = structuredClone(scienceArchive);
+    discountedArchive.subjectCode = "9708";
+    discountedArchive.subjectName = "Economics";
+    Object.assign(discountedArchive.papers[0], { slug: "9708_s25_qp_14", year: 2025, paperNumber: 1,
+      paperType: "mcq", durationMinutes: 60, totalMarks: 30, sourceQuestionCount: 30,
+      discountedQuestions: [2], metadata: { positiveMarkTotal: 29 } });
+    await writeFile(manifestPath, JSON.stringify(discountedArchive));
+    const discountedPlan = await loadImportPlan(manifestPath, { publish: true });
+    await execute(db, discountedPlan.sql);
+    const discountedRecord = await db.prepare(`SELECT source_question_count, valid_question_count, total_marks,
+      discounted_questions, metadata FROM exam_papers WHERE slug = '9708_s25_qp_14'`).first();
+    assert.equal(discountedRecord.source_question_count, 30);
+    assert.equal(discountedRecord.valid_question_count, 0);
+    assert.equal(discountedRecord.total_marks, 30);
+    assert.deepEqual(JSON.parse(discountedRecord.discounted_questions), [2]);
+    assert.equal(JSON.parse(discountedRecord.metadata).positiveMarkTotal, 29);
+    discountedArchive.papers[0].discountedQuestions = [2, 3];
+    await execute(db, buildImportSql(discountedArchive));
+    assert.deepEqual(JSON.parse((await db.prepare("SELECT discounted_questions FROM exam_papers WHERE slug = '9708_s25_qp_14'").first()).discounted_questions), [2, 3],
+      "A repeat import updates the reviewed discounted-question list.");
+    await writeFile(manifestPath, JSON.stringify(bundle));
+
     const publishPlan = await loadImportPlan(manifestPath, { publish: true });
     await execute(db, buildImportSql(publishPlan.bundle, { publish: true, timestamp: "2026-10-04T00:00:00.000Z" }));
     assert.equal((await db.prepare("SELECT status FROM exam_papers WHERE slug = ?").bind(paperSlug).first()).status, "published");

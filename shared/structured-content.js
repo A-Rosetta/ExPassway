@@ -175,16 +175,25 @@ export function validateResourcePackage(bundle) {
     const path = `papers[${index}]`;
     if (!record(paper, path)) continue;
     unique(paper.slug, paperIds, `${path}.slug`, "paper slug");
-    const slug = typeof paper.slug === "string" ? paper.slug.match(/^(\d{4})_([msw])(\d{2})_qp_([1-4])([1-9])$/) : null;
+    const slug = typeof paper.slug === "string" ? paper.slug.match(/^(\d{4})_([msw])(\d{2})_qp_([1-5])([1-9])$/) : null;
     if (!slug || slug[1] !== code) fail(`${path}.slug`, "Invalid source paper slug.");
     if (slug) {
       for (const [field, expected] of Object.entries({ paperNumber: Number(slug[4]), year: 2000 + Number(slug[3]), season: slug[2], variant: Number(slug[5]) })) {
         if (paper[field] !== undefined && paper[field] !== expected) fail(`${path}.${field}`, "Value does not match the source paper slug.");
       }
     }
-    if (![1, 2, 3, 4].includes(paper.paperNumber) || !Number.isInteger(paper.totalMarks) || paper.totalMarks <= 0 || !Number.isInteger(paper.durationMinutes) || paper.durationMinutes <= 0) fail(path, "Paper must supply actual paper number, marks, and duration.");
+    if (![1, 2, 3, 4, 5].includes(paper.paperNumber) || !Number.isInteger(paper.totalMarks) || paper.totalMarks <= 0 || !Number.isInteger(paper.durationMinutes) || paper.durationMinutes <= 0) fail(path, "Paper must supply actual paper number, marks, and duration.");
     status(paper.status, `${path}.status`, ["draft", "published", "rejected"]);
     if (paper.metadata !== undefined) record(paper.metadata, `${path}.metadata`);
+    const discounted = array(paper.discountedQuestions, `${path}.discountedQuestions`);
+    const discountedNumbers = new Set();
+    for (const [questionIndex, questionNo] of discounted.entries()) {
+      if (!Number.isInteger(questionNo) || questionNo < 1 || !Number.isInteger(paper.sourceQuestionCount)
+        || questionNo > paper.sourceQuestionCount || discountedNumbers.has(questionNo)) {
+        fail(`${path}.discountedQuestions[${questionIndex}]`, "Expected a unique positive original question number within the source question count.");
+      }
+      discountedNumbers.add(questionNo);
+    }
     for (const type of ["qp", "ms"]) if (paper[`${type}StorageKey`] !== undefined) fileRef(paper[`${type}StorageKey`], `${path}.${type}StorageKey`);
   }
   for (const [index, resource] of resources.entries()) {
@@ -207,7 +216,7 @@ export function validateResourcePackage(bundle) {
       fail(`${path}.id`, "Question ID must derive from subject, paper slug, and original question number.");
     }
     unique(question.id, questionIds, `${path}.id`, "question ID");
-    if (question.questionType !== "structured" || typeof question.paperSlug !== "string" || Number(question.paperSlug.slice(-2, -1)) === 4) fail(path, "Only complete structured questions from Papers 1–3 enter the bank.");
+    if (question.questionType !== "structured" || typeof question.paperSlug !== "string" || ![1, 2, 3].includes(Number(question.paperSlug.slice(-2, -1)))) fail(path, "Only complete structured questions from Papers 1–3 enter the bank.");
     if (!Number.isInteger(question.maxMarks) || question.maxMarks <= 0) fail(`${path}.maxMarks`, "Official parent-question marks are required.");
     const partIds = new Set();
     const dependencies = [];

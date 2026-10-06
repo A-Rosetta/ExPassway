@@ -1,3 +1,5 @@
+import { subjectHubDefinition } from "../shared/subject-catalogue.js";
+
 const { getLanguage, setLanguage, t, applyPage } = window.ALevelI18n;
 const requestedCode = new URLSearchParams(location.search).get("subject") || "9618";
 const requestedView = new URLSearchParams(location.search).get("view") || "";
@@ -14,7 +16,7 @@ const make = (tag, className, text) => {
   return element;
 };
 const state = {
-  subject: { code: subjectCode, board: "CIE", qualification: "AS & A Level", name: "Computer Science", nameZh: "计算机科学" },
+  subject: { code: subjectCode, board: "CIE", qualification: "AS & A Level", ...(subjectHubDefinition(subjectCode) || { name: "Subject", nameZh: "科目" }) },
   components: [], resources: [], syllabus: [], syllabusResources: [], textbooks: [], papers: [], questions: [], counts: {}, readiness: {},
   filters: { year: "", season: "", paperNumber: "" }, status: "", statusVars: {}, failed: false,
   openSessions: new Set(), openResourceSections: new Set(),
@@ -93,7 +95,7 @@ function renderComponents() {
     const card = make("article", "component-card"); card.appendChild(make("h3", "", `P${component.paperNumber} · ${localized(component)}`));
     card.appendChild(make("p", "", `${t("subjectMinutes", { count: component.durationMinutes })} · ${t("subjectMarks", { count: component.totalMarks })}`));
     if (component.capabilities?.manualPaperBuilder) card.appendChild(make("p", "subject-muted", t("subjectManualPaperBuilder")));
-    card.appendChild(make("p", "subject-muted", t(Number(component.paperNumber) === 4 ? "subjectPracticalMaterials" : "subjectStructuredPaper"))); grid.appendChild(card);
+    card.appendChild(make("p", "subject-muted", t(component.paperType === "practical" ? "subjectPracticalMaterials" : component.questionType === "mcq" ? "subjectMcqPaper" : "subjectStructuredPaper"))); grid.appendChild(card);
   }); target.appendChild(grid);
 }
 function renderReadiness() {
@@ -169,7 +171,8 @@ function renderPapers() {
     }); target.appendChild(navigation);
   }
   const toolbar = make("div", "paper-toolbar");
-  [["season", "subjectSeason", [...new Set(sessions.map((session) => session.season))]], ["paperNumber", "subjectPaperNumber", [1, 2, 3, 4]]].forEach(([key, labelKey, values]) => {
+  const paperNumbers = [...new Set([...state.components, ...state.papers].map((item) => Number(item.paperNumber)).filter((number) => Number.isInteger(number) && number > 0))].sort((a, b) => a - b);
+  [["season", "subjectSeason", [...new Set(sessions.map((session) => session.season))]], ["paperNumber", "subjectPaperNumber", paperNumbers]].forEach(([key, labelKey, values]) => {
     const label = make("label"); label.appendChild(make("span", "", t(labelKey))); const select = make("select"); select.id = `subjectFilter${key}`;
     select.appendChild(new Option(t("subjectAll"), "")); values.forEach((value) => select.appendChild(new Option(key === "paperNumber" ? t("subjectPaperLabel", { number: value }) : seasonLabel(value), String(value)))); select.value = state.filters[key];
     select.addEventListener("change", () => { state.filters[key] = select.value; renderPaperList(); }); label.appendChild(select); toolbar.appendChild(label);
@@ -221,7 +224,7 @@ function paperRow(paper) {
   const card = make("article", "paper-card paper-card--session"); card.dataset.paperSlug = paper.slug; card.appendChild(make("h4", "", `${t("subjectPaperLabel", { number: paper.paperNumber })} · ${t("subjectVariant", { value: paper.variant })}`));
   card.appendChild(make("p", "paper-source-code", paper.slug));
   const metadata = [paper.durationMinutes ? t("subjectMinutes", { count: paper.durationMinutes }) : "", paper.totalMarks ? t("subjectMarks", { count: paper.totalMarks }) : ""].filter(Boolean); if (metadata.length) card.appendChild(make("p", "paper-meta", metadata.join(" · ")));
-  const practical = Number(paper.paperNumber) === 4; if (practical) card.appendChild(make("p", "subject-muted", t("subjectPracticalMaterials")));
+  const practical = paper.paperType === "practical"; if (practical) card.appendChild(make("p", "subject-muted", t("subjectPracticalMaterials")));
   const actions = make("div", "paper-actions"); ["qp", "ms"].forEach((type) => {
     if (!paperHasFile(paper, type)) return;
     const href = `${api.getBaseUrl?.() || ""}/api/catalog/papers/${encodeURIComponent(paper.slug)}/download/${type}`;
@@ -233,7 +236,7 @@ function paperRow(paper) {
   state.resources.filter((resource) => resource.paperSlug === paper.slug).forEach((resource) => {
     const row = make("div", "paper-attachment"); row.appendChild(make("p", "", localized(resource))); const resourceActions = make("div", "paper-actions"); addResourceActions(resourceActions, resource); row.appendChild(resourceActions); card.appendChild(row);
   });
-  if ([1, 2, 3].includes(Number(paper.paperNumber)) && hasQuestions) {
+  if (state.subject.capabilities?.onlinePractice && [1, 2, 3].includes(Number(paper.paperNumber)) && hasQuestions) {
     const practice = make("div", "paper-practice-entry");
     const link = make("a", "btn-primary", t("subjectPracticeThisPaper"));
     link.href = `./structured-practice.html?paper=${encodeURIComponent(paper.slug)}`;
@@ -269,9 +272,10 @@ function renderSyllabus() {
 function renderAll() {
   applyPage(); const name = localized(state.subject); el("subjectTitle").textContent = name;
   el("subjectEyebrow").textContent = `${state.subject.board} · ${state.subject.qualification} · ${subjectCode}`;
-  el("subjectSubtitle").textContent = t("subjectHubSubtitle", { subject: name, code: subjectCode }); document.title = `${name} · ${t("subjectHubTitle")}`;
+  el("subjectSubtitle").textContent = t(state.subject.capabilities?.onlinePractice ? "subjectHubSubtitle" : "subjectArchiveSubtitle", { subject: name, code: subjectCode }); document.title = `${name} · ${t("subjectHubTitle")}`;
   const builderReady = state.readiness.manualPaperBuilder === true && state.questions.some((question) => !/_qp_4[1-9]$/.test(question.paperSlug || ""));
   const builder = el("subjectBuilder"); builder.classList.toggle("is-disabled", !builderReady); builder.setAttribute("aria-disabled", String(!builderReady));
+  builder.closest(".subject-toolbar").hidden = state.subject.capabilities?.manualPaperBuilder === false;
   if (builderReady) builder.href = `./paper-builder.html?subject=${encodeURIComponent(subjectCode)}`; else builder.removeAttribute("href");
   builder.title = t(builderReady ? "subjectBuilder" : "subjectBuilderPending"); el("subjectLanguage").textContent = getLanguage() === "en" ? "中文" : "EN";
   renderReadiness(); renderComponents(); renderSyllabus(); renderResources("textbooks", "textbooksView", "subjectTextbooksEmptyTitle", "subjectTextbooksEmptyBody"); renderPapers();

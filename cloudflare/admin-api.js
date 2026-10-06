@@ -10,6 +10,7 @@ import {
 import { dispatchImportWorkflow, writeAudit } from "./admin-support.js";
 import { handleAdminPlatformRoute } from "./admin-platform-api.js";
 import { subjectCapabilities } from "./read-api.js";
+import { usesSubjectHub } from "../shared/subject-catalogue.js";
 
 const CORS_PREFLIGHT_HEADERS = {
   "Access-Control-Allow-Headers": "Authorization, Content-Type",
@@ -100,7 +101,7 @@ function mapSubject(row) {
 }
 
 async function subjectReadiness(db, subject) {
-  if (subject.code !== "9618") return subject;
+  if (!usesSubjectHub(subject.code)) return subject;
   const row = await db.prepare(`
     SELECT
       (SELECT COUNT(*) FROM subject_resources WHERE subject_code = ? AND status = 'published' AND kind = 'syllabus') AS syllabus,
@@ -119,7 +120,7 @@ async function subjectReadiness(db, subject) {
       syllabus: Number(row.syllabus), textbooks: Number(row.textbooks),
       papers: Number(row.papers), questions: Number(row.questions),
     },
-    importMode: "structured-package",
+    importMode: subject.capabilities.structured ? "structured-package" : "resource-package",
   };
 }
 
@@ -218,8 +219,8 @@ async function getImportJob(db, jobId, detail = false) {
 }
 
 function parsePdfFileName(fileName, subjectCode) {
-  if (subjectCode === "9618") {
-    throw new AuthError(400, "9618 requires a structured content package, not the MCQ importer.", "UNSUPPORTED_IMPORT_TYPE");
+  if (usesSubjectHub(subjectCode)) {
+    throw new AuthError(400, `${subjectCode} requires a prepared resource package.`, "UNSUPPORTED_IMPORT_TYPE");
   }
   const name = String(fileName || "");
   const match = name.match(FILE_PATTERN);
@@ -724,8 +725,8 @@ export async function handleAdminApiRequest(request, env) {
       const body = await readJsonBody(request);
       const subjectCode = String(body.subjectCode || "").trim();
       if (!/^\d{4}$/.test(subjectCode)) throw new AuthError(400, "Select a registered subject.", "INVALID_INPUT");
-      if (subjectCode === "9618") {
-        throw new AuthError(400, "9618 requires a structured content package, not the MCQ importer.", "UNSUPPORTED_IMPORT_TYPE");
+      if (usesSubjectHub(subjectCode)) {
+        throw new AuthError(400, `${subjectCode} requires a prepared resource package.`, "UNSUPPORTED_IMPORT_TYPE");
       }
       const subject = await env.DB.prepare("SELECT 1 FROM exam_subjects WHERE code = ?").bind(subjectCode).first();
       if (!subject) throw new AuthError(404, "Register the subject before importing papers.", "SUBJECT_NOT_FOUND");
@@ -743,8 +744,8 @@ export async function handleAdminApiRequest(request, env) {
       const jobId = decodeURIComponent(importFiles[1]);
       const job = await getImportJob(env.DB, jobId);
       if (!job) throw new AuthError(404, "Import job not found.", "IMPORT_JOB_NOT_FOUND");
-      if (job.subjectCode === "9618") {
-        throw new AuthError(400, "9618 requires a structured content package, not the MCQ importer.", "UNSUPPORTED_IMPORT_TYPE");
+      if (usesSubjectHub(job.subjectCode)) {
+        throw new AuthError(400, `${job.subjectCode} requires a prepared resource package.`, "UNSUPPORTED_IMPORT_TYPE");
       }
       if (!new Set(["uploading", "failed"]).has(job.status)) {
         throw new AuthError(409, "Files can only be uploaded before processing.", "INVALID_IMPORT_STATE");
@@ -779,8 +780,8 @@ export async function handleAdminApiRequest(request, env) {
       const jobId = decodeURIComponent(importAction[1]);
       const job = await getImportJob(env.DB, jobId);
       if (!job) throw new AuthError(404, "Import job not found.", "IMPORT_JOB_NOT_FOUND");
-      if (job.subjectCode === "9618") {
-        throw new AuthError(400, "9618 requires a structured content package, not the MCQ importer.", "UNSUPPORTED_IMPORT_TYPE");
+      if (usesSubjectHub(job.subjectCode)) {
+        throw new AuthError(400, `${job.subjectCode} requires a prepared resource package.`, "UNSUPPORTED_IMPORT_TYPE");
       }
       if (importAction[2] === "process" && !new Set(["uploading", "failed"]).has(job.status)) {
         throw new AuthError(409, "Import job cannot be processed in its current state.", "INVALID_IMPORT_STATE");

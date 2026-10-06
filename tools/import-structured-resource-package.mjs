@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Import a validated 9618 resource package.
+ * Import a validated subject resource package.
  *
  * The default mode is a local, side-effect-free dry run. Applying a package
  * uploads declared files first and then upserts draft D1 rows. Publishing is
@@ -106,7 +106,7 @@ function paperStorageKey(paper, type) {
 }
 
 function sourcePaperMetadata(paper) {
-  const slug = typeof paper.slug === "string" ? paper.slug.match(/^(\d{4})_([msw])(\d{2})_qp_([1-4])([1-9])$/) : null;
+  const slug = typeof paper.slug === "string" ? paper.slug.match(/^(\d{4})_([msw])(\d{2})_qp_([1-5])([1-9])$/) : null;
   return {
     year: paper.year ?? (slug ? 2000 + Number(slug[3]) : null),
     season: paper.season ?? slug?.[2],
@@ -138,11 +138,11 @@ function buildExamPaperSql(paper, bundle, publish, timestamp, questionCount) {
   const sourceCount = paper.sourceQuestionCount;
   const validCount = questionCount;
   return `INSERT INTO exam_papers (slug, subject_code, year, season, paper_number, variant, paper_type, duration_minutes, source_question_count, valid_question_count, total_marks, discounted_questions, qp_file_name, ms_file_name, data_url, status, metadata, published_at, updated_at)
-VALUES (${sqlString(paper.slug)}, ${sqlString(bundle.subjectCode)}, ${sqlInteger(year)}, ${sqlString(season)}, ${sqlInteger(paperNumber)}, ${sqlInteger(variant)}, ${sqlString(paper.paperType || (paperNumber === 4 ? "practical" : "structured"))}, ${sqlInteger(paper.durationMinutes)}, ${sqlInteger(sourceCount)}, ${sqlInteger(validCount, 0)}, ${sqlInteger(paper.totalMarks)}, '[]', ${sqlString(paper.qpFileName || `${paper.slug}.qp.pdf`)}, ${sqlString(paper.msFileName || `${paper.slug}.ms.pdf`)}, NULL, ${sqlString(status)}, ${sqlJson(metadata)}, ${publish ? sqlString(timestamp) : "NULL"}, ${sqlString(timestamp)})
+VALUES (${sqlString(paper.slug)}, ${sqlString(bundle.subjectCode)}, ${sqlInteger(year)}, ${sqlString(season)}, ${sqlInteger(paperNumber)}, ${sqlInteger(variant)}, ${sqlString(paper.paperType || (bundle.subjectCode === "9618" && paperNumber === 4 ? "practical" : "structured"))}, ${sqlInteger(paper.durationMinutes)}, ${sqlInteger(sourceCount)}, ${sqlInteger(validCount, 0)}, ${sqlInteger(paper.totalMarks)}, ${sqlJson(paper.discountedQuestions || [])}, ${sqlString(paper.qpFileName || `${paper.slug}.qp.pdf`)}, ${sqlString(paper.msFileName || `${paper.slug}.ms.pdf`)}, NULL, ${sqlString(status)}, ${sqlJson(metadata)}, ${publish ? sqlString(timestamp) : "NULL"}, ${sqlString(timestamp)})
 ON CONFLICT(slug) DO UPDATE SET
   subject_code = excluded.subject_code, year = excluded.year, season = excluded.season, paper_number = excluded.paper_number, variant = excluded.variant,
   paper_type = excluded.paper_type, duration_minutes = excluded.duration_minutes, source_question_count = excluded.source_question_count,
-  valid_question_count = excluded.valid_question_count, total_marks = excluded.total_marks, qp_file_name = excluded.qp_file_name,
+  valid_question_count = excluded.valid_question_count, total_marks = excluded.total_marks, discounted_questions = excluded.discounted_questions, qp_file_name = excluded.qp_file_name,
   ms_file_name = excluded.ms_file_name, metadata = excluded.metadata, updated_at = excluded.updated_at,
   status = CASE WHEN exam_papers.status = 'published' AND excluded.status = 'draft' THEN exam_papers.status ELSE excluded.status END ,
   published_at = CASE WHEN excluded.status = 'published' THEN excluded.published_at ELSE exam_papers.published_at END;`;
