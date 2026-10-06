@@ -75,7 +75,20 @@ function renderResources(kind, targetId, titleKey, bodyKey, resources = state[ki
   target.replaceChildren(...resources.map((resource) => {
     const card = make("article", "book-card"); card.appendChild(make("h3", "", localized(resource)));
     if (resource.version) card.appendChild(make("p", "book-meta", resource.version));
-    if (resource.id) {
+    if (resource.metadata?.linkOnly) {
+      const metadata = resource.metadata;
+      const authors = Array.isArray(metadata.authors) ? metadata.authors.join(", ") : metadata.authors;
+      if (authors) card.appendChild(make("p", "book-meta", authors));
+      if (metadata.isbn) card.appendChild(make("p", "book-meta", `ISBN ${metadata.isbn}`));
+      if (metadata.compatibilityNote) card.appendChild(make("p", "subject-muted", metadata.compatibilityNote));
+      card.appendChild(make("p", "subject-muted", t("subjectTextbookAccess")));
+      list(metadata.externalLinks).forEach((source) => {
+        let url;
+        try { url = new URL(source.url); if (url.protocol !== "https:") return; } catch { return; }
+        const link = make("a", "btn-secondary", localized(source, t("subjectTextbookPublisher")));
+        link.href = url.href; link.target = "_blank"; link.rel = "noopener noreferrer"; card.appendChild(link);
+      });
+    } else if (resource.id) {
       const button = make("button", "btn-secondary", t("subjectDownloadResource")); button.type = "button";
       button.addEventListener("click", () => resourceDownload(resource, button)); card.appendChild(button);
       if (resource.mimeType === "application/pdf" || resource.mimeType?.startsWith("image/") || resource.mimeType === "text/plain") {
@@ -84,7 +97,7 @@ function renderResources(kind, targetId, titleKey, bodyKey, resources = state[ki
     }
     const entries = resource.metadata?.directory || resource.chapters || resource.metadata?.sections;
     if (entries?.length) { const tree = make("div", "tree resource-directory"); tree.appendChild(make("h4", "", t("subjectDirectory"))); directory(tree, entries); card.appendChild(tree); }
-    else card.appendChild(make("p", "subject-muted", t("subjectDirectoryPending")));
+    else if (!resource.metadata?.linkOnly) card.appendChild(make("p", "subject-muted", t("subjectDirectoryPending")));
     return card;
   }));
 }
@@ -209,6 +222,7 @@ function sessionCard(session) {
     const materials = make("div", "session-materials"); shared.forEach((resource) => {
       const row = make("article", "session-resource-row"); const info = make("div", "session-resource-info"); info.append(resourceBadge(resourceCategory(resource)), make("h4", "", localized(resource))); row.appendChild(info);
       const actions = make("div", "paper-actions"); addResourceActions(actions, resource); row.appendChild(actions); materials.appendChild(row);
+      if (resourceCategory(resource) === "gt") renderThresholds(row, resource);
     }); body.appendChild(materials);
   }
   session.papers.sort((a, b) => Number(a.paperNumber) - Number(b.paperNumber) || Number(a.variant) - Number(b.variant)).forEach((paper) => body.appendChild(paperRow(paper)));
@@ -220,6 +234,26 @@ function addResourceActions(target, resource) {
   }
   const download = make("button", "btn-secondary", t("subjectDownloadResource")); download.type = "button"; download.addEventListener("click", () => resourceDownload(resource, download)); target.appendChild(download);
 }
+function renderThresholds(target, resource) {
+  const groups = [["subjectComponentThresholds", resource.metadata?.chinaComponentThresholds], ["subjectOptionThresholds", resource.metadata?.chinaOptionThresholds]];
+  if (!groups.some(([, rows]) => list(rows).length)) return;
+  const details = make("details", "subject-thresholds"); details.appendChild(make("summary", "", t("subjectChinaThresholds")));
+  details.appendChild(make("p", "subject-muted", t("subjectThresholdBasis")));
+  for (const [titleKey, rows] of groups) {
+    if (!list(rows).length) continue;
+    details.appendChild(make("h4", "", t(titleKey)));
+    const wrap = make("div", "subject-threshold-scroll"); const table = make("table", "subject-threshold-table");
+    const head = make("thead"); const headings = make("tr");
+    [t("subjectThresholdCombination"), t("subjectThresholdMaximum"), "A*", "A", "B", "C", "D", "E"].forEach((label) => headings.appendChild(make("th", "", label))); head.appendChild(headings); table.appendChild(head);
+    const body = make("tbody");
+    rows.forEach((row) => {
+      const tr = make("tr"); const label = row.component || `${row.option ? `${row.option} · ` : ""}${list(row.components).join(" + ")}`;
+      [label, row.maxMarks, ...["A*", "A", "B", "C", "D", "E"].map((grade) => row.grades?.[grade] ?? "—")].forEach((value) => tr.appendChild(make("td", "", value ?? "—")));
+      body.appendChild(tr);
+    }); table.appendChild(body); wrap.appendChild(table); details.appendChild(wrap);
+  }
+  target.appendChild(details);
+}
 function paperRow(paper) {
   const card = make("article", "paper-card paper-card--session"); card.dataset.paperSlug = paper.slug; card.appendChild(make("h4", "", `${t("subjectPaperLabel", { number: paper.paperNumber })} · ${t("subjectVariant", { value: paper.variant })}`));
   card.appendChild(make("p", "paper-source-code", paper.slug));
@@ -227,16 +261,18 @@ function paperRow(paper) {
   const practical = paper.paperType === "practical"; if (practical) card.appendChild(make("p", "subject-muted", t("subjectPracticalMaterials")));
   const actions = make("div", "paper-actions"); ["qp", "ms"].forEach((type) => {
     if (!paperHasFile(paper, type)) return;
-    const href = `${api.getBaseUrl?.() || ""}/api/catalog/papers/${encodeURIComponent(paper.slug)}/download/${type}`;
-    const read = make("a", "btn-secondary", t("subjectOpenFile", { type: type.toUpperCase() })); read.href = `${href}?inline=1`; read.target = "_blank"; read.rel = "noopener";
+    const hash = type === "qp" ? paper.metadata?.sha256 : paper.metadata?.msSha256;
+    const version = /^[a-f0-9]{64}$/i.test(hash || "") ? `?v=${hash.slice(0, 16)}` : "";
+    const href = `${api.getBaseUrl?.() || ""}/api/catalog/papers/${encodeURIComponent(paper.slug)}/download/${type}${version}`;
+    const read = make("a", "btn-secondary", t("subjectOpenFile", { type: type.toUpperCase() })); read.href = `${href}${version ? "&" : "?"}inline=1`; read.target = "_blank"; read.rel = "noopener";
     const link = make("a", "btn-secondary", t("subjectDownloadFile", { type: type.toUpperCase() })); link.href = href; link.target = "_blank"; link.rel = "noopener"; actions.append(read, link);
   });
-  const hasQuestions = (paper.paperType === "structured" && Number(paper.validQuestionCount) > 0) || state.questions.some((question) => question.paperSlug === paper.slug && question.questionType === "structured");
+  const hasQuestions = Number(paper.validQuestionCount) > 0 || state.questions.some((question) => question.paperSlug === paper.slug && question.questionType === "structured");
   card.appendChild(actions);
   state.resources.filter((resource) => resource.paperSlug === paper.slug).forEach((resource) => {
     const row = make("div", "paper-attachment"); row.appendChild(make("p", "", localized(resource))); const resourceActions = make("div", "paper-actions"); addResourceActions(resourceActions, resource); row.appendChild(resourceActions); card.appendChild(row);
   });
-  if (state.subject.capabilities?.onlinePractice && [1, 2, 3].includes(Number(paper.paperNumber)) && hasQuestions) {
+  if (state.subject.capabilities?.onlinePractice && hasQuestions) {
     const practice = make("div", "paper-practice-entry");
     const link = make("a", "btn-primary", t("subjectPracticeThisPaper"));
     link.href = `./structured-practice.html?paper=${encodeURIComponent(paper.slug)}`;

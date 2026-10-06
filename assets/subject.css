@@ -88,7 +88,12 @@
 .paper-session-card[open] .session-expand { transform: rotate(225deg); }
 .paper-session-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 0 25px 25px; }
 .session-materials { display: grid; grid-column: 1 / -1; gap: 8px; padding: 14px 0; border-block: 1px solid var(--line); margin-bottom: 2px; }
-.session-resource-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.session-resource-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+.subject-thresholds { flex-basis: 100%; width: 100%; min-width: 0; }
+.subject-thresholds summary { cursor: pointer; font-weight: 600; }
+.subject-threshold-scroll { max-width: 100%; overflow-x: auto; }
+.subject-threshold-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: .82rem; }
+.subject-threshold-table th, .subject-threshold-table td { border: 1px solid var(--line); padding: 7px 9px; text-align: left; white-space: nowrap; }
 .session-resource-info { display: flex; align-items: center; gap: 9px; }
 .session-resource-info h4 { margin: 0; font-size: .92rem; line-height: 1.5; }
 .session-resource-row .paper-actions { margin: 0; flex-shrink: 0; }

@@ -1,5 +1,7 @@
 # Five Cambridge AS & A Level original-paper archives
 
+This document records the initial original-source release. The subsequent [five-subject practice rollout](as-a-level-practice-rollout.md) prepares all 78 papers for question-by-question practice and adds official June grade thresholds and textbook access links. Source-only counts below describe the initial release rather than the current prepared collection.
+
 The 2026-10-06 collection publishes original May/June 2024–2026 papers for Physics 9702, Chemistry 9701, Economics 9708, Biology 9700, and Geography 9696. It follows the 9618 resource package and catalogue workflow. The downloaded collection contains 78 QP/MS pairs, 12 Geography Inserts, and five official syllabuses: 173 distinct content files. Entry guides used as research evidence are additional supporting files and are not archive resources.
 
 | Subject        | Paper records | QP/MS files | Inserts | Syllabuses | Total files |

@@ -165,7 +165,7 @@ try {
     [{ partId: "ai", text: "x".repeat(10001) }],
   ]) assert.equal((await grade(invalid)).payload.error.code, "INVALID_STRUCTURED_ANSWERS");
   assert.equal((await grade(answered, "invalid-uuid")).response.status, 400);
-  assert.equal((await call(gradePath, { method: "POST", headers, body: "x".repeat(170000) })).payload.error.code, "GRADING_REQUEST_TOO_LARGE");
+  assert.equal((await call(gradePath, { method: "POST", headers, body: "x".repeat(1024 * 1024 + 1) })).payload.error.code, "GRADING_REQUEST_TOO_LARGE");
   assert.equal((await grade(answered, crypto.randomUUID(), { maxMarks: 99 })).response.status, 400);
   assert.equal((await grade(answered, crypto.randomUUID(), { language: "xx" })).response.status, 400);
   const blank = await grade([{ partId: "ai", text: "  \n " }]);

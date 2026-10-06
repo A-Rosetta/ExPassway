@@ -1,5 +1,5 @@
 import { orderedImages, pairedMarkScheme, structuredDisplayBlocks } from "../shared/structured-content.js";
-import { STRUCTURED_ANSWER_MAX_LENGTH, STRUCTURED_ANSWER_TOTAL_MAX_LENGTH, structuredAnswerParts } from "../shared/structured-practice.js";
+import { STRUCTURED_ANSWER_MAX_LENGTH, STRUCTURED_ANSWER_TOTAL_MAX_LENGTH, STRUCTURED_ANSWER_IMAGE_MAX_BYTES, STRUCTURED_ANSWER_IMAGE_MAX_COUNT, structuredAnswerParts } from "../shared/structured-practice.js";
 
 const { getLanguage, setLanguage, t, applyPage } = window.ALevelI18n;
 const api = window.ALevelApi;
@@ -15,7 +15,8 @@ const node = (tag, className = "", text = null) => {
 };
 const state = { paper: null, questions: [], responses: new Map(), currentId: "", openId: "", draftKey: "", draftFailed: false, statusKey: "structuredPracticeLoading", statusError: false };
 const answerParts = (question) => structuredAnswerParts(question);
-const answersFor = (question) => answerParts(question).map(({ partId }) => ({ partId, text: state.responses.get(question.id)?.answers?.[partId] || "" }));
+const answersFor = (question) => answerParts(question).map(({ partId }) => ({ partId, text: state.responses.get(question.id)?.answers?.[partId] || "",
+  ...(state.responses.get(question.id)?.drawings?.[partId] ? { imageDataUrl: state.responses.get(question.id).drawings[partId] } : {}) }));
 const fingerprint = (answers) => JSON.stringify(answers);
 const matchingGrade = (question) => {
   const response = state.responses.get(question.id);
@@ -30,7 +31,7 @@ function requireLogin(error) {
 function persistDraft() {
   if (!state.draftKey) return;
   const responses = Object.fromEntries([...state.responses].map(([id, response]) => [id, {
-    answers: response.answers, request: response.request, stale: response.stale,
+    answers: response.answers, drawings: response.drawings, request: response.request, stale: response.stale,
   }]));
   try { localStorage.setItem(state.draftKey, JSON.stringify({ version: 1, responses })); state.draftFailed = false; }
   catch { state.draftFailed = true; }
@@ -47,9 +48,14 @@ function restoreResponses(attempts) {
     const previous = stored[question.id]; const attempt = latest.get(question.id);
     const sourceAnswers = previous?.answers && typeof previous.answers === "object" ? previous.answers : Object.fromEntries(list(attempt?.answers).map(({ partId, text }) => [partId, text]));
     const answers = Object.fromEntries(answerParts(question).map(({ partId }) => [partId, typeof sourceAnswers[partId] === "string" ? sourceAnswers[partId].slice(0, STRUCTURED_ANSWER_MAX_LENGTH) : ""]));
-    const response = { answers, grade: null, gradeFingerprint: "", request: previous?.request || null, stale: Boolean(previous?.stale), pending: false, error: null };
+    const sourceDrawings = previous?.drawings || Object.fromEntries(list(attempt?.answers).filter((answer) => answer.imageDataUrl).map(({ partId, imageDataUrl }) => [partId, imageDataUrl]));
+    const drawings = Object.fromEntries(answerParts(question).filter((part) => part.answerFormat !== "choice" && /^data:image\/(?:png|jpeg);base64,/.test(sourceDrawings?.[part.partId] || "")).map(({ partId }) => [partId, sourceDrawings[partId]]));
+    const response = { answers, drawings, grade: null, gradeFingerprint: "", request: previous?.request || null, stale: Boolean(previous?.stale), pending: false, error: null };
     state.responses.set(question.id, response);
-    const attemptAnswers = answerParts(question).map(({ partId }) => ({ partId, text: list(attempt?.answers).find((answer) => answer.partId === partId)?.text || "" }));
+    const attemptAnswers = answerParts(question).map(({ partId }) => {
+      const answer = list(attempt?.answers).find((item) => item.partId === partId);
+      return { partId, text: answer?.text || "", ...(answer?.imageDataUrl ? { imageDataUrl: answer.imageDataUrl } : {}) };
+    });
     if (attempt && fingerprint(attemptAnswers) === fingerprint(answersFor(question))) {
       response.grade = attempt; response.gradeFingerprint = fingerprint(attemptAnswers); response.stale = false; response.request = null;
     }
@@ -87,10 +93,11 @@ function renderDocument(target, content) {
 }
 function renderPaperSummary() {
   const grades = state.questions.map((question) => matchingGrade(question)).filter(Boolean);
-  const maxMarks = Number(state.paper?.totalMarks) || state.questions.reduce((sum, question) => sum + Number(question.maxMarks || 0), 0);
+  const maxMarks = state.questions.reduce((sum, question) => sum + Number(question.maxMarks || 0), 0) || Number(state.paper?.totalMarks) || 0;
   const earned = grades.reduce((sum, grade) => sum + Number(grade.earnedMarks || 0), 0);
   const markedMax = grades.reduce((sum, grade) => sum + Number(grade.maxMarks || 0), 0);
   byId("practiceScoreSummary").replaceChildren(node("p", "practice-score-label", t("structuredPracticeScoreLabel")), node("strong", "", `${earned} / ${maxMarks}`), node("p", "practice-muted", t("structuredPracticeScoreProgress", { count: grades.length, total: state.questions.length, marks: markedMax })));
+  if (state.paper?.totalMarks && maxMarks !== Number(state.paper.totalMarks)) byId("practiceScoreSummary").appendChild(node("p", "practice-muted", t("structuredPracticeSelectionMarks", { marks: state.paper.totalMarks })));
 }
 function gradeErrorText(error) {
   if (error?.code === "AI_GRADING_RATE_LIMITED") return t("aiCallCooldown", { seconds: error.retryAfterSeconds || 30 });
@@ -101,6 +108,7 @@ function gradeErrorText(error) {
     REQUEST_TIMEOUT: "structuredPracticeNetworkUnknown", MARK_SCHEME_UNAVAILABLE: "structuredPracticeMarkSchemeMissing", GRADING_CONTENT_INVALID: "structuredPracticeContentUnavailable",
     GRADING_ASSET_INVALID: "structuredPracticeContentUnavailable", GRADING_ASSET_UNAVAILABLE: "structuredPracticeContentUnavailable", GRADING_ASSET_TOO_LARGE: "structuredPracticeContentUnavailable",
     LOCAL_ANSWER_TOO_LONG: "structuredPracticeAnswerTooLong",
+    LOCAL_ANSWER_IMAGE_INVALID: "structuredPracticeDrawingInvalid",
   }[error?.code] || (error?.status === 403 ? "structuredPracticeAccessDenied" : "structuredPracticeNetworkUnknown");
   return t(key);
 }
@@ -108,7 +116,7 @@ function renderQuestionResult(question) {
   const response = state.responses.get(question.id); const card = [...document.querySelectorAll(".practice-question")].find((item) => item.dataset.questionId === question.id);
   if (!card) return;
   const grade = matchingGrade(question); const result = card.querySelector(".practice-grade-result"); result.replaceChildren();
-  const button = card.querySelector("[data-grade-question]"); button.disabled = response.pending;
+  const button = card.querySelector("[data-grade-question]"); button.disabled = response.pending || Boolean(question.content?.gradingUnavailableReason);
   button.textContent = t(response.pending ? "structuredPracticeGrading" : grade ? "structuredPracticeGradeAgain" : response.error ? "structuredPracticeRetryGrade" : "structuredPracticeGradeQuestion");
   card.querySelector(".practice-question-error").textContent = response.error ? gradeErrorText(response.error) : "";
   card.querySelector(".practice-grade-stale").textContent = response.stale && !grade ? t("structuredPracticeGradeStale") : "";
@@ -129,6 +137,43 @@ function updateAnswer(question, partId, value) {
   if (!changed) return;
   response.answers[partId] = value; response.stale ||= Boolean(response.grade || response.pending); response.grade = null; response.gradeFingerprint = ""; response.error = null;
   persistDraft(); renderQuestionResult(question);
+}
+async function compressedDrawing(file) {
+  if (!file || !["image/png", "image/jpeg"].includes(file.type) || file.size > 10 * 1024 * 1024) throw new Error("Unsupported drawing.");
+  const image = await createImageBitmap(file);
+  try {
+    const canvas = document.createElement("canvas"); const scale = Math.min(1, 1600 / Math.max(image.width, image.height));
+    canvas.width = Math.max(1, Math.round(image.width * scale)); canvas.height = Math.max(1, Math.round(image.height * scale));
+    const context = canvas.getContext("2d"); context.fillStyle = "white"; context.fillRect(0, 0, canvas.width, canvas.height); context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    for (const quality of [0.9, 0.8, 0.65, 0.5]) {
+      const data = canvas.toDataURL("image/jpeg", quality);
+      if (atob(data.split(",")[1]).length <= STRUCTURED_ANSWER_IMAGE_MAX_BYTES) return data;
+    }
+    throw new Error("Drawing too large.");
+  } finally { image.close(); }
+}
+function drawingInput(question, part) {
+  const response = state.responses.get(question.id); const controls = node("div", "practice-drawing");
+  const label = node("label", "practice-muted", t("structuredPracticeDrawing")); const upload = node("input"); upload.type = "file"; upload.accept = "image/png,image/jpeg"; upload.dataset.drawingPart = part.partId; label.appendChild(upload);
+  const preview = node("img", "practice-drawing-preview"); preview.alt = t("structuredPracticeDrawingPreview");
+  const remove = node("button", "btn-secondary", t("structuredPracticeRemoveDrawing")); remove.type = "button";
+  const refresh = () => { const data = response.drawings[part.partId]; preview.hidden = !data; remove.hidden = !data; if (data) preview.src = data; else preview.removeAttribute("src"); };
+  const update = (data) => {
+    if (data) response.drawings[part.partId] = data; else delete response.drawings[part.partId];
+    response.stale ||= Boolean(response.grade || response.pending); response.grade = null; response.gradeFingerprint = ""; response.error = null;
+    persistDraft(); refresh(); renderQuestionResult(question);
+  };
+  upload.addEventListener("change", async () => {
+    const file = upload.files?.[0]; if (!file) return; upload.disabled = true;
+    try {
+      if (!response.drawings[part.partId] && Object.keys(response.drawings).length >= STRUCTURED_ANSWER_IMAGE_MAX_COUNT) throw new Error("Too many drawings.");
+      const data = await compressedDrawing(file);
+      if (!response.drawings[part.partId] && Object.keys(response.drawings).length >= STRUCTURED_ANSWER_IMAGE_MAX_COUNT) throw new Error("Too many drawings.");
+      update(data);
+    } catch { response.error = { code: "LOCAL_ANSWER_IMAGE_INVALID" }; renderQuestionResult(question); }
+    finally { upload.value = ""; upload.disabled = false; }
+  });
+  remove.addEventListener("click", () => update(null)); refresh(); controls.append(label, preview, remove); return controls;
 }
 async function gradeQuestion(question) {
   const response = state.responses.get(question.id); if (response.pending) return;
@@ -159,6 +204,13 @@ function questionCard(question, index) {
   card.addEventListener("toggle", () => { if (card.open && state.openId !== question.id) selectQuestion(question.id, false); });
   const body = node("div", "practice-question-body"); const workspace = node("div", "practice-question-workspace");
   const original = node("section", "practice-original-content"); original.appendChild(node("h2", "practice-section-title", t("structuredPracticeOriginalQuestion")));
+  if (question.content?.sourceMaterialNote) original.appendChild(node("p", "practice-source-note", question.content.sourceMaterialNote));
+  list(question.content?.sourceMaterialLinks).forEach((source) => {
+    let url; try { url = new URL(source.url); } catch { return; }
+    if (url.protocol !== "https:") return;
+    const link = node("a", "btn-secondary", source.title || t("subjectOpenResource"));
+    link.href = url.href; link.target = "_blank"; link.rel = "noopener noreferrer"; original.appendChild(link);
+  });
   renderDocument(original, question.content);
   if (!original.querySelector("img") && !structuredDisplayBlocks(question.content).length) { if (list(question.images).length) renderImages(original, question.images); else original.appendChild(node("p", "practice-content-text", question.stem || t("subjectQuestionUnavailable"))); }
   const panel = node("section", "practice-answer-panel"); panel.appendChild(node("h2", "practice-section-title", t("structuredPracticeYourAnswers")));
@@ -166,7 +218,14 @@ function questionCard(question, index) {
   answerParts(question).forEach((part, partIndex) => {
     const item = node("div", "practice-answer-part"); const label = node("label"); const inputId = `practice-answer-${index}-${partIndex}`; label.htmlFor = inputId;
     label.append(node("span", "", part.label || t("structuredPracticeWholeQuestion")), node("span", "", t("subjectMarks", { count: part.maxMarks })));
-    const prompt = node("div", "practice-part-prompt"); renderBlocks(prompt, part.prompt); const textarea = node("textarea");
+    const prompt = node("div", "practice-part-prompt"); renderBlocks(prompt, part.prompt);
+    if (part.answerFormat === "choice") {
+      const select = node("select"); select.id = inputId; select.dataset.partId = part.partId;
+      select.appendChild(new Option(t("structuredPracticeChooseOption"), "")); list(part.choices).forEach((choice) => select.appendChild(new Option(choice, choice)));
+      select.value = state.responses.get(question.id).answers[part.partId] || ""; select.addEventListener("change", () => updateAnswer(question, part.partId, select.value));
+      item.append(label, prompt, select); panel.appendChild(item); return;
+    }
+    const textarea = node("textarea");
     textarea.id = inputId; textarea.dataset.partId = part.partId; textarea.rows = 5; textarea.maxLength = STRUCTURED_ANSWER_MAX_LENGTH; textarea.spellcheck = false;
     textarea.setAttribute("aria-describedby", inputHint.id);
     textarea.placeholder = t("structuredPracticeAnswerPlaceholder"); textarea.value = state.responses.get(question.id).answers[part.partId] || "";
@@ -178,7 +237,7 @@ function questionCard(question, index) {
       if (textarea.value.length - (end - start) + 4 > STRUCTURED_ANSWER_MAX_LENGTH) return;
       textarea.setRangeText("    ", start, end, "end"); updateAnswer(question, part.partId, textarea.value);
     });
-    item.append(label, prompt, textarea); panel.appendChild(item);
+    item.append(label, prompt, textarea, drawingInput(question, part)); panel.appendChild(item);
   });
   const actions = node("div", "practice-answer-actions"); const grade = node("button", "btn-primary", t("structuredPracticeGradeQuestion")); grade.type = "button"; grade.dataset.gradeQuestion = question.id; grade.addEventListener("click", () => gradeQuestion(question)); actions.appendChild(grade); panel.appendChild(actions);
   const error = node("p", "practice-question-error"); error.setAttribute("role", "alert"); panel.appendChild(error);
@@ -212,6 +271,7 @@ function render() {
   byId("practiceBack").href = `./subject.html?subject=${encodeURIComponent(state.paper?.subjectCode || "9618")}&view=papers&paper=${encodeURIComponent(paperSlug)}`;
   byId("practicePaperCode").textContent = paperSlug;
   byId("practicePaperMeta").textContent = state.paper ? [t("subjectPaperLabel", { number: state.paper.paperNumber }), t("subjectMinutes", { count: state.paper.durationMinutes }), t("subjectMarks", { count: state.paper.totalMarks })].join(" · ") : "";
+  const instructions = byId("practiceAnswerInstructions"); instructions.textContent = state.paper?.metadata?.answerInstructions || ""; instructions.hidden = !instructions.textContent;
   document.title = `${t("structuredPracticeTitle")} · ${paperSlug || "9618"}`;
   byId("practiceQuestionNavigation").hidden = !state.questions.length;
   byId("practiceQuestionPicker").replaceChildren(...state.questions.map((question, index) => new Option(t("subjectQuestionNumber", { number: question.questionNo || index + 1 }), question.id)));
@@ -227,7 +287,7 @@ async function init() {
   byId("practicePrevious").addEventListener("click", () => { const index = state.questions.findIndex((question) => question.id === state.currentId); if (index > 0) selectQuestion(state.questions[index - 1].id); });
   byId("practiceNext").addEventListener("click", () => { const index = state.questions.findIndex((question) => question.id === state.currentId); if (index < state.questions.length - 1) selectQuestion(state.questions[index + 1].id); });
   render();
-  if (!/^\d{4}_[msw]\d{2}_qp_[1-3][1-9]$/.test(paperSlug)) { state.statusKey = "structuredPracticeInvalidPaper"; state.statusError = true; render(); return; }
+  if (!/^\d{4}_[msw]\d{2}_qp_[1-5][1-9]$/.test(paperSlug)) { state.statusKey = "structuredPracticeInvalidPaper"; state.statusError = true; render(); return; }
   try {
     const user = await api.getCurrentUser(token); const data = await api.getStructuredPracticePaper(token, paperSlug); state.paper = data.paper;
     state.questions = list(data.questions).filter((question) => question.questionType === "structured").sort((a, b) => Number(a.questionNo) - Number(b.questionNo));

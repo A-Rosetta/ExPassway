@@ -74,7 +74,7 @@ export function subjectCapabilities(code) {
     structured,
     components: Boolean(hub),
     resources: Boolean(hub),
-    manualPaperBuilder: !sourceOnly,
+    manualPaperBuilder: !sourceOnly && hub?.manualPaperBuilder !== false,
     smartPaperBuilder: !hub,
     equivalentPaperBuilder: !hub,
     onlinePractice: !sourceOnly,

@@ -1,16 +1,18 @@
 import { AuthError, failure, requireCurrentUser, success } from "./auth-api.js";
 import { parseContent } from "../shared/structured-content.js";
 import { normalizeStructuredAnswers } from "../shared/structured-practice.js";
+import { supportsPreparedPractice } from "../shared/subject-catalogue.js";
 import { aiCallCooldownError, reserveAiCallStatement } from "./ai-call-cooldown.js";
 import {
   blankStructuredGrade,
+  officialMcqGrade,
   officialAnswerParts,
   prepareStructuredGradingContext,
   requestStructuredGrading,
 } from "./structured-grading.js";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-const MAX_BODY_BYTES = 160 * 1024;
+const MAX_BODY_BYTES = 1024 * 1024;
 
 function mapQuestion(row) {
   return {
@@ -66,12 +68,12 @@ async function publishedPaper(db, slug) {
     SELECT paper.*, subject.name AS subject_name, subject.name_zh AS subject_name_zh,
       subject.qualification
     FROM exam_papers paper JOIN exam_subjects subject ON subject.code = paper.subject_code
-    WHERE paper.slug = ? AND paper.subject_code = '9618'
+    WHERE paper.slug = ?
       AND paper.status = 'published' AND subject.active = 1 LIMIT 1
   `).bind(slug).first();
   if (!row) throw new AuthError(404, "Published paper not found.", "PAPER_NOT_FOUND");
-  if (row.paper_number < 1 || row.paper_number > 3 || row.paper_type !== "structured") {
-    throw new AuthError(409, "Practice is available for structured Papers 1–3 only.", "UNSUPPORTED_PAPER_TYPE");
+  if (!supportsPreparedPractice(row.subject_code, Number(row.paper_number), row.paper_type)) {
+    throw new AuthError(409, "Practice is unavailable for this subject component.", "UNSUPPORTED_PAPER_TYPE");
   }
   return row;
 }
@@ -80,10 +82,10 @@ async function readPaper(db, slug, userId) {
   const paper = await publishedPaper(db, slug);
   const rows = await db.prepare(`
     SELECT question.* FROM question_bank question
-    WHERE question.paper_slug = ? AND question.subject_code = '9618'
+    WHERE question.paper_slug = ? AND question.subject_code = ?
       AND question.question_type = 'structured' AND question.active = 1
     ORDER BY question.question_no, question.id
-  `).bind(slug).all();
+  `).bind(slug, paper.subject_code).all();
   const questions = rows.results.map(mapQuestion);
   const fingerprints = new Map(await Promise.all(questions.map(async (question) => [question.id, await questionFingerprint(question)])));
   const attempts = await db.prepare(`
@@ -108,16 +110,20 @@ async function readQuestion(db, questionId) {
     FROM question_bank question
     JOIN exam_papers paper ON paper.slug = question.paper_slug
     JOIN exam_subjects subject ON subject.code = paper.subject_code
-    WHERE question.id = ? AND question.active = 1 AND question.subject_code = '9618'
-      AND paper.subject_code = '9618' AND paper.status = 'published' AND subject.active = 1
+    WHERE question.id = ? AND question.active = 1 AND question.subject_code = paper.subject_code
+      AND paper.status = 'published' AND subject.active = 1
     LIMIT 1
   `).bind(questionId).first();
   if (!row) throw new AuthError(404, "Published question not found.", "QUESTION_NOT_FOUND");
-  if (row.question_type !== "structured" || row.source_paper_type !== "structured"
-    || row.source_paper_number < 1 || row.source_paper_number > 3) {
-    throw new AuthError(409, "AI grading is available for structured Papers 1–3 only.", "UNSUPPORTED_QUESTION_TYPE");
+  if (row.question_type !== "structured"
+    || !supportsPreparedPractice(row.subject_code, Number(row.source_paper_number), row.source_paper_type)) {
+    throw new AuthError(409, "Grading is unavailable for this subject component.", "UNSUPPORTED_QUESTION_TYPE");
   }
-  return { ...mapQuestion(row), paperMetadata: parseContent(row.paper_metadata) };
+  const question = { ...mapQuestion(row), paperMetadata: parseContent(row.paper_metadata) };
+  if (row.source_paper_type === "mcq" && question.content.gradingMode !== "official-mcq") {
+    throw new AuthError(422, "The official answer key is unavailable.", "MARK_SCHEME_UNAVAILABLE");
+  }
+  return question;
 }
 
 async function readGradeBody(request) {
@@ -188,10 +194,16 @@ async function gradeQuestion(request, env, userId, questionId) {
   const inputHash = await hash({ questionId, language: body.language, answers, fingerprint });
   const previous = await previousAttempt(env.DB, userId, requestId, inputHash);
   if (previous) return previous;
-  const hasAnswer = answers.some((answer) => answer.text.trim());
+  if (question.content.gradingUnavailableReason) {
+    throw new AuthError(422, "Required source material is missing from the published original.", "GRADING_CONTENT_INVALID");
+  }
+  const hasAnswer = answers.some((answer) => answer.text.trim() || answer.imageDataUrl);
+  const deterministic = question.content.gradingMode === "official-mcq";
+  const usesAi = hasAnswer && !deterministic;
   // Resolve every official image before reserving a charged attempt. Missing
   // content cannot leave a phantom pending record or consume the AI quota.
-  const context = hasAnswer ? await prepareStructuredGradingContext(env, question, parts, answers) : null;
+  const directGrade = deterministic ? officialMcqGrade(question, parts, answers, body.language) : null;
+  const context = usesAi ? await prepareStructuredGradingContext(env, question, parts, answers) : null;
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   const insertAttempt = env.DB.prepare(`
@@ -204,8 +216,8 @@ async function gradeQuestion(request, env, userId, questionId) {
     )
     ON CONFLICT(user_id, request_id) DO NOTHING
   `).bind(id, userId, requestId, questionId, question.paperSlug, inputHash, fingerprint,
-    body.language, JSON.stringify(answers), hasAnswer ? 1 : 0, now, now, hasAnswer ? 1 : 0, userId, id);
-  const inserted = hasAnswer
+    body.language, JSON.stringify(answers), usesAi ? 1 : 0, now, now, usesAi ? 1 : 0, userId, id);
+  const inserted = usesAi
     ? (await env.DB.batch([reserveAiCallStatement(env.DB, userId, id, requestId), insertAttempt]))[1]
     : await insertAttempt.run();
   if (!inserted.meta.changes) {
@@ -214,9 +226,9 @@ async function gradeQuestion(request, env, userId, questionId) {
     throw await aiCallCooldownError(env.DB, userId, "AI_GRADING_RATE_LIMITED");
   }
   try {
-    const grading = hasAnswer
+    const grading = directGrade || (hasAnswer
       ? await requestStructuredGrading(env, context, parts, answers, body.language)
-      : blankStructuredGrade(parts, body.language);
+      : blankStructuredGrade(parts, body.language));
     const result = {
       id, requestId, questionId, language: body.language, answers,
       earnedMarks: grading.earnedMarks, maxMarks: question.maxMarks,
@@ -251,7 +263,7 @@ export async function handleStructuredPracticeRequest(request, env) {
   try {
     const { user } = await requireCurrentUser(request, env);
     const pathname = new URL(request.url).pathname;
-    const paper = pathname.match(/^\/api\/structured-practice\/papers\/(9618_[msw]\d{2}_qp_[1-4][1-9])$/);
+    const paper = pathname.match(/^\/api\/structured-practice\/papers\/(\d{4}_[msw]\d{2}_qp_[1-5][1-9])$/);
     const question = pathname.match(/^\/api\/structured-practice\/questions\/([^/]+)\/grade$/);
     let data;
     if (paper && request.method === "GET") data = await readPaper(env.DB, paper[1], user.id);

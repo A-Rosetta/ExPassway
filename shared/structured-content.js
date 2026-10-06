@@ -1,3 +1,5 @@
+import { supportsPreparedPractice } from "./subject-catalogue.js";
+
 /** Version 1 structured-resource contract shared by import validation and readers. */
 export const RESOURCE_PACKAGE_VERSION = 1;
 
@@ -216,7 +218,11 @@ export function validateResourcePackage(bundle) {
       fail(`${path}.id`, "Question ID must derive from subject, paper slug, and original question number.");
     }
     unique(question.id, questionIds, `${path}.id`, "question ID");
-    if (question.questionType !== "structured" || typeof question.paperSlug !== "string" || ![1, 2, 3].includes(Number(question.paperSlug.slice(-2, -1)))) fail(path, "Only complete structured questions from Papers 1–3 enter the bank.");
+    const sourcePaper = papers.find((paper) => paper?.slug === question.paperSlug);
+    if (question.questionType !== "structured" || !sourcePaper
+      || !supportsPreparedPractice(code, sourcePaper.paperNumber, sourcePaper.paperType || "structured")) {
+      fail(path, "Only complete questions from supported subject practice papers enter the bank.");
+    }
     if (!Number.isInteger(question.maxMarks) || question.maxMarks <= 0) fail(`${path}.maxMarks`, "Official parent-question marks are required.");
     const partIds = new Set();
     const dependencies = [];
@@ -230,6 +236,10 @@ export function validateResourcePackage(bundle) {
         partIds.add(part.id);
         dependencies.push(...array(part.dependsOn, `${current}.dependsOn`).map((id) => ({ id, path: current })));
         if (!Number.isInteger(part.maxMarks) || part.maxMarks < 0) fail(`${current}.maxMarks`, "Part marks must be non-negative integers.");
+        if (part.answerFormat !== undefined && part.answerFormat !== "choice") fail(`${current}.answerFormat`, "Unsupported answer format.");
+        if (part.answerFormat === "choice" && (JSON.stringify(part.choices) !== '["A","B","C","D"]' || part.maxMarks !== 1)) {
+          fail(current, "Official MCQ parts need A–D choices and one mark.");
+        }
         const promptReadable = blocks(part.prompt, `${current}.prompt`);
         const childrenReadable = parts(part.children, `${current}.children`, depth + 1);
         readable ||= promptReadable || childrenReadable;
@@ -252,6 +262,15 @@ export function validateResourcePackage(bundle) {
         readable.push(blocks(part.blocks, `${current}.blocks`));
       }
       if (!readable.some(Boolean)) fail(`${path}.markScheme`, "Official mark scheme blocks or fragments are required.");
+      if (question.content?.gradingMode === "official-mcq") {
+        const choices = question.content.parts;
+        const criteria = scheme.parts;
+        if (sourcePaper?.paperType !== "mcq" || question.maxMarks !== 1 || choices?.length !== 1
+          || choices[0]?.answerFormat !== "choice" || criteria?.length !== 1
+          || criteria[0]?.partId !== choices[0]?.id || !["A", "B", "C", "D"].includes(criteria[0]?.correctChoice)) {
+          fail(path, "Official MCQ grading requires a matching single-part official answer key.");
+        }
+      } else if (sourcePaper?.paperType === "mcq") fail(path, "MCQ source papers require their official answer-key grading mode.");
     }
   }
   return { valid: errors.length === 0, errors };

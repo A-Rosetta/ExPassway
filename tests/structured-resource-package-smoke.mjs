@@ -50,7 +50,7 @@ unsupportedPaper.papers[0].slug = "9702_s26_qp_64";
 unsupportedPaper.papers[0].paperNumber = 6;
 assert.equal(validateResourcePackage(unsupportedPaper).valid, false);
 paperFiveArchive.questions = [{ ...structuredClone(bundle.questions[0]), paperSlug: "9702_s26_qp_54", id: stableStructuredQuestionId("9702", "9702_s26_qp_54", 1) }];
-assert.ok(validateResourcePackage(paperFiveArchive).errors.some((error) => error.path === "questions[0]"), "Expanding archive components must not implicitly enable Paper 5 in the question bank.");
+assert.deepEqual(validateResourcePackage(paperFiveArchive), { valid: true, errors: [] }, "Prepared science Paper 5 questions can enter practice.");
 assert.equal(stableStructuredQuestionId("9618", "9618_s24_qp_11", 1), "CIE-ASAL-9618-9618_s24_qp_11-01");
 const copy = () => structuredClone(bundle);
 const rejected = (mutate, expectedPath) => {

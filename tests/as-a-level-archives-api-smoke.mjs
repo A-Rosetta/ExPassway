@@ -46,9 +46,13 @@ try {
     assert.equal(subject.qualification, "AS & A Level");
     assert.equal(subject.capabilities.resources, true);
     assert.equal(subject.capabilities.components, true);
-    for (const key of ["manualPaperBuilder", "smartPaperBuilder", "equivalentPaperBuilder", "onlinePractice", "structuredAiGrading", "aiHints"]) {
+    for (const key of ["manualPaperBuilder", "smartPaperBuilder", "equivalentPaperBuilder", "aiHints"]) {
       assert.equal(subject.capabilities[key], false, `${code}/${key} stays unavailable without a question bank`);
       assert.equal(meta.subjects[code][key], false);
+    }
+    for (const key of ["onlinePractice", "structuredAiGrading"]) {
+      assert.equal(subject.capabilities[key], true, `${code}/${key} is supported for prepared questions`);
+      assert.equal(meta.subjects[code][key], true);
     }
     assert.equal((await call(handleReadApiRequest, `/api/catalog/subjects/${code}/overview`)).response.status, 401);
     const empty = (await call(handleReadApiRequest, `/api/catalog/subjects/${code}/overview`, { headers })).payload.data;
@@ -107,12 +111,12 @@ try {
   const adminSubjects = (await call(handleAdminApiRequest, "/api/admin/subjects", { headers })).payload.data;
   for (const code of archiveCodes) {
     const subject = adminSubjects.find((item) => item.code === code);
-    assert.equal(subject.importMode, "resource-package");
+    assert.equal(subject.importMode, "structured-package");
     assert.deepEqual(subject.contentCounts, { syllabus: 1, textbooks: 0, papers: 1, questions: 0 });
   }
   const curriculum = (await call(handleReadApiRequest, "/api/meta/curriculum")).payload.data;
   for (const subject of initial.filter((item) => archiveCodes.includes(item.code))) {
-    assert.deepEqual(curriculum.boards.CIE[`AS & A Level ${subject.name}`], []);
+    assert.deepEqual(curriculum.boards.CIE[`AS & A Level ${subject.name}`], ["Structured", "Practical"]);
   }
   const builderSubjects = (await call(handleLearningApiRequest, "/api/paper-builder/subjects", { headers })).payload.data;
   assert(builderSubjects.some((subject) => subject.code === "9618"));
