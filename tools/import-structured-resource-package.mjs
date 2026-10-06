@@ -161,7 +161,15 @@ ON CONFLICT(id) DO UPDATE SET
   status = CASE WHEN subject_resources.status = 'published' AND excluded.status = 'draft' THEN subject_resources.status ELSE excluded.status END;`;
 }
 
-function buildQuestionSql(question, paper, bundle, publish) {
+function documentUpdateSql(id, column, document) {
+  const statement = `UPDATE question_bank SET ${column} = ${sqlJson(document)} WHERE id = ${sqlString(id)};`;
+  // Each write must preserve the schema's json_valid CHECK. Never split a
+  // document into incomplete JSON or truncate the official source material.
+  if (Buffer.byteLength(statement, "utf8") > 90000) throw new Error(`Question ${id} ${column} needs a parameterized import: its complete document exceeds the D1 SQL limit.`);
+  return statement;
+}
+
+function buildQuestionSql(question, paper, bundle, publish, allowDocumentSplit = true) {
   const content = question.content || {};
   const markScheme = question.markScheme || {};
   const questionImages = Array.isArray(question.images) ? question.images : (Array.isArray(content.images) ? content.images : []);
@@ -173,7 +181,7 @@ function buildQuestionSql(question, paper, bundle, publish) {
   };
   const stem = question.stem || contentFallbackStem(question);
   const { year } = sourcePaperMetadata(paper);
-  return `INSERT INTO question_bank (id, board, subject, paper, difficulty, topic, year, stem, options, answer, mistake_type, template_id, skills, hints, images, source, subject_code, paper_slug, question_no, active, question_type, max_marks, structured_content, mark_scheme)
+  const statement = `INSERT INTO question_bank (id, board, subject, paper, difficulty, topic, year, stem, options, answer, mistake_type, template_id, skills, hints, images, source, subject_code, paper_slug, question_no, active, question_type, max_marks, structured_content, mark_scheme)
 VALUES (${sqlString(question.id)}, ${sqlString(bundle.board || SUBJECT_BOARD)}, ${sqlString(bundle.subjectName || SUBJECT_NAME)}, ${sqlString(paper.paperType || "structured")}, ${sqlString(question.difficulty || "unmarked")}, ${sqlString(question.topic)}, ${sqlString(year)}, ${sqlString(stem)}, '[]', NULL, 'unknown', ${sqlString(`${question.paperSlug}-${question.questionNo}`)}, '[]', '[]', ${sqlJson(questionImages)}, ${sqlJson(source)}, ${sqlString(bundle.subjectCode)}, ${sqlString(question.paperSlug)}, ${sqlInteger(question.questionNo)}, ${publish ? 1 : 0}, 'structured', ${sqlInteger(question.maxMarks)}, ${sqlJson(content)}, ${sqlJson(markScheme)})
 ON CONFLICT(id) DO UPDATE SET
   board = excluded.board, subject = excluded.subject, paper = excluded.paper, difficulty = excluded.difficulty, topic = excluded.topic,
@@ -181,6 +189,12 @@ ON CONFLICT(id) DO UPDATE SET
   skills = '[]', hints = '[]', images = excluded.images, source = excluded.source, subject_code = excluded.subject_code, paper_slug = excluded.paper_slug,
   question_no = excluded.question_no, question_type = 'structured', max_marks = excluded.max_marks, structured_content = excluded.structured_content,
   mark_scheme = excluded.mark_scheme, active = CASE WHEN question_bank.active = 1 AND excluded.active = 0 THEN question_bank.active ELSE excluded.active END;`;
+  if (Buffer.byteLength(statement, "utf8") <= 90000) return statement;
+  if (!allowDocumentSplit) throw new Error(`Question ${question.id} metadata exceeds the D1 statement limit.`);
+  // The SQL file is applied through Wrangler's D1 transaction mechanism, so
+  // readers only see the fully restored official documents after publication.
+  const initial = buildQuestionSql({ ...question, stem, images: questionImages, content: {}, markScheme: {} }, paper, bundle, publish, false);
+  return [initial, documentUpdateSql(question.id, "structured_content", content), documentUpdateSql(question.id, "mark_scheme", markScheme)].join("\n");
 }
 
 export function buildImportSql(bundle, { publish = false, timestamp = nowIso() } = {}) {

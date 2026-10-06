@@ -166,6 +166,22 @@ try {
     await execute(db, plan.sql);
     assert.equal((await db.prepare("SELECT status FROM exam_papers WHERE slug = ?").bind(paperSlug).first()).status, "published", "a draft re-import must not unpublish a live paper");
     assert.equal((await db.prepare("SELECT active FROM question_bank WHERE id = ?").bind(bundle.questions[0].id).first()).active, 1, "a draft re-import must not deactivate a live question");
+    const largeOfficialQuestion = structuredClone(bundle);
+    const longText = "Official criterion 'quoted' — 原文 🧪\n".repeat(1250);
+    largeOfficialQuestion.questions[0].content.blocks.push({ type: "text", text: longText });
+    largeOfficialQuestion.questions[0].markScheme.blocks.push({ type: "text", text: longText });
+    const largeSql = buildImportSql(largeOfficialQuestion, { publish: true });
+    const largeStatements = unstable_splitSqlQuery(largeSql);
+    assert(largeStatements.length > unstable_splitSqlQuery(plan.sql).length, "Long QP and MS documents are written separately from the parent metadata.");
+    assert(largeStatements.every((statement) => Buffer.byteLength(statement, "utf8") < 100000), "Complete long official content uses bounded D1 statements.");
+    for (let index = 0; index < largeStatements.length; index += 100) await db.batch(largeStatements.slice(index, index + 100).map((statement) => db.prepare(statement)));
+    const complete = await db.prepare("SELECT structured_content, mark_scheme, stem, active FROM question_bank WHERE id = ?").bind(bundle.questions[0].id).first();
+    assert.deepEqual(JSON.parse(complete.structured_content), largeOfficialQuestion.questions[0].content);
+    assert.deepEqual(JSON.parse(complete.mark_scheme), largeOfficialQuestion.questions[0].markScheme);
+    assert.equal(complete.stem, bundle.questions[0].stem);
+    assert.equal(complete.active, 1);
+    largeOfficialQuestion.questions[0].content.blocks[1].text = longText.repeat(3);
+    assert.throws(() => buildImportSql(largeOfficialQuestion), /complete document exceeds the D1 SQL limit/, "An oversized individual document is rejected without silently truncating official content.");
   } finally {
     await mf.dispose();
   }
