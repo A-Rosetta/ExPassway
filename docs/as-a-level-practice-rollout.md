@@ -31,7 +31,18 @@ The original PapaCambridge Chemistry `9701_s24_ms_22.pdf` has 13 pages and omits
 
 Some Cambridge public QPs/Inserts replace copyrighted source images with notices. Questions with an indispensable figure and no verified available source retain their complete official content but explicitly disable grading using `gradingUnavailableReason`. No missing image or answer is fabricated.
 
+The reviewed collection has 877 grading-ready parent questions and four explicitly blocked questions:
+
+| Paper | Question | Missing indispensable material |
+| --- | ---: | --- |
+| `9708_s25_qp_24` | 1 | GDP growth figure in QP page 2 |
+| `9700_s25_qp_44` | 2 | Pedigree figure in QP page 4 |
+| `9696_s25_qp_32` | 4 | Netarts Bay figure in Insert page 3 |
+| `9696_s26_qp_12` | 1 | Drainage basin figure in Insert page 2 |
+
 Verified original-provider reading links can accompany a question through `content.sourceMaterialLinks`. They appear as external HTTPS links and are not fetched as official grading image assets or copied into the published package. Recovery evidence records the match to the original question and every relevant MS value; any rounding or redraw differences must remain visible. The official MS remains the scoring authority.
+
+Geography `9696_s25_qp_32` question 10 links to the verified Lajamanu climate graph, and `9696_s26_qp_32` question 1 links to the verified Medan and Tidele graphs. All relevant official MS features were checked against the actual provider images. The latter source's 3220/1178 mm annual rainfall totals differ from the MS's approximate 3225/1180 mm values and fall within its explicit c3000/c1200 reading tolerances. These original-provider charts are not claimed to be pixel-identical Cambridge redraws.
 
 Biology `9700_s25_qp_44` question 3's removed cat photograph is disclosed, but the original written no-tail description is independently sufficient for its answers. Question 2's removed pedigree is indispensable and requires a verified recovery before grading can open.
 
