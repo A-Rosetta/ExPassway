@@ -1005,9 +1005,9 @@
 
 .site-ui .chat-entry__icon {
   display: block;
-  width: 28px;
-  height: 28px;
-  flex: 0 0 28px;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
   border-radius: 9px;
   background: transparent;
 }
