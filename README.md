@@ -10,6 +10,8 @@ application data and R2 for uploaded and published content.
 - CIE IGCSE Chemistry 0620, Paper 2 MCQ: 6 papers / 240 questions
 - CIE IGCSE Co-ordinated Sciences 0654, Paper 2 MCQ: 21 papers / 839 valid questions
 - CIE IGCSE Economics 0455, Paper 1 MCQ: 1 paper / 30 questions
+- CIE IGCSE Physics 0625, Paper 2 MCQ: 36 paper / 1436 questions
+- CIE AS&Alevel 9618, Paper 1 MCQ: 12 paper / 80 questions
 
 Question images and static fallback data are stored by subject under
 `assets/exam-question-images/`. The homepage, practice pages, notebook, discussions, and
