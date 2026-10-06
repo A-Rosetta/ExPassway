@@ -1009,11 +1009,12 @@
   height: 28px;
   flex: 0 0 28px;
   border-radius: 9px;
-  background-color: #152238;
-  -webkit-mask: url("chat-mark.svg") center / contain no-repeat;
-  mask: url("chat-mark.svg") center / contain no-repeat;
 }
 
+/* 浅色主题：白图标反色成深色 */
+.site-ui .chat-entry__icon {
+  filter: invert(1);
+}
 [data-theme="dark"] .site-ui .chat-entry__icon {
   background-color: var(--text);
 }
