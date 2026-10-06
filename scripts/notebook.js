@@ -156,7 +156,7 @@
     if (row.subject) params.set("subject", row.subject);
     if (row.paper) params.set("paper", row.paper);
     if (row.topic) params.set("topic", row.topic);
-    if (row.stem) params.set("stem", String(row.stem).slice(0, 220));
+    if (!row.hasQuestionImage && row.stem) params.set("stem", String(row.stem).slice(0, 220));
     return `./community.html?${params.toString()}`;
   }
 
@@ -264,7 +264,7 @@
                     ${r.starred ? `<span class="notebook-star-marker" aria-hidden="true">★</span>` : ""}
                   </summary>
                   <div class="notebook-question-content">
-                    <p class="chem-text">${r.stem || t("stemMissing")}</p>
+                    ${r.hasQuestionImage ? "" : `<p class="chem-text">${r.stem || t("stemMissing")}</p>`}
                     <div class="tag-row">
                       ${renderDifficultyTag(r)}
                       <span class="tag">${r.topic || "-"}</span>

@@ -9,6 +9,7 @@ import {
   normalizeStructuredDocument,
   orderedImages,
   pairedMarkScheme,
+  questionPresentationImages,
   stableStructuredQuestionId,
   structuredDisplayBlocks,
   validateResourcePackage,
@@ -177,6 +178,13 @@ assert.equal(blocks[4].text, "(i) [2]");
 assert.equal(blocks[5].type, "table");
 assert.equal(blocks[5].depth, 1);
 assert.deepEqual(orderedImages([{ url: "/later.png", order: 2 }, { url: "/first.png", order: 1 }]).map((image) => image.url), ["/first.png", "/later.png"]);
+assert.deepEqual(questionPresentationImages({
+  stem: "OCR text must never be used for image-backed questions.",
+  content: {
+    blocks: [{ type: "text", text: "OCR duplicate" }, { type: "image", ...fragment("9618/qp-q1.png") }],
+    parts: [{ prompt: [{ type: "text", text: "OCR part duplicate" }, { type: "image", ...fragment("9618/qp-q1.png", 2) }] }],
+  },
+}).map((image) => image.storageKey), ["9618/qp-q1.png"]);
 
 const originalQuestion = {
   parts: [{ id: "part-a", label: "(a)", maxMarks: 3, children: [{ id: "part-a-i", label: "(i)", maxMarks: 2 }] }],

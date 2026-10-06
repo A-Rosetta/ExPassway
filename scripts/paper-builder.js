@@ -1,6 +1,6 @@
 import { buildPaperBlueprint, buildBlueprintIssues, compareEquivalentPapers } from "../shared/paper-blueprint.js";
 import { createAnswerKeyPdf, createMarkSchemePdf, createQuestionPaperPdf, createPaperZip, createEquivalentPaperZip } from "./paper-export.js";
-import { hasStructuredContent, normalizeStructuredDocument, orderedImages, pairedMarkScheme, structuredDisplayBlocks } from "../shared/structured-content.js";
+import { hasStructuredContent, normalizeStructuredDocument, orderedImages, pairedMarkScheme, questionPresentationImages, structuredDisplayBlocks } from "../shared/structured-content.js";
 
 export function isStructuredQuestion(question) {
   return String(question?.questionType ?? question?.question_type ?? "mcq").trim().toLowerCase() === "structured";
@@ -386,7 +386,7 @@ function initializePaperBuilder() {
   }
 
   function appendContent(root, item, compact = false) {
-    const fragments = isStructuredQuestion(item) && item.content?.images?.length ? item.content.images : item.images || [];
+    const fragments = isStructuredQuestion(item) ? questionPresentationImages(item) : item.images || [];
     const images = orderedImages(fragments).map(imageUrl).filter(Boolean);
     if (images.length) {
       for (const source of compact ? images.slice(0, 1) : images) {
@@ -613,7 +613,7 @@ function initializePaperBuilder() {
           || (documentKind !== "question" && !hasStructuredContent(item.markScheme));
       }
       return !Number.isInteger(Number(item.answer)) || Number(item.answer) < 0 || Number(item.answer) > 3
-        || (!(item.images || []).some(imageUrl) && !String(item.stem || "").trim());
+        || (!questionPresentationImages(item).some(imageUrl) && !String(item.stem || "").trim());
     });
     if (invalid.length) issues.unshift({
       code: "INVALID_QUESTION", blocking: true, questionIds: invalid.map((item) => item.id), details: {},

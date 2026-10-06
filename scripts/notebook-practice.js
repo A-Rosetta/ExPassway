@@ -106,13 +106,10 @@
             detail.correct ? t("notebookPracticeCorrectTag") : t("notebookPracticeWrongTag")
           }</span>`
           : "";
-        // For image questions the stem column holds the OCR dump of the same
-        // artwork - unreadable prose that just pushes the image down. The image
-        // is the question, so render only that (generate.js does the same).
         return `
           <article class="question notebook-practice-question">
             <h3>${t("questionNumber", { number: idx + 1 })} ${resultTag}</h3>
-            ${hasImages ? "" : `<p class="chem-text">${escapeHtml(question.stem)}</p>`}
+            ${hasImages ? "" : `<p class="chem-text">${escapeHtml(question.stem || "")}</p>`}
             ${imagesHtml ? `<div class="question-images-wrap">${imagesHtml}</div>` : ""}
             <div class="options-wrap">${optionsHtml}</div>
           </article>

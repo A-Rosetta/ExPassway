@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../assets/styles.css?v=20261005-2" />
   <link rel="stylesheet" href="../assets/site-design.css?v=20261006-2" />
   <link rel="stylesheet" href="../assets/subject.css?v=20261006-2" />
+  <link rel="stylesheet" href="../assets/china-component-guide.css?v=20261006-1" />
 </head>
 <body class="student-ui site-ui subject-hub-page">
   <header class="site-topbar subject-topbar">
@@ -32,6 +33,9 @@
     </section>
 
     <section id="subjectComponents" class="subject-components" aria-live="polite"></section>
+    <div class="subject-toolbar subject-component-guide-toolbar">
+      <button id="openChinaComponentGuide" class="btn-secondary" type="button" data-i18n="chinaComponentGuide">中国卷别快查</button>
+    </div>
     <div class="subject-toolbar">
       <a id="subjectBuilder" class="btn-primary" href="paper-builder.html?subject=9618" data-i18n="subjectBuilder">Build a paper</a>
     </div>
@@ -58,5 +62,6 @@
   <script src="../scripts/chat-session.js?v=20261005-3"></script>
   <script src="../scripts/api.js?v=20261005-3"></script>
   <script src="../scripts/subject.bundle.js?v=20261006-2"></script>
+  <script type="module" src="../scripts/china-component-guide.js?v=20261006-1"></script>
 </body>
 </html>

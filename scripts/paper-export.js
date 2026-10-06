@@ -1,5 +1,5 @@
 import { jsPDF } from "jspdf";
-import { normalizeStructuredDocument, orderedImages, pairedMarkScheme, structuredDisplayBlocks } from "../shared/structured-content.js";
+import { normalizeStructuredDocument, orderedImages, pairedMarkScheme, questionPresentationImages, structuredDisplayBlocks } from "../shared/structured-content.js";
 
 const PAGE_WIDTH = 210;
 const PAGE_HEIGHT = 297;
@@ -246,11 +246,12 @@ async function prepareImageFragment(doc, image, loadImage) {
 }
 
 async function prepareLeadingStructuredImage(doc, value, loadImage, fallbackImages = []) {
-  const normalized = normalizeStructuredDocument(value);
-  const images = normalized.images.length ? normalized.images : fallbackImages;
+  const normalized = normalizeStructuredDocument(value?.content ?? value);
+  const presentationImages = questionPresentationImages(value);
+  const images = presentationImages.length ? presentationImages : fallbackImages;
   const first = images.length ? orderedImages(images)[0]
-    : structuredDisplayBlocks(normalized).find((entry) => entry.type === "image" || blockText(entry).trim());
-  if (!first || (!images.length && first.type !== "image")) return null;
+    : structuredDisplayBlocks(normalized).find((entry) => entry.type === "image");
+  if (!first) return null;
   return prepareImageFragment(doc, first, loadImage);
 }
 
@@ -354,8 +355,9 @@ async function writeImageFragment(doc, image, y, section, loadImage, prepared = 
 }
 
 async function writeStructuredContent(doc, value, y, section, loadImage, fallbackImages = [], prepared = null) {
-  const normalized = normalizeStructuredDocument(value);
-  const images = normalized.images.length ? normalized.images : fallbackImages;
+  const normalized = normalizeStructuredDocument(value?.content ?? value);
+  const presentationImages = questionPresentationImages(value);
+  const images = presentationImages.length ? presentationImages : fallbackImages;
   const entries = images.length ? [] : structuredDisplayBlocks(normalized);
   if (!images.length && !entries.some((entry) => entry.type === "image" || blockText(entry).trim())) {
     throw new Error("Structured content is missing its text and image fragments.");
@@ -409,7 +411,7 @@ export async function createQuestionPaperPdf(groups, options = {}) {
       questionIds.push(question.id);
       if (isStructuredQuestion(question)) {
         if (y > PAGE_BOTTOM - 18) y = addPageHeading(doc, currentSection, true);
-        const prepared = await prepareLeadingStructuredImage(doc, question.content, loadImage, question.images || []);
+        const prepared = await prepareLeadingStructuredImage(doc, question, loadImage, question.images || []);
         y = keepStructuredHeadingWithImage(doc, prepared, y, currentSection, structuredHeaderHeight(doc, question, 5));
         doc.setFont("helvetica", "bold");
         doc.setFontSize(10);
@@ -422,7 +424,7 @@ export async function createQuestionPaperPdf(groups, options = {}) {
           doc.setFontSize(8);
           y = writeTextBlock(doc, `Source: ${source}`, MARGIN, y, CONTENT_WIDTH, currentSection) + 2;
         }
-        y = await writeStructuredContent(doc, question.content, y, currentSection, loadImage, question.images || [], prepared);
+        y = await writeStructuredContent(doc, question, y, currentSection, loadImage, question.images || [], prepared);
         y += 4;
         continue;
       }

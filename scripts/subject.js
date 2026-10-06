@@ -82,7 +82,11 @@ function renderResources(kind, targetId, titleKey, bodyKey, resources = state[ki
       if (metadata.isbn) card.appendChild(make("p", "book-meta", `ISBN ${metadata.isbn}`));
       if (metadata.compatibilityNote) card.appendChild(make("p", "subject-muted", metadata.compatibilityNote));
       card.appendChild(make("p", "subject-muted", t("subjectTextbookAccess")));
-      list(metadata.externalLinks).forEach((source) => {
+      const links = list(metadata.externalLinks);
+      if (metadata.sourceUrl && !links.some((source) => source?.url === metadata.sourceUrl)) {
+        links.unshift({ title: "Cambridge official published resources", titleZh: "Cambridge 官方教材目录", url: metadata.sourceUrl });
+      }
+      list(links).forEach((source) => {
         let url;
         try { url = new URL(source.url); if (url.protocol !== "https:") return; } catch { return; }
         const link = make("a", "btn-secondary", localized(source, t("subjectTextbookPublisher")));

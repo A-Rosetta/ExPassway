@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" />
   <link rel="stylesheet" href="assets/styles.css?v=20261005-2" />
   <link rel="stylesheet" href="assets/site-design.css?v=20261006-2" />
+  <link rel="stylesheet" href="assets/china-component-guide.css?v=20261006-1" />
 </head>
 <body class="student-ui site-ui home-dashboard">
   <header class="home-topbar">
@@ -50,6 +51,7 @@
         </div>
         <div class="home-heading-actions">
           <a id="openChapterPaperBuilder" class="btn-secondary" href="pages/paper-builder.html" data-i18n="paperBuilderOpen">按章节组卷</a>
+          <button id="openChinaComponentGuide" class="btn-secondary" type="button" data-i18n="chinaComponentGuide">中国卷别快查</button>
           <button id="openPdfDownload" class="btn-primary home-pdf-download-button" type="button" data-i18n="homeDownloadPdfs" disabled>下载试卷 PDF</button>
           <button id="toggleMoreSubjects" class="btn-secondary home-more-subjects-button" type="button" data-i18n="homeMoreSubjects" aria-controls="moreSubjectPanel" aria-expanded="false">更多科目</button>
           <button id="goAdmin" class="btn-secondary home-admin-button" type="button" data-i18n="goAdmin" hidden>查看后台数据面板</button>
@@ -176,5 +178,6 @@
   <script src="scripts/passkey-settings.js?v=20261005-2"></script>
 
   <script src="scripts/site-ui.js?v=20261006-8"></script>
+  <script type="module" src="scripts/china-component-guide.js?v=20261006-1"></script>
 </body>
 </html>

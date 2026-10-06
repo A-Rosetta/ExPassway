@@ -310,8 +310,7 @@
     if (question?.subjectCode) params.set("subjectCode", question.subjectCode);
     if (question?.paper) params.set("paper", question.paper);
     if (question?.topic) params.set("topic", question.topic);
-    const stem = question?.stem ? String(question.stem).slice(0, 220) : "";
-    if (stem) params.set("stem", stem);
+    if (!questionImageUrl(question) && question?.stem) params.set("stem", String(question.stem).slice(0, 220));
     if (!questionKey) params.set("topic", question?.topic || detail?.topic || `Q${idx + 1}`);
     return `./community.html?${params.toString()}`;
   }

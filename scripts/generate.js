@@ -676,7 +676,6 @@
           })
           .join("");
 
-        const textViewId = `textView_${idx}`;
         return `
           <div class="question">
             <div class="question-title-row">
@@ -690,25 +689,11 @@
                 title="${starred ? t("unstarQuestion") : t("starQuestion")}"
               ><span aria-hidden="true">${starred ? "★" : "☆"}</span></button>
             </div>
-            ${
-              hasImages
-                ? `
-                  <div class="text-toggle-row">
-                    <button class='btn-secondary' data-toggle-text='${textViewId}'>${t("showText")}</button>
-                  </div>
-                `
-                : ""
-            }
             <div class="tag-row">
               <span class="tag">${q.id}</span>
               <span class="tag">${q.topic}</span>
               <span class="tag">${q.difficulty}</span>
             </div>
-            ${
-              hasImages
-                ? `<div id='${textViewId}' class='tip text-view-box' style='display:none; white-space:pre-wrap;'>${formatChemText(q.stem)}</div>`
-                : ""
-            }
             ${imagesHtml ? `<div class="question-images-wrap">${imagesHtml}</div>` : ""}
             <div class="options-wrap">${optionsHtml}</div>
             <div id="feedback_${idx}" class="tip"></div>
@@ -750,18 +735,6 @@
       const q = state.questions[idx];
       if (q) updateHintControls(idx);
     }
-
-    const toggleButtons = document.querySelectorAll("[data-toggle-text]");
-    toggleButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const targetId = btn.getAttribute("data-toggle-text");
-        const textView = targetId ? byId(targetId) : null;
-        if (!textView) return;
-        const hidden = textView.style.display === "none";
-        textView.style.display = hidden ? "block" : "none";
-        btn.textContent = hidden ? t("hideText") : t("showText");
-      });
-    });
 
     const imageDialog = byId("questionImageDialog");
     const imageDialogImage = byId("questionImageDialogImage");

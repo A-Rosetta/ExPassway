@@ -151,6 +151,7 @@ function mapNotebookEntry(row) {
     topic: row.topic,
     year: row.year,
     stem: row.stem,
+    hasQuestionImage: (() => { try { return JSON.parse(row.question_images || "[]").length > 0; } catch (_e) { return false; } })(),
     answer: row.answer == null ? null : Number(row.answer),
     answerText: row.answer_text,
     lastSelected: row.last_selected == null ? null : Number(row.last_selected),
@@ -1874,7 +1875,10 @@ export async function handleLearningApiRequest(request, env) {
       const userId = decodeURIComponent(notebookList[1]);
       await assertOwnUser(request, env, userId);
       const rows = await env.DB.prepare(`
-        SELECT * FROM wrong_notebook_entries WHERE user_id = ? ORDER BY last_wrong_at DESC
+        SELECT entry.*, question.images AS question_images
+        FROM wrong_notebook_entries entry
+        LEFT JOIN question_bank question ON question.id = entry.question_key
+        WHERE entry.user_id = ? ORDER BY entry.last_wrong_at DESC
       `).bind(userId).all();
       return success(rows.results.map(mapNotebookEntry), request.method);
     }

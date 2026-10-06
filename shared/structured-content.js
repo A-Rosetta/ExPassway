@@ -30,6 +30,39 @@ export function normalizeStructuredDocument(value) {
   };
 }
 
+/** Student question views use original image fragments, never extracted text. */
+export function questionPresentationImages(value) {
+  const question = parseContent(value);
+  const content = normalizeStructuredDocument(question.content ?? question);
+  const images = [...content.images];
+  const collectBlocks = (blocks) => {
+    for (const block of Array.isArray(blocks) ? blocks : []) {
+      if (block?.type === "image") images.push(block);
+    }
+  };
+  collectBlocks(content.sharedMaterials);
+  collectBlocks(content.blocks);
+  function visit(parts, depth = 0) {
+    if (!Array.isArray(parts) || depth > 64) return;
+    for (const part of parts) {
+      if (!part || typeof part !== "object") continue;
+      images.push(...orderedImages(part.images));
+      collectBlocks(part.prompt);
+      collectBlocks(part.blocks);
+      visit(part.children, depth + 1);
+    }
+  }
+  visit(content.parts);
+  images.push(...orderedImages(question.images));
+  const seen = new Set();
+  return orderedImages(images).filter((image) => {
+    const key = image.storageKey || image.url;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 /** Pair official MS blocks with the original QP labels without reordering them. */
 export function pairedMarkScheme(scheme, content) {
   const markScheme = parseContent(scheme);

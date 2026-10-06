@@ -385,6 +385,7 @@ async function getQuestionReference(db, questionKey) {
     subject: row.subject,
     paper: row.paper,
   };
+  if (images.length) reference.hasQuestionImage = true;
   if (!legacy) reference.subjectCode = row.subject_code || "";
   return reference;
 }

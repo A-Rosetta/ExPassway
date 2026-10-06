@@ -1,4 +1,4 @@
-import { orderedImages, pairedMarkScheme, structuredDisplayBlocks } from "../shared/structured-content.js";
+import { orderedImages, pairedMarkScheme, questionPresentationImages, structuredDisplayBlocks } from "../shared/structured-content.js";
 import { STRUCTURED_ANSWER_MAX_LENGTH, STRUCTURED_ANSWER_TOTAL_MAX_LENGTH, STRUCTURED_ANSWER_IMAGE_MAX_BYTES, STRUCTURED_ANSWER_IMAGE_MAX_COUNT, structuredAnswerParts } from "../shared/structured-practice.js";
 
 const { getLanguage, setLanguage, t, applyPage } = window.ALevelI18n;
@@ -61,15 +61,15 @@ function restoreResponses(attempts) {
     }
   });
 }
-function renderImages(target, images) {
+function renderImages(target, images, originalQuestion = false) {
   orderedImages(images).forEach((image, index) => {
     const source = image.url.startsWith("/api/") ? `${api.getBaseUrl?.() || ""}${image.url}` : image.url;
     let url;
     try { url = new URL(source, location.href); if (!["http:", "https:"].includes(url.protocol)) return; } catch { return; }
     const figure = node("figure", "practice-image"); const img = node("img");
-    img.src = url.href; img.loading = "lazy"; img.alt = image.alt || t("subjectImagePage", { page: image.page || index + 1 });
+    img.src = url.href; img.loading = "lazy"; img.alt = (!originalQuestion && image.alt) || t("subjectImagePage", { page: image.page || index + 1 });
     figure.appendChild(img);
-    if (image.caption) figure.appendChild(node("figcaption", "", image.caption));
+    if (!originalQuestion && image.caption) figure.appendChild(node("figcaption", "", image.caption));
     target.appendChild(figure);
   });
 }
@@ -211,19 +211,35 @@ function questionCard(question, index) {
     const link = node("a", "btn-secondary", source.title || t("subjectOpenResource"));
     link.href = url.href; link.target = "_blank"; link.rel = "noopener noreferrer"; original.appendChild(link);
   });
-  renderDocument(original, question.content);
-  if (!original.querySelector("img") && !structuredDisplayBlocks(question.content).length) { if (list(question.images).length) renderImages(original, question.images); else original.appendChild(node("p", "practice-content-text", question.stem || t("subjectQuestionUnavailable"))); }
+  const questionImages = questionPresentationImages(question);
+  if (questionImages.length) renderImages(original, questionImages, true);
+  else original.appendChild(node("p", "practice-muted", t("subjectQuestionUnavailable")));
   const panel = node("section", "practice-answer-panel"); panel.appendChild(node("h2", "practice-section-title", t("structuredPracticeYourAnswers")));
   const inputHint = node("p", "practice-input-hint practice-muted", t("structuredPracticeInputHint")); inputHint.id = `practiceInputHint-${index}`; panel.appendChild(inputHint);
   answerParts(question).forEach((part, partIndex) => {
-    const item = node("div", "practice-answer-part"); const label = node("label"); const inputId = `practice-answer-${index}-${partIndex}`; label.htmlFor = inputId;
+    const choicePart = part.answerFormat === "choice";
+    const item = node(choicePart ? "fieldset" : "div", "practice-answer-part"); const label = node(choicePart ? "legend" : "label", "practice-answer-label"); const inputId = `practice-answer-${index}-${partIndex}`;
+    if (!choicePart) label.htmlFor = inputId;
     label.append(node("span", "", part.label || t("structuredPracticeWholeQuestion")), node("span", "", t("subjectMarks", { count: part.maxMarks })));
-    const prompt = node("div", "practice-part-prompt"); renderBlocks(prompt, part.prompt);
-    if (part.answerFormat === "choice") {
-      const select = node("select"); select.id = inputId; select.dataset.partId = part.partId;
-      select.appendChild(new Option(t("structuredPracticeChooseOption"), "")); list(part.choices).forEach((choice) => select.appendChild(new Option(choice, choice)));
-      select.value = state.responses.get(question.id).answers[part.partId] || ""; select.addEventListener("change", () => updateAnswer(question, part.partId, select.value));
-      item.append(label, prompt, select); panel.appendChild(item); return;
+    if (choicePart) {
+      const choices = node("div", "practice-choice-options");
+      list(part.choices).forEach((choice, choiceIndex) => {
+        const option = node("label", "practice-choice-option"); const radio = node("input");
+        const rawChoice = String(choice ?? "").trim();
+        const letter = String.fromCharCode(65 + choiceIndex);
+        const value = /^[A-D]$/i.test(rawChoice) ? rawChoice.toUpperCase() : letter;
+        const labelText = /^[A-D]$/i.test(rawChoice) ? value : `${value}. ${rawChoice}`;
+        radio.type = "radio"; radio.name = inputId; radio.id = `${inputId}-${value}`; radio.value = value; radio.dataset.partId = part.partId;
+        radio.checked = state.responses.get(question.id).answers[part.partId] === value;
+        radio.addEventListener("change", () => { if (radio.checked) updateAnswer(question, part.partId, value); });
+        option.append(radio, node("span", "", labelText)); choices.appendChild(option);
+      });
+      const clear = node("button", "practice-clear-choice", t("structuredPracticeClearChoice")); clear.type = "button";
+      clear.addEventListener("click", () => {
+        choices.querySelectorAll("input").forEach((radio) => { radio.checked = false; });
+        updateAnswer(question, part.partId, "");
+      });
+      item.append(label, choices, clear); panel.appendChild(item); return;
     }
     const textarea = node("textarea");
     textarea.id = inputId; textarea.dataset.partId = part.partId; textarea.rows = 5; textarea.maxLength = STRUCTURED_ANSWER_MAX_LENGTH; textarea.spellcheck = false;
@@ -237,7 +253,7 @@ function questionCard(question, index) {
       if (textarea.value.length - (end - start) + 4 > STRUCTURED_ANSWER_MAX_LENGTH) return;
       textarea.setRangeText("    ", start, end, "end"); updateAnswer(question, part.partId, textarea.value);
     });
-    item.append(label, prompt, textarea, drawingInput(question, part)); panel.appendChild(item);
+    item.append(label, textarea, drawingInput(question, part)); panel.appendChild(item);
   });
   const actions = node("div", "practice-answer-actions"); const grade = node("button", "btn-primary", t("structuredPracticeGradeQuestion")); grade.type = "button"; grade.dataset.gradeQuestion = question.id; grade.addEventListener("click", () => gradeQuestion(question)); actions.appendChild(grade); panel.appendChild(actions);
   const error = node("p", "practice-question-error"); error.setAttribute("role", "alert"); panel.appendChild(error);

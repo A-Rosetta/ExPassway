@@ -1137,7 +1137,6 @@
       stem: params.get("stem") || "",
     };
   }
-
   function setStatus(message, isBad) {
     const el = byId("communityStatus");
     if (!el) return;
@@ -1372,7 +1371,7 @@
         <span class="tag">${escapeHtml(state.context.subject || "IGCSE Chemistry")}</span>
         <span class="tag">${escapeHtml(state.context.paper || "MCQ")}</span>
       </div>
-      ${state.context.stem ? `<p class="tip">${escapeHtml(state.context.stem)}</p>` : ""}
+      ${state.context.stem && !reference?.imageUrl ? `<p class="tip">${escapeHtml(state.context.stem)}</p>` : ""}
     `;
   }
 
@@ -1662,7 +1661,7 @@
       : "";
     setEditorValue(
       "communityBodyEditor",
-      state.context.stem ? `${state.context.stem}\n\n` : ""
+      ""
     );
     state.activeEditorId = "communityBodyEditor";
     state.activeMathField = null;
