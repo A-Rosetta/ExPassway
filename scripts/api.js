@@ -138,6 +138,10 @@
         timeoutMs: 15000,
       });
     },
+    async getChinaComponentThresholds(subjectCode, year, season) {
+      const params = new URLSearchParams({ year: String(year), season: String(season) });
+      return request(`/api/catalog/subjects/${encodeURIComponent(subjectCode)}/china-thresholds?${params}`);
+    },
     async getCatalogPapers(subjectCode) {
       return request(`/api/catalog/subjects/${encodeURIComponent(subjectCode)}/papers`);
     },

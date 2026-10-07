@@ -275,6 +275,92 @@ async function getSubjectOverview(db, subjectCode) {
   };
 }
 
+const CHINA_THRESHOLD_SEASONS = new Map([
+  ["May/June", "s"],
+  ["February/March", "m"],
+  ["October/November", "w"],
+  ["s", "s"],
+  ["m", "m"],
+  ["w", "w"],
+]);
+
+const THRESHOLD_GRADES = ["A*", "A", "B", "C", "D", "E"];
+
+function chinaThresholdRows(rows, kind) {
+  if (!Array.isArray(rows)) return [];
+  return rows.flatMap((row) => {
+    if (!row || typeof row !== "object" || !Number.isFinite(Number(row.maxMarks))) return [];
+    const components = Array.isArray(row.components)
+      ? row.components.filter((component) => /^[A-Z0-9]{2,4}$/.test(String(component)))
+      : [];
+    const component = typeof row.component === "string" && /^[A-Z0-9]{2,4}$/.test(row.component)
+      ? row.component
+      : "";
+    if (kind === "component" ? !component : components.length === 0) return [];
+    const grades = Object.fromEntries(THRESHOLD_GRADES.map((grade) => {
+      const value = row.grades?.[grade];
+      return [grade, Number.isFinite(Number(value)) && value !== null ? Number(value) : null];
+    }));
+    return [{
+      ...(kind === "component" ? { component } : {
+        option: typeof row.option === "string" ? row.option : null,
+        components,
+      }),
+      maxMarks: Number(row.maxMarks),
+      grades,
+      markBasis: kind === "component" ? "raw" : "weighted",
+    }];
+  });
+}
+
+function officialCambridgeUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname === "www.cambridgeinternational.org" ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+async function getChinaComponentThresholds(db, subjectCode, year, season) {
+  const result = await db.prepare(`
+    SELECT resource.metadata
+    FROM subject_resources resource
+    JOIN exam_subjects subject ON subject.code = resource.subject_code
+    WHERE resource.subject_code = ? AND resource.status = 'published'
+      AND subject.active = 1
+  `).bind(subjectCode).all();
+  const targetSeason = CHINA_THRESHOLD_SEASONS.get(season);
+  const metadata = result.results
+    .map((row) => parseJson(row.metadata, {}))
+    .find((item) => item.resourceType === "grade_threshold"
+      && Number(item.year) === year
+      && item.season === targetSeason
+      && item.country === "China mainland"
+      && Number(item.administrativeZone) === 5);
+
+  if (!metadata) return { available: false, year, season };
+  const componentThresholds = chinaThresholdRows(metadata.chinaComponentThresholds, "component");
+  const optionThresholds = chinaThresholdRows(metadata.chinaOptionThresholds, "option");
+  const sourceUrl = officialCambridgeUrl(metadata.sourceUrl || metadata.downloadUrl);
+  const sourcePage = officialCambridgeUrl(metadata.sourcePage);
+  if ((!componentThresholds.length && !optionThresholds.length) || !sourceUrl) {
+    return { available: false, year, season };
+  }
+  return {
+    available: true,
+    year,
+    season,
+    publisher: typeof metadata.publisher === "string" ? metadata.publisher : "Cambridge International Education",
+    sourceUrl,
+    sourcePage,
+    displayNote: typeof metadata.displayNote === "string" ? metadata.displayNote : "",
+    carryForwardNote: typeof metadata.carryForwardNote === "string" ? metadata.carryForwardNote : "",
+    componentThresholds,
+    optionThresholds,
+  };
+}
+
 function capabilities() {
   return {
     catalog: { papers: true, structured: true, components: true, resources: true },
@@ -422,6 +508,21 @@ export async function handleReadApiRequest(request, env) {
   try {
     if (url.pathname === "/api/catalog/subjects") {
       return success(await listPublishedSubjects(env.DB), request.method);
+    }
+
+    const chinaThresholdMatch = url.pathname.match(/^\/api\/catalog\/subjects\/([^/]+)\/china-thresholds$/);
+    if (chinaThresholdMatch) {
+      const subjectCode = decodeURIComponent(chinaThresholdMatch[1]).trim();
+      const yearValue = url.searchParams.get("year") || "";
+      const season = url.searchParams.get("season") || "";
+      if (!/^\d{4}$/.test(subjectCode) || !/^\d{4}$/.test(yearValue) || !CHINA_THRESHOLD_SEASONS.has(season)) {
+        return failure(400, "INVALID_INPUT", "Subject, year, or examination series is invalid.", request.method);
+      }
+      const year = Number(yearValue);
+      if (year < 2000 || year > 2099) {
+        return failure(400, "INVALID_INPUT", "Year must be between 2000 and 2099.", request.method);
+      }
+      return success(await getChinaComponentThresholds(env.DB, subjectCode, year, season), request.method);
     }
 
     const subjectOverviewMatch = url.pathname.match(/^\/api\/catalog\/subjects\/([^/]+)\/overview$/);

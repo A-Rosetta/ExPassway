@@ -57,6 +57,34 @@ try {
     const response = await handler(new Request(`https://expassway.test${path}`, options), env);
     return { response, payload: await response.clone().json().catch(() => null) };
   };
+  await db.prepare("INSERT INTO exam_subjects(code,name,asset_key) VALUES ('9702','Physics','physics-9702')").run();
+  await db.prepare(`INSERT INTO subject_resources(id,subject_code,kind,title,storage_key,content_type,metadata)
+    VALUES ('private-threshold-fixture','9702','other','June 2026 thresholds','private/9702-s26.pdf','application/pdf',?)`)
+    .bind(JSON.stringify({
+      resourceType: "grade_threshold", year: 2026, season: "s", country: "China mainland", administrativeZone: 5,
+      sourceUrl: "https://www.cambridgeinternational.org/Images/physics-9702-june-2026-grade-threshold-table.pdf",
+      sourcePage: "https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-advanced/cambridge-international-as-and-a-levels/grade-threshold-tables/june-2026/",
+      chinaComponentThresholds: [{ component: "14", maxMarks: 40, grades: { A: 29, B: 25, C: 22, D: 20, E: 18 }, markBasis: "raw", chinaMatch: true }],
+      chinaOptionThresholds: [{ option: null, components: ["14", "24", "37", "44", "54"], maxMarks: 260, grades: { "A*": 201, A: 176, B: 151, C: 130, D: 109, E: 88 }, markBasis: "weighted", route: "linear", chinaMatch: true }],
+      displayNote: "Raw component marks and weighted option marks use different scales.",
+      carryForwardNote: "Check staged routes against the previous examination.",
+    })).run();
+  const chinaThresholds = await call(handleReadApiRequest, "/api/catalog/subjects/9702/china-thresholds?year=2026&season=May%2FJune");
+  assert.equal(chinaThresholds.response.status, 200);
+  assert.equal(chinaThresholds.payload.data.available, true);
+  assert.equal(chinaThresholds.payload.data.componentThresholds[0].component, "14");
+  assert.equal(chinaThresholds.payload.data.componentThresholds[0].markBasis, "raw");
+  assert.equal(chinaThresholds.payload.data.componentThresholds[0].grades["A*"], null);
+  assert.equal(chinaThresholds.payload.data.optionThresholds[0].option, null);
+  assert.equal(chinaThresholds.payload.data.optionThresholds[0].markBasis, "weighted");
+  assert.equal(chinaThresholds.payload.data.sourcePage.endsWith("june-2026/"), true);
+  assert.equal(JSON.stringify(chinaThresholds.payload).includes("private-threshold-fixture"), false);
+  assert.deepEqual((await call(handleReadApiRequest, "/api/catalog/subjects/9702/china-thresholds?year=2026&season=February%2FMarch")).payload.data,
+    { available: false, year: 2026, season: "February/March" });
+  assert.deepEqual((await call(handleReadApiRequest, "/api/catalog/subjects/9701/china-thresholds?year=2026&season=May%2FJune")).payload.data,
+    { available: false, year: 2026, season: "May/June" });
+  assert.equal((await call(handleReadApiRequest, "/api/catalog/subjects/9702/china-thresholds?year=2026&season=summer")).response.status, 400);
+
   const bearer = await token("admin");
   const headers = { Authorization: `Bearer ${bearer}` };
   assert.equal((await call(handleReadApiRequest, "/api/catalog/subjects/9618/overview")).response.status, 401);

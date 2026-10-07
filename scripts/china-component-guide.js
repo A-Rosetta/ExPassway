@@ -11,7 +11,7 @@ const text = (en, zh) => isZh() ? zh : en;
 const query = new URLSearchParams(window.location.search);
 const pageSubject = query.get("subject");
 const knownSubject = subjects.some((subject) => subject.code === pageSubject) ? pageSubject : "";
-const state = { code: knownSubject, year: 2026, season: "May/June" };
+const state = { code: knownSubject, year: 2026, season: "May/June", thresholdRequest: 0 };
 
 function create(tag, className, content) {
   const node = document.createElement(tag);
@@ -86,7 +86,26 @@ function makeDialog() {
   note.id = "chinaComponentNote";
   const sources = create("div", "china-component-sources");
   sources.id = "chinaComponentSources";
-  shell.append(header, intro, controls, status, tableWrap, note, sources);
+  const thresholds = create("section", "china-component-thresholds");
+  thresholds.id = "chinaComponentThresholds";
+  thresholds.setAttribute("aria-labelledby", "chinaComponentThresholdsTitle");
+  const thresholdHeading = create("h3", "", text("China component grade thresholds", "中国组件等级分数线"));
+  thresholdHeading.id = "chinaComponentThresholdsTitle";
+  const thresholdIntro = create("p", "china-component-threshold-intro");
+  thresholdIntro.id = "chinaComponentThresholdIntro";
+  const thresholdStatus = create("p", "china-component-threshold-status");
+  thresholdStatus.id = "chinaComponentThresholdStatus";
+  thresholdStatus.setAttribute("role", "status");
+  thresholdStatus.setAttribute("aria-live", "polite");
+  const thresholdTables = create("div", "china-component-threshold-tables");
+  thresholdTables.id = "chinaComponentThresholdTables";
+  thresholdTables.setAttribute("aria-busy", "false");
+  const thresholdNotes = create("div", "china-component-threshold-notes");
+  thresholdNotes.id = "chinaComponentThresholdNotes";
+  const thresholdSources = create("div", "china-component-threshold-sources");
+  thresholdSources.id = "chinaComponentThresholdSources";
+  thresholds.append(thresholdHeading, thresholdIntro, thresholdStatus, thresholdTables, thresholdNotes, thresholdSources);
+  shell.append(header, intro, controls, status, tableWrap, note, thresholds, sources);
   dialog.appendChild(shell);
   document.body.appendChild(dialog);
 
@@ -128,6 +147,138 @@ function renderTable(session) {
   });
   table.appendChild(body);
   target.appendChild(table);
+}
+
+function renderThresholdTable(title, rows) {
+  const section = create("section", "china-component-threshold-group");
+  section.appendChild(create("h4", "", title));
+  const wrap = create("div", "china-component-table-wrap china-component-threshold-table-wrap");
+  wrap.tabIndex = 0;
+  wrap.setAttribute("role", "region");
+  wrap.setAttribute("aria-label", title);
+  const table = document.createElement("table");
+  table.className = "china-component-table china-component-threshold-table";
+  const head = document.createElement("thead");
+  const headerRow = document.createElement("tr");
+  [
+    text("Component / combination", "组件 / 组合"),
+    text("Maximum", "满分"),
+    "A*", "A", "B", "C", "D", "E",
+  ].forEach((label) => headerRow.appendChild(create("th", "", label)));
+  head.appendChild(headerRow);
+  table.appendChild(head);
+  const body = document.createElement("tbody");
+  rows.forEach((row) => {
+    const tr = document.createElement("tr");
+    const label = row.component || `${row.option ? `${row.option} · ` : ""}${Array.isArray(row.components) ? row.components.join(" + ") : ""}`;
+    [label || "—", row.maxMarks ?? "—", ...["A*", "A", "B", "C", "D", "E"].map((grade) => row.grades?.[grade] ?? "—")]
+      .forEach((value) => tr.appendChild(create("td", "", String(value))));
+    body.appendChild(tr);
+  });
+  table.appendChild(body);
+  wrap.appendChild(table);
+  section.appendChild(wrap);
+  return section;
+}
+
+function renderThresholdSources(data) {
+  const target = document.getElementById("chinaComponentThresholdSources");
+  target.replaceChildren();
+  const sources = [
+    data.sourceUrl && { label: text("Official grade threshold PDF", "官方等级分数线 PDF"), url: data.sourceUrl },
+    data.sourcePage && { label: text("Source page", "来源页面"), url: data.sourcePage },
+  ].filter((source) => source?.url);
+  const safeSources = sources.filter((source) => {
+    try {
+      return ["http:", "https:"].includes(new URL(source.url, window.location.href).protocol);
+    } catch {
+      return false;
+    }
+  });
+  if (!safeSources.length) return;
+  target.appendChild(create("h4", "", text("Threshold source", "分数线来源")));
+  const list = create("ul", "china-component-source-list");
+  safeSources.forEach((source) => {
+    const item = create("li");
+    const link = create("a", "", source.label);
+    link.href = source.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    item.appendChild(link);
+    list.appendChild(item);
+  });
+  target.appendChild(list);
+}
+
+function renderThresholdData(data) {
+  const status = document.getElementById("chinaComponentThresholdStatus");
+  const tables = document.getElementById("chinaComponentThresholdTables");
+  const notes = document.getElementById("chinaComponentThresholdNotes");
+  tables.replaceChildren();
+  notes.replaceChildren();
+  renderThresholdSources(data || {});
+
+  if (!data?.available) {
+    status.textContent = text(
+      "No verified grade threshold data is available for this subject and examination series.",
+      "该科目和考试季暂无已核实的等级分数线数据。",
+    );
+    return;
+  }
+
+  const componentRows = Array.isArray(data.componentThresholds) ? data.componentThresholds : [];
+  const optionRows = Array.isArray(data.optionThresholds) ? data.optionThresholds : [];
+  if (!componentRows.length && !optionRows.length) {
+    status.textContent = text(
+      "No threshold rows are available for this examination series.",
+      "该考试季暂无可显示的分数线表格。",
+    );
+    return;
+  }
+
+  status.textContent = `${data.year} ${data.season} · ${text("verified threshold data", "已核实的分数线数据")}`;
+  if (componentRows.length) {
+    tables.appendChild(renderThresholdTable(text("Individual components (raw marks)", "单个组件（原始分）"), componentRows));
+  }
+  if (optionRows.length) {
+    tables.appendChild(renderThresholdTable(text("Examination combinations (weighted marks)", "考试组合（加权分）"), optionRows));
+  }
+  const localizedNotes = isZh()
+    ? [
+      data.displayNote && "单个组件分数线按原始分计；考纲组合按加权分计。单个组件和 AS Level 不设 A*。请核对具体组件和评估路线，不应推导通用分数线。",
+      data.carryForwardNote && "分阶段组合保留原有 carry-forward 组件代码。没有考生报名选项或 carry-forward 记录支持时，不会自动将其认定为中国大陆组合。",
+    ]
+    : [data.displayNote, data.carryForwardNote];
+  localizedNotes.filter(Boolean).forEach((note) => {
+    notes.appendChild(create("p", "", note));
+  });
+}
+
+async function loadThresholds(code, year, season) {
+  const request = ++state.thresholdRequest;
+  const target = document.getElementById("chinaComponentThresholdTables");
+  const status = document.getElementById("chinaComponentThresholdStatus");
+  const notes = document.getElementById("chinaComponentThresholdNotes");
+  const sources = document.getElementById("chinaComponentThresholdSources");
+  target.replaceChildren();
+  target.setAttribute("aria-busy", "true");
+  notes.replaceChildren();
+  sources.replaceChildren();
+  status.textContent = text("Loading verified threshold data…", "正在加载已核实的分数线数据…");
+  try {
+    const data = await window.ALevelApi?.getChinaComponentThresholds?.(code, year, season);
+    if (request !== state.thresholdRequest) return;
+    renderThresholdData(data);
+  } catch {
+    if (request !== state.thresholdRequest) return;
+    renderThresholdData(null);
+    status.textContent = text(
+      "Threshold data could not be loaded. Please try changing the selection again.",
+      "无法加载分数线数据。请重新选择科目或考试季后重试。",
+    );
+  } finally {
+    if (request === state.thresholdRequest) target.setAttribute("aria-busy", "false");
+  }
 }
 
 function renderSources() {
@@ -174,6 +325,14 @@ function render() {
   document.querySelector("#chinaComponentSubject").previousElementSibling.textContent = text("Subject", "科目");
   document.querySelector("#chinaComponentYear").previousElementSibling.textContent = text("Year", "年份");
   document.querySelector("#chinaComponentSeason").previousElementSibling.textContent = text("Series", "季节");
+  document.getElementById("chinaComponentThresholdIntro").textContent = text(
+    "Thresholds are grouped by subject, year and examination series. Raw component marks and weighted examination combinations use separate scales.",
+    "分数线按科目、年份和考试季查询。单个组件原始分与考试组合加权分使用不同分数尺度。",
+  );
+  document.getElementById("chinaComponentThresholdsTitle").textContent = text(
+    "China component grade thresholds",
+    "中国组件等级分数线",
+  );
   const status = document.getElementById("chinaComponentStatus");
   status.textContent = session
     ? `${subject.code} · ${isZh() ? subject.nameZh : subject.name} · ${state.year} ${state.season} · ${session.zone}`
@@ -183,6 +342,7 @@ function render() {
     ? (isZh() ? session.noticeZh : session.notice)
     : text("Only the displayed May/June mappings are verified in this quick lookup.", "本快查仅核实并显示 May/June 映射。");
   renderSources();
+  loadThresholds(state.code, state.year, state.season);
 }
 
 function setup() {
