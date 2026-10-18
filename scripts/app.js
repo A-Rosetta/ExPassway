@@ -4,6 +4,8 @@
   const AUTH_TOKEN_KEY = "alevel.authToken";
   const VISITOR_MODE_KEY = "alevel.visitorMode";
   const SELECTION_KEY = "alevel.selection";
+  const HOME_QUALIFICATION_KEY = "alevel.homeQualification";
+  const HOME_QUALIFICATIONS = ["IGCSE", "AS & A Level"];
   const { getLanguage, setLanguage, t, applyPage } = window.ALevelI18n;
   let currentLanguage = getLanguage();
   let backendStatusState = null;
@@ -12,6 +14,9 @@
   let pdfDownloadPapers = [];
   let pdfPaperLoadId = 0;
   let pdfDownloadStatusKey = "";
+  let homeQualification = HOME_QUALIFICATIONS.includes(localStorage.getItem(HOME_QUALIFICATION_KEY))
+    ? localStorage.getItem(HOME_QUALIFICATION_KEY)
+    : "IGCSE";
   const additionalSubjects = [{
     qualification: "IGCSE",
     board: "CIE",
@@ -54,7 +59,8 @@
     const languageSelect = getEl("preferredLanguage");
     if (languageSelect) languageSelect.value = currentLanguage;
 
-    renderSubjectCourses(catalogSubjects);
+    renderQualificationControl();
+    renderSubjectCourses(getQualificationSubjects());
     renderAdditionalSubjects();
     renderPdfDownloadOptions();
     setPdfDownloadStatus(pdfDownloadStatusKey);
@@ -108,6 +114,79 @@
       : ["0610", "0620", "0625", "0654", "0455"].includes(subject.code)
       ? `pages/biology.html?subject=${encodeURIComponent(subject.code)}`
       : "pages/generate.html";
+  }
+
+  function getQualificationSubjects() {
+    return catalogSubjects.filter((subject) => subject.qualification === homeQualification);
+  }
+
+  function renderQualificationControl() {
+    const label = getEl("qualificationToggleLabel");
+    const toggle = getEl("qualificationToggle");
+    const eyebrow = document.querySelector(".home-eyebrow");
+    if (label) label.textContent = homeQualification === "IGCSE" ? "IGCSE" : "A Level";
+    if (eyebrow) {
+      eyebrow.textContent = t(homeQualification === "IGCSE" ? "homeCourseEyebrow" : "homeCourseEyebrowALevel");
+    }
+    document.querySelectorAll("#qualificationMenu [data-qualification]").forEach((option) => {
+      option.setAttribute("aria-checked", String(option.dataset.qualification === homeQualification));
+    });
+    if (toggle) toggle.setAttribute("aria-expanded", String(getEl("qualificationMenu")?.hidden === false));
+  }
+
+  function setHomeQualification(qualification) {
+    if (!HOME_QUALIFICATIONS.includes(qualification)) return;
+    homeQualification = qualification;
+    localStorage.setItem(HOME_QUALIFICATION_KEY, homeQualification);
+    const menu = getEl("qualificationMenu");
+    const morePanel = getEl("moreSubjectPanel");
+    const moreButton = getEl("toggleMoreSubjects");
+    if (menu) menu.hidden = true;
+    if (morePanel) morePanel.hidden = true;
+    if (moreButton) moreButton.setAttribute("aria-expanded", "false");
+    renderQualificationControl();
+    renderSubjectCourses(getQualificationSubjects());
+    renderAdditionalSubjects();
+  }
+
+  function setupQualificationControl() {
+    const toggle = getEl("qualificationToggle");
+    const menu = getEl("qualificationMenu");
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener("click", () => {
+      menu.hidden = !menu.hidden;
+      renderQualificationControl();
+      if (!menu.hidden) menu.querySelector('[aria-checked="true"]')?.focus();
+    });
+    menu.querySelectorAll("[data-qualification]").forEach((option) => {
+      option.addEventListener("click", () => {
+        setHomeQualification(option.dataset.qualification);
+        toggle.focus();
+      });
+    });
+    menu.addEventListener("keydown", (event) => {
+      const options = [...menu.querySelectorAll("[data-qualification]")];
+      const index = options.indexOf(document.activeElement);
+      const next = event.key === "ArrowDown" ? (index + 1) % options.length
+        : event.key === "ArrowUp" ? (index - 1 + options.length) % options.length
+        : -1;
+      if (next >= 0) {
+        event.preventDefault();
+        options[next].focus();
+      } else if (event.key === "Escape") {
+        menu.hidden = true;
+        renderQualificationControl();
+        toggle.focus();
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!menu.hidden && !event.target.closest(".home-qualification-picker")) {
+        menu.hidden = true;
+        renderQualificationControl();
+      }
+    });
+    renderQualificationControl();
   }
 
   function renderSubjectCourses(subjects, gridId = "subjectCourses") {
@@ -186,7 +265,9 @@
 
   function renderAdditionalSubjects() {
     const catalogCodes = new Set(catalogSubjects.map((subject) => subject.code));
-    const subjects = additionalSubjects.filter((subject) => !catalogCodes.has(subject.code));
+    const subjects = additionalSubjects.filter((subject) => (
+      subject.qualification === homeQualification && !catalogCodes.has(subject.code)
+    ));
     renderSubjectCourses(subjects, "moreSubjectCourses");
     const button = getEl("toggleMoreSubjects");
     if (button) button.hidden = subjects.length === 0;
@@ -334,6 +415,7 @@
     }
 
     applyLanguage(getLanguage());
+    setupQualificationControl();
 
     const goAdmin = getEl("goAdmin");
     if (goAdmin) {
@@ -398,7 +480,7 @@
     }
 
     catalogSubjects = await loadSubjectCourses();
-    renderSubjectCourses(catalogSubjects);
+    renderSubjectCourses(getQualificationSubjects());
     renderAdditionalSubjects();
     const moreSubjectsButton = getEl("toggleMoreSubjects");
     const moreSubjectPanel = getEl("moreSubjectPanel");

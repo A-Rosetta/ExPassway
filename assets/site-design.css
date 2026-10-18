@@ -441,6 +441,59 @@
   gap: 16px;
 }
 
+.site-ui .home-qualification-picker {
+  position: relative;
+}
+
+.site-ui .home-qualification-toggle {
+  min-width: 136px;
+  gap: 12px;
+}
+
+.site-ui .home-qualification-chevron {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.site-ui .home-qualification-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 35;
+  min-width: 190px;
+  display: grid;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  background: var(--surface-raised);
+  box-shadow: var(--surface-shadow-hover);
+}
+
+.site-ui .home-qualification-menu[hidden] {
+  display: none !important;
+}
+
+.site-ui .home-qualification-menu button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--text);
+  font: 600 0.9rem/1.2 "DM Sans", sans-serif;
+  text-align: left;
+}
+
+.site-ui .home-qualification-menu button:hover,
+.site-ui .home-qualification-menu button:focus-visible,
+.site-ui .home-qualification-menu button[aria-checked="true"] {
+  background: var(--surface-hover);
+}
+
 .site-ui .btn-primary,
 .site-ui .btn-secondary,
 .site-ui .pdf-download-action {

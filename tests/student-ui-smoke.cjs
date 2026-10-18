@@ -24,6 +24,7 @@ const subjects = [
   { code: "0620", name: "Chemistry", nameZh: "化学", qualification: "IGCSE", board: "CIE", paperCount: 2, questionCount: 80, active: true },
   { code: "0654", name: "Co-ordinated Sciences", nameZh: "协调科学", qualification: "IGCSE", board: "CIE", paperCount: 1, questionCount: 40, active: true },
   { code: "0455", name: "Economics", nameZh: "经济", qualification: "IGCSE", board: "CIE", paperCount: 1, questionCount: 30, active: true },
+  { code: "9701", name: "Chemistry", nameZh: "Chemistry", qualification: "AS & A Level", board: "CIE", paperCount: 1, questionCount: 30, active: true },
 ];
 
 function papersFor(code) {
@@ -380,8 +381,10 @@ async function mockApi(page, currentUser = user, authDelayMs = 0) {
 async function seedStorage(page, pathname, language = "en", currentUser = user) {
   await page.addInitScript(({ path, currentUser, result, questions, selectedLanguage }) => {
     const theme = localStorage.getItem("app-theme");
+    const qualification = localStorage.getItem("alevel.homeQualification");
     localStorage.clear();
     if (theme) localStorage.setItem("app-theme", theme);
+    if (qualification) localStorage.setItem("alevel.homeQualification", qualification);
     localStorage.setItem("alevel.language", selectedLanguage);
     localStorage.setItem("alevel.userProfile", JSON.stringify(currentUser));
     localStorage.setItem("alevel.selection", JSON.stringify({
@@ -635,6 +638,28 @@ async function verifyHomeThemes(browser, config) {
   const { page } = run;
   try {
     await page.locator(".course-card--biology").waitFor({ state: "visible" });
+    assert.equal(await page.locator("#qualificationToggleLabel").textContent(), "IGCSE");
+    assert.equal(await page.locator("#subjectCourses .course-card").count(), 4);
+    await page.locator("#qualificationToggle").click();
+    await page.locator("#qualificationMenu").waitFor({ state: "visible" });
+    await page.keyboard.press("ArrowDown");
+    assert.equal(await page.evaluate(() => document.activeElement?.dataset.qualification), "AS & A Level");
+    await page.keyboard.press("Escape");
+    await page.locator("#qualificationMenu").waitFor({ state: "hidden" });
+    assert.equal(await page.locator("#qualificationToggle").evaluate((element) => document.activeElement === element), true);
+    await page.locator("#qualificationToggle").click();
+    await page.locator('#qualificationMenu [data-qualification="AS & A Level"]').click();
+    await page.locator(".course-card").filter({ hasText: "Chemistry" }).waitFor({ state: "visible" });
+    assert.equal(await page.locator("#subjectCourses .course-card").count(), 1);
+    assert.equal(await page.locator("#toggleMoreSubjects").isVisible(), false);
+    assert.equal(await page.locator("#qualificationToggleLabel").textContent(), "A Level");
+    assert.equal(await page.evaluate(() => localStorage.getItem("alevel.homeQualification")), "AS & A Level");
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await page.locator("#subjectCourses .course-card").filter({ hasText: "Chemistry" }).waitFor({ state: "visible" });
+    assert.equal(await page.locator("#subjectCourses .course-card").count(), 1);
+    await page.locator("#qualificationToggle").click();
+    await page.locator('#qualificationMenu [data-qualification="IGCSE"]').click();
+    assert.equal(await page.locator("#subjectCourses .course-card").count(), 4);
     const light = await homeSurfaceState(page);
     assert.equal(light.theme, "light");
     assert.equal(light.storedTheme, "light");
@@ -724,7 +749,7 @@ async function verifyHomeThemes(browser, config) {
 
     await page.locator("#openPdfDownload").click();
     await page.locator("#pdfDownloadDialog").waitFor({ state: "visible" });
-    assert.equal(await page.locator("#pdfDownloadSubject option").count(), 4);
+    assert.equal(await page.locator("#pdfDownloadSubject option").count(), 5);
     await page.locator("#closePdfDownload").click();
 
     await assertPageGeometry(page, `${config.name}-home-dark`);
@@ -1483,6 +1508,11 @@ async function runConfig(config) {
         await verifyStandardPage(browser, config, pageSpec);
         console.log(JSON.stringify({ viewport: config.name, page: pageSpec.name, ok: true }));
       }
+      return;
+    }
+    if (process.env.STUDENT_UI_FOCUS === "qualification") {
+      await verifyHomeThemes(browser, config);
+      console.log(JSON.stringify({ viewport: config.name, page: "home-qualification", ok: true }));
       return;
     }
     if (process.env.STUDENT_UI_FOCUS === "practice") {

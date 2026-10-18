@@ -50,6 +50,16 @@
           <h1 id="mySubjectsTitle" data-i18n="homeMySubjects">我的学科</h1>
         </div>
         <div class="home-heading-actions">
+          <div class="home-qualification-picker">
+            <button id="qualificationToggle" class="btn-secondary home-qualification-toggle" type="button" aria-controls="qualificationMenu" aria-expanded="false" aria-haspopup="menu" aria-label="Switch qualification" data-i18n-aria-label="homeQualificationToggle">
+              <span id="qualificationToggleLabel">IGCSE</span>
+              <span class="home-qualification-chevron" aria-hidden="true"></span>
+            </button>
+            <div id="qualificationMenu" class="home-qualification-menu" role="menu" aria-label="Choose qualification" data-i18n-aria-label="homeQualificationMenu" hidden>
+              <button type="button" role="menuitemradio" data-qualification="IGCSE" aria-checked="true">IGCSE</button>
+              <button type="button" role="menuitemradio" data-qualification="AS &amp; A Level" aria-checked="false">AS &amp; A Level</button>
+            </div>
+          </div>
           <a id="openChapterPaperBuilder" class="btn-secondary" href="pages/paper-builder.html" data-i18n="paperBuilderOpen">按章节组卷</a>
           <button id="openChinaComponentGuide" class="btn-secondary" type="button" data-i18n="chinaComponentGuide">中国卷别快查</button>
           <button id="openPdfDownload" class="btn-primary home-pdf-download-button" type="button" data-i18n="homeDownloadPdfs" disabled>下载试卷 PDF</button>
