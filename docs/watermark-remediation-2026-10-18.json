@@ -1,0 +1,989 @@
+{
+  "releaseId": "15abab2c-5f11-4683-a4a8-9a23e41effbd",
+  "releasePrefix": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd",
+  "status": "published-and-verified",
+  "verifiedAt": "2026-10-18T02:55:41.240Z",
+  "publication": {
+    "target": "https://expassway.com",
+    "r2Bucket": "expassway-content",
+    "database": "expassway-db",
+    "rows": 313,
+    "byTable": {
+      "exam_papers": 26,
+      "subject_resources": 1,
+      "question_bank": 286
+    },
+    "files": 1165,
+    "bytes": 189314566
+  },
+  "validation": {
+    "originalInventorySubjects": 11,
+    "originalInventoryPapers": 195,
+    "subjectYearGroups": 32,
+    "sampleRequests": 126,
+    "successfulSampleRequests": 114,
+    "unverifiedSampleRequests": 12,
+    "wholeYearFlaggedOriginalPdfs": 60,
+    "acceptedReplacementPdfs": 47,
+    "regeneratedImages": 1026,
+    "copiedOriginalBiologyMsImages": 92,
+    "publicPdfsHashVerified": 46,
+    "publicImagesHashVerified": 1118,
+    "practiceQuestions": 286,
+    "mcqCorrectAnswerScoresVerified": 180,
+    "officialContentAndMarksUnchanged": true,
+    "exactDatabaseAfterVerified": true,
+    "exactRollbackTested": true,
+    "staleSnapshotAbortsTested": true
+  },
+  "replacements": [
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_qp_13.pdf",
+      "kind": "qp",
+      "paperSlug": "9618_s26_qp_13",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/computer-science/2026/june/9618_s26_qp_13.pdf",
+      "sha256": "2ca0cf4b108e428c7da7f9f7291232f656277dd8e33ee3b6639a0884223f4cba",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_qp_13.pdf"
+    },
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_qp_33.pdf",
+      "kind": "qp",
+      "paperSlug": "9618_s26_qp_33",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/computer-science/2026/june/9618_s26_qp_33.pdf",
+      "sha256": "5c86140e19fbd99afbe385c7aaa2525108607e20c15f2309e26d30f3bc94f52c",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_qp_33.pdf"
+    },
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_qp_23.pdf",
+      "kind": "qp",
+      "paperSlug": "9618_s26_qp_23",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/computer-science/2026/june/9618_s26_qp_23.pdf",
+      "sha256": "772c5ae1d3d20b9b5ef977e55ea18ea1681c87714b07486bdcb3fc220dd79947",
+      "pages": 24,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_qp_23.pdf"
+    },
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_ms_13.pdf",
+      "kind": "ms",
+      "paperSlug": "9618_s26_qp_13",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/computer-science/2026/june/9618_s26_ms_13.pdf",
+      "sha256": "7a1ce2802c39283e933c4613dd2169d504a6f2043929eaa93833a2a09b58785d",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_ms_13.pdf"
+    },
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_ms_33.pdf",
+      "kind": "ms",
+      "paperSlug": "9618_s26_qp_33",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/computer-science/2026/june/9618_s26_ms_33.pdf",
+      "sha256": "c828e3605af018c467fd00f476fd0fe14fd4d3e9d4b49da98098f7ac9bd97018",
+      "pages": 18,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_ms_33.pdf"
+    },
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_ms_23.pdf",
+      "kind": "ms",
+      "paperSlug": "9618_s26_qp_23",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/computer-science/2026/june/9618_s26_ms_23.pdf",
+      "sha256": "9b846e6b3fe1349f9928d828bb66f56dc582af5ec6e4b23f65031b6c04cf8142",
+      "pages": 15,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_ms_23.pdf"
+    },
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_qp_43.pdf",
+      "kind": "qp",
+      "paperSlug": "9618_s26_qp_43",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/computer-science/2026/june/9618_s26_qp_43.pdf",
+      "sha256": "e3d51e17833dfb74e5e21f5b661339fb180ce0c10e70fcf6c6b5220b7c23c2f9",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_qp_43.pdf"
+    },
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_ms_43.pdf",
+      "kind": "ms",
+      "paperSlug": "9618_s26_qp_43",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/computer-science/2026/june/9618_s26_ms_43.pdf",
+      "sha256": "784a49401da04d8d9b525ff965b89c550eda555fb18e49f8153115f8fa197cb6",
+      "pages": 46,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_ms_43.pdf"
+    },
+    {
+      "subject": "9700",
+      "year": 2026,
+      "filename": "9700_s26_qp_37.pdf",
+      "kind": "qp",
+      "paperSlug": "9700_s26_qp_37",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/biology/2026/june/9700_s26_qp_37.pdf",
+      "sha256": "0d9af668a47103a869f4d6a90d7eeb7874b78a14e25a51096b4000d2dadba1d7",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9700/9700_s26_qp_37.pdf"
+    },
+    {
+      "subject": "9700",
+      "year": 2026,
+      "filename": "9700_s26_qp_24.pdf",
+      "kind": "qp",
+      "paperSlug": "9700_s26_qp_24",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/biology/2026/june/9700_s26_qp_24.pdf",
+      "sha256": "23c618ccb862f03dc6cb9aeea85f631857f56db7ce31cd9c8a8359ce8714e45f",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9700/9700_s26_qp_24.pdf"
+    },
+    {
+      "subject": "9700",
+      "year": 2026,
+      "filename": "9700_s26_qp_14.pdf",
+      "kind": "qp",
+      "paperSlug": "9700_s26_qp_14",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/biology/2026/june/9700_s26_qp_14.pdf",
+      "sha256": "a41016025eee51c8c73f75695943304042e9f9921d16b7450eacd73a3aa0fd8d",
+      "pages": 20,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9700/9700_s26_qp_14.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_ms_14.pdf",
+      "kind": "ms",
+      "paperSlug": "9701_s26_qp_14",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/chemistry/2026/june/9701_s26_ms_14.pdf",
+      "sha256": "3456af550bc7628812e72511372faf2f3130a2997316feb22c0c507013554293",
+      "pages": 3,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_ms_14.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_qp_14.pdf",
+      "kind": "qp",
+      "paperSlug": "9701_s26_qp_14",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/chemistry/2026/june/9701_s26_qp_14.pdf",
+      "sha256": "2c66972aa08fb6570da9d684f4834b5208e853c781d879b288cb910afb835d51",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_qp_14.pdf"
+    },
+    {
+      "subject": "9700",
+      "year": 2026,
+      "filename": "9700_s26_qp_44.pdf",
+      "kind": "qp",
+      "paperSlug": "9700_s26_qp_44",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/biology/2026/june/9700_s26_qp_44.pdf",
+      "sha256": "cbddd3535fe2555fb9eb65c5cd3c4b239be550e55b34fb321f6707994109140b",
+      "pages": 24,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9700/9700_s26_qp_44.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_qp_24.pdf",
+      "kind": "qp",
+      "paperSlug": "9701_s26_qp_24",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/chemistry/2026/june/9701_s26_qp_24.pdf",
+      "sha256": "782b485a5ab5165746e3b1bd4a727d97e3a5584bcc1f3b686c663f150b1ff02d",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_qp_24.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_qp_37.pdf",
+      "kind": "qp",
+      "paperSlug": "9701_s26_qp_37",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/chemistry/2026/june/9701_s26_qp_37.pdf",
+      "sha256": "d40792deb0360ade46844e4620761cea3eaeaec4df4daaa1337ccdfb97da5cb4",
+      "pages": 12,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_qp_37.pdf"
+    },
+    {
+      "subject": "9700",
+      "year": 2026,
+      "filename": "9700_s26_qp_54.pdf",
+      "kind": "qp",
+      "paperSlug": "9700_s26_qp_54",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/biology/2026/june/9700_s26_qp_54.pdf",
+      "sha256": "b8c7b1d06781db59d6185e40ebd1633e4d08f26696ef2b8c2d5dac9da40d6ad9",
+      "pages": 20,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9700/9700_s26_qp_54.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_qp_38.pdf",
+      "kind": "qp",
+      "paperSlug": "9701_s26_qp_38",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/chemistry/2026/june/9701_s26_qp_38.pdf",
+      "sha256": "b65d70a1aedf702d3b157c95537f60a1d4064e4fc7037b080823e1e6dc33fd87",
+      "pages": 12,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_qp_38.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_ms_24.pdf",
+      "kind": "ms",
+      "paperSlug": "9701_s26_qp_24",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/chemistry/2026/june/9701_s26_ms_24.pdf",
+      "sha256": "2a4389a89f1e392cd3304d381a697d84c7eabfde7fc05576cfbe21c75613c402",
+      "pages": 23,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_ms_24.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_ms_37.pdf",
+      "kind": "ms",
+      "paperSlug": "9701_s26_qp_37",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/chemistry/2026/june/9701_s26_ms_37.pdf",
+      "sha256": "467dfaa782d9754e4ca7e1a28ee5c9ee535e3b5f2b89bc44b1a7e108006aa31d",
+      "pages": 26,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_ms_37.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_ms_38.pdf",
+      "kind": "ms",
+      "paperSlug": "9701_s26_qp_38",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/chemistry/2026/june/9701_s26_ms_38.pdf",
+      "sha256": "4d7f5267e099b9f768990cd747406d7f8951783f787edbae13e1ae7c94a90e76",
+      "pages": 20,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_ms_38.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_qp_54.pdf",
+      "kind": "qp",
+      "paperSlug": "9701_s26_qp_54",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/chemistry/2026/june/9701_s26_qp_54.pdf",
+      "sha256": "742b39ee494f513445866a7623ba8af552340f10585b9339b93f0cb9654fd1ec",
+      "pages": 12,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_qp_54.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_qp_44.pdf",
+      "kind": "qp",
+      "paperSlug": "9701_s26_qp_44",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/chemistry/2026/june/9701_s26_qp_44.pdf",
+      "sha256": "5192bd7f587a199e71dd1a8e1fce1a3514f7d3d61e7504bc5d74a838c98d710b",
+      "pages": 28,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_qp_44.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_ms_44.pdf",
+      "kind": "ms",
+      "paperSlug": "9701_s26_qp_44",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/chemistry/2026/june/9701_s26_ms_44.pdf",
+      "sha256": "4675ccb3c01d9648785ed0d9c5a1e8f31495d811eceba7438d920d582dd71a2e",
+      "pages": 21,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_ms_44.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_qp_24.pdf",
+      "kind": "qp",
+      "paperSlug": "9702_s26_qp_24",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/physics/2026/june/9702_s26_qp_24.pdf",
+      "sha256": "417ef9dbf14afab03de385120431e130c3da90a50289c28b7bbd8a967006b08e",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_qp_24.pdf"
+    },
+    {
+      "subject": "9701",
+      "year": 2026,
+      "filename": "9701_s26_ms_54.pdf",
+      "kind": "ms",
+      "paperSlug": "9701_s26_qp_54",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/chemistry/2026/june/9701_s26_ms_54.pdf",
+      "sha256": "4edf16349d4ce043f60095f7440b9ff3fccc87c2dfe3bf51ac05daf1b6313c18",
+      "pages": 19,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9701/9701_s26_ms_54.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_ms_14.pdf",
+      "kind": "ms",
+      "paperSlug": "9702_s26_qp_14",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/physics/2026/june/9702_s26_ms_14.pdf",
+      "sha256": "00ee185f4f7effce187e370c5b6ad36c503ad96952e70ad908d7b0174ad7bf76",
+      "pages": 3,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_ms_14.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_qp_37.pdf",
+      "kind": "qp",
+      "paperSlug": "9702_s26_qp_37",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/physics/2026/june/9702_s26_qp_37.pdf",
+      "sha256": "422f662027a06ebd4d7d520ed044b8998b6618416ee42507da42dfb5c299a7c1",
+      "pages": 12,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_qp_37.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_ms_24.pdf",
+      "kind": "ms",
+      "paperSlug": "9702_s26_qp_24",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/physics/2026/june/9702_s26_ms_24.pdf",
+      "sha256": "e9cc69f4d328cedd2cb8f48ac2d11a7ac0397db6031c5e1645de8fa242b3d6a2",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_ms_24.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_qp_38.pdf",
+      "kind": "qp",
+      "paperSlug": "9702_s26_qp_38",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/physics/2026/june/9702_s26_qp_38.pdf",
+      "sha256": "0f3efeca160aaa90dde58bbc68ec299cb7e448f990293418a4c7e0de883bb9e2",
+      "pages": 12,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_qp_38.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_ms_37.pdf",
+      "kind": "ms",
+      "paperSlug": "9702_s26_qp_37",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/physics/2026/june/9702_s26_ms_37.pdf",
+      "sha256": "6df72fc485f01ab94b933b7dc4bab66bf80610fa76690ffb93a214d38bf7f9df",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_ms_37.pdf"
+    },
+    {
+      "subject": "9700",
+      "year": 2026,
+      "filename": "9700_s26_qp_38.pdf",
+      "kind": "qp",
+      "paperSlug": "9700_s26_qp_38",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/biology/2026/june/9700_s26_qp_38.pdf",
+      "sha256": "2d556da3294506944de35444e367117d938d115bef1f474bb81301869bbeefaf",
+      "pages": 16,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9700/9700_s26_qp_38.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_qp_44.pdf",
+      "kind": "qp",
+      "paperSlug": "9702_s26_qp_44",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/physics/2026/june/9702_s26_qp_44.pdf",
+      "sha256": "05867657a61dd1ae72ca2a67744482927ad967e92747fb036cfe6c274184b538",
+      "pages": 24,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_qp_44.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_ms_38.pdf",
+      "kind": "ms",
+      "paperSlug": "9702_s26_qp_38",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/physics/2026/june/9702_s26_ms_38.pdf",
+      "sha256": "66c2cbf362f0d636c0a1c43ed1a7303701ce831fc82104553c7fcca7235786e0",
+      "pages": 17,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_ms_38.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_ms_44.pdf",
+      "kind": "ms",
+      "paperSlug": "9702_s26_qp_44",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/physics/2026/june/9702_s26_ms_44.pdf",
+      "sha256": "ddb987a23464d44820b5342262074f5bc6439d68e5d0cb04c9bcdb52377da32c",
+      "pages": 21,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_ms_44.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_qp_14.pdf",
+      "kind": "qp",
+      "paperSlug": "9702_s26_qp_14",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/physics/2026/june/9702_s26_qp_14.pdf",
+      "sha256": "ca4cc62a93376af51139518fa52d44396edef1b0f8e8af6fc2755fdaed2610f1",
+      "pages": 20,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_qp_14.pdf"
+    },
+    {
+      "subject": "9708",
+      "year": 2026,
+      "filename": "9708_s26_ms_14.pdf",
+      "kind": "ms",
+      "paperSlug": "9708_s26_qp_14",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/economics/2026/june/9708_s26_ms_14.pdf",
+      "sha256": "2fe39d9d31e52ffa17c948a1281e7d6124e918925a52ebfc927c0feda2bcd956",
+      "pages": 3,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9708/9708_s26_ms_14.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_ms_54.pdf",
+      "kind": "ms",
+      "paperSlug": "9702_s26_qp_54",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/physics/2026/june/9702_s26_ms_54.pdf",
+      "sha256": "accf28875083cc9fbbf7cbcb6c63d89a1f1597441d220c25a6b73715cf481369",
+      "pages": 14,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_ms_54.pdf"
+    },
+    {
+      "subject": "9702",
+      "year": 2026,
+      "filename": "9702_s26_qp_54.pdf",
+      "kind": "qp",
+      "paperSlug": "9702_s26_qp_54",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/physics/2026/june/9702_s26_qp_54.pdf",
+      "sha256": "0c936a4b6480406d96b63b24583c4295f1f63caafd27a7f20c34fe009e9e11d2",
+      "pages": 8,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9702/9702_s26_qp_54.pdf"
+    },
+    {
+      "subject": "9708",
+      "year": 2026,
+      "filename": "9708_s26_qp_14.pdf",
+      "kind": "qp",
+      "paperSlug": "9708_s26_qp_14",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/economics/2026/june/9708_s26_qp_14.pdf",
+      "sha256": "1c7d6e2d45394d624256a8cd655080e261737e2e581ec8b8648f63e211fecfc8",
+      "pages": 12,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9708/9708_s26_qp_14.pdf"
+    },
+    {
+      "subject": "9708",
+      "year": 2026,
+      "filename": "9708_s26_qp_34.pdf",
+      "kind": "qp",
+      "paperSlug": "9708_s26_qp_34",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/economics/2026/june/9708_s26_qp_34.pdf",
+      "sha256": "32e26e987b1737292564fbca5d877febab71a411cb9c1cfade867352543cb59b",
+      "pages": 12,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9708/9708_s26_qp_34.pdf"
+    },
+    {
+      "subject": "9708",
+      "year": 2026,
+      "filename": "9708_s26_ms_44.pdf",
+      "kind": "ms",
+      "paperSlug": "9708_s26_qp_44",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/economics/2026/june/9708_s26_ms_44.pdf",
+      "sha256": "6988658bb63cb3a7810742cb5eefca9c3a75e48093a4b15f05a9617c585bddc2",
+      "pages": 15,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9708/9708_s26_ms_44.pdf"
+    },
+    {
+      "subject": "9708",
+      "year": 2026,
+      "filename": "9708_s26_ms_34.pdf",
+      "kind": "ms",
+      "paperSlug": "9708_s26_qp_34",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/economics/2026/june/9708_s26_ms_34.pdf",
+      "sha256": "98609b9031922054d28da53ee57eed6f769d8ab1753c027d3c8fb4401a6685ac",
+      "pages": 3,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9708/9708_s26_ms_34.pdf"
+    },
+    {
+      "subject": "9708",
+      "year": 2026,
+      "filename": "9708_s26_qp_24.pdf",
+      "kind": "qp",
+      "paperSlug": "9708_s26_qp_24",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/economics/2026/june/9708_s26_qp_24.pdf",
+      "sha256": "2a8d031a940d4799d244f343ef214043e37df4ac344c22d2df6ef61fbdcf0a79",
+      "pages": 4,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9708/9708_s26_qp_24.pdf"
+    },
+    {
+      "subject": "9618",
+      "year": 2026,
+      "filename": "9618_s26_in_23.pdf",
+      "kind": "in",
+      "resourceId": "9618_s26_in_23",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/inserts/cambridge/a-level/computer-science/2026/june/9618_s26_in_23.pdf",
+      "sha256": "5a367c88436ddde81a91e86b5802a5d6e875124906d37af04bb368f5645281c5",
+      "pages": 4,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9618/9618_s26_in_23.pdf"
+    },
+    {
+      "subject": "9708",
+      "year": 2026,
+      "filename": "9708_s26_ms_24.pdf",
+      "kind": "ms",
+      "paperSlug": "9708_s26_qp_24",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/economics/2026/june/9708_s26_ms_24.pdf",
+      "sha256": "e0bf725e7756b7eef0f2d43c5ab8fbc19eadfb0f11b2437c6d2d801e2cd60c4e",
+      "pages": 23,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9708/9708_s26_ms_24.pdf"
+    },
+    {
+      "subject": "9708",
+      "year": 2026,
+      "filename": "9708_s26_qp_44.pdf",
+      "kind": "qp",
+      "paperSlug": "9708_s26_qp_44",
+      "sourceUrl": "https://resources.pastpapersacademy.com/resources/past-papers/cambridge/a-level/economics/2026/june/9708_s26_qp_44.pdf",
+      "sha256": "3e0a14d15a4895e230bfa88c3289e4225d93f81759b64e5b3c44e4f6ab1927a0",
+      "pages": 4,
+      "storageKey": "releases/15abab2c-5f11-4683-a4a8-9a23e41effbd/pdfs/9708/9708_s26_qp_44.pdf"
+    }
+  ],
+  "pending": {
+    "papers": [
+      {
+        "filename": "9696_s26_ms_12.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Past Papers Academy master index has no A Level Geography 9696 subject.",
+        "status": "pending-source",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_ms_22.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Past Papers Academy master index has no A Level Geography 9696 subject.",
+        "status": "pending-source",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_ms_32.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Past Papers Academy master index has no A Level Geography 9696 subject.",
+        "status": "pending-source",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_ms_42.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Past Papers Academy master index has no A Level Geography 9696 subject.",
+        "status": "pending-source",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_qp_12.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "qp",
+        "reason": "Past Papers Academy master index has no A Level Geography 9696 subject.",
+        "status": "pending-source",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_qp_22.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "qp",
+        "reason": "Past Papers Academy master index has no A Level Geography 9696 subject.",
+        "status": "pending-source",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_qp_32.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "qp",
+        "reason": "Past Papers Academy master index has no A Level Geography 9696 subject.",
+        "status": "pending-source",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_qp_42.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "qp",
+        "reason": "Past Papers Academy master index has no A Level Geography 9696 subject.",
+        "status": "pending-source",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9700_s26_ms_14.pdf",
+        "subject": "9700",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Academy candidate still contains third-party page watermarks.",
+        "status": "rejected-watermark",
+        "candidateUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/a2/biology/2026/june/9700_s26_ms_14.pdf",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9700_s26_ms_24.pdf",
+        "subject": "9700",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Academy candidate still contains third-party page watermarks.",
+        "status": "rejected-watermark",
+        "candidateUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/a2/biology/2026/june/9700_s26_ms_24.pdf",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9700_s26_ms_37.pdf",
+        "subject": "9700",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Academy candidate still contains third-party page watermarks.",
+        "status": "rejected-watermark",
+        "candidateUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/a2/biology/2026/june/9700_s26_ms_37.pdf",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9700_s26_ms_38.pdf",
+        "subject": "9700",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Academy candidate still contains third-party page watermarks.",
+        "status": "rejected-watermark",
+        "candidateUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/a2/biology/2026/june/9700_s26_ms_38.pdf",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9700_s26_ms_44.pdf",
+        "subject": "9700",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Academy candidate still contains third-party page watermarks.",
+        "status": "rejected-watermark",
+        "candidateUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/a2/biology/2026/june/9700_s26_ms_44.pdf",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9700_s26_ms_54.pdf",
+        "subject": "9700",
+        "year": 2026,
+        "kind": "ms",
+        "reason": "Academy candidate still contains third-party page watermarks.",
+        "status": "rejected-watermark",
+        "candidateUrl": "https://resources.pastpapersacademy.com/resources/mark-schemes/cambridge/a-level/a2/biology/2026/june/9700_s26_ms_54.pdf",
+        "detectedMarkers": ["PapaCambridge"],
+        "action": "Keep the existing original available and list for manual source replacement."
+      }
+    ],
+    "supplements": [
+      {
+        "filename": "9618_s21_gt.pdf",
+        "subject": "9618",
+        "year": 2021,
+        "kind": "gt",
+        "resourceId": "9618_s21_gt",
+        "storageKey": "imports/9618/alcs-20261004/9618_s21_gt.pdf",
+        "sha256": "b0af469bd7e37b0f1d8116ff02fcef89e25ee7853712be1be82f810f0fb7962f",
+        "detectedMarkers": ["PapersDaddy"],
+        "reason": "Grade threshold PDFs are absent from the audited Past Papers Academy index; no clean replacement was identified there.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9618_s22_gt.pdf",
+        "subject": "9618",
+        "year": 2022,
+        "kind": "gt",
+        "resourceId": "9618_s22_gt",
+        "storageKey": "imports/9618/alcs-20261004/9618_s22_gt.pdf",
+        "sha256": "602235000bab414b39e9cd70d84be14a707e6f7ffe60c49e5bd1bd8af506fe9d",
+        "detectedMarkers": ["PapersDaddy"],
+        "reason": "Grade threshold PDFs are absent from the audited Past Papers Academy index; no clean replacement was identified there.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9618_s23_gt.pdf",
+        "subject": "9618",
+        "year": 2023,
+        "kind": "gt",
+        "resourceId": "9618_s23_gt",
+        "storageKey": "imports/9618/alcs-20261004/9618_s23_gt.pdf",
+        "sha256": "0455b4372cf3c275d1f45bd98416ee1149ae4d081dc5d869198f659a2ac78989",
+        "detectedMarkers": ["PapersDaddy"],
+        "reason": "Grade threshold PDFs are absent from the audited Past Papers Academy index; no clean replacement was identified there.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9618_s24_gt.pdf",
+        "subject": "9618",
+        "year": 2024,
+        "kind": "gt",
+        "resourceId": "9618_s24_gt",
+        "storageKey": "imports/9618/alcs-20261004/9618_s24_gt.pdf",
+        "sha256": "849a8a42755b854441683c852f4cc62781268c83953671fac894f953de8df3d8",
+        "detectedMarkers": ["PapersDaddy"],
+        "reason": "Grade threshold PDFs are absent from the audited Past Papers Academy index; no clean replacement was identified there.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9618_s26_gt.pdf",
+        "subject": "9618",
+        "year": 2026,
+        "kind": "gt",
+        "resourceId": "9618_s26_gt",
+        "storageKey": "imports/9618/alcs-20261004/9618_s26_gt.pdf",
+        "sha256": "61479bf67ae750c2a613187320c0703378dfef4ea709302c81429818b025cb79",
+        "detectedMarkers": ["PapaCambridge"],
+        "reason": "Grade threshold PDFs are absent from the audited Past Papers Academy index; no clean replacement was identified there.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_in_12.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "in",
+        "resourceId": "9696_s26_in_12",
+        "storageKey": "imports/9696/china-june-2024-2026-20261006/9696_s26_in_12.pdf",
+        "sha256": "aec5149ee4fb1bc8bf8a3a09e3b39e26c30d836d4769fa44bd3c4aa05e1d73dc",
+        "detectedMarkers": ["PapaCambridge"],
+        "reason": "Past Papers Academy has no A Level Geography 9696 entry.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_in_22.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "in",
+        "resourceId": "9696_s26_in_22",
+        "storageKey": "imports/9696/china-june-2024-2026-20261006/9696_s26_in_22.pdf",
+        "sha256": "b0f1a039ef31b3a715fa46b7d34b58644ecdc042dd26948f63ded12cac43b66e",
+        "detectedMarkers": ["PapaCambridge"],
+        "reason": "Past Papers Academy has no A Level Geography 9696 entry.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_in_32.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "in",
+        "resourceId": "9696_s26_in_32",
+        "storageKey": "imports/9696/china-june-2024-2026-20261006/9696_s26_in_32.pdf",
+        "sha256": "bb337c5ea230d66204672c4488bc58d53fbc4f615ae7a5ef0c55fcba3d555e3b",
+        "detectedMarkers": ["PapaCambridge"],
+        "reason": "Past Papers Academy has no A Level Geography 9696 entry.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      },
+      {
+        "filename": "9696_s26_in_42.pdf",
+        "subject": "9696",
+        "year": 2026,
+        "kind": "in",
+        "resourceId": "9696_s26_in_42",
+        "storageKey": "imports/9696/china-june-2024-2026-20261006/9696_s26_in_42.pdf",
+        "sha256": "edba4a36a8e8c49ef42c5103509625d55c5c16b17f583d4b0f63952d0dde51eb",
+        "detectedMarkers": ["PapaCambridge"],
+        "reason": "Past Papers Academy has no A Level Geography 9696 entry.",
+        "status": "pending-source",
+        "action": "Keep the existing original available and list for manual source replacement."
+      }
+    ],
+    "unverifiedSamples": [
+      {
+        "subjectCode": "0625",
+        "year": 2023,
+        "slug": "0625_w23_qp_23",
+        "kind": "qp",
+        "fileName": "0625_w23_qp_23.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2023,
+        "slug": "0625_w23_qp_23",
+        "kind": "ms",
+        "fileName": "0625_w23_ms_23.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2023,
+        "slug": "0625_w23_qp_12",
+        "kind": "qp",
+        "fileName": "0625_w23_qp_12.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2023,
+        "slug": "0625_w23_qp_12",
+        "kind": "ms",
+        "fileName": "0625_w23_ms_12.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2024,
+        "slug": "0625_s24_qp_13",
+        "kind": "qp",
+        "fileName": "0625_s24_qp_13.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2024,
+        "slug": "0625_s24_qp_13",
+        "kind": "ms",
+        "fileName": "0625_s24_ms_13.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2024,
+        "slug": "0625_w24_qp_22",
+        "kind": "qp",
+        "fileName": "0625_w24_qp_22.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2024,
+        "slug": "0625_w24_qp_22",
+        "kind": "ms",
+        "fileName": "0625_w24_ms_22.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2025,
+        "slug": "0625_m25_qp_22",
+        "kind": "qp",
+        "fileName": "0625_m25_qp_22.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2025,
+        "slug": "0625_m25_qp_22",
+        "kind": "ms",
+        "fileName": "0625_m25_ms_22.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2025,
+        "slug": "0625_m25_qp_12",
+        "kind": "qp",
+        "fileName": "0625_m25_qp_12.pdf",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "subjectCode": "0625",
+        "year": 2025,
+        "slug": "0625_m25_qp_12",
+        "kind": "ms",
+        "fileName": "0625_m25_ms_12.pdf",
+        "error": "HTTP Error 404: Not Found"
+      }
+    ],
+    "notes": [
+      "Random audit sampled up to two published papers per subject-year and checked each selected QP and MS.",
+      "All 60 QP/MS PDFs in the six flagged 2026 subject-years were then checked, and all carried PapaCambridge markers.",
+      "All 45 deployed supplemental PDFs were checked using matching local deployment files. Ten carried page markers; one clean insert replacement is ready and nine remain pending.",
+      "The four 2021–2024 Computer Science GT files contain PapersDaddy page text markers, rather than PapaCambridge marks. They are included for manual follow-up even though existing metadata says text was removed.",
+      "The Academy copy of each of the six Biology 2026 MS PDFs still has PapaCambridge page watermarks and was rejected.",
+      "0625 2023–2025 sample requests returned HTTP 404. Those groups are unverified, rather than watermark-free.",
+      "9708_s24_qp_12/ms_12 are absent from Academy, but 2024 was not flagged for replacement. 9702_s26_ms_21 and 9700_s26_ci_38 are not deployed records in this snapshot. These source-availability notes are not pending replacements.",
+      "Negative known-marker tests and random negative groups do not prove absence of every possible visual or print watermark.",
+      "Existing ER PDFs and all six deployed syllabus PDFs had no known page-marker hits. No Confidential Instructions PDF is present in the deployed resource snapshot, so there was no deployed file of that type to audit."
+    ]
+  },
+  "evidenceDirectory": "D:/Project/EXPW/deployment-watermark-remediation-20261017",
+  "evidence": [
+    {
+      "file": "release.json",
+      "sha256": "a9df4083f7a551e4b851653ceac4371d70793985a2d409ec2e98c9433f89a2e6",
+      "bytes": 11678149
+    },
+    {
+      "file": "publish.sql",
+      "sha256": "07b089b1afa082ee7265c1e290c3abd1e5af6a8aa4e277abcffe24f633d4bcbd",
+      "bytes": 10782313
+    },
+    {
+      "file": "rollback.sql",
+      "sha256": "d88a8d73a6287a74a27f4cd291d4bb86ab81003834b935f4c9fd0e3dc016ec01",
+      "bytes": 11230908
+    },
+    {
+      "file": "upload-readback.json",
+      "sha256": "136b1033dfddc70136bd0ff12988f8aa86896bf0e9a04e375379685da1a90391",
+      "bytes": 385713
+    },
+    {
+      "file": "database-before-verification.json",
+      "sha256": "61068530fd9685a7e625d40a4069050898e713bb5bfbee673d0a4161040b52b1",
+      "bytes": 70399
+    },
+    {
+      "file": "database-after-verification.json",
+      "sha256": "12a98bdcc9e3b215004953f982bcf3328ab8d8ce45126061967b4a357897e89a",
+      "bytes": 70398
+    },
+    {
+      "file": "local-database-verification.json",
+      "sha256": "15edb729a6e4da7a711cd310f188459efc1cefa87bd1e4f0df4bd6ad7fed78d1",
+      "bytes": 190
+    },
+    {
+      "file": "practice-verification.json",
+      "sha256": "b227980b87084a6be047761990f658a3493a77a7dd827fc3cb4bda46c279c9e7",
+      "bytes": 53302
+    },
+    {
+      "file": "d1-publication-stdout.json",
+      "sha256": "68529ed3cb0df2dba93e579169a8b42cc1e8972d9aed64379d0a35e1c97c9eda",
+      "bytes": 891
+    },
+    {
+      "file": "production-verification.json",
+      "sha256": "511fa0e934dda8214dac138c0b01036ac0f3fe10c1aee70b121312af6ff4523b",
+      "bytes": 339416
+    }
+  ]
+}
